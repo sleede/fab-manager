@@ -7,11 +7,7 @@ import { UnpackNestedValue } from 'react-hook-form/dist/types';
 import { FormControlledComponent } from '../../models/form-component';
 import { AbstractFormItem, AbstractFormItemProps } from './abstract-form-item';
 import { FabButton } from '../base/fab-button';
-
-/**
- * Checklist Option format
- */
-export type ChecklistOption<TOptionValue> = { value: TOptionValue, label: string };
+import { ChecklistOption } from '../../models/select';
 
 interface FormChecklistProps<TFieldValues, TOptionValue, TContext extends object> extends FormControlledComponent<TFieldValues, TContext>, AbstractFormItemProps<TFieldValues> {
   defaultValue?: Array<TOptionValue>,

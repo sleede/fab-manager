@@ -6,6 +6,7 @@ import OrderAPI from '../../api/order';
 import { Order } from '../../models/order';
 import FabTextEditor from '../base/text-editor/fab-text-editor';
 import { HtmlTranslate } from '../base/html-translate';
+import { SelectOption } from '../../models/select';
 
 interface OrderActionsProps {
   order: Order,
@@ -14,17 +15,11 @@ interface OrderActionsProps {
 }
 
 /**
-* Option format, expected by react-select
-* @see https://github.com/JedWatson/react-select
-*/
-type selectOption = { value: string, label: string };
-
-/**
  * Actions for an order
  */
 export const OrderActions: React.FC<OrderActionsProps> = ({ order, onSuccess, onError }) => {
   const { t } = useTranslation('shared');
-  const [currentAction, setCurrentAction] = useState<selectOption>();
+  const [currentAction, setCurrentAction] = useState<SelectOption<string>>();
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
   const [readyNote, setReadyNote] = useState<string>('');
 
@@ -51,7 +46,7 @@ export const OrderActions: React.FC<OrderActionsProps> = ({ order, onSuccess, on
   /**
    * Creates sorting options to the react-select format
    */
-  const buildOptions = (): Array<selectOption> => {
+  const buildOptions = (): Array<SelectOption<string>> => {
     let actions = [];
     switch (order.state) {
       case 'paid':
@@ -80,7 +75,7 @@ export const OrderActions: React.FC<OrderActionsProps> = ({ order, onSuccess, on
   /**
    * Callback after selecting an action
    */
-  const handleAction = (action: selectOption) => {
+  const handleAction = (action: SelectOption<string>) => {
     setCurrentAction(action);
     setModalIsOpen(true);
   };

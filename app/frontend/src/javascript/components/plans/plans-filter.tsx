@@ -5,6 +5,7 @@ import { Group } from '../../models/group';
 import { User } from '../../models/user';
 import PlanAPI from '../../api/plan';
 import { PlansDuration } from '../../models/plan';
+import { SelectOption } from '../../models/select';
 
 interface PlansFilterProps {
   user?: User,
@@ -13,12 +14,6 @@ interface PlansFilterProps {
   onError: (message: string) => void,
   onDurationSelected: (plansIds: Array<number>) => void,
 }
-
-/**
- * Option format, expected by react-select
- * @see https://github.com/JedWatson/react-select
- */
-type selectOption = { value: number, label: string };
 
 /**
  * Allows filtering on plans list
@@ -38,7 +33,7 @@ export const PlansFilter: React.FC<PlansFilterProps> = ({ user, groups, onGroupS
   /**
    * Convert all groups to the react-select format
    */
-  const buildGroupOptions = (): Array<selectOption> => {
+  const buildGroupOptions = (): Array<SelectOption<number>> => {
     return groups.filter(g => !g.disabled).map(g => {
       return { value: g.id, label: g.name };
     });
@@ -47,7 +42,7 @@ export const PlansFilter: React.FC<PlansFilterProps> = ({ user, groups, onGroupS
   /**
    * Convert all durations to the react-select format
    */
-  const buildDurationOptions = (): Array<selectOption> => {
+  const buildDurationOptions = (): Array<SelectOption<number>> => {
     const options = durations.map((d, index) => {
       return { value: index, label: d.name };
     });
@@ -58,14 +53,14 @@ export const PlansFilter: React.FC<PlansFilterProps> = ({ user, groups, onGroupS
   /**
    * Callback triggered when the user selects a group in the dropdown list
    */
-  const handleGroupSelected = (option: selectOption): void => {
+  const handleGroupSelected = (option: SelectOption<number>): void => {
     onGroupSelected(option.value);
   };
 
   /**
    * Callback triggered when the user selects a duration in the dropdown list
    */
-  const handleDurationSelected = (option: selectOption): void => {
+  const handleDurationSelected = (option: SelectOption<number>): void => {
     onDurationSelected(durations[option.value]?.plans_ids);
   };
 

@@ -3,6 +3,7 @@ import AsyncSelect from 'react-select/async';
 import { useTranslation } from 'react-i18next';
 import MemberAPI from '../../api/member';
 import { User } from '../../models/user';
+import { SelectOption } from '../../models/select';
 
 interface MemberSelectProps {
   defaultUser?: User,
@@ -13,17 +14,11 @@ interface MemberSelectProps {
 }
 
 /**
- * Option format, expected by react-select
- * @see https://github.com/JedWatson/react-select
- */
-type selectOption = { value: number, label: string };
-
-/**
  * This component renders the member select for manager.
  */
 export const MemberSelect: React.FC<MemberSelectProps> = ({ defaultUser, value, onSelected, noHeader, hasError }) => {
   const { t } = useTranslation('public');
-  const [option, setOption] = useState<selectOption>();
+  const [option, setOption] = useState<SelectOption<number>>();
 
   useEffect(() => {
     if (defaultUser) {
@@ -49,7 +44,7 @@ export const MemberSelect: React.FC<MemberSelectProps> = ({ defaultUser, value, 
   /**
    * search members by name
    */
-  const loadMembers = async (inputValue: string): Promise<Array<selectOption>> => {
+  const loadMembers = async (inputValue: string): Promise<Array<SelectOption<number>>> => {
     if (!inputValue) {
       return [];
     }
@@ -62,7 +57,7 @@ export const MemberSelect: React.FC<MemberSelectProps> = ({ defaultUser, value, 
   /**
    * callback for handle select changed
    */
-  const onChange = (v: selectOption) => {
+  const onChange = (v: SelectOption<number>) => {
     setOption(v);
     onSelected({ id: v.value, name: v.label });
   };

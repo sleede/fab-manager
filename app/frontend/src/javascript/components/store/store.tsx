@@ -28,6 +28,7 @@ import { ActiveFiltersTags } from './filters/active-filters-tags';
 import ProductLib from '../../lib/product';
 import { UIRouter } from '@uirouter/angularjs';
 import SettingAPI from '../../api/setting';
+import { SelectOption } from '../../models/select';
 
 declare const Application: IApplication;
 
@@ -50,11 +51,6 @@ interface StoreProps {
   currentUser: User,
   uiRouter: UIRouter,
 }
-/**
- * Option format, expected by react-select
- * @see https://github.com/JedWatson/react-select
- */
- type selectOption = { value: ProductSortOption, label: string };
 
 /**
  * This component shows public store
@@ -165,7 +161,7 @@ const Store: React.FC<StoreProps> = ({ onError, onSuccess, currentUser, uiRouter
   /**
    * Creates sorting options to the react-select format
    */
-  const buildOptions = (): Array<selectOption> => {
+  const buildOptions = (): Array<SelectOption<ProductSortOption>> => {
     return [
       { value: 'name-asc', label: t('app.public.store.products.sort.name_az') },
       { value: 'name-desc', label: t('app.public.store.products.sort.name_za') },
@@ -176,7 +172,7 @@ const Store: React.FC<StoreProps> = ({ onError, onSuccess, currentUser, uiRouter
   /**
    * Display option: sorting
    */
-  const handleSorting = (option: selectOption) => {
+  const handleSorting = (option: SelectOption<ProductSortOption>) => {
     ProductLib.updateFilter(setResources, 'sort', option.value);
   };
 

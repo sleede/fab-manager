@@ -16,6 +16,7 @@ import OrderAPI from '../../api/order';
 import { Order, OrderIndexFilter, OrderSortOption } from '../../models/order';
 import { FabPagination } from '../base/fab-pagination';
 import { CaretDoubleUp, X } from 'phosphor-react';
+import { ChecklistOption, SelectOption } from '../../models/select';
 
 declare const Application: IApplication;
 
@@ -23,16 +24,6 @@ interface OrdersProps {
   currentUser?: User,
   onError: (message: string) => void,
 }
-/**
-* Option format, expected by react-select
-* @see https://github.com/JedWatson/react-select
-*/
-type selectOption = { value: OrderSortOption, label: string };
-
-/**
-* Option format, expected by checklist
-*/
-type checklistOption = { value: string, label: string };
 
 const initFilters: OrderIndexFilter = {
   reference: '',
@@ -72,14 +63,7 @@ const Orders: React.FC<OrdersProps> = ({ currentUser, onError }) => {
     }).catch(onError);
   }, [filters]);
 
-  /**
-   * Create a new order
-   */
-  const newOrder = () => {
-    console.log('Create new order');
-  };
-
-  const statusOptions: checklistOption[] = [
+  const statusOptions: ChecklistOption<string>[] = [
     { value: 'cart', label: t('app.admin.store.orders.state.cart') },
     { value: 'paid', label: t('app.admin.store.orders.state.paid') },
     { value: 'payment_failed', label: t('app.admin.store.orders.state.payment_failed') },
@@ -174,7 +158,7 @@ const Orders: React.FC<OrdersProps> = ({ currentUser, onError }) => {
   /**
    * Creates sorting options to the react-select format
    */
-  const buildOptions = (): Array<selectOption> => {
+  const buildOptions = (): Array<SelectOption<OrderSortOption>> => {
     return [
       { value: 'created_at-desc', label: t('app.admin.store.orders.sort.newest') },
       { value: 'created_at-asc', label: t('app.admin.store.orders.sort.oldest') }
@@ -184,7 +168,7 @@ const Orders: React.FC<OrdersProps> = ({ currentUser, onError }) => {
   /**
    * Display option: sorting
    */
-  const handleSorting = (option: selectOption) => {
+  const handleSorting = (option: SelectOption<OrderSortOption>) => {
     setFilters(draft => {
       draft.sort = option.value;
     });
@@ -200,7 +184,7 @@ const Orders: React.FC<OrdersProps> = ({ currentUser, onError }) => {
   /**
    * Filter: by status
    */
-  const handleSelectStatus = (s: checklistOption, checked: boolean) => {
+  const handleSelectStatus = (s: ChecklistOption<string>, checked: boolean) => {
     const list = [...states];
     checked
       ? list.push(s.value)
@@ -250,11 +234,6 @@ const Orders: React.FC<OrdersProps> = ({ currentUser, onError }) => {
     <div className='orders'>
       <header>
         <h2>{t('app.admin.store.orders.heading')}</h2>
-        {false &&
-          <div className='grpBtn'>
-            <FabButton className="main-action-btn" onClick={newOrder}>{t('app.admin.store.orders.create_order')}</FabButton>
-          </div>
-        }
       </header>
 
       <aside className={`store-filters ${filtersPanel ? '' : 'collapsed'}`}>

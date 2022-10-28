@@ -28,6 +28,7 @@ import { ActiveFiltersTags } from './filters/active-filters-tags';
 import SettingAPI from '../../api/setting';
 import { UIRouter } from '@uirouter/angularjs';
 import { CaretDoubleUp } from 'phosphor-react';
+import { SelectOption } from '../../models/select';
 
 declare const Application: IApplication;
 
@@ -36,11 +37,6 @@ interface ProductsProps {
   onError: (message: string) => void,
   uiRouter: UIRouter,
 }
-/**
- * Option format, expected by react-select
- * @see https://github.com/JedWatson/react-select
- */
- type selectOption = { value: ProductSortOption, label: string };
 
 /** This component shows the admin view of the store */
 const Products: React.FC<ProductsProps> = ({ onSuccess, onError, uiRouter }) => {
@@ -171,7 +167,7 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError, uiRouter }) => 
   };
 
   /** Display option: sorting */
-  const handleSorting = (option: selectOption) => {
+  const handleSorting = (option: SelectOption<ProductSortOption>) => {
     ProductLib.updateFilter(setResources, 'sort', option.value);
   };
 
@@ -183,7 +179,7 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError, uiRouter }) => 
   };
 
   /** Creates sorting options to the react-select format */
-  const buildSortOptions = (): Array<selectOption> => {
+  const buildSortOptions = (): Array<SelectOption<ProductSortOption>> => {
     return [
       { value: 'name-asc', label: t('app.admin.store.products.sort.name_az') },
       { value: 'name-desc', label: t('app.admin.store.products.sort.name_za') },

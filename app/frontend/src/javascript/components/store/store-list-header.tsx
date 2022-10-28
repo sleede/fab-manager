@@ -3,21 +3,17 @@ import { useTranslation } from 'react-i18next';
 import Select from 'react-select';
 import Switch from 'react-switch';
 import { SortOption } from '../../models/api';
+import { SelectOption } from '../../models/select';
 
 interface StoreListHeaderProps {
   productsCount: number,
-  selectOptions: selectOption[],
-  onSelectOptionsChange: (option: selectOption) => void,
+  selectOptions: SelectOption<SortOption>[],
+  onSelectOptionsChange: (option: SelectOption<SortOption>) => void,
   selectValue?: SortOption,
   switchLabel?: string,
   switchChecked?: boolean,
   onSwitch?: (boolean) => void
 }
-/**
- * Option format, expected by react-select
- * @see https://github.com/JedWatson/react-select
- */
- type selectOption = { value: SortOption, label: string };
 
 /**
  * Renders an accordion item

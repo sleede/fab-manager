@@ -12,6 +12,7 @@ import { FormSelect } from '../form/form-select';
 import MemberAPI from '../../api/member';
 import SettingAPI from '../../api/setting';
 import UserLib from '../../lib/user';
+import { SelectOption } from '../../models/select';
 
 declare const Application: IApplication;
 
@@ -22,12 +23,6 @@ interface ChangeGroupProps {
   allowChange?: boolean,
   className?: string,
 }
-
-/**
- * Option format, expected by react-select
- * @see https://github.com/JedWatson/react-select
- */
-type selectOption = { value: number, label: string };
 
 /**
  * Component to display the group of the provided user, and allow him to change his group.
@@ -72,7 +67,7 @@ export const ChangeGroup: React.FC<ChangeGroupProps> = ({ user, onSuccess, onErr
   /**
    * Convert the provided array of items to the react-select format
    */
-  const buildGroupsOptions = (): Array<selectOption> => {
+  const buildGroupsOptions = (): Array<SelectOption<number>> => {
     return groups?.map(t => {
       return { value: t.id, label: t.name };
     });
