@@ -40,6 +40,21 @@ class CouponService
     price
   end
 
+  # Apply the provided coupon to the given amount, considering that this applies to a refund invoice (Avoir),
+  # potentially partial
+  def self.apply_on_refund(amount, coupon, paid_items = 1, refund_items = 1)
+    return amount if coupon.nil?
+
+    case coupon.type
+    when 'percent_off'
+      amount - (Rational(amount * coupon.percent_off) / Rational(100.0)).to_f.ceil
+    when 'amount_off'
+      amount - (Rational(coupon.amount_off / paid_items) * Rational(refund_items)).to_f.ceil
+    else
+      raise InvalidCouponError
+    end
+  end
+
   ##
   # Find the coupon associated with the given code and check it is valid for the given user
   # @param code {String} the literal code of the coupon

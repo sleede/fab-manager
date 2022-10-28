@@ -58,14 +58,14 @@ class Invoices::RoundTest < ActionDispatch::IntegrationTest
     ### amount paid = 1295
 
     invoice = Invoice.last
-    assert_equal 121, invoice.invoice_items.first.amount
-    assert_equal 1498, invoice.invoice_items.last.amount
+    assert_equal 121, invoice.main_item.amount
+    assert_equal 1498, invoice.other_items.last.amount
     assert_equal 1295, invoice.total
 
     coupon_service = CouponService.new
     total_without_coupon = coupon_service.invoice_total_no_coupon(invoice)
-    assert_equal 97, coupon_service.ventilate(total_without_coupon, invoice.invoice_items.first.amount, invoice.coupon)
-    assert_equal 1198, coupon_service.ventilate(total_without_coupon, invoice.invoice_items.last.amount, invoice.coupon)
+    assert_equal 97, coupon_service.ventilate(total_without_coupon, invoice.main_item.amount, invoice.coupon)
+    assert_equal 1198, coupon_service.ventilate(total_without_coupon, invoice.other_items.last.amount, invoice.coupon)
     assert_equal 324, total_without_coupon - invoice.total
 
     vat_service = VatHistoryService.new
@@ -121,14 +121,14 @@ class Invoices::RoundTest < ActionDispatch::IntegrationTest
     ### amount paid = 2336
 
     invoice = Invoice.last
-    assert_equal 1423, invoice.invoice_items.first.amount
-    assert_equal 1498, invoice.invoice_items.last.amount
+    assert_equal 1423, invoice.main_item.amount
+    assert_equal 1498, invoice.other_items.last.amount
     assert_equal 2336, invoice.total
 
     coupon_service = CouponService.new
     total_without_coupon = coupon_service.invoice_total_no_coupon(invoice)
-    assert_equal 1138, coupon_service.ventilate(total_without_coupon, invoice.invoice_items.first.amount, invoice.coupon)
-    assert_equal 1198, coupon_service.ventilate(total_without_coupon, invoice.invoice_items.last.amount, invoice.coupon)
+    assert_equal 1138, coupon_service.ventilate(total_without_coupon, invoice.main_item.amount, invoice.coupon)
+    assert_equal 1198, coupon_service.ventilate(total_without_coupon, invoice.other_items.last.amount, invoice.coupon)
     assert_equal 585, total_without_coupon - invoice.total
 
     vat_service = VatHistoryService.new
@@ -184,14 +184,14 @@ class Invoices::RoundTest < ActionDispatch::IntegrationTest
     ### amount paid = 1319
 
     invoice = Invoice.last
-    assert_equal 121, invoice.invoice_items.first.amount
-    assert_equal 1498, invoice.invoice_items.last.amount
+    assert_equal 121, invoice.main_item.amount
+    assert_equal 1498, invoice.other_items.last.amount
     assert_equal 1319, invoice.total
 
     coupon_service = CouponService.new
     total_without_coupon = coupon_service.invoice_total_no_coupon(invoice)
-    assert_equal 99, coupon_service.ventilate(total_without_coupon, invoice.invoice_items.first.amount, invoice.coupon)
-    assert_equal 1220, coupon_service.ventilate(total_without_coupon, invoice.invoice_items.last.amount, invoice.coupon)
+    assert_equal 99, coupon_service.ventilate(total_without_coupon, invoice.main_item.amount, invoice.coupon)
+    assert_equal 1220, coupon_service.ventilate(total_without_coupon, invoice.other_items.last.amount, invoice.coupon)
     assert_equal 300, total_without_coupon - invoice.total
 
     vat_service = VatHistoryService.new
@@ -247,14 +247,14 @@ class Invoices::RoundTest < ActionDispatch::IntegrationTest
     ### amount paid = 2621
 
     invoice = Invoice.last
-    assert_equal 1423, invoice.invoice_items.first.amount
-    assert_equal 1498, invoice.invoice_items.last.amount
+    assert_equal 1423, invoice.main_item.amount
+    assert_equal 1498, invoice.other_items.last.amount
     assert_equal 2621, invoice.total
 
     coupon_service = CouponService.new
     total_without_coupon = coupon_service.invoice_total_no_coupon(invoice)
-    assert_equal 1277, coupon_service.ventilate(total_without_coupon, invoice.invoice_items.first.amount, invoice.coupon)
-    assert_equal 1344, coupon_service.ventilate(total_without_coupon, invoice.invoice_items.last.amount, invoice.coupon)
+    assert_equal 1277, coupon_service.ventilate(total_without_coupon, invoice.main_item.amount, invoice.coupon)
+    assert_equal 1344, coupon_service.ventilate(total_without_coupon, invoice.other_items.last.amount, invoice.coupon)
     assert_equal 300, total_without_coupon - invoice.total
 
     vat_service = VatHistoryService.new
