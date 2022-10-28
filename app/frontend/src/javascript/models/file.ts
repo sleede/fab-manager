@@ -1,7 +1,8 @@
 export interface FileType {
-  id?: number,
+  id?: number|string,
   attachment_name?: string,
-  attachment_url?: string
+  attachment_url?: string,
+  _destroy?: boolean
 }
 
 export interface ImageType extends FileType {

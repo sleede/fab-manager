@@ -50,7 +50,7 @@
       flex: 1 1 320px;
     }
   }
-  
+
   .header-switch {
     display: flex;
     flex-direction: row;
@@ -65,18 +65,4 @@
     gap: 0 3.2rem;
     align-items: flex-end;
   }
-
-  .product-images,
-  .product-documents {
-    display: flex;
-    flex-direction: column;
-    .list {
-      margin-bottom: 2.4rem;
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(440px, 1fr));
-      gap: 2.4rem;
-    }
-    button { margin-left: auto; }
-  }
-
 }

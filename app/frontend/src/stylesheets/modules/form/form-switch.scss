@@ -13,6 +13,7 @@
 
   .form-item-field {
     display: flex;
+    flex-wrap: wrap;
     padding: 16px;
     background-color: white;
     & > *:not(:first-child) {

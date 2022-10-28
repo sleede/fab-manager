@@ -1,23 +1,20 @@
 import { Reservation } from './reservation';
 import { ApiFilter } from './api';
+import { FileType } from './file';
 
 export interface MachineIndexFilter extends ApiFilter {
   disabled: boolean,
 }
 
 export interface Machine {
-  id: number,
+  id?: number,
   name: string,
   description?: string,
   spec?: string,
   disabled: boolean,
   slug: string,
-  machine_image: string,
-  machine_files_attributes?: Array<{
-    id: number,
-    attachment: string,
-    attachment_url: string
-  }>,
+  machine_image_attributes: FileType,
+  machine_files_attributes?: Array<FileType>,
   trainings?: Array<{
     id: number,
     name: string,

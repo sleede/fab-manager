@@ -9,12 +9,12 @@ export default class FileUploadLib {
   public static onRemoveFile<TFieldValues extends FieldValues> (file: FileType, id: string, setFile: Dispatch<SetStateAction<FileType>>, setValue: UseFormSetValue<TFieldValues>, onFileRemove: () => void) {
     if (file?.id) {
       setValue(
-        `${id}[_destroy]` as Path<TFieldValues>,
+        `${id}._destroy` as Path<TFieldValues>,
         true as UnpackNestedValue<FieldPathValue<TFieldValues, Path<TFieldValues>>>
       );
     }
     setValue(
-      `${id}[attachment_files]` as Path<TFieldValues>,
+      `${id}.attachment_files` as Path<TFieldValues>,
       null as UnpackNestedValue<FieldPathValue<TFieldValues, Path<TFieldValues>>>
     );
     setFile(null);
@@ -24,6 +24,6 @@ export default class FileUploadLib {
   }
 
   public static hasFile (file: FileType): boolean {
-    return !!file?.attachment_name;
+    return file?.attachment_name && !file?._destroy;
   }
 }

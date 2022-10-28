@@ -73,8 +73,8 @@ export const stockMovementAllReasons = [...stockMovementInReasons, ...stockMovem
 export type StockMovementReason = typeof stockMovementAllReasons[number];
 
 export interface Stock {
-  internal: number,
-  external: number,
+  internal?: number,
+  external?: number,
 }
 
 export type ProductsIndex = PaginatedIndex<Product>;
@@ -99,21 +99,21 @@ export interface StockMovementIndexFilter extends ApiFilter {
 
 export interface Product {
   id?: number,
-  name: string,
-  slug: string,
+  name?: string,
+  slug?: string,
   sku?: string,
   description?: string,
-  is_active: boolean,
+  is_active?: boolean,
   product_category_id?: number,
   is_active_price?: boolean,
   amount?: number,
   quantity_min?: number,
-  stock: Stock,
-  low_stock_alert: boolean,
+  stock?: Stock,
+  low_stock_alert?: boolean,
   low_stock_threshold?: number,
-  machine_ids: number[],
+  machine_ids?: number[],
   created_at?: TDateISO,
-  product_files_attributes: Array<{
+  product_files_attributes?: Array<{
     id?: number,
     attachment?: File,
     attachment_files?: FileList,
@@ -121,7 +121,7 @@ export interface Product {
     attachment_url?: string,
     _destroy?: boolean
   }>,
-  product_images_attributes: Array<{
+  product_images_attributes?: Array<{
     id?: number,
     attachment?: File,
     attachment_files?: FileList,

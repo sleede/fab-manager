@@ -45,7 +45,7 @@ export const FormFileUpload = <TFieldValues extends FieldValues>({ id, register,
         attachment_name: f.name
       });
       setValue(
-        `${id}[_destroy]` as Path<TFieldValues>,
+        `${id}._destroy` as Path<TFieldValues>,
         false as UnpackNestedValue<FieldPathValue<TFieldValues, Path<TFieldValues>>>
       );
       if (typeof onFileChange === 'function') {

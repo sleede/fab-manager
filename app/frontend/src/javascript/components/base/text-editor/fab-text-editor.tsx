@@ -101,9 +101,9 @@ const FabTextEditor: React.ForwardRefRenderFunction<FabTextEditorRef, FabTextEdi
     <div className={`fab-text-editor ${disabled ? 'is-disabled' : ''}`}>
       <MenuBar editor={editor} heading={heading} bulletList={bulletList} blockquote={blockquote} video={video} image={image} link={link} disabled={disabled} />
       <EditorContent editor={editor} />
-      <div className="fab-text-editor-character-count">
+      {limit && <div className="fab-text-editor-character-count">
         {editor?.storage.characterCount.characters()} / {limit}
-      </div>
+      </div>}
       {error &&
         <div className="fab-text-editor-error">
           <WarningOctagon size={24} />

@@ -100,10 +100,10 @@ export const MachinesList: React.FC<MachinesListProps> = ({ onError, onSuccess, 
   );
 };
 
-const MachinesListWrapper: React.FC<MachinesListProps> = ({ user, onError, onSuccess, onShowMachine, onReserveMachine, onLoginRequested, onEnrollRequested, canProposePacks }) => {
+const MachinesListWrapper: React.FC<MachinesListProps> = (props) => {
   return (
     <Loader>
-      <MachinesList user={user} onError={onError} onSuccess={onSuccess} onShowMachine={onShowMachine} onReserveMachine={onReserveMachine} onLoginRequested={onLoginRequested} onEnrollRequested={onEnrollRequested} canProposePacks={canProposePacks}/>
+      <MachinesList {...props} />
     </Loader>
   );
 };
