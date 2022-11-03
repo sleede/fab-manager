@@ -92,7 +92,10 @@ export const FormImageUpload = <TFieldValues extends FieldValues, TContext exten
   return (
     <div className={`form-image-upload form-image-upload--${size} ${label ? 'with-label' : ''} ${classNames}`}>
       <div className={`image image--${size}`}>
-        <img src={hasImage() ? image : noImage} alt={file?.attachment_name || 'no image'} />
+        <img src={hasImage() ? image : noImage} alt={file?.attachment_name || 'no image'} onError={({ currentTarget }) => {
+          currentTarget.onerror = null;
+          currentTarget.src = noImage;
+        }} />
       </div>
       <div className="actions">
         {mainOption &&
