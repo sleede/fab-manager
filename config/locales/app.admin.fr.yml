@@ -2080,7 +2080,7 @@ fr:
           clone_product: "Dupliquer le produit"
           clone: "Dupliquer"
           name: "Nom"
-          sku: "URL"
+          sku: "Référence du produit (SKU)"
           is_show_in_store: "Disponible dans la boutique"
           active_price_info: "Ce produit est-il visible par les membres dans la boutique ?"
         orders:
