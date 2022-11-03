@@ -2,6 +2,7 @@ import { TDateISO } from '../typings/date-iso';
 import { ApiFilter, ApiResource, PaginatedIndex } from './api';
 import { ProductCategory } from './product-category';
 import { Machine } from './machine';
+import { FileType, ImageType } from './file';
 
 export type ProductSortOption = 'name-asc' | 'name-desc' | 'amount-asc' | 'amount-desc' | '';
 
@@ -113,23 +114,9 @@ export interface Product {
   low_stock_threshold?: number,
   machine_ids?: number[],
   created_at?: TDateISO,
-  product_files_attributes?: Array<{
-    id?: number,
-    attachment?: File,
-    attachment_files?: FileList,
-    attachment_name?: string,
-    attachment_url?: string,
-    _destroy?: boolean
-  }>,
-  product_images_attributes?: Array<{
-    id?: number,
-    attachment?: File,
-    attachment_files?: FileList,
-    attachment_name?: string,
-    attachment_url?: string,
+  product_files_attributes?: Array<FileType>,
+  product_images_attributes?: Array<ImageType & {
     thumb_attachment_url?: string,
-    _destroy?: boolean,
-    is_main?: boolean
   }>,
   product_stock_movements_attributes?: Array<ProductStockMovement>,
 }

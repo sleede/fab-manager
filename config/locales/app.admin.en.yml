@@ -12,7 +12,7 @@ en:
         add_an_attachment: "Add an attachment"
         disable_machine: "Disable machine"
         disabled_help: "When disabled, the machine won't be reservable and won't appear by default in the machine list."
-        validate_your_machine: "Validate your machine"
+        ACTION_machine: "{ACTION, select, create{Create} other{Update}} the machine"
       #add a new machine
       machines_new:
         declare_a_new_machine: "Declare a new machine"

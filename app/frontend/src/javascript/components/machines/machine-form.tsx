@@ -11,6 +11,8 @@ import { react2angular } from 'react2angular';
 import { ErrorBoundary } from '../base/error-boundary';
 import { FormRichText } from '../form/form-rich-text';
 import { FormSwitch } from '../form/form-switch';
+import { FormMultiFileUpload } from '../form/form-multi-file-upload';
+import { FabButton } from '../base/fab-button';
 
 declare const Application: IApplication;
 
@@ -68,10 +70,24 @@ export const MachineForm: React.FC<MachineFormProps> = ({ action, machine, onErr
                     limit={null}
                     heading bulletList blockquote link video image />
 
+      <div className='form-item-header machine-files-header'>
+        <p>{t('app.admin.machine_form.attached_files_pdf')}</p>
+      </div>
+      <FormMultiFileUpload setValue={setValue}
+                           addButtonLabel={t('app.admin.machine_form.add_an_attachment')}
+                           control={control}
+                           accept="application/pdf"
+                           register={register}
+                           id="machine_files_attributes"
+                           className="machine-files" />
+
       <FormSwitch control={control}
                   id="disabled"
                   label={t('app.admin.machine_form.disable_machine')}
                   tooltip={t('app.admin.machine_form.disabled_help')} />
+      <FabButton type="submit" className="is-info submit-btn">
+        {t('app.admin.machine_form.ACTION_machine', { ACTION: action })}
+      </FabButton>
     </form>
   );
 };
