@@ -15,6 +15,6 @@ class CartPolicy < ApplicationPolicy
   end
 
   def set_offer?
-    user.privileged?
+    !record.is_offered || (user.privileged? && record.customer_id != user.id)
   end
 end
