@@ -110,7 +110,7 @@ namespace :fablab do
       end
     end
 
-    desc 'migrate administrators to normal groups'
+    desc 'migrate administrators to normal groups and validate them'
     task set_admins_group: :environment do
       groups = Group.where.not(slug: 'admins').where(disabled: [false, nil]).order(:id)
       User.admins.each do |admin|
@@ -120,6 +120,10 @@ namespace :fablab do
       end
       print "\e[91m::\e[0m \e[1mRemoving the 'admins' group...\e[0m\n"
       Group.find_by(slug: 'admins').destroy
+      if Setting.get('user_validation_required')
+        print "\e[91m::\e[0m \e[1mValidating the 'admins'...\e[0m\n"
+        User.admins.each { |admin| admin.update(validated_at: DateTime.current) if admin.validated_at.nil? }
+      end
       print "\e[32m✅\e[0m \e[1mDone\e[0m\n"
     end
 

@@ -33,7 +33,7 @@ class UserService
 
     def create_admin(params)
       generated_password = SecurePassword.generate
-      admin = User.new(params.merge(password: generated_password))
+      admin = User.new(params.merge(password: generated_password, validated_at: DateTime.current))
       admin.send :set_slug
 
       # if the authentication is made through an SSO, generate a migration token
