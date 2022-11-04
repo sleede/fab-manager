@@ -94,7 +94,7 @@ class VatHistoryService
         # when the VAT rate was enabled, set the date it was enabled and the rate
         range = chronology.find { |p| rate.created_at.to_i.between?(p[:start].to_i, p[:end].to_i) }
         date = range[:enabled] ? rate.created_at : range[:end]
-        date_rates.push(date: date, rate: rate.value.to_f) unless date_rates.find { |d| d[:date] == date }
+        date_rates.push(date: date, rate: rate.value.to_f) unless date_rates.find { |d| d[:date].to_i == date.to_i }
       end
       chronology.reverse_each do |period|
         # when the VAT rate was disabled, set the date it was disabled and rate=0
