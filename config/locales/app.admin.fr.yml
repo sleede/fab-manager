@@ -1,6 +1,18 @@
 fr:
   app:
     admin:
+      machine_form:
+        name: "Nom"
+        illustration: "Illustration"
+        add_an_illustration: "Ajouter un visuel"
+        description: "Description"
+        technical_specifications: "Caractéristiques techniques"
+        attached_files_pdf: "Pièces jointes (pdf)"
+        attach_a_file: "Joindre un fichier"
+        add_an_attachment: "Ajouter une pièce jointe"
+        disable_machine: "Désactiver la machine"
+        disabled_help: "Lorsque désactivée, la machine ne sera pas réservable et n'apparaîtra pas par défaut dans la liste des machines."
+        validate_your_machine: "Valider votre machine"
       #add a new machine
       machines_new:
         declare_a_new_machine: "Déclarer une nouvelle machine"
@@ -987,13 +999,13 @@ fr:
         refuse_documents_info: "Après vérification, vous pouvez notifier le membre que le ou les justificatif(s) déposés ne sont pas recevables. Vous pouvez préciser les motifs de votre refus et lui indiquer les actions à mettre en œuvre. Le membre sera notifié par mail."
       change_role_modal:
         change_role: "Changer le rôle"
-        warning_role_change: "<p><strong>Attention :</strong> changer le rôle d'un utilisateur n'est pas une opération anodine.</p><ul><li><strong>Les membres</strong> ne peuvent que prendre des réservations pour eux-même, en payant par carte bancaire ou par porte-monnaie.</li><li><strong>Les gestionnaires</strong> peuvent prendre des réservations pour eux-même, en payant par carte bancaire ou par porte-monnaie, ainsi que pour les autres membres et gestionnaires, en encaissant les paiements à la caisse.</li><li><strong>Les administrateurs</strong> ne peuvent que prendre des réservations pour les membres et gestionnaires, en encaissant les paiements à la caisse. De plus, ils peuvent modifier l'ensemble des paramètres de l'application.</li></ul>"
+        warning_role_change: "<p><strong>Attention :</strong> changer le rôle d'un utilisateur n'est pas une opération anodine.</p><ul><li><strong>Les membres</strong> ne peuvent que prendre des réservations pour eux-même, en payant par carte bancaire ou par porte-monnaie.</li><li><strong>Les gestionnaires</strong> peuvent prendre des réservations pour eux-même, en payant par carte bancaire ou par porte-monnaie, ainsi que pour les autres membres et gestionnaires, en encaissant les paiements à la caisse.</li><li><strong>Les administrateurs</strong> peuvent réserver pour eux-mêmes ou pour les autres, comme les gestionnaires. De plus, ils peuvent modifier l'ensemble des paramètres de l'application.</li></ul>"
         new_role: "Nouveau rôle"
         admin: "Administrateur"
         manager: "Gestionnaire"
         member: "Membre"
         new_group: "Nouveau groupe"
-        new_group_help: "Les membres et les gestionnaires doivent être placés dans un groupe."
+        new_group_help: "Les utilisateurs ayant une souscription en cours ne peuvent pas être changés de leur groupe actuel."
         confirm: "Changer le rôle"
         role_changed: "Rôle modifié avec succès de {OLD} à {NEW}."
         error_while_changing_role: "Une erreur est survenue lors de changement de rôle. Merci de réessayer plus tard."
