@@ -18,18 +18,19 @@ Use the following commands to dump the PostgreSQL database to an archive file
 cd /apps/fabmanager/
 docker-compose exec postgres bash
 cd /var/lib/postgresql/data/
-pg_dump -U postgres fabmanager_production > fabmanager_production_$(date -I).sql
-tar cvzf fabmanager_production_$(date -I).tar.gz fabmanager_production_$(date -I).sql
+DB=$(psql -U postgres -c \\l | grep production | awk '{print $1}')
+pg_dump -U postgres "$DB" > "$DB_$(date -I).sql"
+tar cvzf "fabmanager_database_dump_$(date -I).tar.gz" "$DB_$(date -I).sql"
 ```
 
 If you're connected to your server thought SSH, you can download the resulting dump file using the following:
 ```bash
-scp root@remote.server.fab:/apps/fabmanager/postgresql/fabmanager_production_$(date -I).tar.gz .
+scp root@remote.server.fab:/apps/fabmanager/postgresql/fabmanager_database_dump_$(date -I).tar.gz .
 ```
 
 Restore the dump with the following:
 ```bash
-tar xvf fabmanager_production_$(date -I).tar.gz
+tar xvf fabmanager_database_dump_$(date -I).tar.gz
 sudo cp fabmanager_production_$(date -I).sql /apps/fabmanager/postgresql/
 cd /apps/fabmanager/
 docker-compose down
@@ -76,7 +77,7 @@ This is currently not supported, because of some PostgreSQL specific instruction
  - `db/migrate/20200511075933_fix_accounting_periods.rb` is using `CREATE RULE` and `DROP RULE`;
  - `app/models/project.rb` is using the `pg_search` gem.
  - `db/migrate/20200622135401_add_pg_search_dmetaphone_support_functions.rb` is using [fuzzystrmatch](http://www.postgresql.org/docs/current/static/fuzzystrmatch.html) module and defines a PL/pgSQL function (`pg_search_dmetaphone()`);
- - `db/migrate/20200623134900_add_search_vector_to_project.rb` is using [tsvector](https://www.postgresql.org/docs/10/datatype-textsearch.html), a PostgreSQL datatype and [GIN  (Generalized Inverted Index)](https://www.postgresql.org/docs/9.1/textsearch-indexes.html) a PostgreSQL index type; 
+ - `db/migrate/20200623134900_add_search_vector_to_project.rb` is using [tsvector](https://www.postgresql.org/docs/10/datatype-textsearch.html), a PostgreSQL datatype and [GIN  (Generalized Inverted Index)](https://www.postgresql.org/docs/9.1/textsearch-indexes.html) a PostgreSQL index type;
  - `db/migrate/20200623141305_update_search_vector_of_projects.rb` defines a PL/pgSQL function (`fill_search_vector_for_project()`) and create an SQL trigger for this function;
  - `db/migrate/20200629123011_update_pg_trgm.rb` is using [ALTER EXTENSION](https://www.postgresql.org/docs/10/sql-alterextension.html);
  - `db/migrate/20201027101809_create_payment_schedule_items.rb` is using [jsonb](https://www.postgresql.org/docs/9.4/static/datatype-json.html);
