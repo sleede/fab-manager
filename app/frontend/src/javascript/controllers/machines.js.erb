@@ -231,7 +231,7 @@ Application.Controllers.controller('MachinesController', ['$scope', '$state', '_
 /**
  * Controller used in the machine creation page (admin)
  */
-Application.Controllers.controller('NewMachineController', ['$scope', '$state', 'CSRF', function ($scope, $state, CSRF) {
+Application.Controllers.controller('NewMachineController', ['$scope', '$state', 'CSRF', 'growl', function ($scope, $state, CSRF, growl) {
   CSRF.setMetaTags();
 
   // API URL where the form will be posted
@@ -244,6 +244,20 @@ Application.Controllers.controller('NewMachineController', ['$scope', '$state', 
   $scope.machine =
     { machine_files_attributes: [] };
 
+  /**
+   * Shows an error message forwarded from a child component
+   */
+  $scope.onError = function (message) {
+    growl.error(message);
+  }
+
+  /**
+   * Shows a success message forwarded from a child react components
+   */
+  $scope.onSuccess = function (message) {
+    growl.success(message)
+  }
+
   // Using the MachinesController
   return new MachinesController($scope, $state);
 }
@@ -252,8 +266,8 @@ Application.Controllers.controller('NewMachineController', ['$scope', '$state', 
 /**
  * Controller used in the machine edition page (admin)
  */
-Application.Controllers.controller('EditMachineController', ['$scope', '$state', '$transition$', 'machinePromise', 'CSRF',
-  function ($scope, $state, $transition$, machinePromise, CSRF) {
+Application.Controllers.controller('EditMachineController', ['$scope', '$state', '$transition$', 'machinePromise', 'CSRF', 'growl',
+  function ($scope, $state, $transition$, machinePromise, CSRF, growl) {
   /* PUBLIC SCOPE */
 
     // API URL where the form will be posted

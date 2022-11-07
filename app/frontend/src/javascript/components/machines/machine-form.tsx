@@ -35,8 +35,9 @@ export const MachineForm: React.FC<MachineFormProps> = ({ action, machine, onErr
    * Callback triggered when the user validates the machine form: handle create or update
    */
   const onSubmit: SubmitHandler<Machine> = (data: Machine) => {
-    MachineAPI[action](data).then(() => {
+    MachineAPI[action](data).then((res) => {
       onSuccess(t(`app.admin.machine_form.${action}_success`));
+      window.location.href = `/#!/machines/${res.slug}`;
     }).catch(error => {
       onError(error);
     });

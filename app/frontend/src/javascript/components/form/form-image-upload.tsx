@@ -31,7 +31,7 @@ export const FormImageUpload = <TFieldValues extends FieldValues, TContext exten
   const { t } = useTranslation('shared');
 
   const [file, setFile] = useState<ImageType>(defaultImage);
-  const [image, setImage] = useState<string | ArrayBuffer>(defaultImage.attachment_url);
+  const [image, setImage] = useState<string | ArrayBuffer>(defaultImage?.attachment_url);
 
   useEffect(() => {
     setFile(defaultImage);
@@ -118,7 +118,7 @@ export const FormImageUpload = <TFieldValues extends FieldValues, TContext exten
                    register={register}
                    label={label}
                    formState={formState}
-                   rules={rules}
+                   rules={{ ...rules, required: rules.required && !hasImage() }}
                    disabled={disabled}
                    error={error}
                    warning={warning}

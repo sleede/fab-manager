@@ -39,8 +39,8 @@
 
       <div class="article wrapper-lg" >
 
-        <div class="article-thumbnail" ng-if="machine.machine_image">
-          <img ng-src="{{machine.machine_image}}" alt="{{machine.name}}" class="img-responsive">
+        <div class="article-thumbnail" ng-if="machine.machine_image_attributes">
+          <img ng-src="{{machine.machine_image_attributes.attachment_url}}" alt="{{machine.name}}" class="img-responsive">
         </div>
 
         <p class="intro" ng-bind-html="machine.description | toTrusted"></p>
@@ -69,7 +69,7 @@
 
           <ul class="widget-content list-group list-group-lg no-bg auto">
             <li ng-repeat="file in machine.machine_files_attributes" class="list-group-item no-b clearfix">
-              <a target="_blank" ng-href="{{file.attachment_url}}"><i class="fa fa-arrow-circle-o-down"> </i> {{file.attachment | humanize : 25}}</a>
+              <a target="_blank" ng-href="{{file.attachment_url}}"><i class="fa fa-arrow-circle-o-down"> </i> {{file.attachment_name | humanize : 25}}</a>
             </li>
           </ul>
       </section>
