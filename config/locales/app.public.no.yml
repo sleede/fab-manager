@@ -451,6 +451,7 @@
           stock_limit_QUANTITY: "Only {QUANTITY} {QUANTITY, plural, =1{unit} other{units}} left in stock, please adjust the quantity of items."
           quantity_min_QUANTITY: "Minimum number of product was changed to {QUANTITY}, please adjust the quantity of items."
           price_changed_PRICE: "The product price was modified to {PRICE}"
+          unauthorized_offering_product: "You can't offer anything to yourself"
       orders_dashboard:
         heading: "My orders"
         sort:

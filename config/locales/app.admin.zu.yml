@@ -1,6 +1,18 @@
 zu:
   app:
     admin:
+      machine_form:
+        name: "crwdns31659:0crwdne31659:0"
+        illustration: "crwdns31661:0crwdne31661:0"
+        add_an_illustration: "crwdns31663:0crwdne31663:0"
+        description: "crwdns31665:0crwdne31665:0"
+        technical_specifications: "crwdns31667:0crwdne31667:0"
+        attached_files_pdf: "crwdns31669:0crwdne31669:0"
+        attach_a_file: "crwdns31671:0crwdne31671:0"
+        add_an_attachment: "crwdns31673:0crwdne31673:0"
+        disable_machine: "crwdns31675:0crwdne31675:0"
+        disabled_help: "crwdns31677:0crwdne31677:0"
+        validate_your_machine: "crwdns31679:0crwdne31679:0"
       #add a new machine
       machines_new:
         declare_a_new_machine: "crwdns24050:0crwdne24050:0"

@@ -1,6 +1,18 @@
 "no":
   app:
     admin:
+      machine_form:
+        name: "Name"
+        illustration: "Visual"
+        add_an_illustration: "Add a visual"
+        description: "Description"
+        technical_specifications: "Technical specifications"
+        attached_files_pdf: "Attached files (pdf)"
+        attach_a_file: "Attach a file"
+        add_an_attachment: "Add an attachment"
+        disable_machine: "Disable machine"
+        disabled_help: "When disabled, the machine won't be reservable and won't appear by default in the machine list."
+        validate_your_machine: "Validate your machine"
       #add a new machine
       machines_new:
         declare_a_new_machine: "Sett opp en ny maskin"
@@ -987,13 +999,13 @@
         refuse_documents_info: "After verification, you may notify the member that the evidence submitted is not acceptable. You can specify the reasons for your refusal and indicate the actions to be taken. The member will be notified by e-mail."
       change_role_modal:
         change_role: "Change role"
-        warning_role_change: "<p><strong>Warning:</strong> changing the role of a user is not a harmless operation.</p><ul><li><strong>Members</strong> can only book reservations for themselves, paying by card or wallet.</li><li><strong>Managers</strong> can book reservations for themselves, paying by card or wallet, and for other members and managers, by collecting payments at the checkout.</li><li><strong>Administrators</strong> can only book reservations for members and managers, by collecting payments at the checkout. Moreover, they can change every settings of the application.</li></ul>"
+        warning_role_change: "<p><strong>Warning:</strong> changing the role of a user is not a harmless operation.</p><ul><li><strong>Members</strong> can only book reservations for themselves, paying by card or wallet.</li><li><strong>Managers</strong> can book reservations for themselves, paying by card or wallet, and for other members and managers, by collecting payments at the checkout.</li><li><strong>Administrators</strong> as managers, they can book reservations for themselves and for others. Moreover, they can change every settings of the application.</li></ul>"
         new_role: "New role"
         admin: "Administrator"
         manager: "Manager"
         member: "Member"
         new_group: "New group"
-        new_group_help: "Members and managers must be placed in a group."
+        new_group_help: "Users with a running subscription cannot be changed from their current group."
         confirm: "Change role"
         role_changed: "Role successfully changed from {OLD} to {NEW}."
         error_while_changing_role: "An error occurred while changing the role. Please try again later."
@@ -2080,7 +2092,7 @@
           clone_product: "Duplicate the product"
           clone: "Duplicate"
           name: "Name"
-          sku: "URL"
+          sku: "Product reference (SKU)"
           is_show_in_store: "Available in the store"
           active_price_info: "Is this product visible by the members on the store?"
         orders:

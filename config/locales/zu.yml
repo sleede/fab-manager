@@ -13,8 +13,8 @@ zu:
   activerecord:
     attributes:
       product:
-        amount: "crwdns31600:0crwdne31600:0"
-        slug: "crwdns31640:0crwdne31640:0"
+        amount: "crwdns31683:0crwdne31683:0"
+        slug: "crwdns31685:0crwdne31685:0"
   errors:
     #CarrierWave
     messages:
@@ -43,12 +43,12 @@ zu:
       invalid_duration: "crwdns3207:0%{DAYS}crwdne3207:0"
       must_be_in_the_past: "crwdns3209:0crwdne3209:0"
       registration_disabled: "crwdns22285:0crwdne22285:0"
-      undefined_in_store: "crwdns31602:0crwdne31602:0"
-      gateway_error: "crwdns31604:0%{MESSAGE}crwdne31604:0"
-      gateway_amount_too_small: "crwdns31606:0%{AMOUNT}crwdne31606:0"
-      gateway_amount_too_large: "crwdns31608:0%{AMOUNT}crwdne31608:0"
-      product_in_use: "crwdns31610:0crwdne31610:0"
-      slug_already_used: "crwdns31642:0crwdne31642:0"
+      undefined_in_store: "crwdns31687:0crwdne31687:0"
+      gateway_error: "crwdns31689:0%{MESSAGE}crwdne31689:0"
+      gateway_amount_too_small: "crwdns31691:0%{AMOUNT}crwdne31691:0"
+      gateway_amount_too_large: "crwdns31693:0%{AMOUNT}crwdne31693:0"
+      product_in_use: "crwdns31695:0crwdne31695:0"
+      slug_already_used: "crwdns31697:0crwdne31697:0"
   apipie:
     api_documentation: "crwdns3257:0crwdne3257:0"
     code: "crwdns20914:0crwdne20914:0"
@@ -68,7 +68,6 @@ zu:
   #members management
   members:
     unable_to_change_the_group_while_a_subscription_is_running: "crwdns3275:0crwdne3275:0"
-    admins_cant_change_group: "crwdns20496:0crwdne20496:0"
     please_input_the_authentication_code_sent_to_the_address: "crwdns3277:0%{EMAIL}crwdne3277:0"
     your_authentication_code_is_not_valid: "crwdns3279:0crwdne3279:0"
     current_authentication_method_no_code: "crwdns3281:0crwdne3281:0"
@@ -132,7 +131,7 @@ zu:
     error_invoice: "crwdns21480:0crwdne21480:0"
     prepaid_pack: "crwdns22022:0crwdne22022:0"
     pack_item: "crwdns22024:0%{COUNT}crwdnd22024:0%{ITEM}crwdne22024:0"
-    order: "crwdns31612:0crwdne31612:0"
+    order: "crwdns31699:0crwdne31699:0"
   #PDF payment schedule generation
   payment_schedules:
     schedule_reference: "crwdns21094:0%{REF}crwdne21094:0"
@@ -165,6 +164,7 @@ zu:
     Event_reservation: "crwdns3407:0crwdne3407:0"
     Space_reservation: "crwdns3409:0crwdne3409:0"
     wallet: "crwdns3411:0crwdne3411:0"
+    shop_order: "crwdns31701:0crwdne31701:0"
   vat_export:
     start_date: "crwdns22259:0crwdne22259:0"
     end_date: "crwdns22261:0crwdne22261:0"
@@ -368,8 +368,8 @@ zu:
         members: "crwdns3669:0crwdne3669:0"
         view_results: "crwdns3671:0crwdne3671:0"
       notify_admin_low_stock_threshold:
-        low_stock: "crwdns31614:0%{PRODUCT}crwdne31614:0"
-        view_product: "crwdns31616:0crwdne31616:0"
+        low_stock: "crwdns31703:0%{PRODUCT}crwdne31703:0"
+        view_product: "crwdns31705:0crwdne31705:0"
       notify_member_about_coupon:
         enjoy_a_discount_of_PERCENT_with_code_CODE: "crwdns3673:0%{PERCENT}crwdnd3673:0%{CODE}crwdne3673:0"
         enjoy_a_discount_of_AMOUNT_with_code_CODE: "crwdns3675:0%{AMOUNT}crwdnd3675:0%{CODE}crwdne3675:0"
@@ -422,17 +422,17 @@ zu:
       notify_admin_user_proof_of_identity_refusal:
         refusal: "crwdns23010:0%{NAME}crwdne23010:0"
       notify_user_order_is_ready:
-        order_ready: "crwdns31618:0%{REFERENCE}crwdne31618:0"
+        order_ready: "crwdns31707:0%{REFERENCE}crwdne31707:0"
       notify_user_order_is_canceled:
-        order_canceled: "crwdns31620:0%{REFERENCE}crwdne31620:0"
+        order_canceled: "crwdns31709:0%{REFERENCE}crwdne31709:0"
       notify_user_order_is_refunded:
-        order_refunded: "crwdns31622:0%{REFERENCE}crwdne31622:0"
+        order_refunded: "crwdns31711:0%{REFERENCE}crwdne31711:0"
   #statistics tools for admins
   statistics:
     subscriptions: "crwdns3689:0crwdne3689:0"
     machines_hours: "crwdns4561:0crwdne4561:0"
     spaces: "crwdns3693:0crwdne3693:0"
-    orders: "crwdns31624:0crwdne31624:0"
+    orders: "crwdns31713:0crwdne31713:0"
     trainings: "crwdns3695:0crwdne3695:0"
     events: "crwdns3697:0crwdne3697:0"
     registrations: "crwdns3699:0crwdne3699:0"
@@ -456,9 +456,9 @@ zu:
     account_creation: "crwdns3735:0crwdne3735:0"
     project_publication: "crwdns3737:0crwdne3737:0"
     duration: "crwdns20282:0crwdne20282:0"
-    store: "crwdns31644:0crwdne31644:0"
-    paid-processed: "crwdns31628:0crwdne31628:0"
-    aborted: "crwdns31630:0crwdne31630:0"
+    store: "crwdns31715:0crwdne31715:0"
+    paid-processed: "crwdns31717:0crwdne31717:0"
+    aborted: "crwdns31719:0crwdne31719:0"
   #statistics exports to the Excel file format
   export:
     entries: "crwdns3739:0crwdne3739:0"
@@ -478,15 +478,12 @@ zu:
   price_category:
     reduced_fare: "crwdns3765:0crwdne3765:0"
     reduced_fare_if_you_are_under_25_student_or_unemployed: "crwdns3767:0crwdne3767:0"
-  group:
-    #name of the user's group for administrators
-    admins: 'crwdns3769:0crwdne3769:0'
   cart_items:
     free_extension: "crwdns22091:0%{DATE}crwdne22091:0"
   statistic_profile:
     birthday_in_past: "crwdns22127:0crwdne22127:0"
   order:
-    please_contact_FABLAB: "crwdns31632:0crwdne31632:0"
+    please_contact_FABLAB: "crwdns31721:0crwdne31721:0"
   settings:
     locked_setting: "crwdns21632:0crwdne21632:0"
     about_title: "crwdns21634:0crwdne21634:0"
@@ -620,6 +617,6 @@ zu:
     machines_module: "crwdns23038:0crwdne23038:0"
     user_change_group: "crwdns23040:0crwdne23040:0"
     show_username_in_admin_list: "crwdns24016:0crwdne24016:0"
-    store_module: "crwdns31634:0crwdne31634:0"
-    store_withdrawal_instructions: "crwdns31636:0crwdne31636:0"
-    store_hidden: "crwdns31638:0crwdne31638:0"
+    store_module: "crwdns31723:0crwdne31723:0"
+    store_withdrawal_instructions: "crwdns31725:0crwdne31725:0"
+    store_hidden: "crwdns31727:0crwdne31727:0"

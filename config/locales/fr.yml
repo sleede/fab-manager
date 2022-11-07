@@ -68,7 +68,6 @@ fr:
   #members management
   members:
     unable_to_change_the_group_while_a_subscription_is_running: "Impossible de changer le groupe tant qu'un abonnement est en cours"
-    admins_cant_change_group: "Impossible de supprimer un administrateur de son groupe dédié"
     please_input_the_authentication_code_sent_to_the_address: "Merci d'enter le code d'authentification qui a été envoyé à l'adresse de courriel %{EMAIL}"
     your_authentication_code_is_not_valid: "Votre code d'authentification n'est pas valide."
     current_authentication_method_no_code: "La méthode d'authentification actuelle ne requiert pas de code de migration"
@@ -165,6 +164,7 @@ fr:
     Event_reservation: "réserv. événement"
     Space_reservation: "réserv. espace"
     wallet: "porte-monnaie"
+    shop_order: "commande de la boutique"
   vat_export:
     start_date: "Date de début"
     end_date: "Date de fin"
@@ -478,9 +478,6 @@ fr:
   price_category:
     reduced_fare: "Tarif réduit"
     reduced_fare_if_you_are_under_25_student_or_unemployed: "Tarif réduit si vous avez moins de 25 ans, que vous êtes étudiant ou demandeur d'emploi."
-  group:
-    #name of the user's group for administrators
-    admins: 'Administrateurs'
   cart_items:
     free_extension: "Extension gratuite d'un abonnement, jusqu'au %{DATE}"
   statistic_profile:

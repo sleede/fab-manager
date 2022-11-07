@@ -68,7 +68,6 @@ pt:
   #members management
   members:
     unable_to_change_the_group_while_a_subscription_is_running: "Não é possível alterar o grupo enquanto uma assinatura está sendo executada"
-    admins_cant_change_group: "Não é possível remover o administrador do seu grupo dedicado"
     please_input_the_authentication_code_sent_to_the_address: "Por favor insira o código de autenticação enviado para seu endereço de email %{EMAIL}"
     your_authentication_code_is_not_valid: "Seu código de autentiicação não é válido."
     current_authentication_method_no_code: "O método de autenticação atual não requer nenhum código de migração"
@@ -165,6 +164,7 @@ pt:
     Event_reservation: "reserva de evento."
     Space_reservation: "reserva de espaço."
     wallet: "carteira"
+    shop_order: "shop order"
   vat_export:
     start_date: "Data de início"
     end_date: "Data de término"
@@ -478,9 +478,6 @@ pt:
   price_category:
     reduced_fare: "Tarifa reduzida"
     reduced_fare_if_you_are_under_25_student_or_unemployed: "Tarifa reduzida se tiver menos de 25 anos, estudante ou desempregado."
-  group:
-    #name of the user's group for administrators
-    admins: 'Administradores'
   cart_items:
     free_extension: "Extensão gratuita de uma assinatura, até %{DATE}"
   statistic_profile:
