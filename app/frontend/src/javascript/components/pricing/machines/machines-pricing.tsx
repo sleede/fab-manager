@@ -41,7 +41,7 @@ export const MachinesPricing: React.FC<MachinesPricingProps> = ({ onError, onSuc
     MachineAPI.index({ disabled: false })
       .then(data => setMachines(data))
       .catch(error => onError(error));
-    GroupAPI.index({ disabled: false, admins: false })
+    GroupAPI.index({ disabled: false })
       .then(data => setGroups(data))
       .catch(error => onError(error));
     PriceAPI.index({ priceable_type: 'Machine', plan_id: null })

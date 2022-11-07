@@ -7,13 +7,13 @@ class Plan < ApplicationRecord
   belongs_to :plan_category
 
   has_many :credits, dependent: :destroy
-  has_many :training_credits, -> { where(creditable_type: 'Training') }, class_name: 'Credit'
-  has_many :machine_credits, -> { where(creditable_type: 'Machine') }, class_name: 'Credit'
-  has_many :space_credits, -> { where(creditable_type: 'Space') }, class_name: 'Credit'
-  has_many :subscriptions
+  has_many :training_credits, -> { where(creditable_type: 'Training') }, class_name: 'Credit', dependent: :destroy, inverse_of: :plan
+  has_many :machine_credits, -> { where(creditable_type: 'Machine') }, class_name: 'Credit', dependent: :destroy, inverse_of: :plan
+  has_many :space_credits, -> { where(creditable_type: 'Space') }, class_name: 'Credit', dependent: :destroy, inverse_of: :plan
+  has_many :subscriptions, dependent: :nullify
   has_one :plan_file, as: :viewable, dependent: :destroy
   has_many :prices, dependent: :destroy
-  has_one :payment_gateway_object, as: :item
+  has_one :payment_gateway_object, as: :item, dependent: :destroy
 
   extend FriendlyId
   friendly_id :base_name, use: :slugged
@@ -37,7 +37,7 @@ class Plan < ApplicationRecord
 
   def self.create_for_all_groups(plan_params)
     plans = []
-    Group.all_except_admins.each do |group|
+    Group.find_each do |group|
       plan = if plan_params[:type] == 'PartnerPlan'
                PartnerPlan.new(plan_params.except(:group_id, :type))
              else
@@ -59,14 +59,14 @@ class Plan < ApplicationRecord
   end
 
   def create_machines_prices
-    Machine.all.each do |machine|
+    Machine.all.find_each do |machine|
       default_price = Price.find_by(priceable: machine, plan: nil, group_id: group_id)&.amount || 0
       Price.create(priceable: machine, plan: self, group_id: group_id, amount: default_price)
     end
   end
 
   def create_spaces_prices
-    Space.all.each do |space|
+    Space.all.find_each do |space|
       default_price = Price.find_by(priceable: space, plan: nil, group_id: group_id)&.amount || 0
       Price.create(priceable: space, plan: self, group_id: group_id, amount: default_price)
     end
@@ -123,12 +123,12 @@ class Plan < ApplicationRecord
       StatisticTypeSubType.create!(statistic_type: stat_type, statistic_sub_type: stat_subtype)
     else
       Rails.logger.error 'Unable to create the statistics association for the new plan. ' \
-           'Possible causes: the type or the subtype were not created successfully.'
+                         'Possible causes: the type or the subtype were not created successfully.'
     end
   end
 
   def set_name
-    update_columns(name: human_readable_name)
+    update_columns(name: human_readable_name)  # rubocop:disable Rails/SkipsModelValidations
   end
 
   def update_gateway_product

@@ -27,7 +27,7 @@ class PlanController {
 
     // groups list
     $scope.groups = groups
-      .filter(function (g) { return (g.slug !== 'admins') && !g.disabled; })
+      .filter(function (g) { return !g.disabled; })
       .map(e => Object.assign({}, e, { category: 'app.shared.plan.groups', id: `${e.id}` }));
     $scope.groups.push({ id: 'all', name: 'app.shared.plan.transversal_all_groups', category: 'app.shared.plan.all' });
 

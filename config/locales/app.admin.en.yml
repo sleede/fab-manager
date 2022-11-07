@@ -1,6 +1,18 @@
 en:
   app:
     admin:
+      machine_form:
+        name: "Name"
+        illustration: "Visual"
+        add_an_illustration: "Add a visual"
+        description: "Description"
+        technical_specifications: "Technical specifications"
+        attached_files_pdf: "Attached files (pdf)"
+        attach_a_file: "Attach a file"
+        add_an_attachment: "Add an attachment"
+        disable_machine: "Disable machine"
+        disabled_help: "When disabled, the machine won't be reservable and won't appear by default in the machine list."
+        validate_your_machine: "Validate your machine"
       #add a new machine
       machines_new:
         declare_a_new_machine: "Declare a new machine"

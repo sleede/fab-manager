@@ -43,9 +43,9 @@ class User < ApplicationRecord
   has_many :exports, dependent: :destroy
   has_many :imports, dependent: :nullify
 
-  has_one :payment_gateway_object, as: :item
+  has_one :payment_gateway_object, as: :item, dependent: :nullify
 
-  has_many :accounting_periods, foreign_key: 'closed_by', dependent: :nullify
+  has_many :accounting_periods, foreign_key: 'closed_by', dependent: :nullify, inverse_of: :user
 
   has_many :proof_of_identity_files, dependent: :destroy
   has_many :proof_of_identity_refusals, dependent: :destroy
@@ -56,14 +56,15 @@ class User < ApplicationRecord
   end
 
   before_create :assign_default_role
-  after_commit :create_gateway_customer, on: [:create]
-  after_commit :notify_admin_when_user_is_created, on: :create
   after_create :init_dependencies
   after_update :update_invoicing_profile, if: :invoicing_data_was_modified?
   after_update :update_statistic_profile, if: :statistic_data_was_modified?
   before_destroy :remove_orphan_drafts
+  after_commit :create_gateway_customer, on: [:create]
+  after_commit :notify_admin_when_user_is_created, on: :create
 
   attr_accessor :cgu
+
   delegate :first_name, to: :profile
   delegate :last_name, to: :profile
   delegate :subscriptions, to: :statistic_profile
@@ -116,11 +117,11 @@ class User < ApplicationRecord
   end
 
   def self.online_payers
-    User.with_any_role(:manager, :member)
+    User.with_any_role(:admin, :manager, :member)
   end
 
   def self.adminsys
-    return unless Rails.application.secrets.adminsys_email.present?
+    return if Rails.application.secrets.adminsys_email.blank?
 
     User.find_by('lower(email) = ?', Rails.application.secrets.adminsys_email&.downcase)
   end
@@ -225,7 +226,7 @@ class User < ApplicationRecord
   def update_statistic_profile
     raise NoProfileError if statistic_profile.nil? || statistic_profile.id.nil?
 
-    statistic_profile.update_attributes(
+    statistic_profile.update(
       group_id: group_id,
       role_id: roles.first.id
     )
@@ -255,7 +256,7 @@ class User < ApplicationRecord
   def remove_orphan_drafts
     orphans = my_projects
               .joins('LEFT JOIN project_users ON projects.id = project_users.project_id')
-              .where('project_users.project_id IS NULL')
+              .where(project_users: { project_id: nil })
               .where(state: 'draft')
     orphans.map(&:destroy!)
   end
@@ -342,7 +343,7 @@ class User < ApplicationRecord
   def update_invoicing_profile
     raise NoProfileError if invoicing_profile.nil?
 
-    invoicing_profile.update_attributes(
+    invoicing_profile.update(
       email: email,
       first_name: first_name,
       last_name: last_name
@@ -351,7 +352,7 @@ class User < ApplicationRecord
 
   def password_complexity
     return if password.blank? || SecurePassword.is_secured?(password)
-    
+
     errors.add I18n.t("app.public.common.password_is_too_weak"), I18n.t("app.public.common.password_is_too_weak_explanations")
   end
 end

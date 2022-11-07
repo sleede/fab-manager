@@ -5,7 +5,7 @@ import ApiLib from '../lib/api';
 
 export default class OrderAPI {
   static async index (filters?: OrderIndexFilter): Promise<OrderIndex> {
-    const res: AxiosResponse<OrderIndex> = await apiClient.get(`/api/orders${ApiLib.filtersToQuery(filters)}`);
+    const res: AxiosResponse<OrderIndex> = await apiClient.get(`/api/orders${ApiLib.filtersToQuery(filters, false)}`);
     return res?.data;
   }
 

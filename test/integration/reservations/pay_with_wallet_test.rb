@@ -271,7 +271,7 @@ class Reservations::PayWithWalletTest < ActionDispatch::IntegrationTest
     # Check the answer
     result = json_response(response.body)
     assert_equal payment_schedule.id, result[:id], 'payment schedule id does not match'
-    subscription = payment_schedule.payment_schedule_objects.find { |pso| pso.object_type == Subscription.name }.object
-    assert_equal plan.id, subscription.plan_id, 'subscribed plan does not match'
+    subscription = payment_schedule.payment_schedule_objects.find { |pso| pso.object_type == Subscription.name }&.object
+    assert_equal plan.id, subscription&.plan_id, 'subscribed plan does not match'
   end
 end

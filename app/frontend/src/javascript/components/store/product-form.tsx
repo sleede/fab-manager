@@ -10,20 +10,19 @@ import { FormSwitch } from '../form/form-switch';
 import { FormSelect } from '../form/form-select';
 import { FormChecklist } from '../form/form-checklist';
 import { FormRichText } from '../form/form-rich-text';
-import { FormFileUpload } from '../form/form-file-upload';
-import { FormImageUpload } from '../form/form-image-upload';
 import { FabButton } from '../base/fab-button';
 import { FabAlert } from '../base/fab-alert';
 import ProductCategoryAPI from '../../api/product-category';
 import MachineAPI from '../../api/machine';
 import ProductAPI from '../../api/product';
-import { Plus } from 'phosphor-react';
 import { ProductStockForm } from './product-stock-form';
 import { CloneProductModal } from './clone-product-modal';
 import ProductLib from '../../lib/product';
 import { UnsavedFormAlert } from '../form/unsaved-form-alert';
 import { UIRouter } from '@uirouter/angularjs';
 import { SelectOption, ChecklistOption } from '../../models/select';
+import { FormMultiFileUpload } from '../form/form-multi-file-upload';
+import { FormMultiImageUpload } from '../form/form-multi-image-upload';
 
 interface ProductFormProps {
   product: Product,
@@ -149,101 +148,6 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
     setOpenCloneModal(!openCloneModal);
   };
 
-  /**
-   * Add new product file
-   */
-  const addProductFile = () => {
-    setValue('product_files_attributes', output.product_files_attributes.concat({}));
-  };
-
-  /**
-   * Remove a product file
-   */
-  const handleRemoveProductFile = (i: number) => {
-    return () => {
-      const productFile = output.product_files_attributes[i];
-      if (!productFile.id) {
-        output.product_files_attributes.splice(i, 1);
-        setValue('product_files_attributes', output.product_files_attributes);
-      }
-    };
-  };
-
-  /**
-   * Add new product image
-   */
-  const addProductImage = () => {
-    setValue('product_images_attributes', output.product_images_attributes.concat({
-      is_main: output.product_images_attributes.filter(i => i.is_main).length === 0
-    }));
-  };
-
-  /**
-   * Remove a product image
-   */
-  const handleRemoveProductImage = (i: number) => {
-    return () => {
-      const productImage = output.product_images_attributes[i];
-      if (!productImage.id) {
-        output.product_images_attributes.splice(i, 1);
-        if (productImage.is_main) {
-          setValue('product_images_attributes', output.product_images_attributes.map((image, k) => {
-            if (k === 0) {
-              return {
-                ...image,
-                is_main: true
-              };
-            }
-            return image;
-          }));
-        } else {
-          setValue('product_images_attributes', output.product_images_attributes);
-        }
-      } else {
-        if (productImage.is_main) {
-          let mainImage = false;
-          setValue('product_images_attributes', output.product_images_attributes.map((image, k) => {
-            if (i !== k && !mainImage) {
-              mainImage = true;
-              return {
-                ...image,
-                _destroy: i === k,
-                is_main: true
-              };
-            }
-            return {
-              ...image,
-              is_main: i === k ? false : image.is_main,
-              _destroy: i === k
-            };
-          }));
-        }
-      }
-    };
-  };
-
-  /**
-   * Remove main image in others product images
-   */
-  const handleSetMainImage = (i: number) => {
-    return () => {
-      if (output.product_images_attributes.length > 1) {
-        setValue('product_images_attributes', output.product_images_attributes.map((image, k) => {
-          if (i !== k) {
-            return {
-              ...image,
-              is_main: false
-            };
-          }
-          return {
-            ...image,
-            is_main: true
-          };
-        }));
-      }
-    };
-  };
-
   return (
     <>
       <header>
@@ -336,31 +240,12 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
               <FabAlert level="warning">
                 <HtmlTranslate trKey="app.admin.store.product_form.product_images_info" />
               </FabAlert>
-              <div className="product-images">
-                <div className="list">
-                  {output.product_images_attributes.map((image, i) => (
-                    <FormImageUpload key={i}
-                                    defaultImage={image}
-                                    id={`product_images_attributes[${i}]`}
-                                    accept="image/*"
-                                    size="small"
+              <FormMultiImageUpload setValue={setValue}
+                                    addButtonLabel={t('app.admin.store.product_form.add_product_image')}
                                     register={register}
-                                    setValue={setValue}
-                                    formState={formState}
-                                    className={image._destroy ? 'hidden' : ''}
-                                    mainOption={true}
-                                    onFileRemove={handleRemoveProductImage(i)}
-                                    onFileIsMain={handleSetMainImage(i)}
-                                    />
-                  ))}
-                </div>
-              <FabButton
-                onClick={addProductImage}
-                className='is-secondary'
-                icon={<Plus size={24} />}>
-                {t('app.admin.store.product_form.add_product_image')}
-              </FabButton>
-              </div>
+                                    control={control}
+                                    id="product_images_attributes"
+                                    className="product-images" />
             </div>
 
             <hr />
@@ -413,27 +298,13 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
               <FabAlert level="warning">
                 <HtmlTranslate trKey="app.admin.store.product_form.product_files_info" />
               </FabAlert>
-              <div className="product-documents">
-                <div className="list">
-                  {output.product_files_attributes.map((file, i) => (
-                    <FormFileUpload key={i}
-                                    defaultFile={file}
-                                    id={`product_files_attributes[${i}]`}
-                                    accept="application/pdf"
-                                    register={register}
-                                    setValue={setValue}
-                                    formState={formState}
-                                    className={file._destroy ? 'hidden' : ''}
-                                    onFileRemove={handleRemoveProductFile(i)}/>
-                  ))}
-                </div>
-                <FabButton
-                  onClick={addProductFile}
-                  className='is-secondary'
-                  icon={<Plus size={24} />}>
-                  {t('app.admin.store.product_form.add_product_file')}
-                </FabButton>
-              </div>
+              <FormMultiFileUpload setValue={setValue}
+                                   addButtonLabel={t('app.admin.store.product_form.add_product_file')}
+                                   control={control}
+                                   accept="application/pdf"
+                                   register={register}
+                                   id="product_files_attributes"
+                                   className="product-documents" />
             </div>
 
             <div className="main-actions">

@@ -50,6 +50,26 @@ class ReservationSubscriptionStatisticServiceTest < ActionDispatch::IntegrationT
              }
            ]
          }.to_json, headers: default_headers
+
+    # Create a training reservation (1 day ago)
+    training = Training.find(1)
+    tr_slot = Availability.find(2).slots.first
+    post '/api/local_payment/confirm_payment', params: {
+      customer_id: @user.id,
+      items: [
+        {
+          reservation: {
+            reservable_id: training.id,
+            reservable_type: training.class.name,
+            slots_reservations_attributes: [
+              {
+                slot_id: tr_slot.id
+              }
+            ]
+          }
+        }
+      ]
+    }.to_json, headers: default_headers
     travel_back
 
     # Crate another machine reservation (today)
@@ -104,6 +124,13 @@ class ReservationSubscriptionStatisticServiceTest < ActionDispatch::IntegrationT
     assert_not_nil stat_hour
     assert_equal machine.friendly_id, stat_hour['subType']
     check_statistics_on_user(stat_hour)
+
+    # training
+    stat_training = Stats::Training.search(query: { bool: { must: [{ term: { date: 1.day.ago.to_date.iso8601 } },
+                                                                   { term: { type: 'booking' } }] } }).first
+    assert_not_nil stat_training
+    assert_equal training.friendly_id, stat_training['subType']
+    check_statistics_on_user(stat_training)
 
     # subscription
     Stats::Subscription.refresh_index!

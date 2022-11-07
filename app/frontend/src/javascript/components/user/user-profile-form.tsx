@@ -72,7 +72,7 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
       setIsLocalDatabaseProvider(data.providable_type === 'DatabaseProvider');
     }).catch(error => onError(error));
     if (showGroupInput) {
-      GroupAPI.index({ disabled: false, admins: user.role === 'admin' }).then(data => {
+      GroupAPI.index({ disabled: false }).then(data => {
         setGroups(buildOptions(data));
       }).catch(error => onError(error));
     }
@@ -150,11 +150,6 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
    * Check if the given field path should be disabled
    */
   const isDisabled = function (id: string) {
-    // never allows admins to change their group
-    if (id === 'group_id' && user.role === 'admin') {
-      return true;
-    }
-
     // if the current provider is the local database, then all fields are enabled
     if (isLocalDatabaseProvider) {
       return false;

@@ -15,12 +15,6 @@ class Members::MembersService
       return false
     end
 
-    if admin_group_change?(params)
-      # an admin cannot change his group
-      @member.errors.add(:group_id, I18n.t('members.admins_cant_change_group'))
-      return false
-    end
-
     group_changed = user_group_change?(params)
     ex_group = @member.group
 
@@ -130,9 +124,7 @@ class Members::MembersService
     @member.remove_role ex_role
     @member.add_role new_role
 
-    # if the new role is 'admin', then change the group to the admins group, otherwise to change to the provided group
-    group_id = new_role == 'admin' ? Group.find_by(slug: 'admins').id : new_group_id
-    @member.update(group_id: group_id)
+    @member.update(group_id: new_group_id)
 
     # notify
     NotificationCenter.call type: 'notify_user_role_update',
@@ -174,10 +166,6 @@ class Members::MembersService
 
   def subscriber_group_change?(params)
     params[:group_id] && @member.group_id != params[:group_id].to_i && !@member.subscribed_plan.nil?
-  end
-
-  def admin_group_change?(params)
-    params[:group_id] && params[:group_id].to_i != Group.find_by(slug: 'admins').id && @member.admin?
   end
 
   def user_group_change?(params)

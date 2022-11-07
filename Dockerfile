@@ -17,6 +17,7 @@ RUN apk update && apk upgrade && \
       libc-dev \
       ruby-dev \
       zlib-dev \
+      xz \
       xz-dev \
       postgresql-dev \
       postgresql-client \

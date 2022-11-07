@@ -63,6 +63,69 @@ class Store::UserPayOrderTest < ActionDispatch::IntegrationTest
     assert_equal activity.operator_profile_id, @pjproudhon.invoicing_profile.id
   end
 
+  test 'user pay order by cart and wallet with success' do
+    login_as(@pjproudhon, scope: :user)
+
+    service = WalletService.new(user: @admin, wallet: @pjproudhon.wallet)
+    service.credit(1)
+
+    invoice_count = Invoice.count
+    invoice_items_count = InvoiceItem.count
+    users_credit_count = UsersCredit.count
+    wallet_transactions_count = WalletTransaction.count
+
+    VCR.use_cassette('store_order_pay_by_cart_and_wallet_success') do
+      post '/api/checkout/payment',
+           params: {
+             payment_id: stripe_payment_method,
+             order_token: @cart1.token
+           }.to_json, headers: default_headers
+    end
+
+    @pjproudhon.wallet.reload
+    @cart1.reload
+
+    # general assertions
+    assert_equal 200, response.status
+    assert_equal invoice_count + 1, Invoice.count
+    assert_equal invoice_items_count + 1, InvoiceItem.count
+
+    # invoice_items assertions
+    invoice_item = InvoiceItem.last
+
+    assert invoice_item.check_footprint
+
+    # invoice assertions
+    invoice = Invoice.last
+    assert_invoice_pdf invoice
+    assert_not_nil invoice.debug_footprint
+
+    assert_not @cart1.payment_gateway_object.blank?
+    assert_not invoice.payment_gateway_object.blank?
+    assert_not invoice.total.blank?
+    assert invoice.check_footprint
+
+    # notification
+    assert_not_empty Notification.where(attached_object: invoice)
+
+    assert_equal @cart1.state, 'paid'
+    assert_equal @cart1.payment_method, 'card'
+    assert_equal @cart1.paid_total, 400
+    assert_equal users_credit_count, UsersCredit.count
+    assert_equal wallet_transactions_count + 1, WalletTransaction.count
+
+    # wallet
+    assert_equal 0, @pjproudhon.wallet.amount
+    assert_equal 2, @pjproudhon.wallet.wallet_transactions.count
+    transaction = @pjproudhon.wallet.wallet_transactions.last
+    assert_equal 'debit', transaction.transaction_type
+    assert_equal @cart1.paid_total, 400
+    assert_equal @cart1.wallet_amount / 100.0, transaction.amount
+    assert_equal @cart1.payment_method, 'card'
+    assert_equal @cart1.wallet_transaction_id, transaction.id
+    assert_equal invoice.wallet_amount / 100.0, transaction.amount
+  end
+
   test 'user pay order by wallet with success' do
     login_as(@pjproudhon, scope: :user)
 
@@ -76,7 +139,6 @@ class Store::UserPayOrderTest < ActionDispatch::IntegrationTest
 
     post '/api/checkout/payment',
          params: {
-           # payment_method_id: stripe_payment_method,
            order_token: @cart1.token
          }.to_json, headers: default_headers
 
@@ -133,7 +195,6 @@ class Store::UserPayOrderTest < ActionDispatch::IntegrationTest
 
     post '/api/checkout/payment',
          params: {
-           # payment_method_id: stripe_payment_method,
            order_token: @cart1.token,
            coupon_code: 'GIME3EUR'
          }.to_json, headers: default_headers

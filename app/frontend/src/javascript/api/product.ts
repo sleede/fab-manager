@@ -12,7 +12,7 @@ import ProductLib from '../lib/product';
 
 export default class ProductAPI {
   static async index (filters?: ProductIndexFilter): Promise<ProductsIndex> {
-    const res: AxiosResponse<ProductsIndex> = await apiClient.get(`/api/products${ApiLib.filtersToQuery(ProductLib.indexFiltersToIds(filters))}`);
+    const res: AxiosResponse<ProductsIndex> = await apiClient.get(`/api/products${ApiLib.filtersToQuery(ProductLib.indexFiltersToIds(filters), false)}`);
     return res?.data;
   }
 

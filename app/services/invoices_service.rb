@@ -73,7 +73,7 @@ class InvoicesService
     method = if payment_method
                payment_method
              else
-               operator&.admin? || (operator&.manager? && operator != user) ? nil : 'card'
+               (operator&.admin? || operator&.manager?) && operator != user ? nil : 'card'
              end
 
     invoice = Invoice.new(

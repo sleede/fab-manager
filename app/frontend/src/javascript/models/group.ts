@@ -1,8 +1,7 @@
 import { ApiFilter } from './api';
 
 export interface GroupIndexFilter extends ApiFilter {
-  disabled?: boolean,
-  admins?: boolean,
+  disabled?: boolean
 }
 
 export interface Group {

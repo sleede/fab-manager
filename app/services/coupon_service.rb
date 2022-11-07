@@ -26,15 +26,33 @@ class CouponService
     return price if coupon_object.nil?
 
     if coupon_object.status(user_id, total) == 'active'
-      if coupon_object.type == 'percent_off'
-        price -= (price * coupon_object.percent_off / 100.00).truncate
-      elsif coupon_object.type == 'amount_off'
+      case coupon_object.type
+      when 'percent_off'
+        price -= (Rational(price * coupon_object.percent_off) / Rational(100.0)).to_f.ceil
+      when 'amount_off'
         # do not apply cash coupon unless it has a lower amount that the total price
         price -= coupon_object.amount_off if coupon_object.amount_off <= price
+      else
+        raise InvalidCouponError("unsupported coupon type #{coupon_object.type}")
       end
     end
 
     price
+  end
+
+  # Apply the provided coupon to the given amount, considering that this applies to a refund invoice (Avoir),
+  # potentially partial
+  def self.apply_on_refund(amount, coupon, paid_items = 1, refund_items = 1)
+    return amount if coupon.nil?
+
+    case coupon.type
+    when 'percent_off'
+      amount - (Rational(amount * coupon.percent_off) / Rational(100.0)).to_f.ceil
+    when 'amount_off'
+      amount - (Rational(coupon.amount_off / paid_items) * Rational(refund_items)).to_f.ceil
+    else
+      raise InvalidCouponError
+    end
   end
 
   ##
@@ -61,14 +79,15 @@ class CouponService
   def ventilate(total, amount, coupon)
     price = amount
     if !coupon.nil? && total != 0
-      if coupon.type == 'percent_off'
-        price = amount - (amount * coupon.percent_off / 100.00)
-      elsif coupon.type == 'amount_off'
-        ratio = (coupon.amount_off / 100.00) / total
-        discount = (amount * ratio.abs) * 100
-        price = amount - discount
+      case coupon.type
+      when 'percent_off'
+        price = amount - (Rational(amount * coupon.percent_off) / Rational(100.00)).to_f.round
+      when 'amount_off'
+        ratio = Rational(amount) / Rational(total)
+        discount = (coupon.amount_off * ratio.abs)
+        price = (amount - discount).to_f.round
       else
-        raise InvalidCouponError
+        raise InvalidCouponError("unsupported coupon type #{coupon.type}")
       end
     end
     price

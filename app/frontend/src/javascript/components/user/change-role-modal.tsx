@@ -45,7 +45,7 @@ export const ChangeRoleModal: React.FC<ChangeRoleModalProps> = ({ isOpen, toggle
   const [selectedRole, setSelectedRole] = useState<UserRole>(user.role);
 
   useEffect(() => {
-    GroupAPI.index({ disabled: false, admins: false }).then(setGroups).catch(onError);
+    GroupAPI.index({ disabled: false }).then(setGroups).catch(onError);
   }, []);
 
   /**

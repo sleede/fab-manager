@@ -49,18 +49,8 @@
     border-top-right-radius: 5px;
     position: relative;
 
-    &.no-picture::before {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      content: '\f03e';
-      font-family: 'Font Awesome 5 Free' !important;
-      font-weight: 900;
-      font-size: 80px;
-      color: #ebebeb;
+    &.no-picture {
+      background-image: url('../../../../images/default-image.png');
     }
   }
 

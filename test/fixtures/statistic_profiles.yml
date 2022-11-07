@@ -3,7 +3,7 @@ admin:
   user_id: 1
   gender: true
   birthday: 2016-04-04
-  group_id: 3
+  group_id: 1
 
 jdupont:
   id: 2

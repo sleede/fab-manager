@@ -38,7 +38,7 @@
 class MembersController {
   constructor ($scope, $state, Group, Training) {
     // Retrieve the profiles groups (e.g. students ...)
-    Group.query(function (groups) { $scope.groups = groups.filter(function (g) { return (g.slug !== 'admins') && !g.disabled; }); });
+    Group.query(function (groups) { $scope.groups = groups.filter(function (g) { return !g.disabled; }); });
 
     // Retrieve the list of available trainings
     Training.query().$promise.then(function (data) {
@@ -1118,8 +1118,8 @@ Application.Controllers.controller('ImportMembersResultController', ['$scope', '
 /**
  * Controller used in the admin creation page (admin view)
  */
-Application.Controllers.controller('NewAdminController', ['$state', '$scope', 'Admin', 'growl', '_t', 'settingsPromise',
-  function ($state, $scope, Admin, growl, _t, settingsPromise) {
+Application.Controllers.controller('NewAdminController', ['$state', '$scope', 'Admin', 'growl', '_t', 'settingsPromise', 'groupsPromise',
+  function ($state, $scope, Admin, growl, _t, settingsPromise, groupsPromise) {
   // default admin profile
     let getGender;
     $scope.admin = {
@@ -1144,6 +1144,9 @@ Application.Controllers.controller('NewAdminController', ['$state', '$scope', 'A
 
     // is the address required in _admin_form?
     $scope.addressRequired = (settingsPromise.address_required === 'true');
+
+    // all available groups
+    $scope.groups = groupsPromise;
 
     /**
    * Shows the birthday datepicker
@@ -1208,7 +1211,7 @@ Application.Controllers.controller('NewManagerController', ['$state', '$scope', 
     };
 
     // list of all groups
-    $scope.groups = groupsPromise.filter(function (g) { return (g.slug !== 'admins') && !g.disabled; });
+    $scope.groups = groupsPromise.filter(function (g) { return !g.disabled; });
 
     // list of all tags
     $scope.tags = tagsPromise;

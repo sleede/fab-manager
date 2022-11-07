@@ -1,0 +1,11 @@
+.form-multi-image-upload {
+  display: flex;
+  flex-direction: column;
+  .list {
+    margin-bottom: 2.4rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(440px, 1fr));
+    gap: 2.4rem;
+  }
+  button { margin-left: auto; }
+}

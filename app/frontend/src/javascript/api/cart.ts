@@ -24,7 +24,7 @@ export default class CartAPI {
   }
 
   static async setOffer (order: Order, orderableId: number, isOffered: boolean): Promise<Order> {
-    const res: AxiosResponse<Order> = await apiClient.put('/api/cart/set_offer', { order_token: order.token, orderable_id: orderableId, is_offered: isOffered });
+    const res: AxiosResponse<Order> = await apiClient.put('/api/cart/set_offer', { order_token: order.token, orderable_id: orderableId, is_offered: isOffered, customer_id: order.user?.id });
     return res?.data;
   }
 

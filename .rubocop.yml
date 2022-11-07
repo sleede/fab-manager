@@ -7,9 +7,9 @@ Layout/LineLength:
 Metrics/MethodLength:
   Max: 35
 Metrics/CyclomaticComplexity:
-  Max: 13
+  Max: 14
 Metrics/PerceivedComplexity:
-  Max: 12
+  Max: 14
 Metrics/AbcSize:
   Max: 45
 Metrics/ClassLength:
@@ -34,7 +34,7 @@ Style/AndOr:
   EnforcedStyle: conditionals
 Style/FormatString:
   EnforcedStyle: sprintf
-Style/FormatStringToken:
-  EnforcedStyle: template
 Rails/RedundantPresenceValidationOnBelongsTo:
   Enabled: false
+Rails/UnknownEnv:
+ Environments: development, test, staging, production

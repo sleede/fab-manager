@@ -87,12 +87,10 @@ if Group.count.zero?
                 ])
 end
 
-Group.create! name: I18n.t('group.admins'), slug: 'admins' unless Group.find_by(slug: 'admins')
-
 # Create the default admin if none exists yet
 if Role.where(name: 'admin').joins(:users).count.zero?
-  admin = User.new(username: 'admin', email: ENV.fetch('ADMIN_EMAIL'), password: ENV.fetch('ADMIN_PASSWORD'),
-                   group_id: Group.find_by(slug: 'admins').id,
+  admin = User.new(username: 'admin', email: ENV.fetch('ADMIN_EMAIL', nil), password: ENV.fetch('ADMIN_PASSWORD', nil),
+                   password_confirmation: Rails.application.secrets.admin_password, group_id: Group.first.id,
                    profile_attributes: { first_name: 'admin', last_name: 'admin', phone: '0123456789' },
                    statistic_profile_attributes: { gender: true, birthday: Date.current })
   admin.add_role 'admin'
@@ -1002,8 +1000,8 @@ if StatisticCustomAggregation.count.zero?
     es_index: 'fablab',
     es_type: 'availabilities',
     field: 'available_hours',
-    query: '{"size":0, "aggregations":{"%{aggs_name}":{"sum":{"field":"bookable_hours"}}}, "query":{"bool":{"must":[{"range":' \
-           '{"start_at":{"gte":"%{start_date}", "lte":"%{end_date}"}}}, {"match":{"available_type":"machines"}}]}}}'
+    query: '{"size":0, "aggregations":{"%<aggs_name>s":{"sum":{"field":"bookable_hours"}}}, "query":{"bool":{"must":[{"range":' \
+           '{"start_at":{"gte":"%<start_date>s", "lte":"%<end_date>s"}}}, {"match":{"available_type":"machines"}}]}}}'
   )
   available_hours.save!
 
@@ -1015,8 +1013,8 @@ if StatisticCustomAggregation.count.zero?
     es_index: 'fablab',
     es_type: 'availabilities',
     field: 'available_tickets',
-    query: '{"size":0, "aggregations":{"%{aggs_name}":{"sum":{"field":"nb_total_places"}}}, "query":{"bool":{"must":[{"range":' \
-           '{"start_at":{"gte":"%{start_date}", "lte":"%{end_date}"}}}, {"match":{"available_type":"training"}}]}}}'
+    query: '{"size":0, "aggregations":{"%<aggs_name>s":{"sum":{"field":"nb_total_places"}}}, "query":{"bool":{"must":[{"range":' \
+           '{"start_at":{"gte":"%<start_date>s", "lte":"%<end_date>s"}}}, {"match":{"available_type":"training"}}]}}}'
   )
   available_tickets.save!
 end
@@ -1045,9 +1043,9 @@ unless StatisticIndex.find_by(es_type_key: 'order')
     es_index: 'stats',
     es_type: 'order',
     field: 'average_cart',
-    query: '{"size":0, "aggregations":{"%{aggs_name}":{"avg":{"field":"ca", ' \
+    query: '{"size":0, "aggregations":{"%<aggs_name>s":{"avg":{"field":"ca", ' \
            '"script":"BigDecimal.valueOf(_value).setScale(1, RoundingMode.HALF_UP)", "missing": 0}}}, ' \
-           '"query":{"bool":{"must":[{"range": {"date":{"gte":"%{start_date}", "lte":"%{end_date}"}}}]}}}'
+           '"query":{"bool":{"must":[{"range": {"date":{"gte":"%<start_date>s", "lte":"%<end_date>s"}}}]}}}'
   )
   average_cart.save!
 end

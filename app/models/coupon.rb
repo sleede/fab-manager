@@ -83,7 +83,8 @@ class Coupon < ApplicationRecord
   end
 
   def users
-    invoices.map(&:user).uniq(&:id)
+    # compact to user removed
+    invoices.map(&:user).compact.uniq(&:id)
   end
 
   def users_ids

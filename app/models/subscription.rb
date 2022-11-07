@@ -31,7 +31,6 @@ class Subscription < ApplicationRecord
     if expired?
       false
     else
-      # TODO, check if the rubocop:disable directove can be deleted
       update_columns(expiration_date: time, canceled_at: time) # rubocop:disable Rails/SkipsModelValidations
       notify_admin_subscription_canceled
       notify_member_subscription_canceled

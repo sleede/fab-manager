@@ -38,7 +38,7 @@ export const SpacesPricing: React.FC<SpacesPricingProps> = ({ onError, onSuccess
     SpaceAPI.index()
       .then(data => setSpaces(data))
       .catch(error => onError(error));
-    GroupAPI.index({ disabled: false, admins: false })
+    GroupAPI.index({ disabled: false })
       .then(data => setGroups(data))
       .catch(error => onError(error));
     PriceAPI.index({ priceable_type: 'Space', plan_id: null })

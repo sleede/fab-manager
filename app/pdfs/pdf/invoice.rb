@@ -53,10 +53,10 @@ class PDF::Invoice < Prawn::Document
       end
 
       # user/organization's information
-      if invoice&.invoicing_profile&.organization
+      if invoice.invoicing_profile.organization
         name = invoice.invoicing_profile.organization.name
         full_name = "#{name} (#{invoice.invoicing_profile.full_name})"
-        others = invoice&.invoicing_profile&.user_profile_custom_fields&.joins(:profile_custom_field)
+        others = invoice.invoicing_profile.user_profile_custom_fields&.joins(:profile_custom_field)
           &.where('profile_custom_fields.actived' => true)
           &.order('profile_custom_fields.id ASC')
           &.select { |f| f.value.present? }
@@ -102,7 +102,7 @@ class PDF::Invoice < Prawn::Document
             next unless item.object_type == Subscription.name
 
             subscription = item.object
-            cancellation = invoice.is_a?(Avoir) ? I18n.t('invoices.cancellation') + ' - ' : ''
+            cancellation = invoice.is_a?(Avoir) ? "#{I18n.t('invoices.cancellation')} - " : ''
             object = "\n- #{object}\n- #{cancellation + subscription_verbose(subscription, name)}"
             break
           end
@@ -120,7 +120,7 @@ class PDF::Invoice < Prawn::Document
           Rails.logger.error "specified main_item.object_type type (#{invoice.main_item.object_type}) is unknown"
         end
       end
-      text I18n.t('invoices.object') + ' ' + object
+      text "#{I18n.t('invoices.object')} #{object}"
 
       # details table of the invoice's elements
       move_down 20
@@ -135,7 +135,7 @@ class PDF::Invoice < Prawn::Document
       invoice.invoice_items.each do |item|
         price = item.amount.to_i / 100.00
 
-        details = invoice.is_a?(Avoir) ? I18n.t('invoices.cancellation') + ' - ' : ''
+        details = invoice.is_a?(Avoir) ? "#{I18n.t('invoices.cancellation')} - " : ''
 
         if item.object_type == Subscription.name
           subscription = item.object
@@ -144,9 +144,10 @@ class PDF::Invoice < Prawn::Document
                               START: I18n.l(invoice.main_item.object.start_at.to_date),
                               END: I18n.l(invoice.main_item.object.end_at.to_date))
           else
-            subscription_end_at = if subscription_expiration_date.is_a?(Time)
+            subscription_end_at = case subscription_expiration_date
+                                  when Time
                                     subscription_expiration_date
-                                  elsif subscription_expiration_date.is_a?(String)
+                                  when String
                                     DateTime.parse(subscription_expiration_date)
                                   else
                                     subscription.expiration_date
@@ -173,12 +174,12 @@ class PDF::Invoice < Prawn::Document
             details += I18n.t('invoices.event_reservation_DESCRIPTION', DESCRIPTION: item.description)
             # details of the number of tickets
             if invoice.main_item.object.nb_reserve_places.positive?
-              details += "\n  " + I18n.t('invoices.full_price_ticket', count: invoice.main_item.object.nb_reserve_places)
+              details += "\n  #{I18n.t('invoices.full_price_ticket', count: invoice.main_item.object.nb_reserve_places)}"
             end
             invoice.main_item.object.tickets.each do |t|
-              details += "\n  " + I18n.t('invoices.other_rate_ticket',
-                                         count: t.booked,
-                                         NAME: t.event_price_category.price_category.name)
+              details += "\n #{I18n.t('invoices.other_rate_ticket',
+                                      count: t.booked,
+                                      NAME: t.event_price_category.price_category.name)}"
             end
           else
             details += item.description
@@ -196,22 +197,9 @@ class PDF::Invoice < Prawn::Document
       ## subtract the coupon, if any
       unless invoice.coupon_id.nil?
         cp = invoice.coupon
-        discount = 0
-        if cp.type == 'percent_off'
-          discount = total_calc * cp.percent_off / 100.00
-        elsif cp.type == 'amount_off'
-          # refunds of invoices with cash coupons: we need to ventilate coupons on paid items
-          if invoice.is_a?(Avoir)
-            paid_items = invoice.invoice.invoice_items.select { |ii| ii.amount.positive? }.length
-            refund_items = invoice.invoice_items.select { |ii| ii.amount.positive? }.length
-
-            discount = ((invoice.coupon.amount_off / paid_items) * refund_items) / 100.00
-          else
-            discount = cp.amount_off / 100.00
-          end
-        else
-          raise InvalidCouponError
-        end
+        coupon_service = CouponService.new
+        total_without_coupon = coupon_service.invoice_total_no_coupon(invoice)
+        discount = (total_without_coupon - invoice.total) / 100.00
 
         total_calc -= discount
 
@@ -286,7 +274,7 @@ class PDF::Invoice < Prawn::Document
       # payment details
       move_down 20
       if invoice.is_a?(Avoir)
-        payment_verbose = I18n.t('invoices.refund_on_DATE', DATE: I18n.l(invoice.avoir_date.to_date)) + ' '
+        payment_verbose = "#{I18n.t('invoices.refund_on_DATE', DATE: I18n.l(invoice.avoir_date.to_date))} "
         case invoice.payment_method
         when 'stripe'
           payment_verbose += I18n.t('invoices.by_card_online_payment')
@@ -303,7 +291,7 @@ class PDF::Invoice < Prawn::Document
         else
           Rails.logger.error "specified refunding method (#{payment_verbose}) is unknown"
         end
-        payment_verbose += ' ' + I18n.t('invoices.for_an_amount_of_AMOUNT', AMOUNT: number_to_currency(total))
+        payment_verbose += " #{I18n.t('invoices.for_an_amount_of_AMOUNT', AMOUNT: number_to_currency(total))}"
       else
         # subtract the wallet amount for this invoice from the total
         if invoice.wallet_amount
@@ -323,18 +311,18 @@ class PDF::Invoice < Prawn::Document
         # if the invoice was 100% payed with the wallet ...
         payment_verbose = I18n.t('invoices.settlement_by_wallet') if total.zero? && wallet_amount
 
-        payment_verbose += ' ' + I18n.t('invoices.on_DATE_at_TIME',
-                                        DATE: I18n.l(invoice.created_at.to_date),
-                                        TIME: I18n.l(invoice.created_at, format: :hour_minute))
+        payment_verbose += " #{I18n.t('invoices.on_DATE_at_TIME',
+                                      DATE: I18n.l(invoice.created_at.to_date),
+                                      TIME: I18n.l(invoice.created_at, format: :hour_minute))}"
         if total.positive? || !invoice.wallet_amount
-          payment_verbose += ' ' + I18n.t('invoices.for_an_amount_of_AMOUNT', AMOUNT: number_to_currency(total))
+          payment_verbose += " #{I18n.t('invoices.for_an_amount_of_AMOUNT', AMOUNT: number_to_currency(total))}"
         end
         if invoice.wallet_amount
           payment_verbose += if total.positive?
-                               ' ' + I18n.t('invoices.and') + ' ' + I18n.t('invoices.by_wallet') + ' ' +
-                                 I18n.t('invoices.for_an_amount_of_AMOUNT', AMOUNT: number_to_currency(wallet_amount))
+                               " #{I18n.t('invoices.and')} #{I18n.t('invoices.by_wallet')} " \
+                                 "#{I18n.t('invoices.for_an_amount_of_AMOUNT', AMOUNT: number_to_currency(wallet_amount))}"
                              else
-                               ' ' + I18n.t('invoices.for_an_amount_of_AMOUNT', AMOUNT: number_to_currency(wallet_amount))
+                               " #{I18n.t('invoices.for_an_amount_of_AMOUNT', AMOUNT: number_to_currency(wallet_amount))}"
                              end
         end
       end
@@ -360,7 +348,7 @@ class PDF::Invoice < Prawn::Document
 
     transparent(0.1) do
       rotate(45, origin: [0, 0]) do
-        image "#{Rails.root}/app/pdfs/data/watermark-#{I18n.default_locale}.png", at: [90, 150]
+        image Rails.root.join("app/pdfs/data/watermark-#{I18n.default_locale}.png"), at: [90, 150]
       end
     end
   end
@@ -369,16 +357,16 @@ class PDF::Invoice < Prawn::Document
 
   def reservation_dates_verbose(slot)
     if slot.start_at.to_date == slot.end_at.to_date
-      '- ' + I18n.t('invoices.on_DATE_from_START_to_END',
-                    DATE: I18n.l(slot.start_at.to_date),
-                    START: I18n.l(slot.start_at, format: :hour_minute),
-                    END: I18n.l(slot.end_at, format: :hour_minute)) + "\n"
+      "- #{I18n.t('invoices.on_DATE_from_START_to_END',
+                  DATE: I18n.l(slot.start_at.to_date),
+                  START: I18n.l(slot.start_at, format: :hour_minute),
+                  END: I18n.l(slot.end_at, format: :hour_minute))}\n"
     else
-      '- ' + I18n.t('invoices.from_STARTDATE_to_ENDDATE_from_STARTTIME_to_ENDTIME',
-                    STARTDATE: I18n.l(slot.start_at.to_date),
-                    ENDDATE: I18n.l(slot.start_at.to_date),
-                    STARTTIME: I18n.l(slot.start_at, format: :hour_minute),
-                    ENDTIME: I18n.l(slot.end_at, format: :hour_minute)) + "\n"
+      "- #{I18n.t('invoices.from_STARTDATE_to_ENDDATE_from_STARTTIME_to_ENDTIME',
+                  STARTDATE: I18n.l(slot.start_at.to_date),
+                  ENDDATE: I18n.l(slot.start_at.to_date),
+                  STARTTIME: I18n.l(slot.start_at, format: :hour_minute),
+                  ENDTIME: I18n.l(slot.end_at, format: :hour_minute))}\n"
     end
   end
 

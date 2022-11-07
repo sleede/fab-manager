@@ -37,7 +37,9 @@ class VatHistoryService
 
   private
 
-  def vat_history(vat_rate_type)
+  # This method is really complex and cannot be simplified using the current data model
+  # As a futur improvement, we should save the VAT rate for each invoice_item in the DB
+  def vat_history(vat_rate_type) # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/MethodLength, Metrics/PerceivedComplexity
     chronology = []
     end_date = DateTime.current
     Setting.find_by(name: 'invoice_VAT-active').history_values.order(created_at: 'DESC').each do |v|
@@ -92,7 +94,7 @@ class VatHistoryService
         # when the VAT rate was enabled, set the date it was enabled and the rate
         range = chronology.find { |p| rate.created_at.to_i.between?(p[:start].to_i, p[:end].to_i) }
         date = range[:enabled] ? rate.created_at : range[:end]
-        date_rates.push(date: date, rate: rate.value.to_i) unless date_rates.find { |d| d[:date] == date }
+        date_rates.push(date: date, rate: rate.value.to_f) unless date_rates.find { |d| d[:date].to_i == date.to_i }
       end
       chronology.reverse_each do |period|
         # when the VAT rate was disabled, set the date it was disabled and rate=0

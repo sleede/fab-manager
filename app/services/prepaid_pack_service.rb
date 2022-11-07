@@ -38,7 +38,7 @@ class PrepaidPackService
 
       # total number of minutes in the reservation's slots
       slots_minutes = reservation.slots.map do |slot|
-        (slot.end_at.to_time - slot.start_at.to_time) / SECONDS_PER_MINUTE
+        (slot.end_at.to_time - slot.start_at.to_time) / 60.0
       end
       reservation_minutes = slots_minutes.reduce(:+) || 0
 

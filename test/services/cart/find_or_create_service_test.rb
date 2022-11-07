@@ -70,7 +70,7 @@ class Cart::FindOrCreateServiceTest < ActiveSupport::TestCase
   test 'admin get a cart' do
     cart = Cart::FindOrCreateService.new(@admin).call(nil)
     assert_equal cart.state, 'cart'
-    assert_equal cart.total, 261_500
+    assert_equal cart.total, 262_500
     assert_equal cart.operator_profile_id, @admin.invoicing_profile.id
     assert_nil cart.statistic_profile_id
     assert_equal Order.where(operator_profile_id: @admin.invoicing_profile.id, state: 'cart').count, 1
