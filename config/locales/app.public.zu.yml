@@ -451,6 +451,7 @@ zu:
           stock_limit_QUANTITY: "crwdns30702:0QUANTITY={QUANTITY}crwdnd30702:0QUANTITY={QUANTITY}crwdne30702:0"
           quantity_min_QUANTITY: "crwdns30704:0{QUANTITY}crwdne30704:0"
           price_changed_PRICE: "crwdns30706:0{PRICE}crwdne30706:0"
+          unauthorized_offering_product: "crwdns31681:0crwdne31681:0"
       orders_dashboard:
         heading: "crwdns30642:0crwdne30642:0"
         sort:
