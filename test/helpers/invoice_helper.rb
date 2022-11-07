@@ -35,7 +35,7 @@ module InvoiceHelper
   # Line of text should be of form 'Label              $10.00'
   # @returns {float}
   def parse_amount_from_invoice_line(line)
-    line[line.rindex(' ') + 1..].tr(I18n.t('number.currency.format.unit'), '').to_f
+    line[line.rindex(' ') + 1..].tr(I18n.t('number.currency.format.unit'), '').gsub(/[$,]/, '').to_f
   end
 
   # check VAT and total excluding taxes

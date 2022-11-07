@@ -18,16 +18,14 @@ class Checkout::PaymentService
     CouponService.new.validate(coupon_code, order.statistic_profile.user.id)
 
     amount = debit_amount(order)
-    if operator.privileged? || amount.zero?
+    if (operator.privileged? && operator != order.statistic_profile.user) || amount.zero?
       Payments::LocalService.new.payment(order, coupon_code)
-    elsif operator.member?
-      if Stripe::Helper.enabled?
-        Payments::StripeService.new.payment(order, coupon_code, payment_id)
-      elsif PayZen::Helper.enabled?
-        Payments::PayzenService.new.payment(order, coupon_code)
-      else
-        raise Error('Bad gateway or online payment is disabled')
-      end
+    elsif Stripe::Helper.enabled? && payment_id.present?
+      Payments::StripeService.new.payment(order, coupon_code, payment_id)
+    elsif PayZen::Helper.enabled?
+      Payments::PayzenService.new.payment(order, coupon_code)
+    else
+      raise Error('Bad gateway or online payment is disabled')
     end
   end
 
