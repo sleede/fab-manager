@@ -7,6 +7,7 @@ import { Event } from '../../models/event';
 import { EventTheme } from '../../models/event-theme';
 import { IApplication } from '../../models/application';
 import EventThemeAPI from '../../api/event-theme';
+import { SelectOption } from '../../models/select';
 
 declare const Application: IApplication;
 
@@ -14,12 +15,6 @@ interface EventThemesProps {
   event: Event,
   onChange: (themes: Array<EventTheme>) => void
 }
-
-/**
- * Option format, expected by react-select
- * @see https://github.com/JedWatson/react-select
- */
-type selectOption = { value: number, label: string };
 
 /**
  * This component shows a select input to edit the themes associated with the event
@@ -43,7 +38,7 @@ export const EventThemes: React.FC<EventThemesProps> = ({ event, onChange }) => 
   /**
    * Return the current theme(s) for the given event, formatted to match the react-select format
    */
-  const defaultValues = (): Array<selectOption> => {
+  const defaultValues = (): Array<SelectOption<number>> => {
     const res = [];
     themes.forEach(t => {
       if (event.event_theme_ids && event.event_theme_ids.indexOf(t.id) > -1) {
@@ -57,7 +52,7 @@ export const EventThemes: React.FC<EventThemesProps> = ({ event, onChange }) => 
    * Callback triggered when the selection has changed.
    * Convert the react-select specific format to an array of EventTheme, and call the provided callback.
    */
-  const handleChange = (selectedOptions: Array<selectOption>): void => {
+  const handleChange = (selectedOptions: Array<SelectOption<number>>): void => {
     const res = [];
     selectedOptions.forEach(opt => {
       res.push(themes.find(t => t.id === opt.value));
@@ -68,7 +63,7 @@ export const EventThemes: React.FC<EventThemesProps> = ({ event, onChange }) => 
   /**
    * Convert all themes to the react-select format
    */
-  const buildOptions = (): Array<selectOption> => {
+  const buildOptions = (): Array<SelectOption<number>> => {
     return themes.map(t => {
       return { value: t.id, label: t.name };
     });

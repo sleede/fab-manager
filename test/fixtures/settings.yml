@@ -502,3 +502,27 @@ setting_85:
   name: public_agenda_module
   created_at: 2020-04-15 14:38:40.000421500 Z
   updated_at: 2020-04-15 14:38:40.000421500 Z
+
+setting_86:
+  id: 86
+  name: accounting_Pack_label
+  created_at: 2022-10-26 12:46:16.125400000 Z
+  updated_at: 2022-10-26 12:46:16.125400000 Z
+
+setting_87:
+  id: 87
+  name: accounting_Pack_code
+  created_at: 2022-10-26 12:46:16.125400000 Z
+  updated_at: 2022-10-26 12:46:16.125400000 Z
+
+setting_88:
+  id: 88
+  name: accounting_Product_label
+  created_at: 2022-10-26 12:46:16.125400000 Z
+  updated_at: 2022-10-26 12:46:16.125400000 Z
+
+setting_89:
+  id: 89
+  name: accounting_Product_code
+  created_at: 2022-10-26 12:46:16.125400000 Z
+  updated_at: 2022-10-26 12:46:16.125400000 Z

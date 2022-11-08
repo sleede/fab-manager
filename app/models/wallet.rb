@@ -11,6 +11,8 @@ class Wallet < ApplicationRecord
 
   validates :invoicing_profile, presence: true
 
+  delegate :user, to: :invoicing_profile
+
   def credit(amount)
     if amount.is_a?(Numeric) && amount >= 0
       self.amount += amount
@@ -25,9 +27,5 @@ class Wallet < ApplicationRecord
       return save
     end
     false
-  end
-
-  def user
-    invoicing_profile.user
   end
 end

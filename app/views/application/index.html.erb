@@ -36,6 +36,7 @@
       Fablab.plansModule = ('<%= Setting.get('plans_module') %>' === 'true');
       Fablab.spacesModule = ('<%= Setting.get('spaces_module') %>' === 'true');
       Fablab.trainingsModule = ('<%= Setting.get('trainings_module') %>' === 'true');
+      Fablab.storeModule = ('<%= Setting.get('store_module') %>' === 'true');
       Fablab.walletModule = ('<%= Setting.get('wallet_module') %>' === 'true');
       Fablab.publicAgendaModule = ('<%= Setting.get('public_agenda_module') %>' === 'true');
       Fablab.statisticsModule = ('<%= Setting.get('statistics_module') %>' === 'true');
@@ -43,6 +44,7 @@
       Fablab.trackingId = "<%= Setting.get('tracking_id') %>";
       Fablab.adminSysId = parseInt("<%= User.adminsys&.id %>", 10);
       Fablab.activeProviderType = "<%= AuthProvider.active&.providable_type %>";
+      Fablab.storeHidden = ('<%= Setting.get('store_hidden') %>' === 'true');
 
       // i18n stuff
       Fablab.locale = "<%= Rails.application.secrets.app_locale %>";

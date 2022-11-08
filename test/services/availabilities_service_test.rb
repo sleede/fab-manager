@@ -83,7 +83,7 @@ class AvailabilitiesServiceTest < ActiveSupport::TestCase
     slots = service.trainings(trainings, @no_subscription, { start: DateTime.current.beginning_of_day, end: 2.days.from_now.end_of_day })
 
     assert_not_empty slots
-    if DateTime.current.hour >= 10
+    if DateTime.current.hour >= 6
       assert_equal Availability.find(2).slots.count, slots.count
     else
       assert_equal Availability.find(1).slots.count + Availability.find(2).slots.count, slots.count

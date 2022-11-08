@@ -494,7 +494,7 @@ history_value_51:
 history_value_52:
   id: 52
   setting_id: 52
-  value: '7062'
+  value: Machine reservation
   created_at: '2019-09-20 11:02:32.125400'
   updated_at: '2021-05-31 15:00:36.872288'
   footprint: 0ee671e962f92a3af95538fdd65a64ff410b208ab790c4e6f7b0a9f5a13dc1a2
@@ -503,7 +503,7 @@ history_value_52:
 history_value_53:
   id: 53
   setting_id: 53
-  value: Machine reservation
+  value: '7062'
   created_at: '2019-09-20 11:02:32.125400'
   updated_at: '2021-05-31 15:00:36.904414'
   footprint: ad09bac8c58754444a9970108d613aefaeceed540609688f5668c68ca5c03531
@@ -512,7 +512,7 @@ history_value_53:
 history_value_54:
   id: 54
   setting_id: 54
-  value: '7063'
+  value: Training reservation
   created_at: '2019-09-20 11:02:32.125400'
   updated_at: '2021-05-31 15:00:36.930713'
   footprint: 89f17add783f9977c4b13bc22f5776d0427c3d9af8c83206af57de7c72c153b0
@@ -521,7 +521,7 @@ history_value_54:
 history_value_55:
   id: 55
   setting_id: 55
-  value: Training reservation
+  value: '7063'
   created_at: '2019-09-20 11:02:32.125400'
   updated_at: '2021-05-31 15:00:36.955492'
   footprint: f2e20f936e3fc917bc82e97adb321f957c2cd6ac992f3223ffe2be529ea1649f
@@ -530,7 +530,7 @@ history_value_55:
 history_value_56:
   id: 56
   setting_id: 56
-  value: '7064'
+  value: Event reservation
   created_at: '2019-09-20 11:02:32.125400'
   updated_at: '2021-05-31 15:00:36.977369'
   footprint: 5ce909aa92740dbd65647ff3a5d5fdc75ad6c2a02b5fa9bbeea1aa27f907416a
@@ -539,7 +539,7 @@ history_value_56:
 history_value_57:
   id: 57
   setting_id: 57
-  value: Event reservation
+  value: '7064'
   created_at: '2019-09-20 11:02:32.125400'
   updated_at: '2021-05-31 15:00:36.993279'
   footprint: ed7ecf389b9560728ce43257bef442a2404f463ebbc0fbaeaad05f113cca21df
@@ -823,4 +823,40 @@ history_value_86:
   created_at: '2021-06-15 12:05:21.513651'
   updated_at: '2021-06-15 12:05:21.513651'
   footprint: 350ca0033f3e65b6e8186dbb0545b55ecb3768e1a08501549b81d95e34809440
+  invoicing_profile_id: 1
+
+history_value_87:
+  id: 87
+  setting_id: 86
+  value: Prepaid pack
+  created_at: '2022-10-26 12:46:16.125400000 Z'
+  updated_at: '2022-10-26 12:46:16.125400000 Z'
+  footprint:
+  invoicing_profile_id: 1
+
+history_value_88:
+  id: 88
+  setting_id: 87
+  value: '7066'
+  created_at: '2022-10-26 12:46:16.125400000 Z'
+  updated_at: '2022-10-26 12:46:16.125400000 Z'
+  footprint:
+  invoicing_profile_id: 1
+
+history_value_89:
+  id: 89
+  setting_id: 88
+  value: Shop order
+  created_at: '2022-10-26 12:46:16.125400000 Z'
+  updated_at: '2022-10-26 12:46:16.125400000 Z'
+  footprint:
+  invoicing_profile_id: 1
+
+history_value_90:
+  id: 90
+  setting_id: 89
+  value: '7067'
+  created_at: '2022-10-26 12:46:16.125400000 Z'
+  updated_at: '2022-10-26 12:46:16.125400000 Z'
+  footprint:
   invoicing_profile_id: 1

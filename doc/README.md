@@ -40,7 +40,7 @@ The following guides are designed for the people that perform software maintenan
 - [ElasticSearch](elastic_upgrade.md)
 
 ### Translator's documentation
-If you intend to translate Fab-manager to a new, or an already supported language, you'll find here the information you need. 
+If you intend to translate Fab-manager to a new, or an already supported language, you'll find here the information you need.
 - [Guide for translators](translation_readme.md)
 
 ### Developer's documentation

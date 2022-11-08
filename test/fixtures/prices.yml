@@ -460,3 +460,80 @@ price_54:
   duration: 60
   created_at: 2016-04-04 15:18:28.860220000 Z
   updated_at: 2016-04-04 15:18:50.517702000 Z
+
+price_55:
+  id: 55
+  group_id: 2
+  plan_id: 5
+  priceable_id: 1
+  priceable_type: Machine
+  amount: 121
+  duration: 60
+  created_at: 2022-10-26 17:08:21.681615000 Z
+  updated_at: 2022-10-26 17:08:21.681615000 Z
+
+price_56:
+  id: 56
+  group_id: 2
+  plan_id: 5
+  priceable_id: 2
+  priceable_type: Machine
+  amount: 1116
+  duration: 60
+  created_at: 2022-10-26 17:08:21.681615000 Z
+  updated_at: 2022-10-26 17:08:21.681615000 Z
+
+price_57:
+  id: 57
+  group_id: 2
+  plan_id: 5
+  priceable_id: 3
+  priceable_type: Machine
+  amount: 1423
+  duration: 60
+  created_at: 2022-10-26 17:08:21.681615000 Z
+  updated_at: 2022-10-26 17:08:21.681615000 Z
+
+price_58:
+  id: 58
+  group_id: 2
+  plan_id: 5
+  priceable_id: 4
+  priceable_type: Machine
+  amount: 1238
+  duration: 60
+  created_at: 2022-10-26 17:08:21.681615000 Z
+  updated_at: 2022-10-26 17:08:21.681615000 Z
+
+price_59:
+  id: 59
+  group_id: 2
+  plan_id: 5
+  priceable_id: 5
+  priceable_type: Machine
+  amount: 724
+  duration: 60
+  created_at: 2022-10-26 17:08:21.681615000 Z
+  updated_at: 2022-10-26 17:08:21.681615000 Z
+
+price_60:
+  id: 60
+  group_id: 2
+  plan_id: 5
+  priceable_id: 6
+  priceable_type: Machine
+  amount: 666
+  duration: 60
+  created_at: 2022-10-26 17:08:21.681615000 Z
+  updated_at: 2022-10-26 17:08:21.681615000 Z
+
+price_61:
+  id: 61
+  group_id: 2
+  plan_id: 5
+  priceable_id: 1
+  priceable_type: Space
+  amount: 1373
+  duration: 60
+  created_at: 2022-10-26 17:08:21.681615000 Z
+  updated_at: 2022-10-26 17:08:21.681615000 Z

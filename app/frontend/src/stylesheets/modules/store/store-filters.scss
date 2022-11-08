@@ -1,0 +1,197 @@
+.store-filters {
+  margin: 0 -30px;
+  padding: 0 30px;
+  box-shadow: 0 10px 10px 0 rgb(39 32 32 / 12%);
+  .grp {
+    max-height: 0;
+    overflow: hidden;
+    transition: all 500ms ease-in-out;
+  }
+
+  &.collapsed {
+    header .grpBtn svg { transform: rotateZ(-180deg); }
+    header .grpBtn button { display: flex; }
+    .grp {
+      max-height: 100vh;
+      padding-bottom: 2.4rem;
+    }
+  }
+
+  header {
+    @include header();
+    margin: 0;
+    padding: 0 0 2.4rem 0;
+
+    .grpBtn {
+      display: flex;
+      align-items: center;
+      button { display: none; }
+      svg {
+        cursor: pointer;
+        transition: transform 250ms ease-in-out;
+      }
+    }
+  }
+
+  .categories {
+    margin-bottom: 1.6rem;
+    h3 { @include text-base(600); }
+    .list {
+      max-height: 30vh;
+      overflow: auto;
+    }
+    p {
+      display: flex;
+      align-items: baseline;
+      cursor: pointer;
+      span {
+        margin-left: 0.8rem;
+        @include text-xs;
+        color: var(--gray-hard-dark);
+      }
+    }
+    .parent {
+      & > p {
+        margin-bottom: 2.4rem;
+        @include text-base(500);
+        color: var(--gray-hard);
+      }
+      &.is-active > p {
+        @include text-base(600);
+        color: var(--primary);
+        .children {
+          max-height: 1000px;
+        }
+      }
+      &.is-active .children {
+        max-height: 1000px;
+        margin: -0.8rem 0 1.6rem;
+        transition: max-height 500ms ease-in-out;
+      }
+    }
+    .children {
+      max-height: 0;
+      overflow: hidden;
+      p {
+        margin-bottom: 1.6rem;
+        @include text-base(400);
+        color: var(--gray-hard-light);
+        &.is-active {
+          background-color: var(--gray-soft-light);
+        }
+      }
+    }
+  }
+
+  .filters {
+    padding-top: 1.6rem;
+    border-top: 1px solid var(--gray-soft-dark);
+  }
+
+  .accordion {
+    &-item:not(:last-of-type) {
+      margin-bottom: 1.6rem;
+      border-bottom: 1px solid var(--gray-soft-darkest);
+    }
+    &-item {
+      position: relative;
+      padding-bottom: 1.6rem;
+      &.collapsed {
+        header svg { transform: rotateZ(180deg); }
+        .content {
+          max-height: 0;
+          overflow: hidden;
+          * { opacity: 0; }
+        }
+      }
+
+      header {
+        width: 100%;
+        padding: 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: none;
+        border: none;
+        @include text-base(600);
+        cursor: pointer;
+        svg { transition: transform 250ms ease-in-out; }
+      }
+      .content {
+        max-height: 24rem;
+        padding-top: 1.6rem;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        transition: max-height 500ms ease-in-out;
+        * { transition: opacity 250ms ease-in-out 300ms; }
+
+        .group {
+          display: flex;
+          flex-direction: column;
+          opacity: 1;
+          &.u-scrollbar {
+            overflow: hidden auto;
+            label {
+              margin: 0 0.8rem 0 0;
+              padding: 0.6rem;
+              &:hover { background-color: var(--gray-soft-light); }
+            }
+          }
+
+          & > label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            input[type=checkbox] { margin: 0 0.8rem 0 0; }
+            p {
+              margin: 0;
+              @include text-base;
+            }
+            &.offset { margin-left: 1.6rem; }
+          }
+          .form-item-field { width: 100%; }
+        }
+
+        input[type="text"] {
+          width: 100%;
+          width: 100%;
+          min-height: 4rem;
+          padding: 0 0.8rem;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          border: 1px solid var(--gray-soft-dark);
+          border-radius: var(--border-radius-sm);
+          @include text-base;
+        }
+
+        button {
+          opacity: 100;
+          margin-top: 0.8rem;
+          justify-content: center;
+        }
+      }
+    }
+  }
+
+  .range {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.6rem;
+    label {
+      margin: 0;
+      flex-direction: column;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    margin: 0;
+    padding: 0 0 2.4rem;
+    box-shadow: none;
+    .filters-toggle { display: none; }
+    .grp { max-height: 100vh; }
+    header .grpBtn button { display: flex; }
+  }
+}

@@ -118,6 +118,16 @@
     </div>
     <div class="row">
       <div class="col-md-6">
+        <label for="productCode" translate>{{ 'app.admin.invoices.accounting_Product_code' }}</label>
+        <input type="text" id="productCode" ng-model="settings.productCode.value" class="form-control" placeholder="{{ 'app.admin.invoices.general_product_code' | translate }}" />
+      </div>
+      <div class="col-md-6">
+        <label for="productLabel" translate>{{ 'app.admin.invoices.accounting_Product_label' }}</label>
+        <input type="text" id="productLabel" ng-model="settings.productLabel.value" class="form-control" placeholder="{{ 'app.admin.invoices.general_product_label' | translate }}"/>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
         <label for="spaceCode" translate>{{ 'app.admin.invoices.accounting_Error_code' }}</label>
         <input type="text" id="errorCode" ng-model="settings.errorCode.value" class="form-control" placeholder="{{ 'app.admin.invoices.general_error_code' | translate }}" />
       </div>

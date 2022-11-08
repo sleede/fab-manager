@@ -4,8 +4,8 @@
 class InvoiceItem < Footprintable
   belongs_to :invoice
 
-  has_one :invoice_item # associates invoice_items of an invoice to invoice_items of an Avoir
-  has_one :payment_gateway_object, as: :item
+  has_one :invoice_item, dependent: :destroy # associates invoice_items of an invoice to invoice_items of an Avoir
+  has_one :payment_gateway_object, as: :item, dependent: :destroy
 
   belongs_to :object, polymorphic: true
 
@@ -15,7 +15,8 @@ class InvoiceItem < Footprintable
   def amount_after_coupon
     # deduct coupon discount
     coupon_service = CouponService.new
-    coupon_service.ventilate(invoice.total, amount, invoice.coupon)
+    total_without_coupon = coupon_service.invoice_total_no_coupon(invoice)
+    coupon_service.ventilate(total_without_coupon, amount, invoice.coupon)
   end
 
   # return the item amount, coupon discount deducted, if any, and VAT excluded, if applicable
@@ -23,7 +24,7 @@ class InvoiceItem < Footprintable
     # deduct VAT
     vat_service = VatHistoryService.new
     vat_rate = vat_service.invoice_item_vat(self)
-    Rational(amount_after_coupon / (vat_rate / 100.00 + 1)).round.to_f
+    Rational(amount_after_coupon / ((vat_rate / 100.00) + 1)).round.to_f
   end
 
   # return the VAT amount for this item
@@ -31,7 +32,7 @@ class InvoiceItem < Footprintable
     amount_after_coupon - net_amount
   end
 
-  # return invoice item type (Machine/Training/Space/Event/Subscription) used to determine the VAT rate
+  # return invoice item type (Machine/Training/Space/Event/Subscription/OrderItem) used to determine the VAT rate
   def invoice_item_type
     if object_type == Reservation.name
       object.try(:reservable_type) || ''
@@ -39,6 +40,8 @@ class InvoiceItem < Footprintable
       Subscription.name
     elsif object_type == StatisticProfilePrepaidPack.name
       object.prepaid_pack.priceable_type
+    elsif object_type == OrderItem.name
+      Product.name
     else
       ''
     end

@@ -7,6 +7,8 @@ import MachineAPI from '../../api/machine';
 import { MachineCard } from './machine-card';
 import { MachinesFilters } from './machines-filters';
 import { User } from '../../models/user';
+import { useTranslation } from 'react-i18next';
+import { FabButton } from '../base/fab-button';
 
 declare const Application: IApplication;
 
@@ -25,6 +27,7 @@ interface MachinesListProps {
  * This component shows a list of all machines and allows filtering on that list.
  */
 export const MachinesList: React.FC<MachinesListProps> = ({ onError, onSuccess, onShowMachine, onReserveMachine, onLoginRequested, onEnrollRequested, user, canProposePacks }) => {
+  const { t } = useTranslation('public');
   // shown machines
   const [machines, setMachines] = useState<Array<Machine>>(null);
   // we keep the full list of machines, for filtering
@@ -56,10 +59,30 @@ export const MachinesList: React.FC<MachinesListProps> = ({ onError, onSuccess, 
     setMachines(allMachines.filter(m => !!m.disabled === !status));
   };
 
+  /**
+   * Go to store
+   */
+  const linkToStore = (): void => {
+    window.location.href = '/#!/store';
+  };
+
+  // TODO: Conditionally display the store ad
   return (
     <div className="machines-list">
       <MachinesFilters onStatusSelected={handleFilterByStatus} />
       <div className="all-machines">
+        {false &&
+          <div className='store-ad' onClick={() => linkToStore}>
+            <div className='content'>
+              <h3>{t('app.public.machines_list.store_ad.title')}</h3>
+              <p>{t('app.public.machines_list.store_ad.buy')}</p>
+              <p className='sell'>{t('app.public.machines_list.store_ad.sell')}</p>
+            </div>
+            <FabButton icon={<i className="fa fa-cart-plus fa-lg" />} className="cta" onClick={linkToStore}>
+              {t('app.public.machines_list.store_ad.link')}
+            </FabButton>
+          </div>
+        }
         {machines && machines.map(machine => {
           return <MachineCard key={machine.id}
             user={user}
@@ -77,10 +100,10 @@ export const MachinesList: React.FC<MachinesListProps> = ({ onError, onSuccess, 
   );
 };
 
-const MachinesListWrapper: React.FC<MachinesListProps> = ({ user, onError, onSuccess, onShowMachine, onReserveMachine, onLoginRequested, onEnrollRequested, canProposePacks }) => {
+const MachinesListWrapper: React.FC<MachinesListProps> = (props) => {
   return (
     <Loader>
-      <MachinesList user={user} onError={onError} onSuccess={onSuccess} onShowMachine={onShowMachine} onReserveMachine={onReserveMachine} onLoginRequested={onLoginRequested} onEnrollRequested={onEnrollRequested} canProposePacks={canProposePacks}/>
+      <MachinesList {...props} />
     </Loader>
   );
 };

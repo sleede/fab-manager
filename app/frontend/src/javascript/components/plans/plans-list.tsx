@@ -235,7 +235,7 @@ export const PlansList: React.FC<PlansListProps> = ({ onError, onPlanSelection, 
       {plans && Array.from(filteredPlans()).map(([groupId, plansByGroup]) => {
         return (
           <div key={groupId} className="plans-per-group">
-            {plansByGroup.size > 0 && <h2 className="group-title">{ groupName(groupId) }</h2>}
+            {plansByGroup?.size > 0 && <h2 className="group-title">{ groupName(groupId) }</h2>}
             {plansByGroup && renderPlansByCategory(plansByGroup)}
           </div>
         );

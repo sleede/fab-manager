@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { useImmer } from 'use-immer';
 import { FabInput } from '../../base/fab-input';
 import { IFablab } from '../../../models/fablab';
+import { SelectOption } from '../../../models/select';
 
 declare let Fablab: IFablab;
 
@@ -19,12 +20,6 @@ const ALL_INTERVALS = ['day', 'week', 'month', 'year'] as const;
 type interval = typeof ALL_INTERVALS[number];
 
 /**
- * Option format, expected by react-select
- * @see https://github.com/JedWatson/react-select
- */
-type selectOption = { value: interval, label: string };
-
-/**
  * A form component to create/edit a PrepaidPack.
  * The form validation must be created elsewhere, using the attribute form={formId}.
  */
@@ -36,14 +31,14 @@ export const PackForm: React.FC<PackFormProps> = ({ formId, onSubmit, pack }) =>
   /**
    * Convert all validity-intervals to the react-select format
    */
-  const buildOptions = (): Array<selectOption> => {
+  const buildOptions = (): Array<SelectOption<interval>> => {
     return ALL_INTERVALS.map(i => intervalToOption(i));
   };
 
   /**
    * Convert the given validity-interval to the react-select format
    */
-  const intervalToOption = (value: interval): selectOption => {
+  const intervalToOption = (value: interval): SelectOption<interval> => {
     if (!value) return { value, label: '' };
 
     return { value, label: t(`app.admin.pack_form.intervals.${value}`, { COUNT: packData.validity_count || 0 }) };
@@ -87,7 +82,7 @@ export const PackForm: React.FC<PackFormProps> = ({ formId, onSubmit, pack }) =>
   /**
    * Callback triggered when the user selects a type of interval for the current pack.
    */
-  const handleUpdateValidityInterval = (option: selectOption) => {
+  const handleUpdateValidityInterval = (option: SelectOption<interval>) => {
     updatePackData(draft => {
       draft.validity_interval = option.value as interval;
     });

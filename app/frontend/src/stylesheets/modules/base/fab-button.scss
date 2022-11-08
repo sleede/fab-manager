@@ -1,23 +1,23 @@
 .fab-button {
-  color: black;
-  background-color: #fbfbfb;
-  display: inline-block;
+  height: 38px;
   margin-bottom: 0;
-  font-weight: normal;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: middle;
-  touch-action: manipulation;
-  cursor: pointer;
-  background-image: none;
-  border: 1px solid #c9c9c9;
   padding: 6px 12px;
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid #c9c9c9;
+  border-radius: 4px;
+  background-color: #fbfbfb;
+  background-image: none;
   font-size: 16px;
   line-height: 1.5;
-  border-radius: 4px;
-  user-select: none;
+  text-align: center;
+  font-weight: normal;
   text-decoration: none;
-  height: 38px;
+  color: black;
+  white-space: nowrap;
+  touch-action: manipulation;
+  cursor: pointer;
+  user-select: none;
 
   &:hover {
     background-color: #f2f2f2;
@@ -45,5 +45,34 @@
 
   &--icon {
     margin-right: 0.5em;
+    display: flex;
+  }
+  &--icon-only {
+    display: flex;
+  }
+
+  // color variants
+  @mixin colorVariant($color, $textColor) {
+    border-color: $color;
+    background-color: $color;
+    color: $textColor;
+    &:hover {
+      border-color: $color;
+      background-color: $color;
+      color: $textColor;
+      opacity: 0.75;
+    }
+  }
+  &.is-info {
+    @include colorVariant(var(--information), var(--gray-soft-lightest));
+  }
+  &.is-secondary {
+    @include colorVariant(var(--secondary), var(--gray-hard-darkest));
+  }
+  &.is-black {
+    @include colorVariant(var(--gray-hard-darkest), var(--gray-soft-lightest));
+  }
+  &.is-main {
+    @include colorVariant(var(--main), var(--gray-soft-lightest));
   }
 }

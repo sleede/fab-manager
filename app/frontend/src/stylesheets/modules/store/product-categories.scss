@@ -1,0 +1,103 @@
+.product-categories {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding-bottom: 6rem;
+  @include grid-col(12);
+  gap: 0 3.2rem;
+
+  header {
+    @include header();
+    grid-column: 2 / -2;
+  }
+  .fab-alert {
+    grid-column: 2 / -2;
+  }
+
+  &-tree {
+    grid-column: 2 / -2;
+    & > *:not(:first-child) {
+      margin-top: 1.6rem;
+    }
+  }
+  &-item {
+    display: flex;
+    pointer-events: all;
+
+    &.is-collapsed {
+      height: 0;
+      margin: 0;
+      padding: 0;
+      border: none;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .offset {
+      width: 4.8rem;
+    }
+
+    .wrap {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.6rem 1.6rem;
+      border: 1px solid var(--gray-soft-dark);
+      border-radius: var(--border-radius);
+      background-color: var(--gray-soft-lightest);
+      &.is-child { margin-left: 4.8rem; }
+      .itemInfo {
+        display: flex;
+        align-items: center;
+        &-name {
+          margin: 0;
+          @include text-base;
+          font-weight: 600;
+          color: var(--gray-hard-darkest);
+        }
+        &-count {
+          margin-left: 2.4rem;
+          @include text-sm;
+          font-weight: 500;
+          color: var(--gray-hard-dark);
+        }
+      }
+
+      .actions {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        .manage {
+          overflow: hidden;
+          display: flex;
+          border-radius: var(--border-radius-sm);
+          button {
+            @include btn;
+            border-radius: 0;
+            color: var(--gray-soft-lightest);
+            &:hover { opacity: 0.75; }
+          }
+          .edit-btn { background: var(--gray-hard-darkest); }
+          .delete-btn { background: var(--main); }
+        }
+      }
+    }
+
+    .collapse-handle {
+      width: 4rem;
+      margin: 0 0 0 -1rem;
+      button {
+        @include btn;
+        background: none;
+        border-radius: 0;
+        transition: transform 250ms ease-in-out;
+        &.rotate {
+          transform: rotateZ(-180deg);
+        }
+      }
+    }
+    .drag-handle button {
+      @include btn;
+      cursor: grab;
+    }
+  }
+}

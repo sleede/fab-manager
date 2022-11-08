@@ -2,7 +2,7 @@
 
 require 'test_helper'
 
-class StatisticServiceTest < ActionDispatch::IntegrationTest
+class ReservationSubscriptionStatisticServiceTest < ActionDispatch::IntegrationTest
   setup do
     @user = User.members.without_subscription.first
     @admin = User.with_role(:admin).first

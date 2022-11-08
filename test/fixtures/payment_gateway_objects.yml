@@ -230,3 +230,46 @@ pgo33:
   item_type: PaymentSchedule
   item_id: 13
   payment_gateway_object_id: 32
+
+pgo34:
+  id: 34
+  item_type: 'User'
+  item_id: 9
+  gateway_object_type: 'Stripe::Customer'
+  gateway_object_id: 'cus_IhIynmoJbzLpwX'
+
+pgo35:
+  id: 35
+  item_type: 'User'
+  item_id: 10
+  gateway_object_type: 'Stripe::Customer'
+  gateway_object_id: 'cus_IhIynmoJbzLpwX'
+pgo36:
+  id: 36
+  gateway_object_id: pi_3LpALs2sOmf47Nz91QyFI7nO
+  gateway_object_type: Stripe::PaymentIntent
+  item_type: Invoice
+  item_id: 5816
+  payment_gateway_object_id:
+pgo37:
+  id: 37
+  gateway_object_id: pi_3LpBa12sOmf47Nz91QFYVXVf
+  gateway_object_type: Stripe::PaymentIntent
+  item_type: Invoice
+  item_id: 5817
+  payment_gateway_object_id:
+pgo38:
+  id: 38
+  gateway_object_id: pi_3LpBjD2sOmf47Nz90bOsclbx
+  gateway_object_type: Stripe::PaymentIntent
+  item_type: Invoice
+  item_id: 5818
+  payment_gateway_object_id:
+pgo39:
+  id: 39
+  gateway_object_id: pi_3LpBwR2sOmf47Nz90EILNKvi
+  gateway_object_type: Stripe::PaymentIntent
+  item_type: Invoice
+  item_id: 5819
+  payment_gateway_object_id:
+

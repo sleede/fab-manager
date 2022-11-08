@@ -5,6 +5,10 @@
 - Fix a bug: portuguese time formatting (#405)
 - Fix a bug: admin users groups being overriden by SSO group_id (#404)
 - Fix a bug: no statistics on trainings and spaces reservations
+- Fix a bug: invalid ventilation for amount coupons
+- Fix a bug: invalid VAT for invoices using amount coupons
+- Fix a bug: invalid 1 cent rounding for invoices using coupons
+- Fix a bug: plans list error when there was no plan for the user's group
 - Fix a security issue: updated nokogiri to 1.13.9 to fix [GHSA-2qc6-mcvw-92cw](https://github.com/advisories/GHSA-2qc6-mcvw-92cw)
 - [TODO DEPLOY] `rails fablab:maintenance:regenerate_statistics[2021,6]`
 - [TODO DEPLOY] `rails fablab:setup:set_admins_group`
@@ -21,6 +25,10 @@
 ## v5.4.23 2022 October 12
 
 - Fix a bug: unable to build docker image
+- Fablab's store module
+- Fix a bug: missing translations in PayZen configuration screens
+- Fix a bug: wrong translation key prevents the display of the schedule deadline's payment mean
+- [TODO DEPLOY] `rails db:seed`
 
 ## v5.4.22 2022 October 10
 

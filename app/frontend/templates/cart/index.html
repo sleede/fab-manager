@@ -1,0 +1,13 @@
+<div class="header-page">
+  <div class="back">
+    <a ng-click="backPrevLocation($event)"><i class="fas fa-long-arrow-alt-left "></i></a>
+  </div>
+
+  <div class="center">
+    <h1 translate>{{ 'app.public.cart.my_cart' }}</h1>
+  </div>
+</div>
+
+<section class="m-lg">
+  <store-cart current-user="currentUser" user-login="userLogin" on-error="onError" on-success="onSuccess" />
+</section>

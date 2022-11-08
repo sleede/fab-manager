@@ -1,0 +1,29 @@
+.fab-tooltip {
+  position: relative;
+  cursor: help;
+
+  .trigger i { display: block; }
+  .content {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: none;
+    width: max-content;
+    max-width: min(75vw, 65ch);
+    padding: 1rem;
+    background-color: var(--information-lightest);
+    color: var(--information);
+    border: 1px solid var(--information);
+    border-radius: var(--border-radius);
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.2em;
+    z-index: 1;
+    & > span { display: block; }
+    a {
+      color: var(--gray-hard);
+      text-decoration: underline;
+    }
+  }
+  &:hover .content { display: block; }
+}

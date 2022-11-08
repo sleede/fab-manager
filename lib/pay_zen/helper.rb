@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
+require 'payment/helper'
+
 # PayZen payement gateway
 module PayZen; end
 
 ## Provides various methods around the PayZen payment gateway
-class PayZen::Helper
+class PayZen::Helper < Payment::Helper
   class << self
     ## Is the PayZen gateway enabled?
     def enabled?
@@ -13,9 +15,13 @@ class PayZen::Helper
 
       res = true
       %w[payzen_username payzen_password payzen_endpoint payzen_public_key payzen_hmac payzen_currency].each do |pz_setting|
-        res = false unless Setting.get(pz_setting).present?
+        res = false if Setting.get(pz_setting).blank?
       end
       res
+    end
+
+    def human_error(error)
+      I18n.t('errors.messages.gateway_error', { MESSAGE: error.message })
     end
 
     ## generate an unique string reference for the content of a cart
@@ -57,12 +63,25 @@ class PayZen::Helper
 
     ## Generate a hash map compatible with PayZen 'V4/Customer/ShoppingCart'
     def generate_shopping_cart(cart_items, customer, operator)
-      cart = if cart_items.is_a? ShoppingCart
+      cart = case cart_items
+             when ShoppingCart, Order
                cart_items
              else
                cs = CartService.new(operator)
                cs.from_hash(cart_items)
              end
+      if cart.is_a? Order
+        return {
+          cartItemInfo: cart.order_items.map do |item|
+            {
+              productAmount: item.amount.to_i.to_s,
+              productLabel: item.orderable_id,
+              productQty: item.quantity.to_s,
+              productType: customer.organization? ? 'SERVICE_FOR_BUSINESS' : 'SERVICE_FOR_INDIVIDUAL'
+            }
+          end
+        }
+      end
       {
         cartItemInfo: cart.items.map do |item|
           {
@@ -84,9 +103,10 @@ class PayZen::Helper
 
       # if key is not defined, we use kr-hash-key parameter to choose it
       if key.nil?
-        if hash_key == 'sha256_hmac'
+        case hash_key
+        when 'sha256_hmac'
           key = Setting.get('payzen_hmac')
-        elsif hash_key == 'password'
+        when 'password'
           key = Setting.get('payzen_password')
         else
           raise ::PayzenError, 'invalid hash-key parameter'

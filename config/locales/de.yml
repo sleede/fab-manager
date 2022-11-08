@@ -10,6 +10,11 @@ de:
     week:
       one: 'Eine Woche'
       other: '%{count} Wochen'
+  activerecord:
+    attributes:
+      product:
+        amount: "The price"
+        slug: "URL"
   errors:
     #CarrierWave
     messages:
@@ -38,6 +43,12 @@ de:
       invalid_duration: "Der zulässige Zeitraum muss zwischen 1 Tag und 1 Jahr lang sein. Ihr Zeitraum ist %{DAYS} Tage lang."
       must_be_in_the_past: "Der Zeitraum darf ausschließlich vor dem heutigen Datum liegen."
       registration_disabled: "Registrierung ist deaktiviert"
+      undefined_in_store: "must be defined to make the product available in the store"
+      gateway_error: "Payement gateway error: %{MESSAGE}"
+      gateway_amount_too_small: "Payments under %{AMOUNT} are not supported. Please order directly at the reception."
+      gateway_amount_too_large: "Payments above %{AMOUNT} are not supported. Please order directly at the reception."
+      product_in_use: "This product have already been ordered"
+      slug_already_used: "is already used"
   apipie:
     api_documentation: "API-Dokumentation"
     code: "HTTP-Code"
@@ -57,7 +68,6 @@ de:
   #members management
   members:
     unable_to_change_the_group_while_a_subscription_is_running: "Die Gruppe kann während eines Abonnements nicht geändert werden"
-    admins_cant_change_group: "Ein Administrator kann nicht aus seiner eigenen Gruppe entfernt werden"
     please_input_the_authentication_code_sent_to_the_address: "Bitte geben Sie den Authentifizierungscode ein, der an die E-Mail-Adresse %{EMAIL} gesendet wurde"
     your_authentication_code_is_not_valid: "Der Authentifizierungscode ist ungültig."
     current_authentication_method_no_code: "Die aktuelle Authentifizierungsmethode erfordert keinen Migrationscode"
@@ -121,6 +131,7 @@ de:
     error_invoice: "Fehlerhafte Rechnung. Die folgenden Artikel sind nicht gebucht. Bitte kontaktieren Sie das FabLab für eine Rückerstattung."
     prepaid_pack: "Prepaid-Stundenpaket"
     pack_item: "Paket von %{COUNT} Stunden für %{ITEM}"
+    order: "Your order on the store"
   #PDF payment schedule generation
   payment_schedules:
     schedule_reference: "Zahlungsplan Referenz: %{REF}"
@@ -153,6 +164,7 @@ de:
     Event_reservation: "Veranstaltungsreservierung"
     Space_reservation: "Raumreservierung"
     wallet: "Guthabenkonto"
+    shop_order: "shop order"
   vat_export:
     start_date: "Anfangsdatum"
     end_date: "Enddatum"
@@ -355,6 +367,9 @@ de:
         import_over: "%{CATEGORY} Import ist beendet. "
         members: "Mitglieder"
         view_results: "Ergebnisse anzeigen."
+      notify_admin_low_stock_threshold:
+        low_stock: "Low stock for %{PRODUCT}. "
+        view_product: "View the product."
       notify_member_about_coupon:
         enjoy_a_discount_of_PERCENT_with_code_CODE: "Erhalten Sie %{PERCENT}% Rabatt mit dem Code %{CODE}"
         enjoy_a_discount_of_AMOUNT_with_code_CODE: "Erhalten Sie %{AMOUNT}% Rabatt mit dem Code %{CODE}"
@@ -406,11 +421,18 @@ de:
         refusal: "Your proof of identity are not accepted"
       notify_admin_user_proof_of_identity_refusal:
         refusal: "Member's proof of identity <strong><em>%{NAME}</strong></em> refused."
+      notify_user_order_is_ready:
+        order_ready: "Your command %{REFERENCE} is ready"
+      notify_user_order_is_canceled:
+        order_canceled: "Your command %{REFERENCE} is canceled"
+      notify_user_order_is_refunded:
+        order_refunded: "Your command %{REFERENCE} is refunded"
   #statistics tools for admins
   statistics:
     subscriptions: "Abonnements"
     machines_hours: "Maschinen-Slots"
     spaces: "Räume"
+    orders: "Orders"
     trainings: "Schulungen"
     events: "Veranstaltungen"
     registrations: "Anmeldungen"
@@ -434,6 +456,9 @@ de:
     account_creation: "Benutzerkontenerstellung"
     project_publication: "Projektveröffentlichung"
     duration: "Dauer"
+    store: "Store"
+    paid-processed: "Paid and/or processed"
+    aborted: "Aborted"
   #statistics exports to the Excel file format
   export:
     entries: "Einträge"
@@ -453,13 +478,12 @@ de:
   price_category:
     reduced_fare: "Ermäßigter Tarif"
     reduced_fare_if_you_are_under_25_student_or_unemployed: "Ermäßigter Tarif, wenn Sie unter 25, studierend oder arbeitslos sind."
-  group:
-    #name of the user's group for administrators
-    admins: 'Administratoren'
   cart_items:
     free_extension: "Kostenlose Verlängerung eines Abonnements bis %{DATE}"
   statistic_profile:
     birthday_in_past: "Geburtsdatum muss in der Vergangenheit liegen"
+  order:
+    please_contact_FABLAB: "Please contact us for withdrawal instructions."
   settings:
     locked_setting: "die Einstellung ist gesperrt."
     about_title: "Seitentitel \"Über\""
@@ -593,3 +617,6 @@ de:
     machines_module: "Machines module"
     user_change_group: "Allow users to change their group"
     show_username_in_admin_list: "Show the username in the admin's members list"
+    store_module: "Store module"
+    store_withdrawal_instructions: "Withdrawal instructions"
+    store_hidden: "Store hidden to the public"

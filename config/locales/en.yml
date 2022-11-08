@@ -10,6 +10,11 @@ en:
     week:
       one: 'one week'
       other: '%{count} weeks'
+  activerecord:
+    attributes:
+      product:
+        amount: "The price"
+        slug: "URL"
   errors:
     #CarrierWave
     messages:
@@ -38,6 +43,12 @@ en:
       invalid_duration: "The allowed duration must be between 1 day and 1 year. Your period is %{DAYS} days long."
       must_be_in_the_past: "The period must be strictly prior to today's date."
       registration_disabled: "Registration is disabled"
+      undefined_in_store: "must be defined to make the product available in the store"
+      gateway_error: "Payement gateway error: %{MESSAGE}"
+      gateway_amount_too_small: "Payments under %{AMOUNT} are not supported. Please order directly at the reception."
+      gateway_amount_too_large: "Payments above %{AMOUNT} are not supported. Please order directly at the reception."
+      product_in_use: "This product have already been ordered"
+      slug_already_used: "is already used"
   apipie:
     api_documentation: "API Documentation"
     code: "HTTP code"
@@ -120,6 +131,7 @@ en:
     error_invoice: "Erroneous invoice. The items below ware not booked. Please contact the FabLab for a refund."
     prepaid_pack: "Prepaid pack of hours"
     pack_item: "Pack of %{COUNT} hours for the %{ITEM}"
+    order: "Your order on the store"
   #PDF payment schedule generation
   payment_schedules:
     schedule_reference: "Payment schedule reference: %{REF}"
@@ -152,6 +164,7 @@ en:
     Event_reservation: "event reserv."
     Space_reservation: "space reserv."
     wallet: "wallet"
+    shop_order: "shop order"
   vat_export:
     start_date: "Start date"
     end_date: "End date"
@@ -354,6 +367,9 @@ en:
         import_over: "%{CATEGORY} import is over. "
         members: "Members"
         view_results: "View results."
+      notify_admin_low_stock_threshold:
+        low_stock: "Low stock for %{PRODUCT}. "
+        view_product: "View the product."
       notify_member_about_coupon:
         enjoy_a_discount_of_PERCENT_with_code_CODE: "Enjoy a discount of %{PERCENT}% with code %{CODE}"
         enjoy_a_discount_of_AMOUNT_with_code_CODE: "Enjoy a discount of %{AMOUNT} with code %{CODE}"
@@ -405,11 +421,18 @@ en:
         refusal: "Your proof of identity are not accepted"
       notify_admin_user_proof_of_identity_refusal:
         refusal: "Member's proof of identity <strong><em>%{NAME}</strong></em> refused."
+      notify_user_order_is_ready:
+        order_ready: "Your command %{REFERENCE} is ready"
+      notify_user_order_is_canceled:
+        order_canceled: "Your command %{REFERENCE} is canceled"
+      notify_user_order_is_refunded:
+        order_refunded: "Your command %{REFERENCE} is refunded"
   #statistics tools for admins
   statistics:
     subscriptions: "Subscriptions"
     machines_hours: "Machines slots"
     spaces: "Spaces"
+    orders: "Orders"
     trainings: "Trainings"
     events: "Events"
     registrations: "Registrations"
@@ -433,6 +456,9 @@ en:
     account_creation: "Account creation"
     project_publication: "Project publication"
     duration: "Duration"
+    store: "Store"
+    paid-processed: "Paid and/or processed"
+    aborted: "Aborted"
   #statistics exports to the Excel file format
   export:
     entries: "Entries"
@@ -456,6 +482,8 @@ en:
     free_extension: "Free extension of a subscription, until %{DATE}"
   statistic_profile:
     birthday_in_past: "The date of birth must be in the past"
+  order:
+    please_contact_FABLAB: "Please contact us for withdrawal instructions."
   settings:
     locked_setting: "the setting is locked."
     about_title: "\"About\" page title"
@@ -589,3 +617,6 @@ en:
     machines_module: "Machines module"
     user_change_group: "Allow users to change their group"
     show_username_in_admin_list: "Show the username in the admin's members list"
+    store_module: "Store module"
+    store_withdrawal_instructions: "Withdrawal instructions"
+    store_hidden: "Store hidden to the public"

@@ -1,0 +1,41 @@
+.cart-button {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 0.8rem 0.6rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  background-color: var(--secondary);
+  
+  &:hover {
+    cursor: pointer;
+  }
+  
+  span {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    min-width: 2rem;
+    height: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--secondary-text-color);
+    border-radius: 10rem;
+    color: var(--secondary);
+    @include text-sm(600);
+  }
+  i {
+    margin-bottom: 0.8rem;
+    font-size: 2.6rem;
+    columns: var(--secondary-text-color);
+  }
+  p {
+    margin: 0;
+    @include text-sm;
+    text-align: center;
+    color: var(--secondary-text-color);
+  }
+}

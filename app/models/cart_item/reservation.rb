@@ -23,7 +23,7 @@ class CartItem::Reservation < CartItem::BaseItem
     amount = 0
 
     hours_available = credits
-    grouped_slots.values.each do |slots|
+    grouped_slots.each_value do |slots|
       prices = applicable_prices(slots)
       slots.each_with_index do |slot, index|
         amount += get_slot_price_from_prices(prices, slot, is_privileged,
@@ -100,7 +100,7 @@ class CartItem::Reservation < CartItem::BaseItem
     slot_minutes = (slot[:slot_attributes][:end_at].to_time - slot[:slot_attributes][:start_at].to_time) / SECONDS_PER_MINUTE
     price = prices[:prices].find { |p| p[:duration] <= slot_minutes && p[:duration].positive? }
     price = prices[:prices].first if price.nil?
-    hourly_rate = (price[:price].amount.to_f / price[:price].duration) * MINUTES_PER_HOUR
+    hourly_rate = ((Rational(price[:price].amount.to_f) / Rational(price[:price].duration)) * Rational(MINUTES_PER_HOUR)).to_f
 
     # apply the base price to the real slot duration
     real_price = get_slot_price(hourly_rate, slot, is_privileged, options)
@@ -130,7 +130,7 @@ class CartItem::Reservation < CartItem::BaseItem
     slot_minutes = (slot[:slot_attributes][:end_at].to_time - slot[:slot_attributes][:start_at].to_time) / SECONDS_PER_MINUTE
     # apply the base price to the real slot duration
     real_price = if options[:is_division]
-                   (slot_rate / MINUTES_PER_HOUR) * slot_minutes
+                   ((Rational(slot_rate) / Rational(MINUTES_PER_HOUR)) * Rational(slot_minutes)).to_f
                  else
                    slot_rate
                  end
@@ -138,7 +138,7 @@ class CartItem::Reservation < CartItem::BaseItem
     if real_price.positive? && options[:prepaid][:minutes]&.positive?
       consumed = slot_minutes
       consumed = options[:prepaid][:minutes] if slot_minutes > options[:prepaid][:minutes]
-      real_price = (slot_minutes - consumed) * (slot_rate / MINUTES_PER_HOUR)
+      real_price = (Rational(slot_minutes - consumed) * (Rational(slot_rate) / Rational(MINUTES_PER_HOUR))).to_f
       options[:prepaid][:minutes] -= consumed
     end
 
@@ -158,7 +158,9 @@ class CartItem::Reservation < CartItem::BaseItem
   # and the base price (1 hours), we use the 7 hours price, then 3 hours price, and finally the base price twice (7+3+1+1 = 12).
   # All these prices are returned to be applied to the reservation.
   def applicable_prices(slots)
-    total_duration = slots.map { |slot| (slot[:slot_attributes][:end_at].to_time - slot[:slot_attributes][:start_at].to_time) / SECONDS_PER_MINUTE }.reduce(:+)
+    total_duration = slots.map do |slot|
+      (slot[:slot_attributes][:end_at].to_time - slot[:slot_attributes][:start_at].to_time) / SECONDS_PER_MINUTE
+    end.reduce(:+)
     rates = { prices: [] }
 
     remaining_duration = total_duration
@@ -182,7 +184,7 @@ class CartItem::Reservation < CartItem::BaseItem
   ##
   # Compute the number of remaining hours in the users current credits (for machine or space)
   ##
-  def credits_hours(credits, new_plan_being_bought = false)
+  def credits_hours(credits, new_plan_being_bought: false)
     return 0 unless credits
 
     hours_available = credits.hours

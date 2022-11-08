@@ -22,6 +22,7 @@ de:
         my_events: "Meine Veranstaltungen"
         my_invoices: "Meine Rechnungen"
         my_payment_schedules: "Meine Zahlungspläne"
+        my_orders: "My orders"
         my_wallet: "Mein Guthaben"
         #contextual help
         help: "Hilfe"
@@ -43,6 +44,7 @@ de:
         projects_gallery: "Projekt-Galerie"
         subscriptions: "Abonnements"
         public_calendar: "Kalender"
+        fablab_store: "Store"
         #left menu (admin)
         trainings_monitoring: "Schulungen"
         manage_the_calendar: "Kalender"
@@ -51,6 +53,7 @@ de:
         subscriptions_and_prices: "Abonnements und Preise"
         manage_the_events: "Veranstaltungen"
         manage_the_machines: "Maschinen"
+        manage_the_store: "Store"
         manage_the_spaces: "Räume"
         projects: "Projekte"
         statistics: "Statistiken"
@@ -217,6 +220,11 @@ de:
         new_availability: "Verfügbare Reservierungen"
         book: "Buchen"
         _or_the_: " oder die "
+        store_ad:
+          title: "Discover our store"
+          buy: "Check out products from members' projects along with consumable related to the different machines and tools of the workshop."
+          sell: "If you also want to sell your creations, please let us know."
+          link: "To the store"
       machines_filters:
         show_machines: "Maschinen anzeigen"
         status_enabled: "Aktiviert"
@@ -372,6 +380,86 @@ de:
         characteristics: "Eigenschaften"
         files_to_download: "Dateien zum Herunterladen"
         projects_using_the_space: "Projekte, die den Raum nutzen"
+      #public store
+      store:
+        fablab_store: "Store"
+        unexpected_error_occurred: "An unexpected error occurred. Please try again later."
+        add_to_cart_success: "Product added to the cart."
+        products:
+          all_products: "All the products"
+          filter: "Filter"
+          filter_clear: "Clear all"
+          filter_apply: "Apply"
+          filter_categories: "Categories"
+          filter_machines: "By machines"
+          filter_keywords_reference: "By keywords or reference"
+          in_stock_only: "Available products only"
+          sort:
+            name_az: "A-Z"
+            name_za: "Z-A"
+            price_low: "Price: low to high"
+            price_high: "Price: high to low"
+      store_product:
+        ref: "ref: {REF}"
+        add_to_cart_success: "Product added to the cart."
+        unexpected_error_occurred: "An unexpected error occurred. Please try again later."
+        show_more: "Display more"
+        show_less: "Display less"
+        documentation: "Documentation"
+        minimum_purchase: "Minimum purchase: "
+        add_to_cart: "Add to cart"
+        stock_limit: "You have reached the current stock limit"
+      stock_status:
+        available: "Available"
+        limited_stock: "Limited stock"
+        out_of_stock: "Out of stock"
+      store_product_item:
+        minimum_purchase: "Minimum purchase: "
+        add: "Add"
+        add_to_cart: "Add to cart"
+        stock_limit: "You have reached the current stock limit"
+      product_price:
+        per_unit: "/ unit"
+        free: "Free"
+      cart:
+        my_cart: "My Cart"
+      cart_button:
+        my_cart: "My Cart"
+      store_cart:
+        checkout: "Checkout"
+        cart_is_empty: "Your cart is empty"
+        pickup: "Pickup your products"
+        reference_short: "ref:"
+        minimum_purchase: "Minimum purchase: "
+        stock_limit: "You have reached the current stock limit"
+        unit: "Unit"
+        total: "Total"
+        offer_product: "Offer the product"
+        checkout_header: "Total amount for your cart"
+        checkout_products_COUNT: "Your cart contains {COUNT} {COUNT, plural, =1{product} other{products}}"
+        checkout_products_total: "Products total"
+        checkout_gift_total: "Discount total"
+        checkout_coupon: "Coupon"
+        checkout_total: "Cart total"
+        checkout_error: "An unexpected error occurred. Please contact the administrator."
+        checkout_success: "Purchase confirmed. Thanks!"
+        select_user: "Please select a user before continuing."
+        update_item: "Update"
+        errors:
+          product_not_found: "This product is no longer available, please remove it from your cart."
+          out_of_stock: "This product is out of stock, please remove it from your cart."
+          stock_limit_QUANTITY: "Only {QUANTITY} {QUANTITY, plural, =1{unit} other{units}} left in stock, please adjust the quantity of items."
+          quantity_min_QUANTITY: "Minimum number of product was changed to {QUANTITY}, please adjust the quantity of items."
+          price_changed_PRICE: "The product price was modified to {PRICE}"
+          unauthorized_offering_product: "You can't offer anything to yourself"
+      orders_dashboard:
+        heading: "My orders"
+        sort:
+          newest: "Newest first"
+          oldest: "Oldest first"
+      member_select:
+        select_a_member: "Select a member"
+        start_typing: "Start typing..."
       tour:
         conclusion:
           title: "Vielen Dank für Ihre Aufmerksamkeit"

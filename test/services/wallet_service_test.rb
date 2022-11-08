@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class WalletServiceTest < ActiveSupport::TestCase
@@ -54,9 +56,9 @@ class WalletServiceTest < ActiveSupport::TestCase
   test 'rollback debited amount if has an error when create wallet transaction' do
     service = WalletService.new(wallet: @vlonchamp_wallet)
     expected_amount = @vlonchamp_wallet.amount
-    transaction = service.debit(5)
+    transaction = service.debit('error')
     @vlonchamp_wallet.reload
-    assert_equal @vlonchamp_wallet.amount, expected_amount
+    assert_equal expected_amount, @vlonchamp_wallet.amount
     assert_not transaction
   end
 end

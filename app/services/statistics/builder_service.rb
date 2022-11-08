@@ -11,6 +11,7 @@ class Statistics::BuilderService
       Statistics::Builders::ReservationsBuilderService.build(options)
       Statistics::Builders::MembersBuilderService.build(options)
       Statistics::Builders::ProjectsBuilderService.build(options)
+      Statistics::Builders::StoreOrdersBuilderService.build(options)
     end
 
     private

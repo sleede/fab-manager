@@ -12,6 +12,8 @@ class ExportService
         last_export_reservations
       when 'users/subscription'
         last_export_subscriptions
+      when %r{statistics/.*}
+        last_export_statistics(type.split('/')[1])
       else
         raise TypeError "unknown export type: #{type}"
       end
@@ -42,6 +44,11 @@ class ExportService
 
       Export.where(category: 'users', export_type: 'members')
             .where('created_at > ?', last_update)
+            .last
+    end
+
+    def last_export_statistics(type)
+      Export.where(category: 'statistics', export_type: type, query: params[:body], key: params[:type_key])
             .last
     end
   end

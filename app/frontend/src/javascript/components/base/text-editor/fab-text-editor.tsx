@@ -12,11 +12,14 @@ import { MenuBar } from './menu-bar';
 import { WarningOctagon } from 'phosphor-react';
 
 interface FabTextEditorProps {
-  paragraphTools?: boolean,
-  content?: string,
-  limit?: number,
+  heading?: boolean,
+  bulletList?: boolean,
+  blockquote?: boolean,
+  link?: boolean,
   video?: boolean,
   image?: boolean,
+  content?: string,
+  limit?: number,
   onChange?: (content: string) => void,
   placeholder?: string,
   error?: string,
@@ -30,7 +33,7 @@ export interface FabTextEditorRef {
 /**
  * This component is a WYSIWYG text editor
  */
-export const FabTextEditor: React.ForwardRefRenderFunction<FabTextEditorRef, FabTextEditorProps> = ({ paragraphTools, content, limit = 400, video, image, onChange, placeholder, error, disabled = false }, ref: RefObject<FabTextEditorRef>) => {
+const FabTextEditor: React.ForwardRefRenderFunction<FabTextEditorRef, FabTextEditorProps> = ({ heading, bulletList, blockquote, content, limit = 400, video, image, link, onChange, placeholder, error, disabled = false }, ref: RefObject<FabTextEditorRef>) => {
   const { t } = useTranslation('shared');
   const placeholderText = placeholder || t('app.shared.text_editor.fab_text_editor.text_placeholder');
   // TODO: Add ctrl+click on link to visit
@@ -72,7 +75,11 @@ export const FabTextEditor: React.ForwardRefRenderFunction<FabTextEditorRef, Fab
     ],
     content,
     onUpdate: ({ editor }) => {
-      onChange(editor.getHTML());
+      if (editor.isEmpty) {
+        onChange('');
+      } else {
+        onChange(editor.getHTML());
+      }
     }
   });
 
@@ -80,17 +87,23 @@ export const FabTextEditor: React.ForwardRefRenderFunction<FabTextEditorRef, Fab
     editor?.setEditable(!disabled);
   }, [disabled]);
 
+  useEffect(() => {
+    if (editor?.getHTML() !== content) {
+      editor?.commands.setContent(content);
+    }
+  }, [content]);
+
   // bind the editor to the ref, once it is ready
   if (!editor) return null;
   editorRef.current = editor;
 
   return (
-    <div className={`fab-text-editor ${disabled && 'is-disabled'}`}>
-      <MenuBar editor={editor} paragraphTools={paragraphTools} video={video} image={image} disabled={disabled} />
+    <div className={`fab-text-editor ${disabled ? 'is-disabled' : ''}`}>
+      <MenuBar editor={editor} heading={heading} bulletList={bulletList} blockquote={blockquote} video={video} image={image} link={link} disabled={disabled} />
       <EditorContent editor={editor} />
-      <div className="fab-text-editor-character-count">
+      {limit && <div className="fab-text-editor-character-count">
         {editor?.storage.characterCount.characters()} / {limit}
-      </div>
+      </div>}
       {error &&
         <div className="fab-text-editor-error">
           <WarningOctagon size={24} />
