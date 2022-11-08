@@ -124,3 +124,183 @@ invoice_6:
   invoicing_profile_id: 8
   operator_profile_id: 1
   statistic_profile_id: 8
+invoice_5811:
+  id: 5811
+  total: 4500
+  created_at: '2022-09-20 15:14:22.873707'
+  updated_at: '2022-09-20 15:14:23.496793'
+  reference: '2209002'
+  payment_method: local
+  avoir_date:
+  invoice_id:
+  type:
+  subscription_to_expire:
+  description:
+  wallet_amount:
+  wallet_transaction_id:
+  coupon_id:
+  footprint: '094590df6330de6a2b5d2ce7230673c7178f2639ca8ceb51ba272795349fff95'
+  environment: development
+  invoicing_profile_id: 3
+  operator_profile_id: 1
+  statistic_profile_id: 3
+invoice_5812:
+  id: 5812
+  total: 6000
+  created_at: '2022-09-20 15:14:48.345927'
+  updated_at: '2022-09-20 15:14:48.409110'
+  reference: '2209004'
+  payment_method: local
+  avoir_date:
+  invoice_id:
+  type:
+  subscription_to_expire:
+  description:
+  wallet_amount:
+  wallet_transaction_id:
+  coupon_id:
+  footprint: ea5cc57a8af956f9a3e66ec1f9bd7fe5fe51e1220955cacb11a3cc99d2e6aa54
+  environment: development
+  invoicing_profile_id: 7
+  operator_profile_id: 1
+  statistic_profile_id: 7
+invoice_5816:
+  id: 5816
+  total: 319
+  created_at: '2022-10-04 12:36:03.060832'
+  updated_at: '2022-10-04 12:36:03.445507'
+  reference: 2210002/VL
+  payment_method: card
+  avoir_date:
+  invoice_id:
+  type:
+  subscription_to_expire:
+  description:
+  wallet_amount:
+  wallet_transaction_id:
+  coupon_id:
+  footprint: ca8879f07cf1bd29500a9df29ce110843fb204ab0da8140bb4c6e8e908a65e0b
+  environment: development
+  invoicing_profile_id: 4
+  operator_profile_id: 4
+  statistic_profile_id: 4
+invoice_5817:
+  id: 5817
+  total: 1295
+  created_at: '2022-10-04 13:54:42.975196'
+  updated_at: '2022-10-04 13:54:43.070098'
+  reference: 2210004/VL
+  payment_method: card
+  avoir_date:
+  invoice_id:
+  type:
+  subscription_to_expire:
+  description:
+  wallet_amount:
+  wallet_transaction_id:
+  coupon_id: 30
+  footprint: 838ae505dfba54f6a69cd341abf8f97fd9370c2acb81e37c6e70d98049d80646
+  environment: development
+  invoicing_profile_id: 4
+  operator_profile_id: 4
+  statistic_profile_id: 4
+invoice_5818:
+  id: 5818
+  total: 1000
+  created_at: '2022-10-04 14:04:12.742685'
+  updated_at: '2022-10-04 14:04:12.774844'
+  reference: 2210006/VL
+  payment_method: card
+  avoir_date:
+  invoice_id:
+  type:
+  subscription_to_expire:
+  description:
+  wallet_amount:
+  wallet_transaction_id:
+  coupon_id:
+  footprint: 93db8c6ded7066a71927b6950cf5a9ea69aff25036df3a5a4259615347f2c8b2
+  environment: development
+  invoicing_profile_id: 4
+  operator_profile_id: 4
+  statistic_profile_id: 4
+invoice_5819:
+  id: 5819
+  total: 4002
+  created_at: '2022-10-04 14:17:52.854636'
+  updated_at: '2022-10-04 14:17:52.898044'
+  reference: 2210008/VL
+  payment_method: card
+  avoir_date:
+  invoice_id:
+  type:
+  subscription_to_expire:
+  description:
+  wallet_amount:
+  wallet_transaction_id:
+  coupon_id:
+  footprint: bfd2f78a99aadd137f3f28fe8258a46ff8afa69b458f0a6f2dce1205fab22784
+  environment: development
+  invoicing_profile_id: 4
+  operator_profile_id: 4
+  statistic_profile_id: 4
+invoice_5820:
+  id: 5820
+  total: 12000
+  created_at: '2022-10-04 14:25:37.291945'
+  updated_at: '2022-10-04 14:25:37.341401'
+  reference: '2210010'
+  payment_method: local
+  avoir_date:
+  invoice_id:
+  type:
+  subscription_to_expire:
+  description:
+  wallet_amount:
+  wallet_transaction_id:
+  coupon_id:
+  footprint: db6a663a25e19229ee93868765e1463ec7bd7856b173c5dd326d70d98369cfc0
+  environment: development
+  invoicing_profile_id: 3
+  operator_profile_id: 1
+  statistic_profile_id: 3
+invoice_5821:
+  id: 5821
+  total: 12000
+  created_at: '2022-10-04 14:32:28.204985'
+  updated_at: '2022-10-04 14:32:28.292591'
+  reference: '2210012'
+  payment_method: local
+  avoir_date:
+  invoice_id:
+  type:
+  subscription_to_expire:
+  description:
+  wallet_amount:
+  wallet_transaction_id:
+  coupon_id:
+  footprint: 3ed9a13e5c7155bc3b186f3215b90345cc5520822728796e7c1c00ad5128ed01
+  environment: development
+  invoicing_profile_id: 2
+  operator_profile_id: 1
+  statistic_profile_id: 2
+invoice_5822:
+  id: 5822
+  total: 3000
+  created_at: '2022-10-04 14:35:40.584472'
+  updated_at: '2022-10-04 14:35:40.637091'
+  reference: '2210014'
+  payment_method: local
+  avoir_date:
+  invoice_id:
+  type:
+  subscription_to_expire:
+  description:
+  wallet_amount:
+  wallet_transaction_id:
+  coupon_id:
+  footprint: 63d069e72b4992244861e9450b0c3ba3b9b30638af972a631b81578091d2925d
+  environment: development
+  invoicing_profile_id: 2
+  operator_profile_id: 1
+  statistic_profile_id: 2

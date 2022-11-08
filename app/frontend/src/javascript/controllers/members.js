@@ -161,7 +161,7 @@ Application.Controllers.controller('EditProfileController', ['$scope', '$rootSco
      * Check if it is allowed the change the group of the current user
      */
     $scope.isAllowedChangingGroup = function () {
-      return !$scope.user.subscribed_plan?.name && $scope.user.role !== 'admin';
+      return !$scope.user.subscribed_plan?.name;
     };
 
     /**

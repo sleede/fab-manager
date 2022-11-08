@@ -1,12 +1,13 @@
-module Stats
-  class Subscription
-    include Elasticsearch::Persistence::Model
-    include StatConcern
+# frozen_string_literal: true
 
-    attribute :ca, Float
-    attribute :planId, Integer
-    attribute :subscriptionId, Integer
-    attribute :invoiceItemId, Integer
-    attribute :groupName, String
-  end
+# This is a statistical data saved in ElasticSearch, about a subscription to a plan
+class Stats::Subscription
+  include Elasticsearch::Persistence::Model
+  include StatConcern
+
+  attribute :ca, Float
+  attribute :planId, Integer
+  attribute :subscriptionId, Integer
+  attribute :invoiceItemId, Integer
+  attribute :groupName, String
 end

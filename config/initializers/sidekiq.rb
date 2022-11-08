@@ -5,7 +5,7 @@ require 'sidekiq-scheduler'
 require 'sidekiq/middleware/i18n'
 require 'sidekiq/server_locale'
 
-redis_host = ENV['REDIS_HOST'] || 'localhost'
+redis_host = ENV.fetch('REDIS_HOST', 'localhost')
 redis_url = "redis://#{redis_host}:6379"
 
 Sidekiq.configure_server do |config|

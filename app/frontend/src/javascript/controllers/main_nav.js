@@ -14,6 +14,20 @@
  * Navigation controller. List the links availables in the left navigation pane and their icon.
  */
 Application.Controllers.controller('MainNavController', ['$scope', 'settingsPromise', function ($scope, settingsPromise) {
+  /**
+   * Returns the current state of the public registration setting (allowed/blocked).
+   */
+  $scope.registrationEnabled = function () {
+    return settingsPromise.public_registrations === 'true';
+  };
+
+  /**
+   * Check if the store should be hidden to members/visitors
+   */
+  $scope.storeHidden = function () {
+    return settingsPromise.store_hidden === 'true';
+  };
+
   // Common links (public application)
   $scope.navLinks = [
     {
@@ -52,6 +66,13 @@ Application.Controllers.controller('MainNavController', ['$scope', 'settingsProm
       linkText: 'app.public.common.events_registrations',
       linkIcon: 'tags',
       class: 'reserve-event-link'
+    },
+    $scope.$root.modules.store && {
+      state: 'app.public.store',
+      linkText: 'app.public.common.fablab_store',
+      linkIcon: 'cart-plus',
+      class: 'store-link',
+      authorizedRoles: $scope.storeHidden() ? ['admin', 'manager'] : undefined
     },
     { class: 'menu-spacer' },
     {
@@ -98,6 +119,12 @@ Application.Controllers.controller('MainNavController', ['$scope', 'settingsProm
       state: 'app.admin.events',
       linkText: 'app.public.common.manage_the_events',
       linkIcon: 'tags',
+      authorizedRoles: ['admin', 'manager']
+    },
+    $scope.$root.modules.store && {
+      state: 'app.admin.store.products',
+      linkText: 'app.public.common.manage_the_store',
+      linkIcon: 'cart-plus',
       authorizedRoles: ['admin', 'manager']
     },
     { class: 'menu-spacer' },
@@ -148,12 +175,5 @@ Application.Controllers.controller('MainNavController', ['$scope', 'settingsProm
       authorizedRoles: ['admin']
     }
   ].filter(Boolean).concat(Fablab.adminNavLinks);
-
-  /**
-   * Returns the current state of the public registration setting (allowed/blocked).
-   */
-  $scope.registrationEnabled = function () {
-    return settingsPromise.public_registrations === 'true';
-  };
 }
 ]);

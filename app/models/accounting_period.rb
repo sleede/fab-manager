@@ -19,7 +19,7 @@ class AccountingPeriod < ApplicationRecord
   validates_with PeriodOverlapValidator
   validates_with PeriodIntegrityValidator
 
-  belongs_to :user, class_name: 'User', foreign_key: 'closed_by'
+  belongs_to :user, class_name: 'User', foreign_key: 'closed_by', inverse_of: :accounting_periods
 
   def delete
     false

@@ -3,7 +3,7 @@
 # API Controller for resources of type Coupon
 # Coupons are used in payments
 class API::CouponsController < API::ApiController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: %i[validate]
   before_action :set_coupon, only: %i[show update destroy]
 
   # Number of notifications added to the page when the user clicks on 'load next notifications'
@@ -31,18 +31,18 @@ class API::CouponsController < API::ApiController
     if @coupon.nil?
       render json: { status: 'rejected' }, status: :not_found
     else
-      _user_id = if !current_user.admin?
-                   current_user.id
-                 else
+      _user_id = if current_user&.admin?
                    params[:user_id]
+                 else
+                   current_user&.id
                  end
 
       amount = params[:amount].to_f * 100.0
       status = @coupon.status(_user_id, amount)
-      if status != 'active'
-        render json: { status: status }, status: :unprocessable_entity
-      else
+      if status == 'active'
         render :validate, status: :ok, location: @coupon
+      else
+        render json: { status: status }, status: :unprocessable_entity
       end
     end
   end

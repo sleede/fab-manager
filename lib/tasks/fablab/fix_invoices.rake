@@ -29,22 +29,23 @@ namespace :fablab do
         puts "Date: #{invoice.created_at}"
 
         print 'Delete [d], create the missing reservation [c] OR keep as error[e] ? > '
-        confirm = STDIN.gets.chomp
-        if confirm == 'd'
+        confirm = $stdin.gets.chomp
+        case confirm
+        when 'd'
           puts "Destroying #{invoice.id}..."
           invoice.destroy
-        elsif confirm == 'c'
+        when 'c'
           if invoice.invoiced_type != 'Reservation'
-            STDERR.puts "WARNING: Invoice #{invoice.id} is about #{invoice.invoiced_type}. Please handle manually."
-            STDERR.puts 'Ignoring...'
+            warn "WARNING: Invoice #{invoice.id} is about #{invoice.invoiced_type}. Please handle manually."
+            warn 'Ignoring...'
             next
           end
 
           reservable = find_reservable(ii)
           if reservable
             if reservable.is_a? Event
-              STDERR.puts "WARNING: invoice #{invoice.id} is linked to Event #{reservable.id}. This is unsupported, please handle manually."
-              STDERR.puts 'Ignoring...'
+              warn "WARNING: invoice #{invoice.id} is linked to Event #{reservable.id}. This is unsupported, please handle manually."
+              warn 'Ignoring...'
               next
             end
             reservation = ::Reservation.create!(
@@ -55,10 +56,10 @@ namespace :fablab do
             )
             invoice.update_attributes(invoiced: reservation)
           else
-            STDERR.puts "WARNING: Unable to guess the reservable for invoice #{invoice.id}, please handle manually."
-            STDERR.puts 'Ignoring...'
+            warn "WARNING: Unable to guess the reservable for invoice #{invoice.id}, please handle manually."
+            warn 'Ignoring...'
           end
-        elsif confirm == 'e'
+        when 'e'
           invoice.update_attributes(invoiced_type: 'Error')
         else
           puts "Operation #{confirm} unknown. Ignoring invoice #{invoice.id}..."
@@ -112,7 +113,7 @@ namespace :fablab do
 
     availability = reservable.availabilities.where('start_at <= ? AND end_at >= ?', slot[0], slot[1]).first
     unless availability
-      STDERR.puts "WARNING: Unable to find an availability for #{reservable.class.name} #{reservable.id}, at #{slot[0]}, creating..."
+      warn "WARNING: Unable to find an availability for #{reservable.class.name} #{reservable.id}, at #{slot[0]}, creating..."
       availability = reservable.availabilities.create!(start_at: slot[0], end_at: slot[1])
     end
     availability

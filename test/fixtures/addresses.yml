@@ -86,3 +86,39 @@ address_7:
   placeable_type: InvoicingProfile
   created_at: 2016-08-02 11:16:24.412236000 Z
   updated_at: 2016-08-02 11:16:24.412236000 Z
+
+address_7:
+  id: 7
+  address: 14 rue du Général Choucroute, 44000 NANTES
+  street_number:
+  route:
+  locality:
+  postal_code:
+  placeable_id: 10
+  placeable_type: InvoicingProfile
+  created_at: 2016-08-02 11:16:24.412236000 Z
+  updated_at: 2016-08-02 11:16:24.412236000 Z
+
+address_8:
+  id: 8
+  address: 127 allée des armées en déroute, 17120 SEMUSSAC
+  street_number:
+  route:
+  locality:
+  postal_code:
+  placeable_id: 1
+  placeable_type: InvoicingProfile
+  created_at: 2016-08-02 11:16:24.412236000 Z
+  updated_at: 2016-08-02 11:16:24.412236000 Z
+
+address_9:
+  id: 9
+  address: 14 rue du Général Choucroute, 44000 NANTES
+  street_number:
+  route:
+  locality:
+  postal_code:
+  placeable_id: 9
+  placeable_type: InvoicingProfile
+  created_at: 2016-08-02 11:16:24.412236000 Z
+  updated_at: 2016-08-02 11:16:24.412236000 Z

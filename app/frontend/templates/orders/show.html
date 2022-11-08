@@ -1,0 +1,17 @@
+<div>
+  <section class="heading">
+    <div class="row no-gutter">
+      <ng-include src="'/dashboard/nav.html'"></ng-include>
+    </div>
+  </section>
+
+  <section>
+    <div class="show-order-nav">
+      <a class="back-btn" ng-click="backOrdersList()" tabindex="0">
+        <i class="fas fa-angle-left"></i>
+        <span translate>{{ 'app.shared.store.show_order.back_to_list' }}</span>
+      </a>
+    </div>
+    <show-order current-user="currentUser" order-id="orderId" on-error="onError" on-success="onSuccess" />
+  </section>
+</div>

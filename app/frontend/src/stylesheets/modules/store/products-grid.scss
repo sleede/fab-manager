@@ -1,0 +1,68 @@
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 3.2rem;
+
+  .store-product-item {
+    --status-color: var(--success);
+    &.low { --status-color: var(--alert-light); }
+    &.out-of-stock { --status-color: var(--alert); }
+
+    padding: 1.6rem 2.4rem;
+    display: grid;
+    grid-template-areas: "image image"
+                         "name name"
+                         "min min"
+                         "price btn"
+                         "stock btn";
+    grid-template-columns: auto min-content;
+    grid-template-rows: repeat(2, min-content) auto repeat(2, min-content);
+    border: 1px solid var(--gray-soft-dark);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+
+    .picture {
+      grid-area: image;
+      @include imageRatio(50%);
+      border-radius: var(--border-radius);
+      img { object-fit: contain; }
+    }
+    .name {
+      margin: 1.6rem 0 0.8rem;
+      grid-area: name;
+      align-self: flex-start;
+      @include text-base(600);
+    }
+    .min {
+      grid-area: min;
+      @include text-sm;
+      color: var(--alert);
+    }
+    .price {
+      grid-area: price;
+      display: flex;
+      align-items: baseline;
+      p {
+        margin: 0;
+        @include title-base;
+      }
+      span {
+        margin-left: 0.8rem;
+        @include text-sm;
+        word-break: break-all;
+      }
+    }
+    .fab-state-label {
+      --status-color: var(--success);
+      &.low { --status-color: var(--alert-light); }
+      &.out-of-stock { --status-color: var(--alert); }
+      grid-area: stock;
+    }
+    button {
+      grid-area: btn;
+      align-self: flex-end;
+      margin-left: 1rem;
+      i { margin-right: 0.8rem; }
+    }
+  }
+}

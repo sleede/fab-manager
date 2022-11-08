@@ -1,3 +1,8 @@
+# frozen_string_literal: true
+
+# This file fills the database with some initial data.
+# Some of them are just some placeholders to prevent having an empty palce when starting fab-manager first.
+# Other data are required default values, for various settings.
 
 if StatisticIndex.count.zero?
   StatisticIndex.create!([
@@ -82,12 +87,10 @@ if Group.count.zero?
                 ])
 end
 
-Group.create! name: I18n.t('group.admins'), slug: 'admins' unless Group.find_by(slug: 'admins')
-
 # Create the default admin if none exists yet
 if Role.where(name: 'admin').joins(:users).count.zero?
-  admin = User.new(username: 'admin', email: ENV['ADMIN_EMAIL'], password: ENV['ADMIN_PASSWORD'],
-                   password_confirmation: Rails.application.secrets.admin_password, group_id: Group.find_by(slug: 'admins').id,
+  admin = User.new(username: 'admin', email: ENV.fetch('ADMIN_EMAIL', nil), password: ENV.fetch('ADMIN_PASSWORD', nil),
+                   password_confirmation: Rails.application.secrets.admin_password, group_id: Group.first.id,
                    profile_attributes: { first_name: 'admin', last_name: 'admin', phone: '0123456789' },
                    statistic_profile_attributes: { gender: true, birthday: Date.current })
   admin.add_role 'admin'
@@ -111,27 +114,48 @@ end
 
 if Licence.count.zero?
   Licence.create!([
-                    { name: 'Attribution (BY)', description: 'Le titulaire des droits autorise toute exploitation de l’œuvre, y compris à' \
-                      ' des fins commerciales, ainsi que la création d’œuvres dérivées, dont la distribution est également autorisé sans ' \
-                      'restriction, à condition de l’attribuer à son l’auteur en citant son nom. Cette licence est recommandée pour la ' \
-                      'diffusion et l’utilisation maximale des œuvres.' },
-                    { name: 'Attribution + Pas de modification (BY ND)', description: 'Le titulaire des droits autorise toute utilisation' \
-                      ' de l’œuvre originale (y compris à des fins commerciales), mais n’autorise pas la création d’œuvres dérivées.' },
-                    { name: "Attribution + Pas d'Utilisation Commerciale + Pas de Modification (BY NC ND)", description: 'Le titulaire ' \
-                      'des droits autorise l’utilisation de l’œuvre originale à des fins non commerciales, mais n’autorise pas la ' \
-                      'création d’œuvres dérivés.' },
-                    { name: "Attribution + Pas d'Utilisation Commerciale (BY NC)", description: 'Le titulaire des droits autorise ' \
-                      'l’exploitation de l’œuvre, ainsi que la création d’œuvres dérivées, à condition qu’il ne s’agisse pas d’une ' \
-                      'utilisation commerciale (les utilisations commerciales restant soumises à son autorisation).' },
-                    { name: "Attribution + Pas d'Utilisation Commerciale + Partage dans les mêmes conditions (BY NC SA)", description:
-                      'Le titulaire des droits autorise l’exploitation de l’œuvre originale à des fins non commerciales, ainsi que la ' \
-                      'création d’œuvres dérivées, à condition qu’elles soient distribuées sous une licence identique à celle qui régit ' \
-                      'l’œuvre originale.' },
-                    { name: 'Attribution + Partage dans les mêmes conditions (BY SA)', description: 'Le titulaire des droits autorise ' \
-                      'toute utilisation de l’œuvre originale (y compris à des fins commerciales) ainsi que la création d’œuvres dérivées' \
-                      ', à condition qu’elles soient distribuées sous une licence identique à celle qui régit l’œuvre originale. Cette' \
-                      'licence est souvent comparée aux licences « copyleft » des logiciels libres. C’est la licence utilisée par ' \
-                      'Wikipedia.' }
+                    {
+                      name: 'Attribution (BY)',
+                      description:
+                        'Le titulaire des droits autorise toute exploitation de l’œuvre, y compris à des ' \
+                        'fins commerciales, ainsi que la création d’œuvres dérivées, dont la distribution est également autorisé sans ' \
+                        'restriction, à condition de l’attribuer à son l’auteur en citant son nom. Cette licence est recommandée pour la ' \
+                        'diffusion et l’utilisation maximale des œuvres.'
+                    },
+                    {
+                      name: 'Attribution + Pas de modification (BY ND)',
+                      description:
+                        'Le titulaire des droits autorise toute utilisation de l’œuvre originale (y compris à des fins commerciales), ' \
+                        'mais n’autorise pas la création d’œuvres dérivées.'
+                    },
+                    {
+                      name: "Attribution + Pas d'Utilisation Commerciale + Pas de Modification (BY NC ND)",
+                      description:
+                        'Le titulaire des droits autorise l’utilisation de l’œuvre originale à des fins non commerciales, ' \
+                        'mais n’autorise pas la création d’œuvres dérivés.'
+                    },
+                    {
+                      name: "Attribution + Pas d'Utilisation Commerciale (BY NC)",
+                      description:
+                        'Le titulaire des droits autorise l’exploitation de l’œuvre, ainsi que la création d’œuvres dérivées, ' \
+                        'à condition qu’il ne s’agisse pas d’une utilisation commerciale (les utilisations commerciales ' \
+                        'restant soumises à son autorisation).'
+                    },
+                    {
+                      name: "Attribution + Pas d'Utilisation Commerciale + Partage dans les mêmes conditions (BY NC SA)",
+                      description:
+                        'Le titulaire des droits autorise l’exploitation de l’œuvre originale à des fins non commerciales, ainsi que la ' \
+                        'création d’œuvres dérivées, à condition qu’elles soient distribuées sous une licence identique à celle qui ' \
+                        'régit l’œuvre originale.'
+                    },
+                    {
+                      name: 'Attribution + Partage dans les mêmes conditions (BY SA)',
+                      description:
+                        'Le titulaire des droits autorise toute utilisation de l’œuvre originale (y compris à des fins commerciales) ' \
+                        'ainsi que la création d’œuvres dérivées, à condition qu’elles soient distribuées sous une licence identique ' \
+                        'à celle qui régit l’œuvre originale. Cette licence est souvent comparée aux licences « copyleft » des logiciels ' \
+                        'libres. C’est la licence utilisée par Wikipedia.'
+                    }
                   ])
 end
 
@@ -149,75 +173,117 @@ end
 
 if Training.count.zero?
   Training.create!([
-                     { name: 'Formation Imprimante 3D', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do ' \
-                       'eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-                     { name: 'Formation Laser / Vinyle', description: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris' \
-                       ' nisi ut aliquip ex ea commodo consequat.' },
-                     { name: 'Formation Petite fraiseuse numerique', description: 'Duis aute irure dolor in reprehenderit in voluptate ' \
-                       'velit esse cillum dolore eu fugiat nulla pariatur.' },
-                     { name: 'Formation Shopbot Grande Fraiseuse', description: 'Excepteur sint occaecat cupidatat non proident, sunt in ' \
-                       'culpa qui officia deserunt mollit anim id est laborum.' },
-                     { name: 'Formation logiciel 2D', description: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem ' \
-                       'accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi ' \
-                       'architecto beatae vitae dicta sunt explicabo.' }
+                     {
+                       name: 'Formation Imprimante 3D',
+                       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do ' \
+                                    'eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+                     },
+                     {
+                       name: 'Formation Laser / Vinyle',
+                       description: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris ' \
+                                    'nisi ut aliquip ex ea commodo consequat.'
+                     },
+                     {
+                       name: 'Formation Petite fraiseuse numerique',
+                       description: 'Duis aute irure dolor in reprehenderit in voluptate ' \
+                                    'velit esse cillum dolore eu fugiat nulla pariatur.'
+                     },
+                     {
+                       name: 'Formation Shopbot Grande Fraiseuse',
+                       description: 'Excepteur sint occaecat cupidatat non proident, sunt in ' \
+                                    'culpa qui officia deserunt mollit anim id est laborum.'
+                     },
+                     {
+                       name: 'Formation logiciel 2D',
+                       description: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem ' \
+                                    'accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis ' \
+                                    'et quasi architecto beatae vitae dicta sunt explicabo.'
+                     }
                    ])
 
   TrainingsPricing.all.each do |p|
-    p.update_columns(amount: (rand * 50 + 5).floor * 100)
+    p.update(amount: ((rand * 50) + 5).floor * 100)
   end
 end
 
 if Machine.count.zero?
   Machine.create!([
-                    { name: 'Découpeuse laser', description: "Préparation à l'utilisation de l'EPILOG Legend 36EXT\r\nInformations" \
-                      " générales    \r\n      Pour la découpe, il suffit d'apporter votre fichier vectorisé type illustrator, svg ou dxf" \
-                      " avec des \"lignes de coupe\" d'une épaisseur inférieur à 0,01 mm et la machine s'occupera du reste!\r\n     La " \
-                      'gravure est basée sur le spectre noir et blanc. Les nuances sont obtenues par différentes profondeurs de gravure ' \
-                      "correspondant aux niveaux de gris de votre image. Il suffit pour cela d'apporter une image scannée ou un fichier " \
-                      "photo en noir et blanc pour pouvoir reproduire celle-ci sur votre support! \r\nQuels types de matériaux pouvons " \
-                      "nous graver/découper?\r\n     Du bois au tissu, du plexiglass au cuir, cette machine permet de découper et graver " \
-                      "la plupart des matériaux sauf les métaux. La gravure est néanmoins possible sur les métaux recouverts d'une couche" \
-                      " de peinture ou les aluminiums anodisés. \r\n        Concernant l'épaisseur des matériaux découpés, il est " \
-                      "préférable de ne pas dépasser 5 mm pour le bois et 6 mm pour le plexiglass.\r\n", spec: "Puissance: 40W\r\nSurface" \
-                      " de travail: 914x609 mm \r\nEpaisseur maximale de la matière: 305mm\r\nSource laser: tube laser type CO2\r\n" \
-                      'Contrôles de vitesse et de puissance: ces deux paramètres sont ajustables en fonction du matériau (de 1% à 100%) .' \
-                      "\r\n", slug: 'decoupeuse-laser' },
-                    { name: 'Découpeuse vinyle', description: "Préparation à l'utilisation de la Roland CAMM-1 GX24\r\nInformations " \
-                      "générales        \r\n     Envie de réaliser un tee shirt personnalisé ? Un sticker à l'effigie votre groupe " \
-                      "préféré ? Un masque pour la réalisation d'un circuit imprimé? Pour cela, il suffit simplement de venir avec votre" \
-                      " fichier vectorisé (ne pas oublier de vectoriser les textes) type illustrator svg ou dxf.\r\n \r\nMatériaux " \
-                      "utilisés:\r\n    Cette machine permet de découper principalement du vinyle,vinyle réfléchissant, flex.\r\n",
+                    {
+                      name: 'Découpeuse laser',
+                      description:
+                        "Préparation à l'utilisation de l'EPILOG Legend 36EXT\r\nInformations générales    \r\n      " \
+                        "Pour la découpe, il suffit d'apporter votre fichier vectorisé type illustrator, svg ou dxf avec des " \
+                        "\"lignes de coupe\" d'une épaisseur inférieur à 0,01 mm et la machine s'occupera du reste!\r\n     La gravure " \
+                        'est basée sur le spectre noir et blanc. Les nuances sont obtenues par différentes profondeurs de gravure ' \
+                        "correspondant aux niveaux de gris de votre image. Il suffit pour cela d'apporter une image scannée ou un " \
+                        "fichier photo en noir et blanc pour pouvoir reproduire celle-ci sur votre support! \r\nQuels types de " \
+                        "matériaux pouvons nous graver/découper?\r\n     Du bois au tissu, du plexiglass au cuir, cette machine " \
+                        'permet de découper et graver la plupart des matériaux sauf les métaux. La gravure est néanmoins possible ' \
+                        "sur les métaux recouverts d'une couche de peinture ou les aluminiums anodisés. \r\n        " \
+                        "Concernant l'épaisseur des matériaux découpés, il est préférable de ne pas dépasser 5 mm pour le bois " \
+                        "et 6 mm pour le plexiglass.\r\n",
+                      spec:
+                        "Puissance: 40W\r\nSurface de travail: 914x609 mm \r\n" \
+                        "Epaisseur maximale de la matière: 305mm\r\nSource laser: tube laser type CO2\r\nContrôles de vitesse " \
+                        "et de puissance: ces deux paramètres sont ajustables en fonction du matériau (de 1% à 100%).\r\n",
+                      slug: 'decoupeuse-laser'
+                    },
+                    {
+                      name: 'Découpeuse vinyle',
+                      description:
+                        "Préparation à l'utilisation de la Roland CAMM-1 GX24\r\nInformations générales        \r\n     " \
+                        "Envie de réaliser un tee shirt personnalisé ? Un sticker à l'effigie votre groupe préféré ? " \
+                        "Un masque pour la réalisation d'un circuit imprimé? Pour cela, il suffit simplement de venir avec votre " \
+                        "fichier vectorisé (ne pas oublier de vectoriser les textes) type illustrator svg ou dxf.\r\n \r\nMatériaux " \
+                        "utilisés:\r\n    Cette machine permet de découper principalement du vinyle,vinyle réfléchissant, flex.\r\n",
                       spec: "Largeurs de support acceptées: de 50 mm à 700 mm\r\nVitesse de découpe: 50 cm/sec\r\nRésolution mécanique: " \
-                      "0,0125 mm/pas\r\n", slug: 'decoupeuse-vinyle' },
-                    { name: 'Shopbot / Grande fraiseuse', description: "La fraiseuse numérique ShopBot PRS standard\r\nInformations " \
-                      "générales\r\nCette machine est un fraiseuse 3 axes idéale pour l'usinage de pièces de grandes dimensions. De la " \
-                      "réalisation d'une chaise ou d'un meuble jusqu'à la construction d'une maison ou d'un assemblage immense, le " \
-                      "ShopBot ouvre de nombreuses portes à votre imagination! \r\nMatériaux usinables\r\nLes principaux matériaux " \
-                      "usinables sont le bois, le plastique, le laiton et bien d'autres.\r\nCette machine n'usine pas les métaux.\r\n",
+                            "0,0125 mm/pas\r\n",
+                      slug: 'decoupeuse-vinyle'
+                    },
+                    {
+                      name: 'Shopbot / Grande fraiseuse',
+                      description:
+                        "La fraiseuse numérique ShopBot PRS standard\r\nInformations " \
+                        "générales\r\nCette machine est un fraiseuse 3 axes idéale pour l'usinage de pièces de grandes dimensions. De la " \
+                        "réalisation d'une chaise ou d'un meuble jusqu'à la construction d'une maison ou d'un assemblage immense, le " \
+                        "ShopBot ouvre de nombreuses portes à votre imagination! \r\nMatériaux usinables\r\nLes principaux matériaux " \
+                        "usinables sont le bois, le plastique, le laiton et bien d'autres.\r\nCette machine n'usine pas les métaux.\r\n",
                       spec: "Surface maximale de travail: 2440x1220x150 (Z) mm\r\nLogiciel utilisé: Partworks 2D & 3D\r\nRésolution " \
-                      "mécanique: 0,015 mm\r\nPrécision de la position: +/- 0,127mm\r\nFormats acceptés: DXF, STL \r\n",
-                      slug: 'shopbot-grande-fraiseuse' },
-                    { name: 'Imprimante 3D', description: "L'utimaker est une imprimante 3D  low cost utilisant une technologie FFF " \
-                      "(Fused Filament Fabrication) avec extrusion thermoplastique.\r\nC'est une machine idéale pour réaliser rapidement " \
-                      "des prototypes 3D dans des couleurs différentes.\r\n", spec: "Surface maximale de travail: 210x210x220mm \r\n" \
-                      "Résolution méchanique: 0,02 mm \r\nPrécision de position: +/- 0,05 \r\nLogiciel utilisé: Cura\r\nFormats de " \
-                      "fichier acceptés: STL \r\nMatériaux utilisés: PLA (en stock).", slug: 'imprimante-3d' },
-                    { name: 'Petite Fraiseuse', description: "La fraiseuse numérique Roland Modela MDX-20\r\nInformations générales" \
-                      "\r\nCette machine est utilisée  pour l'usinage et le scannage 3D de précision. Elle permet principalement d'usiner" \
-                      ' des circuits imprimés et des moules de petite taille. Le faible diamètre des fraises utilisées (Ø 0,3 mm à  Ø 6mm' \
-                      ") induit que certains temps d'usinages peuvent êtres long (> 12h), c'est pourquoi cette fraiseuse peut être " \
-                      "laissée en autonomie toute une nuit afin d'obtenir le plus précis des usinages au FabLab.\r\nMatériaux usinables:" \
-                      "\r\nLes principaux matériaux usinables sont le bois, plâtre, résine, cire usinable, cuivre.\r\n",
+                            "mécanique: 0,015 mm\r\nPrécision de la position: +/- 0,127mm\r\nFormats acceptés: DXF, STL \r\n",
+                      slug: 'shopbot-grande-fraiseuse'
+                    },
+                    {
+                      name: 'Imprimante 3D',
+                      description:
+                        "L'utimaker est une imprimante 3D  low cost utilisant une technologie FFF " \
+                        "(Fused Filament Fabrication) avec extrusion thermoplastique.\r\nC'est une machine idéale pour réaliser " \
+                        "rapidement des prototypes 3D dans des couleurs différentes.\r\n",
+                      spec: "Surface maximale de travail: 210x210x220mm \r\n" \
+                            "Résolution méchanique: 0,02 mm \r\nPrécision de position: +/- 0,05 \r\nLogiciel utilisé: Cura\r\nFormats de " \
+                            "fichier acceptés: STL \r\nMatériaux utilisés: PLA (en stock).",
+                      slug: 'imprimante-3d'
+                    },
+                    {
+                      name: 'Petite Fraiseuse',
+                      description:
+                        "La fraiseuse numérique Roland Modela MDX-20\r\nInformations générales\r\nCette machine est utilisée " \
+                        "pour l'usinage et le scannage 3D de précision. Elle permet principalement d'usiner des circuits imprimés " \
+                        'et des moules de petite taille. Le faible diamètre des fraises utilisées (Ø 0,3 mm à  Ø 6mm) induit que ' \
+                        "certains temps d'usinages peuvent êtres long (> 12h), c'est pourquoi cette fraiseuse peut être laissée en " \
+                        "autonomie toute une nuit afin d'obtenir le plus précis des usinages au FabLab.\r\nMatériaux usinables:" \
+                        "\r\nLes principaux matériaux usinables sont le bois, plâtre, résine, cire usinable, cuivre.\r\n",
                       spec: "Taille du plateau X/Y : 220 mm x 160 mm\r\nVolume maximal de travail: 203,2 mm (X), 152,4 mm (Y), 60,5 mm " \
-                      "(Z)\r\nPrécision usinage: 0,00625 mm\r\nPrécision scannage: réglable de 0,05 à 5 mm (axes X,Y) et 0,025 mm (axe Z)" \
-                      "\r\nVitesse d'analyse (scannage): 4-15 mm/sec\r\n \r\n \r\nLogiciel utilisé pour le fraisage: Roland Modela player" \
-                      " 4 \r\nLogiciel utilisé pour l'usinage de circuits imprimés: Cad.py (linux)\r\nFormats acceptés: STL,PNG 3D\r\n" \
-                      "Format d'exportation des données scannées: DXF, VRML, STL, 3DMF, IGES, Grayscale, Point Group et BMP\r\n",
-                      slug: 'petite-fraiseuse' }
+                            "(Z)\r\nPrécision usinage: 0,00625 mm\r\nPrécision scannage: réglable de 0,05 à 5 mm (axes X,Y) et 0,025 mm " \
+                            "(axe Z)\r\nVitesse d'analyse (scannage): 4-15 mm/sec\r\n \r\n \r\nLogiciel utilisé pour le fraisage: " \
+                            "Roland Modela player 4 \r\nLogiciel utilisé pour l'usinage de circuits imprimés: Cad.py (linux)\r\n" \
+                            "Formats acceptés: STL,PNG 3D\r\nFormat d'exportation des données scannées: DXF, VRML, STL, 3DMF, IGES, " \
+                            "Grayscale, Point Group et BMP\r\n",
+                      slug: 'petite-fraiseuse'
+                    }
                   ])
 
   Price.all.each do |p|
-    p.update_columns(amount: (rand * 50 + 5).floor * 100)
+    p.update(amount: ((rand * 50) + 5).floor * 100)
   end
 end
 
@@ -273,19 +339,19 @@ Setting.set('twitter_name', 'Fab_Manager') unless Setting.find_by(name: 'twitter
 
 unless Setting.find_by(name: 'machine_explications_alert').try(:value)
   setting = Setting.find_or_initialize_by(name: 'machine_explications_alert')
-  setting.value = 'Tout achat de créneau machine est définitif. Aucune' \
-  ' annulation ne pourra être effectuée, néanmoins au plus tard 24h avant le créneau fixé, vous pouvez en' \
-  " modifier la date et l'horaire à votre convenance et en fonction du calendrier proposé. Passé ce délais," \
-  ' aucun changement ne pourra être effectué.'
+  setting.value = 'Tout achat de créneau machine est définitif. Aucune ' \
+                  'annulation ne pourra être effectuée, néanmoins au plus tard 24h avant le créneau fixé, vous pouvez en ' \
+                  "modifier la date et l'horaire à votre convenance et en fonction du calendrier proposé. Passé ce délais, " \
+                  'aucun changement ne pourra être effectué.'
   setting.save
 end
 
 unless Setting.find_by(name: 'training_explications_alert').try(:value)
   setting = Setting.find_or_initialize_by(name: 'training_explications_alert')
-  setting.value = 'Toute réservation de formation est définitive.' \
-  ' Aucune annulation ne pourra être effectuée, néanmoins au plus tard 24h avant le créneau fixé, vous pouvez' \
-  " en modifier la date et l'horaire à votre convenance et en fonction du calendrier proposé. Passé ce délais," \
-  ' aucun changement ne pourra être effectué.'
+  setting.value = 'Toute réservation de formation est définitive. ' \
+                  'Aucune annulation ne pourra être effectuée, néanmoins au plus tard 24h avant le créneau fixé, vous pouvez ' \
+                  "en modifier la date et l'horaire à votre convenance et en fonction du calendrier proposé. Passé ce délais, " \
+                  'aucun changement ne pourra être effectué.'
   setting.save
 end
 
@@ -633,8 +699,8 @@ Stylesheet.build_home!
 
 unless Setting.find_by(name: 'training_information_message').try(:value)
   setting = Setting.find_or_initialize_by(name: 'training_information_message')
-  setting.value = "Avant de réserver une formation, nous vous conseillons de consulter nos offres d'abonnement qui" \
-                  ' proposent des conditions avantageuses sur le prix des formations et les créneaux machines.'
+  setting.value = "Avant de réserver une formation, nous vous conseillons de consulter nos offres d'abonnement qui " \
+                  'proposent des conditions avantageuses sur le prix des formations et les créneaux machines.'
   setting.save
 end
 
@@ -680,8 +746,8 @@ unless Setting.find_by(name: 'privacy_draft').try(:value)
     éventuelles modifications.</p><h3>I. DONNÉES PERSONNELLES</h3><p>D’une manière générale, il vous est possible de visiter le site de
     _________ sans communiquer aucune information personnelle vous concernant. En toute hypothèse, vous n’êtes en aucune manière obligé de
     transmettre ces informations à _________.</p><p>Néanmoins, en cas de refus, il se peut que vous ne puissiez pas bénéficier de
-    certaines informations ou services que vous avez demandé. A ce titre en effet, _________ peut être amené dans certains cas à vous
-    demander de renseigner vos nom, prénom, pseudonyme, sexe, adresse mail, numéro de téléphone, entreprise et date de naissance (ci-après
+    certaines informations ou services que vous avez demandés. À ce titre en effet, _________ peut être amené dans certains cas à vous
+    demander de renseigner votre nom, prénom, pseudonyme, sexe, adresse mail, numéro de téléphone, entreprise et date de naissance (ci-après
     vos « Informations Personnelles »). En fournissant ces informations, vous acceptez expressément qu’elles soient traitées par
     _________, aux fins indiquées au point 2 ci-dessous.</p><p>Conformément au Règlement Général sur la Protection des Données (General
     Data Protection Regulation) adopté par le Parlement européen le 14 avril 2016, et à la Loi Informatique et Libertés du 6 janvier 1978
@@ -725,10 +791,10 @@ unless Setting.find_by(name: 'privacy_draft').try(:value)
     adressée à l’adresse postale indiquée au point 1, vous trouverez en cliquant sur le <a
     href="https://www.cnil.fr/fr/modele/courrier/supprimer-des-informations-vous-concernant-dun-site-internet">lien</a> suivant un modèle de
     courrier élaboré par la CNIL.</p><h4>6. Délais de réponse</h4><p> _________ s’engage à répondre à votre demande d’accès, de rectification
-    ou d’opposition ou toute autre demande complémentaire  d’informations dans un délai raisonnable qui ne saurait dépasser 1 mois à compter
+    ou d’opposition ou toute autre demande complémentaire d’informations dans un délai raisonnable qui ne saurait dépasser 1 mois à compter
     de la réception de votre demande.</p><h4>7. Prestataires habilités et transfert vers un pays tiers de l’Union Européenne</h4><p>_________
     vous informe qu’il a recours à ses prestataires habilités pour faciliter le recueil et le traitement des données que vous nous avez
-    communiqué. Ces prestataires peuvent être situés en dehors de  l’Union Européenne et ont communication des données recueillies par le
+    communiquées. Ces prestataires peuvent être situés en dehors de l’Union Européenne et ont communication des données recueillies par le
     biais des divers formulaires présents sur le Site.</p><p>_________ s’est préalablement assuré de la mise en œuvre par ses prestataires de
     garanties adéquates et du respect de conditions strictes en matière de confidentialité, d’usage et de protection des données. Tout
     particulièrement, la vigilance s’est portée sur l’existence d’un fondement légal pour effectuer un quelconque transfert de données vers un
@@ -755,16 +821,18 @@ unless Setting.find_by(name: 'privacy_draft').try(:value)
     le site web de _________, leur nom, leur finalité ainsi que leur durée de conservation.</p><h4>2. Configuration de vos préférences sur les
     cookies</h4><p>Vous pouvez accepter ou refuser le dépôt de cookies à tout moment.</p><p>Lors de votre première connexion sur le site web
     de _________, une bannière présentant brièvement des informations relatives au dépôt de cookies et de technologies similaires apparaît en
-    bas de votre écran. Cette bannière vous demande de choisir explicitement d'acceptez ou non le dépôt de cookies sur votre terminal.
+    bas de votre écran. Cette bannière vous demande de choisir explicitement d'accepter ou non le dépôt de cookies sur votre terminal.
     </p><p>Après avoir fait votre choix, vous pouvez le modifier ultérieurement&nbsp; en vous connectant à votre compte utilisateur puis en
     naviguant dans la section intitulée « mes paramètres&nbsp;», accessible via un clic sur votre nom, en haut à droite de l'écran.</p>
     <p>Selon le type de cookie en cause, le recueil de votre consentement au dépôt et à la lecture de cookies sur votre terminal peut être
     impératif.</p><h4>a. Les cookies exemptés de consentement</h4><p>Conformément aux recommandations de la Commission Nationale de
     l’Informatique et des Libertés (CNIL), certains cookies sont dispensés du recueil préalable de votre consentement dans la mesure où ils
     sont strictement nécessaires au fonctionnement du site internet ou ont pour finalité exclusive de permettre ou faciliter la communication
-    par voie électronique.  Il s’agit des cookies suivants :</p><p><b>o Identifiant de session</b> et&nbsp;<b>authentification</b> sur l'API.
-    Ces cookies sont intégralement soumis à la présente politique dans la mesure où ils sont émis et gérés par _________.</p><p>
-    <b>o Stripe</b>, permettant de gérer les paiements par carte bancaire et dont la politique de confidentialité est accessible sur ce
+    par voie électronique. Il s’agit des cookies suivants :</p><p><b>o Identifiant de session</b> et&nbsp;<b>d'authentification</b> sur l'API de
+    Fab-manager.</p><p><b>o Identifiant de panier d'achat</b></b>, permettant de sauvegarder le contenu de votre panier d'achat, même lorsque
+    vous n'êtes pas connecté.</p>
+    <p><em>Les cookies ci-dessus sont intégralement soumis à la présente politique dans la mesure où ils sont émis et gérés par _________.</em></p>
+    <p><b>o Stripe</b>, permettant de gérer les paiements par carte bancaire et dont la politique de confidentialité est accessible sur ce
     <a href="https://stripe.com/fr/privacy">lien</a>.</p><p><b>o Disqus</b>, permettant de poster des commentaires sur les fiches projet et
     dont la politique de confidentialité est accessible sur ce <a href="https://help.disqus.com/articles/1717103-disqus-privacy-policy">lien
     </a>.</p><h4>b. Les cookies nécessitant le recueil préalable de votre consentement</h4><p>Cette
@@ -778,7 +846,7 @@ unless Setting.find_by(name: 'privacy_draft').try(:value)
     confidentialité est disponible (uniquement en anglais) à partir du <a href="https://policies.google.com/privacy?hl=fr&amp;gl=ZZ">lien
     </a> suivant. </p><h4>c. Vous disposez de divers outils de paramétrage des cookies</h4><p>La plupart
     des navigateurs Internet sont configurés par défaut de façon à ce que le dépôt de cookies soit autorisé. Votre navigateur vous offre
-    l’opportunité de modifier ces paramètres standards de manière à ce que l’ensemble des cookies soit rejeté systématiquement ou bien à ce
+    l’opportunité de modifier ces paramètres standards de manière que l’ensemble des cookies soit rejeté systématiquement ou bien à ce
     qu’une partie seulement des cookies soit acceptée ou refusée en fonction de leur émetteur.</p><p><b>ATTENTION</b> : Nous attirons votre
     attention sur le fait que le refus du dépôt de cookies sur votre terminal est néanmoins susceptible d’altérer votre expérience
     d’utilisateur ainsi que votre accès à certains services ou fonctionnalités du présent site web. Le cas échéant, _________ décline toute
@@ -787,21 +855,21 @@ unless Setting.find_by(name: 'privacy_draft').try(:value)
     Ces conséquences ne sauraient constituer un dommage et vous ne pourrez prétendre à aucune indemnité de ce fait.</p>
     <p>Votre navigateur vous permet également de supprimer les cookies existants sur votre
     terminal ou encore de vous signaler lorsque de nouveaux cookies sont susceptibles d’être déposés sur votre terminal. Ces paramètres n’ont
-    pas d’incidence sur votre navigation mais vous font perdre tout le bénéfice apporté par le cookie.</p><p>Veuillez ci-dessous prendre
+    pas d’incidence sur votre navigation, mais vous font perdre tout le bénéfice apporté par le cookie.</p><p>Veuillez ci-dessous prendre
     connaissance des multiples outils mis à votre disposition afin que vous puissiez paramétrer les cookies déposés sur votre terminal.</p>
     <h4>d. Le paramétrage de votre navigateur Internet</h4><p>Chaque navigateur Internet propose ses propres paramètres de gestion des
     cookies. Pour savoir de quelle manière modifier vos préférences en matière de cookies, vous trouverez ci-dessous les liens vers l’aide
     nécessaire pour accéder au menu de votre navigateur prévu à cet effet :</p>
     <ul>
       <li><a href="https://support.google.com/chrome/answer/95647?hl=fr">Chrome</a></li>
-      <li><a href="https://support.mozilla.org/fr/kb/activer-desactiver-cookies">Firefox</a></li>
-      <li><a href="https://support.microsoft.com/fr-fr/help/17442/windows-internet-explorer-delete-manage-cookies#ie=ie-11">Internet
-      Explorer</a></li>
-      <li><a href="http://help.opera.com/Windows/10.20/fr/cookies.html">Opera</a></li>
-      <li><a href="https://support.apple.com/kb/PH21411?viewlocale=fr_FR&amp;locale=fr_FR">Safari</a></li>
+      <li><a href="https://mzl.la/3BX2oBb">Firefox</a></li>
+      <li><a href="https://support.microsoft.com/fr-fr/microsoft-edge/supprimer-les-cookies-dans-microsoft-edge-63947406-40ac-c3b8-57b9-2a946a29ae09">
+      Microsoft Edge</a></li>
+      <li><a href="https://help.opera.com/en/latest/web-preferences/#cookies">Opera</a></li>
+      <li><a href="https://support.apple.com/fr-fr/HT201265">Safari</a></li>
     </ul>
     <p>Pour de plus amples informations concernant les outils de maîtrise des cookies, vous pouvez consulter le
-    <a href="https://www.cnil.fr/fr/cookies-les-outils-pour-les-maitriser">site internet</a> de la CNIL.</p>
+    <a href="https://www.cnil.fr/fr/cookies-et-autres-traceurs/comment-se-proteger/maitriser-votre-navigateur">site internet</a> de la CNIL.</p>
   HTML
   setting.save
 end
@@ -919,6 +987,10 @@ Setting.set('extended_prices_in_same_day', false) unless Setting.find_by(name: '
 
 Setting.set('show_username_in_admin_list', false) unless Setting.find_by(name: 'show_username_in_admin_list').try(:value)
 
+Setting.set('store_module', false) unless Setting.find_by(name: 'store_module').try(:value)
+
+Setting.set('store_hidden', true) unless Setting.find_by(name: 'store_hidden').try(:value)
+
 if StatisticCustomAggregation.count.zero?
   # available reservations hours for machines
   machine_hours = StatisticType.find_by(key: 'hour', statistic_index_id: 2)
@@ -928,8 +1000,8 @@ if StatisticCustomAggregation.count.zero?
     es_index: 'fablab',
     es_type: 'availabilities',
     field: 'available_hours',
-    query: '{"size":0, "aggregations":{"%{aggs_name}":{"sum":{"field":"bookable_hours"}}}, "query":{"bool":{"must":[{"range":' \
-           '{"start_at":{"gte":"%{start_date}", "lte":"%{end_date}"}}}, {"match":{"available_type":"machines"}}]}}}'
+    query: '{"size":0, "aggregations":{"%<aggs_name>s":{"sum":{"field":"bookable_hours"}}}, "query":{"bool":{"must":[{"range":' \
+           '{"start_at":{"gte":"%<start_date>s", "lte":"%<end_date>s"}}}, {"match":{"available_type":"machines"}}]}}}'
   )
   available_hours.save!
 
@@ -941,8 +1013,8 @@ if StatisticCustomAggregation.count.zero?
     es_index: 'fablab',
     es_type: 'availabilities',
     field: 'available_tickets',
-    query: '{"size":0, "aggregations":{"%{aggs_name}":{"sum":{"field":"nb_total_places"}}}, "query":{"bool":{"must":[{"range":' \
-           '{"start_at":{"gte":"%{start_date}", "lte":"%{end_date}"}}}, {"match":{"available_type":"training"}}]}}}'
+    query: '{"size":0, "aggregations":{"%<aggs_name>s":{"sum":{"field":"nb_total_places"}}}, "query":{"bool":{"must":[{"range":' \
+           '{"start_at":{"gte":"%<start_date>s", "lte":"%<end_date>s"}}}, {"match":{"available_type":"training"}}]}}}'
   )
   available_tickets.save!
 end
@@ -955,6 +1027,27 @@ unless StatisticIndex.find_by(es_type_key: 'space')
                           { statistic_index_id: index.id, key: 'hour', label: I18n.t('statistics.hours_number'),
                             graph: true, simple: false }
                         ])
+end
+
+unless StatisticIndex.find_by(es_type_key: 'order')
+  index = StatisticIndex.create!(es_type_key: 'order', label: I18n.t('statistics.orders'))
+  type = StatisticType.create!({ statistic_index_id: index.id, key: 'store', label: I18n.t('statistics.store'), graph: true, simple: true })
+  StatisticSubType.create!([
+                             { key: 'paid-processed', label: I18n.t('statistics.paid-processed'), statistic_types: [type] },
+                             { key: 'aborted', label: I18n.t('statistics.aborted'), statistic_types: [type] }
+                           ])
+
+  # average cart price for orders
+  average_cart = StatisticCustomAggregation.new(
+    statistic_type_id: type.id,
+    es_index: 'stats',
+    es_type: 'order',
+    field: 'average_cart',
+    query: '{"size":0, "aggregations":{"%<aggs_name>s":{"avg":{"field":"ca", ' \
+           '"script":"BigDecimal.valueOf(_value).setScale(1, RoundingMode.HALF_UP)", "missing": 0}}}, ' \
+           '"query":{"bool":{"must":[{"range": {"date":{"gte":"%<start_date>s", "lte":"%<end_date>s"}}}]}}}'
+  )
+  average_cart.save!
 end
 
 ProfileCustomField.find_or_create_by(label: 'N° SIRET')

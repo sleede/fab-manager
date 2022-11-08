@@ -4,6 +4,7 @@
 class Coupon < ApplicationRecord
   has_many :invoices
   has_many :payment_schedule
+  has_many :orders
 
   after_create :create_gateway_coupon
   before_destroy :delete_gateway_coupon
@@ -83,7 +84,7 @@ class Coupon < ApplicationRecord
 
   def users
     # compact to user removed
-    invoices.map(&:user).compact
+    invoices.map(&:user).compact.uniq(&:id)
   end
 
   def users_ids

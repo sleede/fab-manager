@@ -1,9 +1,10 @@
-module Stats
-  class Space
-    include Elasticsearch::Persistence::Model
-    include StatConcern
-    include StatReservationConcern
+# frozen_string_literal: true
 
-    attribute :spaceId, Integer
-  end
+# This is a statistical data saved in ElasticSearch, about a space reservation
+class Stats::Space
+  include Elasticsearch::Persistence::Model
+  include StatConcern
+  include StatReservationConcern
+
+  attribute :spaceId, Integer
 end

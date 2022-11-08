@@ -4,18 +4,13 @@ import Select from 'react-select';
 import { FabInput } from '../base/fab-input';
 import { ProofOfIdentityType } from '../../models/proof-of-identity-type';
 import { Group } from '../../models/group';
+import { SelectOption } from '../../models/select';
 
 interface SupportingDocumentsTypeFormProps {
   groups: Array<Group>,
   proofOfIdentityType?: ProofOfIdentityType,
   onChange: (field: string, value: string | Array<number>) => void,
 }
-
-/**
- * Option format, expected by react-select
- * @see https://github.com/JedWatson/react-select
- */
-type selectOption = { value: number, label: string };
 
 /**
  * Form to set create/edit supporting documents type
@@ -26,7 +21,7 @@ export const SupportingDocumentsTypeForm: React.FC<SupportingDocumentsTypeFormPr
   /**
    * Convert all groups to the react-select format
    */
-  const buildOptions = (): Array<selectOption> => {
+  const buildOptions = (): Array<SelectOption<number>> => {
     return groups.map(t => {
       return { value: t.id, label: t.name };
     });
@@ -35,7 +30,7 @@ export const SupportingDocumentsTypeForm: React.FC<SupportingDocumentsTypeFormPr
   /**
    * Return the group(s) associated with the current type, formatted to match the react-select format
    */
-  const groupsValues = (): Array<selectOption> => {
+  const groupsValues = (): Array<SelectOption<number>> => {
     const res = [];
     const groupIds = proofOfIdentityType?.group_ids || [];
     if (groupIds.length > 0) {
@@ -51,7 +46,7 @@ export const SupportingDocumentsTypeForm: React.FC<SupportingDocumentsTypeFormPr
   /**
    * Callback triggered when the selection of group has changed.
    */
-  const handleGroupsChange = (selectedOptions: Array<selectOption>): void => {
+  const handleGroupsChange = (selectedOptions: Array<SelectOption<number>>): void => {
     onChange('group_ids', selectedOptions.map(o => o.value));
   };
 

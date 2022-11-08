@@ -1,10 +1,11 @@
-module Stats
-  class Training
-    include Elasticsearch::Persistence::Model
-    include StatConcern
-    include StatReservationConcern
+# frozen_string_literal: true
 
-    attribute :trainingId, Integer
-    attribute :trainingDate, String
-  end
+# This is a statistical data saved in ElasticSearch, about a training reservation
+class Stats::Training
+  include Elasticsearch::Persistence::Model
+  include StatConcern
+  include StatReservationConcern
+
+  attribute :trainingId, Integer
+  attribute :trainingDate, String
 end

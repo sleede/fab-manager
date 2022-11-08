@@ -8,22 +8,18 @@ import SettingAPI from '../../../api/setting';
 import { CardPaymentModal } from '../card-payment-modal';
 import { PaymentSchedule } from '../../../models/payment-schedule';
 import { HtmlTranslate } from '../../base/html-translate';
+import CheckoutAPI from '../../../api/checkout';
+import { SelectOption } from '../../../models/select';
 
 const ALL_SCHEDULE_METHODS = ['card', 'check', 'transfer'] as const;
 type scheduleMethod = typeof ALL_SCHEDULE_METHODS[number];
-
-/**
- * Option format, expected by react-select
- * @see https://github.com/JedWatson/react-select
- */
-type selectOption = { value: scheduleMethod, label: string };
 
 /**
  * A form component to ask for confirmation before cashing a payment directly at the FabLab's reception.
  * This is intended for use by privileged users.
  * The form validation button must be created elsewhere, using the attribute form={formId}.
  */
-export const LocalPaymentForm: React.FC<GatewayFormProps> = ({ onSubmit, onSuccess, onError, children, className, paymentSchedule, cart, updateCart, customer, operator, formId }) => {
+export const LocalPaymentForm: React.FC<GatewayFormProps> = ({ onSubmit, onSuccess, onError, children, className, paymentSchedule, cart, updateCart, customer, operator, formId, order }) => {
   const { t } = useTranslation('admin');
 
   const [method, setMethod] = useState<scheduleMethod>('check');
@@ -43,14 +39,14 @@ export const LocalPaymentForm: React.FC<GatewayFormProps> = ({ onSubmit, onSucce
   /**
    * Convert all payement methods for schedules to the react-select format
    */
-  const buildMethodOptions = (): Array<selectOption> => {
+  const buildMethodOptions = (): Array<SelectOption<scheduleMethod>> => {
     return ALL_SCHEDULE_METHODS.map(i => methodToOption(i));
   };
 
   /**
    * Convert the given payment-method to the react-select format
    */
-  const methodToOption = (value: scheduleMethod): selectOption => {
+  const methodToOption = (value: scheduleMethod): SelectOption<scheduleMethod> => {
     if (!value) return { value, label: '' };
 
     return { value, label: t(`app.admin.local_payment_form.method_${value}`) };
@@ -59,7 +55,7 @@ export const LocalPaymentForm: React.FC<GatewayFormProps> = ({ onSubmit, onSucce
   /**
    * Callback triggered when the user selects a payment method for the current payment schedule.
    */
-  const handleUpdateMethod = (option: selectOption) => {
+  const handleUpdateMethod = (option: SelectOption<scheduleMethod>) => {
     updateCart(Object.assign({}, cart, { payment_method: option.value }));
     setMethod(option.value);
   };
@@ -85,8 +81,14 @@ export const LocalPaymentForm: React.FC<GatewayFormProps> = ({ onSubmit, onSucce
     }
 
     try {
-      const document = await LocalPaymentAPI.confirmPayment(cart);
-      onSuccess(document);
+      let res;
+      if (order) {
+        res = await CheckoutAPI.payment(order);
+        res = res.order;
+      } else {
+        res = await LocalPaymentAPI.confirmPayment(cart);
+      }
+      onSuccess(res);
     } catch (e) {
       onError(e);
     }
@@ -113,6 +115,9 @@ export const LocalPaymentForm: React.FC<GatewayFormProps> = ({ onSubmit, onSucce
    * Get the type of the main item in the cart compile
    */
   const mainItemType = (): string => {
+    if (order) {
+      return '';
+    }
     return Object.keys(cart.items[0])[0];
   };
 

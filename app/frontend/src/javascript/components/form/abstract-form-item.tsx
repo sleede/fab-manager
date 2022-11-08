@@ -63,7 +63,7 @@ export const AbstractFormItem = <TFieldValues extends FieldValues>({ id, label, 
     <>
       {(label && !inLine) && <div className='form-item-header'>
         <p onClick={handleLabelClick}>{label}</p>
-        {tooltip && <div className="item-tooltip">
+        {tooltip && <div className="fab-tooltip">
           <span className="trigger"><i className="fa fa-question-circle" /></span>
           <div className="content">{tooltip}</div>
         </div>}
@@ -71,7 +71,7 @@ export const AbstractFormItem = <TFieldValues extends FieldValues>({ id, label, 
 
       <div className='form-item-field'>
         {inLine && <div className='form-item-header'><p>{label}</p>
-          {tooltip && <div className="item-tooltip">
+          {tooltip && <div className="fab-tooltip">
             <span className="trigger"><i className="fa fa-question-circle" /></span>
             <div className="content">{tooltip}</div>
           </div>}

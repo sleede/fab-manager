@@ -70,3 +70,103 @@ asset_8:
   type: UserAvatar
   created_at: 2018-12-27 14:48:52.141382000 Z
   updated_at: 2018-12-27 14:48:52.141382000 Z
+
+asset_2707:
+  id: 2707
+  viewable_id: 3
+  viewable_type: Product
+  attachment: appset-icon.png
+  type: ProductImage
+  created_at: '2022-09-13 10:05:07.212923'
+  updated_at: '2022-09-27 10:17:51.976313'
+  is_main: true
+asset_2729:
+  id: 2729
+  viewable_id: 16
+  viewable_type: Product
+  attachment: osb.jpeg
+  type: ProductImage
+  created_at: '2022-09-14 13:50:12.588896'
+  updated_at: '2022-09-27 10:13:39.414052'
+  is_main: true
+asset_2727:
+  id: 2727
+  viewable_id: 15
+  viewable_type: Product
+  attachment: cp.jpeg
+  type: ProductImage
+  created_at: '2022-09-14 13:49:08.237136'
+  updated_at: '2022-09-27 10:13:51.282923'
+  is_main: true
+asset_2721:
+  id: 2721
+  viewable_id: 12
+  viewable_type: Product
+  attachment: casqueapointe.jpg
+  type: ProductImage
+  created_at: '2022-09-14 13:42:36.731315'
+  updated_at: '2022-09-27 10:14:23.371827'
+  is_main: true
+asset_2731:
+  id: 2731
+  viewable_id: 17
+  viewable_type: Product
+  attachment: 3plis.jpeg
+  type: ProductImage
+  created_at: '2022-09-14 13:51:12.634244'
+  updated_at: '2022-09-27 10:13:28.657539'
+  is_main: true
+asset_2725:
+  id: 2725
+  viewable_id: 14
+  viewable_type: Product
+  attachment: melamine.jpeg
+  type: ProductImage
+  created_at: '2022-09-14 13:48:05.033284'
+  updated_at: '2022-09-27 10:14:00.569077'
+  is_main: true
+asset_2723:
+  id: 2723
+  viewable_id: 13
+  viewable_type: Product
+  attachment: mdf.jpeg
+  type: ProductImage
+  created_at: '2022-09-14 13:47:18.129274'
+  updated_at: '2022-09-27 10:14:10.137542'
+  is_main: true
+asset_2733:
+  id: 2733
+  viewable_id: 18
+  viewable_type: Product
+  attachment: lamelle-colle.jpeg
+  type: ProductImage
+  created_at: '2022-09-14 13:52:08.666869'
+  updated_at: '2022-09-27 10:13:10.979122'
+  is_main: true
+asset_2719:
+  id: 2719
+  viewable_id: 11
+  viewable_type: Product
+  attachment: bulldozer.png
+  type: ProductImage
+  created_at: '2022-09-14 13:41:16.209363'
+  updated_at: '2022-09-27 10:14:33.153221'
+  is_main: true
+asset_2743:
+  id: 2743
+  viewable_id: 22
+  viewable_type: Product
+  attachment: filament_pla_1_75_bleu.jpeg
+  type: ProductImage
+  created_at: '2022-10-03 14:00:50.082820'
+  updated_at: '2022-10-03 14:00:50.082820'
+  is_main: true
+asset_2744:
+  id: 2744
+  viewable_id: 23
+  viewable_type: Product
+  attachment: filament-pla_blanc.webp
+  type: ProductImage
+  created_at: '2022-10-03 14:01:43.711513'
+  updated_at: '2022-10-03 14:01:43.711513'
+  is_main: true

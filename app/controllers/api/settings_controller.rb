@@ -26,13 +26,13 @@ class API::SettingsController < API::ApiController
     authorize Setting
 
     @settings = []
-    may_transaction(params[:transactional]) do
+    may_transaction params[:transactional] do
       params[:settings].each do |setting|
         next if !setting[:name] || !setting[:value]
 
         db_setting = Setting.find_or_initialize_by(name: setting[:name])
         if !SettingService.before_update(db_setting)
-          db_setting.errors[:-] << I18n.t("settings.#{setting[:name]}") + ': ' + I18n.t('settings.locked_setting')
+          db_setting.errors.add(:-, "#{I18n.t("settings.#{setting[:name]}")}: #{I18n.t('settings.locked_setting')}")
         elsif db_setting.save
           db_setting.history_values.create(value: setting[:value], invoicing_profile: current_user.invoicing_profile)
           SettingService.after_update(db_setting)
@@ -66,7 +66,7 @@ class API::SettingsController < API::ApiController
     first_val = setting.history_values.order(created_at: :asc).limit(1).first
     new_val = HistoryValue.create!(
       setting_id: setting.id,
-      value: first_val.value,
+      value: first_val&.value,
       invoicing_profile_id: current_user.invoicing_profile.id
     )
     SettingService.after_update(setting)
@@ -84,11 +84,9 @@ class API::SettingsController < API::ApiController
   end
 
   # run the given block in a transaction if `should` is true. Just run it normally otherwise
-  def may_transaction(should)
+  def may_transaction(should, &block)
     if should == 'true'
-      ActiveRecord::Base.transaction do
-        yield
-      end
+      ActiveRecord::Base.transaction(&block)
     else
       yield
     end

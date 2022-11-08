@@ -42,7 +42,7 @@ class SettingPolicy < ApplicationPolicy
        payment_gateway payzen_endpoint payzen_public_key public_agenda_module renew_pack_threshold statistics_module
        pack_only_for_subscription overlapping_categories public_registrations facebook twitter viadeo linkedin instagram
        youtube vimeo dailymotion github echosciences pinterest lastfm flickr machines_module user_change_group
-       user_validation_required user_validation_required_list]
+       user_validation_required user_validation_required_list store_module store_withdrawal_instructions store_hidden]
   end
 
   ##
@@ -50,7 +50,7 @@ class SettingPolicy < ApplicationPolicy
   # This blacklist is automatically generated from the public_whitelist above.
   ##
   def self.public_blacklist
-    Setting.validators.detect { |v| v.class == ActiveModel::Validations::InclusionValidator && v.attributes.include?(:name) }
+    Setting.validators.detect { |v| v.instance_of?(ActiveModel::Validations::InclusionValidator) && v.attributes.include?(:name) }
            .options[:in] - SettingPolicy.public_whitelist
   end
 end

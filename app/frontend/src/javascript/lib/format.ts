@@ -32,4 +32,11 @@ export default class FormatLib {
   static price = (price: number): string => {
     return new Intl.NumberFormat(Fablab.intl_locale, { style: 'currency', currency: Fablab.intl_currency }).format(price);
   };
+
+  /**
+   * Return currency symbol for currency setting
+   */
+  static currencySymbol = (): string => {
+    return new Intl.NumberFormat('fr', { style: 'currency', currency: Fablab.intl_currency }).formatToParts()[2].value;
+  };
 }

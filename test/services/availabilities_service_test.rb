@@ -13,28 +13,32 @@ class AvailabilitiesServiceTest < ActiveSupport::TestCase
 
   test 'no machines availabilities during given window' do
     service = Availabilities::AvailabilitiesService.new(@no_subscription)
-    slots = service.machines([Machine.find(3)], @no_subscription, { start: DateTime.current.beginning_of_day, end: 1.day.from_now.end_of_day })
+    slots = service.machines([Machine.find(3)], @no_subscription,
+                             { start: DateTime.current.beginning_of_day, end: 1.day.from_now.end_of_day })
 
     assert_empty slots
   end
 
   test 'no machines availabilities for user tags' do
     service = Availabilities::AvailabilitiesService.new(@no_subscription)
-    slots = service.machines([Machine.find(3)], @no_subscription, { start: 2.days.from_now.beginning_of_day, end: 4.days.from_now.end_of_day })
+    slots = service.machines([Machine.find(3)], @no_subscription,
+                             { start: 2.days.from_now.beginning_of_day, end: 4.days.from_now.end_of_day })
 
     assert_empty slots
   end
 
   test 'no past availabilities for members' do
     service = Availabilities::AvailabilitiesService.new(@no_subscription)
-    slots = service.machines([Machine.find(2)], @no_subscription, { start: DateTime.parse('2015-06-15').beginning_of_day, end: DateTime.parse('2015-06-15').end_of_day })
+    slots = service.machines([Machine.find(2)], @no_subscription,
+                             { start: DateTime.parse('2015-06-15').beginning_of_day, end: DateTime.parse('2015-06-15').end_of_day })
 
     assert_empty slots
   end
 
   test 'admin cannot see past availabilities further than 1 month' do
     service = Availabilities::AvailabilitiesService.new(@admin)
-    slots = service.machines([Machine.find(2)], @no_subscription, { start: DateTime.parse('2015-06-15').beginning_of_day, end: DateTime.parse('2015-06-15').end_of_day })
+    slots = service.machines([Machine.find(2)], @no_subscription,
+                             { start: DateTime.parse('2015-06-15').beginning_of_day, end: DateTime.parse('2015-06-15').end_of_day })
 
     assert_empty slots
   end
@@ -52,7 +56,8 @@ class AvailabilitiesServiceTest < ActiveSupport::TestCase
 
   test 'machines availabilities' do
     service = Availabilities::AvailabilitiesService.new(@no_subscription)
-    slots = service.machines([Machine.find(1)], @no_subscription, { start: 2.days.from_now.beginning_of_day, end: 4.days.from_now.end_of_day })
+    slots = service.machines([Machine.find(1)], @no_subscription,
+                             { start: 2.days.from_now.beginning_of_day, end: 4.days.from_now.end_of_day })
 
     assert_not_empty slots
     availability = Availability.find(7)
@@ -78,7 +83,7 @@ class AvailabilitiesServiceTest < ActiveSupport::TestCase
     slots = service.trainings(trainings, @no_subscription, { start: DateTime.current.beginning_of_day, end: 2.days.from_now.end_of_day })
 
     assert_not_empty slots
-    if DateTime.current.hour > 10
+    if DateTime.current.hour >= 6
       assert_equal Availability.find(2).slots.count, slots.count
     else
       assert_equal Availability.find(1).slots.count + Availability.find(2).slots.count, slots.count
@@ -87,7 +92,8 @@ class AvailabilitiesServiceTest < ActiveSupport::TestCase
 
   test 'events availability' do
     service = Availabilities::AvailabilitiesService.new(@no_subscription)
-    slots = service.events([Event.find(4)], @no_subscription, { start: DateTime.current.beginning_of_day, end: 30.days.from_now.end_of_day })
+    slots = service.events([Event.find(4)], @no_subscription,
+                           { start: DateTime.current.beginning_of_day, end: 30.days.from_now.end_of_day })
 
     assert_not_empty slots
     availability = Availability.find(17)

@@ -584,7 +584,7 @@ Application.Controllers.controller('NewEventController', ['$scope', '$state', 'C
       end_date: new Date(),
       start_time: new Date(),
       end_time: new Date(),
-      all_day: 'false',
+      all_day: true,
       recurrence: 'none',
       category_id: null,
       prices: []

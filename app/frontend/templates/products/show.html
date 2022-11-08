@@ -1,0 +1,17 @@
+<div class="header-page">
+  <div class="back">
+    <a ng-click="backPrevLocation($event)"><i class="fas fa-long-arrow-alt-left "></i></a>
+  </div>
+
+  <div class="center">
+    <h1 translate>{{ 'app.public.store.fablab_store' }}</h1>
+  </div>
+
+  <div class="right">
+    <cart-button />
+  </div>
+</div>
+
+<section class="m-lg">
+  <store-product product-slug="productSlug" current-user="currentUser" on-error="onError" on-success="onSuccess" />
+</section>

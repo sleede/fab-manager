@@ -6,7 +6,7 @@ class API::GroupsController < API::ApiController
   before_action :authenticate_user!, except: :index
 
   def index
-    @groups = GroupService.list(current_user, params)
+    @groups = GroupService.list(params)
   end
 
   def create

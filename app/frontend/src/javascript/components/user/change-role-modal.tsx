@@ -39,13 +39,12 @@ type selectGroupOption = { value: number, label: string };
  */
 export const ChangeRoleModal: React.FC<ChangeRoleModalProps> = ({ isOpen, toggleModal, user, onSuccess, onError }) => {
   const { t } = useTranslation('admin');
-  const { control, handleSubmit } = useForm<RoleFormData>({ defaultValues: { groupId: user.group_id } });
+  const { control, handleSubmit } = useForm<RoleFormData>({ defaultValues: { role: user.role, groupId: user.group_id } });
 
   const [groups, setGroups] = useState<Array<Group>>([]);
-  const [selectedRole, setSelectedRole] = useState<UserRole>(user.role);
 
   useEffect(() => {
-    GroupAPI.index({ disabled: false, admins: false }).then(setGroups).catch(onError);
+    GroupAPI.index({ disabled: false }).then(setGroups).catch(onError);
   }, []);
 
   /**
@@ -64,10 +63,10 @@ export const ChangeRoleModal: React.FC<ChangeRoleModalProps> = ({ isOpen, toggle
   };
 
   /**
-   * Callback triggered when the user changes the selected role in the dropdown selection list
+   * Check if we can change the group of the user
    */
-  const onRoleSelect = (data: UserRole) => {
-    setSelectedRole(data);
+  const canChangeGroup = (): boolean => {
+    return !user.subscription;
   };
 
   /**
@@ -104,15 +103,14 @@ export const ChangeRoleModal: React.FC<ChangeRoleModalProps> = ({ isOpen, toggle
                     control={control}
                     id="role"
                     label={t('app.admin.change_role_modal.new_role')}
-                    rules={{ required: true }}
-                    onChange={onRoleSelect} />
-        {selectedRole !== 'admin' &&
-          <FormSelect options={buildGroupsOptions()}
-                      control={control}
-                      id="groupId"
-                      label={t('app.admin.change_role_modal.new_group')}
-                      tooltip={t('app.admin.change_role_modal.new_group_help')}
-                      rules={{ required: true }} />}
+                    rules={{ required: true }} />
+        <FormSelect options={buildGroupsOptions()}
+                    control={control}
+                    disabled={!canChangeGroup()}
+                    id="groupId"
+                    label={t('app.admin.change_role_modal.new_group')}
+                    tooltip={t('app.admin.change_role_modal.new_group_help')}
+                    rules={{ required: true }} />
       </form>
     </FabModal>
   );

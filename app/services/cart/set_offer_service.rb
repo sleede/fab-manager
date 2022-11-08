@@ -1,0 +1,18 @@
+# frozen_string_literal: true
+
+# Provides methods for set offer to item in cart
+class Cart::SetOfferService
+  def call(order, orderable, is_offered)
+    item = order.order_items.find_by(orderable: orderable)
+
+    raise ActiveRecord::RecordNotFound if item.nil?
+
+    item.is_offered = is_offered
+    ActiveRecord::Base.transaction do
+      item.save
+      Cart::UpdateTotalService.new.call(order)
+      order.save
+    end
+    order.reload
+  end
+end

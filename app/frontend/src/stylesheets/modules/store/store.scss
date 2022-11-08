@@ -1,0 +1,262 @@
+.store {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding-bottom: 6rem;
+  display: grid;
+  grid-template-rows: min-content 8rem 1fr;
+  align-items: flex-start;
+
+  .breadcrumbs {
+    display: none;
+    padding: 0.8rem 1.6rem;
+    list-style: none;
+    border-radius: var(--border-radius-sm);
+    background-color: var(--gray-soft-light);
+    li:not(:last-of-type)::after {
+      margin: 0 2.4rem;
+      content: "\f054";
+      font-family: 'Font Awesome 5 Free';
+      font-size: 1.2rem;
+      font-weight: 900;
+      color: var(--gray-hard-darkest);
+    }
+    li:last-of-type:not(:first-of-type) span {
+      color: var(--gray-hard-dark);
+    }
+    span {
+      color: var(--gray-hard-light);
+      cursor: pointer;
+    }
+
+  }
+
+  &-filters {
+    grid-area: 2 / 1 / 4 / 2;
+    background-color: var(--gray-soft-lightest);
+    z-index: 1;
+  }
+  &-list { grid-area: 3 / 1 / 4 / 2; }
+
+  @media (min-width: 768px) {
+    .breadcrumbs { display: flex; }
+  }
+
+  @media (min-width: 1200px) {
+    @include grid-col(12);
+    grid-template-rows: min-content 1fr;
+    gap: 2.4rem 3.2rem;
+    align-items: flex-start;
+    .breadcrumbs { grid-column: 1 / -1; }
+    &-filters {
+      position: static;
+      grid-area: 2 / 1 / 3 / 4;
+    }
+    &-list { grid-area: 2 / 4 / 3 / -1; }
+  }
+}
+
+.store-product {
+  --status-color: var(--success);
+  &.low { --status-color: var(--alert-light); }
+  &.out-of-stock { --status-color: var(--alert); }
+
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 4rem 0 6rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: flex-start;
+  align-items: flex-start;
+  gap: 0 3.2rem;
+
+  .ref {
+    grid-row: 1 / 2;
+    @include text-sm;
+    color: var(--gray-hard-lightest);
+    text-transform: uppercase;
+  }
+  .name {
+    grid-row: 2 / 3;
+    margin: 0.8rem 0 3.2rem;
+    @include title-lg;
+    color: var(--gray-hard-darkest) !important;
+  }
+  .gallery {
+    grid-row: 3 / 4;
+    width: 100%;
+    max-width: 50rem;
+    .picture{
+      @include imageRatio;
+      border-radius: var(--border-radius-sm);
+      border: 1px solid var(--gray-soft-darkest);
+      img {
+        object-fit: contain;
+        cursor: pointer;
+      }
+    }
+    .thumbnails {
+      margin-top: 1.6rem;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.8rem;
+      .is-active {
+        border-color: transparent;
+        box-shadow: 0 0 0 2px var(--gray-hard-darkest);
+      }
+    }
+  }
+  .description {
+    grid-row: 5 / 6;
+    &-text {
+      padding-bottom: 4rem;
+      overflow: hidden;
+      @include editor;
+      transition: max-height 0.5s ease-in-out;
+      h3 {
+        @include text-base(600);
+      }
+      p {
+        @include text-sm;
+        color: var(--gray-hard-lightest);
+      }
+    }
+    &-toggle {
+      position: relative;
+      width: 100%;
+      height: 6rem;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      background: linear-gradient(0deg, white 0%, transparent 100%);
+      border: none;
+      transform: translateY(-4rem);
+      &::before {
+        position: absolute;
+        bottom: 1.2rem;
+        left: 0;
+        content: '';
+        width: 100%;
+        height: 1px;
+        background-color: var(--gray-hard-dark);
+        z-index: -1;
+      }
+      span {
+        padding: 0 1.6rem;
+        color: var(--gray-hard-dark);
+        background-color: var(--gray-soft-lightest);
+      }
+    }
+    &-document {
+      padding: 2.4rem;
+      background-color: var(--gray-soft-light);
+      border-radius: var(--border-radius-sm);
+      p { @include text-sm(500); }
+      .list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.8rem 1.6rem;
+        a {
+          display: flex;
+          align-items: center;
+          svg { margin-right: 0.8rem; }
+        }
+      }
+    }
+  }
+  aside {
+    justify-self: stretch;
+    margin: 2.4rem 0;
+    grid-row: 4 / 5;
+    top: 4rem;
+    padding: 4rem;
+    background-color: var(--gray-soft-light);
+    border-radius: var(--border-radius-sm);
+
+    .fab-state-label {
+      --status-color: var(--success);
+      &.low { --status-color: var(--alert-light); }
+      &.out-of-stock { --status-color: var(--alert); }
+    }
+
+    .price {
+      p {
+        margin: 0;
+        display: flex;
+        @include title-xl;
+        sup {
+          margin: 0.8rem 0 0 0.8rem;
+          @include title-sm;
+        }
+      }
+      span {
+        @include text-sm;
+      }
+    }
+    .to-cart {
+      margin-top: 1.6rem;
+      padding-top: 3.2rem;
+      display: grid;
+      grid-template-areas: "min min min"
+                           "minus input plus"
+                           "btn btn btn";
+      grid-template-columns: min-content 1fr min-content;
+      justify-content: center;
+      gap: 1.6rem;
+      border-top: 1px solid var(--gray-soft-dark);
+      .min {
+        grid-area: min;
+        display: flex;
+        justify-content: center;
+        @include text-sm;
+        color: var(--alert);
+      }
+      .minus {
+        grid-area: minus;
+        color: var(--gray-hard-darkest);
+      }
+      .plus {
+        grid-area: plus;
+        color: var(--gray-hard-darkest);
+      }
+      input {
+        grid-area: input;
+        text-align: center;
+      }
+      .main-action-btn {
+        grid-area: btn;
+        justify-content: center;
+      }
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .ref { grid-area: 1 / 1 / 2 / 3; }
+    .name { grid-area: 2 / 1 / 3 / 3; }
+    .gallery { grid-area: 3 / 1 / 4 / 2; }
+    .description {
+      margin-top: 2.4rem;
+      grid-area: 4 / 1 / 5 / 3;
+    }
+    aside {
+      margin: 0;
+      grid-area: 3 / 2 / 4 / 3;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    @include grid-col(12);
+    grid-template-rows: repeat(2, min-content) 1fr;
+    align-items: flex-start;
+    .ref { grid-area: 1 / 1 / 2 / 9; }
+    .name { grid-area: 2 / 1 / 3 / 9; }
+    .gallery { grid-area: 3 / 1 / 4 / 4; }
+    .description { grid-area: 3 / 4 / 4 / 9; }
+    aside {
+      grid-area: 1 / 9 / 4 / -1;
+      position: sticky;
+    }
+  }
+  @media (min-width: 1600px) {
+    aside { grid-area: 1 / 10 / 4 / -1; }
+  }
+}

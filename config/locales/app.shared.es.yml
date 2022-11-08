@@ -550,3 +550,94 @@ es:
         validate_button: "Validate the new card"
       form_multi_select:
         create_label: "Add {VALUE}"
+      form_checklist:
+        select_all: "Select all"
+        unselect_all: "Unselect all"
+      form_file_upload:
+        browse: "Browse"
+        edit: "Edit"
+      form_image_upload:
+        browse: "Browse"
+        edit: "Edit"
+        main_image: "Main visual"
+      store:
+        order_item:
+          total: "Total"
+          client: "Client"
+          created_at: "Order creation"
+          last_update: "Last update"
+          state:
+            cart: 'Cart'
+            in_progress: 'Under preparation'
+            paid: "Paid"
+            payment_failed: "Payment error"
+            canceled: "Canceled"
+            ready: "Ready"
+            refunded: "Refunded"
+            delivered: "Delivered"
+        show_order:
+          back_to_list: "Back to list"
+          see_invoice: "See invoice"
+          tracking: "Order tracking"
+          client: "Client"
+          created_at: "Creation date"
+          last_update: "Last update"
+          cart: "Cart"
+          reference_short: "ref:"
+          unit: "Unit"
+          item_total: "Total"
+          payment_informations: "Payment informations"
+          amount: "Amount"
+          products_total: "Products total"
+          gift_total: "Discount total"
+          coupon: "Coupon"
+          cart_total: "Cart total"
+          pickup: "Pickup your products"
+          state:
+            cart: 'Cart'
+            in_progress: 'Under preparation'
+            paid: "Paid"
+            payment_failed: "Payment error"
+            canceled: "Canceled"
+            ready: "Ready"
+            refunded: "Refunded"
+            delivered: "Delivered"
+          payment:
+            by_wallet: "by wallet"
+            settlement_by_debit_card: "Settlement by debit card"
+            settlement_done_at_the_reception: "Settlement done at the reception"
+            settlement_by_wallet: "Settlement by wallet"
+            on_DATE_at_TIME: "on {DATE} at {TIME},"
+            for_an_amount_of_AMOUNT: "for an amount of {AMOUNT}"
+            and: 'and'
+        order_actions:
+          state:
+            cart: 'Cart'
+            in_progress: 'Under preparation'
+            paid: "Paid"
+            payment_failed: "Payment error"
+            canceled: "Canceled"
+            ready: "Ready"
+            refunded: "Refunded"
+            delivered: "Delivered"
+          confirm: 'Confirm'
+          confirmation_required: "Confirmation required"
+          confirm_order_in_progress_html: "Please confirm that this order in being prepared."
+          order_in_progress_success: "Order is under preparation"
+          confirm_order_ready_html: "Please confirm that this order is ready."
+          order_ready_note: 'You can leave a message to the customer about withdrawal instructions'
+          order_ready_success: "Order is ready"
+          confirm_order_delivered_html: "Please confirm that this order was delivered."
+          order_delivered_success: "Order was delivered"
+          confirm_order_canceled_html: "<strong>Do you really want to cancel this order?</strong><p>If this impacts stock, please reflect the change in <em>edit product &gt; stock management</em>. This won't be automatic.</p>"
+          order_canceled_success: "Order was canceled"
+          confirm_order_refunded_html: "<stong>Do you really want to refund this order?</strong><p>If this impacts stock, please reflect the change in <em>edit product &gt; stock management</em>. This won't be automatic.</p>"
+          order_refunded_success: "Order was refunded"
+      unsaved_form_alert:
+        modal_title: "You have some unsaved changes"
+        confirmation_message: "If you leave this page, your changes will be lost. Are you sure you want to continue?"
+        confirmation_button: "Yes, don't save"
+      active_filters_tags:
+        keyword: "Keyword: {KEYWORD}"
+        stock_internal: "Private stock"
+        stock_external: "Public stock"

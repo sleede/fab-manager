@@ -13,15 +13,17 @@ class Invoice < PaymentDocument
   belongs_to :wallet_transaction
   belongs_to :coupon
 
-  has_one :avoir, class_name: 'Invoice', foreign_key: :invoice_id, dependent: :destroy
-  has_one :payment_schedule_item
-  has_one :payment_gateway_object, as: :item
-  belongs_to :operator_profile, foreign_key: :operator_profile_id, class_name: 'InvoicingProfile'
+  has_one :avoir, class_name: 'Invoice', dependent: :destroy, inverse_of: :avoir
+  has_one :payment_schedule_item, dependent: :nullify
+  has_one :payment_gateway_object, as: :item, dependent: :destroy
+  belongs_to :operator_profile, class_name: 'InvoicingProfile'
+
+  delegate :user, to: :invoicing_profile
 
   before_create :add_environment
   after_create :update_reference, :chain_record
-  after_commit :generate_and_send_invoice, on: [:create], if: :persisted?
   after_update :log_changes
+  after_commit :generate_and_send_invoice, on: [:create], if: :persisted?
 
   validates_with ClosedPeriodValidator
 
@@ -42,10 +44,6 @@ class Invoice < PaymentDocument
                  Setting.get('invoice_prefix')
                end
     "#{prefix}-#{id}_#{created_at.strftime('%d%m%Y')}.pdf"
-  end
-
-  def user
-    invoicing_profile.user
   end
 
   def order_number
@@ -75,7 +73,7 @@ class Invoice < PaymentDocument
     invoice_items.each do |ii|
       paid_items += 1 unless ii.amount.zero?
       next unless attrs[:invoice_items_ids].include? ii.id # list of items to refund (partial refunds)
-      raise Exception if ii.invoice_item # cannot refund an item that was already refunded
+      raise StandardError if ii.invoice_item # cannot refund an item that was already refunded
 
       refund_items += 1 unless ii.amount.zero?
       avoir_ii = avoir.invoice_items.build(ii.dup.attributes)
@@ -84,17 +82,7 @@ class Invoice < PaymentDocument
       avoir.total += avoir_ii.amount
     end
     # handle coupon
-    unless avoir.coupon_id.nil?
-      discount = avoir.total
-      if avoir.coupon.type == 'percent_off'
-        discount = avoir.total * avoir.coupon.percent_off / 100.0
-      elsif avoir.coupon.type == 'amount_off'
-        discount = (avoir.coupon.amount_off / paid_items) * refund_items
-      else
-        raise InvalidCouponError
-      end
-      avoir.total -= discount
-    end
+    avoir.total = CouponService.apply_on_refund(avoir.total, avoir.coupon, paid_items, refund_items)
     avoir
   end
 
@@ -143,6 +131,10 @@ class Invoice < PaymentDocument
 
   def main_item
     invoice_items.where(main: true).first
+  end
+
+  def other_items
+    invoice_items.where(main: [nil, false])
   end
 
   # get amount total paid

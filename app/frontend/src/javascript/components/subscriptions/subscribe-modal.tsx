@@ -18,6 +18,7 @@ import { PaymentScheduleSummary } from '../payment-schedule/payment-schedule-sum
 import { PaymentSchedule } from '../../models/payment-schedule';
 import PriceAPI from '../../api/price';
 import { LocalPaymentModal } from '../payment/local-payment/local-payment-modal';
+import { SelectOption } from '../../models/select';
 
 declare const Application: IApplication;
 
@@ -29,12 +30,6 @@ interface SubscribeModalProps {
   onSuccess: (message: string, subscription: Subscription) => void,
   onError: (message: string) => void,
 }
-
-/**
- * Option format, expected by react-select
- * @see https://github.com/JedWatson/react-select
- */
-type selectOption = { value: number, label: string };
 
 /**
  * Modal dialog shown to create a subscription for the given customer
@@ -91,7 +86,7 @@ export const SubscribeModal: React.FC<SubscribeModalProps> = ({ isOpen, toggleMo
   /**
    * Callback triggered when the user selects a group in the dropdown list
    */
-  const handlePlanSelect = (option: selectOption): void => {
+  const handlePlanSelect = (option: SelectOption<number>): void => {
     const plan = allPlans.find(p => p.id === option.value);
     setSelectedPlan(plan);
   };
@@ -116,7 +111,7 @@ export const SubscribeModal: React.FC<SubscribeModalProps> = ({ isOpen, toggleMo
   /**
    * Convert all groups to the react-select format
    */
-  const buildOptions = (): Array<selectOption> => {
+  const buildOptions = (): Array<SelectOption<number>> => {
     if (!allPlans) return [];
 
     return allPlans.filter(p => !p.disabled && p.group_id === customer.group_id).map(p => {

@@ -45,7 +45,7 @@ const SupportingDocumentsTypesList: React.FC<SupportingDocumentsTypesListProps> 
 
   // get groups
   useEffect(() => {
-    GroupAPI.index({ disabled: false, admins: false }).then(data => {
+    GroupAPI.index({ disabled: false }).then(data => {
       setGroups(data);
       ProofOfIdentityTypeAPI.index().then(pData => {
         setSupportingDocumentsTypes(pData);

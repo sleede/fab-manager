@@ -12,7 +12,9 @@ namespace :fablab do
 
     desc 'add missing VAT rate to history'
     task :add_vat_rate, %i[rate date] => :environment do |_task, args|
-      raise 'Missing argument. Usage exemple: rails fablab:setup:add_vat_rate[20,2014-01-01]. Use 0 to disable' unless args.rate && args.date
+      unless args.rate && args.date
+        raise 'Missing argument. Usage exemple: rails fablab:setup:add_vat_rate[20,2014-01-01]. Use 0 to disable'
+      end
 
       if args.rate == '0'
         setting = Setting.find_by(name: 'invoice_VAT-active')
@@ -105,6 +107,37 @@ namespace :fablab do
         value = (!str_to_bool(value)).to_s if m[0] == '!'
         setting.value = value
         setting.save
+      end
+    end
+
+    desc 'migrate administrators to normal groups and validate them'
+    task set_admins_group: :environment do
+      groups = Group.where.not(slug: 'admins').where(disabled: [false, nil]).order(:id)
+      User.admins.each do |admin|
+        print "\e[91m::\e[0m \e[1mMove admin #{admin.profile} to group\e[0m:\n"
+        admin.update(group_id: select_group(groups))
+        PaymentGatewayService.new.create_user(admin.id)
+      end
+      print "\e[91m::\e[0m \e[1mRemoving the 'admins' group...\e[0m\n"
+      Group.find_by(slug: 'admins').destroy
+      if Setting.get('user_validation_required')
+        print "\e[91m::\e[0m \e[1mValidating the 'admins'...\e[0m\n"
+        User.admins.each { |admin| admin.update(validated_at: DateTime.current) if admin.validated_at.nil? }
+      end
+      print "\e[32m✅\e[0m \e[1mDone\e[0m\n"
+    end
+
+    def select_group(groups)
+      groups.each do |g|
+        print "#{g.id}) #{g.name}\n"
+      end
+      print '> '
+      group_id = $stdin.gets.chomp
+      if groups.map(&:id).include?(group_id.to_i)
+        group_id
+      else
+        warn "\e[91m[ ❌ ] Please select a valid group number \e[39m"
+        select_group(groups)
       end
     end
   end

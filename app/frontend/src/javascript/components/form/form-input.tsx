@@ -18,12 +18,13 @@ interface FormInputProps<TFieldValues, TInputType> extends FormComponent<TFieldV
   placeholder?: string,
   step?: number | 'any',
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void,
+  nullable?: boolean
 }
 
 /**
  * This component is a template for an input component to use within React Hook Form
  */
-export const FormInput = <TFieldValues extends FieldValues, TInputType>({ id, register, label, tooltip, defaultValue, icon, className, rules, disabled, type, addOn, addOnAction, addOnClassName, placeholder, error, warning, formState, step, onChange, debounce, accept }: FormInputProps<TFieldValues, TInputType>) => {
+export const FormInput = <TFieldValues extends FieldValues, TInputType>({ id, register, label, tooltip, defaultValue, icon, className, rules, disabled, type, addOn, addOnAction, addOnClassName, placeholder, error, warning, formState, step, onChange, debounce, accept, nullable = false }: FormInputProps<TFieldValues, TInputType>) => {
   /**
    * Debounced (ie. temporised) version of the 'on change' callback.
    */
@@ -57,8 +58,8 @@ export const FormInput = <TFieldValues extends FieldValues, TInputType>({ id, re
         <input id={id}
           {...register(id as FieldPath<TFieldValues>, {
             ...rules,
-            valueAsNumber: type === 'number',
             valueAsDate: type === 'date',
+            setValueAs: v => ([null, ''].includes(v) && nullable) ? null : (type === 'number' ? parseFloat(v) : v),
             value: defaultValue as FieldPathValue<TFieldValues, FieldPath<TFieldValues>>,
             onChange: (e) => { handleChange(e); }
           })}
@@ -67,6 +68,7 @@ export const FormInput = <TFieldValues extends FieldValues, TInputType>({ id, re
           disabled={typeof disabled === 'function' ? disabled(id) : disabled}
           placeholder={placeholder}
           accept={accept} />
+        {(type === 'file' && placeholder) && <span className='fab-button is-black file-placeholder'>{placeholder}</span>}
         {addOn && <span onClick={addOnAction} className={`addon ${addOnClassName || ''} ${addOnAction ? 'is-btn' : ''}`}>{addOn}</span>}
     </AbstractFormItem>
   );

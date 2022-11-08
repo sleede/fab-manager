@@ -30,6 +30,7 @@ import ProfileCustomFieldAPI from '../../api/profile-custom-field';
 import { ProfileCustomField } from '../../models/profile-custom-field';
 import { SettingName } from '../../models/setting';
 import SettingAPI from '../../api/setting';
+import { SelectOption } from '../../models/select';
 
 declare const Application: IApplication;
 
@@ -47,12 +48,6 @@ interface UserProfileFormProps {
 }
 
 /**
- * Option format, expected by react-select
- * @see https://github.com/JedWatson/react-select
- */
-type selectOption = { value: number, label: string };
-
-/**
  * Form component to create or update a user
  */
 export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, user, className, onError, onSuccess, showGroupInput, showTermsAndConditionsInput, showTrainingsInput, showTagsInput }) => {
@@ -67,7 +62,7 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
 
   const [isOrganization, setIsOrganization] = useState<boolean>(!_isNil(user.invoicing_profile_attributes.organization_attributes));
   const [isLocalDatabaseProvider, setIsLocalDatabaseProvider] = useState<boolean>(false);
-  const [groups, setGroups] = useState<selectOption[]>([]);
+  const [groups, setGroups] = useState<SelectOption<number>[]>([]);
   const [termsAndConditions, setTermsAndConditions] = useState<CustomAsset>(null);
   const [profileCustomFields, setProfileCustomFields] = useState<ProfileCustomField[]>([]);
   const [requiredFieldsSettings, setRequiredFieldsSettings] = useState<Map<SettingName, string>>(new Map());
@@ -77,7 +72,7 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
       setIsLocalDatabaseProvider(data.providable_type === 'DatabaseProvider');
     }).catch(error => onError(error));
     if (showGroupInput) {
-      GroupAPI.index({ disabled: false, admins: user.role === 'admin' }).then(data => {
+      GroupAPI.index({ disabled: false }).then(data => {
         setGroups(buildOptions(data));
       }).catch(error => onError(error));
     }
@@ -107,7 +102,7 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
   /**
    * Convert the provided array of items to the react-select format
    */
-  const buildOptions = (items: Array<{ id?: number, name: string }>): Array<selectOption> => {
+  const buildOptions = (items: Array<{ id?: number, name: string }>): Array<SelectOption<number>> => {
     return items.map(t => {
       return { value: t.id, label: t.name };
     });
@@ -116,7 +111,7 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
   /**
    * Asynchronously load the full list of enabled trainings to display in the drop-down select field
    */
-  const loadTrainings = (inputValue: string, callback: (options: Array<selectOption>) => void): void => {
+  const loadTrainings = (inputValue: string, callback: (options: Array<SelectOption<number>>) => void): void => {
     TrainingAPI.index({ disabled: false }).then(data => {
       callback(buildOptions(data));
     }).catch(error => onError(error));
@@ -125,7 +120,7 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
   /**
    * Asynchronously load the full list of tags to display in the drop-down select field
    */
-  const loadTags = (inputValue: string, callback: (options: Array<selectOption>) => void): void => {
+  const loadTags = (inputValue: string, callback: (options: Array<SelectOption<number>>) => void): void => {
     TagAPI.index().then(data => {
       callback(buildOptions(data));
     }).catch(error => onError(error));
@@ -155,11 +150,6 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
    * Check if the given field path should be disabled
    */
   const isDisabled = function (id: string) {
-    // never allows admins to change their group
-    if (id === 'group_id' && user.role === 'admin') {
-      return true;
-    }
-
     // if the current provider is the local database, then all fields are enabled
     if (isLocalDatabaseProvider) {
       return false;
@@ -179,7 +169,7 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
   const userNetworks = new UserLib(user).getUserSocialNetworks();
 
   return (
-    <form className={`user-profile-form user-profile-form--${size} ${className}`} onSubmit={onSubmit}>
+    <form className={`user-profile-form user-profile-form--${size} ${className || ''}`} onSubmit={onSubmit}>
       <div className="avatar-group">
         <AvatarInput currentAvatar={output.profile_attributes?.user_avatar_attributes?.attachment_url}
                      userName={`${output.profile_attributes?.first_name} ${output.profile_attributes?.last_name}`}

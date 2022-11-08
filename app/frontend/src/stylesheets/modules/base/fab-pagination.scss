@@ -1,0 +1,25 @@
+.fab-pagination {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: repeat(9, min-content);
+  justify-content: center;
+  gap: 1.6rem;
+  button {
+    min-width: 4rem;
+    height: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    border: none;
+    border-radius: var(--border-radius-sm); 
+    @include text-lg(500);
+    &:hover:not(.is-active) {
+      background-color: var(--gray-soft);
+    }
+  }
+  .is-active {
+    background-color: var(--main);
+    color: var(--main-text-color);
+  }
+}

@@ -109,7 +109,7 @@ const PaymentSchedulesTable: React.FC<PaymentSchedulesTableProps> = ({ paymentSc
   const formatState = (item: PaymentScheduleItem, schedule: PaymentSchedule): JSX.Element => {
     let res = t(`app.shared.payment_schedules_table.state_${item.state}${item.state === 'pending' ? '_' + schedule.payment_method : ''}`);
     if (item.state === PaymentScheduleItemState.Paid) {
-      const key = `app.shared.schedules_table.method_${item.payment_method}`;
+      const key = `app.shared.payment_schedules_table.method_${item.payment_method}`;
       res += ` (${t(key)})`;
     }
     // eslint-disable-next-line fabmanager/component-class-named-as-component

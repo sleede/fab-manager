@@ -11,15 +11,17 @@ import { Setting } from '../../models/setting';
 import { Invoice } from '../../models/invoice';
 import SettingAPI from '../../api/setting';
 import { useTranslation } from 'react-i18next';
+import { Order } from '../../models/order';
 
 declare const Application: IApplication;
 
 interface CardPaymentModalProps {
   isOpen: boolean,
   toggleModal: () => void,
-  afterSuccess: (result: Invoice|PaymentSchedule) => void,
+  afterSuccess: (result: Invoice|PaymentSchedule|Order) => void,
   onError: (message: string) => void,
   cart: ShoppingCart,
+  order?: Order,
   currentUser: User,
   schedule?: PaymentSchedule,
   customer: User
@@ -29,7 +31,7 @@ interface CardPaymentModalProps {
  * This component open a modal dialog for the configured payment gateway, allowing the user to input his card data
  * to process an online payment.
  */
-const CardPaymentModal: React.FC<CardPaymentModalProps> = ({ isOpen, toggleModal, afterSuccess, onError, currentUser, schedule, cart, customer }) => {
+const CardPaymentModal: React.FC<CardPaymentModalProps> = ({ isOpen, toggleModal, afterSuccess, onError, currentUser, schedule, cart, customer, order }) => {
   const { t } = useTranslation('shared');
 
   const [gateway, setGateway] = useState<Setting>(null);
@@ -49,6 +51,7 @@ const CardPaymentModal: React.FC<CardPaymentModalProps> = ({ isOpen, toggleModal
       afterSuccess={afterSuccess}
       onError={onError}
       cart={cart}
+      order={order}
       currentUser={currentUser}
       schedule={schedule}
       customer={customer} />;
@@ -63,6 +66,7 @@ const CardPaymentModal: React.FC<CardPaymentModalProps> = ({ isOpen, toggleModal
       afterSuccess={afterSuccess}
       onError={onError}
       cart={cart}
+      order={order}
       currentUser={currentUser}
       schedule={schedule}
       customer={customer} />;
@@ -99,4 +103,4 @@ const CardPaymentModalWrapper: React.FC<CardPaymentModalProps> = (props) => {
 
 export { CardPaymentModalWrapper as CardPaymentModal };
 
-Application.Components.component('cardPaymentModal', react2angular(CardPaymentModalWrapper, ['isOpen', 'toggleModal', 'afterSuccess', 'onError', 'currentUser', 'schedule', 'cart', 'customer']));
+Application.Components.component('cardPaymentModal', react2angular(CardPaymentModalWrapper, ['isOpen', 'toggleModal', 'afterSuccess', 'onError', 'currentUser', 'schedule', 'cart', 'customer', 'order']));

@@ -7,9 +7,10 @@ import { FieldPath } from 'react-hook-form/dist/types/path';
 import { FieldPathValue, UnpackNestedValue } from 'react-hook-form/dist/types';
 import { FormControlledComponent } from '../../models/form-component';
 import { AbstractFormItem, AbstractFormItemProps } from './abstract-form-item';
+import { SelectOption } from '../../models/select';
 
-interface FormSelectProps<TFieldValues, TContext extends object, TOptionValue> extends FormControlledComponent<TFieldValues, TContext>, AbstractFormItemProps<TFieldValues> {
-  options: Array<selectOption<TOptionValue>>,
+interface FormSelectProps<TFieldValues, TContext extends object, TOptionValue, TOptionLabel> extends FormControlledComponent<TFieldValues, TContext>, AbstractFormItemProps<TFieldValues> {
+  options: Array<SelectOption<TOptionValue, TOptionLabel>>,
   valueDefault?: TOptionValue,
   onChange?: (value: TOptionValue) => void,
   placeholder?: string,
@@ -18,15 +19,9 @@ interface FormSelectProps<TFieldValues, TContext extends object, TOptionValue> e
 }
 
 /**
- * Option format, expected by react-select
- * @see https://github.com/JedWatson/react-select
- */
-type selectOption<TOptionValue> = { value: TOptionValue, label: string };
-
-/**
  * This component is a wrapper for react-select to use with react-hook-form
  */
-export const FormSelect = <TFieldValues extends FieldValues, TContext extends object, TOptionValue>({ id, label, tooltip, className, control, placeholder, options, valueDefault, error, warning, rules, disabled = false, onChange, clearable = false, formState, creatable = false }: FormSelectProps<TFieldValues, TContext, TOptionValue>) => {
+export const FormSelect = <TFieldValues extends FieldValues, TContext extends object, TOptionValue, TOptionLabel>({ id, label, tooltip, className, control, placeholder, options, valueDefault, error, warning, rules, disabled = false, onChange, clearable = false, formState, creatable = false }: FormSelectProps<TFieldValues, TContext, TOptionValue, TOptionLabel>) => {
   const [isDisabled, setIsDisabled] = React.useState<boolean>(false);
 
   useEffect(() => {

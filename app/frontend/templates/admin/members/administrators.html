@@ -31,6 +31,9 @@
       <td>{{ admin.email }}</td>
       <td>{{ admin.profile_attributes.phone }}</td>
       <td>
+        <button class="btn btn-default edit-member" ui-sref="app.admin.members_edit({id: admin.id})">
+          <i class="fa fa-edit"></i>
+        </button>
         <button class="btn btn-danger" ng-if="isAuthorized('admin') && admin.id != currentUser.id" ng-click="destroyAdmin(admins, admin)">
           <i class="fa fa-trash-o"></i>
         </button>

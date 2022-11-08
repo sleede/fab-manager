@@ -1,0 +1,275 @@
+product_stock_movement_26:
+  id: 26
+  product_id: 3
+  quantity: 1
+  reason: inward_stock
+  stock_type: internal
+  remaining_stock: 1
+  date: '2022-09-13 12:52:52.656974'
+  created_at: '2022-09-13 12:52:52.669247'
+  updated_at: '2022-09-13 12:52:52.669247'
+  order_item_id:
+product_stock_movement_33:
+  id: 33
+  product_id: 11
+  quantity: 10
+  reason: inward_stock
+  stock_type: external
+  remaining_stock: 10
+  date: '2022-09-14 13:41:16.204940'
+  created_at: '2022-09-14 13:41:16.212290'
+  updated_at: '2022-09-14 13:41:16.212290'
+  order_item_id:
+product_stock_movement_34:
+  id: 34
+  product_id: 12
+  quantity: 1
+  reason: returned
+  stock_type: internal
+  remaining_stock: 1
+  date: '2022-09-14 13:42:53.702489'
+  created_at: '2022-09-14 13:42:53.706634'
+  updated_at: '2022-09-14 13:42:53.706634'
+  order_item_id:
+product_stock_movement_35:
+  id: 35
+  product_id: 13
+  quantity: 1000
+  reason: inward_stock
+  stock_type: external
+  remaining_stock: 1000
+  date: '2022-09-14 13:47:18.120615'
+  created_at: '2022-09-14 13:47:18.131919'
+  updated_at: '2022-09-14 13:47:18.131919'
+  order_item_id:
+product_stock_movement_36:
+  id: 36
+  product_id: 14
+  quantity: 800
+  reason: inward_stock
+  stock_type: external
+  remaining_stock: 800
+  date: '2022-09-14 13:48:05.025884'
+  created_at: '2022-09-14 13:48:05.035926'
+  updated_at: '2022-09-14 13:48:05.035926'
+  order_item_id:
+product_stock_movement_37:
+  id: 37
+  product_id: 15
+  quantity: 600
+  reason: inward_stock
+  stock_type: external
+  remaining_stock: 600
+  date: '2022-09-14 13:49:08.203980'
+  created_at: '2022-09-14 13:49:08.240896'
+  updated_at: '2022-09-14 13:49:08.240896'
+  order_item_id:
+product_stock_movement_38:
+  id: 38
+  product_id: 16
+  quantity: 100
+  reason: inward_stock
+  stock_type: external
+  remaining_stock: 100
+  date: '2022-09-14 13:50:12.581463'
+  created_at: '2022-09-14 13:50:12.591335'
+  updated_at: '2022-09-14 13:50:12.591335'
+  order_item_id:
+product_stock_movement_39:
+  id: 39
+  product_id: 17
+  quantity: 100
+  reason: inward_stock
+  stock_type: external
+  remaining_stock: 100
+  date: '2022-09-14 13:51:12.627746'
+  created_at: '2022-09-14 13:51:12.636692'
+  updated_at: '2022-09-14 13:51:12.636692'
+  order_item_id:
+product_stock_movement_40:
+  id: 40
+  product_id: 18
+  quantity: 20
+  reason: inward_stock
+  stock_type: external
+  remaining_stock: 20
+  date: '2022-09-14 13:52:08.655537'
+  created_at: '2022-09-14 13:52:08.672419'
+  updated_at: '2022-09-14 13:52:08.672419'
+  order_item_id:
+product_stock_movement_41:
+  id: 41
+  product_id: 18
+  quantity: -1
+  reason: sold
+  stock_type: external
+  remaining_stock: 19
+  date: '2022-09-20 15:14:22.629666'
+  created_at: '2022-09-20 15:14:22.651877'
+  updated_at: '2022-09-20 15:14:22.651877'
+  order_item_id: 1
+product_stock_movement_42:
+  id: 42
+  product_id: 13
+  quantity: -1
+  reason: sold
+  stock_type: external
+  remaining_stock: 999
+  date: '2022-09-20 15:14:22.688402'
+  created_at: '2022-09-20 15:14:22.692461'
+  updated_at: '2022-09-20 15:14:22.692461'
+  order_item_id: 2
+product_stock_movement_43:
+  id: 43
+  product_id: 15
+  quantity: -4
+  reason: sold
+  stock_type: external
+  remaining_stock: 596
+  date: '2022-09-20 15:14:48.330513'
+  created_at: '2022-09-20 15:14:48.334360'
+  updated_at: '2022-09-20 15:14:48.334360'
+  order_item_id: 3
+product_stock_movement_56:
+  id: 56
+  product_id: 22
+  quantity: 1000
+  reason: inward_stock
+  stock_type: external
+  remaining_stock: 1000
+  date: '2022-10-03 14:00:49.950506'
+  created_at: '2022-10-03 14:00:50.107429'
+  updated_at: '2022-10-03 14:00:50.107429'
+  order_item_id:
+product_stock_movement_57:
+  id: 57
+  product_id: 22
+  quantity: 1000
+  reason: inward_stock
+  stock_type: internal
+  remaining_stock: 1000
+  date: '2022-10-03 14:00:49.950569'
+  created_at: '2022-10-03 14:00:50.136314'
+  updated_at: '2022-10-03 14:00:50.136314'
+  order_item_id:
+product_stock_movement_58:
+  id: 58
+  product_id: 23
+  quantity: 1000
+  reason: inward_stock
+  stock_type: internal
+  remaining_stock: 1000
+  date: '2022-10-03 14:02:00.518281'
+  created_at: '2022-10-03 14:02:00.524640'
+  updated_at: '2022-10-03 14:02:00.524640'
+  order_item_id:
+product_stock_movement_59:
+  id: 59
+  product_id: 23
+  quantity: 1000
+  reason: inward_stock
+  stock_type: external
+  remaining_stock: 1000
+  date: '2022-10-03 14:02:00.518337'
+  created_at: '2022-10-03 14:02:00.526611'
+  updated_at: '2022-10-03 14:02:00.526611'
+  order_item_id:
+product_stock_movement_61:
+  id: 61
+  product_id: 23
+  quantity: -1
+  reason: sold
+  stock_type: external
+  remaining_stock: 999
+  date: '2022-10-04 12:36:02.765304'
+  created_at: '2022-10-04 12:36:02.788575'
+  updated_at: '2022-10-04 12:36:02.788575'
+  order_item_id: 16
+product_stock_movement_62:
+  id: 62
+  product_id: 22
+  quantity: -1
+  reason: sold
+  stock_type: external
+  remaining_stock: 999
+  date: '2022-10-04 12:36:02.827107'
+  created_at: '2022-10-04 12:36:02.832197'
+  updated_at: '2022-10-04 12:36:02.832197'
+  order_item_id: 17
+product_stock_movement_63:
+  id: 63
+  product_id: 23
+  quantity: -1
+  reason: sold
+  stock_type: external
+  remaining_stock: 998
+  date: '2022-10-04 13:54:42.768616'
+  created_at: '2022-10-04 13:54:42.783563'
+  updated_at: '2022-10-04 13:54:42.783563'
+  order_item_id: 18
+product_stock_movement_64:
+  id: 64
+  product_id: 15
+  quantity: -1
+  reason: sold
+  stock_type: external
+  remaining_stock: 595
+  date: '2022-10-04 13:54:42.785294'
+  created_at: '2022-10-04 13:54:42.788610'
+  updated_at: '2022-10-04 13:54:42.788610'
+  order_item_id: 19
+product_stock_movement_65:
+  id: 65
+  product_id: 11
+  quantity: -1
+  reason: sold
+  stock_type: external
+  remaining_stock: 9
+  date: '2022-10-04 14:04:12.723429'
+  created_at: '2022-10-04 14:04:12.729897'
+  updated_at: '2022-10-04 14:04:12.729897'
+  order_item_id: 20
+product_stock_movement_67:
+  id: 67
+  product_id: 18
+  quantity: -1
+  reason: sold
+  stock_type: external
+  remaining_stock: 18
+  date: '2022-10-04 14:17:52.842942'
+  created_at: '2022-10-04 14:17:52.846168'
+  updated_at: '2022-10-04 14:17:52.846168'
+  order_item_id: 22
+product_stock_movement_68:
+  id: 68
+  product_id: 18
+  quantity: -3
+  reason: sold
+  stock_type: external
+  remaining_stock: 15
+  date: '2022-10-04 14:25:37.280032'
+  created_at: '2022-10-04 14:25:37.283491'
+  updated_at: '2022-10-04 14:25:37.283491'
+  order_item_id: 11
+product_stock_movement_69:
+  id: 69
+  product_id: 18
+  quantity: -3
+  reason: sold
+  stock_type: external
+  remaining_stock: 12
+  date: '2022-10-04 14:32:28.002830'
+  created_at: '2022-10-04 14:32:28.023296'
+  updated_at: '2022-10-04 14:32:28.023296'
+  order_item_id: 23
+product_stock_movement_70:
+  id: 70
+  product_id: 17
+  quantity: -1
+  reason: sold
+  stock_type: external
+  remaining_stock: 99
+  date: '2022-10-04 14:35:40.556113'
+  created_at: '2022-10-04 14:35:40.560251'
+  updated_at: '2022-10-04 14:35:40.560251'
+  order_item_id: 24

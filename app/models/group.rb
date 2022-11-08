@@ -2,16 +2,14 @@
 
 # Group is way to bind users with prices. Different prices can be defined for each plan/reservable, for each group
 class Group < ApplicationRecord
-  has_many :plans
-  has_many :users
-  has_many :statistic_profiles
+  has_many :plans, dependent: :destroy
+  has_many :users, dependent: :nullify
+  has_many :statistic_profiles, dependent: :nullify
   has_many :trainings_pricings, dependent: :destroy
-  has_many :machines_prices, -> { where(priceable_type: 'Machine') }, class_name: 'Price', dependent: :destroy
-  has_many :spaces_prices, -> { where(priceable_type: 'Space') }, class_name: 'Price', dependent: :destroy
+  has_many :machines_prices, -> { where(priceable_type: 'Machine') }, class_name: 'Price', dependent: :destroy, inverse_of: :group
+  has_many :spaces_prices, -> { where(priceable_type: 'Space') }, class_name: 'Price', dependent: :destroy, inverse_of: :group
   has_many :proof_of_identity_types_groups, dependent: :destroy
   has_many :proof_of_identity_types, through: :proof_of_identity_types_groups
-
-  scope :all_except_admins, -> { where.not(slug: 'admins') }
 
   extend FriendlyId
   friendly_id :name, use: :slugged
@@ -41,26 +39,26 @@ class Group < ApplicationRecord
   end
 
   def create_trainings_pricings
-    Training.all.each do |training|
+    Training.find_each do |training|
       TrainingsPricing.create(group: self, training: training, amount: 0)
     end
   end
 
   def create_machines_prices
-    Machine.all.each do |machine|
+    Machine.find_each do |machine|
       Price.create(priceable: machine, group: self, amount: 0)
     end
   end
 
   def create_spaces_prices
-    Space.all.each do |space|
+    Space.find_each do |space|
       Price.create(priceable: space, group: self, amount: 0)
     end
   end
 
   def create_statistic_subtype
     user_index = StatisticIndex.find_by(es_type_key: 'user')
-    StatisticSubType.create!( statistic_types: user_index.statistic_types, key: slug, label: name)
+    StatisticSubType.create!(statistic_types: user_index.statistic_types, key: slug, label: name)
   end
 
   def update_statistic_subtype
@@ -74,7 +72,7 @@ class Group < ApplicationRecord
 
   def disable_plans
     plans.each do |plan|
-      plan.update_attributes(disabled: disabled)
+      plan.update(disabled: disabled)
     end
   end
 end

@@ -150,6 +150,30 @@ Rails.application.routes.draw do
 
     resources :profile_custom_fields
 
+    resources :product_categories do
+      patch 'position', on: :member
+    end
+
+    resources :products do
+      put 'clone', on: :member
+      get 'stock_movements', on: :member
+    end
+    resources :cart, only: %i[create] do
+      put 'add_item', on: :collection
+      put 'remove_item', on: :collection
+      put 'set_quantity', on: :collection
+      put 'set_offer', on: :collection
+      put 'refresh_item', on: :collection
+      post 'validate', on: :collection
+    end
+    resources :checkout, only: %i[] do
+      post 'payment', on: :collection
+      post 'confirm_payment', on: :collection
+    end
+    resources :orders, except: %i[create] do
+      get 'withdrawal_instructions', on: :member
+    end
+
     # for admin
     resources :trainings do
       get :availabilities, on: :member
@@ -259,7 +283,7 @@ Rails.application.routes.draw do
     end
   end
 
-  %w[account event machine project subscription training user space].each do |path|
+  %w[account event machine project subscription training user space order].each do |path|
     post "/stats/#{path}/_search", to: "api/statistics##{path}"
     post "/stats/#{path}/export", to: "api/statistics#export_#{path}"
   end

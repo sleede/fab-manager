@@ -11,13 +11,16 @@ import { LocalPaymentModal } from '../local-payment/local-payment-modal';
 import { CardPaymentModal } from '../card-payment-modal';
 import PriceAPI from '../../../api/price';
 import { ComputePriceResult } from '../../../models/price';
+import { Order } from '../../../models/order';
+import { computePriceWithCoupon } from '../../../lib/coupon';
 
 interface PaymentModalProps {
   isOpen: boolean,
   toggleModal: () => void,
-  afterSuccess: (result: Invoice|PaymentSchedule) => void,
+  afterSuccess: (result: Invoice|PaymentSchedule|Order) => void,
   onError: (message: string) => void,
   cart: ShoppingCart,
+  order?: Order,
   updateCart: (cart: ShoppingCart) => void,
   operator: User,
   schedule?: PaymentSchedule,
@@ -27,7 +30,7 @@ interface PaymentModalProps {
 /**
  * This component is responsible for rendering the payment modal.
  */
-export const PaymentModal: React.FC<PaymentModalProps> = ({ isOpen, toggleModal, afterSuccess, onError, cart, updateCart, operator, schedule, customer }) => {
+export const PaymentModal: React.FC<PaymentModalProps> = ({ isOpen, toggleModal, afterSuccess, onError, cart, updateCart, operator, schedule, customer, order }) => {
   // the user's wallet
   const [wallet, setWallet] = useState<Wallet>(null);
   // the price of the cart
@@ -44,10 +47,14 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({ isOpen, toggleModal,
 
   // refresh the price when the cart changes
   useEffect(() => {
-    PriceAPI.compute(cart).then(price => {
-      setPrice(price);
-    });
-  }, [cart]);
+    if (order) {
+      setPrice({ price: computePriceWithCoupon(order.total, order.coupon), price_without_coupon: order.total });
+    } else {
+      PriceAPI.compute(cart).then(price => {
+        setPrice(price);
+      });
+    }
+  }, [cart, order]);
 
   // refresh the remaining price when the cart price was computed and the wallet was retrieved
   useEffect(() => {
@@ -73,6 +80,7 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({ isOpen, toggleModal,
         afterSuccess={afterSuccess}
         onError={onError}
         cart={cart}
+        order={order}
         updateCart={updateCart}
         currentUser={operator}
         customer={customer}
@@ -86,6 +94,7 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({ isOpen, toggleModal,
         afterSuccess={afterSuccess}
         onError={onError}
         cart={cart}
+        order={order}
         currentUser={operator}
         customer={customer}
         schedule={schedule}

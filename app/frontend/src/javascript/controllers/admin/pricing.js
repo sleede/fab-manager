@@ -30,8 +30,8 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
     $scope.enabledPlans = plans.filter(function (p) { return !p.disabled; });
 
     // List of groups (eg. normal, student ...)
-    $scope.groups = groups.filter(function (g) { return g.slug !== 'admins'; });
-    $scope.enabledGroups = groups.filter(function (g) { return (g.slug !== 'admins') && !g.disabled; });
+    $scope.groups = groups;
+    $scope.enabledGroups = groups.filter(function (g) { return !g.disabled; });
 
     // List of all plan-categories
     $scope.planCategories = planCategories;

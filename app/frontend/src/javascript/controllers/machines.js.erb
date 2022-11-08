@@ -263,7 +263,21 @@ Application.Controllers.controller('EditMachineController', ['$scope', '$state',
     $scope.method = 'put';
 
     // Retrieve the details for the machine id in the URL, if an error occurs redirect the user to the machines list
-    $scope.machine = machinePromise;
+    $scope.machine = cleanMachine(machinePromise);
+
+    /**
+     * Shows an error message forwarded from a child component
+     */
+    $scope.onError = function (message) {
+      growl.error(message);
+    }
+
+    /**
+     * Shows a success message forwarded from a child react components
+     */
+    $scope.onSuccess = function (message) {
+      growl.success(message)
+    }
 
     /* PRIVATE SCOPE */
 
@@ -276,6 +290,13 @@ Application.Controllers.controller('EditMachineController', ['$scope', '$state',
       // Using the MachinesController
       return new MachinesController($scope, $state);
     };
+
+    // prepare the machine for the react-hook-form
+    function cleanMachine (machine) {
+      delete machine.$promise;
+      delete machine.$resolved;
+      return machine;
+    }
 
     // !!! MUST BE CALLED AT THE END of the controller
     return initialize();
@@ -403,7 +424,7 @@ Application.Controllers.controller('ReserveMachineController', ['$scope', '$tran
     // the moment when the slot selection changed for the last time, used to trigger changes in the cart
     $scope.selectionTime = null;
 
-    // the last clicked event in the calender
+    // the last clicked event in the calendar
     $scope.selectedEvent = null;
 
     // the application global settings
