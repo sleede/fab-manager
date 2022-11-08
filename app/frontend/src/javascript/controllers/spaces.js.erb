@@ -214,18 +214,22 @@ Application.Controllers.controller('SpacesController', ['$scope', '$state', 'spa
 /**
  * Controller used in the space creation page (admin)
  */
-Application.Controllers.controller('NewSpaceController', ['$scope', '$state', 'CSRF', function ($scope, $state, CSRF) {
+Application.Controllers.controller('NewSpaceController', ['$scope', '$state', 'CSRF', 'growl', function ($scope, $state, CSRF, growl) {
   CSRF.setMetaTags();
 
-  // API URL where the form will be posted
-  $scope.actionUrl = '/api/spaces/';
+  /**
+   * Callback triggered by react components
+   */
+  $scope.onSuccess = function (message) {
+    growl.success(message);
+  };
 
-  // Form action on the above URL
-  $scope.method = 'post';
-
-  // default space parameters
-  $scope.space =
-    { space_files_attributes: [] };
+  /**
+   * Callback triggered by react components
+   */
+  $scope.onError = function (message) {
+    growl.error(message);
+  };
 
   // Using the SpacesController
   return new SpacesController($scope, $state);
@@ -234,18 +238,33 @@ Application.Controllers.controller('NewSpaceController', ['$scope', '$state', 'C
 /**
  * Controller used in the space edition page (admin)
  */
-Application.Controllers.controller('EditSpaceController', ['$scope', '$state', '$transition$', 'spacePromise', 'CSRF',
-  function ($scope, $state, $transition$, spacePromise, CSRF) {
+Application.Controllers.controller('EditSpaceController', ['$scope', '$state', '$transition$', 'spacePromise', 'CSRF', 'growl',
+  function ($scope, $state, $transition$, spacePromise, CSRF, growl) {
     CSRF.setMetaTags();
 
-    // API URL where the form will be posted
-    $scope.actionUrl = `/api/spaces/${$transition$.params().id}`;
-
-    // Form action on the above URL
-    $scope.method = 'put';
-
     // space to modify
-    $scope.space = spacePromise;
+    $scope.space = cleanSpace(spacePromise);
+
+    /**
+     * Callback triggered by react components
+     */
+    $scope.onSuccess = function (message) {
+      growl.success(message);
+    };
+
+    /**
+     * Callback triggered by react components
+     */
+    $scope.onError = function (message) {
+      growl.error(message);
+    };
+
+    // prepare the space for the react-hook-form
+    function cleanSpace (space) {
+      delete space.$promise;
+      delete space.$resolved;
+      return space;
+    }
 
     // Using the SpacesController
     return new SpacesController($scope, $state);

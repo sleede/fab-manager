@@ -8,7 +8,6 @@ en:
         description: "Description"
         technical_specifications: "Technical specifications"
         attached_files_pdf: "Attached files (pdf)"
-        attach_a_file: "Attach a file"
         add_an_attachment: "Add an attachment"
         disable_machine: "Disable machine"
         disabled_help: "When disabled, the machine won't be reservable and won't appear by default in the machines list."
@@ -31,6 +30,20 @@ en:
         ACTION_training: "{ACTION, select, create{Create} other{Update}} the training"
         create_success: "The training was created successfully"
         update_success: "The training was updated successfully"
+      space_form:
+        name: "Name"
+        illustration: "Illustration"
+        add_an_illustration: "Add an illustration"
+        description: "Description"
+        characteristics: "Characteristics"
+        attached_files_pdf: "Attached files (pdf)"
+        add_an_attachment: "Add an attachment"
+        default_seats: "Default number of seats"
+        disable_space: "Disable the space"
+        disabled_help: "When disabled, the space won't be reservable and won't appear by default in the spaces list."
+        ACTION_space: "{ACTION, select, create{Create} other{Update}} the space"
+        create_success: "The space was created successfully"
+        update_success: "The space was updated successfully"
       #add a new machine
       machines_new:
         declare_a_new_machine: "Declare a new machine"

@@ -1,3 +1,4 @@
+import { FileType } from './file';
 
 export interface Space {
   id: number,
@@ -6,10 +7,6 @@ export interface Space {
   slug: string,
   default_places: number,
   disabled: boolean,
-  space_image: string,
-  space_file_attributes?: {
-    id: number,
-    attachment: string,
-    attachement_url: string,
-  }
+  space_image_attributes: FileType,
+  space_file_attributes?: Array<FileType>
 }

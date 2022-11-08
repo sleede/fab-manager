@@ -141,21 +141,6 @@ en:
         themes: "Themes"
         tags: "Tags"
         save_as_draft: "Save as draft"
-      #machine edition form
-      machine:
-        name: "Name"
-        name_is_required: "Name is required."
-        illustration: "Visual"
-        add_an_illustration: "Add a visual"
-        description: "Description"
-        description_is_required: "Description is required."
-        technical_specifications: "Technical specifications"
-        technical_specifications_are_required: "Technical specifications are required."
-        attached_files_pdf: "Attached files (pdf)"
-        attach_a_file: "Attach a file"
-        add_an_attachment: "Add an attachment"
-        disable_machine: "Disable machine"
-        validate_your_machine: "Validate your machine"
       #button to book a machine reservation
       reserve_button:
         book_this_machine: "Book this machine"
@@ -267,20 +252,6 @@ en:
         email_address_is_required: "Email address is required."
         disabled: "Disable subscription"
         disable_plan_will_not_unsubscribe_users: "Beware: disabling this plan won't unsubscribe users having active subscriptions with it."
-      #training edition form
-      trainings:
-        name: "Name"
-        name_is_required: "Name is required."
-        illustration: "Illustration"
-        add_an_illustration: "Add an illustration"
-        description: "Description"
-        description_is_required: "Description is required."
-        add_a_new_training: "Add a new training"
-        validate_your_training: "Validate your training"
-        associated_machines: "Associated machines"
-        number_of_tickets: "Number of tickets"
-        public_page: "Show in training lists"
-        disable_training: "Disable the training"
       #partial form to edit/create a user (admin view)
       user_admin:
         user: "User"
@@ -397,22 +368,6 @@ en:
         unable_to_apply_the_coupon_because_amount_exceeded: "Unable to apply the coupon: the discount exceed the total amount of this purchase."
         unable_to_apply_the_coupon_because_undefined: "Unable to apply the coupon: an unexpected error occurred, please contact the Fablab's manager."
         unable_to_apply_the_coupon_because_rejected: "This code does not exists."
-      #form to create/edit a space
-      space:
-        name: "Name"
-        name_is_required: "Name is required."
-        illustration: "Illustration"
-        add_an_illustration: "Add an illustration"
-        description: "Description"
-        description_is_required: "Description is required."
-        characteristics: "Characteristics"
-        characteristics_are_required: "Characteristics are required."
-        attached_files_pdf: "Attached files (pdf)"
-        attach_a_file: "Attach a file"
-        add_an_attachment: "Add an attachment"
-        default_places: "Default maximum tickets"
-        default_places_is_required: "Default maximum tickets is required."
-        disable_space: "Disable space"
       payment_schedule_summary:
         your_payment_schedule: "Your payment schedule"
         NUMBER_monthly_payment_of_AMOUNT: "{NUMBER} monthly {NUMBER, plural, =1{payment} other{payments}} of {AMOUNT}"

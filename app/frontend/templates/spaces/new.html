@@ -26,30 +26,11 @@
       {{ 'app.admin.space_new.consider_changing_its_prices_before_creating_any_reservation_slot' | translate }}
     </div>
 
-    <form role="form"
-          name="spaceForm"
-          class="form-horizontal"
-          action="{{ actionUrl }}"
-          ng-upload="submited(content)"
-          upload-options-enable-rails-csrf="true"
-          unsaved-warning-form
-          novalidate>
-
-      <input name="_method" type="hidden" ng-value="method">
-
-      <section class="panel panel-default bg-light m-lg">
-        <div class="panel-body m-r">
-          <ng-include src="'/spaces/_form.html'"></ng-include>
-        </div>
-
-        <div class="panel-footer no-padder">
-          <input type="submit"
-                 value="{{ 'app.admin.space_new.add_this_space' | translate }}"
-                 class="r-b btn-valid btn btn-warning btn-block p-lg btn-lg text-u-c"
-                 ng-disabled="spaceForm.$invalid"/>
-        </div>
-      </section>
-    </form>
+    <div class="panel panel-default bg-light m-lg">
+      <div class="panel-body m-r">
+        <space-form action="'create'" on-success="onSuccess" on-error="onError"></space-form>
+      </div>
+    </div>
 
   </div>
 
