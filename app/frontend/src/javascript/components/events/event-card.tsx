@@ -53,14 +53,14 @@ export const EventCard: React.FC<EventCardProps> = ({ event, cardType }) => {
   const formatTime = (): string => {
     return event.all_day
       ? t('app.public.event_card.all_day')
-      : t('app.public.event_card.from_time_to_time', { START: FormatLib.time(event.start_date), END: FormatLib.time(event.end_date) });
+      : t('app.public.event_card.from_time_to_time', { START: FormatLib.time(event.start_time), END: FormatLib.time(event.end_time) });
   };
 
   return (
     <div className={`event-card event-card--${cardType}`}>
-      {event.event_image
+      {event.event_image_attributes
         ? <div className="event-card-picture">
-            <img src={event.event_image} alt="" />
+            <img src={event.event_image_attributes.attachment_url} alt={event.event_image_attributes.attachment_name} />
           </div>
         : cardType !== 'sm' &&
           <div className="event-card-picture">

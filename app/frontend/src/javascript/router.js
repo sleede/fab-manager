@@ -801,12 +801,6 @@ angular.module('application.router', ['ui.router'])
             templateUrl: '/events/new.html',
             controller: 'NewEventController'
           }
-        },
-        resolve: {
-          categoriesPromise: ['Category', function (Category) { return Category.query().$promise; }],
-          themesPromise: ['EventTheme', function (EventTheme) { return EventTheme.query().$promise; }],
-          ageRangesPromise: ['AgeRange', function (AgeRange) { return AgeRange.query().$promise; }],
-          priceCategoriesPromise: ['PriceCategory', function (PriceCategory) { return PriceCategory.query().$promise; }]
         }
       })
       .state('app.admin.events_edit', {
@@ -818,11 +812,7 @@ angular.module('application.router', ['ui.router'])
           }
         },
         resolve: {
-          eventPromise: ['Event', '$transition$', function (Event, $transition$) { return Event.get({ id: $transition$.params().id }).$promise; }],
-          categoriesPromise: ['Category', function (Category) { return Category.query().$promise; }],
-          themesPromise: ['EventTheme', function (EventTheme) { return EventTheme.query().$promise; }],
-          ageRangesPromise: ['AgeRange', function (AgeRange) { return AgeRange.query().$promise; }],
-          priceCategoriesPromise: ['PriceCategory', function (PriceCategory) { return PriceCategory.query().$promise; }]
+          eventPromise: ['Event', '$transition$', function (Event, $transition$) { return Event.get({ id: $transition$.params().id }).$promise; }]
         }
       })
       .state('app.admin.event_reservations', {

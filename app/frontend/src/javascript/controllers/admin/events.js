@@ -41,126 +41,10 @@
  */
 class EventsController {
   constructor ($scope, $state) {
-    // default parameters for AngularUI-Bootstrap datepicker
-    $scope.datePicker = {
-      format: Fablab.uibDateFormat,
-      startOpened: false, // default: datePicker is not shown
-      endOpened: false,
-      recurrenceEndOpened: false,
-      options: {
-        startingDay: Fablab.weekStartingDay
-      }
-    };
-
-    // themes of the current event
-    $scope.event_themes = $scope.event.event_theme_ids;
-
-    /**
-     * For use with ngUpload (https://github.com/twilson63/ngUpload).
-     * Intended to be the callback when an upload is done: any raised error will be stacked in the
-     * $scope.alerts array. If everything goes fine, the user is redirected to the project page.
-     * @param content {Object} JSON - The upload's result
-     */
-    $scope.submited = function (content) {
-      $scope.onSubmited(content);
-    };
-
     /**
      * Changes the user's view to the events list page
      */
     $scope.cancel = function () { $state.go('app.public.events_list'); };
-
-    /**
-     * For use with 'ng-class', returns the CSS class name for the uploads previews.
-     * The preview may show a placeholder or the content of the file depending on the upload state.
-     * @param v {*} any attribute, will be tested for truthiness (see JS evaluation rules)
-     */
-    $scope.fileinputClass = function (v) {
-      if (v) {
-        return 'fileinput-exists';
-      } else {
-        return 'fileinput-new';
-      }
-    };
-
-    /**
-     * This will create a single new empty entry into the event's attachements list.
-     */
-    $scope.addFile = function () { $scope.event.event_files_attributes.push({}); };
-
-    /**
-     * This will remove the given file from the event's attachements list. If the file was previously uploaded
-     * to the server, it will be marked for deletion on the server. Otherwise, it will be simply truncated from
-     * the attachements array.
-     * @param file {Object} the file to delete
-     */
-    $scope.deleteFile = function (file) {
-      const index = $scope.event.event_files_attributes.indexOf(file);
-      if (file.id != null) {
-        return file._destroy = true;
-      } else {
-        return $scope.event.event_files_attributes.splice(index, 1);
-      }
-    };
-
-    /**
-     * Show/Hide the "start" datepicker (open the drop down/close it)
-     */
-    $scope.toggleStartDatePicker = function ($event) {
-      $event.preventDefault();
-      $event.stopPropagation();
-      return $scope.datePicker.startOpened = !$scope.datePicker.startOpened;
-    };
-
-    /**
-     * Show/Hide the "end" datepicker (open the drop down/close it)
-     */
-    $scope.toggleEndDatePicker = function ($event) {
-      $event.preventDefault();
-      $event.stopPropagation();
-      return $scope.datePicker.endOpened = !$scope.datePicker.endOpened;
-    };
-
-    /**
-     * Masks/displays the recurrence pane allowing the admin to set the current event as recursive
-     */
-    $scope.toggleRecurrenceEnd = function (e) {
-      e.preventDefault();
-      e.stopPropagation();
-      return $scope.datePicker.recurrenceEndOpened = !$scope.datePicker.recurrenceEndOpened;
-    };
-
-    /**
-     * Initialize a new price item in the additional prices list
-     */
-    $scope.addPrice = function () {
-      $scope.event.prices.push({
-        category: null,
-        amount: null
-      });
-    };
-
-    /**
-     * Remove the price or mark it as 'to delete'
-     */
-    $scope.removePrice = function (price, event) {
-      event.preventDefault();
-      event.stopPropagation();
-      if (price.id) {
-        price._destroy = true;
-      } else {
-        const index = $scope.event.prices.indexOf(price);
-        $scope.event.prices.splice(index, 1);
-      }
-    };
-
-    /**
-     * When the theme selection has changes, extract the IDs to populate the form
-     * @param themes {Array<EventTheme>}
-     */
-    $scope.handleEventChange = function (themes) {
-      $scope.event_themes = themes.map(t => t.id);
-    };
   }
 }
 
@@ -555,60 +439,22 @@ Application.Controllers.controller('ShowEventReservationsController', ['$scope',
 /**
  * Controller used in the event creation page
  */
-Application.Controllers.controller('NewEventController', ['$scope', '$state', 'CSRF', 'categoriesPromise', 'themesPromise', 'ageRangesPromise', 'priceCategoriesPromise', '_t',
-  function ($scope, $state, CSRF, categoriesPromise, themesPromise, ageRangesPromise, priceCategoriesPromise, _t) {
+Application.Controllers.controller('NewEventController', ['$scope', '$state', 'CSRF', 'growl',
+  function ($scope, $state, CSRF, growl) {
     CSRF.setMetaTags();
 
-    // API URL where the form will be posted
-    $scope.actionUrl = '/api/events/';
-
-    // Form action on the above URL
-    $scope.method = 'post';
-
-    // List of categories for the events
-    $scope.categories = categoriesPromise;
-
-    // List of events themes
-    $scope.themes = themesPromise;
-
-    // List of age ranges
-    $scope.ageRanges = ageRangesPromise;
-
-    // List of availables price's categories
-    $scope.priceCategories = priceCategoriesPromise;
-
-    // Default event parameters
-    $scope.event = {
-      event_files_attributes: [],
-      start_date: new Date(),
-      end_date: new Date(),
-      start_time: new Date(),
-      end_time: new Date(),
-      all_day: true,
-      recurrence: 'none',
-      category_id: null,
-      prices: []
+    /**
+     * Callback triggered by react components
+     */
+    $scope.onSuccess = function (message) {
+      growl.success(message);
     };
 
-    // Possible types of recurrences for an event
-    $scope.recurrenceTypes = [
-      { label: _t('app.admin.events_new.none'), value: 'none' },
-      { label: _t('app.admin.events_new.every_days'), value: 'day' },
-      { label: _t('app.admin.events_new.every_week'), value: 'week' },
-      { label: _t('app.admin.events_new.every_month'), value: 'month' },
-      { label: _t('app.admin.events_new.every_year'), value: 'year' }
-    ];
-
-    // triggered when the new event form was submitted to the API and have received an answer
-    $scope.onSubmited = function (content) {
-      if ((content.id == null)) {
-        $scope.alerts = [];
-        angular.forEach(content, function (v, k) {
-          angular.forEach(v, function (err) { $scope.alerts.push({ msg: k + ': ' + err, type: 'danger' }); });
-        });
-      } else {
-        $state.go('app.public.events_list');
-      }
+    /**
+     * Callback triggered by react components
+     */
+    $scope.onError = function (message) {
+      growl.error(message);
     };
 
     // Using the EventsController
@@ -619,109 +465,25 @@ Application.Controllers.controller('NewEventController', ['$scope', '$state', 'C
 /**
  * Controller used in the events edition page
  */
-Application.Controllers.controller('EditEventController', ['$scope', '$state', '$transition$', 'CSRF', 'eventPromise', 'categoriesPromise', 'themesPromise', 'ageRangesPromise', 'priceCategoriesPromise', '$uibModal', 'growl', '_t',
-  function ($scope, $state, $transition$, CSRF, eventPromise, categoriesPromise, themesPromise, ageRangesPromise, priceCategoriesPromise, $uibModal, growl, _t) {
+Application.Controllers.controller('EditEventController', ['$scope', '$state', 'CSRF', 'eventPromise', 'growl',
+  function ($scope, $state, CSRF, eventPromise, growl) {
     /* PUBLIC SCOPE */
 
-    // API URL where the form will be posted
-    $scope.actionUrl = `/api/events/${$transition$.params().id}`;
-
-    // Form action on the above URL
-    $scope.method = 'put';
-
     // Retrieve the event details, in case of error the user is redirected to the events listing
-    $scope.event = eventPromise;
+    $scope.event = cleanEvent(eventPromise);
 
-    // We'll keep track of the initial dates here, for later comparison
-    $scope.initialDates = {};
-
-    // List of categories for the events
-    $scope.categories = categoriesPromise;
-
-    // List of available price's categories
-    $scope.priceCategories = priceCategoriesPromise;
-
-    // List of events themes
-    $scope.themes = themesPromise;
-
-    // List of age ranges
-    $scope.ageRanges = ageRangesPromise;
-
-    // Default edit-mode for periodic event
-    $scope.editMode = 'single';
-
-    // show edit-mode modal if event is recurrent
-    $scope.isShowEditModeModal = $scope.event.recurrence_events.length > 0;
-
-    $scope.editRecurrent = function (e) {
-      if ($scope.isShowEditModeModal && $scope.event.recurrence_events.length > 0) {
-        e.preventDefault();
-
-        // open a choice edit-mode dialog
-        const modalInstance = $uibModal.open({
-          animation: true,
-          templateUrl: '/events/editRecurrent.html',
-          size: 'md',
-          controller: 'EditRecurrentEventController',
-          resolve: {
-            editMode: function () { return $scope.editMode; },
-            initialDates: function () { return $scope.initialDates; },
-            currentEvent: function () { return $scope.event; }
-          }
-        });
-        // submit form event by edit-mode
-        modalInstance.result.then(function (res) {
-          $scope.isShowEditModeModal = false;
-          $scope.editMode = res.editMode;
-          e.target.click();
-        });
-      }
+    /**
+     * Callback triggered by react components
+     */
+    $scope.onSuccess = function (message) {
+      growl.success(message);
     };
 
-    // triggered when the edit event form was submitted to the API and have received an answer
-    $scope.onSubmited = function (data) {
-      if (data.total === data.updated) {
-        if (data.updated > 1) {
-          growl.success(_t(
-            'app.admin.events_edit.events_updated',
-            { COUNT: data.updated - 1 }
-          ));
-        } else {
-          growl.success(_t(
-            'app.admin.events_edit.event_successfully_updated'
-          ));
-        }
-      } else {
-        if (data.total > 1) {
-          growl.warning(_t(
-            'app.admin.events_edit.events_not_updated',
-            { TOTAL: data.total, COUNT: data.total - data.updated }
-          ));
-          if (_.find(data.details, { error: 'EventPriceCategory' })) {
-            growl.error(_t(
-              'app.admin.events_edit.error_deleting_reserved_price'
-            ));
-          } else {
-            growl.error(_t(
-              'app.admin.events_edit.other_error'
-            ));
-          }
-        } else {
-          growl.error(_t(
-            'app.admin.events_edit.unable_to_update_the_event'
-          ));
-          if (data.details[0].error === 'EventPriceCategory') {
-            growl.error(_t(
-              'app.admin.events_edit.error_deleting_reserved_price'
-            ));
-          } else {
-            growl.error(_t(
-              'app.admin.events_edit.other_error'
-            ));
-          }
-        }
-      }
-      $state.go('app.public.events_list');
+    /**
+     * Callback triggered by react components
+     */
+    $scope.onError = function (message) {
+      growl.error(message);
     };
 
     /* PRIVATE SCOPE */
@@ -732,18 +494,16 @@ Application.Controllers.controller('EditEventController', ['$scope', '$state', '
     const initialize = function () {
       CSRF.setMetaTags();
 
-      // init the dates to JS objects
-      $scope.event.start_date = moment($scope.event.start_date).toDate();
-      $scope.event.end_date = moment($scope.event.end_date).toDate();
-
-      $scope.initialDates = {
-        start: new Date($scope.event.start_date.valueOf()),
-        end: new Date($scope.event.end_date.valueOf())
-      };
-
       // Using the EventsController
       return new EventsController($scope, $state);
     };
+
+    // prepare the event for the react-hook-form
+    function cleanEvent (event) {
+      delete event.$promise;
+      delete event.$resolved;
+      return event;
+    }
 
     // !!! MUST BE CALLED AT THE END of the controller
     return initialize();

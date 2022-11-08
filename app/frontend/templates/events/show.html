@@ -31,8 +31,8 @@
 
     <div class="article wrapper-lg">
 
-      <div class="article-thumbnail" ng-if="event.event_image">
-        <img ng-src="{{event.event_image}}" alt="{{event.title}}" class="img-responsive">
+      <div class="article-thumbnail" ng-if="event.event_image_attributes">
+        <img ng-src="{{event.event_image_attributes.attachment_url}}" alt="{{event.title}}" class="img-responsive">
       </div>
 
       <h3 translate>{{ 'app.public.events_show.event_description' }}</h3>
@@ -57,7 +57,7 @@
 
         <ul class="widget-content list-group list-group-lg no-bg auto">
           <li ng-repeat="file in event.event_files_attributes" class="list-group-item no-b clearfix">
-            <a target="_blank" ng-href="{{file.attachment_url}}"><i class="fa fa-arrow-circle-o-down"> </i> {{file.attachment | humanize : 25}}</a>
+            <a target="_blank" ng-href="{{file.attachment_url}}"><i class="fa fa-arrow-circle-o-down"> </i> {{file.attachment_name | humanize : 25}}</a>
           </li>
         </ul>
     </section>
@@ -85,12 +85,12 @@
           <dd>{{ 'app.public.events_show.beginning' | translate }} <span class="text-u-l">{{event.start_date | amDateFormat:'L'}}</span><br>{{ 'app.public.events_show.ending' | translate }} <span class="text-u-l">{{event.end_date | amDateFormat:'L'}}</span></dd>
           <dt><i class="fas fa-clock"></i> {{ 'app.public.events_show.opening_hours' | translate }}</dt>
           <dd ng-if="event.all_day"><span translate>{{ 'app.public.events_show.all_day' }}</span></dd>
-          <dd ng-if="!event.all_day">{{ 'app.public.events_show.from_time' | translate }} <span class="text-u-l">{{event.start_date | amDateFormat:'LT'}}</span> {{ 'app.public.events_show.to_time' | translate }} <span class="text-u-l">{{event.end_date | amDateFormat:'LT'}}</span></dd>
+          <dd ng-if="!event.all_day">{{ 'app.public.events_show.from_time' | translate }} <span class="text-u-l">{{event.start_time}}</span> {{ 'app.public.events_show.to_time' | translate }} <span class="text-u-l">{{event.end_time}}</span></dd>
         </dl>
 
         <div class="text-sm" ng-if="event.amount">
           <div>{{ 'app.public.events_show.full_price_' | translate }} <span>{{ event.amount | currency}}</span></div>
-          <div ng-repeat="price in event.prices" class="description-hover">
+          <div ng-repeat="price in event.event_price_categories_attributes" class="description-hover">
             <span uib-popover="{{getPriceCategoryConditions(price.category.id)}}" popover-trigger="mouseenter">
               {{price.category.name}} :
             </span>
@@ -120,7 +120,7 @@
                     </select> {{ 'app.public.events_show.ticket' | translate:{NUMBER:reserve.nbReservePlaces} }}
                   </div>
                 </div>
-                <div class="row" ng-repeat="price in event.prices">
+                <div class="row" ng-repeat="price in event.event_price_categories_attributes">
                   <label class="col-sm-6 control-label">{{price.category.name}} : <span class="text-blue">{{price.amount | currency}}</span></label>
                   <div class="col-sm-6">
                     <select ng-model="reserve.tickets[price.id]" ng-change="changeNbPlaces()" ng-options="i for i in reserve.nbPlaces[price.id]">
