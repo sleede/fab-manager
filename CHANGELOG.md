@@ -1,5 +1,9 @@
 # Changelog Fab-manager
 
+## v5.5.0 2022 November 08
+
+- Feature Fablab Store
+- Feature Allow admin to reserve for himself
 - Allow searching by username (#401)
 - Fix a bug: adding a new event without updating the dates results in internal server error (undefined method `div' for nil)
 - Fix a bug: portuguese time formatting (#405)
