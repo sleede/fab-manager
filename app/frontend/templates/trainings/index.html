@@ -23,10 +23,10 @@
 
 
       <div class="widget panel panel-default">
-        <div class="panel-heading picture" ng-if="!training.training_image" ng-click="showTraining(training)">
+        <div class="panel-heading picture" ng-if="!training.training_image_attributes" ng-click="showTraining(training)">
           <img src="data:image/png;base64," data-src="holder.js/100%x100%/text:&#xf03e;/font:'Font Awesome 5 Free'/icon" bs-holder class="img-responsive">
         </div>
-        <div class="panel-heading picture" style="background-image:url({{training.training_image}})" ng-if="training.training_image" ng-click="showTraining(training)">
+        <div class="panel-heading picture" style="background-image:url({{training.training_image_attributes.attachment_url}})" ng-if="training.training_image_attributes" ng-click="showTraining(training)">
         </div>
         <div class="panel-body">
           <h1 class="m-b text-center">{{training.name}}</h1>

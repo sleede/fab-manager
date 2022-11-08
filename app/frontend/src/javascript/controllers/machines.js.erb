@@ -234,16 +234,6 @@ Application.Controllers.controller('MachinesController', ['$scope', '$state', '_
 Application.Controllers.controller('NewMachineController', ['$scope', '$state', 'CSRF', 'growl', function ($scope, $state, CSRF, growl) {
   CSRF.setMetaTags();
 
-  // API URL where the form will be posted
-  $scope.actionUrl = '/api/machines/';
-
-  // Form action on the above URL
-  $scope.method = 'post';
-
-  // default machine parameters
-  $scope.machine =
-    { machine_files_attributes: [] };
-
   /**
    * Shows an error message forwarded from a child component
    */
@@ -268,13 +258,7 @@ Application.Controllers.controller('NewMachineController', ['$scope', '$state', 
  */
 Application.Controllers.controller('EditMachineController', ['$scope', '$state', '$transition$', 'machinePromise', 'CSRF', 'growl',
   function ($scope, $state, $transition$, machinePromise, CSRF, growl) {
-  /* PUBLIC SCOPE */
-
-    // API URL where the form will be posted
-    $scope.actionUrl = `/api/machines/${$transition$.params().id}`;
-
-    // Form action on the above URL
-    $scope.method = 'put';
+    /* PUBLIC SCOPE */
 
     // Retrieve the details for the machine id in the URL, if an error occurs redirect the user to the machines list
     $scope.machine = cleanMachine(machinePromise);

@@ -8,4 +8,24 @@ export default class TrainingAPI {
     const res: AxiosResponse<Array<Training>> = await apiClient.get(`/api/trainings${ApiLib.filtersToQuery(filters)}`);
     return res?.data;
   }
+
+  static async create (training: Training): Promise<Training> {
+    const data = ApiLib.serializeAttachments(training, 'training', ['training_image_attributes']);
+    const res: AxiosResponse<Training> = await apiClient.post('/api/trainings', data, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
+    return res?.data;
+  }
+
+  static async update (training: Training): Promise<Training> {
+    const data = ApiLib.serializeAttachments(training, 'training', ['training_image_attributes']);
+    const res: AxiosResponse<Training> = await apiClient.put(`/api/trainings/${training.id}`, data, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
+    return res?.data;
+  }
 }

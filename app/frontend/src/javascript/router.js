@@ -504,7 +504,7 @@ angular.module('application.router', ['ui.router'])
           }
         },
         resolve: {
-          trainingsPromise: ['Training', function (Training) { return Training.query({ public_page: true }).$promise; }]
+          trainingsPromise: ['Training', function (Training) { return Training.query({ public_page: true, disabled: false }).$promise; }]
         }
       })
       .state('app.public.training_show', {
@@ -761,10 +761,6 @@ angular.module('application.router', ['ui.router'])
             templateUrl: '/admin/trainings/new.html',
             controller: 'NewTrainingController'
           }
-        },
-        resolve: {
-          machinesPromise: ['Machine', function (Machine) { return Machine.query().$promise; }],
-          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['machines_module']" }).$promise; }]
         }
       })
       .state('app.admin.trainings_edit', {
@@ -777,9 +773,7 @@ angular.module('application.router', ['ui.router'])
           }
         },
         resolve: {
-          trainingPromise: ['Training', '$transition$', function (Training, $transition$) { return Training.get({ id: $transition$.params().id }).$promise; }],
-          machinesPromise: ['Machine', function (Machine) { return Machine.query().$promise; }],
-          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['machines_module']" }).$promise; }]
+          trainingPromise: ['Training', '$transition$', function (Training, $transition$) { return Training.get({ id: $transition$.params().id }).$promise; }]
         }
       })
       // events
