@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- Fix a bug: free disk space not verified in some cases
+
 ## v5.5.0 2022 November 08
 
 - Feature Fablab Store
