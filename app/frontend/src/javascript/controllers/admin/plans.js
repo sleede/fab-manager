@@ -251,6 +251,8 @@ Application.Controllers.controller('EditPlanController', ['$scope', 'groups', 'p
     if ($scope.plan.type === null) { $scope.plan.type = 'Plan'; }
     if ($scope.plan.disabled) { $scope.plan.disabled = 'true'; }
 
+    $scope.suscriptionPlan = cleanPlan(planPromise);
+
     // API URL where the form will be posted
     $scope.actionUrl = `/api/plans/${$transition$.params().id}`;
 
@@ -348,6 +350,27 @@ Application.Controllers.controller('EditPlanController', ['$scope', 'groups', 'p
         }
       }
     };
+
+    /**
+     * Shows an error message forwarded from a child component
+     */
+    $scope.onError = function (message) {
+      growl.error(message);
+    };
+
+    /**
+     * Shows a success message forwarded from a child react components
+     */
+    $scope.onSuccess = function (message) {
+      growl.success(message);
+    };
+
+    // prepare the plan for the react-hook-form
+    function cleanPlan (plan) {
+      delete plan.$promise;
+      delete plan.$resolved;
+      return plan;
+    }
 
     // Using the PlansController
     return new PlanController($scope, groups, prices, partners, CSRF, _t);

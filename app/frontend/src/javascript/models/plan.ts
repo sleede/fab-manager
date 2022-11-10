@@ -23,7 +23,7 @@ export interface Plan {
     name: string,
     interval: Interval,
     interval_count: number,
-    group_id: number,
+    group_id: number|'all',
     plan_category_id: number,
     training_credit_nb: number,
     is_rolling: boolean,

@@ -23,6 +23,12 @@
 <div class="row no-gutter">
     <div class=" col-sm-12 col-md-9 b-r nopadding">
 
+      <div class="panel panel-default bg-light m-lg">
+        <div class="panel-body m-r">
+          <plan-form action="'update'" plan="suscriptionPlan" on-error="onError" on-success="onSuccess"></plan-form>
+        </div>
+      </div>
+
         <div id="planForm">
             <form name="planForm" novalidate="novalidate" class="col-lg-7 col-lg-offset-2 m-t-lg form-group" action="{{ actionUrl }}" ng-upload="afterSubmit(content)" upload-options-enable-rails-csrf="true">
 
