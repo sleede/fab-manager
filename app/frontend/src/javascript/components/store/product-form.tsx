@@ -23,6 +23,7 @@ import { UIRouter } from '@uirouter/angularjs';
 import { SelectOption, ChecklistOption } from '../../models/select';
 import { FormMultiFileUpload } from '../form/form-multi-file-upload';
 import { FormMultiImageUpload } from '../form/form-multi-image-upload';
+import { AdvancedAccountingForm } from '../accounting/advanced-accounting-form';
 
 interface ProductFormProps {
   product: Product,
@@ -306,6 +307,10 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
                                    id="product_files_attributes"
                                    className="product-documents" />
             </div>
+
+            <hr />
+
+            <AdvancedAccountingForm register={register} onError={onError} />
 
             <div className="main-actions">
               <FabButton type="submit" className="main-action-btn" disabled={saving}>

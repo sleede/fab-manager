@@ -20,6 +20,9 @@ class Product < ApplicationRecord
   has_many :product_stock_movements, dependent: :destroy
   accepts_nested_attributes_for :product_stock_movements, allow_destroy: true, reject_if: :all_blank
 
+  has_one :advanced_accounting, as: :accountable, dependent: :destroy
+  accepts_nested_attributes_for :advanced_accounting, allow_destroy: true
+
   validates :name, :slug, presence: true
   validates :slug, uniqueness: { message: I18n.t('.errors.messages.slug_already_used') }
   validates :amount, numericality: { greater_than_or_equal_to: 0, allow_nil: true }

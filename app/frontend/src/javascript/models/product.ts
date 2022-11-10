@@ -3,6 +3,7 @@ import { ApiFilter, ApiResource, PaginatedIndex } from './api';
 import { ProductCategory } from './product-category';
 import { Machine } from './machine';
 import { FileType, ImageType } from './file';
+import { AdvancedAccounting } from './advanced-accounting';
 
 export type ProductSortOption = 'name-asc' | 'name-desc' | 'amount-asc' | 'amount-desc' | '';
 
@@ -119,4 +120,5 @@ export interface Product {
     thumb_attachment_url?: string,
   }>,
   product_stock_movements_attributes?: Array<ProductStockMovement>,
+  advanced_accounting_attributes?: AdvancedAccounting
 }
