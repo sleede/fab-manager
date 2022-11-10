@@ -8,3 +8,9 @@ if space.space_image
     json.attachment_url space.space_image.attachment.url
   end
 end
+
+if space.advanced_accounting
+  json.advanced_accounting_attributes do
+    json.partial! 'api/advanced_accounting/advanced_accounting', advanced_accounting: space.advanced_accounting
+  end
+end

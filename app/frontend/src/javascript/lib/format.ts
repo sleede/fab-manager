@@ -17,7 +17,7 @@ export default class FormatLib {
    */
   static time = (date: Date|TDateISO|`${THours}:${TMinutes}`): string => {
     let tempDate: Date;
-    const isoTimeMatch = (date as string).match(/^(\d\d):(\d\d)$/);
+    const isoTimeMatch = (date as string)?.match(/^(\d\d):(\d\d)$/);
     if (isoTimeMatch) {
       tempDate = new Date();
       tempDate.setHours(parseInt(isoTimeMatch[1], 10));

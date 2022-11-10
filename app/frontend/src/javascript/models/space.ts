@@ -1,4 +1,5 @@
 import { FileType } from './file';
+import { AdvancedAccounting } from './advanced-accounting';
 
 export interface Space {
   id: number,
@@ -8,5 +9,6 @@ export interface Space {
   default_places: number,
   disabled: boolean,
   space_image_attributes: FileType,
-  space_file_attributes?: Array<FileType>
+  space_file_attributes?: Array<FileType>,
+  advanced_accounting_attributes?: AdvancedAccounting
 }

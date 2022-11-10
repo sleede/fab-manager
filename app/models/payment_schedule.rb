@@ -11,9 +11,9 @@ class PaymentSchedule < PaymentDocument
   belongs_to :statistic_profile
   belongs_to :operator_profile, class_name: 'InvoicingProfile'
 
-  has_many :payment_schedule_items
-  has_many :payment_gateway_objects, as: :item
-  has_many :payment_schedule_objects
+  has_many :payment_schedule_items, dependent: :destroy
+  has_many :payment_gateway_objects, as: :item, dependent: :destroy
+  has_many :payment_schedule_objects, dependent: :destroy
 
   before_create :add_environment
   after_create :update_reference, :chain_record

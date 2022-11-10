@@ -10,9 +10,10 @@ class Training < ApplicationRecord
   has_one :training_image, as: :viewable, dependent: :destroy
   accepts_nested_attributes_for :training_image, allow_destroy: true
 
-  has_and_belongs_to_many :machines, join_table: 'trainings_machines'
+  has_many :trainings_machines, dependent: :destroy
+  has_many :machines, through: :trainings_machines
 
-  has_many :trainings_availabilities
+  has_many :trainings_availabilities, dependent: :destroy
   has_many :availabilities, through: :trainings_availabilities, dependent: :destroy
 
   has_many :reservations, as: :reservable, dependent: :destroy
@@ -26,7 +27,10 @@ class Training < ApplicationRecord
   has_many :credits, as: :creditable, dependent: :destroy
   has_many :plans, through: :credits
 
-  has_one :payment_gateway_object, as: :item
+  has_one :payment_gateway_object, as: :item, dependent: :destroy
+
+  has_one :advanced_accounting, as: :accountable, dependent: :destroy
+  accepts_nested_attributes_for :advanced_accounting, allow_destroy: true
 
   after_create :create_statistic_subtype
   after_create :create_trainings_pricings
@@ -40,20 +44,19 @@ class Training < ApplicationRecord
   end
 
   def create_statistic_subtype
-    index = StatisticIndex.where(es_type_key: 'training')
-    StatisticSubType.create!(statistic_types: index.first.statistic_types, key: slug, label: name)
+    index = StatisticIndex.find_by(es_type_key: 'training')
+    StatisticSubType.create!(statistic_types: index.statistic_types, key: slug, label: name)
   end
 
   def update_statistic_subtype
     index = StatisticIndex.where(es_type_key: 'training')
     subtype = StatisticSubType.joins(statistic_type_sub_types: :statistic_type)
-                              .where(key: slug, statistic_types: { statistic_index_id: index.first.id }).first
-    subtype.label = name
-    subtype.save!
+                              .find_by(key: slug, statistic_types: { statistic_index_id: index.id })
+    subtype.update(label: name)
   end
 
   def remove_statistic_subtype
-    subtype = StatisticSubType.where(key: slug).first
+    subtype = StatisticSubType.find_by(key: slug)
     subtype.destroy!
   end
 
@@ -64,7 +67,7 @@ class Training < ApplicationRecord
   private
 
   def create_trainings_pricings
-    Group.all.each do |group|
+    Group.find_each do |group|
       TrainingsPricing.create(training: self, group: group, amount: 0)
     end
   end

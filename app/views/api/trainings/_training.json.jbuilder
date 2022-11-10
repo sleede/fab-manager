@@ -8,3 +8,9 @@ if training.training_image
     json.attachment_url training.training_image.attachment.url
   end
 end
+
+if training.advanced_accounting
+  json.advanced_accounting_attributes do
+    json.partial! 'api/advanced_accounting/advanced_accounting', advanced_accounting: training.advanced_accounting
+  end
+end

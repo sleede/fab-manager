@@ -9,3 +9,9 @@ if machine.machine_image
     json.attachment_url machine.machine_image.attachment.url
   end
 end
+
+if machine.advanced_accounting
+  json.advanced_accounting_attributes do
+    json.partial! 'api/advanced_accounting/advanced_accounting', advanced_accounting: machine.advanced_accounting
+  end
+end

@@ -1,5 +1,6 @@
 import { TDateISO, TDateISODate, THours, TMinutes } from '../typings/date-iso';
 import { FileType } from './file';
+import { AdvancedAccounting } from './advanced-accounting';
 
 export interface EventPriceCategoryAttributes {
   id?: number,
@@ -61,7 +62,8 @@ export interface Event {
     availability_id: number
   }>,
   recurrence: RecurrenceOption,
-  recurrence_end_at: Date
+  recurrence_end_at: Date,
+  advanced_accounting_attributes?: AdvancedAccounting
 }
 
 export interface EventDecoration {

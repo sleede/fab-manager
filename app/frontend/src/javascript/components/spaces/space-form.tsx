@@ -13,6 +13,7 @@ import { FormSwitch } from '../form/form-switch';
 import { FormMultiFileUpload } from '../form/form-multi-file-upload';
 import { FabButton } from '../base/fab-button';
 import { Space } from '../../models/space';
+import { AdvancedAccountingForm } from '../accounting/advanced-accounting-form';
 
 declare const Application: IApplication;
 
@@ -91,6 +92,7 @@ export const SpaceForm: React.FC<SpaceFormProps> = ({ action, space, onError, on
                   id="disabled"
                   label={t('app.admin.space_form.disable_space')}
                   tooltip={t('app.admin.space_form.disabled_help')} />
+      <AdvancedAccountingForm register={register} onError={onError} />
       <FabButton type="submit" className="is-info submit-btn">
         {t('app.admin.space_form.ACTION_space', { ACTION: action })}
       </FabButton>

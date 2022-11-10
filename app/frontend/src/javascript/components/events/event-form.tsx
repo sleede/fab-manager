@@ -23,6 +23,7 @@ import { Plus, Trash } from 'phosphor-react';
 import FormatLib from '../../lib/format';
 import EventPriceCategoryAPI from '../../api/event-price-category';
 import { UpdateRecurrentModal } from './update-recurrent-modal';
+import { AdvancedAccountingForm } from '../accounting/advanced-accounting-form';
 
 declare const Application: IApplication;
 
@@ -290,6 +291,7 @@ export const EventForm: React.FC<EventFormProps> = ({ action, event, onError, on
                              id="event_files_attributes"
                              className="event-files" />
       </div>
+      <AdvancedAccountingForm register={register} onError={onError} />
       <FabButton type="submit" className="is-info submit-btn">
         {t('app.admin.event_form.ACTION_event', { ACTION: action })}
       </FabButton>

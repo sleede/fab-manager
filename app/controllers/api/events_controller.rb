@@ -10,9 +10,9 @@ class API::EventsController < API::ApiController
     @scope = params[:scope]
 
     # filters
-    @events = @events.joins(:category).where('categories.id = :category', category: params[:category_id]) if params[:category_id]
-    @events = @events.joins(:event_themes).where('event_themes.id = :theme', theme: params[:theme_id]) if params[:theme_id]
-    @events = @events.where('age_range_id = :age_range', age_range: params[:age_range_id]) if params[:age_range_id]
+    @events = @events.joins(:category).where(categories: { id: params[:category_id] }) if params[:category_id]
+    @events = @events.joins(:event_themes).where(event_themes: { id: params[:theme_id] }) if params[:theme_id]
+    @events = @events.where(age_range_id: params[:age_range_id]) if params[:age_range_id]
 
     if current_user&.admin? || current_user&.manager?
       @events = case params[:scope]
@@ -65,7 +65,7 @@ class API::EventsController < API::ApiController
 
   def update
     authorize Event
-    res = EventService.update(@event, event_params.permit!, params[:edit_mode])
+    res = Event::UpdateEventService.update(@event, event_params.permit!, params[:edit_mode])
     render json: { action: 'update', total: res[:events].length, updated: res[:events].select { |r| r[:status] }.length, details: res },
            status: :ok,
            location: @event
@@ -97,7 +97,8 @@ class API::EventsController < API::ApiController
                                                      event_theme_ids: [],
                                                      event_image_attributes: [:attachment],
                                                      event_files_attributes: %i[id attachment _destroy],
-                                                     event_price_categories_attributes: %i[id price_category_id amount _destroy])
+                                                     event_price_categories_attributes: %i[id price_category_id amount _destroy],
+                                                     advanced_accounting_attributes: %i[code analytical_section])
     EventService.process_params(event_preparams)
   end
 end

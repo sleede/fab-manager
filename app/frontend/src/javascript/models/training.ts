@@ -1,6 +1,7 @@
 import { ApiFilter } from './api';
 import { TDateISO } from '../typings/date-iso';
 import { FileType } from './file';
+import { AdvancedAccounting } from './advanced-accounting';
 
 export interface Training {
   id?: number,
@@ -22,7 +23,8 @@ export interface Training {
       full_name: string,
       is_valid: boolean
     }>
-  }>
+  }>,
+  advanced_accounting_attributes?: AdvancedAccounting
 }
 
 export interface TrainingIndexFilter extends ApiFilter {

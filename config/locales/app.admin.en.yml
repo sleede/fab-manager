@@ -87,6 +87,10 @@ en:
         edit_all: "All events"
         date_wont_change: "Warning: you have changed the event date. This modification won't be propagated to other occurrences of the periodic event."
         confirm: "Update the {MODE, select, single{event} other{events}}"
+      advanced_accounting_form:
+        title: "Advanced accounting parameters"
+        code: "Accounting code"
+        analytical_section: "Analytical section"
       #add a new machine
       machines_new:
         declare_a_new_machine: "Declare a new machine"

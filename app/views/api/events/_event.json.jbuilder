@@ -58,3 +58,8 @@ end
 json.nb_total_places event.nb_total_places
 json.nb_free_places event.nb_free_places || event.nb_total_places
 
+if event.advanced_accounting
+  json.advanced_accounting_attributes do
+    json.partial! 'api/advanced_accounting/advanced_accounting', advanced_accounting: event.advanced_accounting
+  end
+end

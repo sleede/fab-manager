@@ -118,7 +118,8 @@ export const accountingSettings = [
   'accounting_Space_code',
   'accounting_Space_label',
   'accounting_Product_code',
-  'accounting_Product_label'
+  'accounting_Product_label',
+  'advanced_accounting'
 ] as const;
 
 export const modulesSettings = [

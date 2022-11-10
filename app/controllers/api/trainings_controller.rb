@@ -76,6 +76,7 @@ class API::TrainingsController < API::ApiController
   def training_params
     params.require(:training)
           .permit(:id, :name, :description, :machine_ids, :plan_ids, :nb_total_places, :public_page, :disabled,
-                  training_image_attributes: [:attachment], machine_ids: [], plan_ids: [])
+                  training_image_attributes: [:attachment], machine_ids: [], plan_ids: [],
+                  advanced_accounting_attributes: %i[code analytical_section])
   end
 end

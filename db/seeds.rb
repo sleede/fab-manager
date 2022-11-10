@@ -993,6 +993,8 @@ Setting.set('store_module', false) unless Setting.find_by(name: 'store_module').
 
 Setting.set('store_hidden', true) unless Setting.find_by(name: 'store_hidden').try(:value)
 
+Setting.set('advanced_accounting', false) unless Setting.find_by(name: 'advanced_accounting').try(:value)
+
 if StatisticCustomAggregation.count.zero?
   # available reservations hours for machines
   machine_hours = StatisticType.find_by(key: 'hour', statistic_index_id: 2)

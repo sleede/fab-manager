@@ -18,6 +18,7 @@ import { Machine } from '../../models/machine';
 import { SelectOption } from '../../models/select';
 import SettingAPI from '../../api/setting';
 import { Setting } from '../../models/setting';
+import { AdvancedAccountingForm } from '../accounting/advanced-accounting-form';
 
 declare const Application: IApplication;
 
@@ -110,6 +111,7 @@ export const TrainingForm: React.FC<TrainingFormProps> = ({ action, training, on
                   id="disabled"
                   label={t('app.admin.training_form.disable_training')}
                   tooltip={t('app.admin.training_form.disabled_help')} />
+      <AdvancedAccountingForm register={register} onError={onError} />
       <FabButton type="submit" className="is-info submit-btn">
         {t('app.admin.training_form.ACTION_training', { ACTION: action })}
       </FabButton>

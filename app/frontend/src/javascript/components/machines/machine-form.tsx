@@ -13,6 +13,7 @@ import { FormRichText } from '../form/form-rich-text';
 import { FormSwitch } from '../form/form-switch';
 import { FormMultiFileUpload } from '../form/form-multi-file-upload';
 import { FabButton } from '../base/fab-button';
+import { AdvancedAccountingForm } from '../accounting/advanced-accounting-form';
 
 declare const Application: IApplication;
 
@@ -86,6 +87,7 @@ export const MachineForm: React.FC<MachineFormProps> = ({ action, machine, onErr
                   id="disabled"
                   label={t('app.admin.machine_form.disable_machine')}
                   tooltip={t('app.admin.machine_form.disabled_help')} />
+      <AdvancedAccountingForm register={register} onError={onError} />
       <FabButton type="submit" className="is-info submit-btn">
         {t('app.admin.machine_form.ACTION_machine', { ACTION: action })}
       </FabButton>
