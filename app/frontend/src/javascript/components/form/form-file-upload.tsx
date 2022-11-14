@@ -23,7 +23,7 @@ interface FormFileUploadProps<TFieldValues> extends FormComponent<TFieldValues>,
 /**
  * This component allows to upload file, in forms managed by react-hook-form.
  */
-export const FormFileUpload = <TFieldValues extends FieldValues>({ id, register, defaultFile, className, rules, disabled, error, warning, formState, onFileChange, onFileRemove, accept, setValue }: FormFileUploadProps<TFieldValues>) => {
+export const FormFileUpload = <TFieldValues extends FieldValues>({ id, label, register, defaultFile, className, rules, disabled, error, warning, formState, onFileChange, onFileRemove, accept, setValue }: FormFileUploadProps<TFieldValues>) => {
   const { t } = useTranslation('shared');
 
   const [file, setFile] = useState<FileType>(defaultFile);
@@ -72,7 +72,7 @@ export const FormFileUpload = <TFieldValues extends FieldValues>({ id, register,
   const placeholder = (): string => hasFile() ? t('app.shared.form_file_upload.edit') : t('app.shared.form_file_upload.browse');
 
   return (
-    <div className={`form-file-upload ${classNames}`}>
+    <div className={`form-file-upload ${label ? 'with-label' : ''} ${classNames}`}>
       {hasFile() && (
         <span>{file.attachment_name}</span>
       )}
@@ -89,6 +89,7 @@ export const FormFileUpload = <TFieldValues extends FieldValues>({ id, register,
                     className="image-file-input"
                     accept={accept}
                     register={register}
+                    label={label}
                     formState={formState}
                     rules={rules}
                     disabled={disabled}

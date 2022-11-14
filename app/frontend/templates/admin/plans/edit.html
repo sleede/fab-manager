@@ -7,7 +7,7 @@
         </div>
         <div class="col-xs-10 col-sm-10 col-md-8 b-l">
             <section class="heading-title">
-                <h1>{{ 'app.admin.plans.edit.subscription_plan' | translate }} {{ plan.base_name }}</h1>
+                <h1>{{ 'app.admin.plans.edit.subscription_plan' | translate }} {{ suscriptionPlan.base_name }}</h1>
             </section>
         </div>
 
@@ -28,95 +28,6 @@
           <plan-form action="'update'" plan="suscriptionPlan" on-error="onError" on-success="onSuccess"></plan-form>
         </div>
       </div>
-
-        <div id="planForm">
-            <form name="planForm" novalidate="novalidate" class="col-lg-7 col-lg-offset-2 m-t-lg form-group" action="{{ actionUrl }}" ng-upload="afterSubmit(content)" upload-options-enable-rails-csrf="true">
-
-              <ng-include src="'/admin/plans/_form.html'"></ng-include>
-
-              <div class="input-group m-t-md">
-                <label for="plan[disabled]" class="control-label m-r-md">{{ 'app.shared.plan.disabled' | translate }}</label>
-                <input bs-switch
-                       ng-model="plan.disabled"
-                       id="plan[disabled]"
-                       type="checkbox"
-                       class="form-control"
-                       switch-on-text="{{ 'app.shared.buttons.yes' | translate }}"
-                       switch-off-text="{{ 'app.shared.buttons.no' | translate }}"
-                       switch-animate="true"
-                       ng-true-value="'true'"
-                       ng-false-value="'false'"/>
-                <input type="hidden" name="plan[disabled]" value="{{plan.disabled}}"/>
-                <span class="help-block" translate>{{ 'app.shared.plan.disable_plan_will_not_unsubscribe_users' }}</span>
-              </div>
-
-              <h2 class="m-t-xl" translate>{{ 'app.admin.plans.edit.prices' }}</h2>
-              <div class="form-group col-md-6 col-lg-offset-6">
-                  <input type="hidden" ng-model="plan.parent" name="plan[parent_id]" ng-value="plan.parent"/>
-                  <label for="parentPlan" translate>{{ 'app.admin.plans.edit.copy_prices_from' }}</label>
-                  <select id="parentPlan" ng-options="plan.id as humanReadablePlanName(plan, allGroups) for plan in plans" ng-model="plan.parent" ng-change="copyPricesFromPlan()" class="form-control">
-                      <option value=""></option>
-                  </select>
-              </div>
-
-              <div ng-show="$root.modules.machines">
-                <h3 translate>{{ 'app.admin.plans.edit.machines' }}</h3>
-                <table class="table">
-                    <thead>
-                        <th translate>{{ 'app.admin.plans.edit.machine' }}</th>
-                        <th translate>{{ 'app.admin.plans.edit.hourly_rate' }}</th>
-                    </thead>
-                    <tbody>
-
-                    <tr ng-repeat="price in plan.prices" ng-if="price.priceable_type === 'Machine'" ng-hide="getMachine(price.priceable_id).disabled">
-                        <td style="width: 60%;">{{ getMachine(price.priceable_id).name }} (id {{ price.priceable_id }}) *</td>
-                        <td>
-                            <div class="input-group" ng-class="{'has-error': planForm['plan[prices_attributes][][amount]'].$dirty && planForm['plan[prices_attributes][][amount]'].$invalid}">
-                                <span class="input-group-addon">{{currencySymbol}}</span>
-                                <input type="number" class="form-control" name="plan[prices_attributes][][amount]" ng-value="price.amount" required="true"/>
-                                <input type="hidden" class="form-control" name="plan[prices_attributes][][id]" ng-value="price.id"/>
-                            </div>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-              </div>
-
-              <div ng-show="$root.modules.spaces">
-                <h3 translate>{{ 'app.admin.plans.edit.spaces' }}</h3>
-                <table class="table">
-                  <thead>
-                    <th translate>{{ 'app.admin.plans.edit.space' }}</th>
-                    <th translate>{{ 'app.admin.plans.edit.hourly_rate' }}</th>
-                  </thead>
-                  <tbody>
-
-                  <tr ng-repeat="price in plan.prices" ng-if="price.priceable_type === 'Space'" ng-hide="getSpace(price.priceable_id).disabled">
-                    <td style="width: 60%;">{{ getSpace(price.priceable_id).name }} *</td>
-                    <td>
-                      <div class="input-group" ng-class="{'has-error': planForm['plan[prices_attributes][][amount]'].$dirty && planForm['plan[prices_attributes][][amount]'].$invalid}">
-                        <span class="input-group-addon">{{currencySymbol}}</span>
-                        <input type="number" class="form-control" name="plan[prices_attributes][][amount]" ng-value="price.amount" required="true"/>
-                        <input type="hidden" class="form-control" name="plan[prices_attributes][][id]" ng-value="price.id"/>
-                      </div>
-                    </td>
-                  </tr>
-                  </tbody>
-                </table>
-              </div>
-              <ul>
-              <li ng-repeat="(key, errors) in planForm.$error track by $index"> <strong>{{ key }}</strong> errors
-                <ul>
-                  <li ng-repeat="e in errors">{{ e.$name }} has an error: <strong>{{ key }}</strong>.</li>
-                </ul>
-              </li>
-              </ul>
-
-              <div class="panel-footer no-padder">
-                  <input type="submit" value="{{ 'app.shared.buttons.confirm_changes' | translate }}" class="r-b btn-valid btn btn-warning btn-block p-lg btn-lg text-u-c" ng-disabled="planForm.$invalid"/>
-              </div>
-            </form>
-        </div>
 
     </div>
 </div>

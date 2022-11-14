@@ -21,6 +21,9 @@ class Plan < ApplicationRecord
   accepts_nested_attributes_for :prices
   accepts_nested_attributes_for :plan_file, allow_destroy: true, reject_if: :all_blank
 
+  has_one :advanced_accounting, as: :accountable, dependent: :destroy
+  accepts_nested_attributes_for :advanced_accounting, allow_destroy: true
+
   after_create :create_machines_prices
   after_create :create_spaces_prices
   after_create :create_statistic_type

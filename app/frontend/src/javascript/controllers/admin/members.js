@@ -170,13 +170,13 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
     $scope.orderAdmin = null;
 
     // partners list
-    $scope.partners = partnersPromise.users;
+    $scope.partners = partnersPromise;
 
     // Partners ordering/sorting. Default: not sorted
     $scope.orderPartner = null;
 
     // managers list
-    $scope.managers = managersPromise.users;
+    $scope.managers = managersPromise;
 
     // Managers ordering/sorting. Default: not sorted
     $scope.orderManager = null;

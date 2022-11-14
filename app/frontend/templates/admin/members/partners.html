@@ -28,8 +28,8 @@
     </thead>
     <tbody>
     <tr ng-repeat="partner in partners | filter:searchFilter | orderBy: orderPartner">
-      <td class="text-c">{{ partner.last_name }}</td>
-      <td class="text-c">{{ partner.first_name }}</td>
+      <td class="text-c">{{ partner.profile_attributes.last_name }}</td>
+      <td class="text-c">{{ partner.profile_attributes.first_name }}</td>
       <td>{{ partner.email }}</td>
       <td><a ui-sref="app.admin.plans.edit({id:partner.resource.id})">{{ partner.resource ? partner.resource.base_name : '' }}</a></td>
       <td>

@@ -7,6 +7,12 @@
   border-radius: var(--border-radius);
   background-color: var(--gray-soft-lightest);
 
+  &.with-label {
+    margin-top: 2.6rem;
+    position: relative;
+    margin-bottom: 1.6rem;
+  }
+
   .actions {
     margin-left: auto;
     display: flex;
@@ -20,6 +26,12 @@
 
     .image-file-input {
       margin-bottom: 0;
+    }
+    .form-item-header { // label
+      position: absolute;
+      top: -1.5em;
+      left: 0;
+      margin-bottom: 0.8rem;
     }
   }
 }

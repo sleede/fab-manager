@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { SubmitHandler, useForm, useWatch } from 'react-hook-form';
-import { Plan } from '../../models/plan';
+import { Interval, Plan } from '../../models/plan';
 import { useTranslation } from 'react-i18next';
 import { FormInput } from '../form/form-input';
 import PlanAPI from '../../api/plan';
@@ -12,6 +12,17 @@ import GroupAPI from '../../api/group';
 import { SelectOption } from '../../models/select';
 import { FormSelect } from '../form/form-select';
 import { FormSwitch } from '../form/form-switch';
+import PlanCategoryAPI from '../../api/plan-category';
+import FormatLib from '../../lib/format';
+import { FabAlert } from '../base/fab-alert';
+import { FormRichText } from '../form/form-rich-text';
+import { FormFileUpload } from '../form/form-file-upload';
+import UserAPI from '../../api/user';
+import { FabButton } from '../base/fab-button';
+import { UserPlus } from 'phosphor-react';
+import { PartnerModal } from './partner-modal';
+import { PlanPricingForm } from './plan-pricing-form';
+import { AdvancedAccountingForm } from '../accounting/advanced-accounting-form';
 
 declare const Application: IApplication;
 
@@ -27,15 +38,24 @@ interface PlanFormProps {
  */
 export const PlanForm: React.FC<PlanFormProps> = ({ action, plan, onError, onSuccess }) => {
   const { handleSubmit, register, control, formState, setValue } = useForm<Plan>({ defaultValues: { ...plan } });
-  const _output = useWatch<Plan>({ control }); // eslint-disable-line
+  const output = useWatch<Plan>({ control }); // eslint-disable-line
   const { t } = useTranslation('admin');
 
   const [groups, setGroups] = useState<Array<SelectOption<number>>>(null);
+  const [categories, setCategories] = useState<Array<SelectOption<number>>>(null);
   const [allGroups, setAllGroups] = useState<boolean>(false);
+  const [partners, setPartners] = useState<Array<SelectOption<number>>>(null);
+  const [isOpenPartnerModal, setIsOpenPartnerModal] = useState<boolean>(false);
 
   useEffect(() => {
     GroupAPI.index({ disabled: false })
       .then(res => setGroups(res.map(g => { return { value: g.id, label: g.name }; })))
+      .catch(onError);
+    PlanCategoryAPI.index()
+      .then(res => setCategories(res.map(c => { return { value: c.id, label: c.name }; })))
+      .catch(onError);
+    UserAPI.index({ role: 'partner' })
+      .then(res => setPartners(res.map(p => { return { value: p.id, label: p.name }; })))
       .catch(onError);
   }, []);
 
@@ -63,26 +83,187 @@ export const PlanForm: React.FC<PlanFormProps> = ({ action, plan, onError, onSuc
     }
   };
 
+  /**
+   * Callback triggere when the user switches the 'partner plan' button.
+   */
+  const handlePartnershipChange = (checked: boolean) => {
+    if (checked) {
+      setValue('type', 'PartnerPlan');
+    } else {
+      setValue('type', 'Plan');
+    }
+  };
+
+  /**
+   * Return the available options for the plan period
+   */
+  const buildPeriodsOptions = (): Array<SelectOption<string>> => {
+    return ['week', 'month', 'year'].map(d => { return { value: d, label: t(`app.admin.plan_form.${d}`) }; });
+  };
+
+  /**
+   * Callback triggered when the user changes the period of the current plan
+   */
+  const handlePeriodUpdate = (period: Interval) => {
+    if (period === 'week') {
+      setValue('monthly_payment', false);
+    }
+  };
+
+  /**
+   * Open/closes the partner creation modal
+   */
+  const tooglePartnerModal = () => {
+    setIsOpenPartnerModal(!isOpenPartnerModal);
+  };
+
+  /**
+   * Callback triggered when a user with role partner was created in the dedicated modal form
+   */
+  const handleNewPartner = (user) => {
+    tooglePartnerModal();
+    onSuccess(t('app.admin.plan_form.partner_created'));
+    partners.push({ value: user.id, label: user.name });
+    setValue('partner_id', user.id);
+  };
+
   return (
-    <form className="plan-form" onSubmit={handleSubmit(onSubmit)}>
-      <h4>{t('app.admin.plan_form.general_information')}</h4>
-      <FormInput register={register}
-                 id="base_name"
-                 formState={formState}
-                 rules={{ required: true, maxLength: { value: 24, message: t('app.admin.plan_form.name_max_length') } }}
-                 label={t('app.admin.plan_form.name')} />
-      <FormSwitch control={control}
-                  onChange={handleAllGroupsChange}
-                  defaultValue={false}
-                  label={t('app.admin.plan_form.transversal')}
-                  tooltip={t('app.admin.plan_form.transversal_help')}
-                  id="all_groups" />
-      {!allGroups && groups && <FormSelect options={groups}
-                                           control={control}
-                                           rules={{ required: !allGroups }}
-                                           label={t('app.admin.plan_form.group')}
-                                           id="group_id" />}
-    </form>
+    <div className="plan-form">
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <h4>{t('app.admin.plan_form.general_information')}</h4>
+        <FormInput register={register}
+                   id="base_name"
+                   formState={formState}
+                   rules={{
+                     required: true,
+                     maxLength: { value: 24, message: t('app.admin.plan_form.name_max_length') }
+                   }}
+                   label={t('app.admin.plan_form.name')} />
+        {action === 'create' && <FormSwitch control={control}
+                                            formState={formState}
+                                            onChange={handleAllGroupsChange}
+                                            defaultValue={false}
+                                            label={t('app.admin.plan_form.transversal')}
+                                            tooltip={t('app.admin.plan_form.transversal_help')}
+                                            id="all_groups" />}
+        {!allGroups && groups && <FormSelect options={groups}
+                                             formState={formState}
+                                             control={control}
+                                             rules={{ required: !allGroups }}
+                                             disabled={action === 'update'}
+                                             label={t('app.admin.plan_form.group')}
+                                             id="group_id" />}
+        {categories && <FormSelect options={categories}
+                                   formState={formState}
+                                   control={control}
+                                   id="plan_category_id"
+                                   tooltip={t('app.admin.plan_form.category_help')}
+                                   label={t('app.admin.plan_form.category')} />}
+        {action === 'update' && <FabAlert level="warning">
+          {t('app.admin.plan_form.edit_amount_info')}
+        </FabAlert>}
+        <FormInput register={register}
+                   formState={formState}
+                   id="amount"
+                   type="number"
+                   addOn={FormatLib.currencySymbol()}
+                   rules={{ required: true }}
+                   label={t('app.admin.plan_form.subscription_price')} />
+        <FormInput register={register}
+                   formState={formState}
+                   id="ui_weight"
+                   type="number"
+                   label={t('app.admin.plan_form.visual_prominence')}
+                   tooltip={t('app.admin.plan_form.visual_prominence_help')} />
+        <FormSwitch control={control}
+                    formState={formState}
+                    id="is_rolling"
+                    label={t('app.admin.plan_form.rolling_subscription')}
+                    disabled={action === 'update'}
+                    tooltip={t('app.admin.plan_form.rolling_subscription_help')} />
+        <FormSwitch control={control}
+                    formState={formState}
+                    id="monthly_payment"
+                    label={t('app.admin.plan_form.monthly_payment')}
+                    disabled={action === 'update' || output.interval === 'week'}
+                    tooltip={t('app.admin.plan_form.monthly_payment_help')} />
+        <FormRichText control={control}
+                      formState={formState}
+                      id="description"
+                      label={t('app.admin.plan_form.description')}
+                      limit={200}
+                      heading link blockquote />
+        <FormFileUpload setValue={setValue}
+                        register={register}
+                        formState={formState}
+                        defaultFile={output.plan_file_attributes}
+                        id="plan_file_attributes"
+                        className="plan-sheet"
+                        label={t('app.admin.plan_form.information_sheet')} />
+        <FormSwitch control={control}
+                    formState={formState}
+                    id="disabled"
+                    label={t('app.admin.plan_form.disabled')}
+                    tooltip={t('app.admin.plan_form.disabled_help')} />
+        <h4>{t('app.admin.plan_form.duration')}</h4>
+        <div className="duration">
+          <FormInput register={register}
+                     rules={{ required: true, min: 1 }}
+                     disabled={action === 'update'}
+                     formState={formState}
+                     label={t('app.admin.plan_form.number_of_periods')}
+                     type="number"
+                     id="interval_count" />
+          <FormSelect options={buildPeriodsOptions()}
+                      control={control}
+                      disabled={action === 'update'}
+                      onChange={handlePeriodUpdate}
+                      id="interval"
+                      label={t('app.admin.plan_form.period')}
+                      formState={formState}
+                      rules={{ required: true }} />
+        </div>
+        <h4>{t('app.admin.plan_form.partnership')}</h4>
+        <div className="partnership">
+          <FormSwitch control={control}
+                      id="partnership"
+                      disabled={action === 'update'}
+                      tooltip={t('app.admin.plan_form.partner_plan_help')}
+                      defaultValue={plan?.type === 'PartnerPlan'}
+                      onChange={handlePartnershipChange}
+                      formState={formState}
+                      label={t('app.admin.plan_form.partner_plan')} />
+          <FormInput register={register} type="hidden" id="type" />
+          {output.type === 'PartnerPlan' && <div className="partner">
+            <FabButton className="add-partner is-info" icon={<UserPlus size={20} />} onClick={tooglePartnerModal}>
+              {t('app.admin.plan_form.new_user')}
+            </FabButton>
+            {partners && <FormSelect id="partner_id"
+                                     options={partners}
+                                     control={control}
+                                     formState={formState}
+                                     rules={{ required: output.type === 'PartnerPlan' }}
+                                     label={t('app.admin.plan_form.notified_partner')} />}
+            {output.partner_id && <FabAlert level="info">
+              {t('app.admin.plan_form.alert_partner_notification')}
+            </FabAlert>}
+          </div>}
+        </div>
+        <AdvancedAccountingForm register={register} onError={onError} />
+        {action === 'update' && <PlanPricingForm formState={formState}
+                                                 control={control}
+                                                 onError={onError}
+                                                 setValue={setValue}
+                                                 register={register} />}
+        <FabButton type="submit" className="is-info submit-btn">
+          {t('app.admin.plan_form.ACTION_plan', { ACTION: action })}
+        </FabButton>
+      </form>
+      <PartnerModal isOpen={isOpenPartnerModal}
+                    toggleModal={tooglePartnerModal}
+                    onError={onError}
+                    onPartnerCreated={handleNewPartner} />
+    </div>
   );
 };
 

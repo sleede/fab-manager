@@ -1,0 +1,26 @@
+.fab-tabs {
+  .tabs {
+    display: flex;
+    justify-content: space-between;
+
+    p {
+      flex: 1;
+      margin-bottom: 4rem;
+      padding: 0.8rem;
+      text-align: center;
+      color: var(--main);
+      border-bottom: 1px solid var(--gray-soft-dark);
+
+      &.is-active {
+        color: var(--gray-hard-dark);
+        border: 1px solid var(--gray-soft-dark);
+        border-bottom: none;
+        border-radius: var(--border-radius-sm) var(--border-radius-sm) 0 0;
+      }
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}

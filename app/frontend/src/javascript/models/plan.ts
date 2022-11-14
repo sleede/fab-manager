@@ -1,15 +1,9 @@
 import { Price } from './price';
+import { FileType } from './file';
 
-export enum Interval {
-    Year = 'year',
-    Month = 'month',
-    Week = 'week'
-}
+export type Interval = 'year' | 'month' | 'week';
 
-export enum PlanType {
-    Plan = 'Plan',
-    PartnerPlan = 'PartnerPlan'
-}
+export type PlanType = 'Plan' | 'PartnerPlan';
 
 export interface Partner {
     first_name: string,
@@ -33,13 +27,11 @@ export interface Plan {
     disabled: boolean,
     monthly_payment: boolean
     amount: number
-    prices: Array<Price>,
-    plan_file_attributes: {
-        id: number,
-        attachment_identifier: string
-    },
+    prices_attributes: Array<Price>,
+    plan_file_attributes: FileType,
     plan_file_url: string,
-    partners: Array<Partner>
+    partner_id?: number,
+    partners?: Array<Partner>
 }
 
 export interface PlansDuration {

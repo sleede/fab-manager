@@ -30,10 +30,10 @@
     </thead>
     <tbody>
     <tr ng-repeat="manager in managers | filter:searchFilter | orderBy: orderManager">
-      <td class="text-c">{{ manager.last_name }}</td>
-      <td class="text-c">{{ manager.first_name }}</td>
+      <td class="text-c">{{ manager.profile_attributes.last_name }}</td>
+      <td class="text-c">{{ manager.profile_attributes.first_name }}</td>
       <td>{{ manager.email }}</td>
-      <td>{{ manager.phone }}</td>
+      <td>{{ manager.profile_attributes.phone }}</td>
       <td>
         <button class="btn btn-default edit-member" ui-sref="app.admin.members_edit({id: manager.id})">
           <i class="fa fa-edit"></i>
