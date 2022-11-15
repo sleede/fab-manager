@@ -40,7 +40,7 @@ class Plan < ApplicationRecord
 
   def self.create_for_all_groups(plan_params)
     plans = []
-    Group.find_each do |group|
+    Group.where(disabled: [nil, false]).find_each do |group|
       plan = if plan_params[:type] == 'PartnerPlan'
                PartnerPlan.new(plan_params.except(:group_id, :type))
              else

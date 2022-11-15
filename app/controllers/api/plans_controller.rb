@@ -26,7 +26,7 @@ class API::PlansController < API::ApiController
     end
 
     type = plan_params[:type]
-    partner = params[:plan][:partner_id].empty? ? nil : User.find(params[:plan][:partner_id])
+    partner = params[:plan][:partner_id].blank? ? nil : User.find(params[:plan][:partner_id])
 
     plan = PlansService.create(type, partner, plan_params)
     if plan.key?(:errors)

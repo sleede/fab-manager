@@ -166,8 +166,9 @@ export const PlanForm: React.FC<PlanFormProps> = ({ action, plan, onError, onSuc
                    formState={formState}
                    id="amount"
                    type="number"
+                   step={0.01}
                    addOn={FormatLib.currencySymbol()}
-                   rules={{ required: true }}
+                   rules={{ required: true, min: 0 }}
                    label={t('app.admin.plan_form.subscription_price')} />
         <FormInput register={register}
                    formState={formState}
@@ -233,7 +234,7 @@ export const PlanForm: React.FC<PlanFormProps> = ({ action, plan, onError, onSuc
                       onChange={handlePartnershipChange}
                       formState={formState}
                       label={t('app.admin.plan_form.partner_plan')} />
-          <FormInput register={register} type="hidden" id="type" />
+          <FormInput register={register} type="hidden" id="type" defaultValue="Plan" />
           {output.type === 'PartnerPlan' && <div className="partner">
             <FabButton className="add-partner is-info" icon={<UserPlus size={20} />} onClick={tooglePartnerModal}>
               {t('app.admin.plan_form.new_user')}

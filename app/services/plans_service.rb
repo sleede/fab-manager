@@ -12,11 +12,9 @@ class PlansService
         { plan_ids: plans.map(&:id) }
       else
         plan = type.constantize.new(params)
-        if plan.save
-          partner&.add_role :partner, plan
-        else
-          return { errors: plan.errors.full_messages }
-        end
+        return { errors: plan.errors.full_messages } unless plan.save
+
+        partner&.add_role :partner, plan
         { plan_ids: [plan.id] }
       end
     rescue PaymentGatewayError => e
