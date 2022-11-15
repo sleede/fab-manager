@@ -65,16 +65,13 @@ class Accounting::AccountingExportService
   # Generate the "subscription" and "reservation" rows associated with the provided invoice
   def items_rows(invoice)
     rows = ''
-    {
-      subscription: 'Subscription', reservation: 'Reservation', wallet: 'WalletTransaction',
-      pack: 'StatisticProfilePrepaidPack', product: 'OrderItem', error: 'Error'
-    }.each do |type, object_type|
+    %w[Subscription Reservation WalletTransaction StatisticProfilePrepaidPack OrderItem Error].each do |object_type|
       items = invoice.invoice_items.filter { |ii| ii.object_type == object_type }
       items.each do |item|
         rows << "#{row(
           invoice,
-          account(invoice, type),
-          account(invoice, type, type: :label),
+          Accounting::AccountingCodeService.sales_account(item),
+          Accounting::AccountingCodeService.sales_account(item, type: :label),
           item.net_amount / 100.00,
           line_label: label(invoice)
         )}\n"
@@ -89,8 +86,8 @@ class Accounting::AccountingExportService
     invoice.payment_means.each do |details|
       rows << row(
         invoice,
-        account(invoice, :client, means: details[:means]),
-        account(invoice, :client, means: details[:means], type: :label),
+        Accounting::AccountingCodeService.client_account(details[:means]),
+        Accounting::AccountingCodeService.client_account(details[:means], type: :label),
         details[:amount] / 100.00,
         line_label: label(invoice),
         debit_method: :debit_client,
@@ -109,8 +106,8 @@ class Accounting::AccountingExportService
 
     row(
       invoice,
-      account(invoice, :vat),
-      account(invoice, :vat, type: :label),
+      Accounting::AccountingCodeService.vat_account,
+      Accounting::AccountingCodeService.vat_account(type: :label),
       invoice.invoice_items.map(&:vat).map(&:to_i).reduce(:+) / 100.00,
       line_label: label(invoice)
     )
@@ -145,18 +142,6 @@ class Accounting::AccountingExportService
       row << separator
     end
     row
-  end
-
-  # Get the account code (or label) for the given invoice and the specified line type (client, vat, subscription or reservation)
-  def account(invoice, account, type: :code, means: :other)
-    case account
-    when :client
-      Setting.get("accounting_#{means}_client_#{type}")
-    when :reservation
-      Setting.get("accounting_#{invoice.main_item.object.reservable_type}_#{type}") if invoice.main_item.object_type == 'Reservation'
-    else
-      Setting.get("accounting_#{account}_#{type}")
-    end || ''
   end
 
   # Fill the value of the "debit" column: if the invoice is a refund, returns the given amount, returns 0 otherwise
