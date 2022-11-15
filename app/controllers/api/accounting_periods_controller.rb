@@ -2,12 +2,11 @@
 
 # API Controller for resources of AccountingPeriod
 class API::AccountingPeriodsController < API::ApiController
-
   before_action :authenticate_user!
   before_action :set_period, only: %i[show download_archive]
 
   def index
-    @accounting_periods = AccountingPeriodService.all_periods_with_users
+    @accounting_periods = Accounting::AccountingPeriodService.all_periods_with_users
   end
 
   def show; end
@@ -24,7 +23,7 @@ class API::AccountingPeriodsController < API::ApiController
 
   def last_closing_end
     authorize AccountingPeriod
-    last_period = AccountingPeriodService.find_last_period
+    last_period = Accounting::AccountingPeriodService.find_last_period
     if last_period.nil?
       invoice = Invoice.order(:created_at).first
       @last_end = invoice.created_at if invoice
@@ -35,7 +34,7 @@ class API::AccountingPeriodsController < API::ApiController
 
   def download_archive
     authorize AccountingPeriod
-    send_file File.join(Rails.root, @accounting_period.archive_file), type: 'application/json', disposition: 'attachment'
+    send_file Rails.root.join(@accounting_period.archive_file), type: 'application/json', disposition: 'attachment'
   end
 
   private

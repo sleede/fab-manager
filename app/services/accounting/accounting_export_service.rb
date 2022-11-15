@@ -1,7 +1,10 @@
 # frozen_string_literal: false
 
+# module definition
+module Accounting; end
+
 # Provides the routine to export the accounting data to an external accounting software
-class AccountingExportService
+class Accounting::AccountingExportService
   include ActionView::Helpers::NumberHelper
 
   attr_reader :encoding, :format, :separator, :journal_code, :date_format, :columns, :decimal_separator, :label_max_length,
@@ -119,7 +122,7 @@ class AccountingExportService
     columns.each do |column|
       case column
       when 'journal_code'
-        row << journal_code
+        row << journal_code.to_s
       when 'date'
         row << invoice.created_at&.strftime(date_format)
       when 'account_code'

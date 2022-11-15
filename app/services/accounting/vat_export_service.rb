@@ -1,7 +1,10 @@
 # frozen_string_literal: false
 
+# module definition
+module Accounting; end
+
 # Provides the routine to export the collected VAT data to a CSV file.
-class VatExportService
+class Accounting::VatExportService
   include ActionView::Helpers::NumberHelper
 
   attr_reader :encoding, :format, :separator, :date_format, :columns, :decimal_separator
@@ -15,7 +18,7 @@ class VatExportService
     @columns = columns
   end
 
-  def set_options(decimal_separator: ',', date_format: '%d/%m/%Y', label_max_length: nil, export_zeros: nil)
+  def set_options(decimal_separator: ',', date_format: '%d/%m/%Y')
     @decimal_separator = decimal_separator
     @date_format = date_format
   end
@@ -66,7 +69,7 @@ class VatExportService
       vat_total.push service.invoice_vat(i)
     end
 
-    vat_total.map(&:values).flatten.group_by { |tot| tot[:vat_rate] }.map { |k, v| [k, v.map { |t| t[:total_vat] }.reduce(:+)] }.to_h
+    vat_total.map(&:values).flatten.group_by { |tot| tot[:vat_rate] }.transform_values { |v| v.pluck(:total_vat).reduce(:+) }
   end
 
   # Generate a row of the export, filling the configured columns with the provided values
