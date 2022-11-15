@@ -13,7 +13,7 @@ module SingleSignOnConcern
     ## Retrieve the requested data in the User and user's Profile tables
     ## @param sso_mapping {String} must be of form 'user._field_' or 'profile._field_'. Eg. 'user.email'
     def get_data_from_sso_mapping(sso_mapping)
-      service = UserSetterService.new(self)
+      service = UserGetterService.new(self)
       service.read_attribute(sso_mapping)
     end
 
