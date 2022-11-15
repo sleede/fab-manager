@@ -868,7 +868,7 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
     /**
      * Callback triggered when the user has successfully updated his card
      */
-    $scope.onCardUpdateSuccess = function (message) {
+    $scope.onSuccess = function (message) {
       growl.success(message);
     };
 

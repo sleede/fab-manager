@@ -10,7 +10,7 @@
                        label="'app.admin.invoices.payment.enable_online_payment' | translate"
                        class-name="'m-l'"
                        on-before-save="selectPaymentGateway"
-                       on-success="onCardUpdateSuccess"
+                       on-success="onSuccess"
                        on-error="onError">
       </boolean-setting>
       <select-gateway-modal is-open="openSelectGatewayModal"

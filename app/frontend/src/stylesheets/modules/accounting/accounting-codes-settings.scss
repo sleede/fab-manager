@@ -1,0 +1,14 @@
+.accounting-codes-settings {
+  .cards, .wallets, .others, .vat, .subscriptions, .machine, .training, .events, .space,
+  .prepaid_pack, .product, .error {
+    display: flex;
+    flex-direction: row;
+
+    .form-item:first-child {
+      margin-right: 32px;
+    }
+  }
+  .submit-btn {
+    float: right;
+  }
+}

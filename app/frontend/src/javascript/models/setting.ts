@@ -117,8 +117,12 @@ export const accountingSettings = [
   'accounting_Event_label',
   'accounting_Space_code',
   'accounting_Space_label',
+  'accounting_Pack_code',
+  'accounting_Pack_label',
   'accounting_Product_code',
   'accounting_Product_label',
+  'accounting_Error_code',
+  'accounting_Error_label',
   'advanced_accounting'
 ] as const;
 
