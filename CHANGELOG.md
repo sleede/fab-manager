@@ -1,5 +1,12 @@
 # Changelog Fab-manager
 
+## v5.5.1 2022 November 15
+
+- Fix a bug: free disk space not verified in some cases
+- Fix a bug: unable to merge an SSO account with an existing account
+- Fix a security issue: updated loader-utils to 1.4.1 to fix [CVE-2022-37601](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-37601)
+- Fix a security issue: updated minimatch to 3.1.2 to fix [CVE-2022-3517](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-3517)
+
 ## v5.5.0 2022 November 08
 
 - Feature Fablab Store
