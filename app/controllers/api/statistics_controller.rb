@@ -19,7 +19,8 @@ class API::StatisticsController < API::ApiController
       def export_#{path}                                                # def export_account
         authorize :statistic, :export_#{path}?                          # authorize :statistic, :export_account?
 
-        @export = Statistics::QueryService.export('#{path}', params)    # @export = Statistics::QueryService.export('account', params)
+        @export = Statistics::QueryService.export('#{path}', params,    # @export = Statistics::QueryService.export('account', params,
+                                                  current_user)
         if @export.is_a?(Export)
           if @export.save
             render json: { export_id: @export.id }, status: :ok
@@ -32,13 +33,13 @@ class API::StatisticsController < API::ApiController
                     disposition: 'attachment'
         end
       end
-    }, __FILE__, __LINE__ - 22
+    }, __FILE__, __LINE__ - 23
   end
 
   def export_global
     authorize :statistic, :export_global?
 
-    @export = Statistics::QueryService.export(global, params)
+    @export = Statistics::QueryService.export('global', params, current_user)
     if @export.is_a?(Export)
       if @export.save
         render json: { export_id: @export.id }, status: :ok
