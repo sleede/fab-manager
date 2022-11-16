@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import * as React from 'react';
 import { FabModal } from '../../base/fab-modal';
 import { PackForm } from './pack-form';
 import { PrepaidPack } from '../../../models/prepaid-pack';

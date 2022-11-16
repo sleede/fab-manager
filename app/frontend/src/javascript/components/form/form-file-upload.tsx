@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Path } from 'react-hook-form';
 import { UnpackNestedValue, UseFormSetValue } from 'react-hook-form/dist/types/form';

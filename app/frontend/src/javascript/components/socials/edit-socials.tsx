@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from 'react';
+import { useState, useReducer } from 'react';
 import { FormState, UseFormRegister, UseFormSetValue } from 'react-hook-form';
 import { FieldValues } from 'react-hook-form/dist/types/fields';
 import { User } from '../../models/user';

@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import * as React from 'react';
 import { Machine } from '../../models/machine';
 import { IApplication } from '../../models/application';
 import { react2angular } from 'react2angular';

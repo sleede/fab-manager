@@ -1,4 +1,5 @@
-import React, { ReactElement, useEffect, useState } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
+import * as React from 'react';
 import { Loader } from '../base/loader';
 import { StripeCardUpdateModal } from './stripe/stripe-card-update-modal';
 import { PayzenCardUpdateModal } from './payzen/payzen-card-update-modal';

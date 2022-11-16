@@ -1,4 +1,5 @@
-import React, { BaseSyntheticEvent, ReactNode, useCallback, useEffect, useState } from 'react';
+import { BaseSyntheticEvent, ReactNode, useCallback, useEffect, useState } from 'react';
+import * as React from 'react';
 import { debounce as _debounce } from 'lodash';
 
 type inputType = string|number|readonly string [];

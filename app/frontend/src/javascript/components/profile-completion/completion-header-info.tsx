@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
+import * as React from 'react';
 import { ActiveProviderResponse } from '../../models/authentication-provider';
 import { useTranslation } from 'react-i18next';
 import { User } from '../../models/user';

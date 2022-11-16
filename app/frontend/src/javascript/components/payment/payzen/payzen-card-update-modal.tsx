@@ -1,4 +1,5 @@
-import React, { ReactNode, useState } from 'react';
+import { ReactNode, useState } from 'react';
+import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { FabModal } from '../../base/fab-modal';
 import { PaymentSchedule } from '../../../models/payment-schedule';

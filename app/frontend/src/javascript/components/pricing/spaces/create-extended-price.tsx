@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import * as React from 'react';
 import { FabModal } from '../../base/fab-modal';
 import { ExtendedPriceForm } from './extended-price-form';
 import { Price } from '../../../models/price';

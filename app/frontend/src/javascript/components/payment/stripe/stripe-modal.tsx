@@ -1,4 +1,5 @@
-import React, { FunctionComponent, ReactNode } from 'react';
+import { FunctionComponent, ReactNode } from 'react';
+import * as React from 'react';
 import { StripeElements } from './stripe-elements';
 import { StripeForm } from './stripe-form';
 import { GatewayFormProps, AbstractPaymentModal } from '../abstract-payment-modal';

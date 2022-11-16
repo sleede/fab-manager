@@ -3,7 +3,9 @@
  * The configuration of a payment gateway is required to enable the online payments.
  */
 
-import React, { BaseSyntheticEvent, useEffect, useState } from 'react';
+import { BaseSyntheticEvent, useEffect, useState } from 'react';
+
+import * as React from 'react';
 import { react2angular } from 'react2angular';
 import { useTranslation } from 'react-i18next';
 import { StripeKeysForm } from './stripe/stripe-keys-form';

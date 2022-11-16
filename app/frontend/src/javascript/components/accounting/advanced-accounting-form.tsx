@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import SettingAPI from '../../api/setting';
 import { UseFormRegister } from 'react-hook-form';
 import { FieldValues } from 'react-hook-form/dist/types/fields';

@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import * as React from 'react';
 import Switch from 'react-switch';
 import _ from 'lodash';
 import { useTranslation } from 'react-i18next';

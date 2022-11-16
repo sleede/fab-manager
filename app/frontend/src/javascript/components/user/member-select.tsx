@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import * as React from 'react';
 import AsyncSelect from 'react-select/async';
 import { useTranslation } from 'react-i18next';
 import MemberAPI from '../../api/member';

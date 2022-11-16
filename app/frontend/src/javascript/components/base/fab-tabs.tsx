@@ -1,4 +1,5 @@
-import React, { ReactNode, useEffect, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
+import * as React from 'react';
 
 type tabId = string|number;
 

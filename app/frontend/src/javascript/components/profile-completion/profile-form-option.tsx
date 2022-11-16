@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { User } from '../../models/user';
 import { IApplication } from '../../models/application';
 import { Loader } from '../base/loader';

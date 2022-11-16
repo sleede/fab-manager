@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
+import * as React from 'react';
 import { FormControlledComponent } from '../../models/form-component';
 import { AbstractFormItem, AbstractFormItemProps } from './abstract-form-item';
 import { FieldValues } from 'react-hook-form/dist/types/fields';

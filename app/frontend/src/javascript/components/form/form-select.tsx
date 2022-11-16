@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Select from 'react-select';
 import CreatableSelect from 'react-select/creatable';
 import { Controller, Path } from 'react-hook-form';
@@ -22,7 +22,7 @@ interface FormSelectProps<TFieldValues, TContext extends object, TOptionValue, T
  * This component is a wrapper for react-select to use with react-hook-form
  */
 export const FormSelect = <TFieldValues extends FieldValues, TContext extends object, TOptionValue, TOptionLabel>({ id, label, tooltip, className, control, placeholder, options, valueDefault, error, warning, rules, disabled = false, onChange, clearable = false, formState, creatable = false }: FormSelectProps<TFieldValues, TContext, TOptionValue, TOptionLabel>) => {
-  const [isDisabled, setIsDisabled] = React.useState<boolean>(false);
+  const [isDisabled, setIsDisabled] = useState<boolean>(false);
 
   useEffect(() => {
     if (typeof disabled === 'function') {

@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import Select from 'react-select';
 import { FabInput } from '../base/fab-input';

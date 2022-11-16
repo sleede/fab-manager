@@ -1,4 +1,5 @@
-import React, { useState, useEffect, BaseSyntheticEvent } from 'react';
+import { useState, useEffect, BaseSyntheticEvent } from 'react';
+import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { react2angular } from 'react2angular';
 import Switch from 'react-switch';

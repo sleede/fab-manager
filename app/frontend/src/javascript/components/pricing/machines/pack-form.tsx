@@ -1,4 +1,5 @@
-import React, { BaseSyntheticEvent } from 'react';
+import { BaseSyntheticEvent } from 'react';
+import * as React from 'react';
 import Select from 'react-select';
 import Switch from 'react-switch';
 import { PrepaidPack } from '../../../models/prepaid-pack';

@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { IApplication } from '../../models/application';
 import { User } from '../../models/user';

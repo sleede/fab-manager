@@ -1,4 +1,5 @@
-import React, { FunctionComponent, ReactNode } from 'react';
+import { FunctionComponent, ReactNode } from 'react';
+import * as React from 'react';
 import { GatewayFormProps, AbstractPaymentModal } from '../abstract-payment-modal';
 import { ShoppingCart } from '../../../models/payment';
 import { PaymentSchedule } from '../../../models/payment-schedule';

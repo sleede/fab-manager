@@ -1,4 +1,3 @@
-import React from 'react';
 import { FormControlledComponent } from '../../models/form-component';
 import { FieldPath } from 'react-hook-form/dist/types/path';
 import { FieldPathValue, UnpackNestedValue } from 'react-hook-form/dist/types';

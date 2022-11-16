@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import AsyncSelect from 'react-select/async';
 import Select from 'react-select';
 import AsyncCreatableSelect from 'react-select/async-creatable';
@@ -39,8 +39,8 @@ type selectOption<TOptionValue> = { value: TOptionValue, label: string, select?:
 export const FormMultiSelect = <TFieldValues extends FieldValues, TContext extends object, TOptionValue>({ id, label, tooltip, className, control, placeholder, options, valuesDefault, error, rules, disabled, onChange, formState, warning, loadOptions, creatable, selectKey }: FormSelectProps<TFieldValues, TContext, TOptionValue>) => {
   const { t } = useTranslation('shared');
 
-  const [isDisabled, setIsDisabled] = React.useState<boolean>(false);
-  const [allOptions, setAllOptions] = React.useState<Array<selectOption<TOptionValue>>>(options || []);
+  const [isDisabled, setIsDisabled] = useState<boolean>(false);
+  const [allOptions, setAllOptions] = useState<Array<selectOption<TOptionValue>>>(options || []);
 
   useEffect(() => {
     if (typeof disabled === 'function') {

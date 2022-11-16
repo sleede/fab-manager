@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { PlanCategory } from '../../models/plan-category';
 import { FabButton } from '../base/fab-button';

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useFieldArray, UseFormRegister } from 'react-hook-form';
 import { Control, FormState, UseFormSetValue } from 'react-hook-form/dist/types/form';

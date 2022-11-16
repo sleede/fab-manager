@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { FabModal } from '../base/fab-modal';
 import { useTranslation } from 'react-i18next';
 import { SubmitHandler, useForm } from 'react-hook-form';

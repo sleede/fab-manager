@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import * as React from 'react';
 import { FabButton } from '../../base/fab-button';
 import { AccordionItem } from '../../base/accordion-item';
 import { useTranslation } from 'react-i18next';

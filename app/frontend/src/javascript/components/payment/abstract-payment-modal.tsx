@@ -1,4 +1,5 @@
-import React, { FunctionComponent, ReactNode, useEffect, useRef, useState } from 'react';
+import { FunctionComponent, ReactNode, useEffect, useRef, useState } from 'react';
+import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import WalletLib from '../../lib/wallet';
 import { WalletInfo } from './wallet-info';

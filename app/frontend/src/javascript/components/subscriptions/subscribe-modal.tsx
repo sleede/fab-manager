@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import * as React from 'react';
 import Select from 'react-select';
 import { useTranslation } from 'react-i18next';
 import { Subscription } from '../../models/subscription';

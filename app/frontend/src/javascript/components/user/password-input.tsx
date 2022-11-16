@@ -1,4 +1,3 @@
-import React from 'react';
 import { UseFormRegister } from 'react-hook-form';
 import { FieldValues } from 'react-hook-form/dist/types/fields';
 import { useTranslation } from 'react-i18next';

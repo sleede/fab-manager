@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { react2angular } from 'react2angular';
 import '../../lib/i18n';

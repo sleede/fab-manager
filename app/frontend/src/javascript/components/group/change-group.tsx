@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import * as React from 'react';
 import { User } from '../../models/user';
 import { Loader } from '../base/loader';
 import { IApplication } from '../../models/application';

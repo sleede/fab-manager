@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import * as React from 'react';
 import { SubmitHandler, useFieldArray, useForm, useWatch } from 'react-hook-form';
 import { Event, EventDecoration, EventPriceCategoryAttributes, RecurrenceOption } from '../../models/event';
 import EventAPI from '../../api/event';

@@ -37,14 +37,11 @@
         "sourceType": "module",
         "project": "./tsconfig.json"
       },
-      "settings": {
-        "react": {
-          "version": "detect"
-        }
-      },
       "plugins": ["@typescript-eslint", "react"],
       "rules": {
-        "react/prop-types": "off"
+        "react/prop-types": "off",
+        "react/jsx-uses-react": "off",
+        "react/react-in-jsx-scope": "off"
       }
     },
     {
@@ -67,6 +64,11 @@
         "camelcase": "off"
       }
     }
-  ]
+  ],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  }
 }
 

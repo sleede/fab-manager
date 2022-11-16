@@ -1,4 +1,5 @@
-import React, { ReactNode, BaseSyntheticEvent } from 'react';
+import { ReactNode, BaseSyntheticEvent } from 'react';
+import * as React from 'react';
 
 interface FabButtonProps {
   onClick?: (event: BaseSyntheticEvent) => void,

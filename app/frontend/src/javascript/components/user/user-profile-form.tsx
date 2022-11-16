@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import * as React from 'react';
 import { react2angular } from 'react2angular';
 import { useForm, useWatch, ValidateResult } from 'react-hook-form';
 import { isNil as _isNil } from 'lodash';

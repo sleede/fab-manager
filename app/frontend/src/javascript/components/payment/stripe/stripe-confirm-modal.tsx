@@ -1,6 +1,7 @@
 import { StripeConfirm } from './stripe-confirm';
 import { FabModal } from '../../base/fab-modal';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import * as React from 'react';
 import PaymentScheduleAPI from '../../../api/payment-schedule';
 import { PaymentScheduleItem } from '../../../models/payment-schedule';
 import { useTranslation } from 'react-i18next';

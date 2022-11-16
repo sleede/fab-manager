@@ -1,4 +1,5 @@
-import React, { BaseSyntheticEvent, ReactNode } from 'react';
+import { BaseSyntheticEvent, ReactNode } from 'react';
+import * as React from 'react';
 
 type inputType = string|number|readonly string [];
 

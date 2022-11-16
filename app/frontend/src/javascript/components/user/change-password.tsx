@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
+import * as React from 'react';
 import { FabButton } from '../base/fab-button';
 import { FabModal } from '../base/fab-modal';
 import { FormInput } from '../form/form-input';

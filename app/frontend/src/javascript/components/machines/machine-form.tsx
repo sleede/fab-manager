@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { SubmitHandler, useForm, useWatch } from 'react-hook-form';
 import { Machine } from '../../models/machine';
 import MachineAPI from '../../api/machine';

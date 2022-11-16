@@ -1,4 +1,5 @@
-import React, { ReactNode, BaseSyntheticEvent, useEffect } from 'react';
+import { ReactNode, BaseSyntheticEvent, useEffect } from 'react';
+import * as React from 'react';
 import Modal from 'react-modal';
 import { useTranslation } from 'react-i18next';
 import { Loader } from './loader';

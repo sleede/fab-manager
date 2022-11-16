@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
+import * as React from 'react';
 import { react2angular } from 'react2angular';
 import { Loader } from '../base/loader';
 import { IApplication } from '../../models/application';

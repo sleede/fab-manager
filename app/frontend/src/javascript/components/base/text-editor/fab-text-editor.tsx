@@ -1,4 +1,5 @@
-import React, { forwardRef, RefObject, useEffect, useImperativeHandle, useRef } from 'react';
+import { forwardRef, RefObject, useEffect, useImperativeHandle, useRef } from 'react';
+import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useEditor, EditorContent, Editor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';

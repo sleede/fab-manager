@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { CaretDoubleLeft, CaretLeft, CaretRight, CaretDoubleRight } from 'phosphor-react';
 
 interface FabPaginationProps {

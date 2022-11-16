@@ -1,4 +1,5 @@
-import React, { ReactNode, useCallback } from 'react';
+import { ReactNode, useCallback } from 'react';
+import * as React from 'react';
 import { FieldPathValue } from 'react-hook-form';
 import { debounce as _debounce } from 'lodash';
 import { FieldValues } from 'react-hook-form/dist/types/fields';

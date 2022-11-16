@@ -1,4 +1,3 @@
-import React from 'react';
 import { ArrayPath, useFieldArray, UseFormRegister } from 'react-hook-form';
 import { Control } from 'react-hook-form/dist/types/form';
 import { FieldValues } from 'react-hook-form/dist/types/fields';

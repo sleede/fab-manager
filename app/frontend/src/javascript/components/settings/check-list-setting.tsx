@@ -1,4 +1,5 @@
-import React, { BaseSyntheticEvent, useEffect, useState } from 'react';
+import { BaseSyntheticEvent, useEffect, useState } from 'react';
+import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import _ from 'lodash';
 import { SettingName } from '../../models/setting';

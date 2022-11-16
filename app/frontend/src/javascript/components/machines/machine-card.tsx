@@ -1,4 +1,5 @@
-import React, { ReactNode, useState } from 'react';
+import { ReactNode, useState } from 'react';
+import * as React from 'react';
 import { Machine } from '../../models/machine';
 import { useTranslation } from 'react-i18next';
 import { Loader } from '../base/loader';

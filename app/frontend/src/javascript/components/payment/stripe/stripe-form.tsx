@@ -1,4 +1,5 @@
-import React, { FormEvent } from 'react';
+import { FormEvent } from 'react';
+import * as React from 'react';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import { useTranslation } from 'react-i18next';
 import { GatewayFormProps } from '../abstract-payment-modal';

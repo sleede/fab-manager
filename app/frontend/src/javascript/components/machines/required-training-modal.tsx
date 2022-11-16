@@ -1,4 +1,5 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
+import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { FabModal } from '../base/fab-modal';
 import { HtmlTranslate } from '../base/html-translate';

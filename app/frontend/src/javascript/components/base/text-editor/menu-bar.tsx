@@ -1,4 +1,5 @@
-import React, { useCallback, useState, useEffect } from 'react';
+import { useCallback, useState, useEffect } from 'react';
+import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import useOnclickOutside from 'react-cool-onclickoutside';
 import { Editor } from '@tiptap/react';

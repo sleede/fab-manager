@@ -1,4 +1,5 @@
-import React, { ReactNode, useEffect, useRef, useState } from 'react';
+import { ReactNode, useEffect, useRef, useState } from 'react';
+import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { HtmlTranslate } from '../../base/html-translate';
 import { FabInput } from '../../base/fab-input';
