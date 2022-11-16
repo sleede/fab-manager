@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+## v5.5.2 2022 November 16
+
 - Fix a bug: unable to export statistics
 
 ## v5.5.1 2022 November 15
