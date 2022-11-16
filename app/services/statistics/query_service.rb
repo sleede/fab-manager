@@ -21,8 +21,8 @@ class Statistics::QueryService
       results
     end
 
-    def export(statistic_index, params)
-      export = ExportService.last_export("statistics/#{statistic_index}")
+    def export(statistic_index, params, current_user)
+      export = ExportService.last_export("statistics/#{statistic_index}", params[:body], params[:type_key])
       if export.nil? || !FileTest.exist?(export.file)
         Export.new(category: 'statistics',
                    export_type: statistic_index,

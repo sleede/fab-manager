@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- Fix a bug: unable to export statistics
+
 ## v5.5.1 2022 November 15
 
 - Fix a bug: free disk space not verified in some cases

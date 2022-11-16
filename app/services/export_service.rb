@@ -4,16 +4,20 @@
 class ExportService
   class << self
     # Check if the last export of the provided type is still accurate or if it must be regenerated
-    def last_export(type)
+    def last_export(type, query = nil, key = nil, extension = nil)
       case type
       when 'users/members'
-        last_export_members
+        last_export_members(query, key, extension)
       when 'users/reservations'
-        last_export_reservations
+        last_export_reservations(query, key, extension)
       when 'users/subscription'
-        last_export_subscriptions
+        last_export_subscriptions(query, key, extension)
+      when 'availabilities/index'
+        last_export_availabilities(query, key, extension)
+      when %r{accounting/.*}
+        last_export_accounting(type, query, key, extension)
       when %r{statistics/.*}
-        last_export_statistics(type.split('/')[1])
+        last_export_statistics(type, query, key, extension)
       else
         raise TypeError "unknown export type: #{type}"
       end
@@ -21,19 +25,29 @@ class ExportService
 
     private
 
-    def last_export_subscriptions
-      Export.where(category: 'users', export_type: 'subscriptions')
-            .where('created_at > ?', Subscription.maximum('updated_at'))
-            .last
+    def query_last_export(category, export_type, query = nil, key = nil, extension = nil)
+      export = Export.where(category: category, export_type: export_type)
+      export.where(query: query) unless query.nil?
+      export.where(key: key) unless key.nil?
+      export.where(extension: extension) unless extension.nil?
+      export
     end
 
-    def last_export_reservations
-      Export.where(category: 'users', export_type: 'reservations')
-            .where('created_at > ?', Reservation.maximum('updated_at'))
-            .last
+    def last_export_subscriptions(query, key, extension)
+      query_last_export('users', 'subscriptions', query, key, extension)
+        .where('created_at > ?', Subscription.maximum('updated_at'))
+        .order(created_at: :desc)
+        .first
     end
 
-    def last_export_members
+    def last_export_reservations(query, key, extension)
+      query_last_export('users', 'reservations', query, key, extension)
+        .where('created_at > ?', Reservation.maximum('updated_at'))
+        .order(created_at: :desc)
+        .first
+    end
+
+    def last_export_members(query, key, extension)
       last_update = [
         User.members.maximum('updated_at'),
         Profile.where(user_id: User.members).maximum('updated_at'),
@@ -42,14 +56,30 @@ class ExportService
         Subscription.maximum('updated_at') || DateTime.current
       ].max
 
-      Export.where(category: 'users', export_type: 'members')
-            .where('created_at > ?', last_update)
-            .last
+      query_last_export('users', 'members', query, key, extension)
+        .where('created_at > ?', last_update)
+        .order(created_at: :desc)
+        .first
     end
 
-    def last_export_statistics(type)
-      Export.where(category: 'statistics', export_type: type, query: params[:body], key: params[:type_key])
-            .last
+    def last_export_availabilities(query, key, extension)
+      query_last_export('availabilities', 'index', query, key, extension)
+        .where('created_at > ?', [Availability.maximum('updated_at'), Reservation.maximum('updated_at')].max)
+        .order(created_at: :desc)
+        .first
+    end
+
+    def last_export_accounting(type, query, key, extension)
+      query_last_export('accounting', type.split('/')[1], query, key, extension)
+        .where('created_at > ?', Invoice.maximum('updated_at'))
+        .order(created_at: :desc)
+        .first
+    end
+
+    def last_export_statistics(type, query, key, extension)
+      query_last_export('statistics', type.split('/')[1], query, key, extension)
+        .order(created_at: :desc)
+        .first
     end
   end
 end

@@ -8,16 +8,17 @@ class API::ExportsController < API::ApiController
 
   def download
     authorize @export
-    mime_type = if @export.extension == 'xlsx'
+    mime_type = case @export.extension
+                when 'xlsx'
                   'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-                elsif @export.extension == 'csv'
+                when 'csv'
                   'text/csv'
                 else
                   'application/octet-stream'
                 end
 
     if FileTest.exist?(@export.file)
-      send_file File.join(Rails.root, @export.file),
+      send_file Rails.root.join(@export.file),
                 type: mime_type,
                 disposition: 'attachment'
     else
@@ -28,14 +29,7 @@ class API::ExportsController < API::ApiController
   def status
     authorize Export
 
-    exports = Export.where(
-      category: params[:category],
-      export_type: params[:type],
-      query: params[:query],
-      key: params[:key],
-      extension: params[:extension]
-    )
-    export = retrieve_last_export(exports, params[:category], params[:type])
+    export = ExportService.last_export("#{params[:category]}/#{params[:type]}", params[:query], params[:key], params[:extension])
 
     if export.nil? || !FileTest.exist?(export.file)
       render json: { exists: false, id: nil }, status: :ok
@@ -45,41 +39,6 @@ class API::ExportsController < API::ApiController
   end
 
   private
-
-  def retrieve_last_export(export, category, type)
-    case category
-    when 'users'
-      case type
-      when 'subscriptions'
-        export = export.where('created_at > ?', Subscription.maximum('updated_at'))
-      when 'reservations'
-        export = export.where('created_at > ?', Reservation.maximum('updated_at'))
-      when 'members'
-        export = export.where('created_at > ?', User.members.maximum('updated_at'))
-      else
-        raise ArgumentError, "Unknown export users/#{type}"
-      end
-    when 'availabilities'
-      case type
-      when 'index'
-        export = export.where('created_at > ?', [Availability.maximum('updated_at'), Reservation.maximum('updated_at')].max)
-      else
-        raise ArgumentError, "Unknown type availabilities/#{type}"
-      end
-    when 'accounting'
-      case type
-      when 'acd'
-        export = export.where('created_at > ?', Invoice.maximum('updated_at'))
-      when 'vat'
-        export = export.where('created_at > ?', Invoice.maximum('updated_at'))
-      else
-        raise ArgumentError, "Unknown type accounting/#{type}"
-      end
-    else
-      raise ArgumentError, "Unknown category #{category}"
-    end
-    export.last
-  end
 
   def set_export
     @export = Export.find(params[:id])
