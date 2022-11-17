@@ -6,3 +6,17 @@ one:
   field: "available_hours"
   es_index: "fablab"
   es_type: "availabilities"
+
+two:
+  query: '{"size":0, "aggregations":{"%{aggs_name}":{"sum":{"field":"nb_total_places"}}}, "query":{"bool":{"must":[{"range":{"start_at":{"gte":"%{start_date}", "lte":"%{end_date}"}}}, {"match":{"available_type":"training"}}]}}}'
+  statistic_type_id: 3
+  field: "available_tickets"
+  es_index: "fablab"
+  es_type: "availabilities"
+
+three:
+  query: '{"size":0, "aggregations":{"%{aggs_name}":{"avg":{"field":"ca", "script":"BigDecimal.valueOf(_value).setScale(1, RoundingMode.HALF_UP)", "missing": 0}}}, "query":{"bool":{"must":[{"range":{"date":{"gte":"%{start_date}", "lte":"%{end_date}"}}}]}}}'
+  statistic_type_id: 15
+  field: "average_cart"
+  es_index: "stats"
+  es_type: "order"

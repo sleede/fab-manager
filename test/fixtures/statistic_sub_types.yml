@@ -153,3 +153,17 @@ statistic_sub_type_22:
     - month
   created_at: 2016-04-04 15:18:28.864495000 Z
   updated_at: 2016-04-04 15:18:28.864495000 Z
+
+statistic_sub_type_23:
+  id: 23
+  key: paid-processed
+  label: Payée et/ou traitée
+  created_at: 2022-10-12 08:55:05.167910 Z
+  updated_at: 2022-10-12 08:55:05.167910 Z
+
+statistic_sub_type_24:
+  id: 24
+  key: aborted
+  label: Interrompue
+  created_at: 2022-10-12 08:55:05.209986 Z
+  updated_at: 2022-10-12 08:55:05.209986 Z
