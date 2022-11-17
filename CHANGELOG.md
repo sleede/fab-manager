@@ -1,5 +1,6 @@
 # Changelog Fab-manager
 
+- Fix a bug: unable to download an existing export of the statistics
 - Fix a security issue: updated loader-utils to 2.0.4 to fix [CVE-2022-37601](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-37601), [CVE-2022-37603](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-37603) and [CVE-2022-37599](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-37599)
 
 ## v5.5.3 2022 November 17

@@ -30,7 +30,7 @@ class Statistics::QueryService
                    query: params[:body],
                    key: params[:type_key])
       else
-        File.root.join(export.file)
+        Rails.root.join(export.file)
       end
     end
   end
