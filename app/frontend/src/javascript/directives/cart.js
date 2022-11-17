@@ -824,8 +824,8 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
               ($scope.user.id === $rootScope.currentUser.id && amountToPay > 0)) {
               return payOnline(items);
             } else {
-              if (AuthService.isAuthorized(['admin', 'manager'] && $scope.user.id !== $rootScope.currentUser.id) ||
-                (amountToPay === 0 && !hasOtherDeadlines())) {
+              if ((AuthService.isAuthorized(['admin', 'manager']) && $scope.user.id !== $rootScope.currentUser.id) ||
+                  (amountToPay === 0 && !hasOtherDeadlines())) {
                 return payOnSite(items);
               }
             }

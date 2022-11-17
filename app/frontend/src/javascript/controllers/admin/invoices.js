@@ -51,7 +51,7 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
     $scope.noMoreResults = false;
 
     // Default invoices ordering/sorting
-    $scope.orderInvoice = '-reference';
+    $scope.orderInvoice = '-date';
 
     // Invoice PDF filename settings (and example)
     $scope.file = {
