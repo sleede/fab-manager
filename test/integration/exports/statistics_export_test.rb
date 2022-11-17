@@ -12,6 +12,7 @@ class Exports::StatisticsExportTest < ActionDispatch::IntegrationTest
   end
 
   test 'export machine reservations statistics to Excel' do
+    Stats::Machine.refresh_index!
     # Build the stats for the June 2015, a machine reservation should have happened at the time
     ::Statistics::BuilderService.generate_statistic({ start_date: '2015-06-01'.to_date.beginning_of_day,
                                                       end_date: '2015-06-30'.to_date.end_of_day })
@@ -35,6 +36,7 @@ class Exports::StatisticsExportTest < ActionDispatch::IntegrationTest
     assert_not_nil e, 'Export was not created in database'
 
     # Run the worker
+    Stats::Machine.refresh_index!
     worker = StatisticsExportWorker.new
     worker.perform(e.id)
 
@@ -69,6 +71,7 @@ class Exports::StatisticsExportTest < ActionDispatch::IntegrationTest
   end
 
   test 'export global statistics to Excel' do
+    Stats::Machine.refresh_index!
     # Build the stats for the June 2015
     ::Statistics::BuilderService.generate_statistic({ start_date: '2015-06-01'.to_date.beginning_of_day,
                                                       end_date: '2015-06-30'.to_date.end_of_day })

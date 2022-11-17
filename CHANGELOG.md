@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- Fix a bug: some automated tests were randomly failing because ElasticSearch was not synced
+
 ## v5.5.4 2022 November 17
 
 - Fix a bug: unable to download an existing export of the statistics
