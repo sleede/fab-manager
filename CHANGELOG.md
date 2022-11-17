@@ -2,6 +2,7 @@
 
 - By default, sort invoices by date in the admin list
 - Fix a bug: unable to reserve a machine with payment on site
+- Fix a security issue: updated loader-utils to 1.4.2 to fix [CVE-2022-37601](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-37601), [CVE-2022-37603](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-37603) and [CVE-2022-37599](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-37599)
 
 ## v5.5.2 2022 November 16
 
