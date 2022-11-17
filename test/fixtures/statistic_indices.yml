@@ -11,7 +11,7 @@ statistic_index_1:
 statistic_index_2:
   id: 2
   es_type_key: machine
-  label: Créneaux machines
+  label: Heures machines
   created_at: 2016-04-04 14:11:33.359367000 Z
   updated_at: 2016-04-04 14:11:33.359367000 Z
   table: true
@@ -29,7 +29,7 @@ statistic_index_3:
 statistic_index_4:
   id: 4
   es_type_key: event
-  label: Ateliers/Stages
+  label: Évènements
   created_at: 2016-04-04 14:11:33.366381000 Z
   updated_at: 2016-04-04 14:11:33.366381000 Z
   table: true
@@ -68,5 +68,14 @@ statistic_index_8:
   label: Espaces
   created_at: 2017-02-13 14:08:36.211740000 Z
   updated_at: 2017-02-13 14:08:36.211740000 Z
+  table: true
+  ca: true
+
+statistic_index_9:
+  id: 9
+  es_type_key: order
+  label: Commandes
+  created_at: 2022-10-11 13:31:22.962460
+  updated_at: 2022-10-11 13:31:22.962460 Z
   table: true
   ca: true

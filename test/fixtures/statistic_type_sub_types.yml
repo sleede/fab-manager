@@ -243,3 +243,18 @@ statistic_type_sub_type_35:
   statistic_sub_type_id: 22
   created_at: 2016-04-04 15:18:28.867317000 Z
   updated_at: 2016-04-04 15:18:28.867317000 Z
+
+statistic_type_sub_type_36:
+  id: 36
+  statistic_type_id: 15
+  statistic_sub_type_id: 23
+  created_at: 2022-10-12 08:55:05.187077
+  updated_at: 2022-10-12 08:55:05.187077
+
+statistic_type_sub_type_37:
+  id: 37
+  statistic_type_id: 15
+  statistic_sub_type_id: 24
+  created_at: 2022-10-12 08:55:05.211284
+  updated_at: 2022-10-12 08:55:05.211284
+
