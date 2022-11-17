@@ -1,5 +1,6 @@
 # Changelog Fab-manager
 
+- By default, sort invoices by date in the admin list
 - Fix a bug: unable to reserve a machine with payment on site
 
 ## v5.5.2 2022 November 16
