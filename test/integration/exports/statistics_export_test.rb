@@ -100,8 +100,6 @@ class Exports::StatisticsExportTest < ActionDispatch::IntegrationTest
     assert FileTest.exist?(e.file), 'XLSX file was not generated'
     workbook = RubyXL::Parser.parse(e.file)
 
-    puts e.file
-
     # test worksheets
     StatisticIndex.where(table: true).includes(:statistic_fields, statistic_types: [:statistic_sub_types]).each do |index|
       index.statistic_types.each do |type|
