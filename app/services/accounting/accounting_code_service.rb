@@ -57,7 +57,7 @@ class Accounting::AccountingCodeService
       raise ArgumentError('invalid section') unless %i[code analytical_section].include?(section)
 
       if type == :code
-        item_code = Setting.get('advanced_accounting') ? invoice_item.object.plan.advanced_accounting.send(section) : nil
+        item_code = Setting.get('advanced_accounting') ? invoice_item.object.plan.advanced_accounting&.send(section) : nil
         return Setting.get('accounting_subscription_code') if item_code.nil? && section == :code
 
         item_code
@@ -71,7 +71,7 @@ class Accounting::AccountingCodeService
       raise ArgumentError('invalid section') unless %i[code analytical_section].include?(section)
 
       if type == :code
-        item_code = Setting.get('advanced_accounting') ? invoice_item.object.orderable.advanced_accounting.send(section) : nil
+        item_code = Setting.get('advanced_accounting') ? invoice_item.object.orderable.advanced_accounting&.send(section) : nil
         return Setting.get('accounting_Product_code') if item_code.nil? && section == :code
 
         item_code

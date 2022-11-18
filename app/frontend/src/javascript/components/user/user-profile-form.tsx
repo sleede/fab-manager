@@ -82,10 +82,9 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
         if (cgu?.custom_asset_file_attributes) setTermsAndConditions(cgu);
       }).catch(error => onError(error));
     }
-    ProfileCustomFieldAPI.index().then(data => {
-      const fData = data.filter(f => f.actived);
-      setProfileCustomFields(fData);
-      const userProfileCustomFields = fData.map(f => {
+    ProfileCustomFieldAPI.index({ actived: true }).then(data => {
+      setProfileCustomFields(data);
+      const userProfileCustomFields = data.map(f => {
         const upcf = user?.invoicing_profile_attributes?.user_profile_custom_fields_attributes?.find(uf => uf.profile_custom_field_id === f.id);
         return upcf || {
           value: '',

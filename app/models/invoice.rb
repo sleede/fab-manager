@@ -18,6 +18,8 @@ class Invoice < PaymentDocument
   has_one :payment_gateway_object, as: :item, dependent: :destroy
   belongs_to :operator_profile, class_name: 'InvoicingProfile'
 
+  has_many :accounting_lines, dependent: :destroy
+
   delegate :user, to: :invoicing_profile
 
   before_create :add_environment

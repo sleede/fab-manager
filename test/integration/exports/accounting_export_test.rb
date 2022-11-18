@@ -168,19 +168,25 @@ class Exports::AccountingExportTest < ActionDispatch::IntegrationTest
 
   def check_entry_label(invoice, line)
     if invoice.subscription_invoice?
-      assert_match I18n.t('accounting_export.subscription'),
+      assert_match I18n.t('accounting_summary.subscription_abbreviation'),
                    line[I18n.t('accounting_export.line_label')],
                    'Entry label does not contains the reference to the subscription'
     end
     if invoice.main_item.object_type == 'Reservation'
-      assert_match I18n.t("accounting_export.#{invoice.main_item.object.reservable_type}_reservation"),
+      assert_match I18n.t("accounting_summary.#{invoice.main_item.object.reservable_type}_reservation_abbreviation"),
                    line[I18n.t('accounting_export.line_label')],
                    'Entry label does not contains the reference to the reservation'
     end
-    return unless invoice.main_item.object_type == 'WalletTransaction'
+    if invoice.main_item.object_type == 'WalletTransaction'
+      assert_match I18n.t('accounting_summary.wallet_abbreviation'),
+                   line[I18n.t('accounting_export.line_label')],
+                   'Entry label does not contains the reference to the wallet'
+    end
 
-    assert_match I18n.t('accounting_export.wallet'),
+    return unless invoice.main_item.object_type == 'OrderItem'
+
+    assert_match I18n.t('accounting_summary.shop_order_abbreviation'),
                  line[I18n.t('accounting_export.line_label')],
-                 'Entry label does not contains the reference to the wallet'
+                 'Entry label does not contains the reference to the order'
   end
 end

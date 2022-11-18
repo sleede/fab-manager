@@ -17,17 +17,20 @@ class InvoicingProfile < ApplicationRecord
 
   has_many :history_values, dependent: :nullify
 
-  has_many :operated_invoices, foreign_key: :operator_profile_id, class_name: 'Invoice', dependent: :nullify
-  has_many :operated_payment_schedules, foreign_key: :operator_profile_id, class_name: 'PaymentSchedule', dependent: :nullify
+  has_many :operated_invoices, foreign_key: :operator_profile_id, class_name: 'Invoice', dependent: :nullify, inverse_of: :operator_profile
+  has_many :operated_payment_schedules, foreign_key: :operator_profile_id, class_name: 'PaymentSchedule',
+                                        dependent: :nullify, inverse_of: :operator_profile
 
-  has_many :user_profile_custom_fields
+  has_many :user_profile_custom_fields, dependent: :destroy
   has_many :profile_custom_fields, through: :user_profile_custom_fields
   accepts_nested_attributes_for :user_profile_custom_fields, allow_destroy: true
+
+  has_many :accounting_lines, dependent: :destroy
 
   validates :address, presence: true, if: -> { Setting.get('address_required') }
 
   def full_name
     # if first_name or last_name is nil, the empty string will be used as a temporary replacement
-    (first_name || '').humanize.titleize + ' ' + (last_name || '').humanize.titleize
+    "#{(first_name || '').humanize.titleize} #{(last_name || '').humanize.titleize}"
   end
 end

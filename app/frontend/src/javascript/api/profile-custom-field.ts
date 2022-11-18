@@ -1,10 +1,11 @@
 import apiClient from './clients/api-client';
 import { AxiosResponse } from 'axios';
-import { ProfileCustomField } from '../models/profile-custom-field';
+import { ProfileCustomField, ProfileCustomFieldIndexFilters } from '../models/profile-custom-field';
+import ApiLib from '../lib/api';
 
 export default class ProfileCustomFieldAPI {
-  static async index (): Promise<Array<ProfileCustomField>> {
-    const res: AxiosResponse<Array<ProfileCustomField>> = await apiClient.get('/api/profile_custom_fields');
+  static async index (filters?: ProfileCustomFieldIndexFilters): Promise<Array<ProfileCustomField>> {
+    const res: AxiosResponse<Array<ProfileCustomField>> = await apiClient.get(`/api/profile_custom_fields${ApiLib.filtersToQuery(filters)}`);
     return res?.data;
   }
 

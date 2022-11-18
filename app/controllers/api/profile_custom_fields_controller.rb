@@ -1,13 +1,14 @@
 # frozen_string_literal: true
 
 # API Controller for resources of type ProfileCustomField
-# ProfileCustomFields are used to provide admin config user profile custom fields
+# ProfileCustomFields are fields configured by an admin, added to the user's profile
 class API::ProfileCustomFieldsController < API::ApiController
   before_action :authenticate_user!, except: :index
   before_action :set_profile_custom_field, only: %i[show update destroy]
 
   def index
     @profile_custom_fields = ProfileCustomField.all.order('id ASC')
+    @profile_custom_fields = @profile_custom_fields.where(actived: params[:actived]) if params[:actived].present?
   end
 
   def show; end

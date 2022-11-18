@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Asynchronously export the accounting data (Invoices & Avoirs) to an external accounting software
+# Asynchronously export the accounting data (AccountingLines) to an external accounting software
 class AccountingExportWorker
   include Sidekiq::Worker
 

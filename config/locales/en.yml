@@ -158,13 +158,14 @@ en:
     credit_euro: "Euro credit"
     lettering: "Lettering"
     VAT: 'VAT'
-    subscription: "subscr."
-    Machine_reservation: "machine reserv."
-    Training_reservation: "training reserv."
-    Event_reservation: "event reserv."
-    Space_reservation: "space reserv."
-    wallet: "wallet"
-    shop_order: "shop order"
+  accounting_summary:
+    subscription_abbreviation: "subscr."
+    Machine_reservation_abbreviation: "machine reserv."
+    Training_reservation_abbreviation: "training reserv."
+    Event_reservation_abbreviation: "event reserv."
+    Space_reservation_abbreviation: "space reserv."
+    wallet_abbreviation: "wallet"
+    shop_order_abbreviation: "shop order"
   vat_export:
     start_date: "Start date"
     end_date: "End date"
