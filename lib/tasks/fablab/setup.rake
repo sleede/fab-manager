@@ -127,6 +127,15 @@ namespace :fablab do
       print "\e[32m✅\e[0m \e[1mDone\e[0m\n"
     end
 
+    desc 'generate acconting lines'
+    task build_accounting_lines: :environment do
+      start_date = Invoice.order(created_at: :asc).first&.created_at
+      end_date = DateTime.current
+      AccountingLine.where(date: start_date..end_date).destroy_all
+      Accounting::AccountingService.new.build(start_date&.beginning_of_day, end_date.end_of_day)
+      puts '-> Done'
+    end
+
     def select_group(groups)
       groups.each do |g|
         print "#{g.id}) #{g.name}\n"

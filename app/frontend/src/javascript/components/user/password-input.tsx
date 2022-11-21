@@ -30,6 +30,7 @@ export const PasswordInput = <TFieldValues extends FieldValues>({ register, curr
                  }}
                  formState={formState}
                  label={t('app.shared.password_input.new_password')}
+                 tooltip={t('app.shared.password_input.help')}
                  type="password" />
       <FormInput id="password_confirmation"
                  register={register}

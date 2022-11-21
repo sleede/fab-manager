@@ -5,11 +5,11 @@ namespace :fablab do
   namespace :fix do
     desc '[release 2.3.0] update reservations referencing reservables not present in database'
     task reservations_not_existing_reservable: :environment do
-      ActiveRecord::Base.logger = Logger.new(STDOUT)
+      ActiveRecord::Base.logger = Logger.new($stdout)
       ActiveRecord::Base.connection.execute(
-        'UPDATE reservations SET reservable_type = NULL, reservable_id = NULL'\
-        ' WHERE NOT EXISTS (SELECT 1 FROM events WHERE events.id = reservations.reservable_id)'\
-        ' AND reservations.reservable_type = \'Event\''
+        'UPDATE reservations SET reservable_type = NULL, reservable_id = NULL ' \
+        'WHERE NOT EXISTS (SELECT 1 FROM events WHERE events.id = reservations.reservable_id) ' \
+        "AND reservations.reservable_type = 'Event'"
       )
     end
 
@@ -98,7 +98,7 @@ namespace :fablab do
     task categories_slugs: :environment do
       Category.all.each do |cat|
         # rubocop:disable Layout/LineLength
-        `curl -XPOST http://#{ENV['ELASTICSEARCH_HOST']}:9200/stats/event/_update_by_query?conflicts=proceed\\&refresh\\&wait_for_completion -d '
+        `curl -XPOST http://#{ENV.fetch('ELASTICSEARCH_HOST', nil)}:9200/stats/event/_update_by_query?conflicts=proceed\\&refresh\\&wait_for_completion -d '
         {
           "script": {
             "source": "ctx._source.subType = params.slug",
@@ -277,40 +277,6 @@ namespace :fablab do
 
       infos.each do |i|
         puts i
-      end
-    end
-
-    desc '[release 5.6.0] fix rounding issue on invoices using coupon'
-    task invoices_rounding: :environment do
-      coupon_service = CouponService.new
-      vat_service = VatHistoryService.new
-
-      # check invoices and udpate erroneous
-      Invoice.find_each do |invoice|
-        main_item = invoice.main_item.amount
-        other_items = invoice.other_items.map(&:amount).sum
-
-        total_without_coupon = coupon_service.invoice_total_no_coupon(invoice)
-        main_item_net = coupon_service.ventilate(total_without_coupon, main_item, invoice.coupon)
-        other_items_net = coupon_service.ventilate(total_without_coupon, other_items, invoice.coupon)
-
-        vat_rate_groups = vat_service.invoice_vat(invoice)
-        total_vat = vat_rate_groups.values.pluck(:total_vat).sum
-        total_excl_taxes = invoice.invoice_items.map(&:net_amount).sum
-        new_total = total_vat + total_excl_taxes
-        if (invoice.total != main_item_net + other_items_net) || (new_total != invoice.total)
-          Rails.logger.info "Fixing invoice #{invoice.id}... Previous total = #{invoice.total}, fixed total = #{new_total}"
-          invoice.update(total: new_total)
-        end
-      end
-      # chain invoices
-      if AccountingPeriod.count.positive?
-        last_period = AccountingPeriod.order(start_at: :desc).first
-        puts "Regenerating from #{last_period.end_at}..."
-        Invoice.where('created_at > ?', last_period.end_at).order(:id).each(&:chain_record)
-      else
-        puts '(Re)generating all footprint...'
-        Invoice.order(:id).all.each(&:chain_record)
       end
     end
   end

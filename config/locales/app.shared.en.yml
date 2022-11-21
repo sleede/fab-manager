@@ -110,6 +110,7 @@ en:
       password_input:
         new_password: "New password"
         confirm_password: "Confirm password"
+        help: "Your password must be minimum 12 characters long, have at least one uppercase letter, one lowercase letter, one number and one special character."
         password_too_short: "Password is too short (must be at least 12 characters)"
         confirmation_mismatch: "Confirmation mismatch with password."
       #project edition form

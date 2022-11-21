@@ -8,9 +8,9 @@ require 'integrity/archive_helper'
 # Invoice.invoiced and the subscription was saved in InvoiceItem.subscription_id
 #
 # From this migration, everything will be saved in InvoiceItems.object_id & InvoiceItem.object_type. This will be more
-# extensible and will allow to invoice more types of objects  the future.
+# extensible and will allow to invoice more types of objects in the future.
 class AddObjectToInvoiceItem < ActiveRecord::Migration[5.2]
-  def up
+  def up # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
     # first check that there's no bogus invoices
     raise InvalidInvoiceError if Invoice.where(invoiced_id: nil).where.not(invoiced_type: 'Error').count.positive?
 
@@ -40,7 +40,7 @@ class AddObjectToInvoiceItem < ActiveRecord::Migration[5.2]
             main = true
         WHERE id = #{invoice.invoice_items.where(subscription_id: nil).first.id}
       )
-      invoice.invoice_items.where(subscription_id: nil)[1..-1].each do |ii|
+      invoice.invoice_items.where(subscription_id: nil)[1..].each do |ii|
         execute %(
           UPDATE invoice_items
           SET object_id = #{invoice.invoiced_id || 'NULL'},

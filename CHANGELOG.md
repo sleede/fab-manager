@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- [TODO DEPLOY] `rails fablab:maintenance:build_accounting_lines`
+
 - Add reservation deadline parameter (#414)
 - Fix a bug: unable to run test in negavtive timezones (#425)
 

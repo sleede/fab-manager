@@ -31,6 +31,8 @@ class Accounting::AccountingService
     vat = vat_line(invoice)
     lines << vat unless vat.nil?
 
+    fix_rounding_errors(lines)
+
     lines
   end
 
@@ -136,5 +138,18 @@ class Accounting::AccountingService
     items.push I18n.t('accounting_summary.shop_order_abbreviation') if invoice.main_item.object_type == 'OrderItem'
 
     "#{reference}, #{items.join(' + ')}"
+  end
+
+  # In case of rounding errors, fix the balance by adding or removing a cent to the last item line
+  # This case should only happen when a coupon has been used.
+  def fix_rounding_errors(lines)
+    debit_sum = lines.filter { |l| l[:line_type] == 'client' }.pluck(:debit).sum
+    credit_sum = lines.filter { |l| l[:line_type] != 'client' }.pluck(:credit).sum
+
+    return if debit_sum == credit_sum
+
+    diff = debit_sum - credit_sum
+    fixable_line = lines.filter { |l| l[:line_type] == 'item' }.last
+    fixable_line.credit += diff
   end
 end

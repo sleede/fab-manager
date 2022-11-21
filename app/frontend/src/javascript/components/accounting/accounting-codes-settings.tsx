@@ -115,7 +115,9 @@ export const AccountingCodesSettings: React.FC<AccountingCodesSettingsProps> = (
       <h4>{t('app.admin.accounting_codes_settings.error')}</h4>
       <div className="error">
         <FormInput register={register} id="accounting_Error_code" label={t('app.admin.accounting_codes_settings.code')} />
-        <FormInput register={register} id="accounting_Error_label" label={t('app.admin.accounting_codes_settings.label')} />
+        <FormInput register={register} id="accounting_Error_label"
+                   label={t('app.admin.accounting_codes_settings.label')}
+                   tooltip={t('app.admin.accounting_codes_settings.error_help')} />
       </div>
       <h4>{t('app.admin.accounting_codes_settings.advanced_accounting')}</h4>
       <FormSwitch control={control} id="advanced_accounting"
