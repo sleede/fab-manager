@@ -46,7 +46,7 @@ class SettingService
 
     # sync all objects on stripe
     def sync_stripe_objects(setting)
-      return unless setting.name == 'stripe_secret_key'
+      return unless %w[stripe_secret_key online_payment_module].include?(setting.name)
 
       SyncObjectsOnStripeWorker.perform_async(setting.history_values.last&.invoicing_profile&.user&.id)
     end
