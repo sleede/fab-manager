@@ -1,5 +1,6 @@
 # Changelog Fab-manager
 
+- Fix a bug: broken display of machines pages
 - Fix a bug: some automated tests were randomly failing because ElasticSearch was not synced
 
 ## v5.5.4 2022 November 17
