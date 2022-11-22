@@ -6,11 +6,13 @@ class API::SpacesController < API::ApiController
   respond_to :json
 
   def index
-    @spaces = Space.includes(:space_image)
+    @spaces = Space.includes(:space_image).where(deleted_at: nil)
   end
 
   def show
     @space = Space.includes(:space_files, :projects).friendly.find(params[:id])
+
+    head :not_found if @space.deleted_at
   end
 
   def create
@@ -36,7 +38,11 @@ class API::SpacesController < API::ApiController
   def destroy
     @space = get_space
     authorize @space
-    @space.destroy
+    if @space.destroyable?
+      @space.destroy
+    else
+      @space.soft_destroy!
+    end
     head :no_content
   end
 

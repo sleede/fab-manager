@@ -91,6 +91,10 @@ class ReservationSubscriptionStatisticServiceTest < ActionDispatch::IntegrationT
       ]
     }.to_json, headers: default_headers
 
+    Stats::Machine.refresh_index!
+    Stats::Training.refresh_index!
+    Stats::Subscription.refresh_index!
+
     # Build the stats for the last 3 days, we expect the above invoices (reservations+subscription) to appear in the resulting stats
     ::Statistics::BuilderService.generate_statistic({ start_date: 2.days.ago.beginning_of_day,
                                                       end_date: DateTime.current.end_of_day })
@@ -126,6 +130,8 @@ class ReservationSubscriptionStatisticServiceTest < ActionDispatch::IntegrationT
     check_statistics_on_user(stat_hour)
 
     # training
+    Stats::Training.refresh_index!
+
     stat_training = Stats::Training.search(query: { bool: { must: [{ term: { date: 1.day.ago.to_date.iso8601 } },
                                                                    { term: { type: 'booking' } }] } }).first
     assert_not_nil stat_training

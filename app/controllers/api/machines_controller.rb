@@ -12,6 +12,8 @@ class API::MachinesController < API::ApiController
 
   def show
     @machine = Machine.includes(:machine_files, :projects).friendly.find(params[:id])
+
+    head :not_found if @machine.deleted_at
   end
 
   def create
@@ -35,7 +37,11 @@ class API::MachinesController < API::ApiController
 
   def destroy
     authorize @machine
-    @machine.destroy
+    if @machine.destroyable?
+      @machine.destroy
+    else
+      @machine.soft_destroy!
+    end
     head :no_content
   end
 

@@ -60,11 +60,12 @@ export const FormImageUpload = <TFieldValues extends FieldValues, TContext exten
         attachment_name: f.name
       });
       setValue(
-        id as Path<TFieldValues>,
-        {
-          attachment_name: f.name,
-          _destroy: false
-        } as UnpackNestedValue<FieldPathValue<TFieldValues, Path<TFieldValues>>>
+        `${id}.attachment_name` as Path<TFieldValues>,
+        f.name as UnpackNestedValue<FieldPathValue<TFieldValues, Path<TFieldValues>>>
+      );
+      setValue(
+        `${id}._destroy` as Path<TFieldValues>,
+        false as UnpackNestedValue<FieldPathValue<TFieldValues, Path<TFieldValues>>>
       );
       if (typeof onFileChange === 'function') {
         onFileChange({ attachment_name: f.name });

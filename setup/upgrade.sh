@@ -296,7 +296,7 @@ upgrade()
     fi
   done
   compile_assets
-  if ! docker-compose run --rm "$SERVICE" bundle exec rake db:migrate; then
+  if ! docker-compose run --rm "$SERVICE" bundle exec rake db:migrate </dev/tty; then
     restore_tag
     printf "\e[91m[ ❌ ] Something went wrong while migrating the database, please check the logs above.\e[39m\nExiting...\n"
     exit 4

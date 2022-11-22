@@ -82,6 +82,10 @@ class Machine < ApplicationRecord
     reservations.empty?
   end
 
+  def soft_destroy!
+    update(deleted_at: DateTime.current)
+  end
+
   def packs?(user)
     prepaid_packs.where(group_id: user.group_id)
                  .where(disabled: [false, nil])

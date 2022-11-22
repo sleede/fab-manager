@@ -20,7 +20,7 @@ interface FormMultiImageUploadProps<TFieldValues, TContext extends object> exten
  * This component allows to upload multiple images, in forms managed by react-hook-form.
  */
 export const FormMultiImageUpload = <TFieldValues extends FieldValues, TContext extends object>({ id, className, register, control, setValue, formState, addButtonLabel }: FormMultiImageUploadProps<TFieldValues, TContext>) => {
-  const { fields, append, remove } = useFieldArray({ control, name: id as ArrayPath<TFieldValues> });
+  const { append } = useFieldArray({ control, name: id as ArrayPath<TFieldValues> });
   const output = useWatch({ control, name: id as Path<TFieldValues> });
 
   /**
@@ -44,14 +44,10 @@ export const FormMultiImageUpload = <TFieldValues extends FieldValues, TContext 
           true as UnpackNestedValue<FieldPathValue<TFieldValues, Path<TFieldValues>>>
         );
       }
-      if (typeof image.id === 'string') {
-        remove(index);
-      } else {
-        setValue(
-          `${id}.${index}._destroy` as Path<TFieldValues>,
-          true as UnpackNestedValue<FieldPathValue<TFieldValues, Path<TFieldValues>>>
-        );
-      }
+      setValue(
+        `${id}.${index}._destroy` as Path<TFieldValues>,
+        true as UnpackNestedValue<FieldPathValue<TFieldValues, Path<TFieldValues>>>
+      );
     };
   };
 
@@ -74,8 +70,8 @@ export const FormMultiImageUpload = <TFieldValues extends FieldValues, TContext 
   return (
     <div className={`form-multi-image-upload ${className || ''}`}>
       <div className="list">
-        {fields.map((field: ImageType, index) => (
-          <FormImageUpload key={field.id}
+        {output.map((field: ImageType, index) => (
+          <FormImageUpload key={index}
             defaultImage={field}
             id={`${id}.${index}`}
             accept="image/*"

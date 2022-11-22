@@ -11,6 +11,6 @@ class MachinePolicy < ApplicationPolicy
   end
 
   def destroy?
-    user.admin? and record.destroyable?
+    user.admin?
   end
 end

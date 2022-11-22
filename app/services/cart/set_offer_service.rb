@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+# module definition
+module Cart; end
+
 # Provides methods for set offer to item in cart
 class Cart::SetOfferService
   def call(order, orderable, is_offered)

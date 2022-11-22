@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_03_133019) do
+ActiveRecord::Schema.define(version: 2022_11_22_123605) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
@@ -358,6 +358,8 @@ ActiveRecord::Schema.define(version: 2022_10_03_133019) do
     t.datetime "updated_at"
     t.string "slug"
     t.boolean "disabled"
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_machines_on_deleted_at"
     t.index ["slug"], name: "index_machines_on_slug", unique: true
   end
 
@@ -878,6 +880,8 @@ ActiveRecord::Schema.define(version: 2022_10_03_133019) do
     t.datetime "updated_at", null: false
     t.text "characteristics"
     t.boolean "disabled"
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_spaces_on_deleted_at"
   end
 
   create_table "spaces_availabilities", id: :serial, force: :cascade do |t|

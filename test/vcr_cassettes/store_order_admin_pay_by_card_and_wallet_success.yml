@@ -13,8 +13,6 @@ http_interactions:
       - Bearer sk_test_testfaketestfaketestfake
       Content-Type:
       - application/x-www-form-urlencoded
-      X-Stripe-Client-Telemetry:
-      - '{"last_request_metrics":{"request_id":"req_Xmih0ndHQjzde4","request_duration_ms":2}}'
       Stripe-Version:
       - '2019-08-14'
       X-Stripe-Client-User-Agent:
@@ -33,7 +31,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Tue, 22 Nov 2022 10:23:29 GMT
+      - Mon, 07 Nov 2022 17:22:23 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -53,11 +51,11 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Idempotency-Key:
-      - 524422f2-06be-4b13-a164-1d78f9221db3
+      - 3d420ca2-b79a-451b-88bc-56efb989ae3e
       Original-Request:
-      - req_LJ3F130BMDTCDc
+      - req_7tnZKRYjblvjJF
       Request-Id:
-      - req_LJ3F130BMDTCDc
+      - req_7tnZKRYjblvjJF
       Stripe-Should-Retry:
       - 'false'
       Stripe-Version:
@@ -68,7 +66,7 @@ http_interactions:
       encoding: UTF-8
       string: |-
         {
-          "id": "pm_1M6tdV2sOmf47Nz9ZhwXBRTL",
+          "id": "pm_1M1Z1f2sOmf47Nz9y4qaYQap",
           "object": "payment_method",
           "billing_details": {
             "address": {
@@ -108,19 +106,19 @@ http_interactions:
             },
             "wallet": null
           },
-          "created": 1669112609,
+          "created": 1667841743,
           "customer": null,
           "livemode": false,
           "metadata": {},
           "type": "card"
         }
-  recorded_at: Tue, 22 Nov 2022 10:23:29 GMT
+  recorded_at: Mon, 07 Nov 2022 17:22:24 GMT
 - request:
     method: post
     uri: https://api.stripe.com/v1/payment_intents
     body:
       encoding: UTF-8
-      string: payment_method=pm_1M6tdV2sOmf47Nz9ZhwXBRTL&amount=162500&currency=usd&confirmation_method=manual&confirm=true&customer=cus_8CyNk3UTi8lvCc
+      string: payment_method=pm_1M1Z1f2sOmf47Nz9y4qaYQap&amount=162500&currency=usd&confirmation_method=manual&confirm=true&customer=cus_8CyNk3UTi8lvCc
     headers:
       User-Agent:
       - Stripe/v1 RubyBindings/5.29.0
@@ -129,7 +127,7 @@ http_interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       X-Stripe-Client-Telemetry:
-      - '{"last_request_metrics":{"request_id":"req_LJ3F130BMDTCDc","request_duration_ms":737}}'
+      - '{"last_request_metrics":{"request_id":"req_7tnZKRYjblvjJF","request_duration_ms":697}}'
       Stripe-Version:
       - '2019-08-14'
       X-Stripe-Client-User-Agent:
@@ -148,7 +146,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Tue, 22 Nov 2022 10:23:31 GMT
+      - Mon, 07 Nov 2022 17:22:25 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -168,11 +166,11 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Idempotency-Key:
-      - 3c835ee8-86ea-4896-811f-0d3e0785cd09
+      - 5294d6d7-d766-4aa5-bac1-be52f491fa20
       Original-Request:
-      - req_ybBnHONjaSyx1X
+      - req_c0S6XFCR5hlcc9
       Request-Id:
-      - req_ybBnHONjaSyx1X
+      - req_c0S6XFCR5hlcc9
       Stripe-Should-Retry:
       - 'false'
       Stripe-Version:
@@ -183,7 +181,7 @@ http_interactions:
       encoding: UTF-8
       string: |-
         {
-          "id": "pi_3M6tdW2sOmf47Nz90KZ43vXZ",
+          "id": "pi_3M1Z1g2sOmf47Nz91KcAbrWR",
           "object": "payment_intent",
           "amount": 162500,
           "amount_capturable": 0,
@@ -201,7 +199,7 @@ http_interactions:
             "object": "list",
             "data": [
               {
-                "id": "ch_3M6tdW2sOmf47Nz90CWztIp1",
+                "id": "ch_3M1Z1g2sOmf47Nz91YJQvMPK",
                 "object": "charge",
                 "amount": 162500,
                 "amount_captured": 162500,
@@ -209,7 +207,7 @@ http_interactions:
                 "application": null,
                 "application_fee": null,
                 "application_fee_amount": null,
-                "balance_transaction": "txn_3M6tdW2sOmf47Nz90xHPB7ge",
+                "balance_transaction": "txn_3M1Z1g2sOmf47Nz913ZvXNvF",
                 "billing_details": {
                   "address": {
                     "city": null,
@@ -225,7 +223,7 @@ http_interactions:
                 },
                 "calculated_statement_descriptor": "Stripe",
                 "captured": true,
-                "created": 1669112610,
+                "created": 1667841744,
                 "currency": "usd",
                 "customer": "cus_8CyNk3UTi8lvCc",
                 "description": null,
@@ -245,13 +243,13 @@ http_interactions:
                   "network_status": "approved_by_network",
                   "reason": null,
                   "risk_level": "normal",
-                  "risk_score": 19,
+                  "risk_score": 45,
                   "seller_message": "Payment complete.",
                   "type": "authorized"
                 },
                 "paid": true,
-                "payment_intent": "pi_3M6tdW2sOmf47Nz90KZ43vXZ",
-                "payment_method": "pm_1M6tdV2sOmf47Nz9ZhwXBRTL",
+                "payment_intent": "pi_3M1Z1g2sOmf47Nz91KcAbrWR",
+                "payment_method": "pm_1M1Z1f2sOmf47Nz9y4qaYQap",
                 "payment_method_details": {
                   "card": {
                     "brand": "visa",
@@ -276,14 +274,14 @@ http_interactions:
                 },
                 "receipt_email": null,
                 "receipt_number": null,
-                "receipt_url": "https://pay.stripe.com/receipts/payment/CAcaFwoVYWNjdF8xMDNyRTYyc09tZjQ3Tno5KKPG8psGMgbPi1sBzwo6LBYq6qekkFXHe51z6Ei_GniUXrfPnNwAP9pxTHhMG3SSyEbSD-_jgxqNwc0o",
+                "receipt_url": "https://pay.stripe.com/receipts/payment/CAcaFwoVYWNjdF8xMDNyRTYyc09tZjQ3Tno5KNH9pJsGMgbMAdBS9Kg6LBbMQFUWP1mmaiHjAUCgW-WYHRH5dwIHTlYhiTVjiSL5fqEMQr17GSJhWPA-",
                 "refunded": false,
                 "refunds": {
                   "object": "list",
                   "data": [],
                   "has_more": false,
                   "total_count": 0,
-                  "url": "/v1/charges/ch_3M6tdW2sOmf47Nz90CWztIp1/refunds"
+                  "url": "/v1/charges/ch_3M1Z1g2sOmf47Nz91YJQvMPK/refunds"
                 },
                 "review": null,
                 "shipping": null,
@@ -298,11 +296,11 @@ http_interactions:
             ],
             "has_more": false,
             "total_count": 1,
-            "url": "/v1/charges?payment_intent=pi_3M6tdW2sOmf47Nz90KZ43vXZ"
+            "url": "/v1/charges?payment_intent=pi_3M1Z1g2sOmf47Nz91KcAbrWR"
           },
-          "client_secret": "pi_3M6tdW2sOmf47Nz90KZ43vXZ_secret_EZPT1VWG8jNZgqaW0iqXN0LjY",
+          "client_secret": "pi_3M1Z1g2sOmf47Nz91KcAbrWR_secret_ocSaI8LfCIvNBzfXl5iwRB9kS",
           "confirmation_method": "manual",
-          "created": 1669112610,
+          "created": 1667841744,
           "currency": "usd",
           "customer": "cus_8CyNk3UTi8lvCc",
           "description": null,
@@ -312,7 +310,7 @@ http_interactions:
           "metadata": {},
           "next_action": null,
           "on_behalf_of": null,
-          "payment_method": "pm_1M6tdV2sOmf47Nz9ZhwXBRTL",
+          "payment_method": "pm_1M1Z1f2sOmf47Nz9y4qaYQap",
           "payment_method_options": {
             "card": {
               "installments": null,
@@ -336,5 +334,5 @@ http_interactions:
           "transfer_data": null,
           "transfer_group": null
         }
-  recorded_at: Tue, 22 Nov 2022 10:23:31 GMT
+  recorded_at: Mon, 07 Nov 2022 17:22:26 GMT
 recorded_with: VCR 6.0.0
