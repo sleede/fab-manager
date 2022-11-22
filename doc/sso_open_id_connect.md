@@ -21,3 +21,12 @@ to the corresponding OpenID Connect claims:
 - profile.address
 
 To use the automatic mapping, add one of the fields above and click on the magic wand button near to the "Userinfo claim" input.
+
+## Known issues
+
+```
+Not found. Authentication passthru.
+```
+This issue may occur if you have misconfigured the environment variable `DEFAULT_HOST` and/or `DEFAULT_PROTOCOL`.
+Especially, if you have an automatic redirection (e.g. from example.org to example.com), `DEFAULT_HOST` *MUST* be configured with the redirection target (here example.com).
+Once you have reconfigured these variables, please switch back the active authentication provider to FabManager, restart the application, then delete the OIDC provider you configured and re-create a new one for the new settings to be used.
