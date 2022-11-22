@@ -15,7 +15,7 @@ class Product < ApplicationRecord
   accepts_nested_attributes_for :product_files, allow_destroy: true, reject_if: :all_blank
 
   has_many :product_images, as: :viewable, dependent: :destroy
-  accepts_nested_attributes_for :product_images, allow_destroy: true, reject_if: ->(i) { i[:attachment].blank? }
+  accepts_nested_attributes_for :product_images, allow_destroy: true, reject_if: ->(i) { i[:attachment].blank? && i[:id].blank? }
 
   has_many :product_stock_movements, dependent: :destroy
   accepts_nested_attributes_for :product_stock_movements, allow_destroy: true, reject_if: :all_blank

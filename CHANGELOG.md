@@ -5,6 +5,7 @@
 - Fix a bug: broken display of machines pages
 - Fix a bug: some automated tests were randomly failing because ElasticSearch was not synced
 - Fix a bug: payment related objects are not synced on Stripe when enabling the online payment module
+- Fix a bug: unable set a main image of product and remove an image of product
 
 ## v5.5.4 2022 November 17
 
