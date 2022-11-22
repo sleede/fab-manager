@@ -1,5 +1,6 @@
 # Changelog Fab-manager
 
+- Fix a bug: in upgrade script, the error "the input device is not a TTY" is thrown when migrating the database
 - Fix a bug: broken display of machines pages
 - Fix a bug: some automated tests were randomly failing because ElasticSearch was not synced
 - Fix a bug: payment related objects are not synced on Stripe when enabling the online payment module
