@@ -66,6 +66,10 @@ class Space < ApplicationRecord
     reservations.empty?
   end
 
+  def soft_destroy!
+    update(deleted_at: DateTime.current)
+  end
+
   private
 
   def update_gateway_product

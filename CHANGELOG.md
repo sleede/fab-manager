@@ -1,5 +1,6 @@
 # Changelog Fab-manager
 
+- Soft destroy of spaces and machines
 - Fix a bug: in upgrade script, the error "the input device is not a TTY" is thrown when migrating the database
 - Fix a bug: broken display of machines pages
 - Fix a bug: some automated tests were randomly failing because ElasticSearch was not synced

@@ -9,6 +9,9 @@ class MachineService
                else
                  Machine.includes(:machine_image, :plans).order(sort_by)
                end
+    # do not include soft destroyed
+    machines = machines.where(deleted_at: nil)
+
     if filters[:disabled].present?
       state = filters[:disabled] == 'false' ? [nil, false] : true
       machines = machines.where(disabled: state)
