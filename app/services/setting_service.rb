@@ -5,72 +5,80 @@
 # so this service provides a wrapper around these operations.
 class SettingService
   class << self
-    def before_update(setting)
+    def update_allowed?(setting)
       return false if Rails.application.secrets.locked_settings.include? setting.name
 
       true
     end
 
-    def after_update(setting)
-      update_theme_stylesheet(setting)
-      update_home_stylesheet(setting)
-      notify_privacy_update(setting)
-      sync_stripe_objects(setting)
-      build_stats(setting)
-      export_projects_to_openlab(setting)
-      validate_admins(setting)
+    def run_after_update(settings)
+      update_theme_stylesheet(settings)
+      update_home_stylesheet(settings)
+      notify_privacy_update(settings)
+      sync_stripe_objects(settings)
+      build_stats(settings)
+      export_projects_to_openlab(settings)
+      validate_admins(settings)
+      update_accounting_line(settings)
     end
 
     private
 
     # rebuild the theme stylesheet
-    def update_theme_stylesheet(setting)
-      return unless %w[main_color secondary_color].include? setting.name
+    def update_theme_stylesheet(settings)
+      return unless (%w[main_color secondary_color] & settings.map(&:name)).count.positive?
 
       Stylesheet.theme&.rebuild!
     end
 
     # rebuild the home page stylesheet
-    def update_home_stylesheet(setting)
-      return unless setting.name == 'home_css'
+    def update_home_stylesheet(settings)
+      return unless settings.any? { |s| s.name == 'home_css' }
 
       Stylesheet.home_page&.rebuild!
     end
 
     # notify about a change in privacy policy
-    def notify_privacy_update(setting)
-      return unless setting.name == 'privacy_body'
+    def notify_privacy_update(settings)
+      return unless settings.any? { |s| s.name == 'privacy_body' }
 
       NotifyPrivacyUpdateWorker.perform_async(setting.id)
     end
 
     # sync all objects on stripe
-    def sync_stripe_objects(setting)
-      return unless %w[stripe_secret_key online_payment_module].include?(setting.name)
+    def sync_stripe_objects(settings)
+      return unless (%w[stripe_secret_key online_payment_module] & settings.map(&:name)).count.positive?
 
       SyncObjectsOnStripeWorker.perform_async(setting.history_values.last&.invoicing_profile&.user&.id)
     end
 
     # generate the statistics since the last update
-    def build_stats(setting)
-      return unless setting.name == 'statistics_module' && setting.value == 'true'
+    def build_stats(settings)
+      return unless settings.any? { |s| s.name == 'statistics_module' && s.value == 'true' }
 
       PeriodStatisticsWorker.perform_async(setting.previous_update)
     end
 
     # export projects to openlab
-    def export_projects_to_openlab(setting)
-      return unless %w[openlab_app_id openlab_app_secret].include?(setting.name) &&
+    def export_projects_to_openlab(settings)
+      return unless (%w[openlab_app_id openlab_app_secret] & settings.map(&:name)).count.positive? &&
                     Setting.get('openlab_app_id').present? && Setting.get('openlab_app_secret').present?
 
       Project.all.each(&:openlab_create)
     end
 
     # automatically validate the admins
-    def validate_admins(setting)
-      return unless setting.name == 'user_validation_required' && setting.value == 'true'
+    def validate_admins(settings)
+      return unless settings.any? { |s| s.name == 'user_validation_required' && s.value == 'true' }
 
       User.admins.each { |admin| admin.update(validated_at: DateTime.current) if admin.validated_at.nil? }
+    end
+
+    def update_accounting_line(settings)
+      return unless settings.any? { |s| s.name.match(/^accounting_/) || s.name == 'advanced_accounting' }
+
+      AccountingLine.destroy_all
+      AccountingWorker.perform_async(:all)
     end
   end
 end

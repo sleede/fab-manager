@@ -20,6 +20,8 @@ class Product < ApplicationRecord
   has_many :product_stock_movements, dependent: :destroy
   accepts_nested_attributes_for :product_stock_movements, allow_destroy: true, reject_if: :all_blank
 
+  has_many :order_items, as: :orderable, dependent: :nullify
+
   has_one :advanced_accounting, as: :accountable, dependent: :destroy
   accepts_nested_attributes_for :advanced_accounting, allow_destroy: true
 

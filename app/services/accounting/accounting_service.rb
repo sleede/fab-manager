@@ -12,11 +12,16 @@ class Accounting::AccountingService
     @journal_code = Setting.get('accounting_journal_code') || ''
   end
 
+  # build accounting lines for invoices between the provided dates
   def build(start_date, end_date)
-    # build accounting lines
-    lines = []
     invoices = Invoice.where('created_at >= ? AND created_at <= ?', start_date, end_date).order('created_at ASC')
-    invoices.each do |i|
+    build_from_invoices(invoices)
+  end
+
+  # build accounting lines for the provided invoices
+  def build_from_invoices(invoices)
+    lines = []
+    invoices.find_each do |i|
       Rails.logger.debug { "processing invoice #{i.id}..." } unless Rails.env.test?
       lines << generate_lines(i)
     end

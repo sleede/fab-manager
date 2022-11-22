@@ -1,5 +1,7 @@
 import { ReactNode, useEffect, useState } from 'react';
 import * as React from 'react';
+import _ from 'lodash';
+import { usePrevious } from '../../lib/use-previous';
 
 type tabId = string|number;
 
@@ -21,9 +23,12 @@ interface FabTabsProps {
  */
 export const FabTabs: React.FC<FabTabsProps> = ({ tabs, defaultTab, className }) => {
   const [active, setActive] = useState<Tab>(tabs.filter(Boolean).find(t => t.id === defaultTab) || tabs.filter(Boolean)[0]);
+  const previousTabs = usePrevious<Tab[]>(tabs);
 
   useEffect(() => {
-    setActive(tabs.filter(Boolean).find(t => t.id === defaultTab) || tabs.filter(Boolean)[0]);
+    if (!_.isEqual(previousTabs?.filter(Boolean).map(t => t.id), tabs?.filter(Boolean).map(t => t?.id))) {
+      setActive(tabs.filter(Boolean).find(t => t.id === defaultTab) || tabs.filter(Boolean)[0]);
+    }
   }, [tabs]);
 
   /**

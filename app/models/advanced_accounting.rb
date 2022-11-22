@@ -8,4 +8,25 @@ class AdvancedAccounting < ApplicationRecord
   belongs_to :space, foreign_type: 'Space', foreign_key: 'accountable_id', inverse_of: :advanced_accounting
   belongs_to :event, foreign_type: 'Event', foreign_key: 'accountable_id', inverse_of: :advanced_accounting
   belongs_to :product, foreign_type: 'Product', foreign_key: 'accountable_id', inverse_of: :advanced_accounting
+  belongs_to :plan, foreign_type: 'Plan', foreign_key: 'accountable_id', inverse_of: :advanced_accounting
+
+  after_save :rebuild_accounting_lines
+
+  private
+
+  def rebuild_accounting_lines
+    invoices = case accountable_type
+               when 'Machine', 'Training', 'Space', 'Event'
+                 accountable.reservations.map(&:invoice_items).flatten.map(&:invoice).uniq
+               when 'Product'
+                 accountable.order_items.map(&:order).flatten.map(&:invoice).uniq
+               when 'Plan'
+                 accountable.subscriptions.map(&:invoice_items).flatten.map(&:invoice).uniq
+               else
+                 raise TypeError "Unknown accountable_type #{accountable_type}"
+               end
+    ids = invoices.map(&:id)
+    AccountingLine.where(invoice_id: ids).destroy_all
+    AccountingWorker.perform_async(:invoices, ids)
+  end
 end
