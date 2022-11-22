@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+## v5.5.5 2022 November 22
+
 - Soft destroy of spaces and machines
 - Fix a bug: in upgrade script, the error "the input device is not a TTY" is thrown when migrating the database
 - Fix a bug: broken display of machines pages
