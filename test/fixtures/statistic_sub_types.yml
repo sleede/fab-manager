@@ -167,3 +167,11 @@ statistic_sub_type_24:
   label: Interrompue
   created_at: 2022-10-12 08:55:05.209986 Z
   updated_at: 2022-10-12 08:55:05.209986 Z
+
+statistic_sub_type_25:
+  id: 25
+  key: atelier-bois
+  label: Atelier Bois
+  created_at: 2022-11-23 11:51:14.651651 Z
+  updated_at: 2022-11-23 11:51:14.651651 Z
+

@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- Fix a bug: soft destroyed machines and spaces are still reported in the OpenAPI
+
 ## v5.5.5 2022 November 22
 
 - Soft destroy of spaces and machines

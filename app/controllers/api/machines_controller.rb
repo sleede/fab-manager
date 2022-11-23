@@ -37,11 +37,8 @@ class API::MachinesController < API::ApiController
 
   def destroy
     authorize @machine
-    if @machine.destroyable?
-      @machine.destroy
-    else
-      @machine.soft_destroy!
-    end
+    method = @machine.destroyable? ? :destroy : :soft_destroy!
+    @machine.send(method)
     head :no_content
   end
 
