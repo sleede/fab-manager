@@ -13,61 +13,76 @@ class OpenAPI::V1::AccountingDoc < OpenAPI::V1::BaseDoc
 
   doc_for :index do
     api :GET, "/#{API_VERSION}/accounting", 'Accounting lines'
-    description 'All accounting lines, with optional pagination and dates filtering. Ordered by *date* descendant.'
+    description 'All accounting lines, paginated (necessarily becauce there is a lot of data) with optional dates filtering. ' \
+                'Ordered by *date* descendant.'
     param_group :pagination
     param :after, DateTime, optional: true, desc: 'Filter accounting lines to lines after the given date.'
     param :before, DateTime, optional: true, desc: 'Filter accounting lines to lines before the given date.'
+    param :invoice_id, [Integer, Array], optional: true, desc: 'Scope the request to one or various invoices.'
+
     example <<-LINES
       # /open_api/v1/accounting?after=2022-01-01T00:00:00+02:00&page=1&per_page=3
       {
         "lines": [
           {
+            "id": 1,
+            "line_type": "client",
             "journal_code": "VT01",
             "date": "2022-01-02T18:14:21+01:00",
             "account_code": "5802",
-            "account_label": "Wallet customers",
-            "analytical_code": "P3D71",
-            "invoice": {
-              "reference": "22010009/VL",
-              "id": 274,
-              "label": "Dupont Marcel, 22010009/VL, subscr.",
-            },
-            "user_id": 6512,
-            "amount": 200,
-            "currency": "EUR",
-            "invoice_url": "/open_api/v1/invoices/247/download"
-          },
-          {
-            "journal_code": "VT01",
-            "date": "2022-01-02T18:14:21+01:00",
-            "account_code": "5801",
             "account_label": "Card customers",
-            "analytical_code": "P3D71",
+            "analytical_code": "",
             "invoice": {
               "reference": "22010009/VL",
               "id": 274,
-              "label": "Dupont Marcel, 22010009/VL, subscr.",
+              "label": "Subscription of Dupont Marcel for 1 month starting from 2022, january 2nd",
+              "url": "/open_api/v1/invoices/247/download"
             },
-            "user_id": 6512,
-            "amount": 100,
+            "user_invoicing_profile_id": 6512,
+            "debit": 1400,
+            "credit": 0
             "currency": "EUR",
-            "invoice_url": "/open_api/v1/invoices/247/download"
+            "summary": "Dupont Marcel, 22010009/VL, subscr."
           },
           {
+            "id": 2,
+            "line_type": "item",
             "journal_code": "VT01",
             "date": "2022-01-02T18:14:21+01:00",
-            "account_code": "5802",
-            "account_label": "Wallet customers",
+            "account_code": "7071",
+            "account_label": "Subscriptions",
             "analytical_code": "P3D71",
             "invoice": {
               "reference": "22010009/VL",
               "id": 274,
-              "label": "Dupont Marcel, 22010009/VL, subscr.",
+              "label": "Subscription of Dupont Marcel for 1 month starting from 2022, january 2nd",
+              "url": "/open_api/v1/invoices/247/download"
             },
-            "user_id": 6512,
-            "amount": 200,
+            "user_invoicing_profile_id": 6512,
+            "debit": 0,
+            "credit": 1167
             "currency": "EUR",
-            "invoice_url": "/open_api/v1/invoices/247/download"
+            "summary": "Dupont Marcel, 22010009/VL, subscr."
+          },
+          {
+            "id": 3,
+            "line_type": "vat",
+            "journal_code": "VT01",
+            "date": "2022-01-02T18:14:21+01:00",
+            "account_code": "4457",
+            "account_label": "Collected VAT",
+            "analytical_code": "P3D71",
+            "invoice": {
+              "reference": "22010009/VL",
+              "id": 274,
+              "label": "Subscription of Dupont Marcel for 1 month starting from 2022, january 2nd",
+              "url": "/open_api/v1/invoices/247/download"
+            },
+            "user_invoicing_profile_id": 6512,
+            "debit": 0,
+            "credit": 233
+            "currency": "EUR",
+            "summary": "Dupont Marcel, 22010009/VL, subscr."
           }
         ]
       }

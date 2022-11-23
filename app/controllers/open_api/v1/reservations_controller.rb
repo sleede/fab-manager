@@ -11,11 +11,11 @@ class OpenAPI::V1::ReservationsController < OpenAPI::V1::BaseController
                                .includes(statistic_profile: :user)
                                .references(:statistic_profiles)
 
-    @reservations = @reservations.where(statistic_profiles: { user_id: params[:user_id] }) if params[:user_id].present?
+    @reservations = @reservations.where(statistic_profiles: { user_id: may_array(params[:user_id]) }) if params[:user_id].present?
     @reservations = @reservations.where(reservable_type: format_type(params[:reservable_type])) if params[:reservable_type].present?
-    @reservations = @reservations.where(reservable_id: params[:reservable_id]) if params[:reservable_id].present?
+    @reservations = @reservations.where(reservable_id: may_array(params[:reservable_id])) if params[:reservable_id].present?
 
-    return unless params[:page].present?
+    return if params[:page].blank?
 
     @reservations = @reservations.page(params[:page]).per(per_page)
     paginate @reservations, per_page: per_page

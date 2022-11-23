@@ -279,6 +279,7 @@ Rails.application.routes.draw do
         end
         resources :events
         resources :availabilities
+        resources :accounting
       end
     end
   end

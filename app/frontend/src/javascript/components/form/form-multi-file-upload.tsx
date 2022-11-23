@@ -39,7 +39,7 @@ export const FormMultiFileUpload = <TFieldValues extends FieldValues, TContext e
   return (
     <div className={`form-multi-file-upload ${className || ''}`}>
       <div className="list">
-        {output.map((field: FileType, index) => (
+        {output?.map((field: FileType, index) => (
           <FormFileUpload key={index}
             defaultFile={field}
             id={`${id}.${index}`}

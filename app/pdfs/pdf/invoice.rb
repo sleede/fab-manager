@@ -53,74 +53,19 @@ class PDF::Invoice < Prawn::Document
       end
 
       # user/organization's information
-      if invoice.invoicing_profile.organization
-        name = invoice.invoicing_profile.organization.name
-        full_name = "#{name} (#{invoice.invoicing_profile.full_name})"
-        others = invoice.invoicing_profile.user_profile_custom_fields&.joins(:profile_custom_field)
-          &.where('profile_custom_fields.actived' => true)
-          &.order('profile_custom_fields.id ASC')
-          &.select { |f| f.value.present? }
-          &.map do |f|
-          "#{f.profile_custom_field.label}: #{f.value}"
-        end
-      else
-        name = invoice.invoicing_profile.full_name
-        full_name = name
-      end
-
-      address = if invoice&.invoicing_profile&.organization&.address
-                  invoice.invoicing_profile.organization.address.address
-                elsif invoice&.invoicing_profile&.address
-                  invoice.invoicing_profile.address.address
-                else
-                  ''
-                end
+      name = Invoices::RecipientService.name(invoice)
+      others = Invoices::RecipientService.organization_data(invoice)
+      address = Invoices::RecipientService.address(invoice)
 
       text_box "<b>#{name}</b>\n#{invoice.invoicing_profile.email}\n#{address}\n#{others&.join("\n")}",
                at: [bounds.width - 180, bounds.top - 49],
                width: 180,
                align: :right,
                inline_format: true
-      name = full_name
 
       # object
       move_down 28
-      if invoice.is_a?(Avoir)
-        object = if invoice.main_item.object_type == WalletTransaction.name
-                   I18n.t('invoices.wallet_credit')
-                 else
-                   I18n.t('invoices.cancellation_of_invoice_REF', REF: invoice.invoice.reference)
-                 end
-      else
-        case invoice.main_item.object_type
-        when 'Reservation'
-          object = I18n.t('invoices.reservation_of_USER_on_DATE_at_TIME',
-                          USER: name,
-                          DATE: I18n.l(invoice.main_item.object.slots[0].start_at.to_date),
-                          TIME: I18n.l(invoice.main_item.object.slots[0].start_at, format: :hour_minute))
-          invoice.invoice_items.each do |item|
-            next unless item.object_type == Subscription.name
-
-            subscription = item.object
-            cancellation = invoice.is_a?(Avoir) ? "#{I18n.t('invoices.cancellation')} - " : ''
-            object = "\n- #{object}\n- #{cancellation + subscription_verbose(subscription, name)}"
-            break
-          end
-        when 'Subscription'
-          object = subscription_verbose(invoice.main_item.object, name)
-        when 'OfferDay'
-          object = offer_day_verbose(invoice.main_item.object, name)
-        when 'Error'
-          object = I18n.t('invoices.error_invoice')
-        when 'StatisticProfilePrepaidPack'
-          object = I18n.t('invoices.prepaid_pack')
-        when 'OrderItem'
-          object = I18n.t('invoices.order')
-        else
-          Rails.logger.error "specified main_item.object_type type (#{invoice.main_item.object_type}) is unknown"
-        end
-      end
-      text "#{I18n.t('invoices.object')} #{object}"
+      text "#{I18n.t('invoices.object')} #{Invoices::LabelService.build(invoice)}"
 
       # details table of the invoice's elements
       move_down 20
@@ -368,22 +313,6 @@ class PDF::Invoice < Prawn::Document
                   STARTTIME: I18n.l(slot.start_at, format: :hour_minute),
                   ENDTIME: I18n.l(slot.end_at, format: :hour_minute))}\n"
     end
-  end
-
-  def subscription_verbose(subscription, username)
-    subscription_start_at = subscription.expired_at - subscription.plan.duration
-    duration_verbose = I18n.t("duration.#{subscription.plan.interval}", count: subscription.plan.interval_count)
-    I18n.t('invoices.subscription_of_NAME_for_DURATION_starting_from_DATE',
-           NAME: username,
-           DURATION: duration_verbose,
-           DATE: I18n.l(subscription_start_at.to_date))
-  end
-
-  def offer_day_verbose(offer_day, username)
-    I18n.t('invoices.subscription_of_NAME_extended_starting_from_STARTDATE_until_ENDDATE',
-           NAME: username,
-           STARTDATE: I18n.l(offer_day.start_at.to_date),
-           ENDDATE: I18n.l(offer_day.end_at.to_date))
   end
 
   ##

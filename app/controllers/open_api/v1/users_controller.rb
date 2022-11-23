@@ -13,9 +13,9 @@ class OpenAPI::V1::UsersController < OpenAPI::V1::BaseController
       email_param = params[:email].is_a?(String) ? params[:email].downcase : params[:email].map(&:downcase)
       @users = @users.where(email: email_param)
     end
-    @users = @users.where(id: params[:user_id]) if params[:user_id].present?
+    @users = @users.where(id: may_array(params[:user_id])) if params[:user_id].present?
 
-    return unless params[:page].present?
+    return if params[:page].blank?
 
     @users = @users.page(params[:page]).per(per_page)
     paginate @users, per_page: per_page

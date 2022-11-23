@@ -83,15 +83,22 @@ module ApplicationHelper
     (BigDecimal(amount.to_s) * 100.0).to_f
   end
 
+  # Return the given parameter as it, or as an array if it can be parsed as an array
+  def may_array(param)
+    return param unless param&.chars&.first == '[' && param&.chars&.last == ']'
+
+    param.gsub(/[\[\]]/i, '').split(',')
+  end
+
   private
 
   ## inspired by gems/actionview-4.2.5/lib/action_view/helpers/translation_helper.rb
   # rubocop:disable Rails/HelperInstanceVariable
   def scope_key_by_partial(key)
     if key.to_s.first == '.'
-      raise "Cannot use t(#{key.inspect}) shortcut because path is not available" unless @virtual_path
+      raise "Cannot use t(#{key.inspect}) shortcut because path is not available" unless @virtual_path # rubocop:disable Rails/HelperInstanceVariable
 
-      @virtual_path.gsub(%r{/_?}, '.') + key.to_s
+      @virtual_path.gsub(%r{/_?}, '.') + key.to_s # rubocop:disable Rails/HelperInstanceVariable
     else
       key
     end

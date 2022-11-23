@@ -22,6 +22,21 @@ class OpenApi::UsersTest < ActionDispatch::IntegrationTest
   test 'list all users filtering by IDs' do
     get '/open_api/v1/users?user_id=[3,4,5]', headers: open_api_headers(@token)
     assert_response :success
+    assert_equal Mime[:json], response.content_type
+
+    users = json_response(response.body)
+    assert users[:users].count.positive?
+    assert(users[:users].all? { |user| [3, 4, 5].include?(user[:id]) })
+  end
+
+  test 'list a user filtering by ID' do
+    get '/open_api/v1/users?user_id=2', headers: open_api_headers(@token)
+    assert_response :success
+    assert_equal Mime[:json], response.content_type
+
+    users = json_response(response.body)
+    assert_equal 1, users[:users].count
+    assert_equal 2, users[:users].first[:id]
   end
 
   test 'list all users filtering by email' do

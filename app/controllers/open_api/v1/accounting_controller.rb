@@ -1,25 +1,28 @@
 # frozen_string_literal: true
 
-# OpenAPI controller for the accounting lines
+# authorized 3rd party softwares can fetch the accounting lines through the OpenAPI
 class OpenAPI::V1::AccountingController < OpenAPI::V1::BaseController
   extend OpenAPI::ApiDoc
   include Rails::Pagination
   expose_doc
 
   def index
-    @invoices = Invoice.order(created_at: :desc)
-                       .includes(invoicing_profile: :user)
-                       .references(:invoicing_profiles)
+    @lines = AccountingLine.order(date: :desc)
+                           .includes(:invoice)
 
-    @invoices = @invoices.where(invoicing_profiles: { user_id: params[:user_id] }) if params[:user_id].present?
+    @lines = @lines.where('date >= ?', DateTime.parse(params[:after])) if params[:after].present?
+    @lines = @lines.where('date <= ?', DateTime.parse(params[:before])) if params[:before].present?
+    @lines = @lines.where(invoice_id: may_array(params[:invoice_id])) if params[:invoice_id].present?
 
-    return if params[:page].blank?
-
-    @invoices = @invoices.page(params[:page]).per(per_page)
-    paginate @invoices, per_page: per_page
+    @lines = @lines.page(page).per(per_page)
+    paginate @lines, per_page: per_page
   end
 
   private
+
+  def page
+    params[:page] || 1
+  end
 
   def per_page
     params[:per_page] || 20

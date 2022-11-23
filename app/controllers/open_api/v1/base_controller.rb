@@ -4,7 +4,9 @@
 module OpenAPI::V1; end
 
 # Parameters for OpenAPI endpoints
-class OpenAPI::V1::BaseController < ActionController::Base
+class OpenAPI::V1::BaseController < ActionController::Base # rubocop:disable Rails/ApplicationController
+  include ApplicationHelper
+
   protect_from_forgery with: :null_session
   skip_before_action :verify_authenticity_token
   before_action :authenticate
@@ -49,7 +51,7 @@ class OpenAPI::V1::BaseController < ActionController::Base
   end
 
   def render_unauthorized
-    render json: { errors: ['Bad credentials'] }, status: 401
+    render json: { errors: ['Bad credentials'] }, status: :unauthorized
   end
 
   private

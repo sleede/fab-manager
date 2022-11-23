@@ -12,11 +12,10 @@ class OpenAPI::V1::UserTrainingsController < OpenAPI::V1::BaseController
                                               .references(:statistic_profiles)
                                               .order(created_at: :desc)
 
+    @user_trainings = @user_trainings.where(statistic_profiles: { user_id: may_array(params[:user_id]) }) if params[:user_id].present?
+    @user_trainings = @user_trainings.where(training_id: may_array(params[:training_id])) if params[:training_id].present?
 
-    @user_trainings = @user_trainings.where(statistic_profiles: { user_id: params[:user_id] }) if params[:user_id].present?
-    @user_trainings = @user_trainings.where(training_id: params[:training_id]) if params[:training_id].present?
-
-    return unless params[:page].present?
+    return if params[:page].blank?
 
     @user_trainings = @user_trainings.page(params[:page]).per(per_page)
     paginate @user_trainings, per_page: per_page

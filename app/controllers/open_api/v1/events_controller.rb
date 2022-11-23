@@ -16,10 +16,9 @@ class OpenAPI::V1::EventsController < OpenAPI::V1::BaseController
                 @events.order(created_at: :desc)
               end
 
+    @events = @events.where(id: may_array(params[:id])) if params[:id].present?
 
-    @events = @events.where(id: params[:id]) if params[:id].present?
-
-    return unless params[:page].present?
+    return if params[:page].blank?
 
     @events = @events.page(params[:page]).per(per_page)
     paginate @events, per_page: per_page

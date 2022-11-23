@@ -29,4 +29,13 @@ class OpenApi::PricesTest < ActionDispatch::IntegrationTest
 
     assert_equal [1], json_response(response.body)[:prices].pluck(:priceable_id).uniq
   end
+
+  test 'list all prices for some groups' do
+    get '/open_api/v1/prices?group_id=[1,2]', headers: open_api_headers(@token)
+    assert_response :success
+    assert_equal Mime[:json], response.content_type
+
+    prices = json_response(response.body)
+    assert_equal [1, 2], prices[:prices].pluck(:group_id).uniq.sort
+  end
 end
