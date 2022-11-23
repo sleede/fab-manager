@@ -6,7 +6,7 @@ module OpenlabSync
 
   included do
     after_create :openlab_create, if: :openlab_sync_active?
-    run_after_update :openlab_update, if: :openlab_sync_active?
+    after_update :openlab_update, if: :openlab_sync_active?
     after_destroy :openlab_destroy, if: :openlab_sync_active?
 
     def openlab_create
