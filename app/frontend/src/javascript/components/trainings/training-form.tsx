@@ -96,12 +96,13 @@ export const TrainingForm: React.FC<TrainingFormProps> = ({ action, training, on
                                                            id="machine_ids"
                                                            formState={formState}
                                                            label={t('app.admin.training_form.associated_machines')}
+                                                           tooltip={t('app.admin.training_form.associated_machines_help')}
                                                            loadOptions={loadMachines} />}
       <FormInput register={register}
                  type="number"
                  id="nb_total_places"
                  formState={formState}
-                 rules={{ required: true }}
+                 nullable
                  label={t('app.admin.training_form.default_seats')} />
       <FormSwitch control={control}
                   id="public_page"

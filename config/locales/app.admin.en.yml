@@ -20,6 +20,7 @@ en:
         add_a_new_training: "Add a new training"
         validate_your_training: "Validate your training"
         associated_machines: "Associated machines"
+        associated_machines_help: "If you associate a machine to this training, the members will need to successfully pass this training before being able to reserve the machine."
         default_seats: "Default number of seats"
         public_page: "Show in training lists"
         public_help: "When unchecked, this option will prevent the training from appearing in the trainings list."
