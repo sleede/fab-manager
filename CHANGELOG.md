@@ -3,6 +3,7 @@
 - Accounting data is now built each night and saved in database
 - OpenAPI endpoint to fetch accounting data
 - Fix a bug: providing an array of attributes to filter OpenApi data, results in error
+- Fix a bug: unable to manage stocks on new products
 - [TODO DEPLOY] `rails fablab:setup:build_accounting_lines`
 
 - Add reservation deadline parameter (#414)

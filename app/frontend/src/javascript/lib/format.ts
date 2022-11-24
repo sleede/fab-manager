@@ -6,6 +6,29 @@ declare let Fablab: IFablab;
 
 export default class FormatLib {
   /**
+   * Check if the provided variable is a JS Date oject
+   */
+  static isDate = (value: unknown): boolean => {
+    return (value != null) && !isNaN(value as number) && (typeof (value as Date).getDate !== 'undefined');
+  };
+
+  /**
+   * Check if the provided variable is an ISO 8601 representation of a date
+   */
+  static isDateISO = (value: string): boolean => {
+    if (typeof value !== 'string') return false;
+    return !!value?.match(/^\d\d\d\d-\d\d-\d\dT\d\d:\d\d:\d\d.\d\d\d/);
+  };
+
+  /**
+   * Check if the provided variable is string representing a short time, according to ISO 8601 (e.g. 14:21)
+   */
+  static isShortTimeISO = (value: string): boolean => {
+    if (typeof value !== 'string') return false;
+    return !!value?.match(/^\d\d:\d\d$/);
+  };
+
+  /**
    * Return the formatted localized date for the given date
    */
   static date = (date: Date|TDateISO|TDateISODate): string => {
@@ -17,8 +40,8 @@ export default class FormatLib {
    */
   static time = (date: Date|TDateISO|`${THours}:${TMinutes}`): string => {
     let tempDate: Date;
-    const isoTimeMatch = (date as string)?.match(/^(\d\d):(\d\d)$/);
-    if (isoTimeMatch) {
+    if (FormatLib.isShortTimeISO(date as string)) {
+      const isoTimeMatch = (date as string)?.match(/^(\d\d):(\d\d)$/);
       tempDate = new Date();
       tempDate.setHours(parseInt(isoTimeMatch[1], 10));
       tempDate.setMinutes(parseInt(isoTimeMatch[2], 10));
