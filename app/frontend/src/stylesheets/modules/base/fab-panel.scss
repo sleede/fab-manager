@@ -3,7 +3,7 @@
   border: 1px solid #ddd;
   border-radius: 6px;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
-  margin: 30px;
+  margin: 30px 30px 30px 0;
   min-height: 1px;
   position: relative;
   display: block;
@@ -49,6 +49,7 @@
   .fab-panel {
     width: 75%;
     float: left;
+    margin-left: 30px;
   }
 }
 

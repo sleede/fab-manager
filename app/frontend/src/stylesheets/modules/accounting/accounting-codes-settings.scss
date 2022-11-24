@@ -8,6 +8,15 @@
       margin-right: 32px;
     }
   }
+  .actions {
+    background-color: transparent;
+    border: none;
+    margin-top: 0;
+    margin-bottom: 0;
+    & > .no-header {
+      background-color: transparent;
+    }
+  }
   .submit-btn {
     float: right;
   }
