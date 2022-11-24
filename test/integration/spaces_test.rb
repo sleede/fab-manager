@@ -21,8 +21,8 @@ class SpacesTest < ActionDispatch::IntegrationTest
              characteristics: 'Sed fermentum ante ut elit lobortis, id auctor libero cursus. Sed augue lectus, mollis at luctus eu...',
              default_places: 6,
              space_files_attributes: [
-               { attachment: fixture_file_upload('/files/document.pdf', 'document/pdf', true) },
-               { attachment: fixture_file_upload('/files/document2.pdf', 'document/pdf', true) }
+               { attachment: fixture_file_upload('/files/document.pdf', 'application/pdf', true) },
+               { attachment: fixture_file_upload('/files/document2.pdf', 'application/pdf', true) }
              ],
              disabled: false
            }

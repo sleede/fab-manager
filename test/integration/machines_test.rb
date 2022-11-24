@@ -20,8 +20,8 @@ class MachinesTest < ActionDispatch::IntegrationTest
              description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore...',
              spec: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium...',
              machine_files_attributes: [
-               { attachment: fixture_file_upload('/files/document.pdf', 'document/pdf', true) },
-               { attachment: fixture_file_upload('/files/document2.pdf', 'document/pdf', true) }
+               { attachment: fixture_file_upload('/files/document.pdf', 'application/pdf', true) },
+               { attachment: fixture_file_upload('/files/document2.pdf', 'application/pdf', true) }
              ],
              disabled: false
            }

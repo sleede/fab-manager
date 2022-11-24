@@ -30,8 +30,8 @@ class Events::RecurrenceTest < ActionDispatch::IntegrationTest
              recurrence: 'week',
              recurrence_end_at: 10.weeks.from_now.utc,
              event_files_attributes: [
-               { attachment: fixture_file_upload('/files/document.pdf', 'document/pdf', true) },
-               { attachment: fixture_file_upload('/files/document2.pdf', 'document/pdf', true) }
+               { attachment: fixture_file_upload('/files/document.pdf', 'application/pdf', true) },
+               { attachment: fixture_file_upload('/files/document2.pdf', 'application/pdf', true) }
              ],
              event_price_categories_attributes: [
                { price_category_id: 1, amount: 10 },
