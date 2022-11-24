@@ -23,7 +23,7 @@ class Accounting::AccountingService
     lines = []
     invoices.find_each do |i|
       Rails.logger.debug { "processing invoice #{i.id}..." } unless Rails.env.test?
-      lines << generate_lines(i)
+      lines.concat(generate_lines(i))
     end
     AccountingLine.create!(lines)
   end
