@@ -9,5 +9,5 @@ export interface Group {
   slug: string,
   name: string,
   disabled: boolean,
-  users: number
+  users?: number
 }

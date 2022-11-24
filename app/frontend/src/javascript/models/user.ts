@@ -3,10 +3,10 @@ import { TDateISO, TDateISODate } from '../typings/date-iso';
 import { supportedNetworks, SupportedSocialNetwork } from './social-network';
 import { ApiFilter } from './api';
 
-export type UserRole = 'member' | 'manager' | 'admin';
+export type UserRole = 'member' | 'manager' | 'admin' | 'partner';
 
 type ProfileAttributesSocial = {
-  [network in SupportedSocialNetwork]: string
+  [network in SupportedSocialNetwork]?: string
 }
 
 export interface User {
@@ -16,7 +16,7 @@ export interface User {
   group_id?: number,
   role?: UserRole
   name: string,
-  need_completion: boolean,
+  need_completion?: boolean,
   ip_address?: string,
   mapped_from_sso?: string[],
   password?: string,
@@ -33,10 +33,10 @@ export interface User {
     job?: string,
     tours?: Array<string>,
     user_avatar_attributes?: {
-      id: number,
+      id?: number,
       attachment?: File,
       attachment_url?: string,
-      attachment_files: FileList,
+      attachment_files?: FileList,
       _destroy?: boolean
     }
   },

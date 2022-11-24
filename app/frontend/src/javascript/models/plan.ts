@@ -29,7 +29,7 @@ export interface Plan {
     amount: number
     prices_attributes: Array<Price>,
     plan_file_attributes: FileType,
-    plan_file_url: string,
+    plan_file_url?: string,
     partner_id?: number,
     partners?: Array<Partner>
 }

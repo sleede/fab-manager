@@ -7,6 +7,7 @@ import { get as _get } from 'lodash';
 export interface AbstractFormItemProps<TFieldValues> extends PropsWithChildren<AbstractFormComponent<TFieldValues>> {
   id: string,
   label?: string|ReactNode,
+  ariaLabel?: string,
   tooltip?: ReactNode,
   className?: string,
   disabled?: boolean|((id: string) => boolean),
@@ -19,7 +20,7 @@ export interface AbstractFormItemProps<TFieldValues> extends PropsWithChildren<A
  * This abstract component should not be used directly.
  * Other forms components that are intended to be used with react-hook-form must extend this component.
  */
-export const AbstractFormItem = <TFieldValues extends FieldValues>({ id, label, tooltip, className, disabled, error, warning, rules, formState, onLabelClick, inLine, containerType, children }: AbstractFormItemProps<TFieldValues>) => {
+export const AbstractFormItem = <TFieldValues extends FieldValues>({ id, label, ariaLabel, tooltip, className, disabled, error, warning, rules, formState, onLabelClick, inLine, containerType, children }: AbstractFormItemProps<TFieldValues>) => {
   const [isDirty, setIsDirty] = useState<boolean>(false);
   const [fieldError, setFieldError] = useState<{ message: string }>(error);
   const [isDisabled, setIsDisabled] = useState<boolean>(false);
@@ -70,7 +71,7 @@ export const AbstractFormItem = <TFieldValues extends FieldValues>({ id, label, 
         </div>}
       </div>}
 
-      <div className='form-item-field'>
+      <div className='form-item-field' aria-label={ariaLabel}>
         {inLine && <div className='form-item-header'><p>{label}</p>
           {tooltip && <div className="fab-tooltip">
             <span className="trigger"><i className="fa fa-question-circle" /></span>

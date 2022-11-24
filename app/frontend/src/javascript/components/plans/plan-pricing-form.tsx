@@ -92,7 +92,7 @@ export const PlanPricingForm = <TContext extends object>({ register, control, fo
   };
 
   return (
-    <>
+    <div data-testid="plan-pricing-form">
       <h4>{t('app.admin.plan_pricing_form.prices')}</h4>
       {plans && <FormSelect options={plans}
                             label={t('app.admin.plan_pricing_form.copy_prices_from')}
@@ -116,6 +116,6 @@ export const PlanPricingForm = <TContext extends object>({ register, control, fo
           )
         }
       ]} />}
-    </>
+    </div>
   );
 };

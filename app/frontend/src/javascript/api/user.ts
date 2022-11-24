@@ -10,11 +10,9 @@ export default class UserAPI {
     return res?.data;
   }
 
-  static async create (user: Partner|User): Promise<User> {
-    const data = {
-      user: user as Partner,
-      manager: user as User
-    };
+  static async create (user: Partner|User, role: 'partner'|'manager'): Promise<User> {
+    const data = {};
+    data[role === 'partner' ? 'user' : 'manager'] = user;
     const res: AxiosResponse<User> = await apiClient.post('/api/users', data);
     return res?.data;
   }

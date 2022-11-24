@@ -25,7 +25,7 @@ export const PartnerModal: React.FC<PartnerModalProps> = ({ isOpen, toggleModal,
    * Callback triggered when the user validates the partner form: create the partner on the API
    */
   const onSubmit: SubmitHandler<Partner> = (data: Partner) => {
-    UserAPI.create(data).then(onPartnerCreated).catch(onError);
+    UserAPI.create(data, 'partner').then(onPartnerCreated).catch(onError);
   };
 
   return (
