@@ -37,10 +37,10 @@ class Events::AsAdminTest < ActionDispatch::IntegrationTest
     assert_not_nil e, 'Event was not created in database'
 
     # Check the remaining free places are not defined
-    assert_nil e.nb_free_places, "Free places shouldn't be defined"
+    assert_nil e&.nb_free_places, "Free places shouldn't be defined"
 
     # Then, modify the event to set a nb of places
-    put "/api/events/#{e.id}",
+    put "/api/events/#{e&.id}",
         params: {
           event: {
             title: 'OpenLab discovery day',
@@ -61,8 +61,8 @@ class Events::AsAdminTest < ActionDispatch::IntegrationTest
 
     # Check the places numbers were updated successfully
     e = Event.where(id: event[:id]).first
-    assert_equal 10, e.nb_total_places, 'Total number of places was not updated'
-    assert_equal 10, e.nb_free_places, 'Number of free places was not updated'
+    assert_equal 10, e&.nb_total_places, 'Total number of places was not updated'
+    assert_equal 10, e&.nb_free_places, 'Number of free places was not updated'
 
     # Now, let's make a reservation on this event
     post '/api/local_payment/confirm_payment',
@@ -71,12 +71,12 @@ class Events::AsAdminTest < ActionDispatch::IntegrationTest
            items: [
              {
                reservation: {
-                 reservable_id: e.id,
+                 reservable_id: e&.id,
                  reservable_type: 'Event',
                  nb_reserve_places: 2,
                  slots_reservations_attributes: [
                    {
-                     slot_id: e.availability.slots.first.id,
+                     slot_id: e&.availability&.slots&.first&.id,
                      offered: false
                    }
                  ]
@@ -92,10 +92,10 @@ class Events::AsAdminTest < ActionDispatch::IntegrationTest
 
     # Check the remaining places were updated successfully
     e = Event.where(id: event[:id]).first
-    assert_equal 8, e.nb_free_places, 'Number of free places was not updated'
+    assert_equal 8, e&.nb_free_places, 'Number of free places was not updated'
 
     # Finally, modify the event to add some places
-    put "/api/events/#{e.id}",
+    put "/api/events/#{e&.id}",
         params: {
           event: {
             title: 'OpenLab discovery day',
@@ -116,8 +116,8 @@ class Events::AsAdminTest < ActionDispatch::IntegrationTest
 
     # Check the places numbers were updated successfully
     e = Event.where(id: event[:id]).first
-    assert_equal 20, e.nb_total_places, 'Total number of places was not updated'
-    assert_equal 18, e.nb_free_places, 'Number of free places was not updated'
+    assert_equal 20, e&.nb_total_places, 'Total number of places was not updated'
+    assert_equal 18, e&.nb_free_places, 'Number of free places was not updated'
   end
 
   test 'create event with custom price and reserve it with success' do
@@ -201,7 +201,7 @@ class Events::AsAdminTest < ActionDispatch::IntegrationTest
 
     # Check the remaining places were updated successfully
     e = Event.where(id: event[:id]).first
-    assert_equal 2, e.nb_free_places, 'Number of free places was not updated'
+    assert_equal 2, e&.nb_free_places, 'Number of free places was not updated'
 
     # Check the resulting invoice generation and it has right price
     assert_invoice_pdf i

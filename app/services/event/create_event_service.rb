@@ -2,12 +2,14 @@
 
 # Provides helper methods to create new Events and its recurring occurrences
 class Event::CreateEventService
+  extend ApplicationHelper
+
   class << self
     def create_occurence(event, date)
       service = Availabilities::CreateAvailabilitiesService.new
       occurrence = Event.new(
         recurrence: 'none',
-        title: title,
+        title: event.title,
         description: event.description,
         event_image: occurrence_image(event),
         event_files: occurrence_files(event),
@@ -21,7 +23,8 @@ class Event::CreateEventService
         amount: event.amount,
         event_price_categories: occurrence_price_categories(event),
         nb_total_places: event.nb_total_places,
-        recurrence_id: event.id
+        recurrence_id: event.id,
+        advanced_accounting: occurrence_advanced_accounting(event)
       )
       occurrence.save
       service.create_slots(occurrence.availability)
@@ -59,6 +62,10 @@ class Event::CreateEventService
       event.event_price_categories.map do |epc|
         EventPriceCategory.new(price_category_id: epc.price_category_id, amount: epc.amount)
       end
+    end
+
+    def occurrence_advanced_accounting(event)
+      AdvancedAccounting.new(code: event.advanced_accounting.code, analytical_section: event.advanced_accounting.analytical_section)
     end
   end
 end

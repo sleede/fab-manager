@@ -114,7 +114,7 @@ class Event < ApplicationRecord
 
     r = Recurrence.new(every: recurrence, on: on, starts: availability.start_at + 1.day, until: recurrence_end_at)
     r.events.each do |date|
-      Event::CreateEventService.create_occurence(event, date)
+      Event::CreateEventService.create_occurence(self, date)
     end
     update(recurrence_id: id)
   end
