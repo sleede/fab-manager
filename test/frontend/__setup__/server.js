@@ -37,6 +37,9 @@ export const server = setupServer(
     const { names } = req.params;
     const foundSettings = settings.filter(name => names.replace(/[[\]']/g, '').split(',').includes(name));
     return res(ctx.json(foundSettings));
+  }),
+  rest.patch('/api/settings/bulk_update', (req, res, ctx) => {
+    return res(ctx.json(req.body));
   })
 );
 
