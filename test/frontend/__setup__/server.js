@@ -4,7 +4,7 @@ import groups from '../__fixtures__/groups';
 import plans from '../__fixtures__/plans';
 import planCategories from '../__fixtures__/plan_categories';
 import { partners } from '../__fixtures__/users';
-import { setting, settings } from '../__fixtures__/settings';
+import { settings } from '../__fixtures__/settings';
 
 const server = setupServer(
   rest.get('/api/groups', (req, res, ctx) => {
@@ -30,11 +30,11 @@ const server = setupServer(
     /* eslint-enable camelcase */
   }),
   rest.get('/api/settings/:name', (req, res, ctx) => {
-    return res(ctx.json(setting(req.params.name, 'true')));
+    return res(ctx.json(settings.find(s => s.name === req.params.name)));
   }),
   rest.get('/api/settings', (req, res, ctx) => {
     const { names } = req.params;
-    return res(ctx.json(settings(names.replace(/[[\]']/g, '').split(','))));
+    return res(ctx.json(settings.filter(name => names.replace(/[[\]']/g, '').split(',').includes(name))));
   })
 );
 

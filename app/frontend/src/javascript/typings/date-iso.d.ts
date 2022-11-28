@@ -16,7 +16,12 @@ type TDateISODate = `${TYear}-${TMonth}-${TDay}`;
 /**
  * Represent a string like `14:42:34.678`
  */
-type TDateISOTime = `${THours}:${TMinutes}:${TSeconds}.${TMilliseconds}`;
+type TDateISOTime = `${THours}:${TMinutes}:${TSeconds}`|`${THours}:${TMinutes}:${TSeconds}.${TMilliseconds}`;
+
+/**
+ * Represent a timezone like `+0100`
+ */
+type TTimezoneISO = `+${THours}${TMinutes}`|`-${THours}${TMinutes}`|'Z'
 
 /**
  * Represent a string like `2021-01-08T14:42:34.678Z` (format: ISO 8601).
@@ -25,4 +30,4 @@ type TDateISOTime = `${THours}:${TMinutes}:${TSeconds}.${TMilliseconds}`;
  * it would result in a warning from TypeScript:
  *   "Expression produces a union type that is too complex to represent. ts(2590)
  */
-export type TDateISO = `${TDateISODate}T${TDateISOTime}Z`;
+export type TDateISO = `${TDateISODate}T${TDateISOTime}${TTimezoneISO}`;
