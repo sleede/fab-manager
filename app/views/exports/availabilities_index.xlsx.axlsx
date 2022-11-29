@@ -88,7 +88,7 @@ if Setting.get('spaces_module')
       ((a.end_at - a.start_at) / slot_duration.minutes).to_i.times do |i|
         start_at = a.start_at + (i * slot_duration).minutes
         end_at = a.start_at + (i * slot_duration).minutes + slot_duration.minutes
-        reservations = a.slots.where(start_at: start_at).count
+        reservations = a.slots_reservations.where(slots: { start_at: start_at }).count
 
         data = [
           start_at.to_date,
