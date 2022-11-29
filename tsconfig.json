@@ -7,7 +7,7 @@
     "module": "ES2020",
     "moduleResolution": "node",
     "sourceMap": true,
-    "target": "es2015",
+    "target": "ES2015",
     "jsx": "react-jsx",
     "noEmit": true,
     "allowSyntheticDefaultImports": true,

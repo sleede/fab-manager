@@ -19,13 +19,14 @@ interface FormInputProps<TFieldValues, TInputType> extends FormComponent<TFieldV
   placeholder?: string,
   step?: number | 'any',
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void,
-  nullable?: boolean
+  nullable?: boolean,
+  ariaLabel?: string,
 }
 
 /**
  * This component is a template for an input component to use within React Hook Form
  */
-export const FormInput = <TFieldValues extends FieldValues, TInputType>({ id, register, label, tooltip, defaultValue, icon, className, rules, disabled, type, addOn, addOnAction, addOnClassName, placeholder, error, warning, formState, step, onChange, debounce, accept, nullable = false }: FormInputProps<TFieldValues, TInputType>) => {
+export const FormInput = <TFieldValues extends FieldValues, TInputType>({ id, register, label, tooltip, defaultValue, icon, className, rules, disabled, type, addOn, addOnAction, addOnClassName, placeholder, error, warning, formState, step, onChange, debounce, accept, nullable = false, ariaLabel }: FormInputProps<TFieldValues, TInputType>) => {
   /**
    * Debounced (ie. temporised) version of the 'on change' callback.
    */
@@ -56,7 +57,7 @@ export const FormInput = <TFieldValues extends FieldValues, TInputType>({ id, re
                       disabled={disabled}
                       rules={rules} error={error} warning={warning}>
         {icon && <span className="icon">{icon}</span>}
-        <input id={id}
+        <input id={id} aria-label={ariaLabel}
           {...register(id as FieldPath<TFieldValues>, {
             ...rules,
             valueAsDate: type === 'date',

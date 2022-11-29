@@ -87,18 +87,19 @@ export const FormFileUpload = <TFieldValues extends FieldValues>({ id, label, re
           </a>
         )}
         <FormInput type="file"
-                    className="image-file-input"
-                    accept={accept}
-                    register={register}
-                    label={label}
-                    formState={formState}
-                    rules={rules}
-                    disabled={disabled}
-                    error={error}
-                    warning={warning}
-                    id={`${id}[attachment_files]`}
-                    onChange={onFileSelected}
-                    placeholder={placeholder()}/>
+                   ariaLabel={label as string}
+                   className="image-file-input"
+                   accept={accept}
+                   register={register}
+                   label={label}
+                   formState={formState}
+                   rules={rules}
+                   disabled={disabled}
+                   error={error}
+                   warning={warning}
+                   id={`${id}[attachment_files]`}
+                   onChange={onFileSelected}
+                   placeholder={placeholder()}/>
         {hasFile() &&
           <FabButton onClick={onRemoveFile} icon={<Trash size={20} weight="fill" />} className="is-main" />
         }

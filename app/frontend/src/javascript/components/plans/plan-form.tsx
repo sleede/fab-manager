@@ -207,6 +207,7 @@ export const PlanForm: React.FC<PlanFormProps> = ({ action, plan, onError, onSuc
         <FormSwitch control={control}
                     formState={formState}
                     id="disabled"
+                    defaultValue={false}
                     label={t('app.admin.plan_form.disabled')}
                     tooltip={t('app.admin.plan_form.disabled_help')} />
         <h4>{t('app.admin.plan_form.duration')}</h4>

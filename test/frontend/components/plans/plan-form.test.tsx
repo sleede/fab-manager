@@ -1,9 +1,11 @@
 import { render, fireEvent, waitFor, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { PlanForm } from 'components/plans/plan-form';
+import { Plan } from 'models/plan';
 import selectEvent from 'react-select-event';
 import userEvent from '@testing-library/user-event';
 import plans from '../../__fixtures__/plans';
+import { tiptapEvent } from '../../__lib__/tiptap';
 
 describe('PlanForm', () => {
   const onError = jest.fn();
@@ -11,9 +13,8 @@ describe('PlanForm', () => {
   const beforeSubmit = jest.fn();
 
   test('render create PlanForm', async () => {
-    render(<PlanForm action="create" onError={onError} onSuccess={onSuccess} beforeSubmit={beforeSubmit} />);
+    render(<PlanForm action="create" onError={onError} onSuccess={onSuccess} />);
     await waitFor(() => screen.getByRole('combobox', { name: /app.admin.plan_form.group/ }));
-    // check inputs
     expect(screen.getByLabelText(/app.admin.plan_form.name/)).toBeInTheDocument();
     expect(screen.getByLabelText(/app.admin.plan_form.transversal/)).toBeInTheDocument();
     expect(screen.getByLabelText(/app.admin.plan_form.group/)).toBeInTheDocument();
@@ -30,23 +31,67 @@ describe('PlanForm', () => {
     expect(screen.getByLabelText(/app.admin.plan_form.partner_plan/)).toBeInTheDocument();
     expect(screen.queryByTestId('plan-pricing-form')).toBeNull();
     expect(screen.getByRole('button', { name: /app.admin.plan_form.ACTION_plan/ })).toBeInTheDocument();
-    // input values
+  });
+
+  test('create new plan', async () => {
+    render(<PlanForm action="create" onError={onError} onSuccess={onSuccess} beforeSubmit={beforeSubmit} />);
+    await waitFor(() => screen.getByRole('combobox', { name: /app.admin.plan_form.group/ }));
     const user = userEvent.setup();
+    // base_name
     fireEvent.change(screen.getByLabelText(/app.admin.plan_form.name/), { target: { value: 'Test Plan' } });
+    // group_id = 1
     await selectEvent.select(screen.getByLabelText(/app.admin.plan_form.group/), 'Standard');
+    // plan_category_id = 1
     await selectEvent.select(screen.getByLabelText(/app.admin.plan_form.category/), 'beginners');
+    // amount
     fireEvent.change(screen.getByLabelText(/app.admin.plan_form.subscription_price/), { target: { value: 25.21 } });
+    // ui_weight
     fireEvent.change(screen.getByLabelText(/app.admin.plan_form.visual_prominence/), { target: { value: 10 } });
-    fireEvent.change(screen.getByLabelText(/app.admin.plan_form.rolling_subscription/), { target: { value: true } });
-    fireEvent.change(screen.getByLabelText(/app.admin.plan_form.monthly_payment/), { target: { value: true } });
-    await user.click(screen.getByLabelText(/app.admin.plan_form.description/));
-    await user.keyboard('Lorem ipsum dolor sit amet');
+    // is_rolling
+    await user.click(screen.getByLabelText(/app.admin.plan_form.rolling_subscription/));
+    // monthly_payment
+    await user.click(screen.getByLabelText(/app.admin.plan_form.monthly_payment/));
+    // description
+    await tiptapEvent.type(screen.getByLabelText(/app.admin.plan_form.description/), 'Lorem ipsum dolor sit amet');
+    // plan_file_attributes.attachment_files
+    const file = new File(['(⌐□_□)'], 'document.pdf', { type: 'application/pdf' });
+    await user.upload(screen.getByLabelText(/app.admin.plan_form.information_sheet/), file);
+    // interval_count
     fireEvent.change(screen.getByLabelText(/app.admin.plan_form.number_of_periods/), { target: { value: 6 } });
+    // interval
     await selectEvent.select(screen.getByLabelText(/app.admin.plan_form.period/), 'app.admin.plan_form.month');
+    // advanced_accounting_attributes.code
+    fireEvent.change(screen.getByLabelText(/app.admin.advanced_accounting_form.code/), { target: { value: '705200' } });
+    // advanced_accounting_attributes.analytical_section
+    fireEvent.change(screen.getByLabelText(/app.admin.advanced_accounting_form.analytical_section/), { target: { value: '9B20A' } });
     // send the form
     fireEvent.click(screen.getByRole('button', { name: /app.admin.plan_form.ACTION_plan/ }));
     await waitFor(() => {
-      expect(beforeSubmit).toHaveBeenCalled();
+      const expected: Plan = {
+        base_name: 'Test Plan',
+        type: 'Plan',
+        group_id: 1,
+        plan_category_id: 1,
+        amount: 25.21,
+        ui_weight: 10,
+        is_rolling: true,
+        monthly_payment: true,
+        description: '<p>Lorem ipsum dolor sit amet</p>',
+        interval: 'month',
+        interval_count: 6,
+        all_groups: false,
+        partnership: false,
+        disabled: false,
+        advanced_accounting_attributes: {
+          analytical_section: '9B20A',
+          code: '705200'
+        },
+        plan_file_attributes: {
+          _destroy: false,
+          attachment_files: expect.any(FileList)
+        }
+      };
+      expect(beforeSubmit).toHaveBeenCalledWith(expect.objectContaining(expected));
     });
   });
 

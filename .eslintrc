@@ -70,6 +70,10 @@
       "env": {
         "jest/globals": true
       },
+      "globals": {
+        "Range": true,
+        "Document": true
+      },
       "parserOptions": {
         "project": "./test/frontend/tsconfig.json"
       }

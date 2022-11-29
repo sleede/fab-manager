@@ -1,5 +1,6 @@
 import { Price } from './price';
 import { FileType } from './file';
+import { AdvancedAccounting } from './advanced-accounting';
 
 export type Interval = 'year' | 'month' | 'week';
 
@@ -12,26 +13,29 @@ export interface Partner {
 }
 
 export interface Plan {
-    id: number,
+    id?: number,
     base_name: string,
-    name: string,
+    name?: string,
     interval: Interval,
     interval_count: number,
+    all_groups?: boolean,
     group_id: number|'all',
-    plan_category_id: number,
-    training_credit_nb: number,
+    plan_category_id?: number,
+    training_credit_nb?: number,
     is_rolling: boolean,
-    description: string,
+    description?: string,
     type: PlanType,
     ui_weight: number,
-    disabled: boolean,
+    disabled?: boolean,
     monthly_payment: boolean
     amount: number
-    prices_attributes: Array<Price>,
-    plan_file_attributes: FileType,
+    prices_attributes?: Array<Price>,
+    plan_file_attributes?: FileType,
     plan_file_url?: string,
     partner_id?: number,
-    partners?: Array<Partner>
+    partnership?: boolean,
+    partners?: Array<Partner>,
+    advanced_accounting_attributes?: AdvancedAccounting
 }
 
 export interface PlansDuration {

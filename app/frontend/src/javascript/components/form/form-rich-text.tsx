@@ -46,8 +46,6 @@ export const FormRichText = <TFieldValues extends FieldValues, TContext extends 
 
   return (
     <AbstractFormItem id={id} label={label} tooltip={tooltip}
-                      ariaLabel={label as string}
-                      ariaLabelledBy={id}
                       containerType={'div'}
                       className={`form-rich-text ${className || ''}`}
                       error={error} warning={warning} rules={rules}
@@ -68,7 +66,7 @@ export const FormRichText = <TFieldValues extends FieldValues, TContext extends 
                        link={link}
                        disabled={isDisabled}
                        ref={textEditorRef}
-                       editorId={id} />
+                       ariaLabel={label as string}/>
       } />
     </AbstractFormItem>
   );
