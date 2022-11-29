@@ -1,4 +1,3 @@
-import React from 'react';
 import { AdvancedAccountingForm } from 'components/accounting/advanced-accounting-form';
 import { render, waitFor, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';

@@ -1,11 +1,10 @@
-import React from 'react';
 import { AccountingCodesSettings } from 'components/accounting/accounting-codes-settings';
 import { render, fireEvent, waitFor, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
 describe('AccountingCodesSettings', () => {
-  const onSuccess = jest.fn(message => {});
-  const onError = jest.fn(e => {});
+  const onSuccess = jest.fn();
+  const onError = jest.fn();
 
   test('render AccountingCodesSettings', async () => {
     render(<AccountingCodesSettings onError={onError} onSuccess={onSuccess} />);

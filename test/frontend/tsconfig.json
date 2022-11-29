@@ -1,0 +1,13 @@
+{
+  "references": [
+    { "path": "../../" }
+  ],
+  "include": ["components/**/*", "__fixtures__/**/*"],
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "target": "es2015",
+    "module": "ES2020",
+    "moduleResolution": "node",
+    "baseUrl": "../../app/frontend/src/javascript"
+  }
+}
