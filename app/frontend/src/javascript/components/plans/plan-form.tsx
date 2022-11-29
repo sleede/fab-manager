@@ -32,12 +32,13 @@ interface PlanFormProps {
   plan?: Plan,
   onError: (message: string) => void,
   onSuccess: (message: string) => void,
+  beforeSubmit?: (data: Plan) => void,
 }
 
 /**
  * Form to edit or create subscription plans
  */
-export const PlanForm: React.FC<PlanFormProps> = ({ action, plan, onError, onSuccess }) => {
+export const PlanForm: React.FC<PlanFormProps> = ({ action, plan, onError, onSuccess, beforeSubmit }) => {
   const { handleSubmit, register, control, formState, setValue } = useForm<Plan>({ defaultValues: { ...plan } });
   const output = useWatch<Plan>({ control }); // eslint-disable-line
   const { t } = useTranslation('admin');
@@ -64,6 +65,7 @@ export const PlanForm: React.FC<PlanFormProps> = ({ action, plan, onError, onSuc
    * Callback triggered when the user validates the plan form: handle create or update
    */
   const onSubmit: SubmitHandler<Plan> = (data: Plan) => {
+    if (typeof beforeSubmit === 'function') beforeSubmit(data);
     PlanAPI[action](data).then(() => {
       onSuccess(t(`app.admin.plan_form.${action}_success`));
       window.location.href = '/#!/admin/pricing';

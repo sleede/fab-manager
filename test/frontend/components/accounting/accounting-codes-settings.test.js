@@ -15,5 +15,9 @@ describe('AccountingCodesSettings', () => {
     expect(screen.getAllByLabelText(/app.admin.accounting_codes_settings.code/)).toHaveLength(13);
     expect(screen.getAllByLabelText(/app.admin.accounting_codes_settings.label/)).toHaveLength(13);
     expect(screen.getByRole('button', { name: /app.admin.accounting_codes_settings.save/ })).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: /app.admin.accounting_codes_settings.save/ }));
+    await waitFor(() => {
+      expect(onSuccess).toHaveBeenCalledWith('app.admin.accounting_codes_settings.update_success');
+    });
   });
 });

@@ -2,15 +2,19 @@ import React from 'react';
 import { render, fireEvent, waitFor, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { PlanForm } from 'components/plans/plan-form';
+import selectEvent from 'react-select-event';
+import userEvent from '@testing-library/user-event';
 import plans from '../../__fixtures__/plans';
 
 describe('PlanForm', () => {
   const onError = jest.fn();
   const onSuccess = jest.fn();
+  const beforeSubmit = jest.fn();
 
   test('render create PlanForm', async () => {
-    render(<PlanForm action="create" onError={onError} onSuccess={onSuccess} />);
+    render(<PlanForm action="create" onError={onError} onSuccess={onSuccess} beforeSubmit={beforeSubmit} />);
     await waitFor(() => screen.getByRole('combobox', { name: /app.admin.plan_form.group/ }));
+    // check inputs
     expect(screen.getByLabelText(/app.admin.plan_form.name/)).toBeInTheDocument();
     expect(screen.getByLabelText(/app.admin.plan_form.transversal/)).toBeInTheDocument();
     expect(screen.getByLabelText(/app.admin.plan_form.group/)).toBeInTheDocument();
@@ -27,6 +31,24 @@ describe('PlanForm', () => {
     expect(screen.getByLabelText(/app.admin.plan_form.partner_plan/)).toBeInTheDocument();
     expect(screen.queryByTestId('plan-pricing-form')).toBeNull();
     expect(screen.getByRole('button', { name: /app.admin.plan_form.ACTION_plan/ })).toBeInTheDocument();
+    // input values
+    const user = userEvent.setup();
+    fireEvent.change(screen.getByLabelText(/app.admin.plan_form.name/), { target: { value: 'Test Plan' } });
+    await selectEvent.select(screen.getByLabelText(/app.admin.plan_form.group/), 'Standard');
+    await selectEvent.select(screen.getByLabelText(/app.admin.plan_form.category/), 'beginners');
+    fireEvent.change(screen.getByLabelText(/app.admin.plan_form.subscription_price/), { target: { value: 25.21 } });
+    fireEvent.change(screen.getByLabelText(/app.admin.plan_form.visual_prominence/), { target: { value: 10 } });
+    fireEvent.change(screen.getByLabelText(/app.admin.plan_form.rolling_subscription/), { target: { value: true } });
+    fireEvent.change(screen.getByLabelText(/app.admin.plan_form.monthly_payment/), { target: { value: true } });
+    await user.click(screen.getByLabelText(/app.admin.plan_form.description/));
+    await user.keyboard('Lorem ipsum dolor sit amet');
+    fireEvent.change(screen.getByLabelText(/app.admin.plan_form.number_of_periods/), { target: { value: 6 } });
+    await selectEvent.select(screen.getByLabelText(/app.admin.plan_form.period/), 'app.admin.plan_form.month');
+    // send the form
+    fireEvent.click(screen.getByRole('button', { name: /app.admin.plan_form.ACTION_plan/ }));
+    await waitFor(() => {
+      expect(beforeSubmit).toHaveBeenCalled();
+    });
   });
 
   test('render update PlanForm with partner', async () => {

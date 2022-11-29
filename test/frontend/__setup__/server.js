@@ -3,7 +3,7 @@ import { rest } from 'msw';
 import groups from '../__fixtures__/groups';
 import plans from '../__fixtures__/plans';
 import planCategories from '../__fixtures__/plan_categories';
-import { partners } from '../__fixtures__/users';
+import { partners, managers, users } from '../__fixtures__/users';
 import { settings } from '../__fixtures__/settings';
 
 export const server = setupServer(
@@ -14,10 +14,20 @@ export const server = setupServer(
     return res(ctx.json(planCategories));
   }),
   rest.get('/api/users', (req, res, ctx) => {
-    return res(ctx.json(partners));
+    switch (new URLSearchParams(req.url.search).get('role')) {
+      case 'partner':
+        return res(ctx.json(partners));
+      case 'manager':
+        return res(ctx.json(managers));
+      default:
+        return res(ctx.json(users));
+    }
   }),
   rest.get('/api/plans', (req, res, ctx) => {
     return res(ctx.json(plans));
+  }),
+  rest.post('/api/plans', (req, res, ctx) => {
+    return res(ctx.json(req.body));
   }),
   rest.post('/api/users', (req, res, ctx) => {
     /* eslint-disable camelcase */
