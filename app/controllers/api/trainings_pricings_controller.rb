@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
+# @deprecated
+# <b>DEPRECATED:</b> Please use <tt>API::PriceController</tt> instead.
 # API Controller for managing Training prices
 class API::TrainingsPricingsController < API::ApiController
+  include ApplicationHelper
+
   before_action :authenticate_user!
 
   def index
@@ -12,14 +16,14 @@ class API::TrainingsPricingsController < API::ApiController
     if current_user.admin?
       @trainings_pricing = TrainingsPricing.find(params[:id])
       trainings_pricing_parameters = trainings_pricing_params
-      trainings_pricing_parameters[:amount] = trainings_pricing_parameters[:amount] * 100
+      trainings_pricing_parameters[:amount] = to_centimes(trainings_pricing_parameters[:amount])
       if @trainings_pricing.update(trainings_pricing_parameters)
         render status: :ok
       else
         render status: :unprocessable_entity
       end
     else
-      head 403
+      head :forbidden
     end
   end
 

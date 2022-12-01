@@ -3,6 +3,8 @@
 # API Controller for resources of type Coupon
 # Coupons are used in payments
 class API::CouponsController < API::ApiController
+  include ApplicationHelper
+
   before_action :authenticate_user!, except: %i[validate]
   before_action :set_coupon, only: %i[show update destroy]
 
@@ -31,14 +33,13 @@ class API::CouponsController < API::ApiController
     if @coupon.nil?
       render json: { status: 'rejected' }, status: :not_found
     else
-      _user_id = if current_user&.admin?
-                   params[:user_id]
-                 else
-                   current_user&.id
-                 end
+      user_id = if current_user&.admin?
+                  params[:user_id]
+                else
+                  current_user&.id
+                end
 
-      amount = params[:amount].to_f * 100.0
-      status = @coupon.status(_user_id, amount)
+      status = @coupon.status(user_id, to_centimes(params[:amount]))
       if status == 'active'
         render :validate, status: :ok, location: @coupon
       else
@@ -89,7 +90,7 @@ class API::CouponsController < API::ApiController
       @parameters
     else
       @parameters = params
-      @parameters[:coupon][:amount_off] = @parameters[:coupon][:amount_off].to_f * 100.0 if @parameters[:coupon][:amount_off]
+      @parameters[:coupon][:amount_off] = to_centimes(@parameters[:coupon][:amount_off]) if @parameters[:coupon][:amount_off]
 
       @parameters = @parameters.require(:coupon).permit(:name, :code, :percent_off, :amount_off, :validity_per_user, :valid_until,
                                                         :max_usages, :active)

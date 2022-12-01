@@ -1,8 +1,12 @@
 # frozen_string_literal: true
 
+require './app/helpers/application_helper'
+
 # Provides helper methods for Events resources and properties
 class EventService
   class << self
+    include ApplicationHelper
+
     def process_params(params)
       # handle dates & times (whole-day events or not, maybe during many days)
       range = EventService.date_range({ date: params[:start_date], time: params[:start_time] },
@@ -14,14 +18,14 @@ class EventService
                                                available_type: 'event' })
             .extract!(:start_date, :end_date, :start_time, :end_time, :all_day)
       # convert main price to centimes
-      params[:amount] = (params[:amount].to_f * 100 if params[:amount].present?)
+      params[:amount] = to_centimes(params[:amount]) if params[:amount].present?
       # delete non-complete "other" prices and convert them to centimes
       unless params[:event_price_categories_attributes].nil?
         params[:event_price_categories_attributes].delete_if do |price_cat|
           price_cat[:price_category_id].empty? || price_cat[:amount].empty?
         end
         params[:event_price_categories_attributes].each do |price_cat|
-          price_cat[:amount] = price_cat[:amount].to_f * 100
+          price_cat[:amount] = to_centimes(price_cat[:amount])
         end
       end
       # return the resulting params object

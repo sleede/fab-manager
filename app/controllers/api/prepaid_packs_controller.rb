@@ -3,6 +3,8 @@
 # API Controller for resources of type PrepaidPack
 # PrepaidPacks are used to provide discounts to users that bought many hours at once
 class API::PrepaidPacksController < API::ApiController
+  include ApplicationHelper
+
   before_action :authenticate_user!, except: :index
   before_action :set_pack, only: %i[show update destroy]
 
@@ -46,7 +48,7 @@ class API::PrepaidPacksController < API::ApiController
 
   def pack_params
     pack_params = params
-    pack_params[:pack][:amount] = pack_params[:pack][:amount].to_f * 100.0 if pack_params[:pack][:amount]
+    pack_params[:pack][:amount] = to_centimes(pack_params[:pack][:amount]) if pack_params[:pack][:amount]
     params.require(:pack).permit(:priceable_id, :priceable_type, :group_id, :amount, :minutes, :validity_count, :validity_interval,
                                  :disabled)
   end

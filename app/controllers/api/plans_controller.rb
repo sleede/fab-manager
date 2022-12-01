@@ -4,7 +4,9 @@
 # Plan are used to define subscription's characteristics.
 # PartnerPlan is a special kind of plan which send notifications to an external user
 class API::PlansController < API::ApiController
-  before_action :authenticate_user!, except: [:index, :durations]
+  include ApplicationHelper
+
+  before_action :authenticate_user!, except: %i[index durations]
 
   def index
     @plans = Plan.includes(:plan_file)
@@ -70,10 +72,10 @@ class API::PlansController < API::ApiController
       @parameters
     else
       @parameters = params
-      @parameters[:plan][:amount] = @parameters[:plan][:amount].to_f * 100.0 if @parameters[:plan][:amount]
+      @parameters[:plan][:amount] = to_centimes(@parameters[:plan][:amount]) if @parameters[:plan][:amount]
       if @parameters[:plan][:prices_attributes]
         @parameters[:plan][:prices_attributes] = @parameters[:plan][:prices_attributes].map do |price|
-          { amount: price[:amount].to_f * 100.0, id: price[:id] }
+          { amount: to_centimes(price[:amount]), id: price[:id] }
         end
       end
 

@@ -78,6 +78,11 @@ module ApplicationHelper
     res
   end
 
+  # Return the given amount in centimes, without floating-point imprecision errors
+  def to_centimes(amount)
+    (BigDecimal(amount.to_s) * 100.0).to_f
+  end
+
   private
 
   ## inspired by gems/actionview-4.2.5/lib/action_view/helpers/translation_helper.rb

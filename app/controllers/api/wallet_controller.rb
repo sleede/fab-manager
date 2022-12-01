@@ -14,7 +14,7 @@ class API::WalletController < API::ApiController
   def transactions
     @wallet = Wallet.find(params[:id])
     authorize @wallet
-    @wallet_transactions = @wallet.wallet_transactions.includes(:invoice, :invoicing_profile).order(created_at: :desc)
+    @wallet_transactions = @wallet.wallet_transactions.includes(:invoice, :invoicing_profile, :payment_schedule).order(created_at: :desc)
   end
 
   def credit
@@ -23,7 +23,7 @@ class API::WalletController < API::ApiController
     @wallet = Wallet.find(credit_params[:id])
     authorize @wallet
     service = WalletService.new(user: current_user, wallet: @wallet)
-    transaction = service.credit(credit_params[:amount].to_f)
+    transaction = service.credit(credit_params[:amount])
     if transaction
       service.create_avoir(transaction, credit_params[:avoir_date], credit_params[:avoir_description]) if credit_params[:avoir]
       render :show
