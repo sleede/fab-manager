@@ -19,8 +19,8 @@ cd /apps/fabmanager/
 docker-compose exec postgres bash
 cd /var/lib/postgresql/data/
 DB=$(psql -U postgres -c \\l | grep production | awk '{print $1}')
-pg_dump -U postgres "$DB" > "$DB_$(date -I).sql"
-tar cvzf "fabmanager_database_dump_$(date -I).tar.gz" "$DB_$(date -I).sql"
+pg_dump -U postgres "$DB" > "${DB}_$(date -I).sql"
+tar cvzf "fabmanager_database_dump_$(date -I).tar.gz" "${DB}_$(date -I).sql"
 ```
 
 If you're connected to your server thought SSH, you can download the resulting dump file using the following:
@@ -30,14 +30,15 @@ scp root@remote.server.fab:/apps/fabmanager/postgresql/fabmanager_database_dump_
 
 Restore the dump with the following:
 ```bash
+DUMP=$(tar -tvf "fabmanager_database_dump_$(date -I).tar.gz" | awk '{print $6}')
 tar xvf fabmanager_database_dump_$(date -I).tar.gz
-sudo cp fabmanager_production_$(date -I).sql /apps/fabmanager/postgresql/
+sudo cp "$DUMP" /apps/fabmanager/postgresql/
 cd /apps/fabmanager/
 docker-compose down
 docker-compose up -d postgres
 docker-compose exec postgres dropdb -U postgres fabmanager_production
 docker-compose exec postgres createdb -U postgres fabmanager_production
-docker-compose exec postgres psql -U postgres -d fabmanager_production -f /var/lib/postgresql/data/fabmanager_production_$(date -I).sql
+docker-compose exec postgres psql -U postgres -d fabmanager_production -f "/var/lib/postgresql/data/${DUMP}"
 docker-compose up -d
 ```
 

@@ -27,9 +27,9 @@ class ExportService
 
     def query_last_export(category, export_type, query = nil, key = nil, extension = nil)
       export = Export.where(category: category, export_type: export_type)
-      export.where(query: query) unless query.nil?
-      export.where(key: key) unless key.nil?
-      export.where(extension: extension) unless extension.nil?
+      export = export.where(query: query) unless query.nil?
+      export = export.where(key: key) unless key.nil?
+      export = export.where(extension: extension) unless extension.nil?
       export
     end
 

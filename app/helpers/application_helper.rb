@@ -47,7 +47,7 @@ module ApplicationHelper
     message = MessageFormat.new(I18n.t(scope_key_by_partial(key)), I18n.locale.to_s)
     text = message.format(interpolations)
     if html_safe_translation_key?(key)
-      text.html_safe
+      text.html_safe # rubocop:disable Rails/OutputSafety
     else
       text
     end
@@ -66,23 +66,6 @@ module ApplicationHelper
   end
 
   ##
-  # Retrieve an item in the given array of items
-  # by default, the "id" is expected to match the given parameter but
-  # this can be overridden by passing a third parameter to specify the
-  # property to match
-  ##
-  def get_item(array, id, key = nil)
-    array.each do |i|
-      if key.nil?
-        return i if i.id == id
-      elsif i[key] == id
-        return i
-      end
-    end
-    nil
-  end
-
-  ##
   # Apply a correction for a future DateTime due to change in Daylight Saving Time (DST) period
   # @param reference {ActiveSupport::TimeWithZone}
   # @param datetime {DateTime}
@@ -98,6 +81,7 @@ module ApplicationHelper
   private
 
   ## inspired by gems/actionview-4.2.5/lib/action_view/helpers/translation_helper.rb
+  # rubocop:disable Rails/HelperInstanceVariable
   def scope_key_by_partial(key)
     if key.to_s.first == '.'
       raise "Cannot use t(#{key.inspect}) shortcut because path is not available" unless @virtual_path
@@ -107,6 +91,7 @@ module ApplicationHelper
       key
     end
   end
+  # rubocop:enable Rails/HelperInstanceVariable
 
   def html_safe_translation_key?(key)
     key.to_s =~ /(\b|_|\.)html$/
