@@ -474,6 +474,7 @@ zu:
     type: "crwdns3759:0crwdne3759:0"
     male: "crwdns3761:0crwdne3761:0"
     female: "crwdns3763:0crwdne3763:0"
+    deleted_user: "crwdns31747:0crwdne31747:0"
   #initial price's category for events, created to replace the old "reduced amount" property
   price_category:
     reduced_fare: "crwdns3765:0crwdne3765:0"
