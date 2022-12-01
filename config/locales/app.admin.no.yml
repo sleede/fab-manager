@@ -1664,7 +1664,7 @@
             wallet: "Is the wallet module active?"
             statistics: "Is the statistics module active?"
             trainings: "Is the trainings module active?"
-            public_agenda: "Is the public_agenda module active?"
+            public_agenda: "Is the public agenda module active?"
             machines: "Is the machines module active?"
             store: "Is the store module active?"
             invoices: "Is the invoicing module active?"
