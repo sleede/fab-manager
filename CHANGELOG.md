@@ -1,5 +1,6 @@
 # Changelog Fab-manager
 
+- Updated FabAnalytics reports to include new features
 - Fix a bug: setting somes decimal amounts (e.g. 4,85) result in another amount (e.g. 4,84)
 - Fix a bug: unable to export statistics
 - Fix a bug: soft destroyed machines and spaces are still reported in the OpenAPI

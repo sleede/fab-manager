@@ -12,7 +12,7 @@ class HealthService
   end
 
   def self.redis?
-    !!Sidekiq.redis(&:info) # rubocop:disable Style/DoubleNegation
+    !!Sidekiq.redis(&:info)
   rescue Redis::CannotConnectError
     false
   end
@@ -22,10 +22,8 @@ class HealthService
 
     client = Elasticsearch::Client.new host: "http://#{Rails.application.secrets.elaticsearch_host}:9200"
     response = client.perform_request 'GET', '_cluster/health'
-    !!response.body # rubocop:disable Style/DoubleNegation
-  rescue Elasticsearch::Transport::Transport::Error
-    false
-  rescue Faraday::ConnectionFailed
+    !!response.body
+  rescue Elasticsearch::Transport::Transport::Error, Faraday::ConnectionFailed
     false
   end
 
@@ -39,11 +37,20 @@ class HealthService
       version: Version.current,
       members: User.members.count,
       admins: User.admins.count,
+      managers: User.managers.count,
       availabilities: last_week_availabilities,
       reservations: last_week_new_reservations,
+      orders: last_week_orders,
       plans: Setting.get('plans_module'),
       spaces: Setting.get('spaces_module'),
       online_payment: Setting.get('online_payment_module'),
+      gateway: Setting.get('payment_gateway'),
+      wallet: Setting.get('wallet_module'),
+      statistics: Setting.get('statistics_module'),
+      trainings: Setting.get('trainings_module'),
+      public_agenda: Setting.get('public_agenda_module'),
+      machines: Setting.get('machines_module'),
+      store: Setting.get('store_module'),
       invoices: Setting.get('invoicing_module'),
       openlab: Setting.get('openlab_app_secret').present?
     }
@@ -74,5 +81,8 @@ class HealthService
   def self.last_week_new_reservations
     Reservation.where('created_at >= ? AND created_at < ?', DateTime.current - 7.days, DateTime.current).count
   end
-end
 
+  def self.last_week_orders
+    Order.where('created_at >= ? AND created_at < ?', DateTime.current - 7.days, DateTime.current).where.not(state: 'cart').count
+  end
+end
