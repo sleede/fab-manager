@@ -148,7 +148,8 @@ describe('PlanForm', () => {
     // The following query contains { hidden: true }.
     // This is a workaround because react-modal adds aria-hidden to <body> which breaks accessibility
     fireEvent.click(screen.getByRole('button', { name: /app.admin.partner_modal.create_partner/, hidden: true }));
-    await waitFor(() => screen.getByText(/app.admin.plan_form.alert_partner_notification/));
-    expect(screen.getByText(/app.admin.plan_form.alert_partner_notification/)).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByText(/app.admin.plan_form.alert_partner_notification/)).toBeInTheDocument();
+    });
   });
 });
