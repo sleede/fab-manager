@@ -110,7 +110,7 @@ en:
       password_input:
         new_password: "New password"
         confirm_password: "Confirm password"
-        password_too_short: "Password is too short (must be at least 8 characters)"
+        password_too_short: "Password is too short (must be at least 12 characters)"
         confirmation_mismatch: "Confirmation mismatch with password."
       #project edition form
       project:
