@@ -18,9 +18,12 @@ class Accounting::VatExportService
     @columns = columns
   end
 
-  def set_options(decimal_separator: ',', date_format: '%d/%m/%Y')
+  def set_options(decimal_separator: ',', date_format: '%d/%m/%Y', label_max_length: nil, export_zeros: nil)
     @decimal_separator = decimal_separator
     @date_format = date_format
+    # these unused parameters are required for compatibility with AccountingExportService
+    @label_max_length = label_max_length
+    @export_zeros = export_zeros
   end
 
   def export(start_date, end_date, file)
