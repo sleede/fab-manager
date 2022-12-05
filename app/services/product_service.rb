@@ -1,8 +1,12 @@
 # frozen_string_literal: true
 
+require './app/helpers/application_helper'
+
 # Provides methods for Product
 class ProductService
   class << self
+    include ApplicationHelper
+
     PRODUCTS_PER_PAGE = 12
     MOVEMENTS_PER_PAGE = 10
 
@@ -28,11 +32,8 @@ class ProductService
 
     # amount params multiplied by hundred
     def amount_multiplied_by_hundred(amount)
-      if amount.present?
-        v = amount.to_f
+      return to_centimes(amount) if amount.present?
 
-        return v * 100
-      end
       nil
     end
 

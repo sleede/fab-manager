@@ -12,6 +12,8 @@ class OpenApi::MachinesTest < ActionDispatch::IntegrationTest
   test 'list all machines' do
     get '/open_api/v1/machines', headers: open_api_headers(@token)
     assert_response :success
+    machines = json_response(response.body)
+    assert_not_empty machines[:machines]
   end
 
   test 'create a machine' do
@@ -19,7 +21,7 @@ class OpenApi::MachinesTest < ActionDispatch::IntegrationTest
          params: {
            machine: {
              name: 'IJFX 350 Laser',
-             description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore...',
+             description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et...',
              spec: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium...',
              disabled: true
            }
@@ -48,5 +50,16 @@ class OpenApi::MachinesTest < ActionDispatch::IntegrationTest
   test 'delete a machine' do
     delete '/open_api/v1/machines/3', headers: open_api_headers(@token)
     assert_response :success
+  end
+
+  test 'soft delete a machine' do
+    assert_not Machine.find(4).destroyable?
+    delete '/open_api/v1/machines/4', headers: open_api_headers(@token)
+    assert_response :success
+    get '/open_api/v1/machines/4', headers: open_api_headers(@token)
+    assert_response :not_found
+    get '/open_api/v1/machines', headers: open_api_headers(@token)
+    machines = json_response(response.body)
+    assert_not(machines[:machines].any? { |m| m[:id] == 4 })
   end
 end

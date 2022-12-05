@@ -8,7 +8,7 @@ class OpenAPI::V1::SpacesController < OpenAPI::V1::BaseController
   before_action :set_space, only: %i[show]
 
   def index
-    @spaces = Space.order(:created_at)
+    @spaces = Space.order(:created_at).where(deleted_at: nil)
   end
 
   def show; end

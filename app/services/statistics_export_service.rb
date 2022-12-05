@@ -6,12 +6,11 @@ require 'action_view'
 require 'active_record'
 
 # require any helpers
-require './app/helpers/application_helper'
+require './app/helpers/excel_helper'
 
+# Export statistics (from elasticsearch) to an excel file
 class StatisticsExportService
-
   def export_global(export)
-
     # query all stats with range arguments
     query = MultiJson.load(export.query)
 
@@ -30,18 +29,19 @@ class StatisticsExportService
 
     ActionController::Base.prepend_view_path './app/views/'
     # place data in view_assigns
-    view_assigns = {results: @results, users: @users, indices: @indices}
+    view_assigns = { results: @results, users: @users, indices: @indices }
     av = ActionView::Base.new(ActionController::Base.view_paths, view_assigns)
     av.class_eval do
       # include any needed helpers (for the view)
-      include ApplicationHelper
+      include ExcelHelper
     end
 
     content = av.render template: 'exports/statistics_global.xlsx.axlsx'
     # write content to file
-    File.open(export.file, 'w+b') { |f| f.write content }
+    File.binwrite(export.file, content)
   end
 
+  # rubocop:disable Style/DocumentDynamicEvalDefinition
   %w[account event machine project subscription training space].each do |path|
     class_eval %{
       def export_#{path}(export)
@@ -71,14 +71,14 @@ class StatisticsExportService
         av = ActionView::Base.new(ActionController::Base.view_paths, view_assigns)
         av.class_eval do
           # include any needed helpers (for the view)
-          include ApplicationHelper
+          include ExcelHelper
         end
 
         content = av.render template: 'exports/statistics_current.xlsx.axlsx'
         # write content to file
-        File.open(export.file,"w+b") { |f| f.write content }
+        File.binwrite(export.file, content)
       end
     }, __FILE__, __LINE__ - 35
   end
-
+  # rubocop:enable Style/DocumentDynamicEvalDefinition
 end

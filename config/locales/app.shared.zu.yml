@@ -110,7 +110,7 @@ zu:
       password_input:
         new_password: "crwdns28716:0crwdne28716:0"
         confirm_password: "crwdns28718:0crwdne28718:0"
-        password_too_short: "crwdns28720:0crwdne28720:0"
+        password_too_short: "crwdns31749:0crwdne31749:0"
         confirmation_mismatch: "crwdns28722:0crwdne28722:0"
       #project edition form
       project:

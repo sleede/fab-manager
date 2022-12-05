@@ -3,6 +3,7 @@
 # API Controller for resources of type Space
 class API::SpacesController < API::ApiController
   before_action :authenticate_user!, except: %i[index show]
+  before_action :set_space, only: %i[update destroy]
   respond_to :json
 
   def index
@@ -27,7 +28,6 @@ class API::SpacesController < API::ApiController
 
   def update
     authorize Space
-    @space = get_space
     if @space.update(space_params)
       render :show, status: :ok, location: @space
     else
@@ -36,19 +36,15 @@ class API::SpacesController < API::ApiController
   end
 
   def destroy
-    @space = get_space
     authorize @space
-    if @space.destroyable?
-      @space.destroy
-    else
-      @space.soft_destroy!
-    end
+    method = @space.destroyable? ? :destroy : :soft_destroy!
+    @space.send(method)
     head :no_content
   end
 
   private
 
-  def get_space
+  def set_space
     Space.friendly.find(params[:id])
   end
 

@@ -3,12 +3,14 @@
 # API Controller for resources of type Price
 # Prices are used in reservations (Machine, Space)
 class API::PricesController < API::ApiController
+  include ApplicationHelper
+
   before_action :authenticate_user!
   before_action :set_price, only: %i[update destroy]
 
   def create
     @price = Price.new(price_create_params)
-    @price.amount *= 100
+    @price.amount = to_centimes(price_create_params[:amount])
 
     authorize @price
 
@@ -26,7 +28,7 @@ class API::PricesController < API::ApiController
   def update
     authorize Price
     price_parameters = price_params
-    price_parameters[:amount] = price_parameters[:amount] * 100
+    price_parameters[:amount] = to_centimes(price_parameters[:amount])
     if @price.update(price_parameters)
       render status: :ok
     else

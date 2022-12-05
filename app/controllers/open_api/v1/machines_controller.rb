@@ -8,7 +8,7 @@ class OpenAPI::V1::MachinesController < OpenAPI::V1::BaseController
   before_action :set_machine, only: %i[show update destroy]
 
   def index
-    @machines = Machine.order(:created_at)
+    @machines = Machine.order(:created_at).where(deleted_at: nil)
   end
 
   def create
@@ -28,15 +28,14 @@ class OpenAPI::V1::MachinesController < OpenAPI::V1::BaseController
     end
   end
 
-  def show; end
+  def show
+    head :not_found if @machine.deleted_at
+  end
 
   def destroy
-    if @machine.destroyable?
-      @machine.destroy
-      head :no_content
-    else
-      render json: { error: 'has existing reservations' }, status: :unprocessable_entity
-    end
+    method = @machine.destroyable? ? :destroy : :soft_destroy!
+    @machine.send(method)
+    head :no_content
   end
 
   private

@@ -1,8 +1,12 @@
 # frozen_string_literal: true
 
+# @deprecated
+# <b>DEPRECATED:</b> Please use <tt>API::PriceController</tt> instead.
 # API Controller for managing Plans prices
 class API::PricingController < API::ApiController
-  before_action :authenticate_user!, except: %i[index show]
+  include ApplicationHelper
+
+  before_action :authenticate_user!, except: %i[index update]
 
   def index
     @group_pricing = Group.includes(:plans, :trainings_pricings)
@@ -19,10 +23,10 @@ class API::PricingController < API::ApiController
         next unless group
 
         training_pricing = group.trainings_pricings.find_or_initialize_by(training_id: training.id)
-        training_pricing.amount = amount * 100
+        training_pricing.amount = to_centimes(amount)
         training_pricing.save
       end
     end
-    head 200
+    head :ok
   end
 end

@@ -474,6 +474,7 @@ es:
     type: "Tipo"
     male: "Hombre"
     female: "Mujer"
+    deleted_user: "Deleted user"
   #initial price's category for events, created to replace the old "reduced amount" property
   price_category:
     reduced_fare: "Tarifa reducida"
