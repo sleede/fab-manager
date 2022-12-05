@@ -1,4 +1,5 @@
 import { ReactNode, useEffect, useState } from 'react';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import * as React from 'react';
 import _ from 'lodash';
 import { usePrevious } from '../../lib/use-previous';
@@ -19,7 +20,7 @@ interface FabTabsProps {
 }
 
 /**
- * Tabulation system
+ * A wrapper around https://github.com/reactjs/react-tabs that provides the Fab-manager's theme for tabs
  */
 export const FabTabs: React.FC<FabTabsProps> = ({ tabs, defaultTab, className }) => {
   const [active, setActive] = useState<Tab>(tabs.filter(Boolean).find(t => t.id === defaultTab) || tabs.filter(Boolean)[0]);
@@ -32,21 +33,28 @@ export const FabTabs: React.FC<FabTabsProps> = ({ tabs, defaultTab, className })
   }, [tabs]);
 
   /**
-   * Callback triggered when a tab a selected
+   * Return the index of the currently selected tabs (i.e. the "active" tab)
    */
-  const onTabSelected = (tab: Tab) => {
-    setActive(tab);
-    if (typeof tab.onSelected === 'function') tab.onSelected();
+  const selectedIndex = (): number => {
+    return tabs.findIndex(t => t?.id === active?.id) || 0;
+  };
+
+  /**
+   * Callback triggered when the active tab is changed by the user
+   */
+  const onIndexSelected = (index: number) => {
+    setActive(tabs[index]);
+    if (typeof tabs[index].onSelected === 'function') {
+      tabs[index].onSelected();
+    }
   };
 
   return (
-    <div className={`fab-tabs ${className || ''}`}>
-      <div className="tabs">
-        {tabs.filter(Boolean).map((tab, index) => (
-          <p key={index} className={active?.id === tab.id ? 'is-active' : ''} onClick={() => onTabSelected(tab)}>{tab.title}</p>
-        ))}
-      </div>
-      {active?.content}
-    </div>
+    <Tabs className={`fab-tabs ${className || ''}`} selectedIndex={selectedIndex()} onSelect={onIndexSelected}>
+      <TabList className="tabs">
+        {tabs.filter(Boolean).map((tab, index) => <Tab key={index}>{tab.title}</Tab>)}
+      </TabList>
+      {tabs.filter(Boolean).map((tab, index) => <TabPanel key={index}>{tab.content}</TabPanel>)}
+    </Tabs>
   );
 };
