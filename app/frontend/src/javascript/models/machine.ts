@@ -14,7 +14,7 @@ export interface Machine {
   spec?: string,
   disabled: boolean,
   slug: string,
-  machine_image_attributes: FileType,
+  machine_image_attributes?: FileType,
   machine_files_attributes?: Array<FileType>,
   trainings?: Array<{
     id: number,

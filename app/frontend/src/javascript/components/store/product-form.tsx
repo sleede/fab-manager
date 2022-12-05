@@ -269,7 +269,8 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
                       blockquote
                       link
                       limit={6000}
-                      id="description" />
+                      id="description"
+                      ariaLabel={t('app.admin.store.product_form.product_description')} />
       </div>
 
       <hr />

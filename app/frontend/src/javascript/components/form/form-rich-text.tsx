@@ -16,13 +16,14 @@ interface FormRichTextProps<TFieldValues, TContext extends object> extends FormC
   blockquote?: boolean,
   link?: boolean,
   video?: boolean,
-  image?: boolean
+  image?: boolean,
+  ariaLabel?: string,
 }
 
 /**
  * This component is a rich-text editor to use with react-hook-form.
  */
-export const FormRichText = <TFieldValues extends FieldValues, TContext extends object>({ id, label, tooltip, className, control, valueDefault, error, warning, rules, disabled = false, formState, limit, heading, bulletList, blockquote, video, image, link }: FormRichTextProps<TFieldValues, TContext>) => {
+export const FormRichText = <TFieldValues extends FieldValues, TContext extends object>({ id, label, tooltip, className, control, valueDefault, error, warning, rules, disabled = false, formState, limit, heading, bulletList, blockquote, video, image, link, ariaLabel }: FormRichTextProps<TFieldValues, TContext>) => {
   const textEditorRef = React.useRef<FabTextEditorRef>();
   const [isDisabled, setIsDisabled] = React.useState<boolean>(false);
 
@@ -66,7 +67,7 @@ export const FormRichText = <TFieldValues extends FieldValues, TContext extends 
                        link={link}
                        disabled={isDisabled}
                        ref={textEditorRef}
-                       ariaLabel={label as string}/>
+                       ariaLabel={ariaLabel || label as string}/>
       } />
     </AbstractFormItem>
   );
