@@ -45,12 +45,12 @@ const MachineCard: React.FC<MachineCardProps> = ({ user, machine, onShowMachine,
    * Return the machine's picture or a placeholder
    */
   const machinePicture = (): ReactNode => {
-    if (!machine.machine_image) {
+    if (!machine.machine_image_attributes?.attachment_url) {
       return <div className="machine-picture no-picture" />;
     }
 
     return (
-      <div className="machine-picture" style={{ backgroundImage: `url(${machine.machine_image}), url('/default-image.png')` }} onClick={handleShowMachine} />
+      <div className="machine-picture" style={{ backgroundImage: `url(${machine.machine_image_attributes.attachment_url}), url('/default-image.png')` }} onClick={handleShowMachine} />
     );
   };
 
