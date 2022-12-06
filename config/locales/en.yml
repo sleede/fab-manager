@@ -624,3 +624,4 @@ en:
     store_withdrawal_instructions: "Withdrawal instructions"
     store_hidden: "Store hidden to the public"
     advanced_accounting: "Advanced accounting"
+    external_id: "external identifier"

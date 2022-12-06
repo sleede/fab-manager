@@ -126,6 +126,19 @@
         </boolean-setting>
       </div>
     </div>
+    <div class="row">
+      <h3 class="m-l" translate>{{ 'app.admin.settings.external_id' }}</h3>
+      <p class="alert alert-warning m-h-md" translate>
+        {{ 'app.admin.settings.external_id_info_html' }}
+      </p>
+      <div class="col-md-10 col-md-offset-1">
+        <boolean-setting name="'external_id'"
+                         label="'app.admin.settings.enable_external_id' | translate"
+                         on-success="onSuccess"
+                         on-error="onError">
+        </boolean-setting>
+      </div>
+    </div>
 
     <div class="row">
       <h3 class="m-l" translate>{{ 'app.admin.settings.account.organization' }}</h3>

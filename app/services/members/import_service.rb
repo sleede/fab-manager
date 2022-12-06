@@ -27,13 +27,13 @@ class Members::ImportService
           log << user.errors.to_hash unless user.errors.to_hash.empty?
         rescue StandardError => e
           log << e.to_s
-          puts e
-          puts e.backtrace
+          Rails.logger.error e
+          Rails.logger.debug e.backtrace
         end
       rescue ArgumentError => e
         log << e.to_s
-        puts e
-        puts e.backtrace
+        Rails.logger.error e
+        Rails.logger.debug e.backtrace
       end
       log
     end
@@ -52,6 +52,7 @@ class Members::ImportService
       res.merge! hashify(row, 'id')
       res.merge! hashify(row, 'username')
       res.merge! hashify(row, 'email')
+      res.merge! hashify(row, 'external_id')
       res.merge! hashify(row, 'password', value: password)
       res.merge! hashify(row, 'password', key: :password_confirmation, value: password)
       res.merge! hashify(row, 'allow_contact', value: row['allow_contact'] == 'yes', key: :is_allow_contact)
@@ -93,23 +94,19 @@ class Members::ImportService
       res.merge! hashify(row, 'softwares', key: :software_mastered)
       res.merge! hashify(row, 'website')
       res.merge! hashify(row, 'job')
-      res.merge! hashify(row, 'facebook')
-      res.merge! hashify(row, 'twitter')
-      res.merge! hashify(row, 'googleplus', key: :google_plus)
-      res.merge! hashify(row, 'viadeo')
-      res.merge! hashify(row, 'linkedin')
-      res.merge! hashify(row, 'instagram')
-      res.merge! hashify(row, 'youtube')
-      res.merge! hashify(row, 'vimeo')
-      res.merge! hashify(row, 'dailymotion')
-      res.merge! hashify(row, 'github')
-      res.merge! hashify(row, 'echosciences')
-      res.merge! hashify(row, 'pinterest')
-      res.merge! hashify(row, 'lastfm')
-      res.merge! hashify(row, 'flickr')
+      res.merge! social_networks(row)
 
       res[:id] = user.profile.id if user&.profile
 
+      res
+    end
+
+    def social_networks(row)
+      res = {}
+      networks = %w[facebook twitter viadeo linkedin instagram youtube vimeo dailymotion github echosciences pinterest lastfm flickr]
+      networks.each do |network|
+        res.merge! hashify(row, network)
+      end
       res
     end
 

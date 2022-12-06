@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-json.extract! member, :id, :username, :email, :group_id
+json.extract! member, :id, :username, :email, :group_id, :external_id
 json.role member.roles.first.name
 json.name member.profile.full_name
 json.need_completion member.need_completion?

@@ -12,6 +12,7 @@ type ProfileAttributesSocial = {
 export interface User {
   id: number,
   username?: string,
+  external_id?: string,
   email: string,
   group_id?: number,
   role?: UserRole
@@ -130,3 +131,5 @@ export const UserFieldMapping = Object.assign({
   is_allow_newsletter: 'user.is_allow_newsletter',
   group_id: 'user.group_id'
 }, ...socialMappings);
+
+export const UserFieldsReservedForPrivileged = ['external_id'];

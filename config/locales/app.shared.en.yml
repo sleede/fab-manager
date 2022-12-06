@@ -68,6 +68,7 @@ en:
         declare_organization: "I declare to be an organization"
         declare_organization_help: "If you declare to be an organization, your invoices will be issued in the name of the organization."
         pseudonym: "Nickname"
+        external_id: "External identifier"
         first_name: "First name"
         surname: "Surname"
         email_address: "Email address"

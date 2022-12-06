@@ -997,6 +997,8 @@ Setting.set('advanced_accounting', false) unless Setting.find_by(name: 'advanced
 
 Setting.set('accounting_VAT_code', '4457') unless Setting.find_by(name: 'accounting_VAT_code').try(:value)
 
+Setting.set('external_id', false) unless Setting.find_by(name: 'external_id').try(:value)
+
 if StatisticCustomAggregation.count.zero?
   # available reservations hours for machines
   machine_hours = StatisticType.find_by(key: 'hour', statistic_index_id: 2)

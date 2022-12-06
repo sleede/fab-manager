@@ -164,6 +164,7 @@ export const accountSettings = [
   'phone_required',
   'confirmation_required',
   'address_required',
+  'external_id',
   'user_change_group',
   'user_validation_required',
   'user_validation_required_list'

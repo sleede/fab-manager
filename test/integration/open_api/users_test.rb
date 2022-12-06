@@ -12,6 +12,10 @@ class OpenApi::UsersTest < ActionDispatch::IntegrationTest
   test 'list all users' do
     get '/open_api/v1/users', headers: open_api_headers(@token)
     assert_response :success
+    assert_equal Mime[:json], response.content_type
+
+    users = json_response(response.body)
+    assert_not_nil(users[:users].detect { |u| u[:external_id] == 'J5821-4' })
   end
 
   test 'list all users with pagination' do

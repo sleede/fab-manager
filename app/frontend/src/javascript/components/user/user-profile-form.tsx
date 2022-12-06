@@ -3,7 +3,7 @@ import * as React from 'react';
 import { react2angular } from 'react2angular';
 import { useForm, useWatch, ValidateResult } from 'react-hook-form';
 import { isNil as _isNil } from 'lodash';
-import { User, UserFieldMapping } from '../../models/user';
+import { User, UserFieldMapping, UserFieldsReservedForPrivileged } from '../../models/user';
 import { IApplication } from '../../models/application';
 import { Loader } from '../base/loader';
 import { FormInput } from '../form/form-input';
@@ -39,6 +39,7 @@ interface UserProfileFormProps {
   action: 'create' | 'update',
   size?: 'small' | 'large',
   user: User,
+  operator: User,
   className?: string,
   onError: (message: string) => void,
   onSuccess: (user: User) => void,
@@ -51,7 +52,7 @@ interface UserProfileFormProps {
 /**
  * Form component to create or update a user
  */
-export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, user, className, onError, onSuccess, showGroupInput, showTermsAndConditionsInput, showTrainingsInput, showTagsInput }) => {
+export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, user, operator, className, onError, onSuccess, showGroupInput, showTermsAndConditionsInput, showTrainingsInput, showTagsInput }) => {
   const { t } = useTranslation('shared');
 
   // regular expression to validate the input fields
@@ -66,7 +67,7 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
   const [groups, setGroups] = useState<SelectOption<number>[]>([]);
   const [termsAndConditions, setTermsAndConditions] = useState<CustomAsset>(null);
   const [profileCustomFields, setProfileCustomFields] = useState<ProfileCustomField[]>([]);
-  const [requiredFieldsSettings, setRequiredFieldsSettings] = useState<Map<SettingName, string>>(new Map());
+  const [fieldsSettings, setFieldsSettings] = useState<Map<SettingName, string>>(new Map());
 
   useEffect(() => {
     AuthProviderAPI.active().then(data => {
@@ -94,8 +95,8 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
       });
       setValue('invoicing_profile_attributes.user_profile_custom_fields_attributes', userProfileCustomFields);
     }).catch(error => onError(error));
-    SettingAPI.query(['phone_required', 'address_required'])
-      .then(settings => setRequiredFieldsSettings(settings))
+    SettingAPI.query(['phone_required', 'address_required', 'external_id'])
+      .then(settings => setFieldsSettings(settings))
       .catch(error => onError(error));
   }, []);
 
@@ -150,6 +151,10 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
    * Check if the given field path should be disabled
    */
   const isDisabled = function (id: string) {
+    // some fields may be reserved in edition for priviledged users
+    if (UserFieldsReservedForPrivileged.includes(id) && !(new UserLib(operator).isPrivileged(user))) {
+      return true;
+    }
     // if the current provider is the local database, then all fields are enabled
     if (isLocalDatabaseProvider) {
       return false;
@@ -209,7 +214,7 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
                            value: phoneRegex,
                            message: t('app.shared.user_profile_form.phone_number_invalid')
                          },
-                         required: requiredFieldsSettings.get('phone_required') === 'true'
+                         required: fieldsSettings.get('phone_required') === 'true'
                        }}
                        disabled={isDisabled}
                        formState={formState}
@@ -222,7 +227,7 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
             <FormInput id="invoicing_profile_attributes.address_attributes.address"
                        register={register}
                        disabled={isDisabled}
-                       rules={{ required: requiredFieldsSettings.get('address_required') === 'true' }}
+                       rules={{ required: fieldsSettings.get('address_required') === 'true' }}
                        label={t('app.shared.user_profile_form.address')} />
           </div>
         </div>
@@ -234,6 +239,11 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
                      disabled={isDisabled}
                      formState={formState}
                      label={t('app.shared.user_profile_form.pseudonym')} />
+          {fieldsSettings.get('external_id') === 'true' && <FormInput id="external_id"
+                     register={register}
+                     disabled={isDisabled}
+                     formState={formState}
+                     label={t('app.shared.user_profile_form.external_id')} />}
           <FormInput id="email"
                      register={register}
                      rules={{ required: true }}
@@ -398,4 +408,4 @@ const UserProfileFormWrapper: React.FC<UserProfileFormProps> = (props) => {
   );
 };
 
-Application.Components.component('userProfileForm', react2angular(UserProfileFormWrapper, ['action', 'size', 'user', 'className', 'onError', 'onSuccess', 'showGroupInput', 'showTermsAndConditionsInput', 'showTagsInput', 'showTrainingsInput']));
+Application.Components.component('userProfileForm', react2angular(UserProfileFormWrapper, ['action', 'size', 'user', 'operator', 'className', 'onError', 'onSuccess', 'showGroupInput', 'showTermsAndConditionsInput', 'showTagsInput', 'showTrainingsInput']));

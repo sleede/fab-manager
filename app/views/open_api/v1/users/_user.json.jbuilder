@@ -1,8 +1,8 @@
-json.extract! user, :id, :email, :created_at
+# frozen_string_literal: true
 
-if user.association(:profile).loaded?
-  json.full_name user.profile.full_name
-end
+json.extract! user, :id, :email, :created_at, :external_id
+
+json.full_name user.profile.full_name if user.association(:profile).loaded?
 
 if user.association(:group).loaded?
   json.group do

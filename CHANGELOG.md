@@ -1,5 +1,6 @@
 # Changelog Fab-manager
 
+- Optional external identifier for users
 - Accounting data is now built each night and saved in database
 - OpenAPI endpoint to fetch accounting data
 - Fix a bug: providing an array of attributes to filter OpenApi data, results in error

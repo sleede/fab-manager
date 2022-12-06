@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_22_123605) do
+ActiveRecord::Schema.define(version: 2022_12_06_100225) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
@@ -19,8 +19,8 @@ ActiveRecord::Schema.define(version: 2022_11_22_123605) do
   enable_extension "unaccent"
 
   create_table "abuses", id: :serial, force: :cascade do |t|
-    t.string "signaled_type"
     t.integer "signaled_id"
+    t.string "signaled_type"
     t.string "first_name"
     t.string "last_name"
     t.string "email"
@@ -68,8 +68,8 @@ ActiveRecord::Schema.define(version: 2022_11_22_123605) do
     t.string "locality"
     t.string "country"
     t.string "postal_code"
-    t.string "placeable_type"
     t.integer "placeable_id"
+    t.string "placeable_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -93,8 +93,8 @@ ActiveRecord::Schema.define(version: 2022_11_22_123605) do
   end
 
   create_table "assets", id: :serial, force: :cascade do |t|
-    t.string "viewable_type"
     t.integer "viewable_id"
+    t.string "viewable_type"
     t.string "attachment"
     t.string "type"
     t.datetime "created_at"
@@ -176,8 +176,8 @@ ActiveRecord::Schema.define(version: 2022_11_22_123605) do
   end
 
   create_table "credits", id: :serial, force: :cascade do |t|
-    t.string "creditable_type"
     t.integer "creditable_id"
+    t.string "creditable_type"
     t.integer "plan_id"
     t.integer "hours"
     t.datetime "created_at"
@@ -406,15 +406,15 @@ ActiveRecord::Schema.define(version: 2022_11_22_123605) do
 
   create_table "notifications", id: :serial, force: :cascade do |t|
     t.integer "receiver_id"
-    t.string "attached_object_type"
     t.integer "attached_object_id"
+    t.string "attached_object_type"
     t.integer "notification_type_id"
     t.boolean "is_read", default: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string "receiver_type"
     t.boolean "is_send", default: false
-    t.jsonb "meta_data", default: "{}"
+    t.jsonb "meta_data", default: {}
     t.index ["notification_type_id"], name: "index_notifications_on_notification_type_id"
     t.index ["receiver_id"], name: "index_notifications_on_receiver_id"
   end
@@ -654,8 +654,8 @@ ActiveRecord::Schema.define(version: 2022_11_22_123605) do
   create_table "prices", id: :serial, force: :cascade do |t|
     t.integer "group_id"
     t.integer "plan_id"
-    t.string "priceable_type"
     t.integer "priceable_id"
+    t.string "priceable_type"
     t.integer "amount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -855,8 +855,8 @@ ActiveRecord::Schema.define(version: 2022_11_22_123605) do
     t.text "message"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string "reservable_type"
     t.integer "reservable_id"
+    t.string "reservable_type"
     t.integer "nb_reserve_places"
     t.integer "statistic_profile_id"
     t.index ["reservable_type", "reservable_id"], name: "index_reservations_on_reservable_type_and_reservable_id"
@@ -865,8 +865,8 @@ ActiveRecord::Schema.define(version: 2022_11_22_123605) do
 
   create_table "roles", id: :serial, force: :cascade do |t|
     t.string "name"
-    t.string "resource_type"
     t.integer "resource_id"
+    t.string "resource_type"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
@@ -1150,9 +1150,11 @@ ActiveRecord::Schema.define(version: 2022_11_22_123605) do
     t.inet "last_sign_in_ip"
     t.string "mapped_from_sso"
     t.datetime "validated_at"
+    t.string "external_id"
     t.index ["auth_token"], name: "index_users_on_auth_token"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["external_id"], name: "unique_not_null_external_id", unique: true, where: "(external_id IS NOT NULL)"
     t.index ["group_id"], name: "index_users_on_group_id"
     t.index ["provider"], name: "index_users_on_provider"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

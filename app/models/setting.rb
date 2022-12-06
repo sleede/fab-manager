@@ -157,7 +157,8 @@ class Setting < ApplicationRecord
                              store_module
                              store_withdrawal_instructions
                              store_hidden
-                             advanced_accounting] }
+                             advanced_accounting
+                             external_id] }
   # WARNING: when adding a new key, you may also want to add it in:
   # - config/locales/en.yml#settings
   # - app/frontend/src/javascript/models/setting.ts#SettingName

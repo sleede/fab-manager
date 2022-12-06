@@ -25,6 +25,7 @@ class OpenAPI::V1::UsersDoc < OpenAPI::V1::BaseDoc
             "id": 1746,
             "email": "xxxxxxx@xxxx.com",
             "created_at": "2016-05-04T17:21:48.403+02:00",
+            "external_id": "J5821-4"
             "full_name": "xxxx xxxx",
             "group": {
               "id": 1,
@@ -36,6 +37,7 @@ class OpenAPI::V1::UsersDoc < OpenAPI::V1::BaseDoc
             "id": 1745,
             "email": "xxxxxxx@gmail.com",
             "created_at": "2016-05-03T15:21:13.125+02:00",
+            "external_id": "J5846-4"
             "full_name": "xxxxx xxxxx",
             "group": {
               "id": 2,
@@ -47,6 +49,7 @@ class OpenAPI::V1::UsersDoc < OpenAPI::V1::BaseDoc
             "id": 1744,
             "email": "xxxxxxx@gmail.com",
             "created_at": "2016-05-03T13:51:03.223+02:00",
+            "external_id": "J5900-1"
             "full_name": "xxxxxxx xxxx",
             "group": {
               "id": 1,
@@ -58,6 +61,7 @@ class OpenAPI::V1::UsersDoc < OpenAPI::V1::BaseDoc
             "id": 1743,
             "email": "xxxxxxxx@setecastronomy.eu",
             "created_at": "2016-05-03T12:24:38.724+02:00",
+            "external_id": "P4172-4"
             "full_name": "xxx xxxxxxx",
             "group": {
               "id": 1,
@@ -75,6 +79,7 @@ class OpenAPI::V1::UsersDoc < OpenAPI::V1::BaseDoc
             "id": 1746,
             "email": "xxxxxxxxxxxx",
             "created_at": "2016-05-04T17:21:48.403+02:00",
+            "external_id": "J5500-4"
             "full_name": "xxxx xxxxxx",
             "group": {
               "id": 1,
@@ -86,6 +91,7 @@ class OpenAPI::V1::UsersDoc < OpenAPI::V1::BaseDoc
             "id": 1745,
             "email": "xxxxxxxxx@gmail.com",
             "created_at": "2016-05-03T15:21:13.125+02:00",
+            "external_id": null,
             "full_name": "xxxxx xxxxxx",
             "group": {
               "id": 2,

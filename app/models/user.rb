@@ -7,6 +7,8 @@ class User < ApplicationRecord
   include NotifyWith::NotificationAttachedObject
 
   include SingleSignOnConcern
+  include UserRoleConcern
+  include UserRessourcesConcern
   # Include default devise modules. Others available are:
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable,
@@ -55,6 +57,7 @@ class User < ApplicationRecord
     email&.downcase!
   end
 
+  before_validation :set_external_id_nil
   before_create :assign_default_role
   after_create :init_dependencies
   after_update :update_invoicing_profile, if: :invoicing_data_was_modified?
@@ -79,6 +82,7 @@ class User < ApplicationRecord
   validate :cgu_must_accept, if: :new_record?
 
   validates :username, presence: true, uniqueness: true, length: { maximum: 30 }
+  validates :external_id, uniqueness: true, allow_blank: true
   validate :password_complexity
 
   scope :active, -> { where(is_active: true) }
@@ -94,104 +98,6 @@ class User < ApplicationRecord
       formats: [:json],
       handlers: [:jbuilder]
     )
-  end
-
-  def self.admins
-    User.with_role(:admin)
-  end
-
-  def self.members
-    User.with_role(:member)
-  end
-
-  def self.partners
-    User.with_role(:partner)
-  end
-
-  def self.managers
-    User.with_role(:manager)
-  end
-
-  def self.admins_and_managers
-    User.with_any_role(:admin, :manager)
-  end
-
-  def self.online_payers
-    User.with_any_role(:admin, :manager, :member)
-  end
-
-  def self.adminsys
-    return if Rails.application.secrets.adminsys_email.blank?
-
-    User.find_by('lower(email) = ?', Rails.application.secrets.adminsys_email&.downcase)
-  end
-
-  def training_machine?(machine)
-    return true if admin? || manager?
-
-    trainings.map(&:machines).flatten.uniq.include?(machine)
-  end
-
-  def packs?(item)
-    return true if admin?
-
-    PrepaidPackService.user_packs(self, item).count.positive?
-  end
-
-  def next_training_reservation_by_machine(machine)
-    reservations.where(reservable_type: 'Training', reservable_id: machine.trainings.map(&:id))
-                .includes(:slots)
-                .where('slots.start_at>= ?', DateTime.current)
-                .order('slots.start_at': :asc)
-                .references(:slots)
-                .limit(1)
-                .first
-  end
-
-  def subscribed_plan
-    return nil if subscription.nil? || subscription.expired_at < DateTime.current
-
-    subscription.plan
-  end
-
-  def subscription
-    subscriptions.order(:created_at).last
-  end
-
-  def admin?
-    has_role? :admin
-  end
-
-  def member?
-    has_role? :member
-  end
-
-  def manager?
-    has_role? :manager
-  end
-
-  def partner?
-    has_role? :partner
-  end
-
-  def privileged?
-    admin? || manager?
-  end
-
-  def role
-    if admin?
-      'admin'
-    elsif manager?
-      'manager'
-    elsif member?
-      'member'
-    else
-      'other'
-    end
-  end
-
-  def all_projects
-    my_projects.to_a.concat projects
   end
 
   def generate_subscription_invoice(operator_profile_id)
@@ -266,6 +172,10 @@ class User < ApplicationRecord
   end
 
   private
+
+  def set_external_id_nil
+    self.external_id = nil if external_id.blank?
+  end
 
   def assign_default_role
     add_role(:member) if roles.blank?
@@ -353,6 +263,6 @@ class User < ApplicationRecord
   def password_complexity
     return if password.blank? || SecurePassword.is_secured?(password)
 
-    errors.add I18n.t("app.public.common.password_is_too_weak"), I18n.t("app.public.common.password_is_too_weak_explanations")
+    errors.add I18n.t('app.public.common.password_is_too_weak'), I18n.t('app.public.common.password_is_too_weak_explanations')
   end
 end

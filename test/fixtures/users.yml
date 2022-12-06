@@ -29,6 +29,7 @@ user_1:
   auth_token:
   merged_at:
   is_allow_newsletter: true
+  external_id: J5821-4
 
 user_2:
   id: 2
@@ -61,6 +62,7 @@ user_2:
   auth_token:
   merged_at:
   is_allow_newsletter: true
+  external_id: J5846-4
 
 user_3:
   id: 3
@@ -93,6 +95,7 @@ user_3:
   auth_token:
   merged_at:
   is_allow_newsletter: false
+  external_id: J5900-1
 
 user_4:
   id: 4
@@ -125,6 +128,7 @@ user_4:
   auth_token:
   merged_at:
   is_allow_newsletter: false
+  external_id: P4172-4
 
 user_5:
   id: 5
@@ -157,6 +161,7 @@ user_5:
   auth_token:
   merged_at:
   is_allow_newsletter: true
+  external_id: J5500-4
 
 user_6:
   id: 6
@@ -189,6 +194,7 @@ user_6:
   auth_token:
   merged_at:
   is_allow_newsletter: true
+  external_id:
 
 user_7:
   id: 7
@@ -221,6 +227,7 @@ user_7:
   auth_token:
   merged_at:
   is_allow_newsletter: false
+  external_id:
 
 user_8:
   id: 8
@@ -253,6 +260,7 @@ user_8:
   auth_token:
   merged_at:
   is_allow_newsletter: false
+  external_id:
 
 user_9:
   id: 9
@@ -285,6 +293,7 @@ user_9:
   auth_token:
   merged_at:
   is_allow_newsletter: true
+  external_id:
 
 user_10:
   id: 10
@@ -317,3 +326,4 @@ user_10:
   auth_token:
   merged_at:
   is_allow_newsletter: true
+  external_id:
