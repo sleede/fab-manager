@@ -19,6 +19,9 @@ class OpenApi::UsersTest < ActionDispatch::IntegrationTest
     assert_not_nil(users[:users].detect { |u| u[:external_id] == 'J5821-4' })
     assert(users[:users].all? { |u| %w[man woman].include?(u[:gender]) })
     assert(users[:users].all? { |u| u[:organization] != User.find(u[:id]).invoicing_profile.organization.nil? })
+    assert(users[:users].all? { |u| u[:full_name].present? })
+    assert(users[:users].all? { |u| u[:first_name].present? })
+    assert(users[:users].all? { |u| u[:last_name].present? })
     assert(users[:users].any? { |u| u[:address].present? })
   end
 
