@@ -5,6 +5,7 @@
 - OpenAPI endpoint to fetch accounting data
 - Updated OpenAPI documentation
 - OpenAPI users endpoint offer ability to filter by created_after
+- OpenAPI users endpoint return gender, organization and address
 - Fix a bug: providing an array of attributes to filter OpenApi data, results in error
 - Fix a bug: unable to manage stocks on new products
 - Fix a bug: unsupported param[] syntax in OpenAPI

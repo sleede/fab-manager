@@ -17,6 +17,9 @@ class OpenApi::UsersTest < ActionDispatch::IntegrationTest
     users = json_response(response.body)
     assert_equal User.count, users[:users].length
     assert_not_nil(users[:users].detect { |u| u[:external_id] == 'J5821-4' })
+    assert(users[:users].all? { |u| %w[man woman].include?(u[:gender]) })
+    assert(users[:users].all? { |u| u[:organization] != User.find(u[:id]).invoicing_profile.organization.nil? })
+    assert(users[:users].any? { |u| u[:address].present? })
   end
 
   test 'list all users with pagination' do

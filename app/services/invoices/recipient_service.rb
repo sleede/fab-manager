@@ -18,13 +18,7 @@ class Invoices::RecipientService
 
     # Get the street address of the recipient for the given invoice.
     def address(invoice)
-      if invoice.invoicing_profile&.organization&.address
-        invoice.invoicing_profile.organization.address.address
-      elsif invoice.invoicing_profile&.address
-        invoice.invoicing_profile.address.address
-      else
-        ''
-      end
+      invoice.invoicing_profile&.invoicing_address
     end
 
     # Get the optional data in profile_custom_fields, if the recipient is an organization

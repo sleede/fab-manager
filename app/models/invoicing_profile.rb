@@ -33,4 +33,14 @@ class InvoicingProfile < ApplicationRecord
     # if first_name or last_name is nil, the empty string will be used as a temporary replacement
     "#{(first_name || '').humanize.titleize} #{(last_name || '').humanize.titleize}"
   end
+
+  def invoicing_address
+    if organization&.address
+      organization.address.address
+    elsif address
+      address.address
+    else
+      ''
+    end
+  end
 end

@@ -28,6 +28,9 @@ class OpenAPI::V1::UsersDoc < OpenAPI::V1::BaseDoc
             "created_at": "2016-05-04T17:21:48.403+02:00",
             "external_id": "J5821-4"
             "full_name": "xxxx xxxx",
+            "gender": "man",
+            "organization": true,
+            "address": "2 impasse xxxxxx, BRUXELLES",
             "group": {
               "id": 1,
               "name": "standard, association",
@@ -40,6 +43,9 @@ class OpenAPI::V1::UsersDoc < OpenAPI::V1::BaseDoc
             "created_at": "2016-05-03T15:21:13.125+02:00",
             "external_id": "J5846-4"
             "full_name": "xxxxx xxxxx",
+            "gender": "woman",
+            "organization": true,
+            "address": "Grenoble",
             "group": {
               "id": 2,
               "name": "étudiant, - de 25 ans, enseignant, demandeur d'emploi",
@@ -52,6 +58,9 @@ class OpenAPI::V1::UsersDoc < OpenAPI::V1::BaseDoc
             "created_at": "2016-05-03T13:51:03.223+02:00",
             "external_id": "J5900-1"
             "full_name": "xxxxxxx xxxx",
+            "gender": "man",
+            "organization": false,
+            "address": "21 rue des xxxxxx",
             "group": {
               "id": 1,
               "name": "standard, association",
@@ -64,6 +73,9 @@ class OpenAPI::V1::UsersDoc < OpenAPI::V1::BaseDoc
             "created_at": "2016-05-03T12:24:38.724+02:00",
             "external_id": "P4172-4"
             "full_name": "xxx xxxxxxx",
+            "gender": "woman",
+            "organization": false,
+            "address": "147 rue xxxxxx, 75000 PARIS, France",
             "group": {
               "id": 1,
               "name": "standard, association",
@@ -82,6 +94,9 @@ class OpenAPI::V1::UsersDoc < OpenAPI::V1::BaseDoc
             "created_at": "2016-05-04T17:21:48.403+02:00",
             "external_id": "J5500-4"
             "full_name": "xxxx xxxxxx",
+            "gender": "man",
+            "organization": true,
+            "address": "38100",
             "group": {
               "id": 1,
               "name": "standard, association",
@@ -94,6 +109,9 @@ class OpenAPI::V1::UsersDoc < OpenAPI::V1::BaseDoc
             "created_at": "2016-05-03T15:21:13.125+02:00",
             "external_id": null,
             "full_name": "xxxxx xxxxxx",
+            "gender": "woman",
+            "organization": true,
+            "address": "",
             "group": {
               "id": 2,
               "name": "étudiant, - de 25 ans, enseignant, demandeur d'emploi",
