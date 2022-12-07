@@ -11,8 +11,10 @@ class OpenAPI::V1::BookableMachinesDoc < OpenAPI::V1::BaseDoc
 
   doc_for :index do
     api :GET, "/#{API_VERSION}/bookable_machines", 'Bookable machines index'
-    description 'Machines that a given user is allowed to book.'
+    description 'Machines that a given user is allowed to book. If the given user has machine credits due to his current subscription, ' \
+                'it will be reported in *hours_remaining*.'
     param :user_id, Integer, required: true, desc: 'Id of the given user.'
+    param :machine_id, Integer, optional: true, desc: 'Id of a machine to filter by'
     example <<-MACHINES
       # /open_api/v1/bookable_machines?user_id=522
       {
@@ -44,7 +46,7 @@ class OpenAPI::V1::BookableMachinesDoc < OpenAPI::V1::BaseDoc
             "updated_at": "2014-06-30T15:10:14.272+02:00",
             "created_at": "2014-06-30T03:32:31.977+02:00",
             "description": "La découpeuse Vinyle, Roland CAMM ...",
-            "spec": "Largeurs de support acceptées: de 50 mm à 70 ... 50 cm/sec ... mécanique: 0,0125 mm/pas\r\n",
+            "spec": "Largeurs de support acceptées: de 50 mm à 70 ... 50 cm/sec ... mécanique: 0,0125 mm/pas",
             "hours_remaining": 0
           },
           {

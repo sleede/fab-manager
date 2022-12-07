@@ -18,4 +18,9 @@ class OpenApi::BookableMachinesTest < ActionDispatch::IntegrationTest
     get '/open_api/v1/bookable_machines?user_id=3', headers: open_api_headers(@token)
     assert_response :success
   end
+
+  test 'check if a given machine is bookable by user' do
+    get '/open_api/v1/bookable_machines?user_id=3&machine_id=1', headers: open_api_headers(@token)
+    assert_response :success
+  end
 end
