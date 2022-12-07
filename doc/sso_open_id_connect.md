@@ -30,3 +30,10 @@ Not found. Authentication passthru.
 This issue may occur if you have misconfigured the environment variable `DEFAULT_HOST` and/or `DEFAULT_PROTOCOL`.
 Especially, if you have an automatic redirection (e.g. from example.org to example.com), `DEFAULT_HOST` *MUST* be configured with the redirection target (here example.com).
 Once you have reconfigured these variables, please switch back the active authentication provider to FabManager, restart the application, then delete the OIDC provider you configured and re-create a new one for the new settings to be used.
+
+```
+Unable to decode ID token
+```
+This issue may occur if the ID Token signature algorithm is not set to `RSxxx` on your IDP.
+Especially, this is not the default option when using LemonLDAP::NG, which uses `HSxxx` as the default algorithm, but you can configure it in `OpenID Connect Relaying Parties` > `my-fab-manager` > `Options` > `Security` > `ID Token signature algorithm`.
+Using Keycloak, you can configure it in `Clients` > `my-fab-manager` > `Settings` > `Fine Grain OpenID Connect Configuration` > `ID Token Signature Algorithm`.

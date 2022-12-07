@@ -4,6 +4,7 @@
 - Accounting data is now built each night and saved in database
 - OpenAPI endpoint to fetch accounting data
 - Updated OpenAPI documentation
+- Updated OpenID Connect documentation
 - OpenAPI users endpoint offer ability to filter by created_after
 - OpenAPI users endpoint return first name, last name, gender, organization and address
 - Fix a bug: providing an array of attributes to filter OpenApi data, results in error
