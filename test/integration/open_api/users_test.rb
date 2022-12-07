@@ -15,12 +15,17 @@ class OpenApi::UsersTest < ActionDispatch::IntegrationTest
     assert_equal Mime[:json], response.content_type
 
     users = json_response(response.body)
+    assert_equal User.count, users[:users].length
     assert_not_nil(users[:users].detect { |u| u[:external_id] == 'J5821-4' })
   end
 
   test 'list all users with pagination' do
     get '/open_api/v1/users?page=1&per_page=5', headers: open_api_headers(@token)
     assert_response :success
+    assert_equal Mime[:json], response.content_type
+
+    users = json_response(response.body)
+    assert_equal 5, users[:users].length
   end
 
   test 'list all users filtering by IDs' do
@@ -46,5 +51,20 @@ class OpenApi::UsersTest < ActionDispatch::IntegrationTest
   test 'list all users filtering by email' do
     get '/open_api/v1/users?email=jean.dupond@gmail.com', headers: open_api_headers(@token)
     assert_response :success
+    assert_equal Mime[:json], response.content_type
+
+    users = json_response(response.body)
+    assert_equal 1, users[:users].count
+    assert_equal 'jean.dupond@gmail.com', users[:users].first[:email]
+  end
+
+  test 'list all users created after date' do
+    get '/open_api/v1/users?created_after=2018-01-01T00:00:00+01:00', headers: open_api_headers(@token)
+    assert_response :success
+    assert_equal Mime[:json], response.content_type
+
+    users = json_response(response.body)
+    assert users[:users].count.positive?
+    assert(users[:users].all? { |u| DateTime.parse(u[:created_at]) >= DateTime.parse('2018-01-01T00:00:00+01:00') })
   end
 end

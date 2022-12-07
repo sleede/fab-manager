@@ -14,6 +14,7 @@ class OpenAPI::V1::UsersController < OpenAPI::V1::BaseController
       @users = @users.where(email: email_param)
     end
     @users = @users.where(id: may_array(params[:user_id])) if params[:user_id].present?
+    @users = @users.where('created_at >= ?', DateTime.parse(params[:created_after])) if params[:created_after].present?
 
     return if params[:page].blank?
 

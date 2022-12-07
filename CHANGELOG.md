@@ -4,6 +4,7 @@
 - Accounting data is now built each night and saved in database
 - OpenAPI endpoint to fetch accounting data
 - Updated OpenAPI documentation
+- OpenAPI users endpoint offer ability to filter by created_after
 - Fix a bug: providing an array of attributes to filter OpenApi data, results in error
 - Fix a bug: unable to manage stocks on new products
 - Updated react-modal to 3.16.1
