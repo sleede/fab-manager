@@ -85,6 +85,8 @@ module ApplicationHelper
 
   # Return the given parameter as it, or as an array if it can be parsed as an array
   def may_array(param)
+    return param if param.is_a?(Array)
+
     return param unless param&.chars&.first == '[' && param&.chars&.last == ']'
 
     param.gsub(/[\[\]]/i, '').split(',')
