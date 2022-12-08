@@ -14,7 +14,8 @@ class OpenAPI::V1::AccountingDoc < OpenAPI::V1::BaseDoc
   doc_for :index do
     api :GET, "/#{API_VERSION}/accounting", 'Accounting lines'
     description 'All accounting lines, paginated (necessarily becauce there is a lot of data) with optional dates filtering. ' \
-                'Ordered by *date* descendant.'
+                'Ordered by *date* descendant.<br><br>The field *status* indicates if the accounting data is being built ' \
+                'or if the build is over. Possible status are: <i>building</i> or <i>built</i>.'
     param_group :pagination
     param :after, DateTime, optional: true, desc: 'Filter accounting lines to lines after the given date.'
     param :before, DateTime, optional: true, desc: 'Filter accounting lines to lines before the given date.'
@@ -84,7 +85,8 @@ class OpenAPI::V1::AccountingDoc < OpenAPI::V1::BaseDoc
             "currency": "EUR",
             "summary": "Dupont Marcel, 22010009/VL, subscr."
           }
-        ]
+        ],
+        "status": "built"
       }
     LINES
   end

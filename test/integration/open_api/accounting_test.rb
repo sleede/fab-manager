@@ -33,6 +33,7 @@ class OpenApi::AccountingTest < ActionDispatch::IntegrationTest
     assert_not_nil lines[:lines][0][:credit]
     assert_not_empty lines[:lines][0][:currency]
     assert_not_empty lines[:lines][0][:summary]
+    assert_equal 'built', lines[:status]
   end
 
   test 'list all accounting lines with pagination' do

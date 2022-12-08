@@ -28,6 +28,14 @@ class Accounting::AccountingService
     AccountingLine.create!(lines)
   end
 
+  def self.status
+    workers = Sidekiq::Workers.new
+    workers.each do |_process_id, _thread_id, work|
+      return 'building' if work['payload']['class'] == 'AccountingWorker'
+    end
+    'built'
+  end
+
   private
 
   def generate_lines(invoice)
