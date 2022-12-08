@@ -110,118 +110,6 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
       }
     };
 
-    // Accounting codes
-    $scope.settings = {
-      journalCode: {
-        name: 'accounting_journal_code',
-        value: settings.accounting_journal_code
-      },
-      cardClientCode: {
-        name: 'accounting_card_client_code',
-        value: settings.accounting_card_client_code
-      },
-      cardClientLabel: {
-        name: 'accounting_card_client_label',
-        value: settings.accounting_card_client_label
-      },
-      walletClientCode: {
-        name: 'accounting_wallet_client_code',
-        value: settings.accounting_wallet_client_code
-      },
-      walletClientLabel: {
-        name: 'accounting_wallet_client_label',
-        value: settings.accounting_wallet_client_label
-      },
-      otherClientCode: {
-        name: 'accounting_other_client_code',
-        value: settings.accounting_other_client_code
-      },
-      otherClientLabel: {
-        name: 'accounting_other_client_label',
-        value: settings.accounting_other_client_label
-      },
-      walletCode: {
-        name: 'accounting_wallet_code',
-        value: settings.accounting_wallet_code
-      },
-      walletLabel: {
-        name: 'accounting_wallet_label',
-        value: settings.accounting_wallet_label
-      },
-      vatCode: {
-        name: 'accounting_VAT_code',
-        value: settings.accounting_VAT_code
-      },
-      vatLabel: {
-        name: 'accounting_VAT_label',
-        value: settings.accounting_VAT_label
-      },
-      subscriptionCode: {
-        name: 'accounting_subscription_code',
-        value: settings.accounting_subscription_code
-      },
-      subscriptionLabel: {
-        name: 'accounting_subscription_label',
-        value: settings.accounting_subscription_label
-      },
-      machineCode: {
-        name: 'accounting_Machine_code',
-        value: settings.accounting_Machine_code
-      },
-      machineLabel: {
-        name: 'accounting_Machine_label',
-        value: settings.accounting_Machine_label
-      },
-      trainingCode: {
-        name: 'accounting_Training_code',
-        value: settings.accounting_Training_code
-      },
-      trainingLabel: {
-        name: 'accounting_Training_label',
-        value: settings.accounting_Training_label
-      },
-      eventCode: {
-        name: 'accounting_Event_code',
-        value: settings.accounting_Event_code
-      },
-      eventLabel: {
-        name: 'accounting_Event_label',
-        value: settings.accounting_Event_label
-      },
-      spaceCode: {
-        name: 'accounting_Space_code',
-        value: settings.accounting_Space_code
-      },
-      spaceLabel: {
-        name: 'accounting_Space_label',
-        value: settings.accounting_Space_label
-      },
-      packCode: {
-        name: 'accounting_Pack_code',
-        value: settings.accounting_Pack_code
-      },
-      packLabel: {
-        name: 'accounting_Pack_label',
-        value: settings.accounting_Pack_label
-      },
-      productCode: {
-        name: 'accounting_Product_code',
-        value: settings.accounting_Product_code
-      },
-      productLabel: {
-        name: 'accounting_Product_label',
-        value: settings.accounting_Product_label
-      },
-      errorCode: {
-        name: 'accounting_Error_code',
-        value: settings.accounting_Error_code
-      },
-      errorLabel: {
-        name: 'accounting_Error_label',
-        value: settings.accounting_Error_label
-      }
-    };
-
     // all settings
     $scope.allSettings = settings;
 
@@ -776,20 +664,6 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
         }
       }
       return false;
-    };
-
-    /**
-     * Callback to bulk save all settings in the page to the database with their values
-     */
-    $scope.save = function () {
-      Setting.bulkUpdate(
-        { settings: Object.values($scope.settings) },
-        function () { growl.success(_t('app.admin.invoices.codes_customization_success')); },
-        function (error) {
-          growl.error('app.admin.invoices.unexpected_error_occurred');
-          console.error(error);
-        }
-      );
     };
 
     /**
