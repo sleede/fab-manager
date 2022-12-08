@@ -67,4 +67,14 @@ class OpenApi::AccountingTest < ActionDispatch::IntegrationTest
     assert lines[:lines].count.positive?
     assert(lines[:lines].all? { |line| [1, 2, 3].include?(line[:invoice][:id]) })
   end
+
+  test 'list all accounting lines with type filtering' do
+    get '/open_api/v1/accounting?type=[client,vat]', headers: open_api_headers(@token)
+    assert_response :success
+    assert_equal Mime[:json], response.content_type
+
+    lines = json_response(response.body)
+    assert lines[:lines].count.positive?
+    assert(lines[:lines].all? { |line| %w[client vat].include?(line[:line_type]) })
+  end
 end

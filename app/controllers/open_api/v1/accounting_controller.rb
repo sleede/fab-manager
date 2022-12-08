@@ -13,6 +13,7 @@ class OpenAPI::V1::AccountingController < OpenAPI::V1::BaseController
     @lines = @lines.where('date >= ?', DateTime.parse(params[:after])) if params[:after].present?
     @lines = @lines.where('date <= ?', DateTime.parse(params[:before])) if params[:before].present?
     @lines = @lines.where(invoice_id: may_array(params[:invoice_id])) if params[:invoice_id].present?
+    @lines = @lines.where(line_type: may_array(params[:type])) if params[:type].present?
 
     @lines = @lines.page(page).per(per_page)
     paginate @lines, per_page: per_page

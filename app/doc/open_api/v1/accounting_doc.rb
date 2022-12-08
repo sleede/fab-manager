@@ -20,6 +20,7 @@ class OpenAPI::V1::AccountingDoc < OpenAPI::V1::BaseDoc
     param :after, DateTime, optional: true, desc: 'Filter accounting lines to lines after the given date.'
     param :before, DateTime, optional: true, desc: 'Filter accounting lines to lines before the given date.'
     param :invoice_id, [Integer, Array], optional: true, desc: 'Scope the request to one or various invoices.'
+    param :type, %w[client vat item], optional: true, desc: 'Filter accounting lines by line type.'
 
     example <<-LINES
       # /open_api/v1/accounting?after=2022-01-01T00:00:00+02:00&page=1&per_page=3
