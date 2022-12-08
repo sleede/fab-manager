@@ -26,7 +26,6 @@ class AdvancedAccounting < ApplicationRecord
                  raise TypeError "Unknown accountable_type #{accountable_type}"
                end
     ids = invoices.map(&:id)
-    AccountingLine.where(invoice_id: ids).destroy_all
     AccountingWorker.perform_async(:invoices, ids)
   end
 end

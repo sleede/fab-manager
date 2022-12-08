@@ -14,12 +14,18 @@ class AccountingWorker
   end
 
   def invoices(invoices_ids)
+    # clean
+    AccountingLine.where(invoice_id: ids).destroy_all
+    # build
     service = Accounting::AccountingService.new
     invoices = Invoice.where(id: invoices_ids)
     service.build_from_invoices(invoices)
   end
 
   def all
+    # clean
+    AccountingLine.destroy_all
+    # build
     service = Accounting::AccountingService.new
     service.build_from_invoices(Invoice.all)
   end

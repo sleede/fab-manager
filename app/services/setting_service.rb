@@ -77,7 +77,6 @@ class SettingService
     def update_accounting_line(settings)
       return unless settings.any? { |s| s.name.match(/^accounting_/) || s.name == 'advanced_accounting' }
 
-      AccountingLine.destroy_all
       AccountingWorker.perform_async(:all)
     end
   end
