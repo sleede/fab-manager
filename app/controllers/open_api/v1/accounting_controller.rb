@@ -8,7 +8,7 @@ class OpenAPI::V1::AccountingController < OpenAPI::V1::BaseController
 
   def index
     @lines = AccountingLine.order(date: :desc)
-                           .includes(:invoice)
+                           .includes(:invoice, :invoicing_profile)
 
     @lines = @lines.where('date >= ?', DateTime.parse(params[:after])) if params[:after].present?
     @lines = @lines.where('date <= ?', DateTime.parse(params[:before])) if params[:before].present?
