@@ -4,6 +4,7 @@ admin:
   first_name: admin
   last_name: admin
   email: admin@fab-manager.com
+  external_id: J5821-4
 
 jdupont:
   id: 2
@@ -11,6 +12,7 @@ jdupont:
   first_name: Jean
   last_name: Dupont
   email: jean.dupond@gmail.com
+  external_id: J5846-4
 
 kdumas:
   id: 4
@@ -18,6 +20,7 @@ kdumas:
   first_name: Kevin
   last_name: Dumas
   email: kevin.dumas@orange.fr
+  external_id: J5900-1
 
 vlonchamp:
   id: 5
@@ -25,6 +28,7 @@ vlonchamp:
   first_name: Vanessa
   last_name: Lonchamp
   email: vanessa.lonchamp@sfr.fr
+  external_id: P4172-4
 
 gpartenaire:
   id: 6
@@ -32,6 +36,7 @@ gpartenaire:
   first_name: Gilbert
   last_name: Partenaire
   email: gilbert.partenaire@nicolas.com
+  external_id: J5500-4
 
 pdurand:
   id: 3
@@ -39,6 +44,7 @@ pdurand:
   first_name: Paulette
   last_name: Durand
   email: paulette.durand@hotmail.fr
+  external_id:
 
 lseguin:
   id: 7
@@ -53,6 +59,7 @@ atiermoulin:
   first_name: Amandine
   last_name: Tiermoulin
   email: a.tiermoulin@mail.fr
+  external_id:
 
 proudhon:
   id: 9
@@ -60,6 +67,7 @@ proudhon:
   first_name: Pierre-Joseph
   last_name: Proudhon
   email: pj.proudhon@la-propriete.org
+  external_id:
 
 acamus:
   id: 10
@@ -67,3 +75,4 @@ acamus:
   first_name: Albert
   last_name: Camus
   email: albert.camus@letranger.org
+  external_id:

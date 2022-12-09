@@ -52,7 +52,6 @@ class Members::ImportService
       res.merge! hashify(row, 'id')
       res.merge! hashify(row, 'username')
       res.merge! hashify(row, 'email')
-      res.merge! hashify(row, 'external_id')
       res.merge! hashify(row, 'password', value: password)
       res.merge! hashify(row, 'password', key: :password_confirmation, value: password)
       res.merge! hashify(row, 'allow_contact', value: row['allow_contact'] == 'yes', key: :is_allow_contact)
@@ -112,6 +111,8 @@ class Members::ImportService
 
     def invoicing_profile(row, user)
       res = {}
+
+      res.merge! hashify(row, 'external_id')
 
       res[:id] = user.invoicing_profile.id if user&.invoicing_profile
 

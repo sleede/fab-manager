@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-json.extract! member, :id, :username, :email, :group_id, :external_id
+json.extract! member, :id, :username, :email, :group_id
 json.role member.roles.first.name
 json.name member.profile.full_name
 json.need_completion member.need_completion?
@@ -20,7 +20,7 @@ json.profile_attributes do
 end
 
 json.invoicing_profile_attributes do
-  json.id member.invoicing_profile.id
+  json.extract! member.invoicing_profile, :id, :external_id
   if member.invoicing_profile.address
     json.address_attributes do
       json.id member.invoicing_profile.address.id

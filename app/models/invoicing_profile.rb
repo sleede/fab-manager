@@ -27,6 +27,8 @@ class InvoicingProfile < ApplicationRecord
 
   has_many :accounting_lines, dependent: :destroy
 
+  before_validation :set_external_id_nil
+  validates :external_id, uniqueness: true, allow_blank: true
   validates :address, presence: true, if: -> { Setting.get('address_required') }
 
   def full_name
@@ -42,5 +44,11 @@ class InvoicingProfile < ApplicationRecord
     else
       ''
     end
+  end
+
+  private
+
+  def set_external_id_nil
+    self.external_id = nil if external_id.blank?
   end
 end

@@ -1,10 +1,14 @@
 # frozen_string_literal: true
 
-json.extract! user, :id, :email, :created_at, :external_id
+json.extract! user, :id, :email, :created_at
 json.extract! user.profile, :full_name, :first_name, :last_name if user.association(:profile).loaded?
 json.gender user.statistic_profile.gender ? 'man' : 'woman'
-json.organization !user.invoicing_profile.organization.nil?
-json.address user.invoicing_profile.invoicing_address
+
+if user.association(:invoicing_profile).loaded?
+  json.external_id user.invoicing_profile.external_id
+  json.organization !user.invoicing_profile.organization.nil?
+  json.address user.invoicing_profile.invoicing_address
+end
 
 if user.association(:group).loaded?
   json.group do

@@ -57,7 +57,6 @@ class User < ApplicationRecord
     email&.downcase!
   end
 
-  before_validation :set_external_id_nil
   before_create :assign_default_role
   after_create :init_dependencies
   after_update :update_invoicing_profile, if: :invoicing_data_was_modified?
@@ -82,7 +81,6 @@ class User < ApplicationRecord
   validate :cgu_must_accept, if: :new_record?
 
   validates :username, presence: true, uniqueness: true, length: { maximum: 30 }
-  validates :external_id, uniqueness: true, allow_blank: true
   validate :password_complexity
 
   scope :active, -> { where(is_active: true) }
@@ -172,10 +170,6 @@ class User < ApplicationRecord
   end
 
   private
-
-  def set_external_id_nil
-    self.external_id = nil if external_id.blank?
-  end
 
   def assign_default_role
     add_role(:member) if roles.blank?

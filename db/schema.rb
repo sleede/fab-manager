@@ -371,6 +371,8 @@ ActiveRecord::Schema.define(version: 2022_12_06_100225) do
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "external_id"
+    t.index ["external_id"], name: "unique_not_null_external_id", unique: true, where: "(external_id IS NOT NULL)"
     t.index ["user_id"], name: "index_invoicing_profiles_on_user_id"
   end
 
@@ -1150,11 +1152,9 @@ ActiveRecord::Schema.define(version: 2022_12_06_100225) do
     t.inet "last_sign_in_ip"
     t.string "mapped_from_sso"
     t.datetime "validated_at"
-    t.string "external_id"
     t.index ["auth_token"], name: "index_users_on_auth_token"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["external_id"], name: "unique_not_null_external_id", unique: true, where: "(external_id IS NOT NULL)"
     t.index ["group_id"], name: "index_users_on_group_id"
     t.index ["provider"], name: "index_users_on_provider"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

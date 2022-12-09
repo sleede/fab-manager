@@ -239,7 +239,7 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
                      disabled={isDisabled}
                      formState={formState}
                      label={t('app.shared.user_profile_form.pseudonym')} />
-          {fieldsSettings.get('external_id') === 'true' && <FormInput id="external_id"
+          {fieldsSettings.get('external_id') === 'true' && <FormInput id="invoicing_profile_attributes.external_id"
                      register={register}
                      disabled={isDisabled}
                      formState={formState}

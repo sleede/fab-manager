@@ -12,7 +12,6 @@ type ProfileAttributesSocial = {
 export interface User {
   id: number,
   username?: string,
-  external_id?: string,
   email: string,
   group_id?: number,
   role?: UserRole
@@ -43,6 +42,7 @@ export interface User {
   },
   invoicing_profile_attributes?: {
     id?: number,
+    external_id?: string,
     address_attributes: {
       id?: number,
       address: string
@@ -132,4 +132,4 @@ export const UserFieldMapping = Object.assign({
   group_id: 'user.group_id'
 }, ...socialMappings);
 
-export const UserFieldsReservedForPrivileged = ['external_id'];
+export const UserFieldsReservedForPrivileged = ['invoicing_profile_attributes.external_id'];
