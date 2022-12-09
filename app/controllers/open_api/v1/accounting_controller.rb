@@ -7,8 +7,14 @@ class OpenAPI::V1::AccountingController < OpenAPI::V1::BaseController
   expose_doc
 
   def index
+    @codes = {
+      card: Setting.get('accounting_card_client_code'),
+      wallet: Setting.get('accounting_wallet_client_code'),
+      other: Setting.get('accounting_other_client_code')
+    }
+
     @lines = AccountingLine.order(date: :desc)
-                           .includes(:invoice, :invoicing_profile)
+                           .includes(:invoicing_profile, invoice: :payment_gateway_object)
 
     @lines = @lines.where('date >= ?', DateTime.parse(params[:after])) if params[:after].present?
     @lines = @lines.where('date <= ?', DateTime.parse(params[:before])) if params[:before].present?

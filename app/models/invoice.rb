@@ -147,7 +147,7 @@ class Invoice < PaymentDocument
   # return a summary of the payment means used
   def payment_means
     res = []
-    res.push(means: :wallet, amount: wallet_amount) if wallet_transaction && wallet_amount.positive?
+    res.push(means: :wallet, amount: wallet_amount) if paid_by_wallet?
     if paid_by_card?
       res.push(means: :card, amount: amount_paid)
     else
@@ -156,12 +156,32 @@ class Invoice < PaymentDocument
     res
   end
 
+  def payment_details(mean)
+    case mean
+    when :card
+      if paid_by_card?
+        {
+          gateway_object_id: payment_gateway_object.gateway_object_id,
+          gateway_object_type: payment_gateway_object.gateway_object_type
+        }
+      end
+    when :wallet
+      { wallet_transaction_id: wallet_transaction_id } if paid_by_wallet?
+    else
+      {}
+    end
+  end
+
   def footprint_children
     invoice_items
   end
 
   def paid_by_card?
     !payment_gateway_object.nil? && payment_method == 'card'
+  end
+
+  def paid_by_wallet?
+    wallet_transaction && wallet_amount.positive?
   end
 
   def render_resource
