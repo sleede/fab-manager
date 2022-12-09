@@ -60,20 +60,24 @@ class AccountingServiceTest < ActionDispatch::IntegrationTest
     client_wallet = lines.find { |l| l.account_code == Setting.get('accounting_wallet_client_code') }
     assert_not_nil client_wallet
     assert_equal 1000, client_wallet&.debit
+    assert_equal Setting.get('accounting_wallet_client_journal_code'), client_wallet&.journal_code
     # Check the local payment line
     client_other = lines.find { |l| l.account_code == Setting.get('accounting_other_client_code') }
     assert_not_nil client_other
     assert_equal invoice.total - 1000, client_other&.debit
+    assert_equal Setting.get('accounting_other_client_journal_code'), client_other&.journal_code
 
     # Check the machine reservation line
     assert 2, lines.filter { |l| l.line_type == 'item' }.count
     item_machine = lines.find { |l| l.account_code == Setting.get('accounting_Machine_code') }
     assert_not_nil item_machine
     assert_equal invoice.main_item.net_amount, item_machine&.credit
+    assert_equal Setting.get('accounting_sales_journal_code'), item_machine&.journal_code
     # Check the subscription line
     item_suscription = lines.find { |l| l.account_code == Setting.get('accounting_subscription_code') }
     assert_not_nil item_suscription
     assert_equal invoice.other_items.last.net_amount, item_suscription&.credit
+    assert_equal Setting.get('accounting_sales_journal_code'), item_suscription&.journal_code
 
     # Check the VAT line
     vat_service = VatHistoryService.new
@@ -82,5 +86,6 @@ class AccountingServiceTest < ActionDispatch::IntegrationTest
     vat_line = lines.find { |l| l.account_code == Setting.get('accounting_VAT_code') }
     assert_not_nil vat_line
     assert_equal vat_rate_groups.values.pluck(:total_vat).sum, vat_line&.credit
+    assert_equal Setting.get('accounting_VAT_journal_code'), vat_line&.journal_code
   end
 end

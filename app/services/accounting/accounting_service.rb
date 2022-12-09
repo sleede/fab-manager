@@ -5,11 +5,9 @@ module Accounting; end
 
 # Provides the routine to build the accounting data and save them in DB
 class Accounting::AccountingService
-  attr_reader :currency, :journal_code
-
   def initialize
     @currency = ENV.fetch('INTL_CURRENCY') { '' }
-    @journal_code = Setting.get('accounting_journal_code') || ''
+    @journal_service = Accounting::AccountingJournalService.new
   end
 
   # build accounting lines for invoices between the provided dates
@@ -58,9 +56,10 @@ class Accounting::AccountingService
         lines << line(
           invoice,
           'item',
+          @journal_service.sales_journal(object_type),
           Accounting::AccountingCodeService.sales_account(item),
-          Accounting::AccountingCodeService.sales_account(item, type: :label),
           item.net_amount,
+          account_label: Accounting::AccountingCodeService.sales_account(item, type: :label),
           analytical_code: Accounting::AccountingCodeService.sales_account(item, section: :analytical_section)
         )
       end
@@ -75,9 +74,10 @@ class Accounting::AccountingService
       lines << line(
         invoice,
         'client',
+        @journal_service.client_journal(details[:means]),
         Accounting::AccountingCodeService.client_account(details[:means]),
-        Accounting::AccountingCodeService.client_account(details[:means], type: :label),
         details[:amount],
+        account_label: Accounting::AccountingCodeService.client_account(details[:means], type: :label),
         debit_method: :debit_client,
         credit_method: :credit_client
       )
@@ -95,14 +95,16 @@ class Accounting::AccountingService
     line(
       invoice,
       'vat',
+      @journal_service.vat_journal,
       Accounting::AccountingCodeService.vat_account,
-      Accounting::AccountingCodeService.vat_account(type: :label),
-      total_vat
+      total_vat,
+      account_label: Accounting::AccountingCodeService.vat_account(type: :label)
     )
   end
 
   # Generate a row of the export, filling the configured columns with the provided values
-  def line(invoice, line_type, account_code, account_label, amount, analytical_code: '', debit_method: :debit, credit_method: :credit)
+  def line(invoice, line_type, journal_code, account_code, amount,
+           account_label: '', analytical_code: '', debit_method: :debit, credit_method: :credit)
     {
       line_type: line_type,
       journal_code: journal_code,
@@ -114,7 +116,7 @@ class Accounting::AccountingService
       invoicing_profile_id: invoice.invoicing_profile_id,
       debit: method(debit_method).call(invoice, amount),
       credit: method(credit_method).call(invoice, amount),
-      currency: currency,
+      currency: @currency,
       summary: summary(invoice)
     }
   end

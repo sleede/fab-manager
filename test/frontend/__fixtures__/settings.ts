@@ -536,10 +536,10 @@ export const settings: Array<Setting> = [
     localized: 'Code TVA'
   },
   {
-    name: 'accounting_journal_code',
+    name: 'accounting_sales_journal_code',
     value: '22A',
     last_update: '2022-11-22T17:27:19+0100',
-    localized: 'Code journal'
+    localized: 'Code journal des ventes'
   },
   {
     name: 'accounting_card_client_code',
@@ -579,105 +579,105 @@ export const settings: Array<Setting> = [
   },
   {
     name: 'accounting_wallet_code',
-    value: '',
+    value: '419100',
     last_update: '2022-11-22T17:27:19+0100',
     localized: 'Code porte-monnaie'
   },
   {
     name: 'accounting_wallet_label',
-    value: '',
+    value: 'Wallet credit',
     last_update: '2022-11-22T17:27:19+0100',
     localized: 'Libellé porte-monnaie'
   },
   {
     name: 'accounting_VAT_label',
-    value: '',
+    value: 'VAT',
     last_update: '2022-11-22T17:27:19+0100',
     localized: 'Libellé TVA'
   },
   {
     name: 'accounting_subscription_code',
-    value: '',
+    value: '7061',
     last_update: '2022-11-22T17:27:19+0100',
     localized: 'Code abonnements'
   },
   {
     name: 'accounting_subscription_label',
-    value: '',
+    value: 'Subscriptions',
     last_update: '2022-11-22T17:27:19+0100',
     localized: 'Libellé abonnements'
   },
   {
     name: 'accounting_Machine_code',
-    value: '',
+    value: '7065',
     last_update: '2022-11-22T17:27:19+0100',
     localized: 'Code machines'
   },
   {
     name: 'accounting_Machine_label',
-    value: '',
+    value: 'Machine reservation',
     last_update: '2022-11-22T17:27:19+0100',
     localized: 'Libellé machines'
   },
   {
     name: 'accounting_Training_code',
-    value: '',
+    value: '7062',
     last_update: '2022-11-22T17:27:19+0100',
     localized: 'Code formations'
   },
   {
     name: 'accounting_Training_label',
-    value: '',
+    value: 'Training reservation',
     last_update: '2022-11-22T17:27:19+0100',
     localized: 'Libellé formations'
   },
   {
     name: 'accounting_Event_code',
-    value: '',
+    value: '7063',
     last_update: '2022-11-22T17:27:19+0100',
     localized: 'Code évènements'
   },
   {
     name: 'accounting_Event_label',
-    value: '',
+    value: 'Event reservation',
     last_update: '2022-11-22T17:27:19+0100',
     localized: 'Libellé évènements'
   },
   {
     name: 'accounting_Space_code',
-    value: '',
+    value: '7064',
     last_update: '2022-11-22T17:27:19+0100',
     localized: 'Code espaces'
   },
   {
     name: 'accounting_Space_label',
-    value: '',
+    value: 'Space reservation',
     last_update: '2022-11-22T17:27:19+0100',
     localized: 'Libellé espaces'
   },
   {
     name: 'accounting_Pack_code',
-    value: '',
+    value: '7066',
     last_update: '2022-11-22T17:27:19+0100',
-    localized: 'translation missing: fr.settings.accounting_Pack_code'
+    localized: "Code packs d'heures prépayées"
   },
   {
     name: 'accounting_Pack_label',
-    value: '',
+    value: 'Prepaid pack',
     last_update: '2022-11-22T17:27:20+0100',
-    localized: 'translation missing: fr.settings.accounting_Pack_label'
+    localized: "Libellé packs d'heures prépayées"
   },
   {
     name: 'accounting_Product_code',
-    value: '',
+    value: '7071',
     last_update: '2022-11-22T17:27:20+0100',
-    localized: 'translation missing: fr.settings.accounting_Product_code'
+    localized: 'Code des produits de la boutique'
   },
   {
     name: 'accounting_Product_label',
-    value: '',
+    value: 'Shop order',
     last_update: '2022-11-22T17:27:20+0100',
-    localized: 'translation missing: fr.settings.accounting_Product_label'
+    localized: 'Libellé des produits de la boutique'
   },
   {
     name: 'accounting_Error_code',
@@ -688,6 +688,36 @@ export const settings: Array<Setting> = [
   {
     name: 'accounting_Error_label',
     value: '',
+    last_update: '2022-11-22T17:27:20+0100',
+    localized: 'Libellé erreurs'
+  },
+  {
+    name: 'accounting_card_client_journal_code',
+    value: 'CB01',
+    last_update: '2022-11-22T17:27:20+0100',
+    localized: 'Libellé erreurs'
+  },
+  {
+    name: 'accounting_wallet_client_journal_code',
+    value: 'W001',
+    last_update: '2022-11-22T17:27:20+0100',
+    localized: 'Libellé erreurs'
+  },
+  {
+    name: 'accounting_other_client_journal_code',
+    value: 'CA01',
+    last_update: '2022-11-22T17:27:20+0100',
+    localized: 'Libellé erreurs'
+  },
+  {
+    name: 'accounting_wallet_journal_code',
+    value: 'W002',
+    last_update: '2022-11-22T17:27:20+0100',
+    localized: 'Libellé erreurs'
+  },
+  {
+    name: 'accounting_VAT_journal_code',
+    value: 'TVA1',
     last_update: '2022-11-22T17:27:20+0100',
     localized: 'Libellé erreurs'
   }

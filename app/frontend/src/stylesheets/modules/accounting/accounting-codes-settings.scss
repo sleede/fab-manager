@@ -4,8 +4,11 @@
     display: flex;
     flex-direction: row;
 
-    .form-item:first-child {
+    .form-item {
       margin-right: 32px;
+    }
+    .form-item:last-child {
+      margin-right: 0;
     }
   }
   .actions {

@@ -56,25 +56,28 @@ export const AccountingCodesSettings: React.FC<AccountingCodesSettingsProps> = (
                     tooltip={t('app.admin.accounting_codes_settings.enable_advanced_help')} />
       </FabPanel>
       <FabPanel>
-        <h4>{t('app.admin.accounting_codes_settings.journal_code')}</h4>
-        <FormInput register={register} id="accounting_journal_code" label={t('app.admin.accounting_codes_settings.journal_code')} />
         <h4>{t('app.admin.accounting_codes_settings.payment_means')}</h4>
         <h5>{t('app.admin.accounting_codes_settings.card')}</h5>
         <div className="cards">
+          <FormInput register={register} id="accounting_card_client_journal_code" label={t('app.admin.accounting_codes_settings.journal_code')} />
           <FormInput register={register} id="accounting_card_client_code" label={t('app.admin.accounting_codes_settings.code')} />
           <FormInput register={register} id="accounting_card_client_label" label={t('app.admin.accounting_codes_settings.label')} />
         </div>
         <h5>{t('app.admin.accounting_codes_settings.wallet_debit')}</h5>
         <div className="wallets">
+          <FormInput register={register} id="accounting_wallet_client_journal_code" label={t('app.admin.accounting_codes_settings.journal_code')} />
           <FormInput register={register} id="accounting_wallet_client_code" label={t('app.admin.accounting_codes_settings.code')} />
           <FormInput register={register} id="accounting_wallet_client_label" label={t('app.admin.accounting_codes_settings.label')} />
         </div>
         <h5>{t('app.admin.accounting_codes_settings.other')}</h5>
         <div className="others">
+          <FormInput register={register} id="accounting_other_client_journal_code" label={t('app.admin.accounting_codes_settings.journal_code')} />
           <FormInput register={register} id="accounting_other_client_code" label={t('app.admin.accounting_codes_settings.code')} />
           <FormInput register={register} id="accounting_other_client_label" label={t('app.admin.accounting_codes_settings.label')} />
         </div>
         <h4>{t('app.admin.accounting_codes_settings.sales')}</h4>
+        <h5>{t('app.admin.accounting_codes_settings.sales_journal')}</h5>
+        <FormInput register={register} id="accounting_sales_journal_code" label={t('app.admin.accounting_codes_settings.journal_code')} />
         <h5>{t('app.admin.accounting_codes_settings.subscriptions')}</h5>
         <div className="subscriptions">
           <FormInput register={register} id="accounting_subscription_code" label={t('app.admin.accounting_codes_settings.code')} />
@@ -110,22 +113,24 @@ export const AccountingCodesSettings: React.FC<AccountingCodesSettingsProps> = (
           <FormInput register={register} id="accounting_Product_code" label={t('app.admin.accounting_codes_settings.code')} />
           <FormInput register={register} id="accounting_Product_label" label={t('app.admin.accounting_codes_settings.label')} />
         </div>
-        <h4>{t('app.admin.accounting_codes_settings.wallet_credit')}</h4>
-        <div className="wallets">
-          <FormInput register={register} id="accounting_wallet_code" label={t('app.admin.accounting_codes_settings.code')} />
-          <FormInput register={register} id="accounting_wallet_label" label={t('app.admin.accounting_codes_settings.label')} />
-        </div>
-        <h4>{t('app.admin.accounting_codes_settings.VAT')}</h4>
-        <div className="vat">
-          <FormInput register={register} id="accounting_VAT_code" label={t('app.admin.accounting_codes_settings.code')} />
-          <FormInput register={register} id="accounting_VAT_label" label={t('app.admin.accounting_codes_settings.label')} />
-        </div>
-        <h4>{t('app.admin.accounting_codes_settings.error')}</h4>
+        <h5>{t('app.admin.accounting_codes_settings.error')}</h5>
         <div className="error">
           <FormInput register={register} id="accounting_Error_code" label={t('app.admin.accounting_codes_settings.code')} />
           <FormInput register={register} id="accounting_Error_label"
                      label={t('app.admin.accounting_codes_settings.label')}
                      tooltip={t('app.admin.accounting_codes_settings.error_help')} />
+        </div>
+        <h4>{t('app.admin.accounting_codes_settings.wallet_credit')}</h4>
+        <div className="wallets">
+          <FormInput register={register} id="accounting_wallet_journal_code" label={t('app.admin.accounting_codes_settings.journal_code')} />
+          <FormInput register={register} id="accounting_wallet_code" label={t('app.admin.accounting_codes_settings.code')} />
+          <FormInput register={register} id="accounting_wallet_label" label={t('app.admin.accounting_codes_settings.label')} />
+        </div>
+        <h4>{t('app.admin.accounting_codes_settings.VAT')}</h4>
+        <div className="vat">
+          <FormInput register={register} id="accounting_VAT_journal_code" label={t('app.admin.accounting_codes_settings.journal_code')} />
+          <FormInput register={register} id="accounting_VAT_code" label={t('app.admin.accounting_codes_settings.code')} />
+          <FormInput register={register} id="accounting_VAT_label" label={t('app.admin.accounting_codes_settings.label')} />
         </div>
       </FabPanel>
       <FabPanel className="actions">

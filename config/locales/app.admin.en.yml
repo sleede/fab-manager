@@ -145,6 +145,7 @@ en:
         code: "Accounting code"
         label: "Account label"
         journal_code: "Journal code"
+        sales_journal: "Sales journal"
         payment_means: "Payment means"
         card: "Card clients"
         wallet_debit: "Virtual wallet clients"

@@ -1,7 +1,7 @@
-accounting_line_1:
-  id: 1
+accounting_line_43:
+  id: 43
   line_type: client
-  journal_code: '530'
+  journal_code: CB01
   date: '2012-03-12 11:03:31.651441'
   account_code: '5801'
   account_label: Client card
@@ -12,10 +12,11 @@ accounting_line_1:
   credit: 0
   currency: EUR
   summary: 1604001/VL, subscr.
-  created_at: '2022-11-18 15:04:08.437029'
-  updated_at: '2022-11-18 15:04:08.437029'
-accounting_line_2:
-  id: 2
+  created_at: '2022-12-09 14:47:11.004319'
+  updated_at: '2022-12-09 14:47:11.004319'
+
+accounting_line_44:
+  id: 44
   line_type: item
   journal_code: '530'
   date: '2012-03-12 11:03:31.651441'
@@ -28,12 +29,13 @@ accounting_line_2:
   credit: 10000
   currency: EUR
   summary: 1604001/VL, subscr.
-  created_at: '2022-11-18 15:04:08.455753'
-  updated_at: '2022-11-18 15:04:08.455753'
-accounting_line_3:
-  id: 3
+  created_at: '2022-12-09 14:47:11.018100'
+  updated_at: '2022-12-09 14:47:11.018100'
+
+accounting_line_45:
+  id: 45
   line_type: client
-  journal_code: '530'
+  journal_code: CA01
   date: '2012-03-12 13:40:22.342717'
   account_code: '5803'
   account_label: Client other
@@ -44,10 +46,11 @@ accounting_line_3:
   credit: 0
   currency: EUR
   summary: 1604002, subscr.
-  created_at: '2022-11-18 15:04:08.463802'
-  updated_at: '2022-11-18 15:04:08.463802'
-accounting_line_4:
-  id: 4
+  created_at: '2022-12-09 14:47:11.026505'
+  updated_at: '2022-12-09 14:47:11.026505'
+
+accounting_line_46:
+  id: 46
   line_type: item
   journal_code: '530'
   date: '2012-03-12 13:40:22.342717'
@@ -60,12 +63,13 @@ accounting_line_4:
   credit: 2000
   currency: EUR
   summary: 1604002, subscr.
-  created_at: '2022-11-18 15:04:08.471904'
-  updated_at: '2022-11-18 15:04:08.471904'
-accounting_line_5:
-  id: 5
+  created_at: '2022-12-09 14:47:11.051484'
+  updated_at: '2022-12-09 14:47:11.051484'
+
+accounting_line_47:
+  id: 47
   line_type: client
-  journal_code: '530'
+  journal_code: CA01
   date: '2015-06-10 11:20:01.341130'
   account_code: '5803'
   account_label: Client other
@@ -76,10 +80,11 @@ accounting_line_5:
   credit: 0
   currency: EUR
   summary: 1203001, subscr.
-  created_at: '2022-11-18 15:04:08.480362'
-  updated_at: '2022-11-18 15:04:08.480362'
-accounting_line_6:
-  id: 6
+  created_at: '2022-12-09 14:47:11.059774'
+  updated_at: '2022-12-09 14:47:11.059774'
+
+accounting_line_48:
+  id: 48
   line_type: item
   journal_code: '530'
   date: '2015-06-10 11:20:01.341130'
@@ -92,12 +97,13 @@ accounting_line_6:
   credit: 3000
   currency: EUR
   summary: 1203001, subscr.
-  created_at: '2022-11-18 15:04:08.488755'
-  updated_at: '2022-11-18 15:04:08.488755'
-accounting_line_7:
-  id: 7
+  created_at: '2022-12-09 14:47:11.068258'
+  updated_at: '2022-12-09 14:47:11.068258'
+
+accounting_line_49:
+  id: 49
   line_type: client
-  journal_code: '530'
+  journal_code: CA01
   date: '2016-04-05 08:35:52.931187'
   account_code: '5803'
   account_label: Client other
@@ -108,10 +114,11 @@ accounting_line_7:
   credit: 0
   currency: EUR
   summary: 1203002, training reserv.
-  created_at: '2022-11-18 15:04:08.497148'
-  updated_at: '2022-11-18 15:04:08.497148'
-accounting_line_8:
-  id: 8
+  created_at: '2022-12-09 14:47:11.076845'
+  updated_at: '2022-12-09 14:47:11.076845'
+
+accounting_line_50:
+  id: 50
   line_type: item
   journal_code: '530'
   date: '2016-04-05 08:35:52.931187'
@@ -124,12 +131,13 @@ accounting_line_8:
   credit: 0
   currency: EUR
   summary: 1203002, training reserv.
-  created_at: '2022-11-18 15:04:08.505540'
-  updated_at: '2022-11-18 15:04:08.505540'
-accounting_line_9:
-  id: 9
+  created_at: '2022-12-09 14:47:11.085317'
+  updated_at: '2022-12-09 14:47:11.085317'
+
+accounting_line_51:
+  id: 51
   line_type: client
-  journal_code: '530'
+  journal_code: CA01
   date: '2016-04-05 08:36:46.853368'
   account_code: '5803'
   account_label: Client other
@@ -140,10 +148,11 @@ accounting_line_9:
   credit: 0
   currency: EUR
   summary: 1506031, machine reserv.
-  created_at: '2022-11-18 15:04:08.513708'
-  updated_at: '2022-11-18 15:04:08.513708'
-accounting_line_10:
-  id: 10
+  created_at: '2022-12-09 14:47:11.093737'
+  updated_at: '2022-12-09 14:47:11.093737'
+
+accounting_line_52:
+  id: 52
   line_type: item
   journal_code: '530'
   date: '2016-04-05 08:36:46.853368'
@@ -156,12 +165,13 @@ accounting_line_10:
   credit: 1500
   currency: EUR
   summary: 1506031, machine reserv.
-  created_at: '2022-11-18 15:04:08.522222'
-  updated_at: '2022-11-18 15:04:08.522222'
-accounting_line_11:
-  id: 11
+  created_at: '2022-12-09 14:47:11.102073'
+  updated_at: '2022-12-09 14:47:11.102073'
+
+accounting_line_53:
+  id: 53
   line_type: client
-  journal_code: '530'
+  journal_code: CA01
   date: '2021-01-04 14:51:21.616153'
   account_code: '5803'
   account_label: Client other
@@ -172,10 +182,11 @@ accounting_line_11:
   credit: 0
   currency: EUR
   summary: 2101041, subscr.
-  created_at: '2022-11-18 15:04:08.530494'
-  updated_at: '2022-11-18 15:04:08.530494'
-accounting_line_12:
-  id: 12
+  created_at: '2022-12-09 14:47:11.110627'
+  updated_at: '2022-12-09 14:47:11.110627'
+
+accounting_line_54:
+  id: 54
   line_type: item
   journal_code: '530'
   date: '2021-01-04 14:51:21.616153'
@@ -188,12 +199,13 @@ accounting_line_12:
   credit: 3000
   currency: EUR
   summary: 2101041, subscr.
-  created_at: '2022-11-18 15:04:08.538721'
-  updated_at: '2022-11-18 15:04:08.538721'
-accounting_line_13:
-  id: 13
+  created_at: '2022-12-09 14:47:11.118764'
+  updated_at: '2022-12-09 14:47:11.118764'
+
+accounting_line_55:
+  id: 55
   line_type: client
-  journal_code: '530'
+  journal_code: CA01
   date: '2022-09-20 15:14:22.873707'
   account_code: '5803'
   account_label: Client other
@@ -204,14 +216,15 @@ accounting_line_13:
   credit: 0
   currency: EUR
   summary: 2209002, shop order
-  created_at: '2022-11-18 15:04:08.547966'
-  updated_at: '2022-11-18 15:04:08.547966'
-accounting_line_14:
-  id: 14
+  created_at: '2022-12-09 14:47:11.126381'
+  updated_at: '2022-12-09 14:47:11.126381'
+
+accounting_line_56:
+  id: 56
   line_type: item
   journal_code: '530'
   date: '2022-09-20 15:14:22.873707'
-  account_code: '7067'
+  account_code: '7071'
   account_label: Shop order
   analytical_code:
   invoice_id: 5811
@@ -220,14 +233,15 @@ accounting_line_14:
   credit: 4000
   currency: EUR
   summary: 2209002, shop order
-  created_at: '2022-11-18 15:04:08.556504'
-  updated_at: '2022-11-18 15:04:08.556504'
-accounting_line_15:
-  id: 15
+  created_at: '2022-12-09 14:47:11.134781'
+  updated_at: '2022-12-09 14:47:11.134781'
+
+accounting_line_57:
+  id: 57
   line_type: item
   journal_code: '530'
   date: '2022-09-20 15:14:22.873707'
-  account_code: '7067'
+  account_code: '7071'
   account_label: Shop order
   analytical_code:
   invoice_id: 5811
@@ -236,12 +250,13 @@ accounting_line_15:
   credit: 500
   currency: EUR
   summary: 2209002, shop order
-  created_at: '2022-11-18 15:04:08.563733'
-  updated_at: '2022-11-18 15:04:08.563733'
-accounting_line_16:
-  id: 16
+  created_at: '2022-12-09 14:47:11.144686'
+  updated_at: '2022-12-09 14:47:11.144686'
+
+accounting_line_58:
+  id: 58
   line_type: client
-  journal_code: '530'
+  journal_code: CA01
   date: '2022-09-20 15:14:48.345927'
   account_code: '5803'
   account_label: Client other
@@ -252,14 +267,15 @@ accounting_line_16:
   credit: 0
   currency: EUR
   summary: 2209004, shop order
-  created_at: '2022-11-18 15:04:08.571992'
-  updated_at: '2022-11-18 15:04:08.571992'
-accounting_line_17:
-  id: 17
+  created_at: '2022-12-09 14:47:11.151435'
+  updated_at: '2022-12-09 14:47:11.151435'
+
+accounting_line_59:
+  id: 59
   line_type: item
   journal_code: '530'
   date: '2022-09-20 15:14:48.345927'
-  account_code: '7067'
+  account_code: '7071'
   account_label: Shop order
   analytical_code:
   invoice_id: 5812
@@ -268,12 +284,13 @@ accounting_line_17:
   credit: 6000
   currency: EUR
   summary: 2209004, shop order
-  created_at: '2022-11-18 15:04:08.580452'
-  updated_at: '2022-11-18 15:04:08.580452'
-accounting_line_18:
-  id: 18
+  created_at: '2022-12-09 14:47:11.161817'
+  updated_at: '2022-12-09 14:47:11.161817'
+
+accounting_line_60:
+  id: 60
   line_type: client
-  journal_code: '530'
+  journal_code: CB01
   date: '2022-10-04 12:36:03.060832'
   account_code: '5801'
   account_label: Client card
@@ -284,14 +301,15 @@ accounting_line_18:
   credit: 0
   currency: EUR
   summary: 2210002/VL, shop order
-  created_at: '2022-11-18 15:04:08.589664'
-  updated_at: '2022-11-18 15:04:08.589664'
-accounting_line_19:
-  id: 19
+  created_at: '2022-12-09 14:47:11.186575'
+  updated_at: '2022-12-09 14:47:11.186575'
+
+accounting_line_61:
+  id: 61
   line_type: item
   journal_code: '530'
   date: '2022-10-04 12:36:03.060832'
-  account_code: '7067'
+  account_code: '7071'
   account_label: Shop order
   analytical_code:
   invoice_id: 5816
@@ -300,14 +318,15 @@ accounting_line_19:
   credit: 119
   currency: EUR
   summary: 2210002/VL, shop order
-  created_at: '2022-11-18 15:04:08.598371'
-  updated_at: '2022-11-18 15:04:08.598371'
-accounting_line_20:
-  id: 20
+  created_at: '2022-12-09 14:47:11.203226'
+  updated_at: '2022-12-09 14:47:11.203226'
+
+accounting_line_62:
+  id: 62
   line_type: item
   journal_code: '530'
   date: '2022-10-04 12:36:03.060832'
-  account_code: '7067'
+  account_code: '7071'
   account_label: Shop order
   analytical_code:
   invoice_id: 5816
@@ -316,12 +335,13 @@ accounting_line_20:
   credit: 200
   currency: EUR
   summary: 2210002/VL, shop order
-  created_at: '2022-11-18 15:04:08.613961'
-  updated_at: '2022-11-18 15:04:08.613961'
-accounting_line_21:
-  id: 21
+  created_at: '2022-12-09 14:47:11.219605'
+  updated_at: '2022-12-09 14:47:11.219605'
+
+accounting_line_63:
+  id: 63
   line_type: client
-  journal_code: '530'
+  journal_code: CB01
   date: '2022-10-04 13:54:42.975196'
   account_code: '5801'
   account_label: Client card
@@ -332,14 +352,15 @@ accounting_line_21:
   credit: 0
   currency: EUR
   summary: 2210004/VL, shop order
-  created_at: '2022-11-18 15:04:08.622056'
-  updated_at: '2022-11-18 15:04:08.622056'
-accounting_line_22:
-  id: 22
+  created_at: '2022-12-09 14:47:11.234721'
+  updated_at: '2022-12-09 14:47:11.234721'
+
+accounting_line_64:
+  id: 64
   line_type: item
   journal_code: '530'
   date: '2022-10-04 13:54:42.975196'
-  account_code: '7067'
+  account_code: '7071'
   account_label: Shop order
   analytical_code:
   invoice_id: 5817
@@ -348,14 +369,15 @@ accounting_line_22:
   credit: 95
   currency: EUR
   summary: 2210004/VL, shop order
-  created_at: '2022-11-18 15:04:08.630519'
-  updated_at: '2022-11-18 15:04:08.630519'
-accounting_line_23:
-  id: 23
+  created_at: '2022-12-09 14:47:11.243121'
+  updated_at: '2022-12-09 14:47:11.243121'
+
+accounting_line_65:
+  id: 65
   line_type: item
   journal_code: '530'
   date: '2022-10-04 13:54:42.975196'
-  account_code: '7067'
+  account_code: '7071'
   account_label: Shop order
   analytical_code:
   invoice_id: 5817
@@ -364,12 +386,13 @@ accounting_line_23:
   credit: 1200
   currency: EUR
   summary: 2210004/VL, shop order
-  created_at: '2022-11-18 15:04:08.640333'
-  updated_at: '2022-11-18 15:04:08.640333'
-accounting_line_24:
-  id: 24
+  created_at: '2022-12-09 14:47:11.253093'
+  updated_at: '2022-12-09 14:47:11.253093'
+
+accounting_line_66:
+  id: 66
   line_type: client
-  journal_code: '530'
+  journal_code: CB01
   date: '2022-10-04 14:04:12.742685'
   account_code: '5801'
   account_label: Client card
@@ -380,14 +403,15 @@ accounting_line_24:
   credit: 0
   currency: EUR
   summary: 2210006/VL, shop order
-  created_at: '2022-11-18 15:04:08.656104'
-  updated_at: '2022-11-18 15:04:08.656104'
-accounting_line_25:
-  id: 25
+  created_at: '2022-12-09 14:47:11.268142'
+  updated_at: '2022-12-09 14:47:11.268142'
+
+accounting_line_67:
+  id: 67
   line_type: item
   journal_code: '530'
   date: '2022-10-04 14:04:12.742685'
-  account_code: '7067'
+  account_code: '7071'
   account_label: Shop order
   analytical_code:
   invoice_id: 5818
@@ -396,12 +420,13 @@ accounting_line_25:
   credit: 1000
   currency: EUR
   summary: 2210006/VL, shop order
-  created_at: '2022-11-18 15:04:08.663862'
-  updated_at: '2022-11-18 15:04:08.663862'
-accounting_line_26:
-  id: 26
+  created_at: '2022-12-09 14:47:11.278069'
+  updated_at: '2022-12-09 14:47:11.278069'
+
+accounting_line_68:
+  id: 68
   line_type: client
-  journal_code: '530'
+  journal_code: CB01
   date: '2022-10-04 14:17:52.854636'
   account_code: '5801'
   account_label: Client card
@@ -412,14 +437,15 @@ accounting_line_26:
   credit: 0
   currency: EUR
   summary: 2210008/VL, shop order
-  created_at: '2022-11-18 15:04:08.672150'
-  updated_at: '2022-11-18 15:04:08.672150'
-accounting_line_27:
-  id: 27
+  created_at: '2022-12-09 14:47:11.294694'
+  updated_at: '2022-12-09 14:47:11.294694'
+
+accounting_line_69:
+  id: 69
   line_type: item
   journal_code: '530'
   date: '2022-10-04 14:17:52.854636'
-  account_code: '7067'
+  account_code: '7071'
   account_label: Shop order
   analytical_code:
   invoice_id: 5819
@@ -428,14 +454,15 @@ accounting_line_27:
   credit: 2
   currency: EUR
   summary: 2210008/VL, shop order
-  created_at: '2022-11-18 15:04:08.680577'
-  updated_at: '2022-11-18 15:04:08.680577'
-accounting_line_28:
-  id: 28
+  created_at: '2022-12-09 14:47:11.311492'
+  updated_at: '2022-12-09 14:47:11.311492'
+
+accounting_line_70:
+  id: 70
   line_type: item
   journal_code: '530'
   date: '2022-10-04 14:17:52.854636'
-  account_code: '7067'
+  account_code: '7071'
   account_label: Shop order
   analytical_code:
   invoice_id: 5819
@@ -444,12 +471,13 @@ accounting_line_28:
   credit: 4000
   currency: EUR
   summary: 2210008/VL, shop order
-  created_at: '2022-11-18 15:04:08.688864'
-  updated_at: '2022-11-18 15:04:08.688864'
-accounting_line_29:
-  id: 29
+  created_at: '2022-12-09 14:47:11.318065'
+  updated_at: '2022-12-09 14:47:11.318065'
+
+accounting_line_71:
+  id: 71
   line_type: client
-  journal_code: '530'
+  journal_code: CA01
   date: '2022-10-04 14:25:37.291945'
   account_code: '5803'
   account_label: Client other
@@ -460,14 +488,15 @@ accounting_line_29:
   credit: 0
   currency: EUR
   summary: 2210010, shop order
-  created_at: '2022-11-18 15:04:08.697635'
-  updated_at: '2022-11-18 15:04:08.697635'
-accounting_line_30:
-  id: 30
+  created_at: '2022-12-09 14:47:11.326477'
+  updated_at: '2022-12-09 14:47:11.326477'
+
+accounting_line_72:
+  id: 72
   line_type: item
   journal_code: '530'
   date: '2022-10-04 14:25:37.291945'
-  account_code: '7067'
+  account_code: '7071'
   account_label: Shop order
   analytical_code:
   invoice_id: 5820
@@ -476,12 +505,13 @@ accounting_line_30:
   credit: 12000
   currency: EUR
   summary: 2210010, shop order
-  created_at: '2022-11-18 15:04:08.705822'
-  updated_at: '2022-11-18 15:04:08.705822'
-accounting_line_31:
-  id: 31
+  created_at: '2022-12-09 14:47:11.336473'
+  updated_at: '2022-12-09 14:47:11.336473'
+
+accounting_line_73:
+  id: 73
   line_type: client
-  journal_code: '530'
+  journal_code: CA01
   date: '2022-10-04 14:32:28.204985'
   account_code: '5803'
   account_label: Client other
@@ -492,14 +522,15 @@ accounting_line_31:
   credit: 0
   currency: EUR
   summary: 2210012, shop order
-  created_at: '2022-11-18 15:04:08.713849'
-  updated_at: '2022-11-18 15:04:08.713849'
-accounting_line_32:
-  id: 32
+  created_at: '2022-12-09 14:47:11.353361'
+  updated_at: '2022-12-09 14:47:11.353361'
+
+accounting_line_74:
+  id: 74
   line_type: item
   journal_code: '530'
   date: '2022-10-04 14:32:28.204985'
-  account_code: '7067'
+  account_code: '7071'
   account_label: Shop order
   analytical_code:
   invoice_id: 5821
@@ -508,12 +539,13 @@ accounting_line_32:
   credit: 12000
   currency: EUR
   summary: 2210012, shop order
-  created_at: '2022-11-18 15:04:08.722579'
-  updated_at: '2022-11-18 15:04:08.722579'
-accounting_line_33:
-  id: 33
+  created_at: '2022-12-09 14:47:11.368203'
+  updated_at: '2022-12-09 14:47:11.368203'
+
+accounting_line_75:
+  id: 75
   line_type: client
-  journal_code: '530'
+  journal_code: CA01
   date: '2022-10-04 14:35:40.584472'
   account_code: '5803'
   account_label: Client other
@@ -524,14 +556,15 @@ accounting_line_33:
   credit: 0
   currency: EUR
   summary: 2210014, shop order
-  created_at: '2022-11-18 15:04:08.731248'
-  updated_at: '2022-11-18 15:04:08.731248'
-accounting_line_34:
-  id: 34
+  created_at: '2022-12-09 14:47:11.378107'
+  updated_at: '2022-12-09 14:47:11.378107'
+
+accounting_line_76:
+  id: 76
   line_type: item
   journal_code: '530'
   date: '2022-10-04 14:35:40.584472'
-  account_code: '7067'
+  account_code: '7071'
   account_label: Shop order
   analytical_code:
   invoice_id: 5822
@@ -540,5 +573,5 @@ accounting_line_34:
   credit: 3000
   currency: EUR
   summary: 2210014, shop order
-  created_at: '2022-11-18 15:04:08.739474'
-  updated_at: '2022-11-18 15:04:08.739474'
+  created_at: '2022-12-09 14:47:11.394849'
+  updated_at: '2022-12-09 14:47:11.394849'

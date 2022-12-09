@@ -80,7 +80,6 @@ class Exports::AccountingExportTest < ActionDispatch::IntegrationTest
   end
 
   def check_client_line(invoice, client_line)
-    check_journal_code(client_line)
     check_entry_date(invoice, client_line)
     check_client_accounts(invoice, client_line)
     check_entry_label(invoice, client_line)
@@ -99,7 +98,7 @@ class Exports::AccountingExportTest < ActionDispatch::IntegrationTest
   end
 
   def check_item_line(invoice, invoice_item, item_line)
-    check_journal_code(item_line)
+    check_sales_journal_code(item_line)
     check_entry_date(invoice, item_line)
 
     check_subscription_accounts(invoice, item_line)
@@ -115,8 +114,8 @@ class Exports::AccountingExportTest < ActionDispatch::IntegrationTest
     assert_equal 0, item_line[I18n.t('accounting_export.debit_euro')].to_f, 'Debit euro amount does not match'
   end
 
-  def check_journal_code(line)
-    journal_code = Setting.get('accounting_journal_code')
+  def check_sales_journal_code(line)
+    journal_code = Setting.get('accounting_sales_journal_code')
     assert_equal journal_code, line[I18n.t('accounting_export.journal_code')], 'Wrong journal code'
   end
 
@@ -132,6 +131,9 @@ class Exports::AccountingExportTest < ActionDispatch::IntegrationTest
 
       wallet_client_label = Setting.get('accounting_wallet_client_label')
       assert_equal wallet_client_label, client_line[I18n.t('accounting_export.account_label')], 'Account label for wallet client is wrong'
+
+      wallet_client_journal = Setting.get('accounting_wallet_client_journal_code')
+      assert_equal wallet_client_journal, client_line[I18n.t('accounting_export.journal_code')], 'Journal code for wallet client is wrong'
     end
     mean = invoice.paid_by_card? ? 'card' : 'other'
 
@@ -140,6 +142,9 @@ class Exports::AccountingExportTest < ActionDispatch::IntegrationTest
 
     client_label = Setting.get("accounting_#{mean}_client_label")
     assert_equal client_label, client_line[I18n.t('accounting_export.account_label')], 'Account label for client is wrong'
+
+    client_journal = Setting.get("accounting_#{mean}_client_journal_code")
+    assert_equal client_journal, client_line[I18n.t('accounting_export.journal_code')], 'Journal code for client is wrong'
   end
 
   def check_subscription_accounts(invoice, item_line)

@@ -96,17 +96,22 @@ export const titleSettings = [
 ] as const;
 
 export const accountingSettings = [
-  'accounting_journal_code',
+  'accounting_sales_journal_code',
   'accounting_card_client_code',
   'accounting_card_client_label',
+  'accounting_card_client_journal_code',
   'accounting_wallet_client_code',
   'accounting_wallet_client_label',
+  'accounting_wallet_client_journal_code',
   'accounting_other_client_code',
   'accounting_other_client_label',
+  'accounting_other_client_journal_code',
   'accounting_wallet_code',
   'accounting_wallet_label',
+  'accounting_wallet_journal_code',
   'accounting_VAT_code',
   'accounting_VAT_label',
+  'accounting_VAT_journal_code',
   'accounting_subscription_code',
   'accounting_subscription_label',
   'accounting_Machine_code',
