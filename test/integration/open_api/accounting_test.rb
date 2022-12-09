@@ -92,6 +92,7 @@ class OpenApi::AccountingTest < ActionDispatch::IntegrationTest
     assert lines[:lines].count.positive?
     assert(lines[:lines].all? { |line| line[:line_type] == 'client' })
     assert(lines[:lines].all? { |line| !line[:invoice][:payment_details].nil? })
+    assert(lines[:lines].all? { |line| %w[card wallet other].include?(line[:invoice][:payment_details][:payment_mean]) })
     assert(lines[:lines].filter { |line| line[:account_code] == card_code }
                         .none? { |line| line[:invoice][:payment_details][:gateway_object_id].nil? })
     assert(lines[:lines].filter { |line| line[:account_code] == card_code }

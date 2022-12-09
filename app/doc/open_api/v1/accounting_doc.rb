@@ -14,8 +14,15 @@ class OpenAPI::V1::AccountingDoc < OpenAPI::V1::BaseDoc
   doc_for :index do
     api :GET, "/#{API_VERSION}/accounting", 'Accounting lines'
     description 'All accounting lines, paginated (necessarily becauce there is a lot of data) with optional dates filtering. ' \
-                'Ordered by *date* descendant.<br><br>The field *status* indicates if the accounting data is being built ' \
-                'or if the build is over. Possible status are: <i>building</i> or <i>built</i>.'
+                'Ordered by *date* descendant.<br>' \
+                'The field *status* indicates if the accounting data is being built or if the build is over. ' \
+                'Possible status are: <i>building</i> or <i>built</i>.<br>' \
+                'The field *invoice.payment_details* is available if line_type=client. It will contain the following data:<br>' \
+                '· *payment_mean*, possible status are: <i>card</i>, <i>wallet</i> or <i>other</i>. *WARNING*: If an invoice was settled ' \
+                'using multiple payment means, this will only report the payment mean applicable to current line.<br>' \
+                '· *gateway_object_id*, if payment_mean=card, report the ID of the payment gateway related object<br>' \
+                '· *gateway_object_type*, if payment_mean=card, report the type of the payment gateway related object<br>' \
+                '· *wallet_transaction_id*, if payment_mean=wallet, report the ID of the wallet transaction<br>'
     param_group :pagination
     param :after, DateTime, optional: true, desc: 'Filter accounting lines to lines after the given date.'
     param :before, DateTime, optional: true, desc: 'Filter accounting lines to lines before the given date.'
@@ -38,9 +45,17 @@ class OpenAPI::V1::AccountingDoc < OpenAPI::V1::BaseDoc
               "reference": "22010009/VL",
               "id": 274,
               "label": "Subscription of Dupont Marcel for 1 month starting from 2022, january 2nd",
-              "url": "/open_api/v1/invoices/247/download"
+              "url": "/open_api/v1/invoices/247/download",
+              "payment_details": {
+                "payment_mean": "card",
+                "gateway_object_id": "pi_3MA2PPW4kx8QemzC02ABBEbo",
+                "gateway_object_type": "Stripe::PaymentIntent"
+              }
             },
-            "user_invoicing_profile_id": 6512,
+            "user": {
+              "invoicing_profile_id": 6512,
+              "external_id": "U52-ALC4"
+            },
             "debit": 1400,
             "credit": 0
             "currency": "EUR",

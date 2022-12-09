@@ -161,14 +161,15 @@ class Invoice < PaymentDocument
     when :card
       if paid_by_card?
         {
+          payment_mean: mean,
           gateway_object_id: payment_gateway_object.gateway_object_id,
           gateway_object_type: payment_gateway_object.gateway_object_type
         }
       end
     when :wallet
-      { wallet_transaction_id: wallet_transaction_id } if paid_by_wallet?
+      { payment_mean: mean, wallet_transaction_id: wallet_transaction_id } if paid_by_wallet?
     else
-      {}
+      { payment_mean: mean }
     end
   end
 
