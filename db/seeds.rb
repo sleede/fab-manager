@@ -996,6 +996,38 @@ Setting.set('store_hidden', true) unless Setting.find_by(name: 'store_hidden').t
 Setting.set('advanced_accounting', false) unless Setting.find_by(name: 'advanced_accounting').try(:value)
 
 Setting.set('accounting_VAT_code', '4457') unless Setting.find_by(name: 'accounting_VAT_code').try(:value)
+# accounting_sales_journal_code
+# accounting_payment_card_code
+# accounting_payment_card_label
+# accounting_payment_card_journal_code
+# accounting_payment_wallet_code
+# accounting_payment_wallet_label
+# accounting_payment_wallet_journal_code
+# accounting_payment_other_code
+# accounting_payment_other_label
+# accounting_payment_other_journal_code
+# accounting_wallet_code
+# accounting_wallet_label
+# accounting_wallet_journal_code
+# accounting_VAT_code
+# accounting_VAT_label
+# accounting_VAT_journal_code
+# accounting_subscription_code
+# accounting_subscription_label
+# accounting_Machine_code
+# accounting_Machine_label
+# accounting_Training_code
+# accounting_Training_label
+# accounting_Event_code
+# accounting_Event_label
+# accounting_Space_code
+# accounting_Space_label
+# accounting_Pack_code
+# accounting_Pack_label
+# accounting_Product_code
+# accounting_Product_label
+# accounting_Error_code
+# accounting_Error_label
 
 Setting.set('external_id', false) unless Setting.find_by(name: 'external_id').try(:value)
 
