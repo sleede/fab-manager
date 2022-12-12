@@ -70,28 +70,28 @@ class OpenApi::AccountingTest < ActionDispatch::IntegrationTest
   end
 
   test 'list all accounting lines with type filtering' do
-    get '/open_api/v1/accounting?type=[client,vat]', headers: open_api_headers(@token)
+    get '/open_api/v1/accounting?type=[payment,vat]', headers: open_api_headers(@token)
     assert_response :success
     assert_equal Mime[:json], response.content_type
 
     lines = json_response(response.body)
     assert lines[:lines].count.positive?
-    assert(lines[:lines].all? { |line| %w[client vat].include?(line[:line_type]) })
+    assert(lines[:lines].all? { |line| %w[payment vat].include?(line[:line_type]) })
   end
 
-  test 'list all accounting client lines have payment details' do
-    get '/open_api/v1/accounting?type=client', headers: open_api_headers(@token)
+  test 'list all accounting payment lines should have payment details' do
+    get '/open_api/v1/accounting?type=payment', headers: open_api_headers(@token)
     assert_response :success
     assert_equal Mime[:json], response.content_type
 
-    card_code = Setting.get('accounting_card_client_code')
-    wallet_code = Setting.get('accounting_wallet_client_code')
-    other_code = Setting.get('accounting_other_client_code')
+    card_code = Setting.get('accounting_payment_card_code')
+    wallet_code = Setting.get('accounting_payment_wallet_code')
+    other_code = Setting.get('accounting_payment_other_code')
 
     lines = json_response(response.body)
     assert lines[:lines].count.positive?
-    assert(lines[:lines].all? { |line| line[:line_type] == 'client' })
-    assert(lines[:lines].all? { |line| !line[:invoice][:payment_details].nil? })
+    assert(lines[:lines].all? { |line| line[:line_type] == 'payment' })
+    assert(lines[:lines].none? { |line| line[:invoice][:payment_details].nil? })
     assert(lines[:lines].all? { |line| %w[card wallet other].include?(line[:invoice][:payment_details][:payment_mean]) })
     assert(lines[:lines].filter { |line| line[:account_code] == card_code }
                         .none? { |line| line[:invoice][:payment_details][:gateway_object_id].nil? })
@@ -100,6 +100,6 @@ class OpenApi::AccountingTest < ActionDispatch::IntegrationTest
     assert(lines[:lines].filter { |line| line[:account_code] == wallet_code }
                         .none? { |line| line[:invoice][:payment_details][:wallet_transaction_id].nil? })
     assert(lines[:lines].filter { |line| line[:account_code] == other_code }
-                        .all? { |line| line[:invoice][:payment_details].empty? })
+                        .all? { |line| line[:invoice][:payment_details][:payment_mean] == 'other' })
   end
 end

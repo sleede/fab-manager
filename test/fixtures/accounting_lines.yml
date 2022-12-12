@@ -1,10 +1,10 @@
 accounting_line_43:
   id: 43
-  line_type: client
+  line_type: payment
   journal_code: CB01
   date: '2012-03-12 11:03:31.651441'
   account_code: '5801'
-  account_label: Client card
+  account_label: Payment by card
   analytical_code: ''
   invoice_id: 1
   invoicing_profile_id: 3
@@ -34,11 +34,11 @@ accounting_line_44:
 
 accounting_line_45:
   id: 45
-  line_type: client
+  line_type: payment
   journal_code: CA01
   date: '2012-03-12 13:40:22.342717'
   account_code: '5803'
-  account_label: Client other
+  account_label: Payment by other
   analytical_code: ''
   invoice_id: 2
   invoicing_profile_id: 4
@@ -68,11 +68,11 @@ accounting_line_46:
 
 accounting_line_47:
   id: 47
-  line_type: client
+  line_type: payment
   journal_code: CA01
   date: '2015-06-10 11:20:01.341130'
   account_code: '5803'
-  account_label: Client other
+  account_label: Payment by other
   analytical_code: ''
   invoice_id: 3
   invoicing_profile_id: 7
@@ -102,11 +102,11 @@ accounting_line_48:
 
 accounting_line_49:
   id: 49
-  line_type: client
+  line_type: payment
   journal_code: CA01
   date: '2016-04-05 08:35:52.931187'
   account_code: '5803'
-  account_label: Client other
+  account_label: Payment by other
   analytical_code: ''
   invoice_id: 4
   invoicing_profile_id: 7
@@ -136,11 +136,11 @@ accounting_line_50:
 
 accounting_line_51:
   id: 51
-  line_type: client
+  line_type: payment
   journal_code: CA01
   date: '2016-04-05 08:36:46.853368'
   account_code: '5803'
-  account_label: Client other
+  account_label: Payment by other
   analytical_code: ''
   invoice_id: 5
   invoicing_profile_id: 3
@@ -170,11 +170,11 @@ accounting_line_52:
 
 accounting_line_53:
   id: 53
-  line_type: client
+  line_type: payment
   journal_code: CA01
   date: '2021-01-04 14:51:21.616153'
   account_code: '5803'
-  account_label: Client other
+  account_label: Payment by other
   analytical_code: ''
   invoice_id: 6
   invoicing_profile_id: 8
@@ -204,11 +204,11 @@ accounting_line_54:
 
 accounting_line_55:
   id: 55
-  line_type: client
+  line_type: payment
   journal_code: CA01
   date: '2022-09-20 15:14:22.873707'
   account_code: '5803'
-  account_label: Client other
+  account_label: Payment by other
   analytical_code: ''
   invoice_id: 5811
   invoicing_profile_id: 3
@@ -255,11 +255,11 @@ accounting_line_57:
 
 accounting_line_58:
   id: 58
-  line_type: client
+  line_type: payment
   journal_code: CA01
   date: '2022-09-20 15:14:48.345927'
   account_code: '5803'
-  account_label: Client other
+  account_label: Payment by other
   analytical_code: ''
   invoice_id: 5812
   invoicing_profile_id: 7
@@ -289,11 +289,11 @@ accounting_line_59:
 
 accounting_line_60:
   id: 60
-  line_type: client
+  line_type: payment
   journal_code: CB01
   date: '2022-10-04 12:36:03.060832'
   account_code: '5801'
-  account_label: Client card
+  account_label: Payment by card
   analytical_code: ''
   invoice_id: 5816
   invoicing_profile_id: 4
@@ -340,11 +340,11 @@ accounting_line_62:
 
 accounting_line_63:
   id: 63
-  line_type: client
+  line_type: payment
   journal_code: CB01
   date: '2022-10-04 13:54:42.975196'
   account_code: '5801'
-  account_label: Client card
+  account_label: Payment by card
   analytical_code: ''
   invoice_id: 5817
   invoicing_profile_id: 4
@@ -391,11 +391,11 @@ accounting_line_65:
 
 accounting_line_66:
   id: 66
-  line_type: client
+  line_type: payment
   journal_code: CB01
   date: '2022-10-04 14:04:12.742685'
   account_code: '5801'
-  account_label: Client card
+  account_label: Payment by card
   analytical_code: ''
   invoice_id: 5818
   invoicing_profile_id: 4
@@ -425,11 +425,11 @@ accounting_line_67:
 
 accounting_line_68:
   id: 68
-  line_type: client
+  line_type: payment
   journal_code: CB01
   date: '2022-10-04 14:17:52.854636'
   account_code: '5801'
-  account_label: Client card
+  account_label: Payment by card
   analytical_code: ''
   invoice_id: 5819
   invoicing_profile_id: 4
@@ -476,11 +476,11 @@ accounting_line_70:
 
 accounting_line_71:
   id: 71
-  line_type: client
+  line_type: payment
   journal_code: CA01
   date: '2022-10-04 14:25:37.291945'
   account_code: '5803'
-  account_label: Client other
+  account_label: Payment by other
   analytical_code: ''
   invoice_id: 5820
   invoicing_profile_id: 3
@@ -510,11 +510,11 @@ accounting_line_72:
 
 accounting_line_73:
   id: 73
-  line_type: client
+  line_type: payment
   journal_code: CA01
   date: '2022-10-04 14:32:28.204985'
   account_code: '5803'
-  account_label: Client other
+  account_label: Payment by other
   analytical_code: ''
   invoice_id: 5821
   invoicing_profile_id: 2
@@ -544,11 +544,11 @@ accounting_line_74:
 
 accounting_line_75:
   id: 75
-  line_type: client
+  line_type: payment
   journal_code: CA01
   date: '2022-10-04 14:35:40.584472'
   account_code: '5803'
-  account_label: Client other
+  account_label: Payment by other
   analytical_code: ''
   invoice_id: 5822
   invoicing_profile_id: 2

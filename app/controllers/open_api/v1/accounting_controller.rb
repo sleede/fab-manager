@@ -8,9 +8,9 @@ class OpenAPI::V1::AccountingController < OpenAPI::V1::BaseController
 
   def index
     @codes = {
-      card: Setting.get('accounting_card_client_code'),
-      wallet: Setting.get('accounting_wallet_client_code'),
-      other: Setting.get('accounting_other_client_code')
+      card: Setting.get('accounting_payment_card_code'),
+      wallet: Setting.get('accounting_payment_wallet_code'),
+      other: Setting.get('accounting_payment_other_code')
     }
 
     @lines = AccountingLine.order(date: :desc)

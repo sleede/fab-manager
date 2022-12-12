@@ -6,10 +6,10 @@ module Accounting; end
 # fetch the code matching the given resource
 class Accounting::AccountingCodeService
   class << self
-    def client_account(payment_mean, type: :code)
+    def payment_account(payment_mean, type: :code)
       raise ArgumentError('invalid type') unless %i[code label].include?(type)
 
-      Setting.get("accounting_#{payment_mean}_client_#{type}")
+      Setting.get("accounting_payment_#{payment_mean}_#{type}")
     end
 
     def vat_account(type: :code)

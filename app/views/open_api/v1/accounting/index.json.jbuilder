@@ -7,7 +7,7 @@ json.lines @lines do |line|
       json.extract! line.invoice, :reference, :id
       json.label Invoices::LabelService.build(line.invoice)
       json.url download_open_api_v1_invoice_path(line.invoice)
-      if @codes.values.include?(line.account_code) # if this is a 'client' line
+      if @codes.values.include?(line.account_code) # if this is a 'payment' line
         mean = @codes.select { |_key, value| value == line.account_code }
         json.payment_details line.invoice.payment_details(mean.keys[0])
       end

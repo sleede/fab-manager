@@ -57,15 +57,15 @@ class Setting < ApplicationRecord
                              display_name_enable
                              machines_sort_by
                              accounting_sales_journal_code
-                             accounting_card_client_code
-                             accounting_card_client_label
-                             accounting_card_client_journal_code
-                             accounting_wallet_client_code
-                             accounting_wallet_client_label
-                             accounting_wallet_client_journal_code
-                             accounting_other_client_code
-                             accounting_other_client_label
-                             accounting_other_client_journal_code
+                             accounting_payment_card_code
+                             accounting_payment_card_label
+                             accounting_payment_card_journal_code
+                             accounting_payment_wallet_code
+                             accounting_payment_wallet_label
+                             accounting_payment_wallet_journal_code
+                             accounting_payment_other_code
+                             accounting_payment_other_label
+                             accounting_payment_other_journal_code
                              accounting_wallet_code
                              accounting_wallet_label
                              accounting_wallet_journal_code

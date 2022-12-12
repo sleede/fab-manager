@@ -10,16 +10,16 @@ class Accounting::AccountingJournalService
       sales: Setting.get('accounting_sales_journal_code') || '',
       wallet: Setting.get('accounting_wallet_journal_code') || '',
       vat: Setting.get('accounting_VAT_journal_code') || '',
-      client: {
-        card: Setting.get('accounting_card_client_journal_code') || '',
-        wallet: Setting.get('accounting_wallet_client_journal_code') || '',
-        other: Setting.get('accounting_other_client_journal_code') || ''
+      payment: {
+        card: Setting.get('accounting_payment_card_journal_code') || '',
+        wallet: Setting.get('accounting_payment_wallet_journal_code') || '',
+        other: Setting.get('accounting_payment_other_journal_code') || ''
       }
     }
   end
 
-  def client_journal(payment_mean)
-    @journal_codes[:client][payment_mean]
+  def payment_journal(payment_mean)
+    @journal_codes[:payment][payment_mean]
   end
 
   def vat_journal

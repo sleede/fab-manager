@@ -543,7 +543,7 @@ export const settings: Array<Setting> = [
   },
   {
     name: 'accounting_card_client_code',
-    value: '411210',
+    value: '5801',
     last_update: '2022-11-22T17:27:19+0100',
     localized: 'Code clients par carte'
   },
@@ -555,7 +555,7 @@ export const settings: Array<Setting> = [
   },
   {
     name: 'accounting_wallet_client_code',
-    value: '411211',
+    value: '5802',
     last_update: '2022-11-22T17:27:19+0100',
     localized: 'Code clients par porte-monnaie'
   },
@@ -567,7 +567,7 @@ export const settings: Array<Setting> = [
   },
   {
     name: 'accounting_other_client_code',
-    value: '411212',
+    value: '5803',
     last_update: '2022-11-22T17:27:19+0100',
     localized: 'Code clients autre moyen'
   },

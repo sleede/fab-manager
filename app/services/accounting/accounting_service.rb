@@ -37,7 +37,7 @@ class Accounting::AccountingService
   private
 
   def generate_lines(invoice)
-    lines = client_lines(invoice) + items_lines(invoice)
+    lines = payment_lines(invoice) + items_lines(invoice)
 
     vat = vat_line(invoice)
     lines << vat unless vat.nil?
@@ -67,17 +67,17 @@ class Accounting::AccountingService
     lines
   end
 
-  # Generate the "client" lines, which contains the debit to the client account, all taxes included
-  def client_lines(invoice)
+  # Generate the "payment" lines, which contains the debit to the client account, all taxes included
+  def payment_lines(invoice)
     lines = []
     invoice.payment_means.each do |details|
       lines << line(
         invoice,
-        'client',
-        @journal_service.client_journal(details[:means]),
-        Accounting::AccountingCodeService.client_account(details[:means]),
+        'payment',
+        @journal_service.payment_journal(details[:means]),
+        Accounting::AccountingCodeService.payment_account(details[:means]),
         details[:amount],
-        account_label: Accounting::AccountingCodeService.client_account(details[:means], type: :label),
+        account_label: Accounting::AccountingCodeService.payment_account(details[:means], type: :label),
         debit_method: :debit_client,
         credit_method: :credit_client
       )
@@ -158,13 +158,13 @@ class Accounting::AccountingService
   # In case of rounding errors, fix the balance by adding or removing a cent to the last item line
   # This case should only happen when a coupon has been used.
   def fix_rounding_errors(lines)
-    debit_sum = lines.filter { |l| l[:line_type] == 'client' }.pluck(:debit).sum
-    credit_sum = lines.filter { |l| l[:line_type] != 'client' }.pluck(:credit).sum
+    debit_sum = lines.filter { |l| l[:line_type] == 'payment' }.pluck(:debit).sum
+    credit_sum = lines.filter { |l| l[:line_type] != 'payment' }.pluck(:credit).sum
 
     return if debit_sum == credit_sum
 
     diff = debit_sum - credit_sum
-    fixable_line = lines.filter { |l| l[:line_type] == 'item' }.last
+    fixable_line = lines.filter { |l| l[:line_type] == 'payment' }.last
     fixable_line.credit += diff
   end
 end

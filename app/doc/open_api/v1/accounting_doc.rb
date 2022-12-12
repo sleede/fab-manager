@@ -17,7 +17,7 @@ class OpenAPI::V1::AccountingDoc < OpenAPI::V1::BaseDoc
                 'Ordered by *date* descendant.<br>' \
                 'The field *status* indicates if the accounting data is being built or if the build is over. ' \
                 'Possible status are: <i>building</i> or <i>built</i>.<br>' \
-                'The field *invoice.payment_details* is available if line_type=client. It will contain the following data:<br>' \
+                'The field *invoice.payment_details* is available if line_type=payment. It will contain the following data:<br>' \
                 '· *payment_mean*, possible status are: <i>card</i>, <i>wallet</i> or <i>other</i>. *WARNING*: If an invoice was settled ' \
                 'using multiple payment means, this will only report the payment mean applicable to current line.<br>' \
                 '· *gateway_object_id*, if payment_mean=card, report the ID of the payment gateway related object<br>' \
@@ -35,7 +35,7 @@ class OpenAPI::V1::AccountingDoc < OpenAPI::V1::BaseDoc
         "lines": [
           {
             "id": 1,
-            "line_type": "client",
+            "line_type": "payment",
             "journal_code": "VT01",
             "date": "2022-01-02T18:14:21+01:00",
             "account_code": "5802",

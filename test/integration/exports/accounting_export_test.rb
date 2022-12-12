@@ -53,8 +53,8 @@ class Exports::AccountingExportTest < ActionDispatch::IntegrationTest
 
     # test values
     first_invoice = Invoice.first
-    # first line = client line
-    check_client_line(first_invoice, data[0])
+    # first line = payment line
+    check_payment_line(first_invoice, data[0])
     # second line = sold item line
     check_item_line(first_invoice, first_invoice.invoice_items.first, data[1])
 
@@ -65,12 +65,12 @@ class Exports::AccountingExportTest < ActionDispatch::IntegrationTest
 
     # test with a reservation invoice
     machine_invoice = Invoice.find(5)
-    check_client_line(machine_invoice, data[6])
+    check_payment_line(machine_invoice, data[6])
     check_item_line(machine_invoice, machine_invoice.invoice_items.first, data[7])
 
     # test with a shop order invoice (local payment)
     shop_invoice = Invoice.find(5811)
-    check_client_line(shop_invoice, data[10])
+    check_payment_line(shop_invoice, data[10])
     check_item_line(shop_invoice, shop_invoice.invoice_items.first, data[11])
     check_item_line(shop_invoice, shop_invoice.invoice_items.last, data[12])
 
@@ -79,22 +79,22 @@ class Exports::AccountingExportTest < ActionDispatch::IntegrationTest
     FileUtils.rm(e.file)
   end
 
-  def check_client_line(invoice, client_line)
-    check_entry_date(invoice, client_line)
-    check_client_accounts(invoice, client_line)
-    check_entry_label(invoice, client_line)
-    check_document(invoice, client_line)
+  def check_payment_line(invoice, payment_line)
+    check_entry_date(invoice, payment_line)
+    check_client_accounts(invoice, payment_line)
+    check_entry_label(invoice, payment_line)
+    check_document(invoice, payment_line)
 
     if invoice.wallet_transaction_id.nil?
-      assert_equal invoice.total / 100.00, client_line[I18n.t('accounting_export.debit_origin')].to_f,
+      assert_equal invoice.total / 100.00, payment_line[I18n.t('accounting_export.debit_origin')].to_f,
                    'Origin debit amount does not match'
-      assert_equal invoice.total / 100.00, client_line[I18n.t('accounting_export.debit_euro')].to_f, 'Euro debit amount does not match'
+      assert_equal invoice.total / 100.00, payment_line[I18n.t('accounting_export.debit_euro')].to_f, 'Euro debit amount does not match'
     else
       warn "WARNING: unable to test accurately accounting export: invoice #{invoice.id} is using wallet"
     end
 
-    assert_equal 0, client_line[I18n.t('accounting_export.credit_origin')].to_f, 'Credit origin amount does not match'
-    assert_equal 0, client_line[I18n.t('accounting_export.credit_euro')].to_f, 'Credit euro amount does not match'
+    assert_equal 0, payment_line[I18n.t('accounting_export.credit_origin')].to_f, 'Credit origin amount does not match'
+    assert_equal 0, payment_line[I18n.t('accounting_export.credit_euro')].to_f, 'Credit euro amount does not match'
   end
 
   def check_item_line(invoice, invoice_item, item_line)
@@ -126,24 +126,24 @@ class Exports::AccountingExportTest < ActionDispatch::IntegrationTest
 
   def check_client_accounts(invoice, client_line)
     if invoice.wallet_transaction && invoice.wallet_amount.positive?
-      wallet_client_code = Setting.get('accounting_wallet_client_code')
+      wallet_client_code = Setting.get('accounting_payment_wallet_code')
       assert_equal wallet_client_code, client_line[I18n.t('accounting_export.account_code')], 'Account code for wallet client is wrong'
 
-      wallet_client_label = Setting.get('accounting_wallet_client_label')
+      wallet_client_label = Setting.get('accounting_payment_wallet_label')
       assert_equal wallet_client_label, client_line[I18n.t('accounting_export.account_label')], 'Account label for wallet client is wrong'
 
-      wallet_client_journal = Setting.get('accounting_wallet_client_journal_code')
+      wallet_client_journal = Setting.get('accounting_payent_wallet_journal_code')
       assert_equal wallet_client_journal, client_line[I18n.t('accounting_export.journal_code')], 'Journal code for wallet client is wrong'
     end
     mean = invoice.paid_by_card? ? 'card' : 'other'
 
-    client_code = Setting.get("accounting_#{mean}_client_code")
+    client_code = Setting.get("accounting_payment_#{mean}_code")
     assert_equal client_code, client_line[I18n.t('accounting_export.account_code')], 'Account code for client is wrong'
 
-    client_label = Setting.get("accounting_#{mean}_client_label")
+    client_label = Setting.get("accounting_payment_#{mean}_label")
     assert_equal client_label, client_line[I18n.t('accounting_export.account_label')], 'Account label for client is wrong'
 
-    client_journal = Setting.get("accounting_#{mean}_client_journal_code")
+    client_journal = Setting.get("accounting_payment_#{mean}_journal_code")
     assert_equal client_journal, client_line[I18n.t('accounting_export.journal_code')], 'Journal code for client is wrong'
   end
 

@@ -56,16 +56,16 @@ class AccountingServiceTest < ActionDispatch::IntegrationTest
     assert 5, lines.count
 
     # Check the wallet line
-    assert 2, lines.filter { |l| l.line_type == 'client' }.count
-    client_wallet = lines.find { |l| l.account_code == Setting.get('accounting_wallet_client_code') }
-    assert_not_nil client_wallet
-    assert_equal 1000, client_wallet&.debit
-    assert_equal Setting.get('accounting_wallet_client_journal_code'), client_wallet&.journal_code
+    assert 2, lines.filter { |l| l.line_type == 'payment' }.count
+    payment_wallet = lines.find { |l| l.account_code == Setting.get('accounting_payment_wallet_code') }
+    assert_not_nil payment_wallet
+    assert_equal 1000, payment_wallet&.debit
+    assert_equal Setting.get('accounting_payment_wallet_journal_code'), payment_wallet&.journal_code
     # Check the local payment line
-    client_other = lines.find { |l| l.account_code == Setting.get('accounting_other_client_code') }
-    assert_not_nil client_other
-    assert_equal invoice.total - 1000, client_other&.debit
-    assert_equal Setting.get('accounting_other_client_journal_code'), client_other&.journal_code
+    payment_other = lines.find { |l| l.account_code == Setting.get('accounting_payment_other_code') }
+    assert_not_nil payment_other
+    assert_equal invoice.total - 1000, payment_other&.debit
+    assert_equal Setting.get('accounting_payment_other_journal_code'), payment_other&.journal_code
 
     # Check the machine reservation line
     assert 2, lines.filter { |l| l.line_type == 'item' }.count
