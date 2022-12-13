@@ -23,7 +23,7 @@ class API::WalletController < API::ApiController
     @wallet = Wallet.find(credit_params[:id])
     authorize @wallet
     service = WalletService.new(user: current_user, wallet: @wallet)
-    transaction = service.credit(credit_params[:amount])
+    transaction = service.credit(credit_params[:amount].to_f)
     if transaction
       service.create_avoir(transaction, credit_params[:avoir_date], credit_params[:avoir_description]) if credit_params[:avoir]
       render :show

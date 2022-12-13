@@ -15,7 +15,7 @@ class Wallet < ApplicationRecord
 
   def credit(amount)
     if amount.is_a?(Numeric) && amount >= 0
-      self.amount += amount
+      self.amount = (BigDecimal(self.amount.to_s) + BigDecimal(amount.to_s)).to_f
       return save
     end
     false
@@ -23,7 +23,7 @@ class Wallet < ApplicationRecord
 
   def debit(amount)
     if amount.is_a?(Numeric) && amount >= 0
-      self.amount -= amount
+      self.amount = (BigDecimal(self.amount.to_s) - BigDecimal(amount.to_s)).to_f
       return save
     end
     false

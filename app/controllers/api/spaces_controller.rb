@@ -27,7 +27,7 @@ class API::SpacesController < API::ApiController
   end
 
   def update
-    authorize Space
+    authorize @space
     if @space.update(space_params)
       render :show, status: :ok, location: @space
     else
@@ -45,7 +45,7 @@ class API::SpacesController < API::ApiController
   private
 
   def set_space
-    Space.friendly.find(params[:id])
+    @space = Space.friendly.find(params[:id])
   end
 
   def space_params

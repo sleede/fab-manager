@@ -1,5 +1,11 @@
 # Changelog Fab-manager
 
+## v5.5.7 2022 December 13
+
+- Fix a bug: unable to update/delete a space
+- Fix a bug: unable to credit wallet
+- Fix a security issue: updated nokogiri to 1.13.10 to fix [CVE-2022-23476](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-23476)
+
 ## v5.5.6 2022 December 05
 
 - Updated FabAnalytics reports to include new features
