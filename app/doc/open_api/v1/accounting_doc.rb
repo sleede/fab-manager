@@ -56,7 +56,7 @@ class OpenAPI::V1::AccountingDoc < OpenAPI::V1::BaseDoc
               "invoicing_profile_id": 6512,
               "external_id": "U52-ALC4"
             },
-            "debit": 1400,
+            "debit": 14.0,
             "credit": 0
             "currency": "EUR",
             "summary": "Dupont Marcel, 22010009/VL, subscr."
@@ -77,7 +77,7 @@ class OpenAPI::V1::AccountingDoc < OpenAPI::V1::BaseDoc
             },
             "user_invoicing_profile_id": 6512,
             "debit": 0,
-            "credit": 1167
+            "credit": 11.67
             "currency": "EUR",
             "summary": "Dupont Marcel, 22010009/VL, subscr."
           },
@@ -97,7 +97,7 @@ class OpenAPI::V1::AccountingDoc < OpenAPI::V1::BaseDoc
             },
             "user_invoicing_profile_id": 6512,
             "debit": 0,
-            "credit": 233
+            "credit": 2.33
             "currency": "EUR",
             "summary": "Dupont Marcel, 22010009/VL, subscr."
           }

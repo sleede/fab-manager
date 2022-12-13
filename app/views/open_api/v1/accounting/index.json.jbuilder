@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 json.lines @lines do |line|
-  json.extract! line, :id, :line_type, :journal_code, :date, :account_code, :account_label, :analytical_code, :debit, :credit, :currency, :summary
+  json.extract! line, :id, :line_type, :journal_code, :date, :account_code, :account_label, :analytical_code, :currency, :summary
+  json.debit line.debit / 100.00
+  json.credit line.credit / 100.00
   if line.association(:invoice).loaded?
     json.invoice do
       json.extract! line.invoice, :reference, :id
