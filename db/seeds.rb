@@ -995,39 +995,38 @@ Setting.set('store_hidden', true) unless Setting.find_by(name: 'store_hidden').t
 
 Setting.set('advanced_accounting', false) unless Setting.find_by(name: 'advanced_accounting').try(:value)
 
+Setting.set('accounting_sales_journal_code', 'SALES') unless Setting.find_by(name: 'accounting_sales_journal_code').try(:value)
+Setting.set('accounting_payment_card_code', '5801') unless Setting.find_by(name: 'accounting_payment_card_code').try(:value)
+Setting.set('accounting_payment_card_label', 'Cards payments') unless Setting.find_by(name: 'accounting_payment_card_label').try(:value)
+Setting.set('accounting_payment_card_journal_code', 'CA01') unless Setting.find_by(name: 'accounting_payment_card_journal_code').try(:value)
+Setting.set('accounting_payment_wallet_code', '5802') unless Setting.find_by(name: 'accounting_payment_wallet_code').try(:value)
+Setting.set('accounting_payment_wallet_label', 'Wallet payments') unless Setting.find_by(name: 'accounting_payment_wallet_label').try(:value)
+Setting.set('accounting_payment_wallet_journal_code', 'WA01') unless Setting.find_by(name: 'accounting_payment_wallet_journal_code').try(:value)
+Setting.set('accounting_payment_other_code', '5803') unless Setting.find_by(name: 'accounting_payment_other_code').try(:value)
+Setting.set('accounting_payment_other_label', 'Payments on site') unless Setting.find_by(name: 'accounting_payment_other_label').try(:value)
+Setting.set('accounting_payment_other_journal_code', 'SI01') unless Setting.find_by(name: 'accounting_payment_other_journal_code').try(:value)
+Setting.set('accounting_wallet_code', '4191') unless Setting.find_by(name: 'accounting_wallet_code').try(:value)
+Setting.set('accounting_wallet_label', 'Wallet credit') unless Setting.find_by(name: 'accounting_wallet_label').try(:value)
+Setting.set('accounting_wallet_journal_code', 'WC01') unless Setting.find_by(name: 'accounting_wallet_journal_code').try(:value)
 Setting.set('accounting_VAT_code', '4457') unless Setting.find_by(name: 'accounting_VAT_code').try(:value)
-# accounting_sales_journal_code
-# accounting_payment_card_code
-# accounting_payment_card_label
-# accounting_payment_card_journal_code
-# accounting_payment_wallet_code
-# accounting_payment_wallet_label
-# accounting_payment_wallet_journal_code
-# accounting_payment_other_code
-# accounting_payment_other_label
-# accounting_payment_other_journal_code
-# accounting_wallet_code
-# accounting_wallet_label
-# accounting_wallet_journal_code
-# accounting_VAT_code
-# accounting_VAT_label
-# accounting_VAT_journal_code
-# accounting_subscription_code
-# accounting_subscription_label
-# accounting_Machine_code
-# accounting_Machine_label
-# accounting_Training_code
-# accounting_Training_label
-# accounting_Event_code
-# accounting_Event_label
-# accounting_Space_code
-# accounting_Space_label
-# accounting_Pack_code
-# accounting_Pack_label
-# accounting_Product_code
-# accounting_Product_label
-# accounting_Error_code
-# accounting_Error_label
+Setting.set('accounting_VAT_label', 'Collected VAT') unless Setting.find_by(name: 'accounting_VAT_label').try(:value)
+Setting.set('accounting_VAT_journal_code', 'VAT1') unless Setting.find_by(name: 'accounting_VAT_journal_code').try(:value)
+Setting.set('accounting_subscription_code', '7061') unless Setting.find_by(name: 'accounting_subscription_code').try(:value)
+Setting.set('accounting_subscription_label', 'Subscriptions') unless Setting.find_by(name: 'accounting_subscription_label').try(:value)
+Setting.set('accounting_Machine_code', '7602') unless Setting.find_by(name: 'accounting_Machine_code').try(:value)
+Setting.set('accounting_Machine_label', 'Machines reservations') unless Setting.find_by(name: 'accounting_Machine_label').try(:value)
+Setting.set('accounting_Training_code', '7063') unless Setting.find_by(name: 'accounting_Training_code').try(:value)
+Setting.set('accounting_Training_label', 'Trainings reservations') unless Setting.find_by(name: 'accounting_Training_label').try(:value)
+Setting.set('accounting_Event_code', '7064') unless Setting.find_by(name: 'accounting_Event_code').try(:value)
+Setting.set('accounting_Event_label', 'Events reservations') unless Setting.find_by(name: 'accounting_Event_label').try(:value)
+Setting.set('accounting_Space_code', '7065') unless Setting.find_by(name: 'accounting_Space_code').try(:value)
+Setting.set('accounting_Space_label', 'Spaces reservations') unless Setting.find_by(name: 'accounting_Space_label').try(:value)
+Setting.set('accounting_Pack_code', '7066') unless Setting.find_by(name: 'accounting_Pack_code').try(:value)
+Setting.set('accounting_Pack_label', 'Prepaid-packs selling') unless Setting.find_by(name: 'accounting_Pack_label').try(:value)
+Setting.set('accounting_Product_code', '7071') unless Setting.find_by(name: 'accounting_Product_code').try(:value)
+Setting.set('accounting_Product_label', 'Merchandise selling') unless Setting.find_by(name: 'accounting_Product_label').try(:value)
+Setting.set('accounting_Error_code', 'ERROR') unless Setting.find_by(name: 'accounting_Error_code').try(:value)
+Setting.set('accounting_Error_label', 'Erroneous invoices to refund') unless Setting.find_by(name: 'accounting_Error_label').try(:value)
 
 Setting.set('external_id', false) unless Setting.find_by(name: 'external_id').try(:value)
 

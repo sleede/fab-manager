@@ -3,7 +3,7 @@ require: rubocop-rails
 AllCops:
   NewCops: enable
 Layout/LineLength:
-  Max: 140
+  Max: 145
 Metrics/MethodLength:
   Max: 35
 Metrics/CyclomaticComplexity:

@@ -2,16 +2,19 @@
 
 - Optional external identifier for users
 - Accounting data is now built each night and saved in database
+- Ability to define multiple accounting journal codes
 - OpenAPI endpoint to fetch accounting data
 - Updated OpenAPI documentation
 - Updated OpenID Connect documentation
 - OpenAPI users endpoint offer ability to filter by created_after
 - OpenAPI users endpoint return first name, last name, gender, organization and address
+- Default accounting codes and labels if not set
 - Fix a bug: providing an array of attributes to filter OpenApi data, results in error
 - Fix a bug: unable to manage stocks on new products
 - Fix a bug: unsupported param[] syntax in OpenAPI
 - Updated react-modal to 3.16.1
 - Updated tiptap editor and its dependencies to 2.0.0-beta.204
+- [TODO DEPLOY] `rails db:seed`
 - [TODO DEPLOY] `rails fablab:setup:build_accounting_lines`
 
 - Add reservation deadline parameter (#414)
