@@ -53,6 +53,7 @@ class Setting < ApplicationRecord
                              space_explications_alert
                              visibility_yearly
                              visibility_others
+                             reservation_deadline
                              display_name_enable
                              machines_sort_by
                              accounting_journal_code
