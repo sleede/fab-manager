@@ -56,10 +56,6 @@ group :test do
   gem 'webmock'
 end
 
-group :production, :staging do
-  gem 'rails_12factor'
-end
-
 gem 'seed_dump'
 
 gem 'pg'

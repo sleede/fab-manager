@@ -338,11 +338,6 @@ GEM
       loofah (~> 2.3)
     rails-observers (0.1.5)
       activemodel (>= 4.0)
-    rails_12factor (0.0.3)
-      rails_serve_static_assets
-      rails_stdout_logging
-    rails_serve_static_assets (0.0.5)
-    rails_stdout_logging (0.0.5)
     railties (5.2.8.1)
       actionpack (= 5.2.8.1)
       activesupport (= 5.2.8.1)
@@ -552,7 +547,6 @@ DEPENDENCIES
   railroady
   rails (~> 5.2.8)
   rails-observers
-  rails_12factor
   rb-readline
   recurrence
   redis-session-store
@@ -580,4 +574,4 @@ DEPENDENCIES
   webmock
 
 BUNDLED WITH
-   2.3.13
+   2.3.25
