@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- Fix a bug: wrong reservations count for spaces in availabilities export (#415)
+
 ## v5.5.7 2022 December 13
 
 - Fix a bug: unable to update/delete a space
