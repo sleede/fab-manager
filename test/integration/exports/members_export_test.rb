@@ -39,9 +39,8 @@ class Exports::MembersExportTest < ActionDispatch::IntegrationTest
     assert_not_nil workbook[I18n.t('export_members.members')]
 
     # test data
-    member = User.members.first
     wb = workbook[I18n.t('export_members.members')]
-    assert_equal member.id, wb.sheet_data[1][0].value
+    member = User.find(wb.sheet_data[1][0].value)
     assert_equal (member.is_allow_newsletter ? 1 : nil), wb.sheet_data[1][4].value
 
     # Clean XLSX file
