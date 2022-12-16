@@ -63,6 +63,7 @@ de:
         create_your_account: "Eigenen Account erstellen"
         man: "Männlich"
         woman: "Weiblich"
+        other: "Unbestimmt"
         gender_is_required: "Die Angabe des Geschlechts ist erforderlich."
         your_first_name: "Dein Vorname"
         first_name_is_required: "Der Vorname ist erforderlich."
