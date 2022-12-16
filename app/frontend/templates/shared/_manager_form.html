@@ -95,7 +95,10 @@
 
     <div class="form-group">
       <div class="input-group">
-        <span class="input-group-addon"><i class="fa fa-map-marker"></i> </span>
+        <span class="input-group-addon">
+          <i class="fa fa-map-marker"></i>
+          <span class="exponent" ng-show="addressRequired"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
+        </span>
         <input type="hidden"
                name="manager[invoicing_profile_attributes][address_attributes][id]"
                ng-value="manager.invoicing_profile_attributes.address.id" />
@@ -110,7 +113,10 @@
 
     <div class="form-group" ng-class="{'has-error': managerForm['manager[profile_attributes][phone]'].$dirty && managerForm['manager[profile_attributes][phone]'].$invalid}">
       <div class="input-group">
-        <span class="input-group-addon"><i class="fa fa-phone"></i> </span>
+        <span class="input-group-addon">
+          <i class="fa fa-phone"></i>
+          <span class="exponent" ng-show="phoneRequired"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
+        </span>
         <input ng-model="manager.profile_attributes.phone"
                type="text"
                name="manager[profile_attributes][phone]"

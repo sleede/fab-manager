@@ -1,6 +1,7 @@
 # Changelog Fab-manager
 
 - Fix a bug: wrong reservations count for spaces in availabilities export (#415)
+- Fix a bug: phone or address required are not marked as it, in create manager/admin form
 - Fix a security issue: updated express to 4.18.2 to fix [CVE-2022-24999](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-24999)
 - Fix a security issue: updated @claviska/jquery-minicolors to 2.3.6 to fix [CVE-2021-4243](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-4243)
 - Fix a security issue: updated loofah to 2.19.1 to fix [CVE-2022-23514](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-23514), [CVE-2022-23515](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-23515) and [CVE-2022-23516](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-23516)

@@ -95,7 +95,10 @@
 
     <div class="form-group">
       <div class="input-group">
-        <span class="input-group-addon"><i class="fa fa-map-marker"></i> </span>
+        <span class="input-group-addon">
+          <i class="fa fa-map-marker"></i>
+          <span class="exponent" ng-show="addressRequired"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
+        </span>
         <input type="hidden"
                name="admin[invoicing_profile_attributes][address_attributes][id]"
                ng-value="admin.invoicing_profile_attributes.address.id" />

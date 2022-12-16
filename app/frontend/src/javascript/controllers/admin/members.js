@@ -1190,8 +1190,8 @@ Application.Controllers.controller('NewAdminController', ['$state', '$scope', 'A
 /**
  * Controller used in the manager's creation page (admin view)
  */
-Application.Controllers.controller('NewManagerController', ['$state', '$scope', 'User', 'groupsPromise', 'tagsPromise', 'growl', '_t',
-  function ($state, $scope, User, groupsPromise, tagsPromise, growl, _t) {
+Application.Controllers.controller('NewManagerController', ['$state', '$scope', 'User', 'groupsPromise', 'tagsPromise', 'growl', '_t', 'settingsPromise',
+  function ($state, $scope, User, groupsPromise, tagsPromise, growl, _t, settingsPromise) {
   // default admin profile
     $scope.manager = {
       statistic_profile_attributes: {
@@ -1209,6 +1209,12 @@ Application.Controllers.controller('NewManagerController', ['$state', '$scope', 
         startingDay: Fablab.weekStartingDay
       }
     };
+
+    // is the phone number required in _admin_form?
+    $scope.phoneRequired = (settingsPromise.phone_required === 'true');
+
+    // is the address required in _admin_form?
+    $scope.addressRequired = (settingsPromise.address_required === 'true');
 
     // list of all groups
     $scope.groups = groupsPromise.filter(function (g) { return !g.disabled; });
