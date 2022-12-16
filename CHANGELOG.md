@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+## v5.5.8 2022 December 16
+
 - Fix a bug: wrong reservations count for spaces in availabilities export (#415)
 - Fix a bug: phone or address required are not marked as it, in create manager/admin form
 - Fix a security issue: updated express to 4.18.2 to fix [CVE-2022-24999](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-24999)
