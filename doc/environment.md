@@ -99,6 +99,12 @@ These two variables are also used for SSO authentication.
 
 This parameter configures the logs verbosity.
 Available log levels can be found [here](http://guides.rubyonrails.org/debugging_rails_applications.html#log-levels).
+<a name="RAILS_LOG_TO_STDOUT"></a>
+
+    RAILS_LOG_TO_STDOUT
+
+Enable redirecting logs (including errors) to stdout.
+Set this variable to `true` in production environments.
 <a name="MAX_IMAGE_SIZE"></a>
 
     MAX_IMAGE_SIZE

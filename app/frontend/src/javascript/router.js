@@ -1098,7 +1098,8 @@ angular.module('application.router', ['ui.router'])
         },
         resolve: {
           groupsPromise: ['Group', function (Group) { return Group.query().$promise; }],
-          tagsPromise: ['Tag', function (Tag) { return Tag.query().$promise; }]
+          tagsPromise: ['Tag', function (Tag) { return Tag.query().$promise; }],
+          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['phone_required', 'address_required']" }).$promise; }]
         }
       })
 
