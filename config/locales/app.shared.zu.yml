@@ -102,6 +102,7 @@ zu:
       gender_input:
         man: "crwdns28704:0crwdne28704:0"
         woman: "crwdns28706:0crwdne28706:0"
+        other: "Other"
       change_password:
         change_my_password: "crwdns28708:0crwdne28708:0"
         confirm_current: "crwdns28710:0crwdne28710:0"

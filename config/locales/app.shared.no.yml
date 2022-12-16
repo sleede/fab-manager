@@ -102,6 +102,7 @@
       gender_input:
         man: "Man"
         woman: "Woman"
+        other: "Annet"
       change_password:
         change_my_password: "Change my password"
         confirm_current: "Confirm your current password"

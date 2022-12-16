@@ -212,6 +212,7 @@ zu:
     organization_address: "crwdns3477:0crwdne3477:0"
     man: "crwdns3479:0crwdne3479:0"
     woman: "crwdns3481:0crwdne3481:0"
+    other: "Other"
     without_subscriptions: "crwdns3483:0crwdne3483:0"
   #machines/trainings/events reservations list to EXCEL format
   export_reservations:
@@ -474,6 +475,7 @@ zu:
     type: "crwdns3759:0crwdne3759:0"
     male: "crwdns3761:0crwdne3761:0"
     female: "crwdns3763:0crwdne3763:0"
+    other: "Other"
     deleted_user: "crwdns31747:0crwdne31747:0"
   #initial price's category for events, created to replace the old "reduced amount" property
   price_category:

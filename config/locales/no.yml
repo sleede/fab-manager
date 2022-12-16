@@ -212,6 +212,7 @@
     organization_address: "Organisasjonens adresse"
     man: "Mann"
     woman: "Kvinne"
+    other: "Annet"
     without_subscriptions: "Uten abonnementer"
   #machines/trainings/events reservations list to EXCEL format
   export_reservations:
@@ -474,6 +475,7 @@
     type: "Type"
     male: "Mann"
     female: "Kvinne"
+    other: "Annet"
     deleted_user: "Deleted user"
   #initial price's category for events, created to replace the old "reduced amount" property
   price_category:

@@ -63,6 +63,7 @@ zu:
         create_your_account: "crwdns27878:0crwdne27878:0"
         man: "crwdns27880:0crwdne27880:0"
         woman: "crwdns27882:0crwdne27882:0"
+        other: "Other"
         gender_is_required: "crwdns27884:0crwdne27884:0"
         your_first_name: "crwdns27886:0crwdne27886:0"
         first_name_is_required: "crwdns27888:0crwdne27888:0"
