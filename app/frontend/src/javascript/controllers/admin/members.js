@@ -1176,11 +1176,11 @@ Application.Controllers.controller('NewAdminController', ['$state', '$scope', 'A
     /**
    * Return an enumerable meaningful string for the gender of the provider user
    * @param user {Object} Database user record
-   * @return {string} 'male' or 'female'
+   * @return {string} 'male', 'female' or "other"
    */
     return getGender = function (user) {
       if (user.statistic_profile_attributes) {
-        if (user.statistic_profile_attributes.gender) { return 'male'; } else { return 'female'; }
+        if (user.statistic_profile_attributes.gender === 'male') { return 'male'; } else if (user.statistic_profile_attributes.gender === 'female') { return 'female'; }
       } else { return 'other'; }
     };
   }
