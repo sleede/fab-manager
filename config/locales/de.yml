@@ -212,6 +212,7 @@ de:
     organization_address: "Adresse der Organisation"
     man: "Mann"
     woman: "Frau"
+    other: "Unbestimmt"
     without_subscriptions: "Ohne Abonnement"
   #machines/trainings/events reservations list to EXCEL format
   export_reservations:
