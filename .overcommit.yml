@@ -12,7 +12,7 @@ CommitMsg:
 
   MessageFormat:
     enabled: true
-    pattern: ^(\([a-z0-9]+\) [\w ]+(\n\n.+)?)|(Version (\d+\.?)+)|(Merge branch .*)
-    expected_pattern_message: (type) title\n\ndescription
+    pattern: ^(\((doc|bug|feat|security|dev|i18n|api|test|quality|ui|merge)\) [\w ]++(\n\n.+)?)|(Version (\d+\.?)+)|(Merge branch .*)
+    expected_pattern_message: (doc|bug|feat|security|dev|i18n|api|test|quality|ui|merge) title\n\ndescription
     sample_message: (bug) no validation on date\n\nThe birthdate was not validated...
 
