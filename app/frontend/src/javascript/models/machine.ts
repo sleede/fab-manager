@@ -5,6 +5,11 @@ export interface MachineIndexFilter extends ApiFilter {
   disabled: boolean,
 }
 
+export interface MachineListFilter {
+  status: boolean | void,
+  category: number | void,
+}
+
 export interface Machine {
   id?: number,
   name: string,
@@ -31,5 +36,6 @@ export interface Machine {
     id: number,
     name: string,
     slug: string,
-  }>
+  }>,
+  machine_category_id: number | void
 }

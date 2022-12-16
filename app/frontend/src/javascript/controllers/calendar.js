@@ -16,8 +16,8 @@
  * Controller used in the public calendar global
  */
 
-Application.Controllers.controller('CalendarController', ['$scope', '$state', '$aside', 'moment', 'Availability', 'Setting', 'growl', 'dialogs', 'bookingWindowStart', 'bookingWindowEnd', '_t', 'uiCalendarConfig', 'CalendarConfig', 'trainingsPromise', 'machinesPromise', 'spacesPromise', 'iCalendarPromise',
-  function ($scope, $state, $aside, moment, Availability, Setting, growl, dialogs, bookingWindowStart, bookingWindowEnd, _t, uiCalendarConfig, CalendarConfig, trainingsPromise, machinesPromise, spacesPromise, iCalendarPromise) {
+Application.Controllers.controller('CalendarController', ['$scope', '$state', '$aside', 'moment', 'Availability', 'Setting', 'growl', 'dialogs', 'bookingWindowStart', 'bookingWindowEnd', '_t', 'uiCalendarConfig', 'CalendarConfig', 'trainingsPromise', 'machinesPromise', 'spacesPromise', 'iCalendarPromise', 'machineCategoriesPromise',
+  function ($scope, $state, $aside, moment, Availability, Setting, growl, dialogs, bookingWindowStart, bookingWindowEnd, _t, uiCalendarConfig, CalendarConfig, trainingsPromise, machinesPromise, spacesPromise, iCalendarPromise, machineCategoriesPromise) {
   /* PRIVATE STATIC CONSTANTS */
     let currentMachineEvent = null;
     machinesPromise.forEach(m => m.checked = true);
@@ -34,6 +34,12 @@ Application.Controllers.controller('CalendarController', ['$scope', '$state', '$
 
     // List of machines
     $scope.machines = machinesPromise.filter(t => !t.disabled);
+
+    // List of machine categories
+    $scope.machineCategories = machineCategoriesPromise;
+
+    // List of machines group by category
+    $scope.machinesGroupByCategory = [];
 
     // List of spaces
     $scope.spaces = spacesPromise.filter(t => !t.disabled);
@@ -55,6 +61,7 @@ Application.Controllers.controller('CalendarController', ['$scope', '$state', '$
         evt: filter.evt,
         dispo: filter.dispo
       });
+      scope.machinesGroupByCategory.forEach(c => c.checked = _.every(c.machines, 'checked'));
       // remove all
       $scope.eventSources.splice(0, $scope.eventSources.length);
       // recreate source for trainings/machines/events with new filters
@@ -104,8 +111,19 @@ Application.Controllers.controller('CalendarController', ['$scope', '$state', '$
     };
 
     // toggle to select all formation/machine
-    $scope.toggleFilter = function (type, filter) {
-      $scope[type].forEach(t => t.checked = filter[type]);
+    $scope.toggleFilter = function (type, filter, machineCategoryId) {
+      if (type === 'machineCategory') {
+        const category = _.find($scope.machinesGroupByCategory, (c) => (c.id).toString() === machineCategoryId);
+        if (category) {
+          category.machines.forEach(m => m.checked = category.checked);
+        }
+        filter.machines = isSelectAll('machines', $scope);
+      } else {
+        $scope[type].forEach(t => t.checked = filter[type]);
+        if (type === 'machines') {
+          $scope.machinesGroupByCategory.forEach(t => t.checked = filter[type]);
+        }
+      }
       $scope.filterAvailabilities(filter, $scope);
     };
 
@@ -121,6 +139,9 @@ Application.Controllers.controller('CalendarController', ['$scope', '$state', '$
           },
           machines () {
             return $scope.machines;
+          },
+          machinesGroupByCategory () {
+            return $scope.machinesGroupByCategory;
           },
           spaces () {
             return $scope.spaces;
@@ -138,14 +159,16 @@ Application.Controllers.controller('CalendarController', ['$scope', '$state', '$
             return $scope.filterAvailabilities;
           }
         },
-        controller: ['$scope', '$uibModalInstance', 'trainings', 'machines', 'spaces', 'externals', 'filter', 'toggleFilter', 'filterAvailabilities', function ($scope, $uibModalInstance, trainings, machines, spaces, externals, filter, toggleFilter, filterAvailabilities) {
+        controller: ['$scope', '$uibModalInstance', 'trainings', 'machines', 'machinesGroupByCategory', 'spaces', 'externals', 'filter', 'toggleFilter', 'filterAvailabilities', function ($scope, $uibModalInstance, trainings, machines, machinesGroupByCategory, spaces, externals, filter, toggleFilter, filterAvailabilities) {
           $scope.trainings = trainings;
           $scope.machines = machines;
+          $scope.machinesGroupByCategory = machinesGroupByCategory;
+          $scope.hasMachineCategory = _.some(machines, 'machine_category_id');
           $scope.spaces = spaces;
           $scope.externals = externals;
           $scope.filter = filter;
 
-          $scope.toggleFilter = (type, filter) => toggleFilter(type, filter);
+          $scope.toggleFilter = (type, filter, machineCategoryId) => toggleFilter(type, filter, machineCategoryId);
 
           $scope.filterAvailabilities = filter => filterAvailabilities(filter, $scope);
 
@@ -195,6 +218,18 @@ Application.Controllers.controller('CalendarController', ['$scope', '$state', '$
             color: e.color
           });
         }
+      });
+
+      // group machines by category
+      _.forIn(_.groupBy($scope.machines, 'machine_category_id'), (ms, categoryId) => {
+        const category = _.find($scope.machineCategories, (c) => (c.id).toString() === categoryId);
+        $scope.machinesGroupByCategory.push({
+          id: categoryId,
+          name: category ? category.name : _t('app.shared.machine.machine_uncategorized'),
+          checked: true,
+          machine_ids: category ? category.machine_ids : [],
+          machines: ms
+        });
       });
     };
 

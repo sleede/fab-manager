@@ -90,6 +90,27 @@
     </div>
 
     <div class="form-group m-b-xl">
+      <label for="machine[machine_category_id]" class="control-label col-sm-2" translate>
+        {{ 'app.shared.machine.assigning_machine_to_category' }}
+      </label>
+      <div class="col-sm-10">
+        <span class="help-block alert alert-warning m-b" translate>
+          {{ 'app.shared.machine.assigning_machine_to_category_info_html' }}
+        </span>
+        <small translate>{{ 'app.shared.machine.linking_machine_to_category' }}</small>
+        <ui-select ng-model="machine.machine_category_id" name="machine[machine_category_id]">
+          <ui-select-match>
+              <span ng-bind="$select.selected.name"></span>
+              <input type="hidden" name="machine[machine_category_id]" value="{{$select.selected.id}}" />
+          </ui-select-match>
+          <ui-select-choices repeat="c.id as c in (machineCategories | filter: $select.search)">
+              <span ng-bind-html="c.name | highlight: $select.search"></span>
+          </ui-select-choices>
+        </ui-select>
+      </div>
+    </div>
+
+    <div class="form-group m-b-xl">
       <label class="col-sm-2 control-label" translate>{{ 'app.shared.machine.attached_files_pdf' }}</label>
       <div class="col-sm-10">
         <div ng-repeat="file in machine.machine_files_attributes" ng-show="!file._destroy">

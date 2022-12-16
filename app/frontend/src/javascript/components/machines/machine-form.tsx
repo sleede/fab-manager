@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { SubmitHandler, useForm, useWatch } from 'react-hook-form';
 import { Machine } from '../../models/machine';
 import MachineAPI from '../../api/machine';
@@ -11,6 +11,10 @@ import { react2angular } from 'react2angular';
 import { ErrorBoundary } from '../base/error-boundary';
 import { FormRichText } from '../form/form-rich-text';
 import { FormSwitch } from '../form/form-switch';
+import { FormSelect } from '../form/form-select';
+import { SelectOption } from '../../models/select';
+import MachineCategoryAPI from '../../api/machine-category';
+import { MachineCategory } from '../../models/machine-category';
 
 declare const Application: IApplication;
 
@@ -29,6 +33,15 @@ export const MachineForm: React.FC<MachineFormProps> = ({ action, machine, onErr
   const output = useWatch<Machine>({ control });
   const { t } = useTranslation('admin');
 
+  const [machineCategories, setMachineCategories] = useState<Array<MachineCategory>>([]);
+
+  // retrieve the full list of machine categories on component mount
+  useEffect(() => {
+    MachineCategoryAPI.index()
+      .then(data => setMachineCategories(data))
+      .catch(e => onError(e));
+  }, []);
+
   /**
    * Callback triggered when the user validates the machine form: handle create or update
    */
@@ -37,6 +50,15 @@ export const MachineForm: React.FC<MachineFormProps> = ({ action, machine, onErr
       onSuccess(t(`app.admin.machine_form.${action}_success`));
     }).catch(error => {
       onError(error);
+    });
+  };
+
+  /**
+   * Convert all machine categories to the select format
+   */
+  const buildOptions = (): Array<SelectOption<number>> => {
+    return machineCategories.map(t => {
+      return { value: t.id, label: t.name };
     });
   };
 
@@ -67,6 +89,11 @@ export const MachineForm: React.FC<MachineFormProps> = ({ action, machine, onErr
                     label={t('app.admin.machine_form.technical_specifications')}
                     limit={null}
                     heading bulletList blockquote link video image />
+      <FormSelect options={buildOptions()}
+                  control={control}
+                  id="machine_category_id"
+                  formState={formState}
+                  label={t('app.admin.machine_form.assigning_machine_to_category')} />
 
       <FormSwitch control={control}
                   id="disabled"

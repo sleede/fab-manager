@@ -156,6 +156,10 @@ fr:
         add_an_attachment: "Ajouter une pièce jointe"
         disable_machine: "Désactiver la machine"
         validate_your_machine: "Valider votre machine"
+        assigning_machine_to_category: "Attributer une catégorie"
+        assigning_machine_to_category_info_html: "<strong>Information</strong><br>Vous ne pouvez attribuer qu'une seule catégoriez par machine."
+        linking_machine_to_category: "Lier ce produit à une catégorie machine"
+        machine_uncategorized: 'Non catégorisé'
       #button to book a machine reservation
       reserve_button:
         book_this_machine: "Réserver cette machine"
@@ -641,3 +645,12 @@ fr:
         keyword: "Mot-clef : {KEYWORD}"
         stock_internal: "Stock interne"
         stock_external: "Stock externe"
+      calendar:
+        calendar: "Calendrier"
+        show_unavailables: "Afficher les créneaux non disponibles"
+        filter_calendar: "Filtrer le calendrier"
+        trainings: "Formations"
+        machines: "Machines"
+        spaces: "Espaces"
+        events: "Événements"
+        externals: "Autres calendriers"

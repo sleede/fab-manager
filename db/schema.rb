@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_22_123605) do
+ActiveRecord::Schema.define(version: 2022_12_16_090005) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
@@ -350,6 +350,12 @@ ActiveRecord::Schema.define(version: 2022_11_22_123605) do
     t.text "description"
   end
 
+  create_table "machine_categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "machines", id: :serial, force: :cascade do |t|
     t.string "name", null: false
     t.text "description"
@@ -359,7 +365,9 @@ ActiveRecord::Schema.define(version: 2022_11_22_123605) do
     t.string "slug"
     t.boolean "disabled"
     t.datetime "deleted_at"
+    t.bigint "machine_category_id"
     t.index ["deleted_at"], name: "index_machines_on_deleted_at"
+    t.index ["machine_category_id"], name: "index_machines_on_machine_category_id"
     t.index ["slug"], name: "index_machines_on_slug", unique: true
   end
 
@@ -1187,6 +1195,7 @@ ActiveRecord::Schema.define(version: 2022_11_22_123605) do
   add_foreign_key "invoices", "statistic_profiles"
   add_foreign_key "invoices", "wallet_transactions"
   add_foreign_key "invoicing_profiles", "users"
+  add_foreign_key "machines", "machine_categories"
   add_foreign_key "order_activities", "invoicing_profiles", column: "operator_profile_id"
   add_foreign_key "order_activities", "orders"
   add_foreign_key "order_items", "orders"

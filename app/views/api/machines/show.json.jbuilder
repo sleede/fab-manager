@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-json.extract! @machine, :id, :name, :description, :spec, :disabled, :slug
+json.extract! @machine, :id, :name, :description, :spec, :disabled, :slug, :machine_category_id
 json.machine_image @machine.machine_image.attachment.large.url if @machine.machine_image
 
 json.machine_files_attributes @machine.machine_files do |f|

@@ -1,6 +1,27 @@
 en:
   app:
     admin:
+      machines:
+        the_fablab_s_machines: "The FabLab's machines"
+        all_machines: "All machines"
+        manage_machines_categories: "Manage machines categories"
+      machine_categories_list:
+        machine_categories: "Machines Categories"
+        add_a_machine_category: "Add a machine category"
+        name: "Name"
+        machines_number: "Nb of machines"
+        edit: "Edit"
+      machine_category_modal:
+        new_machine_category: "New categorie"
+        edit_machine_category: "Edit catégorie"
+        successfully_created: "The new machine category request has been created."
+        unable_to_create: "Unable to delete the machine category request: "
+        successfully_updated: "The machine category request has been updated."
+        unable_to_update: "Unable to modify the machine category request: "
+      machine_category_form:
+        name: "Name of category"
+        assigning_machines: "Assigning the machines to this category"
+        save: "Save"
       machine_form:
         name: "Name"
         illustration: "Visual"

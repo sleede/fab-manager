@@ -1,6 +1,27 @@
 fr:
   app:
     admin:
+      machines:
+        the_fablab_s_machines: "Les machines du FabLab"
+        all_machines: "Toutes les machines"
+        manage_machines_categories: "Gérer les catégories machines"
+      machine_categories_list:
+        machine_categories: "Catégories Machines"
+        add_a_machine_category: "Ajouter une catégorie machine"
+        name: "Nom"
+        machines_number: "Nb de machines"
+        edit: "Editer"
+      machine_category_modal:
+        new_machine_category: "Créer une nouvelle catégorie"
+        edit_machine_category: "Modifier la catégorie"
+        successfully_created: "La nouvelle catégorie machine a bien été créée."
+        unable_to_create: "Impossible de supprimer la catégorie machine : "
+        successfully_updated: "La nouvelle catégorie machine a bien été mise à jour."
+        unable_to_update: "Impossible de modifier la catégorie machine : "
+      machine_category_form:
+        name: "Nom de la catégorie"
+        assigning_machines: "Assigner les machines à cette catégorie"
+        save: "Enregistrer"
       machine_form:
         name: "Nom"
         illustration: "Illustration"

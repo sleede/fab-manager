@@ -34,6 +34,8 @@ class Machine < ApplicationRecord
   has_many :machines_products, dependent: :destroy
   has_many :products, through: :machines_products
 
+  belongs_to :category
+
   after_create :create_statistic_subtype
   after_create :create_machine_prices
   after_create :update_gateway_product

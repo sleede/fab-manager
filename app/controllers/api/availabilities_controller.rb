@@ -11,12 +11,12 @@ class API::AvailabilitiesController < API::ApiController
   def index
     authorize Availability
     display_window = window
-    @availabilities = Availability.includes(:machines, :tags, :trainings, :spaces)
-                                  .where('start_at >= ? AND end_at <= ?', display_window[:start], display_window[:end])
-
-    @availabilities = @availabilities.where.not(available_type: 'event') unless Setting.get('events_in_calendar')
-
-    @availabilities = @availabilities.where.not(available_type: 'space') unless Setting.get('spaces_module')
+    service = Availabilities::AvailabilitiesService.new(@current_user, 'availability')
+    machine_ids = params[:m] || []
+    @availabilities = service.index(display_window,
+                                    { machines: machine_ids, spaces: params[:s], trainings: params[:t] },
+                                    (params[:evt] && params[:evt] == 'true'))
+    @availabilities = filter_availabilites(@availabilities)
   end
 
   def public

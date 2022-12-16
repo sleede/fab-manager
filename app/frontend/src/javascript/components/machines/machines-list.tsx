@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Machine } from '../../models/machine';
+import { Machine, MachineListFilter } from '../../models/machine';
 import { IApplication } from '../../models/application';
 import { react2angular } from 'react2angular';
 import { Loader } from '../base/loader';
 import MachineAPI from '../../api/machine';
+import MachineCategoryAPI from '../../api/machine-category';
+import { MachineCategory } from '../../models/machine-category';
 import { MachineCard } from './machine-card';
 import { MachinesFilters } from './machines-filters';
 import { User } from '../../models/user';
@@ -32,31 +34,65 @@ export const MachinesList: React.FC<MachinesListProps> = ({ onError, onSuccess, 
   const [machines, setMachines] = useState<Array<Machine>>(null);
   // we keep the full list of machines, for filtering
   const [allMachines, setAllMachines] = useState<Array<Machine>>(null);
+  // shown machine categories
+  const [machineCategories, setMachineCategories] = useState<Array<MachineCategory>>([]);
+  // machine list filter
+  const [filter, setFilter] = useState<MachineListFilter>({
+    status: true,
+    category: null
+  });
 
   // retrieve the full list of machines on component mount
   useEffect(() => {
     MachineAPI.index()
       .then(data => setAllMachines(data))
       .catch(e => onError(e));
+    MachineCategoryAPI.index()
+      .then(data => setMachineCategories(data))
+      .catch(e => onError(e));
   }, []);
 
   // filter the machines shown when the full list was retrieved
   useEffect(() => {
-    handleFilterByStatus(true);
+    handleFilter();
   }, [allMachines]);
 
-  /**
-   * Callback triggered when the user changes the status filter.
-   * Set the 'machines' state to a filtered list, depending on the provided parameter.
-   * @param status, true = enabled machines, false = disabled machines, null = all machines
-   */
-  const handleFilterByStatus = (status: boolean): void => {
-    if (!allMachines) return;
-    if (status === null) return setMachines(allMachines);
+  // filter the machines shown when the filter was changed
+  useEffect(() => {
+    handleFilter();
+  }, [filter]);
 
-    // enabled machines may have the m.disabled property null (for never disabled machines)
-    // or false (for re-enabled machines)
-    setMachines(allMachines.filter(m => !!m.disabled === !status));
+  /**
+   * Callback triggered when the user changes the filter.
+   * filter the machines shown when the filter was changed.
+   */
+  const handleFilter = (): void => {
+    let machinesFiltered = [];
+    if (allMachines) {
+      if (filter.status === null) {
+        machinesFiltered = allMachines;
+      } else {
+        // enabled machines may have the m.disabled property null (for never disabled machines)
+        // or false (for re-enabled machines)
+        machinesFiltered = allMachines.filter(m => !!m.disabled === !filter.status);
+      }
+      if (filter.category !== null) {
+        machinesFiltered = machinesFiltered.filter(m => m.machine_category_id === filter.category);
+      }
+    }
+    setMachines(machinesFiltered);
+  };
+
+  /**
+   * Callback triggered when the user changes the filter.
+   * @param type, status, category
+   * @param value, status and category value
+   */
+  const handleFilterChangedBy = (type: string, value: number | boolean | void) => {
+    setFilter({
+      ...filter,
+      [type]: value
+    });
   };
 
   /**
@@ -69,7 +105,7 @@ export const MachinesList: React.FC<MachinesListProps> = ({ onError, onSuccess, 
   // TODO: Conditionally display the store ad
   return (
     <div className="machines-list">
-      <MachinesFilters onStatusSelected={handleFilterByStatus} />
+      <MachinesFilters onFilterChangedBy={handleFilterChangedBy} machineCategories={machineCategories}/>
       <div className="all-machines">
         {false &&
           <div className='store-ad' onClick={() => linkToStore}>

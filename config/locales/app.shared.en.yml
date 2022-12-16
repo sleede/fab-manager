@@ -156,6 +156,10 @@ en:
         add_an_attachment: "Add an attachment"
         disable_machine: "Disable machine"
         validate_your_machine: "Validate your machine"
+        assigning_machine_to_category: "Assign a category"
+        assigning_machine_to_category_info_html: "<strong>Information</strong><br>You can only assign one category per machine."
+        linking_machine_to_category: "Link this product to a machine category"
+        machine_uncategorized: 'Uncategorized'
       #button to book a machine reservation
       reserve_button:
         book_this_machine: "Book this machine"
@@ -641,3 +645,12 @@ en:
         keyword: "Keyword: {KEYWORD}"
         stock_internal: "Private stock"
         stock_external: "Public stock"
+      calendar:
+        calendar: "Calendar"
+        show_unavailables: "Show unavailable slots"
+        filter_calendar: "Filter calendar"
+        trainings: "Trainings"
+        machines: "Machines"
+        spaces: "Spaces"
+        events: "Events"
+        externals: "Other calendars"
