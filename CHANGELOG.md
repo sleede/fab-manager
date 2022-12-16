@@ -5,6 +5,7 @@
 - Fix a security issue: updated express to 4.18.2 to fix [CVE-2022-24999](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-24999)
 - Fix a security issue: updated @claviska/jquery-minicolors to 2.3.6 to fix [CVE-2021-4243](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-4243)
 - Fix a security issue: updated loofah to 2.19.1 to fix [CVE-2022-23514](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-23514), [CVE-2022-23515](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-23515) and [CVE-2022-23516](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-23516)
+- Fix a security issue: updated rails-html-sanitizer to 1.4.4 to fix [CVE-2022-23517](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-23517), [CVE-2022-23518](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-23518), [CVE-2022-23519](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-23519), [CVE-2022-23520](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-23520) and [CVE-2022-32209](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-32209)
 - Removed gem rails_12factor
 - [TODO DEPLOY] add the `RAILS_LOG_TO_STDOUT=true` environment variable (see [doc/environment.md](doc/environment.md#RAILS_LOG_TO_STDOUT) for configuration details)
 
