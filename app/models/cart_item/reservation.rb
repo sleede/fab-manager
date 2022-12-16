@@ -64,7 +64,7 @@ class CartItem::Reservation < CartItem::BaseItem
         return false
       end
 
-      if slot_db.start_at < reservation_deadline
+      if slot_db.start_at < reservation_deadline && !@operator.privileged?
         @errors[:slot] = 'cannot reserve a slot ' + reservation_deadline_minutes.to_s + ' minutes prior to its start'
         return false
       end
