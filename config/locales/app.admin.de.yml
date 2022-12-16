@@ -1098,6 +1098,7 @@ de:
         failed_to_create_admin: "Administrator konnte nicht erstellt werden:"
         man: "Männlich"
         woman: "Weiblich"
+        other: "unbestimmt"
         pseudonym: "Pseudonym"
         pseudonym_is_required: "Pseudonym ist erforderlich."
         first_name: "Vorname"
