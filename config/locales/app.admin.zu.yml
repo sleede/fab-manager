@@ -1350,6 +1350,8 @@ zu:
         max_visibility: "crwdns26444:0crwdne26444:0"
         visibility_for_yearly_members: "crwdns26446:0crwdne26446:0"
         visibility_for_other_members: "crwdns26448:0crwdne26448:0"
+        reservation_deadline: "crwdns31751:0crwdne31751:0"
+        deadline_minutes: "crwdns31753:0crwdne31753:0"
         ability_for_the_users_to_move_their_reservations: "crwdns26450:0crwdne26450:0"
         reservations_shifting: "crwdns26452:0crwdne26452:0"
         prior_period_hours: "crwdns26454:0crwdne26454:0"
