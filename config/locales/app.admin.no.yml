@@ -1350,6 +1350,8 @@
         max_visibility: "Maximum visibility (in months)"
         visibility_for_yearly_members: "Abonnementer med varighet på minst 1 år"
         visibility_for_other_members: "For alle andre medlemmer"
+        reservation_deadline: "reservation deadline"
+        deadline_minutes: "Prior period (minutes)"
         ability_for_the_users_to_move_their_reservations: "Om brukerne kan flytte sine bestillinger"
         reservations_shifting: "Reservasjonsendringer"
         prior_period_hours: "Tidligere perioder (timer)"
