@@ -78,6 +78,7 @@ export const bookingSettings = [
   'reminder_delay',
   'visibility_yearly',
   'visibility_others',
+  'reservation_deadline',
   'display_name_enable',
   'book_overlapping_slots',
   'slot_duration',

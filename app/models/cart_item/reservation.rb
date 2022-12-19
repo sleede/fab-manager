@@ -42,6 +42,10 @@ class CartItem::Reservation < CartItem::BaseItem
 
   def valid?(all_items)
     pending_subscription = all_items.find { |i| i.is_a?(CartItem::Subscription) }
+    
+    reservation_deadline_minutes = Setting.get('reservation_deadline').to_i
+    reservation_deadline = reservation_deadline_minutes.minutes.since
+
     @slots.each do |slot|
       slot_db = Slot.find(slot[:slot_id])
       if slot_db.nil?
@@ -57,6 +61,11 @@ class CartItem::Reservation < CartItem::BaseItem
 
       if slot_db.full?
         @errors[:slot] = 'availability is full'
+        return false
+      end
+
+      if slot_db.start_at < reservation_deadline && !@operator.privileged?
+        @errors[:slot] = 'cannot reserve a slot ' + reservation_deadline_minutes.to_s + ' minutes prior to its start'
         return false
       end
 

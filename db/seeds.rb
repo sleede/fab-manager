@@ -729,6 +729,8 @@ Setting.set('visibility_yearly', 3) unless Setting.find_by(name: 'visibility_yea
 
 Setting.set('visibility_others', 1) unless Setting.find_by(name: 'visibility_others').try(:value)
 
+Setting.set('reservation_deadline', 0) unless Setting.find_by(name: 'reservation_deadline').try(:value)
+
 Setting.set('display_name_enable', false) unless Setting.find_by(name: 'display_name_enable').try(:value)
 
 Setting.set('machines_sort_by', 'default') unless Setting.find_by(name: 'machines_sort_by').try(:value)

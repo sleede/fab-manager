@@ -9,6 +9,7 @@ class Availabilities::AvailabilitiesService
       year: Setting.get('visibility_yearly').to_i.months.since,
       other: Setting.get('visibility_others').to_i.months.since
     }
+    @minimum_visibility = Setting.get('reservation_deadline').to_i.minutes.since
     @service = Availabilities::StatusService.new(current_user&.role)
     @level = level
   end
@@ -93,7 +94,7 @@ class Availabilities::AvailabilitiesService
       end_at = @maximum_visibility[:year] if subscription_year?(user) && type != 'training'
       end_at = @maximum_visibility[:year] if show_more_trainings?(user) && type == 'training'
       window_end = [end_at, range_end].min
-      window_start = [range_start, DateTime.current].max
+      window_start = [range_start, @minimum_visibility].max
       availabilities.includes(:tags, :plans, :slots)
                     .joins(:slots)
                     .where('availabilities.start_at <= ? AND availabilities.end_at >= ? AND available_type = ?', window_end, window_start, type)
