@@ -524,6 +524,7 @@ de:
     space_explications_alert: "Erklärungstext auf der Seite für die Raum-Reservierung"
     visibility_yearly: "Maximale Sichtbarkeit für jährliche Abonnenten"
     visibility_others: "Maximale Sichtbarkeit für andere Mitglieder"
+    reservation_deadline: "Prevent reservation before it starts"
     display_name_enable: "Namen im Kalender anzeigen"
     machines_sort_by: "Anzeigereihenfolge der Maschinen"
     accounting_journal_code: "Journalcode"
