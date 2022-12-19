@@ -524,6 +524,7 @@ en:
     space_explications_alert: "Explanation message on the space reservation page"
     visibility_yearly: "Maximum visibility for annual subscribers"
     visibility_others: "Maximum visibility for other members"
+    reservation_deadline: "Prevent reservation before it starts"
     display_name_enable: "Display names in the calendar"
     machines_sort_by: "Machines display order"
     accounting_journal_code: "Journal code"
