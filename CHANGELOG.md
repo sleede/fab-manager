@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- Add reservation deadline parameter (#414)
+
 ## v5.5.8 2022 December 16
 
 - Fix a bug: wrong reservations count for spaces in availabilities export (#415)
