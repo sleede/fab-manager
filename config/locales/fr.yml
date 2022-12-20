@@ -524,6 +524,7 @@ fr:
     space_explications_alert: "L'explication sur la page de réservation d'un espace"
     visibility_yearly: "La visibilité maximale pour les abonnées annuels"
     visibility_others: "La visibilité maximale pour les autres membres"
+    reservation_deadline: "Empêcher la réservation avant qu'elle ne commence"
     display_name_enable: "Afficher les noms dans le calendrier"
     machines_sort_by: "Ordre d'affichage des machines"
     accounting_journal_code: "Code journal"

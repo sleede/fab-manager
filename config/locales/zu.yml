@@ -524,6 +524,7 @@ zu:
     space_explications_alert: "crwdns21702:0crwdne21702:0"
     visibility_yearly: "crwdns21704:0crwdne21704:0"
     visibility_others: "crwdns21706:0crwdne21706:0"
+    reservation_deadline: "crwdns31755:0crwdne31755:0"
     display_name_enable: "crwdns21708:0crwdne21708:0"
     machines_sort_by: "crwdns21710:0crwdne21710:0"
     accounting_journal_code: "crwdns21712:0crwdne21712:0"

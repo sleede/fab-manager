@@ -1350,6 +1350,8 @@ es:
         max_visibility: "Máxima visibilidad (en meses)"
         visibility_for_yearly_members: "Para las suscripciones en curso, por lo menos 1 año"
         visibility_for_other_members: "Para todos los demás miembros"
+        reservation_deadline: "reservation deadline"
+        deadline_minutes: "Prior period (minutes)"
         ability_for_the_users_to_move_their_reservations: "Capacidad para que los usuarios muevan sus reservas"
         reservations_shifting: "Cambio de reservas"
         prior_period_hours: "Período anterior (horas)"
