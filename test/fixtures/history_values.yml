@@ -860,3 +860,12 @@ history_value_90:
   updated_at: '2022-10-26 12:46:16.125400000 Z'
   footprint:
   invoicing_profile_id: 1
+
+history_value_91:
+  id: 91
+  setting_id: 90
+  value: 'true'
+  created_at: '2022-12-20 14:38:40.000421'
+  updated_at: '2022-12-20 14:38:40.000421'
+  footprint:
+  invoicing_profile_id: 1

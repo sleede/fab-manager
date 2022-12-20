@@ -55,7 +55,7 @@ module Availabilities
       start_date = DateTime.current.utc.strftime('%Y-%m-%d')
       end_date = 7.days.from_now.utc.strftime('%Y-%m-%d')
       tz = Time.zone.tzinfo.name
-      get "/api/availabilities?start=#{start_date}&end=#{end_date}&timezone=#{tz}&_=1487169767960"
+      get "/api/availabilities?start=#{start_date}&end=#{end_date}&timezone=#{tz}&_=1487169767960&#{all_machines}"
 
       # Check response format & status
       assert_equal 200, response.status
@@ -66,7 +66,7 @@ module Availabilities
       assert_not_empty availabilities, 'no availabilities were found'
       assert_not_nil availabilities[0], 'first availability was unexpectedly nil'
 
-      assert_not availabilities.map { |a| a[:available_type] }.include?('space'), 'unexpected space availability instead that it was disabled'
+      assert_not availabilities.pluck(:available_type).include?('space'), 'unexpected space availability instead that it was disabled'
 
       # re-enable spaces
       Setting.set('spaces_module', true)
@@ -77,7 +77,7 @@ module Availabilities
       start_date = DateTime.current.utc.strftime('%Y-%m-%d')
       end_date = 7.days.from_now.utc.strftime('%Y-%m-%d')
       tz = Time.zone.tzinfo.name
-      get "/api/availabilities?start=#{start_date}&end=#{end_date}&timezone=#{tz}&_=1487169767960"
+      get "/api/availabilities?start=#{start_date}&end=#{end_date}&timezone=#{tz}&_=1487169767960&#{all_spaces}"
 
       # Check response format & status
       assert_equal 200, response.status
@@ -88,7 +88,7 @@ module Availabilities
       assert_not_empty availabilities, 'no availabilities were found'
       assert_not_nil availabilities[0], 'first availability was unexpectedly nil'
 
-      assert availabilities.map { |a| a[:available_type] }.include?('space'), 'space availability not found instead that it was enabled'
+      assert availabilities.pluck(:available_type).include?('space'), 'space availability not found instead that it was enabled'
     end
 
     test 'create availabilities' do
@@ -126,16 +126,30 @@ module Availabilities
       assert_not_nil availability[:id], 'availability ID was unexpectedly nil'
 
       # Check the slots
-      assert_equal (availability[:start_at].to_datetime + availability[:slot_duration].minutes * 4).iso8601,
+      assert_equal (availability[:start_at].to_datetime + (availability[:slot_duration].minutes * 4)).iso8601,
                    availability[:end_at],
                    'expected end_at = start_at + 4 slots of 90 minutes'
-      assert_equal (slots_count + 4 * 3), Slot.count, 'expected (4*3) slots of 90 minutes were created'
+      assert_equal (slots_count + (4 * 3)), Slot.count, 'expected (4*3) slots of 90 minutes were created'
       assert_equal 90.minutes, Availability.find(availability[:id]).slots.first.duration
 
       # Check the recurrence
       assert_equal (availability[:start_at].to_datetime + 2.weeks).to_date,
                    availability[:end_date].to_datetime.utc.to_date,
                    'expected end_date = start_at + 2 weeks'
+    end
+
+    private
+
+    def all_machines
+      Machine.all.map { |m| "m%5B%5D=#{m.id}" }.join('&')
+    end
+
+    def all_trainings
+      Training.all.map { |m| "t%5B%5D=#{m.id}" }.join('&')
+    end
+
+    def all_spaces
+      Space.all.map { |m| "s%5B%5D=#{m.id}" }.join('&')
     end
   end
 end
