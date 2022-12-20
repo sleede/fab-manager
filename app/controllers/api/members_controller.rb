@@ -4,6 +4,7 @@
 class API::MembersController < API::ApiController
   before_action :authenticate_user!, except: [:last_subscribed]
   before_action :set_member, only: %i[update destroy merge complete_tour update_role validate]
+  before_action :set_operator, only: %i[show update create]
   respond_to :json
 
   def index
@@ -213,6 +214,10 @@ class API::MembersController < API::ApiController
     @member = User.find(params[:id])
   end
 
+  def set_operator
+    @operator = current_user
+  end
+
   def user_params
     if current_user.id == params[:id].to_i
       params.require(:user).permit(:username, :email, :password, :password_confirmation, :group_id, :is_allow_contact, :is_allow_newsletter,
@@ -235,7 +240,7 @@ class API::MembersController < API::ApiController
                                    tag_ids: [],
                                    profile_attributes: [:id, :first_name, :last_name, :phone, :interest, :software_mastered, :website, :job,
                                                         :facebook, :twitter, :google_plus, :viadeo, :linkedin, :instagram, :youtube, :vimeo,
-                                                        :dailymotion, :github, :echosciences, :pinterest, :lastfm, :flickr,
+                                                        :dailymotion, :github, :echosciences, :pinterest, :lastfm, :flickr, :note,
                                                         { user_avatar_attributes: %i[id attachment destroy] }],
                                    invoicing_profile_attributes: [
                                      :id, :organization, :external_id,

@@ -374,6 +374,13 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
                            label={t('app.shared.user_profile_form.tags')}
                            id="tag_ids" />
         </div>}
+        {new UserLib(operator).isPrivileged(user) && <div className="note">
+          <FormRichText control={control}
+                        label={t('app.shared.user_profile_form.note')}
+                        tooltip={t('app.shared.user_profile_form.note_help')}
+                        limit={null}
+                        id="profile_attributes.note" />
+        </div>}
         {showTermsAndConditionsInput && termsAndConditions && <div className="terms-and-conditions">
           <FormSwitch control={control}
                       disabled={isDisabled}

@@ -1,5 +1,6 @@
 # Changelog Fab-manager
 
+- Private note on member's profile
 - Optional external identifier for users
 - Accounting data is now built each night and saved in database
 - Ability to define multiple accounting journal codes

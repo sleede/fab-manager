@@ -98,3 +98,8 @@ json.tags @member.tags do |t|
   json.name t.name
 end
 json.merged_at @member.merged_at
+if @operator.privileged?
+  json.profile_attributes do
+    json.note @member.profile.note
+  end
+end
