@@ -40,7 +40,7 @@ export interface User {
       _destroy?: boolean
     }
   },
-  invoicing_profile_attributes?: {
+  invoicing_profile_attributes: {
     id?: number,
     external_id?: string,
     address_attributes: {

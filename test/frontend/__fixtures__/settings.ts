@@ -542,37 +542,37 @@ export const settings: Array<Setting> = [
     localized: 'Code journal des ventes'
   },
   {
-    name: 'accounting_card_client_code',
+    name: 'accounting_payment_card_code',
     value: '5801',
     last_update: '2022-11-22T17:27:19+0100',
     localized: 'Code clients par carte'
   },
   {
-    name: 'accounting_card_client_label',
+    name: 'accounting_payment_card_label',
     value: 'Clients par carte',
     last_update: '2022-11-22T17:27:19+0100',
     localized: 'Libellé clients par carte'
   },
   {
-    name: 'accounting_wallet_client_code',
+    name: 'accounting_payment_wallet_code',
     value: '5802',
     last_update: '2022-11-22T17:27:19+0100',
     localized: 'Code clients par porte-monnaie'
   },
   {
-    name: 'accounting_wallet_client_label',
+    name: 'accounting_payment_wallet_label',
     value: 'Client par porte-monnaie',
     last_update: '2022-11-22T17:27:19+0100',
     localized: 'Libellé clients par porte-monnaie'
   },
   {
-    name: 'accounting_other_client_code',
+    name: 'accounting_payment_other_code',
     value: '5803',
     last_update: '2022-11-22T17:27:19+0100',
     localized: 'Code clients autre moyen'
   },
   {
-    name: 'accounting_other_client_label',
+    name: 'accounting_payment_other_label',
     value: 'Clients autres moyens de paiement',
     last_update: '2022-11-22T17:27:19+0100',
     localized: 'Libellé clients autre moyen'
@@ -692,19 +692,19 @@ export const settings: Array<Setting> = [
     localized: 'Libellé erreurs'
   },
   {
-    name: 'accounting_card_client_journal_code',
+    name: 'accounting_payment_card_journal_code',
     value: 'CB01',
     last_update: '2022-11-22T17:27:20+0100',
     localized: 'Libellé erreurs'
   },
   {
-    name: 'accounting_wallet_client_journal_code',
+    name: 'accounting_payment_wallet_journal_code',
     value: 'W001',
     last_update: '2022-11-22T17:27:20+0100',
     localized: 'Libellé erreurs'
   },
   {
-    name: 'accounting_other_client_journal_code',
+    name: 'accounting_payment_other_journal_code',
     value: 'CA01',
     last_update: '2022-11-22T17:27:20+0100',
     localized: 'Libellé erreurs'
@@ -720,5 +720,11 @@ export const settings: Array<Setting> = [
     value: 'TVA1',
     last_update: '2022-11-22T17:27:20+0100',
     localized: 'Libellé erreurs'
+  },
+  {
+    name: 'external_id',
+    value: 'true',
+    last_update: '2022-12-20T16:02:01+0100',
+    localized: 'identifiant externe'
   }
 ];

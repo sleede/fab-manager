@@ -57,3 +57,5 @@ global.Fablab.d3DateFormat = '%d/%m/%y';
 global.Fablab.uibDateFormat = 'dd/MM/yyyy';
 global.Fablab.maxProofOfIdentityFileSize = 5242880;
 global.Fablab.sessionTours = [];
+
+global.loggedUser = null;

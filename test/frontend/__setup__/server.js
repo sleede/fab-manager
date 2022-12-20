@@ -9,6 +9,8 @@ import products from '../__fixtures__/products';
 import productCategories from '../__fixtures__/product_categories';
 import productStockMovements from '../__fixtures__/product_stock_movements';
 import machines from '../__fixtures__/machines';
+import providers from '../__fixtures__/auth_providers';
+import profileCustomFields from '../__fixtures__/profile_custom_fields';
 
 export const server = setupServer(
   rest.get('/api/groups', (req, res, ctx) => {
@@ -48,9 +50,9 @@ export const server = setupServer(
     return res(ctx.json({ setting }));
   }),
   rest.get('/api/settings', (req, res, ctx) => {
-    const { names } = req.params;
-    const foundSettings = settings.filter(name => names.replace(/[[\]']/g, '').split(',').includes(name));
-    return res(ctx.json(foundSettings));
+    const names = new URLSearchParams(req.url.search).get('names');
+    const foundSettings = settings.filter(setting => names.replace(/[[\]']/g, '').split(',').includes(setting.name));
+    return res(ctx.json(Object.fromEntries(foundSettings.map(s => [s.name, s.value]))));
   }),
   rest.patch('/api/settings/bulk_update', (req, res, ctx) => {
     return res(ctx.json(req.body));
@@ -73,6 +75,15 @@ export const server = setupServer(
   }),
   rest.get('/api/machines', (req, res, ctx) => {
     return res(ctx.json(machines));
+  }),
+  rest.get('/api/auth_providers/active', (req, res, ctx) => {
+    return res(ctx.json(providers[0]));
+  }),
+  rest.get('/api/profile_custom_fields', (req, res, ctx) => {
+    return res(ctx.json(profileCustomFields));
+  }),
+  rest.get('/api/members/current', (req, res, ctx) => {
+    return res(ctx.json(global.loggedUser));
   })
 );
 

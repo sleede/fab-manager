@@ -21,7 +21,7 @@ interface EditSocialsProps<TFieldValues> {
  */
 export const EditSocials = <TFieldValues extends FieldValues>({ register, setValue, networks, formState, disabled }: EditSocialsProps<TFieldValues>) => {
   const { t } = useTranslation('shared');
-  // regular expression to validate the the input fields
+  // regular expression to validate the input fields
   const urlRegex = /^(https?:\/\/)([^.]+)\.(.{2,30})(\/.*)*\/?$/;
 
   const initSelectedNetworks = networks.filter(el => !['', null, undefined].includes(el.url));
