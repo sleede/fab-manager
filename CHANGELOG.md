@@ -1,6 +1,7 @@
 # Changelog Fab-manager
 
 - Add reservation deadline parameter (#414)
+- Fix a bug: unable to run test in negavtive timezones (#425)
 
 ## v5.5.8 2022 December 16
 
