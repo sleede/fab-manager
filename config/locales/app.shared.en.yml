@@ -116,6 +116,13 @@ en:
         help: "Your password must be minimum 12 characters long, have at least one uppercase letter, one lowercase letter, one number and one special character."
         password_too_short: "Password is too short (must be at least 12 characters)"
         confirmation_mismatch: "Confirmation mismatch with password."
+      password_strength:
+        not_in_requirements: "Your password doesn't meet the minimal requirements"
+        0: "Very weak password"
+        1: "Weak password"
+        2: "Almost ok"
+        3: "Good password"
+        4: "Excellent password"
       #project edition form
       project:
         name: "Name"

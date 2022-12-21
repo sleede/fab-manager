@@ -255,7 +255,8 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
                                                      onError={onError}
                                                      currentFormPassword={output.password}
                                                      user={user}
-                                                     formState={formState} />}
+                                                     formState={formState}
+                                                     setValue={setValue} />}
             {action === 'create' && <PasswordInput register={register}
               currentFormPassword={output.password}
               formState={formState} />}

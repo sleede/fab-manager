@@ -3812,6 +3812,41 @@
   resolved "https://registry.yarnpkg.com/@xtuc/long/-/long-4.2.2.tgz#d291c6a4e97989b5c61d9acf396ae4fe133a718d"
   integrity sha512-NuHqBY1PB/D8xU6s/thBgOAiAP7HOYDQ32+BFZILJ8ivkUkAHQnWfn6WhL79Owj1qmUnoN/YPhktdIoucipkAQ==
 
+"@zxcvbn-ts/core@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@zxcvbn-ts/core/-/core-2.1.0.tgz#026ffaba5b09cb05ee80f28b0183f75217d267d1"
+  integrity sha512-doxol9xrO7LgyVJhguXe7vO0xthnIYmsOKoDwrLg0Ho2kkpQaVtM+AOQw+BkEiKIqNg1V48eUf4/cTzMElXdiA==
+
+"@zxcvbn-ts/language-common@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@zxcvbn-ts/language-common/-/language-common-2.0.1.tgz#01c371a64e86de417c317b4443aaa0a0f07f917b"
+  integrity sha512-P+v5MA/UNc9nb3FEOEoDgTyIGQc2vLc6m04pdf5YyuNOzrL0iNANhECk2TUp62JbrjouJVodqhMH0j1a8/24Bg==
+
+"@zxcvbn-ts/language-de@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@zxcvbn-ts/language-de/-/language-de-2.1.0.tgz#c312638d6f520df40ac953cd0c1c3bcc69701bb3"
+  integrity sha512-VAk6D8+1eaeyatFU6Uz9Odiqu58e4VtyWzqdy2EmajAuGzZ+jpZLWtAlRG/qfElAFKR1B7SUp7tHRApzEJywvQ==
+
+"@zxcvbn-ts/language-en@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@zxcvbn-ts/language-en/-/language-en-2.1.0.tgz#52c797914380546b191e5b915e0e9843116eae18"
+  integrity sha512-I3n4AAbArjPAZtwCrk9MQnSrcj5+9rq8sic2rUU44fP5QaR17Vk8zDt61+R9dnP9ZRsj09aAUYML4Ash05qZjQ==
+
+"@zxcvbn-ts/language-es-es@^2.1.1":
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/@zxcvbn-ts/language-es-es/-/language-es-es-2.1.1.tgz#960b28bf58e537547293d555a36b1c42ef1ce66b"
+  integrity sha512-uDXU/z1df6YGmacFVcFhsvQ2Uu/EbMFCjLeNoM/95vH3GCTb/10eI5IlzjgSP4EG305vd9oNpBy6MODu+9SvNg==
+
+"@zxcvbn-ts/language-fr@^2.2.0":
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/@zxcvbn-ts/language-fr/-/language-fr-2.2.0.tgz#0b7dd93ebba0044fbe733836bc7091b76d42afe1"
+  integrity sha512-KK+vIXm17mZyo7jLmV4T0fT6hh5NOBABdmkCBVpLyXq+rlZpdaz6HgoYLjqq2JbEU3KSZ+gv6qW+2N4dMk3Tlw==
+
+"@zxcvbn-ts/language-pt-br@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@zxcvbn-ts/language-pt-br/-/language-pt-br-2.1.0.tgz#27676c0ee8df538ffc98bc7bca2817d492c70428"
+  integrity sha512-g4HxJLBf546BSfM4zDq29CNpAmFl2UsgHrEjy6gUA4KBEVqEaYNnMNfvayEtM7PpnzfZjSyLLVVG6S02lR8w+g==
+
 "@zxing/text-encoding@0.9.0":
   version "0.9.0"
   resolved "https://registry.yarnpkg.com/@zxing/text-encoding/-/text-encoding-0.9.0.tgz#fb50ffabc6c7c66a0c96b4c03e3d9be74864b70b"

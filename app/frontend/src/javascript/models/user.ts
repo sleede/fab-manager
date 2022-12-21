@@ -19,6 +19,7 @@ export interface User {
   need_completion?: boolean,
   ip_address?: string,
   mapped_from_sso?: string[],
+  current_password?: string,
   password?: string,
   password_confirmation?: string,
   cgu?: boolean, // Accepted terms and conditions?

@@ -47,7 +47,7 @@ class API::MembersController < API::ApiController
     authorize @member
     members_service = Members::MembersService.new(@member)
 
-    if members_service.update(user_params)
+    if members_service.update(user_params, current_user, params[:user][:current_password])
       # Update password without logging out
       bypass_sign_in(@member) unless current_user.id != params[:id].to_i
       render :show, status: :ok, location: member_path(@member)
@@ -235,7 +235,7 @@ class API::MembersController < API::ApiController
                                    ],
                                    statistic_profile_attributes: %i[id gender birthday])
 
-    elsif current_user.admin? || current_user.manager?
+    elsif current_user.privileged?
       params.require(:user).permit(:username, :email, :password, :password_confirmation, :is_allow_contact, :is_allow_newsletter, :group_id,
                                    tag_ids: [],
                                    profile_attributes: [:id, :first_name, :last_name, :phone, :interest, :software_mastered, :website, :job,

@@ -6,6 +6,8 @@
 - Ability to define multiple accounting journal codes
 - OpenAPI endpoint to fetch accounting data
 - Add reservation deadline parameter (#414)
+- Verify current password at server side when changing password
+- Password strengh indicator
 - Updated OpenAPI documentation
 - Updated OpenID Connect documentation
 - OpenAPI users endpoint offer ability to filter by created_after

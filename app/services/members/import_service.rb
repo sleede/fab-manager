@@ -16,7 +16,7 @@ class Members::ImportService
           params = row_to_params(row, user, password)
           if user
             service = Members::MembersService.new(user)
-            res = service.update(params)
+            res = service.update(params, import.user)
             log << { user: user.id, status: 'update', result: res }
           else
             user = User.new(params)
@@ -26,14 +26,10 @@ class Members::ImportService
           end
           log << user.errors.to_hash unless user.errors.to_hash.empty?
         rescue StandardError => e
-          log << e.to_s
-          Rails.logger.error e
-          Rails.logger.debug e.backtrace
+          handle_error(log, e)
         end
       rescue ArgumentError => e
-        log << e.to_s
-        Rails.logger.error e
-        Rails.logger.debug e.backtrace
+        handle_error(log, e)
       end
       log
     end
@@ -183,5 +179,11 @@ class Members::ImportService
       row['password'] = '********' if row['password']
       password
     end
+  end
+
+  def handle_error(log, error)
+    log << error.to_s
+    Rails.logger.error error
+    Rails.logger.debug error.backtrace
   end
 end
