@@ -1559,7 +1559,7 @@ pt:
         address_required_info_html: "Você pode definir se o endereço deve ser necessário para registrar um novo usuário no Fab-manager.<br/><strong>Por favor, note</strong> que, dependendo do seu país, as regulamentações podem exigir endereços para que as faturas sejam válidas."
         address_is_required: "Endereço é obrigatório"
         external_id: "External identifier"
-        external_id_info_html: "You can set up an external identifier for your users which cannot be modified by the user himself."
+        external_id_info_html: "You can set up an external identifier for your users, which cannot be modified by the user himself."
         enable_external_id: "Enable the external ID"
         captcha: "Captcha"
         captcha_info_html: "Você pode configurar uma proteção contra robôs, para evitar que eles criem contas de membros. Esta proteção está usando o Google reCAPTCHA. Inscreva-se para <a href='http://www.google.com/recaptcha/admin' target='_blank'>um par de chaves de API</a> para começar a usar o captcha."
