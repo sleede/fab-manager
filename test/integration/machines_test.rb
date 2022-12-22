@@ -23,7 +23,8 @@ class MachinesTest < ActionDispatch::IntegrationTest
                { attachment: fixture_file_upload('/files/document.pdf', 'document/pdf', true) },
                { attachment: fixture_file_upload('/files/document2.pdf', 'document/pdf', true) }
              ],
-             disabled: false
+             disabled: false,
+             machine_category_id: 1
            }
          },
          headers: upload_headers
@@ -43,6 +44,7 @@ class MachinesTest < ActionDispatch::IntegrationTest
     assert_not_empty db_machine.description
     assert_not db_machine.disabled
     assert_nil db_machine.deleted_at
+    assert_equal db_machine.machine_category_id, 1
   end
 
   test 'update a machine' do
