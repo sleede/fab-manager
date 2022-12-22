@@ -259,7 +259,7 @@ export const EventForm: React.FC<EventFormProps> = ({ action, event, onError, on
                    addOn={FormatLib.currencySymbol()} />
         {priceCategoriesOptions && <div className="additional-prices">
           {fields.map((price, index) => (
-            <div key={index} className={`price-item ${output.event_price_categories_attributes[index]?._destroy ? 'destroyed-item' : ''}`}>
+            <div key={index} className={`price-item ${output.event_price_categories_attributes && output.event_price_categories_attributes[index]?._destroy ? 'destroyed-item' : ''}`}>
               <FormSelect options={priceCategoriesOptions}
                           control={control}
                           id={`event_price_categories_attributes.${index}.price_category_id`}
