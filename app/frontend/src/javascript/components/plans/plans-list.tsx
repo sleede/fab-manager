@@ -121,7 +121,7 @@ export const PlansList: React.FC<PlansListProps> = ({ onError, onPlanSelection, 
    * When called with a category ID, returns the requested plan-category
    */
   const findCategory = (categoryId: number): PlanCategory => {
-    return planCategories.find(c => c.id === categoryId);
+    return planCategories?.find(c => c.id === categoryId);
   };
 
   /**
