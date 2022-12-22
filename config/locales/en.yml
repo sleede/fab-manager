@@ -634,3 +634,4 @@ en:
     store_hidden: "Store hidden to the public"
     advanced_accounting: "Advanced accounting"
     external_id: "external identifier"
+    prevent_invoices_zero: "prevent building invoices at 0"

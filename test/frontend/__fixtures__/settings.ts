@@ -726,5 +726,17 @@ export const settings: Array<Setting> = [
     value: 'true',
     last_update: '2022-12-20T16:02:01+0100',
     localized: 'identifiant externe'
+  },
+  {
+    name: 'prevent_invoices_zero',
+    value: 'false',
+    last_update: '2022-12-22T14:45:07+0100',
+    localized: 'éviter la génération de factures à 0'
+  },
+  {
+    name: 'reservation_deadline',
+    value: '0',
+    last_update: '2022-11-29T21:02:47-0300',
+    localized: "Empêcher la réservation avant qu'elle ne commence"
   }
 ];

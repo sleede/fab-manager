@@ -54,7 +54,7 @@ module Payments::PaymentConcern
     )
     invoice.wallet_amount = order.wallet_amount
     invoice.wallet_transaction_id = order.wallet_transaction_id
-    invoice.save
+    invoice.save unless Setting.get('prevent_invoices_zero') && order.total.zero?
     order.update(invoice_id: invoice.id)
   end
 end

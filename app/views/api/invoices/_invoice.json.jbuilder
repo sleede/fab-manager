@@ -11,8 +11,8 @@ json.is_online_card invoice.paid_by_card?
 json.date invoice.is_a?(Avoir) ? invoice.avoir_date : invoice.created_at
 json.chained_footprint invoice.check_footprint
 json.main_object do
-  json.type invoice.main_item.object_type
-  json.id invoice.main_item.object_id
+  json.type invoice.invoice_items.find(&:main).object_type
+  json.id invoice.invoice_items.find(&:main).object_id
 end
 json.items invoice.invoice_items do |item|
   json.id item.id

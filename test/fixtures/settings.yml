@@ -556,3 +556,15 @@ setting_94:
   name: accounting_VAT_journal_code
   created_at: 2022-12-09 14:00:14.512000000 Z
   updated_at: 2022-12-09 14:00:14.512000000 Z
+
+setting_95:
+  id: 95
+  name: prevent_invoices_zero
+  created_at: 2022-12-22 14:45:07.891240000 Z
+  updated_at: 2022-12-22 14:45:07.891240000 Z
+
+setting_96:
+  id: 96
+  name: reservation_deadline
+  created_at: 2022-11-29 21:02:47.354751000 Z
+  updated_at: 2022-11-29 21:02:47.354751000 Z

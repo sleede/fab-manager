@@ -17,8 +17,8 @@
 /**
  * Controller used in the admin invoices listing page
  */
-Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'Invoice', 'AccountingPeriod', 'AuthService', 'invoices', 'closedPeriods', '$uibModal', 'growl', '$filter', 'Setting', 'settings', 'stripeSecretKey', '_t', 'Member', 'uiTourService', 'Payment', 'onlinePaymentStatus',
-  function ($scope, $state, Invoice, AccountingPeriod, AuthService, invoices, closedPeriods, $uibModal, growl, $filter, Setting, settings, stripeSecretKey, _t, Member, uiTourService, Payment, onlinePaymentStatus) {
+Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'Invoice', 'AccountingPeriod', 'AuthService', 'invoices', 'closedPeriods', '$uibModal', 'growl', '$filter', 'Setting', 'settings', 'stripeSecretKey', '_t', 'Member', 'uiTourService', 'Payment', 'onlinePaymentStatus', '$uiRouter',
+  function ($scope, $state, Invoice, AccountingPeriod, AuthService, invoices, closedPeriods, $uibModal, growl, $filter, Setting, settings, stripeSecretKey, _t, Member, uiTourService, Payment, onlinePaymentStatus, $uiRouter) {
   /* PRIVATE STATIC CONSTANTS */
 
     // number of invoices loaded each time we click on 'load more...'
@@ -52,22 +52,6 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
 
     // Default invoices ordering/sorting
     $scope.orderInvoice = '-date';
-
-    // Invoice PDF filename settings (and example)
-    $scope.file = {
-      prefix: settings.invoice_prefix,
-      nextId: 40,
-      date: moment().format('DDMMYYYY'),
-      templateUrl: '/admin/invoices/settings/editPrefix.html'
-    };
-
-    // Payment Schedule PDF filename settings (and example)
-    $scope.scheduleFile = {
-      prefix: settings.payment_schedule_prefix,
-      nextId: 11,
-      date: moment().format('DDMMYYYY'),
-      templateUrl: '/admin/invoices/settings/editSchedulePrefix.html'
-    };
 
     // Invoices parameters
     $scope.invoice = {
@@ -130,6 +114,9 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
 
     // Is shown the modal dialog to select a payment gateway
     $scope.openSelectGatewayModal = false;
+
+    // the following item is used by the UnsavedFormAlert component to detect a page change
+    $scope.uiRouter = $uiRouter;
 
     /**
      * Return the VAT rate applicable to the machine reservations
@@ -501,70 +488,6 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
           if (error.status === 304) return;
 
           growl.error(_t('app.admin.invoices.an_error_occurred_while_activating_the_VAT'));
-          console.error(error);
-        });
-      });
-    };
-
-    /**
-     * Open a modal dialog allowing the user to edit the prefix of the invoice file name
-     */
-    $scope.openEditPrefix = function () {
-      const modalInstance = $uibModal.open({
-        animation: true,
-        templateUrl: $scope.file.templateUrl,
-        size: 'lg',
-        resolve: {
-          model () { return $scope.file.prefix; }
-        },
-        controller: ['$scope', '$uibModalInstance', 'model', function ($scope, $uibModalInstance, model) {
-          $scope.model = model;
-          $scope.ok = function () { $uibModalInstance.close($scope.model); };
-          $scope.cancel = function () { $uibModalInstance.dismiss('cancel'); };
-        }]
-      });
-
-      return modalInstance.result.then(function (model) {
-        Setting.update({ name: 'invoice_prefix' }, { value: model }, function (data) {
-          $scope.file.prefix = model;
-          return growl.success(_t('app.admin.invoices.prefix_successfully_saved'));
-        }
-        , function (error) {
-          if (error.status === 304) return;
-
-          growl.error(_t('app.admin.invoices.an_error_occurred_while_saving_the_prefix'));
-          console.error(error);
-        });
-      });
-    };
-
-    /**
-     * Open a modal dialog allowing the user to edit the prefix of the payment schedules file names
-     */
-    $scope.openEditSchedulePrefix = function () {
-      const modalInstance = $uibModal.open({
-        animation: true,
-        templateUrl: $scope.scheduleFile.templateUrl,
-        size: 'lg',
-        resolve: {
-          model () { return $scope.scheduleFile.prefix; }
-        },
-        controller: ['$scope', '$uibModalInstance', 'model', function ($scope, $uibModalInstance, model) {
-          $scope.model = model;
-          $scope.ok = function () { $uibModalInstance.close($scope.model); };
-          $scope.cancel = function () { $uibModalInstance.dismiss('cancel'); };
-        }]
-      });
-
-      modalInstance.result.then(function (model) {
-        Setting.update({ name: 'payment_schedule_prefix' }, { value: model }, function (data) {
-          $scope.scheduleFile.prefix = model;
-          return growl.success(_t('app.admin.invoices.prefix_successfully_saved'));
-        }
-        , function (error) {
-          if (error.status === 304) return;
-
-          growl.error(_t('app.admin.invoices.an_error_occurred_while_saving_the_prefix'));
           console.error(error);
         });
       });

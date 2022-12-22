@@ -1,0 +1,51 @@
+.invoices-settings-panel {
+  margin: 24px 0 0 0;
+  background-color: var(--gray-soft-light);
+  border-radius: var(--border-radius);
+  padding: 32px;
+
+  .setting-section {
+    background-color: white;
+    border: 1px solid var(--gray-soft-dark);
+    border-radius: var(--border-radius);
+    margin-bottom: 32px;
+    padding: 24px;
+
+    .section-title {
+      font-family: var(--font-text);
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 24px;
+    }
+
+    .example {
+      background-color: var(--gray-soft-light);
+      border-radius: var(--border-radius);
+      padding: 8px;
+      .title {
+        font-family: var(--font-text);
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 16px;
+      }
+      .content {
+        font-family: var(--font-text);
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 19px;
+      }
+    }
+  }
+  .actions {
+    display: flex;
+    justify-content: flex-end;
+    .save-btn {
+      background-color: var(--main);
+      color: var(--main-text-color);
+
+      &:hover {
+        background-color: var(--main-light);
+      }
+    }
+  }
+}

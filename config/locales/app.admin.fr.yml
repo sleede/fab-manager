@@ -672,6 +672,7 @@ fr:
         no_invoices_for_now: "Aucune facture pour le moment."
         payment_schedules: "Échéanciers de paiement"
         invoicing_settings: "Paramètres de facturation"
+        edit_setting_info_html: "<strong>Information</strong><p>Survoler les éléments de la facture ci-dessous, tous les éléments qui s’éclairent en jaune sont modifiables.</p>"
         warning_invoices_disabled: "Attention : les factures ne sont pas activées. Aucune facture ne sera générée par Fab-manager. Vous devez néanmoins remplir correctement les informations ci-dessous, particulièrement la TVA."
         change_logo: "Changer le logo"
         john_smith: "Jean Dupont"

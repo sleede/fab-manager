@@ -36,6 +36,13 @@ export default class FormatLib {
   };
 
   /**
+   * Return a date formatted for use within a filename
+   */
+  static dateFilename = (date: Date|TDateISO|TDateISODate): string => {
+    return moment(date).format('DDMMYYYY');
+  };
+
+  /**
    * Return the formatted localized time for the given date
    */
   static time = (date: Date|TDateISO|`${THours}:${TMinutes}`): string => {

@@ -64,7 +64,8 @@ export const invoicesSettings = [
   'invoice_text',
   'invoice_legals',
   'invoice_prefix',
-  'payment_schedule_prefix'
+  'payment_schedule_prefix',
+  'prevent_invoices_zero'
 ] as const;
 
 export const bookingSettings = [

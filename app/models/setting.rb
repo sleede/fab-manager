@@ -163,7 +163,8 @@ class Setting < ApplicationRecord
                              store_withdrawal_instructions
                              store_hidden
                              advanced_accounting
-                             external_id] }
+                             external_id
+                             prevent_invoices_zero] }
   # WARNING: when adding a new key, you may also want to add it in:
   # - config/locales/en.yml#settings
   # - app/frontend/src/javascript/models/setting.ts#SettingName

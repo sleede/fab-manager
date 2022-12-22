@@ -12,8 +12,8 @@ class Reservations::PayWithPrepaidPackTest < ActionDispatch::IntegrationTest
   test 'user reserves a machine and pay by prepaid pack with success' do
     login_as(@acamus, scope: :user)
 
-    machine = Machine.first
-    availability = machine.availabilities.first
+    machine = Machine.find(1)
+    availability = Availability.find(4)
 
     reservations_count = Reservation.count
     invoice_count = Invoice.count
