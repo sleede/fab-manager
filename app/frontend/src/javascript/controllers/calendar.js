@@ -167,6 +167,14 @@ Application.Controllers.controller('CalendarController', ['$scope', '$state', '$
           $scope.spaces = spaces;
           $scope.externals = externals;
           $scope.filter = filter;
+          $scope.accordion = {
+            trainings: false,
+            machines: false,
+            spaces: false
+          };
+          $scope.machinesGroupByCategory.forEach(c => $scope.accordion[c.name] = false);
+
+          $scope.toggleAccordion = (type) => $scope.accordion[type] = !$scope.accordion[type];
 
           $scope.toggleFilter = (type, filter, machineCategoryId) => toggleFilter(type, filter, machineCategoryId);
 

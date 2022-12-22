@@ -451,6 +451,14 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
           $scope.hasMachineCategory = _.some(machines, 'machine_category_id');
           $scope.spaces = spaces;
           $scope.filter = filter;
+          $scope.accordion = {
+            trainings: false,
+            machines: false,
+            spaces: false
+          };
+          $scope.machinesGroupByCategory.forEach(c => $scope.accordion[c.name] = false);
+
+          $scope.toggleAccordion = (type) => $scope.accordion[type] = !$scope.accordion[type];
 
           $scope.toggleFilter = (type, filter, machineCategoryId) => toggleFilter(type, filter, machineCategoryId);
 

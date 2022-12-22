@@ -22,6 +22,12 @@ fr:
         name: "Nom de la catégorie"
         assigning_machines: "Assigner les machines à cette catégorie"
         save: "Enregistrer"
+      delete_machine_category_modal:
+        confirmation_required: "Confirmation requise"
+        confirm: "Valider"
+        deleted: "La catégorie machine a bien été supprimée."
+        unable_to_delete: "Impossible de supprimer la catégorie machine : "
+        confirm_machine_category: "Êtes-vous sûr de vouloir supprimer la catégorie machine ?"
       machine_form:
         name: "Nom"
         illustration: "Illustration"

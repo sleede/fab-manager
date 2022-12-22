@@ -23,21 +23,21 @@ export const DeleteMachineCategoryModal: React.FC<DeleteMachineCategoryModalProp
   const handleDeleteMachineCategory = async (): Promise<void> => {
     try {
       await MachineCategoryAPI.destroy(machineCategoryId);
-      onSuccess(t('app.admin.machines.delete_machine_category_modal.deleted'));
+      onSuccess(t('app.admin.delete_machine_category_modal.deleted'));
     } catch (e) {
-      onError(t('app.admin.machines.delete_machine_category_modal.unable_to_delete') + e);
+      onError(t('app.admin.delete_machine_category_modal.unable_to_delete') + e);
     }
   };
 
   return (
-    <FabModal title={t('app.admin.machines.delete_machine_category_modal.confirmation_required')}
+    <FabModal title={t('app.admin.delete_machine_category_modal.confirmation_required')}
       isOpen={isOpen}
       toggleModal={toggleModal}
       closeButton={true}
-      confirmButton={t('app.admin.machines.delete_machine_category_modal.confirm')}
+      confirmButton={t('app.admin.delete_machine_category_modal.confirm')}
       onConfirm={handleDeleteMachineCategory}
       className="delete-machine-category-modal">
-      <p>{t('app.admin.machines.delete_machine_category_modal.confirm_machine_category')}</p>
+      <p>{t('app.admin.delete_machine_category_modal.confirm_machine_category')}</p>
     </FabModal>
   );
 };
