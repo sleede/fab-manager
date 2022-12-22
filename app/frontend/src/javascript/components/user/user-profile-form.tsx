@@ -68,6 +68,7 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
   const [termsAndConditions, setTermsAndConditions] = useState<CustomAsset>(null);
   const [profileCustomFields, setProfileCustomFields] = useState<ProfileCustomField[]>([]);
   const [fieldsSettings, setFieldsSettings] = useState<Map<SettingName, string>>(new Map());
+  const [isSuccessfullySubmitted, setIsSuccessfullySubmitted] = React.useState<boolean>(false);
 
   useEffect(() => {
     AuthProviderAPI.active().then(data => {
@@ -142,6 +143,7 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
         .then(res => {
           reset(res);
           onSuccess(res);
+          setIsSuccessfullySubmitted(true);
         })
         .catch((error) => { onError(error); });
     })(event);
@@ -253,6 +255,7 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
           {isLocalDatabaseProvider && <div className="password">
             { action === 'update' && <ChangePassword register={register}
                                                      onError={onError}
+                                                     isFormSubmitted={isSuccessfullySubmitted}
                                                      currentFormPassword={output.password}
                                                      user={user}
                                                      formState={formState}

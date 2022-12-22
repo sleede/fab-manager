@@ -19,13 +19,14 @@ interface ChangePasswordProp<TFieldValues> {
   formState: FormState<TFieldValues>,
   user: User,
   setValue: UseFormSetValue<User>,
+  isFormSubmitted?: boolean
 }
 
 /**
  * This component shows a button that trigger a modal dialog to verify the user's current password.
  * If the user's current password is correct, the modal dialog is closed and the button is replaced by a form to set the new password.
  */
-export const ChangePassword = <TFieldValues extends FieldValues>({ register, onError, currentFormPassword, formState, user, setValue }: ChangePasswordProp<TFieldValues>) => {
+export const ChangePassword = <TFieldValues extends FieldValues>({ register, onError, currentFormPassword, formState, user, setValue, isFormSubmitted }: ChangePasswordProp<TFieldValues>) => {
   const { t } = useTranslation('shared');
 
   const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false);
@@ -39,6 +40,15 @@ export const ChangePassword = <TFieldValues extends FieldValues>({ register, onE
       setIsPrivileged((operator.role === 'admin' || operator.role === 'manager') && user.id !== operator.id);
     }).catch(error => onError(error));
   }, []);
+
+  useEffect(() => {
+    if (isFormSubmitted) {
+      setIsConfirmedPassword(false);
+      setValue('current_password', '');
+      setValue('password', '');
+      setValue('password_confirmation', '');
+    }
+  }, [isFormSubmitted]);
 
   /**
    * Opens/closes the dialog asking to confirm the current password before changing it.
