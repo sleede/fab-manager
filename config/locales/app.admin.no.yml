@@ -1559,7 +1559,7 @@
         address_required_info_html: "You can define if the address should be required to register a new user on Fab-manager.<br/><strong>Please note</strong> that, depending on your country, the regulations may requires addresses for the invoices to be valid."
         address_is_required: "Adresse er påkrevd"
         external_id: "External identifier"
-        external_id_info_html: "You can set up an external identifier for your users which cannot be modified by the user himself."
+        external_id_info_html: "You can set up an external identifier for your users, which cannot be modified by the user himself."
         enable_external_id: "Enable the external ID"
         captcha: "Captcha"
         captcha_info_html: "Du kan sette opp beskyttelse mot roboter for å unngå at de oppretter medlemskontoer. Beskyttelsen bruker Google reCAPTCHA. Registrer deg for <a href='http://www.google.com/recaptcha/admin' target='_blank'>et API-nøkkelpar</a> for å begynne å bruke captcha."
