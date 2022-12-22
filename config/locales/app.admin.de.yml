@@ -1559,7 +1559,7 @@ de:
         address_required_info_html: "Sie können festlegen, ob eine Adresse für die Neuregistrierung eines Benutzers erforderlich sein soll.<br/><strong>Bitte beachten Sie</strong> dass in Abhängigkeit von Landesvorschriften Adressen für die Gültigkeit der Rechnungen erforderlich sein können."
         address_is_required: "Adresse ist erforderlich"
         external_id: "External identifier"
-        external_id_info_html: "You can set up an external identifier for your users which cannot be modified by the user himself."
+        external_id_info_html: "You can set up an external identifier for your users, which cannot be modified by the user himself."
         enable_external_id: "Enable the external ID"
         captcha: "Captcha"
         captcha_info_html: "Sie können einen Schutz gegen Roboter einrichten, um zu verhindern, dass diese Accounts erstellen. Dieser Schutz verwendet Google reCAPTCHA. Melden Sie sich für <a href='http://www.google.com/recaptcha/admin' target='_blank'>ein API-Schlüsselpaar</a> an, um reCaptcha zu verwenden."
