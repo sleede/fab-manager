@@ -1,5 +1,6 @@
 import { HistoryValue } from './history-value';
 import { TDateISO } from '../typings/date-iso';
+import { ApiFilter } from './api';
 
 export const homePageSettings = [
   'twitter_name',
@@ -65,7 +66,8 @@ export const invoicesSettings = [
   'invoice_legals',
   'invoice_prefix',
   'payment_schedule_prefix',
-  'prevent_invoices_zero'
+  'prevent_invoices_zero',
+  'invoice_VAT-name'
 ] as const;
 
 export const bookingSettings = [
@@ -282,6 +284,10 @@ export interface SettingBulkResult {
   value?: string,
   error?: string,
   localized?: string,
+}
+
+export interface SettingGetOptions extends ApiFilter {
+  history?: boolean
 }
 
 export type SettingBulkArray = Array<{ name: SettingName, value: SettingValue }>;

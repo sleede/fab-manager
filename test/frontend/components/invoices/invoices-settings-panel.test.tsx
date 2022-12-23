@@ -1,13 +1,14 @@
 import { InvoicesSettingsPanel } from '../../../../app/frontend/src/javascript/components/invoices/invoices-settings-panel';
 import { render, fireEvent, waitFor, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
+import { uiRouter } from '../../__lib__/ui-router';
 
 describe('InvoicesSettingsPanel', () => {
   const onError = jest.fn();
   const onSuccess = jest.fn();
 
   test('render InvoicesSettingsPanel', async () => {
-    render(<InvoicesSettingsPanel onError={onError} onSuccess={onSuccess} />);
+    render(<InvoicesSettingsPanel onError={onError} onSuccess={onSuccess} uiRouter={uiRouter} />);
     await waitFor(() => {
       expect(screen.getByLabelText(/app.admin.invoices_settings_panel.disable_invoices_zero_label/)).toBeInTheDocument();
     });
@@ -18,7 +19,7 @@ describe('InvoicesSettingsPanel', () => {
   });
 
   test('update filename example', async () => {
-    render(<InvoicesSettingsPanel onError={onError} onSuccess={onSuccess} />);
+    render(<InvoicesSettingsPanel onError={onError} onSuccess={onSuccess} uiRouter={uiRouter} />);
     await waitFor(() => {
       expect(screen.getAllByLabelText(/app.admin.invoices_settings_panel.prefix/)).toHaveLength(2);
     });
@@ -28,7 +29,7 @@ describe('InvoicesSettingsPanel', () => {
   });
 
   test('update schedule filename example', async () => {
-    render(<InvoicesSettingsPanel onError={onError} onSuccess={onSuccess} />);
+    render(<InvoicesSettingsPanel onError={onError} onSuccess={onSuccess} uiRouter={uiRouter} />);
     await waitFor(() => {
       expect(screen.getAllByLabelText(/app.admin.invoices_settings_panel.prefix/)).toHaveLength(2);
     });

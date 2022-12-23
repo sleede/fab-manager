@@ -1,4 +1,7 @@
-import { Setting } from '../../../app/frontend/src/javascript/models/setting';
+import type { Setting } from '../../../app/frontend/src/javascript/models/setting';
+import { admins } from './users';
+import { sample as _sample } from 'lodash';
+import type { HistoryValue } from '../../../app/frontend/src/javascript/models/history-value';
 
 export const settings: Array<Setting> = [
   {
@@ -738,5 +741,24 @@ export const settings: Array<Setting> = [
     value: '0',
     last_update: '2022-11-29T21:02:47-0300',
     localized: "Empêcher la réservation avant qu'elle ne commence"
+  },
+  {
+    name: 'invoice_VAT-name',
+    value: 'TVA',
+    last_update: '2022-12-23T14:39:12+0100',
+    localized: 'Nom de la TVA'
   }
 ];
+
+export const buildHistoryItem = (setting: Setting): HistoryValue => {
+  const user = _sample(admins);
+  return {
+    id: Math.ceil(Math.random() * 1000),
+    value: setting.value,
+    user: {
+      id: user.id,
+      name: user.name
+    },
+    created_at: setting.last_update
+  };
+};

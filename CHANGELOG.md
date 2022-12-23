@@ -5,6 +5,7 @@
 - Ability to disable generation of invoices at zero
 - Accounting data is now built each night and saved in database
 - Ability to define multiple accounting journal codes
+- Ability to change the name of the VAT
 - OpenAPI endpoint to fetch accounting data
 - Add reservation deadline parameter (#414)
 - Verify current password at server side when changing password

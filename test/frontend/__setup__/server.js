@@ -4,7 +4,7 @@ import groups from '../__fixtures__/groups';
 import plans from '../__fixtures__/plans';
 import planCategories from '../__fixtures__/plan_categories';
 import { partners, managers, users } from '../__fixtures__/users';
-import { settings } from '../__fixtures__/settings';
+import { buildHistoryItem, settings } from '../__fixtures__/settings';
 import products from '../__fixtures__/products';
 import productCategories from '../__fixtures__/product_categories';
 import productStockMovements from '../__fixtures__/product_stock_movements';
@@ -48,7 +48,12 @@ export const server = setupServer(
   }),
   rest.get('/api/settings/:name', (req, res, ctx) => {
     const setting = settings.find(s => s.name === req.params.name);
-    return res(ctx.json({ setting }));
+    const history = new URLSearchParams(req.url.search).get('history');
+    const result = { setting };
+    if (history) {
+      result.setting.history = [buildHistoryItem(setting)];
+    }
+    return res(ctx.json(result));
   }),
   rest.get('/api/settings', (req, res, ctx) => {
     const names = new URLSearchParams(req.url.search).get('names');

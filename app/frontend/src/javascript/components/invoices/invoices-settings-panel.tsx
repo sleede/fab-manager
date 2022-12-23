@@ -15,7 +15,7 @@ import { react2angular } from 'react2angular';
 import FormatLib from '../../lib/format';
 import { FormInput } from '../form/form-input';
 import { UnsavedFormAlert } from '../form/unsaved-form-alert';
-import { UIRouter } from '@uirouter/angularjs';
+import type { UIRouter } from '@uirouter/angularjs';
 
 declare const Application: IApplication;
 

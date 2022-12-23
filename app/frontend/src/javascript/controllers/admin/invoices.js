@@ -53,6 +53,8 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
     // Default invoices ordering/sorting
     $scope.orderInvoice = '-date';
 
+    $scope.isOpenVatModal = false;
+
     // Invoices parameters
     $scope.invoice = {
       logo: null,
@@ -73,18 +75,9 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
       },
       VAT: {
         rate: 19.6,
-        active: false,
-        templateUrl: '/admin/invoices/settings/editVAT.html'
-      },
-      multiVAT: {
+        name: 'VAT',
         rateMachine: '',
-        rateSpace: '',
-        rateTraining: '',
-        rateEvent: '',
-        rateSubscription: '',
-        rateProduct: '',
-        editTemplateUrl: '/admin/invoices/settings/editMultiVAT.html',
-        historyTemplateUrl: '/admin/invoices/settings/multiVATHistory.html'
+        active: false
       },
       text: {
         content: ''
@@ -119,11 +112,35 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
     $scope.uiRouter = $uiRouter;
 
     /**
+     * This callback triggers the opening/closing of the VAT configuration modal
+     */
+    $scope.toggleVatModal = function () {
+      setTimeout(() => {
+        $scope.isOpenVatModal = !$scope.isOpenVatModal;
+        $scope.$apply();
+      }, 50);
+    };
+
+    /**
+     * Callback triggered in case of error
+     */
+    $scope.onError = (message) => {
+      growl.error(message);
+    };
+
+    /**
+     * Callback triggered in case of success
+     */
+    $scope.onSuccess = (message) => {
+      growl.success(message);
+    };
+
+    /**
      * Return the VAT rate applicable to the machine reservations
      * @return {number}
      */
     $scope.getMachineExampleRate = function () {
-      return $scope.invoice.multiVAT.rateMachine || $scope.invoice.VAT.rate;
+      return $scope.invoice.VAT.rateMachine || $scope.invoice.VAT.rate;
     };
 
     /**
@@ -344,153 +361,7 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
      * The VAT can be disabled and its rate can be configured
      */
     $scope.openEditVAT = function () {
-      const modalInstance = $uibModal.open({
-        animation: true,
-        templateUrl: $scope.invoice.VAT.templateUrl,
-        size: 'lg',
-        resolve: {
-          rate () {
-            return $scope.invoice.VAT.rate;
-          },
-          active () {
-            return $scope.invoice.VAT.active;
-          },
-          multiVAT () {
-            return $scope.invoice.multiVAT;
-          },
-          rateHistory () {
-            return Setting.get({ name: 'invoice_VAT-rate', history: true }).$promise;
-          },
-          activeHistory () {
-            return Setting.get({ name: 'invoice_VAT-active', history: true }).$promise;
-          }
-        },
-        controller: ['$scope', '$uibModalInstance', 'rate', 'active', 'rateHistory', 'activeHistory', 'multiVAT', function ($scope, $uibModalInstance, rate, active, rateHistory, activeHistory, multiVAT) {
-          $scope.rate = rate;
-          $scope.isSelected = active;
-          $scope.history = [];
-
-          // callback on "enable VAT" switch toggle
-          $scope.enableVATChanged = function (checked) {
-            setTimeout(() => {
-              $scope.isSelected = checked;
-              $scope.$apply();
-            }, 1);
-          };
-          $scope.ok = function () { $uibModalInstance.close({ rate: $scope.rate, active: $scope.isSelected }); };
-          $scope.cancel = function () { $uibModalInstance.dismiss('cancel'); };
-          $scope.editMultiVAT = function () {
-            const editMultiVATModalInstance = $uibModal.open({
-              animation: true,
-              templateUrl: multiVAT.editTemplateUrl,
-              size: 'lg',
-              resolve: {
-                rate () {
-                  return $scope.rate;
-                },
-                multiVAT () {
-                  return multiVAT;
-                }
-              },
-              controller: ['$scope', '$uibModalInstance', 'rate', 'multiVAT', function ($scope, $uibModalInstance, rate, multiVAT) {
-                $scope.rate = rate;
-                $scope.multiVAT = multiVAT;
-
-                $scope.ok = function () { $uibModalInstance.close({ multiVAT: $scope.multiVAT }); };
-                $scope.cancel = function () { $uibModalInstance.dismiss('cancel'); };
-
-                $scope.showMultiRateHistory = function (rateType) {
-                  $uibModal.open({
-                    animation: true,
-                    templateUrl: multiVAT.historyTemplateUrl,
-                    size: 'lg',
-                    resolve: {
-                      rateHistory () {
-                        return Setting.get({ name: `invoice_VAT-rate_${rateType}`, history: true }).$promise;
-                      }
-                    },
-                    controller: ['$scope', '$uibModalInstance', 'rateHistory', function ($scope, $uibModalInstance, rateHistory) {
-                      $scope.history = [];
-
-                      $scope.cancel = function () { $uibModalInstance.dismiss('cancel'); };
-
-                      $scope.rateValue = function (value) {
-                        if (value.rate === 'null' || value.value === 'undefined' || value.rate === 'NaN') {
-                          return '';
-                        }
-                        return value.rate;
-                      };
-
-                      const initialize = function () {
-                        rateHistory.setting.history.forEach(function (rate) {
-                          $scope.history.push({ date: rate.created_at, rate: rate.value, user: rate.user });
-                        });
-                      };
-
-                      initialize();
-                    }]
-                  });
-                };
-              }]
-            });
-            return editMultiVATModalInstance.result.then(function (result) {
-              ['Machine', 'Space', 'Training', 'Event', 'Subscription', 'Product'].forEach(rateType => {
-                const value = _.isFinite(result.multiVAT[`rate${rateType}`]) ? result.multiVAT[`rate${rateType}`] + '' : '';
-                Setting.update({ name: `invoice_VAT-rate_${rateType}` }, { value }, function (data) {
-                  return growl.success(_t('app.admin.invoices.VAT_rate_successfully_saved'));
-                }
-                , function (error) {
-                  if (error.status === 304) return;
-
-                  growl.error(_t('app.admin.invoices.an_error_occurred_while_saving_the_VAT_rate'));
-                  console.error(error);
-                });
-              });
-            });
-          };
-
-          const initialize = function () {
-            rateHistory.setting.history.forEach(function (rate) {
-              $scope.history.push({ date: rate.created_at, rate: rate.value, user: rate.user });
-            });
-            activeHistory.setting.history.forEach(function (v) {
-              $scope.history.push({ date: v.created_at, enabled: v.value === 'true', user: v.user });
-            });
-          };
-
-          initialize();
-        }]
-      });
-
-      return modalInstance.result.then(function (result) {
-        Setting.update({ name: 'invoice_VAT-rate' }, { value: result.rate + '' }, function (data) {
-          $scope.invoice.VAT.rate = result.rate;
-          if (result.active) {
-            return growl.success(_t('app.admin.invoices.VAT_rate_successfully_saved'));
-          }
-        }
-        , function (error) {
-          if (error.status === 304) return;
-
-          growl.error(_t('app.admin.invoices.an_error_occurred_while_saving_the_VAT_rate'));
-          console.error(error);
-        });
-
-        return Setting.update({ name: 'invoice_VAT-active' }, { value: result.active ? 'true' : 'false' }, function (data) {
-          $scope.invoice.VAT.active = result.active;
-          if (result.active) {
-            return growl.success(_t('app.admin.invoices.VAT_successfully_activated'));
-          } else {
-            return growl.success(_t('app.admin.invoices.VAT_successfully_disabled'));
-          }
-        }
-        , function (error) {
-          if (error.status === 304) return;
-
-          growl.error(_t('app.admin.invoices.an_error_occurred_while_activating_the_VAT'));
-          console.error(error);
-        });
-      });
+      $scope.toggleVatModal();
     };
 
     /**
@@ -855,12 +726,8 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
       $scope.invoice.text.content = settings.invoice_text;
       $scope.invoice.VAT.rate = parseFloat(settings['invoice_VAT-rate']);
       $scope.invoice.VAT.active = (settings['invoice_VAT-active'] === 'true');
-      $scope.invoice.multiVAT.rateMachine = settings['invoice_VAT-rate_Machine'] ? parseFloat(settings['invoice_VAT-rate_Machine']) : '';
-      $scope.invoice.multiVAT.rateSpace = settings['invoice_VAT-rate_Space'] ? parseFloat(settings['invoice_VAT-rate_Space']) : '';
-      $scope.invoice.multiVAT.rateTraining = settings['invoice_VAT-rate_Training'] ? parseFloat(settings['invoice_VAT-rate_Training']) : '';
-      $scope.invoice.multiVAT.rateEvent = settings['invoice_VAT-rate_Event'] ? parseFloat(settings['invoice_VAT-rate_Event']) : '';
-      $scope.invoice.multiVAT.rateSubscription = settings['invoice_VAT-rate_Subscription'] ? parseFloat(settings['invoice_VAT-rate_Subscription']) : '';
-      $scope.invoice.multiVAT.rateProduct = settings['invoice_VAT-rate_Product'] ? parseFloat(settings['invoice_VAT-rate_Product']) : '';
+      $scope.invoice.VAT.name = settings['invoice_VAT-name'];
+      $scope.invoice.VAT.rateMachine = settings['invoice_VAT-rate_Machine'] ? parseFloat(settings['invoice_VAT-rate_Machine']) : '';
       $scope.invoice.number.model = settings['invoice_order-nb'];
       $scope.invoice.code.model = settings['invoice_code-value'];
       $scope.invoice.code.active = (settings['invoice_code-active'] === 'true');

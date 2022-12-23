@@ -950,10 +950,10 @@ angular.module('application.router', ['ui.router'])
         resolve: {
           settings: ['Setting', function (Setting) {
             return Setting.query({
-              names: "['invoice_legals', 'invoice_text', 'invoice_VAT-rate', 'invoice_VAT-rate_Machine', 'invoice_VAT-rate_Training', 'invoice_VAT-rate_Space', " +
-                     "'invoice_VAT-rate_Event', 'invoice_VAT-rate_Subscription', 'invoice_VAT-rate_Product', 'invoice_VAT-active', 'invoice_order-nb', 'invoice_code-value', " +
+              names: "['invoice_legals', 'invoice_text', 'invoice_VAT-rate', 'invoice_VAT-rate_Machine', " +
+                     "'invoice_VAT-active', 'invoice_order-nb', 'invoice_code-value', " +
                      "'invoice_code-active', 'invoice_reference', 'invoice_logo', 'payment_gateway', 'payment_schedule_prefix', 'invoicing_module', " +
-                     "'feature_tour_display', 'online_payment_module', 'stripe_public_key', 'stripe_currency', 'invoice_prefix']"
+                     "'feature_tour_display', 'online_payment_module', 'stripe_public_key', 'stripe_currency', 'invoice_prefix', 'invoice_VAT-name']"
             }).$promise;
           }],
           stripeSecretKey: ['Setting', function (Setting) { return Setting.isPresent({ name: 'stripe_secret_key' }).$promise; }],

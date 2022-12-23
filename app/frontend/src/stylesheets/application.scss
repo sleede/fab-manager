@@ -1,3 +1,4 @@
+@import "variables/animations";
 @import "variables/colors";
 @import "variables/typography";
 @import "variables/decoration";
@@ -55,6 +56,7 @@
 @import "modules/form/form-image-upload";
 @import "modules/group/change-group";
 @import "modules/invoices/invoices-settings-panel";
+@import "modules/invoices/vat-settings-modal";
 @import "modules/layout/header-page";
 @import "modules/machines/machine-card";
 @import "modules/machines/machine-form";
@@ -102,6 +104,7 @@
 @import "modules/select-gateway-modal";
 @import "modules/settings/boolean-setting";
 @import "modules/settings/check-list-setting";
+@import "modules/settings/setting-history-modal";
 @import "modules/settings/user-validation-setting";
 @import "modules/socials/fab-socials";
 @import "modules/spaces/space-form";

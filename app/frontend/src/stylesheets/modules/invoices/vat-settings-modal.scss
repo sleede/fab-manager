@@ -1,0 +1,34 @@
+.vat-settings-modal {
+  .panes {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+
+    &-one > .pane {
+      width: 100%;
+    }
+    &-both {
+      & > .pane { width: 50%; }
+      & > .pane:first-child { margin-right: 0.5em; }
+      & > .pane:last-child {
+        margin-left: 0.5em;
+        animation: show 200ms linear forwards;
+        opacity: 0;
+        transform: translateX(-20%);
+        transform-origin: left;
+      }
+    }
+  }
+  .actions {
+    display: flex;
+    justify-content: space-between;
+    .save-btn {
+      background-color: var(--main);
+      color: var(--main-text-color);
+
+      &:hover {
+        background-color: var(--main-light);
+      }
+    }
+  }
+}

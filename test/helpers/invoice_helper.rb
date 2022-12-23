@@ -5,6 +5,7 @@ module InvoiceHelper
   # Force the invoice generation worker to run NOW and check the resulting file generated.
   # Delete the file afterwards.
   # @param invoice {Invoice}
+  # @param &block an optional block may be provided for additional specific assertions on the invoices PDF lines
   def assert_invoice_pdf(invoice)
     assert_not_nil invoice, 'Invoice was not created'
 
@@ -20,6 +21,8 @@ module InvoiceHelper
 
     check_amounts(invoice, lines)
     check_user(invoice, lines)
+
+    yield lines if block_given?
 
     File.delete(invoice.file)
   end

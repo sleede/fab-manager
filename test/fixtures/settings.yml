@@ -568,3 +568,9 @@ setting_96:
   name: reservation_deadline
   created_at: 2022-11-29 21:02:47.354751000 Z
   updated_at: 2022-11-29 21:02:47.354751000 Z
+
+setting_97:
+  id: 97
+  name: invoice_VAT-name
+  created_at: 2022-12-23 14:39:12.214510000 Z
+  updated_at: 2022-12-23 14:39:12.214510000 Z

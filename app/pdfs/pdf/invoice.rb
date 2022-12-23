@@ -171,7 +171,10 @@ class PDF::Invoice < Prawn::Document
       else
         data += [[I18n.t('invoices.total_including_all_taxes'), number_to_currency(total)]]
         vat_rate_group.each do |_type, rate|
-          data += [[I18n.t('invoices.including_VAT_RATE', RATE: rate[:vat_rate], AMOUNT: number_to_currency(rate[:amount] / 100.00)),
+          data += [[I18n.t('invoices.including_VAT_RATE',
+                           RATE: rate[:vat_rate],
+                           AMOUNT: number_to_currency(rate[:amount] / 100.00),
+                           NAME: Setting.get('invoice_VAT-name')),
                     number_to_currency(rate[:total_vat] / 100.00)]]
         end
         data += [[I18n.t('invoices.including_total_excluding_taxes'), number_to_currency(total_ht / 100.00)]]

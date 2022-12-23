@@ -981,6 +981,8 @@ Setting.set('public_registrations', true) unless Setting.find_by(name: 'public_r
 
 Setting.set('user_change_group', true) unless Setting.find_by(name: 'user_change_group').try(:value)
 
+Setting.set('invoice_VAT-name', I18n.t('invoices.VAT')) unless Setting.find_by(name: 'invoice_VAT-name').try(:value)
+
 unless Setting.find_by(name: 'overlapping_categories').try(:value)
   Setting.set('overlapping_categories', 'training_reservations,machine_reservations,space_reservations,events_reservations')
 end

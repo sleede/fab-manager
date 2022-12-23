@@ -34,7 +34,9 @@ class API::SettingsController < API::ApiController
         if !SettingService.update_allowed?(db_setting)
           db_setting.errors.add(:-, "#{I18n.t("settings.#{setting[:name]}")}: #{I18n.t('settings.locked_setting')}")
         elsif db_setting.save
-          db_setting.history_values.create(value: setting[:value], invoicing_profile: current_user.invoicing_profile)
+          unless db_setting.value == setting[:value]
+            db_setting.history_values.create(value: setting[:value], invoicing_profile: current_user.invoicing_profile)
+          end
         end
 
         @settings.push db_setting

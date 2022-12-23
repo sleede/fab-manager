@@ -60,7 +60,7 @@
           </tr>
 
           <tr class="invoice-vat invoice-editable vat-line italic" ng-click="openEditVAT()" ng-show="invoice.VAT.active">
-            <td translate translate-values="{RATE:getMachineExampleRate(), AMOUNT:(30.0 | currency)}">{{ 'app.admin.invoices.including_VAT' }}</td>
+            <td translate translate-values="{RATE:getMachineExampleRate(), AMOUNT:(30.0 | currency), NAME: invoice.VAT.name}">{{ 'app.admin.invoices.including_VAT' }}</td>
             <td>{{30-(30/(getMachineExampleRate()/100+1)) | currency}}</td>
           </tr>
           <tr class="invoice-ht vat-line italic" ng-show="invoice.VAT.active">
@@ -93,6 +93,7 @@
            ng-blur="legalsEditEnd($event)">
       </div>
     </form>
+    <vat-settings-modal is-open="isOpenVatModal" toggle-modal="toggleVatModal" on-error="onError" on-success="onSuccess"></vat-settings-modal>
   </section>
 </div>
 

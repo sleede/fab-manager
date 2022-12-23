@@ -16,6 +16,7 @@ class Accounting::VatExportService
     @decimal_separator = '.'
     @date_format = '%Y-%m-%d'
     @columns = columns
+    @vat_name = Setting.get('invoice_VAT-name')
   end
 
   def set_options(decimal_separator: ',', date_format: '%d/%m/%Y', label_max_length: nil, export_zeros: nil)
@@ -42,7 +43,7 @@ class Accounting::VatExportService
   def header_row
     row = ''
     columns.each do |column|
-      row << I18n.t("vat_export.#{column}") << separator
+      row << I18n.t("vat_export.#{column}", NAME: @vat_name) << separator
     end
     "#{row}\n"
   end

@@ -164,7 +164,8 @@ class Setting < ApplicationRecord
                              store_hidden
                              advanced_accounting
                              external_id
-                             prevent_invoices_zero] }
+                             prevent_invoices_zero
+                             invoice_VAT-name] }
   # WARNING: when adding a new key, you may also want to add it in:
   # - config/locales/en.yml#settings
   # - app/frontend/src/javascript/models/setting.ts#SettingName

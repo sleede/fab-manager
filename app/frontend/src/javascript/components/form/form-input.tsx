@@ -12,6 +12,7 @@ interface FormInputProps<TFieldValues, TInputType> extends FormComponent<TFieldV
   addOn?: ReactNode,
   addOnAction?: (event: React.MouseEvent<HTMLButtonElement>) => void,
   addOnClassName?: string,
+  addOnAriaLabel?: string,
   debounce?: number,
   type?: 'text' | 'date' | 'password' | 'url' | 'time' | 'tel' | 'search' | 'number' | 'month' | 'email' | 'datetime-local' | 'week' | 'hidden' | 'file',
   accept?: string,
@@ -26,7 +27,7 @@ interface FormInputProps<TFieldValues, TInputType> extends FormComponent<TFieldV
 /**
  * This component is a template for an input component to use within React Hook Form
  */
-export const FormInput = <TFieldValues extends FieldValues, TInputType>({ id, register, label, tooltip, defaultValue, icon, className, rules, disabled, type, addOn, addOnAction, addOnClassName, placeholder, error, warning, formState, step, onChange, debounce, accept, nullable = false, ariaLabel }: FormInputProps<TFieldValues, TInputType>) => {
+export const FormInput = <TFieldValues extends FieldValues, TInputType>({ id, register, label, tooltip, defaultValue, icon, className, rules, disabled, type, addOn, addOnAction, addOnClassName, addOnAriaLabel, placeholder, error, warning, formState, step, onChange, debounce, accept, nullable = false, ariaLabel }: FormInputProps<TFieldValues, TInputType>) => {
   /**
    * Debounced (ie. temporised) version of the 'on change' callback.
    */
@@ -71,7 +72,8 @@ export const FormInput = <TFieldValues extends FieldValues, TInputType>({ id, re
           placeholder={placeholder}
           accept={accept} />
         {(type === 'file' && placeholder) && <span className='fab-button is-black file-placeholder'>{placeholder}</span>}
-        {addOn && <span onClick={addOnAction} className={`addon ${addOnClassName || ''} ${addOnAction ? 'is-btn' : ''}`}>{addOn}</span>}
+        {addOn && addOnAction && <button aria-label={addOnAriaLabel} type="button" onClick={addOnAction} className={`addon ${addOnClassName || ''} is-btn`}>{addOn}</button>}
+        {addOn && !addOnAction && <span aria-label={addOnAriaLabel} className={`addon ${addOnClassName || ''}`}>{addOn}</span>}
     </AbstractFormItem>
   );
 };

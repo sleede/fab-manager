@@ -5,10 +5,12 @@ export default class SettingLib {
   /**
    * Convert the provided data to a map, as expected by BulkUpdate
    */
-  static objectToBulkMap = (data: Record<SettingName, SettingValue>): Map<SettingName, string> => {
+  static objectToBulkMap = (data: Record<SettingName, SettingValue>, options?: { stripNaN: boolean }): Map<SettingName, string> => {
     const res = new Map<SettingName, string>();
     for (const key in data) {
-      res.set(key as SettingName, `${data[key]}`);
+      if (!options?.stripNaN || !Number.isNaN(data[key])) {
+        res.set(key as SettingName, `${data[key]}`);
+      }
     }
     return res;
   };

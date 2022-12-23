@@ -71,6 +71,10 @@
       }
     }
 
+    button.addon {
+      border: 0;
+    }
+
     & > input {
       grid-area: field;
       border: none;

@@ -106,6 +106,7 @@ fr:
       other: "%{count} places %{NAME}"
     coupon_CODE_discount_of_DISCOUNT: "Code {CODE} : remise de {DISCOUNT} {TYPE, select, percent_off{%} other{}}" #messageFormat interpolation
     total_including_all_taxes: "Total TTC"
+    VAT: "TVA"
     including_VAT_RATE: "Dont TVA %{RATE} % de %{AMOUNT}"
     including_total_excluding_taxes: "Dont total HT"
     including_amount_payed_on_ordering: "Dont montant payé à la commande"
