@@ -8,7 +8,7 @@ class Reservations::LastMinuteTest < ActionDispatch::IntegrationTest
   setup do
     @user = User.members.first
     @space = Space.first
-    @availbility = Availability.find(21)
+    @availability = Availability.find(21)
     @admin = User.with_role(:admin).first
   end
 
@@ -28,7 +28,7 @@ class Reservations::LastMinuteTest < ActionDispatch::IntegrationTest
                 reservable_type: @space.class.name,
                 slots_reservations_attributes: [
                   {
-                    slot_id: @availbility.slots.first.id
+                    slot_id: @availability.slots.first.id
                   }
                 ]
               }
@@ -65,7 +65,7 @@ class Reservations::LastMinuteTest < ActionDispatch::IntegrationTest
                 reservable_type: @space.class.name,
                 slots_reservations_attributes: [
                   {
-                    slot_id: @availbility.slots.first.id
+                    slot_id: @availability.slots.first.id
                   }
                 ]
               }
@@ -104,7 +104,7 @@ class Reservations::LastMinuteTest < ActionDispatch::IntegrationTest
             reservable_type: @space.class.name,
             slots_reservations_attributes: [
               {
-                slot_id: @availbility.slots.first.id
+                slot_id: @availability.slots.first.id
               }
             ]
           }
