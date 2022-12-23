@@ -2,6 +2,7 @@
 
 - Private note on member's profile
 - Optional external identifier for users
+- Ability to disable generation of invoices at zero
 - Accounting data is now built each night and saved in database
 - Ability to define multiple accounting journal codes
 - OpenAPI endpoint to fetch accounting data
