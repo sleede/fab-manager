@@ -536,3 +536,5 @@ fr:
         spaces: "Espaces"
         events: "Événements"
         externals: "Autres calendriers"
+      machine:
+        machine_uncategorized: "Machines non classés"

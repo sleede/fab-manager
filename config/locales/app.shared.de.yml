@@ -536,3 +536,5 @@ de:
         spaces: "Spaces"
         events: "Events"
         externals: "Other calendars"
+      machine:
+        machine_uncategorized: "Uncategorized machines"
