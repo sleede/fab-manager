@@ -527,3 +527,12 @@ fr:
         keyword: "Mot-clef : {KEYWORD}"
         stock_internal: "Stock interne"
         stock_external: "Stock externe"
+      calendar:
+        calendar: "Calendar"
+        show_unavailables: "Show unavailable slots"
+        filter_calendar: "Filter calendar"
+        trainings: "Trainings"
+        machines: "Machines"
+        spaces: "Spaces"
+        events: "Events"
+        externals: "Other calendars"
