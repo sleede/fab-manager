@@ -14,10 +14,10 @@ en:
       machine_category_modal:
         new_machine_category: "New categorie"
         edit_machine_category: "Edit catégorie"
-        successfully_created: "The new machine category request has been created."
-        unable_to_create: "Unable to delete the machine category request: "
-        successfully_updated: "The machine category request has been updated."
-        unable_to_update: "Unable to modify the machine category request: "
+        successfully_created: "The new machine category has been created."
+        unable_to_create: "Unable to delete the machine category: "
+        successfully_updated: "The machine category has been updated."
+        unable_to_update: "Unable to modify the machine category: "
       machine_category_form:
         name: "Name of category"
         assigning_machines: "Assigning the machines to this category"
