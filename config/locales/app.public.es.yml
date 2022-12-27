@@ -230,6 +230,8 @@ es:
         status_enabled: "Activadas"
         status_disabled: "Discapacitadas"
         status_all: "Todas"
+        filter_by_machine_category: "Filter by category"
+        all_machines: "All machines"
       machine_card:
         book: "Reservar"
         consult: "Consultar"

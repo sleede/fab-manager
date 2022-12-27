@@ -528,7 +528,7 @@ fr:
         stock_internal: "Stock interne"
         stock_external: "Stock externe"
       calendar:
-        calendar: "Calendrier"
+        calendar: "Agenda"
         show_unavailables: "Afficher les créneaux non disponibles"
         filter_calendar: "Filtrer le calendrier"
         trainings: "Formations"

@@ -527,3 +527,12 @@ de:
         keyword: "Keyword: {KEYWORD}"
         stock_internal: "Private stock"
         stock_external: "Public stock"
+      calendar:
+        calendar: "Calendar"
+        show_unavailables: "Show unavailable slots"
+        filter_calendar: "Filter calendar"
+        trainings: "Trainings"
+        machines: "Machines"
+        spaces: "Spaces"
+        events: "Events"
+        externals: "Other calendars"
