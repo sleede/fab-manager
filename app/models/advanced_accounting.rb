@@ -25,7 +25,7 @@ class AdvancedAccounting < ApplicationRecord
                else
                  raise TypeError "Unknown accountable_type #{accountable_type}"
                end
-    ids = invoices.map(&:id)
+    ids = invoices.filter { |i| !i.nil? }.map(&:id)
     AccountingWorker.perform_async(:invoices, ids)
   end
 end
