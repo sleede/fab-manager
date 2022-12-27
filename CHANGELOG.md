@@ -1,5 +1,6 @@
 # Changelog Fab-manager
 
+- Ability to group machines by categories
 - Private note on member's profile
 - Optional external identifier for users
 - Ability to disable generation of invoices at zero
