@@ -38,6 +38,7 @@ fr:
         add_an_attachment: "Ajouter une pièce jointe"
         disable_machine: "Désactiver la machine"
         disabled_help: "Lorsque désactivée, la machine ne sera pas réservable et n'apparaîtra pas par défaut dans la liste des machines."
+        reservable: "Cette machine peut-elle être réservée ?"
         ACTION_machine: "{ACTION, select, create{Créer} other{Mettre à jour}} la machine"
         create_success: "La machine a bien été créée"
         update_success: "La machine a bien été mise à jour"
