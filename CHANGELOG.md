@@ -20,6 +20,7 @@
 - Fix a bug: unable to manage stocks on new products
 - Fix a bug: unsupported param[] syntax in OpenAPI
 - Fix a bug: unable to access in-system notifications if a slot was cancelled
+- Fix a bug: feature tour in admin/settings is broken
 - Updated react-modal to 3.16.1
 - Updated tiptap editor and its dependencies to 2.0.0-beta.204
 - [TODO DEPLOY] `rails db:seed`
