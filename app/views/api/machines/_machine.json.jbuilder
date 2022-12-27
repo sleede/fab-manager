@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-json.extract! machine, :id, :name, :slug, :disabled, :machine_category_id
+json.extract! machine, :id, :name, :slug, :disabled, :machine_category_id, :reservable
 
 if machine.machine_image
   json.machine_image_attributes do

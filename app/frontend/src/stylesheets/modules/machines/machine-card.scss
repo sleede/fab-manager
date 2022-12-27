@@ -113,7 +113,10 @@
 
   &.disabled {
     opacity: 0.5;
+  }
 
+  &.disabled,
+  &.unreservable {
     .machine-actions > span {
       width: 100%;
     }

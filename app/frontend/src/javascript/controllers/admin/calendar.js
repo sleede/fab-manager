@@ -43,7 +43,7 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
     $scope.trainings = trainingsPromise.filter(t => !t.disabled);
 
     // list of the FabLab machines
-    $scope.machines = machinesPromise;
+    $scope.machines = machinesPromise.filter(m => !m.disabled && m.reservable);
 
     // List of machine categories
     $scope.machineCategories = machineCategoriesPromise;
@@ -712,7 +712,7 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
     $scope.end = end;
 
     // machines list
-    $scope.machines = machinesPromise.filter(function (m) { return !m.disabled; });
+    $scope.machines = machinesPromise.filter(function (m) { return !m.disabled && m.reservable; });
 
     // trainings list
     $scope.trainings = trainingsPromise.filter(function (t) { return !t.disabled; });

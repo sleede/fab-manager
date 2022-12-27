@@ -55,13 +55,13 @@ const MachineCard: React.FC<MachineCardProps> = ({ user, machine, onShowMachine,
   };
 
   return (
-    <div className={`machine-card ${loading ? 'loading' : ''} ${machine.disabled ? 'disabled' : ''}`}>
+    <div className={`machine-card ${loading ? 'loading' : ''} ${machine.disabled ? 'disabled' : ''} ${!machine.reservable ? 'unreservable' : ''}`}>
       {machinePicture()}
       <div className="machine-name">
         {machine.name}
       </div>
       <div className="machine-actions">
-        {!machine.disabled && <ReserveButton currentUser={user}
+        {!machine.disabled && machine.reservable && <ReserveButton currentUser={user}
           machineId={machine.id}
           onLoadingStart={() => setLoading(true)}
           onLoadingEnd={() => setLoading(false)}

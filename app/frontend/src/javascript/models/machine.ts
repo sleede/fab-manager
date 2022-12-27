@@ -18,6 +18,7 @@ export interface Machine {
   description?: string,
   spec?: string,
   disabled: boolean,
+  reservable: boolean,
   slug: string,
   machine_image_attributes?: FileType,
   machine_files_attributes?: Array<FileType>,
