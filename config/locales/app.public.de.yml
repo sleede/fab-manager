@@ -230,6 +230,8 @@ de:
         status_enabled: "Aktiviert"
         status_disabled: "Deaktiviert"
         status_all: "Alle"
+        filter_by_machine_category: "Filter by category"
+        all_machines: "All machines"
       machine_card:
         book: "Buchen"
         consult: "Beschreibung"
