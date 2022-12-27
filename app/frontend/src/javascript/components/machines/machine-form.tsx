@@ -98,8 +98,7 @@ export const MachineForm: React.FC<MachineFormProps> = ({ action, machine, onErr
                   control={control}
                   id="machine_category_id"
                   formState={formState}
-                  label={t('app.admin.machine_form.assigning_machine_to_category')} />
-
+                  label={t('app.admin.machine_form.category')} />
       <div className='form-item-header machine-files-header'>
         <p>{t('app.admin.machine_form.attached_files_pdf')}</p>
       </div>
