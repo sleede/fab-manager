@@ -42,7 +42,7 @@ export const FreeExtendModal: React.FC<FreeExtendModalProps> = ({ isOpen, toggle
       setFreeDays(0);
     }
     // 86400000 = 1000 * 3600 * 24 = number of ms per day
-    setFreeDays(Math.ceil((expirationDate.getTime() - new Date(subscription.expired_at).getTime()) / 86400000));
+    setFreeDays(Math.ceil((expirationDate.getTime() - new Date(subscription.expired_at).getTime()) / 86400000) || 0);
   }, [expirationDate]);
 
   /**
@@ -56,7 +56,9 @@ export const FreeExtendModal: React.FC<FreeExtendModalProps> = ({ isOpen, toggle
    * Return the given date formatted for the HTML input-date
    */
   const formatDefaultDate = (date: Date): string => {
-    return date.toISOString().substr(0, 10);
+    if (isNaN(date as unknown as number)) return null;
+
+    return date.toISOString().substring(0, 10);
   };
 
   /**

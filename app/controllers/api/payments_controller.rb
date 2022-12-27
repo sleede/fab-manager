@@ -4,7 +4,6 @@
 class API::PaymentsController < API::ApiController
   before_action :authenticate_user!
 
-
   # This method must be overridden by the the gateways controllers that inherits API::PaymentsControllers
   def confirm_payment
     raise NoMethodError
@@ -41,5 +40,7 @@ class API::PaymentsController < API::ApiController
     else
       { json: res[:errors].drop_while(&:empty?), status: :unprocessable_entity }
     end
+  rescue StandardError => e
+    { json: e, status: :unprocessable_entity }
   end
 end

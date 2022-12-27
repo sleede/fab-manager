@@ -13,7 +13,9 @@ class CartItem::FreeExtension < CartItem::BaseItem
 
   def start_at
     raise InvalidSubscriptionError if @subscription.nil?
-    raise InvalidSubscriptionError if @new_expiration_date <= @subscription.expired_at
+    if @new_expiration_date.nil? || @new_expiration_date <= @subscription.expired_at
+      raise InvalidSubscriptionError, I18n.t('cart_items.must_be_after_expiration')
+    end
 
     @subscription.expired_at
   end
