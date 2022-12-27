@@ -513,7 +513,7 @@ es:
     invoice_VAT-rate_Machine: "VAT rate for machine reservations"
     invoice_VAT-rate_Subscription: "VAT rate for subscriptions"
     invoice_VAT-rate_Space: "VAT rate for space reservations"
-    invoice_VAT-rate_Training: "VAT rate for traning reservations"
+    invoice_VAT-rate_Training: "VAT rate for training reservations"
     invoice_text: "Invoices' text"
     invoice_legals: "Invoices' legal information"
     booking_window_start: "Opening time"
