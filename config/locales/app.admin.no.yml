@@ -38,6 +38,7 @@
         add_an_attachment: "Add an attachment"
         disable_machine: "Disable machine"
         disabled_help: "When disabled, the machine won't be reservable and won't appear by default in the machines list."
+        reservable: "Can this machine be reserved?"
         ACTION_machine: "{ACTION, select, create{Create} other{Update}} the machine"
         create_success: "The machine was created successfully"
         update_success: "The machine was updated successfully"
