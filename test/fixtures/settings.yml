@@ -574,3 +574,9 @@ setting_97:
   name: invoice_VAT-name
   created_at: 2022-12-23 14:39:12.214510000 Z
   updated_at: 2022-12-23 14:39:12.214510000 Z
+
+setting_98:
+  id: 98
+  name: machines_module
+  created_at: 2020-04-15 14:38:40.000421500 Z
+  updated_at: 2020-04-15 14:38:40.000421500 Z

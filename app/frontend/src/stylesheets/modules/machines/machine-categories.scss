@@ -1,0 +1,61 @@
+.machine-categories-list {
+  .buttons {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    button {
+      border-radius: 5;
+      &:hover { opacity: 0.75; }
+    }
+    .edit-btn {
+      color: var(--gray-hard-darkest);
+      margin-right: 10px;
+    }
+    .delete-btn {
+      color: var(--gray-soft-lightest);
+      background: var(--main);
+    }
+  }
+
+  .machine-categories-table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 24px;
+    border-collapse: collapse;
+    border-spacing: 0;
+    & thead:first-child > tr:first-child > th {
+      border-top: 0;
+    }
+    & thead > tr > th {
+      vertical-align: bottom;
+      border-bottom: 2px solid #ddd;
+    }
+    & th {
+      text-align: left;
+    }
+    & thead > tr > th, & tbody > tr > td {
+      padding: 8px;
+      line-height: 1.5;
+      vertical-align: top;
+      border-top: 1px solid #ddd;
+    }
+  }
+}
+
+.machine-category-form {
+  .form-checklist {
+    .actions {
+      align-self: flex-start;
+      margin: 1rem 0;
+    }
+    .checklist {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0.3rem 3.2rem;
+    }
+  }
+
+  .main-actions {
+    align-self: flex-end;
+  }
+}

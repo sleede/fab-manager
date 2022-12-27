@@ -256,12 +256,15 @@ Application.Controllers.controller('NewMachineController', ['$scope', '$state', 
 /**
  * Controller used in the machine edition page (admin)
  */
-Application.Controllers.controller('EditMachineController', ['$scope', '$state', '$transition$', 'machinePromise', 'CSRF', 'growl',
-  function ($scope, $state, $transition$, machinePromise, CSRF, growl) {
+Application.Controllers.controller('EditMachineController', ['$scope', '$state', '$transition$', 'machinePromise', 'machineCategoriesPromise', 'CSRF', 'growl',
+  function ($scope, $state, $transition$, machinePromise, machineCategoriesPromise, CSRF, growl) {
     /* PUBLIC SCOPE */
 
     // Retrieve the details for the machine id in the URL, if an error occurs redirect the user to the machines list
     $scope.machine = cleanMachine(machinePromise);
+
+    // Retrieve all machine categories
+    $scope.machineCategories = machineCategoriesPromise;
 
     /**
      * Shows an error message forwarded from a child component

@@ -18,9 +18,15 @@
  * Controller used in the calendar management page
  */
 
-Application.Controllers.controller('AdminCalendarController', ['$scope', '$state', '$uibModal', 'moment', 'AuthService', 'Availability', 'SlotsReservation', 'Setting', 'Export', 'growl', 'dialogs', 'bookingWindowStart', 'bookingWindowEnd', 'machinesPromise', 'plansPromise', 'groupsPromise', 'settingsPromise', '_t', 'uiCalendarConfig', 'CalendarConfig', 'Member', 'uiTourService',
-  function ($scope, $state, $uibModal, moment, AuthService, Availability, SlotsReservation, Setting, Export, growl, dialogs, bookingWindowStart, bookingWindowEnd, machinesPromise, plansPromise, groupsPromise, settingsPromise, _t, uiCalendarConfig, CalendarConfig, Member, uiTourService) {
+Application.Controllers.controller('AdminCalendarController', ['$scope', '$state', '$uibModal', 'moment', 'AuthService', 'Availability', 'SlotsReservation', 'Setting', 'Export', 'growl', 'dialogs', 'bookingWindowStart', 'bookingWindowEnd', 'machinesPromise', 'plansPromise', 'groupsPromise', 'settingsPromise', '_t', 'uiCalendarConfig', 'CalendarConfig', 'Member', 'uiTourService', 'trainingsPromise', 'spacesPromise', 'machineCategoriesPromise', '$aside',
+  function ($scope, $state, $uibModal, moment, AuthService, Availability, SlotsReservation, Setting, Export, growl, dialogs, bookingWindowStart, bookingWindowEnd, machinesPromise, plansPromise, groupsPromise, settingsPromise, _t, uiCalendarConfig, CalendarConfig, Member, uiTourService, trainingsPromise, spacesPromise, machineCategoriesPromise, $aside) {
     /* PRIVATE STATIC CONSTANTS */
+    machinesPromise.forEach(m => m.checked = true);
+    trainingsPromise.forEach(t => t.checked = true);
+    spacesPromise.forEach(s => s.checked = true);
+
+    // check all formation/machine is select in filter
+    const isSelectAll = (type, scope) => scope[type].length === scope[type].filter(t => t.checked).length;
 
     // The calendar is divided in slots of 30 minutes
     const BASE_SLOT = '00:30:00';
@@ -33,8 +39,20 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
 
     /* PUBLIC SCOPE */
 
+    // List of trainings
+    $scope.trainings = trainingsPromise.filter(t => !t.disabled);
+
     // list of the FabLab machines
     $scope.machines = machinesPromise;
+
+    // List of machine categories
+    $scope.machineCategories = machineCategoriesPromise;
+
+    // List of machines group by category
+    $scope.machinesGroupByCategory = [];
+
+    // List of spaces
+    $scope.spaces = spacesPromise.filter(t => !t.disabled);
 
     // currently selected availability
     $scope.availability = null;
@@ -44,12 +62,6 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
 
     // Should we show the scheduled events in the calendar?
     $scope.eventsInCalendar = (settingsPromise.events_in_calendar === 'true');
-
-    // bind the availabilities slots with full-Calendar events
-    $scope.eventSources = [{
-      url: '/api/availabilities',
-      textColor: 'black'
-    }];
 
     // fullCalendar (v2) configuration
     $scope.calendarConfig = CalendarConfig({
@@ -356,12 +368,140 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
       }
     };
 
+    // filter availabilities if have change
+    $scope.filterAvailabilities = function (filter, scope) {
+      if (!scope) { scope = $scope; }
+      scope.filter = ($scope.filter = {
+        trainings: isSelectAll('trainings', scope),
+        machines: isSelectAll('machines', scope),
+        spaces: isSelectAll('spaces', scope),
+        evt: filter.evt,
+        dispo: filter.dispo
+      });
+      scope.machinesGroupByCategory.forEach(c => c.checked = _.every(c.machines, 'checked'));
+      // remove all
+      $scope.eventSources.splice(0, $scope.eventSources.length);
+      // recreate source for trainings/machines/events with new filters
+      $scope.eventSources.push({
+        url: availabilitySourceUrl(),
+        textColor: 'black'
+      });
+      uiCalendarConfig.calendars.calendar.fullCalendar('refetchEvents');
+    };
+
+    // a variable for formation/machine/event/dispo checkbox is or not checked
+    $scope.filter = {
+      trainings: isSelectAll('trainings', $scope),
+      machines: isSelectAll('machines', $scope),
+      spaces: isSelectAll('spaces', $scope),
+      evt: true,
+      dispo: true
+    };
+
+    // toggle to select all formation/machine
+    $scope.toggleFilter = function (type, filter, machineCategoryId) {
+      if (type === 'machineCategory') {
+        const category = _.find($scope.machinesGroupByCategory, (c) => (c.id).toString() === machineCategoryId);
+        if (category) {
+          category.machines.forEach(m => m.checked = category.checked);
+        }
+        filter.machines = isSelectAll('machines', $scope);
+      } else {
+        $scope[type].forEach(t => t.checked = filter[type]);
+        if (type === 'machines') {
+          $scope.machinesGroupByCategory.forEach(t => t.checked = filter[type]);
+        }
+      }
+      $scope.filterAvailabilities(filter, $scope);
+    };
+
+    $scope.openFilterAside = () =>
+      $aside.open({
+        templateUrl: '/calendar/filterAside.html',
+        placement: 'right',
+        size: 'md',
+        backdrop: false,
+        resolve: {
+          trainings () {
+            return $scope.trainings;
+          },
+          machines () {
+            return $scope.machines;
+          },
+          machinesGroupByCategory () {
+            return $scope.machinesGroupByCategory;
+          },
+          spaces () {
+            return $scope.spaces;
+          },
+          filter () {
+            return $scope.filter;
+          },
+          toggleFilter () {
+            return $scope.toggleFilter;
+          },
+          filterAvailabilities () {
+            return $scope.filterAvailabilities;
+          }
+        },
+        controller: ['$scope', '$uibModalInstance', 'trainings', 'machines', 'machinesGroupByCategory', 'spaces', 'filter', 'toggleFilter', 'filterAvailabilities', function ($scope, $uibModalInstance, trainings, machines, machinesGroupByCategory, spaces, filter, toggleFilter, filterAvailabilities) {
+          $scope.trainings = trainings;
+          $scope.machines = machines;
+          $scope.machinesGroupByCategory = machinesGroupByCategory;
+          $scope.hasMachineCategory = _.some(machines, 'machine_category_id');
+          $scope.spaces = spaces;
+          $scope.filter = filter;
+          $scope.accordion = {
+            trainings: false,
+            machines: false,
+            spaces: false
+          };
+          $scope.machinesGroupByCategory.forEach(c => $scope.accordion[c.name] = false);
+
+          $scope.toggleAccordion = (type) => $scope.accordion[type] = !$scope.accordion[type];
+
+          $scope.toggleFilter = (type, filter, machineCategoryId) => toggleFilter(type, filter, machineCategoryId);
+
+          $scope.filterAvailabilities = filter => filterAvailabilities(filter, $scope);
+
+          return $scope.close = function (e) {
+            $uibModalInstance.dismiss();
+            return e.stopPropagation();
+          };
+        }]
+      });
+
     /* PRIVATE SCOPE */
+    const getFilter = function () {
+      const t = $scope.trainings.filter(t => t.checked).map(t => t.id);
+      const m = $scope.machines.filter(m => m.checked).map(m => m.id);
+      const s = $scope.spaces.filter(s => s.checked).map(s => s.id);
+      return { t, m, s, evt: $scope.filter.evt, dispo: $scope.filter.dispo };
+    };
+
+    const availabilitySourceUrl = () => `/api/availabilities?${$.param(getFilter())}`;
 
     /**
      * Kind of constructor: these actions will be realized first when the controller is loaded
      */
-    const initialize = function () {};
+    const initialize = function () {
+      // bind the availabilities slots with full-Calendar events
+      $scope.eventSources = [{
+        url: availabilitySourceUrl(),
+        textColor: 'black'
+      }];
+      // group machines by category
+      _.forIn(_.groupBy($scope.machines, 'machine_category_id'), (ms, categoryId) => {
+        const category = _.find($scope.machineCategories, (c) => (c.id).toString() === categoryId);
+        $scope.machinesGroupByCategory.push({
+          id: categoryId,
+          name: category ? category.name : _t('app.shared.machine.machine_uncategorized'),
+          checked: true,
+          machine_ids: category ? category.machine_ids : [],
+          machines: ms
+        });
+      });
+    };
 
     /**
      * Return an enumerable meaninful string for the gender of the provider user

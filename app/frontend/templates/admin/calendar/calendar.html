@@ -41,17 +41,22 @@
         <span class="calendar-legend-item text-sm border-event" ng-show="eventsInCalendar" translate>{{ 'app.admin.calendar.events' }}</span>
       </div>
     </div>
-    <div ng-show="isAuthorized('admin')">
-      <a class="btn btn-default export-xls-button"
-        ng-href="api/availabilities/export_index.xlsx"
-        target="export-frame"
-        ng-click="alertExport('index')"
-        uib-popover="{{ 'app.admin.calendar.availabilities_notice' | translate}}"
-        popover-trigger="mouseenter"
-        popover-placement="bottom-left">
-        <i class="fa fa-file-excel-o"></i> {{ 'app.admin.calendar.availabilities' | translate }}
-      </a>
-      <iframe name="export-frame" height="0" width="0" class="none"></iframe>
+    <div class="calendar-actions">
+      <div ng-show="isAuthorized('admin')">
+        <a class="btn btn-default export-xls-button"
+          ng-href="api/availabilities/export_index.xlsx"
+          target="export-frame"
+          ng-click="alertExport('index')"
+          uib-popover="{{ 'app.admin.calendar.availabilities_notice' | translate}}"
+          popover-trigger="mouseenter"
+          popover-placement="bottom-left">
+          <i class="fa fa-file-excel-o"></i> {{ 'app.admin.calendar.availabilities' | translate }}
+        </a>
+        <iframe name="export-frame" height="0" width="0" class="none"></iframe>
+      </div>
+      <button type="button" class="btn btn-default m-l" ng-click="openFilterAside()">
+        <span class="fa fa-filter"></span> {{ 'app.shared.calendar.filter_calendar' | translate }}
+      </button>
     </div>
   </div>
   <div class="col-12">
