@@ -38,6 +38,7 @@ zu:
         add_an_attachment: "crwdns31673:0crwdne31673:0"
         disable_machine: "crwdns31675:0crwdne31675:0"
         disabled_help: "crwdns31677:0crwdne31677:0"
+        reservable: "crwdns36217:0crwdne36217:0"
         ACTION_machine: "crwdns31757:0ACTION={ACTION}crwdne31757:0"
         create_success: "crwdns31759:0crwdne31759:0"
         update_success: "crwdns31761:0crwdne31761:0"
