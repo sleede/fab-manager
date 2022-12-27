@@ -28,7 +28,7 @@ export const FormMultiImageUpload = <TFieldValues extends FieldValues, TContext 
    */
   const addImage = () => {
     append({
-      is_main: output.filter(i => i.is_main).length === 0,
+      is_main: output.filter((i: ImageType) => i.is_main).length === 0,
       _destroy: false
     } as UnpackNestedValue<FieldArray<TFieldValues, ArrayPath<TFieldValues>>>);
   };
@@ -55,8 +55,8 @@ export const FormMultiImageUpload = <TFieldValues extends FieldValues, TContext 
    * Set the image at the given index as the new main image, and unset the current main image
    */
   const handleSetMainImage = (index: number) => {
-    return (setNewImageValue) => {
-      const mainImageIndex = output.findIndex(i => i.is_main && i !== index);
+    return (setNewImageValue: (isMain: boolean) => void) => {
+      const mainImageIndex = output.findIndex((i: ImageType, idx) => i.is_main && idx !== index);
       if (mainImageIndex > -1) {
         setValue(
           `${id}.${mainImageIndex}.is_main` as Path<TFieldValues>,

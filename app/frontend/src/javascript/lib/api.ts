@@ -32,16 +32,19 @@ export default class ApiLib {
           if (file?._destroy) {
             data.set(`${name}[${attr}][${i}][_destroy]`, file._destroy.toString());
           }
+          if (file?.is_main) {
+            data.set(`${name}[${attr}][${i}][is_main]`, file.is_main.toString());
+          }
         });
       } else {
         if (object[attr]?.attachment_files && object[attr]?.attachment_files[0]) {
           data.set(`${name}[${attr}][attachment]`, object[attr]?.attachment_files[0]);
-          if (object[attr].id) {
-            data.set(`${name}[${attr}][id]`, object[attr].id.toString());
-          }
-          if (object[attr]._destroy) {
-            data.set(`${name}[${attr}][_destroy]`, object[attr]._destroy.toString());
-          }
+        }
+        if (object[attr]?.id) {
+          data.set(`${name}[${attr}][id]`, object[attr].id.toString());
+        }
+        if (object[attr]?._destroy) {
+          data.set(`${name}[${attr}][_destroy]`, object[attr]._destroy.toString());
         }
       }
     });

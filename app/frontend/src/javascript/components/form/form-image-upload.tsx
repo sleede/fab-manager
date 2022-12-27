@@ -22,7 +22,7 @@ interface FormImageUploadProps<TFieldValues, TContext extends object> extends Fo
   mainOption?: boolean,
   onFileChange?: (value: ImageType) => void,
   onFileRemove?: () => void,
-  onFileIsMain?: (setIsMain: () => void) => void,
+  onFileIsMain?: (setIsMain: (isMain: boolean) => void) => void,
 }
 
 /**
@@ -108,7 +108,7 @@ export const FormImageUpload = <TFieldValues extends FieldValues, TContext exten
               render={({ field: { onChange, value } }) =>
                 <input id={`${id}.is_main`}
                   type="radio"
-                  checked={value}
+                  checked={value || false}
                   onChange={() => { onFileIsMain(onChange); }} />
               } />
           </label>
