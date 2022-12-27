@@ -527,3 +527,12 @@ zu:
         keyword: "crwdns30722:0{KEYWORD}crwdne30722:0"
         stock_internal: "crwdns30564:0crwdne30564:0"
         stock_external: "crwdns30566:0crwdne30566:0"
+      calendar:
+        calendar: "crwdns36181:0crwdne36181:0"
+        show_unavailables: "crwdns36183:0crwdne36183:0"
+        filter_calendar: "crwdns36185:0crwdne36185:0"
+        trainings: "crwdns36187:0crwdne36187:0"
+        machines: "crwdns36189:0crwdne36189:0"
+        spaces: "crwdns36191:0crwdne36191:0"
+        events: "crwdns36193:0crwdne36193:0"
+        externals: "crwdns36195:0crwdne36195:0"
