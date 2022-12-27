@@ -26,7 +26,7 @@ en:
         confirmation_required: "Confirmation required"
         confirm: "Confirm"
         deleted: "The machine category has been successfully deleted."
-        unable_to_delete: "Unable to delete the machine category : "
+        unable_to_delete: "Unable to delete the machine category: "
         confirm_delete_supporting_documents_type: "Do you really want to remove this machine category?"
       machine_form:
         name: "Name"
