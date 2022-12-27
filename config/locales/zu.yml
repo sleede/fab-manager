@@ -106,7 +106,8 @@ zu:
       other: "crwdns3327:5%{count}crwdnd3327:5%{NAME}crwdne3327:5"
     coupon_CODE_discount_of_DISCOUNT: "crwdns3331:0CODE={CODE}crwdnd3331:0DISCOUNT={DISCOUNT}crwdnd3331:0TYPE={TYPE}crwdne3331:0" #messageFormat interpolation
     total_including_all_taxes: "crwdns3333:0crwdne3333:0"
-    including_VAT_RATE: "crwdns22257:0%{RATE}crwdnd22257:0%{AMOUNT}crwdne22257:0"
+    VAT: "crwdns36197:0crwdne36197:0"
+    including_VAT_RATE: "crwdns22257:0%{NAME}crwdnd22257:0%{RATE}crwdnd22257:0%{AMOUNT}crwdne22257:0"
     including_total_excluding_taxes: "crwdns3337:0crwdne3337:0"
     including_amount_payed_on_ordering: "crwdns3339:0crwdne3339:0"
     total_amount: "crwdns3341:0crwdne3341:0"
@@ -169,7 +170,7 @@ zu:
   vat_export:
     start_date: "crwdns22259:0crwdne22259:0"
     end_date: "crwdns22261:0crwdne22261:0"
-    vat_rate: "crwdns22263:0crwdne22263:0"
+    vat_rate: "crwdns22263:0%{NAME}crwdne22263:0"
     amount: "crwdns22265:0crwdne22265:0"
   #training availabilities
   trainings:
@@ -507,6 +508,12 @@ zu:
     invoice_order-nb: "crwdns21666:0crwdne21666:0"
     invoice_VAT-active: "crwdns21668:0crwdne21668:0"
     invoice_VAT-rate: "crwdns21670:0crwdne21670:0"
+    invoice_VAT-rate_Product: "crwdns36199:0crwdne36199:0"
+    invoice_VAT-rate_Event: "crwdns36201:0crwdne36201:0"
+    invoice_VAT-rate_Machine: "crwdns36203:0crwdne36203:0"
+    invoice_VAT-rate_Subscription: "crwdns36205:0crwdne36205:0"
+    invoice_VAT-rate_Space: "crwdns36207:0crwdne36207:0"
+    invoice_VAT-rate_Training: "crwdns36209:0crwdne36209:0"
     invoice_text: "crwdns21672:0crwdne21672:0"
     invoice_legals: "crwdns21674:0crwdne21674:0"
     booking_window_start: "crwdns21676:0crwdne21676:0"
@@ -634,3 +641,5 @@ zu:
     store_hidden: "crwdns31727:0crwdne31727:0"
     advanced_accounting: "crwdns32111:0crwdne32111:0"
     external_id: "crwdns32113:0crwdne32113:0"
+    prevent_invoices_zero: "crwdns36211:0crwdne36211:0"
+    invoice_VAT-name: "crwdns36213:0crwdne36213:0"
