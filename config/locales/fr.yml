@@ -483,6 +483,7 @@ fr:
     reduced_fare_if_you_are_under_25_student_or_unemployed: "Tarif réduit si vous avez moins de 25 ans, que vous êtes étudiant ou demandeur d'emploi."
   cart_items:
     free_extension: "Extension gratuite d'un abonnement, jusqu'au %{DATE}"
+    must_be_after_expiration: "La nouvelle date d'expiration doit être définie après la date d'expiration actuelle"
   statistic_profile:
     birthday_in_past: "La date de naissance doit être dans le passé"
   order:
