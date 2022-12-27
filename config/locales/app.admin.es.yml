@@ -33,6 +33,7 @@ es:
         illustration: "Visual"
         description: "Description"
         technical_specifications: "Technical specifications"
+        category: "Category"
         attached_files_pdf: "Attached files (pdf)"
         add_an_attachment: "Add an attachment"
         disable_machine: "Disable machine"

@@ -33,6 +33,7 @@ fr:
         illustration: "Illustration"
         description: "Description"
         technical_specifications: "Caractéristiques techniques"
+        category: "Catégorie"
         attached_files_pdf: "Pièces jointes (pdf)"
         add_an_attachment: "Ajouter une pièce jointe"
         disable_machine: "Désactiver la machine"
