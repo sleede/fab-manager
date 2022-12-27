@@ -230,8 +230,8 @@ fr:
         status_enabled: "Actives"
         status_disabled: "Désactivées"
         status_all: "Toutes"
-        filter_by_machine_category: "Filter by category"
-        all_machines: "All machines"
+        filter_by_machine_category: "Filtrer par catégorie"
+        all_machines: "Toutes les machines"
       machine_card:
         book: "Réserver"
         consult: "Consulter"
