@@ -37,6 +37,8 @@ class Machine < ApplicationRecord
   has_one :advanced_accounting, as: :accountable, dependent: :destroy
   accepts_nested_attributes_for :advanced_accounting, allow_destroy: true
 
+  belongs_to :category
+
   after_create :create_statistic_subtype
   after_create :create_machine_prices
   after_create :update_gateway_product

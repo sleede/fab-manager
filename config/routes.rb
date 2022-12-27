@@ -41,6 +41,7 @@ Rails.application.routes.draw do
     end
     resources :openlab_projects, only: :index
     resources :machines
+    resources :machine_categories
     resources :components
     resources :themes
     resources :licences

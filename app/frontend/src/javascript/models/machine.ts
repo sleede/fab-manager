@@ -7,6 +7,11 @@ export interface MachineIndexFilter extends ApiFilter {
   disabled: boolean,
 }
 
+export interface MachineListFilter {
+  status?: boolean,
+  category?: number,
+}
+
 export interface Machine {
   id?: number,
   name: string,
@@ -30,5 +35,6 @@ export interface Machine {
     name: string,
     slug: string,
   }>,
-  advanced_accounting_attributes?: AdvancedAccounting
+  advanced_accounting_attributes?: AdvancedAccounting,
+  machine_category_id?: number
 }

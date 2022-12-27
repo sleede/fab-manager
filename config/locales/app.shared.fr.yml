@@ -527,3 +527,12 @@ fr:
         keyword: "Mot-clef : {KEYWORD}"
         stock_internal: "Stock interne"
         stock_external: "Stock externe"
+      calendar:
+        calendar: "Calendrier"
+        show_unavailables: "Afficher les créneaux non disponibles"
+        filter_calendar: "Filtrer le calendrier"
+        trainings: "Formations"
+        machines: "Machines"
+        spaces: "Espaces"
+        events: "Événements"
+        externals: "Autres calendriers"

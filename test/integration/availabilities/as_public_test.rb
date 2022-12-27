@@ -3,11 +3,11 @@
 require 'test_helper'
 
 class Availabilities::AsPublicTest < ActionDispatch::IntegrationTest
-  test 'get public machines availabilities' do
+  test 'get public machines availabilities if machines module is active' do
     start_date = DateTime.current.to_date
     end_date = (DateTime.current + 7.days).to_date
 
-    get "/api/availabilities/public?start=#{start_date.to_s}&end=#{end_date.to_s}&timezone=Europe%2FParis&#{all_machines}"
+    get "/api/availabilities/public?start=#{start_date}&end=#{end_date}&timezone=Europe%2FParis&#{all_machines}"
 
     # Check response format & status
     assert_equal 200, response.status
@@ -24,11 +24,27 @@ class Availabilities::AsPublicTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test 'get anymore machines availabilities if machines module is inactive' do
+    Setting.set('machines_module', false)
+    start_date = DateTime.current.to_date
+    end_date = (DateTime.current + 7.days).to_date
+
+    get "/api/availabilities/public?start=#{start_date}&end=#{end_date}&timezone=Europe%2FParis&#{all_machines}"
+
+    # Check response format & status
+    assert_equal 200, response.status
+    assert_equal Mime[:json], response.content_type
+
+    # Check the correct availabilities was returned
+    availabilities = json_response(response.body)
+    assert_empty availabilities
+  end
+
   test 'get public trainings availabilities' do
     start_date = DateTime.current.to_date
     end_date = (DateTime.current + 7.days).to_date
 
-    get "/api/availabilities/public?start=#{start_date.to_s}&end=#{end_date.to_s}&timezone=Europe%2FParis&#{all_trainings}"
+    get "/api/availabilities/public?start=#{start_date}&end=#{end_date}&timezone=Europe%2FParis&#{all_trainings}"
 
     # Check response format & status
     assert_equal 200, response.status
@@ -49,7 +65,7 @@ class Availabilities::AsPublicTest < ActionDispatch::IntegrationTest
     start_date = DateTime.current.to_date
     end_date = (DateTime.current + 7.days).to_date
 
-    get "/api/availabilities/public?start=#{start_date.to_s}&end=#{end_date.to_s}&timezone=Europe%2FParis&#{all_spaces}"
+    get "/api/availabilities/public?start=#{start_date}&end=#{end_date}&timezone=Europe%2FParis&#{all_spaces}"
 
     # Check response format & status
     assert_equal 200, response.status
@@ -70,7 +86,7 @@ class Availabilities::AsPublicTest < ActionDispatch::IntegrationTest
     start_date = 8.days.from_now.to_date
     end_date = 16.days.from_now.to_date
 
-    get "/api/availabilities/public?start=#{start_date.to_s}&end=#{end_date.to_s}&timezone=Europe%2FParis&evt=true"
+    get "/api/availabilities/public?start=#{start_date}&end=#{end_date}&timezone=Europe%2FParis&evt=true"
 
     # Check response format & status
     assert_equal 200, response.status

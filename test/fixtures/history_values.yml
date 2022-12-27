@@ -923,3 +923,12 @@ history_value_97:
   updated_at: 2022-11-29 21:02:47.354751000 Z
   footprint:
   invoicing_profile_id: 1
+
+history_value_98:
+  id: 98
+  setting_id: 97
+  value: 'true'
+  created_at: '2022-12-20 14:38:40.000421'
+  updated_at: '2022-12-20 14:38:40.000421'
+  footprint:
+  invoicing_profile_id: 1

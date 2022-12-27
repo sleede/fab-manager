@@ -359,6 +359,20 @@ angular.module('application.router', ['ui.router'])
           settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['feature_tour_display', 'user_validation_required', 'user_validation_required_list']" }).$promise; }]
         }
       })
+      .state('app.admin.machines_list', {
+        url: '/admin/machines',
+        abstract: !Fablab.machinesModule,
+        views: {
+          'main@': {
+            templateUrl: '/admin/machines/index.html',
+            controller: 'AdminMachinesController'
+          }
+        },
+        resolve: {
+          machinesPromise: ['Machine', function (Machine) { return Machine.query().$promise; }],
+          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['feature_tour_display', 'user_validation_required', 'user_validation_required_list']" }).$promise; }]
+        }
+      })
       .state('app.admin.machines_new', {
         url: '/machines/new',
         abstract: !Fablab.machinesModule,
@@ -414,7 +428,8 @@ angular.module('application.router', ['ui.router'])
           }
         },
         resolve: {
-          machinePromise: ['Machine', '$transition$', function (Machine, $transition$) { return Machine.get({ id: $transition$.params().id }).$promise; }]
+          machinePromise: ['Machine', '$transition$', function (Machine, $transition$) { return Machine.get({ id: $transition$.params().id }).$promise; }],
+          machineCategoriesPromise: ['MachineCategory', function (MachineCategory) { return MachineCategory.query().$promise; }]
         }
       })
 
@@ -620,7 +635,8 @@ angular.module('application.router', ['ui.router'])
           trainingsPromise: ['Training', function (Training) { return Training.query().$promise; }],
           machinesPromise: ['Machine', function (Machine) { return Machine.query().$promise; }],
           spacesPromise: ['Space', function (Space) { return Space.query().$promise; }],
-          iCalendarPromise: ['ICalendar', function (ICalendar) { return ICalendar.query().$promise; }]
+          iCalendarPromise: ['ICalendar', function (ICalendar) { return ICalendar.query().$promise; }],
+          machineCategoriesPromise: ['MachineCategory', function (MachineCategory) { return MachineCategory.query().$promise; }]
         }
       })
 
@@ -687,7 +703,10 @@ angular.module('application.router', ['ui.router'])
           machinesPromise: ['Machine', function (Machine) { return Machine.query().$promise; }],
           plansPromise: ['Plan', function (Plan) { return Plan.query().$promise; }],
           groupsPromise: ['Group', function (Group) { return Group.query().$promise; }],
-          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['slot_duration', 'events_in_calendar', 'feature_tour_display']" }).$promise; }]
+          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['slot_duration', 'events_in_calendar', 'feature_tour_display']" }).$promise; }],
+          trainingsPromise: ['Training', function (Training) { return Training.query().$promise; }],
+          spacesPromise: ['Space', function (Space) { return Space.query().$promise; }],
+          machineCategoriesPromise: ['MachineCategory', function (MachineCategory) { return MachineCategory.query().$promise; }]
         }
       })
       .state('app.admin.calendar.icalendar', {

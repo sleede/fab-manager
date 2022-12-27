@@ -2,7 +2,6 @@
 
 # List all Availability's slots for the given resources
 class Availabilities::AvailabilitiesService
-
   def initialize(current_user, level = 'slot')
     @current_user = current_user
     @maximum_visibility = {
@@ -12,6 +11,19 @@ class Availabilities::AvailabilitiesService
     @minimum_visibility = Setting.get('reservation_deadline').to_i.minutes.since
     @service = Availabilities::StatusService.new(current_user&.role)
     @level = level
+  end
+
+  def index(window, ids, events: false)
+    machines_availabilities = Setting.get('machines_module') ? machines(Machine.where(id: ids[:machines]), @current_user, window) : []
+    spaces_availabilities = Setting.get('spaces_module') ? spaces(Space.where(id: ids[:spaces]), @current_user, window) : []
+    trainings_availabilities = Setting.get('trainings_module') ? trainings(Training.where(id: ids[:trainings]), @current_user, window) : []
+    events_availabilities = if events && Setting.get('events_in_calendar')
+                              events(Event.all, @current_user, window)
+                            else
+                              []
+                            end
+
+    [].concat(trainings_availabilities).concat(events_availabilities).concat(machines_availabilities).concat(spaces_availabilities)
   end
 
   # list all slots for the given machines, with visibility relative to the given user

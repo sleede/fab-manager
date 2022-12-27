@@ -1,44 +1,66 @@
-<div>
+<div class="row">
+  <h3 class="col-md-11 col-sm-11 col-xs-11 text-black" translate>{{ 'app.shared.calendar.show_unavailables' }}</h3>
+  <input class="col-md-1 col-sm-1 col-xs-1" type="checkbox" ng-model="filter.dispo" ng-change="filterAvailabilities(filter)">
+</div>
+<div class="m-t" ng-show="$root.modules.trainings">
   <div class="row">
-    <h3 class="col-md-11 col-sm-11 col-xs-11 text-purple" translate>{{ 'app.public.calendar.trainings' }}</h3>
+    <h3 class="col-md-11 col-sm-11 col-xs-11">
+      <i ng-class="{'fa-chevron-up': !accordion.trainings, 'fa-chevron-down': accordion.trainings}" ng-click="toggleAccordion('trainings')" class="fa m-r-xs text-black"></i>
+      <span class="text-purple" translate>{{ 'app.shared.calendar.trainings' }}</span>
+    </h3>
     <input class="col-md-1 col-sm-1 col-xs-1" type="checkbox" ng-model="filter.trainings" ng-change="toggleFilter('trainings', filter)">
   </div>
-  <div ng-repeat="t in trainings" class="row">
+  <div ng-repeat="t in trainings" class="row" ng-hide="accordion.trainings">
     <span class="col-md-11 col-sm-11 col-xs-11">{{::t.name}}</span>
     <input class="col-md-1 col-sm-1 col-xs-1" type="checkbox" ng-model="t.checked" ng-change="filterAvailabilities(filter)">
   </div>
 </div>
-<div class="m-t">
+<div class="m-t" ng-show="$root.modules.machines">
   <div class="row">
-    <h3 class="col-md-11 col-sm-11 col-xs-11 text-beige" translate>{{ 'app.public.calendar.machines' }}</h3>
+    <h3 class="col-md-11 col-sm-11 col-xs-11">
+      <i ng-class="{'fa-chevron-up': !accordion.machines, 'fa-chevron-down': accordion.machines}" ng-click="toggleAccordion('machines')" class="fa m-r-xs text-black"></i>
+      <span class="text-beige" translate>{{ 'app.shared.calendar.machines' }}</span>
+    </h3>
     <input class="col-md-1 col-sm-1 col-xs-1" type="checkbox" ng-model="filter.machines" ng-change="toggleFilter('machines', filter)">
   </div>
-  <div ng-repeat="m in machines" class="row">
+  <div ng-if="!hasMachineCategory" ng-repeat="m in machines" class="row" ng-hide="accordion.machines">
     <span class="col-md-11 col-sm-11 col-xs-11">{{::m.name}}</span>
     <input class="col-md-1 col-sm-1 col-xs-1" type="checkbox" ng-model="m.checked" ng-change="filterAvailabilities(filter)">
+  </div>
+  <div ng-if="hasMachineCategory" ng-repeat="category in machinesGroupByCategory" class="row" ng-hide="accordion.machines">
+    <span class="col-md-11 col-sm-11 col-xs-11">
+      <i ng-class="{'fa-chevron-up': !accordion[category.name], 'fa-chevron-down': accordion[category.name]}" ng-click="toggleAccordion(category.name)" class="fa m-r-xs text-black"></i>
+      {{::category.name}}
+    </span>
+    <input class="col-md-1 col-sm-1 col-xs-1" type="checkbox" ng-model="category.checked" ng-change="toggleFilter('machineCategory', filter, category.id)">
+    <div ng-repeat="m in category.machines" class="col-md-12" ng-hide="accordion[category.name]">
+      <div class="row p-l-sm">
+        <span class="col-md-11 col-sm-11 col-xs-11">{{::m.name}}</span>
+        <input class="col-md-1 col-sm-1 col-xs-1" type="checkbox" ng-model="m.checked" ng-change="filterAvailabilities(filter)">
+      </div>
+    </div>
   </div>
 </div>
 <div class="m-t" ng-show="$root.modules.spaces">
   <div class="row">
-    <h3 class="col-md-11 col-sm-11 col-xs-11 text-cyan" translate>{{ 'app.public.calendar.spaces' }}</h3>
+    <h3 class="col-md-11 col-sm-11 col-xs-11">
+      <i ng-class="{'fa-chevron-up': !accordion.spaces, 'fa-chevron-down': accordion.spaces}" ng-click="toggleAccordion('spaces')" class="fa m-r-xs text-black"></i>
+      <span class="text-cyan" translate>{{ 'app.shared.calendar.spaces' }}</span>
+    </h3>
     <input class="col-md-1 col-sm-1 col-xs-1" type="checkbox" ng-model="filter.spaces" ng-change="toggleFilter('spaces', filter)">
   </div>
-  <div ng-repeat="s in spaces" class="row">
+  <div ng-repeat="s in spaces" class="row" ng-hide="accordion.spaces">
     <span class="col-md-11 col-sm-11 col-xs-11">{{::s.name}}</span>
     <input class="col-md-1 col-sm-1 col-xs-1" type="checkbox" ng-model="s.checked" ng-change="filterAvailabilities(filter)">
   </div>
 </div>
 <div class="m-t row">
-  <h3 class="col-md-11 col-sm-11 col-xs-11 text-japonica" translate>{{ 'app.public.calendar.events' }}</h3>
+  <h3 class="col-md-11 col-sm-11 col-xs-11 text-japonica" translate>{{ 'app.shared.calendar.events' }}</h3>
   <input class="col-md-1 col-sm-1 col-xs-1" type="checkbox" ng-model="filter.evt" ng-change="filterAvailabilities(filter)">
 </div>
-<div class="m-t row">
-  <h3 class="col-md-11 col-sm-11 col-xs-11 text-black" translate>{{ 'app.public.calendar.show_unavailables' }}</h3>
-  <input class="col-md-1 col-sm-1 col-xs-1" type="checkbox" ng-model="filter.dispo" ng-change="filterAvailabilities(filter)">
-</div>
-<div class="m-t" ng-hide="externals.length == 0">
+<div class="m-t" ng-hide="!externals || externals.length == 0">
   <div class="row">
-    <h3 class="col-md-11 col-sm-11 col-xs-11 text-black" translate>{{ 'app.public.calendar.externals' }}</h3>
+    <h3 class="col-md-11 col-sm-11 col-xs-11 text-black" translate>{{ 'app.shared.calendar.externals' }}</h3>
     <input class="col-md-1 col-sm-1 col-xs-1" type="checkbox" ng-model="filter.externals" ng-change="toggleFilter('externals', filter)">
   </div>
 

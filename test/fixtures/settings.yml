@@ -568,3 +568,9 @@ setting_96:
   name: reservation_deadline
   created_at: 2022-11-29 21:02:47.354751000 Z
   updated_at: 2022-11-29 21:02:47.354751000 Z
+
+setting_97:
+  id: 97
+  name: machines_module
+  created_at: 2020-04-15 14:38:40.000421500 Z
+  updated_at: 2020-04-15 14:38:40.000421500 Z
