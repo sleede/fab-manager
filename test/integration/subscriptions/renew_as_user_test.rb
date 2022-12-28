@@ -2,6 +2,8 @@
 
 require 'test_helper'
 
+module Subscriptions; end
+
 class Subscriptions::RenewAsUserTest < ActionDispatch::IntegrationTest
   setup do
     @user = User.find_by(username: 'atiermoulin')
@@ -60,7 +62,7 @@ class Subscriptions::RenewAsUserTest < ActionDispatch::IntegrationTest
 
     # Check notifications were sent for every admins
     notifications = Notification.where(
-      notification_type_id: NotificationType.find_by_name('notify_admin_subscribed_plan'),
+      notification_type_id: NotificationType.find_by_name('notify_admin_subscribed_plan'), # rubocop:disable Rails/DynamicFindBy
       attached_object_type: 'Subscription',
       attached_object_id: subscription[:id]
     )

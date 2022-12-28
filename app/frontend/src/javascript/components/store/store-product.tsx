@@ -108,7 +108,7 @@ export const StoreProduct: React.FC<StoreProductProps> = ({ productSlug, current
    */
   const addToCart = () => {
     if (toCartCount <= product.stock.external) {
-      CartAPI.addItem(cart, product.id, toCartCount).then(data => {
+      CartAPI.addItem(cart, product.id, 'Product', toCartCount).then(data => {
         setCart(data);
         onSuccess(t('app.public.store_product.add_to_cart_success'));
       }).catch(() => {

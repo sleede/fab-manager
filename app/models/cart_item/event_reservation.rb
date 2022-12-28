@@ -2,30 +2,38 @@
 
 # An event reservation added to the shopping cart
 class CartItem::EventReservation < CartItem::Reservation
-  # @param normal_tickets {Number} number of tickets at the normal price
-  # @param other_tickets {Array<{booked: Number, event_price_category_id: Number}>}
-  def initialize(customer, operator, event, slots, normal_tickets: 0, other_tickets: [])
-    raise TypeError unless event.is_a? Event
+  has_many :cart_item_event_reservation_tickets, class_name: 'CartItem::EventReservationTicket', dependent: :destroy,
+                                                 inverse_of: :cart_item_event_reservation,
+                                                 foreign_key: 'cart_item_event_reservation_id'
+  accepts_nested_attributes_for :cart_item_event_reservation_tickets
 
-    super(customer, operator, event, slots)
-    @normal_tickets = normal_tickets || 0
-    @other_tickets = other_tickets || []
+  has_many :cart_item_reservation_slots, class_name: 'CartItem::ReservationSlot', dependent: :destroy, inverse_of: :cart_item,
+                                         foreign_key: 'cart_item_id', foreign_type: 'cart_item_type'
+  accepts_nested_attributes_for :cart_item_reservation_slots
+
+  belongs_to :operator_profile, class_name: 'InvoicingProfile'
+  belongs_to :customer_profile, class_name: 'InvoicingProfile'
+
+  belongs_to :event
+
+  def reservable
+    event
   end
 
   def price
-    amount = @reservable.amount * @normal_tickets
-    is_privileged = @operator.privileged? && @operator.id != @customer.id
+    amount = reservable.amount * normal_tickets
+    is_privileged = operator.privileged? && operator.id != customer.id
 
-    @other_tickets.each do |ticket|
-      amount += ticket[:booked] * EventPriceCategory.find(ticket[:event_price_category_id]).amount
+    cart_item_event_reservation_tickets.each do |ticket|
+      amount += ticket.booked * ticket.event_price_category.amount
     end
 
     elements = { slots: [] }
     total = 0
 
-    @slots.each do |slot|
+    cart_item_reservation_slots.each do |sr|
       total += get_slot_price(amount,
-                              slot,
+                              sr,
                               is_privileged,
                               elements: elements,
                               is_division: false)
@@ -36,26 +44,25 @@ class CartItem::EventReservation < CartItem::Reservation
 
   def to_object
     ::Reservation.new(
-      reservable_id: @reservable.id,
+      reservable_id: reservable.id,
       reservable_type: Event.name,
       slots_reservations_attributes: slots_params,
-      tickets_attributes: tickets_params,
-      nb_reserve_places: @normal_tickets,
-      statistic_profile_id: StatisticProfile.find_by(user: @customer).id
+      tickets_attributes: cart_item_event_reservation_tickets.map do |t|
+        {
+          event_price_category_id: t.event_price_category_id,
+          booked: t.booked
+        }
+      end,
+      nb_reserve_places: normal_tickets,
+      statistic_profile_id: StatisticProfile.find_by(user: customer).id
     )
   end
 
   def name
-    @reservable.title
+    reservable.title
   end
 
   def type
     'event'
-  end
-
-  protected
-
-  def tickets_params
-    @other_tickets.map { |ticket| ticket.permit(:event_price_category_id, :booked) }
   end
 end

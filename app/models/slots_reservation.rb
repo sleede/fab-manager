@@ -5,6 +5,7 @@
 class SlotsReservation < ApplicationRecord
   belongs_to :slot
   belongs_to :reservation
+  has_one :cart_item_reservation_slot, class_name: 'CartItem::ReservationSlot', dependent: :nullify
 
   after_update :set_ex_start_end_dates_attrs, if: :slot_changed?
   after_update :notify_member_and_admin_slot_is_modified, if: :slot_changed?
@@ -13,7 +14,7 @@ class SlotsReservation < ApplicationRecord
   after_update :update_event_nb_free_places, if: :canceled?
 
   def set_ex_start_end_dates_attrs
-    update_columns(ex_start_at: previous_slot.start_at, ex_end_at: previous_slot.end_at)
+    update_columns(ex_start_at: previous_slot.start_at, ex_end_at: previous_slot.end_at) # rubocop:disable Rails/SkipsModelValidations
   end
 
   private

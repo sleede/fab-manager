@@ -2,6 +2,8 @@
 
 require 'test_helper'
 
+module Subscriptions; end
+
 class Subscriptions::CreateAsUserTest < ActionDispatch::IntegrationTest
   setup do
     @user = User.find_by(username: 'jdupond')
@@ -57,7 +59,7 @@ class Subscriptions::CreateAsUserTest < ActionDispatch::IntegrationTest
 
     # Check notifications were sent for every admins
     notifications = Notification.where(
-      notification_type_id: NotificationType.find_by_name('notify_admin_subscribed_plan'),
+      notification_type_id: NotificationType.find_by_name('notify_admin_subscribed_plan'), # rubocop:disable Rails/DynamicFindBy
       attached_object_type: 'Subscription',
       attached_object_id: subscription[:id]
     )
@@ -100,7 +102,7 @@ class Subscriptions::CreateAsUserTest < ActionDispatch::IntegrationTest
     assert_equal Mime[:json], response.content_type
 
     # Check the error was handled
-    assert_match(/plan is not compatible/, response.body)
+    assert_match(/plan is reserved for members of group/, response.body)
 
     # Check that the user has no subscription
     assert_nil @user.subscription, "user's subscription was found"
@@ -162,7 +164,7 @@ class Subscriptions::CreateAsUserTest < ActionDispatch::IntegrationTest
 
     # Check notifications were sent for every admins
     notifications = Notification.where(
-      notification_type_id: NotificationType.find_by_name('notify_admin_subscribed_plan'),
+      notification_type_id: NotificationType.find_by_name('notify_admin_subscribed_plan'), # rubocop:disable Rails/DynamicFindBy
       attached_object_type: 'Subscription',
       attached_object_id: subscription[:id]
     )

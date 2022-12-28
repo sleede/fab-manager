@@ -52,6 +52,6 @@ class API::CartController < API::ApiController
   private
 
   def orderable
-    Product.find(cart_params[:orderable_id])
+    params[:orderable_type].classify.constantize.find(cart_params[:orderable_id])
   end
 end

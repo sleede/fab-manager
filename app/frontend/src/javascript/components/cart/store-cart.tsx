@@ -65,7 +65,7 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
       if (errors.length === 1 && errors[0].error === 'not_found') {
         reloadCart().catch(onError);
       } else {
-        CartAPI.removeItem(cart, item.orderable_id).then(data => {
+        CartAPI.removeItem(cart, item.orderable_id, item.orderable_type).then(data => {
           setCart(data);
         }).catch(onError);
       }
@@ -76,7 +76,7 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
    * Change product quantity
    */
   const changeProductQuantity = (e: React.BaseSyntheticEvent, item) => {
-    CartAPI.setQuantity(cart, item.orderable_id, e.target.value)
+    CartAPI.setQuantity(cart, item.orderable_id, item.orderable_type, e.target.value)
       .then(data => {
         setCart(data);
       })
@@ -87,7 +87,7 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
    * Increment/decrement product quantity
    */
   const increaseOrDecreaseProductQuantity = (item, direction: 'up' | 'down') => {
-    CartAPI.setQuantity(cart, item.orderable_id, direction === 'up' ? item.quantity + 1 : item.quantity - 1)
+    CartAPI.setQuantity(cart, item.orderable_id, item.orderable_type, direction === 'up' ? item.quantity + 1 : item.quantity - 1)
       .then(data => {
         setCart(data);
       })
@@ -101,7 +101,7 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
     return (e: React.BaseSyntheticEvent) => {
       e.preventDefault();
       e.stopPropagation();
-      CartAPI.refreshItem(cart, item.orderable_id).then(data => {
+      CartAPI.refreshItem(cart, item.orderable_id, item.orderable_type).then(data => {
         setCart(data);
       }).catch(onError);
     };
@@ -185,7 +185,7 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
     // if the selected user is the operator, he cannot offer products to himself
     if (user.id === currentUser.id && cart.order_items_attributes.filter(item => item.is_offered).length > 0) {
       Promise.all(cart.order_items_attributes.filter(item => item.is_offered).map(item => {
-        return CartAPI.setOffer(cart, item.orderable_id, false);
+        return CartAPI.setOffer(cart, item.orderable_id, item.orderable_type, false);
       })).then((data) => setCart({ ...data[data.length - 1], user: { id: user.id, role: user.role } }));
     } else {
       setCart({ ...cart, user: { id: user.id, role: user.role } });
@@ -211,7 +211,7 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
    */
   const toggleProductOffer = (item) => {
     return (checked: boolean) => {
-      CartAPI.setOffer(cart, item.orderable_id, checked).then(data => {
+      CartAPI.setOffer(cart, item.orderable_id, item.orderable_type, checked).then(data => {
         setCart(data);
       }).catch(e => {
         if (e.match(/code 403/)) {

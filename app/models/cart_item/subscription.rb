@@ -2,21 +2,11 @@
 
 # A subscription added to the shopping cart
 class CartItem::Subscription < CartItem::BaseItem
-  attr_reader :start_at
+  belongs_to :plan
+  belongs_to :customer_profile, class_name: 'InvoicingProfile'
 
-  def initialize(plan, customer, start_at = nil)
-    raise TypeError unless plan.is_a? Plan
-
-    @plan = plan
-    @customer = customer
-    @start_at = start_at
-    super
-  end
-
-  def plan
-    raise InvalidGroupError if @plan.group_id != @customer.group_id
-
-    @plan
+  def customer
+    customer_profile.user
   end
 
   def price
@@ -27,14 +17,14 @@ class CartItem::Subscription < CartItem::BaseItem
   end
 
   def name
-    @plan.base_name
+    plan.base_name
   end
 
   def to_object
     ::Subscription.new(
-      plan_id: @plan.id,
-      statistic_profile_id: StatisticProfile.find_by(user: @customer).id,
-      start_at: @start_at
+      plan_id: plan.id,
+      statistic_profile_id: StatisticProfile.find_by(user: customer).id,
+      start_at: start_at
     )
   end
 
@@ -43,8 +33,12 @@ class CartItem::Subscription < CartItem::BaseItem
   end
 
   def valid?(_all_items)
-    if @plan.disabled
-      @errors[:item] = I18n.t('cart_item_validation.plan')
+    if plan.disabled
+      errors.add(:plan, I18n.t('cart_item_validation.plan'))
+      return false
+    end
+    if plan.group_id != customer.group_id
+      errors.add(:group, "plan is reserved for members of group #{plan.group.name}")
       return false
     end
     true

@@ -32,6 +32,9 @@ class Training < ApplicationRecord
   has_one :advanced_accounting, as: :accountable, dependent: :destroy
   accepts_nested_attributes_for :advanced_accounting, allow_destroy: true
 
+  has_many :cart_item_training_reservations, class_name: 'CartItem::TrainingReservation', dependent: :destroy, inverse_of: :reservable,
+                                             foreign_type: 'reservable_type', foreign_key: 'reservable_id'
+
   after_create :create_statistic_subtype
   after_create :create_trainings_pricings
   after_create :update_gateway_product

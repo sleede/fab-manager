@@ -1,20 +1,17 @@
 # frozen_string_literal: true
 
 # A discount coupon applied to the whole shopping cart
-class CartItem::Coupon
-  attr_reader :errors
+class CartItem::Coupon < ApplicationRecord
+  belongs_to :operator_profile, class_name: 'InvoicingProfile'
+  belongs_to :customer_profile, class_name: 'InvoicingProfile'
+  belongs_to :coupon
 
-  # @param coupon {String|Coupon} may be nil or empty string if no coupons are applied
-  def initialize(customer, operator, coupon)
-    @customer = customer
-    @operator = operator
-    @coupon = coupon
-    @errors = {}
+  def operator
+    operator_profile.user
   end
 
-  def coupon
-    cs = CouponService.new
-    cs.validate(@coupon, @customer.id)
+  def customer
+    customer_profile.user
   end
 
   def price(cart_total = 0)
@@ -31,11 +28,10 @@ class CartItem::Coupon
   end
 
   def valid?(_all_items)
-    return true if @coupon.nil?
+    return true if coupon.nil?
 
-    c = ::Coupon.find_by(code: @coupon)
-    if c.nil? || c.status(@customer.id) != 'active'
-      @errors[:item] = 'coupon is invalid'
+    if coupon.status(customer.id) != 'active'
+      errors.add(:coupon, 'invalid coupon')
       return false
     end
     true

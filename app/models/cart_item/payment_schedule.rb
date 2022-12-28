@@ -1,23 +1,18 @@
 # frozen_string_literal: true
 
 # A payment schedule applied to plan in the shopping cart
-class CartItem::PaymentSchedule
-  attr_reader :requested, :errors
+class CartItem::PaymentSchedule < ApplicationRecord
+  belongs_to :customer_profile, class_name: 'InvoicingProfile'
+  belongs_to :coupon
+  belongs_to :plan
 
-  def initialize(plan, coupon, requested, customer, start_at = nil)
-    raise TypeError unless coupon.is_a? CartItem::Coupon
-
-    @plan = plan
-    @coupon = coupon
-    @requested = requested
-    @customer = customer
-    @start_at = start_at
-    @errors = {}
+  def customer
+    customer_profile.user
   end
 
   def schedule(total, total_without_coupon)
-    schedule = if @requested && @plan&.monthly_payment
-                 PaymentScheduleService.new.compute(@plan, total_without_coupon, @customer, coupon: @coupon.coupon, start_at: @start_at)
+    schedule = if requested && plan&.monthly_payment
+                 PaymentScheduleService.new.compute(plan, total_without_coupon, customer, coupon: coupon.coupon, start_at: start_at)
                else
                  nil
                end
@@ -36,10 +31,10 @@ class CartItem::PaymentSchedule
   end
 
   def valid?(_all_items)
-    return true unless @requested && @plan&.monthly_payment
+    return true unless requested && plan&.monthly_payment
 
-    if @plan&.disabled
-      @errors[:item] = I18n.t('cart_item_validation.plan')
+    if plan&.disabled
+      errors.add(:plan, I18n.t('cart_item_validation.plan'))
       return false
     end
     true

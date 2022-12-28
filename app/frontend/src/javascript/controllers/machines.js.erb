@@ -393,12 +393,6 @@ Application.Controllers.controller('ReserveMachineController', ['$scope', '$tran
     // Slot free to be booked
     const FREE_SLOT_BORDER_COLOR = '<%= AvailabilityHelper::MACHINE_COLOR %>';
 
-    // Slot already booked by another user
-    const UNAVAILABLE_SLOT_BORDER_COLOR = '<%= AvailabilityHelper::MACHINE_IS_RESERVED_BY_USER %>';
-
-    // Slot already booked by the current user
-    const BOOKED_SLOT_BORDER_COLOR = '<%= AvailabilityHelper::IS_RESERVED_BY_CURRENT_USER %>';
-
     /* PUBLIC SCOPE */
 
     // bind the machine availabilities with full-Calendar events
@@ -642,7 +636,6 @@ Application.Controllers.controller('ReserveMachineController', ['$scope', '$tran
      * Callback triggered after a successful prepaid-pack purchase
      */
     $scope.onSuccess = function (message) {
-
       growl.success(message);
     };
 

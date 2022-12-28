@@ -7,7 +7,6 @@ module AvailabilityHelper
   SPACE_COLOR = '#3fc7ff'
   EVENT_COLOR = '#dd7e6b'
   IS_RESERVED_BY_CURRENT_USER = '#b2e774'
-  MACHINE_IS_RESERVED_BY_USER = '#1d98ec'
   IS_FULL = '#eeeeee'
 
   def availability_border_color(availability)

@@ -15,6 +15,12 @@ class Plan < ApplicationRecord
   has_many :prices, dependent: :destroy
   has_one :payment_gateway_object, -> { order id: :desc }, inverse_of: :plan, as: :item, dependent: :destroy
 
+  has_many :cart_item_machine_reservations, class_name: 'CartItem::MachineReservation', dependent: :destroy
+  has_many :cart_item_space_reservations, class_name: 'CartItem::SpaceReservation', dependent: :destroy
+  has_many :cart_item_training_reservations, class_name: 'CartItem::TrainingReservation', dependent: :destroy
+  has_many :cart_item_subscriptions, class_name: 'CartItem::Subscription', dependent: :destroy
+  has_many :cart_item_payment_schedules, class_name: 'CartItem::PaymentSchedule', dependent: :destroy
+
   extend FriendlyId
   friendly_id :base_name, use: :slugged
 

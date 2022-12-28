@@ -31,6 +31,8 @@ class Event < ApplicationRecord
   has_one :advanced_accounting, as: :accountable, dependent: :destroy
   accepts_nested_attributes_for :advanced_accounting, allow_destroy: true
 
+  has_many :cart_item_event_reservations, class_name: 'CartItem::EventReservation', dependent: :destroy
+
   attr_accessor :recurrence, :recurrence_end_at
 
   before_save :update_nb_free_places

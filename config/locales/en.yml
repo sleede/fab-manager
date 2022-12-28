@@ -67,6 +67,8 @@ en:
     length_must_be_slot_multiple: "must be at least %{MIN} minutes after the start date"
     must_be_associated_with_at_least_1_machine: "must be associated with at least 1 machine"
     deleted_user: "Deleted user"
+  coupon:
+    code_format_error: "only caps letters, numbers, and dashes are allowed"
   #members management
   members:
     unable_to_change_the_group_while_a_subscription_is_running: "Unable to change the group while a subscription is running"

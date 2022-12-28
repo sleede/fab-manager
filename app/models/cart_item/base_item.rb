@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
 # Items that can be added to the shopping cart
-module CartItem; end
+module CartItem
+  def self.table_name_prefix
+    'cart_item_'
+  end
+end
 
 # This is an abstract class implemented by classes that can be added to the shopping cart
-class CartItem::BaseItem
-  attr_reader :errors
-
-  def initialize(*)
-    @errors = {}
-  end
+class CartItem::BaseItem < ApplicationRecord
+  self.abstract_class = true
 
   def price
     { elements: {}, amount: 0 }

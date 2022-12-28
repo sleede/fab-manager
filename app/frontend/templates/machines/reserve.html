@@ -2,14 +2,20 @@
 
 <section class="heading b-b">
   <div class="row no-gutter">
-    <div class="col-xs-2 col-sm-2 col-md-1">
+    <div class="col-xs-2 col-md-1">
       <section class="heading-btn">
         <a ng-click="backPrevLocation($event)"><i class="fas fa-long-arrow-alt-left "></i></a>
       </section>
     </div>
-    <div class="col-xs-10 col-sm-10 col-md-8 b-l">
+    <div class="col-xs-8 col-md-10 b-l">
       <section class="heading-title">
         <h1>{{ 'app.logged.machines_reserve.machine_planning' | translate }} : {{machine.name}}</h1>
+      </section>
+    </div>
+
+    <div class="col-xs-2 col-md-1 b-t hide-b-md p-none">
+      <section class="heading-actions">
+        <cart-button />
       </section>
     </div>
   </div>
@@ -38,6 +44,8 @@
                    ng-if="isShowPacks()"
                    refresh="afterPaymentPromise">
     </packs-summary>
+
+    <reservations-summary slot="selectedEvent" customer="ctrl.member" on-error="onError"></reservations-summary>
 
     <cart slot="selectedEvent"
           slot-selection-time="selectionTime"

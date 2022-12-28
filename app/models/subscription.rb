@@ -12,6 +12,8 @@ class Subscription < ApplicationRecord
   has_many :invoice_items, as: :object, dependent: :destroy
   has_many :offer_days, dependent: :destroy
 
+  has_many :cart_item_free_extensions, class_name: 'CartItem::FreeExtension', dependent: :destroy
+
   validates :plan_id, presence: true
   validates_with SubscriptionGroupValidator
 

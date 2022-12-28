@@ -5,6 +5,8 @@ import { UserRole } from './user';
 import { Coupon } from './coupon';
 import { ApiFilter, PaginatedIndex } from './api';
 
+export type OrderableType = 'Product' | 'Slot';
+
 export interface Order {
   id: number,
   token: string,
@@ -28,7 +30,7 @@ export interface Order {
   paid_total?: number,
   order_items_attributes: Array<{
     id: number,
-    orderable_type: string,
+    orderable_type: OrderableType,
     orderable_id: number,
     orderable_name: string,
     orderable_slug: string,

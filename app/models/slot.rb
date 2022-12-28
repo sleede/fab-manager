@@ -10,6 +10,8 @@ class Slot < ApplicationRecord
   has_many :reservations, through: :slots_reservations
   belongs_to :availability
 
+  has_many :cart_item_reservation_slots, class_name: 'CartItem::ReservationSlot', dependent: :destroy
+
   attr_accessor :is_reserved, :machine, :space, :title, :can_modify, :current_user_slots_reservations_ids
 
   def full?(reservable = nil)

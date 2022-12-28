@@ -37,6 +37,9 @@ class Machine < ApplicationRecord
   has_one :advanced_accounting, as: :accountable, dependent: :destroy
   accepts_nested_attributes_for :advanced_accounting, allow_destroy: true
 
+  has_many :cart_item_machine_reservations, class_name: 'CartItem::MachineReservation', dependent: :destroy, inverse_of: :reservable,
+                                            foreign_type: 'reservable_type', foreign_key: 'reservable_id'
+
   belongs_to :category
 
   after_create :create_statistic_subtype
