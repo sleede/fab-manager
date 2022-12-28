@@ -49,7 +49,7 @@ class Subscriptions::FreeExtensionTest < ActionDispatch::IntegrationTest
 
     # Check notification was sent to the user
     notification = Notification.find_by(
-      notification_type_id: NotificationType.find_by(name: 'notify_member_subscription_extended'),
+      notification_type_id: NotificationType.find_by_name('notify_member_subscription_extended'), # rubocop:disable Rails/DynamicFindBy
       attached_object_type: 'Subscription',
       attached_object_id: subscription[:id]
     )

@@ -24,6 +24,7 @@
 - Fix a bug: unable to access in-system notifications if a slot was cancelled
 - Fix a bug: feature tour in admin/settings is broken
 - Fix a bug: clearing the new expiration date field in the offer days modal result in errors
+- Fix a bug: low stock notification is always sent if one of the stocks has reached the threshold
 - Updated react-modal to 3.16.1
 - Updated tiptap editor and its dependencies to 2.0.0-beta.204
 - [TODO DEPLOY] `rails db:seed`
