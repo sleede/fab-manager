@@ -24,6 +24,8 @@ class API::CheckoutController < API::ApiController
   rescue PayzenError => e
     render json: PayZen::Helper.human_error(e), status: :unprocessable_entity
   rescue StandardError => e
+    Rails.logger.error e
+    Rails.logger.debug e.backtrace
     render json: e, status: :unprocessable_entity
   end
 

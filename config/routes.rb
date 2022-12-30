@@ -169,6 +169,7 @@ Rails.application.routes.draw do
       put 'refresh_item', on: :collection
       post 'validate', on: :collection
       post 'create_item', on: :collection
+      put 'set_customer', on: :collection
     end
     resources :checkout, only: %i[] do
       post 'payment', on: :collection

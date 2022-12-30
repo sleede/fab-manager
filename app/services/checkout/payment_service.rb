@@ -25,7 +25,7 @@ class Checkout::PaymentService
     elsif PayZen::Helper.enabled?
       Payments::PayzenService.new.payment(order, coupon_code)
     else
-      raise Error('Bad gateway or online payment is disabled')
+      raise PaymentGatewayError, 'Bad gateway or online payment is disabled'
     end
   end
 
@@ -37,7 +37,7 @@ class Checkout::PaymentService
     elsif PayZen::Helper.enabled?
       Payments::PayzenService.new.confirm_payment(order, coupon_code, payment_id)
     else
-      raise Error('Bad gateway or online payment is disabled')
+      raise PaymentGatewayError, 'Bad gateway or online payment is disabled'
     end
   end
 end

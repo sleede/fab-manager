@@ -81,10 +81,14 @@ class ProductService
         pi = new_product.product_images.build
         pi.is_main = image.is_main
         pi.attachment = File.open(image.attachment.file.file)
+      rescue Errno::ENOENT => e
+        Rails.logger.warn "Unable to clone product image: #{e}"
       end
       product.product_files.each do |file|
         pf = new_product.product_files.build
         pf.attachment = File.open(file.attachment.file.file)
+      rescue Errno::ENOENT => e
+        Rails.logger.warn "Unable to clone product file: #{e}"
       end
       new_product
     end

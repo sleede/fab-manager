@@ -141,6 +141,7 @@
 - Updated tiptap editor and its dependencies to 2.0.0-beta.204
 - [TODO DEPLOY] `rails db:seed`
 - [TODO DEPLOY] `rails fablab:setup:build_accounting_lines`
+- [TODO DEPLOY] `rails fablab:fix:cart_operator`
 
 ## v5.5.8 2022 December 16
 

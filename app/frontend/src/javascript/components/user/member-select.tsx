@@ -31,6 +31,9 @@ export const MemberSelect: React.FC<MemberSelectProps> = ({ defaultUser, value, 
     if (!defaultUser && option) {
       onSelected({ id: option.value, name: option.label });
     }
+    if (!option && defaultUser) {
+      setOption({ value: defaultUser.id, label: defaultUser.name });
+    }
   }, [defaultUser]);
 
   useEffect(() => {
@@ -77,6 +80,7 @@ export const MemberSelect: React.FC<MemberSelectProps> = ({ defaultUser, value, 
                    defaultOptions
                    onChange={onChange}
                    value={option}
+                   defaultInputValue={defaultUser?.name}
       />
     </div>
   );

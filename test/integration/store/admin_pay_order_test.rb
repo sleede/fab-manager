@@ -11,6 +11,7 @@ class Store::AdminPayOrderTest < ActionDispatch::IntegrationTest
     @caisse_en_bois = Product.find_by(slug: 'caisse-en-bois')
     @panneaux = Product.find_by(slug: 'panneaux-de-mdf')
     @cart1 = Order.find_by(token: '0DKxbAOzSXRx-amXyhmDdg1666691976019')
+    Cart::SetCustomerService.new(@admin).call(@cart1, @pjproudhon)
   end
 
   test 'admin pay user order by local with success' do

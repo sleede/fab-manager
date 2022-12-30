@@ -182,14 +182,7 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
    * Change cart's customer by admin/manger
    */
   const handleChangeMember = (user: User): void => {
-    // if the selected user is the operator, he cannot offer products to himself
-    if (user.id === currentUser.id && cart.order_items_attributes.filter(item => item.is_offered).length > 0) {
-      Promise.all(cart.order_items_attributes.filter(item => item.is_offered).map(item => {
-        return CartAPI.setOffer(cart, item.orderable_id, item.orderable_type, false);
-      })).then((data) => setCart({ ...data[data.length - 1], user: { id: user.id, role: user.role } }));
-    } else {
-      setCart({ ...cart, user: { id: user.id, role: user.role } });
-    }
+    CartAPI.setCustomer(cart, user.id).then(setCart).catch(onError);
   };
 
   /**

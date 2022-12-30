@@ -2,140 +2,105 @@
 
 # Provides methods for find or create a cart
 class Cart::FindOrCreateService
-  def initialize(user)
-    @user = user
+  def initialize(operator = nil, customer = nil)
+    @operator = operator
+    @customer = customer
+    @customer = operator if @customer.nil? && operator&.member?
   end
 
   def call(order_token)
     @order = Order.find_by(token: order_token, state: 'cart')
     check_order_authorization
-    set_last_cart_if_user_login if @order.nil?
+    @order = last_cart if @order.nil?
+    check_operator_authorization
 
+    # find an existing order (and update it)
     if @order
-      if @order.order_items.count.zero? && @user && ((@user.member? && @order.statistic_profile_id.nil?) || (@user.privileged? && @order.operator_profile_id.nil?))
-        set_last_order_if_anonymous_order_s_items_is_empty_after_user_login
-      end
-      clean_old_cart if @user
-      @order.update(statistic_profile_id: @user.statistic_profile.id) if @order.statistic_profile_id.nil? && @user&.member?
-      @order.update(operator_profile_id: @user.invoicing_profile.id) if @order.operator_profile_id.nil? && @user&.privileged?
+      set_last_order_after_login
+      clean_old_cart
+      @order.update(statistic_profile_id: @customer.statistic_profile.id) if @order.statistic_profile_id.nil? && !@customer.nil?
+      @order.update(operator_profile_id: @operator.invoicing_profile.id) if @order.operator_profile_id.nil? && !@operator.nil?
       Cart::UpdateTotalService.new.call(@order)
       return @order
     end
 
+    # OR create a new order
     token = GenerateTokenService.new.call(Order)
     order_param = {
       token: token,
       state: 'cart',
-      total: 0
+      total: 0,
+      statistic_profile_id: @customer&.statistic_profile&.id,
+      operator_profile_id: @operator&.invoicing_profile&.id
     }
-    if @user
-      order_param[:statistic_profile_id] = @user.statistic_profile.id if @user.member?
-
-      order_param[:operator_profile_id] = @user.invoicing_profile.id if @user.privileged?
-    end
     Order.create!(order_param)
   end
 
-  # This function check current order that
-  # 1. belongs current user
-  # 2. has belonged an user but this user dont login
-  # 3. created date > last paid order of user
-  # if not, set current order = nil
+  # This function check the access rights for the currently set order.
+  # If the rights are not validated, set the current order to nil
   def check_order_authorization
-    if @order && @user && ((@user.member? && @order.statistic_profile_id.present? && @order.statistic_profile_id != @user.statistic_profile.id) ||
-        (@user.privileged? && @order.operator_profile_id.present? && @order.operator_profile_id != @user.invoicing_profile.id))
-      @order = nil
-    end
-    @order = nil if @order && !@user && (@order.statistic_profile_id.present? || @order.operator_profile_id.present?)
-    if @order && @order.statistic_profile_id.present? && Order.where(statistic_profile_id: @order.statistic_profile_id,
-                                                                     state: 'paid').where('created_at > ?', @order.created_at).last.present?
-      @order = nil
-    end
-    if @order && @order.operator_profile_id.present? && Order.where(operator_profile_id: @order.operator_profile_id,
-                                                                    state: 'paid').where('created_at > ?', @order.created_at).last.present?
+    # order belongs to the current user
+    @order = nil if belongs_to_another?(@order, @customer) && !@operator&.privileged?
+    # order has belonged to an user, but this user is not logged-in
+    @order = nil if !@operator && @order&.statistic_profile_id&.present?
+    # order creation date is before than the last paid order of the user
+    if @order&.statistic_profile_id&.present? && Order.where(statistic_profile_id: @order&.statistic_profile_id, state: 'paid')
+                                                      .where('created_at > ?', @order&.created_at).last.present?
       @order = nil
     end
   end
 
-  # set user last cart of user when login
-  def set_last_cart_if_user_login
-    if @user&.member?
-      last_paid_order = Order.where(statistic_profile_id: @user.statistic_profile.id,
-                                    state: 'paid').last
-      @order = if last_paid_order
-                 Order.where(statistic_profile_id: @user.statistic_profile.id,
-                             state: 'cart').where('created_at > ?', last_paid_order.created_at).last
-               else
-                 Order.where(statistic_profile_id: @user.statistic_profile.id, state: 'cart').last
-               end
-    end
-    if @user&.privileged?
-      last_paid_order = Order.where(operator_profile_id: @user.invoicing_profile.id,
-                                    state: 'paid').last
-      @order = if last_paid_order
-                 Order.where(operator_profile_id: @user.invoicing_profile.id,
-                             state: 'cart').where('created_at > ?', last_paid_order.created_at).last
-               else
-                 Order.where(operator_profile_id: @user.invoicing_profile.id, state: 'cart').last
-               end
+  # Check that the current operator is allowed to operate on the current order
+  def check_operator_authorization
+    return if @order&.operator_profile_id.nil?
+
+    @order = nil if @order&.operator_profile_id != @operator&.invoicing_profile&.id
+  end
+
+  def belongs_to_another?(order, user)
+    order&.statistic_profile_id.present? && order&.statistic_profile_id != user&.statistic_profile&.id
+  end
+
+  # retrieve the last cart of the current user
+  def last_cart
+    return if @customer.nil?
+
+    last_paid_order = Order.where(statistic_profile_id: @customer&.statistic_profile&.id, state: 'paid')
+                           .last
+    if last_paid_order
+      Order.where(statistic_profile_id: @customer&.statistic_profile&.id, state: 'cart')
+           .where('created_at > ?', last_paid_order.created_at)
+           .last
+    else
+      Order.where(statistic_profile_id: @customer&.statistic_profile&.id, state: 'cart')
+           .last
     end
   end
 
-  # set last order if current cart is anoymous and user is login
-  def set_last_order_if_anonymous_order_s_items_is_empty_after_user_login
-    last_unpaid_order = nil
-    if @user&.member?
-      last_paid_order = Order.where(statistic_profile_id: @user.statistic_profile.id,
-                                    state: 'paid').last
-      last_unpaid_order = if last_paid_order
-                            Order.where(statistic_profile_id: @user.statistic_profile.id,
-                                        state: 'cart').where('created_at > ?', last_paid_order.created_at).last
-                          else
-                            Order.where(statistic_profile_id: @user.statistic_profile.id, state: 'cart').last
-                          end
-    end
-    if @user&.privileged?
-      last_paid_order = Order.where(operator_profile_id: @user.invoicing_profile.id,
-                                    state: 'paid').last
-      last_unpaid_order = if last_paid_order
-                            Order.where(operator_profile_id: @user.invoicing_profile.id,
-                                        state: 'cart').where('created_at > ?', last_paid_order.created_at).last
-                          else
-                            Order.where(operator_profile_id: @user.invoicing_profile.id, state: 'cart').last
-                          end
-    end
-    if last_unpaid_order && last_unpaid_order.id != @order.id
-      @order.destroy
-      @order = last_unpaid_order
-    end
+  # Check if the provided order/cart is empty AND anonymous
+  def empty_and_anonymous?(order)
+    order&.order_items&.count&.zero? && (order&.operator_profile_id.nil? || order&.statistic_profile_id.nil?)
+  end
+
+  # If the current cart is empty and anonymous, set the current cart as the last unpaid order.
+  # This is relevant after the user has logged-in
+  def set_last_order_after_login
+    return unless empty_and_anonymous?(@order)
+
+    last_unpaid_order = last_cart
+    return if last_unpaid_order.nil? || last_unpaid_order.id == @order&.id
+
+    @order&.destroy
+    @order = last_unpaid_order
   end
 
   # delete all old cart if last cart of user isnt empty
   # keep every user only one cart
   def clean_old_cart
-    if @user&.member?
-      Order.where(statistic_profile_id: @user.statistic_profile.id, state: 'cart')
-           .where.not(id: @order.id)
-           .destroy_all
-    end
-    if @user&.privileged?
-      Order.where(operator_profile_id: @user.invoicing_profile.id, state: 'cart')
-           .where.not(id: @order.id)
-           .destroy_all
-    end
-  end
+    return if @customer.nil?
 
-  # delete all empty cart if last cart of user isnt empty
-  def clean_empty_cart
-    if @user&.member?
-      Order.where(statistic_profile_id: @user.statistic_profile.id, state: 'cart')
-           .where('(SELECT COUNT(*) FROM order_items WHERE order_items.order_id = orders.id) = 0')
-           .destroy_all
-    end
-    if @user&.privileged?
-      Order.where(operator_profile_id: @user.invoicing_profile.id, state: 'cart')
-           .where('(SELECT COUNT(*) FROM order_items WHERE order_items.order_id = orders.id) = 0')
-           .destroy_all
-    end
+    Order.where(statistic_profile_id: @customer&.statistic_profile&.id, state: 'cart')
+         .where.not(id: @order&.id)
+         .destroy_all
   end
 end

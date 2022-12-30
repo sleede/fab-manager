@@ -42,7 +42,7 @@ class Members::ListService
     end
 
     def search(current_user, query, subscription)
-      members = User.includes(:profile, :statistic_profile)
+      members = User.includes(:profile, :statistic_profile, invoicing_profile: [:address])
                     .joins(:profile,
                            :statistic_profile,
                            :roles,
@@ -59,7 +59,6 @@ class Members::ListService
                                 'lower(f_unaccent(profiles.last_name)) ~ :search',
                                 search: word)
       end
-
 
       if current_user.member?
         # non-admin can only retrieve users with "public profiles"

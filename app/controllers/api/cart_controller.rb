@@ -60,6 +60,13 @@ class API::CartController < API::ApiController
     render json: @order_errors
   end
 
+  def set_customer
+    authorize @current_order, policy_class: CartPolicy
+    customer = User.find(params[:user_id])
+    @order = Cart::SetCustomerService.new(current_user).call(@current_order, customer)
+    render 'api/orders/show'
+  end
+
   private
 
   def orderable

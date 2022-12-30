@@ -295,4 +295,14 @@ namespace :fablab do
       Rake::Task['fablab:chain:invoices_items'].invoke
     end
   end
+
+  desc '[release 5.7] fix operator of self-bought carts'
+  task cart_operator: :environment do |_task, _args|
+    Order.where.not(statistic_profile_id: nil).find_each do |order|
+      order.update(operator_profile_id: order.user&.invoicing_profile&.id)
+    end
+    Order.where.not(operator_profile_id: nil).find_each do |order|
+      order.update(statistic_profile_id: order.operator_profile&.user&.statistic_profile&.id)
+    end
+  end
 end
