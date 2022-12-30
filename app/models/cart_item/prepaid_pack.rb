@@ -3,6 +3,7 @@
 # A prepaid-pack added to the shopping cart
 class CartItem::PrepaidPack < CartItem::BaseItem
   belongs_to :prepaid_pack
+  belongs_to :customer_profile, class_name: 'InvoicingProfile'
 
   def customer
     customer_profile.user
@@ -36,11 +37,11 @@ class CartItem::PrepaidPack < CartItem::BaseItem
 
   def valid?(_all_items)
     if pack.disabled
-      @errors[:item] = I18n.t('cart_item_validation.pack')
+      errors.add(:prepaid_pack, I18n.t('cart_item_validation.pack'))
       return false
     end
     if pack.group_id != customer.group_id
-      @errors[:group] = "pack is reserved for members of group #{pack.group.name}"
+      errors.add(:group, "pack is reserved for members of group #{pack.group.name}")
       return false
     end
     true

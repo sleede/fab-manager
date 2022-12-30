@@ -52,7 +52,7 @@ class CartItem::Reservation < CartItem::BaseItem
     reservable&.name
   end
 
-  def valid?(all_items)
+  def valid?(all_items = [])
     pending_subscription = all_items.find { |i| i.is_a?(CartItem::Subscription) }
 
     reservation_deadline_minutes = Setting.get('reservation_deadline').to_i

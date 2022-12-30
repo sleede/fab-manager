@@ -19,7 +19,7 @@ class CartItem::MachineReservation < CartItem::Reservation
     'machine'
   end
 
-  def valid?(all_items)
+  def valid?(all_items = [])
     cart_item_reservation_slots.each do |slot|
       same_hour_slots = SlotsReservation.joins(:reservation).where(
         reservations: { reservable: reservable },

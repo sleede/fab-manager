@@ -8,8 +8,8 @@ class Cart::AddItemService
     item = case orderable
            when Product
              add_product(order, orderable, quantity)
-           when Slot
-             add_slot(order, orderable)
+           when /^CartItem::/
+             add_cart_item(order, orderable)
            else
              raise Cart::UnknownItemError
            end
@@ -42,11 +42,7 @@ class Cart::AddItemService
     item
   end
 
-  def add_slot(order, orderable)
-    item = order.order_items.find_by(orderable: orderable)
-
-    item = order.order_items.new(quantity: 1, orderable: orderable, amount: orderable.amount || 0) if item.nil?
-
-    item
+  def add_cart_item(order, orderable)
+    order.order_items.new(quantity: 1, orderable: orderable, amount: orderable.price.amount || 0)
   end
 end
