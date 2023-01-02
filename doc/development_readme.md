@@ -81,7 +81,7 @@ This procedure is not easy to follow so if you don't need to write some code for
    ```bash
    brew install imagemagick
    ```
-   
+
    - For other systems, please refer to your system specific documentation to install the appropriate packages: ImageMagick and the PostgreSQL development library
 
 9. Init the RVM and NVM instances and check they were correctly configured
@@ -134,23 +134,29 @@ This procedure is not easy to follow so if you don't need to write some code for
    RAILS_ENV=test rails db:migrate
    ```
 
-14. Create the pids folder used by Sidekiq. If you want to use a different location, you can configure it in [config/sidekiq.yml](config/sidekiq.yml)
+14. Enable Overcommit
+
+   ```bash
+   overcommit --install
+   ```
+
+15. Create the pids folder used by Sidekiq. If you want to use a different location, you can configure it in [config/sidekiq.yml](config/sidekiq.yml)
 
    ```bash
    mkdir -p tmp/pids
    ```
 
-15. Start the development web server
+16. Start the development web server
 
    ```bash
    foreman s -p 5000
    ```
 
-16. You should now be able to access your local development Fab-manager instance by accessing `http://localhost:5000` in your web browser.
+17. You should now be able to access your local development Fab-manager instance by accessing `http://localhost:5000` in your web browser.
 
-17. You can log in as the default administrator using the credentials defined previously.
+18. You can log in as the default administrator using the credentials defined previously.
 
-18. Email notifications will be caught by MailCatcher.
+19. Email notifications will be caught by MailCatcher.
     To see the emails sent by the platform, open your web browser at `http://fabmanager-mailcatcher:1080` to access the MailCatcher interface.
 
 <a name="tests"></a>
@@ -173,7 +179,7 @@ ElasticSearch is a powerful search engine based on Apache Lucene combined with a
 
 In FabManager, it is used for the administrator's statistics module.
 
-The organisation if the data in the ElasticSearch database is documented in [elasticsearch.md](elasticsearch.md) 
+The organisation if the data in the ElasticSearch database is documented in [elasticsearch.md](elasticsearch.md)
 
 <a name="rebuild-stats"></a>
 ### Rebuild statistics
