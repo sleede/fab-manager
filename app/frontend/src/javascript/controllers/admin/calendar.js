@@ -166,7 +166,7 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
               // update the machine_ids attribute
               $scope.availability.machine_ids = data.machine_ids;
               $scope.availability.title = data.title;
-              uiCalendarConfig.calendars.calendar.fullCalendar('rerenderEvents');
+              uiCalendarConfig.calendars.calendar.fullCalendar('refetchEvents');
               // notify the admin
               return growl.success(_t('app.admin.calendar.the_machine_was_successfully_removed_from_the_slot'));
             }
@@ -203,7 +203,7 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
             // update the plan_ids attribute
             $scope.availability.plan_ids = data.plan_ids;
             $scope.availability.plans = availabilityPlans();
-            uiCalendarConfig.calendars.calendar.fullCalendar('rerenderEvents');
+            uiCalendarConfig.calendars.calendar.fullCalendar('refetchEvents');
             // notify the admin
             return growl.success(_t('app.admin.calendar.the_plan_was_successfully_removed_from_the_slot'));
           }
