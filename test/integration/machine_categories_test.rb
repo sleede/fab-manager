@@ -53,7 +53,7 @@ class MachineCategoriesTest < ActionDispatch::IntegrationTest
     json = json_response(response.body)
     assert_equal name, json[:name]
     assert_equal category.machines.length, 2
-    assert_equal category.machine_ids, [2, 3]
+    assert_equal category.machine_ids.sort, [2, 3]
   end
 
   test 'delete a machine category' do
