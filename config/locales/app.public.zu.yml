@@ -230,6 +230,8 @@ zu:
         status_enabled: "crwdns28160:0crwdne28160:0"
         status_disabled: "crwdns28162:0crwdne28162:0"
         status_all: "crwdns28164:0crwdne28164:0"
+        filter_by_machine_category: "crwdns36245:0crwdne36245:0"
+        all_machines: "crwdns36247:0crwdne36247:0"
       machine_card:
         book: "crwdns28166:0crwdne28166:0"
         consult: "crwdns28168:0crwdne28168:0"
