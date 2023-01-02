@@ -104,7 +104,7 @@ angular.module('application', ['ngCookies', 'ngResource', 'ngSanitize', 'ui.rout
           ['style', ['style']],
           ['font', ['bold', 'italic', 'underline', 'clear']],
           ['color', ['color']],
-          ['para', ['ul', 'ol', 'paragraph']],
+          ['para', ['ul', 'ol']],
           ['table', ['table']],
           ['insert', ['link', 'picture', 'hr']],
           ['view', ['fullscreen', 'codeview']],
