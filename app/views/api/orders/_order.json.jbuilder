@@ -24,13 +24,8 @@ json.order_items_attributes order.order_items.order(created_at: :asc) do |item|
   json.id item.id
   json.orderable_type item.orderable_type
   json.orderable_id item.orderable_id
-  json.orderable_name item.orderable.name
-  json.orderable_ref item.orderable.sku
-  json.orderable_slug item.orderable.slug
-  json.orderable_main_image_url item.orderable.main_image&.attachment_url
-  json.orderable_external_stock item.orderable.stock['external']
   json.quantity item.quantity
-  json.quantity_min item.orderable.quantity_min
   json.amount item.amount / 100.0
   json.is_offered item.is_offered
+  json.partial! 'api/orders/product', item: item if item.orderable_type == 'Product'
 end

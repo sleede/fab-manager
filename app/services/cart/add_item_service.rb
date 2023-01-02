@@ -5,8 +5,8 @@ class Cart::AddItemService
   def call(order, orderable, quantity = 1)
     return order if quantity.to_i.zero?
 
-    item = case orderable
-           when Product
+    item = case orderable.class.name
+           when 'Product'
              add_product(order, orderable, quantity)
            when /^CartItem::/
              add_cart_item(order, orderable)
@@ -43,6 +43,6 @@ class Cart::AddItemService
   end
 
   def add_cart_item(order, orderable)
-    order.order_items.new(quantity: 1, orderable: orderable, amount: orderable.price.amount || 0)
+    order.order_items.new(quantity: 1, orderable: orderable, amount: orderable.price[:amount] || 0)
   end
 end

@@ -45,7 +45,7 @@
                    refresh="afterPaymentPromise">
     </packs-summary>
 
-    <reservations-summary slot="selectedEvent" customer="ctrl.member" on-error="onError"></reservations-summary>
+    <reservations-summary slot="selectedEvent" customer="ctrl.member" on-error="onError" reservable-id="machine.id" reservable-type="'Machine'"></reservations-summary>
 
     <cart slot="selectedEvent"
           slot-selection-time="selectionTime"

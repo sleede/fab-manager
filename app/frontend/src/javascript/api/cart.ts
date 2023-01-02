@@ -1,10 +1,16 @@
 import apiClient from './clients/api-client';
 import { AxiosResponse } from 'axios';
 import { Order, OrderableType, OrderErrors } from '../models/order';
+import { CartItem, CartItemResponse } from '../models/cart_item';
 
 export default class CartAPI {
   static async create (token?: string): Promise<Order> {
     const res: AxiosResponse<Order> = await apiClient.post('/api/cart', { order_token: token });
+    return res?.data;
+  }
+
+  static async createItem (order: Order, item: CartItem): Promise<CartItemResponse> {
+    const res: AxiosResponse<CartItemResponse> = await apiClient.post('/api/cart/create_item', { order_token: order.token, ...item });
     return res?.data;
   }
 

@@ -4,8 +4,9 @@ import { CreateTokenResponse } from './payzen';
 import { UserRole } from './user';
 import { Coupon } from './coupon';
 import { ApiFilter, PaginatedIndex } from './api';
+import { CartItemType } from './cart_item';
 
-export type OrderableType = 'Product' | 'Slot';
+export type OrderableType = 'Product' | CartItemType;
 
 export interface Order {
   id: number,
