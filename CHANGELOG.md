@@ -17,6 +17,7 @@
 - OpenAPI users endpoint offer ability to filter by created_after
 - OpenAPI users endpoint return first name, last name, gender, organization and address
 - Default accounting codes and labels if not set
+- Active serving static files from the `/public` folder by default from rails
 - Fix a bug: unable to run test in negative timezones (#425)
 - Fix a bug: providing an array of attributes to filter OpenApi data, results in error
 - Fix a bug: unable to manage stocks on new products
