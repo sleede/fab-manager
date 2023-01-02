@@ -376,7 +376,8 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
         machines: isSelectAll('machines', scope),
         spaces: isSelectAll('spaces', scope),
         evt: filter.evt,
-        dispo: filter.dispo
+        dispo: filter.dispo,
+        reserved: filter.reserved
       });
       scope.machinesGroupByCategory.forEach(c => c.checked = _.every(c.machines, 'checked'));
       // remove all
@@ -395,7 +396,8 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
       machines: isSelectAll('machines', $scope),
       spaces: isSelectAll('spaces', $scope),
       evt: true,
-      dispo: true
+      dispo: true,
+      reserved: false
     };
 
     // toggle to select all formation/machine
@@ -444,7 +446,7 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
             return $scope.filterAvailabilities;
           }
         },
-        controller: ['$scope', '$uibModalInstance', 'trainings', 'machines', 'machinesGroupByCategory', 'spaces', 'filter', 'toggleFilter', 'filterAvailabilities', function ($scope, $uibModalInstance, trainings, machines, machinesGroupByCategory, spaces, filter, toggleFilter, filterAvailabilities) {
+        controller: ['$scope', '$uibModalInstance', 'trainings', 'machines', 'machinesGroupByCategory', 'spaces', 'filter', 'toggleFilter', 'filterAvailabilities', 'AuthService', function ($scope, $uibModalInstance, trainings, machines, machinesGroupByCategory, spaces, filter, toggleFilter, filterAvailabilities, AuthService) {
           $scope.trainings = trainings;
           $scope.machines = machines;
           $scope.machinesGroupByCategory = machinesGroupByCategory;
@@ -464,6 +466,8 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
 
           $scope.filterAvailabilities = filter => filterAvailabilities(filter, $scope);
 
+          $scope.isAuthorized = AuthService.isAuthorized;
+
           return $scope.close = function (e) {
             $uibModalInstance.dismiss();
             return e.stopPropagation();
@@ -476,7 +480,7 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
       const t = $scope.trainings.filter(t => t.checked).map(t => t.id);
       const m = $scope.machines.filter(m => m.checked).map(m => m.id);
       const s = $scope.spaces.filter(s => s.checked).map(s => s.id);
-      return { t, m, s, evt: $scope.filter.evt, dispo: $scope.filter.dispo };
+      return { t, m, s, evt: $scope.filter.evt, dispo: $scope.filter.dispo, reserved: $scope.filter.reserved };
     };
 
     const availabilitySourceUrl = () => `/api/availabilities?${$.param(getFilter())}`;

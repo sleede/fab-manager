@@ -163,10 +163,19 @@ class API::AvailabilitiesController < API::ApiController
   end
 
   def filter_availabilites(availabilities)
-    availabilities.delete_if(&method(:remove_full?))
+    availabilities_filterd = availabilities
+    availabilities_filterd = availabilities.delete_if(&method(:remove_full?)) if params[:dispo] == 'false'
+
+    availabilities_filterd = availabilities.delete_if(&method(:remove_empty?)) if params[:reserved] == 'true'
+
+    availabilities_filterd
   end
 
   def remove_full?(availability)
-    params[:dispo] == 'false' && (availability.is_reserved || (availability.try(:full?) && availability.full?))
+    availability.try(:full?) && availability.full?
+  end
+
+  def remove_empty?(availability)
+    availability.try(:empty?) && availability.empty?
   end
 end

@@ -159,7 +159,7 @@ Application.Controllers.controller('CalendarController', ['$scope', '$state', '$
             return $scope.filterAvailabilities;
           }
         },
-        controller: ['$scope', '$uibModalInstance', 'trainings', 'machines', 'machinesGroupByCategory', 'spaces', 'externals', 'filter', 'toggleFilter', 'filterAvailabilities', function ($scope, $uibModalInstance, trainings, machines, machinesGroupByCategory, spaces, externals, filter, toggleFilter, filterAvailabilities) {
+        controller: ['$scope', '$uibModalInstance', 'trainings', 'machines', 'machinesGroupByCategory', 'spaces', 'externals', 'filter', 'toggleFilter', 'filterAvailabilities', 'AuthService', function ($scope, $uibModalInstance, trainings, machines, machinesGroupByCategory, spaces, externals, filter, toggleFilter, filterAvailabilities, AuthService) {
           $scope.trainings = trainings;
           $scope.machines = machines;
           $scope.machinesGroupByCategory = machinesGroupByCategory;
@@ -179,6 +179,8 @@ Application.Controllers.controller('CalendarController', ['$scope', '$state', '$
           $scope.toggleFilter = (type, filter, machineCategoryId) => toggleFilter(type, filter, machineCategoryId);
 
           $scope.filterAvailabilities = filter => filterAvailabilities(filter, $scope);
+
+          $scope.isAuthorized = AuthService.isAuthorized;
 
           return $scope.close = function (e) {
             $uibModalInstance.dismiss();

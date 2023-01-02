@@ -1,3 +1,17 @@
+<div class="row m-b" ng-if="isAuthorized(['admin', 'manager'])">
+  <h3 class="col-md-8 col-sm-8 col-xs-8 text-black" translate>{{ 'app.shared.calendar.show_reserved_uniq' }}</h3>
+  <div class="col-md-4 col-sm-4 col-xs-4">
+    <input bs-switch
+           ng-model="filter.reserved"
+           type="checkbox"
+           switch-size="small"
+           switch-on-text="{{ 'app.shared.buttons.yes' | translate }}"
+           switch-off-text="{{ 'app.shared.buttons.no' | translate }}"
+           switch-animate="true"
+           ng-change="filterAvailabilities(filter)"
+           switch-animate="true"/>
+  </div>
+</div>
 <div class="row">
   <h3 class="col-md-11 col-sm-11 col-xs-11 text-black" translate>{{ 'app.shared.calendar.show_unavailables' }}</h3>
   <input class="col-md-1 col-sm-1 col-xs-1" type="checkbox" ng-model="filter.dispo" ng-change="filterAvailabilities(filter)">

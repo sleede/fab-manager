@@ -115,13 +115,18 @@ class Availability < ApplicationRecord
   # check if the reservations are complete?
   # if a nb_total_places hasn't been defined, then places are unlimited
   def full?
-    return false if nb_total_places.blank?
+    return false if nb_total_places.blank? && available_type != 'machines'
 
     if available_type == 'event'
       event.nb_free_places.zero?
     else
       slots.map(&:full?).reduce(:&)
     end
+  end
+
+  # check availability don't have any reservation
+  def empty?
+    slots.map(&:empty?).reduce(:&)
   end
 
   def available_places_per_slot(reservable = nil)
