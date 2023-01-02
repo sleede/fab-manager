@@ -93,10 +93,10 @@ pt:
         phone_number_is_required: "Número de telefone é obrigatório."
         address: "Endereço"
         address_is_required: "O endereço é necessário"
-        i_authorize_Fablab_users_registered_on_the_site_to_contact_me: "Eu autorizo usuários do FabLab, registrados no site, a entrarem em contato comigo"
+        i_authorize_Fablab_users_registered_on_the_site_to_contact_me: "I authorize users, registered on the site, to contact me"
         i_accept_to_receive_information_from_the_fablab: "Eu aceito receber informações do FabLab"
         i_ve_read_and_i_accept_: "Eu li e aceito"
-        _the_fablab_policy: "a política do FabLab"
+        _the_fablab_policy: "the terms of use"
         field_required: "Campo obrigatório"
         profile_custom_field_is_required: "{FEILD} é obrigatório"
         user_supporting_documents_required: "Atenção!<br>Você se declarou como \"{GROUP}\", é possível sejam solicitados documentos de comprovação."
@@ -115,7 +115,7 @@ pt:
         connection: "Login"
         password_forgotten: "Esqueceu sua senha?"
         confirm_my_account: "Confirmar sua conta"
-        not_registered_to_the_fablab: "Ainda não é registrado no FabLab?"
+        not_registered_to_the_fablab: "Not yet registered?"
         create_an_account: "Criar conta"
         wrong_email_or_password: "E-mail ou senha incorretos."
         caps_lock_is_on: "A tecla Caps Lock está ativada."
@@ -135,9 +135,9 @@ pt:
         and_NUMBER_other_notifications: "e {NUMBER, plural, =0{sem notificação} =1{uma notificação} other{{NUMBER} notificações}}..."
       #about page
       about:
-        read_the_fablab_policy: "Ler a política do FabLab"
-        read_the_fablab_s_general_terms_and_conditions: "Ler os termos e condições do FabLab"
-        your_fablab_s_contacts: "Nossos contatos"
+        read_the_fablab_policy: "Terms of use"
+        read_the_fablab_s_general_terms_and_conditions: "Read the general terms and conditions"
+        your_fablab_s_contacts: "Contact us"
         privacy_policy: "Política de privacidade"
       #'privacy policy' page
       privacy:
@@ -153,7 +153,7 @@ pt:
         create_an_account: "Criar uma conta"
         discover_members: "Ver membros"
         #next events summary on the home page
-        fablab_s_next_events: "Próximos eventos do FabLab"
+        fablab_s_next_events: "Next events"
         every_events: "Todos Eventos"
       event_card:
         on_the_date: "Em {DATE}"
@@ -167,7 +167,7 @@ pt:
         full_price: "Valor inteira: "
       #projects gallery
       projects_list:
-        the_fablab_projects: "Projetos do Fab Lab"
+        the_fablab_projects: "The projects"
         add_a_project: "Adicionar projeto"
         search_over_the_whole_network: "Pesquisar em todos os FabLabs"
         tooltip_openlab_projects_switch: "A busca em todos os FabLabs busca projetos em todos os FabLabs que usam o Fab-manager !"
@@ -215,7 +215,7 @@ pt:
         do_you_really_want_to_delete_this_project: "Você quer realmente deletar esse projeto?"
       #list of machines
       machines_list:
-        the_fablab_s_machines: "Lista de máquinas no FabLab"
+        the_fablab_s_machines: "The machines"
         add_a_machine: "Adicionar uma máquina"
         new_availability: "Reservas em aberto"
         book: "Reservar"
@@ -230,8 +230,6 @@ pt:
         status_enabled: "Ativadas"
         status_disabled: "Desabilitadas"
         status_all: "Todas"
-        filter_by_machine_category: "Filter by category"
-        all_machines: "All machines"
       machine_card:
         book: "Reservar"
         consult: "Consultar"
@@ -290,7 +288,7 @@ pt:
         select_duration: "selecione uma duração"
       #Fablab's events list
       events_list:
-        the_fablab_s_events: "Eventos do Fablab"
+        the_fablab_s_events: "The events"
         all_categories: "Todas categorias"
         for_all: "Para todos"
         sold_out: "Esgotado."
@@ -330,7 +328,7 @@ pt:
         book: "Reservar"
         confirm_and_pay: "Confirmar e pagar"
         confirm_payment_of_html: "{ROLE, select, admin{Pagamento pelo site} other{Pagamento}}: {AMOUNT}" #(contexte : validate a payment of $20,00)
-        online_payment_disabled: "Pagamento por cartão de crédito não está disponível. Por favor, contate a recepção do FabLab diretamente."
+        online_payment_disabled: "Payment by credit card is not available. Please contact us directly."
         please_select_a_member_first: "Por favor, selecione um membro primeiro"
         change_the_reservation: "Alterar reserva"
         you_can_shift_this_reservation_on_the_following_slots: "Você pode alterar essa reserva nos campos a seguir:"
