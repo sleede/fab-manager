@@ -39,6 +39,7 @@ fr:
         disable_machine: "Désactiver la machine"
         disabled_help: "Lorsque désactivée, la machine ne sera pas réservable et n'apparaîtra pas par défaut dans la liste des machines."
         reservable: "Cette machine peut-elle être réservée ?"
+        reservable_help: "Lorsque cette option est désactivée, la machine sera affichée dans la liste par défaut des machines, mais sans le bouton de réservation. Si vous avez déjà créé des créneaux de disponibilité pour cette machine, vous pourriez vouloir les supprimer : faites-le depuis l'agenda administrateur."
         ACTION_machine: "{ACTION, select, create{Créer} other{Mettre à jour}} la machine"
         create_success: "La machine a bien été créée"
         update_success: "La machine a bien été mise à jour"
