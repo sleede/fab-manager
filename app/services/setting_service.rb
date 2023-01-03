@@ -42,6 +42,7 @@ class SettingService
     def notify_privacy_update(settings)
       return unless settings.any? { |s| s.name == 'privacy_body' }
 
+      setting = settings.find { |s| s.name == 'privacy_body' }
       NotifyPrivacyUpdateWorker.perform_async(setting.id)
     end
 
@@ -49,6 +50,7 @@ class SettingService
     def sync_stripe_objects(settings)
       return unless (%w[stripe_secret_key online_payment_module] & settings.map(&:name)).count.positive?
 
+      setting = settings.find { |s| s.name == 'stripe_secret_key' }
       SyncObjectsOnStripeWorker.perform_async(setting.history_values.last&.invoicing_profile&.user&.id)
     end
 
@@ -56,6 +58,7 @@ class SettingService
     def build_stats(settings)
       return unless settings.any? { |s| s.name == 'statistics_module' && s.value == 'true' }
 
+      setting = settings.find { |s| s.name == 'statistics_module' }
       PeriodStatisticsWorker.perform_async(setting.previous_update)
     end
 
