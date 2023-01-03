@@ -106,8 +106,8 @@ es:
       other: "%{count} %{NAME} entradas"
     coupon_CODE_discount_of_DISCOUNT: "Cupón {CODE}: descuento de {DISCOUNT}{TYPE, select, percent_off{%} other{}}" #messageFormat interpolation
     total_including_all_taxes: "Total impuestos incluidos"
-    VAT: "VAT"
-    including_VAT_RATE: "Incluido IVA %{RATE}% de %{AMOUNT}"
+    VAT: "IVA"
+    including_VAT_RATE: "Incluido %{NAME} %{RATE}% de %{AMOUNT}"
     including_total_excluding_taxes: "Excluyendo IVA"
     including_amount_payed_on_ordering: "Incluyendo cantidad pagada en el pedido"
     total_amount: "Precio total"
@@ -133,6 +133,7 @@ es:
     prepaid_pack: "Prepaid pack of hours"
     pack_item: "Pack of %{COUNT} hours for the %{ITEM}"
     order: "Your order on the store"
+    unable_to_find_pdf: "We cannot find your invoice. If you ordered recently, it may have not been generated yet. Please retry in a moment."
   #PDF payment schedule generation
   payment_schedules:
     schedule_reference: "Payment schedule reference: %{REF}"
