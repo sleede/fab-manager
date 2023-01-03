@@ -98,7 +98,7 @@ es:
         trainings: "Trainings"
         tags: "Tags"
         note: "Private note"
-        note_help: "This note is only shown to privileged users. The member won't be able to view it."
+        note_help: "This note is only visible to administrators and managers. The member cannot see it."
         terms_and_conditions_html: "I've read and accept <a href=\"{POLICY_URL}\" target=\"_blank\">the terms and conditions<a/>"
         must_accept_terms: "You must accept the terms and conditions"
         save: "Save"
