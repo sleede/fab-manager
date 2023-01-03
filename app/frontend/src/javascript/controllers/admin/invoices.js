@@ -129,6 +129,17 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
     };
 
     /**
+     * Callback triggered when the VAT settings were successfully updated
+     */
+    $scope.onVATSuccess = (message) => {
+      $scope.onSuccess(message);
+      Setting.query({ names: "['invoice_VAT-name', 'invoice_VAT-rate']" }, (vatSettings) => {
+        $scope.invoice.VAT.rate = vatSettings['invoice_VAT-rate'];
+        $scope.invoice.VAT.name = vatSettings['invoice_VAT-name'];
+      }, $scope.onError);
+    };
+
+    /**
      * Callback triggered in case of success
      */
     $scope.onSuccess = (message) => {
@@ -524,20 +535,6 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
           $scope.allSettings.online_payment_module = value;
         });
       }
-    };
-
-    /**
-     * Callback used in PaymentScheduleList, in case of error
-     */
-    $scope.onError = function (message) {
-      growl.error(message);
-    };
-
-    /**
-     * Callback triggered when the user has successfully updated his card
-     */
-    $scope.onSuccess = function (message) {
-      growl.success(message);
     };
 
     /**
