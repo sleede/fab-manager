@@ -75,7 +75,7 @@
 
             <section class="panel panel-default bg-light m-lg">
               <div class="panel-body m-r">
-                <div class="" ng-show="subscription">
+                <div class="" ng-if="subscription">
                   <h3>{{ subscription.plan | humanReadablePlanName }}</h3>
                   <p>
                     {{ 'app.admin.members_edit.duration' | translate }} {{ subscription.plan.interval | planIntervalFilter: subscription.plan.interval_count }}
@@ -89,6 +89,7 @@
                   <div ng-hide="user.id === currentUser.id">
                     <button class="btn btn-default" ng-click="toggleFreeExtendModal()" translate>{{ 'app.admin.members_edit.offer_free_days' }}</button>
                     <button class="btn btn-default" ng-click="toggleRenewModal()" translate>{{ 'app.admin.members_edit.renew_subscription' }}</button>
+                    <button class="btn btn-default" ng-click="toggleCancelModal()" translate>{{ 'app.admin.members_edit.cancel_subscription' }}</button>
                     <free-extend-modal is-open="isOpenFreeExtendModal"
                                        toggle-modal="toggleFreeExtendModal"
                                        subscription="subscription"
@@ -104,6 +105,14 @@
                                  on-error="onError"
                                  on-success="onExtendSuccess">
                     </renew-modal>
+                    <cancel-subscription-modal is-open="isOpenCancelModal"
+                                               toggle-modal="toggleCancelModal"
+                                               subscription="subscription"
+                                               customer="user"
+                                               operator="currentUser"
+                                               on-error="onError"
+                                               on-success="onCancelSuccess">
+                    </cancel-subscription-modal>
                   </div>
                   <p class="alert alert-info" ng-show="user.id === currentUser.id" translate>
                     {{ 'app.admin.members_edit.cannot_extend_own_subscription' }}

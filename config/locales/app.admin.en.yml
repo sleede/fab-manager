@@ -1134,6 +1134,7 @@ en:
         price_: "Price:"
         offer_free_days: "Offer free days"
         renew_subscription: "Renew the subscription"
+        cancel_subscription: "Cancel the subscription"
         user_has_no_current_subscription: "User has no current subscription."
         subscribe_to_a_plan: "Subscribe to a plan"
         trainings: "Trainings"
@@ -1208,6 +1209,12 @@ en:
         select_plan: "Please select a plan"
         pay_in_one_go: "Pay in one go"
         subscription_success: "Subscription successfully subscribed"
+      # cancel the current subscription
+      cancel_subscription_modal:
+        title: "Confirmation required"
+        confirmation_html: "You are about to cancel the subscription <em>{NAME}</em> of this user. From now, he won't be able to benefit from the advantages of this subscription, and all his unused credits will be lost. <strong>Are your sure?</strong>"
+        confirm: "Cancel this subscription"
+        subscription_canceled: "The subscription was successfully canceled."
       #add a new administrator to the platform
       admins_new:
         add_an_administrator: "Add an administrator"

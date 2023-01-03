@@ -1134,6 +1134,7 @@ fr:
         price_: "Prix :"
         offer_free_days: "Offrir des jours gratuits"
         renew_subscription: "Renouveler l'abonnement"
+        cancel_subscription: "Annuler l'abonnement"
         user_has_no_current_subscription: "L'utilisateur n'a pas d'abonnement en cours."
         subscribe_to_a_plan: "Souscrire à un abonnement"
         trainings: "Formations"
@@ -1208,6 +1209,12 @@ fr:
         select_plan: "Veuillez choisir une formule d'abonnement"
         pay_in_one_go: "Payer en une fois"
         subscription_success: "Abonnement souscrit avec succès"
+      #cancel the current subscription
+      cancel_subscription_modal:
+        title: "Confirmation requise"
+        confirmation_html: "Vous êtes sur le point d'annuler l'abonnement <em>{NAME}</em> de cet utilisateur. À partir de maintenant, il ne pourra plus bénéficier des avantages de cet abonnement et tous ses crédits inutilisés seront perdus. <strong>Êtes-vous sûr(e) ?</strong>"
+        confirm: "Annuler cet abonnement"
+        subscription_canceled: "L'abonnement a bien été annulé."
       #add a new administrator to the platform
       admins_new:
         add_an_administrator: "Ajouter un administrateur"

@@ -2,7 +2,7 @@
 
 # API Controller for resources of type Subscription
 class API::SubscriptionsController < API::ApiController
-  before_action :set_subscription, only: %i[show payment_details]
+  before_action :set_subscription, only: %i[show payment_details cancel]
   before_action :authenticate_user!
 
   def show
@@ -11,6 +11,15 @@ class API::SubscriptionsController < API::ApiController
 
   def payment_details
     authorize @subscription
+  end
+
+  def cancel
+    authorize @subscription
+    if @subscription.expire(DateTime.current)
+      render :show, status: :ok, location: @subscription
+    else
+      render json: { error: 'already expired' }, status: :unprocessable_entity
+    end
   end
 
   private

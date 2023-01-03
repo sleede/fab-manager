@@ -727,6 +727,9 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
     // modal dialog to change the user's role
     $scope.isOpenChangeRoleModal = false;
 
+    // modal dialog to cancel the current subscription
+    $scope.isOpenCancelModal = false;
+
     /**
      * Open a modal dialog asking for confirmation to change the role of the given user
      * @returns {*}
@@ -795,6 +798,16 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
     };
 
     /**
+     * Opens/closes the modal dialog to cancel the current running subscription
+     */
+    $scope.toggleCancelModal = () => {
+      setTimeout(() => {
+        $scope.isOpenCancelModal = !$scope.isOpenCancelModal;
+        $scope.$apply();
+      }, 50);
+    };
+
+    /**
      * Opens/closes the modal dialog to renew the subscription (with payment)
      */
     $scope.toggleSubscribeModal = () => {
@@ -820,6 +833,16 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
     $scope.onExtendSuccess = (message, newExpirationDate) => {
       growl.success(message);
       $scope.subscription.expired_at = newExpirationDate;
+    };
+
+    /**
+     * Callback triggered when the subscription was successfully canceled
+     */
+    $scope.onCancelSuccess = (message) => {
+      growl.success(message);
+      $scope.user.subscribed_plan = null;
+      $scope.user.subscription = null;
+      $scope.subscription = null;
     };
 
     /**

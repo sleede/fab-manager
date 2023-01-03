@@ -9,6 +9,7 @@
 - Accounting data is now built each night and saved in database
 - Ability to define multiple accounting journal codes
 - Ability to change the name of the VAT
+- Ability to cancel a running subscription from the member edition view for admin/managers
 - OpenAPI endpoint to fetch accounting data
 - Add reservation deadline parameter (#414)
 - Verify current password at server side when changing password

@@ -1134,6 +1134,7 @@ zu:
         price_: "crwdns25854:0crwdne25854:0"
         offer_free_days: "crwdns25856:0crwdne25856:0"
         renew_subscription: "crwdns25858:0crwdne25858:0"
+        cancel_subscription: "crwdns36255:0crwdne36255:0"
         user_has_no_current_subscription: "crwdns25860:0crwdne25860:0"
         subscribe_to_a_plan: "crwdns25862:0crwdne25862:0"
         trainings: "crwdns25864:0crwdne25864:0"
@@ -1208,6 +1209,12 @@ zu:
         select_plan: "crwdns25988:0crwdne25988:0"
         pay_in_one_go: "crwdns25990:0crwdne25990:0"
         subscription_success: "crwdns25992:0crwdne25992:0"
+      #cancel the current subscription
+      cancel_subscription_modal:
+        title: "crwdns36257:0crwdne36257:0"
+        confirmation_html: "crwdns36259:0{NAME}crwdne36259:0"
+        confirm: "crwdns36261:0crwdne36261:0"
+        subscription_canceled: "crwdns36263:0crwdne36263:0"
       #add a new administrator to the platform
       admins_new:
         add_an_administrator: "crwdns25994:0crwdne25994:0"
