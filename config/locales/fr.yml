@@ -107,7 +107,7 @@ fr:
     coupon_CODE_discount_of_DISCOUNT: "Code {CODE} : remise de {DISCOUNT} {TYPE, select, percent_off{%} other{}}" #messageFormat interpolation
     total_including_all_taxes: "Total TTC"
     VAT: "TVA"
-    including_VAT_RATE: "Dont TVA %{RATE} % de %{AMOUNT}"
+    including_VAT_RATE: "Dont %{NAME} %{RATE} % de %{AMOUNT}"
     including_total_excluding_taxes: "Dont total HT"
     including_amount_payed_on_ordering: "Dont montant payé à la commande"
     total_amount: "Montant total"
@@ -133,6 +133,7 @@ fr:
     prepaid_pack: "Paquet d'heures prépayé"
     pack_item: "Pack de %{COUNT} heures pour la %{ITEM}"
     order: "Votre commande sur la boutique"
+    unable_to_find_pdf: "Nous ne trouvons pas votre facture. Si vous avez commandé récemment, il se peut qu'elle n'ait pas encore été générée. Veuillez réessayer dans un instant."
   #PDF payment schedule generation
   payment_schedules:
     schedule_reference: "Référence de l'échéancier : %{REF}"
