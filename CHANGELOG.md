@@ -18,6 +18,7 @@
 - OpenAPI users endpoint return first name, last name, gender, organization and address
 - Default accounting codes and labels if not set
 - Active serving static files from the `/public` folder by default from rails
+- Display custom error message if the PDF invoice is not found
 - Fix a bug: unable to run test in negative timezones (#425)
 - Fix a bug: providing an array of attributes to filter OpenApi data, results in error
 - Fix a bug: unable to manage stocks on new products
@@ -27,6 +28,7 @@
 - Fix a bug: clearing the new expiration date field in the offer days modal result in errors
 - Fix a bug: low stock notification is always sent if one of the stocks has reached the threshold
 - Fix a bug: unable to update title of availability after admin remove a machine/plan in calendar
+- Fix a bug: unable to access files from the public folder (like example.csv)
 - Updated react-modal to 3.16.1
 - Updated tiptap editor and its dependencies to 2.0.0-beta.204
 - [TODO DEPLOY] `rails db:seed`

@@ -133,6 +133,7 @@ es:
     prepaid_pack: "Prepaid pack of hours"
     pack_item: "Pack of %{COUNT} hours for the %{ITEM}"
     order: "Your order on the store"
+    unable_to_find_pdf: "We cannot find your invoice. If you ordered recently, it may have not been generated yet. Please retry in a moment."
   #PDF payment schedule generation
   payment_schedules:
     schedule_reference: "Payment schedule reference: %{REF}"

@@ -133,6 +133,7 @@
     prepaid_pack: "Forhåndsbetalt pakke med timer"
     pack_item: "Pakke med %{COUNT} timer for %{ITEM}"
     order: "Your order on the store"
+    unable_to_find_pdf: "We cannot find your invoice. If you ordered recently, it may have not been generated yet. Please retry in a moment."
   #PDF payment schedule generation
   payment_schedules:
     schedule_reference: "Referanse til betalingsplanen: %{REF}"
