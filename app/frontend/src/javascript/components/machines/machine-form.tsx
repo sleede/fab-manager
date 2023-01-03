@@ -113,6 +113,7 @@ export const MachineForm: React.FC<MachineFormProps> = ({ action, machine, onErr
       <FormSwitch control={control}
                   id="reservable"
                   label={t('app.admin.machine_form.reservable')}
+                  tooltip={t('app.admin.machine_form.reservable_help')}
                   defaultValue={true} />
       <FormSwitch control={control}
                   id="disabled"
