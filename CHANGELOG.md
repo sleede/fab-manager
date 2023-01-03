@@ -2,6 +2,7 @@
 
 - Ability to group machines by categories
 - Ability to mark a machine as reservable or not
+- Ability to filter the admin's calendar
 - Private note on member's profile
 - Optional external identifier for users
 - Ability to disable generation of invoices at zero
