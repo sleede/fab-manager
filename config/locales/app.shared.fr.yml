@@ -536,6 +536,5 @@ fr:
         spaces: "Espaces"
         events: "Événements"
         externals: "Autres calendriers"
-        show_reserved_uniq: "Voir les créneaux réservés uniquement"
       machine:
         machine_uncategorized: "Machines non classés"
