@@ -529,13 +529,13 @@ fr:
         stock_external: "Stock externe"
       calendar:
         calendar: "Agenda"
-        show_unavailables: "Afficher les créneaux non disponibles"
+        show_unavailables: "Afficher les créneaux complets"
         filter_calendar: "Filtrer le calendrier"
         trainings: "Formations"
         machines: "Machines"
         spaces: "Espaces"
         events: "Événements"
         externals: "Autres calendriers"
-        show_reserved_uniq: "Afficher uniquement les créneaux réservés"
+        show_reserved_uniq: "Afficher uniquement les créneaux avec réservation"
       machine:
         machine_uncategorized: "Machines non classés"
