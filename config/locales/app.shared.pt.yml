@@ -536,6 +536,6 @@ pt:
         spaces: "Spaces"
         events: "Events"
         externals: "Other calendars"
-        show_reserved_uniq: "Show only the slots with reservation"
+        show_reserved_uniq: "Show only slots with reservations"
       machine:
         machine_uncategorized: "Uncategorized machines"
