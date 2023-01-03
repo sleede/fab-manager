@@ -39,6 +39,7 @@ es:
         disable_machine: "Disable machine"
         disabled_help: "When disabled, the machine won't be reservable and won't appear by default in the machines list."
         reservable: "Can this machine be reserved?"
+        reservable_help: "When disabled, the machine will be shown in the default list of machines, but without the reservation button. If you already have created some availability slots for this machine, you may want to remove them: do it from the admin agenda."
         ACTION_machine: "{ACTION, select, create{Create} other{Update}} the machine"
         create_success: "The machine was created successfully"
         update_success: "The machine was updated successfully"
