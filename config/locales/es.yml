@@ -106,8 +106,8 @@ es:
       other: "%{count} %{NAME} entradas"
     coupon_CODE_discount_of_DISCOUNT: "Cupón {CODE}: descuento de {DISCOUNT}{TYPE, select, percent_off{%} other{}}" #messageFormat interpolation
     total_including_all_taxes: "Total impuestos incluidos"
-    VAT: "VAT"
-    including_VAT_RATE: "Incluido IVA %{RATE}% de %{AMOUNT}"
+    VAT: "IVA"
+    including_VAT_RATE: "Incluido %{NAME} %{RATE}% de %{AMOUNT}"
     including_total_excluding_taxes: "Excluyendo IVA"
     including_amount_payed_on_ordering: "Incluyendo cantidad pagada en el pedido"
     total_amount: "Precio total"
