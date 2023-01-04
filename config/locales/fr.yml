@@ -489,6 +489,18 @@ fr:
     birthday_in_past: "La date de naissance doit être dans le passé"
   order:
     please_contact_FABLAB: "Veuillez nous contacter pour des instructions de retrait."
+  cart_item_validation:
+    slot: "Le créneau n'existe pas"
+    availability: "La disponibilité n'existe pas"
+    full: "Le créneau est déjà entièrement réservé"
+    deadline: "Vous ne pouvez pas réserver un créneau %{MINUTES} minutes avant son début"
+    restricted: "Cette disponibilité n'est disponible que pour les abonnés"
+    plan: "Cette formule d'abonnement est désactivé"
+    reserved: "Ce créneau est déjà réservé"
+    pack: "Ce pack prépayé est désactivé"
+    space: "Cet espace est désactivé"
+    machine: "Cette machine est désactivée"
+    reservable: "Cette machine n'est pas réservable"
   settings:
     locked_setting: "le paramètre est verrouillé."
     about_title: "Le titre de la page \"À propos\""
