@@ -96,6 +96,7 @@ Application.Controllers.controller('NewTrainingController', ['$scope', '$state',
      * Callback triggered by react components
      */
     $scope.onError = function (message) {
+      console.error(message);
       growl.error(message);
     };
 
@@ -137,6 +138,7 @@ Application.Controllers.controller('EditTrainingController', ['$scope', '$state'
      * Callback triggered by react components
      */
     $scope.onError = function (message) {
+      console.error(message);
       growl.error(message);
     };
 

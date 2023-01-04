@@ -50,7 +50,7 @@ const ReservationsSummary: React.FC<ReservationsSummaryProps> = ({ slot, custome
   }, [slot]);
 
   useEffect(() => {
-    if (customer) {
+    if (customer && cart) {
       CartAPI.setCustomer(cart, customer.id).then(setCart).catch(onError);
     }
   }, [customer]);

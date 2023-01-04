@@ -125,6 +125,7 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
      * Callback triggered in case of error
      */
     $scope.onError = (message) => {
+      console.error(message);
       growl.error(message);
     };
 

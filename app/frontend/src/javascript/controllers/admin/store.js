@@ -40,6 +40,7 @@ Application.Controllers.controller('AdminStoreController', ['$scope', 'CSRF', 'g
      * Callback triggered in case of error
      */
     $scope.onError = (message) => {
+      console.error(message);
       growl.error(message);
     };
 

@@ -869,6 +869,7 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
      * Callback triggered in case of error
      */
     $scope.onError = (message) => {
+      console.error(message);
       growl.error(message);
     };
 
@@ -1055,6 +1056,7 @@ Application.Controllers.controller('NewMemberController', ['$scope', '$state', '
      * Callback triggered in case of error
      */
     $scope.onError = (message) => {
+      console.error(message);
       growl.error(message);
     };
 

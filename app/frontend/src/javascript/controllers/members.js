@@ -289,6 +289,7 @@ Application.Controllers.controller('EditProfileController', ['$scope', '$rootSco
      * @param message {string}
      */
     $scope.onError = function (message) {
+      console.error(message);
       growl.error(message);
     };
 

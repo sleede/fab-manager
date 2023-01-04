@@ -30,6 +30,7 @@ Application.Controllers.controller('NewPlanController', ['$scope', '$uibModal', 
      * Shows an error message forwarded from a child component
      */
     $scope.onError = function (message) {
+      console.error(message);
       growl.error(message);
     };
 
@@ -56,6 +57,7 @@ Application.Controllers.controller('EditPlanController', ['$scope', 'groups', 'p
      * Shows an error message forwarded from a child component
      */
     $scope.onError = function (message) {
+      console.error(message);
       growl.error(message);
     };
 
@@ -87,6 +89,7 @@ Application.Controllers.controller('PlanCategoriesController', ['$scope', 'growl
     };
 
     $scope.onError = function (message) {
+      console.error(message);
       growl.error(message);
     };
   }

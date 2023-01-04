@@ -216,6 +216,7 @@ Application.Controllers.controller('CompleteProfileController', ['$scope', '$roo
      * @param message {string}
      */
     $scope.onError = function (message) {
+      console.error(message);
       growl.error(message);
     };
 

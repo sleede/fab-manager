@@ -15,6 +15,7 @@ Application.Controllers.controller('ShowOrdersController', ['$rootScope', '$scop
      * Callback triggered in case of error
      */
     $scope.onError = (message) => {
+      console.error(message);
       growl.error(message);
     };
 

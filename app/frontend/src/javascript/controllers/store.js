@@ -11,6 +11,7 @@ Application.Controllers.controller('StoreController', ['$scope', 'CSRF', 'growl'
      * Callback triggered in case of error
      */
     $scope.onError = (message) => {
+      console.error(message);
       growl.error(message);
     };
 

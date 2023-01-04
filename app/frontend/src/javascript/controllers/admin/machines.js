@@ -23,6 +23,7 @@ Application.Controllers.controller('AdminMachinesController', ['$scope', 'CSRF',
      * Shows an error message forwarded from a child component
      */
     $scope.onError = function (message) {
+      console.error(message);
       growl.error(message);
     };
 

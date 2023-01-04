@@ -28,7 +28,8 @@ class Availabilities::AvailabilitiesService
 
   # list all slots for the given machines, with visibility relative to the given user
   def machines(machines, user, window)
-    ma_availabilities = Availability.includes('machines_availabilities')
+    ma_availabilities = Availability.includes(:machines_availabilities, :availability_tags, :machines, :slots_reservations,
+                                              slots: [:slots_reservations])
                                     .where('machines_availabilities.machine_id': machines.map(&:id))
     availabilities = availabilities(ma_availabilities, 'machines', user, window[:start], window[:end])
 

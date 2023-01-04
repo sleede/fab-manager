@@ -121,6 +121,7 @@ Application.Controllers.controller('NewAuthenticationController', ['$scope', '$s
      * Callback triggered by react components
      */
     $scope.onError = function (message) {
+      console.error(message);
       growl.error(message);
     };
 
@@ -147,6 +148,7 @@ Application.Controllers.controller('EditAuthenticationController', ['$scope', '$
      * Callback triggered by react components
      */
     $scope.onError = function (message) {
+      console.error(message);
       growl.error(message);
     };
 
