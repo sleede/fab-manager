@@ -10,6 +10,10 @@ class AccountingWorkerTest < ActiveSupport::TestCase
     @worker = AccountingWorker.new
   end
 
+  teardown do
+    Sidekiq::Testing.fake!
+  end
+
   test 'build accounting lines for yesterday by default' do
     date = DateTime.current.midnight
     travel_to(date)

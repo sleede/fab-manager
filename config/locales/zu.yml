@@ -489,6 +489,18 @@ zu:
     birthday_in_past: "crwdns22127:0crwdne22127:0"
   order:
     please_contact_FABLAB: "crwdns31721:0crwdne31721:0"
+  cart_item_validation:
+    slot: "crwdns36267:0crwdne36267:0"
+    availability: "crwdns36269:0crwdne36269:0"
+    full: "crwdns36271:0crwdne36271:0"
+    deadline: "crwdns36273:0%{MINUTES}crwdne36273:0"
+    restricted: "crwdns36275:0crwdne36275:0"
+    plan: "crwdns36277:0crwdne36277:0"
+    reserved: "crwdns36279:0crwdne36279:0"
+    pack: "crwdns36281:0crwdne36281:0"
+    space: "crwdns36283:0crwdne36283:0"
+    machine: "crwdns36285:0crwdne36285:0"
+    reservable: "crwdns36287:0crwdne36287:0"
   settings:
     locked_setting: "crwdns21632:0crwdne21632:0"
     about_title: "crwdns21634:0crwdne21634:0"

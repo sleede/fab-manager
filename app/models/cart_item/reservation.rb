@@ -49,30 +49,30 @@ class CartItem::Reservation < CartItem::BaseItem
     @slots.each do |slot|
       slot_db = Slot.find(slot[:slot_id])
       if slot_db.nil?
-        @errors[:slot] = 'slot does not exist'
+        @errors[:slot] = I18n.t('cart_item_validation.slot')
         return false
       end
 
       availability = Availability.find_by(id: slot[:slot_attributes][:availability_id])
       if availability.nil?
-        @errors[:availability] = 'availability does not exist'
+        @errors[:availability] = I18n.t('cart_item_validation.availability')
         return false
       end
 
       if slot_db.full?
-        @errors[:slot] = 'availability is full'
+        @errors[:slot] = I18n.t('cart_item_validation.full')
         return false
       end
 
       if slot_db.start_at < reservation_deadline && !@operator.privileged?
-        @errors[:slot] = "cannot reserve a slot #{reservation_deadline_minutes} minutes prior to its start"
+        @errors[:slot] = I18n.t('cart_item_validation.deadline', { MINUTES: reservation_deadline_minutes })
         return false
       end
 
       next if availability.plan_ids.empty?
       next if required_subscription?(availability, pending_subscription)
 
-      @errors[:availability] = 'availability is restricted for subscribers'
+      @errors[:availability] = I18n.t('cart_item_validation.restricted')
       return false
     end
 

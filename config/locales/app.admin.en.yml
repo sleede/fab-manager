@@ -1475,6 +1475,7 @@ en:
         visibility_for_yearly_members: "For currently running subscriptions, at least 1 year long"
         visibility_for_other_members: "For all other members"
         reservation_deadline: "Prevent last minute booking"
+        reservation_deadline_help: "If you increase the prior period, members won't be able to book a slot X minutes before its start."
         deadline_minutes: "Prior period (minutes)"
         ability_for_the_users_to_move_their_reservations: "Ability for the users to move their reservations"
         reservations_shifting: "Reservations shifting"

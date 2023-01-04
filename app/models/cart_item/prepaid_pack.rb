@@ -40,7 +40,7 @@ class CartItem::PrepaidPack < CartItem::BaseItem
 
   def valid?(_all_items)
     if @pack.disabled
-      @errors[:item] = 'pack is disabled'
+      @errors[:item] = I18n.t('cart_item_validation.pack')
       return false
     end
     true

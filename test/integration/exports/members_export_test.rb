@@ -41,7 +41,7 @@ class Exports::MembersExportTest < ActionDispatch::IntegrationTest
     # test data
     wb = workbook[I18n.t('export_members.members')]
     member = User.find(wb.sheet_data[1][0].value)
-    assert_equal (member.is_allow_newsletter ? 1 : nil), wb.sheet_data[1][4].value
+    assert_equal (member.is_allow_newsletter ? 1 : 0), wb.sheet_data[1][4].value
 
     # Clean XLSX file
     require 'fileutils'

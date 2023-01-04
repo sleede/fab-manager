@@ -44,7 +44,7 @@ class CartItem::Subscription < CartItem::BaseItem
 
   def valid?(_all_items)
     if @plan.disabled
-      @errors[:item] = 'plan is disabled'
+      @errors[:item] = I18n.t('cart_item_validation.plan')
       return false
     end
     true

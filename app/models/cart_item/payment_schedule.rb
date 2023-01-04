@@ -39,7 +39,7 @@ class CartItem::PaymentSchedule
     return true unless @requested && @plan&.monthly_payment
 
     if @plan&.disabled
-      @errors[:item] = 'plan is disabled'
+      @errors[:item] = I18n.t('cart_item_validation.plan')
       return false
     end
     true

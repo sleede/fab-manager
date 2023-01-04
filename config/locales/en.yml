@@ -489,6 +489,18 @@ en:
     birthday_in_past: "The date of birth must be in the past"
   order:
     please_contact_FABLAB: "Please contact us for withdrawal instructions."
+  cart_item_validation:
+    slot: "The slot doesn't exist"
+    availability: "The availaility doesn't exist"
+    full: "The slot is already fully reserved"
+    deadline: "You can't reserve a slot %{MINUTES} minutes prior to its start"
+    restricted: "This availability is restricted for subscribers"
+    plan: "This subscription plan is disabled"
+    reserved: "This slot is already reserved"
+    pack: "This prepaid pack is disabled"
+    space: "This space is disabled"
+    machine: "This machine is disabled"
+    reservable: "This machine is not reservable"
   settings:
     locked_setting: "the setting is locked."
     about_title: "\"About\" page title"
