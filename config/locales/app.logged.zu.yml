@@ -143,20 +143,29 @@ zu:
           save: "crwdns27628:0crwdne27628:0"
           browse: "crwdns27630:0crwdne27630:0"
           edit: "crwdns27632:0crwdne27632:0"
-        reservations:
+        reservations_dashboard:
+          machine_section_title: "crwdns36291:0crwdne36291:0"
+          space_section_title: "crwdns36293:0crwdne36293:0"
           reservations_panel:
-            title_Space: "crwdns27634:0crwdne27634:0"
-            title_Machine: "crwdns27636:0crwdne27636:0"
-            upcoming: "crwdns27638:0crwdne27638:0"
-            past: "crwdns27640:0crwdne27640:0"
-            slots_details: "crwdns27642:0crwdne27642:0"
-            no_reservations: "crwdns27644:0crwdne27644:0"
-            show_more: "crwdns27646:0crwdne27646:0"
+            title: "crwdns36295:0crwdne36295:0"
+            upcoming: "crwdns36297:0crwdne36297:0"
+            date: "crwdns36299:0crwdne36299:0"
+            history: "crwdns36301:0crwdne36301:0"
+            no_reservations: "crwdns36303:0crwdne36303:0"
+            show_more: "crwdns36305:0crwdne36305:0"
           credits_panel:
-            title_Space: "crwdns27648:0crwdne27648:0"
-            title_Machine: "crwdns27650:0crwdne27650:0"
-            reamaining_credits_html: "crwdns27652:0NAME={NAME}crwdnd27652:0REMAINING={REMAINING}crwdnd27652:0REMAINING={REMAINING}crwdnd27652:0USED={USED}crwdnd27652:0USED={USED}crwdne27652:0"
-            no_credits: "crwdns27654:0crwdne27654:0"
+            title: "crwdns36307:0crwdne36307:0"
+            info: "crwdns36309:0crwdne36309:0"
+            remaining_credits_html: "crwdns36311:0REMAINING={REMAINING}crwdnd36311:0REMAINING={REMAINING}crwdne36311:0"
+            used_credits_html: "crwdns36313:0USED={USED}crwdnd36313:0USED={USED}crwdne36313:0"
+            no_credits: "crwdns36315:0crwdne36315:0"
+          prepaid_packs_panel:
+            title: "crwdns36317:0crwdne36317:0"
+            name: "crwdns36319:0crwdne36319:0"
+            end: "crwdns36321:0crwdne36321:0"
+            countdown: "crwdns36323:0crwdne36323:0"
+            history: "crwdns36325:0crwdne36325:0"
+            consumed_hours: "crwdns36327:0crwdne36327:0"
       #public profil of a member
       members_show:
         members_list: "crwdns27656:0crwdne27656:0"
