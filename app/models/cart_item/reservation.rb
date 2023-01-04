@@ -72,7 +72,7 @@ class CartItem::Reservation < CartItem::BaseItem
       end
 
       if slot.full?
-        errors.add(:slot, I18n.t('cart_item_validation.full')
+        errors.add(:slot, I18n.t('cart_item_validation.full'))
         return false
       end
 
