@@ -32,6 +32,7 @@
 - Fix a bug: low stock notification is always sent if one of the stocks has reached the threshold
 - Fix a bug: unable to update title of availability after admin remove a machine/plan in calendar
 - Fix a bug: unable to access files from the public folder (like example.csv)
+- Fix a bug: unable to return to the statistics tab
 - Updated react-modal to 3.16.1
 - Updated tiptap editor and its dependencies to 2.0.0-beta.204
 - [TODO DEPLOY] `rails db:seed`

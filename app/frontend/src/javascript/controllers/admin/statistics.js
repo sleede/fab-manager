@@ -410,7 +410,7 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
       // workaround for angular-bootstrap::tabs behavior: on tab deletion, another tab will be selected
       // which will cause every tabs to reload, one by one, when the view is closed
       $transitions.onStart({ to: 'app.admin.statistics' }, function (trans) {
-        if (Object.keys(trans.from().params).length === 0) {
+        if (Object.keys(trans.from().params || {}).length === 0) {
           return $scope.preventRefresh = true;
         }
       });
