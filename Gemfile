@@ -143,3 +143,7 @@ gem 'sassc', '= 2.1.0'
 gem 'redis-session-store'
 
 gem 'acts_as_list'
+
+# Error reporting
+gem 'sentry-rails'
+gem 'sentry-ruby'

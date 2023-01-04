@@ -300,6 +300,11 @@ Accordingly, `RAILS_LOCALE` and `APP_LOCALE` must be configured to `zu`.
     NO_COLOR
 
 If set to any value, this will set `config.colorize_logging` to `false`, disabling ANSI color codes when logging information.
+<a name="ENABLE_SENTRY"></a>
+
+    ENABLE_SENTRY
+
+Sentry is an automated error reporting tool. It is disabled by default, but you can enable it by setting `ENABLE_SENTRY=true`.
 <a name="open-projects-settings"></a>
 ## OpenLab settings
 <a name="OPENLAB_BASE_URI"></a>
