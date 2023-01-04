@@ -151,7 +151,7 @@ zu:
             upcoming: "crwdns36297:0crwdne36297:0"
             date: "crwdns36299:0crwdne36299:0"
             history: "crwdns36301:0crwdne36301:0"
-            no_reservations: "crwdns36303:0crwdne36303:0"
+            no_reservation: "crwdns36329:0crwdne36329:0"
             show_more: "crwdns36305:0crwdne36305:0"
           credits_panel:
             title: "crwdns36307:0crwdne36307:0"
@@ -162,7 +162,7 @@ zu:
           prepaid_packs_panel:
             title: "crwdns36317:0crwdne36317:0"
             name: "crwdns36319:0crwdne36319:0"
-            end: "crwdns36321:0crwdne36321:0"
+            end: "crwdns36331:0crwdne36331:0"
             countdown: "crwdns36323:0crwdne36323:0"
             history: "crwdns36325:0crwdne36325:0"
             consumed_hours: "crwdns36327:0crwdne36327:0"
