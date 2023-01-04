@@ -4,13 +4,26 @@
 class AccountingWorker
   include Sidekiq::Worker
 
-  def perform(action = :today, *params)
+  attr_reader :performed
+
+  def perform(action = :yesterday, *params)
     send(action, *params)
   end
 
   def today
     service = Accounting::AccountingService.new
-    service.build(DateTime.current.beginning_of_day, DateTime.current.end_of_day)
+    start = DateTime.current.beginning_of_day
+    finish = DateTime.current.end_of_day
+    ids = service.build(start, finish)
+    @performed = "today: #{start} -> #{finish}; invoices: #{ids}"
+  end
+
+  def yesterday
+    service = Accounting::AccountingService.new
+    start = DateTime.yesterday.beginning_of_day
+    finish = DateTime.yesterday.end_of_day
+    ids = service.build(start, finish)
+    @performed = "yesterday: #{start} -> #{finish}; invoices: #{ids}"
   end
 
   def invoices(invoices_ids)
@@ -19,7 +32,8 @@ class AccountingWorker
     # build
     service = Accounting::AccountingService.new
     invoices = Invoice.where(id: invoices_ids)
-    service.build_from_invoices(invoices)
+    ids = service.build_from_invoices(invoices)
+    @performed = "invoices: #{ids}"
   end
 
   def all
@@ -27,6 +41,7 @@ class AccountingWorker
     AccountingLine.delete_all
     # build
     service = Accounting::AccountingService.new
-    service.build_from_invoices(Invoice.all)
+    ids = service.build_from_invoices(Invoice.all)
+    @performed = "all: #{ids}"
   end
 end

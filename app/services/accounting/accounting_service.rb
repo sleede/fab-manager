@@ -14,16 +14,20 @@ class Accounting::AccountingService
   def build(start_date, end_date)
     invoices = Invoice.where('created_at >= ? AND created_at <= ?', start_date, end_date).order('created_at ASC')
     build_from_invoices(invoices)
+    invoices.map(&:id)
   end
 
   # build accounting lines for the provided invoices
   def build_from_invoices(invoices)
     lines = []
+    processed = []
     invoices.find_each do |i|
       Rails.logger.debug { "processing invoice #{i.id}..." } unless Rails.env.test?
       lines.concat(generate_lines(i))
+      processed.push(i.id)
     end
     AccountingLine.create!(lines)
+    processed
   end
 
   def self.status
