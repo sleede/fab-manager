@@ -485,6 +485,7 @@ fr:
   cart_items:
     free_extension: "Extension gratuite d'un abonnement, jusqu'au %{DATE}"
     must_be_after_expiration: "La nouvelle date d'expiration doit être définie après la date d'expiration actuelle"
+    group_subscription_mismatch: "Votre groupe ne correspond pas à votre abonnement. Veuillez signaler cette erreur."
   statistic_profile:
     birthday_in_past: "La date de naissance doit être dans le passé"
   order:
