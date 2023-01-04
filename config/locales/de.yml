@@ -485,6 +485,7 @@ de:
   cart_items:
     free_extension: "Kostenlose Verlängerung eines Abonnements bis %{DATE}"
     must_be_after_expiration: "The new expiration date must be set after the current expiration date"
+    group_subscription_mismatch: "Your group mismatch with your subscription. Please report this error."
   statistic_profile:
     birthday_in_past: "Geburtsdatum muss in der Vergangenheit liegen"
   order:

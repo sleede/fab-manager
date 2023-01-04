@@ -19,6 +19,8 @@ class CartItem::Reservation < CartItem::BaseItem
     is_privileged = @operator.privileged? && @operator.id != @customer.id
     prepaid = { minutes: PrepaidPackService.minutes_available(@customer, @reservable) }
 
+    raise InvalidGroupError, I18n.t('cart_items.group_subscription_mismatch') if !@plan.nil? && @customer.group_id != @plan.group_id
+
     elements = { slots: [] }
     amount = 0
 
