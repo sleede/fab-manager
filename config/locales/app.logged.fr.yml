@@ -151,7 +151,7 @@ fr:
             upcoming: "À venir"
             date: "Date"
             history: "Historique"
-            no_reservations: "Aucune réservation"
+            no_reservation: "Aucune réservation"
             show_more: "Afficher plus"
           credits_panel:
             title: "Mes crédits"
@@ -160,12 +160,12 @@ fr:
             used_credits_html: "Vous avez déjà utilisé <strong> {USED} {USED, plural, =0{crédit} one{crédit} other{crédits}}</strong>."
             no_credits: "Vous n'avez pas encore de crédits. Certains abonnements peuvent vous permettre de réserver des créneaux gratuitement."
           prepaid_packs_panel:
-            title: "My prepaid packs"
-            name: "Prepaid pack name"
-            end: "expiry date"
-            countdown: "Countdown"
-            history: "History"
-            consumed_hours: "H consumed"
+            title: "Mes packs d'heures prépayées"
+            name: "Nom du pack d'heures prépayées"
+            end: "Expire le"
+            countdown: "Décompte"
+            history: "Historique"
+            consumed_hours: "H consommée(s)"
       #public profil of a member
       members_show:
         members_list: "Liste des membres"
