@@ -151,7 +151,7 @@ es:
             upcoming: "Upcoming"
             date: "Date"
             history: "History"
-            no_reservations: "No reservations"
+            no_reservation: "No reservation"
             show_more: "Show more"
           credits_panel:
             title: "My credits"
@@ -162,7 +162,7 @@ es:
           prepaid_packs_panel:
             title: "My prepaid packs"
             name: "Prepaid pack name"
-            end: "expiry date"
+            end: "Expiry date"
             countdown: "Countdown"
             history: "History"
             consumed_hours: "H consumed"
