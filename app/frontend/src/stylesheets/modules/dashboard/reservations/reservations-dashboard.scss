@@ -1,5 +1,29 @@
 .reservations-dashboard {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  max-width: 1600px;
+  margin: 0 auto 6rem;
+  padding: 3.2rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3.2rem;
+
+  .section {
+    display: flex;
+    flex-direction: column;
+    gap: 3.2rem;
+    &-title {
+      @include title-base;
+      margin-bottom: 0;
+    }
+  }
+
+
+  .fab-panel {
+    width: 100%;
+    float: none;
+    margin: 0;
+  }
+
+  @media (min-width: 1440px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }

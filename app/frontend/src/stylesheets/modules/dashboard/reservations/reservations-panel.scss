@@ -1,56 +1,63 @@
 .reservations-panel {
-  margin-bottom: 60px;
-  .reservation {
-    position: relative;
-    &-title {
-      cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  .title { @include text-base(600); }
+  p { margin: 0; }
 
-      &.clicked {
-        color: var(--secondary-dark);
-      }
-      &.canceled {
-        text-decoration: line-through;
-      }
-    }
-    .slot-details {
-      display: block;
-
-      &.canceled {
-        text-decoration: line-through;
-      }
-    }
-
-    .fab-popover {
-      left: 0;
-    }
+  .reservations {
+    padding: 1.6rem;
+    background-color: var(--gray-soft-lightest);
+    border-radius: var(--border-radius);
   }
-  .no-reservations,
-  .show-more {
-    list-style: none;
-    text-align: center;
+
+  .reservations-list {
+    display: grid;
+    grid-template-columns: 1fr max-content;
+    gap: 0 1.6rem;
+    .name { grid-column: 1 / 2; }
+    .date { grid-column: 2 / 3; }
+    &-label {
+      @include text-xs;
+      color: var(--gray-soft-darkest);
+    }
+
+    &-item {
+      display: contents;
+      @include text-base(600);
+      .date{
+        margin-bottom: 0.4rem;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+      }
+      &.canceled {
+        text-decoration: line-through;
+      }
+    }
+
+  }
+  .reservations-list.is-history {
+    margin-top: 2.4rem;
+    .reservations-list-label {
+      margin-bottom: 0.8rem;
+      padding-bottom: 0.8rem;
+      grid-column: 1 / -1;
+      border-bottom: 1px solid var(--gray-soft-dark);
+    }
+    .reservations-list-item { font-weight: 400; }
+  }
+
+  .no-reservations {
+    display: block;
+    @include text-sm;
     font-style: italic;
-    color: #aaa;
+    text-align: center;
+    color: var(--gray-soft-darkest);
   }
 
   .show-more {
-    margin-top: 10px;
-  }
-}
-
-@media (min-width: 1460px) {
-  .reservations-panel {
-    width: 45%;
-  }
-}
-
-@media (max-width: 1459px) {
-  .reservations-panel {
-    width: 95%;
-  }
-}
-
-@media (max-width: 992px) {
-  .reservations-panel {
-    width: 90%;
+    width: fit-content;
+    margin-top: 1rem;
   }
 }

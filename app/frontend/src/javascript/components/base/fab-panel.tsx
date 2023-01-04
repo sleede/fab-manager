@@ -12,18 +12,16 @@ interface FabPanelProps {
  */
 export const FabPanel: React.FC<FabPanelProps> = ({ className, header, size, children }) => {
   return (
-    <div className={`fab-panel ${className || ''}`}>
-      {header && <div>
+    <div className={`fab-panel ${className || ''} ${!header ? 'no-header' : ''}`}>
+      {header && <>
         <div className={`panel-header ${size}`}>
           {header}
         </div>
         <div className="panel-content">
           {children}
         </div>
-      </div>}
-      {!header && <div className="no-header">
-        {children}
-      </div>}
+      </>}
+      {!header && <>{ children }</>}
     </div>
   );
 };

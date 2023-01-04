@@ -7,8 +7,6 @@ import { useTranslation } from 'react-i18next';
 import moment from 'moment';
 import { Loader } from '../../base/loader';
 import FormatLib from '../../../lib/format';
-import { FabPopover } from '../../base/fab-popover';
-import { useImmer } from 'use-immer';
 import _ from 'lodash';
 import { FabButton } from '../../base/fab-button';
 
@@ -25,7 +23,6 @@ const ReservationsPanel: React.FC<SpaceReservationsProps> = ({ userId, onError, 
   const { t } = useTranslation('logged');
 
   const [reservations, setReservations] = useState<Array<Reservation>>([]);
-  const [details, updateDetails] = useImmer<Record<number, boolean>>({});
   const [showMore, setShowMore] = useState<boolean>(false);
 
   useEffect(() => {
@@ -52,28 +49,6 @@ const ReservationsPanel: React.FC<SpaceReservationsProps> = ({ userId, onError, 
   };
 
   /**
-   * Panel title
-   */
-  const header = (): ReactNode => {
-    return (
-      <div>
-        {t(`app.logged.dashboard.reservations.reservations_panel.title_${reservableType}`)}
-      </div>
-    );
-  };
-
-  /**
-   * Show/hide the slots details for the given reservation
-   */
-  const toggleDetails = (reservationId: number): () => void => {
-    return () => {
-      updateDetails(draft => {
-        draft[reservationId] = !draft[reservationId];
-      });
-    };
-  };
-
-  /**
    * Shows/hide the very old reservations list
    */
   const toggleShowMore = (): void => {
@@ -85,7 +60,7 @@ const ReservationsPanel: React.FC<SpaceReservationsProps> = ({ userId, onError, 
    */
   const noReservations = (): ReactNode => {
     return (
-      <li className="no-reservations">{t('app.logged.dashboard.reservations.reservations_panel.no_reservations')}</li>
+      <span className="no-reservations">{t('app.logged.dashboard.reservations_dashboard.reservations_panel.no_reservation')}</span>
     );
   };
 
@@ -101,18 +76,17 @@ const ReservationsPanel: React.FC<SpaceReservationsProps> = ({ userId, onError, 
    */
   const renderReservation = (reservation: Reservation, state: 'past' | 'futur'): ReactNode => {
     return (
-      <li key={reservation.id} className="reservation">
-        <a className={`reservation-title ${details[reservation.id] ? 'clicked' : ''} ${isCancelled(reservation) ? 'canceled' : ''}`} onClick={toggleDetails(reservation.id)}>
-          {reservation.reservable.name} - {FormatLib.date(reservation.slots_reservations_attributes[0].slot_attributes.start_at)}
-        </a>
-        {details[reservation.id] && <FabPopover title={t('app.logged.dashboard.reservations.reservations_panel.slots_details')}>
+      <div key={reservation.id} className="reservations-list-item">
+        <p className='name'>{reservation.reservable.name}</p>
+
+        <div className="date">
           {reservation.slots_reservations_attributes.filter(s => filterSlot(s, state)).map(
-            slotReservation => <span key={slotReservation.id} className={`slot-details ${slotReservation.canceled_at ? 'canceled' : ''}`}>
-              {FormatLib.date(slotReservation.slot_attributes.start_at)}, {FormatLib.time(slotReservation.slot_attributes.start_at)} - {FormatLib.time(slotReservation.slot_attributes.end_at)}
-            </span>
+            slotReservation => <p key={slotReservation.id}>
+              {FormatLib.date(slotReservation.slot_attributes.start_at)} - {FormatLib.time(slotReservation.slot_attributes.start_at)} - {FormatLib.time(slotReservation.slot_attributes.end_at)}
+            </p>
           )}
-        </FabPopover>}
-      </li>
+        </div>
+      </div>
     );
   };
 
@@ -120,21 +94,31 @@ const ReservationsPanel: React.FC<SpaceReservationsProps> = ({ userId, onError, 
   const past = _.orderBy(reservationsByDate('past'), r => r.slots_reservations_attributes[0].slot_attributes.start_at, 'desc');
 
   return (
-    <FabPanel className="reservations-panel" header={header()}>
-      <h4>{t('app.logged.dashboard.reservations.reservations_panel.upcoming')}</h4>
-      <ul>
-        {futur.length === 0 && noReservations()}
-        {futur.map(r => renderReservation(r, 'futur'))}
-      </ul>
-      <h4>{t('app.logged.dashboard.reservations.reservations_panel.past')}</h4>
-      <ul>
-        {past.length === 0 && noReservations()}
-        {past.slice(0, 10).map(r => renderReservation(r, 'past'))}
-        {past.length > 10 && !showMore && <li className="show-more"><FabButton onClick={toggleShowMore}>
-          {t('app.logged.dashboard.reservations.reservations_panel.show_more')}
-        </FabButton></li>}
-        {past.length > 10 && showMore && past.slice(10).map(r => renderReservation(r, 'past'))}
-      </ul>
+    <FabPanel className="reservations-panel">
+      <p className="title">{t('app.logged.dashboard.reservations_dashboard.reservations_panel.title')}</p>
+      <div className="reservations">
+        {futur.length === 0
+          ? noReservations()
+          : <div className="reservations-list">
+              <span className="reservations-list-label name">{t('app.logged.dashboard.reservations_dashboard.reservations_panel.upcoming')}</span>
+              <span className="reservations-list-label date">{t('app.logged.dashboard.reservations_dashboard.reservations_panel.date')}</span>
+
+              {futur.map(r => renderReservation(r, 'futur'))}
+            </div>
+        }
+
+        {past.length > 0 &&
+          <div className="reservations-list is-history">
+            <span className="reservations-list-label">{t('app.logged.dashboard.reservations_dashboard.reservations_panel.history')}</span>
+
+            {past.slice(0, 5).map(r => renderReservation(r, 'past'))}
+            {past.length > 5 && !showMore && <FabButton onClick={toggleShowMore} className="show-more is-black">
+              {t('app.logged.dashboard.reservations_dashboard.reservations_panel.show_more')}
+            </FabButton>}
+            {past.length > 5 && showMore && past.slice(5).map(r => renderReservation(r, 'past'))}
+          </div>
+        }
+      </div>
     </FabPanel>
   );
 };
