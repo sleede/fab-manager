@@ -143,29 +143,20 @@ fr:
           save: "Enregistrer"
           browse: "Parcourir"
           edit: "Modifier"
-        reservations_dashboard:
-          machine_section_title: "Réservations de machines"
-          space_section_title: "Réservations d'espaces"
+        reservations:
           reservations_panel:
-            title: "Mes réservations"
-            upcoming: "À venir"
-            date: "Date"
-            history: "Historique"
-            no_reservation: "Aucune réservation"
-            show_more: "Afficher plus"
+            title_Space: "My space reservations"
+            title_Machine: "My machines reservations"
+            upcoming: "Upcoming"
+            past: "Past"
+            slots_details: "Slots details"
+            no_reservations: "No reservations"
+            show_more: "Show more"
           credits_panel:
-            title: "Mes crédits"
-            info: "Avec votre abonnement, vous bénéficiez de crédits gratuits que vous pouvez utiliser sur les réservations"
-            remaining_credits_html: "Vous pouvez réserver {REMAINING} {REMAINING, plural, one{créneau} other{créneaux}} gratuitement."
-            used_credits_html: "Vous avez déjà utilisé <strong> {USED} {USED, plural, =0{crédit} one{crédit} other{crédits}}</strong>."
-            no_credits: "Vous n'avez pas encore de crédits. Certains abonnements peuvent vous permettre de réserver des créneaux gratuitement."
-          prepaid_packs_panel:
-            title: "Mes packs d'heures prépayées"
-            name: "Nom du pack d'heures prépayées"
-            end: "Expire le"
-            countdown: "Décompte"
-            history: "Historique"
-            consumed_hours: "H consommée(s)"
+            title_Space: "My space credits"
+            title_Machine: "My machines credits"
+            reamaining_credits_html: "<strong>{NAME}</strong>: You can book <em>{REMAINING} {REMAINING, plural, one{slot} other{slots}}</em> for free. You have already used {USED} {USED, plural, one{credit} other{credits}} from your current subscription."
+            no_credits: "You don't have any credits yet. Some subscriptions may allow you to book some slots for free."
       #public profil of a member
       members_show:
         members_list: "Liste des membres"
