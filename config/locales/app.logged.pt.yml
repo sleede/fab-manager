@@ -143,20 +143,31 @@ pt:
           save: "Salvar"
           browse: "Navegar"
           edit: "Editar"
-        reservations:
+        reservations_dashboard:
+          machine_section_title: "Machines reservations"
+          space_section_title: "Spaces reservations"
           reservations_panel:
-            title_Space: "Minhas reservas de espaços"
-            title_Machine: "Minhas reservas de máquinas"
-            upcoming: "Próximas"
-            past: "Passadas"
-            slots_details: "Detalhes da reserva"
-            no_reservations: "Sem reservas"
-            show_more: "Mostrar mais"
+            title: "My reservations"
+            upcoming: "Upcoming"
+            date: "Date"
+            history: "History"
+            no_reservation: "No reservation"
+            show_more: "Show more"
           credits_panel:
-            title_Space: "Meus créditos de espaços"
-            title_Machine: "Meus créditos de máquinas"
-            reamaining_credits_html: "<strong>{NAME}</strong>: Você pode fazer <em>{REMAINING} {REMAINING, plural, one{reserva} other{reservas}}</em> gratuitamente. Você já usou {USED} {USED, plural, one{credito} other{creditos}} da sua assinatura."
-            no_credits: "Você não tem nenhum crédito ainda. Algumas assinaturas podem permitir que você reserve alguns slots gratuitamente."
+            title: "My credits"
+            info: "Your subscription comes with free credits you can use on reservations"
+            remaining_credits_html: "You can book {REMAINING} {REMAINING, plural, one{slot} other{slots}} for free."
+            used_credits_html: "You have already used <strong> {USED} {USED, plural, =0{credit} one{credit} other{credits}}</strong>."
+            no_credits: "You don't have any credits yet. Some subscriptions may allow you to book some slots for free."
+          prepaid_packs_panel:
+            title: "My prepaid packs"
+            name: "Prepaid pack name"
+            end: "Expiry date"
+            countdown: "Countdown"
+            history: "History"
+            consumed_hours: "H consumed"
+            cta_info: "You can buy prepaid hours packs to book machines and benefit from discounts"
+            cta_button: "Buy a pack"
       #public profil of a member
       members_show:
         members_list: "Lista de membros"
