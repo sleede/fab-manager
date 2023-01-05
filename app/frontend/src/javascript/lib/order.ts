@@ -1,11 +1,11 @@
 import { computePriceWithCoupon } from './coupon';
-import { Order } from '../models/order';
+import { Order, OrderItem } from '../models/order';
 
 export default class OrderLib {
   /**
    * Get the order item total
    */
-  static itemAmount = (item): number => {
+  static itemAmount = (item: OrderItem): number => {
     return item.quantity * Math.round(item.amount * 100) / 100;
   };
 

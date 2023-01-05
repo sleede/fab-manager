@@ -8,6 +8,29 @@ import { CartItemType } from './cart_item';
 
 export type OrderableType = 'Product' | CartItemType;
 
+export interface OrderItem {
+  id: number,
+  orderable_type: OrderableType,
+  orderable_id: number,
+  orderable_name: string,
+  orderable_main_image_url?: string;
+  quantity: number,
+  amount: number,
+  is_offered: boolean
+}
+
+export interface OrderProduct extends OrderItem {
+  orderable_type: 'Product',
+  orderable_slug: string,
+  orderable_ref?: string,
+  orderable_external_stock: number,
+  quantity_min: number
+}
+
+export interface OrderCartItem extends OrderItem {
+  orderable_type: CartItemType
+}
+
 export interface Order {
   id: number,
   token: string,
@@ -29,20 +52,7 @@ export interface Order {
   payment_date?: TDateISO,
   wallet_amount?: number,
   paid_total?: number,
-  order_items_attributes: Array<{
-    id: number,
-    orderable_type: OrderableType,
-    orderable_id: number,
-    orderable_name: string,
-    orderable_slug: string,
-    orderable_ref?: string,
-    orderable_main_image_url?: string,
-    orderable_external_stock: number,
-    quantity: number,
-    quantity_min: number,
-    amount: number,
-    is_offered: boolean
-  }>,
+  order_items_attributes: Array<OrderItem>,
 }
 
 export interface OrderPayment {
