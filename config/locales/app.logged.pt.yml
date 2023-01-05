@@ -166,6 +166,8 @@ pt:
             countdown: "Countdown"
             history: "History"
             consumed_hours: "H consumed"
+            cta_info: "You can buy prepaid hours packs to book machines and benefit from discounts"
+            cta_button: "Buy a pack"
       #public profil of a member
       members_show:
         members_list: "Lista de membros"

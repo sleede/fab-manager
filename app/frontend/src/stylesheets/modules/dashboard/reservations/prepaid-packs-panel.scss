@@ -17,7 +17,7 @@
 
   .prepaid-packs-list {
     display: grid;
-    grid-template-columns: 2fr 1fr max-content;
+    grid-template-columns: 2fr 1fr minmax(25%, max-content);
     gap: 0 1.6rem;
     .name { grid-column: 1 / 2; }
     .end { grid-column: 2 / 3; }
@@ -42,5 +42,15 @@
       border-bottom: 1px solid var(--gray-soft-dark);
     }
     .prepaid-packs-list-item { font-weight: 400; }
+  }
+
+  .prepaid-packs-cta {
+    padding: 1.6rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap:2.4rem;
+    background-color: var(--gray-soft-lightest);
+    border-radius: var(--border-radius);
   }
 }

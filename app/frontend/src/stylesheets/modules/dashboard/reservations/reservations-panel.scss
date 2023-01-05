@@ -13,7 +13,7 @@
 
   .reservations-list {
     display: grid;
-    grid-template-columns: 1fr max-content;
+    grid-template-columns: 1fr minmax(25%, max-content);
     gap: 0 1.6rem;
     .name { grid-column: 1 / 2; }
     .date { grid-column: 2 / 3; }
@@ -26,7 +26,7 @@
       display: contents;
       @include text-base(600);
       .date{
-        margin-bottom: 0.4rem;
+        margin-bottom: 1.6rem;
         display: flex;
         flex-direction: column;
         align-items: flex-end;

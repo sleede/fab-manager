@@ -41,6 +41,11 @@ const PrepaidPacksPanel: React.FC<PrepaidPacksPanelProps> = () => {
         </div>
       </div>
 
+      <div className='prepaid-packs-cta'>
+        <p>{t('app.logged.dashboard.reservations_dashboard.prepaid_packs_panel.cta_info')}</p>
+        <button className='fab-button is-black'>{t('app.logged.dashboard.reservations_dashboard.prepaid_packs_panel.cta_button')}</button>
+      </div>
+
     </FabPanel>
   );
 };
