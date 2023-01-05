@@ -1,5 +1,6 @@
 # Changelog Fab-manager
 
+- Fix a bug: unable to build accounting lines if no invoices
 - Fix a security issue: updated json5 to 1.0.2 to fix [CVE-2022-46175](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-46175)
 
 ## v5.6.0 2023 January 5
