@@ -143,29 +143,20 @@
           save: "Lagre"
           browse: "Bla igjennom"
           edit: "Rediger"
-        reservations_dashboard:
-          machine_section_title: "Machines reservations"
-          space_section_title: "Spaces reservations"
+        reservations:
           reservations_panel:
-            title: "My reservations"
+            title_Space: "My space reservations"
+            title_Machine: "My machines reservations"
             upcoming: "Upcoming"
-            date: "Date"
-            history: "History"
-            no_reservation: "No reservation"
+            past: "Past"
+            slots_details: "Slots details"
+            no_reservations: "No reservations"
             show_more: "Show more"
           credits_panel:
-            title: "My credits"
-            info: "Your subscription comes with free credits you can use on reservations"
-            remaining_credits_html: "You can book {REMAINING} {REMAINING, plural, one{slot} other{slots}} for free."
-            used_credits_html: "You have already used <strong> {USED} {USED, plural, =0{credit} one{credit} other{credits}}</strong>."
+            title_Space: "My space credits"
+            title_Machine: "My machines credits"
+            reamaining_credits_html: "<strong>{NAME}</strong>: You can book <em>{REMAINING} {REMAINING, plural, one{slot} other{slots}}</em> for free. You have already used {USED} {USED, plural, one{credit} other{credits}} from your current subscription."
             no_credits: "You don't have any credits yet. Some subscriptions may allow you to book some slots for free."
-          prepaid_packs_panel:
-            title: "My prepaid packs"
-            name: "Prepaid pack name"
-            end: "Expiry date"
-            countdown: "Countdown"
-            history: "History"
-            consumed_hours: "H consumed"
       #public profil of a member
       members_show:
         members_list: "Medlemsliste"
