@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
+import * as React from 'react';
 import { FabButton } from '../base/fab-button';
 import { FabModal } from '../base/fab-modal';
 import { FormInput } from '../form/form-input';
@@ -7,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 import Authentication from '../../api/authentication';
 import { FieldValues } from 'react-hook-form/dist/types/fields';
 import { PasswordInput } from './password-input';
-import { FormState } from 'react-hook-form/dist/types/form';
+import { FormState, UseFormSetValue } from 'react-hook-form/dist/types/form';
 import MemberAPI from '../../api/member';
 import { User } from '../../models/user';
 
@@ -17,13 +18,15 @@ interface ChangePasswordProp<TFieldValues> {
   currentFormPassword: string,
   formState: FormState<TFieldValues>,
   user: User,
+  setValue: UseFormSetValue<User>,
+  isFormSubmitted?: boolean
 }
 
 /**
  * This component shows a button that trigger a modal dialog to verify the user's current password.
  * If the user's current password is correct, the modal dialog is closed and the button is replaced by a form to set the new password.
  */
-export const ChangePassword = <TFieldValues extends FieldValues>({ register, onError, currentFormPassword, formState, user }: ChangePasswordProp<TFieldValues>) => {
+export const ChangePassword = <TFieldValues extends FieldValues>({ register, onError, currentFormPassword, formState, user, setValue, isFormSubmitted }: ChangePasswordProp<TFieldValues>) => {
   const { t } = useTranslation('shared');
 
   const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false);
@@ -37,6 +40,15 @@ export const ChangePassword = <TFieldValues extends FieldValues>({ register, onE
       setIsPrivileged((operator.role === 'admin' || operator.role === 'manager') && user.id !== operator.id);
     }).catch(error => onError(error));
   }, []);
+
+  useEffect(() => {
+    if (isFormSubmitted) {
+      setIsConfirmedPassword(false);
+      setValue('current_password', '');
+      setValue('password', '');
+      setValue('password_confirmation', '');
+    }
+  }, [isFormSubmitted]);
 
   /**
    * Opens/closes the dialog asking to confirm the current password before changing it.
@@ -67,6 +79,7 @@ export const ChangePassword = <TFieldValues extends FieldValues>({ register, onE
     return handleSubmit((data: { password: string }) => {
       Authentication.verifyPassword(data.password).then(res => {
         if (res) {
+          setValue('current_password', data.password);
           setIsConfirmedPassword(true);
           toggleConfirmationModal();
         } else {
@@ -84,6 +97,7 @@ export const ChangePassword = <TFieldValues extends FieldValues>({ register, onE
         {t('app.shared.change_password.change_my_password')}
       </FabButton>}
       {isConfirmedPassword && <div className="password-fields">
+        <FormInput register={register} id="current_password" type="hidden" label="current password" />
         <PasswordInput register={register} currentFormPassword={currentFormPassword} formState={formState} />
       </div>}
       <FabModal isOpen={isModalOpen} toggleModal={toggleConfirmationModal} title={t('app.shared.change_password.change_my_password')} closeButton>

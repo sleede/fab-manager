@@ -1,4 +1,5 @@
-import React, { ReactEventHandler, useState, useEffect, ReactElement } from 'react';
+import { ReactEventHandler, useState, useEffect, ReactElement } from 'react';
+import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Loader } from '../base/loader';
 import _ from 'lodash';

@@ -1,10 +1,10 @@
 import apiClient from './clients/api-client';
 import { AxiosResponse } from 'axios';
 import { serialize } from 'object-to-formdata';
-import { User, UserIndexFilter, UserRole } from '../models/user';
+import { User, MemberIndexFilter, UserRole } from '../models/user';
 
 export default class MemberAPI {
-  static async list (filters: UserIndexFilter): Promise<Array<User>> {
+  static async list (filters: MemberIndexFilter): Promise<Array<User>> {
     const res: AxiosResponse<Array<User>> = await apiClient.post('/api/members/list', filters);
     return res?.data;
   }

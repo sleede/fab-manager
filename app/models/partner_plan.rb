@@ -11,6 +11,10 @@ class PartnerPlan < Plan
     User.joins(:roles).where(roles: { name: 'partner', resource_type: 'PartnerPlan', resource_id: id })
   end
 
+  def partner_id
+    partners.first.id
+  end
+
   private
 
   def assign_default_values

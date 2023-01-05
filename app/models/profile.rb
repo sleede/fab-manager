@@ -10,13 +10,13 @@ class Profile < ApplicationRecord
 
   validates :first_name, presence: true, length: { maximum: 30 }
   validates :last_name, presence: true, length: { maximum: 30 }
-  validates_numericality_of :phone, only_integer: true, allow_blank: false, if: -> { Setting.get('phone_required') }
+  validates :phone, numericality: { only_integer: true, allow_blank: false, if: -> { Setting.get('phone_required') } }
 
   after_commit :update_invoicing_profile, if: :invoicing_data_was_modified?
 
   def full_name
     # if first_name or last_name is nil, the empty string will be used as a temporary replacement
-    (first_name || '').humanize.titleize + ' ' + (last_name || '').humanize.titleize
+    "#{(first_name || '').humanize.titleize} #{(last_name || '').humanize.titleize}"
   end
 
   def to_s
@@ -44,10 +44,9 @@ class Profile < ApplicationRecord
   def update_invoicing_profile
     raise NoProfileError if user.invoicing_profile.nil?
 
-    user.invoicing_profile.update_attributes(
+    user.invoicing_profile.update(
       first_name: first_name,
       last_name: last_name
     )
   end
-
 end

@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import * as React from 'react';
 import { LabelledInput } from './base/labelled-input';
 import { useTranslation } from 'react-i18next';
 import { TDateISODate } from '../typings/date-iso';

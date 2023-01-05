@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from 'react';
+import { useState, useReducer } from 'react';
 import { FormState, UseFormRegister, UseFormSetValue } from 'react-hook-form';
 import { FieldValues } from 'react-hook-form/dist/types/fields';
 import { User } from '../../models/user';
@@ -21,7 +21,7 @@ interface EditSocialsProps<TFieldValues> {
  */
 export const EditSocials = <TFieldValues extends FieldValues>({ register, setValue, networks, formState, disabled }: EditSocialsProps<TFieldValues>) => {
   const { t } = useTranslation('shared');
-  // regular expression to validate the the input fields
+  // regular expression to validate the input fields
   const urlRegex = /^(https?:\/\/)([^.]+)\.(.{2,30})(\/.*)*\/?$/;
 
   const initSelectedNetworks = networks.filter(el => !['', null, undefined].includes(el.url));

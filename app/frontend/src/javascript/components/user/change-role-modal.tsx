@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import * as React from 'react';
 import { FabModal, ModalSize } from '../base/fab-modal';
 import { User, UserRole } from '../../models/user';
 import { IApplication } from '../../models/application';

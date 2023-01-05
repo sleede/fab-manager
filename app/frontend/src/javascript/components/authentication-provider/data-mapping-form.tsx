@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { UseFormRegister, useFieldArray, ArrayPath, useWatch, Path, FieldPathValue } from 'react-hook-form';
 import { FieldValues } from 'react-hook-form/dist/types/fields';
 import AuthProviderAPI from '../../api/auth-provider';
@@ -114,7 +114,7 @@ export const DataMappingForm = <TFieldValues extends FieldValues, TContext exten
    * Return a className based on the current mapping-item status
    */
   const itemStatus = (index: number): string => {
-    if (currentFormValues[index]?.id) {
+    if (currentFormValues && currentFormValues[index]?.id) {
       if (currentFormValues[index]._destroy) return 'destroyed-item';
       return 'saved-item';
     }

@@ -53,19 +53,25 @@ class Setting < ApplicationRecord
                              space_explications_alert
                              visibility_yearly
                              visibility_others
+                             reservation_deadline
                              display_name_enable
                              machines_sort_by
-                             accounting_journal_code
-                             accounting_card_client_code
-                             accounting_card_client_label
-                             accounting_wallet_client_code
-                             accounting_wallet_client_label
-                             accounting_other_client_code
-                             accounting_other_client_label
+                             accounting_sales_journal_code
+                             accounting_payment_card_code
+                             accounting_payment_card_label
+                             accounting_payment_card_journal_code
+                             accounting_payment_wallet_code
+                             accounting_payment_wallet_label
+                             accounting_payment_wallet_journal_code
+                             accounting_payment_other_code
+                             accounting_payment_other_label
+                             accounting_payment_other_journal_code
                              accounting_wallet_code
                              accounting_wallet_label
+                             accounting_wallet_journal_code
                              accounting_VAT_code
                              accounting_VAT_label
+                             accounting_VAT_journal_code
                              accounting_subscription_code
                              accounting_subscription_label
                              accounting_Machine_code
@@ -155,12 +161,19 @@ class Setting < ApplicationRecord
                              show_username_in_admin_list
                              store_module
                              store_withdrawal_instructions
-                             store_hidden] }
+                             store_hidden
+                             advanced_accounting
+                             external_id
+                             prevent_invoices_zero
+                             invoice_VAT-name] }
   # WARNING: when adding a new key, you may also want to add it in:
   # - config/locales/en.yml#settings
   # - app/frontend/src/javascript/models/setting.ts#SettingName
   # - db/seeds.rb (to set the default value)
   # - app/policies/setting_policy.rb#public_whitelist (if the setting can be read by anyone)
+  # - test/fixtures/settings.yml (for backend testing)
+  # - test/fixtures/history_values.yml (example value for backend testing)
+  # - test/frontend/__fixtures__/settings.ts (example value for frontend testing)
 
   def value
     last_value = history_values.order(HistoryValue.arel_table['created_at'].desc).limit(1).first

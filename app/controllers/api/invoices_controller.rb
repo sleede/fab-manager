@@ -12,9 +12,13 @@ class API::InvoicesController < API::ApiController
     ).all.order('reference DESC')
   end
 
+  def show; end
+
   def download
     authorize @invoice
-    send_file File.join(Rails.root, @invoice.file), type: 'application/pdf', disposition: 'attachment'
+    send_file Rails.root.join(@invoice.file), type: 'application/pdf', disposition: 'attachment'
+  rescue ActionController::MissingFile
+    render html: I18n.t('invoices.unable_to_find_pdf'), status: :not_found
   end
 
   def list

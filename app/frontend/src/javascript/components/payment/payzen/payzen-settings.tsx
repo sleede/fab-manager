@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import * as React from 'react';
 import { react2angular } from 'react2angular';
 import { useTranslation } from 'react-i18next';
 import { useImmer } from 'use-immer';

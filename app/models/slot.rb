@@ -23,6 +23,14 @@ class Slot < ApplicationRecord
     end
   end
 
+  def empty?(reservable = nil)
+    if reservable.nil?
+      slots_reservations.where(canceled_at: nil).count.zero?
+    else
+      slots_reservations.includes(:reservation).where(canceled_at: nil).where('reservations.reservable': reservable).count.zero?
+    end
+  end
+
   def duration
     (end_at - start_at).seconds
   end

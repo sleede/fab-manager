@@ -1,0 +1,26 @@
+.accounting-codes-settings {
+  .cards, .wallets, .others, .vat, .subscriptions, .machine, .training, .events, .space,
+  .prepaid_pack, .product, .error {
+    display: flex;
+    flex-direction: row;
+
+    .form-item {
+      margin-right: 32px;
+    }
+    .form-item:last-child {
+      margin-right: 0;
+    }
+  }
+  .actions {
+    background-color: transparent;
+    border: none;
+    margin-top: 0;
+    margin-bottom: 0;
+    & > .no-header {
+      background-color: transparent;
+    }
+  }
+  .submit-btn {
+    float: right;
+  }
+}

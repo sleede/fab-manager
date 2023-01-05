@@ -49,18 +49,8 @@ class ShoppingCart
   # Build the dataset for the current ShoppingCart and save it into the database.
   # Data integrity is guaranteed: all goes right or nothing is saved.
   def build_and_save(payment_id, payment_type)
-    user_validation_required = Setting.get('user_validation_required')
-    user_validation_required_list = Setting.get('user_validation_required_list')
-    unless @operator.privileged?
-      if user_validation_required && user_validation_required_list.present?
-        list = user_validation_required_list.split(',')
-        errors = []
-        items.each do |item|
-          errors.push("User validation is required to reserve #{item.type}") if list.include?(item.type) && !@customer.validated_at?
-        end
-        return { success: nil, payment: nil, errors: errors } unless errors.empty?
-      end
-    end
+    validation_errors = check_user_validation(items)
+    return { success: nil, payment: nil, errors: validation_errors } if validation_errors
 
     price = total
     objects = []
@@ -74,6 +64,8 @@ class ShoppingCart
 
       payment = create_payment_document(price, objects, payment_id, payment_type)
       WalletService.debit_user_wallet(payment, @customer)
+      next if Setting.get('prevent_invoices_zero') && price[:total].zero?
+
       payment.save
       payment.post_save(payment_id, payment_type)
     end
@@ -163,5 +155,21 @@ class ShoppingCart
       reservation.reload
       PrepaidPackService.update_user_minutes(@customer, reservation)
     end
+  end
+
+  # Check if the current cart needs the user to have been validated, and if the condition is satisfied.
+  # Return an array of errors, if any; false otherwise
+  def check_user_validation(items)
+    user_validation_required = Setting.get('user_validation_required')
+    user_validation_required_list = Setting.get('user_validation_required_list')
+    if !@operator.privileged? && (user_validation_required && user_validation_required_list.present?)
+      list = user_validation_required_list.split(',')
+      errors = []
+      items.each do |item|
+        errors.push("User validation is required to reserve #{item.type}") if list.include?(item.type) && !@customer.validated_at?
+      end
+      return errors unless errors.empty?
+    end
+    false
   end
 end

@@ -1,6 +1,6 @@
 import apiClient from './clients/api-client';
 import { AxiosResponse } from 'axios';
-import { EventTheme } from '../models/event-theme';
+import { EventTheme } from '../models/event';
 
 export default class EventThemeAPI {
   static async index (): Promise<Array<EventTheme>> {

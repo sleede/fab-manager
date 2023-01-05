@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { ProductCategory } from '../../../models/product-category';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';

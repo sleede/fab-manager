@@ -1,4 +1,5 @@
-import React, { forwardRef, RefObject, useEffect, useImperativeHandle, useRef } from 'react';
+import { forwardRef, RefObject, useEffect, useImperativeHandle, useRef } from 'react';
+import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useEditor, EditorContent, Editor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
@@ -24,6 +25,7 @@ interface FabTextEditorProps {
   placeholder?: string,
   error?: string,
   disabled?: boolean
+  ariaLabel?: string,
 }
 
 export interface FabTextEditorRef {
@@ -33,7 +35,7 @@ export interface FabTextEditorRef {
 /**
  * This component is a WYSIWYG text editor
  */
-const FabTextEditor: React.ForwardRefRenderFunction<FabTextEditorRef, FabTextEditorProps> = ({ heading, bulletList, blockquote, content, limit = 400, video, image, link, onChange, placeholder, error, disabled = false }, ref: RefObject<FabTextEditorRef>) => {
+const FabTextEditor: React.ForwardRefRenderFunction<FabTextEditorRef, FabTextEditorProps> = ({ heading, bulletList, blockquote, content, limit = 400, video, image, link, onChange, placeholder, error, disabled = false, ariaLabel }, ref: RefObject<FabTextEditorRef>) => {
   const { t } = useTranslation('shared');
   const placeholderText = placeholder || t('app.shared.text_editor.fab_text_editor.text_placeholder');
   // TODO: Add ctrl+click on link to visit
@@ -73,6 +75,12 @@ const FabTextEditor: React.ForwardRefRenderFunction<FabTextEditorRef, FabTextEdi
         }
       })
     ],
+    editorProps: {
+      attributes: {
+        'aria-label': ariaLabel,
+        role: 'textbox'
+      }
+    },
     content,
     onUpdate: ({ editor }) => {
       if (editor.isEmpty) {

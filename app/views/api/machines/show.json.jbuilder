@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-json.extract! @machine, :id, :name, :description, :spec, :disabled, :slug
-json.machine_image @machine.machine_image.attachment.large.url if @machine.machine_image
+json.partial! 'api/machines/machine', machine: @machine
+json.extract! @machine, :description, :spec
 
 json.machine_files_attributes @machine.machine_files do |f|
   json.id f.id
-  json.attachment f.attachment_identifier
+  json.attachment_name f.attachment_identifier
   json.attachment_url f.attachment_url
 end
 json.trainings @machine.trainings.each, :id, :name, :disabled

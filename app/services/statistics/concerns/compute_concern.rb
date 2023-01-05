@@ -6,7 +6,7 @@ module Statistics::Concerns::ComputeConcern
 
   class_methods do
     def calcul_ca(invoice)
-      return nil unless invoice
+      return 0 unless invoice
 
       ca = 0
       # sum each items in the invoice (+ for invoices/- for refunds)

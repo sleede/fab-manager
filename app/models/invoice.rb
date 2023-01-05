@@ -18,6 +18,8 @@ class Invoice < PaymentDocument
   has_one :payment_gateway_object, as: :item, dependent: :destroy
   belongs_to :operator_profile, class_name: 'InvoicingProfile'
 
+  has_many :accounting_lines, dependent: :destroy
+
   delegate :user, to: :invoicing_profile
 
   before_create :add_environment
@@ -52,7 +54,7 @@ class Invoice < PaymentDocument
 
   # for debug & used by rake task "fablab:maintenance:regenerate_invoices"
   def regenerate_invoice_pdf
-    pdf = ::PDF::Invoice.new(self, invoice_items.find_by(object_type: Subscription.name)&.object&.expiration_date).render
+    pdf = ::PDF::Invoice.new(self).render
     File.binwrite(file, pdf)
   end
 
@@ -145,7 +147,7 @@ class Invoice < PaymentDocument
   # return a summary of the payment means used
   def payment_means
     res = []
-    res.push(means: :wallet, amount: wallet_amount) if wallet_transaction && wallet_amount.positive?
+    res.push(means: :wallet, amount: wallet_amount) if paid_by_wallet?
     if paid_by_card?
       res.push(means: :card, amount: amount_paid)
     else
@@ -154,12 +156,33 @@ class Invoice < PaymentDocument
     res
   end
 
+  def payment_details(mean)
+    case mean
+    when :card
+      if paid_by_card?
+        {
+          payment_mean: mean,
+          gateway_object_id: payment_gateway_object.gateway_object_id,
+          gateway_object_type: payment_gateway_object.gateway_object_type
+        }
+      end
+    when :wallet
+      { payment_mean: mean, wallet_transaction_id: wallet_transaction_id } if paid_by_wallet?
+    else
+      { payment_mean: mean }
+    end
+  end
+
   def footprint_children
     invoice_items
   end
 
   def paid_by_card?
     !payment_gateway_object.nil? && payment_method == 'card'
+  end
+
+  def paid_by_wallet?
+    wallet_transaction && wallet_amount.positive?
   end
 
   def render_resource
@@ -176,7 +199,7 @@ class Invoice < PaymentDocument
                         "main_item.object_id(#{main_item.object_id}), " \
                         "main_item.object_type(#{main_item.object_type}), user_id(#{invoicing_profile.user_id})"
     end
-    InvoiceWorker.perform_async(id, user&.subscription&.expired_at)
+    InvoiceWorker.perform_async(id)
   end
 
   def log_changes

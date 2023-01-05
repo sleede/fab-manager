@@ -1,4 +1,5 @@
-import React, { ReactNode, useEffect, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
+import * as React from 'react';
 import _ from 'lodash';
 import PlanAPI from '../../api/plan';
 import { Plan } from '../../models/plan';
@@ -120,7 +121,7 @@ export const PlansList: React.FC<PlansListProps> = ({ onError, onPlanSelection, 
    * When called with a category ID, returns the requested plan-category
    */
   const findCategory = (categoryId: number): PlanCategory => {
-    return planCategories.find(c => c.id === categoryId);
+    return planCategories?.find(c => c.id === categoryId);
   };
 
   /**

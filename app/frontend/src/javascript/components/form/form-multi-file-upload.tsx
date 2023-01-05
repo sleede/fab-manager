@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { FormFileUpload } from './form-file-upload';
 import { FabButton } from '../base/fab-button';
 import { Plus } from 'phosphor-react';
@@ -39,7 +39,7 @@ export const FormMultiFileUpload = <TFieldValues extends FieldValues, TContext e
   return (
     <div className={`form-multi-file-upload ${className || ''}`}>
       <div className="list">
-        {output.map((field: FileType, index) => (
+        {output?.map((field: FileType, index) => (
           <FormFileUpload key={index}
             defaultFile={field}
             id={`${id}.${index}`}

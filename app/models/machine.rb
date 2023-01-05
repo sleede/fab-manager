@@ -34,6 +34,11 @@ class Machine < ApplicationRecord
   has_many :machines_products, dependent: :destroy
   has_many :products, through: :machines_products
 
+  has_one :advanced_accounting, as: :accountable, dependent: :destroy
+  accepts_nested_attributes_for :advanced_accounting, allow_destroy: true
+
+  belongs_to :category
+
   after_create :create_statistic_subtype
   after_create :create_machine_prices
   after_create :update_gateway_product
@@ -50,21 +55,19 @@ class Machine < ApplicationRecord
   end
 
   def create_statistic_subtype
-    index = StatisticIndex.where(es_type_key: 'machine')
-    StatisticSubType.create!(statistic_types: index.first.statistic_types, key: slug, label: name)
+    index = StatisticIndex.find_by(es_type_key: 'machine')
+    StatisticSubType.create!(statistic_types: index.statistic_types, key: slug, label: name)
   end
 
   def update_statistic_subtype
-    index = StatisticIndex.where(es_type_key: 'machine')
+    index = StatisticIndex.find_by(es_type_key: 'machine')
     subtype = StatisticSubType.joins(statistic_type_sub_types: :statistic_type)
-                              .where(key: slug, statistic_types: { statistic_index_id: index.first.id })
-                              .first
-    subtype.label = name
-    subtype.save!
+                              .find_by(key: slug, statistic_types: { statistic_index_id: index.id })
+    subtype.update(label: name)
   end
 
   def remove_statistic_subtype
-    subtype = StatisticSubType.where(key: slug).first
+    subtype = StatisticSubType.find_by(key: slug)
     subtype.destroy!
   end
 

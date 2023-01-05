@@ -93,10 +93,10 @@
         phone_number_is_required: "Telefonnummer er påkrevd."
         address: "Adresse"
         address_is_required: "Adresse er påkrevd"
-        i_authorize_Fablab_users_registered_on_the_site_to_contact_me: "Jeg godkjenner at nettstedets brukere kan kontakte meg"
+        i_authorize_Fablab_users_registered_on_the_site_to_contact_me: "I authorize users, registered on the site, to contact me"
         i_accept_to_receive_information_from_the_fablab: "Jeg aksepterer å motta informasjon"
         i_ve_read_and_i_accept_: "Jeg har lest og aksepterer"
-        _the_fablab_policy: "Les policyen vår"
+        _the_fablab_policy: "the terms of use"
         field_required: "Nødvendig felt"
         profile_custom_field_is_required: "{FEILD} is required"
         user_supporting_documents_required: "Warning!<br>You have declared to be \"{GROUP}\", supporting documents may be requested."
@@ -115,7 +115,7 @@
         connection: "Tilkobling"
         password_forgotten: "Glemt passord?"
         confirm_my_account: "Bekreft min e-post"
-        not_registered_to_the_fablab: "Ikke registrert?"
+        not_registered_to_the_fablab: "Not yet registered?"
         create_an_account: "Lag en konto"
         wrong_email_or_password: "Feil e-postadresse eller passord."
         caps_lock_is_on: "Caps Lock er på."
@@ -135,9 +135,9 @@
         and_NUMBER_other_notifications: "og {NUMBER, plural, one {} =0{ingen andre varsler} =1{et annen varsel} other{{NUMBER} andre varsler}}..."
       #about page
       about:
-        read_the_fablab_policy: "Les policyen vår"
-        read_the_fablab_s_general_terms_and_conditions: "Våre generelle vilkår og betingelser"
-        your_fablab_s_contacts: "Kontakter"
+        read_the_fablab_policy: "Terms of use"
+        read_the_fablab_s_general_terms_and_conditions: "Read the general terms and conditions"
+        your_fablab_s_contacts: "Contact us"
         privacy_policy: "Persovernerklæring"
       #'privacy policy' page
       privacy:
@@ -153,7 +153,7 @@
         create_an_account: "Lag en konto"
         discover_members: "Oppdag medlemmer"
         #next events summary on the home page
-        fablab_s_next_events: "Fremtidige arrangementer"
+        fablab_s_next_events: "Next events"
         every_events: "Alle arrangementer"
       event_card:
         on_the_date: "På {DATE}"
@@ -167,7 +167,7 @@
         full_price: "Full pris: "
       #projects gallery
       projects_list:
-        the_fablab_projects: "Våre prosjekter"
+        the_fablab_projects: "The projects"
         add_a_project: "Legg til et prosjekt"
         search_over_the_whole_network: "Søk over hele Fab-manager-nettverket"
         tooltip_openlab_projects_switch: "Søk i hele nettverket lar deg søke i prosjekter for hver Fab-manager ved hjelp av denne funksjonen!"
@@ -215,7 +215,7 @@
         do_you_really_want_to_delete_this_project: "Vil du virkelig slette dette prosjektet?"
       #list of machines
       machines_list:
-        the_fablab_s_machines: "Makerspacets maskiner"
+        the_fablab_s_machines: "The machines"
         add_a_machine: "Legg til en maskin"
         new_availability: "Åpne reservasjoner"
         book: "Reserver"
@@ -230,6 +230,8 @@
         status_enabled: "Aktivert"
         status_disabled: "Deaktivert"
         status_all: "Alle"
+        filter_by_machine_category: "Filter by category"
+        all_machines: "All machines"
       machine_card:
         book: "Reserver"
         consult: "Se på"
@@ -288,7 +290,7 @@
         select_duration: "velg varighet"
       #Fablab's events list
       events_list:
-        the_fablab_s_events: "Våre arrangementer"
+        the_fablab_s_events: "The events"
         all_categories: "Alle kategorier"
         for_all: "For alle"
         sold_out: "Utsolgt"
@@ -328,7 +330,7 @@
         book: "Meld på"
         confirm_and_pay: "Bekreft og betal"
         confirm_payment_of_html: "{ROLE, select, admin{Cash} other{Pay}}: {AMOUNT}" #(contexte : validate a payment of $20,00)
-        online_payment_disabled: "Elektronisk betaling er ikke tilgjengelig. Kontakt ledelsen."
+        online_payment_disabled: "Payment by credit card is not available. Please contact us directly."
         please_select_a_member_first: "Vennligst velg et medlem først"
         change_the_reservation: "Endre reservasjonen"
         you_can_shift_this_reservation_on_the_following_slots: "Du kan flytte denne reservasjonen til følgende tidsluke:"

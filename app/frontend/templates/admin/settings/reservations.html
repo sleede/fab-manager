@@ -106,6 +106,19 @@
             </div>
             <div class="section-separator"></div>
             <div class="row">
+                <h3 class="m-l m-t-lg" translate>{{ 'app.admin.settings.reservation_deadline' }}</h3>
+                <p class="alert alert-warning m-h-md" translate>{{ 'app.admin.settings.reservation_deadline_help' }}</p>
+                <number-setting name="reservation_deadline"
+                                settings="allSettings"
+                                label="app.admin.settings.deadline_minutes"
+                                classes="col-md-4"
+                                fa-icon="fas fa-clock"
+                                min="0"
+                                required="true">
+                </number-setting>
+            </div>
+            <div class="section-separator"></div>
+            <div class="row">
                 <h3 class="m-l m-t-lg" translate>{{ 'app.admin.settings.default_slot_duration' }}</h3>
                 <p class="alert alert-warning m-h-md" translate>{{ 'app.admin.settings.default_slot_duration_info' }}</p>
                 <number-setting name="slot_duration"

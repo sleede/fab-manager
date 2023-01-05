@@ -37,14 +37,11 @@
         "sourceType": "module",
         "project": "./tsconfig.json"
       },
-      "settings": {
-        "react": {
-          "version": "detect"
-        }
-      },
       "plugins": ["@typescript-eslint", "react"],
       "rules": {
-        "react/prop-types": "off"
+        "react/prop-types": "off",
+        "react/jsx-uses-react": "off",
+        "react/react-in-jsx-scope": "off"
       }
     },
     {
@@ -66,7 +63,26 @@
       "rules": {
         "camelcase": "off"
       }
+    },
+    {
+      "files": ["test/**/*"],
+      "plugins": ["jest"],
+      "env": {
+        "jest/globals": true
+      },
+      "globals": {
+        "Range": true,
+        "Document": true
+      },
+      "parserOptions": {
+        "project": "./test/frontend/tsconfig.json"
+      }
     }
-  ]
+  ],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  }
 }
 

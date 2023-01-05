@@ -78,8 +78,8 @@ class Events::AsUserTest < ActionDispatch::IntegrationTest
     # invoice assertions
     invoice = reservation.original_invoice
 
-    refute invoice.payment_gateway_object.blank?
-    refute invoice.total.blank?
+    assert_not invoice.payment_gateway_object.blank?
+    assert_not invoice.total.blank?
     assert_equal 43_350, invoice.total # total minus coupon
 
     # invoice_items assertions
@@ -97,7 +97,7 @@ class Events::AsUserTest < ActionDispatch::IntegrationTest
 
     VCR.use_cassette('reserve_event_with_many_prices_and_payment_means_retrieve_invoice_from_stripe') do
       stp_intent = invoice.payment_gateway_object.gateway_object.retrieve
-      assert_equal stp_intent.amount, (invoice.total - invoice.wallet_amount) # total minus coupon minus wallet = amount really paid by the user
+      assert_equal stp_intent.amount, (invoice.total - invoice.wallet_amount) # total minus coupon minus wallet = amount really paid
     end
 
     # wallet assertions

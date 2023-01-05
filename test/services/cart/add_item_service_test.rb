@@ -25,8 +25,8 @@ class Cart::AddItemServiceTest < ActiveSupport::TestCase
     assert_equal cart.order_items.first.quantity, @caisse_en_bois.quantity_min
   end
 
-  test 'add two product to cart' do
-    cart = Cart::AddItemService.new.call(@cart, @panneaux, 10)
+  test 'add two products to the cart' do
+    Cart::AddItemService.new.call(@cart, @panneaux, 10)
     cart = Cart::AddItemService.new.call(@cart, @caisse_en_bois)
     assert_equal cart.total, (@caisse_en_bois.amount * 5) + (@panneaux.amount * 10)
     assert_equal cart.order_items.length, 2

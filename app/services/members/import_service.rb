@@ -16,7 +16,7 @@ class Members::ImportService
           params = row_to_params(row, user, password)
           if user
             service = Members::MembersService.new(user)
-            res = service.update(params)
+            res = service.update(params, import.user)
             log << { user: user.id, status: 'update', result: res }
           else
             user = User.new(params)
@@ -26,14 +26,10 @@ class Members::ImportService
           end
           log << user.errors.to_hash unless user.errors.to_hash.empty?
         rescue StandardError => e
-          log << e.to_s
-          puts e
-          puts e.backtrace
+          handle_error(log, e)
         end
       rescue ArgumentError => e
-        log << e.to_s
-        puts e
-        puts e.backtrace
+        handle_error(log, e)
       end
       log
     end
@@ -93,28 +89,26 @@ class Members::ImportService
       res.merge! hashify(row, 'softwares', key: :software_mastered)
       res.merge! hashify(row, 'website')
       res.merge! hashify(row, 'job')
-      res.merge! hashify(row, 'facebook')
-      res.merge! hashify(row, 'twitter')
-      res.merge! hashify(row, 'googleplus', key: :google_plus)
-      res.merge! hashify(row, 'viadeo')
-      res.merge! hashify(row, 'linkedin')
-      res.merge! hashify(row, 'instagram')
-      res.merge! hashify(row, 'youtube')
-      res.merge! hashify(row, 'vimeo')
-      res.merge! hashify(row, 'dailymotion')
-      res.merge! hashify(row, 'github')
-      res.merge! hashify(row, 'echosciences')
-      res.merge! hashify(row, 'pinterest')
-      res.merge! hashify(row, 'lastfm')
-      res.merge! hashify(row, 'flickr')
+      res.merge! social_networks(row)
 
       res[:id] = user.profile.id if user&.profile
 
       res
     end
 
+    def social_networks(row)
+      res = {}
+      networks = %w[facebook twitter viadeo linkedin instagram youtube vimeo dailymotion github echosciences pinterest lastfm flickr]
+      networks.each do |network|
+        res.merge! hashify(row, network)
+      end
+      res
+    end
+
     def invoicing_profile(row, user)
       res = {}
+
+      res.merge! hashify(row, 'external_id')
 
       res[:id] = user.invoicing_profile.id if user&.invoicing_profile
 
@@ -185,5 +179,11 @@ class Members::ImportService
       row['password'] = '********' if row['password']
       password
     end
+  end
+
+  def handle_error(log, error)
+    log << error.to_s
+    Rails.logger.error error
+    Rails.logger.debug error.backtrace
   end
 end

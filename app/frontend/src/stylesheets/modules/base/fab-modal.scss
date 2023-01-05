@@ -95,6 +95,7 @@
           margin-left: auto;
           background-color: var(--secondary);
           border: none;
+          color: var(--secondary-text-color);
           &:hover { background-color: var(--secondary-dark);}
         }
       }

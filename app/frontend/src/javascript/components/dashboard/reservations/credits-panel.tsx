@@ -1,4 +1,5 @@
-import React, { ReactNode, useEffect, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
+import * as React from 'react';
 import { FabPanel } from '../../base/fab-panel';
 import { Loader } from '../../base/loader';
 import { useTranslation } from 'react-i18next';

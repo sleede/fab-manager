@@ -639,7 +639,7 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
         slot_id: event.availability.slot_id
       });
 
-      for (let evt_px_cat of Array.from(event.prices)) {
+      for (let evt_px_cat of Array.from(event.event_price_categories_attributes)) {
         const booked = reserve.tickets[evt_px_cat.id];
         if (booked > 0) {
           reservation.tickets_attributes.push({
@@ -684,7 +684,7 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
           totalSeats: 0
         };
 
-        for (let evt_px_cat of Array.from($scope.event.prices)) {
+        for (let evt_px_cat of Array.from($scope.event.event_price_categories_attributes)) {
           $scope.reserve.nbPlaces[evt_px_cat.id] = __range__(0, $scope.event.nb_free_places, true);
           $scope.reserve.tickets[evt_px_cat.id] = 0;
         }

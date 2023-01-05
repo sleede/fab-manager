@@ -1,4 +1,3 @@
-import React from 'react';
 import { FabModal } from '../base/fab-modal';
 import { useTranslation } from 'react-i18next';
 import { IntegerMappingForm } from './integer-mapping-form';

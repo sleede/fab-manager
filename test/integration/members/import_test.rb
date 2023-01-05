@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'test_helper'
+
 class ImportTest < ActionDispatch::IntegrationTest
   # Called before every test method runs. Can be used
   # to set up fixture information.
@@ -42,6 +44,7 @@ class ImportTest < ActionDispatch::IntegrationTest
     assert_equal 'create', res[1][:status], 'wrong operation: victor hugo should have been created'
     assert res[1][:result], 'wrong result: operation should have succeeded'
     assert_equal 1, User.where(id: res[1][:user]).count, 'victor hugo was not found in database'
+    assert_equal res[0][:row]['external_id'], User.find(res[1][:user]).invoicing_profile.external_id, 'victor hugo has a wrong external ID'
 
     assert_not_nil res[3][:user], 'wrong user: louise michel is expected to have been created in database'
     assert_equal 'create', res[3][:status], 'wrong operation: louise michel should have been created'
@@ -58,8 +61,8 @@ class ImportTest < ActionDispatch::IntegrationTest
     assert_not res[7][:result], 'wrong result: operation should have failed'
     assert_equal 0, Profile.where(last_name: res[6][:row]['last_name']).count, 'rirette maitrejean was found in database'
 
-    assert_match /can't be blank/, res[8][:email].to_json
-    assert_match /can't be blank/, res[8][:username].to_json
+    assert_match(/can't be blank/, res[8][:email].to_json)
+    assert_match(/can't be blank/, res[8][:username].to_json)
 
     assert_not_nil res[10][:user], 'wrong user: jean dupont is expected to exists in database'
     assert_equal 'update', res[10][:status], 'wrong operation: jean dupont should have been updated'

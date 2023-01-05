@@ -1,4 +1,5 @@
-import React, { BaseSyntheticEvent, useState } from 'react';
+import { BaseSyntheticEvent, useState } from 'react';
+import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { ProofOfIdentityType } from '../../models/proof-of-identity-type';
 

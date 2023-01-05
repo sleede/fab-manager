@@ -1,5 +1,6 @@
 import { HistoryValue } from './history-value';
 import { TDateISO } from '../typings/date-iso';
+import { ApiFilter } from './api';
 
 export const homePageSettings = [
   'twitter_name',
@@ -64,7 +65,9 @@ export const invoicesSettings = [
   'invoice_text',
   'invoice_legals',
   'invoice_prefix',
-  'payment_schedule_prefix'
+  'payment_schedule_prefix',
+  'prevent_invoices_zero',
+  'invoice_VAT-name'
 ] as const;
 
 export const bookingSettings = [
@@ -78,6 +81,7 @@ export const bookingSettings = [
   'reminder_delay',
   'visibility_yearly',
   'visibility_others',
+  'reservation_deadline',
   'display_name_enable',
   'book_overlapping_slots',
   'slot_duration',
@@ -95,17 +99,22 @@ export const titleSettings = [
 ] as const;
 
 export const accountingSettings = [
-  'accounting_journal_code',
-  'accounting_card_client_code',
-  'accounting_card_client_label',
-  'accounting_wallet_client_code',
-  'accounting_wallet_client_label',
-  'accounting_other_client_code',
-  'accounting_other_client_label',
+  'accounting_sales_journal_code',
+  'accounting_payment_card_code',
+  'accounting_payment_card_label',
+  'accounting_payment_card_journal_code',
+  'accounting_payment_wallet_code',
+  'accounting_payment_wallet_label',
+  'accounting_payment_wallet_journal_code',
+  'accounting_payment_other_code',
+  'accounting_payment_other_label',
+  'accounting_payment_other_journal_code',
   'accounting_wallet_code',
   'accounting_wallet_label',
+  'accounting_wallet_journal_code',
   'accounting_VAT_code',
   'accounting_VAT_label',
+  'accounting_VAT_journal_code',
   'accounting_subscription_code',
   'accounting_subscription_label',
   'accounting_Machine_code',
@@ -116,8 +125,13 @@ export const accountingSettings = [
   'accounting_Event_label',
   'accounting_Space_code',
   'accounting_Space_label',
+  'accounting_Pack_code',
+  'accounting_Pack_label',
   'accounting_Product_code',
-  'accounting_Product_label'
+  'accounting_Product_label',
+  'accounting_Error_code',
+  'accounting_Error_label',
+  'advanced_accounting'
 ] as const;
 
 export const modulesSettings = [
@@ -158,6 +172,7 @@ export const accountSettings = [
   'phone_required',
   'confirmation_required',
   'address_required',
+  'external_id',
   'user_change_group',
   'user_validation_required',
   'user_validation_required_list'
@@ -269,6 +284,10 @@ export interface SettingBulkResult {
   value?: string,
   error?: string,
   localized?: string,
+}
+
+export interface SettingGetOptions extends ApiFilter {
+  history?: boolean
 }
 
 export type SettingBulkArray = Array<{ name: SettingName, value: SettingValue }>;

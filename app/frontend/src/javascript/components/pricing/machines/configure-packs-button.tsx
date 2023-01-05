@@ -1,4 +1,5 @@
-import React, { ReactNode, useState } from 'react';
+import { ReactNode, useState } from 'react';
+import * as React from 'react';
 import { PrepaidPack } from '../../../models/prepaid-pack';
 import { useTranslation } from 'react-i18next';
 import { FabPopover } from '../../base/fab-popover';

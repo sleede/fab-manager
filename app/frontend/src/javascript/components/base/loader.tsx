@@ -1,4 +1,5 @@
-import React, { Suspense } from 'react';
+import { Suspense } from 'react';
+import * as React from 'react';
 
 /**
  * This component is a wrapper that display a loader while the children components have their rendering suspended.

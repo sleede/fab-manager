@@ -28,7 +28,7 @@ class CartItem::SpaceReservation < CartItem::Reservation
 
   def valid?(all_items)
     if @space.disabled
-      @errors[:reservable] = 'space is disabled'
+      @errors[:reservable] = I18n.t('cart_item_validation.space')
       return false
     end
 

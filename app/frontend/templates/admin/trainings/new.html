@@ -26,7 +26,11 @@
       {{ 'app.admin.trainings_new.dont_forget_to_change_them_before_creating_slots_for_this_training' | translate }}
     </div>
 
-    <ng-include src="'/admin/trainings/_form.html'"></ng-include>
+    <div class="panel panel-default bg-light m-lg">
+      <div class="panel-body m-r">
+        <training-form action="'create'" on-error="onError" on-success="onSuccess"></training-form>
+      </div>
+    </div>
   </div>
 
   <div class="col-md-3">

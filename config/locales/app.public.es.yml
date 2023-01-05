@@ -93,10 +93,10 @@ es:
         phone_number_is_required: "El número de telefono es obligatorio."
         address: "Dirección"
         address_is_required: "Address is required"
-        i_authorize_Fablab_users_registered_on_the_site_to_contact_me: "Autorizo a los usuarios registrados en este FabLab a contactarme"
+        i_authorize_Fablab_users_registered_on_the_site_to_contact_me: "Autorizo a los usuarios registrados en el sitio, a contactarme"
         i_accept_to_receive_information_from_the_fablab: "Acepto recibir información del FabLab"
         i_ve_read_and_i_accept_: "He leido y acepto"
-        _the_fablab_policy: "la política de FabLab"
+        _the_fablab_policy: "the terms of use"
         field_required: "Field required"
         profile_custom_field_is_required: "{FEILD} is required"
         user_supporting_documents_required: "Warning!<br>You have declared to be \"{GROUP}\", supporting documents may be requested."
@@ -115,7 +115,7 @@ es:
         connection: "Conexión"
         password_forgotten: "¿Ha olvidado su contraseña?"
         confirm_my_account: "Confirmar mi E-mail"
-        not_registered_to_the_fablab: "¿No está registrado en el FabLab todavía?"
+        not_registered_to_the_fablab: "Not yet registered?"
         create_an_account: "Crear una cuenta"
         wrong_email_or_password: "E-mail o contraseña incorrecta."
         caps_lock_is_on: "Las mayusculas están activadas."
@@ -135,9 +135,9 @@ es:
         and_NUMBER_other_notifications: "y {NUMBER, plural, =0{no other notifications} =1{one other notification} otras{{NUMBER} other notifications}}..."
       #about page
       about:
-        read_the_fablab_policy: "Leer la politica del FabLab"
-        read_the_fablab_s_general_terms_and_conditions: "Leer los terminos y condiciones del FabLab"
-        your_fablab_s_contacts: "Sus contactos del FabLab"
+        read_the_fablab_policy: "Terms of use"
+        read_the_fablab_s_general_terms_and_conditions: "Read the general terms and conditions"
+        your_fablab_s_contacts: "Contact us"
         privacy_policy: "Política de privacidad"
       #'privacy policy' page
       privacy:
@@ -153,7 +153,7 @@ es:
         create_an_account: "Crear una cuenta"
         discover_members: "Descubrir miembros"
         #next events summary on the home page
-        fablab_s_next_events: "Próximos eventos del FabLab"
+        fablab_s_next_events: "Next events"
         every_events: "Todos los eventos"
       event_card:
         on_the_date: "El {DATE}"
@@ -167,7 +167,7 @@ es:
         full_price: "Full price: "
       #projects gallery
       projects_list:
-        the_fablab_projects: "Los proyectos del FabLab"
+        the_fablab_projects: "The projects"
         add_a_project: "Añadir un proyecto"
         search_over_the_whole_network: "Buscar en toda la red de FabLab"
         tooltip_openlab_projects_switch: "La busqueda en toda la red le permite buscar los proyectos de todos los FabLab que usan esta característica"
@@ -215,7 +215,7 @@ es:
         do_you_really_want_to_delete_this_project: "¿Está seguro de querer eliminar este proyecto?"
       #list of machines
       machines_list:
-        the_fablab_s_machines: "Las máquinas del FabLab"
+        the_fablab_s_machines: "The machines"
         add_a_machine: "Añadir una máquina"
         new_availability: "Open reservations"
         book: "Reservar"
@@ -230,6 +230,8 @@ es:
         status_enabled: "Activadas"
         status_disabled: "Discapacitadas"
         status_all: "Todas"
+        filter_by_machine_category: "Filter by category"
+        all_machines: "All machines"
       machine_card:
         book: "Reservar"
         consult: "Consultar"
@@ -288,7 +290,7 @@ es:
         select_duration: "select a duration"
       #Fablab's events list
       events_list:
-        the_fablab_s_events: "Los eventos del FabLab"
+        the_fablab_s_events: "The events"
         all_categories: "Todas las categorías"
         for_all: "Para todo"
         sold_out: "Sold Out"
@@ -328,7 +330,7 @@ es:
         book: "Reservar"
         confirm_and_pay: "Confirm and pay"
         confirm_payment_of_html: "{ROLE, select, admin{Cash} other{Pay}}: {AMOUNT}" #(contexte : validate a payment of $20,00)
-        online_payment_disabled: "Payment by credit card is not available. Please contact the FabLab's reception directly."
+        online_payment_disabled: "Payment by credit card is not available. Please contact us directly."
         please_select_a_member_first: "Please select a member first"
         change_the_reservation: "Cambiar la reserva"
         you_can_shift_this_reservation_on_the_following_slots: "Puede cambiar la reserva en los siguientes campos:"

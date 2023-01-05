@@ -1,0 +1,37 @@
+.event-form {
+  .additional-prices {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+    .add-price {
+      max-width: fit-content;
+      margin-bottom: 1.6rem;
+    }
+    .price-item {
+      width: 100%;
+      .remove-price {
+        align-items: center;
+        display: flex;
+        margin: 2.6rem 2rem 0;
+        cursor: pointer;
+      }
+
+      &.destroyed-item {
+        display: none;
+      }
+    }
+  }
+  .dates, .times, .price-item, .recurring {
+    display: flex;
+    flex-direction: row;
+
+    .form-item:first-child {
+      margin-right: 32px;
+    }
+  }
+  .submit-btn {
+    margin-top: 2rem;
+    float: right;
+  }
+}

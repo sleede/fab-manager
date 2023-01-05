@@ -1,8 +1,15 @@
 import { Reservation } from './reservation';
 import { ApiFilter } from './api';
+import { FileType } from './file';
+import { AdvancedAccounting } from './advanced-accounting';
 
 export interface MachineIndexFilter extends ApiFilter {
   disabled: boolean,
+}
+
+export interface MachineListFilter {
+  status?: boolean,
+  category?: number,
 }
 
 export interface Machine {
@@ -11,13 +18,10 @@ export interface Machine {
   description?: string,
   spec?: string,
   disabled: boolean,
+  reservable: boolean,
   slug: string,
-  machine_image: string,
-  machine_files_attributes?: Array<{
-    id: number,
-    attachment: string,
-    attachment_url: string
-  }>,
+  machine_image_attributes?: FileType,
+  machine_files_attributes?: Array<FileType>,
   trainings?: Array<{
     id: number,
     name: string,
@@ -31,5 +35,7 @@ export interface Machine {
     id: number,
     name: string,
     slug: string,
-  }>
+  }>,
+  advanced_accounting_attributes?: AdvancedAccounting,
+  machine_category_id?: number
 }

@@ -1,4 +1,5 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import * as React from 'react';
 import { useForm, SubmitHandler, useWatch } from 'react-hook-form';
 import { react2angular } from 'react2angular';
 import { debounce as _debounce } from 'lodash';

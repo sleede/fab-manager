@@ -11,9 +11,9 @@ class OpenAPI::V1::InvoicesController < OpenAPI::V1::BaseController
                        .includes(invoicing_profile: :user)
                        .references(:invoicing_profiles)
 
-    @invoices = @invoices.where(invoicing_profiles: { user_id: params[:user_id] }) if params[:user_id].present?
+    @invoices = @invoices.where(invoicing_profiles: { user_id: may_array(params[:user_id]) }) if params[:user_id].present?
 
-    return unless params[:page].present?
+    return if params[:page].blank?
 
     @invoices = @invoices.page(params[:page]).per(per_page)
     paginate @invoices, per_page: per_page
@@ -21,7 +21,7 @@ class OpenAPI::V1::InvoicesController < OpenAPI::V1::BaseController
 
   def download
     @invoice = Invoice.find(params[:id])
-    send_file File.join(Rails.root, @invoice.file), type: 'application/pdf', disposition: 'inline', filename: @invoice.filename
+    send_file Rails.root.join(@invoice.file), type: 'application/pdf', disposition: 'inline', filename: @invoice.filename
   end
 
   private

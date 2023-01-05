@@ -1,0 +1,28 @@
+.fab-tabs {
+  .tabs {
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    padding-left: 0;
+
+    li {
+      flex: 1;
+      margin-bottom: 4rem;
+      padding: 0.8rem;
+      text-align: center;
+      color: var(--main);
+      border-bottom: 1px solid var(--gray-soft-dark);
+
+      &.react-tabs__tab--selected {
+        color: var(--gray-hard-dark);
+        border: 1px solid var(--gray-soft-dark);
+        border-bottom: none;
+        border-radius: var(--border-radius-sm) var(--border-radius-sm) 0 0;
+      }
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}

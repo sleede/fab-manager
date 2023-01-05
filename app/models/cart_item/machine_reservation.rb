@@ -33,7 +33,15 @@ class CartItem::MachineReservation < CartItem::Reservation
         canceled_at: nil
       ).count
       if same_hour_slots.positive?
-        @errors[:slot] = 'slot is reserved'
+        @errors[:slot] = I18n.t('cart_item_validation.reserved')
+        return false
+      end
+      if @reservable.disabled
+        @errors[:reservable] = I18n.t('cart_item_validation.machine')
+        return false
+      end
+      unless @reservable.reservable
+        @errors[:reservable] = I18n.t('cart_item_validation.reservable')
         return false
       end
     end

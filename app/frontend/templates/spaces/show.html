@@ -30,8 +30,8 @@
 
             <div class="article wrapper-lg">
 
-                <div class="article-thumbnail" ng-if="space.space_image">
-                    <img ng-src="{{space.space_image}}" alt="{{space.name}}" class="img-responsive">
+                <div class="article-thumbnail" ng-if="space.space_image_attributes">
+                    <img ng-src="{{space.space_image_attributes.attachment_url}}" alt="{{space.name}}" class="img-responsive">
                 </div>
 
                 <p class="intro" ng-bind-html="space.description | toTrusted"></p>
@@ -42,7 +42,7 @@
 
         <div class="col-sm-12 col-md-12 col-lg-4">
 
-            <div class="widget panel b-a m m-t-lg">
+            <div class="widget panel b-a m m-t-lg" ng-show="space.characteristics">
                 <div class="panel-heading b-b small">
                     <h3 translate>{{ 'app.public.space_show.characteristics' }}</h3>
                 </div>
@@ -60,7 +60,7 @@
 
                 <ul class="widget-content list-group list-group-lg no-bg auto">
                     <li ng-repeat="file in space.space_files_attributes" class="list-group-item no-b clearfix">
-                        <a target="_blank" ng-href="{{file.attachment_url}}"><i class="fa fa-arrow-circle-o-down"> </i> {{file.attachment | humanize : 25}}</a>
+                        <a target="_blank" ng-href="{{file.attachment_url}}"><i class="fa fa-arrow-circle-o-down"> </i> {{file.attachment_name | humanize : 25}}</a>
                     </li>
                 </ul>
             </section>

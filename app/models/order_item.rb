@@ -4,6 +4,7 @@
 class OrderItem < ApplicationRecord
   belongs_to :order
   belongs_to :orderable, polymorphic: true
+  belongs_to :product, foreign_type: 'Product', foreign_key: 'orderable_id', inverse_of: :order_items
 
   validates :orderable, :order_id, :amount, presence: true
 end

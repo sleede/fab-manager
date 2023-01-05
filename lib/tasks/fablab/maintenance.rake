@@ -4,11 +4,8 @@
 namespace :fablab do
   namespace :maintenance do
     desc 'Regenerate the invoices (invoices & avoirs) PDF'
-    task :regenerate_invoices, %i[year month] => :environment do |_task, args|
-      year = args.year || Time.current.year
-      month = args.month || Time.current.month
-      start_date = Time.zone.local(year.to_i, month.to_i, 1)
-      end_date = start_date.next_month
+    task :regenerate_invoices, %i[year month end] => :environment do |_task, args|
+      start_date, end_date = dates_from_args(args)
       puts "-> Start regenerate the invoices PDF between #{I18n.l start_date, format: :long} and " \
            "#{I18n.l end_date - 1.minute, format: :long}"
       invoices = Invoice.where('created_at >= :start_date AND created_at < :end_date', start_date: start_date, end_date: end_date)
@@ -17,11 +14,8 @@ namespace :fablab do
       puts '-> Done'
     end
 
-    task :regenerate_schedules, %i[year month] => :environment do |_task, args|
-      year = args.year || Time.current.year
-      month = args.month || Time.current.month
-      start_date = Time.zone.local(year.to_i, month.to_i, 1)
-      end_date = start_date.next_month
+    task :regenerate_schedules, %i[year month end] => :environment do |_task, args|
+      start_date, end_date = dates_from_args(args)
       puts "-> Start regenerate the payment schedules PDF between #{I18n.l start_date, format: :long} and " \
            "#{I18n.l end_date - 1.minute, format: :long}"
       schedules = PaymentSchedule.where('created_at >= :start_date AND created_at < :end_date', start_date: start_date, end_date: end_date)
@@ -125,17 +119,32 @@ namespace :fablab do
     end
 
     desc 'Regenerate the invoices (invoices & avoirs) reference'
-    task :regenerate_invoices_reference, %i[year month] => :environment do |_task, args|
-      year = args.year || Time.current.year
-      month = args.month || Time.current.month
-      start_date = Time.zone.local(year.to_i, month.to_i, 1)
-      end_date = start_date.next_month
+    task :regenerate_invoices_reference, %i[year month end] => :environment do |_task, args|
+      start_date, end_date = dates_from_args(args)
       puts "-> Start regenerate the invoices reference between #{I18n.l start_date, format: :long} and " \
            "#{I18n.l end_date - 1.minute, format: :long}"
       invoices = Invoice.where('created_at >= :start_date AND created_at < :end_date', start_date: start_date, end_date: end_date)
                         .order(created_at: :asc)
       invoices.each(&:update_reference)
       puts '-> Done'
+    end
+
+    desc 'Regenerate accounting lines'
+    task :regenerate_accounting_lines, %i[year month end] => :environment do |_task, args|
+      start_date, end_date = dates_from_args(args)
+      puts "-> Start regenerate the accounting lines between #{I18n.l start_date, format: :long} and " \
+           "#{I18n.l end_date - 1.minute, format: :long}"
+      AccountingLine.where(date: start_date.beginning_of_day..end_date.end_of_day).delete_all
+      Accounting::AccountingService.new.build(start_date.beginning_of_day, end_date.end_of_day)
+      puts '-> Done'
+    end
+
+    def dates_from_args(args)
+      year = args.year || Time.current.year
+      month = args.month || Time.current.month
+      start_date = Time.zone.local(year.to_i, month.to_i, 1)
+      end_date = args.end == 'today' ? Time.current.end_of_day : start_date.next_month
+      [start_date, end_date]
     end
   end
 end

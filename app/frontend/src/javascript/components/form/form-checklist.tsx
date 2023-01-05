@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { Controller, Path, FieldPathValue } from 'react-hook-form';
 import { FieldValues } from 'react-hook-form/dist/types/fields';
 import { FieldPath } from 'react-hook-form/dist/types/path';

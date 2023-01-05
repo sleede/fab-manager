@@ -1,4 +1,5 @@
-import React, { ReactElement, useEffect, useState } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
+import * as React from 'react';
 import { react2angular } from 'react2angular';
 import { Loader } from '../base/loader';
 import { StripeModal } from './stripe/stripe-modal';

@@ -1,4 +1,5 @@
-import React, { BaseSyntheticEvent } from 'react';
+import { BaseSyntheticEvent } from 'react';
+import * as React from 'react';
 import { Price } from '../../../models/price';
 import { useTranslation } from 'react-i18next';
 import { useImmer } from 'use-immer';

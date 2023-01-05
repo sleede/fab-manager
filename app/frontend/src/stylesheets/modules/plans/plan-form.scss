@@ -1,0 +1,25 @@
+.plan-form {
+  .plan-sheet {
+    margin-top: 4rem;
+  }
+  .duration {
+    display: flex;
+    flex-direction: row;
+
+    .form-item:first-child {
+      margin-right: 32px;
+    }
+  }
+  .partner {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+    .fab-alert {
+      width: 100%;
+    }
+  }
+  .submit-btn {
+    float: right;
+  }
+}

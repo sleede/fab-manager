@@ -4,8 +4,8 @@ import { Control, FormState } from 'react-hook-form/dist/types/form';
 export type ruleTypes = {
   required?: boolean | string,
   pattern?: RegExp | { value: RegExp, message: string },
-  minLength?: number,
-  maxLength?: number,
+  minLength?: number | { value: number, message: string },
+  maxLength?: number | { value: number, message: string },
   min?: number,
   max?: number,
   validate?: Validate<unknown>;

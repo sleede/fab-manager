@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import * as React from 'react';
 import _ from 'lodash';
 import ProductLib from '../../../lib/product';
 import { ProductCategory } from '../../../models/product-category';

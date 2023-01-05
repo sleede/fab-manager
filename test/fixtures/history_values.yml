@@ -395,7 +395,7 @@ history_value_40:
 history_value_41:
   id: 41
   setting_id: 41
-  value: Client card
+  value: Payment by card
   created_at: '2019-09-20 11:02:32.125400'
   updated_at: '2021-05-31 15:00:36.518127'
   footprint: bad61ed94921d492052622f6da1e7b1611c8abee4d0e3260229f0bf23bc24f70
@@ -413,7 +413,7 @@ history_value_42:
 history_value_43:
   id: 43
   setting_id: 43
-  value: Client wallet
+  value: Payment by wallet
   created_at: '2019-09-20 11:02:32.125400'
   updated_at: '2021-05-31 15:00:36.553577'
   footprint: 430cdf800a4e84f0385ebbdb7b48a107450c618b9c49b9b97016e80047407036
@@ -431,7 +431,7 @@ history_value_44:
 history_value_45:
   id: 45
   setting_id: 45
-  value: Client other
+  value: Payment by other
   created_at: '2019-09-20 11:02:32.125400'
   updated_at: '2021-05-31 15:00:36.593026'
   footprint: 383ef2b5ad5aaa5e014893e0ca8f7bdcd13d565a3bfd97446e5543e8d0dca941
@@ -440,7 +440,7 @@ history_value_45:
 history_value_46:
   id: 46
   setting_id: 46
-  value: '4091'
+  value: '419100'
   created_at: '2019-09-20 11:02:32.125400'
   updated_at: '2021-05-31 15:00:36.672119'
   footprint: 160a865d5709e9b365b1e18fa930e9069cab3b4e3c23e7d79cd0fdeee758539b
@@ -458,7 +458,7 @@ history_value_47:
 history_value_48:
   id: 48
   setting_id: 48
-  value: '445'
+  value: '4457'
   created_at: '2019-09-20 11:02:32.125400'
   updated_at: '2021-05-31 15:00:36.710257'
   footprint: f585a1b670e6cb1632398360513793ce1f459f49884f971ca7f36594bb67fa70
@@ -855,8 +855,89 @@ history_value_89:
 history_value_90:
   id: 90
   setting_id: 89
-  value: '7067'
+  value: '7071'
   created_at: '2022-10-26 12:46:16.125400000 Z'
   updated_at: '2022-10-26 12:46:16.125400000 Z'
+  footprint:
+  invoicing_profile_id: 1
+
+history_value_91:
+  id: 91
+  setting_id: 90
+  value: 'CB01'
+  created_at: 2022-12-09 14:00:14.512000000 Z
+  updated_at: 2022-12-09 14:00:14.512000000 Z
+  footprint:
+  invoicing_profile_id: 1
+
+history_value_92:
+  id: 92
+  setting_id: 91
+  value: 'W001'
+  created_at: 2022-12-09 14:00:14.512000000 Z
+  updated_at: 2022-12-09 14:00:14.512000000 Z
+  footprint:
+  invoicing_profile_id: 1
+
+history_value_93:
+  id: 93
+  setting_id: 92
+  value: 'CA01'
+  created_at: 2022-12-09 14:00:14.512000000 Z
+  updated_at: 2022-12-09 14:00:14.512000000 Z
+  footprint:
+  invoicing_profile_id: 1
+
+history_value_94:
+  id: 94
+  setting_id: 93
+  value: 'W002'
+  created_at: 2022-12-09 14:00:14.512000000 Z
+  updated_at: 2022-12-09 14:00:14.512000000 Z
+  footprint:
+  invoicing_profile_id: 1
+
+history_value_95:
+  id: 95
+  setting_id: 94
+  value: 'TVA1'
+  created_at: 2022-12-09 14:00:14.512000000 Z
+  updated_at: 2022-12-09 14:00:14.512000000 Z
+  footprint:
+  invoicing_profile_id: 1
+
+history_value_96:
+  id: 96
+  setting_id: 95
+  value: 'false'
+  created_at: 2022-12-22 14:45:07.891240000 Z
+  updated_at: 2022-12-22 14:45:07.891240000 Z
+  footprint:
+  invoicing_profile_id: 1
+
+history_value_97:
+  id: 97
+  setting_id: 96
+  value: '0'
+  created_at: 2022-11-29 21:02:47.354751000 Z
+  updated_at: 2022-11-29 21:02:47.354751000 Z
+  footprint:
+  invoicing_profile_id: 1
+
+history_value_98:
+  id: 98
+  setting_id: 97
+  value: 'TVA'
+  created_at: 2022-12-23 14:39:12.214510000 Z
+  updated_at: 2022-12-23 14:39:12.214510000 Z
+  footprint:
+  invoicing_profile_id: 1
+
+history_value_99:
+  id: 99
+  setting_id: 98
+  value: 'true'
+  created_at: '2022-12-20 14:38:40.000421'
+  updated_at: '2022-12-20 14:38:40.000421'
   footprint:
   invoicing_profile_id: 1

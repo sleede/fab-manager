@@ -13,7 +13,7 @@ class Reservations::ReserveMachineTest < ActionDispatch::IntegrationTest
     login_as(@user_without_subscription, scope: :user)
 
     machine = Machine.find(6)
-    availability = machine.availabilities.first
+    availability = Availability.find(4)
 
     reservations_count = Reservation.count
     invoice_count = Invoice.count
@@ -85,7 +85,7 @@ class Reservations::ReserveMachineTest < ActionDispatch::IntegrationTest
     login_as(@user_without_subscription, scope: :user)
 
     machine = Machine.find(6)
-    availability = machine.availabilities.first
+    availability = Availability.find(4)
 
     reservations_count = Reservation.count
     invoice_count = Invoice.count
@@ -137,7 +137,7 @@ class Reservations::ReserveMachineTest < ActionDispatch::IntegrationTest
 
     machine = Machine.find(6)
     plan = Plan.find(4)
-    availability = machine.availabilities.first
+    availability = Availability.find(4)
 
     reservations_count = Reservation.count
     invoice_count = Invoice.count

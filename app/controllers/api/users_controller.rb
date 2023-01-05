@@ -11,7 +11,7 @@ class API::UsersController < API::ApiController
     if %w[partner manager].include?(params[:role])
       @users = User.with_role(params[:role].to_sym).includes(:profile)
     else
-      head 403
+      head :forbidden
     end
   end
 

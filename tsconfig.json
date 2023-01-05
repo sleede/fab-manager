@@ -7,17 +7,22 @@
     "module": "ES2020",
     "moduleResolution": "node",
     "sourceMap": true,
-    "target": "es5",
-    "jsx": "react",
+    "target": "ES2015",
+    "jsx": "react-jsx",
     "noEmit": true,
     "allowSyntheticDefaultImports": true,
     "downlevelIteration": true,
+    "rootDir": "app/frontend/src/javascript"
   },
   "exclude": [
     "**/*.spec.ts",
     "node_modules",
     "vendor",
-    "public"
+    "public",
+    "test/frontend/**/*"
+  ],
+  "include": [
+    "app/frontend/src/javascript/**/*"
   ],
   "compileOnSave": false
 }

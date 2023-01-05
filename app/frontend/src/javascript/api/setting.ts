@@ -4,14 +4,15 @@ import {
   Setting,
   SettingBulkArray,
   SettingBulkResult,
-  SettingError,
+  SettingError, SettingGetOptions,
   SettingName,
   SettingValue
 } from '../models/setting';
+import ApiLib from '../lib/api';
 
 export default class SettingAPI {
-  static async get (name: SettingName): Promise<Setting> {
-    const res: AxiosResponse<{setting: Setting}> = await apiClient.get(`/api/settings/${name}`);
+  static async get (name: SettingName, options?: SettingGetOptions): Promise<Setting> {
+    const res: AxiosResponse<{setting: Setting}> = await apiClient.get(`/api/settings/${name}${ApiLib.filtersToQuery(options)}`);
     return res?.data?.setting;
   }
 

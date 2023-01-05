@@ -20,7 +20,7 @@ json.profile_attributes do
 end
 
 json.invoicing_profile_attributes do
-  json.id member.invoicing_profile.id
+  json.extract! member.invoicing_profile, :id, :external_id
   if member.invoicing_profile.address
     json.address_attributes do
       json.id member.invoicing_profile.address.id

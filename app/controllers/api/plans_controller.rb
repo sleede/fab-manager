@@ -26,7 +26,7 @@ class API::PlansController < API::ApiController
     end
 
     type = plan_params[:type]
-    partner = params[:plan][:partner_id].empty? ? nil : User.find(params[:plan][:partner_id])
+    partner = params[:plan][:partner_id].blank? ? nil : User.find(params[:plan][:partner_id])
 
     plan = PlansService.create(type, partner, plan_params)
     if plan.key?(:errors)
@@ -83,7 +83,8 @@ class API::PlansController < API::ApiController
                                .permit(:base_name, :type, :group_id, :amount, :interval, :interval_count, :is_rolling,
                                        :training_credit_nb, :ui_weight, :disabled, :monthly_payment, :description, :plan_category_id,
                                        plan_file_attributes: %i[id attachment _destroy],
-                                       prices_attributes: %i[id amount])
+                                       prices_attributes: %i[id amount],
+                                       advanced_accounting_attributes: %i[code analytical_section])
     end
   end
 end

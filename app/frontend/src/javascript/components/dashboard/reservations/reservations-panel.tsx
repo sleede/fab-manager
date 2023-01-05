@@ -1,4 +1,5 @@
-import React, { ReactNode, useEffect, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
+import * as React from 'react';
 import { FabPanel } from '../../base/fab-panel';
 import { Reservation, SlotsReservation } from '../../../models/reservation';
 import ReservationAPI from '../../../api/reservation';

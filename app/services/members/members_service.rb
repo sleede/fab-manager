@@ -8,7 +8,7 @@ class Members::MembersService
     @member = member
   end
 
-  def update(params)
+  def update(params, operator, current_password = nil)
     if subscriber_group_change?(params)
       # here a group change is requested but unprocessable, handle the exception
       @member.errors.add(:group_id, I18n.t('members.unable_to_change_the_group_while_a_subscription_is_running'))
@@ -29,6 +29,8 @@ class Members::MembersService
         @member.validated_at = nil
       end
     end
+
+    handle_password(params, operator, current_password)
 
     Members::MembersService.handle_organization(params)
 
@@ -170,5 +172,15 @@ class Members::MembersService
 
   def user_group_change?(params)
     @member.group_id && params[:group_id] && @member.group_id != params[:group_id].to_i
+  end
+
+  def handle_password(params, operator, current_password = nil)
+    return unless params[:password] && params[:password_confirmation]
+
+    return if operator.privileged?
+
+    raise SecurityError, 'current password not provided' if current_password.blank?
+
+    raise SecurityError, 'current password does not match' unless @member.valid_password?(current_password)
   end
 end

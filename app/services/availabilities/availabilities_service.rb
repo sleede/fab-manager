@@ -2,15 +2,28 @@
 
 # List all Availability's slots for the given resources
 class Availabilities::AvailabilitiesService
-
   def initialize(current_user, level = 'slot')
     @current_user = current_user
     @maximum_visibility = {
       year: Setting.get('visibility_yearly').to_i.months.since,
       other: Setting.get('visibility_others').to_i.months.since
     }
+    @minimum_visibility = Setting.get('reservation_deadline').to_i.minutes.since
     @service = Availabilities::StatusService.new(current_user&.role)
     @level = level
+  end
+
+  def index(window, ids, events: false)
+    machines_availabilities = Setting.get('machines_module') ? machines(Machine.where(id: ids[:machines]), @current_user, window) : []
+    spaces_availabilities = Setting.get('spaces_module') ? spaces(Space.where(id: ids[:spaces]), @current_user, window) : []
+    trainings_availabilities = Setting.get('trainings_module') ? trainings(Training.where(id: ids[:trainings]), @current_user, window) : []
+    events_availabilities = if events && Setting.get('events_in_calendar')
+                              events(Event.all, @current_user, window)
+                            else
+                              []
+                            end
+
+    [].concat(trainings_availabilities).concat(events_availabilities).concat(machines_availabilities).concat(spaces_availabilities)
   end
 
   # list all slots for the given machines, with visibility relative to the given user
@@ -93,7 +106,7 @@ class Availabilities::AvailabilitiesService
       end_at = @maximum_visibility[:year] if subscription_year?(user) && type != 'training'
       end_at = @maximum_visibility[:year] if show_more_trainings?(user) && type == 'training'
       window_end = [end_at, range_end].min
-      window_start = [range_start, DateTime.current].max
+      window_start = [range_start, @minimum_visibility].max
       availabilities.includes(:tags, :plans, :slots)
                     .joins(:slots)
                     .where('availabilities.start_at <= ? AND availabilities.end_at >= ? AND available_type = ?', window_end, window_start, type)

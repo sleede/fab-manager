@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import * as React from 'react';
 import { IFablab } from '../../models/fablab';
 import { FabInput } from '../base/fab-input';
 import { FabButton } from '../base/fab-button';

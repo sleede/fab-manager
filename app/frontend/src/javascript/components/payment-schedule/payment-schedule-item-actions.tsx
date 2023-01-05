@@ -4,7 +4,8 @@ import {
   PaymentScheduleItem,
   PaymentScheduleItemState
 } from '../../models/payment-schedule';
-import React, { ReactElement, useState } from 'react';
+import { ReactElement, useState } from 'react';
+import * as React from 'react';
 import { FabButton } from '../base/fab-button';
 import { useTranslation } from 'react-i18next';
 import { User } from '../../models/user';

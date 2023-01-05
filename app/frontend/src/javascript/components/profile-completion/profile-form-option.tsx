@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { User } from '../../models/user';
 import { IApplication } from '../../models/application';
 import { Loader } from '../base/loader';
@@ -15,6 +15,7 @@ declare const Application: IApplication;
 
 interface ProfileFormOptionProps {
   user: User,
+  operator: User,
   activeProvider: ActiveProviderResponse,
   onError: (message: string) => void,
   onSuccess: (user: User) => void,
@@ -27,7 +28,7 @@ interface ProfileFormOptionProps {
  * (*) This component handle the first case.
  * It also deals with duplicate email addresses in database
  */
-export const ProfileFormOption: React.FC<ProfileFormOptionProps> = ({ user, activeProvider, onError, onSuccess }) => {
+export const ProfileFormOption: React.FC<ProfileFormOptionProps> = ({ user, operator, activeProvider, onError, onSuccess }) => {
   const { t } = useTranslation('logged');
 
   const userLib = new UserLib(user);
@@ -60,6 +61,7 @@ export const ProfileFormOption: React.FC<ProfileFormOptionProps> = ({ user, acti
         <UserProfileForm onError={onError}
                          action="update"
                          user={user}
+                         operator={operator}
                          onSuccess={onSuccess}
                          size="small"
                          showGroupInput

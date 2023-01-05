@@ -9,4 +9,8 @@ class SubscriptionPolicy < ApplicationPolicy
   def payment_details?
     user.admin? || user.manager?
   end
+
+  def cancel?
+    user.admin? || user.manager?
+  end
 end

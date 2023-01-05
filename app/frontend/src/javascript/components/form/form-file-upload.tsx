@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Path } from 'react-hook-form';
 import { UnpackNestedValue, UseFormSetValue } from 'react-hook-form/dist/types/form';
@@ -23,7 +24,7 @@ interface FormFileUploadProps<TFieldValues> extends FormComponent<TFieldValues>,
 /**
  * This component allows to upload file, in forms managed by react-hook-form.
  */
-export const FormFileUpload = <TFieldValues extends FieldValues>({ id, register, defaultFile, className, rules, disabled, error, warning, formState, onFileChange, onFileRemove, accept, setValue }: FormFileUploadProps<TFieldValues>) => {
+export const FormFileUpload = <TFieldValues extends FieldValues>({ id, label, register, defaultFile, className, rules, disabled, error, warning, formState, onFileChange, onFileRemove, accept, setValue }: FormFileUploadProps<TFieldValues>) => {
   const { t } = useTranslation('shared');
 
   const [file, setFile] = useState<FileType>(defaultFile);
@@ -72,7 +73,7 @@ export const FormFileUpload = <TFieldValues extends FieldValues>({ id, register,
   const placeholder = (): string => hasFile() ? t('app.shared.form_file_upload.edit') : t('app.shared.form_file_upload.browse');
 
   return (
-    <div className={`form-file-upload ${classNames}`}>
+    <div className={`form-file-upload ${label ? 'with-label' : ''} ${classNames}`}>
       {hasFile() && (
         <span>{file.attachment_name}</span>
       )}
@@ -86,17 +87,19 @@ export const FormFileUpload = <TFieldValues extends FieldValues>({ id, register,
           </a>
         )}
         <FormInput type="file"
-                    className="image-file-input"
-                    accept={accept}
-                    register={register}
-                    formState={formState}
-                    rules={rules}
-                    disabled={disabled}
-                    error={error}
-                    warning={warning}
-                    id={`${id}[attachment_files]`}
-                    onChange={onFileSelected}
-                    placeholder={placeholder()}/>
+                   ariaLabel={label as string}
+                   className="image-file-input"
+                   accept={accept}
+                   register={register}
+                   label={label}
+                   formState={formState}
+                   rules={rules}
+                   disabled={disabled}
+                   error={error}
+                   warning={warning}
+                   id={`${id}[attachment_files]`}
+                   onChange={onFileSelected}
+                   placeholder={placeholder()}/>
         {hasFile() &&
           <FabButton onClick={onRemoveFile} icon={<Trash size={20} weight="fill" />} className="is-main" />
         }

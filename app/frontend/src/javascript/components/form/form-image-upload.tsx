@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Path, Controller } from 'react-hook-form';
 import { UnpackNestedValue, UseFormSetValue } from 'react-hook-form/dist/types/form';
@@ -21,7 +22,7 @@ interface FormImageUploadProps<TFieldValues, TContext extends object> extends Fo
   mainOption?: boolean,
   onFileChange?: (value: ImageType) => void,
   onFileRemove?: () => void,
-  onFileIsMain?: (setIsMain: () => void) => void,
+  onFileIsMain?: (setIsMain: (isMain: boolean) => void) => void,
 }
 
 /**
@@ -31,7 +32,7 @@ export const FormImageUpload = <TFieldValues extends FieldValues, TContext exten
   const { t } = useTranslation('shared');
 
   const [file, setFile] = useState<ImageType>(defaultImage);
-  const [image, setImage] = useState<string | ArrayBuffer>(defaultImage.attachment_url);
+  const [image, setImage] = useState<string | ArrayBuffer>(defaultImage?.attachment_url);
 
   useEffect(() => {
     setFile(defaultImage);
@@ -107,7 +108,7 @@ export const FormImageUpload = <TFieldValues extends FieldValues, TContext exten
               render={({ field: { onChange, value } }) =>
                 <input id={`${id}.is_main`}
                   type="radio"
-                  checked={value}
+                  checked={value || false}
                   onChange={() => { onFileIsMain(onChange); }} />
               } />
           </label>
@@ -118,7 +119,7 @@ export const FormImageUpload = <TFieldValues extends FieldValues, TContext exten
                    register={register}
                    label={label}
                    formState={formState}
-                   rules={rules}
+                   rules={{ ...rules, required: rules?.required && !hasImage() }}
                    disabled={disabled}
                    error={error}
                    warning={warning}

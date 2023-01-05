@@ -1,4 +1,5 @@
-import React, { PropsWithChildren, ReactNode, useEffect, useState } from 'react';
+import { PropsWithChildren, ReactNode, useEffect, useState } from 'react';
+import * as React from 'react';
 import { AbstractFormComponent } from '../../models/form-component';
 import { FieldValues } from 'react-hook-form/dist/types/fields';
 import { get as _get } from 'lodash';

@@ -14,12 +14,6 @@ export interface SubscriptionRequest {
   start_at?: TDateISO
 }
 
-export interface UpdateSubscriptionRequest {
-  id: number,
-  expired_at: TDateISO,
-  free: boolean
-}
-
 export interface SubscriptionPaymentDetails {
   payment_schedule: boolean,
   card: boolean

@@ -447,10 +447,10 @@ Application.Controllers.controller('SettingsController', ['$scope', '$rootScope'
       // on step change, change the active tab if needed
       uitour.on('stepChanged', function (nextStep) {
         if (nextStep.stepId === 'general') { $scope.tabs.active = 0; }
-        if (nextStep.stepId === 'home' || nextStep.stepId === 'css') { $scope.tabs.active = 1; }
-        if (nextStep.stepId === 'about') { $scope.tabs.active = 2; }
-        if (nextStep.stepId === 'privacy' || nextStep.stepId === 'draft') { $scope.tabs.active = 3; }
-        if (nextStep.stepId === 'reservations') { $scope.tabs.active = 4; }
+        if (nextStep.stepId === 'home' || nextStep.stepId === 'css') { $scope.tabs.active = 2; }
+        if (nextStep.stepId === 'about') { $scope.tabs.active = 3; }
+        if (nextStep.stepId === 'privacy' || nextStep.stepId === 'draft') { $scope.tabs.active = 4; }
+        if (nextStep.stepId === 'reservations') { $scope.tabs.active = 5; }
       });
       // on tour end, save the status in database
       uitour.on('ended', function () {

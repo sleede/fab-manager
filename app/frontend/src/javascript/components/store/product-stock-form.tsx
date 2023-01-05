@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Select from 'react-select';
 import { PencilSimple, X } from 'phosphor-react';
 import { useFieldArray, UseFormRegister } from 'react-hook-form';
@@ -265,8 +265,8 @@ export const ProductStockForm = <TContext extends object> ({ currentFormValues, 
             />
           </div>
         </div>
-        {stockMovements?.data?.map(movement => <div className="stock-history" key={movement.id}>
-          <div className="stock-item">
+        {stockMovements?.data?.map(movement => <div className="stock-history" key={movement.id} role="list">
+          <div className="stock-item" role="listitem">
             <p className='title'>{currentFormValues.name}</p>
             <p>{FormatLib.date(movement.date)}</p>
             <div className="group">

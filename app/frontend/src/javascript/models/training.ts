@@ -1,4 +1,7 @@
 import { ApiFilter } from './api';
+import { TDateISO } from '../typings/date-iso';
+import { FileType } from './file';
+import { AdvancedAccounting } from './advanced-accounting';
 
 export interface Training {
   id?: number,
@@ -6,11 +9,22 @@ export interface Training {
   description: string,
   machine_ids: number[],
   nb_total_places: number,
-  slug: string,
+  slug?: string,
   public_page?: boolean,
   disabled?: boolean,
   plan_ids?: number[],
-  training_image?: string,
+  training_image_attributes?: FileType,
+  availabilities?: Array<{
+    id: number,
+    start_at: TDateISO,
+    end_at: TDateISO,
+    reservation_users: Array<{
+      id: number,
+      full_name: string,
+      is_valid: boolean
+    }>
+  }>,
+  advanced_accounting_attributes?: AdvancedAccounting
 }
 
 export interface TrainingIndexFilter extends ApiFilter {

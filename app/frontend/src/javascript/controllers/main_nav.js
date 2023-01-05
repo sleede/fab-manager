@@ -99,7 +99,7 @@ Application.Controllers.controller('MainNavController', ['$scope', 'settingsProm
       authorizedRoles: ['admin', 'manager']
     },
     $scope.$root.modules.machines && {
-      state: 'app.public.machines_list',
+      state: 'app.admin.machines_list',
       linkText: 'app.public.common.manage_the_machines',
       linkIcon: 'cogs',
       authorizedRoles: ['admin', 'manager']

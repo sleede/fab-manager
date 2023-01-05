@@ -93,10 +93,10 @@ zu:
         phone_number_is_required: "crwdns27938:0crwdne27938:0"
         address: "crwdns27940:0crwdne27940:0"
         address_is_required: "crwdns27942:0crwdne27942:0"
-        i_authorize_Fablab_users_registered_on_the_site_to_contact_me: "crwdns27944:0crwdne27944:0"
+        i_authorize_Fablab_users_registered_on_the_site_to_contact_me: "crwdns36223:0crwdne36223:0"
         i_accept_to_receive_information_from_the_fablab: "crwdns27946:0crwdne27946:0"
         i_ve_read_and_i_accept_: "crwdns27948:0crwdne27948:0"
-        _the_fablab_policy: "crwdns27950:0crwdne27950:0"
+        _the_fablab_policy: "crwdns36225:0crwdne36225:0"
         field_required: "crwdns27952:0crwdne27952:0"
         profile_custom_field_is_required: "crwdns27954:0{FEILD}crwdne27954:0"
         user_supporting_documents_required: "crwdns27956:0{GROUP}crwdne27956:0"
@@ -115,7 +115,7 @@ zu:
         connection: "crwdns27978:0crwdne27978:0"
         password_forgotten: "crwdns27980:0crwdne27980:0"
         confirm_my_account: "crwdns27982:0crwdne27982:0"
-        not_registered_to_the_fablab: "crwdns27984:0crwdne27984:0"
+        not_registered_to_the_fablab: "crwdns36227:0crwdne36227:0"
         create_an_account: "crwdns27986:0crwdne27986:0"
         wrong_email_or_password: "crwdns27988:0crwdne27988:0"
         caps_lock_is_on: "crwdns27990:0crwdne27990:0"
@@ -135,9 +135,9 @@ zu:
         and_NUMBER_other_notifications: "crwdns28010:0NUMBER={NUMBER}crwdnd28010:0NUMBER={NUMBER}crwdne28010:0"
       #about page
       about:
-        read_the_fablab_policy: "crwdns28012:0crwdne28012:0"
-        read_the_fablab_s_general_terms_and_conditions: "crwdns28014:0crwdne28014:0"
-        your_fablab_s_contacts: "crwdns28016:0crwdne28016:0"
+        read_the_fablab_policy: "crwdns36229:0crwdne36229:0"
+        read_the_fablab_s_general_terms_and_conditions: "crwdns36231:0crwdne36231:0"
+        your_fablab_s_contacts: "crwdns36233:0crwdne36233:0"
         privacy_policy: "crwdns28018:0crwdne28018:0"
       #'privacy policy' page
       privacy:
@@ -153,7 +153,7 @@ zu:
         create_an_account: "crwdns28034:0crwdne28034:0"
         discover_members: "crwdns28036:0crwdne28036:0"
         #next events summary on the home page
-        fablab_s_next_events: "crwdns28038:0crwdne28038:0"
+        fablab_s_next_events: "crwdns36235:0crwdne36235:0"
         every_events: "crwdns28040:0crwdne28040:0"
       event_card:
         on_the_date: "crwdns28042:0{DATE}crwdne28042:0"
@@ -167,7 +167,7 @@ zu:
         full_price: "crwdns28058:0crwdne28058:0"
       #projects gallery
       projects_list:
-        the_fablab_projects: "crwdns28060:0crwdne28060:0"
+        the_fablab_projects: "crwdns36237:0crwdne36237:0"
         add_a_project: "crwdns28062:0crwdne28062:0"
         search_over_the_whole_network: "crwdns28064:0crwdne28064:0"
         tooltip_openlab_projects_switch: "crwdns28066:0crwdne28066:0"
@@ -215,7 +215,7 @@ zu:
         do_you_really_want_to_delete_this_project: "crwdns28146:0crwdne28146:0"
       #list of machines
       machines_list:
-        the_fablab_s_machines: "crwdns28148:0crwdne28148:0"
+        the_fablab_s_machines: "crwdns36239:0crwdne36239:0"
         add_a_machine: "crwdns28150:0crwdne28150:0"
         new_availability: "crwdns28152:0crwdne28152:0"
         book: "crwdns28154:0crwdne28154:0"
@@ -230,6 +230,8 @@ zu:
         status_enabled: "crwdns28160:0crwdne28160:0"
         status_disabled: "crwdns28162:0crwdne28162:0"
         status_all: "crwdns28164:0crwdne28164:0"
+        filter_by_machine_category: "crwdns36245:0crwdne36245:0"
+        all_machines: "crwdns36247:0crwdne36247:0"
       machine_card:
         book: "crwdns28166:0crwdne28166:0"
         consult: "crwdns28168:0crwdne28168:0"
@@ -288,7 +290,7 @@ zu:
         select_duration: "crwdns28254:0crwdne28254:0"
       #Fablab's events list
       events_list:
-        the_fablab_s_events: "crwdns28256:0crwdne28256:0"
+        the_fablab_s_events: "crwdns36241:0crwdne36241:0"
         all_categories: "crwdns28258:0crwdne28258:0"
         for_all: "crwdns28260:0crwdne28260:0"
         sold_out: "crwdns28262:0crwdne28262:0"
@@ -328,7 +330,7 @@ zu:
         book: "crwdns28326:0crwdne28326:0"
         confirm_and_pay: "crwdns28328:0crwdne28328:0"
         confirm_payment_of_html: "crwdns28330:0ROLE={ROLE}crwdnd28330:0AMOUNT={AMOUNT}crwdne28330:0" #(contexte : validate a payment of $20,00)
-        online_payment_disabled: "crwdns28332:0crwdne28332:0"
+        online_payment_disabled: "crwdns36243:0crwdne36243:0"
         please_select_a_member_first: "crwdns28334:0crwdne28334:0"
         change_the_reservation: "crwdns28336:0crwdne28336:0"
         you_can_shift_this_reservation_on_the_following_slots: "crwdns28338:0crwdne28338:0"

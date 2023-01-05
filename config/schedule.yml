@@ -1,27 +1,27 @@
 subscription_expire_in_7_days:
-  cron: "0 0 * * *"
+  cron: "0 0 * * *" # every day, at midnight
   class: SubscriptionExpireWorker
   queue: default
   args: [7]
 
 subscription_is_expired:
-  cron: "0 23 * * *"
+  cron: "0 23 * * *" # every day, at 11pm
   class: SubscriptionExpireWorker
   queue: default
   args: [0]
 
 generate_statistic:
-  cron: "0 1 * * *"
+  cron: "0 1 * * *" # every day, at 1am
   class: StatisticWorker
   queue: default
 
 i_calendar_import:
-  cron: "0 * * * *"
+  cron: "0 * * * *" # every day, every hour
   class: ICalendarImportWorker
   queue: default
 
 reservation_reminder:
-  cron: "1 * * * *"
+  cron: "1 * * * *" # every day, every hour + 1 minute
   class: ReservationReminderWorker
   queue: default
 
@@ -35,17 +35,21 @@ free_disk_space:
   class: FreeDiskSpaceWorker
   queue: system
 
-# schedule a version check, every week at the current day+time
 # this will prevent that all the instances query the hub simultaneously
 <% h = DateTime.current - 1.minute %>
 version_check:
-  cron: <%="#{h.strftime('%M %H')} * * #{h.cwday}" %>
+  cron: <%="#{h.strftime('%M %H')} * * #{h.cwday}" %> # every week, at current day+time
   class: VersionCheckWorker
   queue: system
 
 payment_schedule_item:
   cron: "0 * * * *" # every day, every hour
   class: PaymentScheduleItemWorker
+  queue: default
+
+accounting_data:
+  cron: "0 0 * * *" # every day, at midnight
+  class: AccountingWorker
   queue: default
 
 <%= PluginRegistry.insert_code('yml.schedule') %>

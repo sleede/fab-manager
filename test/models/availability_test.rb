@@ -15,4 +15,12 @@ class AvailabilityTest < ActiveSupport::TestCase
     assert a.invalid?
     assert a.errors.key?(:machine_ids)
   end
+
+  test 'return empty = true if availability dont have any reservation' do
+    not_reserved = Availability.find(1)
+    assert not_reserved.empty?
+
+    reserved = Availability.find(13)
+    assert_not reserved.empty?
+  end
 end

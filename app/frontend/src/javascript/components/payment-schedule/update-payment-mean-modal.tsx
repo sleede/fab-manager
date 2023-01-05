@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import Select from 'react-select';
 import { useTranslation } from 'react-i18next';
 import { FabModal } from '../base/fab-modal';

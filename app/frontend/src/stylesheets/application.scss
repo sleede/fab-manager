@@ -1,3 +1,4 @@
+@import "variables/animations";
 @import "variables/colors";
 @import "variables/typography";
 @import "variables/decoration";
@@ -15,6 +16,7 @@
 @import "app.components";
 @import "app.plugins";
 
+@import "modules/accounting/accounting-codes-settings";
 @import "modules/authentication-provider/array-mapping-form";
 @import "modules/authentication-provider/data-mapping-form";
 @import "modules/authentication-provider/openid-connect-data-mapping-form";
@@ -29,6 +31,7 @@
 @import "modules/base/fab-panel";
 @import "modules/base/fab-popover";
 @import "modules/base/fab-state-label";
+@import "modules/base/fab-tabs";
 @import "modules/base/fab-text-editor";
 @import "modules/base/fab-tooltip";
 @import "modules/base/labelled-input";
@@ -39,6 +42,8 @@
 @import "modules/dashboard/reservations/reservations-dashboard";
 @import "modules/dashboard/reservations/reservations-panel";
 @import "modules/events/event";
+@import "modules/events/event-form";
+@import "modules/events/update-recurrent-modal";
 @import "modules/form/abstract-form-item";
 @import "modules/form/form-input";
 @import "modules/form/form-multi-file-upload";
@@ -50,11 +55,15 @@
 @import "modules/form/form-file-upload";
 @import "modules/form/form-image-upload";
 @import "modules/group/change-group";
+@import "modules/invoices/invoices-settings-panel";
+@import "modules/invoices/vat-settings-modal";
 @import "modules/layout/header-page";
 @import "modules/machines/machine-card";
+@import "modules/machines/machine-form";
 @import "modules/machines/machines-filters";
 @import "modules/machines/machines-list";
 @import "modules/machines/required-training-modal";
+@import "modules/machines/machine-categories";
 @import "modules/payment-schedule/payment-schedule-dashboard";
 @import "modules/payment-schedule/payment-schedule-summary";
 @import "modules/payment-schedule/payment-schedules-list";
@@ -73,6 +82,7 @@
 @import "modules/plan-categories/manage-plan-category";
 @import "modules/plan-categories/plan-categories-list";
 @import "modules/plans/plan-card";
+@import "modules/plans/plan-form";
 @import "modules/plans/plans-filter";
 @import "modules/plans/plans-list";
 @import "modules/prepaid-packs/packs-summary";
@@ -95,8 +105,10 @@
 @import "modules/select-gateway-modal";
 @import "modules/settings/boolean-setting";
 @import "modules/settings/check-list-setting";
+@import "modules/settings/setting-history-modal";
 @import "modules/settings/user-validation-setting";
 @import "modules/socials/fab-socials";
+@import "modules/spaces/space-form";
 @import "modules/store/_utilities";
 @import "modules/store/order-actions.scss";
 @import "modules/store/order-item";
@@ -122,10 +134,13 @@
 @import "modules/supporting-documents/supporting-documents-validation";
 @import "modules/supporting-documents/supporting-documents-type-form";
 @import "modules/supporting-documents/supporting-documents-types-list";
+@import "modules/trainings/training-form";
 @import "modules/user/avatar";
 @import "modules/user/avatar-input";
+@import "modules/user/change-password";
 @import "modules/user/gender-input";
 @import "modules/user/member-select";
+@import "modules/user/password-strength";
 @import "modules/user/user-profile-form";
 @import "modules/user/user-validation";
 

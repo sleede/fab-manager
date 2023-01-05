@@ -11,12 +11,12 @@ class API::AvailabilitiesController < API::ApiController
   def index
     authorize Availability
     display_window = window
-    @availabilities = Availability.includes(:machines, :tags, :trainings, :spaces)
-                                  .where('start_at >= ? AND end_at <= ?', display_window[:start], display_window[:end])
-
-    @availabilities = @availabilities.where.not(available_type: 'event') unless Setting.get('events_in_calendar')
-
-    @availabilities = @availabilities.where.not(available_type: 'space') unless Setting.get('spaces_module')
+    service = Availabilities::AvailabilitiesService.new(@current_user, 'availability')
+    machine_ids = params[:m] || []
+    @availabilities = service.index(display_window,
+                                    { machines: machine_ids, spaces: params[:s], trainings: params[:t] },
+                                    events: (params[:evt] && params[:evt] == 'true'))
+    @availabilities = filter_availabilites(@availabilities)
   end
 
   def public
@@ -27,7 +27,7 @@ class API::AvailabilitiesController < API::ApiController
     @availabilities = service.public_availabilities(
       display_window,
       { machines: machine_ids, spaces: params[:s], trainings: params[:t] },
-      (params[:evt] && params[:evt] == 'true')
+      events: (params[:evt] && params[:evt] == 'true')
     )
 
     @title_filter = { machine_ids: machine_ids.map(&:to_i) }
@@ -112,7 +112,7 @@ class API::AvailabilitiesController < API::ApiController
         render json: @export.errors, status: :unprocessable_entity
       end
     else
-      send_file File.join(Rails.root, export.file),
+      send_file Rails.root.join(export.file),
                 type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
                 disposition: 'attachment'
     end
@@ -120,7 +120,7 @@ class API::AvailabilitiesController < API::ApiController
 
   def lock
     authorize @availability
-    if @availability.update_attributes(lock: lock_params)
+    if @availability.update(lock: lock_params)
       render :show, status: :ok, location: @availability
     else
       render json: @availability.errors, status: :unprocessable_entity
@@ -163,10 +163,19 @@ class API::AvailabilitiesController < API::ApiController
   end
 
   def filter_availabilites(availabilities)
-    availabilities.delete_if(&method(:remove_full?))
+    availabilities_filterd = availabilities
+    availabilities_filterd = availabilities.delete_if(&method(:remove_full?)) if params[:dispo] == 'false'
+
+    availabilities_filterd = availabilities.delete_if(&method(:remove_empty?)) if params[:reserved] == 'true'
+
+    availabilities_filterd
   end
 
   def remove_full?(availability)
-    params[:dispo] == 'false' && (availability.is_reserved || (availability.try(:full?) && availability.full?))
+    availability.try(:full?) && availability.full?
+  end
+
+  def remove_empty?(availability)
+    availability.try(:empty?) && availability.empty?
   end
 end

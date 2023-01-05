@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import * as React from 'react';
 import Switch from 'react-switch';
 import _ from 'lodash';
 import { AxiosResponse } from 'axios';

@@ -8,7 +8,6 @@ class AuthProvidersTest < ActionDispatch::IntegrationTest
     login_as(@admin, scope: :user)
   end
 
-
   test 'create an auth external provider and activate it' do
     name = 'GitHub'
     post '/api/auth_providers',
@@ -21,8 +20,8 @@ class AuthProvidersTest < ActionDispatch::IntegrationTest
                token_endpoint: 'access_token',
                base_url: 'https://github.com/login/oauth/',
                profile_url: 'https://github.com/settings/profile',
-               client_id: ENV.fetch('OAUTH_CLIENT_ID') { 'github-oauth-app-id' },
-               client_secret: ENV.fetch('OAUTH_CLIENT_SECRET') { 'github-oauth-app-secret' }
+               client_id: ENV.fetch('OAUTH_CLIENT_ID', 'github-oauth-app-id'),
+               client_secret: ENV.fetch('OAUTH_CLIENT_SECRET', 'github-oauth-app-secret')
              },
              auth_provider_mappings_attributes: [
                {
@@ -49,12 +48,12 @@ class AuthProvidersTest < ActionDispatch::IntegrationTest
     assert_equal Mime[:json], response.content_type
 
     # Check the provider was correctly created
-    db_provider = OAuth2Provider.includes(:auth_provider).where('auth_providers.name': name).first.auth_provider
+    db_provider = OAuth2Provider.includes(:auth_provider).where('auth_providers.name': name).first&.auth_provider
     assert_not_nil db_provider
 
     provider = json_response(response.body)
     assert_equal name, provider[:name]
-    assert_equal db_provider.id, provider[:id]
+    assert_equal db_provider&.id, provider[:id]
     assert_equal 'pending', provider[:status]
     assert_equal 2, provider[:auth_provider_mappings_attributes].length
 
@@ -62,9 +61,9 @@ class AuthProvidersTest < ActionDispatch::IntegrationTest
     Fablab::Application.load_tasks if Rake::Task.tasks.empty?
     Rake::Task['fablab:auth:switch_provider'].invoke(name)
 
-    db_provider.reload
-    assert_equal 'active', db_provider.status
-    assert_equal AuthProvider.active.id, db_provider.id
+    db_provider&.reload
+    assert_equal 'active', db_provider&.status
+    assert_equal AuthProvider.active.id, db_provider&.id
     User.all.each do |u|
       assert_not_nil u.auth_token
     end

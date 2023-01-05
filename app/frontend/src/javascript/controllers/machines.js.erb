@@ -231,18 +231,22 @@ Application.Controllers.controller('MachinesController', ['$scope', '$state', '_
 /**
  * Controller used in the machine creation page (admin)
  */
-Application.Controllers.controller('NewMachineController', ['$scope', '$state', 'CSRF', function ($scope, $state, CSRF) {
+Application.Controllers.controller('NewMachineController', ['$scope', '$state', 'CSRF', 'growl', function ($scope, $state, CSRF, growl) {
   CSRF.setMetaTags();
 
-  // API URL where the form will be posted
-  $scope.actionUrl = '/api/machines/';
+  /**
+   * Shows an error message forwarded from a child component
+   */
+  $scope.onError = function (message) {
+    growl.error(message);
+  }
 
-  // Form action on the above URL
-  $scope.method = 'post';
-
-  // default machine parameters
-  $scope.machine =
-    { machine_files_attributes: [] };
+  /**
+   * Shows a success message forwarded from a child react components
+   */
+  $scope.onSuccess = function (message) {
+    growl.success(message)
+  }
 
   // Using the MachinesController
   return new MachinesController($scope, $state);
@@ -252,32 +256,29 @@ Application.Controllers.controller('NewMachineController', ['$scope', '$state', 
 /**
  * Controller used in the machine edition page (admin)
  */
-Application.Controllers.controller('EditMachineController', ['$scope', '$state', '$transition$', 'machinePromise', 'CSRF',
-  function ($scope, $state, $transition$, machinePromise, CSRF) {
-  /* PUBLIC SCOPE */
-
-    // API URL where the form will be posted
-    $scope.actionUrl = `/api/machines/${$transition$.params().id}`;
-
-    // Form action on the above URL
-    $scope.method = 'put';
+Application.Controllers.controller('EditMachineController', ['$scope', '$state', '$transition$', 'machinePromise', 'machineCategoriesPromise', 'CSRF', 'growl',
+  function ($scope, $state, $transition$, machinePromise, machineCategoriesPromise, CSRF, growl) {
+    /* PUBLIC SCOPE */
 
     // Retrieve the details for the machine id in the URL, if an error occurs redirect the user to the machines list
     $scope.machine = cleanMachine(machinePromise);
+
+    // Retrieve all machine categories
+    $scope.machineCategories = machineCategoriesPromise;
 
     /**
      * Shows an error message forwarded from a child component
      */
     $scope.onError = function (message) {
       growl.error(message);
-    }
+    };
 
     /**
      * Shows a success message forwarded from a child react components
      */
     $scope.onSuccess = function (message) {
-      growl.success(message)
-    }
+      growl.success(message);
+    };
 
     /* PRIVATE SCOPE */
 

@@ -1,9 +1,14 @@
 .machines-filters {
-  margin: 1.5em;
+  margin: 1.5em 0;
+  display: flex;
+  justify-content: space-between;
 
-  .status-filter {
+  .filter-item {
+    &:first-child {
+      padding-right: 20px;
+    }
     & {
-      display: inline-flex;
+      display: block;
       width: 50%;
     }
     & > label {
@@ -13,18 +18,18 @@
     & > * {
       display: inline-block;
     }
-    .status-select {
+    .status-select, .category-select {
       width: 100%;
-      margin-left: 10px;
     }
   }
 }
 
 @media screen and (max-width: 720px){
   .machines-filters {
-    .status-filter {
-      padding-right: 0;
-      display: inline-block;
+    display: block;
+    .filter-item {
+      padding-right: 0 !important;
+      display: block;
       width: 100%;
     }
   }

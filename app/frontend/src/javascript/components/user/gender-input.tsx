@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { UseFormRegister } from 'react-hook-form';
 import { FieldValues } from 'react-hook-form/dist/types/fields';
 import { FieldPath } from 'react-hook-form/dist/types/path';
@@ -15,7 +15,7 @@ interface GenderInputProps<TFieldValues> {
 export const GenderInput = <TFieldValues extends FieldValues>({ register, disabled = false }: GenderInputProps<TFieldValues>) => {
   const { t } = useTranslation('shared');
 
-  const [isDisabled, setIsDisabled] = React.useState<boolean>(false);
+  const [isDisabled, setIsDisabled] = useState<boolean>(false);
 
   useEffect(() => {
     if (typeof disabled === 'function') {

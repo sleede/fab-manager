@@ -4,6 +4,7 @@
 class API::MembersController < API::ApiController
   before_action :authenticate_user!, except: [:last_subscribed]
   before_action :set_member, only: %i[update destroy merge complete_tour update_role validate]
+  before_action :set_operator, only: %i[show update create]
   respond_to :json
 
   def index
@@ -46,7 +47,7 @@ class API::MembersController < API::ApiController
     authorize @member
     members_service = Members::MembersService.new(@member)
 
-    if members_service.update(user_params)
+    if members_service.update(user_params, current_user, params[:user][:current_password])
       # Update password without logging out
       bypass_sign_in(@member) unless current_user.id != params[:id].to_i
       render :show, status: :ok, location: member_path(@member)
@@ -213,6 +214,10 @@ class API::MembersController < API::ApiController
     @member = User.find(params[:id])
   end
 
+  def set_operator
+    @operator = current_user
+  end
+
   def user_params
     if current_user.id == params[:id].to_i
       params.require(:user).permit(:username, :email, :password, :password_confirmation, :group_id, :is_allow_contact, :is_allow_newsletter,
@@ -230,15 +235,15 @@ class API::MembersController < API::ApiController
                                    ],
                                    statistic_profile_attributes: %i[id gender birthday])
 
-    elsif current_user.admin? || current_user.manager?
+    elsif current_user.privileged?
       params.require(:user).permit(:username, :email, :password, :password_confirmation, :is_allow_contact, :is_allow_newsletter, :group_id,
                                    tag_ids: [],
                                    profile_attributes: [:id, :first_name, :last_name, :phone, :interest, :software_mastered, :website, :job,
                                                         :facebook, :twitter, :google_plus, :viadeo, :linkedin, :instagram, :youtube, :vimeo,
-                                                        :dailymotion, :github, :echosciences, :pinterest, :lastfm, :flickr,
+                                                        :dailymotion, :github, :echosciences, :pinterest, :lastfm, :flickr, :note,
                                                         { user_avatar_attributes: %i[id attachment destroy] }],
                                    invoicing_profile_attributes: [
-                                     :id, :organization,
+                                     :id, :organization, :external_id,
                                      {
                                        address_attributes: %i[id address],
                                        organization_attributes: [:id, :name, { address_attributes: %i[id address] }],

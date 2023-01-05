@@ -41,6 +41,7 @@ Rails.application.routes.draw do
     end
     resources :openlab_projects, only: :index
     resources :machines
+    resources :machine_categories
     resources :components
     resources :themes
     resources :licences
@@ -107,6 +108,7 @@ Rails.application.routes.draw do
     resources :groups, only: %i[index create update destroy]
     resources :subscriptions, only: %i[show] do
       get 'payment_details', action: 'payment_details', on: :member
+      patch 'cancel', on: :member
     end
     resources :plan_categories
     resources :plans do
@@ -279,6 +281,7 @@ Rails.application.routes.draw do
         end
         resources :events
         resources :availabilities
+        resources :accounting
       end
     end
   end

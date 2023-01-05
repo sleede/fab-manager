@@ -5,11 +5,11 @@ namespace :fablab do
   namespace :fix do
     desc '[release 2.3.0] update reservations referencing reservables not present in database'
     task reservations_not_existing_reservable: :environment do
-      ActiveRecord::Base.logger = Logger.new(STDOUT)
+      ActiveRecord::Base.logger = Logger.new($stdout)
       ActiveRecord::Base.connection.execute(
-        'UPDATE reservations SET reservable_type = NULL, reservable_id = NULL'\
-        ' WHERE NOT EXISTS (SELECT 1 FROM events WHERE events.id = reservations.reservable_id)'\
-        ' AND reservations.reservable_type = \'Event\''
+        'UPDATE reservations SET reservable_type = NULL, reservable_id = NULL ' \
+        'WHERE NOT EXISTS (SELECT 1 FROM events WHERE events.id = reservations.reservable_id) ' \
+        "AND reservations.reservable_type = 'Event'"
       )
     end
 
@@ -47,11 +47,9 @@ namespace :fablab do
     task new_group_space_prices: :environment do
       Space.all.each do |space|
         Group.all.each do |group|
-          begin
-            Price.find(priceable: space, group: group)
-          rescue ActiveRecord::RecordNotFound
-            Price.create(priceable: space, group: group, amount: 0)
-          end
+          Price.find(priceable: space, group: group)
+        rescue ActiveRecord::RecordNotFound
+          Price.create(priceable: space, group: group, amount: 0)
         end
       end
     end
@@ -72,7 +70,7 @@ namespace :fablab do
       include ApplicationHelper
       failed_ids = []
       groups = Event.group(:recurrence_id).count
-      groups.keys.each do |recurrent_event_id|
+      groups.each_key do |recurrent_event_id|
         next unless recurrent_event_id
 
         begin
@@ -99,7 +97,8 @@ namespace :fablab do
     desc '[release 2.6.6] reset slug in events categories'
     task categories_slugs: :environment do
       Category.all.each do |cat|
-        `curl -XPOST http://#{ENV['ELASTICSEARCH_HOST']}:9200/stats/event/_update_by_query?conflicts=proceed\\&refresh\\&wait_for_completion -d '
+        # rubocop:disable Layout/LineLength
+        `curl -XPOST http://#{ENV.fetch('ELASTICSEARCH_HOST', nil)}:9200/stats/event/_update_by_query?conflicts=proceed\\&refresh\\&wait_for_completion -d '
         {
           "script": {
             "source": "ctx._source.subType = params.slug",
@@ -114,6 +113,7 @@ namespace :fablab do
             }
           }
         }';`
+        # rubocop:enable Layout/LineLength
       end
     end
 
@@ -129,7 +129,7 @@ namespace :fablab do
     desc '[release 3.1.2] fix users with invalid group_id'
     task users_group_ids: :environment do
       User.where.not(group_id: Group.all.map(&:id)).each do |u|
-        u.update_columns(group_id: Group.first.id, updated_at: DateTime.current)
+        u.update_columns(group_id: Group.first.id, updated_at: DateTime.current) # rubocop:disable Rails/SkipsModelValidations
 
         meta_data = { ex_group_name: 'invalid group' }
 
@@ -146,7 +146,7 @@ namespace :fablab do
 
     desc '[release 4.3.0] add name to theme stylesheet'
     task name_stylesheet: :environment do
-      Stylesheet.order(:created_at).first.update_attributes(
+      Stylesheet.order(:created_at).first&.update(
         name: 'theme'
       )
     end
@@ -169,7 +169,7 @@ namespace :fablab do
     task role_in_statistic_profile: :environment do
       puts "Fixing #{StatisticProfile.where(role_id: nil).count} bugged profiles...\n"
       StatisticProfile.where(role_id: nil).each do |sp|
-        role_id = sp&.user&.roles&.first&.id
+        role_id = sp.user&.roles&.first&.id
         sp.role_id = role_id
         sp.save!
       end
@@ -183,7 +183,7 @@ namespace :fablab do
 
         duration = occurrences.map(&:slot_duration).uniq.detect { |e| !e.nil? }
         occurrences.each do |o|
-          o.update_attributes(slot_duration: duration)
+          o.update(slot_duration: duration)
         end
       end
     end
@@ -191,17 +191,17 @@ namespace :fablab do
     desc '[release 4.7.9] fix invoicing profiles without names'
     task invoices_without_names: :environment do
       InvoicingProfile.where('(first_name IS NULL OR last_name IS NULL) AND user_id IS NOT NULL').each do |ip|
-        ip.update_attribute('first_name', ip.user.profile.first_name)
-        ip.update_attribute('last_name', ip.user.profile.last_name)
+        ip.update(first_name: ip.user.profile.first_name)
+        ip.update(last_name: ip.user.profile.last_name)
       end
     end
 
     desc '[release 5.3.8] fix invoicing profiles without names and email'
     task invoices_without_names_and_email: :environment do
       InvoicingProfile.where('(first_name IS NULL OR last_name IS NULL OR email IS NULL) AND user_id IS NOT NULL').each do |ip|
-        ip.update_attribute('first_name', ip.user.profile.first_name)
-        ip.update_attribute('last_name', ip.user.profile.last_name)
-        ip.update_attribute('email', ip.user.email)
+        ip.update(first_name: ip.user.profile.first_name)
+        ip.update(last_name: ip.user.profile.last_name)
+        ip.update(email: ip.user.email)
       end
     end
 
@@ -238,15 +238,15 @@ namespace :fablab do
         packs = StatisticProfilePrepaidPack
                 .includes(:prepaid_pack)
                 .references(:prepaid_packs)
-                .where('prepaid_packs.priceable_id = ?', reservation.reservable.id)
-                .where('prepaid_packs.priceable_type = ?', reservation.reservable.class.name)
+                .where(prepaid_packs: { priceable_id: reservation.reservable.id })
+                .where(prepaid_packs: { priceable_type: reservation.reservable.class.name })
                 .where(statistic_profile_id: reservation.statistic_profile_id)
                 .where('statistic_profile_prepaid_packs.created_at <= ?', reservation.created_at)
                 .where('expires_at is NULL or expires_at > ?', start_date)
                 .order(created_at: 'ASC')
 
         # passe reservation if cannot find any pack
-        next unless packs.length > 0
+        next if packs.empty?
 
         user = reservation.statistic_profile.user
         pack = packs.last
@@ -259,7 +259,8 @@ namespace :fablab do
 
         info = {
           user: "#{user.profile.full_name} - #{user.email}",
-          reservation: "Reservation #{reservation.original_invoice.reference} for the machine #{reservation.reservable.name} by #{reservation_minutes / 60.0} hours at #{I18n.l(reservation.created_at.to_date)}",
+          reservation: "Reservation #{reservation.original_invoice.reference} for the machine #{reservation.reservable.name} " \
+                       "by #{reservation_minutes / 60.0} hours at #{I18n.l(reservation.created_at.to_date)}",
           pack_before: "Prepaid pack of hours has used #{pack.minutes_used / 60.0} hours / #{pack.prepaid_pack.minutes / 60.0} hours"
         }
 

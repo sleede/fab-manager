@@ -13,7 +13,7 @@ class Reservations::PayWithWalletTest < ActionDispatch::IntegrationTest
     login_as(@vlonchamp, scope: :user)
 
     machine = Machine.find(6)
-    availability = machine.availabilities.first
+    availability = Availability.find(4)
 
     reservations_count = Reservation.count
     invoice_count = Invoice.count

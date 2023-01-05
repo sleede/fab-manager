@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { FabModal } from '../base/fab-modal';
 import { ProofOfIdentityType } from '../../models/proof-of-identity-type';

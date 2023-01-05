@@ -359,6 +359,20 @@ angular.module('application.router', ['ui.router'])
           settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['feature_tour_display', 'user_validation_required', 'user_validation_required_list']" }).$promise; }]
         }
       })
+      .state('app.admin.machines_list', {
+        url: '/admin/machines',
+        abstract: !Fablab.machinesModule,
+        views: {
+          'main@': {
+            templateUrl: '/admin/machines/index.html',
+            controller: 'AdminMachinesController'
+          }
+        },
+        resolve: {
+          machinesPromise: ['Machine', function (Machine) { return Machine.query().$promise; }],
+          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['feature_tour_display', 'user_validation_required', 'user_validation_required_list']" }).$promise; }]
+        }
+      })
       .state('app.admin.machines_new', {
         url: '/machines/new',
         abstract: !Fablab.machinesModule,
@@ -414,7 +428,8 @@ angular.module('application.router', ['ui.router'])
           }
         },
         resolve: {
-          machinePromise: ['Machine', '$transition$', function (Machine, $transition$) { return Machine.get({ id: $transition$.params().id }).$promise; }]
+          machinePromise: ['Machine', '$transition$', function (Machine, $transition$) { return Machine.get({ id: $transition$.params().id }).$promise; }],
+          machineCategoriesPromise: ['MachineCategory', function (MachineCategory) { return MachineCategory.query().$promise; }]
         }
       })
 
@@ -504,7 +519,7 @@ angular.module('application.router', ['ui.router'])
           }
         },
         resolve: {
-          trainingsPromise: ['Training', function (Training) { return Training.query({ public_page: true }).$promise; }]
+          trainingsPromise: ['Training', function (Training) { return Training.query({ public_page: true, disabled: false }).$promise; }]
         }
       })
       .state('app.public.training_show', {
@@ -620,7 +635,8 @@ angular.module('application.router', ['ui.router'])
           trainingsPromise: ['Training', function (Training) { return Training.query().$promise; }],
           machinesPromise: ['Machine', function (Machine) { return Machine.query().$promise; }],
           spacesPromise: ['Space', function (Space) { return Space.query().$promise; }],
-          iCalendarPromise: ['ICalendar', function (ICalendar) { return ICalendar.query().$promise; }]
+          iCalendarPromise: ['ICalendar', function (ICalendar) { return ICalendar.query().$promise; }],
+          machineCategoriesPromise: ['MachineCategory', function (MachineCategory) { return MachineCategory.query().$promise; }]
         }
       })
 
@@ -687,7 +703,10 @@ angular.module('application.router', ['ui.router'])
           machinesPromise: ['Machine', function (Machine) { return Machine.query().$promise; }],
           plansPromise: ['Plan', function (Plan) { return Plan.query().$promise; }],
           groupsPromise: ['Group', function (Group) { return Group.query().$promise; }],
-          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['slot_duration', 'events_in_calendar', 'feature_tour_display']" }).$promise; }]
+          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['slot_duration', 'events_in_calendar', 'feature_tour_display']" }).$promise; }],
+          trainingsPromise: ['Training', function (Training) { return Training.query().$promise; }],
+          spacesPromise: ['Space', function (Space) { return Space.query().$promise; }],
+          machineCategoriesPromise: ['MachineCategory', function (MachineCategory) { return MachineCategory.query().$promise; }]
         }
       })
       .state('app.admin.calendar.icalendar', {
@@ -761,10 +780,6 @@ angular.module('application.router', ['ui.router'])
             templateUrl: '/admin/trainings/new.html',
             controller: 'NewTrainingController'
           }
-        },
-        resolve: {
-          machinesPromise: ['Machine', function (Machine) { return Machine.query().$promise; }],
-          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['machines_module']" }).$promise; }]
         }
       })
       .state('app.admin.trainings_edit', {
@@ -777,9 +792,7 @@ angular.module('application.router', ['ui.router'])
           }
         },
         resolve: {
-          trainingPromise: ['Training', '$transition$', function (Training, $transition$) { return Training.get({ id: $transition$.params().id }).$promise; }],
-          machinesPromise: ['Machine', function (Machine) { return Machine.query().$promise; }],
-          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['machines_module']" }).$promise; }]
+          trainingPromise: ['Training', '$transition$', function (Training, $transition$) { return Training.get({ id: $transition$.params().id }).$promise; }]
         }
       })
       // events
@@ -807,12 +820,6 @@ angular.module('application.router', ['ui.router'])
             templateUrl: '/events/new.html',
             controller: 'NewEventController'
           }
-        },
-        resolve: {
-          categoriesPromise: ['Category', function (Category) { return Category.query().$promise; }],
-          themesPromise: ['EventTheme', function (EventTheme) { return EventTheme.query().$promise; }],
-          ageRangesPromise: ['AgeRange', function (AgeRange) { return AgeRange.query().$promise; }],
-          priceCategoriesPromise: ['PriceCategory', function (PriceCategory) { return PriceCategory.query().$promise; }]
         }
       })
       .state('app.admin.events_edit', {
@@ -824,11 +831,7 @@ angular.module('application.router', ['ui.router'])
           }
         },
         resolve: {
-          eventPromise: ['Event', '$transition$', function (Event, $transition$) { return Event.get({ id: $transition$.params().id }).$promise; }],
-          categoriesPromise: ['Category', function (Category) { return Category.query().$promise; }],
-          themesPromise: ['EventTheme', function (EventTheme) { return EventTheme.query().$promise; }],
-          ageRangesPromise: ['AgeRange', function (AgeRange) { return AgeRange.query().$promise; }],
-          priceCategoriesPromise: ['PriceCategory', function (PriceCategory) { return PriceCategory.query().$promise; }]
+          eventPromise: ['Event', '$transition$', function (Event, $transition$) { return Event.get({ id: $transition$.params().id }).$promise; }]
         }
       })
       .state('app.admin.event_reservations', {
@@ -966,17 +969,10 @@ angular.module('application.router', ['ui.router'])
         resolve: {
           settings: ['Setting', function (Setting) {
             return Setting.query({
-              names: "['invoice_legals', 'invoice_text', 'invoice_VAT-rate', 'invoice_VAT-rate_Machine', 'invoice_VAT-rate_Training', 'invoice_VAT-rate_Space', " +
-                     "'invoice_VAT-rate_Event', 'invoice_VAT-rate_Subscription', 'invoice_VAT-rate_Product', 'invoice_VAT-active', 'invoice_order-nb', 'invoice_code-value', " +
-                     "'invoice_code-active', 'invoice_reference', 'invoice_logo', 'accounting_journal_code', 'accounting_card_client_code', " +
-                     "'accounting_card_client_label', 'accounting_wallet_client_code', 'accounting_wallet_client_label', 'invoicing_module', " +
-                     "'accounting_other_client_code', 'accounting_other_client_label', 'accounting_wallet_code', 'accounting_wallet_label', " +
-                     "'accounting_VAT_code', 'accounting_VAT_label', 'accounting_subscription_code', 'accounting_subscription_label', " +
-                     "'accounting_Machine_code', 'accounting_Machine_label', 'accounting_Training_code', 'accounting_Training_label', " +
-                     "'accounting_Event_code', 'accounting_Event_label', 'accounting_Space_code', 'accounting_Space_label', 'accounting_Product_code', 'accounting_Product_label', " +
-                     "'payment_gateway', 'accounting_Error_code', 'accounting_Error_label', 'payment_schedule_prefix', " +
-                     "'feature_tour_display', 'online_payment_module', 'stripe_public_key', 'stripe_currency', 'invoice_prefix', " +
-                     "'accounting_Pack_code', 'accounting_Pack_label']"
+              names: "['invoice_legals', 'invoice_text', 'invoice_VAT-rate', 'invoice_VAT-rate_Machine', " +
+                     "'invoice_VAT-active', 'invoice_order-nb', 'invoice_code-value', " +
+                     "'invoice_code-active', 'invoice_reference', 'invoice_logo', 'payment_gateway', 'payment_schedule_prefix', 'invoicing_module', " +
+                     "'feature_tour_display', 'online_payment_module', 'stripe_public_key', 'stripe_currency', 'invoice_prefix', 'invoice_VAT-name']"
             }).$promise;
           }],
           stripeSecretKey: ['Setting', function (Setting) { return Setting.isPresent({ name: 'stripe_secret_key' }).$promise; }],
@@ -1179,7 +1175,7 @@ angular.module('application.router', ['ui.router'])
                      "'renew_pack_threshold', 'pack_only_for_subscription', 'overlapping_categories', 'public_registrations'," +
                      "'extended_prices_in_same_day', 'recaptcha_site_key', 'recaptcha_secret_key', 'user_validation_required', " +
                      "'user_validation_required_list', 'machines_module', 'user_change_group', 'show_username_in_admin_list', " +
-                     "'store_module']"
+                     "'store_module', 'reservation_deadline']"
             }).$promise;
           }],
           privacyDraftsPromise: ['Setting', function (Setting) { return Setting.get({ name: 'privacy_draft', history: true }).$promise; }],

@@ -1,10 +1,12 @@
-import React from 'react';
+import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { react2angular } from 'react2angular';
 import { IApplication } from '../../models/application';
 import { Loader } from '../base/loader';
 import { Event } from '../../models/event';
 import FormatLib from '../../lib/format';
+
+import defaultImage from '../../../../images/default-image.png';
 
 declare const Application: IApplication;
 
@@ -53,14 +55,17 @@ export const EventCard: React.FC<EventCardProps> = ({ event, cardType }) => {
   const formatTime = (): string => {
     return event.all_day
       ? t('app.public.event_card.all_day')
-      : t('app.public.event_card.from_time_to_time', { START: FormatLib.time(event.start_date), END: FormatLib.time(event.end_date) });
+      : t('app.public.event_card.from_time_to_time', { START: FormatLib.time(event.start_time), END: FormatLib.time(event.end_time) });
   };
 
   return (
     <div className={`event-card event-card--${cardType}`}>
-      {event.event_image
+      {event.event_image_attributes
         ? <div className="event-card-picture">
-            <img src={event.event_image} alt="" />
+            <img src={event.event_image_attributes.attachment_url} alt={event.event_image_attributes.attachment_name} onError={({ currentTarget }) => {
+              currentTarget.onerror = null;
+              currentTarget.src = defaultImage;
+            }} />
           </div>
         : cardType !== 'sm' &&
           <div className="event-card-picture">

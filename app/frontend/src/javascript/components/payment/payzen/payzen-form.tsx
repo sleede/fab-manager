@@ -1,4 +1,5 @@
-import React, { FormEvent, FunctionComponent, useEffect, useRef, useState } from 'react';
+import { FormEvent, FunctionComponent, useEffect, useRef, useState } from 'react';
+import * as React from 'react';
 import KRGlue from '@lyracom/embedded-form-glue';
 import { GatewayFormProps } from '../abstract-payment-modal';
 import SettingAPI from '../../../api/setting';

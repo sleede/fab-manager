@@ -14,9 +14,10 @@ class Space < ApplicationRecord
   has_many :space_files, as: :viewable, dependent: :destroy
   accepts_nested_attributes_for :space_files, allow_destroy: true, reject_if: :all_blank
 
-  has_and_belongs_to_many :projects, join_table: :projects_spaces
+  has_many :projects_spaces, dependent: :destroy
+  has_many :projects, through: :projects_spaces
 
-  has_many :spaces_availabilities
+  has_many :spaces_availabilities, dependent: :destroy
   has_many :availabilities, through: :spaces_availabilities, dependent: :destroy
 
   has_many :reservations, as: :reservable, dependent: :destroy
@@ -25,7 +26,10 @@ class Space < ApplicationRecord
   has_many :prepaid_packs, as: :priceable, dependent: :destroy
   has_many :credits, as: :creditable, dependent: :destroy
 
-  has_one :payment_gateway_object, as: :item
+  has_one :payment_gateway_object, as: :item, dependent: :destroy
+
+  has_one :advanced_accounting, as: :accountable, dependent: :destroy
+  accepts_nested_attributes_for :advanced_accounting, allow_destroy: true
 
   after_create :create_statistic_subtype
   after_create :create_space_prices
@@ -34,30 +38,29 @@ class Space < ApplicationRecord
   after_update :update_statistic_subtype, if: :saved_change_to_name?
   after_destroy :remove_statistic_subtype
 
-
   def create_statistic_subtype
     index = StatisticIndex.find_by(es_type_key: 'space')
-    StatisticSubType.create!({statistic_types: index.statistic_types, key: self.slug, label: self.name})
+    StatisticSubType.create!({ statistic_types: index.statistic_types, key: slug, label: name })
   end
 
   def update_statistic_subtype
     index = StatisticIndex.find_by(es_type_key: 'space')
-    subtype = StatisticSubType.joins(statistic_type_sub_types: :statistic_type).find_by(key: self.slug, statistic_types: { statistic_index_id: index.id })
-    subtype.label = self.name
-    subtype.save!
+    subtype = StatisticSubType.joins(statistic_type_sub_types: :statistic_type)
+                              .find_by(key: slug, statistic_types: { statistic_index_id: index.id })
+    subtype.update(label: name)
   end
 
   def remove_statistic_subtype
-    subtype = StatisticSubType.find_by(key: self.slug)
+    subtype = StatisticSubType.find_by(key: slug)
     subtype.destroy!
   end
 
   def create_space_prices
-    Group.all.each do |group|
+    Group.find_each do |group|
       Price.create(priceable: self, group: group, amount: 0)
     end
 
-    Plan.all.includes(:group).each do |plan|
+    Plan.includes(:group).find_each do |plan|
       Price.create(group: plan.group, plan: plan, priceable: self, amount: 0)
     end
   end

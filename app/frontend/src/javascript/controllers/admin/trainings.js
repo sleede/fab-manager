@@ -81,20 +81,23 @@ class TrainingsController {
 /**
  * Controller used in the training creation page (admin)
  */
-Application.Controllers.controller('NewTrainingController', ['$scope', '$state', 'machinesPromise', 'settingsPromise', 'CSRF',
-  function ($scope, $state, machinesPromise, settingsPromise, CSRF) {
-  /* PUBLIC SCOPE */
+Application.Controllers.controller('NewTrainingController', ['$scope', '$state', 'CSRF', 'growl',
+  function ($scope, $state, CSRF, growl) {
+    /* PUBLIC SCOPE */
 
-    // Form action on the following URL
-    $scope.method = 'post';
+    /**
+     * Callback triggered by react components
+     */
+    $scope.onSuccess = function (message) {
+      growl.success(message);
+    };
 
-    // API URL where the form will be posted
-    $scope.actionUrl = '/api/trainings/';
-
-    // list of machines
-    $scope.machines = machinesPromise;
-
-    $scope.enableMachinesModule = settingsPromise.machines_module === 'true';
+    /**
+     * Callback triggered by react components
+     */
+    $scope.onError = function (message) {
+      growl.error(message);
+    };
 
     /* PRIVATE SCOPE */
 
@@ -116,23 +119,26 @@ Application.Controllers.controller('NewTrainingController', ['$scope', '$state',
 /**
  * Controller used in the training edition page (admin)
  */
-Application.Controllers.controller('EditTrainingController', ['$scope', '$state', '$transition$', 'trainingPromise', 'machinesPromise', 'settingsPromise', 'CSRF',
-  function ($scope, $state, $transition$, trainingPromise, machinesPromise, settingsPromise, CSRF) {
-  /* PUBLIC SCOPE */
-
-    // Form action on the following URL
-    $scope.method = 'patch';
-
-    // API URL where the form will be posted
-    $scope.actionUrl = `/api/trainings/${$transition$.params().id}`;
+Application.Controllers.controller('EditTrainingController', ['$scope', '$state', '$transition$', 'trainingPromise', 'CSRF', 'growl',
+  function ($scope, $state, $transition$, trainingPromise, CSRF, growl) {
+    /* PUBLIC SCOPE */
 
     // Details of the training to edit (id in URL)
-    $scope.training = trainingPromise;
+    $scope.training = cleanTraining(trainingPromise);
 
-    // list of machines
-    $scope.machines = machinesPromise;
+    /**
+     * Callback triggered by react components
+     */
+    $scope.onSuccess = function (message) {
+      growl.success(message);
+    };
 
-    $scope.enableMachinesModule = settingsPromise.machines_module === 'true';
+    /**
+     * Callback triggered by react components
+     */
+    $scope.onError = function (message) {
+      growl.error(message);
+    };
 
     /* PRIVATE SCOPE */
 
@@ -145,6 +151,13 @@ Application.Controllers.controller('EditTrainingController', ['$scope', '$state'
       // Using the TrainingsController
       return new TrainingsController($scope, $state);
     };
+
+    // prepare the training for the react-hook-form
+    function cleanTraining (training) {
+      delete training.$promise;
+      delete training.$resolved;
+      return training;
+    }
 
     // !!! MUST BE CALLED AT THE END of the controller
     return initialize();

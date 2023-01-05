@@ -29,8 +29,8 @@
 
       <div class="article wrapper-lg" >
 
-        <div class="article-thumbnail" ng-if="training.training_image">
-          <img ng-src="{{training.training_image}}" alt="{{training.name}}" class="img-responsive">
+        <div class="article-thumbnail" ng-if="training.training_image_attributes">
+          <img ng-src="{{training.training_image_attributes.attachment_url}}" alt="{{training.name}}" class="img-responsive">
         </div>
 
         <p class="intro" ng-bind-html="training.description | toTrusted"></p>

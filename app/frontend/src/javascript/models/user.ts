@@ -1,23 +1,25 @@
 import { Plan } from './plan';
 import { TDateISO, TDateISODate } from '../typings/date-iso';
 import { supportedNetworks, SupportedSocialNetwork } from './social-network';
+import { ApiFilter } from './api';
 
-export type UserRole = 'member' | 'manager' | 'admin';
+export type UserRole = 'member' | 'manager' | 'admin' | 'partner';
 
 type ProfileAttributesSocial = {
-  [network in SupportedSocialNetwork]: string
+  [network in SupportedSocialNetwork]?: string
 }
 
 export interface User {
   id: number,
-  username: string,
+  username?: string,
   email: string,
-  group_id: number,
-  role: UserRole
+  group_id?: number,
+  role?: UserRole
   name: string,
-  need_completion: boolean,
-  ip_address: string,
+  need_completion?: boolean,
+  ip_address?: string,
   mapped_from_sso?: string[],
+  current_password?: string,
   password?: string,
   password_confirmation?: string,
   cgu?: boolean, // Accepted terms and conditions?
@@ -25,35 +27,36 @@ export interface User {
     id: number,
     first_name: string,
     last_name: string,
-    interest: string,
-    software_mastered: string,
-    phone: string,
-    website: string,
-    job: string,
-    tours: Array<string>,
-    user_avatar_attributes: {
-      id: number,
+    interest?: string,
+    software_mastered?: string,
+    phone?: string,
+    website?: string,
+    job?: string,
+    tours?: Array<string>,
+    user_avatar_attributes?: {
+      id?: number,
       attachment?: File,
       attachment_url?: string,
-      attachment_files: FileList,
+      attachment_files?: FileList,
       _destroy?: boolean
     }
   },
   invoicing_profile_attributes: {
-    id: number,
+    id?: number,
+    external_id?: string,
     address_attributes: {
-      id: number,
+      id?: number,
       address: string
     },
-    organization_attributes: {
-      id: number,
+    organization_attributes?: {
+      id?: number,
       name: string,
       address_attributes: {
-        id: number,
+        id?: number,
         address: string
       }
     },
-    user_profile_custom_fields_attributes: Array<
+    user_profile_custom_fields_attributes?: Array<
       {
         id?: number,
         value: string,
@@ -62,14 +65,14 @@ export interface User {
       }
     >
   },
-  statistic_profile_attributes: {
-    id: number,
+  statistic_profile_attributes?: {
+    id?: number,
     gender: string,
     birthday: TDateISODate
     training_ids: Array<number>
   },
-  subscribed_plan: Plan,
-  subscription: {
+  subscribed_plan?: Plan,
+  subscription?: {
     id: number,
     expired_at: TDateISO,
     canceled_at: TDateISO,
@@ -83,21 +86,26 @@ export interface User {
       amount: number
     }
   },
-  training_credits: Array<number>,
-  machine_credits: Array<{ machine_id: number, hours_used: number }>,
-  last_sign_in_at: TDateISO
-  validated_at: TDateISO,
-  tag_ids: Array<number>
+  training_credits?: Array<number>,
+  machine_credits?: Array<{ machine_id: number, hours_used: number }>,
+  last_sign_in_at?: TDateISO
+  validated_at?: TDateISO,
+  tag_ids?: Array<number>,
+  resource?: Plan // for users with role=partner, there will be the associated plan
 }
 
 type OrderingKey = 'last_name' | 'first_name' | 'email' | 'phone' | 'group' | 'plan' | 'id'
 
-export interface UserIndexFilter {
+export interface MemberIndexFilter {
   search?: string,
   filter?: 'inactive_for_3_years' | 'not_confirmed',
   order_by?: OrderingKey | `-${OrderingKey}`,
   page?: number,
   size?: number
+}
+
+export interface UserIndexFilter extends ApiFilter {
+  role?: 'partner' | 'manager'
 }
 
 const socialMappings = supportedNetworks.map(network => {
@@ -124,3 +132,5 @@ export const UserFieldMapping = Object.assign({
   is_allow_newsletter: 'user.is_allow_newsletter',
   group_id: 'user.group_id'
 }, ...socialMappings);
+
+export const UserFieldsReservedForPrivileged = ['invoicing_profile_attributes.external_id'];

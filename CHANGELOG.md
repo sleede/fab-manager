@@ -1,5 +1,49 @@
 # Changelog Fab-manager
 
+## v5.6.0 2023 January 5
+
+- Ability to group machines by categories
+- Ability to mark a machine as reservable or not
+- Ability to filter the admin's calendar
+- Private note on member's profile
+- Optional external identifier for users
+- Ability to disable generation of invoices at zero
+- Accounting data is now built each night and saved in database
+- Ability to define multiple accounting journal codes
+- Ability to change the name of the VAT
+- Ability to cancel a running subscription from the member edition view for admin/managers
+- OpenAPI endpoint to fetch accounting data
+- Add reservation deadline parameter (#414)
+- Verify current password at server side when changing password
+- Password strengh indicator
+- Updated OpenAPI documentation
+- Updated OpenID Connect documentation
+- OpenAPI users endpoint offer ability to filter by created_after
+- OpenAPI users endpoint return first name, last name, gender, organization and address
+- Default accounting codes and labels if not set
+- Active serving static files from the `/public` folder by default from rails
+- Display custom error message if the PDF invoice is not found
+- Report subsription mismatch with user's group
+- Added sentry for error reporting
+- Report details of the due for invoices related to a payment schedule
+- Fix a bug: unable to run test in negative timezones (#425)
+- Fix a bug: providing an array of attributes to filter OpenApi data, results in error
+- Fix a bug: unable to manage stocks on new products
+- Fix a bug: unsupported param[] syntax in OpenAPI
+- Fix a bug: unable to access in-system notifications if a slot was cancelled
+- Fix a bug: feature tour in admin/settings is broken
+- Fix a bug: clearing the new expiration date field in the offer days modal result in errors
+- Fix a bug: low stock notification is always sent if one of the stocks has reached the threshold
+- Fix a bug: unable to update title of availability after admin remove a machine/plan in calendar
+- Fix a bug: unable to access files from the public folder (like example.csv)
+- Fix a bug: unable to return to the statistics tab
+- Fix a bug: payment schedule by check result in error if payment mean was not changed
+- Fix a security issue: updated httparty to 0.21.0 to fix [GHSA-5pq7-52mg-hr42](https://github.com/advisories/GHSA-5pq7-52mg-hr42)
+- Updated react-modal to 3.16.1
+- Updated tiptap editor and its dependencies to 2.0.0-beta.204
+- [TODO DEPLOY] `rails db:seed`
+- [TODO DEPLOY] `rails fablab:setup:build_accounting_lines`
+
 ## v5.5.8 2022 December 16
 
 - Fix a bug: wrong reservations count for spaces in availabilities export (#415)
