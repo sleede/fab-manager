@@ -143,20 +143,31 @@ fr:
           save: "Enregistrer"
           browse: "Parcourir"
           edit: "Modifier"
-        reservations:
+        reservations_dashboard:
+          machine_section_title: "Réservations de machines"
+          space_section_title: "Réservations d'espaces"
           reservations_panel:
-            title_Space: "Mes réservations d'espace"
-            title_Machine: "Mes réservations de machines"
+            title: "Mes réservations"
             upcoming: "À venir"
-            past: "Passées"
-            slots_details: "Détails des créneaux"
-            no_reservations: "Aucune réservation"
+            date: "Date"
+            history: "Historique"
+            no_reservation: "Aucune réservation"
             show_more: "Afficher plus"
           credits_panel:
-            title_Space: "Mes crédits espace"
-            title_Machine: "Mes crédits machine"
-            reamaining_credits_html: "<strong>{NAME}</strong> : Vous pouvez réserver gratuitement <em>{REMAINING} {REMAINING, plural, one{créneau} other{créneaux}}</em>. Vous avez déjà utilisé {USED} {USED, plural, one{crédit} other{crédits}} de votre abonnement actuel."
+            title: "Mes crédits"
+            info: "Avec votre abonnement, vous bénéficiez de crédits gratuits que vous pouvez utiliser sur les réservations"
+            remaining_credits_html: "Vous pouvez réserver {REMAINING} {REMAINING, plural, one{créneau} other{créneaux}} gratuitement."
+            used_credits_html: "Vous avez déjà utilisé <strong> {USED} {USED, plural, =0{crédit} one{crédit} other{crédits}}</strong>."
             no_credits: "Vous n'avez pas encore de crédits. Certains abonnements peuvent vous permettre de réserver des créneaux gratuitement."
+          prepaid_packs_panel:
+            title: "Mes packs d'heures prépayées"
+            name: "Nom du pack d'heures prépayées"
+            end: "Expire le"
+            countdown: "Décompte"
+            history: "Historique"
+            consumed_hours: "H consommée(s)"
+            cta_info: "Vous pouvez acheter des packs d'heures prépayées pour les machines. Ces packs vous permettent de bénéficier de remises."
+            cta_button: "Acheter un pack"
       #public profil of a member
       members_show:
         members_list: "Liste des membres"
