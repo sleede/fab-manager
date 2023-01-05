@@ -1,5 +1,5 @@
-import { FormEvent, useEffect, useState } from 'react';
 import * as React from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import Select from 'react-select';
 import { useTranslation } from 'react-i18next';
 import { GatewayFormProps } from '../abstract-payment-modal';
@@ -11,6 +11,7 @@ import { PaymentSchedule } from '../../../models/payment-schedule';
 import { HtmlTranslate } from '../../base/html-translate';
 import CheckoutAPI from '../../../api/checkout';
 import { SelectOption } from '../../../models/select';
+import { PaymentMethod } from '../../../models/payment';
 
 const ALL_SCHEDULE_METHODS = ['card', 'check', 'transfer'] as const;
 type scheduleMethod = typeof ALL_SCHEDULE_METHODS[number];
@@ -28,6 +29,9 @@ export const LocalPaymentForm: React.FC<GatewayFormProps> = ({ onSubmit, onSucce
 
   useEffect(() => {
     setMethod(cart.payment_method || 'check');
+    if (cart.payment_method === '') {
+      cart.payment_method = PaymentMethod.Check;
+    }
   }, [cart]);
 
   /**

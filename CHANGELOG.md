@@ -34,6 +34,7 @@
 - Fix a bug: unable to update title of availability after admin remove a machine/plan in calendar
 - Fix a bug: unable to access files from the public folder (like example.csv)
 - Fix a bug: unable to return to the statistics tab
+- Fix a bug: payment schedule by check result in error if payment mean was not changed
 - Updated react-modal to 3.16.1
 - Updated tiptap editor and its dependencies to 2.0.0-beta.204
 - [TODO DEPLOY] `rails db:seed`
