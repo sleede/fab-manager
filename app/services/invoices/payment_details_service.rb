@@ -13,7 +13,7 @@ class Invoices::PaymentDetailsService
     # @return [String]
     def build(invoice, total)
       if invoice.is_a?(Avoir)
-        build_avoir_details(invoice)
+        build_avoir_details(invoice, total)
       else
         # subtract the wallet amount for this invoice from the total
         if invoice.wallet_amount
@@ -54,8 +54,9 @@ class Invoices::PaymentDetailsService
     private
 
     # @param invoice [Invoice]
+    # @param total [Float]
     # @return [String]
-    def build_avoir_details(invoice)
+    def build_avoir_details(invoice, total)
       details = "#{I18n.t('invoices.refund_on_DATE', DATE: I18n.l(invoice.avoir_date.to_date))} "
       case invoice.payment_method
       when 'stripe'
