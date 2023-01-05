@@ -98,6 +98,7 @@
     space_reservation_DESCRIPTION: "Reservasjon av plass/rom - %{DESCRIPTION}"
     training_reservation_DESCRIPTION: "Bestilling, opplæring/kurs - %{DESCRIPTION}"
     event_reservation_DESCRIPTION: "Arrangements-reservasjon - %{DESCRIPTION}"
+    from_payment_schedule: "Due {NUMBER} out of {TOTAL}, from {DATE}. Repayment schedule {SCHEDULE}"
     full_price_ticket:
       one: "En fullprisbillett"
       other: "%{count} full price tickets"
