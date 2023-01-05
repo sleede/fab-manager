@@ -98,6 +98,7 @@ fr:
     space_reservation_DESCRIPTION: "Réservation Espace - %{DESCRIPTION}"
     training_reservation_DESCRIPTION: "Réservation Formation - %{DESCRIPTION}"
     event_reservation_DESCRIPTION: "Réservation Événement - %{DESCRIPTION}"
+    from_payment_schedule: "Due {NUMBER} out of {TOTAL}, from {DATE}. Repayment schedule {SCHEDULE}"
     full_price_ticket:
       one: "Une place plein tarif"
       other: "%{count} places plein tarif"
