@@ -10,12 +10,13 @@ class PaymentScheduleItemWorker
       psi = PaymentScheduleItem.find(record_id)
       check_item(psi)
     else
-      PaymentScheduleItem.where.not(state: 'paid').where('due_date < ?', DateTime.current).each do |psi|
-        check_item(psi)
+      PaymentScheduleItem.where.not(state: 'paid').where('due_date < ?', DateTime.current).each do |item|
+        check_item(item)
       end
     end
   end
 
+  # @param psi [PaymentScheduleItem]
   def check_item(psi)
     # the following depends on the payment method (card/check)
     if psi.payment_schedule.payment_method == 'card'
@@ -26,9 +27,10 @@ class PaymentScheduleItemWorker
       NotificationCenter.call type: "notify_admin_payment_schedule_#{psi.payment_schedule.payment_method}_deadline",
                               receiver: User.admins_and_managers,
                               attached_object: psi
-      psi.update_attributes(state: 'pending')
+      psi.update(state: 'pending')
     end
-  rescue StandardError
-    psi.update_attributes(state: 'error')
+  rescue StandardError => e
+    Rails.logger.debug(e.backtrace)
+    psi.update(state: 'error')
   end
 end

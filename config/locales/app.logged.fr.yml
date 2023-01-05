@@ -155,7 +155,7 @@ fr:
           credits_panel:
             title_Space: "Mes crédits espace"
             title_Machine: "Mes crédits machine"
-            reamaining_credits_html: "<strong>{NAME}</strong> : Vous pouvez réserver gratuitement <em>{REMAINING} {REMAINING, plural, =0{créneau} one{créneau} other{créneaux}}</em>. Vous avez déjà utilisé {USED} {USED, plural, =0{crédit} one{crédit} other{crédits}} de votre abonnement actuel."
+            reamaining_credits_html: "<strong>{NAME}</strong> : Vous pouvez réserver gratuitement <em>{REMAINING} {REMAINING, plural, one{créneau} other{créneaux}}</em>. Vous avez déjà utilisé {USED} {USED, plural, one{crédit} other{crédits}} de votre abonnement actuel."
             no_credits: "Vous n'avez pas encore de crédits. Certains abonnements peuvent vous permettre de réserver des créneaux gratuitement."
       #public profil of a member
       members_show:

@@ -6,12 +6,14 @@ module Invoices; end
 # Build a label for the given invoice
 class Invoices::LabelService
   class << self
+    # @param invoice [Invoice]
+    # @return [String, nil]
     def build(invoice)
       username = Invoices::RecipientService.name(invoice)
       if invoice.is_a?(Avoir)
         avoir_label(invoice)
       else
-        case invoice.main_item.object_type
+        case invoice.main_item&.object_type
         when 'Reservation'
           reservation_invoice_label(invoice, username)
         when 'Subscription'
@@ -25,7 +27,7 @@ class Invoices::LabelService
         when 'OrderItem'
           I18n.t('invoices.order')
         else
-          Rails.logger.error "specified main_item.object_type type (#{invoice.main_item.object_type}) is unknown"
+          Rails.logger.error "specified main_item.object_type type (#{invoice.main_item&.object_type}) is unknown"
           nil
         end
       end
@@ -33,12 +35,17 @@ class Invoices::LabelService
 
     private
 
+    # @param invoice [Invoice]
+    # @return [String]
     def avoir_label(invoice)
-      return I18n.t('invoices.wallet_credit') if invoice.main_item.object_type == WalletTransaction.name
+      return I18n.t('invoices.wallet_credit') if invoice.main_item&.object_type == WalletTransaction.name
 
       I18n.t('invoices.cancellation_of_invoice_REF', REF: invoice.invoice.reference)
     end
 
+    # @param invoice [Invoice]
+    # @param username [String]
+    # @return [String]
     def reservation_invoice_label(invoice, username)
       label = I18n.t('invoices.reservation_of_USER_on_DATE_at_TIME',
                      USER: username,
@@ -55,6 +62,9 @@ class Invoices::LabelService
       label
     end
 
+    # @param subscription [Subscription]
+    # @param username [String]
+    # @return [String]
     def subscription_label(subscription, username)
       subscription_start_at = subscription.expired_at - subscription.plan.duration
       duration_verbose = I18n.t("duration.#{subscription.plan.interval}", count: subscription.plan.interval_count)
@@ -64,6 +74,9 @@ class Invoices::LabelService
              DATE: I18n.l(subscription_start_at.to_date))
     end
 
+    # @param offer_day [OfferDay]
+    # @param username [String]
+    # @return [String]
     def offer_day_label(offer_day, username)
       I18n.t('invoices.subscription_of_NAME_extended_starting_from_STARTDATE_until_ENDDATE',
              NAME: username,

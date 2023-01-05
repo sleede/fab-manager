@@ -54,7 +54,7 @@ class Invoice < PaymentDocument
 
   # for debug & used by rake task "fablab:maintenance:regenerate_invoices"
   def regenerate_invoice_pdf
-    pdf = ::PDF::Invoice.new(self, invoice_items.find_by(object_type: Subscription.name)&.object&.expiration_date).render
+    pdf = ::PDF::Invoice.new(self).render
     File.binwrite(file, pdf)
   end
 
@@ -199,7 +199,7 @@ class Invoice < PaymentDocument
                         "main_item.object_id(#{main_item.object_id}), " \
                         "main_item.object_type(#{main_item.object_type}), user_id(#{invoicing_profile.user_id})"
     end
-    InvoiceWorker.perform_async(id, user&.subscription&.expired_at)
+    InvoiceWorker.perform_async(id)
   end
 
   def log_changes

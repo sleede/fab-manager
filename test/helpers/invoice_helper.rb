@@ -31,7 +31,7 @@ module InvoiceHelper
 
   def generate_pdf(invoice)
     invoice_worker = InvoiceWorker.new
-    invoice_worker.perform(invoice.id, invoice&.user&.subscription&.expired_at)
+    invoice_worker.perform(invoice.id)
   end
 
   # Parse a line of text read from a PDF file and return the price included inside

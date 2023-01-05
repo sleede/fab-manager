@@ -7,6 +7,8 @@ module Invoices; end
 class Invoices::RecipientService
   class << self
     # Get the full name of the recipient for the given invoice.
+    # @param invoice [Invoice]
+    # @return [String]
     def name(invoice)
       if invoice.invoicing_profile.organization
         name = invoice.invoicing_profile.organization.name
@@ -17,11 +19,15 @@ class Invoices::RecipientService
     end
 
     # Get the street address of the recipient for the given invoice.
+    # @param invoice [Invoice]
+    # @return [String]
     def address(invoice)
       invoice.invoicing_profile&.invoicing_address
     end
 
     # Get the optional data in profile_custom_fields, if the recipient is an organization
+    # @param invoice [Invoice]
+    # @return [Array<String>]
     def organization_data(invoice)
       return unless invoice.invoicing_profile.organization
 

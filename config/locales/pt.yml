@@ -98,6 +98,7 @@ pt:
     space_reservation_DESCRIPTION: "Reserva de máquina - %{DESCRIPTION}"
     training_reservation_DESCRIPTION: "Reserva de treinamneto - %{DESCRIPTION}"
     event_reservation_DESCRIPTION: "Reserva de evento - %{DESCRIPTION}"
+    from_payment_schedule: "Due %{NUMBER} out of %{TOTAL}, from %{DATE}. Repayment schedule %{SCHEDULE}"
     full_price_ticket:
       one: "Um ticket de preço cheio"
       other: "%{count} tickets de preço cheio"

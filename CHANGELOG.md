@@ -23,6 +23,7 @@
 - Display custom error message if the PDF invoice is not found
 - Report subsription mismatch with user's group
 - Added sentry for error reporting
+- Report details of the due for invoices related to a payment schedule
 - Fix a bug: unable to run test in negative timezones (#425)
 - Fix a bug: providing an array of attributes to filter OpenApi data, results in error
 - Fix a bug: unable to manage stocks on new products
