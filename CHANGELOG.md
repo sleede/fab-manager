@@ -1,5 +1,6 @@
 # Changelog Fab-manager
 
+- Fix a bug: allow decimal values for VAT rates
 - Fix a bug: canceled reservations/slots not shown as it in the reservations dashboard
 - Fix a bug: no main item on some invoices
 - Fix a bug: unable to build accounting lines if no invoices

@@ -115,6 +115,7 @@ export const VatSettingsModal: React.FC<VatSettingsModalProps> = ({ isOpen, togg
                          rules={{ required: true }}
                          tooltip={t('app.admin.vat_settings_modal.VAT_rate_help')}
                          type='number'
+                         step={0.001}
                          label={t('app.admin.vat_settings_modal.VAT_rate')}
                          addOn={<ClockCounterClockwise size={24}/>}
                          addOnAriaLabel={t('app.admin.vat_settings_modal.show_history')}
@@ -132,6 +133,7 @@ export const VatSettingsModal: React.FC<VatSettingsModalProps> = ({ isOpen, togg
             <FormInput register={register}
                        id="invoice_VAT-rate_Product"
                        type='number'
+                       step={0.001}
                        label={t('app.admin.vat_settings_modal.VAT_rate_product')}
                        addOn={<ClockCounterClockwise size={24}/>}
                        addOnAriaLabel={t('app.admin.vat_settings_modal.show_history')}
@@ -143,6 +145,7 @@ export const VatSettingsModal: React.FC<VatSettingsModalProps> = ({ isOpen, togg
             <FormInput register={register}
                        id="invoice_VAT-rate_Event"
                        type='number'
+                       step={0.001}
                        label={t('app.admin.vat_settings_modal.VAT_rate_event')}
                        addOn={<ClockCounterClockwise size={24}/>}
                        addOnAriaLabel={t('app.admin.vat_settings_modal.show_history')}
@@ -154,6 +157,7 @@ export const VatSettingsModal: React.FC<VatSettingsModalProps> = ({ isOpen, togg
             <FormInput register={register}
                        id="invoice_VAT-rate_Machine"
                        type='number'
+                       step={0.001}
                        label={t('app.admin.vat_settings_modal.VAT_rate_machine')}
                        addOn={<ClockCounterClockwise size={24}/>}
                        addOnAriaLabel={t('app.admin.vat_settings_modal.show_history')}
@@ -165,6 +169,7 @@ export const VatSettingsModal: React.FC<VatSettingsModalProps> = ({ isOpen, togg
             <FormInput register={register}
                        id="invoice_VAT-rate_Subscription"
                        type='number'
+                       step={0.001}
                        label={t('app.admin.vat_settings_modal.VAT_rate_subscription')}
                        addOn={<ClockCounterClockwise size={24}/>}
                        addOnAriaLabel={t('app.admin.vat_settings_modal.show_history')}
@@ -176,6 +181,7 @@ export const VatSettingsModal: React.FC<VatSettingsModalProps> = ({ isOpen, togg
             <FormInput register={register}
                        id="invoice_VAT-rate_Space"
                        type='number'
+                       step={0.001}
                        label={t('app.admin.vat_settings_modal.VAT_rate_space')}
                        addOn={<ClockCounterClockwise size={24}/>}
                        addOnAriaLabel={t('app.admin.vat_settings_modal.show_history')}
@@ -187,6 +193,7 @@ export const VatSettingsModal: React.FC<VatSettingsModalProps> = ({ isOpen, togg
             <FormInput register={register}
                        id="invoice_VAT-rate_Training"
                        type='number'
+                       step={0.001}
                        label={t('app.admin.vat_settings_modal.VAT_rate_training')}
                        addOn={<ClockCounterClockwise size={24}/>}
                        addOnAriaLabel={t('app.admin.vat_settings_modal.show_history')}
