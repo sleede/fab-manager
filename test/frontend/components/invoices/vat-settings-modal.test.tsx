@@ -26,6 +26,7 @@ describe('VatSettingsModal', () => {
       expect(screen.getByLabelText(/app.admin.vat_settings_modal.enable_VAT/)).toBeChecked();
     });
     fireEvent.click(screen.getByRole('button', { name: /app.admin.vat_settings_modal.advanced/, hidden: true }));
+    expect(screen.getByLabelText(/app.admin.vat_settings_modal.VAT_rate/, { selector: '#invoice_VAT-rate' })).toBeInTheDocument();
     expect(screen.getByLabelText(/app.admin.vat_settings_modal.VAT_rate_product/)).toBeInTheDocument();
     expect(screen.getByLabelText(/app.admin.vat_settings_modal.VAT_rate_event/)).toBeInTheDocument();
     expect(screen.getByLabelText(/app.admin.vat_settings_modal.VAT_rate_machine/)).toBeInTheDocument();
@@ -43,5 +44,15 @@ describe('VatSettingsModal', () => {
     await waitFor(() => {
       expect(screen.getByRole('heading', { name: /app.admin.setting_history_modal.title/, hidden: true })).toBeInTheDocument();
     });
+  });
+
+  test('input 3 decimals rate', async () => {
+    render(<VatSettingsModal isOpen={true} toggleModal={toggleModal} onError={onError} onSuccess={onSuccess} />);
+    await waitFor(() => {
+      expect(screen.getByLabelText(/app.admin.vat_settings_modal.enable_VAT/)).toBeChecked();
+    });
+    const input = screen.getByLabelText(/app.admin.vat_settings_modal.VAT_rate/, { selector: '#invoice_VAT-rate' });
+    fireEvent.change(input, { target: { value: 14.976 } });
+    expect(input).toHaveValue(14.976);
   });
 });

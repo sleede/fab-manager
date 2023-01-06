@@ -12,9 +12,7 @@ namespace :fablab do
 
     desc 'add missing VAT rate to history'
     task :add_vat_rate, %i[rate date] => :environment do |_task, args|
-      unless args.rate && args.date
-        raise 'Missing argument. Usage exemple: rails fablab:setup:add_vat_rate[20,2014-01-01]. Use 0 to disable'
-      end
+      raise 'Missing argument. Usage exemple: rails fablab:setup:add_vat_rate[20,2014-01-01]. Use 0 to disable' unless args.rate && args.date
 
       if args.rate == '0'
         setting = Setting.find_by(name: 'invoice_VAT-active')
@@ -129,7 +127,7 @@ namespace :fablab do
 
     desc 'generate acconting lines'
     task build_accounting_lines: :environment do
-      start_date = Invoice.order(created_at: :asc).first&.created_at
+      start_date = Invoice.order(created_at: :asc).first&.created_at || DateTime.current
       end_date = DateTime.current
       AccountingLine.where(date: start_date..end_date).destroy_all
       Accounting::AccountingService.new.build(start_date&.beginning_of_day, end_date.end_of_day)

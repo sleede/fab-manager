@@ -1,5 +1,17 @@
 # Changelog Fab-manager
 
+## v5.6.1 2023 January 6
+
+- Fix a bug: allow decimal values for VAT rates
+- Fix a bug: canceled reservations/slots not shown as it in the reservations dashboard
+- Fix a bug: no main item on some invoices
+- Fix a bug: unable to build accounting lines if no invoices
+- Fix a bug: unable to apply rounding correction on accounting lines
+- Fix a bug: empty object for some invoice item
+- Fix a bug: unable to filter Show only slots with reservations in public calendar for admin
+- Fix a security issue: updated json5 to 1.0.2 to fix [CVE-2022-46175](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-46175)
+- [TODO DEPLOY] `rails fablab:fix_invoice_items` => run this script BEFORE running the migrations
+
 ## v5.6.0 2023 January 5
 
 - Ability to group machines by categories

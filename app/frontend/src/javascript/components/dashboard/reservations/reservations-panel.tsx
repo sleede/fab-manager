@@ -90,17 +90,24 @@ const ReservationsPanel: React.FC<SpaceReservationsProps> = ({ userId, onError, 
   };
 
   /**
+   * Check if all slots of the given reservation are canceled
+   */
+  const isCancelled = (reservation: Reservation): boolean => {
+    return reservation.slots_reservations_attributes.map(sr => sr.canceled_at).every(ca => ca != null);
+  };
+
+  /**
    * Render the reservation in a user-friendly way
    */
   const renderReservation = (reservation: Reservation, state: 'past' | 'futur'): ReactNode => {
     return (
       <li key={reservation.id} className="reservation">
-        <a className={`reservation-title ${details[reservation.id] ? 'clicked' : ''}`} onClick={toggleDetails(reservation.id)}>
+        <a className={`reservation-title ${details[reservation.id] ? 'clicked' : ''} ${isCancelled(reservation) ? 'canceled' : ''}`} onClick={toggleDetails(reservation.id)}>
           {reservation.reservable.name} - {FormatLib.date(reservation.slots_reservations_attributes[0].slot_attributes.start_at)}
         </a>
         {details[reservation.id] && <FabPopover title={t('app.logged.dashboard.reservations.reservations_panel.slots_details')}>
           {reservation.slots_reservations_attributes.filter(s => filterSlot(s, state)).map(
-            slotReservation => <span key={slotReservation.id} className="slot-details">
+            slotReservation => <span key={slotReservation.id} className={`slot-details ${slotReservation.canceled_at ? 'canceled' : ''}`}>
               {FormatLib.date(slotReservation.slot_attributes.start_at)}, {FormatLib.time(slotReservation.slot_attributes.start_at)} - {FormatLib.time(slotReservation.slot_attributes.end_at)}
             </span>
           )}

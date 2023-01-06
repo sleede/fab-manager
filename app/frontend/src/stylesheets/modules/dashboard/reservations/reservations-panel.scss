@@ -8,9 +8,16 @@
       &.clicked {
         color: var(--secondary-dark);
       }
+      &.canceled {
+        text-decoration: line-through;
+      }
     }
     .slot-details {
       display: block;
+
+      &.canceled {
+        text-decoration: line-through;
+      }
     }
 
     .fab-popover {

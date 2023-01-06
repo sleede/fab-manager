@@ -169,6 +169,6 @@ class Accounting::AccountingService
 
     diff = debit_sum - credit_sum
     fixable_line = lines.filter { |l| l[:line_type] == 'payment' }.last
-    fixable_line.credit += diff
+    fixable_line[:credit] += diff
   end
 end

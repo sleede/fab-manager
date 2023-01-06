@@ -132,7 +132,12 @@ class Invoice < PaymentDocument
   end
 
   def main_item
-    invoice_items.where(main: true).first
+    main = invoice_items.where(main: true).first
+    if main.nil?
+      main = invoice_items.order(id: :asc).first
+      main&.update(main: true)
+    end
+    main
   end
 
   def other_items

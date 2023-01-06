@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_12_27_141529) do
+ActiveRecord::Schema.define(version: 2023_01_06_081943) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
@@ -331,8 +331,8 @@ ActiveRecord::Schema.define(version: 2022_12_27_141529) do
     t.text "description"
     t.integer "invoice_item_id"
     t.string "footprint"
-    t.string "object_type"
-    t.bigint "object_id"
+    t.string "object_type", null: false
+    t.bigint "object_id", null: false
     t.boolean "main"
     t.index ["invoice_id"], name: "index_invoice_items_on_invoice_id"
     t.index ["object_type", "object_id"], name: "index_invoice_items_on_object_type_and_object_id"
