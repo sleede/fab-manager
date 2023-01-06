@@ -250,8 +250,7 @@ ActiveRecord::Schema.define(version: 2023_01_06_081943) do
     t.index ["user_id"], name: "index_exports_on_user_id"
   end
 
-  create_table "footprint_debugs", id: false, force: :cascade do |t|
-    t.bigserial "id", null: false
+  create_table "footprint_debugs", force: :cascade do |t|
     t.string "footprint"
     t.string "data"
     t.string "klass"
@@ -416,8 +415,7 @@ ActiveRecord::Schema.define(version: 2023_01_06_081943) do
     t.bigint "machine_id", null: false
   end
 
-  create_table "notifications", id: false, force: :cascade do |t|
-    t.serial "id", null: false
+  create_table "notifications", id: :serial, force: :cascade do |t|
     t.integer "receiver_id"
     t.integer "attached_object_id"
     t.string "attached_object_type"
