@@ -418,11 +418,26 @@ en:
         status_enabled: "Enabled"
         status_disabled: "Disabled"
         status_all: "All"
+        trainings_settings: "Settings"
       #create a new training
       trainings_new:
         add_a_new_training: "Add a new training"
         beware_when_creating_a_training_its_reservation_prices_are_initialized_to_zero: "Beware, when creating a training, its reservation prices are initialized at zero."
         dont_forget_to_change_them_before_creating_slots_for_this_training: "Don't forget to change them before creating slots for this training."
+      trainings_settings:
+        title: "Settings"
+        automatic_cancellation: "Trainings automatic cancellation"
+        automatic_cancellation_info: "If this setting is activated, a minimum number of participants will be required to maintain a session. You will be notified by email if a session is cancelled. If the wallet is enabled, credit notes and refunds will be automatic, otherwise you will have to generate credit notes and make refunds manually."
+        automatic_cancellation_switch: "Activate automatic cancellation of the trainings"
+        automatic_cancellation_threshold: "Minimum number of registrations to maintain a session"
+        automatic_cancellation_deadline: "Deadline, in hours, before automatic cancellation"
+        generic_text_block: "Generic text block"
+        generic_text_block_info: "Displays an editorial block above the list of trainings visible to members."
+        generic_text_block_switch: "Display editorial block"
+        cta_switch: "Display a button"
+        cta_label: "Button label"
+        cta_url: "url"
+        save: "Save"
       #events tracking and management
       events:
         events_monitoring: "Events monitoring"
@@ -2278,7 +2293,7 @@ en:
             newest: "Newest first"
             oldest: "Oldest first"
       store_settings:
-        title: 'Settings'
+        title: "Settings"
         withdrawal_instructions: 'Product withdrawal instructions'
         withdrawal_info: "This text is displayed on the checkout page to inform the client about the products withdrawal method"
         store_hidden_title: "Store publicly available"

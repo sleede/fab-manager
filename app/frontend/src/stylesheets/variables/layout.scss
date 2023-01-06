@@ -1,0 +1,5 @@
+@mixin grid-col($col-count) {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat($col-count, minmax(0, 1fr));
+}

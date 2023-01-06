@@ -1,0 +1,37 @@
+.trainings-settings {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding-bottom: 6rem;
+  @include grid-col(12);
+  gap: 3.2rem;
+  align-items: flex-start;
+  header {
+    @include header();
+    padding-bottom: 0;
+    grid-column: 2 / -2;
+  }
+
+  &-content {
+    grid-column: 2 / -2;
+    @include grid-col(2);
+    gap: 2.4rem 3.2rem;
+
+    .setting-section { grid-column: 1 / -1; }
+    @media (min-width: 1024px) {
+      .setting-section { grid-column: span 1; }
+    }
+    .section-title { @include title-base; }
+    .save-btn {
+      grid-column: 1 / -1;
+      justify-self: flex-start;
+      background-color: var(--main);
+      color: var(--gray-soft-lightest);
+      border: none;
+      &:hover {
+        background-color: var(--main);
+        color: var(--gray-soft-lightest);
+        opacity: 0.75;
+      }
+    }
+  }
+}

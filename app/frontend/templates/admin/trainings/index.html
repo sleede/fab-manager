@@ -33,6 +33,9 @@
 
     <div class="col-md-12">
       <uib-tabset justified="true" active="tabs.active">
+        <uib-tab heading="{{ 'app.admin.trainings.trainings_settings' | translate }}" index="1" class="manage-trainings">
+          <trainings-settings on-error="onError" on-success="on-success"></trainings-settings>
+        </uib-tab>
         <uib-tab heading="{{ 'app.admin.trainings.trainings' | translate }}" index="0" class="manage-trainings">
           <div class="m-t m-b">
             <button type="button" class="btn btn-warning" ui-sref="app.admin.trainings_new" ng-show="isAuthorized('admin')">
@@ -78,7 +81,7 @@
           </table>
         </uib-tab>
 
-        <uib-tab heading="{{ 'app.admin.trainings.trainings_monitoring' | translate }}" class="post-tracking" index="1">
+        <uib-tab heading="{{ 'app.admin.trainings.trainings_monitoring' | translate }}" class="post-tracking" index="2">
           <div class="m-lg">
             <label for="training_select" translate>{{ 'app.admin.trainings.select_a_training' }}</label>
             <select ng-options="training as training.name for training in trainings" ng-model="monitoring.training" class="form-control" ng-change="selectTrainingToMonitor()" name="training_select">

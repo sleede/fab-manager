@@ -1,7 +1,8 @@
 @import "variables/animations";
 @import "variables/colors";
-@import "variables/typography";
 @import "variables/decoration";
+@import "variables/layout";
+@import "variables/typography";
 @import "app.functions";
 @import "bootstrap_and_overrides";
 
@@ -139,6 +140,7 @@
 @import "modules/supporting-documents/supporting-documents-type-form";
 @import "modules/supporting-documents/supporting-documents-types-list";
 @import "modules/trainings/training-form";
+@import "modules/trainings/trainings-settings";
 @import "modules/user/avatar";
 @import "modules/user/avatar-input";
 @import "modules/user/change-password";

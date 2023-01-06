@@ -22,12 +22,13 @@ interface FormInputProps<TFieldValues, TInputType> extends FormComponent<TFieldV
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void,
   nullable?: boolean,
   ariaLabel?: string,
+  maxLength?: number
 }
 
 /**
  * This component is a template for an input component to use within React Hook Form
  */
-export const FormInput = <TFieldValues extends FieldValues, TInputType>({ id, register, label, tooltip, defaultValue, icon, className, rules, disabled, type, addOn, addOnAction, addOnClassName, addOnAriaLabel, placeholder, error, warning, formState, step, onChange, debounce, accept, nullable = false, ariaLabel }: FormInputProps<TFieldValues, TInputType>) => {
+export const FormInput = <TFieldValues extends FieldValues, TInputType>({ id, register, label, tooltip, defaultValue, icon, className, rules, disabled, type, addOn, addOnAction, addOnClassName, addOnAriaLabel, placeholder, error, warning, formState, step, onChange, debounce, accept, nullable = false, ariaLabel, maxLength }: FormInputProps<TFieldValues, TInputType>) => {
   /**
    * Debounced (ie. temporised) version of the 'on change' callback.
    */
@@ -70,7 +71,8 @@ export const FormInput = <TFieldValues extends FieldValues, TInputType>({ id, re
           step={step}
           disabled={typeof disabled === 'function' ? disabled(id) : disabled}
           placeholder={placeholder}
-          accept={accept} />
+          accept={accept}
+          maxLength={maxLength} />
         {(type === 'file' && placeholder) && <span className='fab-button is-black file-placeholder'>{placeholder}</span>}
         {addOn && addOnAction && <button aria-label={addOnAriaLabel} type="button" onClick={addOnAction} className={`addon ${addOnClassName || ''} is-btn`}>{addOn}</button>}
         {addOn && !addOnAction && <span aria-label={addOnAriaLabel} className={`addon ${addOnClassName || ''}`}>{addOn}</span>}
