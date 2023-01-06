@@ -2,6 +2,7 @@
 
 - Improved fix_invoice_item task
 - Fix a bug: cryptic error message when failed to create a manager
+- Fix a bug: unable to restore accounting periods closed by a deleted admin
 
 ## v5.6.1 2023 January 6
 
