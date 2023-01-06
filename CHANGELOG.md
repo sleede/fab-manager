@@ -1,5 +1,6 @@
 # Changelog Fab-manager
 
+- Fix a bug: no main item on some invoices
 - Fix a bug: unable to build accounting lines if no invoices
 - Fix a bug: unable to apply rounding correction on accounting lines
 - Fix a bug: empty object for some invoice item
