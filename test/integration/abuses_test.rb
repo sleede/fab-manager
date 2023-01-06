@@ -3,19 +3,6 @@
 require 'test_helper'
 
 class AbusesTest < ActionDispatch::IntegrationTest
-  # Called before every test method runs. Can be used
-  # to set up fixture information.
-  def setup
-    # Do nothing
-  end
-
-  # Called after every test method runs. Can be used to tear
-  # down fixture information.
-
-  def teardown
-    # Do nothing
-  end
-
   # Abuse report
   test 'visitor report an abuse' do
     project = Project.take
@@ -43,7 +30,9 @@ class AbusesTest < ActionDispatch::IntegrationTest
     assert_equal 'Project', abuse[:reporting][:signaled_type], 'signaled object type mismatch'
 
     # Check notifications were sent for every admins
-    notifications = Notification.where(notification_type_id: NotificationType.find_by_name('notify_admin_abuse_reported'), attached_object_type: 'Abuse', attached_object_id: abuse[:reporting][:id])
+    notifications = Notification.where(notification_type_id: NotificationType.find_by_name('notify_admin_abuse_reported'), # rubocop:disable Rails/DynamicFindBy
+                                       attached_object_type: 'Abuse',
+                                       attached_object_id: abuse[:reporting][:id])
     assert_not_empty notifications, 'no notifications were created'
     notified_users_ids = notifications.map(&:receiver_id)
     User.admins.each do |adm|
@@ -69,6 +58,40 @@ class AbusesTest < ActionDispatch::IntegrationTest
          headers: default_headers
 
     assert_equal 422, response.status, response.body
-    assert_match /can't be blank/, response.body
+    assert_match(/can't be blank/, response.body)
+  end
+
+  test 'admin list all abuses' do
+    login_as(User.admins.first, scope: :user)
+
+    get '/api/abuses'
+    # Check response format & status
+    assert_equal 200, response.status, response.body
+    assert_equal Mime[:json], response.content_type
+
+    # Check the abuses
+    abuses = json_response(response.body)
+    assert_equal Abuse.count, abuses[:abuses].length
+    assert_not_nil abuses[:abuses].first[:id]
+    assert_not_nil abuses[:abuses].first[:signaled_type]
+    assert_not_nil abuses[:abuses].first[:signaled_id]
+    assert_not_nil abuses[:abuses].first[:first_name]
+    assert_not_nil abuses[:abuses].first[:last_name]
+    assert_not_nil abuses[:abuses].first[:email]
+    assert_not_nil abuses[:abuses].first[:message]
+    assert_not_nil abuses[:abuses].first[:created_at]
+    assert_not_nil abuses[:abuses].first[:signaled]
+    assert_not_nil abuses[:abuses].first[:signaled][:name]
+    assert_not_nil abuses[:abuses].first[:signaled][:slug]
+    assert_not_nil abuses[:abuses].first[:signaled][:published_at]
+    assert_not_nil abuses[:abuses].first[:signaled][:author]
+  end
+
+  test 'admin delete an abuse' do
+    login_as(User.admins.first, scope: :user)
+
+    delete '/api/abuses/1'
+    assert_response :success
+    assert_empty response.body
   end
 end

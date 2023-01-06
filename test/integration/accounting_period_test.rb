@@ -76,8 +76,8 @@ class AccountingPeriodTest < ActionDispatch::IntegrationTest
   end
 
   test 'admin tries to close today' do
-    start_at = Date.today.beginning_of_day.iso8601
-    end_at = Date.today.end_of_day.iso8601
+    start_at = DateTime.current.beginning_of_day.iso8601
+    end_at = DateTime.current.end_of_day.iso8601
 
     post '/api/accounting_periods',
          params: {
@@ -110,6 +110,17 @@ class AccountingPeriodTest < ActionDispatch::IntegrationTest
     period_id = AccountingPeriod.first.id
     get "/api/accounting_periods/#{period_id}/archive"
 
-    assert_match /^attachment; filename=/, response.headers['Content-Disposition']
+    assert_match(/^attachment; filename=/, response.headers['Content-Disposition'])
+  end
+
+  test 'list all periods' do
+    get '/api/accounting_periods'
+    # Check response format & status
+    assert_equal 200, response.status, response.body
+    assert_equal Mime[:json], response.content_type
+
+    # Check the periods
+    periods = json_response(response.body)
+    assert_equal AccountingPeriod.count, periods.length
   end
 end
