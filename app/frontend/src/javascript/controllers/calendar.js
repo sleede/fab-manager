@@ -59,7 +59,8 @@ Application.Controllers.controller('CalendarController', ['$scope', '$state', '$
         spaces: isSelectAll('spaces', scope),
         externals: isSelectAll('externals', scope),
         evt: filter.evt,
-        dispo: filter.dispo
+        dispo: filter.dispo,
+        reserved: filter.reserved
       });
       scope.machinesGroupByCategory.forEach(c => c.checked = _.every(c.machines, 'checked'));
       // remove all
@@ -319,7 +320,7 @@ Application.Controllers.controller('CalendarController', ['$scope', '$state', '$
       const t = $scope.trainings.filter(t => t.checked).map(t => t.id);
       const m = $scope.machines.filter(m => m.checked).map(m => m.id);
       const s = $scope.spaces.filter(s => s.checked).map(s => s.id);
-      return { t, m, s, evt: $scope.filter.evt, dispo: $scope.filter.dispo };
+      return { t, m, s, evt: $scope.filter.evt, dispo: $scope.filter.dispo, reserved: $scope.filter.reserved };
     };
 
     const availabilitySourceUrl = () => `/api/availabilities/public?${$.param(getFilter())}`;
