@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- Fix a bug: cryptic error message when failed to create a manager
+
 ## v5.6.1 2023 January 6
 
 - Fix a bug: allow decimal values for VAT rates

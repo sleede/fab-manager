@@ -1262,7 +1262,7 @@ Application.Controllers.controller('NewManagerController', ['$state', '$scope', 
           return $state.go('app.admin.members');
         }
         , function (error) {
-          growl.error(_t('app.admin.admins_new.failed_to_create_manager') + JSON.stringify(error.data ? error.data : error));
+          growl.error(_t('app.admin.manager_new.failed_to_create_manager') + JSON.stringify(error.data ? error.data : error));
           console.error(error);
         }
       );
