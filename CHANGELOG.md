@@ -1,5 +1,6 @@
 # Changelog Fab-manager
 
+- Improved fix_invoice_item task
 - Fix a bug: cryptic error message when failed to create a manager
 
 ## v5.6.1 2023 January 6
