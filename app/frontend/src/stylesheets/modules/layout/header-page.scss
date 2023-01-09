@@ -5,7 +5,7 @@
   grid-template-columns: min-content 1fr min-content;
   background-color: var(--gray-soft-lightest);
   border-bottom: 1px solid var(--gray-soft-dark);
-  
+
   .back {
     width: 9rem;
     border-right: 1px solid var(--gray-soft-dark);
@@ -33,5 +33,10 @@
   .right {
     min-width: 9rem;
     border-left: 1px solid var(--gray-soft-dark);
+    .grpBtn {
+      display: flex;
+      align-items: center;
+      gap: 1.6rem;
+    }
   }
 }
