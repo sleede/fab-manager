@@ -2,16 +2,16 @@
 
 require 'test_helper'
 
-class CategoriesTest < ActionDispatch::IntegrationTest
+class EventThemesTest < ActionDispatch::IntegrationTest
   def setup
     @admin = User.find_by(username: 'admin')
     login_as(@admin, scope: :user)
   end
 
-  test 'create a category' do
-    post '/api/categories',
+  test 'create an event theme' do
+    post '/api/event_themes',
          params: {
-           name: 'Workshop'
+           name: 'Cuisine'
          }.to_json,
          headers: default_headers
 
@@ -19,18 +19,18 @@ class CategoriesTest < ActionDispatch::IntegrationTest
     assert_equal 201, response.status, response.body
     assert_equal Mime[:json], response.content_type
 
-    # Check the correct category was created
+    # Check the correct event theme was created
     res = json_response(response.body)
-    cat = Category.where(id: res[:id]).first
-    assert_not_nil cat, 'category was not created in database'
+    theme = EventTheme.where(id: res[:id]).first
+    assert_not_nil theme, 'event theme was not created in database'
 
-    assert_equal 'Workshop', res[:name]
+    assert_equal 'Cuisine', res[:name]
   end
 
-  test 'update a category' do
-    patch '/api/categories/1',
+  test 'update an event theme' do
+    patch '/api/event_themes/1',
           params: {
-            name: 'Stage pratique'
+            name: 'DIY'
           }.to_json,
           headers: default_headers
 
@@ -38,31 +38,31 @@ class CategoriesTest < ActionDispatch::IntegrationTest
     assert_equal 200, response.status, response.body
     assert_equal Mime[:json], response.content_type
 
-    # Check the category was updated
+    # Check the event theme was updated
     res = json_response(response.body)
     assert_equal 1, res[:id]
-    assert_equal 'Stage pratique', res[:name]
+    assert_equal 'DIY', res[:name]
   end
 
-  test 'list all categories' do
-    get '/api/categories'
+  test 'list all event themes' do
+    get '/api/event_themes'
 
     # Check response format & status
     assert_equal 200, response.status, response.body
     assert_equal Mime[:json], response.content_type
 
     # Check the list items are ok
-    cats = json_response(response.body)
-    assert_equal Category.count, cats.count
+    themes = json_response(response.body)
+    assert_equal EventTheme.count, themes.count
   end
 
-  test 'delete a category' do
-    cat = Category.create!(name: 'delete me')
-    delete "/api/categories/#{cat.id}"
+  test 'delete an event theme' do
+    theme = EventTheme.create!(name: 'delete me')
+    delete "/api/event_themes/#{theme.id}"
     assert_response :success
     assert_empty response.body
     assert_raise ActiveRecord::RecordNotFound do
-      cat.reload
+      theme.reload
     end
   end
 end

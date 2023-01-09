@@ -41,7 +41,7 @@ class AgeRangesTest < ActionDispatch::IntegrationTest
     # Check the age range was updated
     res = json_response(response.body)
     assert_equal 1, res[:id]
-    assert_equal res[:name], "Jusqu'à 17 ans"
+    assert_equal "Jusqu'à 17 ans", res[:name]
   end
 
   test 'list all age ranges' do

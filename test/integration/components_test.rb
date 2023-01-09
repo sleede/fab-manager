@@ -2,16 +2,16 @@
 
 require 'test_helper'
 
-class CategoriesTest < ActionDispatch::IntegrationTest
+class ComponentsTest < ActionDispatch::IntegrationTest
   def setup
     @admin = User.find_by(username: 'admin')
     login_as(@admin, scope: :user)
   end
 
-  test 'create a category' do
-    post '/api/categories',
+  test 'create a component' do
+    post '/api/components',
          params: {
-           name: 'Workshop'
+           name: 'Wood'
          }.to_json,
          headers: default_headers
 
@@ -19,18 +19,18 @@ class CategoriesTest < ActionDispatch::IntegrationTest
     assert_equal 201, response.status, response.body
     assert_equal Mime[:json], response.content_type
 
-    # Check the correct category was created
+    # Check the correct component was created
     res = json_response(response.body)
-    cat = Category.where(id: res[:id]).first
-    assert_not_nil cat, 'category was not created in database'
+    comp = Component.where(id: res[:id]).first
+    assert_not_nil comp, 'component was not created in database'
 
-    assert_equal 'Workshop', res[:name]
+    assert_equal 'Wood', res[:name]
   end
 
-  test 'update a category' do
-    patch '/api/categories/1',
+  test 'update a component' do
+    patch '/api/components/1',
           params: {
-            name: 'Stage pratique'
+            name: 'Silicon'
           }.to_json,
           headers: default_headers
 
@@ -38,31 +38,31 @@ class CategoriesTest < ActionDispatch::IntegrationTest
     assert_equal 200, response.status, response.body
     assert_equal Mime[:json], response.content_type
 
-    # Check the category was updated
+    # Check the component was updated
     res = json_response(response.body)
     assert_equal 1, res[:id]
-    assert_equal 'Stage pratique', res[:name]
+    assert_equal 'Silicon', res[:name]
   end
 
-  test 'list all categories' do
-    get '/api/categories'
+  test 'list all components' do
+    get '/api/components'
 
     # Check response format & status
     assert_equal 200, response.status, response.body
     assert_equal Mime[:json], response.content_type
 
     # Check the list items are ok
-    cats = json_response(response.body)
-    assert_equal Category.count, cats.count
+    comps = json_response(response.body)
+    assert_equal Component.count, comps.count
   end
 
-  test 'delete a category' do
-    cat = Category.create!(name: 'delete me')
-    delete "/api/categories/#{cat.id}"
+  test 'delete a component' do
+    comp = Component.create!(name: 'delete me')
+    delete "/api/components/#{comp.id}"
     assert_response :success
     assert_empty response.body
     assert_raise ActiveRecord::RecordNotFound do
-      cat.reload
+      comp.reload
     end
   end
 end
