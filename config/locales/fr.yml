@@ -216,6 +216,7 @@ fr:
     organization_address: "Adresse de la structure"
     man: "Homme"
     woman: "Femme"
+    other: "Autre"
     without_subscriptions: "Sans Abonnement"
   #machines/trainings/events reservations list to EXCEL format
   export_reservations:
@@ -478,6 +479,7 @@ fr:
     type: "Type"
     male: "Homme"
     female: "Femme"
+    other: "Autre"
     deleted_user: "Utilisateur supprimé"
   #initial price's category for events, created to replace the old "reduced amount" property
   price_category:

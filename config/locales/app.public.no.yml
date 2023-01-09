@@ -63,6 +63,7 @@
         create_your_account: "Opprett konto"
         man: "Mann"
         woman: "Kvinne"
+        other: "Annet"
         gender_is_required: "Kjønn er nødvendig."
         your_first_name: "Fornavn"
         first_name_is_required: "Fornavn er påkrevd."

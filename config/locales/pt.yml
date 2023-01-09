@@ -216,6 +216,7 @@ pt:
     organization_address: "Endereço da organização"
     man: "Homem"
     woman: "Mulher"
+    other: "Other"
     without_subscriptions: "Sem assinaturas"
   #machines/trainings/events reservations list to EXCEL format
   export_reservations:
@@ -478,6 +479,7 @@ pt:
     type: "Tipo"
     male: "Homem"
     female: "Mulher"
+    other: "Other"
     deleted_user: "Deleted user"
   #initial price's category for events, created to replace the old "reduced amount" property
   price_category:

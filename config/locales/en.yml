@@ -478,6 +478,7 @@ en:
     type: "Type"
     male: "Man"
     female: "Woman"
+    other: "Other"
     deleted_user: "Deleted user"
   #initial price's category for events, created to replace the old "reduced amount" property
   price_category:

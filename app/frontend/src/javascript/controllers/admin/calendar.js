@@ -510,11 +510,11 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
     /**
      * Return an enumerable meaninful string for the gender of the provider user
      * @param user {Object} Database user record
-     * @return {string} 'male' or 'female'
+     * @return {string} 'male', 'female' or "other"
      */
     const getGender = function (user) {
       if (user.statistic_profile_attributes) {
-        if (user.statistic_profile_attributes.gender === 'true') { return 'male'; } else { return 'female'; }
+        if (user.statistic_profile_attributes.gender === 'male') { return 'male'; } else if (user.statistic_profile_attributes.gender === 'female') { return 'female'; }
       } else { return 'other'; }
     };
 

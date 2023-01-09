@@ -105,6 +105,7 @@ fr:
       gender_input:
         man: "Homme"
         woman: "Femme"
+        other: "Autre"
       change_password:
         change_my_password: "Changer mon mot de passe"
         confirm_current: "Confirmez votre mot de passe actuel"

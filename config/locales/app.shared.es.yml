@@ -103,8 +103,9 @@ es:
         must_accept_terms: "You must accept the terms and conditions"
         save: "Save"
       gender_input:
-        man: "Man"
-        woman: "Woman"
+        man: "Hombre"
+        woman: "Mujer"
+        other: "Otro"
       change_password:
         change_my_password: "Change my password"
         confirm_current: "Confirm your current password"

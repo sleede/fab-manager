@@ -105,6 +105,7 @@ pt:
       gender_input:
         man: "Homem"
         woman: "Mulher"
+        other: "Other"
       change_password:
         change_my_password: "Alterar a minha senha"
         confirm_current: "Confirme sua senha atual"
