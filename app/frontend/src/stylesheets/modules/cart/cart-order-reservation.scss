@@ -1,0 +1,9 @@
+.cart-order-reservation {
+  .actions:before {
+    content: ' '
+  }
+
+  .ref > ul > li > span {
+    margin-left: 1em;
+  }
+}

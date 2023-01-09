@@ -1,13 +1,11 @@
 # frozen_string_literal: true
 
-MINUTES_PER_HOUR = 60.0
-SECONDS_PER_MINUTE = 60.0
-
-GET_SLOT_PRICE_DEFAULT_OPTS = { has_credits: false, elements: nil, is_division: true, prepaid: { minutes: 0 }, custom_duration: nil }.freeze
-
 # A generic reservation added to the shopping cart
 class CartItem::Reservation < CartItem::BaseItem
-  self.abstract_class = true
+  MINUTES_PER_HOUR = 60.0
+  SECONDS_PER_MINUTE = 60.0
+
+  GET_SLOT_PRICE_DEFAULT_OPTS = { has_credits: false, elements: nil, is_division: true, prepaid: { minutes: 0 }, custom_duration: nil }.freeze
 
   def reservable
     nil

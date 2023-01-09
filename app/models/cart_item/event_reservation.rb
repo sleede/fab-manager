@@ -2,6 +2,8 @@
 
 # An event reservation added to the shopping cart
 class CartItem::EventReservation < CartItem::Reservation
+  self.table_name = 'cart_item_event_reservations'
+
   has_many :cart_item_event_reservation_tickets, class_name: 'CartItem::EventReservationTicket', dependent: :destroy,
                                                  inverse_of: :cart_item_event_reservation,
                                                  foreign_key: 'cart_item_event_reservation_id'

@@ -524,6 +524,8 @@ en:
     space: "This space is disabled"
     machine: "This machine is disabled"
     reservable: "This machine is not reservable"
+  cart_validation:
+    select_user: "Please select a user before continuing"
   settings:
     locked_setting: "the setting is locked."
     about_title: "\"About\" page title"

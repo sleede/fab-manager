@@ -39,8 +39,9 @@ export interface CartItemPrepaidPack extends CartItem {
 export interface CartItemFreeExtension extends CartItem {
   free_extension: { end_at: Date }
 }
+export type CartItemReservationType = 'CartItem::MachineReservation' | 'CartItem::SpaceReservation' | 'CartItem::TrainingReservation';
 
-export type CartItemType = 'CartItem::EventReservation' | 'CartItem::MachineReservation' | 'CartItem::PrepaidPack' | 'CartItem::SpaceReservation' | 'CartItem::Subscription' | 'CartItem::TrainingReservation';
+export type CartItemType = 'CartItem::EventReservation' | 'CartItem::PrepaidPack' | 'CartItem::Subscription' | CartItemReservationType;
 
 export interface CartItemResponse {
   id: number,

@@ -11,7 +11,7 @@ import CartAPI from '../../api/cart';
 import type { User } from '../../models/user';
 import { PaymentModal } from '../payment/stripe/payment-modal';
 import { PaymentMethod } from '../../models/payment';
-import type { Order, OrderCartItem, OrderErrors, OrderItem, OrderProduct } from '../../models/order';
+import type { Order, OrderCartItemReservation, OrderErrors, OrderProduct } from '../../models/order';
 import { MemberSelect } from '../user/member-select';
 import { CouponInput } from '../coupon/coupon-input';
 import type { Coupon } from '../../models/coupon';
@@ -52,20 +52,6 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
         .catch(onError);
     }
   }, [cart]);
-
-  /**
-   * Remove the product from cart
-   */
-  const removeProductFromCart = (item) => {
-    const errors = getItemErrors(item);
-    if (errors.length === 1 && errors[0].error === 'not_found') {
-      reloadCart().catch(onError);
-    } else {
-      CartAPI.removeItem(cart, item.orderable_id, item.orderable_type).then(data => {
-        setCart(data);
-      }).catch(onError);
-    }
-  };
 
   /**
    * Check the current cart's items (available, price, stock, quantity_min)
@@ -110,15 +96,6 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
   };
 
   /**
-   * get givean item's error
-   */
-  const getItemErrors = (item) => {
-    if (!cartErrors) return [];
-    const errors = _.find(cartErrors.details, (e) => e.item_id === item.id);
-    return errors?.errors || [{ error: 'not_found' }];
-  };
-
-  /**
    * Open/closes the payment modal
    */
   const togglePaymentModal = (): void => {
@@ -160,21 +137,6 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
   };
 
   /**
-   * Toggle product offer
-   */
-  const toggleProductOffer = (item: OrderItem, checked: boolean) => {
-    CartAPI.setOffer(cart, item.orderable_id, item.orderable_type, checked).then(data => {
-      setCart(data);
-    }).catch(e => {
-      if (e.match(/code 403/)) {
-        onError(t('app.public.store_cart.errors.unauthorized_offering_product'));
-      } else {
-        onError(e);
-      }
-    });
-  };
-
-  /**
    * Apply coupon to current cart
    */
   const applyCoupon = (coupon?: Coupon): void => {
@@ -196,22 +158,20 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
                                 cartErrors={cartErrors}
                                 cart={cart}
                                 setCart={setCart}
+                                reloadCart={reloadCart}
                                 onError={onError}
-                                removeProductFromCart={removeProductFromCart}
-                                toggleProductOffer={toggleProductOffer}
                                 privilegedOperator={isPrivileged()} />
             );
           }
           return (
-            <CartOrderReservation item={item as OrderCartItem}
+            <CartOrderReservation item={item as OrderCartItemReservation}
                                   key={item.id}
                                   className="store-cart-list-item"
                                   cartErrors={cartErrors}
                                   cart={cart}
+                                  reloadCart={reloadCart}
                                   setCart={setCart}
                                   onError={onError}
-                                  removeProductFromCart={removeProductFromCart}
-                                  toggleProductOffer={toggleProductOffer}
                                   privilegedOperator={isPrivileged()} />
           );
         })}

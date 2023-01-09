@@ -518,6 +518,8 @@ fr:
     space: "Cet espace est désactivé"
     machine: "Cette machine est désactivée"
     reservable: "Cette machine n'est pas réservable"
+  cart_validation:
+    select_user: "Veuillez sélectionner un utilisateur avant de continuer"
   settings:
     locked_setting: "le paramètre est verrouillé."
     about_title: "Le titre de la page \"À propos\""

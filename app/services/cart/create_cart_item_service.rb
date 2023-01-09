@@ -3,11 +3,11 @@
 # Provides methods to create new cart items, based on an existing Order
 class Cart::CreateCartItemService
   def initialize(order)
-    raise Cart::AnonymousError if order.statistic_profile.nil? || order.operator_profile.nil?
+    raise Cart::AnonymousError, I18n.t('cart_validation.select_user') if order.statistic_profile.nil? || order.operator_profile.nil?
 
     @order = order
     @customer = order.user
-    @operator = order.user.privileged? ? order.operator_profile.user : order.user
+    @operator = order.operator_profile.user
   end
 
   def create(item)

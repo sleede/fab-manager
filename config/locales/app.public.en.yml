@@ -446,6 +446,8 @@ en:
       abstract_item:
         offer_product: "Offer the product"
         total: "Total"
+        errors:
+          unauthorized_offering_product: "You can't offer anything to yourself"
       cart_order_product:
         reference_short: "ref:"
         minimum_purchase: "Minimum purchase: "
@@ -458,7 +460,11 @@ en:
           stock_limit_QUANTITY: "Only {QUANTITY} {QUANTITY, plural, =1{unit} other{units}} left in stock, please adjust the quantity of items."
           quantity_min_QUANTITY: "Minimum number of product was changed to {QUANTITY}, please adjust the quantity of items."
           price_changed_PRICE: "The product price was modified to {PRICE}"
-          unauthorized_offering_product: "You can't offer anything to yourself"
+      cart_order_reservation:
+        reservation: "Reservation"
+        offer_reservation: "Offer the reservation"
+        slot: "{DATE}: {START} - {END}"
+        offered: "offered"
       orders_dashboard:
         heading: "My orders"
         sort:

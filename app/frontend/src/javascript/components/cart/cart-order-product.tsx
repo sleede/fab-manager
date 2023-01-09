@@ -1,7 +1,7 @@
 import * as React from 'react';
 import FormatLib from '../../lib/format';
 import { CaretDown, CaretUp } from 'phosphor-react';
-import type { OrderProduct, OrderErrors, Order } from '../../models/order';
+import type { OrderProduct, OrderErrors, Order, ItemError } from '../../models/order';
 import { useTranslation } from 'react-i18next';
 import _ from 'lodash';
 import CartAPI from '../../api/cart';
@@ -14,22 +14,21 @@ interface CartOrderProductProps {
   className?: string,
   cart: Order,
   setCart: (cart: Order) => void,
+  reloadCart: () => Promise<void>,
   onError: (message: string) => void,
-  removeProductFromCart: (item: OrderProduct) => void,
-  toggleProductOffer: (item: OrderProduct, checked: boolean) => void,
   privilegedOperator: boolean,
 }
 
 /**
  * This component shows a product in the cart
  */
-export const CartOrderProduct: React.FC<CartOrderProductProps> = ({ item, cartErrors, className, cart, setCart, onError, removeProductFromCart, toggleProductOffer, privilegedOperator }) => {
+export const CartOrderProduct: React.FC<CartOrderProductProps> = ({ item, cartErrors, className, cart, setCart, reloadCart, onError, privilegedOperator }) => {
   const { t } = useTranslation('public');
 
   /**
    * Get the given item's errors
    */
-  const getItemErrors = (item: OrderProduct) => {
+  const getItemErrors = (item: OrderProduct): Array<ItemError> => {
     if (!cartErrors) return [];
     const errors = _.find(cartErrors.details, (e) => e.item_id === item.id);
     return errors?.errors || [{ error: 'not_found' }];
@@ -120,11 +119,13 @@ export const CartOrderProduct: React.FC<CartOrderProductProps> = ({ item, cartEr
 
   return (
     <AbstractItem className={`cart-order-product ${className || ''}`}
-                  hasError={getItemErrors(item).length > 0}
+                  errors={getItemErrors(item)}
+                  setCart={setCart}
+                  cart={cart}
+                  onError={onError}
+                  reloadCart={reloadCart}
                   item={item}
-                  removeItemFromCart={removeProductFromCart}
                   privilegedOperator={privilegedOperator}
-                  toggleItemOffer={toggleProductOffer}
                   actions={buildActions()}>
       <div className="ref">
         <span>{t('app.public.cart_order_product.reference_short')} {item.orderable_ref || ''}</span>

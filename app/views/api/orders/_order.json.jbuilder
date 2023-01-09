@@ -28,4 +28,7 @@ json.order_items_attributes order.order_items.order(created_at: :asc) do |item|
   json.amount item.amount / 100.0
   json.is_offered item.is_offered
   json.partial! 'api/orders/product', item: item if item.orderable_type == 'Product'
+  if %w[CartItem::MachineReservation CartItem::SpaceReservation CartItem::TrainingReservation].include?(item.orderable_type)
+    json.partial! 'api/orders/cart_item_reservation', item: item
+  end
 end

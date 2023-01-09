@@ -4,7 +4,7 @@ import { CreateTokenResponse } from './payzen';
 import { UserRole } from './user';
 import { Coupon } from './coupon';
 import { ApiFilter, PaginatedIndex } from './api';
-import { CartItemType } from './cart_item';
+import type { CartItemReservationType, CartItemType } from './cart_item';
 
 export type OrderableType = 'Product' | CartItemType;
 
@@ -13,6 +13,7 @@ export interface OrderItem {
   orderable_type: OrderableType,
   orderable_id: number,
   orderable_name: string,
+  orderable_slug: string,
   orderable_main_image_url?: string;
   quantity: number,
   amount: number,
@@ -21,14 +22,22 @@ export interface OrderItem {
 
 export interface OrderProduct extends OrderItem {
   orderable_type: 'Product',
-  orderable_slug: string,
   orderable_ref?: string,
   orderable_external_stock: number,
   quantity_min: number
 }
 
-export interface OrderCartItem extends OrderItem {
-  orderable_type: CartItemType
+export interface OrderCartItemReservation extends OrderItem {
+  orderable_type: CartItemReservationType
+  slots_reservations: Array<{
+    id: number,
+    offered: boolean,
+    slot: {
+      id: number,
+      start_at: TDateISO,
+      end_at: TDateISO
+    }
+  }>
 }
 
 export interface Order {
@@ -78,13 +87,14 @@ export interface OrderIndexFilter extends ApiFilter {
   period_to?: string
 }
 
+export interface ItemError {
+  error: string,
+  value?: string|number
+}
 export interface OrderErrors {
   order_id: number,
   details: Array<{
     item_id: number,
-    errors: Array<{
-      error: string,
-      value: string|number
-    }>
+    errors: Array<ItemError>
   }>
 }
