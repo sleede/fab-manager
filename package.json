@@ -1,6 +1,6 @@
 {
   "name": "fab-manager",
-  "version": "5.6.4",
+  "version": "5.6.5",
   "description": "Fab-manager is the FabLab management solution. It provides a comprehensive, web-based, open-source tool to simplify your administrative tasks and your marker's projects.",
   "keywords": [
     "fablab",
@@ -152,6 +152,7 @@
     "ngtemplate-loader": "^2.1.0",
     "nvd3": "1.8",
     "object-to-formdata-tz": "4.4.3",
+    "object-to-formdata": "npm:object-to-formdata-tz@4.4.3",
     "phosphor-react": "^1.4.0",
     "process": "^0.11.10",
     "prop-types": "^15.7.2",
