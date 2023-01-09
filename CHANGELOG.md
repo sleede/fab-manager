@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- Fix a security issue: logged users but non-admins can access to analytics data throught the API
+
 ## v5.6.2 2023 January 9
 
 - Improved fix_invoice_item task
