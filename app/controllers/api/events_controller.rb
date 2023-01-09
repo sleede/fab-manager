@@ -95,7 +95,7 @@ class API::EventsController < API::ApiController
                                                      :amount, :nb_total_places, :availability_id, :all_day, :recurrence,
                                                      :recurrence_end_at, :category_id, :event_theme_ids, :age_range_id,
                                                      event_theme_ids: [],
-                                                     event_image_attributes: [:attachment],
+                                                     event_image_attributes: %i[id attachment],
                                                      event_files_attributes: %i[id attachment _destroy],
                                                      event_price_categories_attributes: %i[id price_category_id amount _destroy],
                                                      advanced_accounting_attributes: %i[code analytical_section])

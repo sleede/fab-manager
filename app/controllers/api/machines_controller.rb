@@ -50,7 +50,7 @@ class API::MachinesController < API::ApiController
 
   def machine_params
     params.require(:machine).permit(:name, :description, :spec, :disabled, :machine_category_id, :plan_ids, :reservable,
-                                    plan_ids: [], machine_image_attributes: [:attachment],
+                                    plan_ids: [], machine_image_attributes: %i[id attachment],
                                     machine_files_attributes: %i[id attachment _destroy],
                                     advanced_accounting_attributes: %i[code analytical_section])
   end
