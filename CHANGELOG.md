@@ -1,5 +1,8 @@
 # Changelog Fab-manager
 
+- Moved the buttons to create a new machine or availability to the admin section
+- Fix a bug: unable to create/update machines/spaces/trainings/events/...
+
 ## v5.6.4 2023 January 9
 
 - Fix a bug: unable to build the docker image (yarn error extracting tar content of undefined failed)
