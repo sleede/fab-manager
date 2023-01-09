@@ -8311,7 +8311,7 @@ object-keys@^1.0.12, object-keys@^1.1.1:
   resolved "https://registry.yarnpkg.com/object-keys/-/object-keys-1.1.1.tgz#1c47f272df277f3b1daf061677d9c82e2322c60e"
   integrity sha512-NuAESUOUMrlIXOfHKzD6bpPu3tYt3xvjNdRIQ+FeT0lNb4K8WR70CaDxhuNguS2XG+GjkyMwOzsN5ZktImfhLA==
 
-"object-to-formdata@https://github.com/sylvainbx/object-to-formdata.git#master":
+"object-to-formdata@https://github.com/sylvainbx/object-to-formdata.git":
   version "4.4.2"
   resolved "https://github.com/sylvainbx/object-to-formdata.git#4c00be9626e64653e0e2fdfbefca99b3fb3de511"
 
