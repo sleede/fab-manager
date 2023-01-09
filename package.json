@@ -151,7 +151,7 @@
     "ngUpload": "0.5",
     "ngtemplate-loader": "^2.1.0",
     "nvd3": "1.8",
-    "object-to-formdata": "^4.4.2",
+    "object-to-formdata": "https://github.com/sylvainbx/object-to-formdata.git#master",
     "phosphor-react": "^1.4.0",
     "process": "^0.11.10",
     "prop-types": "^15.7.2",
