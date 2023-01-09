@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- Fix a bug: unable to build the docker image (yarn error extracting tar content of undefined failed)
+
 ## v5.6.3 2023 January 9
 
 - Fix a bug: unable to build the docker image (yarn error extracting tar content of undefined failed)
