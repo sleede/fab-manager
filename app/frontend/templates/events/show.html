@@ -173,7 +173,7 @@
           </div>
 
 
-          <div ng-show="now.isSameOrAfter(event.end_date)" class="alert alert-info">
+          <div ng-show="now.isSameOrAfter(eventEndDateTime)" class="alert alert-info">
             <span translate>{{ 'app.public.events_show.event_is_over' }}</span>
             <span ng-show="reservations.length > 0" translate>{{ 'app.public.events_show.thanks_for_coming' }}</span>
             <a ui-sref="app.public.events_list" translate>{{ 'app.public.events_show.view_event_list' }}</a>

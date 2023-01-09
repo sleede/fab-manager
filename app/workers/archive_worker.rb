@@ -28,7 +28,7 @@ class ArchiveWorker
     end
 
     NotificationCenter.call type: :notify_admin_archive_complete,
-                            receiver: User.find(period.closed_by),
+                            receiver: User.where(id: period.closed_by)&.first,
                             attached_object: period
   end
 

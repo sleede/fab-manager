@@ -25,6 +25,8 @@ namespace :fablab do
                  .or(InvoiceItem.where(object_id: nil))
                  .find_each do |ii|
         invoice = ii.invoice
+        next if ii.object_type == 'Error'
+
         other_items = invoice.invoice_items.where.not(id: ii.id)
         puts "\e[4;33mFound an invalid InvoiceItem\e[0m"
         puts '=============================================='
@@ -43,7 +45,10 @@ namespace :fablab do
           puts "Other item slots: #{oii.object.try(:slots)&.map { |s| "#{s.start_at} - #{s.end_at}" }}"
           print "\e[1;34m[ ? ]\e[0m Associate the item with #{oii.object_type} #{oii.object_id} ? (y/N) > "
           confirm = $stdin.gets.chomp
-          ii.update(object_id: oii.object_id, object_type: oii.object_type) if confirm == 'y'
+          if confirm == 'y'
+            ii.update(object_id: oii.object_id, object_type: oii.object_type)
+            break
+          end
         end
         ii.reload
         if ii.object_id.nil? || ii.object_type.nil?

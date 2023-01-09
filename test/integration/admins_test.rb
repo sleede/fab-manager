@@ -1,18 +1,13 @@
 # frozen_string_literal: true
 
+require 'test_helper'
+
 class AdminsTest < ActionDispatch::IntegrationTest
   # Called before every test method runs. Can be used
   # to set up fixture information.
   def setup
     @admin = User.find_by(username: 'admin')
     login_as(@admin, scope: :user)
-  end
-
-  # Called after every test method runs. Can be used to tear
-  # down fixture information.
-
-  def teardown
-    # Do nothing
   end
 
   test 'create an admin' do
@@ -66,5 +61,11 @@ class AdminsTest < ActionDispatch::IntegrationTest
     assert_equal @admin.profile.user_avatar.id,
                  admins[:admins][0][:profile_attributes][:user_avatar][:id],
                  'admin avatar does not match'
+  end
+
+  test 'admin cannot delete himself' do
+    delete "/api/admins/#{@admin.id}"
+
+    assert_response :unauthorized
   end
 end
