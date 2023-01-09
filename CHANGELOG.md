@@ -1,6 +1,7 @@
 # Changelog Fab-manager
 
 - Improved fix_invoice_item task
+- Fix a bug: events are shown as over and unbookable, starting from midnight at the event end's day
 - Fix a bug: updating a space/machine/event/training removes the image
 - Fix a bug: cryptic error message when failed to create a manager
 - Fix a bug: unable to restore accounting periods closed by a deleted admin

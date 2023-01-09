@@ -162,6 +162,7 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
 
     // Get the details for the current event (event's id is recovered from the current URL)
     $scope.event = eventPromise;
+    $scope.eventEndDateTime = moment(`${eventPromise.end_date}T${eventPromise.end_time}:00`);
 
     // the application global settings
     $scope.settings = settingsPromise;
@@ -259,7 +260,7 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
     $scope.isShowReserveEventButton = () => {
       return $scope.event.nb_free_places > 0 &&
         !$scope.reserve.toReserve &&
-        $scope.now.isBefore($scope.event.end_date) &&
+        $scope.now.isBefore($scope.eventEndDateTime) &&
         helpers.isUserValidatedByType($scope.ctrl.member, $scope.settings, 'event');
     };
 
