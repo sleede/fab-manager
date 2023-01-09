@@ -4,7 +4,7 @@
 - Fix a bug: updating a space/machine/event/training removes the image
 - Fix a bug: cryptic error message when failed to create a manager
 - Fix a bug: unable to restore accounting periods closed by a deleted admin
-- Fix a bug: unable to build an acocunting archive if the operator was deleted
+- Fix a bug: unable to build an accounting archive if the operator was deleted
 - Fix a bug: unable to udpate an event category
 
 ## v5.6.1 2023 January 6
