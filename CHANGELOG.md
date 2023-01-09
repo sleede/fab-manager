@@ -1,6 +1,9 @@
 # Changelog Fab-manager
 
+## v5.6.2 2023 January 9
+
 - Improved fix_invoice_item task
+- Improved test coverage
 - Fix a bug: unable to set some dates for the events if user is in negative timezone
 - Fix a bug: events are shown as over and unbookable, starting from midnight at the event end's day
 - Fix a bug: updating a space/machine/event/training removes the image
