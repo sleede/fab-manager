@@ -36,13 +36,13 @@ namespace :fablab do
         puts "Operator: #{invoice.operator_profile&.user&.profile&.full_name} (#{invoice.operator_profile&.user&.email})"
         puts "Date: #{invoice.created_at}"
         puts '=============================================='
-        puts "Concerned item: #{ii.id}"
+        puts "Concerned item: #{ii.id} (#{ii.object_type} #{ii.object_id})"
         puts "Item subject: #{ii.description}."
         other_items.find_each do |oii|
           puts '=============================================='
           puts "Other item: #{oii.description} (#{oii.id})"
           puts "Other item object: #{oii.object_type} #{oii.object_id}"
-          puts "Other item slots: #{oii.object.try(:slots)&.map { |s| "#{s.start_at} - #{s.end_at}" }}"
+          puts "Other item slots: #{oii.object.try(:slots)&.map { |s| "#{s.start_at} - #{s.end_at}" }}" if oii.object_type == 'Reservation'
           print "\e[1;34m[ ? ]\e[0m Associate the item with #{oii.object_type} #{oii.object_id} ? (y/N) > "
           confirm = $stdin.gets.chomp
           if confirm == 'y'
