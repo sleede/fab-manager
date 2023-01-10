@@ -1,6 +1,7 @@
 # Changelog Fab-manager
 
 - Add more context data to sentry reports
+- Improved SSO testing
 - Fix a bug: unable to run task fix_invoice_item when some invoice items are associated with errors
 - [TODO DEPLOY] `rails fablab:fix:invoice_items_in_error` THEN `rails fablab:fix_invoice_items` THEN `rails db:migrate`
 
