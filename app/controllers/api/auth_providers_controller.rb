@@ -3,7 +3,6 @@
 # API Controller for resources of type AuthProvider
 # AuthProvider are used to connect users through single-sign on systems
 class API::AuthProvidersController < API::ApiController
-
   before_action :set_provider, only: %i[show update destroy]
   def index
     @providers = policy_scope(AuthProvider)
@@ -64,13 +63,13 @@ class API::AuthProvidersController < API::ApiController
     user = User.find_by('lower(email) = ?', params[:email]&.downcase)
 
     if user&.auth_token
-      if AuthProvider.active.providable_type != DatabaseProvider.name
+      if AuthProvider.active.providable_type == DatabaseProvider.name
+        render json: { status: 'error', error: I18n.t('members.current_authentication_method_no_code') }, status: :bad_request
+      else
         NotificationCenter.call type: 'notify_user_auth_migration',
                                 receiver: user,
                                 attached_object: user
         render json: { status: 'processing' }, status: :ok
-      else
-        render json: { status: 'error', error: I18n.t('members.current_authentication_method_no_code') }, status: :bad_request
       end
     else
       render json: { status: 'error', error: I18n.t('members.requested_account_does_not_exists') }, status: :bad_request
@@ -92,18 +91,18 @@ class API::AuthProvidersController < API::ApiController
                     providable_attributes: %i[id base_url token_endpoint authorization_endpoint
                                               profile_url client_id client_secret scopes],
                     auth_provider_mappings_attributes: [:id, :local_model, :local_field, :api_field, :api_endpoint, :api_data_type,
-                                                        :_destroy, transformation: [:type, :format, :true_value, :false_value,
-                                                                                    mapping: %i[from to]]])
+                                                        :_destroy, { transformation: [:type, :format, :true_value, :false_value,
+                                                                                      { mapping: %i[from to] }] }])
     elsif params['auth_provider']['providable_type'] == OpenIdConnectProvider.name
       params.require(:auth_provider)
             .permit(:id, :name, :providable_type,
                     providable_attributes: [:id, :issuer, :discovery, :client_auth_method, :prompt, :send_scope_to_token_endpoint,
                                             :client__identifier, :client__secret, :client__authorization_endpoint, :client__token_endpoint,
                                             :client__userinfo_endpoint, :client__jwks_uri, :client__end_session_endpoint, :profile_url,
-                                            scope: []],
+                                            { scope: [] }],
                     auth_provider_mappings_attributes: [:id, :local_model, :local_field, :api_field, :api_endpoint, :api_data_type,
-                                                        :_destroy, transformation: [:type, :format, :true_value, :false_value,
-                                                                                    mapping: %i[from to]]])
+                                                        :_destroy, { transformation: [:type, :format, :true_value, :false_value,
+                                                                                      { mapping: %i[from to] }] }])
     end
   end
 end
