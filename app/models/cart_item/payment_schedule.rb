@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative 'cart_item'
+
 # A payment schedule applied to plan in the shopping cart
 class CartItem::PaymentSchedule < ApplicationRecord
   belongs_to :customer_profile, class_name: 'InvoicingProfile'

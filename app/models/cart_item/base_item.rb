@@ -1,11 +1,6 @@
 # frozen_string_literal: true
 
-# Items that can be added to the shopping cart
-module CartItem
-  def self.table_name_prefix
-    'cart_item_'
-  end
-end
+require_relative 'cart_item'
 
 # This is an abstract class implemented by classes that can be added to the shopping cart
 class CartItem::BaseItem < ApplicationRecord

@@ -63,6 +63,7 @@ en:
   #availability slots in the calendar
   availabilities:
     not_available: "Not available"
+    reserving: "I'm reserving"
     i_ve_reserved: "I've reserved"
     length_must_be_slot_multiple: "must be at least %{MIN} minutes after the start date"
     must_be_associated_with_at_least_1_machine: "must be associated with at least 1 machine"
