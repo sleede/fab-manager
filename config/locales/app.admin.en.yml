@@ -402,7 +402,7 @@ en:
       trainings:
         trainings_monitoring: "Trainings monitoring"
         plan_session: "Schedule a new session"
-        trainings: "Trainings"
+        all_trainings: "All trainings"
         add_a_new_training: "Add a new training"
         name: "Training name"
         associated_machines: "Associated machines"

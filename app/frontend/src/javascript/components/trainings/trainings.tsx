@@ -57,7 +57,7 @@ export const Trainings: React.FC<TrainingsProps> = () => {
   return (
     <div className='trainings'>
       <header>
-        <h2>{t('app.admin.trainings.trainings')}</h2>
+        <h2>{t('app.admin.trainings.all_trainings')}</h2>
         <div className='grpBtn'>
           <FabButton className="main-action-btn" onClick={newTraining}>{t('app.admin.trainings.add_a_new_training')}</FabButton>
         </div>
