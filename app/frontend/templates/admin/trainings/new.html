@@ -5,35 +5,18 @@
         <a ng-click="cancel()"><i class="fas fa-long-arrow-alt-left "></i></a>
       </section>
     </div>
-    <div class="col-md-8 b-l b-r">
+    <div class="col-md-11 b-l">
       <section class="heading-title">
         <h1 translate>{{ 'app.admin.trainings_new.add_a_new_training' }}</h1>
       </section>
-
     </div>
-
   </div>
-
 </section>
 
-
-<div class="row no-gutter" >
-
-  <div class="col-md-9 b-r nopadding">
-
-    <div class="alert alert-warning m-lg" role="alert">
-      {{ 'app.admin.trainings_new.beware_when_creating_a_training_its_reservation_prices_are_initialized_to_zero' | translate }}
-      {{ 'app.admin.trainings_new.dont_forget_to_change_them_before_creating_slots_for_this_training' | translate }}
-    </div>
-
-    <div class="panel panel-default bg-light m-lg">
-      <div class="panel-body m-r">
-        <training-form action="'create'" on-error="onError" on-success="onSuccess"></training-form>
-      </div>
-    </div>
+<div class="trainings-container" >
+  <div class="alert alert-warning" role="alert">
+    {{ 'app.admin.trainings_new.beware_when_creating_a_training_its_reservation_prices_are_initialized_to_zero' | translate }}
+    {{ 'app.admin.trainings_new.dont_forget_to_change_them_before_creating_slots_for_this_training' | translate }}
   </div>
-
-  <div class="col-md-3">
-      <!-- <button class="btn">TEST</button> -->
-  </div>
+  <training-form action="'create'" on-error="onError" on-success="onSuccess"></training-form>
 </div>

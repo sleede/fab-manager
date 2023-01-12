@@ -1,5 +1,24 @@
+// hide Angular tag for the grid
+training-form { display: contents; }
+
 .training-form {
-  .submit-btn {
-    float: right;
+  grid-column: 2/-2;
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+
+  .fab-panel {
+    width: 100%;
+    margin: 0;
+    .title {
+      @include text-base(600);
+      margin-bottom: 2.4rem;
+      display: flex;
+      align-items: center;
+      .fab-tooltip { margin-left: 1.6rem; }
+    }
+  }
+  .save-btn {
+    align-self: flex-start;
   }
 }

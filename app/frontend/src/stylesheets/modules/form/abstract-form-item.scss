@@ -5,10 +5,13 @@
   &-header {
     width: 100%;
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
     margin-bottom: 0.8rem;
     position: relative;
+    & > *:not(:first-child) {
+      margin-left: 1.5rem;
+    }
+
     p {
       @include text-sm;
       margin: 0;

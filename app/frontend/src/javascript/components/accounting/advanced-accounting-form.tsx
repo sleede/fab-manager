@@ -26,7 +26,7 @@ export const AdvancedAccountingForm = <TFieldValues extends FieldValues>({ regis
   return (
     <div className="advanced-accounting-form">
       {isEnabled && <div>
-        <h4>{t('app.admin.advanced_accounting_form.title')}</h4>
+        <p className='title'>{t('app.admin.advanced_accounting_form.title')}</p>
         <FormInput register={register}
                    id="advanced_accounting_attributes.code"
                    label={t('app.admin.advanced_accounting_form.code')} />

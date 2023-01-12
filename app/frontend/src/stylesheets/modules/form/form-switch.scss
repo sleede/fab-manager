@@ -2,10 +2,6 @@
   .form-item-header {
     margin-bottom: 0;
 
-    & > *:not(:first-child) {
-      margin-left: 1.5rem;
-    }
-
     .fab-tooltip .content {
       max-width: min(75vw, 30ch);
     }

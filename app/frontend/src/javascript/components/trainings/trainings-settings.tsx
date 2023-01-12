@@ -79,7 +79,7 @@ export const TrainingsSettings: React.FC<TrainingsSettingsProps> = () => {
         <h2>{t('app.admin.trainings_settings.title')}</h2>
       </header>
       <form onSubmit={handleSubmit(onSubmit)} className="trainings-settings-content">
-        <div className="setting-section">
+        <div className="settings-section">
           <p className="section-title">{t('app.admin.trainings_settings.automatic_cancellation')}</p>
           <FabAlert level="warning">
             {t('app.admin.trainings_settings.automatic_cancellation_info')}
@@ -108,7 +108,7 @@ export const TrainingsSettings: React.FC<TrainingsSettingsProps> = () => {
           </>}
         </div>
 
-        <div className="setting-section">
+        <div className="settings-section">
           <p className="section-title">{t('app.admin.trainings_settings.automatic_cancellation')}</p>
           <FabAlert level="warning">
             {t('app.admin.trainings_settings.generic_text_block_info')}
@@ -121,6 +121,7 @@ export const TrainingsSettings: React.FC<TrainingsSettingsProps> = () => {
 
           <FormRichText id="text_block"
                         control={control}
+                        heading
                         limit={280}
                         disabled={!isActiveTextBlock} />
 

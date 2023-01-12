@@ -1,7 +1,7 @@
 .fab-panel {
   background-color: #fff;
   border: 1px solid #ddd;
-  border-radius: 6px;
+  border-radius: var(--border-radius);
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
   margin: 30px 30px 30px 0;
   min-height: 1px;
@@ -14,8 +14,8 @@
     background-color: #f4f3f3;
     padding: 18px 15px;
     border-bottom: 1px solid #ddd;
-    border-top-right-radius: 3px;
-    border-top-left-radius: 3px;
+    border-top-right-radius: var(--border-radius);
+    border-top-left-radius: var(--border-radius);
 
     &.small {
       padding: 24px;
@@ -29,6 +29,7 @@
   &.no-header {
     padding: 15px;
     background-color: #f4f3f3;
+    border-radius: var(--border-radius);
   }
 }
 
