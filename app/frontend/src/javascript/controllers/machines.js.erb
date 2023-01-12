@@ -469,21 +469,23 @@ Application.Controllers.controller('ReserveMachineController', ['$scope', '$tran
     /**
      * Change the last selected slot's appearance to looks like 'added to cart'
      */
-    $scope.markSlotAsAdded = function () {
-      $scope.selectedEvent.backgroundColor = FREE_SLOT_BORDER_COLOR;
-      $scope.selectedEvent.oldTitle = $scope.selectedEvent.title;
-      $scope.selectedEvent.title = _t('app.logged.machines_reserve.i_reserve');
-      updateEvents($scope.selectedEvent);
+    $scope.markSlotAsAdded = function (slot) {
+      let calSlot = { ...slot };
+      calSlot.backgroundColor = FREE_SLOT_BORDER_COLOR;
+      calSlot.oldTitle = $scope.selectedEvent.title;
+      calSlot.title = _t('app.logged.machines_reserve.i_reserve');
+      updateEvents(calSlot);
     };
 
     /**
      * Change the last selected slot's appearance to looks like 'never added to cart'
      */
     $scope.markSlotAsRemoved = function (slot) {
-      slot.backgroundColor = 'white';
-      slot.borderColor = FREE_SLOT_BORDER_COLOR;
-      slot.title = slot.oldTitle;
-      updateEvents(slot);
+      let calSlot = { ...slot };
+      calSlot.backgroundColor = 'white';
+      calSlot.borderColor = FREE_SLOT_BORDER_COLOR;
+      calSlot.title = calSlot.oldTitle;
+      updateEvents(calSlot);
     };
 
     /**

@@ -15,7 +15,7 @@ interface MemberSelectProps {
 }
 
 /**
- * This component renders the member select for manager.
+ * This component allows privileged users (managers/admins) to select a user on whose behalf to act.
  */
 export const MemberSelect: React.FC<MemberSelectProps> = ({ defaultUser, value, onSelected, noHeader, hasError }) => {
   const { t } = useTranslation('public');

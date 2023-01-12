@@ -134,6 +134,17 @@ namespace :fablab do
       puts '-> Done'
     end
 
+    desc 'build the reserved places cache for all slots'
+    task build_places_cache: :environment do
+      puts 'Builing the places cache. This may take some time...'
+      total = Slot.maximum(:id)
+      Slot.order(id: :asc).find_each do |slot|
+        puts "#{slot.id} / #{total}"
+        Slots::PlacesCacheService.refresh(slot)
+      end
+      puts '-> Done'
+    end
+
     def select_group(groups)
       groups.each do |g|
         print "#{g.id}) #{g.name}\n"

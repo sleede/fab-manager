@@ -529,7 +529,7 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
                 }
                 // slot is not in the cart, so we add it
                 $scope.events.reserved.push($scope.slot);
-                if (typeof $scope.onSlotAddedToCart === 'function') { $scope.onSlotAddedToCart(); }
+                if (typeof $scope.onSlotAddedToCart === 'function') { $scope.onSlotAddedToCart($scope.slot); }
               } else {
                 // slot is in the cart, remove it
                 $scope.removeSlot($scope.slot, index);

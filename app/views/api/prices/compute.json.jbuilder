@@ -5,6 +5,7 @@ json.price_without_coupon @amount[:before_coupon] / 100.00
 if @amount[:elements]
   json.details do
     json.slots @amount[:elements][:slots] do |slot|
+      json.slot_id slot[:slot_id]
       json.start_at slot[:start_at]
       json.price slot[:price] / 100.00
       json.promo slot[:promo]

@@ -12,17 +12,25 @@ class Slot < ApplicationRecord
 
   has_many :cart_item_reservation_slots, class_name: 'CartItem::ReservationSlot', dependent: :destroy
 
+  after_create_commit :create_places_cache
+
   attr_accessor :is_reserved, :machine, :space, :title, :can_modify, :current_user_slots_reservations_ids, :current_user_pending_reservations_ids
 
+  # @param reservable [Machine, Space, Training, Event, NilClass]
   def full?(reservable = nil)
     availability_places = availability.available_places_per_slot(reservable)
     return false if availability_places.nil?
 
-    if reservable.nil?
-      slots_reservations.where(canceled_at: nil).count >= availability_places
-    else
-      slots_reservations.includes(:reservation).where(canceled_at: nil).where('reservations.reservable': reservable).count >= availability_places
-    end
+    reserved_places = if reservable.nil?
+                        places.pluck('reserved_places').reduce(:+)
+                      else
+                        rp = places.detect do |p|
+                          p['reservable_type'] == reservable.class.name && p['reservable_id'] == reservable&.id
+                        end
+                        rp['reserved_places']
+                      end
+
+    reserved_places >= availability_places
   end
 
   def empty?(reservable = nil)
@@ -35,5 +43,11 @@ class Slot < ApplicationRecord
 
   def duration
     (end_at - start_at).seconds
+  end
+
+  private
+
+  def create_places_cache
+    Slots::PlacesCacheService.refresh(self)
   end
 end

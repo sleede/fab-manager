@@ -1,4 +1,8 @@
 .member-select {
+  @include component-border;
+  &-title {
+    @include component-title;
+  }
   &.error {
     .select-input > div:first-of-type {
       border-color: var(--alert);

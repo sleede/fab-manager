@@ -31,9 +31,14 @@
 
   <div class="col-sm-12 col-md-12 col-lg-3">
 
-    <div ng-if="isAuthorized(['admin', 'manager'])">
-      <select-member></select-member>
-    </div>
+    <ongoing-reservation-panel selected-slot="selectedEvent"
+                               on-slot-added="markSlotAsAdded"
+                               on-slot-removed="markSlotAsRemoved"
+                               on-error="onError"
+                               reservable-id="machine.id"
+                               reservable-type="'Machine'"
+                               operator="currentUser">
+    </ongoing-reservation-panel>
 
     <packs-summary item="machine"
                    item-type="'Machine'"
@@ -45,7 +50,9 @@
                    refresh="afterPaymentPromise">
     </packs-summary>
 
-    <reservations-summary slot="selectedEvent" customer="ctrl.member" on-error="onError" reservable-id="machine.id" reservable-type="'Machine'"></reservations-summary>
+    <div ng-if="isAuthorized(['admin', 'manager'])">
+      <select-member></select-member>
+    </div>
 
     <cart slot="selectedEvent"
           slot-selection-time="selectionTime"

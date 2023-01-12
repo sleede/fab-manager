@@ -116,7 +116,7 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
   };
 
   /**
-   * Change cart's customer by admin/manger
+   * Change cart's customer by admin/manager
    */
   const handleChangeMember = (user: User): void => {
     CartAPI.setCustomer(cart, user.id).then(setCart).catch(onError);

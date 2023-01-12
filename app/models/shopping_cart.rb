@@ -22,6 +22,7 @@ class ShoppingCart
   end
 
   # compute the price details of the current shopping cart
+  # @return [Hash]
   def total
     total_amount = 0
     all_elements = { slots: [] }

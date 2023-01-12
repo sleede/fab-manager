@@ -67,4 +67,8 @@ class CartItem::EventReservation < CartItem::Reservation
   def type
     'event'
   end
+
+  def total_tickets
+    (normal_tickets || 0) + (cart_item_event_reservation_tickets.map(&:booked).reduce(:+) || 0)
+  end
 end

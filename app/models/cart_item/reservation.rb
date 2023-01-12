@@ -2,6 +2,8 @@
 
 # A generic reservation added to the shopping cart
 class CartItem::Reservation < CartItem::BaseItem
+  self.table_name = 'cart_item_reservations'
+
   MINUTES_PER_HOUR = 60.0
   SECONDS_PER_MINUTE = 60.0
 
@@ -104,20 +106,26 @@ class CartItem::Reservation < CartItem::BaseItem
     0
   end
 
-  ##
   # Group the slots by date, if the extended_prices_in_same_day option is set to true
-  ##
+  # @return Hash{Symbol => Array<CartItem::ReservationSlot>}
   def grouped_slots
     return { all: cart_item_reservation_slots } unless Setting.get('extended_prices_in_same_day')
 
     cart_item_reservation_slots.group_by { |slot| slot.slot[:start_at].to_date }
   end
 
-  ##
   # Compute the price of a single slot, according to the list of applicable prices.
-  # @param prices {{ prices: Array<{price: Price, duration: number}> }} list of prices to use with the current reservation
-  # @see get_slot_price
-  ##
+  # @param prices [Hash{Symbol => Array<Hash{Symbol => Number,Price}>}] list of prices to use with the current reservation,
+  #   as returned by #get_slot_price
+  # @option prices [Array<Hash{Symbol => Number,Price}>}] :prices => {price: Price, duration: number}
+  # @param slot_reservation [CartItem::ReservationSlot]
+  # @param is_privileged [Boolean]
+  # @param options [Hash] optional parameters, allowing the following options:
+  # @option options [Array] :elements if provided the resulting price will be append into elements.slots
+  # @option options [Boolean] :has_credits true if the user still has credits for the given slot, false if not provided
+  # @option options [Boolean] :is_division false if the slot covers a full availability, true if it is a subdivision (default)
+  # @option options [Number] :prepaid_minutes number of remaining prepaid minutes for the customer
+  # @return [Float]
   def get_slot_price_from_prices(prices, slot_reservation, is_privileged, options = {})
     options = GET_SLOT_PRICE_DEFAULT_OPTS.merge(options)
 
@@ -134,19 +142,17 @@ class CartItem::Reservation < CartItem::BaseItem
     real_price
   end
 
-  ##
   # Compute the price of a single slot, according to the base price and the ability for an admin
   # to offer the slot.
-  # @param hourly_rate {Number} base price of a slot
-  # @param slot_reservation {CartItem::ReservationSlot}
-  # @param is_privileged {Boolean} true if the current user has a privileged role (admin or manager)
-  # @param [options] {Hash} optional parameters, allowing the following options:
-  #  - elements {Array} if provided the resulting price will be append into elements.slots
-  #  - has_credits {Boolean} true if the user still has credits for the given slot, false if not provided
-  #  - is_division {boolean} false if the slot covers a full availability, true if it is a subdivision (default)
-  #  - prepaid_minutes {Number} number of remaining prepaid minutes for the customer
-  # @return {Number} price of the slot
-  ##
+  # @param hourly_rate [Float] base price of a slot
+  # @param slot_reservation [CartItem::ReservationSlot]
+  # @param is_privileged [Boolean] true if the current user has a privileged role (admin or manager)
+  # @param options [Hash] optional parameters, allowing the following options:
+  # @option options [Array] :elements if provided the resulting price will be append into elements.slots
+  # @option options [Boolean] :has_credits true if the user still has credits for the given slot, false if not provided
+  # @option options [Boolean] :is_division false if the slot covers a full availability, true if it is a subdivision (default)
+  # @option options [Number] :prepaid_minutes number of remaining prepaid minutes for the customer
+  # @return [Float] price of the slot
   def get_slot_price(hourly_rate, slot_reservation, is_privileged, options = {})
     options = GET_SLOT_PRICE_DEFAULT_OPTS.merge(options)
 
@@ -158,16 +164,12 @@ class CartItem::Reservation < CartItem::BaseItem
                  else
                    slot_rate
                  end
-    # subtract free minutes from prepaid packs
-    if real_price.positive? && options[:prepaid][:minutes]&.positive?
-      consumed = slot_minutes
-      consumed = options[:prepaid][:minutes] if slot_minutes > options[:prepaid][:minutes]
-      real_price = (Rational(slot_minutes - consumed) * (Rational(slot_rate) / Rational(MINUTES_PER_HOUR))).to_f
-      options[:prepaid][:minutes] -= consumed
-    end
+
+    real_price = handle_prepaid_pack_price(real_price, slot_minutes, slot_rate, options)
 
     unless options[:elements].nil?
       options[:elements][:slots].push(
+        slot_id: slot_reservation.slot_id,
         start_at: slot_reservation.slot[:start_at],
         price: real_price,
         promo: (slot_rate != hourly_rate)
@@ -176,15 +178,35 @@ class CartItem::Reservation < CartItem::BaseItem
     real_price
   end
 
+  # @param price [Float, Integer]
+  # @param slot_minutes [Number]
+  # @param options [Hash] optional parameters, allowing the following options:
+  # @option options [Array] :elements if provided the resulting price will be append into elements.slots
+  # @option options [Boolean] :has_credits true if the user still has credits for the given slot, false if not provided
+  # @option options [Boolean] :is_division false if the slot covers a full availability, true if it is a subdivision (default)
+  # @option options [Number] :prepaid_minutes number of remaining prepaid minutes for the customer
+  # @return [Float, Integer]
+  def handle_prepaid_pack_price(price, slot_minutes, slot_rate, options)
+    return price unless price.positive? && options[:prepaid][:minutes]&.positive?
+
+    # subtract free minutes from prepaid packs
+    consumed = slot_minutes
+    consumed = options[:prepaid][:minutes] if slot_minutes > options[:prepaid][:minutes]
+    options[:prepaid][:minutes] -= consumed
+    (Rational(slot_minutes - consumed) * (Rational(slot_rate) / Rational(MINUTES_PER_HOUR))).to_f
+  end
+
   # We determine the list of prices applicable to current reservation
   # The longest available price is always used in priority.
   # Eg. If the reservation is for 12 hours, and there are prices for 3 hours, 7 hours,
   # and the base price (1 hours), we use the 7 hours price, then 3 hours price, and finally the base price twice (7+3+1+1 = 12).
   # All these prices are returned to be applied to the reservation.
+  # @param slots_reservations [Array<CartItem::ReservationSlot>]
+  # @return [Hash{Symbol => Array<Hash{Symbol => Number, Price}>}]
   def applicable_prices(slots_reservations)
     total_duration = slots_reservations.map do |slot|
       (slot.slot[:end_at].to_time - slot.slot[:start_at].to_time) / SECONDS_PER_MINUTE
-    end.reduce(:+)
+    end.reduce(:+) || 0
     rates = { prices: [] }
 
     remaining_duration = total_duration

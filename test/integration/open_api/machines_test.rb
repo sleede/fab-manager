@@ -53,13 +53,13 @@ class OpenApi::MachinesTest < ActionDispatch::IntegrationTest
   end
 
   test 'soft delete a machine' do
-    assert_not Machine.find(4).destroyable?
-    delete '/open_api/v1/machines/4', headers: open_api_headers(@token)
+    assert_not Machine.find(2).destroyable?
+    delete '/open_api/v1/machines/2', headers: open_api_headers(@token)
     assert_response :success
-    get '/open_api/v1/machines/4', headers: open_api_headers(@token)
+    get '/open_api/v1/machines/2', headers: open_api_headers(@token)
     assert_response :not_found
     get '/open_api/v1/machines', headers: open_api_headers(@token)
     machines = json_response(response.body)
-    assert_not(machines[:machines].any? { |m| m[:id] == 4 })
+    assert_not(machines[:machines].any? { |m| m[:id] == 2 })
   end
 end

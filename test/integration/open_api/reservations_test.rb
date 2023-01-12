@@ -57,13 +57,13 @@ class OpenApi::ReservationsTest < ActionDispatch::IntegrationTest
     assert_equal ['Machine'], reservations[:reservations].pluck(:reservable_type).uniq
   end
 
-  test 'list all machine 4 reservations' do
-    get '/open_api/v1/reservations?reservable_type=Machine&reservable_id=4', headers: open_api_headers(@token)
+  test 'list all machine 2 reservations' do
+    get '/open_api/v1/reservations?reservable_type=Machine&reservable_id=2', headers: open_api_headers(@token)
     assert_response :success
     assert_equal Mime[:json], response.content_type
 
     reservations = json_response(response.body)
     assert_not_empty reservations[:reservations]
-    assert_equal [4], reservations[:reservations].pluck(:reservable_id).uniq
+    assert_equal [2], reservations[:reservations].pluck(:reservable_id).uniq
   end
 end
