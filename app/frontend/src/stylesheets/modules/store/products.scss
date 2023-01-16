@@ -9,10 +9,6 @@
     @include header();
     padding-bottom: 0;
     grid-column: 1 / -1;
-    .grpBtn {
-      display: flex;
-      & > *:not(:first-child) { margin-left: 2.4rem; }
-    }
   }
 }
 

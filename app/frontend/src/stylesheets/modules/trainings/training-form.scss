@@ -1,24 +1,23 @@
-// hide Angular tag for the grid
-training-form { display: contents; }
-
 .training-form {
-  grid-column: 2/-2;
+  max-width: 1260px;
+  margin: 2.4rem auto 0;
+  padding: 0 3rem 6rem;
   display: flex;
   flex-direction: column;
-  gap: 2.4rem;
-
-  .fab-panel {
-    width: 100%;
-    margin: 0;
-    .title {
-      @include text-base(600);
-      margin-bottom: 2.4rem;
-      display: flex;
-      align-items: center;
-      .fab-tooltip { margin-left: 1.6rem; }
-    }
+  & > header {
+    padding-bottom: 0;
+    @include header($sticky: true);
+    gap: 2.4rem;
   }
-  .save-btn {
-    align-self: flex-start;
+
+  &-content {
+    display: flex;
+    flex-direction: column;
+    gap: 3.2rem;
+
+    .fab-alert { margin: 0; }
+
+    section { @include layout-settings; }
+    .save-btn { align-self: flex-start; }
   }
 }

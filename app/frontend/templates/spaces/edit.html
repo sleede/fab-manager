@@ -9,23 +9,8 @@
       <section class="heading-title">
         <h1 translate translate-values="{NAME: space.name}">{{ 'app.admin.space_edit.edit_the_space_NAME' }}</h1>
       </section>
-
     </div>
-
   </div>
-
 </section>
 
-
-<div class="row no-gutter" >
-
-  <div class="col-md-9 b-r nopadding">
-    <div class="panel panel-default bg-light m-lg">
-      <div class="panel-body m-r">
-        <space-form action="'update'" space="space" on-success="onSuccess" on-error="onError"></space-form>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-md-3"/>
-</div>
+<space-form action="'update'" space="space" on-success="onSuccess" on-error="onError"></space-form>

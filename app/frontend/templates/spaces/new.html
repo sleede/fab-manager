@@ -9,30 +9,8 @@
       <section class="heading-title">
         <h1 translate>{{ 'app.admin.space_new.add_a_new_space' }}</h1>
       </section>
-
     </div>
-
   </div>
-
 </section>
 
-
-<div class="row no-gutter" >
-
-  <div class="col-md-9 b-r nopadding">
-
-    <div class="m-lg alert alert-warning" role="alert">
-      {{ 'app.admin.space_new.watch_out_when_creating_a_new_space_its_prices_are_initialized_at_0_for_all_subscriptions' | translate}}
-      {{ 'app.admin.space_new.consider_changing_its_prices_before_creating_any_reservation_slot' | translate }}
-    </div>
-
-    <div class="panel panel-default bg-light m-lg">
-      <div class="panel-body m-r">
-        <space-form action="'create'" on-success="onSuccess" on-error="onError"></space-form>
-      </div>
-    </div>
-
-  </div>
-
-  <div class="col-md-3"/>
-</div>
+<space-form action="'create'" on-success="onSuccess" on-error="onError"></space-form>

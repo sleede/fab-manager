@@ -1,6 +1,6 @@
 .fab-panel {
-  background-color: #fff;
-  border: 1px solid #ddd;
+  background-color: var(--gray-soft-lightest);
+  border: 1px solid var(--gray-soft-dark);
   border-radius: var(--border-radius);
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
   margin: 30px 30px 30px 0;
@@ -11,9 +11,9 @@
   overflow: hidden;
 
   .panel-header {
-    background-color: #f4f3f3;
+    background-color: var(--gray-soft-light);
     padding: 18px 15px;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid var(--gray-soft-dark);
     border-top-right-radius: var(--border-radius);
     border-top-left-radius: var(--border-radius);
 
@@ -28,7 +28,7 @@
 
   &.no-header {
     padding: 15px;
-    background-color: #f4f3f3;
+    background-color: var(--gray-soft-light);
     border-radius: var(--border-radius);
   }
 }

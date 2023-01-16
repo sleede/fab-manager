@@ -8,10 +8,6 @@
   header {
     @include header();
     padding-bottom: 1.6rem;
-    .grpBtn {
-      display: flex;
-      & > *:not(:first-child) { margin-left: 2.4rem; }
-    }
   }
 
   &-content {
@@ -111,17 +107,5 @@
         }
       }
     }
-  }
-}
-
-.trainings-container {
-  max-width: 1600px;
-  margin: 0 auto;
-  padding: 2.4rem 0 6rem;
-  @include grid-col(12);
-  gap: 2.4rem 3.2rem;
-  .alert {
-    margin: 0;
-    grid-column: 2/-2;
   }
 }

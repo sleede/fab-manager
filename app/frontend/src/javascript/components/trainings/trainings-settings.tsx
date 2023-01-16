@@ -77,76 +77,79 @@ export const TrainingsSettings: React.FC<TrainingsSettingsProps> = () => {
     <div className="trainings-settings">
       <header>
         <h2>{t('app.admin.trainings_settings.title')}</h2>
+        <FabButton onClick={handleSubmit(onSubmit)} className='save-btn is-main'>{t('app.admin.trainings_settings.save')}</FabButton>
       </header>
-      <form onSubmit={handleSubmit(onSubmit)} className="trainings-settings-content">
+      <form className="trainings-settings-content">
         <div className="settings-section">
-          <p className="section-title">{t('app.admin.trainings_settings.automatic_cancellation')}</p>
-          <FabAlert level="warning">
-            {t('app.admin.trainings_settings.automatic_cancellation_info')}
-          </FabAlert>
+          <header>
+            <p className="title">{t('app.admin.trainings_settings.automatic_cancellation')}</p>
+            <p className="description">{t('app.admin.trainings_settings.automatic_cancellation_info')}</p>
+          </header>
 
-          <FormSwitch id="active_auto_cancellation" control={control}
-            onChange={toggleAutoCancellation} formState={formState}
-            defaultValue={isActiveAutoCancellation}
-            label={t('app.admin.trainings_settings.automatic_cancellation_switch')} />
+          <div className="content">
+            <FormSwitch id="active_auto_cancellation" control={control}
+              onChange={toggleAutoCancellation} formState={formState}
+              defaultValue={isActiveAutoCancellation}
+              label={t('app.admin.trainings_settings.automatic_cancellation_switch')} />
 
-          {isActiveAutoCancellation && <>
-            <FormInput id="auto_cancellation_threshold"
-                     type="number"
-                     register={register}
-                     rules={{ required: isActiveAutoCancellation, min: 0 }}
-                     step={1}
-                     formState={formState}
-                     label={t('app.admin.trainings_settings.automatic_cancellation_threshold')} />
-            <FormInput id="auto_cancellation_deadline"
-                     type="number"
-                     register={register}
-                     rules={{ required: isActiveAutoCancellation, min: 1 }}
-                     step={1}
-                     formState={formState}
-                     label={t('app.admin.trainings_settings.automatic_cancellation_deadline')} />
-          </>}
-        </div>
-
-        <div className="settings-section">
-          <p className="section-title">{t('app.admin.trainings_settings.automatic_cancellation')}</p>
-          <FabAlert level="warning">
-            {t('app.admin.trainings_settings.generic_text_block_info')}
-          </FabAlert>
-
-          <FormSwitch id="active_text_block" control={control}
-            onChange={toggleTextBlockSwitch} formState={formState}
-            defaultValue={isActiveTextBlock}
-            label={t('app.admin.trainings_settings.generic_text_block_switch')} />
-
-          <FormRichText id="text_block"
-                        control={control}
-                        heading
-                        limit={280}
-                        disabled={!isActiveTextBlock} />
-
-          {isActiveTextBlock && <>
-            <FormSwitch id="active_cta" control={control}
-              onChange={toggleTextBlockCta} formState={formState}
-              label={t('app.admin.trainings_settings.cta_switch')} />
-
-            {isActiveCta && <>
-              <FormInput id="cta_label"
-                        register={register}
-                        rules={{ required: true }}
-                        onChange={handleCtaLabelChange}
-                        maxLength={40}
-                        label={t('app.admin.trainings_settings.cta_label')} />
-              <FormInput id="cta_url"
-                        register={register}
-                        rules={{ required: true, pattern: urlRegex }}
-                        onChange={handleCtaUrlChange}
-                        label={t('app.admin.trainings_settings.cta_url')} />
+            {isActiveAutoCancellation && <>
+              <FormInput id="auto_cancellation_threshold"
+                      type="number"
+                      register={register}
+                      rules={{ required: isActiveAutoCancellation, min: 0 }}
+                      step={1}
+                      formState={formState}
+                      label={t('app.admin.trainings_settings.automatic_cancellation_threshold')} />
+              <FormInput id="auto_cancellation_deadline"
+                      type="number"
+                      register={register}
+                      rules={{ required: isActiveAutoCancellation, min: 1 }}
+                      step={1}
+                      formState={formState}
+                      label={t('app.admin.trainings_settings.automatic_cancellation_deadline')} />
             </>}
-          </>}
+          </div>
         </div>
 
-        <FabButton type='submit' className='save-btn'>{t('app.admin.trainings_settings.save')}</FabButton>
+        <div className="settings-section">
+          <header>
+            <p className="title">{t('app.admin.trainings_settings.generic_text_block')}</p>
+            <p className="description">{t('app.admin.trainings_settings.generic_text_block_info')}</p>
+          </header>
+
+          <div className="content">
+            <FormSwitch id="active_text_block" control={control}
+              onChange={toggleTextBlockSwitch} formState={formState}
+              defaultValue={isActiveTextBlock}
+              label={t('app.admin.trainings_settings.generic_text_block_switch')} />
+
+            <FormRichText id="text_block"
+                          control={control}
+                          heading
+                          limit={280}
+                          disabled={!isActiveTextBlock} />
+
+            {isActiveTextBlock && <>
+              <FormSwitch id="active_cta" control={control}
+                onChange={toggleTextBlockCta} formState={formState}
+                label={t('app.admin.trainings_settings.cta_switch')} />
+
+              {isActiveCta && <>
+                <FormInput id="cta_label"
+                          register={register}
+                          rules={{ required: true }}
+                          onChange={handleCtaLabelChange}
+                          maxLength={40}
+                          label={t('app.admin.trainings_settings.cta_label')} />
+                <FormInput id="cta_url"
+                          register={register}
+                          rules={{ required: true, pattern: urlRegex }}
+                          onChange={handleCtaUrlChange}
+                          label={t('app.admin.trainings_settings.cta_url')} />
+              </>}
+            </>}
+          </div>
+        </div>
       </form>
     </div>
   );

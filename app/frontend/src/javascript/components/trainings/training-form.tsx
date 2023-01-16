@@ -20,7 +20,7 @@ import { SelectOption } from '../../models/select';
 import SettingAPI from '../../api/setting';
 import { Setting } from '../../models/setting';
 import { AdvancedAccountingForm } from '../accounting/advanced-accounting-form';
-import { FabPanel } from '../base/fab-panel';
+import { FabAlert } from '../base/fab-alert';
 
 declare const Application: IApplication;
 
@@ -116,140 +116,156 @@ export const TrainingForm: React.FC<TrainingFormProps> = ({ action, training, on
   const urlRegex = /^(https?:\/\/)([^.]+)\.(.{2,30})(\/.*)*\/?$/;
 
   return (
-    <form className="training-form" onSubmit={handleSubmit(onSubmit)}>
-      <FabPanel>
-        <p className="title">{t('app.admin.training_form.description')}</p>
-        <FormInput register={register} id="name"
-                  formState={formState}
-                  rules={{ required: true }}
-                  label={t('app.admin.training_form.name')} />
-        <FormImageUpload setValue={setValue}
-                        register={register}
-                        control={control}
+    <div className="training-form">
+      <header>
+        <h2>{t('app.admin.training_form.ACTION_title', { ACTION: action })}</h2>
+        <FabButton onClick={handleSubmit(onSubmit)} className="fab-button save-btn is-main">
+          {t('app.admin.training_form.save')}
+        </FabButton>
+      </header>
+      <form className='training-form-content'>
+        {action === 'create' &&
+          <FabAlert level='warning'>
+            {t('app.admin.training_form.beware_when_creating_a_training_its_reservation_prices_are_initialized_to_zero')} {t('app.admin.training_form.dont_forget_to_change_them_before_creating_slots_for_this_training')}
+          </FabAlert>
+        }
+        <section>
+          <header>
+            <p className="title">{t('app.admin.training_form.description')}</p>
+          </header>
+          <div className="content">
+            <FormInput register={register} id="name"
+                       formState={formState}
+                       rules={{ required: true }}
+                       label={t('app.admin.training_form.name')} />
+            <FormImageUpload setValue={setValue}
+                             register={register}
+                             control={control}
+                             formState={formState}
+                             rules={{ required: true }}
+                             id="training_image_attributes"
+                             accept="image/*"
+                             defaultImage={output.training_image_attributes}
+                             label={t('app.admin.training_form.illustration')} />
+            <FormRichText control={control}
+                          id="description"
+                          rules={{ required: true }}
+                          label={t('app.admin.training_form.description')}
+                          limit={null}
+                          heading bulletList blockquote link />
+          </div>
+        </section>
+
+        <section>
+          <header>
+            <p className="title">{t('app.admin.training_form.settings')}</p>
+          </header>
+          <div className="content">
+            {machineModule?.value === 'true' &&
+              <FormMultiSelect control={control}
+                              id="machine_ids"
+                              formState={formState}
+                              label={t('app.admin.training_form.associated_machines')}
+                              tooltip={t('app.admin.training_form.associated_machines_help')}
+                              loadOptions={loadMachines} />
+            }
+            <FormInput register={register}
+                    type="number"
+                    id="nb_total_places"
+                    formState={formState}
+                    nullable
+                    label={t('app.admin.training_form.default_seats')} />
+            <FormSwitch control={control}
+                        id="public_page"
+                        defaultValue={true}
+                        label={t('app.admin.training_form.public_page')}
+                        tooltip={t('app.admin.training_form.public_help')} />
+            <FormSwitch control={control}
+                        id="disabled"
+                        label={t('app.admin.training_form.disable_training')}
+                        tooltip={t('app.admin.training_form.disabled_help')} />
+          </div>
+        </section>
+
+        <section>
+          <header>
+            <p className="title">{t('app.admin.training_form.automatic_cancellation')}</p>
+            <p className="description">{t('app.admin.training_form.automatic_cancellation_info')}</p>
+          </header>
+          <div className="content">
+            <FormSwitch id="active_cancellation" control={control}
+              onChange={toggleCancellationSwitch} formState={formState}
+              defaultValue={isActiveCancellation}
+              label={t('app.admin.training_form.automatic_cancellation_switch')} />
+            {isActiveCancellation && <>
+              <FormInput register={register}
+                        type="number"
+                        step={1}
+                        id="auto_cancellation_threshold"
                         formState={formState}
-                        rules={{ required: true }}
-                        id="training_image_attributes"
-                        accept="image/*"
-                        defaultImage={output.training_image_attributes}
-                        label={t('app.admin.training_form.illustration')} />
-        <FormRichText control={control}
-                      id="description"
-                      rules={{ required: true }}
-                      label={t('app.admin.training_form.description')}
-                      limit={null}
-                      heading bulletList blockquote link />
-      </FabPanel>
-
-      <FabPanel>
-        <p className="title">{t('app.admin.training_form.settings')}</p>
-        {machineModule?.value === 'true' &&
-          <FormMultiSelect control={control}
-                           id="machine_ids"
-                           formState={formState}
-                           label={t('app.admin.training_form.associated_machines')}
-                           tooltip={t('app.admin.training_form.associated_machines_help')}
-                           loadOptions={loadMachines} />}
-        <FormInput register={register}
-                 type="number"
-                 id="nb_total_places"
-                 formState={formState}
-                 nullable
-                 label={t('app.admin.training_form.default_seats')} />
-        <FormSwitch control={control}
-                    id="public_page"
-                    defaultValue={true}
-                    label={t('app.admin.training_form.public_page')}
-                    tooltip={t('app.admin.training_form.public_help')} />
-        <FormSwitch control={control}
-                    id="disabled"
-                    label={t('app.admin.training_form.disable_training')}
-                    tooltip={t('app.admin.training_form.disabled_help')} />
-      </FabPanel>
-
-      <FabPanel>
-        <p className="title">
-          {t('app.admin.training_form.automatic_cancellation')}
-          <div className="fab-tooltip">
-            <span className="trigger"><i className="fa fa-question-circle" /></span>
-            <div className="content">{t('app.admin.training_form.automatic_cancellation_info')}</div>
+                        rules={{ required: isActiveCancellation }}
+                        nullable
+                        label={t('app.admin.training_form.automatic_cancellation_threshold')} />
+              <FormInput register={register}
+                        type="number"
+                        step={1}
+                        id="auto_cancellation_deadline"
+                        formState={formState}
+                        rules={{ required: isActiveCancellation }}
+                        nullable
+                        label={t('app.admin.training_form.automatic_cancellation_deadline')} />
+            </>}
           </div>
-        </p>
 
-        <FormSwitch id="active_cancellation" control={control}
-          onChange={toggleCancellationSwitch} formState={formState}
-          defaultValue={isActiveCancellation}
-          label={t('app.admin.training_form.automatic_cancellation_switch')} />
-        {isActiveCancellation && <>
-          <FormInput register={register}
-                     type="number"
-                     step={1}
-                     id="auto_cancellation_threshold"
-                     formState={formState}
-                     rules={{ required: isActiveCancellation }}
-                     nullable
-                     label={t('app.admin.training_form.automatic_cancellation_threshold')} />
-          <FormInput register={register}
-                     type="number"
-                     step={1}
-                     id="auto_cancellation_deadline"
-                     formState={formState}
-                     rules={{ required: isActiveCancellation }}
-                     nullable
-                     label={t('app.admin.training_form.automatic_cancellation_deadline')} />
-        </>}
-      </FabPanel>
+        </section>
 
-      <FabPanel>
-        <p className="title">
-          {t('app.admin.training_form.generic_text_block')}
-          <div className="fab-tooltip">
-            <span className="trigger"><i className="fa fa-question-circle" /></span>
-            <div className="content">{t('app.admin.training_form.generic_text_block_info')}</div>
+        <section>
+          <header>
+            <p className="title">{t('app.admin.training_form.generic_text_block')}</p>
+            <p className="description">{t('app.admin.training_form.generic_text_block_info')}</p>
+          </header>
+
+          <div className="content">
+            <FormSwitch id="active_text_block" control={control}
+              onChange={toggleTextBlockSwitch} formState={formState}
+              defaultValue={isActiveTextBlock}
+              label={t('app.admin.training_form.generic_text_block_switch')} />
+
+            <FormRichText id="text_block"
+                          control={control}
+                          heading
+                          limit={280}
+                          disabled={!isActiveTextBlock} />
+
+            {isActiveTextBlock && <>
+              <FormSwitch id="active_cta" control={control}
+                onChange={toggleTextBlockCta} formState={formState}
+                label={t('app.admin.training_form.cta_switch')} />
+
+              {isActiveCta && <>
+                <FormInput id="cta_label"
+                          register={register}
+                          rules={{ required: true }}
+                          onChange={handleCtaLabelChange}
+                          maxLength={40}
+                          label={t('app.admin.training_form.cta_label')} />
+                <FormInput id="cta_url"
+                          register={register}
+                          rules={{ required: true, pattern: urlRegex }}
+                          onChange={handleCtaUrlChange}
+                          label={t('app.admin.training_form.cta_url')} />
+              </>}
+            </>}
           </div>
-        </p>
+        </section>
 
-        <FormSwitch id="active_text_block" control={control}
-          onChange={toggleTextBlockSwitch} formState={formState}
-          defaultValue={isActiveTextBlock}
-          label={t('app.admin.training_form.generic_text_block_switch')} />
-
-        <FormRichText id="text_block"
-                      control={control}
-                      heading
-                      limit={280}
-                      disabled={!isActiveTextBlock} />
-
-        {isActiveTextBlock && <>
-          <FormSwitch id="active_cta" control={control}
-            onChange={toggleTextBlockCta} formState={formState}
-            label={t('app.admin.training_form.cta_switch')} />
-
-          {isActiveCta && <>
-            <FormInput id="cta_label"
-                      register={register}
-                      rules={{ required: true }}
-                      onChange={handleCtaLabelChange}
-                      maxLength={40}
-                      label={t('app.admin.training_form.cta_label')} />
-            <FormInput id="cta_url"
-                      register={register}
-                      rules={{ required: true, pattern: urlRegex }}
-                      onChange={handleCtaUrlChange}
-                      label={t('app.admin.training_form.cta_url')} />
-          </>}
-        </>}
-      </FabPanel>
-
-      {isActiveAccounting &&
-        <FabPanel>
-          <AdvancedAccountingForm register={register} onError={onError} />
-        </FabPanel>
-      }
-
-      <FabButton type="submit" className="fab-button save-btn is-main">
-        {t('app.admin.training_form.ACTION_training', { ACTION: action })}
-      </FabButton>
-    </form>
+        {isActiveAccounting &&
+          <section>
+            <AdvancedAccountingForm register={register} onError={onError} />
+          </section>
+        }
+      </form>
+    </div>
   );
 };
 

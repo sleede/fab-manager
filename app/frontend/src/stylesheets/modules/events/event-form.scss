@@ -1,12 +1,34 @@
 .event-form {
+  max-width: 1260px;
+  margin: 2.4rem auto 0;
+  padding: 0 3rem 6rem;
+  display: flex;
+  flex-direction: column;
+  & > header {
+    padding-bottom: 0;
+    @include header($sticky: true);
+    gap: 2.4rem;
+  }
+
+  &-content {
+    display: flex;
+    flex-direction: column;
+    gap: 3.2rem;
+
+    .fab-alert { margin: 0; }
+
+    section { @include layout-settings; }
+    .save-btn { align-self: flex-start; }
+  }
+
   .additional-prices {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
+    gap: 2.4rem;
 
     .add-price {
       max-width: fit-content;
-      margin-bottom: 1.6rem;
     }
     .price-item {
       width: 100%;
@@ -22,12 +44,13 @@
       }
     }
   }
-  .dates, .times, .price-item, .recurring {
+  .grp {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    @media (min-width: 640px) {flex-direction: row; }
 
     .form-item:first-child {
-      margin-right: 32px;
+      margin-right: 2.4rem;
     }
   }
   .submit-btn {

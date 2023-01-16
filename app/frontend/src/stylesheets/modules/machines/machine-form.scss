@@ -1,11 +1,30 @@
 .machine-form {
+  max-width: 1260px;
+  margin: 2.4rem auto 0;
+  padding: 0 3rem 6rem;
+  display: flex;
+  flex-direction: column;
+  & > header {
+    padding-bottom: 0;
+    @include header($sticky: true);
+    gap: 2.4rem;
+  }
+
+  &-content {
+    display: flex;
+    flex-direction: column;
+    gap: 3.2rem;
+
+    .fab-alert { margin: 0; }
+
+    section { @include layout-settings; }
+    .save-btn { align-self: flex-start; }
+  }
+
   .machine-files-header.form-item-header p  {
     cursor: default;
   }
   .machine-files {
     margin-bottom: 1.4rem;
-  }
-  .submit-btn {
-    float: right;
   }
 }
