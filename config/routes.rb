@@ -45,6 +45,7 @@ Rails.application.routes.draw do
     resources :components
     resources :themes
     resources :licences
+    resources :statuses
     resources :admins, only: %i[index create destroy]
     resources :settings, only: %i[show update index], param: :name do
       patch '/bulk_update', action: 'bulk_update', on: :collection
