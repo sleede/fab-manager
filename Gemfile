@@ -136,7 +136,7 @@ gem 'icalendar'
 gem 'tzinfo-data'
 
 # compilation of dynamic stylesheets (home page & theme)
-gem 'sassc', '= 2.1.0'
+gem 'sassc', '= 2.3.0'
 
 gem 'redis-session-store'
 
