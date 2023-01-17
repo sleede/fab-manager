@@ -33,16 +33,16 @@
     <div>
       <uib-tabset justified="true" active="tabs.active">
 
-        <uib-tab heading="{{ 'app.admin.machines.all_machines' | translate }}" index="0" select="selectTab()">
-          <div ng-if="tabs.active === 0">
-            <ng-include src="'/admin/machines/machines.html'"></ng-include>
-          </div>
+        <uib-tab heading="{{ 'app.admin.machines.machines_settings' | translate }}" index="1" select="selectTab()">
+          <machines-settings on-error="onError" on-success="on-success"></machines-settings>
         </uib-tab>
 
-        <uib-tab heading="{{ 'app.admin.machines.manage_machines_categories' | translate }}" index="1" select="selectTab()">
-          <div ng-if="tabs.active === 1">
-            <ng-include src="'/admin/machines/categories.html'"></ng-include>
-          </div>
+        <uib-tab heading="{{ 'app.admin.machines.all_machines' | translate }}" index="0" select="selectTab()">
+          <ng-include src="'/admin/machines/machines.html'"></ng-include>
+        </uib-tab>
+
+        <uib-tab heading="{{ 'app.admin.machines.manage_machines_categories' | translate }}" index="2" select="selectTab()">
+          <ng-include src="'/admin/machines/categories.html'"></ng-include>
         </uib-tab>
 
       </uib-tabset>

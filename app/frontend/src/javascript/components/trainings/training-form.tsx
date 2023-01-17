@@ -39,9 +39,10 @@ export const TrainingForm: React.FC<TrainingFormProps> = ({ action, training, on
 
   const [machineModule, setMachineModule] = useState<Setting>(null);
   const [isActiveCancellation, setIsActiveCancellation] = useState<boolean>(false);
-  const [isActiveTextBlock, setIsActiveTextBlock] = useState<boolean>(false);
-  const [isActiveCta, setIsActiveCta] = useState<boolean>(false);
   const [isActiveAccounting, setIsActiveAccounting] = useState<boolean>(false);
+  const [isActiveAuthorizationValidity, setIsActiveAuthorizationValidity] = useState<boolean>(false);
+  const [isActiveValidationRule, setIsActiveValidationRule] = useState<boolean>(false);
+
   const { handleSubmit, register, control, setValue, formState } = useForm<Training>({ defaultValues: { ...training } });
   const output = useWatch<Training>({ control });
 
@@ -86,34 +87,18 @@ export const TrainingForm: React.FC<TrainingFormProps> = ({ action, training, on
   };
 
   /**
-   * Callback triggered when the text block switch has changed.
+   * Callback triggered when the authorisation validity switch has changed.
    */
-  const toggleTextBlockSwitch = (value: boolean) => {
-    setIsActiveTextBlock(value);
+  const toggleAuthorizationValidity = (value: boolean) => {
+    setIsActiveAuthorizationValidity(value);
   };
 
   /**
-   * Callback triggered when the CTA switch has changed.
-  */
-  const toggleTextBlockCta = (value: boolean) => {
-    setIsActiveCta(value);
-  };
-
-  /**
-   * Callback triggered when the CTA label has changed.
-  */
-  const handleCtaLabelChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    console.log('cta label:', event.target.value);
-  };
-  /**
-   * Callback triggered when the cta url has changed.
+   * Callback triggered when the authorisation validity switch has changed.
    */
-  const handleCtaUrlChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    console.log('cta url:', event.target.value);
+  const toggleValidationRule = (value: boolean) => {
+    setIsActiveValidationRule(value);
   };
-
-  // regular expression to validate the input fields
-  const urlRegex = /^(https?:\/\/)([^.]+)\.(.{2,30})(\/.*)*\/?$/;
 
   return (
     <div className="training-form">
@@ -221,40 +206,44 @@ export const TrainingForm: React.FC<TrainingFormProps> = ({ action, training, on
 
         <section>
           <header>
-            <p className="title">{t('app.admin.training_form.generic_text_block')}</p>
-            <p className="description">{t('app.admin.training_form.generic_text_block_info')}</p>
+            <p className="title">{t('app.admin.training_form.authorization_validity')}</p>
+            <p className="description">{t('app.admin.training_form.authorization_validity_info')}</p>
           </header>
-
           <div className="content">
-            <FormSwitch id="active_text_block" control={control}
-              onChange={toggleTextBlockSwitch} formState={formState}
-              defaultValue={isActiveTextBlock}
-              label={t('app.admin.training_form.generic_text_block_switch')} />
+            <FormSwitch id="authorization_validity" control={control}
+                        onChange={toggleAuthorizationValidity} formState={formState}
+                        defaultValue={isActiveAuthorizationValidity}
+                        label={t('app.admin.training_form.authorization_validity_switch')} />
+            {isActiveAuthorizationValidity && <>
+              <FormInput id="authorization_validity_duration"
+                         type="number"
+                         register={register}
+                         rules={{ required: isActiveAuthorizationValidity, min: 1 }}
+                         step={1}
+                         formState={formState}
+                         label={t('app.admin.training_form.authorization_validity_period')} />
+            </>}
+          </div>
+        </section>
 
-            <FormRichText id="text_block"
-                          control={control}
-                          heading
-                          limit={280}
-                          disabled={!isActiveTextBlock} />
-
-            {isActiveTextBlock && <>
-              <FormSwitch id="active_cta" control={control}
-                onChange={toggleTextBlockCta} formState={formState}
-                label={t('app.admin.training_form.cta_switch')} />
-
-              {isActiveCta && <>
-                <FormInput id="cta_label"
-                          register={register}
-                          rules={{ required: true }}
-                          onChange={handleCtaLabelChange}
-                          maxLength={40}
-                          label={t('app.admin.training_form.cta_label')} />
-                <FormInput id="cta_url"
-                          register={register}
-                          rules={{ required: true, pattern: urlRegex }}
-                          onChange={handleCtaUrlChange}
-                          label={t('app.admin.training_form.cta_url')} />
-              </>}
+        <section>
+          <header>
+            <p className="title">{t('app.admin.training_form.validation_rule')}</p>
+            <p className="description">{t('app.admin.training_form.validation_rule_info')}</p>
+          </header>
+          <div className="content">
+            <FormSwitch id="validation_rule" control={control}
+              onChange={toggleValidationRule} formState={formState}
+              defaultValue={isActiveValidationRule}
+              label={t('app.admin.training_form.validation_rule_switch')} />
+            {isActiveValidationRule && <>
+              <FormInput id="validation_rule_period"
+                      type="number"
+                      register={register}
+                      rules={{ required: isActiveValidationRule, min: 1 }}
+                      step={1}
+                      formState={formState}
+                      label={t('app.admin.training_form.validation_rule_period')} />
             </>}
           </div>
         </section>

@@ -5,17 +5,9 @@
         <a ng-click="backPrevLocation($event)"><i class="fas fa-long-arrow-alt-left "></i></a>
       </section>
     </div>
-    <div class="col-xs-10 col-sm-10 col-md-8 b-l b-r-md">
+    <div class="col-xs-10 col-sm-10 col-md-11 b-l b-r-md">
       <section class="heading-title">
         <h1 translate>{{ 'app.admin.trainings.trainings_monitoring' }}</h1>
-      </section>
-    </div>
-
-    <div class="col-xs-12 col-sm-12 col-md-3 b-t hide-b-md">
-      <section class="heading-actions wrapper">
-        <a role="button" ui-sref="app.admin.calendar" class="btn btn-lg btn-default rounded m-t-sm text-sm">
-          <i class="fa fa-calendar-check-o m-r" aria-hidden="true"></i><span translate>{{ 'app.admin.trainings.plan_session' }}</span>
-        </a>
       </section>
     </div>
   </div>
@@ -39,7 +31,7 @@
         <uib-tab heading="{{ 'app.admin.trainings.all_trainings' | translate }}" index="0" class="manage-trainings">
           <trainings on-error="onError" on-success="on-success"></trainings>
 
-          <div class="m-t m-b">
+          <!--<div class="m-t m-b">
             <button type="button" class="btn btn-warning" ui-sref="app.admin.trainings_new" ng-show="isAuthorized('admin')">
               <i class="fa fa-plus m-r"></i>
               <span translate>{{ 'app.admin.trainings.add_a_new_training' }}</span>
@@ -80,7 +72,7 @@
               </td>
             </tr>
             </tbody>
-          </table>
+          </table>-->
         </uib-tab>
 
         <uib-tab heading="{{ 'app.admin.trainings.trainings_monitoring' | translate }}" class="post-tracking" index="2">

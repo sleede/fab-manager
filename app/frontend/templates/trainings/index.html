@@ -5,7 +5,7 @@
         <a ng-click="backPrevLocation($event)"><i class="fas fa-long-arrow-alt-left "></i></a>
       </section>
     </div>
-    <div class="col-xs-10 col-sm-10 col-md-8 b-l b-r-md">
+    <div class="col-xs-10 col-sm-10 col-md-11 b-l">
       <section class="heading-title">
         <h1 translate>{{ 'app.public.trainings_list.the_trainings' }}</h1>
       </section>
@@ -16,6 +16,7 @@
 
 
 <section class="m-lg">
+  <editorial-block></editorial-block>
 
   <div class="row" ng-repeat="training in (trainings.length/3 | array)">
 

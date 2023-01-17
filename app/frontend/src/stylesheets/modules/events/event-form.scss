@@ -32,11 +32,23 @@
     }
     .price-item {
       width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0 2.4rem;
+
       .remove-price {
         align-items: center;
         display: flex;
-        margin: 2.6rem 2rem 0;
+        margin: 0;
         cursor: pointer;
+      }
+      @media (min-width: 640px) {
+        flex-direction: row;
+        align-items: flex-start;
+        .remove-price {
+          margin: 2.6rem 0 0;
+        }
       }
 
       &.destroyed-item {
@@ -52,9 +64,5 @@
     .form-item:first-child {
       margin-right: 2.4rem;
     }
-  }
-  .submit-btn {
-    margin-top: 2rem;
-    float: right;
   }
 }

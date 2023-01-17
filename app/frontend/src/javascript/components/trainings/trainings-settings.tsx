@@ -5,7 +5,6 @@ import { Loader } from '../base/loader';
 import { react2angular } from 'react2angular';
 import { ErrorBoundary } from '../base/error-boundary';
 import { useTranslation } from 'react-i18next';
-import { FabAlert } from '../base/fab-alert';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { FormRichText } from '../form/form-rich-text';
 import { FormSwitch } from '../form/form-switch';
@@ -30,7 +29,9 @@ export const TrainingsSettings: React.FC<TrainingsSettingsProps> = () => {
   const urlRegex = /^(https?:\/\/)([^.]+)\.(.{2,30})(\/.*)*\/?$/;
 
   const [isActiveAutoCancellation, setIsActiveAutoCancellation] = useState<boolean>(false);
+  const [isActiveAuthorizationValidity, setIsActiveAuthorizationValidity] = useState<boolean>(false);
   const [isActiveTextBlock, setIsActiveTextBlock] = useState<boolean>(false);
+  const [isActiveValidationRule, setIsActiveValidationRule] = useState<boolean>(false);
   const [isActiveCta, setIsActiveCta] = useState<boolean>(false);
 
   /**
@@ -39,6 +40,21 @@ export const TrainingsSettings: React.FC<TrainingsSettingsProps> = () => {
   const toggleAutoCancellation = (value: boolean) => {
     setIsActiveAutoCancellation(value);
   };
+
+  /**
+   * Callback triggered when the authorisation validity switch has changed.
+   */
+  const toggleAuthorizationValidity = (value: boolean) => {
+    setIsActiveAuthorizationValidity(value);
+  };
+
+  /**
+   * Callback triggered when the authorisation validity switch has changed.
+   */
+  const toggleValidationRule = (value: boolean) => {
+    setIsActiveValidationRule(value);
+  };
+
   /**
    * Callback triggered when the text block switch has changed.
    */
@@ -82,37 +98,6 @@ export const TrainingsSettings: React.FC<TrainingsSettingsProps> = () => {
       <form className="trainings-settings-content">
         <div className="settings-section">
           <header>
-            <p className="title">{t('app.admin.trainings_settings.automatic_cancellation')}</p>
-            <p className="description">{t('app.admin.trainings_settings.automatic_cancellation_info')}</p>
-          </header>
-
-          <div className="content">
-            <FormSwitch id="active_auto_cancellation" control={control}
-              onChange={toggleAutoCancellation} formState={formState}
-              defaultValue={isActiveAutoCancellation}
-              label={t('app.admin.trainings_settings.automatic_cancellation_switch')} />
-
-            {isActiveAutoCancellation && <>
-              <FormInput id="auto_cancellation_threshold"
-                      type="number"
-                      register={register}
-                      rules={{ required: isActiveAutoCancellation, min: 0 }}
-                      step={1}
-                      formState={formState}
-                      label={t('app.admin.trainings_settings.automatic_cancellation_threshold')} />
-              <FormInput id="auto_cancellation_deadline"
-                      type="number"
-                      register={register}
-                      rules={{ required: isActiveAutoCancellation, min: 1 }}
-                      step={1}
-                      formState={formState}
-                      label={t('app.admin.trainings_settings.automatic_cancellation_deadline')} />
-            </>}
-          </div>
-        </div>
-
-        <div className="settings-section">
-          <header>
             <p className="title">{t('app.admin.trainings_settings.generic_text_block')}</p>
             <p className="description">{t('app.admin.trainings_settings.generic_text_block_info')}</p>
           </header>
@@ -147,6 +132,81 @@ export const TrainingsSettings: React.FC<TrainingsSettingsProps> = () => {
                           onChange={handleCtaUrlChange}
                           label={t('app.admin.trainings_settings.cta_url')} />
               </>}
+            </>}
+          </div>
+        </div>
+
+        <div className="settings-section">
+          <header>
+            <p className="title">{t('app.admin.trainings_settings.automatic_cancellation')}</p>
+            <p className="description">{t('app.admin.trainings_settings.automatic_cancellation_info')}</p>
+          </header>
+
+          <div className="content">
+            <FormSwitch id="active_auto_cancellation" control={control}
+              onChange={toggleAutoCancellation} formState={formState}
+              defaultValue={isActiveAutoCancellation}
+              label={t('app.admin.trainings_settings.automatic_cancellation_switch')} />
+
+            {isActiveAutoCancellation && <>
+              <FormInput id="auto_cancellation_threshold"
+                      type="number"
+                      register={register}
+                      rules={{ required: isActiveAutoCancellation, min: 0 }}
+                      step={1}
+                      formState={formState}
+                      label={t('app.admin.trainings_settings.automatic_cancellation_threshold')} />
+              <FormInput id="auto_cancellation_deadline"
+                      type="number"
+                      register={register}
+                      rules={{ required: isActiveAutoCancellation, min: 1 }}
+                      step={1}
+                      formState={formState}
+                      label={t('app.admin.trainings_settings.automatic_cancellation_deadline')} />
+            </>}
+          </div>
+        </div>
+
+        <div className="settings-section">
+          <header>
+            <p className="title">{t('app.admin.trainings_settings.authorization_validity')}</p>
+            <p className="description">{t('app.admin.trainings_settings.authorization_validity_info')}</p>
+          </header>
+          <div className="content">
+            <FormSwitch id="authorization_validity" control={control}
+              onChange={toggleAuthorizationValidity} formState={formState}
+              defaultValue={isActiveAuthorizationValidity}
+              label={t('app.admin.trainings_settings.authorization_validity_switch')} />
+            {isActiveAuthorizationValidity && <>
+              <FormInput id="authorization_validity_duration"
+                      type="number"
+                      register={register}
+                      rules={{ required: isActiveAuthorizationValidity, min: 1 }}
+                      step={1}
+                      formState={formState}
+                      label={t('app.admin.trainings_settings.authorization_validity_duration')} />
+            </>}
+          </div>
+        </div>
+
+        <div className="settings-section">
+          <header>
+            <p className="title">{t('app.admin.trainings_settings.validation_rule')}</p>
+            <p className="description">{t('app.admin.trainings_settings.validation_rule_info')}</p>
+          </header>
+          <div className="content">
+            <FormSwitch id="validation_rule" control={control}
+              onChange={toggleValidationRule} formState={formState}
+              defaultValue={isActiveValidationRule}
+              label={t('app.admin.trainings_settings.validation_rule_switch')} />
+            {isActiveValidationRule && <>
+              <FormInput id="validation_rule_period"
+                      type="number"
+                      register={register}
+                      rules={{ required: isActiveValidationRule, min: 1 }}
+                      step={1}
+                      formState={formState}
+                      label={t('app.admin.trainings_settings.validation_rule_period')} />
             </>}
           </div>
         </div>

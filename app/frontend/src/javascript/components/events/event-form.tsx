@@ -283,7 +283,7 @@ export const EventForm: React.FC<EventFormProps> = ({ action, event, onError, on
                       label={t('app.admin.event_form.standard_rate')}
                       tooltip={t('app.admin.event_form.0_equal_free')}
                       addOn={FormatLib.currencySymbol()} />
-            {/* TODO: need ui */}
+
             {priceCategoriesOptions && <div className="additional-prices">
               {fields.map((price, index) => (
                 <div key={index} className={`price-item ${output.event_price_categories_attributes && output.event_price_categories_attributes[index]?._destroy ? 'destroyed-item' : ''}`}>

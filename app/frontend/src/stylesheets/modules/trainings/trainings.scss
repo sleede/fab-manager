@@ -39,7 +39,7 @@
         width: 100%;
         display: grid;
         justify-content: space-between;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr;
         gap: 1.6rem;
         padding: 1.6rem;
         border: 1px solid var(--gray-soft-dark);
@@ -55,7 +55,10 @@
         p {
           margin: 0;
           @include text-base(600);
-          span { @include text-base(400); }
+          span {
+            margin: 0 1ch;
+            @include text-base(400);
+          }
         }
 
         .name,
@@ -64,11 +67,11 @@
           overflow: hidden ;
           p { @extend .text-ellipsis; }
         }
-        .cancel {
-          .override {
-            @include text-sm;
-            color: var(--alert-light);
-          }
+        .override {
+          margin-left: 1ch;
+          @include text-sm;
+          font-style: italic;
+          color: var(--alert-light);
         }
         .actions {
           grid-column-end: -1;
@@ -91,19 +94,15 @@
         }
 
         @media (min-width: 1024px) {
-          grid-template-columns: 2fr 1fr max-content;
+          grid-template-columns: 1fr 1fr;
+        }
+        @media (min-width: 1440px) {
+          grid-template-columns: 2fr 1fr 1fr max-content;
+          grid-auto-flow: column;
+          gap: 1.6rem 3.2rem;
           .name { grid-area: 1/1/2/2; }
           .machines { grid-area: 2/1/3/2; }
           .actions { grid-row: 1/3; }
-        }
-        @media (min-width: 1440px) {
-          grid-template-columns: 1fr 40ch repeat(2, 1fr) max-content;
-          align-items: center;
-          .name,
-          .machines,
-          .cancel,
-          .capacity,
-          .actions { grid-area: auto; }
         }
       }
     }
