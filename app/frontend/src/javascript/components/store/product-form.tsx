@@ -154,116 +154,32 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
    * This function render the content of the 'products settings' tab
    */
   const renderSettingsTab = () => (
-    <section>
-      <div className="subgrid">
-        <FormInput id="name"
-                   register={register}
-                   rules={{ required: true }}
-                   formState={formState}
-                   onChange={handleNameChange}
-                   label={t('app.admin.store.product_form.name')}
-                   className="span-7" />
-        <FormInput id="sku"
-                   register={register}
-                   formState={formState}
-                   label={t('app.admin.store.product_form.sku')}
-                   className="span-3" />
-      </div>
-      <div className="subgrid">
-        <FormInput id="slug"
+    <div className='product-form-content'>
+      <section>
+        <header>
+          <p className="title">{t('app.admin.store.product_form.description')}</p>
+          <p className="description">{t('app.admin.store.product_form.description_info')}</p>
+        </header>
+        <div className="content">
+          <FormInput id="name"
+                    register={register}
+                    rules={{ required: true }}
+                    formState={formState}
+                    onChange={handleNameChange}
+                    label={t('app.admin.store.product_form.name')}
+                    className="span-7" />
+          <FormInput id="slug"
                    register={register}
                    rules={{ required: true }}
                    formState={formState}
                    label={t('app.admin.store.product_form.slug')}
                    className='span-7' />
-        <FormSwitch control={control}
-                    id="is_active"
+          <FormInput id="sku"
+                    register={register}
                     formState={formState}
-                    label={t('app.admin.store.product_form.is_show_in_store')}
-                    tooltip={t('app.admin.store.product_form.active_price_info')}
-                    onChange={handleIsActiveChanged}
-                    className='span-3' />
-      </div>
-
-      <hr />
-
-      <div className="price-data">
-        <div className="header-switch">
-          <h4>{t('app.admin.store.product_form.price_and_rule_of_selling_product')}</h4>
-          <FormSwitch control={control}
-                      id="is_active_price"
-                      label={t('app.admin.store.product_form.is_active_price')}
-                      defaultValue={isActivePrice}
-                      onChange={toggleIsActivePrice} />
-        </div>
-        {isActivePrice && <div className="price-data-content">
-          <FormInput id="amount"
-                     type="number"
-                     register={register}
-                     rules={{ required: isActivePrice, min: 0 }}
-                     step={0.01}
-                     formState={formState}
-                     label={t('app.admin.store.product_form.price')}
-                     nullable />
-          <FormInput id="quantity_min"
-                     type="number"
-                     rules={{ required: true }}
-                     register={register}
-                     formState={formState}
-                     label={t('app.admin.store.product_form.quantity_min')} />
-        </div>}
-      </div>
-
-      <hr />
-
-      <div>
-        <h4>{t('app.admin.store.product_form.product_images')}</h4>
-        <FabAlert level="warning">
-          <HtmlTranslate trKey="app.admin.store.product_form.product_images_info" />
-        </FabAlert>
-        <FormMultiImageUpload setValue={setValue}
-                              addButtonLabel={t('app.admin.store.product_form.add_product_image')}
-                              register={register}
-                              control={control}
-                              id="product_images_attributes"
-                              className="product-images" />
-      </div>
-
-      <hr />
-
-      <div>
-        <h4>{t('app.admin.store.product_form.assigning_category')}</h4>
-        <FabAlert level="warning">
-          <HtmlTranslate trKey="app.admin.store.product_form.assigning_category_info" />
-        </FabAlert>
-        <FormSelect options={productCategories}
-                    control={control}
-                    id="product_category_id"
-                    formState={formState}
-                    label={t('app.admin.store.product_form.linking_product_to_category')} />
-      </div>
-
-      <hr />
-
-      <div>
-        <h4>{t('app.admin.store.product_form.assigning_machines')}</h4>
-        <FabAlert level="warning">
-          <HtmlTranslate trKey="app.admin.store.product_form.assigning_machines_info" />
-        </FabAlert>
-        <FormChecklist options={machines}
-                       control={control}
-                       id="machine_ids"
-                       formState={formState} />
-      </div>
-
-      <hr />
-
-      <div>
-        <h4>{t('app.admin.store.product_form.product_description')}</h4>
-        <FabAlert level="warning">
-          <HtmlTranslate trKey="app.admin.store.product_form.product_description_info" />
-        </FabAlert>
-        <FormRichText control={control}
+                    label={t('app.admin.store.product_form.sku')}
+                    className="span-3" />
+          <FormRichText control={control}
                       heading
                       bulletList
                       blockquote
@@ -271,35 +187,106 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
                       limit={6000}
                       id="description"
                       ariaLabel={t('app.admin.store.product_form.product_description')} />
-      </div>
+          <FormSwitch control={control}
+                      id="is_active"
+                      formState={formState}
+                      label={t('app.admin.store.product_form.is_show_in_store')}
+                      tooltip={t('app.admin.store.product_form.active_price_info')}
+                      onChange={handleIsActiveChanged}
+                      className='span-3' />
+        </div>
+      </section>
 
-      <hr />
+      <section>
+        <header>
+          <p className="title">{t('app.admin.store.product_form.product_images')}</p>
+          <p className="description">{t('app.admin.store.product_form.product_images_info')}</p>
+        </header>
+        <div className="content">
+          <FormMultiImageUpload setValue={setValue}
+                                addButtonLabel={t('app.admin.store.product_form.add_product_image')}
+                                register={register}
+                                control={control}
+                                id="product_images_attributes" />
+        </div>
+      </section>
 
-      <div>
-        <h4>{t('app.admin.store.product_form.product_files')}</h4>
-        <FabAlert level="warning">
-          <HtmlTranslate trKey="app.admin.store.product_form.product_files_info" />
-        </FabAlert>
-        <FormMultiFileUpload setValue={setValue}
-                             addButtonLabel={t('app.admin.store.product_form.add_product_file')}
-                             control={control}
-                             accept="application/pdf"
-                             register={register}
-                             id="product_files_attributes"
-                             className="product-documents" />
-      </div>
+      <section>
+        <header>
+          <p className="title">{t('app.admin.store.product_form.price_and_rule_of_selling_product')}</p>
+        </header>
+        <div className="content">
+          <FormSwitch control={control}
+                      id="is_active_price"
+                      label={t('app.admin.store.product_form.is_active_price')}
+                      defaultValue={isActivePrice}
+                      onChange={toggleIsActivePrice} />
+          {isActivePrice && <>
+            <FormInput id="amount"
+                      type="number"
+                      register={register}
+                      rules={{ required: isActivePrice, min: 0 }}
+                      step={0.01}
+                      formState={formState}
+                      label={t('app.admin.store.product_form.price')}
+                      nullable />
+            <FormInput id="quantity_min"
+                      type="number"
+                      rules={{ required: true }}
+                      register={register}
+                      formState={formState}
+                      label={t('app.admin.store.product_form.quantity_min')} />
+          </>}
+        </div>
+      </section>
 
-      <hr />
+      <section>
+        <header>
+          <p className="title">{t('app.admin.store.product_form.assigning_category')}</p>
+          <p className="description">{t('app.admin.store.product_form.assigning_category_info')}</p>
+        </header>
+        <div className="content">
+          <FormSelect options={productCategories}
+                      control={control}
+                      id="product_category_id"
+                      formState={formState}
+                      label={t('app.admin.store.product_form.linking_product_to_category')} />
+        </div>
+      </section>
 
-      <AdvancedAccountingForm register={register} onError={onError} />
+      <section>
+        <header>
+          <p className="title">{t('app.admin.store.product_form.assigning_machines')}</p>
+          <p className="description">{t('app.admin.store.product_form.assigning_machines_info')}</p>
+        </header>
+        <div className="content">
+          <FormChecklist options={machines}
+                        control={control}
+                        id="machine_ids"
+                        formState={formState} />
+        </div>
+      </section>
 
-      <div className="main-actions">
-        <FabButton type="submit" className="main-action-btn" disabled={saving}>
-          {!saving && t('app.admin.store.product_form.save')}
-          {saving && <i className="fa fa-spinner fa-pulse fa-fw" />}
-        </FabButton>
-      </div>
-    </section>
+      <section>
+        <header>
+          <p className="title">{t('app.admin.store.product_form.product_files')}</p>
+          <p className="description">{t('app.admin.store.product_form.product_files_info')}</p>
+        </header>
+        <div className="content">
+          <FormMultiFileUpload setValue={setValue}
+                              addButtonLabel={t('app.admin.store.product_form.add_product_file')}
+                              control={control}
+                              accept="application/pdf"
+                              register={register}
+                              id="product_files_attributes"
+                              className="product-documents" />
+        </div>
+      </section>
+
+      <section>
+        <AdvancedAccountingForm register={register} onError={onError} />
+      </section>
+    </div>
   );
 
   return (

@@ -1,23 +1,22 @@
 .products,
 .new-product,
 .edit-product {
-  max-width: 1600px;
   margin: 0 auto;
   padding-bottom: 6rem;
-
-  header {
-    @include header();
-    padding-bottom: 0;
-    grid-column: 1 / -1;
-  }
 }
 
 .products {
+  max-width: 1600px;
   display: grid;
   grid-template-rows: min-content 8rem 1fr;
   align-items: flex-start;
 
-  & > header { margin-bottom: 2.4rem; }
+  & > header {
+    grid-column: 1 / -1;
+    margin-bottom: 2.4rem;
+    @include header();
+    gap: 2.4rem;
+  }
 
   .store-filters {
     grid-area: 2 / 1 / 4 / 2;
@@ -44,20 +43,17 @@
 
 .new-product,
 .edit-product {
-  @include grid-col(12);
-  gap: 3.2rem;
-  align-items: flex-start;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
 
   &-nav {
-    max-width: 1600px;
+    max-width: 1200px;
     margin: 0 auto;
-    @include grid-col(12);
-    gap: 3.2rem;
-    justify-items: flex-start;
-    & > * {
-      grid-column: 2 / -2;
-    }
   }
-
-  header { grid-column: 2 / -2; }
+  & > header {
+    padding-bottom: 0;
+    @include header($sticky: true);
+    gap: 2.4rem;
+  }
 }

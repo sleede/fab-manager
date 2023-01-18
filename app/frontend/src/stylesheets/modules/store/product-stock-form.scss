@@ -27,6 +27,7 @@
     }
   }
   .store-list {
+    margin-top: 2.4rem;
     h4 { margin: 0; }
   }
   .store-list-header {
@@ -50,17 +51,19 @@
     }
   }
 
-  .threshold-data-content {
-    margin-top: 1.6rem;
-    padding: 1.6rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    gap: 3.2rem;
-    border: 1px solid var(--gray-soft);
-    border-radius: var(--border-radius);
-    label { flex: 0 1 fit-content; }
-
+  .threshold-data {
+    @include layout-settings;
+    &-content {
+      margin-top: 1.6rem;
+      padding: 1.6rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 3.2rem;
+      border: 1px solid var(--gray-soft);
+      border-radius: var(--border-radius);
+      label { flex: 0 1 fit-content; }
+    }
   }
   .fab-state-label {
     --status-color: var(--alert-light);

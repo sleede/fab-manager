@@ -1,48 +1,77 @@
 .product-form {
   grid-column: 2 / -2;
 
-  h4 {
-    margin: 0 0 2.4rem;
-    @include title-base;
-  }
-  hr {
-    margin: 4.8rem 0;
-  }
-
-  .subgrid {
-    @include grid-col(10);
-    gap: 3.2rem;
-    align-items: flex-end;
-  }
-  .span-3 { grid-column: span 3; }
-  .span-7 { grid-column: span 7; }
-
-  & > div {
-    grid-column: 2 / -2;
-  }
-
-  .flex {
+  &-content {
     display: flex;
-    flex-wrap: wrap;
-    align-items: flex-end;
-    gap: 0 3.2rem;
-    & > * {
-      flex: 1 1 320px;
+    flex-direction: column;
+    gap: 3.2rem;
+
+    section { @include layout-settings; }
+    .form-checklist {
+      margin: 0;
+      .form-item-field {
+        background: none;
+        .checklist {
+          max-height: max(170px, 25vh);
+          overflow-y: auto;
+          padding: 1.6rem;
+          border: 1px solid var(--gray-soft-dark);
+          background-color: var(--gray-soft-lightest);
+          border-radius: var(--border-radius);
+        }
+        .actions { margin-bottom: 0; }
+      }
+    }
+
+    @media (max-width: 539px) {
+      .form-multi-image-upload .list {
+        grid-template-columns: 1fr;
+      }
     }
   }
 
-  .header-switch {
-    display: flex;
-    flex-direction: row;
-    gap: 3.2rem;
-    justify-content: space-between;
-    align-items: center;
-    label { flex: 0 1 fit-content; }
-  }
-  .price-data-content {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 0 3.2rem;
-    align-items: flex-end;
-  }
+  //h4 {
+  //  margin: 0 0 2.4rem;
+  //  @include title-base;
+  //}
+  //hr {
+  //  margin: 4.8rem 0;
+  //}
+
+  //.subgrid {
+  //  @include grid-col(10);
+  //  gap: 3.2rem;
+  //  align-items: flex-end;
+  //}
+  //.span-3 { grid-column: span 3; }
+  //.span-7 { grid-column: span 7; }
+
+  //& > div {
+  //  grid-column: 2 / -2;
+  //}
+
+  //.flex {
+  //  display: flex;
+  //  flex-wrap: wrap;
+  //  align-items: flex-end;
+  //  gap: 0 3.2rem;
+  //  & > * {
+  //    flex: 1 1 320px;
+  //  }
+  //}
+
+  //.header-switch {
+  //  display: flex;
+  //  flex-direction: row;
+  //  gap: 3.2rem;
+  //  justify-content: space-between;
+  //  align-items: center;
+  //  label { flex: 0 1 fit-content; }
+  //}
+  //.price-data-content {
+  //  display: grid;
+  //  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  //  gap: 0 3.2rem;
+  //  align-items: flex-end;
+  //}
 }

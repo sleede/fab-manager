@@ -52,28 +52,32 @@ export const StoreSettings: React.FC<StoreSettingsProps> = ({ onError, onSuccess
     <div className='store-settings'>
       <header>
         <h2>{t('app.admin.store_settings.title')}</h2>
+        <FabButton onClick={handleSubmit(onSubmit)} className='save-btn is-main'>{t('app.admin.store_settings.save')}</FabButton>
       </header>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="setting-section">
-          <p className="section-title">{t('app.admin.store_settings.withdrawal_instructions')}</p>
-          <FabAlert level="warning">
-            <HtmlTranslate trKey="app.admin.store_settings.withdrawal_info" />
-          </FabAlert>
-          <FormRichText control={control}
-                        heading
-                        bulletList
-                        link
-                        limit={400}
-                        id="store_withdrawal_instructions" />
+      <form onSubmit={handleSubmit(onSubmit)} className="store-settings-content">
+        <div className="settings-section">
+          <header>
+            <p className="title">{t('app.admin.store_settings.withdrawal_instructions')}</p>
+            <p className="description">{t('app.admin.store_settings.withdrawal_info')}</p>
+          </header>
+          <div className="content">
+            <FormRichText control={control}
+                          heading
+                          bulletList
+                          link
+                          limit={400}
+                          id="store_withdrawal_instructions" />
+          </div>
         </div>
-        <div className="setting-section">
-          <p className="section-title">{t('app.admin.store_settings.store_hidden_title')}</p>
-          <FabAlert level="warning">
-            <HtmlTranslate trKey="app.admin.store_settings.store_hidden_info" />
-          </FabAlert>
-          <FormSwitch control={control} id="store_hidden" label={t('app.admin.store_settings.store_hidden')} />
+        <div className="settings-section">
+          <header>
+            <p className="title">{t('app.admin.store_settings.store_hidden_title')}</p>
+            <p className="description">{t('app.admin.store_settings.store_hidden_info')}</p>
+          </header>
+          <div className="content">
+            <FormSwitch control={control} id="store_hidden" label={t('app.admin.store_settings.store_hidden')} />
+          </div>
         </div>
-        <FabButton type='submit' className='save-btn'>{t('app.admin.store_settings.save')}</FabButton>
       </form>
     </div>
   );

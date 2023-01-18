@@ -162,7 +162,7 @@ export const ProductStockForm = <TContext extends object> ({ currentFormValues, 
   };
 
   return (
-    <section className='product-stock-form'>
+    <div className='product-stock-form'>
       <h4>{t('app.admin.store.product_stock_form.stock_up_to_date')}&nbsp;
         <span>{t('app.admin.store.product_stock_form.date_time', {
           DATE: FormatLib.date(lastStockUpdate()),
@@ -214,36 +214,33 @@ export const ProductStockForm = <TContext extends object> ({ currentFormValues, 
       <hr />
 
       <div className="threshold-data">
-        <div className="header-switch">
-          <h4>{t('app.admin.store.product_stock_form.low_stock_threshold')}</h4>
+        <header>
+          <p className="title">{t('app.admin.store.product_stock_form.low_stock_threshold')}</p>
+          <p className="description">{t('app.admin.store.product_stock_form.stock_threshold_info')}</p>
+        </header>
+        <div className="content">
           <FormSwitch control={control}
                       id="is_active_threshold"
                       label={t('app.admin.store.product_stock_form.stock_threshold_toggle')}
                       defaultValue={activeThreshold}
                       onChange={toggleStockThreshold} />
-        </div>
-        <FabAlert level="warning">
-          <HtmlTranslate trKey="app.admin.store.product_stock_form.stock_threshold_information" />
-        </FabAlert>
-        {activeThreshold && <>
-          <FabStateLabel>{t('app.admin.store.product_stock_form.low_stock')}</FabStateLabel>
-          <div className="threshold-data-content">
+          {activeThreshold && <>
+            <FabStateLabel>{t('app.admin.store.product_stock_form.low_stock')}</FabStateLabel>
             <FormInput id="low_stock_threshold"
-                       type="number"
-                       register={register}
-                       rules={{ required: activeThreshold, min: 1 }}
-                       step={1}
-                       formState={formState}
-                       nullable
-                       label={t('app.admin.store.product_stock_form.threshold_level')} />
+                      type="number"
+                      register={register}
+                      rules={{ required: activeThreshold, min: 1 }}
+                      step={1}
+                      formState={formState}
+                      nullable
+                      label={t('app.admin.store.product_stock_form.threshold_level')} />
             <FormSwitch control={control}
                         id="low_stock_alert"
                         formState={formState}
                         label={t('app.admin.store.product_stock_form.threshold_alert')} />
-          </div>
-        </>}
+          </>}
+        </div>
       </div>
-      <hr />
 
       <div className="store-list">
         <h4>{t('app.admin.store.product_stock_form.events_history')}</h4>
@@ -292,6 +289,6 @@ export const ProductStockForm = <TContext extends object> ({ currentFormValues, 
       <ProductStockModal onSuccess={onNewStockMovement}
                          isOpen={isOpen}
                          toggleModal={toggleModal} />
-    </section>
+    </div>
   );
 };
