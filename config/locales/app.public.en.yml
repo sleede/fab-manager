@@ -229,11 +229,11 @@ en:
           sell: "If you also want to sell your creations, please let us know."
           link: "To the store"
       machines_filters:
-        show_machines: "Show machines"
+        show_machines: "Show machines:"
         status_enabled: "Enabled"
         status_disabled: "Disabled"
         status_all: "All"
-        filter_by_machine_category: "Filter by category"
+        filter_by_machine_category: "Filter by category:"
         all_machines: "All machines"
       machine_card:
         book: "Book"

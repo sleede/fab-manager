@@ -117,8 +117,12 @@ export const MachineCategoriesList: React.FC<MachineCategoriesListProps> = ({ on
 
   return (
     <div className="machine-categories-list">
-      <h3 className="machines-categories">{t('app.admin.machine_categories_list.machine_categories')}</h3>
-      <FabButton onClick={addMachineCategory} className="is-secondary" >{t('app.admin.machine_categories_list.add_a_machine_category')}</FabButton>
+      <header>
+        <h2>{t('app.admin.machine_categories_list.machine_categories')}</h2>
+        <div className='grpBtn'>
+          <FabButton className="main-action-btn" onClick={addMachineCategory}>{t('app.admin.machine_categories_list.add_a_machine_category')}</FabButton>
+        </div>
+      </header>
       <MachineCategoryModal isOpen={modalIsOpen}
                             machines={machines}
                             machineCategory={machineCategory}

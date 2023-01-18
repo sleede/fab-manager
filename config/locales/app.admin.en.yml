@@ -4,8 +4,18 @@ en:
       machines:
         the_fablab_s_machines: "The FabLab's machines"
         all_machines: "All machines"
+        add_a_machine: "Add a new machine"
         manage_machines_categories: "Manage machines categories"
         machines_settings: "Settings"
+      machines_settings:
+        title: "Settings"
+        generic_text_block: "Editorial text block"
+        generic_text_block_info: "Displays an editorial block above the list of machines visible to members."
+        generic_text_block_switch: "Display editorial block"
+        cta_switch: "Display a button"
+        cta_label: "Button label"
+        cta_url: "url"
+        save: "Save"
       machine_categories_list:
         machine_categories: "Machines categories"
         add_a_machine_category: "Add a machine category"

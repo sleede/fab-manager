@@ -1,6 +1,24 @@
 .machines-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+
+  &-container {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding-bottom: 6rem;
+    display: flex;
+    flex-direction: column;
+    & > header {
+      padding-bottom: 0;
+      @include header;
+      gap: 2.4rem;
+    }
+  }
+
   .all-machines {
     max-width: 1600px;
+    width: 100%;
     margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));

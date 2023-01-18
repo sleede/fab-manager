@@ -12,6 +12,8 @@ import { MachinesFilters } from './machines-filters';
 import { User } from '../../models/user';
 import { useTranslation } from 'react-i18next';
 import { FabButton } from '../base/fab-button';
+import { EditorialBlock } from '../base/editorial-block';
+import { CalendarBlank } from 'phosphor-react';
 
 declare const Application: IApplication;
 
@@ -96,30 +98,14 @@ export const MachinesList: React.FC<MachinesListProps> = ({ onError, onSuccess, 
     });
   };
 
-  /**
-   * Go to store
-   */
-  const linkToStore = (): void => {
-    window.location.href = '/#!/store';
-  };
-
-  // TODO: Conditionally display the store ad
   return (
     <div className="machines-list">
+      {/*  TODO: Condition to display editorial block */}
+      {false &&
+        <EditorialBlock />
+      }
       <MachinesFilters onFilterChangedBy={handleFilterChangedBy} machineCategories={machineCategories}/>
       <div className="all-machines">
-        {false &&
-          <div className='store-ad' onClick={() => linkToStore}>
-            <div className='content'>
-              <h3>{t('app.public.machines_list.store_ad.title')}</h3>
-              <p>{t('app.public.machines_list.store_ad.buy')}</p>
-              <p className='sell'>{t('app.public.machines_list.store_ad.sell')}</p>
-            </div>
-            <FabButton icon={<i className="fa fa-cart-plus fa-lg" />} className="cta" onClick={linkToStore}>
-              {t('app.public.machines_list.store_ad.link')}
-            </FabButton>
-          </div>
-        }
         {machines && machines.map(machine => {
           return <MachineCard key={machine.id}
             user={user}
