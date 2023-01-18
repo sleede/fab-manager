@@ -3,7 +3,7 @@
 # List all Availability's slots for the given resources
 class Availabilities::AvailabilitiesService
   # @param current_user [User]
-  # @param level [String]
+  # @param level [String] 'slot' | 'availability'
   def initialize(current_user, level = 'slot')
     @current_user = current_user
     @maximum_visibility = {
@@ -39,16 +39,16 @@ class Availabilities::AvailabilitiesService
   # @param window [Hash] the time window the look through: {start: xxx, end: xxx}
   # @option window [ActiveSupport::TimeWithZone] :start the beginning of the time window
   # @option window [ActiveSupport::TimeWithZone] :end the end of the time window
-  def machines(machines, user, window)
-    ma_availabilities = Availability.includes(:machines_availabilities, :availability_tags, :machines, :slots_reservations,
-                                              slots: [:slots_reservations])
+  # @param no_status [Boolean] should the availability/slot reservation status be computed?
+  def machines(machines, user, window, no_status: false)
+    ma_availabilities = Availability.includes(:machines_availabilities)
                                     .where('machines_availabilities.machine_id': machines.map(&:id))
     availabilities = availabilities(ma_availabilities, 'machines', user, window[:start], window[:end])
 
     if @level == 'slot'
-      availabilities.map(&:slots).flatten.map { |s| @service.slot_reserved_status(s, user, (machines & s.availability.machines)) }
+      availabilities.map(&:slots).flatten.map { |s| no_status ? s : @service.slot_reserved_status(s, user, (machines & s.availability.machines)) }
     else
-      availabilities.map { |a| @service.availability_reserved_status(a, user, (machines & a.machines)) }
+      no_status ? availabilities : availabilities.map { |a| @service.availability_reserved_status(a, user, (machines & a.machines)) }
     end
   end
 
@@ -58,15 +58,16 @@ class Availabilities::AvailabilitiesService
   # @param window [Hash] the time window the look through: {start: xxx, end: xxx}
   # @option window [ActiveSupport::TimeWithZone] :start
   # @option window [ActiveSupport::TimeWithZone] :end
-  def spaces(spaces, user, window)
+  # @param no_status [Boolean] should the availability/slot reservation status be computed?
+  def spaces(spaces, user, window, no_status: false)
     sp_availabilities = Availability.includes('spaces_availabilities')
                                     .where('spaces_availabilities.space_id': spaces.map(&:id))
     availabilities = availabilities(sp_availabilities, 'space', user, window[:start], window[:end])
 
     if @level == 'slot'
-      availabilities.map(&:slots).flatten.map { |s| @service.slot_reserved_status(s, user, (spaces & s.availability.spaces)) }
+      availabilities.map(&:slots).flatten.map { |s| no_status ? s : @service.slot_reserved_status(s, user, (spaces & s.availability.spaces)) }
     else
-      availabilities.map { |a| @service.availability_reserved_status(a, user, (spaces & a.spaces)) }
+      no_status ? availabilities : availabilities.map { |a| @service.availability_reserved_status(a, user, (spaces & a.spaces)) }
     end
   end
 
@@ -76,15 +77,15 @@ class Availabilities::AvailabilitiesService
   # @param window [Hash] the time window the look through: {start: xxx, end: xxx}
   # @option window [ActiveSupport::TimeWithZone] :start
   # @option window [ActiveSupport::TimeWithZone] :end
-  def trainings(trainings, user, window)
+  def trainings(trainings, user, window, no_status: false)
     tr_availabilities = Availability.includes('trainings_availabilities')
                                     .where('trainings_availabilities.training_id': trainings.map(&:id))
     availabilities = availabilities(tr_availabilities, 'training', user, window[:start], window[:end])
 
     if @level == 'slot'
-      availabilities.map(&:slots).flatten.map { |s| @service.slot_reserved_status(s, user, (trainings & s.availability.trainings)) }
+      availabilities.map(&:slots).flatten.map { |s| no_status ? s : @service.slot_reserved_status(s, user, (trainings & s.availability.trainings)) }
     else
-      availabilities.map { |a| @service.availability_reserved_status(a, user, (trainings & a.trainings)) }
+      no_status ? availabilities : availabilities.map { |a| @service.availability_reserved_status(a, user, (trainings & a.trainings)) }
     end
   end
 
@@ -94,18 +95,18 @@ class Availabilities::AvailabilitiesService
   # @param window [Hash] the time window the look through: {start: xxx, end: xxx}
   # @option window [ActiveSupport::TimeWithZone] :start
   # @option window [ActiveSupport::TimeWithZone] :end
-  def events(events, user, window)
+  def events(events, user, window, no_status: false)
     ev_availabilities = Availability.includes('event').where('events.id': events.map(&:id))
     availabilities = availabilities(ev_availabilities, 'event', user, window[:start], window[:end])
 
     if @level == 'slot'
-      availabilities.map(&:slots).flatten.map { |s| @service.slot_reserved_status(s, user, [s.availability.event]) }
+      availabilities.map(&:slots).flatten.map { |s| no_status ? s : @service.slot_reserved_status(s, user, [s.availability.event]) }
     else
-      availabilities.map { |a| @service.availability_reserved_status(a, user, [a.event]) }
+      no_status ? availabilities : availabilities.map { |a| @service.availability_reserved_status(a, user, [a.event]) }
     end
   end
 
-  private
+  protected
 
   # @param user [User]
   def subscription_year?(user)
@@ -131,7 +132,7 @@ class Availabilities::AvailabilitiesService
     # 1) an admin (he can see all availabilities from 1 month ago to anytime in the future)
     if @current_user&.admin? || @current_user&.manager?
       window_start = [range_start, 1.month.ago].max
-      availabilities.includes(:tags, :plans, :slots)
+      availabilities.includes(:tags, :slots)
                     .joins(:slots)
                     .where('availabilities.start_at <= ? AND availabilities.end_at >= ? AND available_type = ?', range_end, window_start, type)
                     .where('slots.start_at > ? AND slots.end_at < ?', window_start, range_end)
@@ -143,7 +144,7 @@ class Availabilities::AvailabilitiesService
       end_at = @maximum_visibility[:year] if show_more_trainings?(user) && type == 'training'
       window_end = [end_at, range_end].min
       window_start = [range_start, @minimum_visibility].max
-      availabilities.includes(:tags, :plans, :slots)
+      availabilities.includes(:tags, :slots)
                     .joins(:slots)
                     .where('availabilities.start_at <= ? AND availabilities.end_at >= ? AND available_type = ?', window_end, window_start, type)
                     .where('slots.start_at > ? AND slots.end_at < ?', window_start, window_end)

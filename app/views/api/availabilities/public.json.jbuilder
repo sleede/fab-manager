@@ -21,9 +21,9 @@ json.array!(@availabilities) do |availability|
     end
 
     json.is_completed availability.full?
-    json.is_reserved availability.is_reserved
+    json.is_reserved availability.reserved?
     json.borderColor availability_border_color(availability)
-    if availability.is_reserved && !availability.current_user_slots_reservations_ids.empty?
+    if availability.reserved? && !@user.nil? && availability.reserved_users.include?(@user.id)
       json.title "#{availability.title}' - #{t('trainings.i_ve_reserved')}"
     elsif availability.full?
       json.title "#{availability.title} - #{t('trainings.completed')}"
@@ -38,7 +38,7 @@ json.array!(@availabilities) do |availability|
       json.id t.id
       json.name t.name
     end
-    json.is_reserved availability.is_reserved
+    json.is_reserved availability.reserved?
     json.is_completed availability.full?
     case availability.availability.available_type
     when 'machines'

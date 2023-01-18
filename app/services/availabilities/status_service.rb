@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-
+# TODO, remove this
 # Provides helper methods checking reservation status of any availabilities
 class Availabilities::StatusService
   # @param current_user_role [String]
@@ -22,7 +22,7 @@ class Availabilities::StatusService
 
     places = places(slot, reservables)
     is_reserved = places.any? { |p| p['reserved_places'].positive? }
-    is_reserved_by_user = is_reserved && places.select { |p| p['user_ids'].include?(user.id) }.length.positive?
+    is_reserved_by_user = is_reserved && user && places.select { |p| p['user_ids'].include?(user.id) }.length.positive?
     slot.is_reserved = is_reserved
     slot.title = slot_title(slot, is_reserved, is_reserved_by_user, reservables)
     slot.can_modify = true if %w[admin manager].include?(@current_user_role) || is_reserved

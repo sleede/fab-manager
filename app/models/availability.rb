@@ -37,8 +37,6 @@ class Availability < ApplicationRecord
   scope :trainings, -> { includes(:trainings).where(available_type: 'training') }
   scope :spaces, -> { includes(:spaces).where(available_type: 'space') }
 
-  attr_accessor :is_reserved, :current_user_slots_reservations_ids, :current_user_pending_reservations_ids, :can_modify
-
   validates :start_at, :end_at, presence: true
   validate :length_must_be_slot_multiple, unless: proc { end_at.blank? or start_at.blank? }
   validate :should_be_associated
@@ -114,6 +112,7 @@ class Availability < ApplicationRecord
 
   # check if the reservations are complete?
   # if a nb_total_places hasn't been defined, then places are unlimited
+  # @return [Boolean]
   def full?
     return false if nb_total_places.blank? && available_type != 'machines'
 
@@ -122,6 +121,15 @@ class Availability < ApplicationRecord
     else
       slots.map(&:full?).reduce(:&)
     end
+  end
+
+  # @return [Array<Integer>] Collection of User's IDs
+  def reserved_users
+    slots.map(&:reserved_users).flatten
+  end
+
+  def reserved?
+    slots.map(&:reserved?).reduce(:&)
   end
 
   # check availability don't have any reservation
@@ -140,7 +148,7 @@ class Availability < ApplicationRecord
     when 'machines'
       reservable.nil? ? machines.count : 1
     else
-      raise TypeError
+      raise TypeError, "unknown available type #{available_type} for availability #{id}"
     end
   end
 

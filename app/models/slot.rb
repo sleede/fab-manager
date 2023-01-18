@@ -16,29 +16,56 @@ class Slot < ApplicationRecord
 
   attr_accessor :is_reserved, :machine, :space, :title, :can_modify, :current_user_slots_reservations_ids, :current_user_pending_reservations_ids
 
+  # @param reservable [Machine,Space,Training,Event,NilClass]
+  # @return [Integer] the total number of reserved places
+  def reserved_places(reservable = nil)
+    if reservable.nil?
+      places.pluck('reserved_places').reduce(:+)
+    else
+      places.detect { |p| p['reservable_type'] == reservable.class.name && p['reservable_id'] == reservable.id }['reserved_places']
+    end
+  end
+
+  # @param reservables [Array<Machine,Space,Training,Event>,NilClass]
+  # @return [Array<Integer>] Collection of User's IDs
+  def reserved_users(reservables = nil)
+    if reservable.nil?
+      places.pluck('user_ids').flatten
+    else
+      r_places = places.select do |p|
+        reservables.any? { |r| r.class.name == p['reservable_type'] && r.id == p['reservable_id'] } # rubocop:disable Style/ClassEqualityComparison
+      end
+      r_places.pluck('user_ids').flatten
+    end
+  end
+
   # @param reservable [Machine, Space, Training, Event, NilClass]
+  # @return [Boolean] enough reservation to fill the whole slot?
   def full?(reservable = nil)
     availability_places = availability.available_places_per_slot(reservable)
     return false if availability_places.nil?
 
-    reserved_places = if reservable.nil?
-                        places.pluck('reserved_places').reduce(:+)
-                      else
-                        rp = places.detect do |p|
-                          p['reservable_type'] == reservable.class.name && p['reservable_id'] == reservable&.id
-                        end
-                        rp['reserved_places']
-                      end
-
-    reserved_places >= availability_places
+    reserved_places(reservable) >= availability_places
   end
 
+  # @param reservable [Machine,Space,Training,Event,NilClass]
+  # @return [Boolean] any reservation or none?
+  def reserved?(reservable = nil)
+    reserved_places(reservable).positive?
+  end
+
+  # @param reservable [Machine,Space,Training,Event,NilClass]
+  # @return [Boolean] no reservations at all?
   def empty?(reservable = nil)
-    if reservable.nil?
-      slots_reservations.where(canceled_at: nil).count.zero?
-    else
-      slots_reservations.includes(:reservation).where(canceled_at: nil).where('reservations.reservable': reservable).count.zero?
-    end
+    reserved_places(reservable).zero?
+  end
+
+  # @param operator_role [String,NilClass] 'admin' | 'manager' | 'member'
+  # @param user_id [Integer]
+  # @param reservable [Machine,Space,Training,Event,NilClass]
+  # @return [Boolean] the reservation on this slot can be modified?
+  def modifiable?(operator_role, user_id, reservable = nil)
+    %w[admin manager].include?(operator_role) || reserved_users([reservable]).include?(user_id)
   end
 
   def duration
