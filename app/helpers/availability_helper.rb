@@ -22,16 +22,16 @@ module AvailabilityHelper
     end
   end
 
-  def machines_slot_border_color(slot)
-    if slot.is_reserved
-      slot.current_user_slots_reservations_ids.empty? ? IS_FULL : IS_RESERVED_BY_CURRENT_USER
+  def machines_slot_border_color(slot, customer = nil)
+    if slot.reserved?
+      slot.reserved_users.include?(customer&.id) ? IS_RESERVED_BY_CURRENT_USER : IS_FULL
     else
       MACHINE_COLOR
     end
   end
 
   def space_slot_border_color(slot)
-    if slot.is_reserved
+    if slot.reserved?
       IS_RESERVED_BY_CURRENT_USER
     elsif slot.full?
       IS_FULL
@@ -41,7 +41,7 @@ module AvailabilityHelper
   end
 
   def trainings_events_border_color(availability)
-    if availability.is_reserved
+    if availability.reserved?
       IS_RESERVED_BY_CURRENT_USER
     elsif availability.full?
       IS_FULL

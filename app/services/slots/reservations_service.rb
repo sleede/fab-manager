@@ -12,7 +12,7 @@ class Slots::ReservationsService
     def reservations(slots_reservations, reservables)
       reservable_types = reservables.map(&:class).map(&:name).uniq
       if reservable_types.size > 1
-        raise TypeError("[Availabilities::StatusService#slot_reservations] reservables have differents types: #{reservable_types}")
+        raise TypeError("[Availabilities::ReservationsService#reservations] reservables have differents types: #{reservable_types}")
       end
 
       reservations = slots_reservations.includes(:reservation)
@@ -75,14 +75,26 @@ class Slots::ReservationsService
     # @param slot [Slot]
     # @param user [User]
     # @param reservable_type [String] 'Machine' | 'Space' | 'Training' | 'Event'
+    # @param reservable_id [Integer]
     # @return [Hash{Symbol=>ActiveRecord::Relation<SlotsReservation>,ActiveRecord::Relation<CartItem::ReservationSlot>}]
-    def user_reservations(slot, user, reservable_type)
+    def user_reservations(slot, user, reservable_type, reservable_id)
+      return { reservations: [], pending: [] } if user.nil?
+
       reservations = SlotsReservation.includes(:reservation)
-                                     .where(slot_id: slot.id, reservations: { statistic_profile_id: user.statistic_profile.id })
+                                     .where(slot_id: slot.id, reservations: {
+                                              statistic_profile_id: user.statistic_profile.id,
+                                              reservable_type: reservable_type,
+                                              reservable_id: reservable_id
+                                            })
       relation = "cart_item_#{reservable_type&.downcase}_reservation".to_sym
       table = (reservable_type == 'Event' ? 'cart_item_event_reservations' : 'cart_item_reservations').to_sym
+      id_key = (reservable_type == 'Event' ? 'event_id' : 'reservable_id').to_sym
+      type_key = (reservable_type == 'Event' ? {} : { reservable_type: reservable_type })
       pending = CartItem::ReservationSlot.includes(relation)
-                                         .where(slot_id: slot.id, table => { customer_profile_id: user.invoicing_profile.id })
+                                         .where(slot_id: slot.id, table => {
+                                           customer_profile_id: user.invoicing_profile.id,
+                                           id_key => reservable_id
+                                         }.merge!(type_key))
 
       {
         reservations: reservations,

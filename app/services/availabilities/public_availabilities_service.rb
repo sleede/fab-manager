@@ -4,7 +4,6 @@
 class Availabilities::PublicAvailabilitiesService
   def initialize(current_user)
     @current_user = current_user
-    @service = Availabilities::StatusService.new('public')
   end
 
   def public_availabilities(window, ids, events: false)
@@ -12,17 +11,17 @@ class Availabilities::PublicAvailabilitiesService
     service = Availabilities::AvailabilitiesService.new(@current_user, level)
 
     machines_slots = if Setting.get('machines_module')
-                       service.machines(Machine.where(id: ids[:machines]), @current_user, window, no_status: true)
+                       service.machines(Machine.where(id: ids[:machines]), @current_user, window)
                      else
                        []
                      end
-    spaces_slots = Setting.get('spaces_module') ? service.spaces(Space.where(id: ids[:spaces]), @current_user, window, no_status: true) : []
+    spaces_slots = Setting.get('spaces_module') ? service.spaces(Space.where(id: ids[:spaces]), @current_user, window) : []
     trainings_slots = if Setting.get('trainings_module')
-                        service.trainings(Training.where(id: ids[:trainings]), @current_user, window, no_status: true)
+                        service.trainings(Training.where(id: ids[:trainings]), @current_user, window)
                       else
                         []
                       end
-    events_slots = events ? service.events(Event.all, @current_user, window, no_status: true) : []
+    events_slots = events ? service.events(Event.all, @current_user, window) : []
 
     [].concat(trainings_slots).concat(events_slots).concat(machines_slots).concat(spaces_slots)
   end

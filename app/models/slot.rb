@@ -14,8 +14,6 @@ class Slot < ApplicationRecord
 
   after_create_commit :create_places_cache
 
-  attr_accessor :is_reserved, :machine, :space, :title, :can_modify, :current_user_slots_reservations_ids, :current_user_pending_reservations_ids
-
   # @param reservable [Machine,Space,Training,Event,NilClass]
   # @return [Integer] the total number of reserved places
   def reserved_places(reservable = nil)
@@ -29,7 +27,7 @@ class Slot < ApplicationRecord
   # @param reservables [Array<Machine,Space,Training,Event>,NilClass]
   # @return [Array<Integer>] Collection of User's IDs
   def reserved_users(reservables = nil)
-    if reservable.nil?
+    if reservables.nil?
       places.pluck('user_ids').flatten
     else
       r_places = places.select do |p|

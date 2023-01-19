@@ -366,6 +366,8 @@ en:
         spaces: "Spaces"
         events: "Events"
         externals: "Other calendars"
+        choose_a_machine: "Choose a machine"
+        cancel: "Cancel"
       #list of spaces
       spaces_list:
         the_spaces: "The spaces"

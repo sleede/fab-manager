@@ -11,7 +11,6 @@ class Availabilities::AvailabilitiesService
       other: Setting.get('visibility_others').to_i.months.since
     }
     @minimum_visibility = Setting.get('reservation_deadline').to_i.minutes.since
-    @service = Availabilities::StatusService.new(current_user&.role)
     @level = level
   end
 
@@ -39,16 +38,15 @@ class Availabilities::AvailabilitiesService
   # @param window [Hash] the time window the look through: {start: xxx, end: xxx}
   # @option window [ActiveSupport::TimeWithZone] :start the beginning of the time window
   # @option window [ActiveSupport::TimeWithZone] :end the end of the time window
-  # @param no_status [Boolean] should the availability/slot reservation status be computed?
-  def machines(machines, user, window, no_status: false)
+  def machines(machines, user, window)
     ma_availabilities = Availability.includes(:machines_availabilities)
                                     .where('machines_availabilities.machine_id': machines.map(&:id))
     availabilities = availabilities(ma_availabilities, 'machines', user, window[:start], window[:end])
 
     if @level == 'slot'
-      availabilities.map(&:slots).flatten.map { |s| no_status ? s : @service.slot_reserved_status(s, user, (machines & s.availability.machines)) }
+      availabilities.map(&:slots).flatten
     else
-      no_status ? availabilities : availabilities.map { |a| @service.availability_reserved_status(a, user, (machines & a.machines)) }
+      availabilities
     end
   end
 
@@ -58,16 +56,15 @@ class Availabilities::AvailabilitiesService
   # @param window [Hash] the time window the look through: {start: xxx, end: xxx}
   # @option window [ActiveSupport::TimeWithZone] :start
   # @option window [ActiveSupport::TimeWithZone] :end
-  # @param no_status [Boolean] should the availability/slot reservation status be computed?
-  def spaces(spaces, user, window, no_status: false)
+  def spaces(spaces, user, window)
     sp_availabilities = Availability.includes('spaces_availabilities')
                                     .where('spaces_availabilities.space_id': spaces.map(&:id))
     availabilities = availabilities(sp_availabilities, 'space', user, window[:start], window[:end])
 
     if @level == 'slot'
-      availabilities.map(&:slots).flatten.map { |s| no_status ? s : @service.slot_reserved_status(s, user, (spaces & s.availability.spaces)) }
+      availabilities.map(&:slots).flatten
     else
-      no_status ? availabilities : availabilities.map { |a| @service.availability_reserved_status(a, user, (spaces & a.spaces)) }
+      availabilities
     end
   end
 
@@ -77,15 +74,15 @@ class Availabilities::AvailabilitiesService
   # @param window [Hash] the time window the look through: {start: xxx, end: xxx}
   # @option window [ActiveSupport::TimeWithZone] :start
   # @option window [ActiveSupport::TimeWithZone] :end
-  def trainings(trainings, user, window, no_status: false)
+  def trainings(trainings, user, window)
     tr_availabilities = Availability.includes('trainings_availabilities')
                                     .where('trainings_availabilities.training_id': trainings.map(&:id))
     availabilities = availabilities(tr_availabilities, 'training', user, window[:start], window[:end])
 
     if @level == 'slot'
-      availabilities.map(&:slots).flatten.map { |s| no_status ? s : @service.slot_reserved_status(s, user, (trainings & s.availability.trainings)) }
+      availabilities.map(&:slots).flatten
     else
-      no_status ? availabilities : availabilities.map { |a| @service.availability_reserved_status(a, user, (trainings & a.trainings)) }
+      availabilities
     end
   end
 
@@ -95,14 +92,14 @@ class Availabilities::AvailabilitiesService
   # @param window [Hash] the time window the look through: {start: xxx, end: xxx}
   # @option window [ActiveSupport::TimeWithZone] :start
   # @option window [ActiveSupport::TimeWithZone] :end
-  def events(events, user, window, no_status: false)
+  def events(events, user, window)
     ev_availabilities = Availability.includes('event').where('events.id': events.map(&:id))
     availabilities = availabilities(ev_availabilities, 'event', user, window[:start], window[:end])
 
     if @level == 'slot'
-      availabilities.map(&:slots).flatten.map { |s| no_status ? s : @service.slot_reserved_status(s, user, [s.availability.event]) }
+      availabilities.map(&:slots).flatten
     else
-      no_status ? availabilities : availabilities.map { |a| @service.availability_reserved_status(a, user, [a.event]) }
+      availabilities
     end
   end
 

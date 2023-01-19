@@ -1,0 +1,11 @@
+<div class="modal-header">
+  <h3 class="text-center red" translate>
+    {{ 'app.public.calendar.choose_a_machine' }}
+  </h3>
+</div>
+<div class="modal-body">
+  <button class="block m-auto btn btn-default" style="margin-bottom: 5px" ng-repeat="machine in machines" type="button" ng-click="selectMachine(machine.id)" translate>{{machine.name}}</button>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-default" ng-click="cancel()" translate>{{ 'app.public.calendar.cancel' }}</button>
+</div>
