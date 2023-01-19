@@ -8,11 +8,18 @@
   border: 1px solid var(--gray-soft-dark);
   border-radius: var(--border-radius);
   @include editor;
+  button { white-space: normal; }
 
   @media (min-width: 540px) {
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-end;
+    button { white-space: nowrap; }
+    &.long-cta {
+      flex-direction: column;
+      align-items: flex-start;
+      button { margin-left: auto; }
+    }
   }
   @media (min-width: 1200px) {
     width: 50%;

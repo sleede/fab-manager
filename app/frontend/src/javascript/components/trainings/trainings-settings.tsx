@@ -119,7 +119,7 @@ export const TrainingsSettings: React.FC<TrainingsSettingsProps> = () => {
                       rules={{ required: isActiveAuthorizationValidity, min: 1 }}
                       step={1}
                       formState={formState}
-                      label={t('app.admin.trainings_settings.authorization_validity_duration')} />
+                      label={t('app.admin.trainings_settings.authorization_validity_period')} />
             </>}
           </div>
         </div>

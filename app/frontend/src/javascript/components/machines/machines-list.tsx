@@ -98,7 +98,10 @@ export const MachinesList: React.FC<MachinesListProps> = ({ onError, onSuccess, 
     <div className="machines-list">
       {/*  TODO: Condition to display editorial block */}
       {false &&
-        <EditorialBlock />
+        <EditorialBlock
+          text={'<h3>Lorem ipsum dolor sit amet</h3><p>Consectetur adipiscing elit. In eget eros sed odio tristique cursus. Quisque pretium tortor vel lorem tempor, eu egestas lorem laoreet. Pellentesque arcu lectus, rutrum eu volutpat nec, luctus eget sapien. Sed ligula tortor, blandit eget purus sit sed.</p>'}
+          cta={'Pif paf pouf'}
+          url={'https://www.plop.io'} />
       }
       <MachinesFilters onFilterChangedBy={handleFilterChangedBy} machineCategories={machineCategories}/>
       <div className="all-machines">
