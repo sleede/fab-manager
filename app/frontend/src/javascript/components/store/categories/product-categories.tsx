@@ -79,7 +79,7 @@ const ProductCategories: React.FC<ProductCategoriesProps> = ({ onSuccess, onErro
         </div>
       </header>
       <FabAlert level="warning">
-        <HtmlTranslate trKey="app.admin.store.product_categories.info" />
+        {t('app.admin.store.product_categories.info')}
       </FabAlert>
       <ProductCategoriesTree
         productCategories={productCategories}

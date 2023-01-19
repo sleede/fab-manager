@@ -31,7 +31,7 @@
         <uib-tab heading="{{ 'app.admin.trainings.all_trainings' | translate }}" index="0" class="manage-trainings">
           <trainings on-error="onError" on-success="on-success"></trainings>
 
-          <!--<div class="m-t m-b">
+          <div class="m-t m-b">
             <button type="button" class="btn btn-warning" ui-sref="app.admin.trainings_new" ng-show="isAuthorized('admin')">
               <i class="fa fa-plus m-r"></i>
               <span translate>{{ 'app.admin.trainings.add_a_new_training' }}</span>
@@ -72,7 +72,7 @@
               </td>
             </tr>
             </tbody>
-          </table>-->
+          </table>
         </uib-tab>
 
         <uib-tab heading="{{ 'app.admin.trainings.trainings_monitoring' | translate }}" class="post-tracking" index="2">
