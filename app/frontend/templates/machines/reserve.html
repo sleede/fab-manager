@@ -12,12 +12,13 @@
         <h1>{{ 'app.logged.machines_reserve.machine_planning' | translate }} : {{machine.name}}</h1>
       </section>
     </div>
-
+<!-- TODO, uncomment this block to work on reservations in cart
     <div class="col-xs-2 col-md-1 b-t hide-b-md p-none">
       <section class="heading-actions">
         <cart-button />
       </section>
     </div>
+    -->
   </div>
 </section>
 
@@ -30,16 +31,16 @@
 
 
   <div class="col-sm-12 col-md-12 col-lg-3">
-
-    <ongoing-reservation-panel selected-slot="selectedEvent"
-                               on-slot-added="markSlotAsAdded"
-                               on-slot-removed="markSlotAsRemoved"
-                               on-error="onError"
-                               reservable-id="machine.id"
-                               reservable-type="'Machine'"
-                               operator="currentUser">
-    </ongoing-reservation-panel>
-
+    <!-- TODO, uncomment this block to work on reservations in cart
+        <ongoing-reservation-panel selected-slot="selectedEvent"
+                                   on-slot-added="markSlotAsAdded"
+                                   on-slot-removed="markSlotAsRemoved"
+                                   on-error="onError"
+                                   reservable-id="machine.id"
+                                   reservable-type="'Machine'"
+                                   operator="currentUser">
+        </ongoing-reservation-panel>
+    -->
     <packs-summary item="machine"
                    item-type="'Machine'"
                    customer="ctrl.member"
