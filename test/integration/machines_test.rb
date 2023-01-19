@@ -69,9 +69,13 @@ class MachinesTest < ActionDispatch::IntegrationTest
   end
 
   test 'delete a machine' do
-    delete '/api/machines/3', headers: default_headers
+    machine = Machine.find(3)
+    delete "/api/machines/#{machine.id}", headers: default_headers
     assert_response :success
     assert_empty response.body
+    assert_raise ActiveRecord::RecordNotFound do
+      machine.reload
+    end
   end
 
   test 'soft delete a machine' do
