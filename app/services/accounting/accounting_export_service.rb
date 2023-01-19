@@ -62,9 +62,9 @@ class Accounting::AccountingExportService
       when 'date'
         row << line.date&.strftime(date_format)
       when 'account_code'
-        row << line.account_code
+        row << line.account_code.to_s
       when 'account_label'
-        row << line.account_label
+        row << line.account_label.to_s
       when 'piece'
         row << line.invoice.reference
       when 'line_label'
