@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-json.extract! @project, :id, :name, :tags, :created_at, :updated_at, :licence_id, :slug
+json.extract! @project, :id, :name, :tags, :created_at, :updated_at, :licence_id, :status_id, :slug
 json.description sanitize(@project.description)
 json.author_id @project.author.user_id
 json.project_image @project.project_image.attachment.large.url if @project.project_image
@@ -73,3 +73,4 @@ if @project.licence.present?
     json.name @project.licence.name
   end
 end
+json.status @project.status

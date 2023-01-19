@@ -68,13 +68,13 @@ class API::ProjectsController < API::ApiController
   end
 
   def project_params
-    params.require(:project).permit(:name, :description, :tags, :machine_ids, :component_ids, :theme_ids, :licence_id, :licence_id, :state,
+    params.require(:project).permit(:name, :description, :tags, :machine_ids, :component_ids, :theme_ids, :licence_id, :status_id, :state,
                                     user_ids: [], machine_ids: [], component_ids: [], theme_ids: [],
                                     project_image_attributes: [:attachment],
                                     project_caos_attributes: %i[id attachment _destroy],
                                     project_steps_attributes: [
                                       :id, :description, :title, :_destroy, :step_nb,
-                                      project_step_images_attributes: %i[id attachment _destroy]
+                                      { project_step_images_attributes: %i[id attachment _destroy] }
                                     ])
   end
 end

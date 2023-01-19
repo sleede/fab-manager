@@ -865,15 +865,6 @@ ActiveRecord::Schema.define(version: 2023_01_31_104958) do
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
-  create_table "project_statuses", force: :cascade do |t|
-    t.bigint "project_id"
-    t.bigint "status_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["project_id"], name: "index_project_statuses_on_project_id"
-    t.index ["status_id"], name: "index_project_statuses_on_status_id"
-  end
-
   create_table "project_steps", id: :serial, force: :cascade do |t|
     t.text "description"
     t.integer "project_id"
@@ -1409,8 +1400,6 @@ ActiveRecord::Schema.define(version: 2023_01_31_104958) do
   add_foreign_key "prices", "plans"
   add_foreign_key "product_stock_movements", "products"
   add_foreign_key "products", "product_categories"
-  add_foreign_key "project_statuses", "projects"
-  add_foreign_key "project_statuses", "statuses"
   add_foreign_key "project_steps", "projects"
   add_foreign_key "project_users", "projects"
   add_foreign_key "project_users", "users"

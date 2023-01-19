@@ -50,7 +50,7 @@
         </div>
       </form>
     </div>
-    <div class="inline" ng-if="!openlab.searchOverWholeNetwork">
+    <div class="col-md-12" ng-if="!openlab.searchOverWholeNetwork">
       <div class="col-md-3 m-b" ng-show="isAuthenticated()">
         <select ng-model="search.from" ng-change="setUrlQueryParams(search) && triggerSearch()" class="form-control">
           <option value="" translate>{{ 'app.public.projects_list.all_projects' }}</option>
@@ -58,28 +58,28 @@
           <option value="collaboration" translate>{{ 'app.public.projects_list.projects_to_whom_i_take_part_in' }}</option>
         </select>
       </div>
-
       <div class="col-md-3 m-b">
         <select ng-model="search.machine_id" ng-change="setUrlQueryParams(search) && triggerSearch()" class="form-control" ng-options="m.id as m.name for m in machines">
           <option value="" translate>{{ 'app.public.projects_list.all_machines' }}</option>
         </select>
       </div>
 
-      <div class="col-md-3 m-b">
+      <div class="col-md-2 m-b">
         <select ng-model="search.theme_id" ng-change="setUrlQueryParams(search) && triggerSearch()" class="form-control" ng-options="t.id as t.name for t in themes">
           <option value="" translate>{{ 'app.public.projects_list.all_themes' }}</option>
         </select>
       </div>
 
-      <div class="col-md-3 m-b">
+      <div class="col-md-2 m-b">
         <select ng-model="search.component_id" ng-change="setUrlQueryParams(search) && triggerSearch()" class="form-control" ng-options="t.id as t.name for t in components">
           <option value="" translate>{{ 'app.public.projects_list.all_materials' }}</option>
         </select>
       </div>
-      <status-filter></status-filter>
+      <div class="col-md-2 m-b">
+        <status-filter on-filter-change="onStatusChange" current-status-index="search.status_id"></status-filter>
+      </div>
     </div>
   </div>
-
 
   <div class="row">
     <span class="col-md-12" ng-show="projects && (projects.length == 0)"> {{ 'app.public.projects_list.project_search_result_is_empty' | translate }} </span>

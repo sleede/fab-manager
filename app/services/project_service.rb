@@ -2,7 +2,6 @@
 
 # Provides methods for Project
 class ProjectService
-
   def search(params, current_user)
     connection = ActiveRecord::Base.connection
     return { error: 'invalid adapter' } unless connection.instance_values['config'][:adapter] == 'postgresql'
@@ -23,6 +22,7 @@ class ProjectService
     records = records.with_component(query_params['component_id']) if query_params['component_id'].present?
     records = records.with_theme(query_params['theme_id']) if query_params['theme_id'].present?
     records = records.with_space(query_params['space_id']) if query_params['space_id'].present?
+    records = records.with_status(query_params['status_id']) if query_params['status_id'].present?
     records = if query_params['q'].present?
                 records.search(query_params['q'])
               else

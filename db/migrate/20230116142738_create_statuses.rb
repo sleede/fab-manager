@@ -8,5 +8,6 @@ class CreateStatuses < ActiveRecord::Migration[5.2]
 
       t.timestamps
     end
+    add_reference :projects, :status, index: true, foreign_key: true
   end
 end

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 json.projects @projects do |project|
-  json.extract! project, :id, :name, :licence_id, :slug, :state
+  json.extract! project, :id, :name, :licence_id, :slug, :state, :status
   json.description sanitize(project.description)
   json.author_id project.author.user_id
 

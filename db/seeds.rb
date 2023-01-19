@@ -101,6 +101,15 @@ if Theme.count.zero?
                 ])
 end
 
+if Status.count.zero?
+  Status.create!([
+                   { label: 'Nouveau' },
+                   { label: 'En cours' },
+                   { label: 'Terminé' },
+                   { label: 'Arrêté' }
+                 ])
+end
+
 if Training.count.zero?
   Training.create!([
                      {

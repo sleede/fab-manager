@@ -184,6 +184,9 @@ en:
         all_materials: "All materials"
         load_next_projects: "Load next projects"
         rough_draft: "Rough draft"
+      status_filter:
+        all_statuses: "All statuses"
+        select_status: "Select a status"
       #details of a projet
       projects_show:
         rough_draft: "Draft"
@@ -213,6 +216,7 @@ en:
         message_is_required: "Message is required."
         report: "Report"
         do_you_really_want_to_delete_this_project: "Do you really want to delete this project?"
+        status: "Status"
       #list of machines
       machines_list:
         the_fablab_s_machines: "The machines"

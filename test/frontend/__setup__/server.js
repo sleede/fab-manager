@@ -12,6 +12,7 @@ import machines from '../__fixtures__/machines';
 import providers from '../__fixtures__/auth_providers';
 import profileCustomFields from '../__fixtures__/profile_custom_fields';
 import spaces from '../__fixtures__/spaces';
+import statuses from '../__fixtures__/statuses';
 
 export const server = setupServer(
   rest.get('/api/groups', (req, res, ctx) => {
@@ -96,6 +97,9 @@ export const server = setupServer(
   }),
   rest.get('/api/spaces', (req, res, ctx) => {
     return res(ctx.json(spaces));
+  }),
+  rest.get('/api/statuses', (req, res, ctx) => {
+    return res(ctx.json(statuses));
   })
 );
 
