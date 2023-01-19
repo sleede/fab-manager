@@ -2,7 +2,7 @@ import React from 'react';
 import { IApplication } from '../../models/application';
 import { Loader } from '../base/loader';
 import { react2angular } from 'react2angular';
-import { FabButton } from './fab-button';
+import { FabButton } from '../base/fab-button';
 
 declare const Application: IApplication;
 

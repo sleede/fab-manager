@@ -10,10 +10,8 @@ import {
   StockMovementReason,
   StockType
 } from '../../models/product';
-import { HtmlTranslate } from '../base/html-translate';
 import { FormSwitch } from '../form/form-switch';
 import { FormInput } from '../form/form-input';
-import { FabAlert } from '../base/fab-alert';
 import { FabButton } from '../base/fab-button';
 import { ProductStockModal } from './product-stock-modal';
 import { FabStateLabel } from '../base/fab-state-label';

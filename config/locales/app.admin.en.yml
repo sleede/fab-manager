@@ -2388,3 +2388,9 @@ en:
         value: "Value"
         date: "Changed at"
         operator: "By"
+      editorial_block_form:
+        title: "Editorial text block"
+        switch: "Display editorial block"
+        cta_switch: "Display a button"
+        cta_label: "Button label"
+        cta_url: "url"

@@ -10,10 +10,7 @@ import { MachineCategory } from '../../models/machine-category';
 import { MachineCard } from './machine-card';
 import { MachinesFilters } from './machines-filters';
 import { User } from '../../models/user';
-import { useTranslation } from 'react-i18next';
-import { FabButton } from '../base/fab-button';
-import { EditorialBlock } from '../base/editorial-block';
-import { CalendarBlank } from 'phosphor-react';
+import { EditorialBlock } from '../editorial-block/editorial-block';
 
 declare const Application: IApplication;
 
@@ -32,7 +29,6 @@ interface MachinesListProps {
  * This component shows a list of all machines and allows filtering on that list.
  */
 export const MachinesList: React.FC<MachinesListProps> = ({ onError, onSuccess, onShowMachine, onReserveMachine, onLoginRequested, onEnrollRequested, user, canProposePacks }) => {
-  const { t } = useTranslation('public');
   // shown machines
   const [machines, setMachines] = useState<Array<Machine>>(null);
   // we keep the full list of machines, for filtering
