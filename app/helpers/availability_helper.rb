@@ -22,9 +22,11 @@ module AvailabilityHelper
     end
   end
 
+  # @param slot [Slot]
+  # @param customer [User]
   def machines_slot_border_color(slot, customer = nil)
     if slot.reserved?
-      slot.reserved_users.include?(customer&.id) ? IS_RESERVED_BY_CURRENT_USER : IS_FULL
+      slot.reserved_by?(customer&.id) ? IS_RESERVED_BY_CURRENT_USER : IS_FULL
     else
       MACHINE_COLOR
     end

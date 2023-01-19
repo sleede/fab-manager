@@ -12,7 +12,7 @@ class Slots::TitleService
   def call(slot, reservables = nil)
     reservables = all_reservables(slot) if reservables.nil?
     is_reserved = slot.reserved?
-    is_reserved_by_user = slot.reserved_users(reservables).include?(@user&.id)
+    is_reserved_by_user = slot.reserved_by?(@user&.id, reservables)
 
     name = reservables.map(&:name).join(', ')
     if !is_reserved && !is_reserved_by_user

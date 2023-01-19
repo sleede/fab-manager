@@ -37,6 +37,13 @@ class Slot < ApplicationRecord
     end
   end
 
+  # @param user_id [Integer,NilClass]
+  # @param reservables [Array<Machine,Space,Training,Event>,NilClass]
+  # @return [Boolean]
+  def reserved_by?(user_id, reservables = nil)
+    reserved_users(reservables).include?(user_id)
+  end
+
   # @param reservable [Machine, Space, Training, Event, NilClass]
   # @return [Boolean] enough reservation to fill the whole slot?
   def full?(reservable = nil)
@@ -63,7 +70,7 @@ class Slot < ApplicationRecord
   # @param reservable [Machine,Space,Training,Event,NilClass]
   # @return [Boolean] the reservation on this slot can be modified?
   def modifiable?(operator_role, user_id, reservable = nil)
-    %w[admin manager].include?(operator_role) || reserved_users([reservable]).include?(user_id)
+    %w[admin manager].include?(operator_role) || reserved_by?(user_id, [reservable])
   end
 
   def duration

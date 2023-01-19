@@ -23,7 +23,7 @@ json.array!(@availabilities) do |availability|
     json.is_completed availability.full?
     json.is_reserved availability.reserved?
     json.borderColor availability_border_color(availability)
-    if availability.reserved? && !@user.nil? && availability.reserved_users.include?(@user.id)
+    if availability.reserved? && !@user.nil? && availability.reserved_by?(@user.id)
       json.title "#{availability.title}' - #{t('trainings.i_ve_reserved')}"
     elsif availability.full?
       json.title "#{availability.title} - #{t('trainings.completed')}"
@@ -33,7 +33,7 @@ json.array!(@availabilities) do |availability|
   # slot object ( here => availability = slot ), for daily view
   elsif availability.instance_of? Slot
     slot = availability
-    json.title Slots::TitleService.new(@user.role, @user).call(slot)
+    json.title Slots::TitleService.new(@user&.role, @user).call(slot)
     json.tag_ids slot.availability.tag_ids
     json.tags slot.availability.tags do |t|
       json.id t.id

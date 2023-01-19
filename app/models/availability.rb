@@ -128,6 +128,12 @@ class Availability < ApplicationRecord
     slots.map(&:reserved_users).flatten
   end
 
+  # @param user [User]
+  # @return [Boolean]
+  def reserved_by?(user_id)
+    reserved_users.include?(user_id)
+  end
+
   def reserved?
     slots.map(&:reserved?).reduce(:&)
   end

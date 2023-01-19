@@ -74,11 +74,13 @@ class Slots::ReservationsService
 
     # @param slot [Slot]
     # @param user [User]
-    # @param reservable_type [String] 'Machine' | 'Space' | 'Training' | 'Event'
-    # @param reservable_id [Integer]
-    # @return [Hash{Symbol=>ActiveRecord::Relation<SlotsReservation>,ActiveRecord::Relation<CartItem::ReservationSlot>}]
-    def user_reservations(slot, user, reservable_type, reservable_id)
-      return { reservations: [], pending: [] } if user.nil?
+    # @param reservable [Machine,Space,Training,Event']
+    # @return [Hash{Symbol=>ActiveRecord::Relation<SlotsReservation>,ActiveRecord::Relation<CartItem::ReservationSlot>,Array}]
+    def user_reservations(slot, user, reservable)
+      return { reservations: [], pending: [] } if user.nil? || !slot.reserved_by?(user.id, [reservable])
+
+      reservable_type = reservable&.class&.name
+      reservable_id = reservable&.id
 
       reservations = SlotsReservation.includes(:reservation)
                                      .where(slot_id: slot.id, reservations: {
