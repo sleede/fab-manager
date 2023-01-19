@@ -2,6 +2,7 @@
 
 - Add more context data to sentry reports
 - Improved SSO testing
+- Ability to map the external ID from the SSO
 - Fix a bug: unable to run task fix_invoice_item when some invoice items are associated with errors
 - Fix a bug: invalid event date reported when the timezone in before UTC
 - Fix a bug: unable to run accounting export if a line label was not defined
