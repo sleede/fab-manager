@@ -22,11 +22,6 @@ interface TrainingsProps {
 export const Trainings: React.FC<TrainingsProps> = () => {
   const { t } = useTranslation('admin');
 
-  /** Goto new training page */
-  const newTraining = (): void => {
-    window.location.href = '/#!/admin/trainings/new';
-  };
-
   // Styles the React-select component
   const customStyles = {
     control: base => ({
@@ -54,13 +49,22 @@ export const Trainings: React.FC<TrainingsProps> = () => {
     console.log(option);
   };
 
+  /** Link to calendar page */
+  const toCalendar = (): void => {
+    window.location.href = '/#!/admin/calendar';
+  };
+
+  /** Link to new training page */
+  const newTraining = (): void => {
+    window.location.href = '/#!/admin/trainings/new';
+  };
+
   return (
     <div className='trainings'>
       <header>
         <h2>{t('app.admin.trainings.all_trainings')}</h2>
         <div className='grpBtn'>
-          {/* lien vers l'agenda */}
-          <FabButton><CalendarBlank size={20} /></FabButton>
+          <FabButton onClick={toCalendar}><CalendarBlank size={20} /></FabButton>
           <FabButton className="main-action-btn" onClick={newTraining}>{t('app.admin.trainings.add_a_new_training')}</FabButton>
         </div>
       </header>
