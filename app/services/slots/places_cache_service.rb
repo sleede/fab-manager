@@ -85,7 +85,7 @@ class Slots::PlacesCacheService
         all_users as (
           select (ids.id)::text::int as all_ids
             from users
-                ,jsonb_array_elements(users.user_ids) with ordinality ids(id, index)
+                ,jsonb_array_elements(users.user_ids::jsonb) with ordinality ids(id, index)
         ),
         remaining_users as (
            SELECT array_to_json(array(SELECT unnest(array_agg(all_users.all_ids)) EXCEPT SELECT unnest('{#{user_ids.to_s.gsub(/\]| |\[|/, '')}}'::int[])))::jsonb as ids

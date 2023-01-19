@@ -14,6 +14,7 @@ class Reservations::ReserveTrainingTest < ActionDispatch::IntegrationTest
 
     training = Training.first
     availability = training.availabilities.first
+    slot = availability.slots.first
 
     reservations_count = Reservation.count
     invoice_count = Invoice.count
@@ -31,7 +32,7 @@ class Reservations::ReserveTrainingTest < ActionDispatch::IntegrationTest
                      reservable_type: training.class.name,
                      slots_reservations_attributes: [
                        {
-                         slot_id: availability.slots.first.id
+                         slot_id: slot.id
                        }
                      ]
                    }
@@ -75,6 +76,13 @@ class Reservations::ReserveTrainingTest < ActionDispatch::IntegrationTest
 
     # notification
     assert_not_empty Notification.where(attached_object: reservation)
+
+    # place cache
+    slot.reload
+    cached = slot.places.detect { |p| p['reservable_id'] == training.id && p['reservable_type'] == training.class.name }
+    assert_not_nil cached
+    assert_equal 1, cached['reserved_places']
+    assert_includes cached['user_ids'], @user_without_subscription.id
   end
 
   test 'user reserves a training with an expired coupon with error' do
