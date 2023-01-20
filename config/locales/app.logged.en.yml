@@ -153,6 +153,7 @@ en:
             history: "History"
             no_reservation: "No reservation"
             show_more: "Show more"
+            cancelled_slot: "Cancelled"
           credits_panel:
             title: "My credits"
             info: "Your subscription comes with free credits you can use on reservations"

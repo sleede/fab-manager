@@ -76,13 +76,13 @@ const ReservationsPanel: React.FC<SpaceReservationsProps> = ({ userId, onError, 
    */
   const renderReservation = (reservation: Reservation, state: 'past' | 'futur'): ReactNode => {
     return (
-      <div key={reservation.id} className="reservations-list-item">
+      <div key={reservation.id} className={`reservations-list-item ${isCancelled(reservation) ? 'cancelled' : ''}`}>
         <p className='name'>{reservation.reservable.name}</p>
 
         <div className="date">
           {reservation.slots_reservations_attributes.filter(s => filterSlot(s, state)).map(
-            slotReservation => <p key={slotReservation.id}>
-              {FormatLib.date(slotReservation.slot_attributes.start_at)} - {FormatLib.time(slotReservation.slot_attributes.start_at)} - {FormatLib.time(slotReservation.slot_attributes.end_at)}
+            slotReservation => <p key={slotReservation.id} className={slotReservation.canceled_at ? 'cancelled' : ''}>
+              {slotReservation.canceled_at ? t('app.logged.dashboard.reservations_dashboard.reservations_panel.cancelled_slot') : ''} {FormatLib.date(slotReservation.slot_attributes.start_at)} - {FormatLib.time(slotReservation.slot_attributes.start_at)} - {FormatLib.time(slotReservation.slot_attributes.end_at)}
             </p>
           )}
         </div>
