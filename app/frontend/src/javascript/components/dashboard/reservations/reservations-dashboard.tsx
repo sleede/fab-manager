@@ -31,17 +31,17 @@ const ReservationsDashboard: React.FC<ReservationsDashboardProps> = ({ onError, 
 
   return (
     <div className="reservations-dashboard">
-      <div className="section">
+      {modules?.get('machines_module') !== 'false' && <div className="section">
         <p className="section-title">{t('app.logged.dashboard.reservations_dashboard.machine_section_title')}</p>
-        {modules?.get('machines_module') !== 'false' && <CreditsPanel userId={userId} onError={onError} reservableType="Machine" />}
+        <CreditsPanel userId={userId} onError={onError} reservableType="Machine" />
         <PrepaidPacksPanel userId={userId} onError={onError} />
-        {modules?.get('machines_module') !== 'false' && <ReservationsPanel userId={userId} onError={onError} reservableType="Machine" />}
-      </div>
-      <div className="section">
+        <ReservationsPanel userId={userId} onError={onError} reservableType="Machine" />
+      </div>}
+      {modules?.get('spaces_module') !== 'false' && <div className="section">
         <p className="section-title">{t('app.logged.dashboard.reservations_dashboard.space_section_title')}</p>
-        {modules?.get('spaces_module') !== 'false' && <CreditsPanel userId={userId} onError={onError} reservableType="Space" />}
-        {modules?.get('spaces_module') !== 'false' && <ReservationsPanel userId={userId} onError={onError} reservableType="Space" />}
-      </div>
+        <CreditsPanel userId={userId} onError={onError} reservableType="Space" />
+        <ReservationsPanel userId={userId} onError={onError} reservableType="Space" />
+      </div>}
     </div>
   );
 };
