@@ -63,6 +63,37 @@
   line-height: 1.18;
 }
 
+@mixin header($sticky: false) {
+  padding: 2.4rem 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  @if $sticky {
+    position: sticky;
+    top: 0;
+    margin-top: 1px;
+    padding: 2.4rem 0 4rem;
+    background: linear-gradient(180deg, var(--gray-soft-lightest) 80%, transparent);
+    z-index: 1;
+  }
+  h2 {
+    margin: 0;
+    @include title-lg;
+    color: var(--gray-hard-darkest) !important;
+  }
+  h3 {
+    margin: 0;
+    @include text-lg(600);
+    color: var(--gray-hard-darkest) !important;
+  }
+  .grpBtn {
+    display: flex;
+    align-items: center;
+    gap: 1.6rem;
+  }
+}
+
 // Text Editor
 @mixin editor {
   *:first-child {

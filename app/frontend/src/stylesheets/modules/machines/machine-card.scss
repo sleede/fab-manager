@@ -1,6 +1,6 @@
 .machine-card {
-  background-color: #fff;
-  border: 1px solid #ddd;
+  background-color: var(--gray-soft-lightest);
+  border: 1px solid var(--gray-soft-dark);
   border-radius: var(--border-radius);
   position: relative;
   overflow: hidden;
