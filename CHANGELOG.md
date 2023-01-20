@@ -1,4 +1,6 @@
 # Changelog Fab-manager
+- Report user's prepaid packs in the dashboard
+- Ability to buy a new prepaid pack from the user's dashboard
 
 - Use Time instead of DateTime objects
 - Fix a bug: missing statististics subtypes
@@ -52,8 +54,7 @@
 - Fix a bug: unable to run task fix_invoice_item when some invoice items are associated with errors
 - Fix a bug: invalid event date reported when the timezone in before UTC
 - Fix a bug: unable to run accounting export if a line label was not defined
-- Fix a security issue: updated rack to 2.2.6.2 to fix [CVE-2022-44571](https
-- cgi-bin/cvename.cgi?name=CVE-2022-44571)
+- Fix a security issue: updated rack to 2.2.6.2 to fix [CVE-2022-44571](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-44571)
 - Fix a security issue: updated globalid to 1.0.1 to fix [CVE-2023-22799](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-22799)
 - [TODO DEPLOY] `rails fablab:fix:invoice_items_in_error` THEN `rails fablab:fix_invoice_items` THEN `rails db:migrate`
 

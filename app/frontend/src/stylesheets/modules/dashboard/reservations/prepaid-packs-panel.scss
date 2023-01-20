@@ -1,6 +1,7 @@
 .prepaid-packs-panel {
   display: flex;
   flex-direction: column;
+  overflow: visible;
   gap: 1.6rem;
   .title { @include text-base(600); }
   p { margin: 0; }
@@ -46,11 +47,14 @@
 
   .prepaid-packs-cta {
     padding: 1.6rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap:2.4rem;
     background-color: var(--gray-soft-lightest);
     border-radius: var(--border-radius);
+    & > form {
+      margin-top: 1.6rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap:2.4rem;
+    }
   }
 }

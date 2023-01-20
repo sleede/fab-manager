@@ -166,7 +166,8 @@ fr:
             countdown: "Décompte"
             history: "Historique"
             consumed_hours: "H consommée(s)"
-            cta_info: "Vous pouvez acheter des packs d'heures prépayées pour les machines. Ces packs vous permettent de bénéficier de remises."
+            cta_info: "Vous pouvez acheter des packs d'heures prépayées pour les machines. Ces packs vous permettent de bénéficier de remises. Choisissez une machine pour acheter un pack correspondant."
+            select_machine: "Selectionnez une machine"
             cta_button: "Acheter un pack"
       #public profil of a member
       members_show:
