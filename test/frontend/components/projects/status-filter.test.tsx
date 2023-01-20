@@ -16,13 +16,13 @@ describe('Status Filter', () => {
     await waitFor(() => screen.getByText('Mocked Status 1'));
     fireEvent.click(screen.getByText('Mocked Status 1'));
 
-    expect(onFilterChange).toHaveBeenCalledWith({ label: 'Mocked Status 1', id: 1 });
+    expect(onFilterChange).toHaveBeenCalledWith({ name: 'Mocked Status 1', id: 1 });
 
     fireEvent.keyDown(screen.getByLabelText(/app.public.status_filter.select_status/), { key: 'ArrowDown' });
     await waitFor(() => screen.getByText('Mocked Status 2'));
     fireEvent.click(screen.getByText('Mocked Status 2'));
 
     expect(onFilterChange).toHaveBeenCalledTimes(2);
-    expect(onFilterChange).toHaveBeenCalledWith({ label: 'Mocked Status 2', id: 2 });
+    expect(onFilterChange).toHaveBeenCalledWith({ name: 'Mocked Status 2', id: 2 });
   });
 });

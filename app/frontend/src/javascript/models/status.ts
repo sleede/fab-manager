@@ -1,4 +1,6 @@
-export interface Status {
+import { ProjectSettingOption } from './project-setting-option';
+
+export interface Status extends ProjectSettingOption {
   id?: number,
-  label: string,
+  name: string,
 }

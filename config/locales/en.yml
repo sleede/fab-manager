@@ -664,3 +664,9 @@ en:
     external_id: "external identifier"
     prevent_invoices_zero: "prevent building invoices at 0"
     invoice_VAT-name: "VAT name"
+  #statuses of projects
+  statuses:
+    new: "New"
+    pending: "Pending"
+    done: "Done"
+    abandoned: "Abandoned"

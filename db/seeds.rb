@@ -103,10 +103,10 @@ end
 
 if Status.count.zero?
   Status.create!([
-                   { label: 'Nouveau' },
-                   { label: 'En cours' },
-                   { label: 'Terminé' },
-                   { label: 'Arrêté' }
+                   { name:  I18n.t('statuses.new') },
+                   { name:  I18n.t('statuses.pending') },
+                   { name:  I18n.t('statuses.done') },
+                   { name:  I18n.t('statuses.abandoned') }
                  ])
 end
 

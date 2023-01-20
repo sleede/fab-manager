@@ -170,11 +170,11 @@
         <!-- TODO: be able to remove the selected option -->
         <ui-select ng-model="project.status_id">
             <ui-select-match>
-                <span ng-bind="$select.selected.label"></span>
+                <span ng-bind="$select.selected.name"></span>
                 <input type="hidden" name="project[status_id]" value="{{$select.selected.id}}" />
             </ui-select-match>
             <ui-select-choices repeat="s.id as s in (statuses | filter: $select.search)">
-                <span ng-bind-html="s.label | highlight: $select.search"></span>
+                <span ng-bind-html="s.name | highlight: $select.search"></span>
             </ui-select-choices>
         </ui-select>
       </div>

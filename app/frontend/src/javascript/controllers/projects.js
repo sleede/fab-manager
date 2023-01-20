@@ -93,7 +93,7 @@ class ProjectsController {
       $scope.statuses = data.map(function (d) {
         return ({
           id: d.id,
-          label: d.label
+          name: d.name
         });
       });
     });

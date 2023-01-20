@@ -102,7 +102,7 @@ export const server = setupServer(
     const id = parseInt(req.params.id);
     const reqBody = await req.json();
     const status = fixtures.statuses.find((status) => status.id === id);
-    status.label = reqBody.status.label;
+    status.name = reqBody.status.name;
     return res(ctx.json(status));
   }),
   rest.post('/api/statuses', async (req, res, ctx) => {

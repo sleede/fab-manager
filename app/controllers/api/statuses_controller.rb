@@ -41,6 +41,6 @@ class API::StatusesController < ApplicationController
   end
 
   def status_params
-    params.require(:status).permit(:label)
+    params.require(:status).permit(:name)
   end
 end

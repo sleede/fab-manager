@@ -37,11 +37,16 @@ export const StatusFilter: React.FC<StatusFilterProps> = ({ currentStatusIndex, 
 
   /**
   * On component mount, asynchronously load the full list of statuses
+  * Converts name property into label property, since a SelectOption needs a label
   */
   useEffect(() => {
     StatusAPI.index()
-      .then(setStatusesList)
-      .catch(onError);
+      .then((data) => {
+        const options = data.map(status => {
+          return { id: status.id, label: status.name };
+        });
+        setStatusesList(options);
+      }).catch(onError);
   }, []);
 
   // If currentStatusIndex is provided, set currentOption accordingly
@@ -54,7 +59,7 @@ export const StatusFilter: React.FC<StatusFilterProps> = ({ currentStatusIndex, 
   * Callback triggered when the admin selects a status in the dropdown list
   */
   const handleStatusSelected = (option: SelectOption<number>): void => {
-    onFilterChange({ id: option.value, label: option.label });
+    onFilterChange({ id: option.value, name: option.label });
     setCurrentOption(option);
   };
 

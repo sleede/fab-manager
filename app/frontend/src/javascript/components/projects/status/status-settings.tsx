@@ -6,6 +6,7 @@ import { Loader } from '../../base/loader';
 import { ProjectsSetting } from './../projects-setting';
 import { ProjectSettingOption } from '../../../models/project-setting-option';
 import { useTranslation } from 'react-i18next';
+import { Status } from '../../../models/status';
 
 declare const Application: IApplication;
 
@@ -19,11 +20,11 @@ interface StatusSettingsProps {
 */
 export const StatusSettings: React.FC<StatusSettingsProps> = ({ onError, onSuccess }) => {
   const { t } = useTranslation('admin');
-  const [statusesOptions, setStatusesOptions] = useState([]);
+  const [statusesOptions, setStatusesOptions] = useState<Array<Status>>([]);
 
   // Async function : post new status to API, then refresh status list
   const addOption = async (option: ProjectSettingOption) => {
-    await StatusAPI.create({ label: option.name }).catch(onError);
+    await StatusAPI.create({ name: option.name }).catch(onError);
     onSuccess(t('app.admin.status_settings.option_create_success'));
     fetchStatus();
   };
@@ -37,7 +38,7 @@ export const StatusSettings: React.FC<StatusSettingsProps> = ({ onError, onSucce
 
   // Async function : send updated status to API, then refresh status list
   const updateOption = async (option: ProjectSettingOption) => {
-    await StatusAPI.update({ id: option.id, label: option.name }).catch(onError);
+    await StatusAPI.update({ id: option.id, name: option.name }).catch(onError);
     onSuccess(t('app.admin.status_settings.option_update_success'));
     fetchStatus();
   };
@@ -46,10 +47,7 @@ export const StatusSettings: React.FC<StatusSettingsProps> = ({ onError, onSucce
   const fetchStatus = () => {
     StatusAPI.index()
       .then(data => {
-        const options = data.map(status => {
-          return { id: status.id, name: status.label };
-        });
-        setStatusesOptions(options.sort((a, b) => a.id - b.id));
+        setStatusesOptions(data.sort((a, b) => a.id - b.id));
       })
       .catch(onError);
   };
