@@ -39,7 +39,10 @@
         <uib-tab heading="{{ 'app.admin.projects.licences' | translate }}" index="2">
           <ng-include src="'/admin/projects/licences.html'"></ng-include>
         </uib-tab>
-        <uib-tab heading="{{ 'app.admin.projects.settings.title' | translate }}" index="3" class="settings-tab">
+        <uib-tab heading="{{ 'app.admin.projects.statuses' | translate }}" index="3">
+          <status-settings on-error="onError" on-success="onSuccess"/>
+        </uib-tab>
+        <uib-tab heading="{{ 'app.admin.projects.settings.title' | translate }}" index="4" class="settings-tab">
           <ng-include src="'/admin/projects/settings.html'"></ng-include>
         </uib-tab>
       </uib-tabset>

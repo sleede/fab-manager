@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { react2angular } from 'react2angular';
 import Select from 'react-select';
 import { useTranslation } from 'react-i18next';
-import StatusAPI from '../../api/status';
-import { IApplication } from '../../models/application';
-import { SelectOption } from '../../models/select';
-import { Loader } from '../base/loader';
-import { Status } from '../../models/status';
+import StatusAPI from '../../../api/status';
+import { IApplication } from '../../../models/application';
+import { SelectOption } from '../../../models/select';
+import { Loader } from '../../base/loader';
+import { Status } from '../../../models/status';
 
 declare const Application: IApplication;
 
@@ -40,14 +40,14 @@ export const StatusFilter: React.FC<StatusFilterProps> = ({ currentStatusIndex, 
   */
   useEffect(() => {
     StatusAPI.index()
-      .then(data => setStatusesList(data))
-      .catch(e => onError(e));
+      .then(setStatusesList)
+      .catch(onError);
   }, []);
 
   // If currentStatusIndex is provided, set currentOption accordingly
   useEffect(() => {
     const selectedOption = statusesList.find((status) => status.id === currentStatusIndex);
-    setCurrentOption(selectedOption);
+    setCurrentOption(selectedOption || defaultValue);
   }, [currentStatusIndex, statusesList]);
 
   /**
@@ -76,6 +76,7 @@ export const StatusFilter: React.FC<StatusFilterProps> = ({ currentStatusIndex, 
 
   return (
     <div>
+      {statusesList.length !== 0 &&
       <Select defaultValue={currentOption}
         value={currentOption}
         id="status"
@@ -84,6 +85,7 @@ export const StatusFilter: React.FC<StatusFilterProps> = ({ currentStatusIndex, 
         options={buildOptions()}
         styles={selectStyles}
         aria-label={t('app.public.status_filter.select_status')}/>
+      }
     </div>
   );
 };
