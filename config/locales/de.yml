@@ -13,8 +13,8 @@ de:
   activerecord:
     attributes:
       product:
-        amount: "The price"
-        slug: "URL"
+        amount: "Der Preis"
+        slug: "Link"
   errors:
     #CarrierWave
     messages:
@@ -64,7 +64,7 @@ de:
     i_ve_reserved: "Ich reservierte"
     length_must_be_slot_multiple: "muss mindestens %{MIN} Minuten nach dem Startdatum liegen"
     must_be_associated_with_at_least_1_machine: "muss mindestens einer Maschine zugeordnet sein"
-    deleted_user: "Deleted user"
+    deleted_user: "Gelöschte Benutzer"
   #members management
   members:
     unable_to_change_the_group_while_a_subscription_is_running: "Die Gruppe kann während eines Abonnements nicht geändert werden"
@@ -133,8 +133,8 @@ de:
     error_invoice: "Fehlerhafte Rechnung. Die folgenden Artikel sind nicht gebucht. Bitte kontaktieren Sie das FabLab für eine Rückerstattung."
     prepaid_pack: "Prepaid-Stundenpaket"
     pack_item: "Paket von %{COUNT} Stunden für %{ITEM}"
-    order: "Your order on the store"
-    unable_to_find_pdf: "We cannot find your invoice. If you ordered recently, it may have not been generated yet. Please retry in a moment."
+    order: "Ihre Bestellung im Shop"
+    unable_to_find_pdf: "Wir können Ihre Rechnung nicht finden. Wenn Sie erst kürzlich bestellt haben, wurde sie möglicherweise noch nicht generiert. Bitte versuchen Sie es in einem Moment erneut."
   #PDF payment schedule generation
   payment_schedules:
     schedule_reference: "Zahlungsplan Referenz: %{REF}"
@@ -373,7 +373,7 @@ de:
         view_results: "Ergebnisse anzeigen."
       notify_admin_low_stock_threshold:
         low_stock: "Low stock for %{PRODUCT}. "
-        view_product: "View the product."
+        view_product: "Produkt anzeigen."
       notify_member_about_coupon:
         enjoy_a_discount_of_PERCENT_with_code_CODE: "Erhalten Sie %{PERCENT}% Rabatt mit dem Code %{CODE}"
         enjoy_a_discount_of_AMOUNT_with_code_CODE: "Erhalten Sie %{AMOUNT}% Rabatt mit dem Code %{CODE}"
@@ -418,11 +418,11 @@ de:
       notify_admin_user_proof_of_identity_files_updated:
         proof_of_identity_files_uploaded: "Proof of identity changed by Member <strong><em>%{NAME}</strong></em>."
       notify_user_is_validated:
-        account_validated: "Your account is valid."
+        account_validated: "Dein Account ist gültig."
       notify_user_is_invalidated:
-        account_invalidated: "Your account is invalid."
+        account_invalidated: "Dein Account ist ungültig."
       notify_user_proof_of_identity_refusal:
-        refusal: "Your proof of identity are not accepted"
+        refusal: "Ihr Identitätsnachweis wird nicht akzeptiert"
       notify_admin_user_proof_of_identity_refusal:
         refusal: "Member's proof of identity <strong><em>%{NAME}</strong></em> refused."
       notify_user_order_is_ready:
@@ -436,7 +436,7 @@ de:
     subscriptions: "Abonnements"
     machines_hours: "Maschinen-Slots"
     spaces: "Räume"
-    orders: "Orders"
+    orders: "Bestellungen"
     trainings: "Schulungen"
     events: "Veranstaltungen"
     registrations: "Anmeldungen"
@@ -460,9 +460,9 @@ de:
     account_creation: "Benutzerkontenerstellung"
     project_publication: "Projektveröffentlichung"
     duration: "Dauer"
-    store: "Store"
-    paid-processed: "Paid and/or processed"
-    aborted: "Aborted"
+    store: "Shop"
+    paid-processed: "Bezahlt und/oder bearbeitet"
+    aborted: "Abgebrochen"
   #statistics exports to the Excel file format
   export:
     entries: "Einträge"
@@ -478,7 +478,7 @@ de:
     type: "Typ"
     male: "Männlich"
     female: "Weiblich"
-    deleted_user: "Deleted user"
+    deleted_user: "Gelöschte Benutzer"
   #initial price's category for events, created to replace the old "reduced amount" property
   price_category:
     reduced_fare: "Ermäßigter Tarif"
@@ -636,20 +636,20 @@ de:
     overlapping_categories: "Kategorien zur Vorbeugung überlappender Buchungen"
     extended_prices_in_same_day: "Erweiterte Preise am selben Tag"
     public_registrations: "Öffentliche Registrierungen"
-    facebook: "facebook"
-    twitter: "twitter"
-    viadeo: "viadeo"
-    linkedin: "linkedin"
+    facebook: "Facebook"
+    twitter: "Twitter"
+    viadeo: "Viadeo"
+    linkedin: "LinkedIn"
     instagram: "instagram"
-    youtube: "youtube"
-    vimeo: "vimeo"
-    dailymotion: "dailymotion"
-    github: "github"
+    youtube: "YouTube"
+    vimeo: "Vimeo"
+    dailymotion: "Dailymotion"
+    github: "Github"
     echosciences: "echosciences"
-    pinterest: "pinterest"
-    lastfm: "lastfm"
-    flickr: "flickr"
-    machines_module: "Machines module"
+    pinterest: "Pinterest"
+    lastfm: "Lastfm"
+    flickr: "Flickr"
+    machines_module: "Maschinenmodul"
     user_change_group: "Allow users to change their group"
     show_username_in_admin_list: "Show the username in the admin's members list"
     store_module: "Store module"
