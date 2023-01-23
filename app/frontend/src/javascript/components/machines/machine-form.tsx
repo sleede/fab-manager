@@ -64,6 +64,26 @@ export const MachineForm: React.FC<MachineFormProps> = ({ action, machine, onErr
   };
 
   /**
+   * Callack triggered when the user changes the 'reservable' status of the machine:
+   * A reservable machine cannot be disabled
+   */
+  const onReservableToggled = (reservable: boolean) => {
+    if (reservable) {
+      setValue('disabled', false);
+    }
+  };
+
+  /**
+   * Callack triggered when the user changes the 'disabled' status of the machine:
+   * A disabled machine cannot be reservable
+   */
+  const onDisabledToggled = (disabled: boolean) => {
+    if (disabled) {
+      setValue('reservable', false);
+    }
+  };
+
+  /**
    * Convert all machine categories to the select format
    */
   const buildOptions = (): Array<SelectOption<number>> => {
@@ -150,10 +170,12 @@ export const MachineForm: React.FC<MachineFormProps> = ({ action, machine, onErr
             <FormSwitch control={control}
                       id="reservable"
                       label={t('app.admin.machine_form.reservable')}
+                      onChange={onReservableToggled}
                       tooltip={t('app.admin.machine_form.reservable_help')}
                       defaultValue={true} />
             <FormSwitch control={control}
                         id="disabled"
+                        onChange={onDisabledToggled}
                         label={t('app.admin.machine_form.disable_machine')}
                         tooltip={t('app.admin.machine_form.disabled_help')} />
           </div>
