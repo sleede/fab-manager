@@ -7,6 +7,7 @@
 - Fix a bug: unable to run task fix_invoice_item when some invoice items are associated with errors
 - Fix a bug: invalid event date reported when the timezone in before UTC
 - Fix a bug: unable to run accounting export if a line label was not defined
+- Fix a security issue: updated rack to 2.2.6.2 to fix [CVE-2022-44571](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-44571)
 - [TODO DEPLOY] `rails fablab:fix:invoice_items_in_error` THEN `rails fablab:fix_invoice_items` THEN `rails db:migrate`
 
 ## v5.6.5 2023 January 9
