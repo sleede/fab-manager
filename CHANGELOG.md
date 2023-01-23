@@ -1,5 +1,18 @@
 # Changelog Fab-manager
 
+## v5.6.6 2023 January 23
+
+- Add more context data to sentry reports
+- Improved SSO testing
+- Ability to map the external ID from the SSO
+- Ability to soft-destroy a reserved event
+- Fix a bug: unable to run task fix_invoice_item when some invoice items are associated with errors
+- Fix a bug: invalid event date reported when the timezone in before UTC
+- Fix a bug: unable to run accounting export if a line label was not defined
+- Fix a security issue: updated rack to 2.2.6.2 to fix [CVE-2022-44571](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-44571)
+- Fix a security issue: updated globalid to 1.0.1 to fix [CVE-2023-22799](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-22799)
+- [TODO DEPLOY] `rails fablab:fix:invoice_items_in_error` THEN `rails fablab:fix_invoice_items` THEN `rails db:migrate`
+
 ## v5.6.5 2023 January 9
 
 - Moved the buttons to create a new machine or availability to the admin section
@@ -24,7 +37,7 @@
 - Fix a bug: cryptic error message when failed to create a manager
 - Fix a bug: unable to restore accounting periods closed by a deleted admin
 - Fix a bug: unable to build an accounting archive if the operator was deleted
-- Fix a bug: unable to udpate an event category
+- Fix a bug: unable to update an event category
 
 ## v5.6.1 2023 January 6
 

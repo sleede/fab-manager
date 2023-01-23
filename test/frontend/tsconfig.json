@@ -2,7 +2,7 @@
   "references": [
     { "path": "../../" }
   ],
-  "include": ["components/**/*", "__fixtures__/**/*", "__lib__/**/*"],
+  "include": ["components/**/*", "lib/**/*", "__fixtures__/**/*", "__lib__/**/*"],
   "compilerOptions": {
     "jsx": "react-jsx",
     "target": "ES2015",

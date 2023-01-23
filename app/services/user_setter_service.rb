@@ -40,6 +40,11 @@ class UserSetterService
     @user.statistic_profile.birthday = data
   end
 
+  def assign_external_id(data)
+    @user.invoicing_profile ||= InvoicingProfile.new
+    @user.invoicing_profile.external_id = data
+  end
+
   def assign_profile_attribute(attribute, data)
     @user.profile[attribute[8..].to_sym] = data
   end
@@ -65,6 +70,8 @@ class UserSetterService
         assign_gender(data)
       when 'profile.birthday'
         assign_birthday(data)
+      when 'profile.external_id'
+        assign_external_id(data)
       else
         assign_profile_attribute(attribute, data)
       end

@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'version'
+
 Sentry.init do |config|
   config.excluded_exceptions += ['Pundit::NotAuthorizedError']
 
@@ -20,6 +22,11 @@ Sentry.init do |config|
   # Set traces_sample_rate to 1.0 to capture 100%
   # of transactions for performance monitoring.
   # We recommend adjusting this value in production.
-  config.traces_sample_rate = 0.01
+  config.traces_sample_rate = 0.1
   config.environment = Rails.env
+  config.release = Version.current
+end
+
+Sentry.configure_scope do |scope|
+  scope.set_tags(instance: ENV.fetch('DEFAULT_HOST'))
 end

@@ -8,6 +8,7 @@ class OpenAPI::V1::EventsController < OpenAPI::V1::BaseController
 
   def index
     @events = Event.includes(:event_image, :event_files, :availability, :category)
+                   .where(deleted_at: nil)
     @events = if upcoming
                 @events.references(:availabilities)
                        .where('availabilities.end_at >= ?', DateTime.current)

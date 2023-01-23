@@ -1,4 +1,4 @@
-// from https://gist.github.com/MrChocolatine/367fb2a35d02f6175cc8ccb3d3a20054
+// inspired from https://gist.github.com/MrChocolatine/367fb2a35d02f6175cc8ccb3d3a20054
 
 type TYear = `${number}${number}${number}${number}`;
 type TMonth = `${number}${number}`;
@@ -14,9 +14,14 @@ type TMilliseconds = `${number}${number}${number}`;
 type TDateISODate = `${TYear}-${TMonth}-${TDay}`;
 
 /**
+ * Represent a string like `14:42`
+ */
+type TDateISOShortTime = `${THours}:${TMinutes}`;
+
+/**
  * Represent a string like `14:42:34.678`
  */
-type TDateISOTime = `${THours}:${TMinutes}:${TSeconds}`|`${THours}:${TMinutes}:${TSeconds}.${TMilliseconds}`;
+type TDateISOTime = `${TDateISOShortTime}:${TSeconds}`|`${TDateISOShortTime}:${TSeconds}.${TMilliseconds}`;
 
 /**
  * Represent a timezone like `+0100`

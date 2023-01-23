@@ -1,6 +1,6 @@
 import moment, { unitOfTime } from 'moment';
 import { IFablab } from '../models/fablab';
-import { TDateISO, TDateISODate, THours, TMinutes } from '../typings/date-iso';
+import { TDateISO, TDateISODate, TDateISOShortTime } from '../typings/date-iso';
 
 declare let Fablab: IFablab;
 
@@ -17,7 +17,15 @@ export default class FormatLib {
    */
   static isDateISO = (value: string): boolean => {
     if (typeof value !== 'string') return false;
-    return !!value?.match(/^\d\d\d\d-\d\d-\d\dT\d\d:\d\d:\d\d.\d\d\d/);
+    return !!value?.match(/^\d\d\d\d-\d\d-\d\dT\d\d:\d\d:\d\d/);
+  };
+
+  /**
+   * Check if the provided variable is string representing a short date, according to ISO 8601 (e.g. 2023-01-12)
+   */
+  static isShortDateISO = (value: string): boolean => {
+    if (typeof value !== 'string') return false;
+    return !!value.match(/^\d\d\d\d-\d\d-\d\d$/);
   };
 
   /**
@@ -32,7 +40,36 @@ export default class FormatLib {
    * Return the formatted localized date for the given date
    */
   static date = (date: Date|TDateISO|TDateISODate): string => {
-    return Intl.DateTimeFormat().format(moment(date).toDate());
+    let tempDate: Date;
+    if (FormatLib.isShortDateISO(date as string) || FormatLib.isDateISO(date as string)) {
+      tempDate = FormatLib.parseISOdate(date as TDateISO);
+    } else {
+      tempDate = moment(date).toDate();
+    }
+    return Intl.DateTimeFormat(Fablab.intl_locale).format(tempDate);
+  };
+
+  /**
+   * Parse the provided datetime or date string (as ISO8601 format) and return the equivalent Date object
+   */
+  private static parseISOdate = (date: TDateISO|TDateISODate, res: Date = new Date()): Date => {
+    const isoDateMatch = (date as string)?.match(/^(\d\d\d\d)-(\d\d)-(\d\d)/);
+    res.setFullYear(parseInt(isoDateMatch[1], 10));
+    res.setMonth(parseInt(isoDateMatch[2], 10) - 1);
+    res.setDate(parseInt(isoDateMatch[3], 10));
+
+    return res;
+  };
+
+  /**
+   * Parse the provided datetime or time string (as ISO8601 format) and return the equivalent Date object
+   */
+  private static parseISOtime = (date: TDateISO|TDateISOShortTime, res: Date = new Date()): Date => {
+    const isoTimeMatch = (date as string)?.match(/(^|T)(\d\d):(\d\d)/);
+    res.setHours(parseInt(isoTimeMatch[2], 10));
+    res.setMinutes(parseInt(isoTimeMatch[3], 10));
+
+    return res;
   };
 
   /**
@@ -45,13 +82,10 @@ export default class FormatLib {
   /**
    * Return the formatted localized time for the given date
    */
-  static time = (date: Date|TDateISO|`${THours}:${TMinutes}`): string => {
+  static time = (date: Date|TDateISO|TDateISOShortTime): string => {
     let tempDate: Date;
-    if (FormatLib.isShortTimeISO(date as string)) {
-      const isoTimeMatch = (date as string)?.match(/^(\d\d):(\d\d)$/);
-      tempDate = new Date();
-      tempDate.setHours(parseInt(isoTimeMatch[1], 10));
-      tempDate.setMinutes(parseInt(isoTimeMatch[2], 10));
+    if (FormatLib.isShortTimeISO(date as string) || FormatLib.isDateISO(date as string)) {
+      tempDate = FormatLib.parseISOtime(date as TDateISOShortTime);
     } else {
       tempDate = moment(date).toDate();
     }

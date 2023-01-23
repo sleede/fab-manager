@@ -177,7 +177,7 @@ namespace :fablab do
 
     desc '[release 4.4.3] fix duration of recurring availabilities'
     task availabilities_duration: :environment do
-      Availability.select(:occurrence_id).where(is_recurrent: true).group(:occurrence_id).each do |a|
+      Availability.select('occurrence_id').where(is_recurrent: true).group('occurrence_id').each do |a|
         occurrences = Availability.where(occurrence_id: a.occurrence_id)
         next unless occurrences.map(&:slot_duration).uniq.size > 1
 
@@ -231,7 +231,7 @@ namespace :fablab do
       statistic_profile_ids = StatisticProfilePrepaidPack.all.map(&:statistic_profile_id).uniq
       # find the reservations that use prepaid pack by machine_ids, members and preriod
       reservations = Reservation.where(reservable_type: 'Machine', reservable_id: machine_ids, statistic_profile_id: statistic_profile_ids,
-                                       created_at: start_date..end_date).order(statistic_profile_id: 'ASC', created_at: 'ASC')
+                                       created_at: start_date..end_date).order(statistic_profile_id: :asc, created_at: :asc)
       infos = []
       reservations.each do |reservation|
         # find pack by pack's created_at before reservation's create_at and pack's expries_at before start_date
@@ -243,7 +243,7 @@ namespace :fablab do
                 .where(statistic_profile_id: reservation.statistic_profile_id)
                 .where('statistic_profile_prepaid_packs.created_at <= ?', reservation.created_at)
                 .where('expires_at is NULL or expires_at > ?', start_date)
-                .order(created_at: 'ASC')
+                .order(created_at: :asc)
 
         # passe reservation if cannot find any pack
         next if packs.empty?
@@ -278,6 +278,16 @@ namespace :fablab do
       infos.each do |i|
         puts i
       end
+    end
+
+    desc '[release 5.6.6] fix invoice items in error'
+    task invoice_items_in_error: :environment do
+      next if InvoiceItem.where(object_type: 'Error').count.zero?
+
+      InvoiceItem.where(object_type: 'Error').update_all(object_id: 0) # rubocop:disable Rails/SkipsModelValidations
+
+      Fablab::Application.load_tasks if Rake::Task.tasks.empty?
+      Rake::Task['fablab:chain:invoices_items'].invoke
     end
   end
 end

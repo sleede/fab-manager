@@ -53,13 +53,12 @@ class Event < ApplicationRecord
          .references(:availabilities)
   end
 
-  def safe_destroy
-    reservations = Reservation.where(reservable_type: 'Event', reservable_id: id)
-    if reservations.size.zero?
-      destroy
-    else
-      false
-    end
+  def destroyable?
+    Reservation.where(reservable_type: 'Event', reservable_id: id).count.zero?
+  end
+
+  def soft_destroy!
+    update(deleted_at: DateTime.current)
   end
 
   ##

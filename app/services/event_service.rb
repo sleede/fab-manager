@@ -70,8 +70,9 @@ class EventService
                end
 
       events.each do |e|
-        # we use double negation because safe_destroy can return either a boolean (false) or an Availability (in case of delete success)
-        results.push status: !!e.safe_destroy, event: e # rubocop:disable Style/DoubleNegation
+        method = e.destroyable? ? :destroy : :soft_destroy!
+        # we use double negation because destroy can return either a boolean (false) or an Event (in case of delete success)
+        results.push status: !!e.send(method), event: e # rubocop:disable Style/DoubleNegation
       end
       results
     end

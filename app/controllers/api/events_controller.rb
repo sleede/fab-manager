@@ -36,7 +36,8 @@ class API::EventsController < API::ApiController
     limit = params[:limit]
     @events = Event.includes(:event_image, :event_files, :availability, :category)
                    .where('events.nb_total_places != -1 OR events.nb_total_places IS NULL')
-                   .order('availabilities.start_at ASC').references(:availabilities)
+                   .where(deleted_at: nil)
+                   .order('availabilities.start_at').references(:availabilities)
                    .limit(limit)
 
     @events = case Setting.get('upcoming_events_shown')
@@ -49,7 +50,9 @@ class API::EventsController < API::ApiController
               end
   end
 
-  def show; end
+  def show
+    head :not_found if @event.deleted_at
+  end
 
   def create
     authorize Event

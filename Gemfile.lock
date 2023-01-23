@@ -160,7 +160,7 @@ GEM
     fugit (1.5.3)
       et-orbi (~> 1, >= 1.2.7)
       raabro (~> 1.4)
-    globalid (1.0.0)
+    globalid (1.0.1)
       activesupport (>= 5.0)
     hashdiff (1.0.1)
     hashery (2.1.2)
@@ -222,7 +222,7 @@ GEM
     mini_magick (4.10.1)
     mini_mime (1.1.2)
     mini_portile2 (2.8.0)
-    minitest (5.16.2)
+    minitest (5.17.0)
     minitest-reporters (1.4.2)
       ansi
       builder
@@ -303,7 +303,7 @@ GEM
       activesupport (>= 3.0.0)
     raabro (1.4.0)
     racc (1.6.1)
-    rack (2.2.4)
+    rack (2.2.6.2)
     rack-oauth2 (1.19.0)
       activesupport
       attr_required
