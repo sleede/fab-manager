@@ -747,6 +747,18 @@ export const settings: Array<Setting> = [
     value: 'TVA',
     last_update: '2022-12-23T14:39:12+0100',
     localized: 'Nom de la TVA'
+  },
+  {
+    name: 'machines_banner_text',
+    value: 'false',
+    last_update: '2022-12-23T14:39:12+0100',
+    localized: 'Text of the banner in Machines List'
+  },
+  {
+    name: 'machines_banner_button',
+    value: 'false',
+    last_update: '2022-12-23T14:39:12+0100',
+    localized: 'Button of the banner in Machines List'
   }
 ];
 

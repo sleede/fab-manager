@@ -173,6 +173,12 @@ class Setting < ApplicationRecord
                              trainings_authorization_validity_duration
                              trainings_invalidation_rule
                              trainings_invalidation_rule_period] }
+                             trainings_auto_cancel_deadline
+                             machines_banner_active
+                             machines_banner_text
+                             machines_banner_cta_active
+                             machines_banner_cta_label
+                             machines_banner_cta_url] }
   # WARNING: when adding a new key, you may also want to add it in:
   # - config/locales/en.yml#settings
   # - app/frontend/src/javascript/models/setting.ts#SettingName
