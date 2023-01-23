@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+## v5.6.6 2023 January 23
+
 - Add more context data to sentry reports
 - Improved SSO testing
 - Ability to map the external ID from the SSO
