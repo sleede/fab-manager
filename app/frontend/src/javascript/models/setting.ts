@@ -233,6 +233,12 @@ export const storeSettings = [
   'store_hidden'
 ] as const;
 
+export const trainingSettings = [
+  'trainings_auto_cancel',
+  'trainings_auto_cancel_threshold',
+  'trainings_auto_cancel_deadline'
+] as const;
+
 export const allSettings = [
   ...homePageSettings,
   ...privacyPolicySettings,
@@ -258,7 +264,8 @@ export const allSettings = [
   ...pricingSettings,
   ...poymentSettings,
   ...displaySettings,
-  ...storeSettings
+  ...storeSettings,
+  ...trainingSettings
 ] as const;
 
 export type SettingName = typeof allSettings[number];

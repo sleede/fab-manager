@@ -355,6 +355,20 @@ Application.Controllers.controller('TrainingsAdminController', ['$scope', '$stat
     };
 
     /**
+     * Shows a success message forwarded from a child react component
+     */
+    $scope.onSuccess = function (message) {
+      growl.success(message);
+    };
+
+    /**
+     * Callback triggered by react components
+     */
+    $scope.onError = function (message) {
+      growl.error(message);
+    };
+
+    /**
      * Setup the feature-tour for the admin/trainings page.
      * This is intended as a contextual help (when pressing F1)
      */

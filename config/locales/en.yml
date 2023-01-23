@@ -664,6 +664,9 @@ en:
     external_id: "external identifier"
     prevent_invoices_zero: "prevent building invoices at 0"
     invoice_VAT-name: "VAT name"
+    trainings_auto_cancel: "Trainings automatic cancellation"
+    trainings_auto_cancel_threshold: "Minimum participants for automatic cancellation"
+    trainings_auto_cancel_deadline: "Automatic cancellation deadline"
   #statuses of projects
   statuses:
     new: "New"

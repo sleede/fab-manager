@@ -1,6 +1,12 @@
 en:
   app:
     admin:
+      destroy_button:
+        deleted: "The {TYPE} was successfully deleted."
+        unable_to_delete: "Unable to delete the {TYPE}: "
+        delete_item: "Delete the {TYPE}"
+        confirm_delete: "Delete"
+        delete_confirmation: "Are you sure you want to delete this {TYPE}?"
       machines:
         the_fablab_s_machines: "The FabLab's machines"
         all_machines: "All machines"
@@ -491,6 +497,7 @@ en:
         cta_label: "Button label"
         cta_url: "url"
         save: "Save"
+        update_success: "The trainings settings were successfully updated"
       #events tracking and management
       events:
         events_monitoring: "Events monitoring"
@@ -669,9 +676,11 @@ en:
         machines: "Machines"
         price_updated: "Price successfully updated"
       configure_packs_button:
+        pack: "prepaid pack"
         packs: "Prepaid packs"
         no_packs: "No packs for now"
         pack_DURATION: "{DURATION} hours"
+        delete_confirmation: "Are you sure you want to delete this prepaid pack? This won't be possible if the pack was already bought by users."
       configure_extended_prices_button:
         extended_prices: "Extended prices"
         no_extended_prices: "No extended price for now"
@@ -695,12 +704,6 @@ en:
         new_pack_info: "A prepaid pack allows users to buy {TYPE, select, Machine{machine} Space{space} other{}} hours before booking any slots. These packs can provide discounts on volumes purchases."
         create_pack: "Create this pack"
         pack_successfully_created: "The new prepaid pack was successfully created."
-      delete_pack:
-        pack_deleted: "The prepaid pack was successfully deleted."
-        unable_to_delete: "Unable to delete the prepaid pack: "
-        delete_pack: "Delete the prepaid pack"
-        confirm_delete: "Delete"
-        delete_confirmation: "Are you sure you want to delete this prepaid pack? This won't be possible if the pack was already bought by users."
       edit_pack:
         edit_pack: "Edit the pack"
         confirm_changes: "Confirm changes"

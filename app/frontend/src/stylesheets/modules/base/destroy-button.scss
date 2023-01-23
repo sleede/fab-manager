@@ -1,0 +1,8 @@
+.destroy-button {
+  display: inline;
+
+  & > button.destroy-button-cta {
+    background-color: var(--alert);
+    color: white;
+  }
+}

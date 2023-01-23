@@ -1,15 +1,18 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { IApplication } from '../../models/application';
 import { Loader } from '../base/loader';
 import { react2angular } from 'react2angular';
 import { ErrorBoundary } from '../base/error-boundary';
 import { useTranslation } from 'react-i18next';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { useForm, SubmitHandler, useWatch } from 'react-hook-form';
 import { FormSwitch } from '../form/form-switch';
 import { FormInput } from '../form/form-input';
 import { FabButton } from '../base/fab-button';
 import { EditorialBlockForm } from '../editorial-block/editorial-block-form';
+import { SettingName, SettingValue, trainingSettings } from '../../models/setting';
+import SettingAPI from '../../api/setting';
+import SettingLib from '../../lib/setting';
 
 declare const Application: IApplication;
 
@@ -21,20 +24,22 @@ interface TrainingsSettingsProps {
 /**
  * Trainings settings
  */
-export const TrainingsSettings: React.FC<TrainingsSettingsProps> = () => {
+export const TrainingsSettings: React.FC<TrainingsSettingsProps> = ({ onError, onSuccess }) => {
   const { t } = useTranslation('admin');
-  const { register, control, formState, handleSubmit } = useForm();
+  const { register, control, formState, handleSubmit, reset } = useForm<Record<SettingName, SettingValue>>();
 
-  const [isActiveAutoCancellation, setIsActiveAutoCancellation] = useState<boolean>(false);
+  const isActiveAutoCancellation = useWatch({ control, name: 'trainings_auto_cancel' }) as boolean;
   const [isActiveAuthorizationValidity, setIsActiveAuthorizationValidity] = useState<boolean>(false);
   const [isActiveValidationRule, setIsActiveValidationRule] = useState<boolean>(false);
 
-  /**
-   * Callback triggered when the auto cancellation switch has changed.
-   */
-  const toggleAutoCancellation = (value: boolean) => {
-    setIsActiveAutoCancellation(value);
-  };
+  useEffect(() => {
+    SettingAPI.query(trainingSettings)
+      .then(settings => {
+        const data = SettingLib.bulkMapToObject(settings);
+        reset(data);
+      })
+      .catch(onError);
+  }, []);
 
   /**
    * Callback triggered when the authorisation validity switch has changed.
@@ -53,8 +58,12 @@ export const TrainingsSettings: React.FC<TrainingsSettingsProps> = () => {
   /**
    * Callback triggered when the form is submitted: save the settings
    */
-  const onSubmit: SubmitHandler<any> = (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<Record<SettingName, SettingValue>> = (data) => {
+    SettingAPI.bulkUpdate(SettingLib.objectToBulkMap(data)).then(() => {
+      onSuccess(t('app.admin.trainings_settings.update_success'));
+    }, reason => {
+      onError(reason);
+    });
   };
 
   return (
@@ -78,20 +87,20 @@ export const TrainingsSettings: React.FC<TrainingsSettingsProps> = () => {
           </header>
 
           <div className="content">
-            <FormSwitch id="active_auto_cancellation" control={control}
-              onChange={toggleAutoCancellation} formState={formState}
+            <FormSwitch id="trainings_auto_cancel" control={control}
+              formState={formState}
               defaultValue={isActiveAutoCancellation}
               label={t('app.admin.trainings_settings.automatic_cancellation_switch')} />
 
             {isActiveAutoCancellation && <>
-              <FormInput id="auto_cancellation_threshold"
+              <FormInput id="trainings_auto_cancel_threshold"
                       type="number"
                       register={register}
                       rules={{ required: isActiveAutoCancellation, min: 0 }}
                       step={1}
                       formState={formState}
                       label={t('app.admin.trainings_settings.automatic_cancellation_threshold')} />
-              <FormInput id="auto_cancellation_deadline"
+              <FormInput id="trainings_auto_cancel_deadline"
                       type="number"
                       register={register}
                       rules={{ required: isActiveAutoCancellation, min: 1 }}

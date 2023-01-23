@@ -5,9 +5,9 @@ import { useTranslation } from 'react-i18next';
 import { FabPopover } from '../../base/fab-popover';
 import { CreatePack } from './create-pack';
 import PrepaidPackAPI from '../../../api/prepaid-pack';
-import { DeletePack } from './delete-pack';
 import { EditPack } from './edit-pack';
 import FormatLib from '../../../lib/format';
+import { DestroyButton } from '../../base/destroy-button';
 
 interface ConfigurePacksButtonProps {
   packsData: Array<PrepaidPack>,
@@ -76,7 +76,13 @@ export const ConfigurePacksButton: React.FC<ConfigurePacksButtonProps> = ({ pack
               {formatDuration(p.minutes)} - {FormatLib.price(p.amount)}
               <span className="pack-actions">
                 <EditPack onSuccess={handleSuccess} onError={onError} pack={p} />
-                <DeletePack onSuccess={handleSuccess} onError={onError} pack={p} />
+                <DestroyButton onSuccess={handleSuccess}
+                               onError={onError}
+                               itemId={p.id}
+                               itemType={t('app.admin.configure_packs_button.pack')}
+                               apiDestroy={PrepaidPackAPI.destroy}
+                               iconSize={12}
+                               confirmationMessage={t('app.admin.configure_packs_button.delete_confirmation')} />
               </span>
             </li>)}
         </ul>
