@@ -5,12 +5,14 @@
 # so this service provides a wrapper around these operations.
 class SettingService
   class << self
+    # @param setting [Setting]
     def update_allowed?(setting)
       return false if Rails.application.secrets.locked_settings.include? setting.name
 
       true
     end
 
+    # @param settings [Array<Setting>]
     def run_after_update(settings)
       update_theme_stylesheet(settings)
       update_home_stylesheet(settings)
@@ -20,11 +22,13 @@ class SettingService
       export_projects_to_openlab(settings)
       validate_admins(settings)
       update_accounting_line(settings)
+      update_trainings_auto_cancel(settings)
     end
 
     private
 
     # rebuild the theme stylesheet
+    # @param settings [Array<Setting>]
     def update_theme_stylesheet(settings)
       return unless (%w[main_color secondary_color] & settings.map(&:name)).count.positive?
 
@@ -32,6 +36,7 @@ class SettingService
     end
 
     # rebuild the home page stylesheet
+    # @param settings [Array<Setting>]
     def update_home_stylesheet(settings)
       return unless settings.any? { |s| s.name == 'home_css' }
 
@@ -39,6 +44,7 @@ class SettingService
     end
 
     # notify about a change in privacy policy
+    # @param settings [Array<Setting>]
     def notify_privacy_update(settings)
       return unless settings.any? { |s| s.name == 'privacy_body' }
 
@@ -47,6 +53,7 @@ class SettingService
     end
 
     # sync all objects on stripe
+    # @param settings [Array<Setting>]
     def sync_stripe_objects(settings)
       return unless (%w[stripe_secret_key online_payment_module] & settings.map(&:name)).count.positive?
 
@@ -55,6 +62,7 @@ class SettingService
     end
 
     # generate the statistics since the last update
+    # @param settings [Array<Setting>]
     def build_stats(settings)
       return unless settings.any? { |s| s.name == 'statistics_module' && s.value == 'true' }
 
@@ -63,6 +71,7 @@ class SettingService
     end
 
     # export projects to openlab
+    # @param settings [Array<Setting>]
     def export_projects_to_openlab(settings)
       return unless (%w[openlab_app_id openlab_app_secret] & settings.map(&:name)).count.positive? &&
                     Setting.get('openlab_app_id').present? && Setting.get('openlab_app_secret').present?
@@ -71,16 +80,33 @@ class SettingService
     end
 
     # automatically validate the admins
+    # @param settings [Array<Setting>]
     def validate_admins(settings)
       return unless settings.any? { |s| s.name == 'user_validation_required' && s.value == 'true' }
 
       User.admins.each { |admin| admin.update(validated_at: Time.current) if admin.validated_at.nil? }
     end
 
+    # rebuild accounting lines
+    # @param settings [Array<Setting>]
     def update_accounting_line(settings)
       return unless settings.any? { |s| s.name.match(/^accounting_/) || s.name == 'advanced_accounting' }
 
       AccountingWorker.perform_async(:all)
+    end
+
+    # update tranings auto_cancel parameters
+    # @param settings [Array<Setting>]
+    def update_trainings_auto_cancel(settings)
+      return unless settings.any? { |s| s.name.match(/^trainings_auto_cancel/) }
+
+      tac = settings.find { |s| s.name == 'trainings_auto_cancel' }
+      threshold = settings.find { |s| s.name == 'trainings_auto_cancel_threshold' }
+      deadline = settings.find { |s| s.name == 'trainings_auto_cancel_deadline' }
+
+      Training.find_each do |t|
+        TrainingService.update_auto_cancel(t, tac, threshold, deadline)
+      end
     end
   end
 end

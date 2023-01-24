@@ -34,6 +34,29 @@ class TrainingService
       end
     end
 
+    # update the given training, depending on the provided settings
+    # @param training [Training]
+    # @param auto_cancel [Setting,NilClass]
+    # @param threshold [Setting,NilClass]
+    # @param deadline [Setting,NilClass]
+    def update_auto_cancel(training, auto_cancel, threshold, deadline)
+      previous_auto_cancel = auto_cancel.nil? ? Setting.find_by(name: 'trainings_auto_cancel').value : auto_cancel.previous_value
+      previous_threshold = threshold.nil? ? Setting.find_by(name: 'trainings_auto_cancel_threshold').value : threshold.previous_value
+      previous_deadline = deadline.nil? ? Setting.find_by(name: 'trainings_auto_cancel_deadline').value : deadline.previous_value
+      is_default = training.auto_cancel.to_s == previous_auto_cancel &&
+                   [nil, previous_threshold].include?(training.auto_cancel_threshold.to_s) &&
+                   [nil, previous_deadline].include?(training.auto_cancel_deadline.to_s)
+
+      return unless is_default
+
+      # update parameters if the given training is default
+      params = {}
+      params[:auto_cancel] = auto_cancel.value unless auto_cancel.nil?
+      params[:auto_cancel_threshold] = threshold.value unless threshold.nil?
+      params[:auto_cancel_deadline] = deadline.value unless deadline.nil?
+      training.update(params)
+    end
+
     private
 
     # @param trainings [ActiveRecord::Relation<Training>]

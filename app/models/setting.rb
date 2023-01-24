@@ -203,6 +203,11 @@ class Setting < ApplicationRecord
     last_value&.created_at
   end
 
+  def previous_value
+    previous_value = history_values.order(HistoryValue.arel_table['created_at'].desc).limit(2).last
+    previous_value&.value
+  end
+
   def previous_update
     previous_value = history_values.order(HistoryValue.arel_table['created_at'].desc).limit(2).last
     previous_value&.created_at

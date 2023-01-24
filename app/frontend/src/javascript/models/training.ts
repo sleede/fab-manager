@@ -14,6 +14,9 @@ export interface Training {
   disabled?: boolean,
   plan_ids?: number[],
   training_image_attributes?: FileType,
+  auto_cancel: boolean,
+  auto_cancel_threshold: number,
+  auto_cancel_deadline: number,
   availabilities?: Array<{
     id: number,
     start_at: TDateISO,

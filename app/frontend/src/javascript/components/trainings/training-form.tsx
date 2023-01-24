@@ -38,13 +38,13 @@ export const TrainingForm: React.FC<TrainingFormProps> = ({ action, training, on
   const { t } = useTranslation('admin');
 
   const [machineModule, setMachineModule] = useState<Setting>(null);
-  const [isActiveCancellation, setIsActiveCancellation] = useState<boolean>(false);
   const [isActiveAccounting, setIsActiveAccounting] = useState<boolean>(false);
   const [isActiveAuthorizationValidity, setIsActiveAuthorizationValidity] = useState<boolean>(false);
   const [isActiveValidationRule, setIsActiveValidationRule] = useState<boolean>(false);
 
   const { handleSubmit, register, control, setValue, formState } = useForm<Training>({ defaultValues: { ...training } });
   const output = useWatch<Training>({ control });
+  const isActiveCancellation = useWatch({ control, name: 'auto_cancel' }) as boolean;
 
   useEffect(() => {
     SettingAPI.get('machines_module').then(setMachineModule).catch(onError);
@@ -77,13 +77,6 @@ export const TrainingForm: React.FC<TrainingFormProps> = ({ action, training, on
     MachineAPI.index({ disabled: false }).then(data => {
       callback(data.map(m => machineToOption(m)));
     }).catch(error => onError(error));
-  };
-
-  /**
-   * Callback triggered when the auto cancellation switch has changed.
-   */
-  const toggleCancellationSwitch = (value: boolean) => {
-    setIsActiveCancellation(value);
   };
 
   /**
@@ -178,15 +171,15 @@ export const TrainingForm: React.FC<TrainingFormProps> = ({ action, training, on
             <p className="description">{t('app.admin.training_form.automatic_cancellation_info')}</p>
           </header>
           <div className="content">
-            <FormSwitch id="active_cancellation" control={control}
-              onChange={toggleCancellationSwitch} formState={formState}
+            <FormSwitch id="auto_cancel" control={control}
+              formState={formState}
               defaultValue={isActiveCancellation}
               label={t('app.admin.training_form.automatic_cancellation_switch')} />
             {isActiveCancellation && <>
               <FormInput register={register}
                         type="number"
                         step={1}
-                        id="auto_cancellation_threshold"
+                        id="auto_cancel_threshold"
                         formState={formState}
                         rules={{ required: isActiveCancellation }}
                         nullable
@@ -194,7 +187,7 @@ export const TrainingForm: React.FC<TrainingFormProps> = ({ action, training, on
               <FormInput register={register}
                         type="number"
                         step={1}
-                        id="auto_cancellation_deadline"
+                        id="auto_cancel_deadline"
                         formState={formState}
                         rules={{ required: isActiveCancellation }}
                         nullable

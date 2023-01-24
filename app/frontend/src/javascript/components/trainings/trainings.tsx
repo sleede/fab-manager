@@ -143,8 +143,11 @@ export const Trainings: React.FC<TrainingsProps> = ({ onError, onSuccess }) => {
 
               <div className='cancel'>
                 <span>{t('app.admin.trainings.cancellation')}</span>
-                <p>5 {t('app.admin.trainings.cancellation_minimum')}<span>|</span>48 {t('app.admin.trainings.cancellation_deadline')}
-                </p>
+                {(training.auto_cancel && <p>
+                  {t('app.admin.trainings.cancellation_minimum', { ATTENDEES: training.auto_cancel_threshold })}
+                  <span>|</span>
+                  {t('app.admin.trainings.cancellation_deadline', { DEADLINE: training.auto_cancel_deadline })}
+                </p>) || <p>---</p>}
               </div>
 
               <div className='capacity'>

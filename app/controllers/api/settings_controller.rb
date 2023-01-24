@@ -26,6 +26,7 @@ class API::SettingsController < API::ApiController
     authorize Setting
 
     @settings = []
+    updated_settings = []
     may_transaction params[:transactional] do
       params[:settings].each do |setting|
         next if !setting[:name] || !setting[:value]
@@ -34,8 +35,9 @@ class API::SettingsController < API::ApiController
         if !SettingService.update_allowed?(db_setting)
           db_setting.errors.add(:-, "#{I18n.t("settings.#{setting[:name]}")}: #{I18n.t('settings.locked_setting')}")
         elsif db_setting.save
-          unless db_setting.value == setting[:value]
-            db_setting.history_values.create(value: setting[:value], invoicing_profile: current_user.invoicing_profile)
+          if db_setting.value != setting[:value] &&
+             db_setting.history_values.create(value: setting[:value], invoicing_profile: current_user.invoicing_profile)
+            updated_settings.push(db_setting)
           end
         end
 
@@ -43,7 +45,7 @@ class API::SettingsController < API::ApiController
         may_rollback(params[:transactional]) if db_setting.errors.keys.count.positive?
       end
     end
-    SettingService.run_after_update(@settings)
+    SettingService.run_after_update(updated_settings)
   end
 
   def show
