@@ -178,7 +178,7 @@ export const ProductStockForm = <TContext extends object> ({ currentFormValues, 
           <span>{t('app.admin.store.product_stock_form.external')}</span>
           <p>{currentFormValues?.stock?.external}</p>
         </div>
-        <FabButton onClick={toggleModal} icon={<PencilSimple size={20} weight="fill" />} className="is-black">Modifier</FabButton>
+        <FabButton onClick={toggleModal} icon={<PencilSimple size={20} weight="fill" />} className="is-black">{t('app.admin.store.product_stock_form.edit')}</FabButton>
       </div>
 
       {fields.length > 0 && <div className="ongoing-stocks">

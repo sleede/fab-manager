@@ -26,6 +26,7 @@
           background-color: var(--gray-soft-lightest);
           cursor: default;
         }
+        &:focus { outline: none; }
       }
     }
   }

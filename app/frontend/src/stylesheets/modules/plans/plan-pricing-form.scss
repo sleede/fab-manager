@@ -1,0 +1,12 @@
+.plan-pricing-form {
+  .fab-tabs .tabs li {
+    margin-bottom: 1.6rem;
+    &:hover { background-color: var(--gray-soft); }
+    &.react-tabs__tab--selected:hover { background-color: transparent; }
+  }
+
+  .react-tabs__tab-panel {
+    max-height: 50vh;
+    overflow-y: auto;
+  }
+}

@@ -25,6 +25,7 @@ import { PartnerModal } from './partner-modal';
 import { PlanPricingForm } from './plan-pricing-form';
 import { AdvancedAccountingForm } from '../accounting/advanced-accounting-form';
 import { FabTabs } from '../base/fab-tabs';
+import { PlanLimitForm } from './plan-limit-form';
 
 declare const Application: IApplication;
 
@@ -202,6 +203,9 @@ export const PlanForm: React.FC<PlanFormProps> = ({ action, plan, onError, onSuc
                         formState={formState}
                         rules={{ required: true }} />
           </div>
+          {action === 'update' && <FabAlert level="info">
+            {t('app.admin.plan_form.edit_amount_info')}
+          </FabAlert>}
           <FormInput register={register}
                      formState={formState}
                      id="amount"
@@ -268,24 +272,30 @@ export const PlanForm: React.FC<PlanFormProps> = ({ action, plan, onError, onSuc
         </div>
       </section>
 
-      {categories?.length > 0 && <FormSelect options={categories}
-                                             formState={formState}
-                                             control={control}
-                                             id="plan_category_id"
-                                             tooltip={t('app.admin.plan_form.category_help')}
-                                             label={t('app.admin.plan_form.category')} />}
-      {action === 'update' && <FabAlert level="warning">
-        {t('app.admin.plan_form.edit_amount_info')}
-      </FabAlert>}
+      <section>
+        <header>
+          <p className="title">{t('app.admin.plan_form.display')} </p>
+        </header>
+        <div className="content">
+          {categories?.length > 0 && <FormSelect options={categories}
+                                                 formState={formState}
+                                                 control={control}
+                                                 id="plan_category_id"
+                                                 tooltip={t('app.admin.plan_form.category_help')}
+                                                 label={t('app.admin.plan_form.category')} />}
+          <FormInput register={register}
+                      formState={formState}
+                      id="ui_weight"
+                      type="number"
+                      label={t('app.admin.plan_form.visual_prominence')}
+                      tooltip={t('app.admin.plan_form.visual_prominence_help')} />
+        </div>
+      </section>
 
-      <FormInput register={register}
-                  formState={formState}
-                  id="ui_weight"
-                  type="number"
-                  label={t('app.admin.plan_form.visual_prominence')}
-                  tooltip={t('app.admin.plan_form.visual_prominence_help')} />
+      <section>
+        <AdvancedAccountingForm register={register} onError={onError} />
+      </section>
 
-      <AdvancedAccountingForm register={register} onError={onError} />
       {action === 'update' && <PlanPricingForm formState={formState}
                                                 control={control}
                                                 onError={onError}
@@ -315,7 +325,8 @@ export const PlanForm: React.FC<PlanFormProps> = ({ action, plan, onError, onSuc
           {
             id: 'usageLimits',
             title: t('app.admin.plan_form.tab_usage_limits'),
-            content: <pre>plop</pre>
+            content: <PlanLimitForm control={control}
+                                    formState={formState} />
           }
         ]} />
       </form>

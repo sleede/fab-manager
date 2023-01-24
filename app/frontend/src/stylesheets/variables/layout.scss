@@ -37,6 +37,7 @@
     border-radius: var(--border-radius);
     & > * { margin-bottom: 0; }
     & > *:not(:last-child) { margin-bottom: 3.2rem; }
+    .fab-alert { margin: 0 0 1.6rem; }
   }
 
   @media (min-width: 1024px) {

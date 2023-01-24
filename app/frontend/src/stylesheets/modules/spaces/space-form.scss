@@ -15,8 +15,6 @@
     flex-direction: column;
     gap: 3.2rem;
 
-    .fab-alert { margin: 0; }
-
     section { @include layout-settings; }
     .save-btn { align-self: flex-start; }
   }
