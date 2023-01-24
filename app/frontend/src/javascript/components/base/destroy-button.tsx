@@ -46,8 +46,10 @@ export const DestroyButton: React.FC<DestroyButtonProps> = ({ onSuccess, onError
   };
 
   return (
-    <div className={`destroy-button ${className || ''}`}>
-      <FabButton type='button' className="destroy-button-cta" icon={<Trash size={iconSize} weight="fill" />} onClick={toggleDeletionModal} />
+    <div className='destroy-button'>
+      <FabButton type='button' className={className} onClick={toggleDeletionModal}>
+        <Trash size={iconSize} weight="fill" />
+      </FabButton>
       <FabModal title={t('app.admin.destroy_button.delete_item', { TYPE: itemType })}
         isOpen={deletionModal}
         toggleModal={toggleDeletionModal}

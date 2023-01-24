@@ -144,8 +144,6 @@ export const Trainings: React.FC<TrainingsProps> = ({ onError, onSuccess }) => {
               <div className='cancel'>
                 <span>{t('app.admin.trainings.cancellation')}</span>
                 <p>5 {t('app.admin.trainings.cancellation_minimum')}<span>|</span>48 {t('app.admin.trainings.cancellation_deadline')}
-                  {/* si l'item a un réglage spécifique (différent des paramètres généraux) */}
-                  {true && <span className='override'>{t('app.admin.trainings.override')}</span> }
                 </p>
               </div>
 
@@ -159,8 +157,6 @@ export const Trainings: React.FC<TrainingsProps> = ({ onError, onSuccess }) => {
                 <p>
                   {t('app.admin.trainings.active_true')}
                   <span>|</span>{t('app.admin.trainings.period_MONTH', { MONTH: 48 })}
-                  {/* si l'item a un réglage spécifique (différent des paramètres généraux) */}
-                  {true && <span className='override'>{t('app.admin.trainings.override')}</span> }
                 </p>
               </div>
 
@@ -168,9 +164,6 @@ export const Trainings: React.FC<TrainingsProps> = ({ onError, onSuccess }) => {
                 <span>{t('app.admin.trainings.validation_rule')}</span>
                 <p>
                   {t('app.admin.trainings.active_false')}
-                  <span>|</span>
-                  {/* si l'item a un réglage spécifique (différent des paramètres généraux) */}
-                  {true && <span className='override'>{t('app.admin.trainings.override')}</span> }
                 </p>
               </div>
 
