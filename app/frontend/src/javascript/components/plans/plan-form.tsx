@@ -24,6 +24,7 @@ import { UserPlus } from 'phosphor-react';
 import { PartnerModal } from './partner-modal';
 import { PlanPricingForm } from './plan-pricing-form';
 import { AdvancedAccountingForm } from '../accounting/advanced-accounting-form';
+import { FabTabs } from '../base/fab-tabs';
 
 declare const Application: IApplication;
 
@@ -130,140 +131,195 @@ export const PlanForm: React.FC<PlanFormProps> = ({ action, plan, onError, onSuc
     setValue('partner_id', user.id);
   };
 
-  return (
-    <div className="plan-form">
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <h4>{t('app.admin.plan_form.general_information')}</h4>
-        <FormInput register={register}
-                   id="base_name"
-                   formState={formState}
-                   rules={{
-                     required: true,
-                     maxLength: { value: 24, message: t('app.admin.plan_form.name_max_length') }
-                   }}
-                   label={t('app.admin.plan_form.name')} />
-        {action === 'create' && <FormSwitch control={control}
-                                            formState={formState}
-                                            onChange={handleAllGroupsChange}
-                                            defaultValue={false}
-                                            label={t('app.admin.plan_form.transversal')}
-                                            tooltip={t('app.admin.plan_form.transversal_help')}
-                                            id="all_groups" />}
-        {!allGroups && groups && <FormSelect options={groups}
-                                             formState={formState}
-                                             control={control}
-                                             rules={{ required: !allGroups }}
-                                             disabled={action === 'update'}
-                                             label={t('app.admin.plan_form.group')}
-                                             id="group_id" />}
-        {categories?.length > 0 && <FormSelect options={categories}
-                                   formState={formState}
-                                   control={control}
-                                   id="plan_category_id"
-                                   tooltip={t('app.admin.plan_form.category_help')}
-                                   label={t('app.admin.plan_form.category')} />}
-        {action === 'update' && <FabAlert level="warning">
-          {t('app.admin.plan_form.edit_amount_info')}
-        </FabAlert>}
-        <FormInput register={register}
-                   formState={formState}
-                   id="amount"
-                   type="number"
-                   step={0.01}
-                   addOn={FormatLib.currencySymbol()}
-                   rules={{ required: true, min: 0 }}
-                   label={t('app.admin.plan_form.subscription_price')} />
-        <FormInput register={register}
-                   formState={formState}
-                   id="ui_weight"
-                   type="number"
-                   label={t('app.admin.plan_form.visual_prominence')}
-                   tooltip={t('app.admin.plan_form.visual_prominence_help')} />
-        <FormSwitch control={control}
-                    formState={formState}
-                    id="is_rolling"
-                    label={t('app.admin.plan_form.rolling_subscription')}
-                    disabled={action === 'update'}
-                    tooltip={t('app.admin.plan_form.rolling_subscription_help')} />
-        <FormSwitch control={control}
-                    formState={formState}
-                    id="monthly_payment"
-                    label={t('app.admin.plan_form.monthly_payment')}
-                    disabled={action === 'update' || output.interval === 'week'}
-                    tooltip={t('app.admin.plan_form.monthly_payment_help')} />
-        <FormRichText control={control}
-                      formState={formState}
-                      id="description"
-                      label={t('app.admin.plan_form.description')}
-                      limit={200}
-                      heading link blockquote />
-        <FormFileUpload setValue={setValue}
-                        register={register}
-                        formState={formState}
-                        defaultFile={output.plan_file_attributes}
-                        id="plan_file_attributes"
-                        className="plan-sheet"
-                        label={t('app.admin.plan_form.information_sheet')} />
-        <FormSwitch control={control}
-                    formState={formState}
-                    id="disabled"
-                    defaultValue={false}
-                    label={t('app.admin.plan_form.disabled')}
-                    tooltip={t('app.admin.plan_form.disabled_help')} />
-        <h4>{t('app.admin.plan_form.duration')}</h4>
-        <div className="duration">
+  /**
+   * Render the content of the 'subscriptions settings' tab
+   */
+  const renderSettingsTab = () => (
+    <div className='plan-form-content'>
+      <section>
+        <header>
+          <p className="title">{t('app.admin.plan_form.description')}</p>
+        </header>
+        <div className="content">
           <FormInput register={register}
-                     rules={{ required: true, min: 1 }}
-                     disabled={action === 'update'}
+                     id="base_name"
                      formState={formState}
-                     label={t('app.admin.plan_form.number_of_periods')}
-                     type="number"
-                     id="interval_count" />
-          <FormSelect options={buildPeriodsOptions()}
-                      control={control}
-                      disabled={action === 'update'}
-                      onChange={handlePeriodUpdate}
-                      id="interval"
-                      label={t('app.admin.plan_form.period')}
-                      formState={formState}
-                      rules={{ required: true }} />
+                     rules={{
+                       required: true,
+                       maxLength: { value: 24, message: t('app.admin.plan_form.name_max_length') }
+                     }}
+                     label={t('app.admin.plan_form.name')} />
+          <FormRichText control={control}
+                        formState={formState}
+                        id="description"
+                        label={t('app.admin.plan_form.description')}
+                        limit={200}
+                        heading link blockquote />
+          <FormFileUpload setValue={setValue}
+                          register={register}
+                          formState={formState}
+                          defaultFile={output.plan_file_attributes}
+                          id="plan_file_attributes"
+                          className="plan-sheet"
+                          label={t('app.admin.plan_form.information_sheet')} />
         </div>
-        <h4>{t('app.admin.plan_form.partnership')}</h4>
-        <div className="partnership">
+      </section>
+
+      <section>
+        <header>
+          <p className="title">{t('app.admin.plan_form.general_settings')}</p>
+          <p className="description">{t('app.admin.plan_form.general_settings_info')}</p>
+        </header>
+        <div className="content">
+          {action === 'create' && <FormSwitch control={control}
+                                              formState={formState}
+                                              onChange={handleAllGroupsChange}
+                                              defaultValue={false}
+                                              label={t('app.admin.plan_form.transversal')}
+                                              tooltip={t('app.admin.plan_form.transversal_help')}
+                                              id="all_groups" />}
+          {!allGroups && groups && <FormSelect options={groups}
+                                                formState={formState}
+                                                control={control}
+                                                rules={{ required: !allGroups }}
+                                                disabled={action === 'update'}
+                                                label={t('app.admin.plan_form.group')}
+                                                id="group_id" />}
+          <div className="grp">
+            <FormInput register={register}
+                       rules={{ required: true, min: 1 }}
+                       disabled={action === 'update'}
+                       formState={formState}
+                       label={t('app.admin.plan_form.number_of_periods')}
+                       type="number"
+                       id="interval_count" />
+            <FormSelect options={buildPeriodsOptions()}
+                        control={control}
+                        disabled={action === 'update'}
+                        onChange={handlePeriodUpdate}
+                        id="interval"
+                        label={t('app.admin.plan_form.period')}
+                        formState={formState}
+                        rules={{ required: true }} />
+          </div>
+          <FormInput register={register}
+                     formState={formState}
+                     id="amount"
+                     type="number"
+                     step={0.01}
+                     addOn={FormatLib.currencySymbol()}
+                     rules={{ required: true, min: 0 }}
+                     label={t('app.admin.plan_form.subscription_price')} />
+        </div>
+      </section>
+
+      <section>
+        <header>
+          <p className="title">{t('app.admin.plan_form.activation_and_payment')}</p>
+        </header>
+        <div className="content">
+          <FormSwitch control={control}
+                      formState={formState}
+                      id="disabled"
+                      defaultValue={false}
+                      label={t('app.admin.plan_form.disabled')}
+                      tooltip={t('app.admin.plan_form.disabled_help')} />
+          <FormSwitch control={control}
+                      formState={formState}
+                      id="is_rolling"
+                      label={t('app.admin.plan_form.rolling_subscription')}
+                      disabled={action === 'update'}
+                      tooltip={t('app.admin.plan_form.rolling_subscription_help')} />
+          <FormSwitch control={control}
+                      formState={formState}
+                      id="monthly_payment"
+                      label={t('app.admin.plan_form.monthly_payment')}
+                      disabled={action === 'update' || output.interval === 'week'}
+                      tooltip={t('app.admin.plan_form.monthly_payment_help')} />
+        </div>
+      </section>
+
+      <section>
+        <header>
+          <p className="title">{t('app.admin.plan_form.partnership')}</p>
+          <p className="description">{t('app.admin.plan_form.partner_plan_help')}</p>
+        </header>
+        <div className="content">
           <FormSwitch control={control}
                       id="partnership"
                       disabled={action === 'update'}
-                      tooltip={t('app.admin.plan_form.partner_plan_help')}
                       defaultValue={plan?.type === 'PartnerPlan'}
                       onChange={handlePartnershipChange}
                       formState={formState}
                       label={t('app.admin.plan_form.partner_plan')} />
           <FormInput register={register} type="hidden" id="type" defaultValue="Plan" />
           {output.type === 'PartnerPlan' && <div className="partner">
-            <FabButton className="add-partner is-info" icon={<UserPlus size={20} />} onClick={tooglePartnerModal}>
+            {partners && <FormSelect id="partner_id"
+                                      options={partners}
+                                      control={control}
+                                      formState={formState}
+                                      rules={{ required: output.type === 'PartnerPlan' }}
+                                      tooltip={t('app.admin.plan_form.alert_partner_notification')}
+                                      label={t('app.admin.plan_form.notified_partner')} />}
+            <FabButton className="is-secondary" icon={<UserPlus size={20} />} onClick={tooglePartnerModal}>
               {t('app.admin.plan_form.new_user')}
             </FabButton>
-            {partners && <FormSelect id="partner_id"
-                                     options={partners}
-                                     control={control}
-                                     formState={formState}
-                                     rules={{ required: output.type === 'PartnerPlan' }}
-                                     label={t('app.admin.plan_form.notified_partner')} />}
-            {output.partner_id && <FabAlert level="info">
-              {t('app.admin.plan_form.alert_partner_notification')}
-            </FabAlert>}
           </div>}
         </div>
-        <AdvancedAccountingForm register={register} onError={onError} />
-        {action === 'update' && <PlanPricingForm formState={formState}
-                                                 control={control}
-                                                 onError={onError}
-                                                 setValue={setValue}
-                                                 register={register} />}
-        <FabButton type="submit" className="is-info submit-btn">
-          {t('app.admin.plan_form.ACTION_plan', { ACTION: action })}
-        </FabButton>
+      </section>
+
+      {categories?.length > 0 && <FormSelect options={categories}
+                                             formState={formState}
+                                             control={control}
+                                             id="plan_category_id"
+                                             tooltip={t('app.admin.plan_form.category_help')}
+                                             label={t('app.admin.plan_form.category')} />}
+      {action === 'update' && <FabAlert level="warning">
+        {t('app.admin.plan_form.edit_amount_info')}
+      </FabAlert>}
+
+      <FormInput register={register}
+                  formState={formState}
+                  id="ui_weight"
+                  type="number"
+                  label={t('app.admin.plan_form.visual_prominence')}
+                  tooltip={t('app.admin.plan_form.visual_prominence_help')} />
+
+      <AdvancedAccountingForm register={register} onError={onError} />
+      {action === 'update' && <PlanPricingForm formState={formState}
+                                                control={control}
+                                                onError={onError}
+                                                setValue={setValue}
+                                                register={register} />}
+    </div>
+  );
+
+  return (
+    <div className="plan-form">
+      <header>
+        <h2>{t('app.admin.plan_form.ACTION_title', { ACTION: action })}</h2>
+        <div className="grpBtn">
+          <FabButton type="submit" onClick={handleSubmit(onSubmit)} className="fab-button is-main">
+            {t('app.admin.plan_form.save')}
+          </FabButton>
+        </div>
+      </header>
+
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <FabTabs tabs={[
+          {
+            id: 'settings',
+            title: t('app.admin.plan_form.tab_settings'),
+            content: renderSettingsTab()
+          },
+          {
+            id: 'usageLimits',
+            title: t('app.admin.plan_form.tab_usage_limits'),
+            content: <pre>plop</pre>
+          }
+        ]} />
       </form>
+
       <PartnerModal isOpen={isOpenPartnerModal}
                     toggleModal={tooglePartnerModal}
                     onError={onError}

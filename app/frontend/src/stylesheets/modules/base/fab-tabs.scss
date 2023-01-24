@@ -12,16 +12,20 @@
       text-align: center;
       color: var(--main);
       border-bottom: 1px solid var(--gray-soft-dark);
+      border-radius: var(--border-radius-sm) var(--border-radius-sm) 0 0;
+      &:hover {
+        background-color: var(--gray-soft-light);
+        cursor: pointer;
+      }
 
       &.react-tabs__tab--selected {
         color: var(--gray-hard-dark);
         border: 1px solid var(--gray-soft-dark);
         border-bottom: none;
-        border-radius: var(--border-radius-sm) var(--border-radius-sm) 0 0;
-      }
-
-      &:hover {
-        cursor: pointer;
+        &:hover {
+          background-color: var(--gray-soft-lightest);
+          cursor: default;
+        }
       }
     }
   }

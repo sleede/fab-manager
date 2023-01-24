@@ -152,7 +152,13 @@ en:
           every_month: "Every month"
           every_year: "Every year"
       plan_form:
-        general_information: "General information"
+        ACTION_title: "{ACTION, select, create{New} other{Update the}} plan"
+        tab_settings: "Settings"
+        tab_usage_limits: "Usage limits"
+        description: "Description"
+        general_settings: "General settings"
+        general_settings_info: "Determine to which group this subscription is dedicated. Also set its price and duration in periods."
+        activation_and_payment: "Subscription activation and payment"
         name: "Name"
         name_max_length: "Name length must be less than 24 characters."
         group: "Group"
@@ -185,7 +191,7 @@ en:
         partner_plan: "Partner plan"
         partner_plan_help: "You can sell subscriptions in partnership with another organization. By doing so, the other organization will be notified when a member subscribes to this subscription plan."
         partner_created: "The partner was successfully created"
-        ACTION_plan: "{ACTION, select, create{Create} other{Update}} the plan"
+        save: "Save"
         create_success: "Plan(s) successfully created. Don't forget to redefine prices."
         update_success: "The plan was updated successfully"
       partner_modal:

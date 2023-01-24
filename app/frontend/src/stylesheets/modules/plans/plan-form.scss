@@ -1,25 +1,64 @@
 .plan-form {
-  .plan-sheet {
-    margin-top: 4rem;
+  max-width: 1260px;
+  margin: 2.4rem auto 0;
+  padding: 0 3rem 6rem;
+  display: flex;
+  flex-direction: column;
+  & > header {
+    padding-bottom: 0;
+    @include header($sticky: true);
+    gap: 2.4rem;
   }
-  .duration {
-    display: flex;
-    flex-direction: row;
 
-    .form-item:first-child {
-      margin-right: 32px;
-    }
-  }
-  .partner {
+  &-content {
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
+    gap: 3.2rem;
 
-    .fab-alert {
-      width: 100%;
+    section { @include layout-settings; }
+    .grp {
+      display: flex;
+      flex-direction: column;
+      @media (min-width: 640px) {flex-direction: row; }
+
+      .form-item { margin: 0; }
+      .form-item:first-child { margin-right: 2.4rem; }
+    }
+
+    .partner {
+      display: flex;
+      flex-direction: column-reverse;
+      align-items: flex-end;
+      gap: 0 2.4rem;
+
+      @media (min-width: 640px) {
+        flex-direction: row;
+        button { margin-bottom: 1.6rem; }
+      }
     }
   }
-  .submit-btn {
-    float: right;
-  }
+
+  //.plan-sheet {
+  //  margin-top: 4rem;
+  //}
+  //.duration {
+  //  display: flex;
+  //  flex-direction: row;
+
+  //  .form-item:first-child {
+  //    margin-right: 32px;
+  //  }
+  //}
+  //.partner {
+  //  display: flex;
+  //  flex-direction: column;
+  //  align-items: flex-end;
+
+  //  .fab-alert {
+  //    width: 100%;
+  //  }
+  //}
+  //.submit-btn {
+  //  float: right;
+  //}
 }
