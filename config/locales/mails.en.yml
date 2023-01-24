@@ -131,6 +131,10 @@ en:
         your_plan: "you plan"
         expires_in_7_days: "will expire in 7 days."
         to_renew_your_plan_follow_the_link: "Please, follow this link to renew your plan"
+    notify_admin_training_auto_cancelled:
+      subject: "A training was automatically cancelled"
+      body:
+        cancelled_training: "The %{TRAINING} training session scheduled for %{DATE}, from %{START} to %{END} has been automatically canceled due to an insufficient number of participants."
     notify_member_subscription_is_expired:
       subject: "Your subscription has expired"
       body:

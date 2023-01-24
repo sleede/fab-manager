@@ -25,10 +25,14 @@ class TrainingService
       training.availabilities
               .includes(slots: :slots_reservations)
               .where('availabilities.start_at >= ?', DateTime.current - training.auto_cancel_deadline.hours)
-              .find_each do |a|
-        next if a.reservations.count >= training.auto_cancel_threshold
+              .find_each do |availability|
+        next if availability.reservations.count >= training.auto_cancel_threshold
 
-        a.slots_reservations.find_each do |sr|
+        NotificationCenter.call type: 'notify_admin_training_auto_cancelled',
+                                receiver: User.admins_and_managers,
+                                attached_object: availability
+
+        availability.slots_reservations.find_each do |sr|
           sr.update(canceled_at: DateTime.current)
         end
       end
