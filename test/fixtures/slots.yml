@@ -574,3 +574,11 @@ slot_133:
   created_at: '2022-12-14 12:01:26.165110'
   updated_at: '2022-12-14 12:01:26.165110'
   availability_id: 21
+
+slot_134:
+  id: 134
+  start_at: <%= 1.hour.from_now.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  end_at: <%= 2.hours.from_now.strftime('%Y-%m-%d %H:%M:%S.%9N Z')  %>
+  created_at: 2023-01-24 13:34:43.841240000 Z
+  updated_at: 2023-01-24 13:34:43.841240000 Z
+  availability_id: 22

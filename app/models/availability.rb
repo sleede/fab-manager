@@ -19,11 +19,11 @@ class Availability < ApplicationRecord
   has_many :spaces_availabilities, dependent: :destroy
   has_many :spaces, through: :spaces_availabilities
 
-  has_many :slots
+  has_many :slots, dependent: :destroy
   has_many :slots_reservations, through: :slots
   has_many :reservations, through: :slots
 
-  has_one :event
+  has_one :event, dependent: :destroy
 
   has_many :availability_tags, dependent: :destroy
   has_many :tags, through: :availability_tags
@@ -58,32 +58,32 @@ class Availability < ApplicationRecord
   def safe_destroy
     case available_type
     when 'machines'
-      reservations = Reservation.where(reservable_type: 'Machine', reservable_id: machine_ids)
-                                .joins(:slots)
-                                .where('slots.availability_id = ?', id)
+      reservations = find_reservations('Machine', machine_ids)
     when 'training'
-      reservations = Reservation.where(reservable_type: 'Training', reservable_id: training_ids)
-                                .joins(:slots)
-                                .where('slots.availability_id = ?', id)
+      reservations = find_reservations('Training', training_ids)
     when 'space'
-      reservations = Reservation.where(reservable_type: 'Space', reservable_id: space_ids)
-                                .joins(:slots)
-                                .where('slots.availability_id = ?', id)
+      reservations = find_reservations('Space', space_ids)
     when 'event'
-      reservations = Reservation.where(reservable_type: 'Event', reservable_id: event&.id)
-                                .joins(:slots)
-                                .where('slots.availability_id = ?', id)
+      reservations = find_reservations('Event', [event&.id])
     else
       Rails.logger.warn "[safe_destroy] Availability with unknown type #{available_type}"
       reservations = []
     end
     if reservations.size.zero?
       # this update may not call any rails callbacks, that's why we use direct SQL update
-      update_column(:destroying, true)
+      update_column(:destroying, true) # rubocop:disable Rails/SkipsModelValidations
       destroy
     else
       false
     end
+  end
+
+  # @param reservable_type [String]
+  # @param reservable_ids [Array<Integer>]
+  def find_reservations(reservable_type, reservable_ids)
+    Reservation.where(reservable_type: reservable_type, reservable_id: reservable_ids)
+               .joins(:slots)
+               .where(slots: { availability_id: id })
   end
 
   ## compute the total number of places over the whole space availability
@@ -97,7 +97,7 @@ class Availability < ApplicationRecord
   def title(filter = {})
     case available_type
     when 'machines'
-      return machines.to_ary.delete_if { |m| !filter[:machine_ids].include?(m.id) }.map(&:name).join(' - ') if filter[:machine_ids]
+      return machines.to_ary.delete_if { |m| filter[:machine_ids].exclude?(m.id) }.map(&:name).join(' - ') if filter[:machine_ids]
 
       machines.map(&:name).join(' - ')
     when 'event'

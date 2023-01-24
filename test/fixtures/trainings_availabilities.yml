@@ -33,3 +33,10 @@ trainings_availability_5:
   availability_id: 20
   created_at: 2020-07-22 10:09:41.841162000 Z
   updated_at: 2020-07-22 10:09:41.841162000 Z
+
+trainings_availability_6:
+  id: 6
+  training_id: 4
+  availability_id: 22
+  created_at: 2023-01-24 13:34:43.841240000 Z
+  updated_at: 2023-01-24 13:34:43.841240000 Z

@@ -52,4 +52,9 @@ accounting_data:
   class: AccountingWorker
   queue: default
 
+auto_cancel_tranings:
+  cron: "0 * * * *" # every day, every hour
+  class: TrainingAutoCancelWorker
+  queue: default
+
 <%= PluginRegistry.insert_code('yml.schedule') %>

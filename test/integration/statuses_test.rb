@@ -11,7 +11,7 @@ class StatusesTest < ActionDispatch::IntegrationTest
   test 'create a status' do
     post '/api/statuses',
          params: {
-           label: 'Open'
+           name: 'Open'
          }.to_json,
          headers: default_headers
 
@@ -24,13 +24,13 @@ class StatusesTest < ActionDispatch::IntegrationTest
     status = Status.where(id: res[:id]).first
     assert_not_nil status, 'status was not created in database'
 
-    assert_equal 'Open', res[:label]
+    assert_equal 'Open', res[:name]
   end
 
   test 'update a status' do
     patch '/api/statuses/1',
           params: {
-            label: 'Done'
+            name: 'Done'
           }.to_json,
           headers: default_headers
 
@@ -41,7 +41,7 @@ class StatusesTest < ActionDispatch::IntegrationTest
     # Check the status was updated
     res = json_response(response.body)
     assert_equal 1, res[:id]
-    assert_equal 'Done', res[:label]
+    assert_equal 'Done', res[:name]
   end
 
   test 'list all statuses' do
@@ -57,7 +57,7 @@ class StatusesTest < ActionDispatch::IntegrationTest
   end
 
   test 'delete a status' do
-    status = Status.create!(label: 'Gone too soon')
+    status = Status.create!(name: 'Gone too soon')
     delete "/api/statuses/#{status.id}"
     assert_response :success
     assert_empty response.body

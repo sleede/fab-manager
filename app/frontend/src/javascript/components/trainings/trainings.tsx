@@ -52,7 +52,7 @@ export const Trainings: React.FC<TrainingsProps> = ({ onError, onSuccess }) => {
   }, []);
 
   useEffect(() => {
-    TrainingAPI.index({ disabled: filter })
+    TrainingAPI.index(typeof filter === 'boolean' ? { disabled: filter } : {})
       .then(setTrainings)
       .catch(onError);
   }, [filter]);

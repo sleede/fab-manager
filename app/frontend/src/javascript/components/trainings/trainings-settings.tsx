@@ -98,12 +98,14 @@ export const TrainingsSettings: React.FC<TrainingsSettingsProps> = ({ onError, o
                       register={register}
                       rules={{ required: isActiveAutoCancellation, min: 0 }}
                       step={1}
+                      nullable
                       formState={formState}
                       label={t('app.admin.trainings_settings.automatic_cancellation_threshold')} />
               <FormInput id="trainings_auto_cancel_deadline"
                       type="number"
                       register={register}
                       rules={{ required: isActiveAutoCancellation, min: 1 }}
+                      nullable
                       step={1}
                       formState={formState}
                       label={t('app.admin.trainings_settings.automatic_cancellation_deadline')} />

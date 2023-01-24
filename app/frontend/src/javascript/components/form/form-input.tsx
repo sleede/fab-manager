@@ -50,6 +50,24 @@ export const FormInput = <TFieldValues extends FieldValues, TInputType>({ id, re
     }
   };
 
+  /**
+   * Parse the inputted value before saving it in the RHF state
+   */
+  const parseValue = (value: string) => {
+    if ([null, ''].includes(value) && nullable) {
+      return null;
+    } else {
+      if (type === 'number') {
+        const num: number = parseFloat(value);
+        if (Number.isNaN(num) && nullable) {
+          return null;
+        }
+        return num;
+      }
+      return value;
+    }
+  };
+
   // Compose classnames from props
   const classNames = [
     `${className || ''}`,
@@ -66,7 +84,7 @@ export const FormInput = <TFieldValues extends FieldValues, TInputType>({ id, re
           {...register(id as FieldPath<TFieldValues>, {
             ...rules,
             valueAsDate: type === 'date',
-            setValueAs: v => ([null, ''].includes(v) && nullable) ? null : (type === 'number' ? parseFloat(v) : v),
+            setValueAs: parseValue,
             value: defaultValue as FieldPathValue<TFieldValues, FieldPath<TFieldValues>>,
             onChange: (e) => { handleChange(e); }
           })}
