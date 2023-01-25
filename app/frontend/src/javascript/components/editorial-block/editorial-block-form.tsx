@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Control, FormState, UseFormRegister, UseFormGetValues } from 'react-hook-form';
+import { Control, FormState, UseFormRegister } from 'react-hook-form';
 import { FormSwitch } from '../form/form-switch';
 import { FormRichText } from '../form/form-rich-text';
 import { FormInput } from '../form/form-input';
@@ -13,8 +13,7 @@ interface EditorialBlockFormProps {
   control: Control<Record<SettingName, SettingValue>>,
   formState: FormState<Record<SettingName, SettingValue>>,
   info?: string
-  keys: Record<EditorialKeys, SettingName>,
-  getValues?: UseFormGetValues<Record<SettingName, SettingValue>>,
+  keys: Record<EditorialKeys, SettingName>
 }
 
 // regular expression to validate the input fields
@@ -23,7 +22,7 @@ const urlRegex = /^(https?:\/\/)([^.]+)\.(.{2,30})(\/.*)*\/?$/;
 /**
  * Allows to create a formatted text and optional cta button in a form block, to be included in a resource form managed by react-hook-form.
  */
-export const EditorialBlockForm: React.FC<EditorialBlockFormProps> = ({ register, control, formState, info, keys, getValues }) => {
+export const EditorialBlockForm: React.FC<EditorialBlockFormProps> = ({ register, control, formState, info, keys }) => {
   const { t } = useTranslation('admin');
 
   const [isActiveTextBlock, setIsActiveTextBlock] = useState<boolean>(false);
@@ -72,7 +71,6 @@ export const EditorialBlockForm: React.FC<EditorialBlockFormProps> = ({ register
             <FormInput id={keys.cta_label}
                       register={register}
                       formState={formState}
-                      getValues={getValues}
                       rules={{ required: { value: isActiveCta, message: t('app.admin.editorial_block_form.label_is_required') } }}
                       maxLength={40}
                       label={t('app.admin.editorial_block_form.cta_label')} />
