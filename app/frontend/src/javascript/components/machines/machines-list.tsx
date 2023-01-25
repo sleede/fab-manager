@@ -11,6 +11,9 @@ import { MachineCard } from './machine-card';
 import { MachinesFilters } from './machines-filters';
 import { User } from '../../models/user';
 import { EditorialBlock } from '../editorial-block/editorial-block';
+import SettingAPI from '../../api/setting';
+import SettingLib from '../../lib/setting';
+import { SettingValue, machineBannerSettings } from '../../models/setting';
 
 declare const Application: IApplication;
 
@@ -41,6 +44,17 @@ export const MachinesList: React.FC<MachinesListProps> = ({ onError, onSuccess, 
     category: null
   });
 
+  const [banner, setBanner] = useState<Record<string, SettingValue>>({});
+
+  // fetch Banner text and button from API
+  const fetchBanner = async () => {
+    SettingAPI.query(machineBannerSettings)
+      .then(settings => {
+        setBanner({ ...SettingLib.bulkMapToObject(settings) });
+      })
+      .catch(onError);
+  };
+
   // retrieve the full list of machines on component mount
   useEffect(() => {
     MachineAPI.index()
@@ -49,6 +63,7 @@ export const MachinesList: React.FC<MachinesListProps> = ({ onError, onSuccess, 
     MachineCategoryAPI.index()
       .then(data => setMachineCategories(data))
       .catch(e => onError(e));
+    fetchBanner();
   }, []);
 
   // filter the machines shown when the full list was retrieved
@@ -96,12 +111,11 @@ export const MachinesList: React.FC<MachinesListProps> = ({ onError, onSuccess, 
 
   return (
     <div className="machines-list">
-      {/*  TODO: Condition to display editorial block */}
-      {false &&
+      {banner.machines_banner_active &&
         <EditorialBlock
-          text={'<h3>Lorem ipsum dolor sit amet</h3><p>Consectetur adipiscing elit. In eget eros sed odio tristique cursus. Quisque pretium tortor vel lorem tempor, eu egestas lorem laoreet. Pellentesque arcu lectus, rutrum eu volutpat nec, luctus eget sapien. Sed ligula tortor, blandit eget purus sit sed.</p>'}
-          cta={'Pif paf pouf'}
-          url={'https://www.plop.io'} />
+          text={banner.machines_banner_text}
+          cta={banner.machines_banner_cta_active && banner.machines_banner_cta_label}
+          url={banner.machines_banner_cta_active && banner.machines_banner_cta_url} />
       }
       <MachinesFilters onFilterChangedBy={handleFilterChangedBy} machineCategories={machineCategories}/>
       <div className="all-machines">

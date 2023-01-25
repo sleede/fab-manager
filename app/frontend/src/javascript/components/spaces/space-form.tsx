@@ -94,6 +94,7 @@ export const SpaceForm: React.FC<SpaceFormProps> = ({ action, space, onError, on
             <FormRichText control={control}
                           id="description"
                           rules={{ required: true }}
+                          formState={formState}
                           label={t('app.admin.space_form.description')}
                           limit={null}
                           heading bulletList blockquote link video image />

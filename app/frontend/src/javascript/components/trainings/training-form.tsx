@@ -113,6 +113,7 @@ export const TrainingForm: React.FC<TrainingFormProps> = ({ action, training, on
             <FormRichText control={control}
                           id="description"
                           rules={{ required: true }}
+                          formState={formState}
                           label={t('app.admin.training_form.description')}
                           limit={null}
                           heading bulletList blockquote link />

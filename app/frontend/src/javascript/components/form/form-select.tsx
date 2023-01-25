@@ -9,7 +9,7 @@ import { FormControlledComponent } from '../../models/form-component';
 import { AbstractFormItem, AbstractFormItemProps } from './abstract-form-item';
 import { SelectOption } from '../../models/select';
 
-interface FormSelectProps<TFieldValues, TContext extends object, TOptionValue, TOptionLabel> extends FormControlledComponent<TFieldValues, TContext>, AbstractFormItemProps<TFieldValues> {
+type FormSelectProps<TFieldValues, TContext extends object, TOptionValue, TOptionLabel> = FormControlledComponent<TFieldValues, TContext> & AbstractFormItemProps<TFieldValues> & {
   options: Array<SelectOption<TOptionValue, TOptionLabel>>,
   valueDefault?: TOptionValue,
   onChange?: (value: TOptionValue) => void,

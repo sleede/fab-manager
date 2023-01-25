@@ -254,7 +254,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
 
       <section>
         <header>
-          <p className="title">{t('app.admin.store.product_form.assigning_machines')}</p>
+          <p className="title" role="heading">{t('app.admin.store.product_form.assigning_machines')}</p>
           <p className="description">{t('app.admin.store.product_form.assigning_machines_info')}</p>
         </header>
         <div className="content">

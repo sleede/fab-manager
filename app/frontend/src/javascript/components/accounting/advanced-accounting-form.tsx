@@ -24,9 +24,10 @@ export const AdvancedAccountingForm = <TFieldValues extends FieldValues>({ regis
   }, []);
 
   return (<>
+    <p>toto</p>
     {isEnabled && <>
       <header>
-        <p className="title">{t('app.admin.advanced_accounting_form.title')}</p>
+        <p className="title" role="heading">{t('app.admin.advanced_accounting_form.title')}</p>
       </header>
       <div className="content">
         <FormInput register={register}

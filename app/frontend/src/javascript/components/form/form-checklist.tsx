@@ -9,7 +9,7 @@ import { AbstractFormItem, AbstractFormItemProps } from './abstract-form-item';
 import { FabButton } from '../base/fab-button';
 import { ChecklistOption } from '../../models/select';
 
-interface FormChecklistProps<TFieldValues, TOptionValue, TContext extends object> extends FormControlledComponent<TFieldValues, TContext>, AbstractFormItemProps<TFieldValues> {
+type FormChecklistProps<TFieldValues, TOptionValue, TContext extends object> = FormControlledComponent<TFieldValues, TContext> & AbstractFormItemProps<TFieldValues> & {
   defaultValue?: Array<TOptionValue>,
   options: Array<ChecklistOption<TOptionValue>>,
   onChange?: (values: Array<TOptionValue>) => void,

@@ -33,7 +33,7 @@ export const ChangePassword = <TFieldValues extends FieldValues>({ register, onE
   const [isConfirmedPassword, setIsConfirmedPassword] = React.useState<boolean>(false);
   const [isPrivileged, setIsPrivileged] = React.useState<boolean>(false);
 
-  const { handleSubmit, register: passwordRegister } = useForm<{ password: string }>();
+  const { handleSubmit, register: passwordRegister, formState: passwordFormState } = useForm<{ password: string }>();
 
   useEffect(() => {
     MemberAPI.current().then(operator => {
@@ -106,6 +106,7 @@ export const ChangePassword = <TFieldValues extends FieldValues>({ register, onE
                      type="password"
                      register={passwordRegister}
                      rules={{ required: true }}
+                     formState={passwordFormState}
                      label={t('app.shared.change_password.confirm_current')} />
           <FabButton type="submit">
             {t('app.shared.change_password.confirm')}

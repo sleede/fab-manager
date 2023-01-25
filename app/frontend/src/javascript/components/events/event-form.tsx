@@ -186,6 +186,7 @@ export const EventForm: React.FC<EventFormProps> = ({ action, event, onError, on
             <FormRichText control={control}
                           id="description"
                           rules={{ required: true }}
+                          formState={formState}
                           label={t('app.admin.event_form.description')}
                           limit={null}
                           heading bulletList blockquote link video image />
@@ -291,11 +292,13 @@ export const EventForm: React.FC<EventFormProps> = ({ action, event, onError, on
                               control={control}
                               id={`event_price_categories_attributes.${index}.price_category_id`}
                               rules={{ required: true }}
+                              formState={formState}
                               label={t('app.admin.event_form.fare_class')} />
                   <FormInput id={`event_price_categories_attributes.${index}.amount`}
                             register={register}
                             type="number"
                             rules={{ required: true }}
+                            formState={formState}
                             label={t('app.admin.event_form.price')}
                             addOn={FormatLib.currencySymbol()} />
                   <FabButton className="remove-price is-main" onClick={() => handlePriceRemove(price, index)} icon={<Trash size={20} />} />

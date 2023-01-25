@@ -2,7 +2,7 @@ import { UseFormRegister, Validate } from 'react-hook-form';
 import { Control, FormState } from 'react-hook-form/dist/types/form';
 
 export type ruleTypes = {
-  required?: boolean | string,
+  required?: boolean | string | { value: boolean, message: string },
   pattern?: RegExp | { value: RegExp, message: string },
   minLength?: number | { value: number, message: string },
   maxLength?: number | { value: number, message: string },
@@ -16,17 +16,21 @@ export type ruleTypes = {
  * Automatic error handling is done through the `formState` prop.
  * Even for manual error/warning, the `formState` prop is required, because it is used to determine if the field is dirty.
  */
-export interface AbstractFormComponent<TFieldValues> {
+interface AbstractFormComponentCommon {
   error?: { message: string },
-  warning?: { message: string },
-  rules?: ruleTypes,
-  formState?: FormState<TFieldValues>;
+  warning?: { message: string }
 }
 
-export interface FormComponent<TFieldValues> extends AbstractFormComponent<TFieldValues> {
+type AbstractFormComponentRules<TFieldValues> =
+  { rules: ruleTypes, formState: FormState<TFieldValues> } |
+  { rules?: never, formState?: FormState<TFieldValues> };
+
+export type AbstractFormComponent<TFieldValues> = AbstractFormComponentCommon & AbstractFormComponentRules<TFieldValues>;
+
+export type FormComponent<TFieldValues> = AbstractFormComponent<TFieldValues> & {
   register: UseFormRegister<TFieldValues>,
 }
 
-export interface FormControlledComponent<TFieldValues, TContext extends object> extends AbstractFormComponent<TFieldValues> {
+export type FormControlledComponent<TFieldValues, TContext extends object> = AbstractFormComponent<TFieldValues> & {
   control: Control<TFieldValues, TContext>
 }

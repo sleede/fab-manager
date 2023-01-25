@@ -1,5 +1,5 @@
 import { UseFormRegister } from 'react-hook-form';
-import { Control } from 'react-hook-form/dist/types/form';
+import { Control, FormState } from 'react-hook-form/dist/types/form';
 import { FieldValues } from 'react-hook-form/dist/types/fields';
 import { FormInput } from '../form/form-input';
 import { FormSelect } from '../form/form-select';
@@ -10,13 +10,14 @@ interface Oauth2DataMappingFormProps<TFieldValues, TContext extends object> {
   register: UseFormRegister<TFieldValues>,
   control: Control<TFieldValues, TContext>,
   index: number,
+  formState: FormState<TFieldValues>
 }
 
 /**
  * Partial form to set the data mapping for an OAuth 2.0 provider.
  * The data mapping is the way to bind data from the authentication provider API to the Fab-manager's database
  */
-export const Oauth2DataMappingForm = <TFieldValues extends FieldValues, TContext extends object>({ register, control, index }: Oauth2DataMappingFormProps<TFieldValues, TContext>) => {
+export const Oauth2DataMappingForm = <TFieldValues extends FieldValues, TContext extends object>({ register, control, index, formState }: Oauth2DataMappingFormProps<TFieldValues, TContext>) => {
   const { t } = useTranslation('admin');
 
   return (
@@ -24,15 +25,19 @@ export const Oauth2DataMappingForm = <TFieldValues extends FieldValues, TContext
       <FormInput id={`auth_provider_mappings_attributes.${index}.api_endpoint`}
                  register={register}
                  rules={{ required: true }}
+                 formState={formState}
                  placeholder="/api/resource..."
                  label={t('app.admin.authentication.oauth2_data_mapping_form.api_endpoint_url')} />
       <FormSelect id={`auth_provider_mappings_attributes.${index}.api_data_type`}
                   options={[{ label: 'JSON', value: 'json' }]}
-                  control={control} rules={{ required: true }}
+                  control={control}
+                  rules={{ required: true }}
+                  formState={formState}
                   label={t('app.admin.authentication.oauth2_data_mapping_form.api_type')} />
       <FormInput id={`auth_provider_mappings_attributes.${index}.api_field`}
                  register={register}
                  rules={{ required: true }}
+                 formState={formState}
                  placeholder="field_name..."
                  tooltip={<HtmlTranslate trKey="app.admin.authentication.oauth2_data_mapping_form.api_field_help_html" />}
                  label={t('app.admin.authentication.oauth2_data_mapping_form.api_field')} />

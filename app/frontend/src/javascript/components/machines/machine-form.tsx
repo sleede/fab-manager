@@ -127,12 +127,14 @@ export const MachineForm: React.FC<MachineFormProps> = ({ action, machine, onErr
             <FormRichText control={control}
                           id="description"
                           rules={{ required: true }}
+                          formState={formState}
                           label={t('app.admin.machine_form.description')}
                           limit={null}
                           heading bulletList blockquote link image video />
             <FormRichText control={control}
                           id="spec"
                           rules={{ required: true }}
+                          formState={formState}
                           label={t('app.admin.machine_form.technical_specifications')}
                           limit={null}
                           heading bulletList link />

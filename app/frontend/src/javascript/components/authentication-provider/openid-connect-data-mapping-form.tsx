@@ -3,7 +3,7 @@ import { FieldValues } from 'react-hook-form/dist/types/fields';
 import { FormInput } from '../form/form-input';
 import { HtmlTranslate } from '../base/html-translate';
 import { useTranslation } from 'react-i18next';
-import { UnpackNestedValue, UseFormSetValue } from 'react-hook-form/dist/types/form';
+import { UnpackNestedValue, UseFormSetValue, FormState } from 'react-hook-form/dist/types/form';
 import { FabButton } from '../base/fab-button';
 import { FieldPathValue } from 'react-hook-form/dist/types/path';
 import { AuthenticationProviderMapping } from '../../models/authentication-provider';
@@ -13,13 +13,14 @@ interface OpenidConnectDataMappingFormProps<TFieldValues> {
   setValue: UseFormSetValue<TFieldValues>,
   currentFormValues: Array<AuthenticationProviderMapping>,
   index: number,
+  formState: FormState<TFieldValues>
 }
 
 /**
  * Partial form to set the data mapping for an OpenID Connect provider.
  * The data mapping is the way to bind data from the OIDC claims to the Fab-manager's database
  */
-export const OpenidConnectDataMappingForm = <TFieldValues extends FieldValues>({ register, setValue, currentFormValues, index }: OpenidConnectDataMappingFormProps<TFieldValues>) => {
+export const OpenidConnectDataMappingForm = <TFieldValues extends FieldValues>({ register, setValue, currentFormValues, index, formState }: OpenidConnectDataMappingFormProps<TFieldValues>) => {
   const { t } = useTranslation('admin');
 
   const standardConfiguration = {
@@ -65,15 +66,18 @@ export const OpenidConnectDataMappingForm = <TFieldValues extends FieldValues>({
                  type="hidden"
                  register={register}
                  rules={{ required: true }}
+                 formState={formState}
                  defaultValue="user_info" />
       <FormInput id={`auth_provider_mappings_attributes.${index}.api_data_type`}
                  type="hidden"
                  register={register}
                  rules={{ required: true }}
+                 formState={formState}
                  defaultValue="json" />
       <FormInput id={`auth_provider_mappings_attributes.${index}.api_field`}
                  register={register}
                  rules={{ required: true }}
+                 formState={formState}
                  placeholder="claim..."
                  tooltip={<HtmlTranslate trKey="app.admin.authentication.openid_connect_data_mapping_form.api_field_help_html" />}
                  label={t('app.admin.authentication.openid_connect_data_mapping_form.api_field')} />

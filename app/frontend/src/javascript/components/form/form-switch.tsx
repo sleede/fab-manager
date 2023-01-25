@@ -5,7 +5,7 @@ import { Controller, Path } from 'react-hook-form';
 import Switch from 'react-switch';
 import { AbstractFormItem, AbstractFormItemProps } from './abstract-form-item';
 
-interface FormSwitchProps<TFieldValues, TContext extends object> extends FormControlledComponent<TFieldValues, TContext>, AbstractFormItemProps<TFieldValues> {
+type FormSwitchProps<TFieldValues, TContext extends object> = FormControlledComponent<TFieldValues, TContext> & AbstractFormItemProps<TFieldValues> & {
   defaultValue?: boolean,
   onChange?: (value: boolean) => void,
 }

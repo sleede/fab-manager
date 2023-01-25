@@ -33,7 +33,7 @@ const PrepaidPacksPanel: React.FC<PrepaidPacksPanelProps> = ({ user, onError }) 
   const [selectedMachine, setSelectedMachine] = useState<Machine>(null);
   const [packsModal, setPacksModal] = useState<boolean>(false);
 
-  const { handleSubmit, control } = useForm<{ machine_id: number }>();
+  const { handleSubmit, control, formState } = useForm<{ machine_id: number }>();
 
   useEffect(() => {
     UserPackAPI.index({ user_id: user.id })
@@ -125,7 +125,7 @@ const PrepaidPacksPanel: React.FC<PrepaidPacksPanelProps> = ({ user, onError }) 
       <div className='prepaid-packs-cta'>
         <p>{t('app.logged.dashboard.reservations_dashboard.prepaid_packs_panel.cta_info')}</p>
         <form onSubmit={handleSubmit(onBuyPack)}>
-          <FormSelect options={buildMachinesOptions(machines)} control={control} id="machine_id" rules={{ required: true }} label={t('app.logged.dashboard.reservations_dashboard.prepaid_packs_panel.select_machine')} />
+          <FormSelect options={buildMachinesOptions(machines)} control={control} id="machine_id" rules={{ required: true }} formState={formState} label={t('app.logged.dashboard.reservations_dashboard.prepaid_packs_panel.select_machine')} />
           <FabButton className='is-black' type="submit">
             {t('app.logged.dashboard.reservations_dashboard.prepaid_packs_panel.cta_button')}
           </FabButton>

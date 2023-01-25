@@ -161,41 +161,49 @@ export const OpenidConnectForm = <TFieldValues extends FieldValues, TContext ext
                  placeholder="https://sso.exemple.com/my-account"
                  label={t('app.admin.authentication.openid_connect_form.profile_edition_url')}
                  tooltip={t('app.admin.authentication.openid_connect_form.profile_edition_url_help')}
-                 rules={{ required: false, pattern: urlRegex }} />
+                 rules={{ required: false, pattern: urlRegex }}
+                 formState={formState} />
       <h4>{t('app.admin.authentication.openid_connect_form.client_options')}</h4>
       <FormInput id="providable_attributes.client__identifier"
                  label={t('app.admin.authentication.openid_connect_form.client__identifier')}
                  rules={{ required: true }}
+                 formState={formState}
                  register={register} />
       <FormInput id="providable_attributes.client__secret"
                  label={t('app.admin.authentication.openid_connect_form.client__secret')}
                  rules={{ required: true }}
+                 formState={formState}
                  register={register} />
       {!currentFormValues?.discovery && <div className="client-options-without-discovery">
         <FormInput id="providable_attributes.client__authorization_endpoint"
                    label={t('app.admin.authentication.openid_connect_form.client__authorization_endpoint')}
                    placeholder="/authorize"
                    rules={{ required: !currentFormValues?.discovery, pattern: endpointRegex }}
+                   formState={formState}
                    register={register} />
         <FormInput id="providable_attributes.client__token_endpoint"
                    label={t('app.admin.authentication.openid_connect_form.client__token_endpoint')}
                    placeholder="/token"
                    rules={{ required: !currentFormValues?.discovery, pattern: endpointRegex }}
+                   formState={formState}
                    register={register} />
         <FormInput id="providable_attributes.client__userinfo_endpoint"
                    label={t('app.admin.authentication.openid_connect_form.client__userinfo_endpoint')}
                    placeholder="/userinfo"
                    rules={{ required: !currentFormValues?.discovery, pattern: endpointRegex }}
+                   formState={formState}
                    register={register} />
         {currentFormValues?.client_auth_method === 'jwks' && <FormInput id="providable_attributes.client__jwks_uri"
                    label={t('app.admin.authentication.openid_connect_form.client__jwks_uri')}
                    rules={{ required: currentFormValues.client_auth_method === 'jwks', pattern: endpointRegex }}
+                   formState={formState}
                    placeholder="/jwk"
                    register={register} />}
         <FormInput id="providable_attributes.client__end_session_endpoint"
                    label={t('app.admin.authentication.openid_connect_form.client__end_session_endpoint')}
                    tooltip={t('app.admin.authentication.openid_connect_form.client__end_session_endpoint_help')}
                    rules={{ pattern: endpointRegex }}
+                   formState={formState}
                    register={register} />
       </div>}
     </div>

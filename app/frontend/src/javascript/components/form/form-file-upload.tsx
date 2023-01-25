@@ -13,7 +13,7 @@ import { FilePdf, Trash } from 'phosphor-react';
 import { FileType } from '../../models/file';
 import FileUploadLib from '../../lib/file-upload';
 
-interface FormFileUploadProps<TFieldValues> extends FormComponent<TFieldValues>, AbstractFormItemProps<TFieldValues> {
+type FormFileUploadProps<TFieldValues> = FormComponent<TFieldValues> & AbstractFormItemProps<TFieldValues> & {
   setValue: UseFormSetValue<TFieldValues>,
   defaultFile?: FileType,
   accept?: string,

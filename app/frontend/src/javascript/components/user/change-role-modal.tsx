@@ -40,7 +40,7 @@ type selectGroupOption = { value: number, label: string };
  */
 export const ChangeRoleModal: React.FC<ChangeRoleModalProps> = ({ isOpen, toggleModal, user, onSuccess, onError }) => {
   const { t } = useTranslation('admin');
-  const { control, handleSubmit } = useForm<RoleFormData>({ defaultValues: { role: user.role, groupId: user.group_id } });
+  const { control, handleSubmit, formState } = useForm<RoleFormData>({ defaultValues: { role: user.role, groupId: user.group_id } });
 
   const [groups, setGroups] = useState<Array<Group>>([]);
 
@@ -104,14 +104,16 @@ export const ChangeRoleModal: React.FC<ChangeRoleModalProps> = ({ isOpen, toggle
                     control={control}
                     id="role"
                     label={t('app.admin.change_role_modal.new_role')}
-                    rules={{ required: true }} />
+                    rules={{ required: true }}
+                    formState={formState} />
         <FormSelect options={buildGroupsOptions()}
                     control={control}
                     disabled={!canChangeGroup()}
                     id="groupId"
                     label={t('app.admin.change_role_modal.new_group')}
                     tooltip={t('app.admin.change_role_modal.new_group_help')}
-                    rules={{ required: true }} />
+                    rules={{ required: true }}
+                    formState={formState} />
       </form>
     </FabModal>
   );

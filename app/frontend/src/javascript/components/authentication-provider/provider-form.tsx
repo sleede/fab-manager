@@ -99,6 +99,7 @@ export const ProviderForm: React.FC<ProviderFormProps> = ({ action, provider, on
                  register={register}
                  disabled={action === 'update'}
                  rules={{ required: true }}
+                 formState={formState}
                  label={t('app.admin.authentication.provider_form.name')} />
       <FormSelect id="providable_type"
                   control={control}
@@ -106,9 +107,10 @@ export const ProviderForm: React.FC<ProviderFormProps> = ({ action, provider, on
                   label={t('app.admin.authentication.provider_form.authentication_type')}
                   onChange={onProvidableTypeChange}
                   disabled={action === 'update'}
-                  rules={{ required: true }} />
+                  rules={{ required: true }}
+                  formState={formState} />
       {providableType === 'DatabaseProvider' && <DatabaseForm register={register} />}
-      {providableType === 'OAuth2Provider' && <Oauth2Form register={register} strategyName={strategyName} />}
+      {providableType === 'OAuth2Provider' && <Oauth2Form register={register} strategyName={strategyName} formState={formState} />}
       {providableType === 'OpenIdConnectProvider' && <OpenidConnectForm register={register}
                                                                         control={control}
                                                                         currentFormValues={output.providable_attributes as OpenIdConnectProvider}
@@ -116,6 +118,7 @@ export const ProviderForm: React.FC<ProviderFormProps> = ({ action, provider, on
                                                                         setValue={setValue} />}
       {providableType && providableType !== 'DatabaseProvider' && <DataMappingForm register={register}
                                                                                    control={control}
+                                                                                   formState={formState}
                                                                                    providerType={providableType}
                                                                                    setValue={setValue}
                                                                                    currentFormValues={output.auth_provider_mappings_attributes as Array<AuthenticationProviderMapping>} />}

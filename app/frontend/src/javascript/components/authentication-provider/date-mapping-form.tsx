@@ -1,17 +1,18 @@
 import { FieldValues } from 'react-hook-form/dist/types/fields';
 import { useTranslation } from 'react-i18next';
 import { FormSelect } from '../form/form-select';
-import { Control } from 'react-hook-form/dist/types/form';
+import { Control, FormState } from 'react-hook-form/dist/types/form';
 
 export interface DateMappingFormProps<TFieldValues, TContext extends object> {
   control: Control<TFieldValues, TContext>,
   fieldMappingId: number,
+  formState: FormState<TFieldValues>
 }
 
 /**
  * Partial form for mapping an internal date field to an external API.
  */
-export const DateMappingForm = <TFieldValues extends FieldValues, TContext extends object>({ control, fieldMappingId }: DateMappingFormProps<TFieldValues, TContext>) => {
+export const DateMappingForm = <TFieldValues extends FieldValues, TContext extends object>({ control, fieldMappingId, formState }: DateMappingFormProps<TFieldValues, TContext>) => {
   const { t } = useTranslation('admin');
 
   // available date formats
@@ -44,6 +45,7 @@ export const DateMappingForm = <TFieldValues extends FieldValues, TContext exten
       <FormSelect id={`auth_provider_mappings_attributes.${fieldMappingId}.transformation.format`}
                   control={control}
                   rules={{ required: true }}
+                  formState={formState}
                   options={dateFormats}
                   label={t('app.admin.authentication.date_mapping_form.date_format')} />
     </div>

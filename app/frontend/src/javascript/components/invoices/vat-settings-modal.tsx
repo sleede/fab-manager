@@ -38,7 +38,7 @@ enableMapSet();
 export const VatSettingsModal: React.FC<VatSettingsModalProps> = ({ isOpen, toggleModal, onError, onSuccess }) => {
   const { t } = useTranslation('admin');
 
-  const { handleSubmit, reset, control, register } = useForm<Record<SettingName, SettingValue>>();
+  const { handleSubmit, reset, control, register, formState } = useForm<Record<SettingName, SettingValue>>();
   const isActive = useWatch({ control, name: 'invoice_VAT-active' });
   const generalRate = useWatch({ control, name: 'invoice_VAT-rate' });
 
@@ -108,11 +108,13 @@ export const VatSettingsModal: React.FC<VatSettingsModalProps> = ({ isOpen, togg
               <FormInput register={register}
                          id="invoice_VAT-name"
                          rules={{ required: true }}
+                         formState={formState}
                          tooltip={t('app.admin.vat_settings_modal.VAT_name_help')}
                          label={t('app.admin.vat_settings_modal.VAT_name')} />
               <FormInput register={register}
                          id="invoice_VAT-rate"
                          rules={{ required: true }}
+                         formState={formState}
                          tooltip={t('app.admin.vat_settings_modal.VAT_rate_help')}
                          type='number'
                          step={0.001}

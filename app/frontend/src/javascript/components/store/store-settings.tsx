@@ -31,6 +31,7 @@ export const StoreSettings: React.FC<StoreSettingsProps> = ({ onError, onSuccess
       .then(settings => {
         const data = SettingLib.bulkMapToObject(settings);
         reset(data);
+        console.log(data);
       })
       .catch(onError);
   }, []);
