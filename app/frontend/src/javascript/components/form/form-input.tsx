@@ -3,7 +3,7 @@ import * as React from 'react';
 import { FieldPathValue, UseFormGetValues } from 'react-hook-form';
 import { debounce as _debounce } from 'lodash';
 import { FieldValues } from 'react-hook-form/dist/types/fields';
-import { FieldPath } from 'react-hook-form/dist/types/path';
+import { Path, FieldPath } from 'react-hook-form/dist/types/path';
 import { FormComponent } from '../../models/form-component';
 import { AbstractFormItem, AbstractFormItemProps } from './abstract-form-item';
 
@@ -23,7 +23,7 @@ type FormInputProps<TFieldValues, TInputType> = FormComponent<TFieldValues> & Ab
   nullable?: boolean,
   ariaLabel?: string,
   maxLength?: number,
-  getValues?: UseFormGetValues<FieldValues>
+  getValues?: UseFormGetValues<TFieldValues>
 }
 
 /**
@@ -73,7 +73,7 @@ export const FormInput = <TFieldValues extends FieldValues, TInputType>({ id, re
   // If maxLength and getValues is provided, uses input ref to initiate the countdown of characters
   useEffect(() => {
     if (getValues && maxLength) {
-      setCharacterCount(getValues(id).length);
+      setCharacterCount(getValues(id as Path<TFieldValues>).length);
     }
   }, [maxLength, getValues]);
 

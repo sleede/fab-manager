@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { FieldValues } from 'react-hook-form/dist/types/fields';
 import { Control, FormState, UseFormRegister, UseFormGetValues } from 'react-hook-form';
 import { FormSwitch } from '../form/form-switch';
 import { FormRichText } from '../form/form-rich-text';
@@ -14,7 +13,7 @@ interface EditorialBlockFormProps {
   formState: FormState<Record<SettingName, SettingValue>>,
   info?: string
   keys: Record<EditorialKeys, SettingName>,
-  getValues?: UseFormGetValues<FieldValues>,
+  getValues?: UseFormGetValues<Record<SettingName, SettingValue>>,
 }
 
 // regular expression to validate the input fields
@@ -23,7 +22,7 @@ const urlRegex = /^(https?:\/\/)([^.]+)\.(.{2,30})(\/.*)*\/?$/;
 /**
  * Allows to create a formatted text and optional cta button in a form block, to be included in a resource form managed by react-hook-form.
  */
-export const EditorialBlockForm = <TFieldValues extends FieldValues>({ register, control, formState, info, keys, getValues }: EditorialBlockFormProps<TFieldValues>) => {
+export const EditorialBlockForm: React.FC<EditorialBlockFormProps> = ({ register, control, formState, info, keys, getValues }) => {
   const { t } = useTranslation('admin');
 
   const [isActiveTextBlock, setIsActiveTextBlock] = useState<boolean>(false);
