@@ -1,9 +1,9 @@
-import { ReactNode, useCallback, useState, useEffect } from 'react';
+import { ReactNode, useCallback, useState } from 'react';
 import * as React from 'react';
-import { FieldPathValue, UseFormGetValues } from 'react-hook-form';
+import { FieldPathValue } from 'react-hook-form';
 import { debounce as _debounce } from 'lodash';
 import { FieldValues } from 'react-hook-form/dist/types/fields';
-import { Path, FieldPath } from 'react-hook-form/dist/types/path';
+import { FieldPath } from 'react-hook-form/dist/types/path';
 import { FormComponent } from '../../models/form-component';
 import { AbstractFormItem, AbstractFormItemProps } from './abstract-form-item';
 
@@ -22,14 +22,13 @@ type FormInputProps<TFieldValues, TInputType> = FormComponent<TFieldValues> & Ab
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void,
   nullable?: boolean,
   ariaLabel?: string,
-  maxLength?: number,
-  getValues?: UseFormGetValues<TFieldValues>
+  maxLength?: number
 }
 
 /**
  * This component is a template for an input component to use within React Hook Form
  */
-export const FormInput = <TFieldValues extends FieldValues, TInputType>({ id, register, getValues, label, tooltip, defaultValue, icon, className, rules, disabled, type, addOn, addOnAction, addOnClassName, addOnAriaLabel, placeholder, error, warning, formState, step, onChange, debounce, accept, nullable = false, ariaLabel, maxLength }: FormInputProps<TFieldValues, TInputType>) => {
+export const FormInput = <TFieldValues extends FieldValues, TInputType>({ id, register, label, tooltip, defaultValue, icon, className, rules, disabled, type, addOn, addOnAction, addOnClassName, addOnAriaLabel, placeholder, error, warning, formState, step, onChange, debounce, accept, nullable = false, ariaLabel, maxLength }: FormInputProps<TFieldValues, TInputType>) => {
   const [characterCount, setCharacterCount] = useState<number>(0);
 
   /**
@@ -69,13 +68,6 @@ export const FormInput = <TFieldValues extends FieldValues, TInputType>({ id, re
       return value;
     }
   };
-
-  // If maxLength and getValues is provided, uses input ref to initiate the countdown of characters
-  useEffect(() => {
-    if (getValues && maxLength) {
-      setCharacterCount(getValues(id as Path<TFieldValues>).length);
-    }
-  }, [maxLength, getValues]);
 
   // Compose classnames from props
   const classNames = [
