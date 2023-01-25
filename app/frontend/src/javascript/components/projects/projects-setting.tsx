@@ -21,7 +21,7 @@ interface ProjectsSettingProps {
 */
 export const ProjectsSetting: React.FC<ProjectsSettingProps> = ({ hasDescription = false, handleAdd, handleUpdate, handleDelete, options, optionType }) => {
   const { t } = useTranslation('admin');
-  const [isAdding, setIsAdding] = useState(false);
+  const [isAdding, setIsAdding] = useState<boolean>(false);
 
   // Shows form to add an option if it's not already here. Else, removes it.
   const toggleIsAdding = () => setIsAdding((prevState) => !prevState);

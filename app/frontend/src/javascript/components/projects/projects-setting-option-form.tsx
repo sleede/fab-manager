@@ -20,7 +20,7 @@ export const ProjectsSettingOptionForm: React.FC<ProjectsSettingOptionFormProps>
   const enteredOptionName = useRef(null);
   const enteredOptionDescription = useRef(null);
 
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState<string>('');
 
   /**
   * Builds up new or updated option based on User input and provides it to parent component.

@@ -19,7 +19,7 @@ interface ProjectsSettingOptionProps {
 export const ProjectsSettingOption: React.FC<ProjectsSettingOptionProps> = ({ option, handleDelete, handleUpdate, hasDescription }) => {
   const { t } = useTranslation('admin');
 
-  const [isEditing, setIsEditing] = useState(false);
+  const [isEditing, setIsEditing] = useState<boolean>(false);
 
   // If option is in display mode, sets it in editing mode, and vice-versa.
   const toggleIsEditing = () => setIsEditing(prevState => !prevState);

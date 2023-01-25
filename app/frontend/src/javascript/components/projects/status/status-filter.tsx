@@ -22,15 +22,15 @@ interface StatusFilterProps {
 export const StatusFilter: React.FC<StatusFilterProps> = ({ currentStatusIndex, onError, onFilterChange }) => {
   const { t } = useTranslation('public');
   const defaultValue = { value: null, label: t('app.public.status_filter.all_statuses') };
-  const [statusesList, setStatusesList] = useState([]);
-  const [currentOption, setCurrentOption] = useState(defaultValue);
+  const [statusesList, setStatusesList] = useState<Array<Status>>([]);
+  const [currentOption, setCurrentOption] = useState<SelectOption<number>>(defaultValue);
 
   /**
   * From the statusesList (retrieved from API) and a default Value, generates an Array of options conform to react-select
   */
-  const buildOptions = (): Array<SelectOption<number|void>> => {
+  const buildOptions = (): Array<SelectOption<number, string>> => {
     const apiStatusesList = statusesList.map(status => {
-      return { value: status.id, label: status.label };
+      return { value: status.id, label: status.name };
     });
     return [defaultValue, ...apiStatusesList];
   };
@@ -42,17 +42,16 @@ export const StatusFilter: React.FC<StatusFilterProps> = ({ currentStatusIndex, 
   useEffect(() => {
     StatusAPI.index()
       .then((data) => {
-        const options = data.map(status => {
-          return { id: status.id, label: status.name };
-        });
-        setStatusesList(options);
+        setStatusesList(data);
       }).catch(onError);
   }, []);
 
-  // If currentStatusIndex is provided, set currentOption accordingly
+  // If currentStatusIndex is provided and match a status, set currentOption accordingly
   useEffect(() => {
-    const selectedOption = statusesList.find((status) => status.id === currentStatusIndex);
-    setCurrentOption(selectedOption || defaultValue);
+    const selectedStatus = statusesList.find((status) => status.id === currentStatusIndex);
+    if (selectedStatus) {
+      setCurrentOption({ value: selectedStatus.id, label: selectedStatus.name });
+    }
   }, [currentStatusIndex, statusesList]);
 
   /**

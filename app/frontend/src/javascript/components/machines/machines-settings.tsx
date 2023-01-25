@@ -24,7 +24,7 @@ interface MachinesSettingsProps {
  */
 export const MachinesSettings: React.FC<MachinesSettingsProps> = ({ onError, onSuccess, beforeSubmit }) => {
   const { t } = useTranslation('admin');
-  const { register, control, formState, handleSubmit, reset, getValues } = useForm();
+  const { register, control, formState, handleSubmit, reset, getValues } = useForm<Record<SettingName, SettingValue>>();
 
   /** Link Machines Banner Setting Names to generic keys expected by the Editorial Form */
   const bannerKeys: Record<EditorialKeys, SettingName> = {
