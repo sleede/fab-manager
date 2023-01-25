@@ -329,16 +329,15 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
 
         return Wallet.getWalletByUser({ user_id: $scope.ctrl.member.id }, function (wallet) {
           const amountToPay = helpers.getAmountToPay($scope.reserve.amountTotal, wallet.amount);
-          if ((AuthService.isAuthorized(['member']) && amountToPay > 0)
-            || (AuthService.isAuthorized('manager') && $scope.ctrl.member.id === $rootScope.currentUser.id && amountToPay > 0)) {
+          if ((AuthService.isAuthorized('member') && amountToPay > 0)
+            || (AuthService.isAuthorized(['manager', 'admin']) && $scope.ctrl.member.id === $rootScope.currentUser.id && amountToPay > 0)) {
             if (settingsPromise.online_payment_module !== 'true') {
               growl.error(_t('app.public.events_show.online_payment_disabled'));
             } else {
               return payOnline(reservation);
             }
           } else {
-            if (AuthService.isAuthorized('admin')
-              || (AuthService.isAuthorized('manager') && $scope.ctrl.member.id !== $rootScope.currentUser.id)
+            if (AuthService.isAuthorized(['manager', 'admin']) && $scope.ctrl.member.id !== $rootScope.currentUser.id
               || amountToPay === 0) {
               return payOnSite(reservation);
             }

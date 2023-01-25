@@ -1,6 +1,7 @@
 # Changelog Fab-manager
 
 - Fix a bug: updating plan prices
+- Fix a bug: admin cannot book an event for himself
 
 ## v5.6.6 2023 January 23
 
