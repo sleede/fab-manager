@@ -243,9 +243,12 @@ export const trainingSettings = [
   'trainings_invalidation_rule_period'
 ] as const;
 
-export const bannersSettings = [
+export const machineBannerSettings = [
+  'machines_banner_active',
   'machines_banner_text',
-  'machines_banner_button'
+  'machines_banner_cta_active',
+  'machines_banner_cta_label',
+  'machines_banner_cta_url'
 ] as const;
 
 export const allSettings = [
@@ -275,7 +278,7 @@ export const allSettings = [
   ...displaySettings,
   ...storeSettings,
   ...trainingSettings,
-  ...bannersSettings
+  ...machineBannerSettings
 ] as const;
 
 export type SettingName = typeof allSettings[number];

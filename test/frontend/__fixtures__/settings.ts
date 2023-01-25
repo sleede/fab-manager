@@ -749,16 +749,34 @@ export const settings: Array<Setting> = [
     localized: 'Nom de la TVA'
   },
   {
-    name: 'machines_banner_text',
-    value: 'false',
+    name: 'machines_banner_active',
+    value: 'true',
     last_update: '2022-12-23T14:39:12+0100',
-    localized: 'Text of the banner in Machines List'
+    localized: 'Custom banner is active'
   },
   {
-    name: 'machines_banner_button',
-    value: 'false',
+    name: 'machines_banner_text',
+    value: 'Test for machines Banner Content',
     last_update: '2022-12-23T14:39:12+0100',
-    localized: 'Button of the banner in Machines List'
+    localized: 'Text of the custom banner'
+  },
+  {
+    name: 'machines_banner_cta_active',
+    value: 'true',
+    last_update: '2022-12-23T14:39:12+0100',
+    localized: 'Custom banner has a button'
+  },
+  {
+    name: 'machines_banner_cta_label',
+    value: 'Test for machines Banner Button',
+    last_update: '2022-12-23T14:39:12+0100',
+    localized: 'Label'
+  },
+  {
+    name: 'machines_banner_cta_url',
+    value: 'https://www.sleede.com/',
+    last_update: '2022-12-23T14:39:12+0100',
+    localized: 'Url'
   }
 ];
 

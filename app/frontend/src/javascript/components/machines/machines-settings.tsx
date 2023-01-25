@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useEffect } from 'react';
 import { IApplication } from '../../models/application';
 import { Loader } from '../base/loader';
 import { react2angular } from 'react2angular';
@@ -6,28 +6,51 @@ import { ErrorBoundary } from '../base/error-boundary';
 import { useTranslation } from 'react-i18next';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { FabButton } from '../base/fab-button';
-import { EditorialBlockForm } from '../editorial-block/editorial-block-form';
+import { EditorialKeys, EditorialBlockForm } from '../editorial-block/editorial-block-form';
+import SettingAPI from '../../api/setting';
+import SettingLib from '../../lib/setting';
+import { SettingName, SettingValue, machineBannerSettings } from '../../models/setting';
 
 declare const Application: IApplication;
 
 interface MachinesSettingsProps {
   onError: (message: string) => void,
   onSuccess: (message: string) => void,
+  beforeSubmit?: (data: Record<SettingName, SettingValue>) => void,
 }
 
 /**
  * Machines settings
  */
-export const MachinesSettings: React.FC<MachinesSettingsProps> = () => {
+export const MachinesSettings: React.FC<MachinesSettingsProps> = ({ onError, onSuccess, beforeSubmit }) => {
   const { t } = useTranslation('admin');
-  const { register, control, formState, handleSubmit } = useForm();
+  const { register, control, formState, handleSubmit, reset, getValues } = useForm();
 
-  /**
-   * Callback triggered when the form is submitted: save the settings
-   */
-  const onSubmit: SubmitHandler<any> = (data) => {
-    console.log(data);
+  /** Link Machines Banner Setting Names to generic keys expected by the Editorial Form */
+  const bannerKeys: Record<EditorialKeys, SettingName> = {
+    active_text_block: 'machines_banner_active',
+    text_block: 'machines_banner_text',
+    active_cta: 'machines_banner_cta_active',
+    cta_label: 'machines_banner_cta_label',
+    cta_url: 'machines_banner_cta_url'
   };
+
+  /** Callback triggered when the form is submitted: save the settings */
+  const onSubmit: SubmitHandler<Record<SettingName, SettingValue>> = (data) => {
+    if (typeof beforeSubmit === 'function') beforeSubmit(data);
+    SettingAPI.bulkUpdate(SettingLib.objectToBulkMap(data)).then(() => {
+      onSuccess(t('app.admin.machines_settings.successfully_saved'));
+    }, reason => {
+      onError(reason);
+    });
+  };
+
+  /** On component mount, fetch existing Machines Banner Settings from API, and populate form with these values. */
+  useEffect(() => {
+    SettingAPI.query(machineBannerSettings)
+      .then(settings => reset(SettingLib.bulkMapToObject(settings)))
+      .catch(onError);
+  }, []);
 
   return (
     <div className="machines-settings">
@@ -40,6 +63,8 @@ export const MachinesSettings: React.FC<MachinesSettingsProps> = () => {
           <EditorialBlockForm register={register}
                               control={control}
                               formState={formState}
+                              getValues={getValues}
+                              keys={bannerKeys}
                               info={t('app.admin.machines_settings.generic_text_block_info')} />
         </div>
       </form>

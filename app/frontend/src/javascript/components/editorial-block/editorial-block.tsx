@@ -3,13 +3,14 @@ import { IApplication } from '../../models/application';
 import { Loader } from '../base/loader';
 import { react2angular } from 'react2angular';
 import { FabButton } from '../base/fab-button';
+import { SettingValue } from '../../models/setting';
 
 declare const Application: IApplication;
 
 interface EditorialBlockProps {
-  text: string,
-  cta?: string,
-  url?: string
+  text: SettingValue,
+  cta?: SettingValue,
+  url?: SettingValue
 }
 
 /**
@@ -18,12 +19,12 @@ interface EditorialBlockProps {
 export const EditorialBlock: React.FC<EditorialBlockProps> = ({ text, cta, url }) => {
   /** Link to url from props */
   const linkTo = (): void => {
-    window.location.href = url;
+    window.location.href = url as string;
   };
 
   return (
-    <div className={`editorial-block ${cta?.length > 25 ? 'long-cta' : ''}`}>
-      <div dangerouslySetInnerHTML={{ __html: text }}></div>
+    <div className={`editorial-block ${(cta as string)?.length > 25 ? 'long-cta' : ''}`}>
+      <div dangerouslySetInnerHTML={{ __html: text as string }}></div>
       {cta && <FabButton className='is-main' onClick={linkTo}>{cta}</FabButton>}
     </div>
   );
