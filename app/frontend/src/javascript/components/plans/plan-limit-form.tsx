@@ -55,13 +55,15 @@ export const PlanLimitForm = <TContext extends object> ({ control, formState }: 
         <div className='plan-limit-list'>
           <p className="title">{t('app.admin.plan_limit_form.by_categories')}</p>
           <div className="plan-limit-item">
-            <div>
-              <span>{t('app.admin.plan_limit_form.category')}</span>
-              <p>Plop</p>
-            </div>
-            <div>
-              <span>{t('app.admin.plan_limit_form.max_hours_per_day')}</span>
-              <p>5</p>
+            <div className="grp">
+              <div>
+                <span>{t('app.admin.plan_limit_form.category')}</span>
+                <p>Plop</p>
+              </div>
+              <div>
+                <span>{t('app.admin.plan_limit_form.max_hours_per_day')}</span>
+                <p>5</p>
+              </div>
             </div>
 
             <div className='actions'>
@@ -80,13 +82,15 @@ export const PlanLimitForm = <TContext extends object> ({ control, formState }: 
         <div className='plan-limit-list'>
           <p className="title">{t('app.admin.plan_limit_form.by_machine')}</p>
           <div className="plan-limit-item">
-            <div>
-              <span>{t('app.admin.plan_limit_form.machine')}</span>
-              <p>Pouet</p>
-            </div>
-            <div>
-              <span>{t('app.admin.plan_limit_form.max_hours_per_day')}</span>
-              <p>5</p>
+            <div className="grp">
+              <div>
+                <span>{t('app.admin.plan_limit_form.machine')}</span>
+                <p>Pouet</p>
+              </div>
+              <div>
+                <span>{t('app.admin.plan_limit_form.max_hours_per_day')}</span>
+                <p>5</p>
+              </div>
             </div>
 
             <div className='actions'>

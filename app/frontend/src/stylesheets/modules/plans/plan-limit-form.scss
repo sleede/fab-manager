@@ -58,6 +58,17 @@
             .delete-btn {background: var(--main) }
           }
         }
+
+        @media (min-width: 540px) {
+          .grp {
+            flex: 1;
+            display: flex;
+            justify-content: space-between;
+            & > * {
+              flex: 1;
+            }
+          }
+        }
       }
     }
   }
