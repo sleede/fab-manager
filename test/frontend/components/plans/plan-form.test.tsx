@@ -158,7 +158,7 @@ describe('PlanForm', () => {
     const plan = plans[1];
     const machine = machines[1];
     render(<PlanForm action="update" plan={plan} onError={onError} onSuccess={onSuccess} beforeSubmit={beforeSubmit} />);
-    await waitFor(() => screen.getByRole('combobox', { name: /app.admin.plan_pricing_form.copy_prices_from/ }));
+    await waitFor(() => screen.getByLabelText(new RegExp(machine.name)));
     // update machine price
     fireEvent.change(screen.getByLabelText(new RegExp(machine.name)), { target: { value: 42.42 } });
     // send the form
