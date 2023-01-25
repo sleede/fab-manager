@@ -1,5 +1,10 @@
 # Changelog Fab-manager
 
+## v5.6.7 2023 January 25
+
+- Fix a bug: updating plan prices
+- Fix a bug: admin cannot book an event for himself
+
 ## v5.6.6 2023 January 23
 
 - Add more context data to sentry reports
