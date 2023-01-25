@@ -5,6 +5,7 @@ import { Plan } from 'models/plan';
 import selectEvent from 'react-select-event';
 import userEvent from '@testing-library/user-event';
 import plans from '../../__fixtures__/plans';
+import machines from '../../__fixtures__/machines';
 import { tiptapEvent } from '../../__lib__/tiptap';
 
 describe('PlanForm', () => {
@@ -150,6 +151,31 @@ describe('PlanForm', () => {
     fireEvent.click(screen.getByRole('button', { name: /app.admin.partner_modal.create_partner/, hidden: true }));
     await waitFor(() => {
       expect(screen.getByText(/app.admin.plan_form.alert_partner_notification/)).toBeInTheDocument();
+    });
+  });
+
+  test('update plan prices', async () => {
+    const plan = plans[1];
+    const machine = machines[1];
+    render(<PlanForm action="update" plan={plan} onError={onError} onSuccess={onSuccess} beforeSubmit={beforeSubmit} />);
+    await waitFor(() => screen.getByRole('combobox', { name: /app.admin.plan_pricing_form.copy_prices_from/ }));
+    // update machine price
+    fireEvent.change(screen.getByLabelText(new RegExp(machine.name)), { target: { value: 42.42 } });
+    // send the form
+    fireEvent.click(screen.getByRole('button', { name: /app.admin.plan_form.ACTION_plan/ }));
+    await waitFor(() => {
+      const expected = {
+        prices_attributes: expect.arrayContaining([{
+          amount: 42.42,
+          duration: 60,
+          group_id: plan.group_id,
+          id: expect.any(Number),
+          plan_id: plan.id,
+          priceable_id: machine.id,
+          priceable_type: 'Machine'
+        }])
+      };
+      expect(beforeSubmit).toHaveBeenCalledWith(expect.objectContaining(expected));
     });
   });
 });

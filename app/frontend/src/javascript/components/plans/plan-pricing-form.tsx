@@ -73,7 +73,7 @@ export const PlanPricingForm = <TContext extends object>({ register, control, fo
                                   (price.priceable_type === 'Space' && spaces?.find(s => s.id === price.priceable_id));
     if (!item?.disabled) {
       return (
-        <div key={index}>
+        <div key={price.id}>
           <FormInput register={register}
                      id={`prices_attributes.${index}.id`}
                      formState={formState}

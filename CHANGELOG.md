@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- Fix a bug: updating plan prices
+
 ## v5.6.6 2023 January 23
 
 - Add more context data to sentry reports
