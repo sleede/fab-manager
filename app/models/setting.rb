@@ -219,11 +219,10 @@ class Setting < ApplicationRecord
     save && history_values.create(invoicing_profile: admin.invoicing_profile, value: val)
   end
 
-  ##
   # Return the value of the requested setting, if any.
-  # Usage: Setting.get('my_setting')
-  # @return {String|Boolean}
-  ##
+  # @example Setting.get('my_setting') #=> "foo"
+  # @param name [String]
+  # @return [String,Boolean]
   def self.get(name)
     res = find_by('LOWER(name) = ? ', name.downcase)&.value
 
@@ -234,20 +233,20 @@ class Setting < ApplicationRecord
     res
   end
 
-  ##
   # Create or update the provided setting with the given value
-  # Usage: Setting.set('my_setting', true)
+  # @example Setting.set('my_setting', true)
   # Optionally (but recommended when possible), the user updating the value can be provided as the third parameter
   # Eg.: Setting.set('my_setting', true, User.find_by(slug: 'admin'))
-  ##
+  # @param name [String]
+  # @param value [String,Boolean,Numeric,NilClass]
   def self.set(name, value, user = User.admins.first)
     setting = find_or_initialize_by(name: name)
     setting.save && setting.history_values.create(invoicing_profile: user.invoicing_profile, value: value.to_s)
   end
 
-  ##
   # Check if the given setting was set
-  ##
+  # @param name [String]
+  # @return [Boolean]
   def self.set?(name)
     !find_by(name: name)&.value.nil?
   end

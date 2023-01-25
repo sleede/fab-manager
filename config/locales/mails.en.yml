@@ -131,10 +131,11 @@ en:
         your_plan: "you plan"
         expires_in_7_days: "will expire in 7 days."
         to_renew_your_plan_follow_the_link: "Please, follow this link to renew your plan"
-    notify_admin_training_auto_cancelled:
-      subject: "A training was automatically cancelled"
+    notify_member_training_auto_cancelled:
+      subject: "Your training session was cancelled"
       body:
-        cancelled_training: "The %{TRAINING} training session scheduled for %{DATE}, from %{START} to %{END} has been automatically canceled due to an insufficient number of participants."
+        cancelled_training: "The %{TRAINING} training session scheduled for %{DATE}, from %{START} to %{END} has been canceled due to an insufficient number of participants."
+        auto_refund: "You were refunded on your wallet and a credit note should be available."
     notify_member_subscription_is_expired:
       subject: "Your subscription has expired"
       body:
@@ -146,6 +147,12 @@ en:
       subject: "A member subscription expires in 7 days"
       body:
         subscription_will_expire_html: "Subscription plan for user %{NAME} <strong><em>%{PLAN}</em></strong> will expire in 7 days."
+    notify_admin_training_auto_cancelled:
+      subject: "A training was automatically cancelled"
+      body:
+        cancelled_training: "The %{TRAINING} training session scheduled for %{DATE}, from %{START} to %{END} has been automatically canceled due to an insufficient number of participants."
+        auto_refund: "The members who have booked this training session were automatically refunded on their wallet and credit notes was generated."
+        manual_refund: "Please manually refund all members who have booked this training session and generate the credit notes."
     notify_admin_subscription_is_expired:
       subject: "A member subscription has expired"
       body:

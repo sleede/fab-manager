@@ -28,12 +28,21 @@ class TrainingService
               .find_each do |availability|
         next if availability.reservations.count >= training.auto_cancel_threshold
 
+        auto_refund = Setting.get('wallet_module')
+
         NotificationCenter.call type: 'notify_admin_training_auto_cancelled',
                                 receiver: User.admins_and_managers,
-                                attached_object: availability
+                                attached_object: availability,
+                                meta_data: { auto_refund: auto_refund }
 
         availability.slots_reservations.find_each do |sr|
+          NotificationCenter.call type: 'notify_member_training_auto_cancelled',
+                                  receiver: sr.reservation.user,
+                                  attached_object: sr,
+                                  meta_data: { auto_refund: auto_refund }
+
           sr.update(canceled_at: DateTime.current)
+          refund_after_cancel(sr.reservation) if auto_refund
         end
       end
     end
@@ -79,6 +88,14 @@ class TrainingService
 
       state = filters[:public_page] == 'false' ? [nil, false] : true
       trainings.where(public_page: state)
+    end
+
+    # @param reservation [Reservation]
+    def refund_after_cancel(reservation)
+      invoice_item = reservation.invoice_items.joins(:invoice).where(invoices: { type: nil }).first
+      service = WalletService.new(user: reservation.user, wallet: reservation.user.wallet)
+      transaction = service.credit(invoice_item.amount_after_coupon / 100.00)
+      service.create_avoir(transaction, DateTime.current, I18n.t('trainings.refund_for_auto_cancel')) if transaction
     end
   end
 end

@@ -180,6 +180,7 @@ en:
   trainings:
     i_ve_reserved: "I've reserved"
     completed: "Full"
+    refund_for_auto_cancel: "This training session was cancelled due to an insufficient number of participants."
   #error messages when updating an event
   events:
     error_deleting_reserved_price: "Unable to delete the requested price because it is associated with some reservations"
@@ -297,7 +298,9 @@ en:
       notify_admin_subscription_will_expire_in_7_days:
         USER_s_subscription_will_expire_in_7_days: "%{USER}'s subscription will expire in 7 days."
       notify_admin_training_auto_cancelled:
-        auto_cancelled_training: "TODO"
+        auto_cancelled_training: "The %{TRAINING} training session scheduled for %{DATE}, has been automatically canceled due to an insufficient number of participants."
+        auto_refund: "The members were automatically refunded on their wallet."
+        manual_refund: "Please refund each members."
       notify_admin_user_group_changed:
         user_NAME_changed_his_group_html: "User <strong><em>{NAME}</strong></em> changed group."  #messageFormat interpolation
       notify_admin_user_merged:
@@ -328,6 +331,9 @@ en:
         your_subscription_has_expired: "Your subscription has expired."
       notify_member_subscription_will_expire_in_7_days:
         your_subscription_will_expire_in_7_days: "Your subscription will expire in 7 days."
+      notify_member_training_auto_cancelled:
+        auto_cancelled_training: "The %{TRAINING} training session scheduled for %{DATE}, has been canceled due to an insufficient number of participants."
+        auto_refund: "You were refunded on your wallet."
       notify_partner_subscribed_plan:
         subscription_partner_PLAN_has_been_subscribed_by_USER_html: "Partner subscription <strong><em>%{PLAN}</em></strong> has been subscribed by <strong><em>%{USER}</strong></em>."
       notify_project_author_when_collaborator_valid:
