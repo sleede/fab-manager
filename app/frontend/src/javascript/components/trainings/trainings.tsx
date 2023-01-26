@@ -7,13 +7,13 @@ import { useTranslation } from 'react-i18next';
 import { FabButton } from '../base/fab-button';
 import Select from 'react-select';
 import { SelectOption } from '../../models/select';
-import { CalendarBlank, PencilSimple } from 'phosphor-react';
+import { CalendarBlank } from 'phosphor-react';
 import { useEffect, useState } from 'react';
 import type { Training } from '../../models/training';
 import type { Machine } from '../../models/machine';
 import TrainingAPI from '../../api/training';
 import MachineAPI from '../../api/machine';
-import { DestroyButton } from '../base/destroy-button';
+import { EditDestroyButtons } from '../base/edit-destroy-buttons';
 
 declare const Application: IApplication;
 
@@ -136,10 +136,17 @@ export const Trainings: React.FC<TrainingsProps> = ({ onError, onSuccess }) => {
                 <p>{training.name}</p>
               </div>
 
-              {(hasMachines(training) && <div className='machines'>
+              <div className="machines">
                 <span>{t('app.admin.trainings.associated_machines')}</span>
-                <p>{machinesNames(training.machine_ids)}</p>
-              </div>) || <div/>}
+                {(hasMachines(training) &&
+                  <p>{machinesNames(training.machine_ids)}</p>
+                ) || <p>---</p>}
+              </div>
+
+              <div className='capacity'>
+                <span>{t('app.admin.trainings.capacity')}</span>
+                <p>{training.nb_total_places || '---'}</p>
+              </div>
 
               <div className='cancel'>
                 <span>{t('app.admin.trainings.cancellation')}</span>
@@ -148,11 +155,6 @@ export const Trainings: React.FC<TrainingsProps> = ({ onError, onSuccess }) => {
                   <span>|</span>
                   {t('app.admin.trainings.cancellation_deadline', { DEADLINE: training.auto_cancel_deadline })}
                 </p>) || <p>---</p>}
-              </div>
-
-              <div className='capacity'>
-                <span>{t('app.admin.trainings.capacity')}</span>
-                <p>{training.nb_total_places}</p>
               </div>
 
               <div className='authorisation'>
@@ -171,17 +173,13 @@ export const Trainings: React.FC<TrainingsProps> = ({ onError, onSuccess }) => {
               </div>
 
               <div className='actions'>
-                <div className='grpBtn'>
-                  <FabButton className='edit-btn' onClick={() => toTrainingEdit(training)}>
-                    <PencilSimple size={20} weight="fill" />
-                  </FabButton>
-                  <DestroyButton onSuccess={onSuccess}
-                                 className="delete-btn"
-                                 onError={onError}
-                                 itemId={training.id}
-                                 itemType={t('app.admin.trainings.training')}
-                                 apiDestroy={TrainingAPI.destroy} />
-                </div>
+                <EditDestroyButtons className='grpBtn'
+                                    onError={onError}
+                                    onSuccess={onSuccess}
+                                    onEdit={() => toTrainingEdit(training)}
+                                    itemId={training.id}
+                                    itemType={t('app.admin.trainings.training')}
+                                    apiDestroy={TrainingAPI.destroy}/>
               </div>
             </div>
           ))}

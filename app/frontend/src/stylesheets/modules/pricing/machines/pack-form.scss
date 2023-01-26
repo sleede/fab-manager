@@ -7,4 +7,22 @@
       margin-left: 4px;
     }
   }
+
+  .duration {
+    margin-bottom: 1.6rem;
+    label {
+      @include text-sm;
+      cursor: pointer;
+
+      &::after {
+        content: "*";
+        margin-left: 0.5ch;
+        color: var(--alert);
+      }
+    }
+  }
+  .validity {
+    @include text-sm;
+    cursor: pointer;
+  }
 }

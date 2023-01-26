@@ -29,7 +29,7 @@
           <trainings-settings on-error="onError" on-success="onSuccess"></trainings-settings>
         </uib-tab>
         <uib-tab heading="{{ 'app.admin.trainings.all_trainings' | translate }}" index="0" class="manage-trainings">
-          <trainings on-error="onError" on-success="on-success"></trainings>
+          <trainings on-error="onError" on-success="onSuccess"></trainings>
 
           <div class="m-t m-b">
             <button type="button" class="btn btn-warning" ui-sref="app.admin.trainings_new" ng-show="isAuthorized('admin')">

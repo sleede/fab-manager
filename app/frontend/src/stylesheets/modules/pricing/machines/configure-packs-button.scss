@@ -22,10 +22,14 @@
   .popover-content {
     ul {
       padding-left: 19px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem 0;
 
       li {
         display: flex;
         justify-content: space-between;
+        align-items: center;
         &::before {
           content: '\f466';
           font-family: 'Font Awesome 5 Free';
@@ -37,12 +41,10 @@
           line-height: 24px;
         }
 
-        .pack-actions button {
-          min-height: unset;
-          font-size: 10px;
-          vertical-align: middle;
-          line-height: 10px;
-          height: auto;
+        .pack-actions {
+          overflow: hidden;
+          display: flex;
+          border-radius: var(--border-radius-sm);
         }
 
         &.disabled {

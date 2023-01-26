@@ -1,7 +1,7 @@
 en:
   app:
     admin:
-      destroy_button:
+      edit_destroy_buttons:
         deleted: "The {TYPE} was successfully deleted."
         unable_to_delete: "Unable to delete the {TYPE}: "
         delete_item: "Delete the {TYPE}"
@@ -681,6 +681,9 @@ en:
         no_packs: "No packs for now"
         pack_DURATION: "{DURATION} hours"
         delete_confirmation: "Are you sure you want to delete this prepaid pack? This won't be possible if the pack was already bought by users."
+        edit_pack: "Edit the pack"
+        confirm_changes: "Confirm changes"
+        pack_successfully_updated: "The prepaid pack was successfully updated."
       configure_extended_prices_button:
         extended_prices: "Extended prices"
         no_extended_prices: "No extended price for now"
@@ -704,10 +707,6 @@ en:
         new_pack_info: "A prepaid pack allows users to buy {TYPE, select, Machine{machine} Space{space} other{}} hours before booking any slots. These packs can provide discounts on volumes purchases."
         create_pack: "Create this pack"
         pack_successfully_created: "The new prepaid pack was successfully created."
-      edit_pack:
-        edit_pack: "Edit the pack"
-        confirm_changes: "Confirm changes"
-        pack_successfully_updated: "The prepaid pack was successfully updated."
       create_extended_price:
         new_extended_price: "New extended price"
         new_extended_price_info: "Extended prices allows you to define prices based on custom durations, instead of the default hourly rates."

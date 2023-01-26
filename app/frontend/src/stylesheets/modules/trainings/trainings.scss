@@ -82,14 +82,6 @@
             overflow: hidden;
             display: flex;
             border-radius: var(--border-radius-sm);
-            button {
-              @include btn;
-              border-radius: 0;
-              color: var(--gray-soft-lightest);
-              &:hover { opacity: 0.75; }
-            }
-            .edit-btn {background: var(--gray-hard-darkest) }
-            .delete-btn {background: var(--main) }
           }
         }
 

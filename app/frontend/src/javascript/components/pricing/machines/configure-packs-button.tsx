@@ -5,9 +5,10 @@ import { useTranslation } from 'react-i18next';
 import { FabPopover } from '../../base/fab-popover';
 import { CreatePack } from './create-pack';
 import PrepaidPackAPI from '../../../api/prepaid-pack';
-import { EditPack } from './edit-pack';
 import FormatLib from '../../../lib/format';
-import { DestroyButton } from '../../base/destroy-button';
+import { EditDestroyButtons } from '../../base/edit-destroy-buttons';
+import { FabModal } from '../../base/fab-modal';
+import { PackForm } from './pack-form';
 
 interface ConfigurePacksButtonProps {
   packsData: Array<PrepaidPack>,
@@ -27,6 +28,8 @@ export const ConfigurePacksButton: React.FC<ConfigurePacksButtonProps> = ({ pack
 
   const [packs, setPacks] = useState<Array<PrepaidPack>>(packsData);
   const [showList, setShowList] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [packData, setPackData] = useState<PrepaidPack>(null);
 
   /**
    * Return the number of hours, user-friendly formatted
@@ -58,10 +61,41 @@ export const ConfigurePacksButton: React.FC<ConfigurePacksButtonProps> = ({ pack
    */
   const renderAddButton = (): ReactNode => {
     return <CreatePack onSuccess={handleSuccess}
-      onError={onError}
-      groupId={groupId}
-      priceableId={priceableId}
-      priceableType={priceableType} />;
+                       onError={onError}
+                       groupId={groupId}
+                       priceableId={priceableId}
+                       priceableType={priceableType} />;
+  };
+
+  /**
+   * Open/closes the "edit pack" modal dialog
+   */
+  const toggleModal = (): void => {
+    setIsOpen(!isOpen);
+  };
+
+  /**
+   * When the user clicks on the edition button, query the full data of the current pack from the API, then open te edition modal
+   */
+  const handleRequestEdit = (pack: PrepaidPack): void => {
+    PrepaidPackAPI.get(pack.id)
+      .then(data => {
+        setPackData(data);
+        toggleModal();
+      })
+      .catch(error => onError(error));
+  };
+
+  /**
+   * Callback triggered when the user has validated the changes of the PrepaidPack
+   */
+  const handleUpdate = (pack: PrepaidPack): void => {
+    PrepaidPackAPI.update(pack)
+      .then(() => {
+        handleSuccess(t('app.admin.configure_packs_button.pack_successfully_updated'));
+        toggleModal();
+      })
+      .catch(error => onError(error));
   };
 
   return (
@@ -74,16 +108,22 @@ export const ConfigurePacksButton: React.FC<ConfigurePacksButtonProps> = ({ pack
           {packs?.map(p =>
             <li key={p.id} className={p.disabled ? 'disabled' : ''}>
               {formatDuration(p.minutes)} - {FormatLib.price(p.amount)}
-              <span className="pack-actions">
-                <EditPack onSuccess={handleSuccess} onError={onError} pack={p} />
-                <DestroyButton onSuccess={handleSuccess}
-                               onError={onError}
-                               itemId={p.id}
-                               itemType={t('app.admin.configure_packs_button.pack')}
-                               apiDestroy={PrepaidPackAPI.destroy}
-                               iconSize={12}
-                               confirmationMessage={t('app.admin.configure_packs_button.delete_confirmation')} />
-              </span>
+              <EditDestroyButtons className='pack-actions'
+                                  onError={onError}
+                                  onSuccess={handleSuccess}
+                                  onEdit={() => handleRequestEdit(p)}
+                                  itemId={p.id}
+                                  itemType={t('app.admin.configure_packs_button.pack')}
+                                  apiDestroy={PrepaidPackAPI.destroy}/>
+              <FabModal isOpen={isOpen}
+                        toggleModal={toggleModal}
+                        title={t('app.admin.configure_packs_button.edit_pack')}
+                        className="edit-pack-modal"
+                        closeButton
+                        confirmButton={t('app.admin.configure_packs_button.confirm_changes')}
+                        onConfirmSendFormId="edit-pack">
+                        {packData && <PackForm formId="edit-pack" onSubmit={handleUpdate} pack={packData} />}
+              </FabModal>
             </li>)}
         </ul>
         {packs?.length === 0 && <span>{t('app.admin.configure_packs_button.no_packs')}</span>}
