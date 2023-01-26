@@ -10,10 +10,6 @@ import { MachineCategory } from '../../models/machine-category';
 import { MachineCard } from './machine-card';
 import { MachinesFilters } from './machines-filters';
 import { User } from '../../models/user';
-import { EditorialBlock } from '../editorial-block/editorial-block';
-import SettingAPI from '../../api/setting';
-import SettingLib from '../../lib/setting';
-import { SettingValue, machinesSettings } from '../../models/setting';
 
 declare const Application: IApplication;
 
@@ -44,9 +40,7 @@ export const MachinesList: React.FC<MachinesListProps> = ({ onError, onSuccess, 
     category: null
   });
 
-  const [banner, setBanner] = useState<Record<string, SettingValue>>({});
-
-  // retrieve the full list of machines and the machines Banner on component mount
+  // retrieve the full list of machines on component mount
   useEffect(() => {
     MachineAPI.index()
       .then(data => setAllMachines(data))
@@ -54,11 +48,6 @@ export const MachinesList: React.FC<MachinesListProps> = ({ onError, onSuccess, 
     MachineCategoryAPI.index()
       .then(data => setMachineCategories(data))
       .catch(e => onError(e));
-    SettingAPI.query(machinesSettings)
-      .then(settings => {
-        setBanner({ ...SettingLib.bulkMapToObject(settings) });
-      })
-      .catch(onError);
   }, []);
 
   // filter the machines shown when the full list was retrieved
@@ -106,12 +95,6 @@ export const MachinesList: React.FC<MachinesListProps> = ({ onError, onSuccess, 
 
   return (
     <div className="machines-list">
-      {banner.machines_banner_active &&
-        <EditorialBlock
-          text={banner.machines_banner_text}
-          cta={banner.machines_banner_cta_active && banner.machines_banner_cta_label}
-          url={banner.machines_banner_cta_active && banner.machines_banner_cta_url} />
-      }
       <MachinesFilters onFilterChangedBy={handleFilterChangedBy} machineCategories={machineCategories}/>
       <div className="all-machines">
         {machines && machines.map(machine => {

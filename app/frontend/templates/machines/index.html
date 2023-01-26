@@ -13,7 +13,6 @@
   </div>
 </section>
 
-
 <section class="m-lg"
          ui-tour="machines"
          ui-tour-backdrop="true"
@@ -21,6 +20,8 @@
          ui-tour-use-hotkeys="true"
          ui-tour-scroll-parent-id="content-main"
          post-render="setupMachinesTour">
+
+  <machines-editorial-block on-error="onError"></machines-editorial-block>
 
   <machines-list user="currentUser"
                  on-error="onError"

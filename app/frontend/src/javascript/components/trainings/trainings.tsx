@@ -35,7 +35,6 @@ export const Trainings: React.FC<TrainingsProps> = ({ onError, onSuccess }) => {
   const [trainings, setTrainings] = useState<Array<Training>>([]);
   const [machines, setMachines] = useState<Array<Machine>>([]);
   const [filter, setFilter] = useState<boolean>(null);
-  const [banner, setBanner] = useState<Record<string, SettingValue>>({});
 
   // Styles the React-select component
   const customStyles = {
@@ -50,13 +49,8 @@ export const Trainings: React.FC<TrainingsProps> = ({ onError, onSuccess }) => {
     })
   };
 
-  // At component mount, fetch Banner and Machines from API
+  // At component mount, fetch Machines from API
   useEffect(() => {
-    SettingAPI.query(trainingsSettings)
-      .then(settings => {
-        setBanner({ ...SettingLib.bulkMapToObject(settings) });
-      })
-      .catch(onError);
     MachineAPI.index({ disabled: false })
       .then(setMachines)
       .catch(onError);
@@ -129,12 +123,6 @@ export const Trainings: React.FC<TrainingsProps> = ({ onError, onSuccess }) => {
         </div>
       </header>
 
-      {banner.trainings_banner_active &&
-        <EditorialBlock
-          text={banner.trainings_banner_text}
-          cta={banner.trainings_banner_cta_active && banner.trainings_banner_cta_label}
-          url={banner.trainings_banner_cta_active && banner.trainings_banner_cta_url} />
-      }
       <div className="trainings-content">
         <div className='display'>
           <div className='filter'>
