@@ -36,6 +36,9 @@ export const server = setupServer(
   rest.post('/api/plans', (req, res, ctx) => {
     return res(ctx.json(req.body));
   }),
+  rest.put('/api/plans/:id', (req, res, ctx) => {
+    return res(ctx.json(req.body));
+  }),
   rest.post('/api/users', (req, res, ctx) => {
     /* eslint-disable camelcase */
     const { user: { first_name, last_name, email } } = req.body;

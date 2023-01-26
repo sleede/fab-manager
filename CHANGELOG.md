@@ -1,5 +1,9 @@
 # Changelog Fab-manager
 
+## v5.6.8 2023 January 26
+
+- Fix a bug: plan prices are not reported correctly in the interface
+
 ## v5.6.7 2023 January 25
 
 - Fix a bug: updating plan prices
@@ -14,7 +18,8 @@
 - Fix a bug: unable to run task fix_invoice_item when some invoice items are associated with errors
 - Fix a bug: invalid event date reported when the timezone in before UTC
 - Fix a bug: unable to run accounting export if a line label was not defined
-- Fix a security issue: updated rack to 2.2.6.2 to fix [CVE-2022-44571](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-44571)
+- Fix a security issue: updated rack to 2.2.6.2 to fix [CVE-2022-44571](https
+- cgi-bin/cvename.cgi?name=CVE-2022-44571)
 - Fix a security issue: updated globalid to 1.0.1 to fix [CVE-2023-22799](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-22799)
 - [TODO DEPLOY] `rails fablab:fix:invoice_items_in_error` THEN `rails fablab:fix_invoice_items` THEN `rails db:migrate`
 
@@ -66,6 +71,7 @@
 - Ability to disable generation of invoices at zero
 - Accounting data is now built each night and saved in database
 - Ability to define multiple accounting journal codes
+- Ability to define accounting codes per resources (aka. advanced accounting)
 - Ability to change the name of the VAT
 - Ability to cancel a running subscription from the member edition view for admin/managers
 - OpenAPI endpoint to fetch accounting data
@@ -82,6 +88,7 @@
 - Report subsription mismatch with user's group
 - Added sentry for error reporting
 - Report details of the due for invoices related to a payment schedule
+- Migrated plan/machine/space/event forms to react
 - Fix a bug: unable to run test in negative timezones (#425)
 - Fix a bug: providing an array of attributes to filter OpenApi data, results in error
 - Fix a bug: unable to manage stocks on new products

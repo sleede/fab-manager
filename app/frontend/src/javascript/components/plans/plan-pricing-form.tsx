@@ -30,7 +30,7 @@ interface PlanPricingFormProps<TContext extends object> {
  */
 export const PlanPricingForm = <TContext extends object>({ register, control, formState, setValue, onError }: PlanPricingFormProps<TContext>) => {
   const { t } = useTranslation('admin');
-  const { fields } = useFieldArray({ control, name: 'prices_attributes' });
+  const { fields } = useFieldArray<Plan, 'prices_attributes'>({ control, name: 'prices_attributes' });
 
   const [machines, setMachines] = useState<Array<Machine>>(null);
   const [spaces, setSpaces] = useState<Array<Space>>(null);
@@ -104,16 +104,18 @@ export const PlanPricingForm = <TContext extends object>({ register, control, fo
         machines && {
           id: 'machines',
           title: t('app.admin.plan_pricing_form.machines'),
-          content: fields.filter(p => p.priceable_type === 'Machine').map((price, index) =>
-            renderPriceElement(price, index)
-          )
+          content: fields.map((price, index) => {
+            if (price.priceable_type !== 'Machine') return false;
+            return renderPriceElement(price, index);
+          }).filter(Boolean)
         },
         spaces && {
           id: 'spaces',
           title: t('app.admin.plan_pricing_form.spaces'),
-          content: fields.filter(p => p.priceable_type === 'Space').map((price, index) =>
-            renderPriceElement(price, index)
-          )
+          content: fields.map((price, index) => {
+            if (price.priceable_type !== 'Space') return false;
+            return renderPriceElement(price, index);
+          }).filter(Boolean)
         }
       ]} />}
     </div>
