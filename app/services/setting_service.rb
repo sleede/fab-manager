@@ -105,7 +105,7 @@ class SettingService
       deadline = settings.find { |s| s.name == 'trainings_auto_cancel_deadline' }
 
       Training.find_each do |t|
-        TrainingService.update_auto_cancel(t, tac, threshold, deadline)
+        Trainings::AutoCancelService.update_auto_cancel(t, tac, threshold, deadline)
       end
     end
   end

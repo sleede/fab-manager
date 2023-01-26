@@ -6,7 +6,7 @@ class TrainingAutoCancelWorker
 
   def perform
     Training.find_each do |t|
-      TrainingService.auto_cancel_reservation(t)
+      Trainings::AutoCancelService.auto_cancel_reservations(t)
     end
   end
 end
