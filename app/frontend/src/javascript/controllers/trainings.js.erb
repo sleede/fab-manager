@@ -17,8 +17,8 @@
 /**
  * Public listing of the trainings
  */
-Application.Controllers.controller('TrainingsController', ['$scope', '$state', 'trainingsPromise',
-  function ($scope, $state, trainingsPromise) {
+Application.Controllers.controller('TrainingsController', ['$scope', '$state', 'trainingsPromise', 'growl',
+  function ($scope, $state, trainingsPromise, growl) {
   // List of trainings
     $scope.trainings = trainingsPromise;
 
@@ -31,6 +31,13 @@ Application.Controllers.controller('TrainingsController', ['$scope', '$state', '
    * Callback for the 'show' button
    */
     $scope.showTraining = function (training) { $state.go('app.public.training_show', { id: training.slug }); };
+
+    /**
+    * Callback triggered by react components
+    */
+    $scope.onError = function (message) {
+      growl.error(message);
+    };
   }]);
 
 /**

@@ -777,6 +777,36 @@ export const settings: Array<Setting> = [
     value: 'https://www.sleede.com/',
     last_update: '2022-12-23T14:39:12+0100',
     localized: 'Url'
+  },
+  {
+    name: 'trainings_banner_active',
+    value: 'true',
+    last_update: '2022-12-23T14:39:12+0100',
+    localized: 'Custom banner is active'
+  },
+  {
+    name: 'trainings_banner_text',
+    value: 'Test for Banner Content in Trainings',
+    last_update: '2022-12-23T14:39:12+0100',
+    localized: 'Text of the custom banner'
+  },
+  {
+    name: 'trainings_banner_cta_active',
+    value: 'true',
+    last_update: '2022-12-23T14:39:12+0100',
+    localized: 'Custom banner has a button'
+  },
+  {
+    name: 'trainings_banner_cta_label',
+    value: 'Test for Banner Button in Trainings',
+    last_update: '2022-12-23T14:39:12+0100',
+    localized: 'Label'
+  },
+  {
+    name: 'trainings_banner_cta_url',
+    value: 'https://www.sleede.com/',
+    last_update: '2022-12-23T14:39:12+0100',
+    localized: 'Url'
   }
 ];
 

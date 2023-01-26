@@ -13,7 +13,7 @@ import { User } from '../../models/user';
 import { EditorialBlock } from '../editorial-block/editorial-block';
 import SettingAPI from '../../api/setting';
 import SettingLib from '../../lib/setting';
-import { SettingValue, machineBannerSettings } from '../../models/setting';
+import { SettingValue, machinesSettings } from '../../models/setting';
 
 declare const Application: IApplication;
 
@@ -46,16 +46,7 @@ export const MachinesList: React.FC<MachinesListProps> = ({ onError, onSuccess, 
 
   const [banner, setBanner] = useState<Record<string, SettingValue>>({});
 
-  // fetch Banner text and button from API
-  const fetchBanner = async () => {
-    SettingAPI.query(machineBannerSettings)
-      .then(settings => {
-        setBanner({ ...SettingLib.bulkMapToObject(settings) });
-      })
-      .catch(onError);
-  };
-
-  // retrieve the full list of machines on component mount
+  // retrieve the full list of machines and the machines Banner on component mount
   useEffect(() => {
     MachineAPI.index()
       .then(data => setAllMachines(data))
@@ -63,7 +54,11 @@ export const MachinesList: React.FC<MachinesListProps> = ({ onError, onSuccess, 
     MachineCategoryAPI.index()
       .then(data => setMachineCategories(data))
       .catch(e => onError(e));
-    fetchBanner();
+    SettingAPI.query(machinesSettings)
+      .then(settings => {
+        setBanner({ ...SettingLib.bulkMapToObject(settings) });
+      })
+      .catch(onError);
   }, []);
 
   // filter the machines shown when the full list was retrieved

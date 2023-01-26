@@ -9,7 +9,7 @@ import { FabButton } from '../base/fab-button';
 import { EditorialKeys, EditorialBlockForm } from '../editorial-block/editorial-block-form';
 import SettingAPI from '../../api/setting';
 import SettingLib from '../../lib/setting';
-import { SettingName, SettingValue, machineBannerSettings } from '../../models/setting';
+import { SettingName, SettingValue, machinesSettings } from '../../models/setting';
 
 declare const Application: IApplication;
 
@@ -47,7 +47,7 @@ export const MachinesSettings: React.FC<MachinesSettingsProps> = ({ onError, onS
 
   /** On component mount, fetch existing Machines Banner Settings from API, and populate form with these values. */
   useEffect(() => {
-    SettingAPI.query(machineBannerSettings)
+    SettingAPI.query(machinesSettings)
       .then(settings => reset(SettingLib.bulkMapToObject(settings)))
       .catch(onError);
   }, []);

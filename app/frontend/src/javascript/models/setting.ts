@@ -233,7 +233,7 @@ export const storeSettings = [
   'store_hidden'
 ] as const;
 
-export const trainingSettings = [
+export const trainingsSettings = [
   'trainings_auto_cancel',
   'trainings_auto_cancel_threshold',
   'trainings_auto_cancel_deadline',
@@ -241,9 +241,15 @@ export const trainingSettings = [
   'trainings_authorization_validity_duration',
   'trainings_invalidation_rule',
   'trainings_invalidation_rule_period'
+  'trainings_auto_cancel_deadline',
+  'trainings_banner_active',
+  'trainings_banner_text',
+  'trainings_banner_cta_active',
+  'trainings_banner_cta_label',
+  'trainings_banner_cta_url'
 ] as const;
 
-export const machineBannerSettings = [
+export const machinesSettings = [
   'machines_banner_active',
   'machines_banner_text',
   'machines_banner_cta_active',
@@ -277,8 +283,8 @@ export const allSettings = [
   ...poymentSettings,
   ...displaySettings,
   ...storeSettings,
-  ...trainingSettings,
-  ...machineBannerSettings
+  ...trainingsSettings,
+  ...machinesSettings
 ] as const;
 
 export type SettingName = typeof allSettings[number];

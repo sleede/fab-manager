@@ -9,8 +9,8 @@ import { useForm, SubmitHandler, useWatch } from 'react-hook-form';
 import { FormSwitch } from '../form/form-switch';
 import { FormInput } from '../form/form-input';
 import { FabButton } from '../base/fab-button';
-import { EditorialBlockForm } from '../editorial-block/editorial-block-form';
-import { SettingName, SettingValue, trainingSettings } from '../../models/setting';
+import { EditorialKeys, EditorialBlockForm } from '../editorial-block/editorial-block-form';
+import { SettingName, SettingValue, trainingsSettings } from '../../models/setting';
 import SettingAPI from '../../api/setting';
 import SettingLib from '../../lib/setting';
 
@@ -32,8 +32,17 @@ export const TrainingsSettings: React.FC<TrainingsSettingsProps> = ({ onError, o
   const isActiveAuthorizationValidity = useWatch({ control, name: 'trainings_authorization_validity' }) as boolean;
   const isActiveInvalidationRule = useWatch({ control, name: 'trainings_invalidation_rule' }) as boolean;
 
+  /** Link Trainings Banner Settings to generic keys expected by the Editorial Form */
+  const bannerKeys: Record<EditorialKeys, SettingName> = {
+    active_text_block: 'trainings_banner_active',
+    text_block: 'trainings_banner_text',
+    active_cta: 'trainings_banner_cta_active',
+    cta_label: 'trainings_banner_cta_label',
+    cta_url: 'trainings_banner_cta_url'
+  };
+
   useEffect(() => {
-    SettingAPI.query(trainingSettings)
+    SettingAPI.query(trainingsSettings)
       .then(settings => {
         const data = SettingLib.bulkMapToObject(settings);
         reset(data);
@@ -63,6 +72,7 @@ export const TrainingsSettings: React.FC<TrainingsSettingsProps> = ({ onError, o
           <EditorialBlockForm register={register}
                               control={control}
                               formState={formState}
+                              keys={bannerKeys}
                               info={t('app.admin.trainings_settings.generic_text_block_info')} />
         </div>
 
