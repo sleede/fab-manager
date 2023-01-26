@@ -188,6 +188,11 @@ module SettingsHelper
     trainings_banner_cta_active
     trainings_banner_cta_label
     trainings_banner_cta_url
+    events_banner_active
+    events_banner_text
+    events_banner_cta_active
+    events_banner_cta_label
+    events_banner_cta_url
   ].freeze
 end
 # rubocop:enable Metrics/ModuleLength

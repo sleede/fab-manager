@@ -257,6 +257,14 @@ export const machinesSettings = [
   'machines_banner_cta_url'
 ] as const;
 
+export const eventsSettings = [
+  'events_banner_active',
+  'events_banner_text',
+  'events_banner_cta_active',
+  'events_banner_cta_label',
+  'events_banner_cta_url'
+] as const;
+
 export const allSettings = [
   ...homePageSettings,
   ...privacyPolicySettings,
@@ -284,7 +292,8 @@ export const allSettings = [
   ...displaySettings,
   ...storeSettings,
   ...trainingsSettings,
-  ...machinesSettings
+  ...machinesSettings,
+  ...eventsSettings
 ] as const;
 
 export type SettingName = typeof allSettings[number];

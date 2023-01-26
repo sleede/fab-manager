@@ -13,9 +13,16 @@
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
 
-Application.Controllers.controller('EventsController', ['$scope', '$state', 'Event', 'categoriesPromise', 'themesPromise', 'ageRangesPromise',
-  function ($scope, $state, Event, categoriesPromise, themesPromise, ageRangesPromise) {
+Application.Controllers.controller('EventsController', ['$scope', '$state', 'Event', 'categoriesPromise', 'themesPromise', 'ageRangesPromise', 'growl',
+  function ($scope, $state, Event, categoriesPromise, themesPromise, ageRangesPromise, growl) {
   /* PUBLIC SCOPE */
+
+    /**
+    * Callback triggered by react components
+    */
+    $scope.onError = function (message) {
+      growl.error(message);
+    };
 
     // The events displayed on the page
     $scope.events = [];

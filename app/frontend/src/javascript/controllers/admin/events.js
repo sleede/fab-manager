@@ -55,6 +55,20 @@ Application.Controllers.controller('AdminEventsController', ['$scope', '$state',
   function ($scope, $state, dialogs, $uibModal, growl, AuthService, Event, Category, EventTheme, AgeRange, PriceCategory, eventsPromise, categoriesPromise, themesPromise, ageRangesPromise, priceCategoriesPromise, _t, Member, uiTourService, settingsPromise) {
   /* PUBLIC SCOPE */
 
+    /**
+   * Callback triggered by react components
+   */
+    $scope.onSuccess = function (message) {
+      growl.success(message);
+    };
+
+    /**
+     * Callback triggered by react components
+     */
+    $scope.onError = function (message) {
+      growl.error(message);
+    };
+
     // By default, the pagination mode is activated to limit the page size
     $scope.paginateActive = true;
 

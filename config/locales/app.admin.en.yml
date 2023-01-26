@@ -500,6 +500,7 @@ en:
         update_success: "The trainings settings were successfully updated"
       #events tracking and management
       events:
+        settings: "Settings"
         events_monitoring: "Events monitoring"
         manage_filters: "Manage filters"
         fablab_events: "Fablab events"
@@ -586,6 +587,16 @@ en:
         no_reservations_for_now: "No reservation for now."
         back_to_monitoring: "Back to monitoring"
         canceled: "Canceled"
+      events_settings:
+        title: "Settings"
+        generic_text_block: "Editorial text block"
+        generic_text_block_info: "Displays an editorial block above the list of events visible to members."
+        generic_text_block_switch: "Display editorial block"
+        cta_switch: "Display a button"
+        cta_label: "Button label"
+        cta_url: "url"
+        save: "Save"
+        update_success: "The events settings were successfully updated"
       #subscriptions, prices, credits and coupons management
       pricing:
         pricing_management: "Pricing management"
