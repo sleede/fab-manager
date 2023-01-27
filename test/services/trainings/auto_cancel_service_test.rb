@@ -21,6 +21,10 @@ class Trainings::AutoCancelServiceTest < ActiveSupport::TestCase
     )
     Trainings::AutoCancelService.auto_cancel_reservations(@training)
 
+    # Check availability was locked
+    @availability.reload
+    assert @availability.lock
+
     # Check reservation was cancelled
     r.reload
     assert_not_nil r.slots_reservations.first&.canceled_at
@@ -76,6 +80,10 @@ class Trainings::AutoCancelServiceTest < ActiveSupport::TestCase
     )
 
     Trainings::AutoCancelService.auto_cancel_reservations(@training)
+
+    # Check availability was not locked
+    @availability.reload
+    assert_not @availability.lock
 
     # Check nothing was cancelled
     r1.reload

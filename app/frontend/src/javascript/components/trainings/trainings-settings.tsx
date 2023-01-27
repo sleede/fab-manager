@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { IApplication } from '../../models/application';
 import { Loader } from '../base/loader';
 import { react2angular } from 'react2angular';
@@ -29,8 +29,8 @@ export const TrainingsSettings: React.FC<TrainingsSettingsProps> = ({ onError, o
   const { register, control, formState, handleSubmit, reset } = useForm<Record<SettingName, SettingValue>>();
 
   const isActiveAutoCancellation = useWatch({ control, name: 'trainings_auto_cancel' }) as boolean;
-  const [isActiveAuthorizationValidity, setIsActiveAuthorizationValidity] = useState<boolean>(false);
-  const [isActiveValidationRule, setIsActiveValidationRule] = useState<boolean>(false);
+  const isActiveAuthorizationValidity = useWatch({ control, name: 'trainings_authorization_validity' }) as boolean;
+  const isActiveInvalidationRule = useWatch({ control, name: 'trainings_invalidation_rule' }) as boolean;
 
   useEffect(() => {
     SettingAPI.query(trainingSettings)
@@ -40,20 +40,6 @@ export const TrainingsSettings: React.FC<TrainingsSettingsProps> = ({ onError, o
       })
       .catch(onError);
   }, []);
-
-  /**
-   * Callback triggered when the authorisation validity switch has changed.
-   */
-  const toggleAuthorizationValidity = (value: boolean) => {
-    setIsActiveAuthorizationValidity(value);
-  };
-
-  /**
-   * Callback triggered when the authorisation validity switch has changed.
-   */
-  const toggleValidationRule = (value: boolean) => {
-    setIsActiveValidationRule(value);
-  };
 
   /**
    * Callback triggered when the form is submitted: save the settings
@@ -119,12 +105,12 @@ export const TrainingsSettings: React.FC<TrainingsSettingsProps> = ({ onError, o
             <p className="description">{t('app.admin.trainings_settings.authorization_validity_info')}</p>
           </header>
           <div className="content">
-            <FormSwitch id="authorization_validity" control={control}
-              onChange={toggleAuthorizationValidity} formState={formState}
+            <FormSwitch id="trainings_authorization_validity" control={control}
+              formState={formState}
               defaultValue={isActiveAuthorizationValidity}
               label={t('app.admin.trainings_settings.authorization_validity_switch')} />
             {isActiveAuthorizationValidity && <>
-              <FormInput id="authorization_validity_duration"
+              <FormInput id="trainings_authorization_validity_duration"
                       type="number"
                       register={register}
                       rules={{ required: isActiveAuthorizationValidity, min: 1 }}
@@ -141,15 +127,15 @@ export const TrainingsSettings: React.FC<TrainingsSettingsProps> = ({ onError, o
             <p className="description">{t('app.admin.trainings_settings.validation_rule_info')}</p>
           </header>
           <div className="content">
-            <FormSwitch id="validation_rule" control={control}
-              onChange={toggleValidationRule} formState={formState}
-              defaultValue={isActiveValidationRule}
+            <FormSwitch id="trainings_invalidation_rule" control={control}
+              formState={formState}
+              defaultValue={isActiveInvalidationRule}
               label={t('app.admin.trainings_settings.validation_rule_switch')} />
-            {isActiveValidationRule && <>
-              <FormInput id="validation_rule_period"
+            {isActiveInvalidationRule && <>
+              <FormInput id="trainings_invalidation_rule_period"
                       type="number"
                       register={register}
-                      rules={{ required: isActiveValidationRule, min: 1 }}
+                      rules={{ required: isActiveInvalidationRule, min: 1 }}
                       step={1}
                       formState={formState}
                       label={t('app.admin.trainings_settings.validation_rule_period')} />

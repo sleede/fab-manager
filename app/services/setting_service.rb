@@ -23,6 +23,8 @@ class SettingService
       validate_admins(settings)
       update_accounting_line(settings)
       update_trainings_auto_cancel(settings)
+      update_trainings_authorization(settings)
+      update_trainings_invalidation(settings)
     end
 
     private
@@ -106,6 +108,32 @@ class SettingService
 
       Training.find_each do |t|
         Trainings::AutoCancelService.update_auto_cancel(t, tac, threshold, deadline)
+      end
+    end
+
+    # update trainings authorization parameters
+    # @param settings [Array<Setting>]
+    def update_trainings_authorization(settings)
+      return unless settings.any? { |s| s.name.match(/^trainings_authorization_validity/) }
+
+      authorization = settings.find { |s| s.name == 'trainings_authorization_validity' }
+      duration = settings.find { |s| s.name == 'trainings_authorization_validity_duration' }
+
+      Training.find_each do |t|
+        Trainings::AuthorizationService.update_authorization(t, authorization, duration)
+      end
+    end
+
+    # update trainings invalidation parameters
+    # @param settings [Array<Setting>]
+    def update_trainings_invalidation(settings)
+      return unless settings.any? { |s| s.name.match(/^trainings_invalidation_rule/) }
+
+      invalidation = settings.find { |s| s.name == 'trainings_invalidation_rule' }
+      duration = settings.find { |s| s.name == 'trainings_invalidation_rule_period' }
+
+      Training.find_each do |t|
+        Trainings::InvalidationService.update_invalidation(t, invalidation, duration)
       end
     end
   end

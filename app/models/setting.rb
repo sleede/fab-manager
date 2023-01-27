@@ -168,7 +168,11 @@ class Setting < ApplicationRecord
                              invoice_VAT-name
                              trainings_auto_cancel
                              trainings_auto_cancel_threshold
-                             trainings_auto_cancel_deadline] }
+                             trainings_auto_cancel_deadline
+                             trainings_authorization_validity
+                             trainings_authorization_validity_duration
+                             trainings_invalidation_rule
+                             trainings_invalidation_rule_period] }
   # WARNING: when adding a new key, you may also want to add it in:
   # - config/locales/en.yml#settings
   # - app/frontend/src/javascript/models/setting.ts#SettingName
@@ -204,13 +208,17 @@ class Setting < ApplicationRecord
   end
 
   def previous_value
-    previous_value = history_values.order(HistoryValue.arel_table['created_at'].desc).limit(2).last
-    previous_value&.value
+    last_two = history_values.order(HistoryValue.arel_table['created_at'].desc).limit(2)
+    return nil if last_two.count < 2
+
+    last_two.last&.value
   end
 
   def previous_update
-    previous_value = history_values.order(HistoryValue.arel_table['created_at'].desc).limit(2).last
-    previous_value&.created_at
+    last_two = history_values.order(HistoryValue.arel_table['created_at'].desc).limit(2)
+    return nil if last_two.count < 2
+
+    last_two.last&.created_at
   end
 
   # @deprecated, prefer Setting.set() instead

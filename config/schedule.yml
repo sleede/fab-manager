@@ -57,4 +57,9 @@ auto_cancel_tranings:
   class: TrainingAutoCancelWorker
   queue: default
 
+auto_cancel_authorizations:
+  cron: "0 0 * * *" # every day, at midnight
+  class: TrainingAuthorizationWorker
+  queue: default
+
 <%= PluginRegistry.insert_code('yml.schedule') %>

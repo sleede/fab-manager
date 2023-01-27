@@ -29,7 +29,7 @@ class API::SettingsController < API::ApiController
     updated_settings = []
     may_transaction params[:transactional] do
       params[:settings].each do |setting|
-        next if !setting[:name] || !setting[:value]
+        next if !setting[:name] || !setting[:value] || setting[:value].blank?
 
         db_setting = Setting.find_or_initialize_by(name: setting[:name])
         if !SettingService.update_allowed?(db_setting)

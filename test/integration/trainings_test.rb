@@ -72,6 +72,20 @@ class TrainingsTest < ActionDispatch::IntegrationTest
     assert_not training[:public_page]
   end
 
+  test 'user validates a training' do
+    training = Training.find(3)
+    user = User.find(9)
+    put "/api/trainings/#{training.id}", params: { training: {
+      users: [user.id]
+    } }.to_json, headers: default_headers
+
+    # Check response status
+    assert_equal 204, response.status, response.body
+
+    # Check user is authorized
+    assert user.training_machine?(Machine.find(5))
+  end
+
   test 'delete a training' do
     delete '/api/trainings/4', headers: default_headers
     assert_response :success

@@ -159,16 +159,16 @@ export const Trainings: React.FC<TrainingsProps> = ({ onError, onSuccess }) => {
 
               <div className='authorisation'>
                 <span>{t('app.admin.trainings.authorisation')}</span>
-                <p>
+                {(training.authorization && <p>
                   {t('app.admin.trainings.active_true')}
-                  <span>|</span>{t('app.admin.trainings.period_MONTH', { MONTH: 48 })}
-                </p>
+                  <span>|</span>{t('app.admin.trainings.period_MONTH', { MONTH: training.authorization_period })}
+                </p>) || <p>---</p>}
               </div>
 
               <div className='rule'>
                 <span>{t('app.admin.trainings.validation_rule')}</span>
                 <p>
-                  {t('app.admin.trainings.active_false')}
+                  {training.invalidation ? t('app.admin.trainings.active_true') : t('app.admin.trainings.active_false')}
                 </p>
               </div>
 

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Add resources-related functionalities to the user model (eg. Reservation, Subscrtion, Project, etc.)
+# Add resources-related functionalities to the user model (eg. Reservation, Subscription, Project, etc.)
 module UserRessourcesConcern
   extend ActiveSupport::Concern
 

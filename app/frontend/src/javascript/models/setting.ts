@@ -236,7 +236,11 @@ export const storeSettings = [
 export const trainingSettings = [
   'trainings_auto_cancel',
   'trainings_auto_cancel_threshold',
-  'trainings_auto_cancel_deadline'
+  'trainings_auto_cancel_deadline',
+  'trainings_authorization_validity',
+  'trainings_authorization_validity_duration',
+  'trainings_invalidation_rule',
+  'trainings_invalidation_rule_period'
 ] as const;
 
 export const allSettings = [

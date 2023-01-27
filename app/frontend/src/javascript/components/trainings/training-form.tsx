@@ -39,12 +39,11 @@ export const TrainingForm: React.FC<TrainingFormProps> = ({ action, training, on
 
   const [machineModule, setMachineModule] = useState<Setting>(null);
   const [isActiveAccounting, setIsActiveAccounting] = useState<boolean>(false);
-  const [isActiveAuthorizationValidity, setIsActiveAuthorizationValidity] = useState<boolean>(false);
-  const [isActiveValidationRule, setIsActiveValidationRule] = useState<boolean>(false);
-
   const { handleSubmit, register, control, setValue, formState } = useForm<Training>({ defaultValues: { ...training } });
   const output = useWatch<Training>({ control });
   const isActiveCancellation = useWatch({ control, name: 'auto_cancel' }) as boolean;
+  const isActiveAuthorizationValidity = useWatch({ control, name: 'authorization' }) as boolean;
+  const isActiveValidationRule = useWatch({ control, name: 'invalidation' });
 
   useEffect(() => {
     SettingAPI.get('machines_module').then(setMachineModule).catch(onError);
@@ -77,20 +76,6 @@ export const TrainingForm: React.FC<TrainingFormProps> = ({ action, training, on
     MachineAPI.index({ disabled: false }).then(data => {
       callback(data.map(m => machineToOption(m)));
     }).catch(error => onError(error));
-  };
-
-  /**
-   * Callback triggered when the authorisation validity switch has changed.
-   */
-  const toggleAuthorizationValidity = (value: boolean) => {
-    setIsActiveAuthorizationValidity(value);
-  };
-
-  /**
-   * Callback triggered when the authorisation validity switch has changed.
-   */
-  const toggleValidationRule = (value: boolean) => {
-    setIsActiveValidationRule(value);
   };
 
   return (
@@ -203,12 +188,12 @@ export const TrainingForm: React.FC<TrainingFormProps> = ({ action, training, on
             <p className="description">{t('app.admin.training_form.authorization_validity_info')}</p>
           </header>
           <div className="content">
-            <FormSwitch id="authorization_validity" control={control}
-                        onChange={toggleAuthorizationValidity} formState={formState}
+            <FormSwitch id="authorization" control={control}
+                        formState={formState}
                         defaultValue={isActiveAuthorizationValidity}
                         label={t('app.admin.training_form.authorization_validity_switch')} />
             {isActiveAuthorizationValidity && <>
-              <FormInput id="authorization_validity_duration"
+              <FormInput id="authorization_period"
                          type="number"
                          register={register}
                          rules={{ required: isActiveAuthorizationValidity, min: 1 }}
@@ -225,12 +210,12 @@ export const TrainingForm: React.FC<TrainingFormProps> = ({ action, training, on
             <p className="description">{t('app.admin.training_form.validation_rule_info')}</p>
           </header>
           <div className="content">
-            <FormSwitch id="validation_rule" control={control}
-              onChange={toggleValidationRule} formState={formState}
+            <FormSwitch id="invalidation" control={control}
+              formState={formState}
               defaultValue={isActiveValidationRule}
               label={t('app.admin.training_form.validation_rule_switch')} />
             {isActiveValidationRule && <>
-              <FormInput id="validation_rule_period"
+              <FormInput id="invalidation_period"
                       type="number"
                       register={register}
                       rules={{ required: isActiveValidationRule, min: 1 }}

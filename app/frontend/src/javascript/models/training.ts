@@ -17,6 +17,10 @@ export interface Training {
   auto_cancel: boolean,
   auto_cancel_threshold: number,
   auto_cancel_deadline: number,
+  authorization: boolean,
+  authorization_period: number,
+  invalidation: boolean,
+  invalidation_period: number,
   availabilities?: Array<{
     id: number,
     start_at: TDateISO,
@@ -33,5 +37,5 @@ export interface Training {
 export interface TrainingIndexFilter extends ApiFilter {
   disabled?: boolean,
   public_page?: boolean,
-  requested_attributes?: ['availabillities'],
+  requested_attributes?: ['availabilities'],
 }

@@ -23,6 +23,7 @@ class Trainings::AutoCancelService
                                 attached_object: availability,
                                 meta_data: { auto_refund: auto_refund }
 
+        availability.update(lock: true)
         availability.slots_reservations.find_each do |sr|
           NotificationCenter.call type: 'notify_member_training_auto_cancelled',
                                   receiver: sr.reservation.user,
@@ -44,9 +45,9 @@ class Trainings::AutoCancelService
       previous_auto_cancel = auto_cancel.nil? ? Setting.find_by(name: 'trainings_auto_cancel').value : auto_cancel.previous_value
       previous_threshold = threshold.nil? ? Setting.find_by(name: 'trainings_auto_cancel_threshold').value : threshold.previous_value
       previous_deadline = deadline.nil? ? Setting.find_by(name: 'trainings_auto_cancel_deadline').value : deadline.previous_value
-      is_default = training.auto_cancel.to_s == previous_auto_cancel &&
-                   [nil, previous_threshold].include?(training.auto_cancel_threshold.to_s) &&
-                   [nil, previous_deadline].include?(training.auto_cancel_deadline.to_s)
+      is_default = training.auto_cancel.to_s == previous_auto_cancel.to_s &&
+                   training.auto_cancel_threshold.to_s == previous_threshold.to_s &&
+                   training.auto_cancel_deadline.to_s == previous_deadline.to_s
 
       return unless is_default
 
