@@ -6,6 +6,17 @@ class Notification < ApplicationRecord
   belongs_to :receiver, polymorphic: true
   belongs_to :attached_object, polymorphic: true
 
+  # This scope filter a user's in system (push) notifications :
+  # It fetch his notifications where no notification preference is made,
+  # or if this preference specify that the user accepts in system notification
+  scope :delivered_in_system, lambda { |user|
+    left_outer_joins(notification_type: :notification_preferences)
+      .where(<<-SQL.squish, user.id)
+      (notification_preferences.user_id = ? AND notification_preferences.in_system IS TRUE)
+      OR notification_preferences.id IS NULL
+      SQL
+  }
+
   validates :receiver_id,
             :receiver_type,
             :attached_object_id,
@@ -31,6 +42,16 @@ class Notification < ApplicationRecord
 
   def deliver_later
     NotificationsMailer.send_mail_by(self).deliver_later if save
+  end
+
+  def deliver_with_preferences(user, notification_type)
+    preference = NotificationPreference.find_by(notification_type: notification_type, user: user)
+
+    # Set as read if user do not want push notifications
+    self.is_read = true if preference && preference.in_system == false
+
+    # Save notification if user do not want email notifications ; else, deliver.
+    preference && preference.email == false ? save : deliver_later
   end
 
   def get_meta_data(key)

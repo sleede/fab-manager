@@ -51,6 +51,7 @@ class User < ApplicationRecord
   has_many :proof_of_identity_refusals, dependent: :destroy
 
   has_many :notifications, as: :receiver, dependent: :destroy
+  has_many :notification_preferences, dependent: :destroy
 
   # fix for create admin user
   before_save do

@@ -15,14 +15,16 @@ class API::NotificationsController < API::ApiController
   def index
     loop do
       @notifications = current_user.notifications
+                                   .delivered_in_system(current_user)
                                    .includes(:attached_object)
                                    .page(params[:page])
-                                   .per(NOTIFICATIONS_PER_PAGE).order('created_at DESC')
+                                   .per(NOTIFICATIONS_PER_PAGE)
+                                   .order('created_at DESC')
       # we delete obsolete notifications on first access
       break unless delete_obsoletes(@notifications)
     end
     @totals = {
-      total: current_user.notifications.count,
+      total: current_user.notifications.delivered_in_system(current_user).count,
       unread: current_user.notifications.where(is_read: false).count
     }
     render :index
@@ -39,7 +41,7 @@ class API::NotificationsController < API::ApiController
       break unless delete_obsoletes(@notifications)
     end
     @totals = {
-      total: current_user.notifications.count,
+      total: current_user.notifications.delivered_in_system(current_user).count,
       unread: current_user.notifications.where(is_read: false).count
     }
     render :index
@@ -50,7 +52,7 @@ class API::NotificationsController < API::ApiController
                                  .where('is_read = false AND created_at >= :date', date: params[:last_poll])
                                  .order('created_at DESC')
     @totals = {
-      total: current_user.notifications.count,
+      total: current_user.notifications.delivered_in_system(current_user).count,
       unread: current_user.notifications.where(is_read: false).count
     }
     render :index
