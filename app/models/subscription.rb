@@ -2,7 +2,7 @@
 
 # Subscription is an active or archived subscription of an User to a Plan
 class Subscription < ApplicationRecord
-  include NotifyWith::NotificationAttachedObject
+  include NotificationAttachedObject
 
   belongs_to :plan
   belongs_to :statistic_profile

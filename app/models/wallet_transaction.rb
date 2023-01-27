@@ -3,6 +3,7 @@
 # track of all transactions payed using the given wallet
 class WalletTransaction < ApplicationRecord
   include AmountConcern
+  include NotificationAttachedObject
 
   belongs_to :invoicing_profile
   belongs_to :wallet

@@ -3,9 +3,7 @@
 # User is a physical or moral person with its authentication parameters
 # It is linked to the Profile model with hold information about this person (like address, name, etc.)
 class User < ApplicationRecord
-  include NotifyWith::NotificationReceiver
-  include NotifyWith::NotificationAttachedObject
-
+  include NotificationAttachedObject
   include SingleSignOnConcern
   include UserRoleConcern
   include UserRessourcesConcern
@@ -51,6 +49,8 @@ class User < ApplicationRecord
 
   has_many :proof_of_identity_files, dependent: :destroy
   has_many :proof_of_identity_refusals, dependent: :destroy
+
+  has_many :notifications, as: :receiver, dependent: :destroy
 
   # fix for create admin user
   before_save do

@@ -2,7 +2,7 @@
 
 # Invoice correspond to a single purchase made by an user. This purchase is linked to one or many invoice_items
 class Invoice < PaymentDocument
-  include NotifyWith::NotificationAttachedObject
+  include NotificationAttachedObject
   require 'fileutils'
   scope :only_invoice, -> { where(type: nil) }
 

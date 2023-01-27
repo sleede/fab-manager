@@ -2,7 +2,7 @@
 
 # Event is an happening organized by the Fablab about a general topic, which does not involve Machines or trainings member's skills.
 class Event < ApplicationRecord
-  include NotifyWith::NotificationAttachedObject
+  include NotificationAttachedObject
   include ApplicationHelper
 
   has_one :event_image, as: :viewable, dependent: :destroy

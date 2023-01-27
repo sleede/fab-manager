@@ -236,10 +236,6 @@ GEM
     nokogiri (1.13.10)
       mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
-    notify_with (0.0.2)
-      jbuilder (~> 2.0)
-      rails (>= 4.2.0)
-      responders (~> 2.0)
     oauth2 (1.4.4)
       faraday (>= 0.8, < 2.0)
       jwt (>= 1.0, < 3.0)
@@ -531,7 +527,6 @@ DEPENDENCIES
   message_format
   mini_magick
   minitest-reporters
-  notify_with
   oj
   omniauth (~> 1.9.2)
   omniauth-oauth2

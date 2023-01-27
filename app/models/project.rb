@@ -4,7 +4,7 @@
 # It can describe the steps taken by the fab-user to build his object, provide photos, description, attached CAO files, etc.
 class Project < ApplicationRecord
   include AASM
-  include NotifyWith::NotificationAttachedObject
+  include NotificationAttachedObject
   include OpenlabSync
   include PgSearch::Model
 
