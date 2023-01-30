@@ -153,6 +153,7 @@ pt:
             history: "History"
             no_reservation: "No reservation"
             show_more: "Show more"
+            cancelled_slot: "Cancelled"
           credits_panel:
             title: "My credits"
             info: "Your subscription comes with free credits you can use on reservations"
@@ -166,7 +167,8 @@ pt:
             countdown: "Countdown"
             history: "History"
             consumed_hours: "H consumed"
-            cta_info: "You can buy prepaid hours packs to book machines and benefit from discounts"
+            cta_info: "You can buy prepaid hours packs to book machines and benefit from discounts. Choose a machine to buy a corresponding pack."
+            select_machine: "Select a machine"
             cta_button: "Buy a pack"
       #public profil of a member
       members_show:
