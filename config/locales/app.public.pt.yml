@@ -169,13 +169,12 @@ pt:
       projects_list:
         the_fablab_projects: "The projects"
         add_a_project: "Adicionar projeto"
-        search_over_the_whole_network: "Pesquisar em todos os FabLabs"
+        network_search: "Fab-manager network"
         tooltip_openlab_projects_switch: "A busca em todos os FabLabs busca projetos em todos os FabLabs que usam o Fab-manager !"
         openlab_search_not_available_at_the_moment: "A busca em toda a rede de FabLabs não está disponível no momento. Você pode procurar por projetos nesta plataforma."
         project_search_result_is_empty: "Desculpe, nós não achamos nenhum resultado para sua pesquisa."
         reset_all_filters: "Resetar todos os filtros"
         keywords: "Palavras-chave"
-        search: "Procurar"
         all_projects: "Todos os projetos"
         my_projects: "Meus Projetos"
         projects_to_whom_i_take_part_in: "Projetos que eu participo"
@@ -184,6 +183,9 @@ pt:
         all_materials: "Todos os materiais"
         load_next_projects: "Carregar próximos projetos"
         rough_draft: "Rascunho"
+      status_filter:
+        all_statuses: "All statuses"
+        select_status: "Select a status"
       #details of a projet
       projects_show:
         rough_draft: "Rascunho"
@@ -213,6 +215,7 @@ pt:
         message_is_required: "Menssagem é obrigatório."
         report: "Enviar"
         do_you_really_want_to_delete_this_project: "Você quer realmente deletar esse projeto?"
+        status: "Status"
       #list of machines
       machines_list:
         the_fablab_s_machines: "The machines"
@@ -230,7 +233,7 @@ pt:
         status_enabled: "Ativadas"
         status_disabled: "Desabilitadas"
         status_all: "Todas"
-        filter_by_machine_category: "Filter by category"
+        filter_by_machine_category: "Filter by category:"
         all_machines: "All machines"
       machine_card:
         book: "Reservar"
