@@ -178,7 +178,7 @@ fr:
   trainings:
     i_ve_reserved: "J'ai réservé"
     completed: "Complet"
-    refund_for_auto_cancel: "This training session was cancelled due to an insufficient number of participants."
+    refund_for_auto_cancel: "Cette session de formation a été annulée en raison d'un nombre insuffisant de participants."
   #error messages when updating an event
   events:
     error_deleting_reserved_price: "Impossible de supprimer le tarif demandé car il est associé à des réservations"
@@ -296,9 +296,9 @@ fr:
       notify_admin_subscription_will_expire_in_7_days:
         USER_s_subscription_will_expire_in_7_days: "L'abonnement de %{USER} expire dans 7 jours."
       notify_admin_training_auto_cancelled:
-        auto_cancelled_training: "The %{TRAINING} training session scheduled for %{DATE}, has been automatically canceled due to an insufficient number of participants."
-        auto_refund: "The members were automatically refunded on their wallet."
-        manual_refund: "Please refund each members."
+        auto_cancelled_training: "La session de formation %{TRAINING} prévue le %{DATE} a été automatiquement annulée en raison d'un nombre insuffisant de participants."
+        auto_refund: "Les membres ont été automatiquement remboursés sur leur porte-monnaie."
+        manual_refund: "Veuillez rembourser chaque membre."
       notify_admin_user_group_changed:
         user_NAME_changed_his_group_html: "L'utilisateur <strong><em>{NAME}</strong></em> a changé de groupe." #messageFormat interpolation
       notify_admin_user_merged:
@@ -330,12 +330,12 @@ fr:
       notify_member_subscription_will_expire_in_7_days:
         your_subscription_will_expire_in_7_days: "Votre abonnement arrive à échéance dans 7 jours."
       notify_member_training_authorization_expired:
-        training_authorization_revoked: "Your authorization to use %{MACHINES} has been revoked because it has expired."
+        training_authorization_revoked: "Votre autorisation d'utiliser %{MACHINES} a été révoquée car elle a expiré."
       notify_member_training_auto_cancelled:
-        auto_cancelled_training: "The %{TRAINING} training session scheduled for %{DATE}, has been canceled due to an insufficient number of participants."
-        auto_refund: "You were refunded on your wallet."
+        auto_cancelled_training: "La session de formation %{TRAINING} prévue le %{DATE} a été automatiquement annulée en raison d'un nombre insuffisant de participants."
+        auto_refund: "Vous avez été remboursé sur votre porte-monnaie."
       notify_member_training_invalidated:
-        invalidated: "Your authorization to use %{MACHINES} has been invalidated due to a lack of reservations."
+        invalidated: "Votre autorisation d'utiliser %{MACHINES} a été invalidée en raison d'un manque de réservations."
       notify_partner_subscribed_plan:
         subscription_partner_PLAN_has_been_subscribed_by_USER_html: "L'abonnement partenaire <strong><em>%{PLAN}</em></strong> a été souscrit par <strong><em>%{USER}</strong></em>."
       notify_project_author_when_collaborator_valid:
@@ -671,16 +671,16 @@ fr:
     external_id: "identifiant externe"
     prevent_invoices_zero: "empêcher la construction des factures à 0"
     invoice_VAT-name: "Nom de la TVA"
-    trainings_auto_cancel: "Trainings automatic cancellation"
-    trainings_auto_cancel_threshold: "Minimum participants for automatic cancellation"
-    trainings_auto_cancel_deadline: "Automatic cancellation deadline"
-    trainings_authorization_validity: "Trainings validity period"
-    trainings_authorization_validity_duration: "Trainings validity period duration"
-    trainings_invalidation_rule: "Trainings automatic invalidation"
-    trainings_invalidation_rule_period: "Grace period before invalidating a training"
+    trainings_auto_cancel: "Annulation automatique des formations"
+    trainings_auto_cancel_threshold: "Minimum de participants pour l'annulation automatique"
+    trainings_auto_cancel_deadline: "Délai d'annulation automatique"
+    trainings_authorization_validity: "Durée de validité des formations"
+    trainings_authorization_validity_duration: "Durée de la période de validité des formations"
+    trainings_invalidation_rule: "Invalidation automatique des formations"
+    trainings_invalidation_rule_period: "Période de grâce avant d'invalider une formation"
   #statuses of projects
   statuses:
-    new: "New"
-    pending: "Pending"
-    done: "Done"
-    abandoned: "Abandoned"
+    new: "Nouveau"
+    pending: "En attente"
+    done: "Terminé"
+    abandoned: "Abandonné"
