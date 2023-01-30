@@ -6,4 +6,6 @@ class NotificationType < ApplicationRecord
   has_many :notification_preferences, dependent: :destroy
 
   validates :name, uniqueness: true, presence: true
+  validates :category, presence: true
+  validates :is_configurable, inclusion: { in: [true, false] }
 end

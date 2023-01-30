@@ -25,7 +25,7 @@ class API::NotificationsController < API::ApiController
     end
     @totals = {
       total: current_user.notifications.delivered_in_system(current_user).count,
-      unread: current_user.notifications.where(is_read: false).count
+      unread: current_user.notifications.delivered_in_system(current_user).where(is_read: false).count
     }
     render :index
   end
@@ -33,6 +33,7 @@ class API::NotificationsController < API::ApiController
   def last_unread
     loop do
       @notifications = current_user.notifications
+                                   .delivered_in_system(current_user)
                                    .includes(:attached_object)
                                    .where(is_read: false)
                                    .limit(3)
@@ -42,7 +43,7 @@ class API::NotificationsController < API::ApiController
     end
     @totals = {
       total: current_user.notifications.delivered_in_system(current_user).count,
-      unread: current_user.notifications.where(is_read: false).count
+      unread: current_user.notifications.delivered_in_system(current_user).where(is_read: false).count
     }
     render :index
   end
@@ -53,7 +54,7 @@ class API::NotificationsController < API::ApiController
                                  .order('created_at DESC')
     @totals = {
       total: current_user.notifications.delivered_in_system(current_user).count,
-      unread: current_user.notifications.where(is_read: false).count
+      unread: current_user.notifications.delivered_in_system(current_user).where(is_read: false).count
     }
     render :index
   end

@@ -1,0 +1,30 @@
+.notification-inline {
+  padding: 2rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--gray-soft-darkest);
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  .date {
+    width: 160px;
+    flex-shrink: 0;
+  }
+
+  .message {
+    margin: 0 4rem;
+    flex-grow: 1;
+    text-align: left;
+  }
+
+  @media (max-width: 1054px) {
+    flex-direction: column;
+    gap: 2rem;
+    .message {
+      margin: 0;
+    }
+  }
+}

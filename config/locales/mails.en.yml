@@ -21,7 +21,7 @@ en:
         token_if_link_problem: "If you experience issues with the link, you can enter the following code at your first connection attempt:"
   notifications_mailer:
     notify_user_user_group_changed:
-      subject: "Your have changed group"
+      subject: "You have changed group"
       body:
         warning: "You have changed group. Inspections can be conducted at the lab to verify the legitimacy of this change."
         user_invalidated: "Your account was invalidated, please upload your new supporting documents to validate your account."

@@ -2412,3 +2412,6 @@ en:
         cta_switch: "Display a button"
         cta_label: "Button label"
         cta_url: "Button link"
+      notifications_center:
+        notifications_list: "All notifications"
+        notifications_settings: "My notifications preferences"

@@ -251,6 +251,8 @@ en:
         i_change: "I change"
       notifications:
         notifications_center: "Notifications center"
+      notifications_list:
+        notifications: "All notifications"
         mark_all_as_read: "Mark all as read"
         date: "Date"
         notif_title: "Title"
@@ -258,3 +260,5 @@ en:
         archives: "Archives"
         no_archived_notifications: "No archived notifications."
         load_the_next_notifications: "Load the next notifications..."
+      notification_line:
+        mark_as_read: "Mark as read"
