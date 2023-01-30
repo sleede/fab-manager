@@ -415,7 +415,7 @@ pt:
           default_to_openlab: "Mostrar OpenLab por padrão"
       projects_setting:
         add: "Add"
-        actions_controls: "Actions Controls"
+        actions_controls: "Actions"
         name: "Name"
       projects_setting_option:
         edit: "Edit"
@@ -446,7 +446,6 @@ pt:
         active_true: "Yes"
         active_false: "No"
         validation_rule: "Lapsed without reservation"
-        override: "(Modified)"
         select_a_training: "Selecione um treinamento"
         training: "Treinamento"
         date: "Data"
@@ -2395,7 +2394,7 @@ pt:
         content_is_required: "You must provide a content. If you wish to disable the banner, toggle the switch above this field."
         label_is_required: "You must provide a label. If you wish to disable the button, toggle the switch above this field."
         url_is_required: "You must provide a link for your button."
-        url_must_be_safe: "The button link should start with http://www or https://www ."
+        url_must_be_safe: "The button link should start with http://... or https://..."
         title: "Banner"
         switch: "Display the banner"
         cta_switch: "Display a button"
