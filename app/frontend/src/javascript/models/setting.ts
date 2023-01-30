@@ -240,7 +240,7 @@ export const trainingsSettings = [
   'trainings_authorization_validity',
   'trainings_authorization_validity_duration',
   'trainings_invalidation_rule',
-  'trainings_invalidation_rule_period'
+  'trainings_invalidation_rule_period',
   'trainings_auto_cancel_deadline',
   'trainings_banner_active',
   'trainings_banner_text',
