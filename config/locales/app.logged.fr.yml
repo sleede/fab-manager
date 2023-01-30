@@ -153,7 +153,7 @@ fr:
             history: "Historique"
             no_reservation: "Aucune réservation"
             show_more: "Afficher plus"
-            cancelled_slot: "Cancelled"
+            cancelled_slot: "Annulé"
           credits_panel:
             title: "Mes crédits"
             info: "Avec votre abonnement, vous bénéficiez de crédits gratuits que vous pouvez utiliser sur les réservations"
@@ -168,7 +168,7 @@ fr:
             history: "Historique"
             consumed_hours: "H consommée(s)"
             cta_info: "Vous pouvez acheter des packs d'heures prépayées pour les machines. Ces packs vous permettent de bénéficier de remises."
-            select_machine: "Select a machine"
+            select_machine: "Sélectionnez une machine"
             cta_button: "Acheter un pack"
       #public profil of a member
       members_show:
