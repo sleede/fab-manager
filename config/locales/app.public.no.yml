@@ -169,13 +169,12 @@
       projects_list:
         the_fablab_projects: "The projects"
         add_a_project: "Legg til et prosjekt"
-        search_over_the_whole_network: "Søk over hele Fab-manager-nettverket"
+        network_search: "Fab-manager network"
         tooltip_openlab_projects_switch: "Søk i hele nettverket lar deg søke i prosjekter for hver Fab-manager ved hjelp av denne funksjonen!"
         openlab_search_not_available_at_the_moment: "Det er ikke mulig å søke over hele nettverket for øyeblikket. Du kan fortsatt søke over prosjektene her."
         project_search_result_is_empty: "Beklager, fant vi ingen resultater som samsvarte med dine søkekriterier."
         reset_all_filters: "Tilbakestill alle filtre"
         keywords: "Nøkkelord"
-        search: "Søk"
         all_projects: "Alle prosjekter"
         my_projects: "Mine prosjekter"
         projects_to_whom_i_take_part_in: "Prosjekter jeg deltar i"
@@ -184,6 +183,9 @@
         all_materials: "Alle materialer"
         load_next_projects: "Last neste prosjekt"
         rough_draft: "Tidlig utkast"
+      status_filter:
+        all_statuses: "All statuses"
+        select_status: "Select a status"
       #details of a projet
       projects_show:
         rough_draft: "Utkast"
@@ -213,6 +215,7 @@
         message_is_required: "Melding er påkrevd."
         report: "Rapporter"
         do_you_really_want_to_delete_this_project: "Vil du virkelig slette dette prosjektet?"
+        status: "Status"
       #list of machines
       machines_list:
         the_fablab_s_machines: "The machines"
@@ -230,7 +233,7 @@
         status_enabled: "Aktivert"
         status_disabled: "Deaktivert"
         status_all: "Alle"
-        filter_by_machine_category: "Filter by category"
+        filter_by_machine_category: "Filter by category:"
         all_machines: "All machines"
       machine_card:
         book: "Reserver"
