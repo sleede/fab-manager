@@ -152,6 +152,7 @@ fr:
         themes: "Thématiques"
         tags: "Étiquettes"
         save_as_draft: "Enregistrer comme brouillon"
+        status: "Statut"
       #button to book a machine reservation
       reserve_button:
         book_this_machine: "Réserver cette machine"

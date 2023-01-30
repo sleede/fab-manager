@@ -153,6 +153,7 @@ zu:
             history: "crwdns36367:0crwdne36367:0"
             no_reservation: "crwdns36369:0crwdne36369:0"
             show_more: "crwdns36371:0crwdne36371:0"
+            cancelled_slot: "crwdns36633:0crwdne36633:0"
           credits_panel:
             title: "crwdns36373:0crwdne36373:0"
             info: "crwdns36375:0crwdne36375:0"
@@ -167,6 +168,7 @@ zu:
             history: "crwdns36391:0crwdne36391:0"
             consumed_hours: "crwdns36393:0crwdne36393:0"
             cta_info: "crwdns36395:0crwdne36395:0"
+            select_machine: "crwdns36635:0crwdne36635:0"
             cta_button: "crwdns36397:0crwdne36397:0"
       #public profil of a member
       members_show:
