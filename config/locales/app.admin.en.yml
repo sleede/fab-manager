@@ -446,7 +446,6 @@ en:
         active_true: "Yes"
         active_false: "No"
         validation_rule: "Lapsed without reservation"
-        override: "(Modified)"
         select_a_training: "Select a training"
         training: "Training"
         date: "Date"
