@@ -131,6 +131,19 @@ es:
         your_plan: "su plan de suscripción"
         expires_in_7_days: "expirará en 7 dias."
         to_renew_your_plan_follow_the_link: "Por favor, haga clic en el siguiente enlace para renovar su suscripción"
+    notify_member_training_authorization_expired:
+      subject: "Your authorization was revoked"
+      body:
+        training_expired_html: "<p>You took the %{TRAINING} training, on %{DATE}.</p><p>Your authorization for this training, valid for %{PERIOD} months, has expired.</p><p>Please validate it again in order to be able to reserve the %{MACHINES}</p>."
+    notify_member_training_auto_cancelled:
+      subject: "Your training session was cancelled"
+      body:
+        cancelled_training: "The %{TRAINING} training session scheduled for %{DATE}, from %{START} to %{END} has been canceled due to an insufficient number of participants."
+        auto_refund: "You were refunded on your wallet and a credit note should be available."
+    notify_member_training_invalidated:
+      subject: "Your authorization was invalidated"
+      body:
+        training_invalidated_html: "<p>You took the %{TRAINING} training, on %{DATE} giving you access to the %{MACHINES}.</p><p>Due to the lack of reservations for one of these machines during the last %{PERIOD} months, your authorization has been invalidated.</p><p>Please validate the training again in order to continue reserving these machines.</p>."
     notify_member_subscription_is_expired:
       subject: "Su suscripción ha expirado"
       body:
@@ -142,6 +155,12 @@ es:
       subject: "La suscripción de un miembre expira en 7 días"
       body:
         subscription_will_expire_html: "El plan de suscripción de %{NAME} <strong><em>%{PLAN}</em></strong> expirará en 7 días."
+    notify_admin_training_auto_cancelled:
+      subject: "A training was automatically cancelled"
+      body:
+        cancelled_training: "The %{TRAINING} training session scheduled for %{DATE}, from %{START} to %{END} has been automatically canceled due to an insufficient number of participants."
+        auto_refund: "The members who have booked this training session were automatically refunded on their wallet and credit notes was generated."
+        manual_refund: "Please manually refund all members who have booked this training session and generate the credit notes."
     notify_admin_subscription_is_expired:
       subject: "La suscripción de un miembro ha expirado"
       body:
