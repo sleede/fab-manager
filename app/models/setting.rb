@@ -172,7 +172,7 @@ class Setting < ApplicationRecord
                              trainings_authorization_validity
                              trainings_authorization_validity_duration
                              trainings_invalidation_rule
-                             trainings_invalidation_rule_period] }
+                             trainings_invalidation_rule_period
                              trainings_auto_cancel_deadline
                              machines_banner_active
                              machines_banner_text
