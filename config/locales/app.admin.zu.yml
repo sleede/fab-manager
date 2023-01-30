@@ -446,7 +446,6 @@ zu:
         active_true: "crwdns36541:0crwdne36541:0"
         active_false: "crwdns36543:0crwdne36543:0"
         validation_rule: "crwdns36545:0crwdne36545:0"
-        override: "crwdns36547:0crwdne36547:0"
         select_a_training: "crwdns24382:0crwdne24382:0"
         training: "crwdns24384:0crwdne24384:0"
         date: "crwdns24386:0crwdne24386:0"
