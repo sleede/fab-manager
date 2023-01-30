@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- Updated shakapaker to 6.5.5
+
 ## v5.6.8 2023 January 26
 
 - Fix a bug: plan prices are not reported correctly in the interface
