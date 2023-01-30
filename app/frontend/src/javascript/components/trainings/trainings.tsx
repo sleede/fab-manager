@@ -9,7 +9,7 @@ import Select from 'react-select';
 import { SelectOption } from '../../models/select';
 import { CalendarBlank } from 'phosphor-react';
 import { useEffect, useState } from 'react';
-import type { Training } from '../../models/training';
+import type { Training, TrainingIndexFilter } from '../../models/training';
 import type { Machine } from '../../models/machine';
 import TrainingAPI from '../../api/training';
 import MachineAPI from '../../api/machine';
@@ -63,7 +63,11 @@ export const Trainings: React.FC<TrainingsProps> = ({ onError, onSuccess }) => {
   }, []);
 
   useEffect(() => {
-    TrainingAPI.index(typeof filter === 'boolean' ? { disabled: filter } : {})
+    const trainingsFilters = Object.assign(
+      { requested_attributes: ['override_settings'] },
+      (typeof filter === 'boolean') ? { disabled: filter } : {}
+    ) as TrainingIndexFilter;
+    TrainingAPI.index(trainingsFilters)
       .then(setTrainings)
       .catch(onError);
   }, [filter]);
@@ -143,11 +147,8 @@ export const Trainings: React.FC<TrainingsProps> = ({ onError, onSuccess }) => {
         </div>
 
         <div className='trainings-list'>
-          {/* map
-            ajouter la classe .is-override si l'item a au moins un réglage spécifique (différent des paramètres généraux)
-          */}
           {trainings.map(training => (
-            <div className='trainings-list-item' key={training.id}>
+            <div className={`trainings-list-item ${training.override_settings ? 'is-override' : ''}`} key={training.id}>
               <div className='name'>
                 <span>{t('app.admin.trainings.name')}</span>
                 <p>{training.name}</p>

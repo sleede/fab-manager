@@ -59,6 +59,14 @@ class Trainings::AutoCancelService
       training.update(params)
     end
 
+    # @param training [Training]
+    # @return [Boolean]
+    def override_settings?(training)
+      training.auto_cancel.to_s != Setting.find_by(name: 'trainings_auto_cancel').value.to_s ||
+        training.auto_cancel_threshold.to_s != Setting.find_by(name: 'trainings_auto_cancel_threshold').value.to_s ||
+        training.auto_cancel_deadline.to_s != Setting.find_by(name: 'trainings_auto_cancel_deadline').value.to_s
+    end
+
     private
 
     # @param reservation [Reservation]

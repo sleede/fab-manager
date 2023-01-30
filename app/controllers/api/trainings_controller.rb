@@ -8,6 +8,7 @@ class API::TrainingsController < API::ApiController
   before_action :set_training, only: %i[update destroy]
 
   def index
+    @requested_attributes = params[:requested_attributes]
     @trainings = TrainingService.list(params)
   end
 

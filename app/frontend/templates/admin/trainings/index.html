@@ -30,49 +30,6 @@
         </uib-tab>
         <uib-tab heading="{{ 'app.admin.trainings.all_trainings' | translate }}" index="0" class="manage-trainings">
           <trainings on-error="onError" on-success="onSuccess"></trainings>
-
-          <div class="m-t m-b">
-            <button type="button" class="btn btn-warning" ui-sref="app.admin.trainings_new" ng-show="isAuthorized('admin')">
-              <i class="fa fa-plus m-r"></i>
-              <span translate>{{ 'app.admin.trainings.add_a_new_training' }}</span>
-            </button>
-            <div class="form-group pull-right filter-trainings">
-              <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-filter"></i></span>
-                <select ng-model="trainingFiltering" class="form-control">
-                  <option ng-repeat="status in filterDisabled" value="{{status}}" translate>{{ 'app.admin.trainings.status_'+status }}</option>
-                </select>
-              </div>
-            </div>
-          </div>
-
-          <table class="table trainings-list">
-            <thead>
-            <tr>
-              <th style="width:20%" translate>{{ 'app.admin.trainings.name' }}</th>
-              <th ng-if="enableMachinesModule" style="width:40%" translate>{{ 'app.admin.trainings.associated_machines' }}</th>
-              <th style="width:20%" translate>{{ 'app.admin.trainings.capacity' }}</th>
-              <th style="width:20%"></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr ng-repeat="training in trainings | filterDisabled:trainingFiltering" ng-class="{'disabled-line' : training.disabled && trainingFiltering === 'all'}">
-              <td>{{ training.name }}</td>
-              <td ng-if="enableMachinesModule">{{ showMachines(training) }}</td>
-              <td>{{ training.nb_total_places }}</td>
-              <td>
-                <div class="buttons" ng-show="isAuthorized('admin')">
-                  <button class="btn btn-default" ui-sref="app.admin.trainings_edit({id:training.id})">
-                    <i class="fa fa-edit"></i> {{ 'app.shared.buttons.edit' | translate }}
-                  </button>
-                  <button class="btn btn-danger" ng-click="removeTraining($index, training)">
-                    <i class="fa fa-trash-o"></i>
-                  </button>
-                </div>
-              </td>
-            </tr>
-            </tbody>
-          </table>
         </uib-tab>
 
         <uib-tab heading="{{ 'app.admin.trainings.trainings_monitoring' | translate }}" class="post-tracking" index="2">

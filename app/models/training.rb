@@ -64,6 +64,12 @@ class Training < ApplicationRecord
     reservations.empty?
   end
 
+  def override_settings?
+    Trainings::AutoCancelService.override_settings?(self) ||
+      Trainings::InvalidationService.override_settings?(self) ||
+      Trainings::AuthorizationService.override_settings?(self)
+  end
+
   private
 
   def create_trainings_pricings

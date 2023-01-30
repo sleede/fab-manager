@@ -47,5 +47,12 @@ class Trainings::InvalidationService
       params[:invalidation_period] = duration.value unless duration.nil?
       training.update(params)
     end
+
+    # @param training [Training]
+    # @return [Boolean]
+    def override_settings?(training)
+      training.invalidation.to_s != Setting.find_by(name: 'trainings_invalidation_rule').value.to_s ||
+        training.invalidation_period.to_s != Setting.find_by(name: 'trainings_invalidation_rule_period').value.to_s
+    end
   end
 end

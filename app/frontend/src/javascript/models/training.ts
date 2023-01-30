@@ -31,11 +31,12 @@ export interface Training {
       is_valid: boolean
     }>
   }>,
-  advanced_accounting_attributes?: AdvancedAccounting
+  advanced_accounting_attributes?: AdvancedAccounting,
+  override_settings?: boolean
 }
 
 export interface TrainingIndexFilter extends ApiFilter {
   disabled?: boolean,
   public_page?: boolean,
-  requested_attributes?: ['availabilities'],
+  requested_attributes?: ['availabilities' | 'override_settings'],
 }
