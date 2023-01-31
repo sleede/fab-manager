@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_19_143245) do
+ActiveRecord::Schema.define(version: 2023_01_31_104958) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
@@ -621,7 +621,7 @@ ActiveRecord::Schema.define(version: 2023_01_19_143245) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer "training_credit_nb", default: 0
-    t.boolean "is_rolling", default: true
+    t.boolean "is_rolling"
     t.text "description"
     t.string "type"
     t.string "base_name"
