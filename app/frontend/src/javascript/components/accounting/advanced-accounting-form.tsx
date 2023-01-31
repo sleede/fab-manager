@@ -24,7 +24,6 @@ export const AdvancedAccountingForm = <TFieldValues extends FieldValues>({ regis
   }, []);
 
   return (<>
-    <p>toto</p>
     {isEnabled && <>
       <header>
         <p className="title" role="heading">{t('app.admin.advanced_accounting_form.title')}</p>
