@@ -8,10 +8,15 @@ describe('FormatLib', () => {
     const str = FormatLib.date(new Date('2023-01-12T12:00:00+0100'));
     expect(str).toBe('12/01/2023');
   });
-  test('format an iso8601 short date', () => {
+  test('format an iso8601 short date in french format', () => {
     Fablab.intl_locale = 'fr-FR';
     const str = FormatLib.date('2023-01-12');
     expect(str).toBe('12/01/2023');
+  });
+  test('format an iso8601 short date in canadian format', () => {
+    Fablab.intl_locale = 'fr-CA';
+    const str = FormatLib.date('2023-02-27');
+    expect(str).toBe('2023-02-27');
   });
   test('format an iso8601 date', () => {
     Fablab.intl_locale = 'fr-CA';
