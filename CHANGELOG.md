@@ -1,7 +1,9 @@
 # Changelog Fab-manager
 
 - Updated shakapaker to 6.5.5
-- Fix a bug: invalid month in shown in date format
+- Fix a bug: unable to create a recurrent event
+- Fix a bug: invalid month in date format
+- Fix a bug: do not show theme and age-range fields in event form if no options were set
 - Fix a bug: new setups doesn't log
 
 ## v5.6.8 2023 January 26

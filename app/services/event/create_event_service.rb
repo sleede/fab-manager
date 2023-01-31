@@ -65,7 +65,7 @@ class Event::CreateEventService
     end
 
     def occurrence_advanced_accounting(event)
-      AdvancedAccounting.new(code: event.advanced_accounting.code, analytical_section: event.advanced_accounting.analytical_section)
+      AdvancedAccounting.new(code: event.advanced_accounting&.code, analytical_section: event.advanced_accounting&.analytical_section)
     end
   end
 end
