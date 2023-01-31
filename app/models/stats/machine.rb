@@ -7,4 +7,5 @@ class Stats::Machine
   include StatReservationConcern
 
   attribute :machineId, Integer
+  attribute :machineDates, Array
 end

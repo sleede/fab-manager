@@ -48,6 +48,7 @@ class API::TrainingsController < API::ApiController
     head :no_content
   end
 
+  # This endpoint is used to get a list of trainings to validate
   def availabilities
     authorize Training
     @training = Training.find(params[:id])

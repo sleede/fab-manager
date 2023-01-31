@@ -7,4 +7,5 @@ class Stats::Space
   include StatReservationConcern
 
   attribute :spaceId, Integer
+  attribute :spaceDates, Array
 end

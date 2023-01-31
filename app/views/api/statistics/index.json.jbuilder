@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 json.array!(@statistics) do |s|
   json.extract! s, :id, :es_type_key, :label, :table, :ca
   json.additional_fields s.statistic_fields do |f|
@@ -12,8 +14,10 @@ json.array!(@statistics) do |s|
       json.extract! st, :id, :key, :label
     end
   end
-  json.graph do
-    json.chart_type s.statistic_graph.chart_type
-    json.limit s.statistic_graph.limit
-  end if s.statistic_graph
+  if s.statistic_graph
+    json.graph do
+      json.chart_type s.statistic_graph.chart_type
+      json.limit s.statistic_graph.limit
+    end
+  end
 end

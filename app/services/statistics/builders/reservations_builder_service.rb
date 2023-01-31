@@ -30,6 +30,8 @@ class Statistics::Builders::ReservationsBuilderService
 
     def add_custom_attributes(category, stat, reservation_data)
       stat = add_event_attributes(category, stat, reservation_data)
+      stat = add_machine_attributes(category, stat, reservation_data)
+      stat = add_space_attributes(category, stat, reservation_data)
       add_training_attributes(category, stat, reservation_data)
     end
 
@@ -47,6 +49,22 @@ class Statistics::Builders::ReservationsBuilderService
       return stat unless category == 'training'
 
       stat[:trainingDate] = reservation_data[:training_date]
+
+      stat
+    end
+
+    def add_machine_attributes(category, stat, reservation_data)
+      return stat unless category == 'machine'
+
+      stat[:machineDates] = reservation_data[:slot_dates]
+
+      stat
+    end
+
+    def add_space_attributes(category, stat, reservation_data)
+      return stat unless category == 'space'
+
+      stat[:spaceDates] = reservation_data[:slot_dates]
 
       stat
     end

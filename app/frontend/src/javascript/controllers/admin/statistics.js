@@ -647,7 +647,7 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
         }
       }
 
-      return angular.forEach($scope.selectedIndex.additional_fields, function (field) {
+      angular.forEach($scope.selectedIndex.additional_fields, function (field) {
         const filter = { key: field.key, label: field.label, values: [] };
         switch (field.data_type) {
           case 'index': filter.values.push('input_number'); break;
