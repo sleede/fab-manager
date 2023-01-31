@@ -75,4 +75,13 @@ class Trainings::InvalidationServiceTest < ActiveSupport::TestCase
     )
     assert_nil notification
   end
+
+  test 'training with default general parameters' do
+    assert_not Trainings::InvalidationService.override_settings?(@training)
+  end
+
+  test 'training with specific parameters' do
+    @training.update(invalidation: true, invalidation_period: 3)
+    assert Trainings::InvalidationService.override_settings?(@training)
+  end
 end

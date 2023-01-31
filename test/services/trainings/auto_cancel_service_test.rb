@@ -160,4 +160,13 @@ class Trainings::AutoCancelServiceTest < ActiveSupport::TestCase
     assert_equal transaction.transaction_type, 'credit'
     assert_equal transaction.amount, r.invoice_items.first.amount
   end
+
+  test 'training with default general parameters' do
+    assert_not Trainings::AutoCancelService.override_settings?(@training)
+  end
+
+  test 'training with specific parameters' do
+    @training.update(auto_cancel: true, auto_cancel_threshold: 3, auto_cancel_deadline: 24)
+    assert Trainings::AutoCancelService.override_settings?(@training)
+  end
 end

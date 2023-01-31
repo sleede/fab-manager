@@ -36,4 +36,13 @@ class Trainings::AuthorizationServiceTest < ActiveSupport::TestCase
     )
     assert_not_nil notification, 'user notification was not created'
   end
+
+  test 'training with default general parameters' do
+    assert_not Trainings::AuthorizationService.override_settings?(@training)
+  end
+
+  test 'training with specific parameters' do
+    @training.update(authorization: true, authorization_period: 3)
+    assert Trainings::AuthorizationService.override_settings?(@training)
+  end
 end

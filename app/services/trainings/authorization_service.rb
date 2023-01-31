@@ -46,8 +46,8 @@ class Trainings::AuthorizationService
     # @param training [Training]
     # @return [Boolean]
     def override_settings?(training)
-      training.authorization.to_s != Setting.find_by(name: 'trainings_authorization_validity').value.to_s ||
-        training.authorization_period.to_s != Setting.find_by(name: 'trainings_authorization_validity_duration').value.to_s
+      training.authorization.to_s != Setting.find_by(name: 'trainings_authorization_validity')&.value.to_s ||
+        training.authorization_period.to_s != Setting.find_by(name: 'trainings_authorization_validity_duration')&.value.to_s
     end
   end
 end

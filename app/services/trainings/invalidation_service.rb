@@ -51,8 +51,8 @@ class Trainings::InvalidationService
     # @param training [Training]
     # @return [Boolean]
     def override_settings?(training)
-      training.invalidation.to_s != Setting.find_by(name: 'trainings_invalidation_rule').value.to_s ||
-        training.invalidation_period.to_s != Setting.find_by(name: 'trainings_invalidation_rule_period').value.to_s
+      training.invalidation.to_s != Setting.find_by(name: 'trainings_invalidation_rule')&.value.to_s ||
+        training.invalidation_period.to_s != Setting.find_by(name: 'trainings_invalidation_rule_period')&.value.to_s
     end
   end
 end
