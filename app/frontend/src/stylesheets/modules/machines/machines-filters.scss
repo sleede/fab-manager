@@ -1,7 +1,5 @@
 .machines-filters {
-  max-width: 1600px;
   width: 100%;
-  margin: 0 auto;
   padding: 0.8rem 2.4rem;
   display: flex;
   flex-wrap: wrap;
@@ -27,14 +25,3 @@
     p { margin: 0 0.8rem 0 0; }
   }
 }
-
-//@media screen and (max-width: 720px){
-//  .machines-filters {
-//    display: block;
-//    .filter-item {
-//      padding-right: 0 !important;
-//      display: block;
-//      width: 100%;
-//    }
-//  }
-//}

@@ -1,4 +1,6 @@
 .machines-list {
+  max-width: 1600px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   gap: 1.6rem;
@@ -17,9 +19,7 @@
   }
 
   .all-machines {
-    max-width: 1600px;
     width: 100%;
-    margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
     gap: 3.2rem;
