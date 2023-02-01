@@ -455,6 +455,7 @@ en:
     components: "Components"
     machines: "Machines"
     user_id: "User ID"
+    group: "Group"
     bookings: "Bookings"
     hours_number: "Hours number"
     tickets_number: "Tickets number"

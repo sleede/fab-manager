@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-
 # Database helpers
 module Database; end
 
@@ -10,9 +9,9 @@ class Database::Sequence
     # update the ID sequence for the given table
     # @param table_name [String]
     def update_id_seq(table_name)
-      return unless @connection.instance_values['config'][:adapter] == 'postgresql'
+      return unless ActiveRecord::Base.connection.instance_values['config'][:adapter] == 'postgresql'
 
-      @connection.execute <<~SQL.squish
+      ActiveRecord::Base.connection.execute <<~SQL.squish
         WITH max_id AS (
          SELECT max(id) as max FROM #{table_name}
         )

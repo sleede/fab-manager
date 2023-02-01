@@ -150,6 +150,110 @@ ActiveRecord::Schema.define(version: 2023_01_31_104958) do
     t.index ["tag_id"], name: "index_availability_tags_on_tag_id"
   end
 
+  create_table "cart_item_coupons", force: :cascade do |t|
+    t.bigint "coupon_id"
+    t.bigint "customer_profile_id"
+    t.bigint "operator_profile_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["coupon_id"], name: "index_cart_item_coupons_on_coupon_id"
+    t.index ["customer_profile_id"], name: "index_cart_item_coupons_on_customer_profile_id"
+    t.index ["operator_profile_id"], name: "index_cart_item_coupons_on_operator_profile_id"
+  end
+
+  create_table "cart_item_event_reservation_tickets", force: :cascade do |t|
+    t.integer "booked"
+    t.bigint "event_price_category_id"
+    t.bigint "cart_item_event_reservation_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cart_item_event_reservation_id"], name: "index_cart_item_tickets_on_cart_item_event_reservation"
+    t.index ["event_price_category_id"], name: "index_cart_item_tickets_on_event_price_category"
+  end
+
+  create_table "cart_item_event_reservations", force: :cascade do |t|
+    t.integer "normal_tickets"
+    t.bigint "event_id"
+    t.bigint "operator_profile_id"
+    t.bigint "customer_profile_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_profile_id"], name: "index_cart_item_event_reservations_on_customer_profile_id"
+    t.index ["event_id"], name: "index_cart_item_event_reservations_on_event_id"
+    t.index ["operator_profile_id"], name: "index_cart_item_event_reservations_on_operator_profile_id"
+  end
+
+  create_table "cart_item_free_extensions", force: :cascade do |t|
+    t.bigint "subscription_id"
+    t.datetime "new_expiration_date"
+    t.bigint "customer_profile_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_profile_id"], name: "index_cart_item_free_extensions_on_customer_profile_id"
+    t.index ["subscription_id"], name: "index_cart_item_free_extensions_on_subscription_id"
+  end
+
+  create_table "cart_item_payment_schedules", force: :cascade do |t|
+    t.bigint "plan_id"
+    t.bigint "coupon_id"
+    t.boolean "requested"
+    t.datetime "start_at"
+    t.bigint "customer_profile_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["coupon_id"], name: "index_cart_item_payment_schedules_on_coupon_id"
+    t.index ["customer_profile_id"], name: "index_cart_item_payment_schedules_on_customer_profile_id"
+    t.index ["plan_id"], name: "index_cart_item_payment_schedules_on_plan_id"
+  end
+
+  create_table "cart_item_prepaid_packs", force: :cascade do |t|
+    t.bigint "prepaid_pack_id"
+    t.bigint "customer_profile_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_profile_id"], name: "index_cart_item_prepaid_packs_on_customer_profile_id"
+    t.index ["prepaid_pack_id"], name: "index_cart_item_prepaid_packs_on_prepaid_pack_id"
+  end
+
+  create_table "cart_item_reservation_slots", force: :cascade do |t|
+    t.string "cart_item_type"
+    t.bigint "cart_item_id"
+    t.bigint "slot_id"
+    t.bigint "slots_reservation_id"
+    t.boolean "offered", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cart_item_type", "cart_item_id"], name: "index_cart_item_slots_on_cart_item"
+    t.index ["slot_id"], name: "index_cart_item_reservation_slots_on_slot_id"
+    t.index ["slots_reservation_id"], name: "index_cart_item_reservation_slots_on_slots_reservation_id"
+  end
+
+  create_table "cart_item_reservations", force: :cascade do |t|
+    t.string "reservable_type"
+    t.bigint "reservable_id"
+    t.bigint "plan_id"
+    t.boolean "new_subscription"
+    t.bigint "customer_profile_id"
+    t.bigint "operator_profile_id"
+    t.string "type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_profile_id"], name: "index_cart_item_reservations_on_customer_profile_id"
+    t.index ["operator_profile_id"], name: "index_cart_item_reservations_on_operator_profile_id"
+    t.index ["plan_id"], name: "index_cart_item_reservations_on_plan_id"
+    t.index ["reservable_type", "reservable_id"], name: "index_cart_item_reservations_on_reservable"
+  end
+
+  create_table "cart_item_subscriptions", force: :cascade do |t|
+    t.bigint "plan_id"
+    t.datetime "start_at"
+    t.bigint "customer_profile_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_profile_id"], name: "index_cart_item_subscriptions_on_customer_profile_id"
+    t.index ["plan_id"], name: "index_cart_item_subscriptions_on_plan_id"
+  end
+
   create_table "categories", id: :serial, force: :cascade do |t|
     t.string "name"
     t.datetime "created_at"
@@ -173,6 +277,7 @@ ActiveRecord::Schema.define(version: 2023_01_31_104958) do
     t.datetime "updated_at", null: false
     t.string "validity_per_user"
     t.integer "amount_off"
+    t.index ["code"], name: "index_coupons_on_code", unique: true
   end
 
   create_table "credits", id: :serial, force: :cascade do |t|
@@ -793,8 +898,10 @@ ActiveRecord::Schema.define(version: 2023_01_31_104958) do
     t.datetime "published_at"
     t.integer "author_statistic_profile_id"
     t.tsvector "search_vector"
+    t.bigint "status_id"
     t.index ["search_vector"], name: "projects_search_vector_idx", using: :gin
     t.index ["slug"], name: "index_projects_on_slug", unique: true
+    t.index ["status_id"], name: "index_projects_on_status_id"
   end
 
   create_table "projects_components", id: :serial, force: :cascade do |t|
@@ -899,13 +1006,15 @@ ActiveRecord::Schema.define(version: 2023_01_31_104958) do
     t.datetime "end_at"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer "availability_id"
+    t.integer "availability_id", null: false
+    t.jsonb "places", default: [], null: false
     t.index ["availability_id"], name: "index_slots_on_availability_id"
+    t.index ["places"], name: "index_slots_on_places", using: :gin
   end
 
   create_table "slots_reservations", id: :serial, force: :cascade do |t|
-    t.integer "slot_id"
-    t.integer "reservation_id"
+    t.integer "slot_id", null: false
+    t.integer "reservation_id", null: false
     t.datetime "ex_start_at"
     t.datetime "ex_end_at"
     t.datetime "canceled_at"
@@ -1035,6 +1144,12 @@ ActiveRecord::Schema.define(version: 2023_01_31_104958) do
     t.index ["statistic_index_id"], name: "index_statistic_types_on_statistic_index_id"
   end
 
+  create_table "statuses", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "stylesheets", id: :serial, force: :cascade do |t|
     t.text "contents"
     t.datetime "created_at", null: false
@@ -1084,6 +1199,13 @@ ActiveRecord::Schema.define(version: 2023_01_31_104958) do
     t.text "description"
     t.boolean "public_page", default: true
     t.boolean "disabled"
+    t.boolean "auto_cancel"
+    t.integer "auto_cancel_threshold"
+    t.integer "auto_cancel_deadline"
+    t.boolean "authorization"
+    t.integer "authorization_period"
+    t.boolean "invalidation"
+    t.integer "invalidation_period"
     t.index ["slug"], name: "index_trainings_on_slug", unique: true
   end
 
@@ -1217,6 +1339,28 @@ ActiveRecord::Schema.define(version: 2023_01_31_104958) do
   add_foreign_key "auth_provider_mappings", "auth_providers"
   add_foreign_key "availability_tags", "availabilities"
   add_foreign_key "availability_tags", "tags"
+  add_foreign_key "cart_item_coupons", "coupons"
+  add_foreign_key "cart_item_coupons", "invoicing_profiles", column: "customer_profile_id"
+  add_foreign_key "cart_item_coupons", "invoicing_profiles", column: "operator_profile_id"
+  add_foreign_key "cart_item_event_reservation_tickets", "cart_item_event_reservations"
+  add_foreign_key "cart_item_event_reservation_tickets", "event_price_categories"
+  add_foreign_key "cart_item_event_reservations", "events"
+  add_foreign_key "cart_item_event_reservations", "invoicing_profiles", column: "customer_profile_id"
+  add_foreign_key "cart_item_event_reservations", "invoicing_profiles", column: "operator_profile_id"
+  add_foreign_key "cart_item_free_extensions", "invoicing_profiles", column: "customer_profile_id"
+  add_foreign_key "cart_item_free_extensions", "subscriptions"
+  add_foreign_key "cart_item_payment_schedules", "coupons"
+  add_foreign_key "cart_item_payment_schedules", "invoicing_profiles", column: "customer_profile_id"
+  add_foreign_key "cart_item_payment_schedules", "plans"
+  add_foreign_key "cart_item_prepaid_packs", "invoicing_profiles", column: "customer_profile_id"
+  add_foreign_key "cart_item_prepaid_packs", "prepaid_packs"
+  add_foreign_key "cart_item_reservation_slots", "slots"
+  add_foreign_key "cart_item_reservation_slots", "slots_reservations"
+  add_foreign_key "cart_item_reservations", "invoicing_profiles", column: "customer_profile_id"
+  add_foreign_key "cart_item_reservations", "invoicing_profiles", column: "operator_profile_id"
+  add_foreign_key "cart_item_reservations", "plans"
+  add_foreign_key "cart_item_subscriptions", "invoicing_profiles", column: "customer_profile_id"
+  add_foreign_key "cart_item_subscriptions", "plans"
   add_foreign_key "event_price_categories", "events"
   add_foreign_key "event_price_categories", "price_categories"
   add_foreign_key "events", "categories"
@@ -1260,6 +1404,7 @@ ActiveRecord::Schema.define(version: 2023_01_31_104958) do
   add_foreign_key "project_users", "projects"
   add_foreign_key "project_users", "users"
   add_foreign_key "projects", "statistic_profiles", column: "author_statistic_profile_id"
+  add_foreign_key "projects", "statuses"
   add_foreign_key "projects_components", "components"
   add_foreign_key "projects_components", "projects"
   add_foreign_key "projects_machines", "machines"
