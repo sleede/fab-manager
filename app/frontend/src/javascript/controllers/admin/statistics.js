@@ -234,6 +234,14 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
     };
 
     /**
+     * Return unique elements from the given array
+     * @param elements {Array<any>}
+     */
+    $scope.uniq = function (elements) {
+      return [...new Set(elements)];
+    };
+
+    /**
      * Retrieve the label for the given subtype in the current type
      * @param key {string} statistic subtype key
      */

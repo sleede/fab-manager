@@ -254,7 +254,8 @@
           <table class="table">
             <thead>
               <tr>
-                <th translate>{{ 'app.admin.statistics.date' }}</th>
+                <th ng-if="['booking', 'hour'].includes(type.active.key)" translate>{{ 'app.admin.statistics.reservation_date' }}</th>
+                <th ng-if="!['booking', 'hour'].includes(type.active.key)" translate>{{ 'app.admin.statistics.date' }}</th>
                 <th translate>{{ 'app.admin.statistics.user' }}</th>
                 <th translate>{{ 'app.admin.statistics.gender' }}</th>
                 <th translate>{{ 'app.admin.statistics.age' }}</th>
@@ -290,7 +291,7 @@
                   <ng-switch on="field.data_type">
                     <span ng-switch-when="date">{{formatDate(datum._source[field.key])}}</span>
                     <ul ng-switch-when="list">
-                      <li ng-repeat="elem in datum._source[field.key]">{{elem.name}}</li>
+                      <li ng-repeat="elem in uniq(datum._source[field.key])">{{elem.name}}</li>
                     </ul>
                     <span ng-switch-default>{{datum._source[field.key]}}</span>
                   </ng-switch>

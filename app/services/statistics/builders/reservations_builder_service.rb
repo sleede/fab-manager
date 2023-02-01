@@ -56,7 +56,7 @@ class Statistics::Builders::ReservationsBuilderService
     def add_machine_attributes(category, stat, reservation_data)
       return stat unless category == 'machine'
 
-      stat[:machineDates] = reservation_data[:slot_dates]
+      stat[:machineDates] = reservation_data[:slot_dates].map { |date| { name: date } }
 
       stat
     end
@@ -64,7 +64,7 @@ class Statistics::Builders::ReservationsBuilderService
     def add_space_attributes(category, stat, reservation_data)
       return stat unless category == 'space'
 
-      stat[:spaceDates] = reservation_data[:slot_dates]
+      stat[:spaceDates] = reservation_data[:slot_dates].map { |date| { name: date } }
 
       stat
     end
