@@ -37,3 +37,7 @@ Unable to decode ID token
 This issue may occur if the ID Token signature algorithm is not set to `RSxxx` on your IDP.
 Especially, this is not the default option when using LemonLDAP::NG, which uses `HSxxx` as the default algorithm, but you can configure it in `OpenID Connect Relaying Parties` > `my-fab-manager` > `Options` > `Security` > `ID Token signature algorithm`.
 Using Keycloak, you can configure it in `Clients` > `my-fab-manager` > `Settings` > `Fine Grain OpenID Connect Configuration` > `ID Token Signature Algorithm`.
+```
+Issuer mismatch
+```
+Check that your configured issuer URL ends with a trailing slash.
