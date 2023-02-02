@@ -152,7 +152,6 @@ es:
         themes: "Themes"
         tags: "Tags"
         save_as_draft: "Save as draft"
-        status: "Status"
       #button to book a machine reservation
       reserve_button:
         book_this_machine: "Book this machine"
