@@ -27,7 +27,7 @@ zu:
         confirm: "crwdns36099:0crwdne36099:0"
         deleted: "crwdns36101:0crwdne36101:0"
         unable_to_delete: "crwdns36103:0crwdne36103:0"
-        confirm_delete_supporting_documents_type: "crwdns36105:0crwdne36105:0"
+        confirm_delete_supporting_documents_type: "crwdns36707:0crwdne36707:0"
       machine_form:
         name: "crwdns31659:0crwdne31659:0"
         illustration: "crwdns31661:0crwdne31661:0"
@@ -40,7 +40,7 @@ zu:
         disabled_help: "crwdns31677:0crwdne31677:0"
         reservable: "crwdns36217:0crwdne36217:0"
         reservable_help: "crwdns36253:0crwdne36253:0"
-        ACTION_machine: "crwdns31757:0ACTION={ACTION}crwdne31757:0"
+        ACTION_machine: "crwdns36709:0ACTION={ACTION}crwdne36709:0"
         create_success: "crwdns31759:0crwdne31759:0"
         update_success: "crwdns31761:0crwdne31761:0"
       training_form:
@@ -56,7 +56,7 @@ zu:
         public_help: "crwdns31781:0crwdne31781:0"
         disable_training: "crwdns31783:0crwdne31783:0"
         disabled_help: "crwdns31785:0crwdne31785:0"
-        ACTION_training: "crwdns31787:0ACTION={ACTION}crwdne31787:0"
+        ACTION_training: "crwdns36711:0ACTION={ACTION}crwdne36711:0"
         create_success: "crwdns31789:0crwdne31789:0"
         update_success: "crwdns31791:0crwdne31791:0"
       space_form:
@@ -69,7 +69,7 @@ zu:
         default_seats: "crwdns31805:0crwdne31805:0"
         disable_space: "crwdns31807:0crwdne31807:0"
         disabled_help: "crwdns31809:0crwdne31809:0"
-        ACTION_space: "crwdns31811:0ACTION={ACTION}crwdne31811:0"
+        ACTION_space: "crwdns36713:0ACTION={ACTION}crwdne36713:0"
         create_success: "crwdns31813:0crwdne31813:0"
         update_success: "crwdns31815:0crwdne31815:0"
       event_form:
@@ -98,7 +98,7 @@ zu:
         event_themes: "crwdns31861:0crwdne31861:0"
         age_range: "crwdns31863:0crwdne31863:0"
         add_price: "crwdns31865:0crwdne31865:0"
-        ACTION_event: "crwdns31867:0ACTION={ACTION}crwdne31867:0"
+        ACTION_event: "crwdns36715:0ACTION={ACTION}crwdne36715:0"
         create_success: "crwdns31869:0crwdne31869:0"
         events_updated: "crwdns31871:0COUNT={COUNT}crwdnd31871:0COUNT={COUNT}crwdne31871:0"
         events_not_updated: "crwdns31873:0TOTAL={TOTAL}crwdnd31873:0TOTAL={TOTAL}crwdnd31873:0COUNT={COUNT}crwdnd31873:0COUNT={COUNT}crwdne31873:0"
@@ -200,8 +200,8 @@ zu:
       #add a new machine
       machines_new:
         declare_a_new_machine: "crwdns24050:0crwdne24050:0"
-        watch_out_when_creating_a_new_machine_its_prices_are_initialized_at_0_for_all_subscriptions: "crwdns24052:0crwdne24052:0"
-        consider_changing_them_before_creating_any_reservation_slot: "crwdns24054:0crwdne24054:0"
+        watch_out_when_creating_a_new_machine_its_prices_are_initialized_at_0_for_all_subscriptions: "crwdns36717:0crwdne36717:0"
+        consider_changing_them_before_creating_any_reservation_slot: "crwdns36719:0crwdne36719:0"
       #machine edition
       machines_edit:
         machine_edit: "crwdns24056:0crwdne24056:0"
@@ -370,12 +370,12 @@ zu:
       #track and monitor the trainings
       trainings:
         trainings_monitoring: "crwdns24368:0crwdne24368:0"
-        plan_session: "crwdns24370:0crwdne24370:0"
-        trainings: "crwdns24372:0crwdne24372:0"
+        plan_session: "crwdns36721:0crwdne36721:0"
+        trainings: "crwdns36723:0crwdne36723:0"
         add_a_new_training: "crwdns24374:0crwdne24374:0"
         name: "crwdns24376:0crwdne24376:0"
         associated_machines: "crwdns24378:0crwdne24378:0"
-        number_of_tickets: "crwdns24380:0crwdne24380:0"
+        number_of_tickets: "crwdns36725:0crwdne36725:0"
         select_a_training: "crwdns24382:0crwdne24382:0"
         training: "crwdns24384:0crwdne24384:0"
         date: "crwdns24386:0crwdne24386:0"
@@ -403,8 +403,8 @@ zu:
       #create a new training
       trainings_new:
         add_a_new_training: "crwdns24430:0crwdne24430:0"
-        beware_when_creating_a_training_its_reservation_prices_are_initialized_to_zero: "crwdns24432:0crwdne24432:0"
-        dont_forget_to_change_them_before_creating_slots_for_this_training: "crwdns24434:0crwdne24434:0"
+        beware_when_creating_a_training_its_reservation_prices_are_initialized_to_zero: "crwdns36727:0crwdne36727:0"
+        dont_forget_to_change_them_before_creating_slots_for_this_training: "crwdns36729:0crwdne36729:0"
       #events tracking and management
       events:
         events_monitoring: "crwdns24436:0crwdne24436:0"
@@ -610,15 +610,15 @@ zu:
         create_pack: "crwdns24804:0crwdne24804:0"
         pack_successfully_created: "crwdns24806:0crwdne24806:0"
       delete_pack:
-        pack_deleted: "crwdns24808:0crwdne24808:0"
-        unable_to_delete: "crwdns24810:0crwdne24810:0"
-        delete_pack: "crwdns24812:0crwdne24812:0"
-        confirm_delete: "crwdns24814:0crwdne24814:0"
-        delete_confirmation: "crwdns24816:0crwdne24816:0"
+        pack_deleted: "crwdns36731:0crwdne36731:0"
+        unable_to_delete: "crwdns36733:0crwdne36733:0"
+        delete_pack: "crwdns36735:0crwdne36735:0"
+        confirm_delete: "crwdns36737:0crwdne36737:0"
+        delete_confirmation: "crwdns36739:0crwdne36739:0"
       edit_pack:
-        edit_pack: "crwdns24818:0crwdne24818:0"
-        confirm_changes: "crwdns24820:0crwdne24820:0"
-        pack_successfully_updated: "crwdns24822:0crwdne24822:0"
+        edit_pack: "crwdns36741:0crwdne36741:0"
+        confirm_changes: "crwdns36743:0crwdne36743:0"
+        pack_successfully_updated: "crwdns36745:0crwdne36745:0"
       create_extended_price:
         new_extended_price: "crwdns24824:0crwdne24824:0"
         new_extended_price_info: "crwdns24826:0crwdne24826:0"
@@ -1377,6 +1377,7 @@ zu:
         available_hours: "crwdns26262:0crwdne26262:0"
         available_tickets: "crwdns26264:0crwdne26264:0"
         date: "crwdns26266:0crwdne26266:0"
+        reservation_date: "crwdns36747:0crwdne36747:0"
         user: "crwdns26268:0crwdne26268:0"
         gender: "crwdns26270:0crwdne26270:0"
         age: "crwdns26272:0crwdne26272:0"
@@ -1821,9 +1822,9 @@ zu:
       #create a new space
       space_new:
         add_a_new_space: "crwdns27066:0crwdne27066:0"
-        watch_out_when_creating_a_new_space_its_prices_are_initialized_at_0_for_all_subscriptions: "crwdns27068:0crwdne27068:0"
-        consider_changing_its_prices_before_creating_any_reservation_slot: "crwdns27070:0crwdne27070:0"
-        add_this_space: "crwdns27072:0crwdne27072:0"
+        watch_out_when_creating_a_new_space_its_prices_are_initialized_at_0_for_all_subscriptions: "crwdns36749:0crwdne36749:0"
+        consider_changing_its_prices_before_creating_any_reservation_slot: "crwdns36751:0crwdne36751:0"
+        add_this_space: "crwdns36753:0crwdne36753:0"
       #modify an exiting space
       space_edit:
         edit_the_space_NAME: "crwdns27074:0{NAME}crwdne27074:0"
@@ -2174,8 +2175,8 @@ zu:
           assigning_category_info: "crwdns31428:0crwdne31428:0"
           assigning_machines: "crwdns31430:0crwdne31430:0"
           assigning_machines_info: "crwdns31432:0crwdne31432:0"
-          product_description: "crwdns31434:0crwdne31434:0"
-          product_description_info: "crwdns31436:0crwdne31436:0"
+          product_description: "crwdns36755:0crwdne36755:0"
+          product_description_info: "crwdns36757:0crwdne36757:0"
           product_files: "crwdns31438:0crwdne31438:0"
           product_files_info: "crwdns31440:0crwdne31440:0"
           add_product_file: "crwdns31442:0crwdne31442:0"
@@ -2191,7 +2192,7 @@ zu:
           save_reminder: "crwdns31460:0crwdne31460:0"
           low_stock_threshold: "crwdns31462:0crwdne31462:0"
           stock_threshold_toggle: "crwdns31464:0crwdne31464:0"
-          stock_threshold_information: "crwdns31466:0crwdne31466:0"
+          stock_threshold_information: "crwdns36759:0crwdne36759:0"
           low_stock: "crwdns31468:0crwdne31468:0"
           threshold_level: "crwdns31470:0crwdne31470:0"
           threshold_alert: "crwdns31472:0crwdne31472:0"

@@ -200,8 +200,8 @@ es:
       #add a new machine
       machines_new:
         declare_a_new_machine: "Declara una nueva máquina"
-        watch_out_when_creating_a_new_machine_its_prices_are_initialized_at_0_for_all_subscriptions: "Cuidado al crear una nueva máquina, los precios están inicializados a 0 para todas las subscripciones."
-        consider_changing_them_before_creating_any_reservation_slot: "Considera cambiarlos antes de crear cualquier ranura de reserva."
+        watch_out_when_creating_a_new_machine_its_prices_are_initialized_at_0_for_all_subscriptions: "Watch out! When creating a new machine, its prices are initialized at 0 for all subscriptions."
+        consider_changing_them_before_creating_any_reservation_slot: "Consider changing them before creating any reservation slot."
       #machine edition
       machines_edit:
         machine_edit: "Editar una máquina"
@@ -403,8 +403,8 @@ es:
       #create a new training
       trainings_new:
         add_a_new_training: "Add a new training"
-        beware_when_creating_a_training_its_reservation_prices_are_initialized_to_zero: "Tenga cuidado, al crear una formación, sus precios de reserva se inicializan en cero."
-        dont_forget_to_change_them_before_creating_slots_for_this_training: "No olvides cambiarlos antes de crear espacios para esta formación."
+        beware_when_creating_a_training_its_reservation_prices_are_initialized_to_zero: "Beware, when creating a training, its reservation prices are initialized at zero."
+        dont_forget_to_change_them_before_creating_slots_for_this_training: "Don't forget to change them before creating slots for this training."
       #events tracking and management
       events:
         events_monitoring: "Monitoreo de eventos"
@@ -1377,6 +1377,7 @@ es:
         available_hours: "Horas disponibles para reservar:"
         available_tickets: "Tickets disponibles para reservar:"
         date: "Date"
+        reservation_date: "Reservation date"
         user: "User"
         gender: "Genero"
         age: "Edad"
@@ -1821,9 +1822,9 @@ es:
       #create a new space
       space_new:
         add_a_new_space: "Añadir un espacio nuevo"
-        watch_out_when_creating_a_new_space_its_prices_are_initialized_at_0_for_all_subscriptions: "¡Cuidado! Al crear un nuevo espacio, sus precios se inicializan en 0 para todas las suscripciones."
-        consider_changing_its_prices_before_creating_any_reservation_slot: "Considere cambiar sus precios antes de crear cualquier espacio de reserva."
-        add_this_space: "Añadir este espacio"
+        watch_out_when_creating_a_new_space_its_prices_are_initialized_at_0_for_all_subscriptions: "Watch out! When creating a new space, its prices are initialized at 0 for all subscriptions."
+        consider_changing_its_prices_before_creating_any_reservation_slot: "Consider changing its prices before creating any reservation slot."
+        add_this_space: "Add this space"
       #modify an exiting space
       space_edit:
         edit_the_space_NAME: "Edit the space: {NAME}"
