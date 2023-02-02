@@ -114,6 +114,17 @@ unless StatisticType.find_by(key: 'store', statistic_index_id: statistic_index_o
   StatisticType.create!({ statistic_index_id: statistic_index_order.id, key: 'store', label: I18n.t('statistics.store'),
                           graph: true, simple: true })
 end
+Plan.find_each do |plan|
+  if plan.find_statistic_type.nil?
+    StatisticType.create!(
+      statistic_index_id: 1,
+      key: plan.duration.to_i,
+      label: "#{I18n.t('statistics.duration')} : #{plan.human_readable_duration}",
+      graph: true,
+      simple: true
+    )
+  end
+end
 
 # statistic_sub_types
 unless StatisticSubType.find_by(key: 'created')
@@ -130,6 +141,18 @@ unless StatisticSubType.find_by(key: 'paid-processed')
 end
 unless StatisticSubType.find_by(key: 'aborted')
   StatisticSubType.create!({ key: 'aborted', label: I18n.t('statistics.aborted'), statistic_types: statistic_index_order.statistic_types })
+end
+Plan.find_each do |plan|
+  type = plan.find_statistic_type
+  subtype = if StatisticSubType.find_by(key: plan.slug).nil?
+              plan.create_statistic_subtype
+            else
+              StatisticSubType.find_by(key: plan.slug)
+            end
+
+  if StatisticTypeSubType.find_by(statistic_type: type, statistic_sub_type: subtype).nil?
+    StatisticTypeSubType.create!(statistic_type: type, statistic_sub_type: subtype)
+  end
 end
 
 # statistic_graphs

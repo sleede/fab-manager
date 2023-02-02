@@ -435,6 +435,8 @@ fr:
   statistics:
     subscriptions: "Abonnements"
     machines_hours: "Créneaux machines"
+    machine_dates: "Date des créneaux"
+    space_dates: "Dates des créneaux"
     spaces: "Espaces"
     orders: "Commandes"
     trainings: "Formations"
@@ -453,6 +455,7 @@ fr:
     components: "Composants"
     machines: "Machines"
     user_id: "ID Utilisateur"
+    group: "Groupe"
     bookings: "Réservations"
     hours_number: "Nombre d'heures"
     tickets_number: "Nombre de places"

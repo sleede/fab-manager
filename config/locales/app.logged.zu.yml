@@ -145,18 +145,18 @@ zu:
           edit: "crwdns27632:0crwdne27632:0"
         reservations:
           reservations_panel:
-            title_Space: "crwdns36333:0crwdne36333:0"
-            title_Machine: "crwdns36335:0crwdne36335:0"
-            upcoming: "crwdns36337:0crwdne36337:0"
-            past: "crwdns36339:0crwdne36339:0"
-            slots_details: "crwdns36341:0crwdne36341:0"
-            no_reservations: "crwdns36343:0crwdne36343:0"
-            show_more: "crwdns36345:0crwdne36345:0"
+            title_Space: "crwdns36761:0crwdne36761:0"
+            title_Machine: "crwdns36763:0crwdne36763:0"
+            upcoming: "crwdns36765:0crwdne36765:0"
+            past: "crwdns36767:0crwdne36767:0"
+            slots_details: "crwdns36769:0crwdne36769:0"
+            no_reservations: "crwdns36771:0crwdne36771:0"
+            show_more: "crwdns36773:0crwdne36773:0"
           credits_panel:
-            title_Space: "crwdns36347:0crwdne36347:0"
-            title_Machine: "crwdns36349:0crwdne36349:0"
-            reamaining_credits_html: "crwdns36351:0NAME={NAME}crwdnd36351:0REMAINING={REMAINING}crwdnd36351:0REMAINING={REMAINING}crwdnd36351:0USED={USED}crwdnd36351:0USED={USED}crwdne36351:0"
-            no_credits: "crwdns36353:0crwdne36353:0"
+            title_Space: "crwdns36775:0crwdne36775:0"
+            title_Machine: "crwdns36777:0crwdne36777:0"
+            reamaining_credits_html: "crwdns36779:0NAME={NAME}crwdnd36779:0REMAINING={REMAINING}crwdnd36779:0REMAINING={REMAINING}crwdnd36779:0USED={USED}crwdnd36779:0USED={USED}crwdne36779:0"
+            no_credits: "crwdns36781:0crwdne36781:0"
       #public profil of a member
       members_show:
         members_list: "crwdns27656:0crwdne27656:0"

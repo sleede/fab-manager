@@ -247,7 +247,7 @@ de:
         category_members: "der Mitglieder"
         click_to_view_results: "Klicken Sie hier, um die Ergebnisse anzuzeigen"
     notify_admin_low_stock_threshold:
-      subject: "Low stock alert"
+      subject: "Warnung niedriger Bestand"
       body:
         low_stock: "A new stock movement of %{PRODUCT} has exceeded the low stock threshold."
         stocks_state_html: "Current stock status: <ul><li>internal: %{INTERNAL}</li><li>external: %{EXTERNAL}</li></ul>"

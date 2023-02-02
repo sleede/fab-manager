@@ -10,7 +10,7 @@
 - Fix a bug: do not show catgory select in plan form if no options were set
 - Fix a bug: new setups doesn't log
 - [TODO DEPLOY] `rails db:seed`
-- [TODO DEPLOY] `rails fablab:maintenance:regenerate_statistics[2014,1]`
+- [TODO DEPLOY] `rails fablab:es:build_stats` THEN `rails fablab:maintenance:regenerate_statistics[2014,1]`
 
 ## v5.6.8 2023 January 26
 
