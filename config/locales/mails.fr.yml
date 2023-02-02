@@ -136,7 +136,7 @@ fr:
       body:
         training_expired_html: "<p>Vous avez suivi la formation %{TRAINING} , le %{DATE}.</p><p>Votre habilitation pour cette formation, valable pour %{PERIOD} mois, a expirée.</p><p>Veuillez la valider à nouveau afin de pouvoir réserver les %{MACHINES}</p>."
     notify_member_training_auto_cancelled:
-      subject: "Votre session de formation a été annulée"
+      subject: "Votre séance de formation a été annulée"
       body:
         cancelled_training: "La séance de formation %{TRAINING} prévue le %{DATE}, de %{START} à %{END}, a été automatiquement annulée en raison d'un nombre insuffisant de participants."
         auto_refund: "Vous avez été remboursé sur votre porte-monnaie et un avoir devrait être disponible."

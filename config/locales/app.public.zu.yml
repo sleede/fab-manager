@@ -169,7 +169,7 @@ zu:
       projects_list:
         the_fablab_projects: "crwdns36237:0crwdne36237:0"
         add_a_project: "crwdns28062:0crwdne28062:0"
-        network_search: "crwdns36637:0crwdne36637:0"
+        network_search: "crwdns37071:0crwdne37071:0"
         tooltip_openlab_projects_switch: "crwdns28066:0crwdne28066:0"
         openlab_search_not_available_at_the_moment: "crwdns28068:0crwdne28068:0"
         project_search_result_is_empty: "crwdns28070:0crwdne28070:0"
@@ -184,8 +184,8 @@ zu:
         load_next_projects: "crwdns28090:0crwdne28090:0"
         rough_draft: "crwdns28092:0crwdne28092:0"
       status_filter:
-        all_statuses: "crwdns36639:0crwdne36639:0"
-        select_status: "crwdns36641:0crwdne36641:0"
+        all_statuses: "crwdns37073:0crwdne37073:0"
+        select_status: "crwdns37075:0crwdne37075:0"
       #details of a projet
       projects_show:
         rough_draft: "crwdns28094:0crwdne28094:0"
@@ -215,7 +215,7 @@ zu:
         message_is_required: "crwdns28142:0crwdne28142:0"
         report: "crwdns28144:0crwdne28144:0"
         do_you_really_want_to_delete_this_project: "crwdns28146:0crwdne28146:0"
-        status: "crwdns36643:0crwdne36643:0"
+        status: "crwdns37077:0crwdne37077:0"
       #list of machines
       machines_list:
         the_fablab_s_machines: "crwdns36239:0crwdne36239:0"
