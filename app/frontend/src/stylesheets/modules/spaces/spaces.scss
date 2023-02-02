@@ -1,0 +1,16 @@
+.spaces {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding-bottom: 6rem;
+  display: grid;
+  gap: 2.4rem;
+
+  &-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 3.2rem;
+
+    .panel { margin-bottom: 0; }
+  }
+}

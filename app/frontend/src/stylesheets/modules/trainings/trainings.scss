@@ -10,6 +10,15 @@
     padding-bottom: 1.6rem;
   }
 
+  &-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 3.2rem;
+
+    .panel { margin-bottom: 0; }
+  }
+
   &-content {
     display: flex;
     flex-direction: column;
