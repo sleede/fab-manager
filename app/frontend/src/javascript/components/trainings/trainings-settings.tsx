@@ -65,7 +65,7 @@ export const TrainingsSettings: React.FC<TrainingsSettingsProps> = ({ onError, o
     <div className="trainings-settings">
       <header>
         <h2>{t('app.admin.trainings_settings.title')}</h2>
-        <FabButton onClick={handleSubmit(onSubmit)} className='save-btn is-main'>{t('app.admin.trainings_settings.save')}</FabButton>
+        <FabButton onClick={() => handleSubmit(onSubmit)()} className='save-btn is-main'>{t('app.admin.trainings_settings.save')}</FabButton>
       </header>
       <form className="trainings-settings-content">
         <div className="settings-section">
@@ -124,6 +124,7 @@ export const TrainingsSettings: React.FC<TrainingsSettingsProps> = ({ onError, o
                       type="number"
                       register={register}
                       rules={{ required: isActiveAuthorizationValidity, min: 1 }}
+                      nullable
                       step={1}
                       formState={formState}
                       label={t('app.admin.trainings_settings.authorization_validity_period')} />
@@ -146,6 +147,7 @@ export const TrainingsSettings: React.FC<TrainingsSettingsProps> = ({ onError, o
                       type="number"
                       register={register}
                       rules={{ required: isActiveInvalidationRule, min: 1 }}
+                      nullable
                       step={1}
                       formState={formState}
                       label={t('app.admin.trainings_settings.validation_rule_period')} />
