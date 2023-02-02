@@ -178,6 +178,7 @@ zu:
   trainings:
     i_ve_reserved: "crwdns3413:0crwdne3413:0"
     completed: "crwdns3415:0crwdne3415:0"
+    refund_for_auto_cancel: "crwdns37081:0crwdne37081:0"
   #error messages when updating an event
   events:
     error_deleting_reserved_price: "crwdns3417:0crwdne3417:0"
@@ -294,6 +295,10 @@ zu:
         USER_s_subscription_has_expired: "crwdns3575:0%{USER}crwdne3575:0"
       notify_admin_subscription_will_expire_in_7_days:
         USER_s_subscription_will_expire_in_7_days: "crwdns3577:0%{USER}crwdne3577:0"
+      notify_admin_training_auto_cancelled:
+        auto_cancelled_training: "crwdns37083:0%{TRAINING}crwdnd37083:0%{DATE}crwdne37083:0"
+        auto_refund: "crwdns37085:0crwdne37085:0"
+        manual_refund: "crwdns37087:0crwdne37087:0"
       notify_admin_user_group_changed:
         user_NAME_changed_his_group_html: "crwdns22438:0{NAME}crwdne22438:0" #messageFormat interpolation
       notify_admin_user_merged:
@@ -324,6 +329,13 @@ zu:
         your_subscription_has_expired: "crwdns3605:0crwdne3605:0"
       notify_member_subscription_will_expire_in_7_days:
         your_subscription_will_expire_in_7_days: "crwdns3607:0crwdne3607:0"
+      notify_member_training_authorization_expired:
+        training_authorization_revoked: "crwdns37089:0%{MACHINES}crwdne37089:0"
+      notify_member_training_auto_cancelled:
+        auto_cancelled_training: "crwdns37091:0%{TRAINING}crwdnd37091:0%{DATE}crwdne37091:0"
+        auto_refund: "crwdns37093:0crwdne37093:0"
+      notify_member_training_invalidated:
+        invalidated: "crwdns37095:0%{MACHINES}crwdne37095:0"
       notify_partner_subscribed_plan:
         subscription_partner_PLAN_has_been_subscribed_by_USER_html: "crwdns3609:0%{PLAN}crwdnd3609:0%{USER}crwdne3609:0"
       notify_project_author_when_collaborator_valid:
@@ -662,3 +674,16 @@ zu:
     external_id: "crwdns32113:0crwdne32113:0"
     prevent_invoices_zero: "crwdns36211:0crwdne36211:0"
     invoice_VAT-name: "crwdns36213:0crwdne36213:0"
+    trainings_auto_cancel: "crwdns37097:0crwdne37097:0"
+    trainings_auto_cancel_threshold: "crwdns37099:0crwdne37099:0"
+    trainings_auto_cancel_deadline: "crwdns37101:0crwdne37101:0"
+    trainings_authorization_validity: "crwdns37103:0crwdne37103:0"
+    trainings_authorization_validity_duration: "crwdns37105:0crwdne37105:0"
+    trainings_invalidation_rule: "crwdns37107:0crwdne37107:0"
+    trainings_invalidation_rule_period: "crwdns37109:0crwdne37109:0"
+  #statuses of projects
+  statuses:
+    new: "crwdns37111:0crwdne37111:0"
+    pending: "crwdns37113:0crwdne37113:0"
+    done: "crwdns37115:0crwdne37115:0"
+    abandoned: "crwdns37117:0crwdne37117:0"
