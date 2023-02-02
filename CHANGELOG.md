@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+## v5.6.9 2023 February 02
+
 - Updated shakapaker to 6.5.5
 - Fix a bug: unable to filter statistics by slot date
 - Fix a bug: unable to create a recurrent event

@@ -115,7 +115,7 @@ class ReservationSubscriptionStatisticServiceTest < ActionDispatch::IntegrationT
     assert_not_nil stat_hour
     assert_equal machine.friendly_id, stat_hour['subType']
     assert_equal (machine_slot.duration.to_i / 3600.0).to_i, stat_hour['stat']
-    assert_includes stat_hour['machineDates'], machine_slot.start_at.to_date.iso8601
+    assert_includes stat_hour['machineDates'], { 'name' => machine_slot.start_at.to_date.iso8601 }
     check_statistics_on_user(stat_hour)
 
     # second machine reservation (today)
@@ -132,7 +132,7 @@ class ReservationSubscriptionStatisticServiceTest < ActionDispatch::IntegrationT
     assert_not_nil stat_hour
     assert_equal machine.friendly_id, stat_hour['subType']
     assert_equal (machine_slot2.duration.to_i / 3600.0).to_i, stat_hour['stat']
-    assert_includes stat_hour['machineDates'], machine_slot2.start_at.to_date.iso8601
+    assert_includes stat_hour['machineDates'], { 'name' => machine_slot2.start_at.to_date.iso8601 }
     check_statistics_on_user(stat_hour)
 
     # training
