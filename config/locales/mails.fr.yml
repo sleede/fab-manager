@@ -131,6 +131,19 @@ fr:
         your_plan: "Votre abonnement"
         expires_in_7_days: "expire dans 7 jours"
         to_renew_your_plan_follow_the_link: "Si vous souhaitez renouveler votre abonnement, vous pouvez vous rendre sur"
+    notify_member_training_authorization_expired:
+      subject: "Votre autorisation a été révoquée"
+      body:
+        training_expired_html: "<p>Vous avez suivi la formation %{TRAINING} , le %{DATE}.</p><p>Votre habilitation pour cette formation, valable pour %{PERIOD} mois, a expirée.</p><p>Veuillez la valider à nouveau afin de pouvoir réserver les %{MACHINES}</p>."
+    notify_member_training_auto_cancelled:
+      subject: "Votre séance de formation a été annulée"
+      body:
+        cancelled_training: "La séance de formation %{TRAINING} prévue le %{DATE}, de %{START} à %{END}, a été automatiquement annulée en raison d'un nombre insuffisant de participants."
+        auto_refund: "Vous avez été remboursé sur votre porte-monnaie et un avoir devrait être disponible."
+    notify_member_training_invalidated:
+      subject: "Votre autorisation a été invalidée"
+      body:
+        training_invalidated_html: "<p>Vous avez suivi la formation %{TRAINING}, le %{DATE} vous donnant accès aux %{MACHINES}.</p><p>En raison de l'abscence de réservation pour l'une de ces machines au cours des %{PERIOD} derniers mois, votre autorisation a été invalidée.</p><p>Veuillez valider la formation à nouveau afin de continuer à réserver ces machines.</p>."
     notify_member_subscription_is_expired:
       subject: "Votre abonnement est arrivé à expiration"
       body:
@@ -142,6 +155,12 @@ fr:
       subject: "L'abonnement d'un membre expire dans 7 jours"
       body:
         subscription_will_expire_html: "L'abonnement du membre %{NAME} <strong><em>%{PLAN}</em></strong> expire dans 7 jours."
+    notify_admin_training_auto_cancelled:
+      subject: "Une formation a été automatiquement annulée"
+      body:
+        cancelled_training: "La séance de formation %{TRAINING} prévue le %{DATE}, de %{START} à %{END}, a été annulée en raison d'un nombre insuffisant de participants."
+        auto_refund: "Les membres qui ont réservé cette séance de formation ont été automatiquement remboursés sur leur portefeuille et des avoirs ont été générés."
+        manual_refund: "Veuillez rembourser manuellement tous les membres qui ont réservé cette séance de formation et générer des avoirs."
     notify_admin_subscription_is_expired:
       subject: "L'abonnement d'un membre est arrivé à expiration"
       body:
