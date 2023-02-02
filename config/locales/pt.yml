@@ -178,6 +178,7 @@ pt:
   trainings:
     i_ve_reserved: "Eu reservei"
     completed: "Cheio"
+    refund_for_auto_cancel: "This training session was cancelled due to an insufficient number of participants."
   #error messages when updating an event
   events:
     error_deleting_reserved_price: "Não permitido deletar o preço requisitado, pois está associado a algumas reservas"
@@ -294,6 +295,10 @@ pt:
         USER_s_subscription_has_expired: "A assinatura do usuário %{USER} expirou."
       notify_admin_subscription_will_expire_in_7_days:
         USER_s_subscription_will_expire_in_7_days: "A assinatura do usuário %{USER} expira em 7 dias."
+      notify_admin_training_auto_cancelled:
+        auto_cancelled_training: "The %{TRAINING} training session scheduled for %{DATE}, has been automatically canceled due to an insufficient number of participants."
+        auto_refund: "The members were automatically refunded on their wallet."
+        manual_refund: "Please refund each members."
       notify_admin_user_group_changed:
         user_NAME_changed_his_group_html: "O usuário <strong><em>{NAME}</strong></em> mudou de grupo." #messageFormat interpolation
       notify_admin_user_merged:
@@ -324,6 +329,13 @@ pt:
         your_subscription_has_expired: "Sua assinatura expirou."
       notify_member_subscription_will_expire_in_7_days:
         your_subscription_will_expire_in_7_days: "Sua assiantura expira em 7 dias."
+      notify_member_training_authorization_expired:
+        training_authorization_revoked: "Your authorization to use %{MACHINES} has been revoked because it has expired."
+      notify_member_training_auto_cancelled:
+        auto_cancelled_training: "The %{TRAINING} training session scheduled for %{DATE}, has been canceled due to an insufficient number of participants."
+        auto_refund: "You were refunded on your wallet."
+      notify_member_training_invalidated:
+        invalidated: "Your authorization to use %{MACHINES} has been invalidated due to a lack of reservations."
       notify_partner_subscribed_plan:
         subscription_partner_PLAN_has_been_subscribed_by_USER_html: "A assinatura de parceiros <strong> <em>%{PLAN} </em> </strong> foi assinada por <strong> <em> %{USER} </strong> </ em."
       notify_project_author_when_collaborator_valid:
@@ -662,3 +674,16 @@ pt:
     external_id: "external identifier"
     prevent_invoices_zero: "prevent building invoices at 0"
     invoice_VAT-name: "VAT name"
+    trainings_auto_cancel: "Trainings automatic cancellation"
+    trainings_auto_cancel_threshold: "Minimum participants for automatic cancellation"
+    trainings_auto_cancel_deadline: "Automatic cancellation deadline"
+    trainings_authorization_validity: "Trainings validity period"
+    trainings_authorization_validity_duration: "Trainings validity period duration"
+    trainings_invalidation_rule: "Trainings automatic invalidation"
+    trainings_invalidation_rule_period: "Grace period before invalidating a training"
+  #statuses of projects
+  statuses:
+    new: "New"
+    pending: "Pending"
+    done: "Done"
+    abandoned: "Abandoned"
