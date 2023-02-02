@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- Optimized memory consumption in statistics fetcher service
+
 ## v5.6.9 2023 February 02
 
 - Updated shakapaker to 6.5.5

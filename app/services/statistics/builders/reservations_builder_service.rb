@@ -8,7 +8,7 @@ class Statistics::Builders::ReservationsBuilderService
     def build(options = default_options)
       # machine/space/training list
       %w[machine space training event].each do |category|
-        Statistics::FetcherService.send("reservations_#{category}_list", options).each do |r|
+        Statistics::FetcherService.send("each_#{category}_reservation", options) do |r|
           %w[booking hour].each do |type|
             stat = "Stats::#{category.capitalize}"
                    .constantize

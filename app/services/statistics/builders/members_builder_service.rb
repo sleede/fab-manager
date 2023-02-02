@@ -7,7 +7,7 @@ class Statistics::Builders::MembersBuilderService
   class << self
     def build(options = default_options)
       # account list
-      Statistics::FetcherService.members_list(options).each do |m|
+      Statistics::FetcherService.each_member(options) do |m|
         Stats::Account.create({ date: format_date(m[:date]),
                                 type: 'member',
                                 subType: 'created',

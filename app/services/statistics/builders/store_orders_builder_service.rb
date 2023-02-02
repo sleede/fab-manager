@@ -13,7 +13,7 @@ class Statistics::Builders::StoreOrdersBuilderService
       }
       # orders list
       states.each do |sub_type, order_states|
-        Statistics::FetcherService.store_orders_list(order_states, options).each do |o|
+        Statistics::FetcherService.each_store_order(order_states, options) do |o|
           Stats::Order.create({ date: format_date(o[:date]),
                                 type: 'store',
                                 subType: sub_type,
