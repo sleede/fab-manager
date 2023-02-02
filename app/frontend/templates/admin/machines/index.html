@@ -11,11 +11,11 @@
 <section class="m-lg admin-machines-manage">
   <uib-tabset justified="true" active="tabs.active">
 
-    <uib-tab heading="{{ 'app.admin.machines.machines_settings' | translate }}" index="1" select="selectTab()">
-      <machines-settings on-error="onError" on-success="onSuccess"></machines-settings>
+    <uib-tab heading="{{ 'app.admin.machines.machines_settings' | translate }}" index="1">
+      <machines-settings on-error="onError" on-success="onSuccess" ui-router="uiRouter"></machines-settings>
     </uib-tab>
 
-    <uib-tab heading="{{ 'app.admin.machines.all_machines' | translate }}" index="0" select="selectTab()">
+    <uib-tab heading="{{ 'app.admin.machines.all_machines' | translate }}" index="0">
       <div class="machines-list-container">
         <header>
           <h2 translate>{{ 'app.admin.machines.all_machines' }}</h2>
@@ -37,11 +37,11 @@
             </a>
           </div>
         </header>
-        <ng-include src="'/admin/machines/machines.html'"></ng-include>
+        <ng-include ng-if="tabs.active == 0" src="'/admin/machines/machines.html'"></ng-include>
       </div>
     </uib-tab>
 
-    <uib-tab heading="{{ 'app.admin.machines.manage_machines_categories' | translate }}" index="2" select="selectTab()">
+    <uib-tab heading="{{ 'app.admin.machines.manage_machines_categories' | translate }}" index="2">
       <ng-include src="'/admin/machines/categories.html'"></ng-include>
     </uib-tab>
 

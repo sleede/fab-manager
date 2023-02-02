@@ -10,6 +10,8 @@ import { EditorialKeys, EditorialBlockForm } from '../editorial-block/editorial-
 import SettingAPI from '../../api/setting';
 import SettingLib from '../../lib/setting';
 import { SettingName, SettingValue, machinesSettings } from '../../models/setting';
+import { UnsavedFormAlert } from '../form/unsaved-form-alert';
+import { UIRouter } from '@uirouter/angularjs';
 
 declare const Application: IApplication;
 
@@ -17,12 +19,13 @@ interface MachinesSettingsProps {
   onError: (message: string) => void,
   onSuccess: (message: string) => void,
   beforeSubmit?: (data: Record<SettingName, SettingValue>) => void,
+  uiRouter: UIRouter
 }
 
 /**
  * Machines settings
  */
-export const MachinesSettings: React.FC<MachinesSettingsProps> = ({ onError, onSuccess, beforeSubmit }) => {
+export const MachinesSettings: React.FC<MachinesSettingsProps> = ({ onError, onSuccess, beforeSubmit, uiRouter }) => {
   const { t } = useTranslation('admin');
   const { register, control, formState, handleSubmit, reset } = useForm<Record<SettingName, SettingValue>>();
 
@@ -59,6 +62,7 @@ export const MachinesSettings: React.FC<MachinesSettingsProps> = ({ onError, onS
         <FabButton onClick={handleSubmit(onSubmit)} className='save-btn is-main'>{t('app.admin.machines_settings.save')}</FabButton>
       </header>
       <form className="machines-settings-content">
+        <UnsavedFormAlert uiRouter={uiRouter} formState={formState} />
         <div className="settings-section">
           <EditorialBlockForm register={register}
                               control={control}
@@ -81,4 +85,4 @@ const MachinesSettingsWrapper: React.FC<MachinesSettingsProps> = (props) => {
   );
 };
 
-Application.Components.component('machinesSettings', react2angular(MachinesSettingsWrapper, ['onError', 'onSuccess']));
+Application.Components.component('machinesSettings', react2angular(MachinesSettingsWrapper, ['onError', 'onSuccess', 'beforeSubmit', 'uiRouter']));

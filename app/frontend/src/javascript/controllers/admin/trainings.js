@@ -169,8 +169,11 @@ Application.Controllers.controller('EditTrainingController', ['$scope', '$state'
 /**
  * Controller used in the trainings management page, allowing admins users to see and manage the list of trainings and reservations.
  */
-Application.Controllers.controller('TrainingsAdminController', ['$scope', '$state', '$uibModal', 'Training', 'trainingsPromise', 'machinesPromise', '_t', 'growl', 'dialogs', 'Member', 'uiTourService', 'settingsPromise',
-  function ($scope, $state, $uibModal, Training, trainingsPromise, machinesPromise, _t, growl, dialogs, Member, uiTourService, settingsPromise) {
+Application.Controllers.controller('TrainingsAdminController', ['$scope', '$state', '$uibModal', 'Training', 'trainingsPromise', 'machinesPromise', '_t', 'growl', 'dialogs', 'Member', 'uiTourService', 'settingsPromise', '$uiRouter',
+  function ($scope, $state, $uibModal, Training, trainingsPromise, machinesPromise, _t, growl, dialogs, Member, uiTourService, settingsPromise, $uiRouter) {
+    // the following item is used by the UnsavedFormAlert component to detect a page change
+    $scope.uiRouter = $uiRouter;
+
     // list of trainings
     $scope.trainings = trainingsPromise;
 

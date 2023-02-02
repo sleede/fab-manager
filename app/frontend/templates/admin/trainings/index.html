@@ -26,10 +26,10 @@
     <div class="col-md-12">
       <uib-tabset justified="true" active="tabs.active">
         <uib-tab heading="{{ 'app.admin.trainings.trainings_settings' | translate }}" index="1" class="manage-trainings">
-          <trainings-settings on-error="onError" on-success="onSuccess"></trainings-settings>
+          <trainings-settings on-error="onError" on-success="onSuccess" ui-router="uiRouter"></trainings-settings>
         </uib-tab>
         <uib-tab heading="{{ 'app.admin.trainings.all_trainings' | translate }}" index="0" class="manage-trainings">
-          <trainings on-error="onError" on-success="onSuccess"></trainings>
+          <trainings on-error="onError" on-success="onSuccess" ng-if="tabs.active == 0"></trainings>
         </uib-tab>
 
         <uib-tab heading="{{ 'app.admin.trainings.trainings_monitoring' | translate }}" class="post-tracking" index="2">

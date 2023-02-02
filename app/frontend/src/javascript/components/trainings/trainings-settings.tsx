@@ -13,18 +13,21 @@ import { EditorialKeys, EditorialBlockForm } from '../editorial-block/editorial-
 import { SettingName, SettingValue, trainingsSettings } from '../../models/setting';
 import SettingAPI from '../../api/setting';
 import SettingLib from '../../lib/setting';
+import { UnsavedFormAlert } from '../form/unsaved-form-alert';
+import { UIRouter } from '@uirouter/angularjs';
 
 declare const Application: IApplication;
 
 interface TrainingsSettingsProps {
   onError: (message: string) => void,
   onSuccess: (message: string) => void,
+  uiRouter: UIRouter
 }
 
 /**
  * Trainings settings
  */
-export const TrainingsSettings: React.FC<TrainingsSettingsProps> = ({ onError, onSuccess }) => {
+export const TrainingsSettings: React.FC<TrainingsSettingsProps> = ({ onError, onSuccess, uiRouter }) => {
   const { t } = useTranslation('admin');
   const { register, control, formState, handleSubmit, reset } = useForm<Record<SettingName, SettingValue>>();
 
@@ -68,6 +71,7 @@ export const TrainingsSettings: React.FC<TrainingsSettingsProps> = ({ onError, o
         <FabButton onClick={() => handleSubmit(onSubmit)()} className='save-btn is-main'>{t('app.admin.trainings_settings.save')}</FabButton>
       </header>
       <form className="trainings-settings-content">
+        <UnsavedFormAlert uiRouter={uiRouter} formState={formState} />
         <div className="settings-section">
           <EditorialBlockForm register={register}
                               control={control}
@@ -169,4 +173,4 @@ const TrainingsSettingsWrapper: React.FC<TrainingsSettingsProps> = (props) => {
   );
 };
 
-Application.Components.component('trainingsSettings', react2angular(TrainingsSettingsWrapper, ['onError', 'onSuccess']));
+Application.Components.component('trainingsSettings', react2angular(TrainingsSettingsWrapper, ['onError', 'onSuccess', 'uiRouter']));
