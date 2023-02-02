@@ -131,6 +131,19 @@ zu:
         your_plan: "crwdns29650:0crwdne29650:0"
         expires_in_7_days: "crwdns29652:0crwdne29652:0"
         to_renew_your_plan_follow_the_link: "crwdns29654:0crwdne29654:0"
+    notify_member_training_authorization_expired:
+      subject: "crwdns37119:0crwdne37119:0"
+      body:
+        training_expired_html: "crwdns37121:0%{TRAINING}crwdnd37121:0%{DATE}crwdnd37121:0%{PERIOD}crwdnd37121:0%{MACHINES}crwdne37121:0"
+    notify_member_training_auto_cancelled:
+      subject: "crwdns37123:0crwdne37123:0"
+      body:
+        cancelled_training: "crwdns37125:0%{TRAINING}crwdnd37125:0%{DATE}crwdnd37125:0%{START}crwdnd37125:0%{END}crwdne37125:0"
+        auto_refund: "crwdns37127:0crwdne37127:0"
+    notify_member_training_invalidated:
+      subject: "crwdns37129:0crwdne37129:0"
+      body:
+        training_invalidated_html: "crwdns37131:0%{TRAINING}crwdnd37131:0%{DATE}crwdnd37131:0%{MACHINES}crwdnd37131:0%{PERIOD}crwdne37131:0"
     notify_member_subscription_is_expired:
       subject: "crwdns29656:0crwdne29656:0"
       body:
@@ -142,6 +155,12 @@ zu:
       subject: "crwdns29666:0crwdne29666:0"
       body:
         subscription_will_expire_html: "crwdns29668:0%{NAME}crwdnd29668:0%{PLAN}crwdne29668:0"
+    notify_admin_training_auto_cancelled:
+      subject: "crwdns37133:0crwdne37133:0"
+      body:
+        cancelled_training: "crwdns37135:0%{TRAINING}crwdnd37135:0%{DATE}crwdnd37135:0%{START}crwdnd37135:0%{END}crwdne37135:0"
+        auto_refund: "crwdns37137:0crwdne37137:0"
+        manual_refund: "crwdns37139:0crwdne37139:0"
     notify_admin_subscription_is_expired:
       subject: "crwdns29670:0crwdne29670:0"
       body:
