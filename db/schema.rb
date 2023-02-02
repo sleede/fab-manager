@@ -1112,7 +1112,7 @@ ActiveRecord::Schema.define(version: 2023_01_31_104958) do
     t.text "description"
     t.boolean "public_page", default: true
     t.boolean "disabled"
-    t.boolean "auto_cancel", default: false
+    t.boolean "auto_cancel"
     t.integer "auto_cancel_threshold"
     t.integer "auto_cancel_deadline"
     t.boolean "authorization"

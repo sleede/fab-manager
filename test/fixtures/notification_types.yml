@@ -1,0 +1,31 @@
+notification_type_1:
+  id: 1
+  name: 'notify_dev_when_sun_shines'
+  category: 'meteo'
+  is_configurable: true
+  created_at: 2023-02-02 15:25:13.744539000 Z
+  updated_at: 2023-02-02 15:25:13.744539000 Z
+
+notification_type_2:
+  id: 2
+  name: 'notify_dev_when_raining'
+  category: 'meteo'
+  is_configurable: true
+  created_at: 2023-02-02 15:25:30.321953000 Z
+  updated_at: 2023-02-02 15:25:30.321953000 Z
+
+notification_type_3:
+  id: 3
+  name: 'notify_dev_when_storming'
+  category: 'meteo'
+  is_configurable: true
+  created_at: 2023-02-02 15:25:13.744539000 Z
+  updated_at: 2023-02-02 15:25:13.744539000 Z
+
+notification_type_4:
+  id: 4
+  name: 'notify_dev_when_tsunami'
+  category: 'meteo'
+  is_configurable: false
+  created_at: 2023-02-02 15:25:30.321953000 Z
+  updated_at: 2023-02-02 15:25:30.321953000 Z
