@@ -1,0 +1,32 @@
+.notification-form {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--gray-soft-dark);
+
+  &:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+  }
+
+  .notification-type {
+    flex-grow: 1;
+  }
+
+  .form-actions {
+    display: flex;
+    gap: 20px;
+    flex-shrink: 0;
+  }
+
+  .form-action {
+    width: 144px;
+  }
+
+  @media (max-width: 1024px) {
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 16px;
+  }
+}

@@ -5,10 +5,12 @@
 class CreateNotificationPreferences < ActiveRecord::Migration[5.2]
   def change
     create_table :notification_preferences do |t|
-      t.references :user, index: true, foreign_key: true, null: false
+      t.references :user, index: false, foreign_key: true, null: false
       t.references :notification_type, index: true, foreign_key: true, null: false
       t.boolean :in_system, default: true
       t.boolean :email, default: true
+
+      t.index %i[user_id notification_type_id], unique: true, name: :index_notification_preferences_on_user_and_notification_type
 
       t.timestamps
     end

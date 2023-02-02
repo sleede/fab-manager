@@ -72,6 +72,10 @@ Rails.application.routes.draw do
       get 'polling', action: 'polling', on: :collection
       get 'last_unread', action: 'last_unread', on: :collection
     end
+    resources :notification_types, only: %i[index]
+    resources :notification_preferences, only: %i[index update], param: :notification_type do
+      patch '/bulk_update', action: 'bulk_update', on: :collection
+    end
     resources :wallet, only: [] do
       get '/by_user/:user_id', action: 'by_user', on: :collection
       get :transactions, on: :member
