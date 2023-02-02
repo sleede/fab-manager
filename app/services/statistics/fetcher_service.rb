@@ -54,7 +54,8 @@ class Statistics::FetcherService
                       machine_id: r.reservable.id,
                       machine_type: r.reservable.friendly_id,
                       machine_name: r.reservable.name,
-                      nb_hours: r.slots.size,
+                      slot_dates: r.slots.map(&:start_at).map(&:to_date),
+                      nb_hours: (r.slots.map(&:duration).map(&:to_i).reduce(:+) / 3600.0).to_i,
                       ca: calcul_ca(r.original_invoice) }.merge(user_info(profile)))
       end
       result
@@ -75,7 +76,8 @@ class Statistics::FetcherService
                       space_id: r.reservable.id,
                       space_name: r.reservable.name,
                       space_type: r.reservable.slug,
-                      nb_hours: r.slots.size,
+                      slot_dates: r.slots.map(&:start_at).map(&:to_date),
+                      nb_hours: (r.slots.map(&:duration).map(&:to_i).reduce(:+) / 3600.0).to_i,
                       ca: calcul_ca(r.original_invoice) }.merge(user_info(profile)))
       end
       result

@@ -234,6 +234,14 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
     };
 
     /**
+     * Return unique elements from the given array
+     * @param elements {Array<any>}
+     */
+    $scope.uniq = function (elements) {
+      return [...new Set(elements)];
+    };
+
+    /**
      * Retrieve the label for the given subtype in the current type
      * @param key {string} statistic subtype key
      */
@@ -647,7 +655,7 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
         }
       }
 
-      return angular.forEach($scope.selectedIndex.additional_fields, function (field) {
+      angular.forEach($scope.selectedIndex.additional_fields, function (field) {
         const filter = { key: field.key, label: field.label, values: [] };
         switch (field.data_type) {
           case 'index': filter.values.push('input_number'); break;

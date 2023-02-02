@@ -1377,6 +1377,7 @@ en:
         available_hours: "Hours available for booking:"
         available_tickets: "Tickets available for booking:"
         date: "Date"
+        reservation_date: "Reservation date"
         user: "User"
         gender: "Gender"
         age: "Age"

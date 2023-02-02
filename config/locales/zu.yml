@@ -435,6 +435,8 @@ zu:
   statistics:
     subscriptions: "crwdns3689:0crwdne3689:0"
     machines_hours: "crwdns4561:0crwdne4561:0"
+    machine_dates: "crwdns36787:0crwdne36787:0"
+    space_dates: "crwdns36789:0crwdne36789:0"
     spaces: "crwdns3693:0crwdne3693:0"
     orders: "crwdns31713:0crwdne31713:0"
     trainings: "crwdns3695:0crwdne3695:0"
@@ -453,6 +455,7 @@ zu:
     components: "crwdns3721:0crwdne3721:0"
     machines: "crwdns3723:0crwdne3723:0"
     user_id: "crwdns3725:0crwdne3725:0"
+    group: "crwdns36791:0crwdne36791:0"
     bookings: "crwdns3727:0crwdne3727:0"
     hours_number: "crwdns3729:0crwdne3729:0"
     tickets_number: "crwdns3731:0crwdne3731:0"

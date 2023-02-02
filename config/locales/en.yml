@@ -435,6 +435,8 @@ en:
   statistics:
     subscriptions: "Subscriptions"
     machines_hours: "Machines slots"
+    machine_dates: "Slots dates"
+    space_dates: "Slots dates"
     spaces: "Spaces"
     orders: "Orders"
     trainings: "Trainings"
@@ -453,6 +455,7 @@ en:
     components: "Components"
     machines: "Machines"
     user_id: "User ID"
+    group: "Group"
     bookings: "Bookings"
     hours_number: "Hours number"
     tickets_number: "Tickets number"

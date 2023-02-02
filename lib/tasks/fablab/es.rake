@@ -9,16 +9,18 @@ namespace :fablab do
       create_stats_index
       create_stats_mappings
       add_event_filters
+      add_machine_filters
+      add_space_filters
     end
 
     def delete_stats_index
       puts 'DELETE stats'
-      `curl -XDELETE http://#{ENV['ELASTICSEARCH_HOST']}:9200/stats`
+      `curl -XDELETE http://#{ENV.fetch('ELASTICSEARCH_HOST')}:9200/stats`
     end
 
     def create_stats_index
       puts 'PUT index stats'
-      `curl -XPUT http://#{ENV['ELASTICSEARCH_HOST']}:9200/stats -d'
+      `curl -XPUT http://#{ENV.fetch('ELASTICSEARCH_HOST')}:9200/stats -d'
     {
       "settings" : {
         "index" : {
@@ -32,7 +34,7 @@ namespace :fablab do
     def create_stats_mappings
       %w[account event machine project subscription training user space].each do |stat|
         puts "PUT Mapping stats/#{stat}"
-        `curl -XPUT http://#{ENV['ELASTICSEARCH_HOST']}:9200/stats/#{stat}/_mapping -d '
+        `curl -XPUT http://#{ENV.fetch('ELASTICSEARCH_HOST')}:9200/stats/#{stat}/_mapping -d '
       {
          "properties": {
             "type": {
@@ -61,7 +63,7 @@ namespace :fablab do
     end
 
     def add_event_filters
-      `curl -XPUT http://#{ENV['ELASTICSEARCH_HOST']}:9200/stats/event/_mapping -d '
+      `curl -XPUT http://#{ENV.fetch('ELASTICSEARCH_HOST')}:9200/stats/event/_mapping -d '
       {
          "properties": {
             "ageRange": {
@@ -76,10 +78,35 @@ namespace :fablab do
       }';`
     end
 
+    def add_machine_filters
+      `curl -XPUT http://#{ENV.fetch('ELASTICSEARCH_HOST')}:9200/stats/machine/_mapping -d '
+      {
+         "properties": {
+            "machineDates": {
+               "properties": {
+                  "type": "date",
+               }
+            }
+         }
+      }';`
+    end
+
+    def add_space_filters
+      `curl -XPUT http://#{ENV.fetch('ELASTICSEARCH_HOST')}:9200/stats/space/_mapping -d '
+      {
+         "properties": {
+            "spaceDates": {
+               "properties": {
+                  "type": "date",
+               }
+            }
+         }
+      }';`
+    end
 
     desc 'add spaces reservations to statistics'
     task add_spaces: :environment do
-      `curl -XPUT http://#{ENV['ELASTICSEARCH_HOST']}:9200/stats/space/_mapping -d '
+      `curl -XPUT http://#{ENV.fetch('ELASTICSEARCH_HOST')}:9200/stats/space/_mapping -d '
       {
          "properties": {
             "type": {
@@ -129,11 +156,10 @@ namespace :fablab do
         end
       else
         puts "[ElasticSearch] An error occurred while creating #{Availability.index_name}/#{Availability.document_type}. " \
-           'Please check your ElasticSearch configuration.'
+             'Please check your ElasticSearch configuration.'
         puts "\nCancelling..."
       end
     end
-
 
     desc '(re)generate statistics in ElasticSearch for the past period. Use 0 to generate for today'
     task :generate_stats, [:period] => :environment do |_task, args|
@@ -141,7 +167,7 @@ namespace :fablab do
 
       unless Setting.get('statistics_module')
         print 'Statistics are disabled. Do you still want to generate? (y/N) '
-        confirm = STDIN.gets.chomp
+        confirm = $stdin.gets.chomp
         raise 'Interrupted by user' unless confirm == 'y'
       end
 

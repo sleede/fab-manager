@@ -169,7 +169,7 @@ class Setting < ApplicationRecord
   # WARNING: when adding a new key, you may also want to add it in:
   # - config/locales/en.yml#settings
   # - app/frontend/src/javascript/models/setting.ts#SettingName
-  # - db/seeds.rb (to set the default value)
+  # - db/seeds/settings.rb (to set the default value)
   # - app/policies/setting_policy.rb#public_whitelist (if the setting can be read by anyone)
   # - test/fixtures/settings.yml (for backend testing)
   # - test/fixtures/history_values.yml (example value for backend testing)

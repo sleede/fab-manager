@@ -16,7 +16,7 @@ class ReservationSubscriptionStatisticServiceTest < ActionDispatch::IntegrationT
   test 'build stats' do
     # Create a reservation to generate an invoice (2 days ago)
     machine = Machine.find(1)
-    slot = Availability.find(19).slots.first
+    machine_slot = Availability.find(19).slots.first
     travel_to(2.days.ago)
     post '/api/local_payment/confirm_payment', params: {
       customer_id: @user.id,
@@ -27,7 +27,7 @@ class ReservationSubscriptionStatisticServiceTest < ActionDispatch::IntegrationT
             reservable_type: machine.class.name,
             slots_reservations_attributes: [
               {
-                slot_id: slot.id
+                slot_id: machine_slot.id
               }
             ]
           }
@@ -72,8 +72,8 @@ class ReservationSubscriptionStatisticServiceTest < ActionDispatch::IntegrationT
     }.to_json, headers: default_headers
     travel_back
 
-    # Crate another machine reservation (today)
-    slot = Availability.find(19).slots.last
+    # Create another machine reservation (today)
+    machine_slot2 = Availability.find(19).slots.last
     post '/api/local_payment/confirm_payment', params: {
       customer_id: @user.id,
       items: [
@@ -83,7 +83,7 @@ class ReservationSubscriptionStatisticServiceTest < ActionDispatch::IntegrationT
             reservable_type: machine.class.name,
             slots_reservations_attributes: [
               {
-                slot_id: slot.id
+                slot_id: machine_slot2.id
               }
             ]
           }
@@ -106,6 +106,7 @@ class ReservationSubscriptionStatisticServiceTest < ActionDispatch::IntegrationT
                                                                  { term: { type: 'booking' } }] } }).first
     assert_not_nil stat_booking
     assert_equal machine.friendly_id, stat_booking['subType']
+    assert_equal 1, stat_booking['stat']
     check_statistics_on_user(stat_booking)
 
     stat_hour = Stats::Machine.search(query: { bool: { must: [{ term: { date: 2.days.ago.to_date.iso8601 } },
@@ -113,6 +114,8 @@ class ReservationSubscriptionStatisticServiceTest < ActionDispatch::IntegrationT
 
     assert_not_nil stat_hour
     assert_equal machine.friendly_id, stat_hour['subType']
+    assert_equal (machine_slot.duration.to_i / 3600.0).to_i, stat_hour['stat']
+    assert_includes stat_hour['machineDates'], { 'name' => machine_slot.start_at.to_date.iso8601 }
     check_statistics_on_user(stat_hour)
 
     # second machine reservation (today)
@@ -120,6 +123,7 @@ class ReservationSubscriptionStatisticServiceTest < ActionDispatch::IntegrationT
                                                                  { term: { type: 'booking' } }] } }).first
     assert_not_nil stat_booking
     assert_equal machine.friendly_id, stat_booking['subType']
+    assert_equal 1, stat_booking['stat']
     check_statistics_on_user(stat_booking)
 
     stat_hour = Stats::Machine.search(query: { bool: { must: [{ term: { date: DateTime.current.to_date.iso8601 } },
@@ -127,6 +131,8 @@ class ReservationSubscriptionStatisticServiceTest < ActionDispatch::IntegrationT
 
     assert_not_nil stat_hour
     assert_equal machine.friendly_id, stat_hour['subType']
+    assert_equal (machine_slot2.duration.to_i / 3600.0).to_i, stat_hour['stat']
+    assert_includes stat_hour['machineDates'], { 'name' => machine_slot2.start_at.to_date.iso8601 }
     check_statistics_on_user(stat_hour)
 
     # training
@@ -136,6 +142,7 @@ class ReservationSubscriptionStatisticServiceTest < ActionDispatch::IntegrationT
                                                                    { term: { type: 'booking' } }] } }).first
     assert_not_nil stat_training
     assert_equal training.friendly_id, stat_training['subType']
+    assert_equal tr_slot.start_at.to_date.iso8601, stat_training['trainingDate']
     check_statistics_on_user(stat_training)
 
     # subscription

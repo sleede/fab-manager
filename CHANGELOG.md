@@ -1,5 +1,19 @@
 # Changelog Fab-manager
 
+## v5.6.9 2023 February 02
+
+- Updated shakapaker to 6.5.5
+- Fix a bug: unable to filter statistics by slot date
+- Fix a bug: unable to create a recurrent event
+- Fix a bug: unable to create a non-rolling plan
+- Fix a bug: invalid duration for machine/spaces reservations in statistics, when using slots of not 1 hour
+- Fix a bug: invalid month in date format
+- Fix a bug: do not show theme and age-range fields in event form if no options were set
+- Fix a bug: do not show catgory select in plan form if no options were set
+- Fix a bug: new setups doesn't log
+- [TODO DEPLOY] `rails db:seed`
+- [TODO DEPLOY] `rails fablab:es:build_stats` THEN `rails fablab:maintenance:regenerate_statistics[2014,1]`
+
 ## v5.6.8 2023 January 26
 
 - Fix a bug: plan prices are not reported correctly in the interface

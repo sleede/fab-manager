@@ -156,7 +156,7 @@ export const PlanForm: React.FC<PlanFormProps> = ({ action, plan, onError, onSuc
                                              disabled={action === 'update'}
                                              label={t('app.admin.plan_form.group')}
                                              id="group_id" />}
-        {categories && <FormSelect options={categories}
+        {categories?.length > 0 && <FormSelect options={categories}
                                    formState={formState}
                                    control={control}
                                    id="plan_category_id"

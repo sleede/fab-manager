@@ -39,7 +39,7 @@ module Statistics::Concerns::HelpersConcern
 
     def difference_in_hours(start_at, end_at)
       if start_at.to_date == end_at.to_date
-        ((end_at - start_at) / 60 / 60).to_i
+        ((end_at - start_at) / 3600.0).to_i
       else
         end_at_to_start_date = end_at.change(year: start_at.year, month: start_at.month, day: start_at.day)
         hours = ((end_at_to_start_date - start_at) / 60 / 60).to_i

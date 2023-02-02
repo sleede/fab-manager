@@ -16,7 +16,12 @@ module.exports = function (api) {
   }
 
   const defaultConfigFunc = require('shakapacker/package/babel/preset.js');
-  const resultConfig = defaultConfigFunc(api);
+  const resultConfig = {
+    ...defaultConfigFunc(api),
+    assumptions: {
+      setPublicClassFields: true
+    }
+  };
 
   const changesOnDefault = {
     presets: [
@@ -35,10 +40,7 @@ module.exports = function (api) {
       isTestEnv && 'babel-plugin-dynamic-import-node',
       '@babel/plugin-transform-destructuring',
       [
-        '@babel/plugin-proposal-class-properties',
-        {
-          loose: true
-        }
+        '@babel/plugin-proposal-class-properties'
       ],
       [
         '@babel/plugin-proposal-object-rest-spread',

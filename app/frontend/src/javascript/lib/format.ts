@@ -54,9 +54,9 @@ export default class FormatLib {
    */
   private static parseISOdate = (date: TDateISO|TDateISODate, res: Date = new Date()): Date => {
     const isoDateMatch = (date as string)?.match(/^(\d\d\d\d)-(\d\d)-(\d\d)/);
-    res.setFullYear(parseInt(isoDateMatch[1], 10));
-    res.setMonth(parseInt(isoDateMatch[2], 10) - 1);
     res.setDate(parseInt(isoDateMatch[3], 10));
+    res.setMonth(parseInt(isoDateMatch[2], 10) - 1);
+    res.setFullYear(parseInt(isoDateMatch[1], 10));
 
     return res;
   };
