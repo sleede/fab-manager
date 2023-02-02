@@ -184,7 +184,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
                       link
                       limit={6000}
                       id="description"
-                      ariaLabel={t('app.admin.store.product_form.product_description')} />
+                      ariaLabel={t('app.admin.store.product_form.description')} />
           <FormSwitch control={control}
                       id="is_active"
                       formState={formState}
