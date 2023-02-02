@@ -152,7 +152,6 @@
         themes: "Temaer"
         tags: "Etiketter"
         save_as_draft: "Lagre som utkast"
-        status: "Status"
       #button to book a machine reservation
       reserve_button:
         book_this_machine: "Reserver denne maskinen"
