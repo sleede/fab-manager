@@ -8,7 +8,7 @@ class Statistics::Builders::ProjectsBuilderService
   class << self
     def build(options = default_options)
       # project list
-      Statistics::FetcherService.projects_list(options).each do |p|
+      Statistics::FetcherService.each_project(options) do |p|
         Stats::Project.create({ date: format_date(p[:date]),
                                 type: 'project',
                                 subType: 'published',

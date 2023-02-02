@@ -145,7 +145,7 @@ end
 Plan.find_each do |plan|
   type = plan.find_statistic_type
   subtype = if StatisticSubType.find_by(key: plan.slug).nil?
-              plan.create_statistic_subtype
+              StatisticSubType.create!(key: plan.slug, label: plan.name)
             else
               StatisticSubType.find_by(key: plan.slug)
             end

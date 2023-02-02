@@ -5,6 +5,8 @@ namespace :fablab do
   namespace :es do
     desc '(re)Build ElasticSearch fablab base for stats'
     task build_stats: :environment do
+      exit unless Setting.get('statistics_module')
+
       delete_stats_index
       create_stats_index
       create_stats_mappings

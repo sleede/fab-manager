@@ -1,5 +1,11 @@
 # Changelog Fab-manager
 
+## v5.6.10 2023 February 02
+
+- Optimized memory consumption in statistics fetcher service
+- Fix a bug: private method `create_statistic_subtype'
+- [TODO DEPLOY] `rails db:seed`
+
 ## v5.6.9 2023 February 02
 
 - Updated shakapaker to 6.5.5
