@@ -195,6 +195,7 @@ en:
   export_members:
     members: "Members"
     id: "ID"
+    external_id: "External ID"
     surname: "Surname"
     first_name: "First name"
     email: "E-mail"
@@ -220,6 +221,7 @@ en:
     echo_sciences: "Echosciences"
     organization: "Organization"
     organization_address: "Organization address"
+    note: "Note"
     man: "Man"
     woman: "Woman"
     without_subscriptions: "Without subscriptions"

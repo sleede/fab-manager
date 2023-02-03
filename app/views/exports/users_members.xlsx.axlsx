@@ -6,10 +6,10 @@ header = wb.styles.add_style b: true, bg_color: Stylesheet.primary.upcase.gsub('
 date = wb.styles.add_style format_code: Rails.application.secrets.excel_date_format
 
 wb.add_worksheet(name: t('export_members.members')) do |sheet|
-
   ## data table
   # heading labels
   columns = [t('export_members.id'),
+             t('export_members.external_id'),
              t('export_members.surname'),
              t('export_members.first_name'),
              t('export_members.email'),
@@ -34,7 +34,8 @@ wb.add_worksheet(name: t('export_members.members')) do |sheet|
              t('export_members.twitter'),
              t('export_members.echo_sciences'),
              t('export_members.organization'),
-             t('export_members.organization_address')]
+             t('export_members.organization_address'),
+             t('export_members.note')]
   sheet.add_row columns, style: header
 
   # data rows
@@ -42,6 +43,7 @@ wb.add_worksheet(name: t('export_members.members')) do |sheet|
     expiration = member&.subscription&.expired_at
     data = [
       member.id,
+      member.invoicing_profile.external_id || '',
       member.profile.last_name,
       member.profile.first_name,
       member.email,
@@ -66,13 +68,14 @@ wb.add_worksheet(name: t('export_members.members')) do |sheet|
       member.profile.twitter || '',
       member.profile.echosciences || '',
       member.invoicing_profile&.organization&.name || '',
-      member.invoicing_profile&.organization&.address&.address || ''
+      member.invoicing_profile&.organization&.address&.address || '',
+      ActionController::Base.helpers.sanitize(member.profile.note, tags: []) || ''
     ]
-    styles = [nil, nil, nil, nil, nil, date, nil, nil, nil, nil, nil, nil, nil,
-              nil, nil, nil, date, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil]
+    styles = [nil, nil, nil, nil, nil, nil, date, nil, nil, nil, nil, nil, nil, nil,
+              nil, nil, nil, date, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil]
 
-    types = %i[integer string string string boolean date string integer string string string string string
-               string string string date string string integer string string string string string string string]
+    types = %i[integer string string string string boolean date string integer string string string string string
+               string string string date string string integer string string string string string string string string]
 
     sheet.add_row data, style: styles, types: types
   end

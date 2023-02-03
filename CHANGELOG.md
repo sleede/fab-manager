@@ -1,5 +1,7 @@
 # Changelog Fab-manager
+
 - Report user's prepaid packs in the dashboard
+- Export external ID and private notes in the members excel export
 - Ability to buy a new prepaid pack from the user's dashboard
 - Improved public calendar loading time
 - Fix a bug: schedules jobs are not launched at the right time
