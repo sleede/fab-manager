@@ -6,6 +6,10 @@ require_relative 'cart_item'
 class CartItem::BaseItem < ApplicationRecord
   self.abstract_class = true
 
+  def self.table_name_prefix
+    'cart_item_'
+  end
+
   def price
     { elements: {}, amount: 0 }
   end

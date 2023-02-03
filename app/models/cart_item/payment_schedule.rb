@@ -4,6 +4,8 @@ require_relative 'cart_item'
 
 # A payment schedule applied to plan in the shopping cart
 class CartItem::PaymentSchedule < ApplicationRecord
+  self.table_name = 'cart_item_payment_schedules'
+
   belongs_to :customer_profile, class_name: 'InvoicingProfile'
   belongs_to :coupon
   belongs_to :plan

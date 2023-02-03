@@ -4,6 +4,8 @@ require_relative 'cart_item'
 
 # A discount coupon applied to the whole shopping cart
 class CartItem::Coupon < ApplicationRecord
+  self.table_name = 'cart_item_coupons'
+
   belongs_to :operator_profile, class_name: 'InvoicingProfile'
   belongs_to :customer_profile, class_name: 'InvoicingProfile'
   belongs_to :coupon

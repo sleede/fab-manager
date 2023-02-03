@@ -2,8 +2,6 @@
 
 # A training reservation added to the shopping cart
 class CartItem::TrainingReservation < CartItem::Reservation
-  self.table_name = 'cart_item_reservations'
-
   has_many :cart_item_reservation_slots, class_name: 'CartItem::ReservationSlot', dependent: :destroy, inverse_of: :cart_item,
                                          foreign_key: 'cart_item_id', foreign_type: 'cart_item_type'
   accepts_nested_attributes_for :cart_item_reservation_slots
