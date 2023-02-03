@@ -2,6 +2,7 @@
 - Report user's prepaid packs in the dashboard
 - Ability to buy a new prepaid pack from the user's dashboard
 - Improved public calendar loading time
+- Fix a bug: schedules jobs are not launched at the right time
 - [TODO DEPLOY] `rails fablab:fix_availabilities` THEN `rails fablab:setup:build_places_cache`
 
 - Use Time instead of DateTime objects
