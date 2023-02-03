@@ -366,6 +366,8 @@ es:
         spaces: "Espacios"
         events: "Eventos"
         externals: "Otros calendarios"
+        choose_a_machine: "Choose a machine"
+        cancel: "Cancel"
       #list of spaces
       spaces_list:
         the_spaces: "Espacios"
@@ -434,12 +436,6 @@ es:
         checkout: "Checkout"
         cart_is_empty: "Your cart is empty"
         pickup: "Pickup your products"
-        reference_short: "ref:"
-        minimum_purchase: "Minimum purchase: "
-        stock_limit: "You have reached the current stock limit"
-        unit: "Unit"
-        total: "Total"
-        offer_product: "Offer the product"
         checkout_header: "Total amount for your cart"
         checkout_products_COUNT: "Your cart contains {COUNT} {COUNT, plural, =1{product} other{products}}"
         checkout_products_total: "Products total"
@@ -449,6 +445,16 @@ es:
         checkout_error: "An unexpected error occurred. Please contact the administrator."
         checkout_success: "Purchase confirmed. Thanks!"
         select_user: "Please select a user before continuing."
+      abstract_item:
+        offer_product: "Offer the product"
+        total: "Total"
+        errors:
+          unauthorized_offering_product: "You can't offer anything to yourself"
+      cart_order_product:
+        reference_short: "ref:"
+        minimum_purchase: "Minimum purchase: "
+        stock_limit: "You have reached the current stock limit"
+        unit: "Unit"
         update_item: "Update"
         errors:
           product_not_found: "This product is no longer available, please remove it from your cart."
@@ -456,7 +462,11 @@ es:
           stock_limit_QUANTITY: "Only {QUANTITY} {QUANTITY, plural, =1{unit} other{units}} left in stock, please adjust the quantity of items."
           quantity_min_QUANTITY: "Minimum number of product was changed to {QUANTITY}, please adjust the quantity of items."
           price_changed_PRICE: "The product price was modified to {PRICE}"
-          unauthorized_offering_product: "You can't offer anything to yourself"
+      cart_order_reservation:
+        reservation: "Reservation"
+        offer_reservation: "Offer the reservation"
+        slot: "{DATE}: {START} - {END}"
+        offered: "offered"
       orders_dashboard:
         heading: "My orders"
         sort:

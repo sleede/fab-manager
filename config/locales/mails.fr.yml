@@ -138,7 +138,7 @@ fr:
     notify_member_training_auto_cancelled:
       subject: "Votre séance de formation a été annulée"
       body:
-        cancelled_training: "La séance de formation %{TRAINING} prévue le %{DATE}, de %{START} à %{END}, a été automatiquement annulée en raison d'un nombre insuffisant de participants."
+        cancelled_training: "La séance de formation %{TRAINING} prévue le %{DATE}, de %{START} à %{END}, a été annulée en raison d'un nombre insuffisant de participants."
         auto_refund: "Vous avez été remboursé sur votre porte-monnaie et un avoir devrait être disponible."
     notify_member_training_invalidated:
       subject: "Votre autorisation a été invalidée"
@@ -159,7 +159,7 @@ fr:
       subject: "Une formation a été automatiquement annulée"
       body:
         cancelled_training: "La séance de formation %{TRAINING} prévue le %{DATE}, de %{START} à %{END}, a été annulée en raison d'un nombre insuffisant de participants."
-        auto_refund: "Les membres qui ont réservé cette séance de formation ont été automatiquement remboursés sur leur portefeuille et des avoirs ont été générés."
+        auto_refund: "Les membres qui ont réservé cette séance de formation ont été automatiquement remboursés sur leur porte-monnaie et des avoirs ont été générés."
         manual_refund: "Veuillez rembourser manuellement tous les membres qui ont réservé cette séance de formation et générer des avoirs."
     notify_admin_subscription_is_expired:
       subject: "L'abonnement d'un membre est arrivé à expiration"

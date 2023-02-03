@@ -500,6 +500,7 @@ pt:
         update_success: "The trainings settings were successfully updated"
       #events tracking and management
       events:
+        settings: "Settings"
         events_monitoring: "Monitoramento de eventos"
         manage_filters: "Gerenciar filtros"
         fablab_events: "Eventos do FabLab"
@@ -586,6 +587,16 @@ pt:
         no_reservations_for_now: "Nenhuma reserva."
         back_to_monitoring: "Voltar ao monitoramento"
         canceled: "cancelada"
+      events_settings:
+        title: "Settings"
+        generic_text_block: "Editorial text block"
+        generic_text_block_info: "Displays an editorial block above the list of events visible to members."
+        generic_text_block_switch: "Display editorial block"
+        cta_switch: "Display a button"
+        cta_label: "Button label"
+        cta_url: "url"
+        save: "Save"
+        update_success: "The events settings were successfully updated"
       #subscriptions, prices, credits and coupons management
       pricing:
         pricing_management: "Gerenciamento de preços"

@@ -366,6 +366,8 @@ fr:
         spaces: "Espaces"
         events: "Événements"
         externals: "Autres calendriers"
+        choose_a_machine: "Choisissez une machine"
+        cancel: "Annuler"
       #list of spaces
       spaces_list:
         the_spaces: "Les espaces"
@@ -434,12 +436,6 @@ fr:
         checkout: "Valider mon panier"
         cart_is_empty: "Votre panier est vide"
         pickup: "Retirer vos produits"
-        reference_short: "réf. :"
-        minimum_purchase: "Achat minimum : "
-        stock_limit: "Vous avez atteint la limite actuelle de stock"
-        unit: "Unité"
-        total: "Total"
-        offer_product: "Offrir le produit"
         checkout_header: "Montant total pour votre panier"
         checkout_products_COUNT: "Votre panier contient {COUNT} {COUNT, plural, one {}=1{produit} other{produits}}"
         checkout_products_total: "Total des produits"
@@ -449,6 +445,16 @@ fr:
         checkout_error: "Une erreur inattendue s'est produite. Veuillez contacter l'administrateur."
         checkout_success: "Achat confirmé. Merci !"
         select_user: "Veuillez sélectionner un utilisateur avant de continuer."
+      abstract_item:
+        offer_product: "Offrir le produit"
+        total: "Total"
+        errors:
+          unauthorized_offering_product: "Vous ne pouvez rien offrir à vous-même"
+      cart_order_product:
+        reference_short: "réf. :"
+        minimum_purchase: "Achat minimum : "
+        stock_limit: "Vous avez atteint la limite du stock actuel"
+        unit: "Unité"
         update_item: "Mettre à jour"
         errors:
           product_not_found: "Ce produit n'est plus disponible, veuillez le retirer de votre panier."
@@ -456,7 +462,11 @@ fr:
           stock_limit_QUANTITY: "Seulement {QUANTITY} {QUANTITY, plural, one {}=1{unité} other{unités}} restant en stock, veuillez ajuster la quantité d'articles."
           quantity_min_QUANTITY: "Le nombre minimum de produits a été changé à {QUANTITY}, veuillez ajuster la quantité d'articles."
           price_changed_PRICE: "Le prix du produit a été modifié à {PRICE}"
-          unauthorized_offering_product: "Vous ne pouvez rien offrir à vous-même"
+      cart_order_reservation:
+        reservation: "Réservation"
+        offer_reservation: "Offrir la réservation"
+        slot: "{DATE} : {START} - {END}"
+        offered: "offert"
       orders_dashboard:
         heading: "Mes commandes"
         sort:

@@ -61,10 +61,13 @@ zu:
   #availability slots in the calendar
   availabilities:
     not_available: "crwdns3267:0crwdne3267:0"
+    reserving: "crwdns37199:0crwdne37199:0"
     i_ve_reserved: "crwdns3269:0crwdne3269:0"
     length_must_be_slot_multiple: "crwdns3271:0%{MIN}crwdne3271:0"
     must_be_associated_with_at_least_1_machine: "crwdns3273:0crwdne3273:0"
     deleted_user: "crwdns22460:0crwdne22460:0"
+  coupon:
+    code_format_error: "crwdns37201:0crwdne37201:0"
   #members management
   members:
     unable_to_change_the_group_while_a_subscription_is_running: "crwdns3275:0crwdne3275:0"
@@ -190,6 +193,7 @@ zu:
   export_members:
     members: "crwdns3425:0crwdne3425:0"
     id: "crwdns3427:0crwdne3427:0"
+    external_id: "crwdns37203:0crwdne37203:0"
     surname: "crwdns3429:0crwdne3429:0"
     first_name: "crwdns3431:0crwdne3431:0"
     email: "crwdns3433:0crwdne3433:0"
@@ -215,6 +219,7 @@ zu:
     echo_sciences: "crwdns3473:0crwdne3473:0"
     organization: "crwdns3475:0crwdne3475:0"
     organization_address: "crwdns3477:0crwdne3477:0"
+    note: "crwdns37205:0crwdne37205:0"
     man: "crwdns3479:0crwdne3479:0"
     woman: "crwdns3481:0crwdne3481:0"
     without_subscriptions: "crwdns3483:0crwdne3483:0"
@@ -513,11 +518,15 @@ zu:
     deadline: "crwdns36273:0%{MINUTES}crwdne36273:0"
     restricted: "crwdns36275:0crwdne36275:0"
     plan: "crwdns36277:0crwdne36277:0"
+    plan_group: "crwdns37207:0%{GROUP}crwdne37207:0"
     reserved: "crwdns36279:0crwdne36279:0"
     pack: "crwdns36281:0crwdne36281:0"
+    pack_group: "crwdns37209:0%{GROUP}crwdne37209:0"
     space: "crwdns36283:0crwdne36283:0"
     machine: "crwdns36285:0crwdne36285:0"
     reservable: "crwdns36287:0crwdne36287:0"
+  cart_validation:
+    select_user: "crwdns37211:0crwdne37211:0"
   settings:
     locked_setting: "crwdns21632:0crwdne21632:0"
     about_title: "crwdns21634:0crwdne21634:0"

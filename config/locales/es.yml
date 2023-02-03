@@ -61,10 +61,13 @@ es:
   #availability slots in the calendar
   availabilities:
     not_available: "No disponible"
+    reserving: "I'm reserving"
     i_ve_reserved: "He reservado"
     length_must_be_slot_multiple: "Debe ser al menos %{MIN} minutos después de la fecha de inicio"
     must_be_associated_with_at_least_1_machine: "debe estar asociado con al menos 1 máquina"
     deleted_user: "Deleted user"
+  coupon:
+    code_format_error: "only caps letters, numbers, and dashes are allowed"
   #members management
   members:
     unable_to_change_the_group_while_a_subscription_is_running: "No se puede cambiar de grupo mientras haya una suscripción en curso"
@@ -190,6 +193,7 @@ es:
   export_members:
     members: "Miembros"
     id: "ID"
+    external_id: "External ID"
     surname: "Apellido"
     first_name: "Nombre"
     email: "Correo electrónico"
@@ -215,6 +219,7 @@ es:
     echo_sciences: "Echociences"
     organization: "Organización"
     organization_address: "Dirección de la organización"
+    note: "Note"
     man: "Hombre"
     woman: "Mujer"
     without_subscriptions: "Sin suscripciones"
@@ -513,11 +518,15 @@ es:
     deadline: "You can't reserve a slot %{MINUTES} minutes prior to its start"
     restricted: "This availability is restricted for subscribers"
     plan: "This subscription plan is disabled"
+    plan_group: "This subscription plan is reserved for members of group %{GROUP}"
     reserved: "This slot is already reserved"
     pack: "This prepaid pack is disabled"
+    pack_group: "This prepaid pack is reserved for members of group %{GROUP}"
     space: "This space is disabled"
     machine: "This machine is disabled"
     reservable: "This machine is not reservable"
+  cart_validation:
+    select_user: "Please select a user before continuing"
   settings:
     locked_setting: "the setting is locked."
     about_title: "\"About\" page title"

@@ -500,6 +500,7 @@ fr:
         update_success: "Les paramètres des formations ont été bien mis à jour"
       #events tracking and management
       events:
+        settings: "Paramètres"
         events_monitoring: "Suivi des événements"
         manage_filters: "Gérer les filtres"
         fablab_events: "Les événements du Fab Lab"
@@ -586,6 +587,16 @@ fr:
         no_reservations_for_now: "Aucune réservation pour le moment."
         back_to_monitoring: "Retour au suivi"
         canceled: "Annulée"
+      events_settings:
+        title: "Paramètres"
+        generic_text_block: "Bloc de texte rédactionnel"
+        generic_text_block_info: "Affiche une bannière, au-dessus de la liste des événements."
+        generic_text_block_switch: "Afficher le bloc rédactionnel"
+        cta_switch: "Afficher un bouton"
+        cta_label: "Libellé du bouton"
+        cta_url: "URL"
+        save: "Enregistrer"
+        update_success: "Les paramètres des événements ont bien été mis à jour"
       #subscriptions, prices, credits and coupons management
       pricing:
         pricing_management: "Gestion de la tarification"

@@ -61,10 +61,13 @@ fr:
   #availability slots in the calendar
   availabilities:
     not_available: "Non disponible"
+    reserving: "Je réserve"
     i_ve_reserved: "J'ai réservé"
     length_must_be_slot_multiple: "doit être au moins %{MIN} minutes après la date de début"
     must_be_associated_with_at_least_1_machine: "doit être associé avec au moins 1 machine"
     deleted_user: "Utilisateur supprimé"
+  coupon:
+    code_format_error: "seules les majuscules, chiffres et tirets sont autorisés"
   #members management
   members:
     unable_to_change_the_group_while_a_subscription_is_running: "Impossible de changer le groupe tant qu'un abonnement est en cours"
@@ -190,6 +193,7 @@ fr:
   export_members:
     members: "Membres"
     id: "ID"
+    external_id: "Identification externe"
     surname: "Nom"
     first_name: "Prénom"
     email: "Courriel"
@@ -215,6 +219,7 @@ fr:
     echo_sciences: "Echosciences"
     organization: "Structure"
     organization_address: "Adresse de la structure"
+    note: "Commentaire"
     man: "Homme"
     woman: "Femme"
     without_subscriptions: "Sans Abonnement"
@@ -332,7 +337,7 @@ fr:
       notify_member_training_authorization_expired:
         training_authorization_revoked: "Votre autorisation d'utiliser %{MACHINES} a été révoquée car elle a expiré."
       notify_member_training_auto_cancelled:
-        auto_cancelled_training: "La session de formation %{TRAINING} prévue le %{DATE} a été automatiquement annulée en raison d'un nombre insuffisant de participants."
+        auto_cancelled_training: "La séance de formation %{TRAINING} prévue le %{DATE} a été annulée en raison d'un nombre insuffisant de participants."
         auto_refund: "Vous avez été remboursé sur votre porte-monnaie."
       notify_member_training_invalidated:
         invalidated: "Votre autorisation d'utiliser %{MACHINES} a été invalidée en raison d'un manque de réservations."
@@ -513,8 +518,10 @@ fr:
     deadline: "Vous ne pouvez pas réserver un créneau %{MINUTES} minutes avant son début"
     restricted: "Cette disponibilité n'est disponible que pour les abonnés"
     plan: "Cette formule d'abonnement est désactivé"
+    plan_group: "Cette formule d'abonnement est réservée aux membres du groupe %{GROUP}"
     reserved: "Ce créneau est déjà réservé"
     pack: "Ce pack prépayé est désactivé"
+    pack_group: "Ce pack prépayé est réservé aux membres du groupe %{GROUP}"
     space: "Cet espace est désactivé"
     machine: "Cette machine est désactivée"
     reservable: "Cette machine n'est pas réservable"

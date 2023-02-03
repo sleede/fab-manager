@@ -500,6 +500,7 @@ zu:
         update_success: "crwdns36987:0crwdne36987:0"
       #events tracking and management
       events:
+        settings: "crwdns37141:0crwdne37141:0"
         events_monitoring: "crwdns24436:0crwdne24436:0"
         manage_filters: "crwdns24438:0crwdne24438:0"
         fablab_events: "crwdns24440:0crwdne24440:0"
@@ -586,6 +587,16 @@ zu:
         no_reservations_for_now: "crwdns24590:0crwdne24590:0"
         back_to_monitoring: "crwdns24592:0crwdne24592:0"
         canceled: "crwdns24594:0crwdne24594:0"
+      events_settings:
+        title: "crwdns37143:0crwdne37143:0"
+        generic_text_block: "crwdns37145:0crwdne37145:0"
+        generic_text_block_info: "crwdns37147:0crwdne37147:0"
+        generic_text_block_switch: "crwdns37149:0crwdne37149:0"
+        cta_switch: "crwdns37151:0crwdne37151:0"
+        cta_label: "crwdns37153:0crwdne37153:0"
+        cta_url: "crwdns37155:0crwdne37155:0"
+        save: "crwdns37157:0crwdne37157:0"
+        update_success: "crwdns37159:0crwdne37159:0"
       #subscriptions, prices, credits and coupons management
       pricing:
         pricing_management: "crwdns24596:0crwdne24596:0"
