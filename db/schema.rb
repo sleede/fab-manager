@@ -19,8 +19,8 @@ ActiveRecord::Schema.define(version: 2023_01_31_104958) do
   enable_extension "unaccent"
 
   create_table "abuses", id: :serial, force: :cascade do |t|
-    t.integer "signaled_id"
     t.string "signaled_type"
+    t.integer "signaled_id"
     t.string "first_name"
     t.string "last_name"
     t.string "email"
@@ -68,8 +68,8 @@ ActiveRecord::Schema.define(version: 2023_01_31_104958) do
     t.string "locality"
     t.string "country"
     t.string "postal_code"
-    t.integer "placeable_id"
     t.string "placeable_type"
+    t.integer "placeable_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -93,8 +93,8 @@ ActiveRecord::Schema.define(version: 2023_01_31_104958) do
   end
 
   create_table "assets", id: :serial, force: :cascade do |t|
-    t.integer "viewable_id"
     t.string "viewable_type"
+    t.integer "viewable_id"
     t.string "attachment"
     t.string "type"
     t.datetime "created_at"
@@ -281,8 +281,8 @@ ActiveRecord::Schema.define(version: 2023_01_31_104958) do
   end
 
   create_table "credits", id: :serial, force: :cascade do |t|
-    t.integer "creditable_id"
     t.string "creditable_type"
+    t.integer "creditable_id"
     t.integer "plan_id"
     t.integer "hours"
     t.datetime "created_at"
@@ -522,17 +522,37 @@ ActiveRecord::Schema.define(version: 2023_01_31_104958) do
     t.bigint "machine_id", null: false
   end
 
+  create_table "notification_preferences", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "notification_type_id", null: false
+    t.boolean "in_system", default: true
+    t.boolean "email", default: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["notification_type_id"], name: "index_notification_preferences_on_notification_type_id"
+    t.index ["user_id", "notification_type_id"], name: "index_notification_preferences_on_user_and_notification_type", unique: true
+  end
+
+  create_table "notification_types", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "category", null: false
+    t.boolean "is_configurable", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_notification_types_on_name", unique: true
+  end
+
   create_table "notifications", id: :serial, force: :cascade do |t|
     t.integer "receiver_id"
-    t.integer "attached_object_id"
     t.string "attached_object_type"
+    t.integer "attached_object_id"
     t.integer "notification_type_id"
     t.boolean "is_read", default: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string "receiver_type"
     t.boolean "is_send", default: false
-    t.jsonb "meta_data", default: {}
+    t.jsonb "meta_data", default: "{}"
     t.index ["notification_type_id"], name: "index_notifications_on_notification_type_id"
     t.index ["receiver_id"], name: "index_notifications_on_receiver_id"
   end
@@ -772,8 +792,8 @@ ActiveRecord::Schema.define(version: 2023_01_31_104958) do
   create_table "prices", id: :serial, force: :cascade do |t|
     t.integer "group_id"
     t.integer "plan_id"
-    t.integer "priceable_id"
     t.string "priceable_type"
+    t.integer "priceable_id"
     t.integer "amount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -976,8 +996,8 @@ ActiveRecord::Schema.define(version: 2023_01_31_104958) do
     t.text "message"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer "reservable_id"
     t.string "reservable_type"
+    t.integer "reservable_id"
     t.integer "nb_reserve_places"
     t.integer "statistic_profile_id"
     t.index ["reservable_type", "reservable_id"], name: "index_reservations_on_reservable_type_and_reservable_id"
@@ -986,8 +1006,8 @@ ActiveRecord::Schema.define(version: 2023_01_31_104958) do
 
   create_table "roles", id: :serial, force: :cascade do |t|
     t.string "name"
-    t.integer "resource_id"
     t.string "resource_type"
+    t.integer "resource_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
@@ -1199,7 +1219,7 @@ ActiveRecord::Schema.define(version: 2023_01_31_104958) do
     t.text "description"
     t.boolean "public_page", default: true
     t.boolean "disabled"
-    t.boolean "auto_cancel"
+    t.boolean "auto_cancel", default: false
     t.integer "auto_cancel_threshold"
     t.integer "auto_cancel_deadline"
     t.boolean "authorization"
@@ -1377,6 +1397,9 @@ ActiveRecord::Schema.define(version: 2023_01_31_104958) do
   add_foreign_key "invoices", "wallet_transactions"
   add_foreign_key "invoicing_profiles", "users"
   add_foreign_key "machines", "machine_categories"
+  add_foreign_key "notification_preferences", "notification_types"
+  add_foreign_key "notification_preferences", "users"
+  add_foreign_key "notifications", "notification_types"
   add_foreign_key "order_activities", "invoicing_profiles", column: "operator_profile_id"
   add_foreign_key "order_activities", "orders"
   add_foreign_key "order_items", "orders"

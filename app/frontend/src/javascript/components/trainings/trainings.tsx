@@ -14,10 +14,6 @@ import type { Machine } from '../../models/machine';
 import TrainingAPI from '../../api/training';
 import MachineAPI from '../../api/machine';
 import { EditDestroyButtons } from '../base/edit-destroy-buttons';
-import { EditorialBlock } from '../editorial-block/editorial-block';
-import { SettingValue, trainingsSettings } from '../../models/setting';
-import SettingAPI from '../../api/setting';
-import SettingLib from '../../lib/setting';
 
 declare const Application: IApplication;
 

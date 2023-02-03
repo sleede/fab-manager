@@ -29,7 +29,7 @@
       <div class="col-md-12" ng-if="isAuthorized('admin')">
         <uib-tabset justified="true" active="tabs.active">
           <uib-tab heading="{{ 'app.admin.events.settings' | translate }}" index="0">
-            <events-settings on-error="onError" on-success="onSuccess"></events-settings>
+            <events-settings on-error="onError" on-success="onSuccess" ui-router="uiRouter"></events-settings>
           </uib-tab>
 
           <uib-tab heading="{{ 'app.admin.events.events_monitoring' | translate }}" index="1">

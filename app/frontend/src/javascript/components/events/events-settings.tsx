@@ -10,18 +10,21 @@ import { EditorialKeys, EditorialBlockForm } from '../editorial-block/editorial-
 import SettingAPI from '../../api/setting';
 import SettingLib from '../../lib/setting';
 import { SettingName, SettingValue, eventsSettings } from '../../models/setting';
+import { UnsavedFormAlert } from '../form/unsaved-form-alert';
+import { UIRouter } from '@uirouter/angularjs';
 
 declare const Application: IApplication;
 
 interface EventsSettingsProps {
   onError: (message: string) => void,
   onSuccess: (message: string) => void
+  uiRouter: UIRouter
 }
 
 /**
  * Events settings
  */
-export const EventsSettings: React.FC<EventsSettingsProps> = ({ onError, onSuccess }) => {
+export const EventsSettings: React.FC<EventsSettingsProps> = ({ onError, onSuccess, uiRouter }) => {
   const { t } = useTranslation('admin');
   const { register, control, formState, handleSubmit, reset } = useForm<Record<SettingName, SettingValue>>();
 
@@ -57,6 +60,7 @@ export const EventsSettings: React.FC<EventsSettingsProps> = ({ onError, onSucce
         <FabButton onClick={handleSubmit(onSubmit)} className='save-btn is-main'>{t('app.admin.events_settings.save')}</FabButton>
       </header>
       <form className="events-settings-content">
+        <UnsavedFormAlert uiRouter={uiRouter} formState={formState} />
         <div className="settings-section">
           <EditorialBlockForm register={register}
                               control={control}
@@ -79,4 +83,4 @@ const EventsSettingsWrapper: React.FC<EventsSettingsProps> = (props) => {
   );
 };
 
-Application.Components.component('eventsSettings', react2angular(EventsSettingsWrapper, ['onError', 'onSuccess']));
+Application.Components.component('eventsSettings', react2angular(EventsSettingsWrapper, ['onError', 'onSuccess', 'uiRouter']));

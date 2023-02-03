@@ -51,8 +51,8 @@ class EventsController {
 /**
  * Controller used in the events listing page (admin view)
  */
-Application.Controllers.controller('AdminEventsController', ['$scope', '$state', 'dialogs', '$uibModal', 'growl', 'AuthService', 'Event', 'Category', 'EventTheme', 'AgeRange', 'PriceCategory', 'eventsPromise', 'categoriesPromise', 'themesPromise', 'ageRangesPromise', 'priceCategoriesPromise', '_t', 'Member', 'uiTourService', 'settingsPromise',
-  function ($scope, $state, dialogs, $uibModal, growl, AuthService, Event, Category, EventTheme, AgeRange, PriceCategory, eventsPromise, categoriesPromise, themesPromise, ageRangesPromise, priceCategoriesPromise, _t, Member, uiTourService, settingsPromise) {
+Application.Controllers.controller('AdminEventsController', ['$scope', '$state', 'dialogs', '$uibModal', 'growl', 'AuthService', 'Event', 'Category', 'EventTheme', 'AgeRange', 'PriceCategory', 'eventsPromise', 'categoriesPromise', 'themesPromise', 'ageRangesPromise', 'priceCategoriesPromise', '_t', 'Member', 'uiTourService', 'settingsPromise', '$uiRouter',
+  function ($scope, $state, dialogs, $uibModal, growl, AuthService, Event, Category, EventTheme, AgeRange, PriceCategory, eventsPromise, categoriesPromise, themesPromise, ageRangesPromise, priceCategoriesPromise, _t, Member, uiTourService, settingsPromise, $uiRouter) {
   /* PUBLIC SCOPE */
 
     /**
@@ -61,6 +61,9 @@ Application.Controllers.controller('AdminEventsController', ['$scope', '$state',
     $scope.onSuccess = function (message) {
       growl.success(message);
     };
+
+    // the following item is used by the UnsavedFormAlert component to detect a page change
+    $scope.uiRouter = $uiRouter;
 
     /**
      * Callback triggered by react components
