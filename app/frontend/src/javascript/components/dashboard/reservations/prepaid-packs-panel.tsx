@@ -15,6 +15,8 @@ import { SelectOption } from '../../../models/select';
 import { ProposePacksModal } from '../../prepaid-packs/propose-packs-modal';
 import * as React from 'react';
 import { User } from '../../../models/user';
+import PrepaidPackAPI from '../../../api/prepaid-pack';
+import { PrepaidPack } from '../../../models/prepaid-pack';
 
 interface PrepaidPacksPanelProps {
   user: User,
@@ -28,22 +30,30 @@ const PrepaidPacksPanel: React.FC<PrepaidPacksPanelProps> = ({ user, onError }) 
   const { t } = useTranslation('logged');
 
   const [machines, setMachines] = useState<Array<Machine>>([]);
-  const [packs, setPacks] = useState<Array<UserPack>>([]);
+  const [packs, setPacks] = useState<Array<PrepaidPack>>([]);
+  const [userPacks, setUserPacks] = useState<Array<UserPack>>([]);
   const [threshold, setThreshold] = useState<number>(null);
   const [selectedMachine, setSelectedMachine] = useState<Machine>(null);
   const [packsModal, setPacksModal] = useState<boolean>(false);
+  const [packsForSubscribers, setPacksForSubscribers] = useState<boolean>(false);
 
   const { handleSubmit, control, formState } = useForm<{ machine_id: number }>();
 
   useEffect(() => {
     UserPackAPI.index({ user_id: user.id })
-      .then(setPacks)
+      .then(setUserPacks)
       .catch(onError);
     SettingAPI.get('renew_pack_threshold')
       .then(data => setThreshold(parseFloat(data.value)))
       .catch(onError);
     MachineAPI.index({ disabled: false })
       .then(setMachines)
+      .catch(onError);
+    PrepaidPackAPI.index({ disabled: false, group_id: user.group_id, priceable_type: 'Machine' })
+      .then(setPacks)
+      .catch(onError);
+    SettingAPI.get('pack_only_for_subscription')
+      .then(data => setPacksForSubscribers(data.value === 'true'))
       .catch(onError);
   }, []);
 
@@ -77,9 +87,17 @@ const PrepaidPacksPanel: React.FC<PrepaidPacksPanelProps> = ({ user, onError }) 
    * Build the options for the select dropdown, for the given list of machines
    */
   const buildMachinesOptions = (machines: Array<Machine>): Array<SelectOption<number>> => {
-    return machines.map(m => {
+    const packMachinesId = packs.map(p => p.priceable_id);
+    return machines.filter(m => packMachinesId.includes(m.id)).map(m => {
       return { label: m.name, value: m.id };
     });
+  };
+
+  /**
+   * Check if the user can buy a pack
+   */
+  const canBuyPacks = (): boolean => {
+    return (packs.length > 0 && (!packsForSubscribers || (packsForSubscribers && user.subscribed_plan != null)));
   };
 
   /**
@@ -88,7 +106,7 @@ const PrepaidPacksPanel: React.FC<PrepaidPacksPanelProps> = ({ user, onError }) 
   const onPackBoughtSuccess = () => {
     togglePacksModal();
     UserPackAPI.index({ user_id: user.id })
-      .then(setPacks)
+      .then(setUserPacks)
       .catch(onError);
   };
 
@@ -96,7 +114,7 @@ const PrepaidPacksPanel: React.FC<PrepaidPacksPanelProps> = ({ user, onError }) 
     <FabPanel className='prepaid-packs-panel'>
       <p className="title">{t('app.logged.dashboard.reservations_dashboard.prepaid_packs_panel.title')}</p>
 
-      {packs.map(pack => (
+      {userPacks.map(pack => (
         <div className={`prepaid-packs ${isLow(pack) ? 'is-low' : ''}`} key={pack.id}>
           <div className='prepaid-packs-list'>
             <span className="prepaid-packs-list-label name">{t('app.logged.dashboard.reservations_dashboard.prepaid_packs_panel.name')}</span>
@@ -122,7 +140,7 @@ const PrepaidPacksPanel: React.FC<PrepaidPacksPanelProps> = ({ user, onError }) 
         </div>
       ))}
 
-      <div className='prepaid-packs-cta'>
+      {canBuyPacks() && <div className='prepaid-packs-cta'>
         <p>{t('app.logged.dashboard.reservations_dashboard.prepaid_packs_panel.cta_info')}</p>
         <form onSubmit={handleSubmit(onBuyPack)}>
           <FormSelect options={buildMachinesOptions(machines)} control={control} id="machine_id" rules={{ required: true }} formState={formState} label={t('app.logged.dashboard.reservations_dashboard.prepaid_packs_panel.select_machine')} />
@@ -140,7 +158,7 @@ const PrepaidPacksPanel: React.FC<PrepaidPacksPanelProps> = ({ user, onError }) 
                              onError={onError}
                              onDecline={togglePacksModal}
                              onSuccess={onPackBoughtSuccess} />}
-      </div>
+      </div>}
 
     </FabPanel>
   );
