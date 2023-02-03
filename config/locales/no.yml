@@ -61,10 +61,13 @@
   #availability slots in the calendar
   availabilities:
     not_available: "Ikke tilgjengelig"
+    reserving: "I'm reserving"
     i_ve_reserved: "Jeg har reservert"
     length_must_be_slot_multiple: "må være minst %{MIN} minutter etter startdatoen"
     must_be_associated_with_at_least_1_machine: "må være tilknyttet minst 1 maskin"
     deleted_user: "Deleted user"
+  coupon:
+    code_format_error: "only caps letters, numbers, and dashes are allowed"
   #members management
   members:
     unable_to_change_the_group_while_a_subscription_is_running: "Kan ikke endre gruppen mens et abonnement kjører"
@@ -190,6 +193,7 @@
   export_members:
     members: "Medlemmer"
     id: "ID"
+    external_id: "External ID"
     surname: "Etternavn"
     first_name: "Fornavn"
     email: "E-post"
@@ -215,6 +219,7 @@
     echo_sciences: "Echosciences"
     organization: "Organisasjon"
     organization_address: "Organisasjonens adresse"
+    note: "Note"
     man: "Mann"
     woman: "Kvinne"
     without_subscriptions: "Uten abonnementer"
@@ -513,11 +518,15 @@
     deadline: "You can't reserve a slot %{MINUTES} minutes prior to its start"
     restricted: "This availability is restricted for subscribers"
     plan: "This subscription plan is disabled"
+    plan_group: "This subscription plan is reserved for members of group %{GROUP}"
     reserved: "This slot is already reserved"
     pack: "This prepaid pack is disabled"
+    pack_group: "This prepaid pack is reserved for members of group %{GROUP}"
     space: "This space is disabled"
     machine: "This machine is disabled"
     reservable: "This machine is not reservable"
+  cart_validation:
+    select_user: "Please select a user before continuing"
   settings:
     locked_setting: "innstillingen er låst."
     about_title: "\"Om\" sidetittel"
