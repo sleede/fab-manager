@@ -10,10 +10,12 @@ class Notification < ApplicationRecord
   # It fetch his notifications where no notification preference is made,
   # or if this preference specify that the user accepts in system notification
   scope :delivered_in_system, lambda { |user|
-    left_outer_joins(notification_type: :notification_preferences)
+    joins(:notification_type)
+      .joins(%(LEFT OUTER JOIN "notification_preferences" ON
+                               "notification_preferences"."notification_type_id" = "notification_types"."id"
+                               AND "notification_preferences"."user_id" = #{user.id}).squish)
       .where(<<-SQL.squish, user.id)
-      (notification_preferences.user_id = ? AND notification_preferences.in_system IS TRUE)
-      OR notification_preferences.id IS NULL
+      notification_preferences.in_system IS TRUE OR notification_preferences.id IS NULL
       SQL
   }
 
