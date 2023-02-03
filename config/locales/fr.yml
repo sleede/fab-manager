@@ -332,7 +332,7 @@ fr:
       notify_member_training_authorization_expired:
         training_authorization_revoked: "Votre autorisation d'utiliser %{MACHINES} a été révoquée car elle a expiré."
       notify_member_training_auto_cancelled:
-        auto_cancelled_training: "La session de formation %{TRAINING} prévue le %{DATE} a été automatiquement annulée en raison d'un nombre insuffisant de participants."
+        auto_cancelled_training: "La séance de formation %{TRAINING} prévue le %{DATE} a été annulée en raison d'un nombre insuffisant de participants."
         auto_refund: "Vous avez été remboursé sur votre porte-monnaie."
       notify_member_training_invalidated:
         invalidated: "Votre autorisation d'utiliser %{MACHINES} a été invalidée en raison d'un manque de réservations."
