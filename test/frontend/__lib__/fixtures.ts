@@ -11,6 +11,8 @@ import providers from '../__fixtures__/auth_providers';
 import profileCustomFields from '../__fixtures__/profile_custom_fields';
 import spaces from '../__fixtures__/spaces';
 import statuses from '../__fixtures__/statuses';
+import notificationTypes from '../__fixtures__/notification_types';
+import notifications from '../__fixtures__/notifications';
 
 const FixturesLib = {
   init: () => {
@@ -29,7 +31,9 @@ const FixturesLib = {
       providers: JSON.parse(JSON.stringify(providers)),
       profileCustomFields: JSON.parse(JSON.stringify(profileCustomFields)),
       spaces: JSON.parse(JSON.stringify(spaces)),
-      statuses: JSON.parse(JSON.stringify(statuses))
+      statuses: JSON.parse(JSON.stringify(statuses)),
+      notificationTypes: JSON.parse(JSON.stringify(notificationTypes)),
+      notifications: JSON.parse(JSON.stringify(notifications))
     };
   }
 };

@@ -8,5 +8,8 @@ describe('Notifications list', () => {
 
     render(<NotificationsList onError={onError} />);
     await waitFor(() => screen.getByTestId('notifications-list'));
+    expect(screen.getByText('Decription of the first notification')).toBeDefined();
+    expect(screen.getByText('Decription of the second notification')).toBeDefined();
+    expect(screen.getByText('Decription of the third notification')).toBeDefined();
   });
 });

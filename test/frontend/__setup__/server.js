@@ -111,6 +111,12 @@ export const server = setupServer(
     status.id = fixtures.statuses.length + 1;
     fixtures.statuses.push(status);
     return res(ctx.json({ status }));
+  }),
+  rest.get('/api/notification_types', (req, res, ctx) => {
+    return res(ctx.json(fixtures.notification_types));
+  }),
+  rest.get('/api/notifications', (req, res, ctx) => {
+    return res(ctx.json(fixtures.notifications));
   })
 );
 
