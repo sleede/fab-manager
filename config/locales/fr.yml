@@ -61,10 +61,13 @@ fr:
   #availability slots in the calendar
   availabilities:
     not_available: "Non disponible"
+    reserving: "Je réserve"
     i_ve_reserved: "J'ai réservé"
     length_must_be_slot_multiple: "doit être au moins %{MIN} minutes après la date de début"
     must_be_associated_with_at_least_1_machine: "doit être associé avec au moins 1 machine"
     deleted_user: "Utilisateur supprimé"
+  coupon:
+    code_format_error: "seules les majuscules, chiffres et tirets sont autorisés"
   #members management
   members:
     unable_to_change_the_group_while_a_subscription_is_running: "Impossible de changer le groupe tant qu'un abonnement est en cours"
@@ -190,6 +193,7 @@ fr:
   export_members:
     members: "Membres"
     id: "ID"
+    external_id: "Identification externe"
     surname: "Nom"
     first_name: "Prénom"
     email: "Courriel"
@@ -215,6 +219,7 @@ fr:
     echo_sciences: "Echosciences"
     organization: "Structure"
     organization_address: "Adresse de la structure"
+    note: "Commentaire"
     man: "Homme"
     woman: "Femme"
     without_subscriptions: "Sans Abonnement"
@@ -513,11 +518,15 @@ fr:
     deadline: "Vous ne pouvez pas réserver un créneau %{MINUTES} minutes avant son début"
     restricted: "Cette disponibilité n'est disponible que pour les abonnés"
     plan: "Cette formule d'abonnement est désactivé"
+    plan_group: "Cette formule d'abonnement est réservée aux membres du groupe %{GROUP}"
     reserved: "Ce créneau est déjà réservé"
     pack: "Ce pack prépayé est désactivé"
+    pack_group: "Ce pack prépayé est réservé aux membres du groupe %{GROUP}"
     space: "Cet espace est désactivé"
     machine: "Cette machine est désactivée"
     reservable: "Cette machine n'est pas réservable"
+  cart_validation:
+    select_user: "Veuillez sélectionner un utilisateur avant de continuer"
   settings:
     locked_setting: "le paramètre est verrouillé."
     about_title: "Le titre de la page \"À propos\""
