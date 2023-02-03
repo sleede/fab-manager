@@ -12,7 +12,10 @@ class Trainings::AutoCancelService
 
       training.availabilities
               .includes(slots: :slots_reservations)
-              .where('availabilities.start_at >= ?', DateTime.current - training.auto_cancel_deadline.hours)
+              .where(availabilities: { lock: false })
+              .where('availabilities.start_at >= ? AND availabilities.start_at <= ?',
+                     DateTime.current,
+                     DateTime.current + training.auto_cancel_deadline.hours)
               .find_each do |availability|
         next if availability.reservations.count >= training.auto_cancel_threshold
 
@@ -72,8 +75,11 @@ class Trainings::AutoCancelService
     # @param reservation [Reservation]
     def refund_after_cancel(reservation)
       invoice_item = reservation.invoice_items.joins(:invoice).where(invoices: { type: nil }).first
+      amount = (invoice_item&.amount_after_coupon || 0) / 100.00
+      return if amount.zero?
+
       service = WalletService.new(user: reservation.user, wallet: reservation.user.wallet)
-      transaction = service.credit(invoice_item.amount_after_coupon / 100.00)
+      transaction = service.credit(amount)
       service.create_avoir(transaction, DateTime.current, I18n.t('trainings.refund_for_auto_cancel')) if transaction
     end
   end
