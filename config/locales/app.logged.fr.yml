@@ -156,7 +156,7 @@ fr:
             cancelled_slot: "Annulé"
           credits_panel:
             title: "Mes crédits"
-            info: "Avec votre abonnement, vous bénéficiez de crédits gratuits que vous pouvez utiliser sur les réservations"
+            info: "Avec votre abonnement, vous bénéficiez de crédits gratuits que vous pouvez utiliser lors de vos réservations"
             remaining_credits_html: "Vous pouvez réserver {REMAINING} {REMAINING, plural, one{créneau} other{créneaux}} gratuitement."
             used_credits_html: "Vous avez déjà utilisé <strong> {USED} {USED, plural, =0{crédit} one{crédit} other{crédits}}</strong>."
             no_credits: "Vous n'avez pas encore de crédits. Certains abonnements peuvent vous permettre de réserver des créneaux gratuitement."
