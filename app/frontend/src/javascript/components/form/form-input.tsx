@@ -64,7 +64,7 @@ export const FormInput = <TFieldValues extends FieldValues, TInputType>({ id, re
         }
         return num;
       }
-      setCharacterCount(value.length);
+      setCharacterCount(value?.length || 0);
       return value;
     }
   };
