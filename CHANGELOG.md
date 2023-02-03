@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- Fix a bug: invalid date display in negative timezones
+
 ## v5.6.10 2023 February 02
 
 - Optimized memory consumption in statistics fetcher service

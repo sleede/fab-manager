@@ -26,7 +26,7 @@ type TDateISOTime = `${TDateISOShortTime}:${TSeconds}`|`${TDateISOShortTime}:${T
 /**
  * Represent a timezone like `+0100`
  */
-type TTimezoneISO = `+${THours}${TMinutes}`|`-${THours}${TMinutes}`|'Z'
+type TTimezoneISO = `+${THours}${TMinutes}`|`-${THours}${TMinutes}`|`+${THours}:${TMinutes}`|`-${THours}:${TMinutes}`|'Z'
 
 /**
  * Represent a string like `2021-01-08T14:42:34.678Z` (format: ISO 8601).
@@ -36,3 +36,5 @@ type TTimezoneISO = `+${THours}${TMinutes}`|`-${THours}${TMinutes}`|'Z'
  *   "Expression produces a union type that is too complex to represent. ts(2590)
  */
 export type TDateISO = `${TDateISODate}T${TDateISOTime}${TTimezoneISO}`;
+
+export type IANATimeZone = `${string}/${string}` | 'UTC';

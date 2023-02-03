@@ -24,6 +24,7 @@ global.Fablab.fullcalendar_locale = 'fr';
 global.Fablab.intl_locale = 'fr-FR';
 global.Fablab.intl_currency = 'EUR';
 global.Fablab.timezone = 'Europe/Paris';
+global.Fablab.timezone_offset = '+01:00';
 global.Fablab.translations = {
   app: {
     shared: {
