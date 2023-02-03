@@ -18,7 +18,7 @@ import MachineAPI from '../../api/machine';
 import { Machine } from '../../models/machine';
 import { SelectOption } from '../../models/select';
 import SettingAPI from '../../api/setting';
-import { Setting } from '../../models/setting';
+import { Setting, SettingName, trainingsSettings } from '../../models/setting';
 import { AdvancedAccountingForm } from '../accounting/advanced-accounting-form';
 import { FabAlert } from '../base/fab-alert';
 
@@ -39,7 +39,7 @@ export const TrainingForm: React.FC<TrainingFormProps> = ({ action, training, on
 
   const [machineModule, setMachineModule] = useState<Setting>(null);
   const [isActiveAccounting, setIsActiveAccounting] = useState<boolean>(false);
-  const { handleSubmit, register, control, setValue, formState } = useForm<Training>({ defaultValues: { ...training } });
+  const { handleSubmit, register, control, setValue, formState, reset } = useForm<Training>({ defaultValues: { ...training } });
   const output = useWatch<Training>({ control });
   const isActiveCancellation = useWatch({ control, name: 'auto_cancel' }) as boolean;
   const isActiveAuthorizationValidity = useWatch({ control, name: 'authorization' }) as boolean;
@@ -48,6 +48,23 @@ export const TrainingForm: React.FC<TrainingFormProps> = ({ action, training, on
   useEffect(() => {
     SettingAPI.get('machines_module').then(setMachineModule).catch(onError);
     SettingAPI.get('advanced_accounting').then(res => setIsActiveAccounting(res.value === 'true')).catch(onError);
+
+    // on training creation, set the default auto-cancel/authorization/invalidation parameters from the general configuration
+    if (action === 'create') {
+      SettingAPI.query(trainingsSettings.filter(s => !s.match(/^trainings_banner/)))
+        .then(settings => {
+          reset({
+            auto_cancel: settings.get('trainings_auto_cancel') === 'true',
+            auto_cancel_threshold: parseInt(settings.get('trainings_auto_cancel_threshold'), 10),
+            auto_cancel_deadline: parseInt(settings.get('trainings_auto_cancel_deadline'), 10),
+            authorization: settings.get('trainings_authorization_validity') === 'true',
+            authorization_period: parseInt(settings.get('trainings_authorization_validity_duration'), 10),
+            invalidation: settings.get('trainings_invalidation_rule') === 'true',
+            invalidation_period: parseInt(settings.get('trainings_invalidation_rule_period'), 10)
+          });
+        })
+        .catch(onError);
+    }
   }, []);
 
   /**
