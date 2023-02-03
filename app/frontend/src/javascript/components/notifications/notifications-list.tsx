@@ -68,7 +68,7 @@ const NotificationsList: React.FC<NotificationsListProps> = ({ onError }) => {
   };
 
   return (
-    <div className="notifications-list">
+    <div className="notifications-list" data-testid="notifications-list">
       <header className="notifications-header">
         <h2 className="title">{t('app.logged.notifications_list.notifications')}</h2>
         {totals.unread > 0 &&

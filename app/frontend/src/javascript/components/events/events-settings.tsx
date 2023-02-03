@@ -18,7 +18,7 @@ declare const Application: IApplication;
 interface EventsSettingsProps {
   onError: (message: string) => void,
   onSuccess: (message: string) => void
-  uiRouter: UIRouter
+  uiRouter?: UIRouter
 }
 
 /**
@@ -60,7 +60,7 @@ export const EventsSettings: React.FC<EventsSettingsProps> = ({ onError, onSucce
         <FabButton onClick={handleSubmit(onSubmit)} className='save-btn is-main'>{t('app.admin.events_settings.save')}</FabButton>
       </header>
       <form className="events-settings-content">
-        <UnsavedFormAlert uiRouter={uiRouter} formState={formState} />
+        {uiRouter && <UnsavedFormAlert uiRouter={uiRouter} formState={formState} />}
         <div className="settings-section">
           <EditorialBlockForm register={register}
                               control={control}

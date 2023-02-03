@@ -19,7 +19,7 @@ interface MachinesSettingsProps {
   onError: (message: string) => void,
   onSuccess: (message: string) => void,
   beforeSubmit?: (data: Record<SettingName, SettingValue>) => void,
-  uiRouter: UIRouter
+  uiRouter?: UIRouter
 }
 
 /**
@@ -62,7 +62,7 @@ export const MachinesSettings: React.FC<MachinesSettingsProps> = ({ onError, onS
         <FabButton onClick={handleSubmit(onSubmit)} className='save-btn is-main'>{t('app.admin.machines_settings.save')}</FabButton>
       </header>
       <form className="machines-settings-content">
-        <UnsavedFormAlert uiRouter={uiRouter} formState={formState} />
+        {uiRouter && <UnsavedFormAlert uiRouter={uiRouter} formState={formState} />}
         <div className="settings-section">
           <EditorialBlockForm register={register}
                               control={control}
