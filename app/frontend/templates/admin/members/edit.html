@@ -91,6 +91,7 @@
                     <button class="btn btn-default" ng-click="toggleRenewModal()" translate>{{ 'app.admin.members_edit.renew_subscription' }}</button>
                     <button class="btn btn-default" ng-click="toggleCancelModal()" translate>{{ 'app.admin.members_edit.cancel_subscription' }}</button>
                     <free-extend-modal is-open="isOpenFreeExtendModal"
+                                       ng-if="isOpenFreeExtendModal"
                                        toggle-modal="toggleFreeExtendModal"
                                        subscription="subscription"
                                        customer-id="user.id"
@@ -98,6 +99,7 @@
                                        on-success="onExtendSuccess">
                     </free-extend-modal>
                     <renew-modal is-open="isOpenRenewModal"
+                                 ng-if="isOpenRenewModal"
                                  toggle-modal="toggleRenewModal"
                                  subscription="subscription"
                                  customer="user"
@@ -106,6 +108,7 @@
                                  on-success="onExtendSuccess">
                     </renew-modal>
                     <cancel-subscription-modal is-open="isOpenCancelModal"
+                                               ng-if="isOpenCancelModal"
                                                toggle-modal="toggleCancelModal"
                                                subscription="subscription"
                                                customer="user"
