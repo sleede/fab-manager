@@ -16,7 +16,8 @@ export const NotificationCategoryNames = [
   'shop',
   'projects',
   'accountings',
-  'trainings'
+  'trainings',
+  'app_management'
 ] as const;
 
 export type NotificationCategoryName = typeof NotificationCategoryNames[number];

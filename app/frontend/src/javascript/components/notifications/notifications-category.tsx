@@ -34,16 +34,20 @@ const NotificationsCategory: React.FC<NotificationsCategoryProps> = ({ onError, 
   };
 
   return (
-    <div className="notifications-category">
-      <h2 className="category-name">{`${t(`app.logged.notifications_category.${categoryName}`)}, ${t('app.logged.notifications_category.notify_me_when')}`}</h2>
-      <div className="category-content">
-        <div className="category-actions">
-          <FabButton className="category-action category-action-left" onClick={enableAll}>{t('app.logged.notifications_category.enable_all')}</FabButton>
-          <FabButton className="category-action" onClick={disableAll}>{t('app.logged.notifications_category.disable_all')}</FabButton>
+    <>
+    {(preferences.length > 0) &&
+      <div className="notifications-category">
+        <h2 className="category-name">{`${t(`app.logged.notifications_category.${categoryName}`)}, ${t('app.logged.notifications_category.notify_me_when')}`}</h2>
+        <div className="category-content">
+          <div className="category-actions">
+            <FabButton className="category-action category-action-left" onClick={enableAll}>{t('app.logged.notifications_category.enable_all')}</FabButton>
+            <FabButton className="category-action" onClick={disableAll}>{t('app.logged.notifications_category.disable_all')}</FabButton>
+          </div>
+          {preferences.map(preference => <NotificationForm key={preference.notification_type} preference={preference} onError={onError}/>)}
         </div>
-        {preferences.map(preference => <NotificationForm key={preference.notification_type} preference={preference} onError={onError}/>)}
       </div>
-    </div>
+   }
+   </>
   );
 };
 
