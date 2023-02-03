@@ -156,7 +156,7 @@ es:
             cancelled_slot: "Cancelled"
           credits_panel:
             title: "My credits"
-            info: "Your subscription comes with free credits you can use on reservations"
+            info: "Your subscription comes with free credits you can use when reserving"
             remaining_credits_html: "You can book {REMAINING} {REMAINING, plural, one{slot} other{slots}} for free."
             used_credits_html: "You have already used <strong> {USED} {USED, plural, =0{credit} one{credit} other{credits}}</strong>."
             no_credits: "You don't have any credits yet. Some subscriptions may allow you to book some slots for free."
