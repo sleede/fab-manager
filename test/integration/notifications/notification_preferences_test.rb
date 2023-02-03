@@ -27,7 +27,7 @@ class NotificationPreferencesTest < ActionDispatch::IntegrationTest
             notification_preference: {
               id: 1,
               user_id: 1,
-              notification_type: 'notify_dev_when_sun_shines',
+              notification_type: 'notify_admin_when_project_published',
               in_system: false,
               email: false
             }
@@ -41,7 +41,9 @@ class NotificationPreferencesTest < ActionDispatch::IntegrationTest
     # Check the status was updated
     res = json_response(response.body)
     assert_equal 1, res[:id]
-    assert_equal 'notify_dev_when_sun_shines', res[:notification_type]
+    assert_equal 'notify_admin_when_project_published', res[:notification_type]
+    assert_equal false, res[:in_system]
+    assert_equal false, res[:email]
   end
 
   test 'bulk update notification preference' do
@@ -51,14 +53,14 @@ class NotificationPreferencesTest < ActionDispatch::IntegrationTest
               {
                 id: 1,
                 user_id: 1,
-                notification_type: 'notify_dev_when_sun_shines',
+                notification_type: 'notify_admin_when_project_published',
                 in_system: false,
                 email: false
               },
               {
                 id: 2,
                 user_id: 1,
-                notification_type: 'notify_dev_when_raining',
+                notification_type: 'notify_project_collaborator_to_valid',
                 in_system: false,
                 email: false
               }

@@ -18,8 +18,17 @@ notification_preference_2:
 
 notification_preference_3:
   id: 3
+  user_id: 1
+  notification_type_id: 13
+  in_system: false
+  email: false
+  created_at: 2023-02-02 15:25:13.744539000 Z
+  updated_at: 2023-02-02 15:25:13.744539000 Z
+
+notification_preference_4:
+  id: 4
   user_id: 2
-  notification_type_id: 2
+  notification_type_id: 35
   in_system: false
   email: false
   created_at: 2023-02-02 15:25:13.744539000 Z
