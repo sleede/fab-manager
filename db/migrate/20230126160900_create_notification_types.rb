@@ -81,7 +81,8 @@ class CreateNotificationTypes < ActiveRecord::Migration[5.2]
     { id: 65, name: 'notify_user_order_is_canceled', category: 'shop', is_configurable: true },
     { id: 66, name: 'notify_user_order_is_refunded', category: 'shop', is_configurable: true },
     { id: 67, name: 'notify_admin_low_stock_threshold', category: 'shop', is_configurable: true },
-    { id: 68, name: 'notify_admin_training_auto_cancelled', category: 'trainings', is_configurable: true }
+    { id: 68, name: 'notify_admin_training_auto_cancelled', category: 'trainings', is_configurable: true },
+    { id: 69, name: 'notify_member_training_auto_cancelled', category: 'trainings', is_configurable: true }
   ].freeze
 
   def up
