@@ -1,5 +1,6 @@
 # Changelog Fab-manager
 
+- OpenAPI endpoint to fetch subscription data
 - Fix a bug: invalid date display in negative timezones
 
 ## v5.6.10 2023 February 02
