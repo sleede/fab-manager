@@ -1,6 +1,6 @@
 import moment, { unitOfTime } from 'moment-timezone';
 import { IFablab } from '../models/fablab';
-import { IANATimeZone, TDateISO, TDateISODate, TDateISOShortTime } from '../typings/date-iso';
+import { TDateISO, TDateISODate, TDateISOShortTime } from '../typings/date-iso';
 
 declare let Fablab: IFablab;
 
