@@ -1,4 +1,4 @@
-import moment, { unitOfTime } from 'moment';
+import moment, { unitOfTime } from 'moment-timezone';
 import { IFablab } from '../models/fablab';
 import { TDateISO, TDateISODate, TDateISOShortTime } from '../typings/date-iso';
 
@@ -46,30 +46,23 @@ export default class FormatLib {
     } else {
       tempDate = moment(date).toDate();
     }
-    return Intl.DateTimeFormat(Fablab.intl_locale).format(tempDate);
+    return Intl.DateTimeFormat(Fablab.intl_locale, { timeZone: Fablab.timezone }).format(tempDate);
   };
 
   /**
    * Parse the provided datetime or date string (as ISO8601 format) and return the equivalent Date object
    */
-  private static parseISOdate = (date: TDateISO|TDateISODate, res: Date = new Date()): Date => {
-    const isoDateMatch = (date as string)?.match(/^(\d\d\d\d)-(\d\d)-(\d\d)/);
-    res.setDate(parseInt(isoDateMatch[3], 10));
-    res.setMonth(parseInt(isoDateMatch[2], 10) - 1);
-    res.setFullYear(parseInt(isoDateMatch[1], 10));
-
-    return res;
+  private static parseISOdate = (date: TDateISO|TDateISODate): Date => {
+    const isoDateMatch = (date as string)?.match(/^(\d\d\d\d-\d\d-\d\d)/);
+    return new Date(`${isoDateMatch[1]}T12:00:00${Fablab.timezone_offset}`);
   };
 
   /**
    * Parse the provided datetime or time string (as ISO8601 format) and return the equivalent Date object
    */
-  private static parseISOtime = (date: TDateISO|TDateISOShortTime, res: Date = new Date()): Date => {
-    const isoTimeMatch = (date as string)?.match(/(^|T)(\d\d):(\d\d)/);
-    res.setHours(parseInt(isoTimeMatch[2], 10));
-    res.setMinutes(parseInt(isoTimeMatch[3], 10));
-
-    return res;
+  private static parseISOtime = (date: TDateISO|TDateISOShortTime): Date => {
+    const isoTimeMatch = (date as string)?.match(/(^|T)(\d\d:\d\d)/);
+    return new Date(`1970-01-01T${isoTimeMatch[2]}:00${Fablab.timezone_offset}`);
   };
 
   /**
@@ -89,7 +82,7 @@ export default class FormatLib {
     } else {
       tempDate = moment(date).toDate();
     }
-    return Intl.DateTimeFormat(Fablab.intl_locale, { hour: 'numeric', minute: 'numeric' }).format(tempDate);
+    return Intl.DateTimeFormat(Fablab.intl_locale, { hour: 'numeric', minute: 'numeric', timeZone: Fablab.timezone }).format(tempDate);
   };
 
   /**

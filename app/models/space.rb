@@ -26,7 +26,7 @@ class Space < ApplicationRecord
   has_many :prepaid_packs, as: :priceable, dependent: :destroy
   has_many :credits, as: :creditable, dependent: :destroy
 
-  has_one :payment_gateway_object, as: :item, dependent: :destroy
+  has_one :payment_gateway_object, -> { order id: :desc }, inverse_of: :space, as: :item, dependent: :destroy
 
   has_one :advanced_accounting, as: :accountable, dependent: :destroy
   accepts_nested_attributes_for :advanced_accounting, allow_destroy: true

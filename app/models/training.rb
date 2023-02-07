@@ -27,7 +27,7 @@ class Training < ApplicationRecord
   has_many :credits, as: :creditable, dependent: :destroy
   has_many :plans, through: :credits
 
-  has_one :payment_gateway_object, as: :item, dependent: :destroy
+  has_one :payment_gateway_object, -> { order id: :desc }, inverse_of: :training, as: :item, dependent: :destroy
 
   has_one :advanced_accounting, as: :accountable, dependent: :destroy
   accepts_nested_attributes_for :advanced_accounting, allow_destroy: true

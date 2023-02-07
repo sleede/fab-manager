@@ -29,7 +29,7 @@ class Machine < ApplicationRecord
   has_many :credits, as: :creditable, dependent: :destroy
   has_many :plans, through: :credits
 
-  has_one :payment_gateway_object, as: :item, dependent: :destroy
+  has_one :payment_gateway_object, -> { order id: :desc }, inverse_of: :machine, as: :item, dependent: :destroy
 
   has_many :machines_products, dependent: :destroy
   has_many :products, through: :machines_products
