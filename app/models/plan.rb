@@ -13,7 +13,7 @@ class Plan < ApplicationRecord
   has_many :subscriptions, dependent: :nullify
   has_one :plan_file, as: :viewable, dependent: :destroy
   has_many :prices, dependent: :destroy
-  has_one :payment_gateway_object, as: :item, dependent: :destroy
+  has_one :payment_gateway_object, -> { order id: :desc }, inverse_of: :plan, as: :item, dependent: :destroy
 
   extend FriendlyId
   friendly_id :base_name, use: :slugged

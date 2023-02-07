@@ -2,6 +2,7 @@
 
 - OpenAPI endpoint to fetch subscription data
 - Fix a bug: invalid date display in negative timezones
+- Fix a bug: unable to get latest payment_gateway_object for plan/machine/training/space
 
 ## v5.6.10 2023 February 02
 
