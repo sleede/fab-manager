@@ -18,7 +18,7 @@ import MachineAPI from '../../api/machine';
 import { Machine } from '../../models/machine';
 import { SelectOption } from '../../models/select';
 import SettingAPI from '../../api/setting';
-import { Setting, SettingName, trainingsSettings } from '../../models/setting';
+import { Setting, trainingsSettings } from '../../models/setting';
 import { AdvancedAccountingForm } from '../accounting/advanced-accounting-form';
 import { FabAlert } from '../base/fab-alert';
 
