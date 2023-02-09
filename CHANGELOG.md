@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- Fix a bug: unable to run `rails db:seed` when first setup Fab-manager
+
 ## v5.6.11 2023 February 07
 
 - OpenAPI endpoint to fetch subscription data

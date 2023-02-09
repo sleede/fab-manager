@@ -4,9 +4,7 @@
 # Some of them are just some placeholders to prevent having an empty palce when starting fab-manager first.
 # Other data are required default values, for various settings.
 
-Dir[Rails.root.join('db/seeds/**/*.rb')].sort.each do |seed|
-  load seed
-end
+load Rails.root.join('db/seeds/statistics.rb')
 
 if Group.count.zero?
   Group.create!([
@@ -26,6 +24,8 @@ if Role.where(name: 'admin').joins(:users).count.zero?
   admin.add_role 'admin'
   admin.save!
 end
+
+load Rails.root.join('db/seeds/settings.rb')
 
 if Component.count.zero?
   Component.create!([
