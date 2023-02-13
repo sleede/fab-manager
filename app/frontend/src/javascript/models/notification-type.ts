@@ -1,9 +1,9 @@
-import { ApiFilter } from '../models/api';
+import { ApiFilter } from './api';
 
 export interface NotificationType {
   id: number,
-  name: typeof notificationTypeNames[number],
-  category: string,
+  name: NotificationTypeName,
+  category: NotificationCategoryName,
   is_configurable: boolean
 }
 
@@ -69,15 +69,34 @@ export const notificationTypeNames = [
   'notify_member_payment_schedule_error',
   'notify_admin_payment_schedule_gateway_canceled',
   'notify_member_payment_schedule_gateway_canceled',
-  'notify_admin_user_proof_of_identity_files_created',
-  'notify_admin_user_proof_of_identity_files_updated',
+  'notify_admin_user_supporting_document_files_created',
+  'notify_admin_user_supporting_document_files_updated',
   'notify_user_is_validated',
   'notify_user_is_invalidated',
   'notify_user_proof_of_identity_refusal',
-  'notify_admin_user_proof_of_identity_refusal',
+  'notify_admin_user_supporting_document_refusal',
   'notify_user_order_is_ready',
   'notify_user_order_is_canceled',
   'notify_user_order_is_refunded',
   'notify_admin_low_stock_threshold',
   'notify_admin_training_auto_cancelled'
 ] as const;
+
+export type NotificationTypeName = typeof notificationTypeNames[number];
+
+// This controls the order of the categories' display in the notification center
+export const NotificationCategoryNames = [
+  'users_accounts',
+  'supporting_documents',
+  'agenda',
+  'subscriptions',
+  'payments',
+  'wallet',
+  'shop',
+  'projects',
+  'accountings',
+  'trainings',
+  'app_management'
+] as const;
+
+export type NotificationCategoryName = typeof NotificationCategoryNames[number];

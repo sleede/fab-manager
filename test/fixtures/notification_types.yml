@@ -456,16 +456,16 @@ notification_type_57:
 
 notification_type_58:
   id: 58
-  name: notify_admin_user_proof_of_identity_files_created
-  category: proof_of_identity
+  name: notify_admin_user_supporting_document_files_created
+  category: supporting_documents
   is_configurable: true
   created_at: 2023-02-02 08:25:33.435886000 Z
   updated_at: 2023-02-02 08:25:33.435886000 Z
 
 notification_type_59:
   id: 59
-  name: notify_admin_user_proof_of_identity_files_updated
-  category: proof_of_identity
+  name: notify_admin_user_supporting_document_files_updated
+  category: supporting_documents
   is_configurable: true
   created_at: 2023-02-02 08:25:33.436627000 Z
   updated_at: 2023-02-02 08:25:33.436627000 Z
@@ -489,15 +489,15 @@ notification_type_61:
 notification_type_62:
   id: 62
   name: notify_user_proof_of_identity_refusal
-  category: proof_of_identity
+  category: supporting_documents
   is_configurable: false
   created_at: 2023-02-02 08:25:33.439078000 Z
   updated_at: 2023-02-02 08:25:33.439078000 Z
 
 notification_type_63:
   id: 63
-  name: notify_admin_user_proof_of_identity_refusal
-  category: proof_of_identity
+  name: notify_admin_user_supporting_document_refusal
+  category: supporting_documents
   is_configurable: true
   created_at: 2023-02-02 08:25:33.439926000 Z
   updated_at: 2023-02-02 08:25:33.439926000 Z

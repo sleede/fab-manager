@@ -70,19 +70,19 @@ class CreateNotificationTypes < ActiveRecord::Migration[5.2]
     { id: 55, name: 'notify_member_payment_schedule_error', category: 'payments', is_configurable: false },
     { id: 56, name: 'notify_admin_payment_schedule_gateway_canceled', category: 'payments', is_configurable: true },
     { id: 57, name: 'notify_member_payment_schedule_gateway_canceled', category: 'payments', is_configurable: false },
-    { id: 58, name: 'notify_admin_user_proof_of_identity_files_created', category: 'proof_of_identity', is_configurable: true },
-    { id: 59, name: 'notify_admin_user_proof_of_identity_files_updated', category: 'proof_of_identity', is_configurable: true },
+    { id: 58, name: 'notify_admin_user_supporting_document_files_created', category: 'supporting_documents', is_configurable: true },
+    { id: 59, name: 'notify_admin_user_supporting_document_files_updated', category: 'supporting_documents', is_configurable: true },
 
     { id: 60, name: 'notify_user_is_validated', category: 'users_accounts', is_configurable: false },
     { id: 61, name: 'notify_user_is_invalidated', category: 'users_accounts', is_configurable: false },
-    { id: 62, name: 'notify_user_proof_of_identity_refusal', category: 'proof_of_identity', is_configurable: false },
-    { id: 63, name: 'notify_admin_user_proof_of_identity_refusal', category: 'proof_of_identity', is_configurable: true },
+    { id: 62, name: 'notify_user_proof_of_identity_refusal', category: 'supporting_documents', is_configurable: false },
+    { id: 63, name: 'notify_admin_user_supporting_document_refusal', category: 'supporting_documents', is_configurable: true },
     { id: 64, name: 'notify_user_order_is_ready', category: 'shop', is_configurable: true },
     { id: 65, name: 'notify_user_order_is_canceled', category: 'shop', is_configurable: true },
     { id: 66, name: 'notify_user_order_is_refunded', category: 'shop', is_configurable: true },
     { id: 67, name: 'notify_admin_low_stock_threshold', category: 'shop', is_configurable: true },
     { id: 68, name: 'notify_admin_training_auto_cancelled', category: 'trainings', is_configurable: true },
-    { id: 69, name: 'notify_member_training_auto_cancelled', category: 'trainings', is_configurable: true }
+    { id: 69, name: 'notify_member_training_auto_cancelled', category: 'trainings', is_configurable: false }
   ].freeze
 
   def up

@@ -1,7 +1,8 @@
 import { Loader } from '../base/loader';
 import { useEffect, useState } from 'react';
 import NotificationPreferencesAPI from '../../api/notification_preference';
-import { NotificationPreference, NotificationCategoryNames, NotificationPreferencesByCategories } from '../../models/notification-preference';
+import { NotificationPreference, NotificationPreferencesByCategories } from '../../models/notification-preference';
+import { NotificationCategoryNames } from '../../models/notification-type';
 import { NotificationsCategory } from './notifications-category';
 import NotificationTypesAPI from '../../api/notification_types';
 
@@ -28,7 +29,7 @@ const NotificationsSettings: React.FC<NotificationsSettingsProps> = ({ onError }
 
     NotificationTypesAPI.index({ is_configurable: true })
       .then(notificationTypes => {
-        // Initialize an object with every categories as keys
+        // Initialize an object with every category as keys
         const newPreferencesByCategories: NotificationPreferencesByCategories = {};
         for (const categoryName of NotificationCategoryNames) {
           newPreferencesByCategories[categoryName] = [];

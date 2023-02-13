@@ -1,7 +1,7 @@
 <%= render 'notifications_mailer/shared/hello', recipient: @recipient %>
 
 <p>
-  <%= t('.body.proof_of_identity_files_uploaded_below',
+  <%= t('.body.supporting_document_files_uploaded_below',
         NAME: @attached_object&.profile&.full_name || t('api.notifications.deleted_user')) %>
 </p>
 <ul>

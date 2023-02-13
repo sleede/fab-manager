@@ -4,10 +4,8 @@
 class ProofOfIdentityFileService
   def self.list(operator, filters = {})
     files = []
-    if filters[:user_id].present?
-      if operator.privileged? || filters[:user_id].to_i == operator.id
-        files = ProofOfIdentityFile.where(user_id: filters[:user_id])
-      end
+    if filters[:user_id].present? && (operator.privileged? || filters[:user_id].to_i == operator.id)
+      files = ProofOfIdentityFile.where(user_id: filters[:user_id])
     end
     files
   end
@@ -20,12 +18,10 @@ class ProofOfIdentityFileService
       all_files_are_upload = true
       user.group.proof_of_identity_types.each do |type|
         file = type.proof_of_identity_files.find_by(user_id: proof_of_identity_file.user_id)
-        unless file
-          all_files_are_upload = false
-        end
+        all_files_are_upload = false unless file
       end
       if all_files_are_upload
-        NotificationCenter.call type: 'notify_admin_user_proof_of_identity_files_created',
+        NotificationCenter.call type: 'notify_admin_user_supporting_document_files_created',
                                 receiver: User.admins_and_managers,
                                 attached_object: user
       end
@@ -40,12 +36,10 @@ class ProofOfIdentityFileService
       all_files_are_upload = true
       user.group.proof_of_identity_types.each do |type|
         file = type.proof_of_identity_files.find_by(user_id: proof_of_identity_file.user_id)
-        unless file
-          all_files_are_upload = false
-        end
+        all_files_are_upload = false unless file
       end
       if all_files_are_upload && !user.validated_at?
-        NotificationCenter.call type: 'notify_admin_user_proof_of_identity_files_updated',
+        NotificationCenter.call type: 'notify_admin_user_supporting_document_files_updated',
                                 receiver: User.admins_and_managers,
                                 attached_object: proof_of_identity_file
       end
