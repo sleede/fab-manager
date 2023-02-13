@@ -33,17 +33,16 @@ class EventService
     end
 
     def date_range(starting, ending, all_day)
-      start_date = Time.zone.parse(starting[:date])
-      end_date = Time.zone.parse(ending[:date])
+      start_date = Date.parse(starting[:date])
+      end_date = Date.parse(ending[:date])
       start_time = starting[:time] ? Time.zone.parse(starting[:time]) : nil
       end_time = ending[:time] ? Time.zone.parse(ending[:time]) : nil
       if all_day || start_time.nil? || end_time.nil?
-        start_at = DateTime.new(start_date.year, start_date.month, start_date.day, 0, 0, 0, start_date.zone)
-        end_at = DateTime.new(end_date.year, end_date.month, end_date.day, 23, 59, 59, end_date.zone)
+        start_at = Time.zone.local(start_date.year, start_date.month, start_date.day, 0, 0, 0)
+        end_at = Time.zone.local(end_date.year, end_date.month, end_date.day, 23, 59, 59)
       else
-        start_at = DateTime.new(start_date.year, start_date.month, start_date.day, start_time.hour, start_time.min, start_time.sec,
-                                start_date.zone)
-        end_at = DateTime.new(end_date.year, end_date.month, end_date.day, end_time.hour, end_time.min, end_time.sec, end_date.zone)
+        start_at = Time.zone.local(start_date.year, start_date.month, start_date.day, start_time.hour, start_time.min, start_time.sec)
+        end_at = Time.zone.local(end_date.year, end_date.month, end_date.day, end_time.hour, end_time.min, end_time.sec)
       end
       { start_at: start_at, end_at: end_at }
     end
