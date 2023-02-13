@@ -6,7 +6,7 @@
         OPERATOR: @attached_object&.operator&.profile&.full_name || t('api.notifications.deleted_user')) %>
 </p>
 <ul>
-  <% @attached_object.proof_of_identity_types.each do |type| %>
+  <% @attached_object.supporting_document_types.each do |type| %>
     <li><%= type.name %></li>
   <% end %>
 </ul>

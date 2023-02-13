@@ -5,7 +5,7 @@
         NAME: @attached_object&.user&.profile&.full_name || t('api.notifications.deleted_user')) %>
 </p>
 <ul>
-  <li><%= @attached_object.proof_of_identity_type.name %></li>
+  <li><%= @attached_object.supporting_document_type.name %></li>
 </ul>
 <% if Setting.get('user_validation_required') %>
 <p>

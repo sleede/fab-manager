@@ -440,8 +440,8 @@ en:
         account_validated: "Your account is valid."
       notify_user_is_invalidated:
         account_invalidated: "Your account is invalid."
-      notify_user_proof_of_identity_refusal:
-        refusal: "Your proof of identity are not accepted"
+      notify_user_supporting_document_refusal:
+        refusal: "Your supporting documents were refused"
       notify_admin_user_supporting_document_refusal:
         refusal: "Member's supporting document <strong><em>%{NAME}</strong></em> was refused."
       notify_user_order_is_ready:

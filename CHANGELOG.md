@@ -6,6 +6,7 @@
 - Improved public calendar loading time
 - Fix a bug: schedules jobs are not launched at the right time
 - [TODO DEPLOY] `rails fablab:fix_availabilities` THEN `rails fablab:setup:build_places_cache`
+- [TODO DEPLOY] `\curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/scripts/rename-supporting-document.sh | bash`
 
 - Use Time instead of DateTime objects
 - Fix a bug: missing statististics subtypes

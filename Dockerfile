@@ -87,7 +87,7 @@ VOLUME /usr/src/app/invoices \
        /usr/src/app/public/uploads \
        /usr/src/app/public/packs \
        /usr/src/app/accounting \
-       /usr/src/app/proof_of_identity_files \
+       /usr/src/app/supporting_document_files \
        /var/log/supervisor
 
 # Expose port 3000 to the Docker host, so we can access it from the outside

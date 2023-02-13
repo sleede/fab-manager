@@ -1,10 +1,10 @@
 import { BaseSyntheticEvent, useState } from 'react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import { ProofOfIdentityType } from '../../models/proof-of-identity-type';
+import { SupportingDocumentType } from '../../models/supporting-document-type';
 
 interface SupportingDocumentsRefusalFormProps {
-  proofOfIdentityTypes: Array<ProofOfIdentityType>,
+  proofOfIdentityTypes: Array<SupportingDocumentType>,
   onChange: (field: string, value: string | Array<number>) => void,
 }
 
@@ -38,7 +38,7 @@ export const SupportingDocumentsRefusalForm: React.FC<SupportingDocumentsRefusal
         newValues = values.filter(x => x !== value);
       }
       setValues(newValues);
-      onChange('proof_of_identity_type_ids', newValues);
+      onChange('supporting_document_type_ids', newValues);
     };
   };
 

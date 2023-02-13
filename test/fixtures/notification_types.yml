@@ -488,7 +488,7 @@ notification_type_61:
 
 notification_type_62:
   id: 62
-  name: notify_user_proof_of_identity_refusal
+  name: notify_user_supporting_document_refusal
   category: supporting_documents
   is_configurable: false
   created_at: 2023-02-02 08:25:33.439078000 Z

@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { FabModal } from '../base/fab-modal';
-import { ProofOfIdentityType } from '../../models/proof-of-identity-type';
+import { SupportingDocumentType } from '../../models/supporting-document-type';
 import { Group } from '../../models/group';
-import ProofOfIdentityTypeAPI from '../../api/proof-of-identity-type';
+import SupportingDocumentTypeAPI from '../../api/supporting-document-type';
 import { SupportingDocumentsTypeForm } from './supporting-documents-type-form';
 
 interface SupportingDocumentsTypeModalProps {
@@ -13,7 +13,7 @@ interface SupportingDocumentsTypeModalProps {
   onSuccess: (message: string) => void,
   onError: (message: string) => void,
   groups: Array<Group>,
-  proofOfIdentityType?: ProofOfIdentityType,
+  proofOfIdentityType?: SupportingDocumentType,
 }
 
 /**
@@ -22,7 +22,7 @@ interface SupportingDocumentsTypeModalProps {
 export const SupportingDocumentsTypeModal: React.FC<SupportingDocumentsTypeModalProps> = ({ isOpen, toggleModal, onSuccess, onError, proofOfIdentityType, groups }) => {
   const { t } = useTranslation('admin');
 
-  const [data, setData] = useState<ProofOfIdentityType>({ id: proofOfIdentityType?.id, group_ids: proofOfIdentityType?.group_ids || [], name: proofOfIdentityType?.name || '' });
+  const [data, setData] = useState<SupportingDocumentType>({ id: proofOfIdentityType?.id, group_ids: proofOfIdentityType?.group_ids || [], name: proofOfIdentityType?.name || '' });
 
   useEffect(() => {
     setData({ id: proofOfIdentityType?.id, group_ids: proofOfIdentityType?.group_ids || [], name: proofOfIdentityType?.name || '' });
@@ -44,10 +44,10 @@ export const SupportingDocumentsTypeModal: React.FC<SupportingDocumentsTypeModal
   const handleSaveType = async (): Promise<void> => {
     try {
       if (proofOfIdentityType?.id) {
-        await ProofOfIdentityTypeAPI.update(data);
+        await SupportingDocumentTypeAPI.update(data);
         onSuccess(t('app.admin.settings.account.supporting_documents_type_modal.successfully_updated'));
       } else {
-        await ProofOfIdentityTypeAPI.create(data);
+        await SupportingDocumentTypeAPI.create(data);
         onSuccess(t('app.admin.settings.account.supporting_documents_type_modal.successfully_created'));
       }
     } catch (e) {
@@ -74,7 +74,7 @@ export const SupportingDocumentsTypeModal: React.FC<SupportingDocumentsTypeModal
       confirmButton={t(`app.admin.settings.account.supporting_documents_type_modal.${proofOfIdentityType ? 'edit' : 'create'}`)}
       onConfirm={handleSaveType}
       preventConfirm={isPreventedSaveType()}>
-      <SupportingDocumentsTypeForm proofOfIdentityType={proofOfIdentityType} groups={groups} onChange={handleTypeChanged}/>
+      <SupportingDocumentsTypeForm supportingDocumentType={proofOfIdentityType} groups={groups} onChange={handleTypeChanged}/>
     </FabModal>
   );
 };

@@ -56,7 +56,7 @@ global.Fablab.translations = {
 global.Fablab.weekStartingDay = 1;
 global.Fablab.d3DateFormat = '%d/%m/%y';
 global.Fablab.uibDateFormat = 'dd/MM/yyyy';
-global.Fablab.maxProofOfIdentityFileSize = 5242880;
+global.Fablab.maxSupportingDocumentFileSize = 5242880;
 global.Fablab.sessionTours = [];
 
 global.loggedUser = null;

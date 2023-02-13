@@ -2,20 +2,20 @@ import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import Select from 'react-select';
 import { FabInput } from '../base/fab-input';
-import { ProofOfIdentityType } from '../../models/proof-of-identity-type';
+import { SupportingDocumentType } from '../../models/supporting-document-type';
 import { Group } from '../../models/group';
 import { SelectOption } from '../../models/select';
 
 interface SupportingDocumentsTypeFormProps {
   groups: Array<Group>,
-  proofOfIdentityType?: ProofOfIdentityType,
+  supportingDocumentType?: SupportingDocumentType,
   onChange: (field: string, value: string | Array<number>) => void,
 }
 
 /**
  * Form to set create/edit supporting documents type
  */
-export const SupportingDocumentsTypeForm: React.FC<SupportingDocumentsTypeFormProps> = ({ groups, proofOfIdentityType, onChange }) => {
+export const SupportingDocumentsTypeForm: React.FC<SupportingDocumentsTypeFormProps> = ({ groups, supportingDocumentType, onChange }) => {
   const { t } = useTranslation('admin');
 
   /**
@@ -32,7 +32,7 @@ export const SupportingDocumentsTypeForm: React.FC<SupportingDocumentsTypeFormPr
    */
   const groupsValues = (): Array<SelectOption<number>> => {
     const res = [];
-    const groupIds = proofOfIdentityType?.group_ids || [];
+    const groupIds = supportingDocumentType?.group_ids || [];
     if (groupIds.length > 0) {
       groups.forEach(t => {
         if (groupIds.indexOf(t.id) > -1) {
@@ -62,7 +62,7 @@ export const SupportingDocumentsTypeForm: React.FC<SupportingDocumentsTypeFormPr
       <div className="info-area">
         {t('app.admin.settings.account.supporting_documents_type_form.type_form_info')}
       </div>
-      <form name="proofOfIdentityTypeForm">
+      <form name="supportingDocumentTypeForm">
         <div className="field">
           <Select defaultValue={groupsValues()}
             placeholder={t('app.admin.settings.account.supporting_documents_type_form.select_group')}
@@ -71,9 +71,9 @@ export const SupportingDocumentsTypeForm: React.FC<SupportingDocumentsTypeFormPr
             isMulti />
         </div>
         <div className="field">
-          <FabInput id="proof_of_identity_type_name"
+          <FabInput id="supporting_document_type_name"
             icon={<i className="fa fa-edit" />}
-            defaultValue={proofOfIdentityType?.name || ''}
+            defaultValue={supportingDocumentType?.name || ''}
             placeholder={t('app.admin.settings.account.supporting_documents_type_form.name')}
             onChange={handleNameChange}
             debounce={200}

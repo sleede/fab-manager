@@ -69,7 +69,6 @@ class NotificationsTest < ActionDispatch::IntegrationTest
     transaction = WalletService.new(user: @member, wallet: @member.wallet).credit(1)
 
     notification = Notification.where(receiver_id: @member.id).last
-    puts notification.receiver_id
     assert_equal notification.attached_object_id, transaction.id
     assert_equal notification.is_read, false
 

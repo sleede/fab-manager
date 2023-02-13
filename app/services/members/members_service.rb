@@ -22,9 +22,9 @@ class Members::MembersService
     validated_at_changed = false
     if group_changed && user_validation_required
       # here a group change, user must re-validate by admin
-      current_proof_of_identity_types = @member.group.proof_of_identity_types
-      new_proof_of_identity_types = Group.find(params[:group_id].to_i).proof_of_identity_types
-      if @member.validated_at? && !(new_proof_of_identity_types - current_proof_of_identity_types).empty?
+      current_types = @member.group.supporting_document_types
+      new_types = Group.find(params[:group_id].to_i).supporting_document_types
+      if @member.validated_at? && !(new_types - current_types).empty?
         validated_at_changed = true
         @member.validated_at = nil
       end

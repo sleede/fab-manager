@@ -139,7 +139,7 @@ angular.module('application.router', ['ui.router'])
         resolve: {
           memberPromise: ['Member', 'currentUser', function (Member, currentUser) { return Member.get({ id: currentUser.id }).$promise; }],
           trainingsPromise: ['Training', function (Training) { return Training.query().$promise; }],
-          proofOfIdentityTypesPromise: ['ProofOfIdentityType', 'currentUser', function (ProofOfIdentityType, currentUser) { return ProofOfIdentityType.query({ group_id: currentUser.group_id }).$promise; }]
+          proofOfIdentityTypesPromise: ['SupportingDocumentType', 'currentUser', function (SupportingDocumentType, currentUser) { return SupportingDocumentType.query({ group_id: currentUser.group_id }).$promise; }]
         }
       })
       .state('app.logged.dashboard.profile', {
@@ -165,11 +165,11 @@ angular.module('application.router', ['ui.router'])
           settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['phone_required', 'address_required']" }).$promise; }]
         }
       })
-      .state('app.logged.dashboard.proof_of_identity_files', {
-        url: '/proof_of_identity_files',
+      .state('app.logged.dashboard.supporting_document_files', {
+        url: '/supporting_document_files',
         views: {
           'main@': {
-            templateUrl: '/dashboard/proof_of_identity_files.html',
+            templateUrl: '/dashboard/supporting_document_files.html',
             controller: 'DashboardController'
           }
         }

@@ -6,7 +6,7 @@
 </p>
 <ul>
 <% if @attached_object %>
-  <% @attached_object.group.proof_of_identity_types.each do |type| %>
+  <% @attached_object.group.supporting_document_types.each do |type| %>
     <li><%= type.name %></li>
   <% end %>
 <% end %>

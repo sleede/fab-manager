@@ -14,7 +14,7 @@ class API::ProfileCustomFieldsController < API::ApiController
   def show; end
 
   def create
-    authorize ProofOfIdentityType
+    authorize ProfileCustomField
     @profile_custom_field = ProfileCustomField.new(profile_custom_field_params)
     if @profile_custom_field.save
       render status: :created

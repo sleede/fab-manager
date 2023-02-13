@@ -75,7 +75,7 @@ class CreateNotificationTypes < ActiveRecord::Migration[5.2]
 
     { id: 60, name: 'notify_user_is_validated', category: 'users_accounts', is_configurable: false },
     { id: 61, name: 'notify_user_is_invalidated', category: 'users_accounts', is_configurable: false },
-    { id: 62, name: 'notify_user_proof_of_identity_refusal', category: 'supporting_documents', is_configurable: false },
+    { id: 62, name: 'notify_user_supporting_document_refusal', category: 'supporting_documents', is_configurable: false },
     { id: 63, name: 'notify_admin_user_supporting_document_refusal', category: 'supporting_documents', is_configurable: true },
     { id: 64, name: 'notify_user_order_is_ready', category: 'shop', is_configurable: true },
     { id: 65, name: 'notify_user_order_is_canceled', category: 'shop', is_configurable: true },

@@ -84,7 +84,7 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
               return Setting.query({ names: "['phone_required', 'recaptcha_site_key', 'confirmation_required', 'address_required']" }).$promise;
             }],
             profileCustomFieldsPromise: ['ProfileCustomField', function (ProfileCustomField) { return ProfileCustomField.query({}).$promise; }],
-            proofOfIdentityTypesPromise: ['ProofOfIdentityType', function (ProofOfIdentityType) { return ProofOfIdentityType.query({}).$promise; }]
+            proofOfIdentityTypesPromise: ['SupportingDocumentType', function (SupportingDocumentType) { return SupportingDocumentType.query({}).$promise; }]
           },
           controller: ['$scope', '$uibModalInstance', 'Group', 'CustomAsset', 'settingsPromise', 'growl', '_t', 'profileCustomFieldsPromise', 'proofOfIdentityTypesPromise', function ($scope, $uibModalInstance, Group, CustomAsset, settingsPromise, growl, _t, profileCustomFieldsPromise, proofOfIdentityTypesPromise) {
             // default parameters for the date picker in the account creation modal

@@ -149,11 +149,11 @@ Rails.application.routes.draw do
       post 'sync', on: :member
     end
 
-    resources :proof_of_identity_types
-    resources :proof_of_identity_files, only: %i[index show create update] do
+    resources :supporting_document_types
+    resources :supporting_document_files, only: %i[index show create update] do
       get 'download', on: :member
     end
-    resources :proof_of_identity_refusals, only: %i[index show create]
+    resources :supporting_document_refusals, only: %i[index show create]
 
     resources :profile_custom_fields
 
