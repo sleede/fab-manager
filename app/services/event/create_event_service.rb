@@ -33,19 +33,15 @@ class Event::CreateEventService
     private
 
     def occurence_start_date(event, date)
-      start_at = DateTime.new(date.year, date.month, date.day,
-                              event.availability.start_at.hour, event.availability.start_at.min, event.availability.start_at.sec,
-                              event.availability.start_at.zone)
-      dst_correction(event.availability.start_at, start_at)
+      Time.zone.local(date.year, date.month, date.day,
+                      event.availability.start_at.hour, event.availability.start_at.min, event.availability.start_at.sec)
     end
 
     def occurrence_end_date(event, date)
       days_diff = event.availability.end_at.day - event.availability.start_at.day
       end_date = date + days_diff.days
-      end_at = DateTime.new(end_date.year, end_date.month, end_date.day,
-                            event.availability.end_at.hour, event.availability.end_at.min, event.availability.end_at.sec,
-                            event.availability.end_at.zone)
-      dst_correction(event.availability.start_at, end_at)
+      Time.zone.local(end_date.year, end_date.month, end_date.day,
+                      event.availability.end_at.hour, event.availability.end_at.min, event.availability.end_at.sec)
     end
 
     def occurrence_image(event)

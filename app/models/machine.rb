@@ -86,7 +86,7 @@ class Machine < ApplicationRecord
   end
 
   def soft_destroy!
-    update(deleted_at: DateTime.current)
+    update(deleted_at: Time.current)
   end
 
   def packs?(user)

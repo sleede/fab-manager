@@ -54,13 +54,13 @@ namespace :fablab do
               slots_reservations_attributes: slots_reservations_attributes(invoice, reservable),
               statistic_profile_id: StatisticProfile.find_by(user: invoice.user).id
             )
-            invoice.update_attributes(invoiced: reservation)
+            invoice.update(invoiced: reservation)
           else
             warn "WARNING: Unable to guess the reservable for invoice #{invoice.id}, please handle manually."
             warn 'Ignoring...'
           end
         when 'e'
-          invoice.update_attributes(invoiced_type: 'Error')
+          invoice.update(invoiced_type: 'Error')
         else
           puts "Operation #{confirm} unknown. Ignoring invoice #{invoice.id}..."
         end
@@ -99,12 +99,10 @@ namespace :fablab do
       description = ii.description
       # DateTime.parse only works with english dates, so translate the month name
       month_idx = I18n.t('date.month_names').find_index { |month| month && description.include?(month) }
-      unless month_idx.nil?
-        description.gsub!(/#{I18n.t('date.month_names')[month_idx]}/, I18n.t('date.month_names', locale: :en)[month_idx])
-      end
-      start = DateTime.parse(description)
-      end_time = DateTime.parse(/- (.+)$/.match(description)[1])
-      [start, DateTime.new(start.year, start.month, start.day, end_time.hour, end_time.min, end_time.sec, DateTime.current.zone)]
+      description.gsub!(/#{I18n.t('date.month_names')[month_idx]}/, I18n.t('date.month_names', locale: :en)[month_idx]) unless month_idx.nil?
+      start = Time.zone.parse(description)
+      end_time = Time.zone.parse(/- (.+)$/.match(description)[1])
+      [start, Time.zone.local(start.year, start.month, start.day, end_time.hour, end_time.min, end_time.sec)]
     end
   end
 

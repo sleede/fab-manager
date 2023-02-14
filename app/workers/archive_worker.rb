@@ -15,7 +15,7 @@ class ArchiveWorker
     last_archive_checksum = previous_file ? Integrity::Checksum.file(previous_file) : nil
     json_data = to_json_archive(period, invoices, schedules, previous_file, last_archive_checksum)
     current_archive_checksum = Integrity::Checksum.text(json_data)
-    date = DateTime.iso8601
+    date = Time.current.iso8601
     chained = Integrity::Checksum.text("#{current_archive_checksum}#{last_archive_checksum}#{date}")
 
     Zip::OutputStream.open(period.archive_file) do |io|
@@ -48,7 +48,7 @@ class ArchiveWorker
         last_archive_checksum: last_checksum,
         previous_file: previous_file,
         software_version: Version.current,
-        date: DateTime.current.iso8601
+        date: Time.current.iso8601
       },
       formats: [:json],
       handlers: [:jbuilder]

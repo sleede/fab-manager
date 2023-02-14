@@ -88,7 +88,7 @@ class Project < ApplicationRecord
   def after_save_and_publish
     return unless saved_change_to_state? && published?
 
-    update_columns(published_at: DateTime.current)
+    update_columns(published_at: Time.current) # rubocop:disable Rails/SkipsModelValidations
     notify_admin_when_project_published
   end
 end

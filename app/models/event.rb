@@ -49,7 +49,7 @@ class Event < ApplicationRecord
 
   def recurrence_events
     Event.includes(:availability)
-         .where('events.recurrence_id = ? AND events.id != ? AND availabilities.start_at >= ?', recurrence_id, id, DateTime.current)
+         .where('events.recurrence_id = ? AND events.id != ? AND availabilities.start_at >= ?', recurrence_id, id, Time.current)
          .references(:availabilities)
   end
 
@@ -58,7 +58,7 @@ class Event < ApplicationRecord
   end
 
   def soft_destroy!
-    update(deleted_at: DateTime.current)
+    update(deleted_at: Time.current)
   end
 
   ##

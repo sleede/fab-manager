@@ -80,7 +80,7 @@ class Availabilities::AvailabilitiesService
   private
 
   def subscription_year?(user)
-    user&.subscription && user.subscription.plan.interval == 'year' && user.subscription.expired_at >= DateTime.current
+    user&.subscription && user.subscription.plan.interval == 'year' && user.subscription.expired_at >= Time.current
   end
 
   # members must have validated at least 1 training and must have a valid yearly subscription to view

@@ -60,7 +60,7 @@ module SingleSignOnConcern
 
       # remove the token
       self.auth_token = nil
-      self.merged_at = DateTime.current
+      self.merged_at = Time.current
 
       # check that the email duplication was resolved
       if sso_user.email.end_with? '-duplicate'

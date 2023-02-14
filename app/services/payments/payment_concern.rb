@@ -28,7 +28,7 @@ module Payments::PaymentConcern
                                payment_method
                              end
       order.state = 'paid'
-      order.created_at = DateTime.current
+      order.created_at = Time.current
       if payment_id && payment_type
         order.payment_gateway_object = PaymentGatewayObject.new(gateway_object_id: payment_id, gateway_object_type: payment_type)
       end

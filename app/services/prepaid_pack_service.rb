@@ -23,10 +23,10 @@ class PrepaidPackService
       StatisticProfilePrepaidPack
         .includes(:prepaid_pack)
         .references(:prepaid_packs)
-        .where('statistic_profile_id = ?', user.statistic_profile.id)
-        .where('expires_at > ? OR expires_at IS NULL', DateTime.current)
-        .where('prepaid_packs.priceable_id = ?', priceable.id)
-        .where('prepaid_packs.priceable_type = ?', priceable.class.name)
+        .where(statistic_profile_id: user.statistic_profile.id)
+        .where('expires_at > ? OR expires_at IS NULL', Time.current)
+        .where(prepaid_packs: { priceable_id: priceable.id })
+        .where(prepaid_packs: { priceable_type: priceable.class.name })
         .where('minutes_used < prepaid_packs.minutes')
     end
 
@@ -53,7 +53,7 @@ class PrepaidPackService
         remaining = pack_available - consumed
         remaining = 0 if remaining.negative?
         pack_consumed = pack.prepaid_pack.minutes - remaining
-        pack.update_attributes(minutes_used: pack_consumed)
+        pack.update(minutes_used: pack_consumed)
 
         consumed -= pack_consumed
       end

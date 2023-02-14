@@ -52,7 +52,7 @@ class ActiveSupport::TestCase
   def stripe_payment_method(error: nil)
     number = '4242424242424242'
     exp_month = 4
-    exp_year = DateTime.current.next_year.year
+    exp_year = Time.current.next_year.year
     cvc = '314'
 
     case error

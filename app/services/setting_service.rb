@@ -74,7 +74,7 @@ class SettingService
     def validate_admins(settings)
       return unless settings.any? { |s| s.name == 'user_validation_required' && s.value == 'true' }
 
-      User.admins.each { |admin| admin.update(validated_at: DateTime.current) if admin.validated_at.nil? }
+      User.admins.each { |admin| admin.update(validated_at: Time.current) if admin.validated_at.nil? }
     end
 
     def update_accounting_line(settings)

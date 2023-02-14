@@ -41,12 +41,12 @@ class VatHistoryService
   # As a futur improvement, we should save the VAT rate for each invoice_item in the DB
   def vat_history(vat_rate_type) # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/MethodLength, Metrics/PerceivedComplexity
     chronology = []
-    end_date = DateTime.current
-    Setting.find_by(name: 'invoice_VAT-active').history_values.order(created_at: 'DESC').each do |v|
+    end_date = Time.current
+    Setting.find_by(name: 'invoice_VAT-active').history_values.order(created_at: :desc).each do |v|
       chronology.push(start: v.created_at, end: end_date, enabled: v.value == 'true')
       end_date = v.created_at
     end
-    chronology.push(start: DateTime.new(0), end: end_date, enabled: false)
+    chronology.push(start: Time.zone.local(0), end: end_date, enabled: false)
     # now chronology contains something like one of the following:
     # - [{start: 0000-01-01, end: now, enabled: false}] => VAT was never enabled
     # - [
@@ -68,17 +68,17 @@ class VatHistoryService
         # before the first VAT rate was defined for the given type, the general VAT rate is used
         vat_rate_history_values = Setting.find_by(name: 'invoice_VAT-rate')
                                          .history_values.where('created_at < ?', first_vat_rate_by_type.created_at)
-                                         .order(created_at: 'ASC').to_a
+                                         .order(created_at: :asc).to_a
         # after that, the VAT rate for the given type is used
         vat_rate_by_type = Setting.find_by(name: "invoice_VAT-rate_#{vat_rate_type}")
                                   .history_values.where('created_at >= ?', first_vat_rate_by_type.created_at)
-                                  .order(created_at: 'ASC')
+                                  .order(created_at: :asc)
         vat_rate_by_type.each do |rate|
           if rate.value.blank? || rate.value == 'null' || rate.value == 'undefined' || rate.value == 'NaN'
             # if, at some point in the history, a blank rate was set, the general VAT rate is used instead
             vat_rate = Setting.find_by(name: 'invoice_VAT-rate')
                               .history_values.where('created_at < ?', rate.created_at)
-                              .order(created_at: 'DESC')
+                              .order(created_at: :desc)
                               .first
             rate.value = vat_rate.value
           end

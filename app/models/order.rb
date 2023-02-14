@@ -20,7 +20,7 @@ class Order < PaymentDocument
 
   delegate :user, to: :statistic_profile
 
-  def generate_reference(_date = DateTime.current)
+  def generate_reference(_date = Time.current)
     self.reference = PaymentDocumentService.generate_order_number(self)
   end
 

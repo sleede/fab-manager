@@ -74,15 +74,15 @@ class HealthService
 
   # availabilities for the last week
   def self.last_week_availabilities
-    Availability.where('start_at >= ? AND end_at <= ?', DateTime.current - 7.days, DateTime.current).count
+    Availability.where('start_at >= ? AND end_at <= ?', 7.days.ago, Time.current).count
   end
 
   # reservations made during the last week
   def self.last_week_new_reservations
-    Reservation.where('created_at >= ? AND created_at < ?', DateTime.current - 7.days, DateTime.current).count
+    Reservation.where('created_at >= ? AND created_at < ?', 7.days.ago, Time.current).count
   end
 
   def self.last_week_orders
-    Order.where('created_at >= ? AND created_at < ?', DateTime.current - 7.days, DateTime.current).where.not(state: 'cart').count
+    Order.where('created_at >= ? AND created_at < ?', 7.days.ago, Time.current).where.not(state: 'cart').count
   end
 end

@@ -1,14 +1,15 @@
 # Changelog Fab-manager
 
+- Use Time instead of DateTime objects
 - Fix a bug: wrong times in admin/event monitoring
-- Fix a bug: event update over daylight saving time's day results in wrong date
+- Fix a bug: daylight saving time is ignored and result in wrong dates and/or times when dealing around the DST day
 - Fix a bug: unable to run `rails db:seed` when first setup Fab-manager
 
 ## v5.6.11 2023 February 07
 
 - OpenAPI endpoint to fetch subscription data
 - Fix a bug: invalid date display in negative timezones
-- Fix a bug: unable to get latest payment_gateway_object for plan/machine/training/space
+- Fix a bug: unable to get the latest payment_gateway_object for plan/machine/training/space
 
 ## v5.6.10 2023 February 02
 

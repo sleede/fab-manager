@@ -65,19 +65,6 @@ module ApplicationHelper
     amount / 100.00
   end
 
-  ##
-  # Apply a correction for a future DateTime due to change in Daylight Saving Time (DST) period
-  # @param reference {ActiveSupport::TimeWithZone}
-  # @param datetime {DateTime}
-  # Inspired by https://stackoverflow.com/a/12065605
-  ##
-  def dst_correction(reference, datetime)
-    res = datetime.in_time_zone(reference.time_zone.tzinfo.name)
-    res -= 1.hour if res.dst? && !reference.dst?
-    res += 1.hour if reference.dst? && !res.dst?
-    res
-  end
-
   # Return the given amount in centimes, without floating-point imprecision errors
   def to_centimes(amount)
     (BigDecimal(amount.to_s) * 100.0).to_f

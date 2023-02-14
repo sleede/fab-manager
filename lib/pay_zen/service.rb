@@ -10,7 +10,7 @@ module PayZen; end
 
 ## create remote objects on PayZen
 class PayZen::Service < Payment::Service
-  def create_subscription(payment_schedule, order_id, *args)
+  def create_subscription(payment_schedule, order_id, *_args)
     first_item = payment_schedule.ordered_items.first
 
     order = PayZen::Order.new.get(order_id, operation_type: 'VERIFICATION')
@@ -79,34 +79,35 @@ class PayZen::Service < Payment::Service
 
   def process_payment_schedule_item(payment_schedule_item)
     pz_subscription = payment_schedule_item.payment_schedule.gateway_subscription.retrieve
-    if pz_subscription['answer']['cancelDate'] && DateTime.parse(pz_subscription['answer']['cancelDate']) <= DateTime.current
+    if pz_subscription['answer']['cancelDate'] && Time.zone.parse(pz_subscription['answer']['cancelDate']) <= Time.current
       # the subscription was canceled by the gateway => notify & update the status
       notify_payment_schedule_gateway_canceled(payment_schedule_item)
-      payment_schedule_item.update_attributes(state: 'gateway_canceled')
+      payment_schedule_item.update(state: 'gateway_canceled')
       return
     end
     pz_order = payment_schedule_item.payment_schedule.gateway_order.retrieve
     transaction = pz_order['answer']['transactions'].last
     return unless transaction_matches?(transaction, payment_schedule_item)
 
-    if transaction['status'] == 'PAID'
+    case transaction['status']
+    when 'PAID'
       PaymentScheduleService.new.generate_invoice(payment_schedule_item,
                                                   payment_method: 'card',
                                                   payment_id: transaction['uuid'],
                                                   payment_type: 'PayZen::Transaction')
-      payment_schedule_item.update_attributes(state: 'paid', payment_method: 'card')
+      payment_schedule_item.update(state: 'paid', payment_method: 'card')
       pgo = PaymentGatewayObject.find_or_initialize_by(item: payment_schedule_item)
       pgo.gateway_object = PayZen::Item.new('PayZen::Transaction', transaction['uuid'])
       pgo.save!
-    elsif transaction['status'] == 'RUNNING'
+    when 'RUNNING'
       notify_payment_schedule_item_failed(payment_schedule_item)
-      payment_schedule_item.update_attributes(state: transaction['detailedStatus'])
+      payment_schedule_item.update(state: transaction['detailedStatus'])
       pgo = PaymentGatewayObject.find_or_initialize_by(item: payment_schedule_item)
       pgo.gateway_object = PayZen::Item.new('PayZen::Transaction', transaction['uuid'])
       pgo.save!
     else
       notify_payment_schedule_item_error(payment_schedule_item)
-      payment_schedule_item.update_attributes(state: 'error')
+      payment_schedule_item.update(state: 'error')
     end
   end
 
@@ -127,7 +128,7 @@ class PayZen::Service < Payment::Service
 
   # check if the given transaction matches the given PaymentScheduleItem
   def transaction_matches?(transaction, payment_schedule_item)
-    transaction_date = DateTime.parse(transaction['creationDate']).to_date
+    transaction_date = Time.zone.parse(transaction['creationDate']).to_date
 
     transaction['amount'] == payment_schedule_item.amount &&
       transaction_date >= payment_schedule_item.due_date.to_date &&

@@ -35,7 +35,7 @@ class PaymentScheduleService
 
   def compute_deadline(deadline_index, payment_schedule, price_per_month, adjustment_price, other_items_price,
                        coupon: nil, schedule_start_at: nil)
-    date = (schedule_start_at || DateTime.current) + deadline_index.months
+    date = (schedule_start_at || Time.current) + deadline_index.months
     details = { recurring: price_per_month }
     amount = if deadline_index.zero?
                details[:adjustment] = adjustment_price.truncate
@@ -154,7 +154,7 @@ class PaymentScheduleService
     unless filters[:date].nil?
       ps = ps.where(
         "date_trunc('day', payment_schedules.created_at) = :search OR date_trunc('day', payment_schedule_items.due_date) = :search",
-        search: "%#{DateTime.iso8601(filters[:date]).to_time.to_date}%"
+        search: "%#{Time.zone.iso8601(filters[:date]).to_date}%"
       )
     end
 
@@ -176,7 +176,7 @@ class PaymentScheduleService
     end
     # cancel subscription
     subscription = payment_schedule.payment_schedule_objects.find { |pso| pso.object_type == Subscription.name }.subscription
-    subscription.expire(DateTime.current)
+    subscription.expire(Time.current)
 
     subscription.canceled_at
   end
@@ -196,7 +196,7 @@ class PaymentScheduleService
   ##
   def reset_erroneous_payment_schedule_items(payment_schedule)
     results = payment_schedule.payment_schedule_items.where(state: %w[error gateway_canceled]).map do |item|
-      item.update(state: item.due_date < DateTime.current ? 'pending' : 'new')
+      item.update(state: item.due_date < Time.current ? 'pending' : 'new')
     end
     results.reduce(true) { |acc, item| acc && item }
   end

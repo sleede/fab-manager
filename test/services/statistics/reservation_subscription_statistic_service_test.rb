@@ -97,7 +97,7 @@ class ReservationSubscriptionStatisticServiceTest < ActionDispatch::IntegrationT
 
     # Build the stats for the last 3 days, we expect the above invoices (reservations+subscription) to appear in the resulting stats
     ::Statistics::BuilderService.generate_statistic({ start_date: 2.days.ago.beginning_of_day,
-                                                      end_date: DateTime.current.end_of_day })
+                                                      end_date: Time.current.end_of_day })
 
     Stats::Machine.refresh_index!
 
@@ -119,14 +119,14 @@ class ReservationSubscriptionStatisticServiceTest < ActionDispatch::IntegrationT
     check_statistics_on_user(stat_hour)
 
     # second machine reservation (today)
-    stat_booking = Stats::Machine.search(query: { bool: { must: [{ term: { date: DateTime.current.to_date.iso8601 } },
+    stat_booking = Stats::Machine.search(query: { bool: { must: [{ term: { date: Time.current.to_date.iso8601 } },
                                                                  { term: { type: 'booking' } }] } }).first
     assert_not_nil stat_booking
     assert_equal machine.friendly_id, stat_booking['subType']
     assert_equal 1, stat_booking['stat']
     check_statistics_on_user(stat_booking)
 
-    stat_hour = Stats::Machine.search(query: { bool: { must: [{ term: { date: DateTime.current.to_date.iso8601 } },
+    stat_hour = Stats::Machine.search(query: { bool: { must: [{ term: { date: Time.current.to_date.iso8601 } },
                                                               { term: { type: 'hour' } }] } }).first
 
     assert_not_nil stat_hour

@@ -39,7 +39,7 @@ class Subscription < ApplicationRecord
   end
 
   def expired?
-    expired_at <= DateTime.current
+    expired_at <= Time.current
   end
 
   def expired_at
@@ -108,7 +108,7 @@ class Subscription < ApplicationRecord
   end
 
   def set_expiration_date
-    start_at = self.start_at || DateTime.current.in_time_zone
+    start_at = self.start_at || Time.current
     self.expiration_date = start_at + plan.duration
   end
 

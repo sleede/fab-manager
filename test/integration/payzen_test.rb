@@ -49,7 +49,6 @@ class PayzenTest < ActionDispatch::IntegrationTest
     assert_not_nil payment[:orderId]
   end
 
-
   test 'confirm payment with payzen' do
     require 'pay_zen/helper'
     require 'pay_zen/pci/charge'
@@ -62,7 +61,6 @@ class PayzenTest < ActionDispatch::IntegrationTest
     availabilities_count = Availability.count
     invoices_count = Invoice.count
     slots_reservation_count = SlotsReservation.count
-
 
     cart_items = {
       items: [
@@ -84,7 +82,6 @@ class PayzenTest < ActionDispatch::IntegrationTest
         }
       ]
     }
-
 
     cs = CartService.new(@user)
     cart = cs.from_hash(cart_items)
@@ -112,7 +109,7 @@ class PayzenTest < ActionDispatch::IntegrationTest
                                        paymentMethodType: 'CARD',
                                        pan: '4970100000000055',
                                        expiryMonth: 12,
-                                       expiryYear: DateTime.current.strftime('%y'),
+                                       expiryYear: Time.current.strftime('%y'),
                                        securityCode: 123
                                      }])
 

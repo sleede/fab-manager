@@ -87,7 +87,7 @@ class CartService
                plan
              end
            elsif @customer.subscribed_plan
-             subscription = @customer.subscription unless @customer.subscription.expired_at < DateTime.current
+             subscription = @customer.subscription unless @customer.subscription.expired_at < Time.current
              @customer.subscribed_plan
            else
              nil

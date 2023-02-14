@@ -46,7 +46,7 @@ class ProductService
         remaining_stock[movement[:stock_type].to_sym] += quantity
         {
           stock_type: movement[:stock_type], reason: movement[:reason], quantity: quantity,
-          remaining_stock: remaining_stock[movement[:stock_type].to_sym], date: DateTime.current, order_item_id: movement[:order_item_id]
+          remaining_stock: remaining_stock[movement[:stock_type].to_sym], date: Time.current, order_item_id: movement[:order_item_id]
         }
       end || {}
       product.stock = remaining_stock

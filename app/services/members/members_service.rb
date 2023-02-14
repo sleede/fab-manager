@@ -76,7 +76,7 @@ class Members::MembersService
   end
 
   def validate(is_valid)
-    is_updated = member.update(validated_at: is_valid ? DateTime.current : nil)
+    is_updated = member.update(validated_at: is_valid ? Time.current : nil)
     if is_updated
       if is_valid
         NotificationCenter.call type: 'notify_user_is_validated',

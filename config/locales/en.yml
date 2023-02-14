@@ -49,6 +49,8 @@ en:
       gateway_amount_too_large: "Payments above %{AMOUNT} are not supported. Please order directly at the reception."
       product_in_use: "This product have already been ordered"
       slug_already_used: "is already used"
+  coupon:
+    invalid_format: "only caps letters, numbers, and dashes are allowed"
   apipie:
     api_documentation: "API Documentation"
     code: "HTTP code"

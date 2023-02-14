@@ -3,13 +3,14 @@
 # Provides methods to generate Invoice, Avoir or PaymentSchedule references
 class PaymentDocumentService
   class << self
-    def generate_reference(document, date: DateTime.current)
+    def generate_reference(document, date: Time.current)
       pattern = Setting.get('invoice_reference')
 
       reference = replace_invoice_number_pattern(pattern, document.created_at)
       reference = replace_date_pattern(reference, date)
 
-      if document.is_a? Avoir
+      case document
+      when Avoir
         # information about refund/avoir (R[text])
         reference.gsub!(/R\[([^\]]+)\]/, '\1')
 
@@ -17,14 +18,14 @@ class PaymentDocumentService
         reference.gsub!(/X\[([^\]]+)\]/, ''.to_s)
         # remove information about payment schedule (S[text])
         reference.gsub!(/S\[([^\]]+)\]/, ''.to_s)
-      elsif document.is_a? PaymentSchedule
+      when PaymentSchedule
         # information about payment schedule
         reference.gsub!(/S\[([^\]]+)\]/, '\1')
         # remove information about online selling (X[text])
         reference.gsub!(/X\[([^\]]+)\]/, ''.to_s)
         # remove information about refunds (R[text])
         reference.gsub!(/R\[([^\]]+)\]/, ''.to_s)
-      elsif document.is_a? Invoice
+      when Invoice
         # information about online selling (X[text])
         if document.paid_by_card?
           reference.gsub!(/X\[([^\]]+)\]/, '\1')
@@ -74,7 +75,7 @@ class PaymentDocumentService
     # @param date {Date} the ending date
     # @return {Integer}
     ##
-    def number_of_invoices(range, date = DateTime.current)
+    def number_of_invoices(range, date = Time.current)
       case range.to_s
       when 'day'
         start = date.beginning_of_day

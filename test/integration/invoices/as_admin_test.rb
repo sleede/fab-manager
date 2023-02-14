@@ -36,7 +36,7 @@ class InvoicesTest < ActionDispatch::IntegrationTest
   end
 
   test 'admin generates a refund' do
-    date = DateTime.current.iso8601
+    date = Time.current.iso8601
 
     post '/api/invoices', params: { avoir: {
       avoir_date: date,
@@ -69,7 +69,7 @@ class InvoicesTest < ActionDispatch::IntegrationTest
   end
 
   test 'admin fails generates a refund in closed period' do
-    date = '2015-10-01T13:09:55+01:00'.to_datetime
+    date = Time.zone.parse('2015-10-01T13:09:55+01:00')
 
     post '/api/invoices', params: { avoir: {
       avoir_date: date,

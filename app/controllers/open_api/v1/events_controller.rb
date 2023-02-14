@@ -11,7 +11,7 @@ class OpenAPI::V1::EventsController < OpenAPI::V1::BaseController
                    .where(deleted_at: nil)
     @events = if upcoming
                 @events.references(:availabilities)
-                       .where('availabilities.end_at >= ?', DateTime.current)
+                       .where('availabilities.end_at >= ?', Time.current)
                        .order('availabilities.start_at ASC')
               else
                 @events.order(created_at: :desc)
