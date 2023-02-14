@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- Fix a bug: wrong times in admin/event monitoring
+- Fix a bug: event update over daylight saving time's day results in wrong date
 - Fix a bug: unable to run `rails db:seed` when first setup Fab-manager
 
 ## v5.6.11 2023 February 07
