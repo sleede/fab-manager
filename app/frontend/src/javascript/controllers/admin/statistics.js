@@ -706,7 +706,7 @@ Application.Controllers.controller('ExportStatisticsController', ['$scope', '$ui
     // API URL where the form will be posted
     $scope.actionUrl = `/stats/${index.key}/export`;
 
-    // Key of the current search' statistic type
+    // Key of the current search's statistic type
     $scope.typeKey = type.key;
 
     // Form action on the above URL
