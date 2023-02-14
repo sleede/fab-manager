@@ -1,10 +1,12 @@
 # Changelog Fab-manager
 
 - Use Time instead of DateTime objects
+- Fix a bug: missing statististics subtypes
 - Fix a bug: wrong times in admin/event monitoring
 - Fix a bug: daylight saving time is ignored and result in wrong dates and/or times when dealing around the DST day
 - Fix a bug: date shift in event creation/update
 - Fix a bug: unable to run `rails db:seed` when first setup Fab-manager
+- [TODO DEPLOY] `rails db:seed`
 
 ## v5.6.11 2023 February 07
 
