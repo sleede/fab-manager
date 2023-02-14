@@ -5,7 +5,7 @@ class Availabilities::CreateAvailabilitiesService
   def create(availability, occurrences)
     occurrences = [] if occurrences.nil?
 
-    availability.update_attributes(occurrence_id: availability.id)
+    availability.update(occurrence_id: availability.id)
     create_slots(availability)
 
     occurrences.each do |o|
