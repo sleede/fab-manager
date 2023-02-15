@@ -370,16 +370,16 @@ pt:
         remember: "De acordo com a agenda de pagamento %{REFERENCE}, %{AMOUNT} deveria ser debitado em %{DATE}."
         date: "Este é um lembrete para verificar se o débito bancário foi bem sucedido."
         confirm: "Não se esqueça de confirmar o recibo na interface de gestão de pagamento, para que a fatura correspondente seja gerada."
-    notify_admin_user_proof_of_identity_files_created:
-      subject: "Documentos enviados por um membro"
+    notify_admin_user_supporting_document_files_created:
+      subject: "Supporting documents uploaded by a member"
       body:
-        proof_of_identity_files_uploaded_below: "O membro %{NAME} enviou os seguintes documentos:"
-        validate_user: "Por favor, valide esta conta"
-    notify_admin_user_proof_of_identity_files_updated:
-      subject: "Os documentos do membro mudaram"
+        supporting_document_files_uploaded_below: "Member %{NAME} has uploaded the following supporting documents:"
+        validate_user: "Please validate this account"
+    notify_admin_user_supporting_document_files_updated:
+      subject: "Member's supporting documents have changed"
       body:
-        user_update_proof_of_identity_file: "O membro %{NAME} modificou os documentos abaixo:"
-        validate_user: "Por favor valide esta conta"
+        user_update_supporting_document_file: "Member %{NAME} has modified the supporting documents below:"
+        validate_user: "Please validate this account"
     notify_user_is_validated:
       subject: "Conta validada"
       body:
@@ -388,15 +388,15 @@ pt:
       subject: "Conta invalidada"
       body:
         account_invalidated: "Sua conta foi invalidada. Você não poderá mais reservar até que sua conta seja validada novamente."
-    notify_user_proof_of_identity_refusal:
-      subject: "Seus documentos foram recusados"
+    notify_user_supporting_document_refusal:
+      subject: "Your supporting documents were refused"
       body:
-        user_proof_of_identity_files_refusal: "Seus documentos foram recusados:"
-        action: "Por favor, recarregue novos documentos."
-    notify_admin_user_proof_of_identity_refusal:
-      subject: "Documentos de um membro foram recusados"
+        user_supporting_document_files_refusal: "Your supporting documents were refused:"
+        action: "Please re-upload some new supporting documents."
+    notify_admin_user_supporting_document_refusal:
+      subject: "A member's supporting documents were refused"
       body:
-        user_proof_of_identity_files_refusal: "Os documentos do membro %{NAME} foram rejeitados por %{OPERATOR}:"
+        user_supporting_document_files_refusal: "Member %{NAME}'s supporting documents were rejected by %{OPERATOR}:"
     shared:
       hello: "Olá %{user_name}"
     notify_user_order_is_ready:
