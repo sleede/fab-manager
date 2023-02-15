@@ -6,6 +6,7 @@
 - Improved public calendar loading time
 - Fix a bug: event image updates are not reflected unless the browser's cache is purged
 - Fix a bug: schedules jobs are not launched at the right time
+- Fix a bug: unable to update the title of a training
 - [TODO DEPLOY] `rails fablab:fix_availabilities` THEN `rails fablab:setup:build_places_cache`
 - [TODO DEPLOY] `\curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/scripts/rename-supporting-document.sh | bash`
 

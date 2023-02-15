@@ -52,9 +52,9 @@ class Training < ApplicationRecord
   end
 
   def update_statistic_subtype
-    index = StatisticIndex.where(es_type_key: 'training')
+    index = StatisticIndex.find_by(es_type_key: 'training')
     subtype = StatisticSubType.joins(statistic_type_sub_types: :statistic_type)
-                              .find_by(key: slug, statistic_types: { statistic_index_id: index.id })
+                              .find_by!(key: slug, statistic_types: { statistic_index_id: index.id })
     subtype.update(label: name)
   end
 

@@ -98,11 +98,11 @@ class Plan < ApplicationRecord
 
   # must be publicly accessible for the migration
   def create_statistic_type
-    stat_index = StatisticIndex.where(es_type_key: 'subscription')
+    stat_index = StatisticIndex.find_by(es_type_key: 'subscription')
     type = find_statistic_type
     if type.nil?
       type = StatisticType.create!(
-        statistic_index_id: stat_index.first.id,
+        statistic_index_id: stat_index.id,
         key: duration.to_i,
         label: "#{I18n.t('statistics.duration')} : #{human_readable_duration}",
         graph: true,
@@ -114,11 +114,11 @@ class Plan < ApplicationRecord
   end
 
   def find_statistic_type
-    stat_index = StatisticIndex.where(es_type_key: 'subscription')
-    type = StatisticType.find_by(statistic_index_id: stat_index.first.id, key: duration.to_i)
+    stat_index = StatisticIndex.find_by(es_type_key: 'subscription')
+    type = StatisticType.find_by(statistic_index_id: stat_index.id, key: duration.to_i)
     return type if type
 
-    StatisticType.where(statistic_index_id: stat_index.first.id).where('label LIKE ?', "%#{human_readable_duration}%").first
+    StatisticType.where(statistic_index_id: stat_index.id).where('label LIKE ?', "%#{human_readable_duration}%").first
   end
 
   private
