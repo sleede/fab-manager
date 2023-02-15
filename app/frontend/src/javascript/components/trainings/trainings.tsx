@@ -138,7 +138,7 @@ export const Trainings: React.FC<TrainingsProps> = ({ onError, onSuccess }) => {
                 <p>{training.name}</p>
               </div>
 
-              <div className="machines">
+              <div className="associated-machines">
                 <span>{t('app.admin.trainings.associated_machines')}</span>
                 {(hasMachines(training) &&
                   <p>{machinesNames(training.machine_ids)}</p>
