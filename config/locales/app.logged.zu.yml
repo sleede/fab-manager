@@ -303,7 +303,6 @@ zu:
         notify_admin_payment_schedule_check_deadline: "crwdns37301:0crwdne37301:0"
         notify_admin_payment_schedule_transfer_deadline: "crwdns37303:0crwdne37303:0"
         notify_admin_payment_schedule_error: "crwdns37305:0crwdne37305:0"
-        notify_admin_gateway_canceled: "crwdns37307:0crwdne37307:0"
         notify_admin_refund_created: "crwdns37309:0crwdne37309:0"
         notify_admin_user_wallet_is_credited: "crwdns37311:0crwdne37311:0"
         notify_user_order_is_ready: "crwdns37313:0crwdne37313:0"
