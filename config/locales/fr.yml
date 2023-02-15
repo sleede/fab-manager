@@ -431,17 +431,17 @@ fr:
       notify_admin_payment_schedule_transfer_deadline:
         schedule_deadline: "Vous devez confirmer le prélèvement bancaire pour l'échéance du %{DATE} , pour l'échéancier %{REFERENCE}"
       notify_admin_user_supporting_document_files_created:
-        supporting_document_files_uploaded: "Supporting document uploaded by member <strong><em>%{NAME}</strong></em>."
+        supporting_document_files_uploaded: "Justificatif téléchargé par le membre <strong><em>%{NAME}</strong></em>."
       notify_admin_user_supporting_document_files_updated:
-        supporting_document_files_uploaded: "Supporting document changed by member <strong><em>%{NAME}</strong></em>."
+        supporting_document_files_uploaded: "Justificatif modifié par le Membre <strong><em>%{NAME}</strong></em>."
       notify_user_is_validated:
         account_validated: "Votre compte est valide."
       notify_user_is_invalidated:
         account_invalidated: "Votre compte est invalide."
       notify_user_supporting_document_refusal:
-        refusal: "Your supporting documents were refused"
+        refusal: "Vos pièces justificatives ont été refusées"
       notify_admin_user_supporting_document_refusal:
-        refusal: "Member's supporting document <strong><em>%{NAME}</strong></em> was refused."
+        refusal: "Le justificatif du membre <strong><em>%{NAME}</strong></em> a été refusé."
       notify_user_order_is_ready:
         order_ready: "Votre commande %{REFERENCE} est prête"
       notify_user_order_is_canceled:
