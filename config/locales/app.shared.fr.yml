@@ -259,7 +259,7 @@ fr:
           credit_AMOUNT_for_pay_ITEM: "Il vous reste {AMOUNT} à payer pour valider votre {ITEM}."
           client_have_AMOUNT_in_wallet: "Le membre a {AMOUNT} sur son porte-monnaie"
           client_wallet_pay_ITEM: "Le membre peut directement payer {ITEM, select, abonnement{son} achat{son} other{sa}} {ITEM}."
-          client_credit_AMOUNT_for_pay_ITEM: "Il reste {AMOUNT} à payer pour valider {ITEM, select, abonnement{l'} achat{l'} other{la }}{ITEM}"
+          client_credit_AMOUNT_for_pay_ITEM: "Il reste {AMOUNT} à payer pour valider {ITEM, select, abonnement{l''} achat{l''} other{la }}{ITEM}"
           other_deadlines_no_wallet: "Attention : le solde du porte-monnaie ne pourra pas être utilisé pour les échéances suivantes."
       #coupon (promotional) (creation/edition form)
       coupon:
