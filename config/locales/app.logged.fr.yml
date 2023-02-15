@@ -312,7 +312,7 @@ fr:
         notify_admin_when_project_published: "Un projet a été publié"
         notify_admin_abuse_reported: "Un contenu abusif a été rapporté"
         notify_admin_close_period_reminder: "L’exercice comptable arrive à échéance"
-        notify_admin_archive_complete: "Une archive est terminée"
+        notify_admin_archive_complete: "Une archive comptable est prête"
         notify_admin_training_auto_cancelled: "Une formation a été automatiquement annulée"
         notify_admin_export_complete: "Un export est disponible"
         notify_user_when_invoice_ready: "Une facture est disponible"
