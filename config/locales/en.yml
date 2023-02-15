@@ -50,11 +50,11 @@ en:
       product_in_use: "This product have already been ordered"
       slug_already_used: "is already used"
   coupon:
-    invalid_format: "only caps letters, numbers, and dashes are allowed"
+    code_format_error: "only caps letters, numbers, and dashes are allowed"
   apipie:
     api_documentation: "API Documentation"
     code: "HTTP code"
-  #error messages when importing an account from a SSO
+  #error messages when importing an account from an SSO
   omniauth:
     email_already_linked_to_another_account_please_input_your_authentication_code: "E-mail address \"%{OLD_MAIL}\" is already linked to another account, please input your authentication code."
     your_username_is_already_linked_to_another_account_unable_to_update_it: "Your username (%{USERNAME}) is already linked to another account, unable to update it."
@@ -68,8 +68,6 @@ en:
     length_must_be_slot_multiple: "must be at least %{MIN} minutes after the start date"
     must_be_associated_with_at_least_1_machine: "must be associated with at least 1 machine"
     deleted_user: "Deleted user"
-  coupon:
-    code_format_error: "only caps letters, numbers, and dashes are allowed"
   #members management
   members:
     unable_to_change_the_group_while_a_subscription_is_running: "Unable to change the group while a subscription is running"
