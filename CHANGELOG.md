@@ -4,6 +4,7 @@
 - Export external ID and private notes in the members excel export
 - Ability to buy a new prepaid pack from the user's dashboard
 - Improved public calendar loading time
+- Fix a bug: event image updates are not reflected unless the browser's cache is purged
 - Fix a bug: schedules jobs are not launched at the right time
 - [TODO DEPLOY] `rails fablab:fix_availabilities` THEN `rails fablab:setup:build_places_cache`
 - [TODO DEPLOY] `\curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/scripts/rename-supporting-document.sh | bash`
