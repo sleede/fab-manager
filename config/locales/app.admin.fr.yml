@@ -100,7 +100,7 @@ fr:
         create_success: "La formation a bien été créée"
         update_success: "La formation a bien été mise à jour"
       space_form:
-        ACTION_title: "{ACTION, select, create{Nouvel } other{Mettre à jour l'}}espace"
+        ACTION_title: "{ACTION, select, create{Nouvel } other{Mettre à jour l''}}espace"
         watch_out_when_creating_a_new_space_its_prices_are_initialized_at_0_for_all_subscriptions: "Attention, lors de la création d'un espace, ses tarifs de réservation sont initialisés à zero pour tous les abonnements."
         consider_changing_its_prices_before_creating_any_reservation_slot: "Pensez à modifier ces prix avant de créer des créneaux pour cet espace."
         name: "Nom"
@@ -118,7 +118,7 @@ fr:
         create_success: "L'espace a bien été créé"
         update_success: "L'espace a bien été mis à jour"
       event_form:
-        ACTION_title: "{ACTION, select, create{Nouvel } other{Mettre à jour l'}}événement"
+        ACTION_title: "{ACTION, select, create{Nouvel } other{Mettre à jour l''}}événement"
         title: "Titre"
         matching_visual: "Visuel associé"
         description: "Description"
