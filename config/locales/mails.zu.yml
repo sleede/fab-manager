@@ -370,16 +370,16 @@ zu:
         remember: "crwdns29938:0%{REFERENCE}crwdnd29938:0%{AMOUNT}crwdnd29938:0%{DATE}crwdne29938:0"
         date: "crwdns29940:0crwdne29940:0"
         confirm: "crwdns29942:0crwdne29942:0"
-    notify_admin_user_proof_of_identity_files_created:
-      subject: "crwdns29944:0crwdne29944:0"
+    notify_admin_user_supporting_document_files_created:
+      subject: "crwdns37349:0crwdne37349:0"
       body:
-        proof_of_identity_files_uploaded_below: "crwdns29946:0%{NAME}crwdne29946:0"
-        validate_user: "crwdns29948:0crwdne29948:0"
-    notify_admin_user_proof_of_identity_files_updated:
-      subject: "crwdns29950:0crwdne29950:0"
+        supporting_document_files_uploaded_below: "crwdns37351:0%{NAME}crwdne37351:0"
+        validate_user: "crwdns37353:0crwdne37353:0"
+    notify_admin_user_supporting_document_files_updated:
+      subject: "crwdns37355:0crwdne37355:0"
       body:
-        user_update_proof_of_identity_file: "crwdns29952:0%{NAME}crwdne29952:0"
-        validate_user: "crwdns29954:0crwdne29954:0"
+        user_update_supporting_document_file: "crwdns37357:0%{NAME}crwdne37357:0"
+        validate_user: "crwdns37359:0crwdne37359:0"
     notify_user_is_validated:
       subject: "crwdns29956:0crwdne29956:0"
       body:
@@ -388,15 +388,15 @@ zu:
       subject: "crwdns29960:0crwdne29960:0"
       body:
         account_invalidated: "crwdns29962:0crwdne29962:0"
-    notify_user_proof_of_identity_refusal:
-      subject: "crwdns29964:0crwdne29964:0"
+    notify_user_supporting_document_refusal:
+      subject: "crwdns37361:0crwdne37361:0"
       body:
-        user_proof_of_identity_files_refusal: "crwdns29966:0crwdne29966:0"
-        action: "crwdns29968:0crwdne29968:0"
-    notify_admin_user_proof_of_identity_refusal:
-      subject: "crwdns29970:0crwdne29970:0"
+        user_supporting_document_files_refusal: "crwdns37363:0crwdne37363:0"
+        action: "crwdns37365:0crwdne37365:0"
+    notify_admin_user_supporting_document_refusal:
+      subject: "crwdns37367:0crwdne37367:0"
       body:
-        user_proof_of_identity_files_refusal: "crwdns29972:0%{NAME}crwdnd29972:0%{OPERATOR}crwdne29972:0"
+        user_supporting_document_files_refusal: "crwdns37369:0%{NAME}crwdnd37369:0%{OPERATOR}crwdne37369:0"
     shared:
       hello: "crwdns29974:0%{user_name}crwdne29974:0"
     notify_user_order_is_ready:

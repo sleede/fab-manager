@@ -49,10 +49,12 @@ zu:
       gateway_amount_too_large: "crwdns31693:0%{AMOUNT}crwdne31693:0"
       product_in_use: "crwdns31695:0crwdne31695:0"
       slug_already_used: "crwdns31697:0crwdne31697:0"
+  coupon:
+    code_format_error: "crwdns37201:0crwdne37201:0"
   apipie:
     api_documentation: "crwdns3257:0crwdne3257:0"
     code: "crwdns20914:0crwdne20914:0"
-  #error messages when importing an account from a SSO
+  #error messages when importing an account from an SSO
   omniauth:
     email_already_linked_to_another_account_please_input_your_authentication_code: "crwdns3259:0%{OLD_MAIL}crwdne3259:0"
     your_username_is_already_linked_to_another_account_unable_to_update_it: "crwdns3261:0%{USERNAME}crwdne3261:0"
@@ -66,8 +68,6 @@ zu:
     length_must_be_slot_multiple: "crwdns3271:0%{MIN}crwdne3271:0"
     must_be_associated_with_at_least_1_machine: "crwdns3273:0crwdne3273:0"
     deleted_user: "crwdns22460:0crwdne22460:0"
-  coupon:
-    code_format_error: "crwdns37201:0crwdne37201:0"
   #members management
   members:
     unable_to_change_the_group_while_a_subscription_is_running: "crwdns3275:0crwdne3275:0"
@@ -430,18 +430,18 @@ zu:
         schedule_deadline: "crwdns21120:0%{DATE}crwdnd21120:0%{REFERENCE}crwdne21120:0"
       notify_admin_payment_schedule_transfer_deadline:
         schedule_deadline: "crwdns22305:0%{DATE}crwdnd22305:0%{REFERENCE}crwdne22305:0"
-      notify_admin_user_proof_of_identity_files_created:
-        proof_of_identity_files_uploaded: "crwdns23000:0%{NAME}crwdne23000:0"
-      notify_admin_user_proof_of_identity_files_updated:
-        proof_of_identity_files_uploaded: "crwdns23002:0%{NAME}crwdne23002:0"
+      notify_admin_user_supporting_document_files_created:
+        supporting_document_files_uploaded: "crwdns37341:0%{NAME}crwdne37341:0"
+      notify_admin_user_supporting_document_files_updated:
+        supporting_document_files_uploaded: "crwdns37343:0%{NAME}crwdne37343:0"
       notify_user_is_validated:
         account_validated: "crwdns23004:0crwdne23004:0"
       notify_user_is_invalidated:
         account_invalidated: "crwdns23006:0crwdne23006:0"
-      notify_user_proof_of_identity_refusal:
-        refusal: "crwdns23008:0crwdne23008:0"
-      notify_admin_user_proof_of_identity_refusal:
-        refusal: "crwdns23010:0%{NAME}crwdne23010:0"
+      notify_user_supporting_document_refusal:
+        refusal: "crwdns37345:0crwdne37345:0"
+      notify_admin_user_supporting_document_refusal:
+        refusal: "crwdns37347:0%{NAME}crwdne37347:0"
       notify_user_order_is_ready:
         order_ready: "crwdns31707:0%{REFERENCE}crwdne31707:0"
       notify_user_order_is_canceled:

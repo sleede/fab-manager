@@ -49,10 +49,12 @@ pt:
       gateway_amount_too_large: "Payments above %{AMOUNT} are not supported. Please order directly at the reception."
       product_in_use: "This product have already been ordered"
       slug_already_used: "is already used"
+  coupon:
+    code_format_error: "only caps letters, numbers, and dashes are allowed"
   apipie:
     api_documentation: "Documentação da API"
     code: "Código HTTP"
-  #error messages when importing an account from a SSO
+  #error messages when importing an account from an SSO
   omniauth:
     email_already_linked_to_another_account_please_input_your_authentication_code: "E-mail \"%{OLD_MAIL}\" já está vinculado a outra conta, insira seu código de autenticação."
     your_username_is_already_linked_to_another_account_unable_to_update_it: "Seu nome de usuário ( %{USERNAME}) já está vinculado a outra conta, não conseguindo atualizá-lo."
@@ -66,8 +68,6 @@ pt:
     length_must_be_slot_multiple: "deve ser pelo menos %{MIN} minutos após a data de início"
     must_be_associated_with_at_least_1_machine: "deve estar associada a pelo menos uma máquina"
     deleted_user: "Usuário deletado"
-  coupon:
-    code_format_error: "only caps letters, numbers, and dashes are allowed"
   #members management
   members:
     unable_to_change_the_group_while_a_subscription_is_running: "Não é possível alterar o grupo enquanto uma assinatura está sendo executada"
@@ -430,18 +430,18 @@ pt:
         schedule_deadline: "Você deve realizar a verificação para a data limite de %{DATE} para agendar %{REFERENCE}"
       notify_admin_payment_schedule_transfer_deadline:
         schedule_deadline: "Você deve realizar a verificação do débito para a data limite de %{DATE}, para o agendamento %{REFERENCE}"
-      notify_admin_user_proof_of_identity_files_created:
-        proof_of_identity_files_uploaded: "Comprovante de identidade enviado pelo membro <strong><em>%{NAME}</strong></em>."
-      notify_admin_user_proof_of_identity_files_updated:
-        proof_of_identity_files_uploaded: "Comprovante de identidade alterado pelo membro <strong><em>%{NAME}</strong></em>."
+      notify_admin_user_supporting_document_files_created:
+        supporting_document_files_uploaded: "Supporting document uploaded by member <strong><em>%{NAME}</strong></em>."
+      notify_admin_user_supporting_document_files_updated:
+        supporting_document_files_uploaded: "Supporting document changed by member <strong><em>%{NAME}</strong></em>."
       notify_user_is_validated:
         account_validated: "Sua conta é válida."
       notify_user_is_invalidated:
         account_invalidated: "Sua conta é inválida."
-      notify_user_proof_of_identity_refusal:
-        refusal: "Seu comprovante de identidade não foi aceito"
-      notify_admin_user_proof_of_identity_refusal:
-        refusal: "Prova de identidade do membro <strong><em>%{NAME}</strong></em> recusada."
+      notify_user_supporting_document_refusal:
+        refusal: "Your supporting documents were refused"
+      notify_admin_user_supporting_document_refusal:
+        refusal: "Member's supporting document <strong><em>%{NAME}</strong></em> was refused."
       notify_user_order_is_ready:
         order_ready: "Your command %{REFERENCE} is ready"
       notify_user_order_is_canceled:

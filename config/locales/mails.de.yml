@@ -370,15 +370,15 @@ de:
         remember: "Gemäß Ihrem Zahlungsplan von %{REFERENCE} wurde zum %{DATE} eine Belastung der Karte in Höhe von %{AMOUNT} geplant."
         date: "Dies ist eine Erinnerung zur Prüfung, ob das Bankkonto erfolgreich belastet werden konnte."
         confirm: "Bitte bestätigen Sie den Erhalt des Guthabens in Ihrer Zahlungsverwaltung, damit die entsprechende Rechnung generiert werden kann."
-    notify_admin_user_proof_of_identity_files_created:
+    notify_admin_user_supporting_document_files_created:
       subject: "Supporting documents uploaded by a member"
       body:
-        proof_of_identity_files_uploaded_below: "Member %{NAME} has uploaded the following supporting documents:"
+        supporting_document_files_uploaded_below: "Member %{NAME} has uploaded the following supporting documents:"
         validate_user: "Please validate this account"
-    notify_admin_user_proof_of_identity_files_updated:
+    notify_admin_user_supporting_document_files_updated:
       subject: "Member's supporting documents have changed"
       body:
-        user_update_proof_of_identity_file: "Member %{NAME} has modified the supporting documents below:"
+        user_update_supporting_document_file: "Member %{NAME} has modified the supporting documents below:"
         validate_user: "Please validate this account"
     notify_user_is_validated:
       subject: "Account validated"
@@ -388,15 +388,15 @@ de:
       subject: "Account invalidated"
       body:
         account_invalidated: "Your account was invalidated. You won't be able to book anymore, until your account is validated again."
-    notify_user_proof_of_identity_refusal:
+    notify_user_supporting_document_refusal:
       subject: "Your supporting documents were refused"
       body:
-        user_proof_of_identity_files_refusal: "Your supporting documents were refused:"
+        user_supporting_document_files_refusal: "Your supporting documents were refused:"
         action: "Please re-upload some new supporting documents."
-    notify_admin_user_proof_of_identity_refusal:
+    notify_admin_user_supporting_document_refusal:
       subject: "A member's supporting documents were refused"
       body:
-        user_proof_of_identity_files_refusal: "Member %{NAME}'s supporting documents were rejected by %{OPERATOR}:"
+        user_supporting_document_files_refusal: "Member %{NAME}'s supporting documents were rejected by %{OPERATOR}:"
     shared:
       hello: "Hallo %{user_name}"
     notify_user_order_is_ready:

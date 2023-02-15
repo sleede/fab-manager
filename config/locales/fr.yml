@@ -49,10 +49,12 @@ fr:
       gateway_amount_too_large: "Les paiements supérieurs à %{AMOUNT} ne sont pas pris en charge. Merci de passer commande directement à l'accueil."
       product_in_use: "Ce produit a déjà été commandé"
       slug_already_used: "est déjà utilisée"
+  coupon:
+    code_format_error: "seules les majuscules, chiffres et tirets sont autorisés"
   apipie:
     api_documentation: "Documentation de l'API"
     code: "Code HTTP "
-  #error messages when importing an account from a SSO
+  #error messages when importing an account from an SSO
   omniauth:
     email_already_linked_to_another_account_please_input_your_authentication_code: "L'adresse de courriel \"%{OLD_MAIL}\" est déjà associée à un compte utilisateur, merci de saisir votre code d'authentification."
     your_username_is_already_linked_to_another_account_unable_to_update_it: "Votre nom d'utilisateur (%{USERNAME}) est déjà associée à un autre compte utilisateur, impossible de le mettre à jour."
@@ -66,8 +68,6 @@ fr:
     length_must_be_slot_multiple: "doit être au moins %{MIN} minutes après la date de début"
     must_be_associated_with_at_least_1_machine: "doit être associé avec au moins 1 machine"
     deleted_user: "Utilisateur supprimé"
-  coupon:
-    code_format_error: "seules les majuscules, chiffres et tirets sont autorisés"
   #members management
   members:
     unable_to_change_the_group_while_a_subscription_is_running: "Impossible de changer le groupe tant qu'un abonnement est en cours"
@@ -430,17 +430,17 @@ fr:
         schedule_deadline: "Vous devez encaisser le chèque de l'échéance du %{DATE}, pour l'échéancier %{REFERENCE}"
       notify_admin_payment_schedule_transfer_deadline:
         schedule_deadline: "Vous devez confirmer le prélèvement bancaire pour l'échéance du %{DATE} , pour l'échéancier %{REFERENCE}"
-      notify_admin_user_proof_of_identity_files_created:
-        proof_of_identity_files_uploaded: "Justificatif téléchargé par le membre <strong><em>%{NAME}</strong></em>."
-      notify_admin_user_proof_of_identity_files_updated:
-        proof_of_identity_files_uploaded: "Justificatif modifié par le Membre <strong><em>%{NAME}</strong></em>."
+      notify_admin_user_supporting_document_files_created:
+        supporting_document_files_uploaded: "Justificatif téléchargé par le membre <strong><em>%{NAME}</strong></em>."
+      notify_admin_user_supporting_document_files_updated:
+        supporting_document_files_uploaded: "Justificatif modifié par le Membre <strong><em>%{NAME}</strong></em>."
       notify_user_is_validated:
         account_validated: "Votre compte est valide."
       notify_user_is_invalidated:
         account_invalidated: "Votre compte est invalide."
-      notify_user_proof_of_identity_refusal:
-        refusal: "Votre justificatif n'est pas accepté"
-      notify_admin_user_proof_of_identity_refusal:
+      notify_user_supporting_document_refusal:
+        refusal: "Vos pièces justificatives ont été refusées"
+      notify_admin_user_supporting_document_refusal:
         refusal: "Le justificatif du membre <strong><em>%{NAME}</strong></em> a été refusé."
       notify_user_order_is_ready:
         order_ready: "Votre commande %{REFERENCE} est prête"

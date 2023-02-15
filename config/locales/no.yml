@@ -49,10 +49,12 @@
       gateway_amount_too_large: "Payments above %{AMOUNT} are not supported. Please order directly at the reception."
       product_in_use: "This product have already been ordered"
       slug_already_used: "is already used"
+  coupon:
+    code_format_error: "only caps letters, numbers, and dashes are allowed"
   apipie:
     api_documentation: "API-dokumentasjon"
     code: "HTTP kode"
-  #error messages when importing an account from a SSO
+  #error messages when importing an account from an SSO
   omniauth:
     email_already_linked_to_another_account_please_input_your_authentication_code: "E-postadressen \"%{OLD_MAIL}\" er allerede koblet til en annen konto, vennligst skriv inn din godkjenningskode."
     your_username_is_already_linked_to_another_account_unable_to_update_it: "Brukernavnet ditt (%{USERNAME}) er allerede koblet til en annen konto, så ikke mulig å oppdatere kontoen."
@@ -66,8 +68,6 @@
     length_must_be_slot_multiple: "må være minst %{MIN} minutter etter startdatoen"
     must_be_associated_with_at_least_1_machine: "må være tilknyttet minst 1 maskin"
     deleted_user: "Deleted user"
-  coupon:
-    code_format_error: "only caps letters, numbers, and dashes are allowed"
   #members management
   members:
     unable_to_change_the_group_while_a_subscription_is_running: "Kan ikke endre gruppen mens et abonnement kjører"
@@ -430,18 +430,18 @@
         schedule_deadline: "You must cash the check for the %{DATE} deadline, for schedule %{REFERENCE}"
       notify_admin_payment_schedule_transfer_deadline:
         schedule_deadline: "You must confirm the bank direct debit for the %{DATE} deadline, for schedule %{REFERENCE}"
-      notify_admin_user_proof_of_identity_files_created:
-        proof_of_identity_files_uploaded: "Proof of identity uploaded by member <strong><em>%{NAME}</strong></em>."
-      notify_admin_user_proof_of_identity_files_updated:
-        proof_of_identity_files_uploaded: "Proof of identity changed by Member <strong><em>%{NAME}</strong></em>."
+      notify_admin_user_supporting_document_files_created:
+        supporting_document_files_uploaded: "Supporting document uploaded by member <strong><em>%{NAME}</strong></em>."
+      notify_admin_user_supporting_document_files_updated:
+        supporting_document_files_uploaded: "Supporting document changed by member <strong><em>%{NAME}</strong></em>."
       notify_user_is_validated:
         account_validated: "Your account is valid."
       notify_user_is_invalidated:
         account_invalidated: "Your account is invalid."
-      notify_user_proof_of_identity_refusal:
-        refusal: "Your proof of identity are not accepted"
-      notify_admin_user_proof_of_identity_refusal:
-        refusal: "Member's proof of identity <strong><em>%{NAME}</strong></em> refused."
+      notify_user_supporting_document_refusal:
+        refusal: "Your supporting documents were refused"
+      notify_admin_user_supporting_document_refusal:
+        refusal: "Member's supporting document <strong><em>%{NAME}</strong></em> was refused."
       notify_user_order_is_ready:
         order_ready: "Your command %{REFERENCE} is ready"
       notify_user_order_is_canceled:

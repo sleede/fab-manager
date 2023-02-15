@@ -370,15 +370,15 @@ fr:
         remember: "Conformément à l'échéancier de paiement %{REFERENCE}, une échéance de %{AMOUNT} était prévu pour être prélevée le %{DATE}."
         date: "Ceci est un rappel pour vérifier que le prélèvement bancaire a bien été effectué."
         confirm: "Veuillez confirmer la réception des fonds dans votre interface de gestion des échéanciers de paiement, afin que la facture correspondante soit générée."
-    notify_admin_user_proof_of_identity_files_created:
+    notify_admin_user_supporting_document_files_created:
       subject: "Justificatif téléversé par un membre"
       body:
-        proof_of_identity_files_uploaded_below: "Le membre %{NAME} a téléversé le justificatif suivant:"
-        validate_user: "Veuillez valider ce compte"
-    notify_admin_user_proof_of_identity_files_updated:
+        supporting_document_files_uploaded_below: "Le membre %{NAME} a téléversé le justificatif suivant :"
+        validate_user: "Veuillez valider son compte"
+    notify_admin_user_supporting_document_files_updated:
       subject: "Le justificatif d'un membre a changé"
       body:
-        user_update_proof_of_identity_file: "Le membre %{NAME} a modifié le justificatif ci-dessous :"
+        user_update_supporting_document_file: "Le membre %{NAME} a modifié le justificatif ci-dessous :"
         validate_user: "Veuillez valider son compte"
     notify_user_is_validated:
       subject: "Compte validé"
@@ -388,15 +388,15 @@ fr:
       subject: "Compte invalidé"
       body:
         account_invalidated: "Votre compte a été invalidé. Vous ne pourrez plus réserver, jusqu'à ce que votre compte soit à nouveau validé."
-    notify_user_proof_of_identity_refusal:
-      subject: "Le justificatif a été refusé"
+    notify_user_supporting_document_refusal:
+      subject: "Vos pièces justificatives ont été refusées"
       body:
-        user_proof_of_identity_files_refusal: "Votre pièce justificative a été refusée :"
-        action: "Veuillez téléverser une nouvelle pièce justificative."
-    notify_admin_user_proof_of_identity_refusal:
-      subject: "Le justificatif d'un membre a été refusé"
+        user_supporting_document_files_refusal: "Vos pièces justificatives ont été refusées :"
+        action: "Veuillez téléverser de nouvelles pièces justificatives."
+    notify_admin_user_supporting_document_refusal:
+      subject: "Les justificatifs d'un membre ont été refusés"
       body:
-        user_proof_of_identity_files_refusal: "Le justificatif du membre %{NAME} a été refusé par %{OPERATOR} :"
+        user_supporting_document_files_refusal: "Le justificatif du membre %{NAME} a été refusé par %{OPERATOR} :"
     shared:
       hello: "Bonjour %{user_name}"
     notify_user_order_is_ready:
