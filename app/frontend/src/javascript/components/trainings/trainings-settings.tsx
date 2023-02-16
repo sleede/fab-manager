@@ -96,7 +96,7 @@ export const TrainingsSettings: React.FC<TrainingsSettingsProps> = ({ onError, o
               <FormInput id="trainings_auto_cancel_threshold"
                       type="number"
                       register={register}
-                      rules={{ required: isActiveAutoCancellation, min: 0 }}
+                      rules={{ required: isActiveAutoCancellation, min: { value: 0, message: t('app.admin.trainings_settings.must_be_positive') } }}
                       step={1}
                       nullable
                       formState={formState}
@@ -104,7 +104,7 @@ export const TrainingsSettings: React.FC<TrainingsSettingsProps> = ({ onError, o
               <FormInput id="trainings_auto_cancel_deadline"
                       type="number"
                       register={register}
-                      rules={{ required: isActiveAutoCancellation, min: 1 }}
+                      rules={{ required: isActiveAutoCancellation, min: { value: 1, message: t('app.admin.trainings_settings.must_be_above_zero') } }}
                       nullable
                       step={1}
                       formState={formState}

@@ -6,8 +6,8 @@ export type ruleTypes = {
   pattern?: RegExp | { value: RegExp, message: string },
   minLength?: number | { value: number, message: string },
   maxLength?: number | { value: number, message: string },
-  min?: number,
-  max?: number,
+  min?: number | { value: number, message: string },
+  max?: number | { value: number, message: string },
   validate?: Validate<unknown>;
 };
 
