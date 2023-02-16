@@ -319,3 +319,4 @@ zu:
         notify_admin_payment_schedule_gateway_canceled: "crwdns37335:0crwdne37335:0"
         notify_project_collaborator_to_valid: "crwdns37337:0crwdne37337:0"
         notify_project_author_when_collaborator_valid: "crwdns37339:0crwdne37339:0"
+        notify_admin_order_is_paid: "crwdns37377:0crwdne37377:0"
