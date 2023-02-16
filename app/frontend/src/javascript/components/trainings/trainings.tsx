@@ -53,14 +53,21 @@ export const Trainings: React.FC<TrainingsProps> = ({ onError, onSuccess }) => {
   }, []);
 
   useEffect(() => {
+    fetchTrainings(filter);
+  }, [filter]);
+
+  /**
+   * Fetch the trainings from the API
+   */
+  const fetchTrainings = (filterDisabled?: boolean) => {
     const trainingsFilters = Object.assign(
       { requested_attributes: ['override_settings'] },
-      (typeof filter === 'boolean') ? { disabled: filter } : {}
+      (typeof filterDisabled === 'boolean') ? { disabled: filterDisabled } : {}
     ) as TrainingIndexFilter;
     TrainingAPI.index(trainingsFilters)
       .then(setTrainings)
       .catch(onError);
-  }, [filter]);
+  };
 
   /** Creates filtering options to the react-select format */
   const buildFilterOptions = (): Array<SelectOption<boolean>> => {
@@ -90,6 +97,14 @@ export const Trainings: React.FC<TrainingsProps> = ({ onError, onSuccess }) => {
   const hasMachines = (training: Training): boolean => {
     const activesMachines = machines.map(m => m.id);
     return training.machine_ids.filter(id => activesMachines.includes(id)).length > 0;
+  };
+
+  /**
+   * Callback triggered when a training was successfully deleted
+   */
+  const handleTrainingDeleted = (message: string): void => {
+    onSuccess(message);
+    fetchTrainings(filter);
   };
 
   /**
@@ -177,7 +192,7 @@ export const Trainings: React.FC<TrainingsProps> = ({ onError, onSuccess }) => {
               <div className='actions'>
                 <EditDestroyButtons className='grpBtn'
                                     onError={onError}
-                                    onSuccess={onSuccess}
+                                    onDeleteSuccess={handleTrainingDeleted}
                                     onEdit={() => toTrainingEdit(training)}
                                     itemId={training.id}
                                     itemType={t('app.admin.trainings.training')}

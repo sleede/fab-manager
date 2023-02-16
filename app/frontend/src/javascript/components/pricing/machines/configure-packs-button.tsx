@@ -110,7 +110,7 @@ export const ConfigurePacksButton: React.FC<ConfigurePacksButtonProps> = ({ pack
               {formatDuration(p.minutes)} - {FormatLib.price(p.amount)}
               <EditDestroyButtons className='pack-actions'
                                   onError={onError}
-                                  onSuccess={handleSuccess}
+                                  onDeleteSuccess={handleSuccess}
                                   onEdit={() => handleRequestEdit(p)}
                                   itemId={p.id}
                                   itemType={t('app.admin.configure_packs_button.pack')}

@@ -6,7 +6,7 @@ import { FabButton } from './fab-button';
 import { FabModal } from './fab-modal';
 
 interface EditDestroyButtonsProps {
-  onSuccess: (message: string) => void,
+  onDeleteSuccess: (message: string) => void,
   onError: (message: string) => void,
   onEdit: () => void,
   itemId: number,
@@ -22,7 +22,7 @@ interface EditDestroyButtonsProps {
  * Destroy : shows a modal dialog to ask the user for confirmation about the deletion of the provided item.
  * Edit : triggers the provided function.
  */
-export const EditDestroyButtons: React.FC<EditDestroyButtonsProps> = ({ onSuccess, onError, onEdit, itemId, itemType, apiDestroy, confirmationMessage, className, iconSize = 20 }) => {
+export const EditDestroyButtons: React.FC<EditDestroyButtonsProps> = ({ onDeleteSuccess, onError, onEdit, itemId, itemType, apiDestroy, confirmationMessage, className, iconSize = 20 }) => {
   const { t } = useTranslation('admin');
 
   const [deletionModal, setDeletionModal] = useState<boolean>(false);
@@ -40,7 +40,7 @@ export const EditDestroyButtons: React.FC<EditDestroyButtonsProps> = ({ onSucces
    */
   const onDeleteConfirmed = (): void => {
     apiDestroy(itemId).then(() => {
-      onSuccess(t('app.admin.edit_destroy_buttons.deleted', { TYPE: itemType }));
+      onDeleteSuccess(t('app.admin.edit_destroy_buttons.deleted', { TYPE: itemType }));
     }).catch((error) => {
       onError(t('app.admin.edit_destroy_buttons.unable_to_delete', { TYPE: itemType }) + error);
     });
