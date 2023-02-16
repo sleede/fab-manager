@@ -319,3 +319,4 @@ fr:
         notify_admin_payment_schedule_gateway_canceled: "Un calendrier de paiement a été annulé par la passerelle de paiement"
         notify_project_collaborator_to_valid: "Vous êtes invité à collaborer sur un projet"
         notify_project_author_when_collaborator_valid: "Un collaborateur a accepté votre invitation à rejoindre votre projet"
+        notify_admin_order_is_paid: "Une nouvelle commande a été passée"
