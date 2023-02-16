@@ -10,8 +10,10 @@
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 1.6rem 3.2rem;
 
-    .checklist-item input {
-      margin-right: 1em;
+    .checklist-item {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
     }
   }
 
