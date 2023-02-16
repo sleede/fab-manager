@@ -145,7 +145,7 @@ class AuthProvidersTest < ActionDispatch::IntegrationTest
 
     # check resulting notification
     notification = Notification.find_by(
-      notification_type_id: NotificationType.find_by_name('notify_user_auth_migration'), # rubocop:disable Rails/DynamicFindBy
+      notification_type_id: NotificationType.find_by(name: 'notify_user_auth_migration'),
       attached_object_type: 'User',
       attached_object_id: user.id
     )

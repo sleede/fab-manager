@@ -31,7 +31,7 @@ class Trainings::AutoCancelServiceTest < ActiveSupport::TestCase
 
     # Check notification was sent to the user
     notification = Notification.find_by(
-      notification_type_id: NotificationType.find_by_name('notify_member_training_auto_cancelled'), # rubocop:disable Rails/DynamicFindBy
+      notification_type_id: NotificationType.find_by(name: 'notify_member_training_auto_cancelled'),
       attached_object_type: 'SlotsReservation',
       attached_object_id: r.slots_reservations.first&.id
     )
@@ -40,7 +40,7 @@ class Trainings::AutoCancelServiceTest < ActiveSupport::TestCase
 
     # Check notification was sent to the admin
     notification = Notification.find_by(
-      notification_type_id: NotificationType.find_by_name('notify_admin_training_auto_cancelled'), # rubocop:disable Rails/DynamicFindBy
+      notification_type_id: NotificationType.find_by(name: 'notify_admin_training_auto_cancelled'),
       attached_object_type: 'Availability',
       attached_object_id: @availability.id
     )
@@ -95,12 +95,12 @@ class Trainings::AutoCancelServiceTest < ActiveSupport::TestCase
 
     # Check no notifications were sent
     assert_empty Notification.where(
-      notification_type_id: NotificationType.find_by_name('notify_member_training_auto_cancelled'), # rubocop:disable Rails/DynamicFindBy
+      notification_type_id: NotificationType.find_by(name: 'notify_member_training_auto_cancelled'),
       attached_object_type: 'SlotsReservation',
       attached_object_id: [r1.slots_reservations.first&.id, r2.slots_reservations.first&.id, r3.slots_reservations.first&.id]
     )
     assert_nil Notification.find_by(
-      notification_type_id: NotificationType.find_by_name('notify_admin_training_auto_cancelled'), # rubocop:disable Rails/DynamicFindBy
+      notification_type_id: NotificationType.find_by(name: 'notify_admin_training_auto_cancelled'),
       attached_object_type: 'Availability',
       attached_object_id: @availability.id
     )
@@ -137,7 +137,7 @@ class Trainings::AutoCancelServiceTest < ActiveSupport::TestCase
 
     # Check notification was sent to the user
     notification = Notification.find_by(
-      notification_type_id: NotificationType.find_by_name('notify_member_training_auto_cancelled'), # rubocop:disable Rails/DynamicFindBy
+      notification_type_id: NotificationType.find_by(name: 'notify_member_training_auto_cancelled'),
       attached_object_type: 'SlotsReservation',
       attached_object_id: r.slots_reservations.first&.id
     )
@@ -146,7 +146,7 @@ class Trainings::AutoCancelServiceTest < ActiveSupport::TestCase
 
     # Check notification was sent to the admin
     notification = Notification.find_by(
-      notification_type_id: NotificationType.find_by_name('notify_admin_training_auto_cancelled'), # rubocop:disable Rails/DynamicFindBy
+      notification_type_id: NotificationType.find_by(name: 'notify_admin_training_auto_cancelled'),
       attached_object_type: 'Availability',
       attached_object_id: @availability.id
     )

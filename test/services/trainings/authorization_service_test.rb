@@ -21,7 +21,7 @@ class Trainings::AuthorizationServiceTest < ActiveSupport::TestCase
     )
 
     # jump to the future and proceed with auto revocations
-    travel_to(DateTime.current + 6.months + 1.day)
+    travel_to(6.months.from_now + 1.day)
     Trainings::AuthorizationService.auto_cancel_authorizations(@training)
 
     # Check authorization was revoked
@@ -30,7 +30,7 @@ class Trainings::AuthorizationServiceTest < ActiveSupport::TestCase
 
     # Check notification was sent
     notification = Notification.find_by(
-      notification_type_id: NotificationType.find_by_name('notify_member_training_authorization_expired'), # rubocop:disable Rails/DynamicFindBy
+      notification_type_id: NotificationType.find_by(name: 'notify_member_training_authorization_expired'),
       attached_object_type: 'Training',
       attached_object_id: @training.id
     )

@@ -21,7 +21,7 @@ class Trainings::InvalidationServiceTest < ActiveSupport::TestCase
     )
 
     # jump to the future and proceed with auto invalidations
-    travel_to(DateTime.current + 6.months + 1.day)
+    travel_to(6.months.from_now + 1.day)
     Trainings::InvalidationService.auto_invalidate(@training)
 
     # Check authorization was revoked
@@ -30,7 +30,7 @@ class Trainings::InvalidationServiceTest < ActiveSupport::TestCase
 
     # Check notification was sent
     notification = Notification.find_by(
-      notification_type_id: NotificationType.find_by_name('notify_member_training_invalidated'), # rubocop:disable Rails/DynamicFindBy
+      notification_type_id: NotificationType.find_by(name: 'notify_member_training_invalidated'),
       attached_object_type: 'Training',
       attached_object_id: @training.id
     )
@@ -51,7 +51,7 @@ class Trainings::InvalidationServiceTest < ActiveSupport::TestCase
 
     # User reserves a machine authorized by this training
     machine = @training.machines.first
-    slot = machine.availabilities.where('start_at > ?', DateTime.current).first&.slots&.first
+    slot = machine.availabilities.where('start_at > ?', Time.current).first&.slots&.first
     Reservation.create!(
       reservable_id: machine.id,
       reservable_type: Machine.name,
@@ -60,7 +60,7 @@ class Trainings::InvalidationServiceTest < ActiveSupport::TestCase
     )
 
     # jump to the future and proceed with auto invalidations
-    travel_to(DateTime.current + 6.months + 1.day)
+    travel_to(6.months.from_now + 1.day)
     Trainings::InvalidationService.auto_invalidate(@training)
 
     # Check authorization was not revoked
@@ -69,7 +69,7 @@ class Trainings::InvalidationServiceTest < ActiveSupport::TestCase
 
     # Check notification was not sent
     notification = Notification.find_by(
-      notification_type_id: NotificationType.find_by_name('notify_member_training_invalidated'), # rubocop:disable Rails/DynamicFindBy
+      notification_type_id: NotificationType.find_by(name: 'notify_member_training_invalidated'),
       attached_object_type: 'Training',
       attached_object_id: @training.id
     )

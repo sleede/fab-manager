@@ -64,7 +64,7 @@ class Subscriptions::RenewAsAdminTest < ActionDispatch::IntegrationTest
 
     # Check notification was sent to the user
     notification = Notification.find_by(
-      notification_type_id: NotificationType.find_by_name('notify_member_subscribed_plan'), # rubocop:disable Rails/DynamicFindBy
+      notification_type_id: NotificationType.find_by(name: 'notify_member_subscribed_plan'),
       attached_object_type: 'Subscription',
       attached_object_id: subscription[:id]
     )
@@ -118,7 +118,7 @@ class Subscriptions::RenewAsAdminTest < ActionDispatch::IntegrationTest
 
     # Check notification was sent to the user
     notification = Notification.find_by(
-      notification_type_id: NotificationType.find_by_name('notify_member_subscribed_plan'), # rubocop:disable Rails/DynamicFindBy
+      notification_type_id: NotificationType.find_by(name: 'notify_member_subscribed_plan'),
       attached_object_type: 'Subscription',
       attached_object_id: subscription[:id]
     )
