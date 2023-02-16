@@ -319,3 +319,4 @@
         notify_admin_payment_schedule_gateway_canceled: "A payment schedule has been canceled by the payment gateway"
         notify_project_collaborator_to_valid: "You are invited to collaborate on a project"
         notify_project_author_when_collaborator_valid: "A collaborator has accepted your invitation to join your project"
+        notify_admin_order_is_paid: "A new order has been placed"
