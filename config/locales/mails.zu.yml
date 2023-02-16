@@ -317,6 +317,11 @@ zu:
       subject: "crwdns29870:0crwdne29870:0"
       body:
         objects_sync: "crwdns29872:0crwdne29872:0"
+    notify_admin_order_is_paid:
+      subject: "crwdns37381:0crwdne37381:0"
+      body:
+        order_placed: "crwdns37383:0%{REFERENCE}crwdnd37383:0%{USER}crwdne37383:0"
+        view_details: "crwdns37385:0crwdne37385:0"
     notify_member_payment_schedule_ready:
       subject: "crwdns29874:0crwdne29874:0"
       body:

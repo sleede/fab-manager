@@ -317,6 +317,11 @@ es:
       subject: "Stripe synchronization"
       body:
         objects_sync: "All members, coupons, machines, trainings, spaces and plans were successfully synchronized on Stripe."
+    notify_admin_order_is_paid:
+      subject: "New order"
+      body:
+        order_placed: "A new order (%{REFERENCE}) has been placed and paid by %{USER}."
+        view_details: ""
     notify_member_payment_schedule_ready:
       subject: "Your payment schedule"
       body:
