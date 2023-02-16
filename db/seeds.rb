@@ -5,6 +5,7 @@
 # Other data are required default values, for various settings.
 
 load Rails.root.join('db/seeds/statistics.rb')
+load Rails.root.join('db/seeds/notification_types.rb')
 
 if Group.count.zero?
   Group.create!([
