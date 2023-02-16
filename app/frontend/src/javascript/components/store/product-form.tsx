@@ -24,6 +24,7 @@ import { FormMultiFileUpload } from '../form/form-multi-file-upload';
 import { FormMultiImageUpload } from '../form/form-multi-image-upload';
 import { AdvancedAccountingForm } from '../accounting/advanced-accounting-form';
 import { FabTabs } from '../base/fab-tabs';
+import { HtmlTranslate } from '../base/html-translate';
 
 interface ProductFormProps {
   product: Product,
@@ -198,7 +199,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
       <section>
         <header>
           <p className="title">{t('app.admin.store.product_form.product_images')}</p>
-          <p className="description">{t('app.admin.store.product_form.product_images_info')}</p>
+          <HtmlTranslate className="description" trKey="app.admin.store.product_form.product_images_info" />
         </header>
         <div className="content">
           <FormMultiImageUpload setValue={setValue}
@@ -241,7 +242,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
       <section>
         <header>
           <p className="title">{t('app.admin.store.product_form.assigning_category')}</p>
-          <p className="description">{t('app.admin.store.product_form.assigning_category_info')}</p>
+          <HtmlTranslate className="description" trKey="app.admin.store.product_form.assigning_category_info" />
         </header>
         <div className="content">
           <FormSelect options={productCategories}
@@ -255,7 +256,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
       <section>
         <header>
           <p className="title" role="heading">{t('app.admin.store.product_form.assigning_machines')}</p>
-          <p className="description">{t('app.admin.store.product_form.assigning_machines_info')}</p>
+          <HtmlTranslate className="description" trKey="app.admin.store.product_form.assigning_machines_info" />
         </header>
         <div className="content">
           <FormChecklist options={machines}
@@ -268,7 +269,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({ product, title, onSucc
       <section>
         <header>
           <p className="title">{t('app.admin.store.product_form.product_files')}</p>
-          <p className="description">{t('app.admin.store.product_form.product_files_info')}</p>
+          <HtmlTranslate className="description" trKey="app.admin.store.product_form.product_files_info" />
         </header>
         <div className="content">
           <FormMultiFileUpload setValue={setValue}
