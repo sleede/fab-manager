@@ -89,13 +89,13 @@ Application.Controllers.controller('ShowTrainingController', ['$scope', '$state'
     /**
    * Revert view to the full list of trainings ("<-" button)
    */
-    $scope.cancel = function (event) { $state.go('app.public.trainings_list'); };
+    $scope.cancel = function (event) {  $scope.currentUser && $scope.currentUser.role === 'admin' ? $state.go('app.admin.trainings') : $state.go('app.public.trainings_list'); };
   }]);
 
 /**
  * Controller used in the training reservation agenda page.
  * This controller is very similar to the machine reservation controller with one major difference: here, ONLY ONE
- * training can be reserved during the reservation process (the shopping cart may contains only one training and a subscription).
+ * training can be reserved during the reservation process (the shopping cart may contain only one training and a subscription).
  */
 
 Application.Controllers.controller('ReserveTrainingController', ['$scope', '$transition$', 'Auth', 'AuthService', '$timeout', 'Availability', 'Member', 'plansPromise', 'groupsPromise', 'settingsPromise', 'trainingPromise', '_t', 'uiCalendarConfig', 'CalendarConfig', 'Reservation', 'helpers',
