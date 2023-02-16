@@ -412,6 +412,8 @@ zu:
         user_NAME_changed_ROLE_html: "crwdns20454:0%{NAME}crwdnd20454:0%{ROLE}crwdne20454:0"
       notify_admin_objects_stripe_sync:
         all_objects_sync: "crwdns21572:0crwdne21572:0"
+      notify_admin_order_is_paid:
+        order_paid_html: "crwdns37379:0%{ID}crwdne37379:0"
       notify_user_when_payment_schedule_ready:
         your_schedule_is_ready_html: "crwdns21114:0%{REFERENCE}crwdnd21114:0%{AMOUNT}crwdnd21114:0%{SCHEDULE_ID}crwdne21114:0"
       notify_admin_payment_schedule_error:
