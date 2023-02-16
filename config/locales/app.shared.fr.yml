@@ -518,7 +518,7 @@ fr:
           order_delivered_success: "La commande a été livrée"
           confirm_order_canceled_html: "<strong>Voulez-vous vraiment annuler cette commande ?</strong><p>Si cela impacte le stock, veuillez refléter le changement dans <em>modifier le produit &gt; gestion des stocks</em>. Ceci ne sera pas automatique.</p>"
           order_canceled_success: "La commande a été annulée"
-          confirm_order_refunded_html: "<stong>Voulez-vous vraiment rembourser cette commande ?</strong><p>Si cela impacte sur le stock, veuillez refléter le changement dans <em>modifier le produit &gt; gestion des stocks</em>. Ceci ne sera pas automatique.</p>"
+          confirm_order_refunded_html: "<strong>Voulez-vous vraiment rembourser cette commande ?</strong><p>Si c'est le cas, merci d'effecturer le remboursement et de générer l'avoir depuis l'onglet <em>Factures</em>.</p><p>Si cela impacte les stocks, veuillez modifier votre produit et refléter le changement dans l’onglet <em>gestion des stocks</em>.</p><p>Ces actions ne seront pas automatiques.</p>"
           order_refunded_success: "La commande a été remboursée"
       unsaved_form_alert:
         modal_title: "Vous avez des modifications non enregistrées"
