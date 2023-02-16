@@ -518,7 +518,7 @@ pt:
           order_delivered_success: "Order was delivered"
           confirm_order_canceled_html: "<strong>Do you really want to cancel this order?</strong><p>If this impacts stock, please reflect the change in <em>edit product &gt; stock management</em>. This won't be automatic.</p>"
           order_canceled_success: "Order was canceled"
-          confirm_order_refunded_html: "<stong>Do you really want to refund this order?</strong><p>If this impacts stock, please reflect the change in <em>edit product &gt; stock management</em>. This won't be automatic.</p>"
+          confirm_order_refunded_html: "<strong>Do you really want to refund this order?</strong><p>If so, please make the refund and generate the credit note from the invoice tab. If this affects stock, please edit your product and indicate the change in the stock management tab. These actions will not be automatic.</p>"
           order_refunded_success: "Order was refunded"
       unsaved_form_alert:
         modal_title: "You have some unsaved changes"
