@@ -17,7 +17,7 @@ class Availabilities::AvailabilitiesService
   # @param window [Hash] the time window the look through: {start: xxx, end: xxx}
   # @option window [ActiveSupport::TimeWithZone] :start
   # @option window [ActiveSupport::TimeWithZone] :end
-  # @param ids [Array<Integer>]
+  # @param ids [Hash{Symbol->ActionController::Parameters | Array<Integer>}]
   # @param events [Boolean] should events be included in the results?
   def index(window, ids, events: false)
     machines_availabilities = Setting.get('machines_module') ? machines(Machine.where(id: ids[:machines]), @current_user, window) : []
@@ -133,7 +133,6 @@ class Availabilities::AvailabilitiesService
                     .joins(:slots)
                     .where('availabilities.start_at <= ? AND availabilities.end_at >= ? AND available_type = ?', range_end, window_start, type)
                     .where('slots.start_at > ? AND slots.end_at < ?', window_start, range_end)
-                    .where(lock: false)
     # 2) an user (he cannot see past availabilities neither those further than 1 (or 3) months in the future)
     else
       end_at = @maximum_visibility[:other]
