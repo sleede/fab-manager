@@ -79,7 +79,8 @@ export const notificationTypeNames = [
   'notify_user_order_is_canceled',
   'notify_user_order_is_refunded',
   'notify_admin_low_stock_threshold',
-  'notify_admin_training_auto_cancelled'
+  'notify_admin_training_auto_cancelled',
+  'notify_admin_order_is_paid'
 ] as const;
 
 export type NotificationTypeName = typeof notificationTypeNames[number];

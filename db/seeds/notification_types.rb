@@ -15,3 +15,11 @@ unless NotificationType.find_by(name: 'notify_member_training_invalidated')
     is_configurable: false
   )
 end
+
+unless NotificationType.find_by(name: 'notify_admin_order_is_paid')
+  NotificationType.create!(
+    name: 'notify_admin_order_is_paid',
+    category: 'shop',
+    is_configurable: true
+  )
+end

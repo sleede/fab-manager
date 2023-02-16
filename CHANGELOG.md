@@ -3,7 +3,13 @@
 - Report user's prepaid packs in the dashboard
 - Export external ID and private notes in the members excel export
 - Ability to buy a new prepaid pack from the user's dashboard
-- Improved public calendar loading time
+- Improved calendars loading time
+- Admin notification when an order was placed
+- Management of notifications preferences for admins
+- Display custom banners in machines/trainings/events lists
+- Filter projects by status
+- Maximum validity period for trainings authorizations
+- Automatically cancel trainings with insufficient attendees
 - Fix a bug: event image updates are not reflected unless the browser's cache is purged
 - Fix a bug: schedules jobs are not launched at the right time
 - Fix a bug: unable to update the title of a training

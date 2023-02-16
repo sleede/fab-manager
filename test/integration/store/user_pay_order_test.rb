@@ -105,8 +105,14 @@ class Store::UserPayOrderTest < ActionDispatch::IntegrationTest
     assert_not invoice.total.blank?
     assert invoice.check_footprint
 
-    # notification
+    # invoice notification
     assert_not_empty Notification.where(attached_object: invoice)
+
+    # order notification
+    assert_not_nil Notification.find_by(
+      notification_type_id: NotificationType.find_by(name: 'notify_admin_order_is_paid'),
+      attached_object: @cart1.order_activities.last
+    )
 
     assert_equal @cart1.state, 'paid'
     assert_equal @cart1.payment_method, 'card'

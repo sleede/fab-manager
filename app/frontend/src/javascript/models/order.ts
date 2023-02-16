@@ -8,6 +8,8 @@ import type { CartItemReservationType, CartItemType } from './cart_item';
 
 export type OrderableType = 'Product' | CartItemType;
 
+export type OrderState = 'cart'|'paid'|'payment_failed'|'refunded'|'in_progress'|'ready'|'canceled'|'delivered';
+
 export interface OrderItem {
   id: number,
   orderable_type: OrderableType,
@@ -51,7 +53,7 @@ export interface Order {
   },
   operator_profile_id?: number,
   reference?: string,
-  state?: string,
+  state?: OrderState,
   total?: number,
   coupon?: Coupon,
   created_at?: TDateISO,
@@ -82,7 +84,7 @@ export interface OrderIndexFilter extends ApiFilter {
   },
   page?: number,
   sort?: OrderSortOption
-  states?: Array<string>,
+  states?: Array<OrderState>,
   period_from?: string,
   period_to?: string
 }

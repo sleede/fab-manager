@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Provides methods for set order to ready state
+# Provides a method to set the order state to ready
 class Orders::OrderReadyService
   def call(order, current_user, note = '')
     raise ::UpdateOrderStateError if %w[cart payment_failed ready canceled refunded delivered].include?(order.state)
