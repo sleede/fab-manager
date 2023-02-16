@@ -412,6 +412,8 @@ es:
         user_NAME_changed_ROLE_html: "User <strong><em>%{NAME}</strong></em> is now %{ROLE}."
       notify_admin_objects_stripe_sync:
         all_objects_sync: "All data were successfully synchronized on Stripe."
+      notify_admin_order_is_paid:
+        order_paid_html: "A new order has been placed. <a href='/#!/admin/store/orders/%{ID}'>View details</a>."
       notify_user_when_payment_schedule_ready:
         your_schedule_is_ready_html: "Your payment schedule #%{REFERENCE}, of %{AMOUNT}, is ready. <a href='api/payment_schedules/%{SCHEDULE_ID}/download' target='_blank'>Click here to download</a>."
       notify_admin_payment_schedule_error:
