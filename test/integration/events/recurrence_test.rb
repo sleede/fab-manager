@@ -84,15 +84,15 @@ class Events::RecurrenceTest < ActionDispatch::IntegrationTest
                attachment: fixture_file_upload('/files/event/Party.jpg')
              },
              description: 'Come party tonight at the fablab...',
-             start_date: 2.weeks.from_now.utc,
-             end_date: 2.weeks.from_now.utc,
+             start_date: 2.weeks.from_now,
+             end_date: 2.weeks.from_now,
              all_day: false,
              start_time: '18:00',
              end_time: '23:29',
              amount: 20,
              category_id: 2,
              recurrence: 'month',
-             recurrence_end_at: 2.weeks.from_now.utc + 3.months
+             recurrence_end_at: 2.weeks.from_now + 3.months
            }
          },
          headers: upload_headers
@@ -103,13 +103,13 @@ class Events::RecurrenceTest < ActionDispatch::IntegrationTest
 
     # Check the events were correctly created
     db_events = Event.where(title: name)
-    assert_equal 3, db_events.count
+    assert_equal 4, db_events.count
     assert(db_events.all? { |event| !event.event_image.attachment.nil? })
     assert(db_events.all? { |event| !event.description.empty? })
     assert(db_events.all? { |event| event.availability.start_at.to_date >= 2.weeks.from_now.to_date })
-    assert(db_events.all? { |event| event.availability.start_at.to_date <= 3.months.from_now.end_of_day.to_date + 2.weeks })
+    assert(db_events.all? { |event| event.availability.start_at.to_date <= 2.weeks.from_now.end_of_day.to_date + 3.months })
     assert(db_events.all? { |event| event.availability.end_at.to_date >= 2.weeks.from_now.to_date })
-    assert(db_events.all? { |event| event.availability.end_at.to_date <= 3.months.from_now.end_of_day.to_date + 2.weeks })
+    assert(db_events.all? { |event| event.availability.end_at.to_date <= 2.weeks.from_now.end_of_day.to_date + 3.months })
     assert(db_events.none?(&:all_day?))
     assert(db_events.all? { |event| event.amount == 2000 })
     assert(db_events.all? { |event| event.event_theme_ids.empty? })

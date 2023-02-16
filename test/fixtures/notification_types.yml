@@ -544,6 +544,30 @@ notification_type_68:
 
 notification_type_69:
   id: 69
+  name: notify_member_training_auto_cancelled
+  category: trainings
+  is_configurable: false
+  created_at: 2023-02-16 10:42:39.143888000 Z
+  updated_at: 2023-02-16 10:42:39.143888000 Z
+
+notification_type_70:
+  id: 70
+  name: notify_member_training_authorization_expired
+  category: trainings
+  is_configurable: false
+  created_at: 2023-02-16 10:42:39.143888000 Z
+  updated_at: 2023-02-16 10:42:39.143888000 Z
+
+notification_type_71:
+  id: 71
+  name: notify_member_training_invalidated
+  category: trainings
+  is_configurable: false
+  created_at: 2023-02-16 10:42:39.143888000 Z
+  updated_at: 2023-02-16 10:42:39.143888000 Z
+
+notification_type_72:
+  id: 72
   name: notify_admin_order_is_paid
   category: shop
   is_configurable: true

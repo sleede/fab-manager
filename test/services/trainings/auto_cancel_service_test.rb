@@ -3,6 +3,8 @@
 require 'test_helper'
 
 class Trainings::AutoCancelServiceTest < ActiveSupport::TestCase
+  include ApplicationHelper
+
   setup do
     @training = Training.find(4)
     @availability = Availability.find(22)
@@ -106,13 +108,65 @@ class Trainings::AutoCancelServiceTest < ActiveSupport::TestCase
     )
   end
 
-  test 'auto cancel reservation and generate refunds' do
+  test 'auto cancel reservation but do not generate any refunds if it was free' do
     Setting.set('wallet_module', true)
 
     wallet_transactions = WalletTransaction.count
 
     @training.update(auto_cancel: true, auto_cancel_threshold: 3, auto_cancel_deadline: 24)
+    # user 3 has subscription's credits from training 4
     customer = User.find(3)
+    slot = @availability.slots.first
+
+    # Reserve through the cart service to get an invoice associated with the reservation
+    cs = CartService.new(User.admins.first)
+    cs.from_hash(ActionController::Parameters.new({
+                                                    customer_id: customer.id,
+                                                    items: [
+                                                      reservation: {
+                                                        reservable_id: @training.id,
+                                                        reservable_type: @training.class.name,
+                                                        slots_reservations_attributes: [{ slot_id: slot.id }]
+                                                      }
+                                                    ]
+                                                  })).build_and_save(nil, nil)
+
+    # Go with cancelling
+    Trainings::AutoCancelService.auto_cancel_reservations(@training)
+
+    # Check reservation was cancelled
+    r = Reservation.last
+    assert_not_nil r.slots_reservations.first&.canceled_at
+
+    # Check notification was sent to the user
+    notification = Notification.find_by(
+      notification_type_id: NotificationType.find_by(name: 'notify_member_training_auto_cancelled'),
+      attached_object_type: 'SlotsReservation',
+      attached_object_id: r.slots_reservations.first&.id
+    )
+    assert_not_nil notification, 'user notification was not created'
+    assert notification.get_meta_data(:auto_refund)
+
+    # Check notification was sent to the admin
+    notification = Notification.find_by(
+      notification_type_id: NotificationType.find_by(name: 'notify_admin_training_auto_cancelled'),
+      attached_object_type: 'Availability',
+      attached_object_id: @availability.id
+    )
+    assert_not_nil notification, 'admin notification was not created'
+    assert notification.get_meta_data(:auto_refund)
+
+    # Check customer was not refunded on his wallet
+    assert_equal wallet_transactions, WalletTransaction.count
+  end
+
+  test 'auto cancel reservation and generate a refund' do
+    Setting.set('wallet_module', true)
+
+    wallet_transactions = WalletTransaction.count
+
+    @training.update(auto_cancel: true, auto_cancel_threshold: 3, auto_cancel_deadline: 24)
+    customer = User.find(4)
     slot = @availability.slots.first
 
     # Reserve through the cart service to get an invoice associated with the reservation
@@ -158,7 +212,7 @@ class Trainings::AutoCancelServiceTest < ActiveSupport::TestCase
     transaction = WalletTransaction.last
     assert_equal transaction.wallet.user.id, customer.id
     assert_equal transaction.transaction_type, 'credit'
-    assert_equal transaction.amount, r.invoice_items.first.amount
+    assert_equal to_centimes(transaction.amount), r.invoice_items.first.amount
   end
 
   test 'training with default general parameters' do

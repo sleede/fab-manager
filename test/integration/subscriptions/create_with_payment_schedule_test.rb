@@ -4,7 +4,7 @@ require 'test_helper'
 
 module Subscriptions; end
 
-class Subscriptions::CreateWithPaymentScheduleTest < Minitest::Test
+class Subscriptions::CreateWithPaymentScheduleTest < ActionDispatch::IntegrationTest
   setup do
     @user = User.find_by(username: 'jdupond')
     login_as(@user, scope: :user)
