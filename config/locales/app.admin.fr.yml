@@ -31,7 +31,7 @@ fr:
         edit: "Modifier"
       machine_category_modal:
         new_machine_category: "Nouvelle catégorie"
-        edit_machine_category: "Modifier la catéchorie"
+        edit_machine_category: "Modifier la catégorie"
         successfully_created: "La nouvelle catégorie de machines a bien été créée."
         unable_to_create: "Impossible de supprimer la catégorie la machines : "
         successfully_updated: "La catégorie de machines a bien été mise à jour."
