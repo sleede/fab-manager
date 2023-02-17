@@ -16,6 +16,6 @@ class StatisticProfilePrepaidPack < ApplicationRecord
   def set_expiration_date
     return unless prepaid_pack.validity
 
-    self.expires_at = DateTime.current + prepaid_pack.validity
+    self.expires_at = Time.zone.now + prepaid_pack.validity
   end
 end

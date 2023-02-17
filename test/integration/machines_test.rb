@@ -79,9 +79,9 @@ class MachinesTest < ActionDispatch::IntegrationTest
   end
 
   test 'soft delete a machine' do
-    machine = Machine.find(4)
+    machine = Machine.find(2)
     assert_not machine.destroyable?
-    delete '/api/machines/4', headers: default_headers
+    delete "/api/machines/#{machine.id}", headers: default_headers
     assert_response :success
     assert_empty response.body
 

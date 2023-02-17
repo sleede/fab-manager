@@ -2,16 +2,23 @@
 
 <section class="heading b-b">
   <div class="row no-gutter">
-    <div class="col-xs-2 col-sm-2 col-md-1">
+    <div class="col-xs-2 col-md-1">
       <section class="heading-btn">
         <a ng-click="backPrevLocation($event)"><i class="fas fa-long-arrow-alt-left "></i></a>
       </section>
     </div>
-    <div class="col-xs-10 col-sm-10 col-md-8 b-l">
+    <div class="col-xs-8 col-md-10 b-l">
       <section class="heading-title">
         <h1>{{ 'app.logged.machines_reserve.machine_planning' | translate }} : {{machine.name}}</h1>
       </section>
     </div>
+<!-- TODO, uncomment this block to work on reservations in cart
+    <div class="col-xs-2 col-md-1 b-t hide-b-md p-none">
+      <section class="heading-actions">
+        <cart-button />
+      </section>
+    </div>
+    -->
   </div>
 </section>
 
@@ -24,11 +31,16 @@
 
 
   <div class="col-sm-12 col-md-12 col-lg-3">
-
-    <div ng-if="isAuthorized(['admin', 'manager'])">
-      <select-member></select-member>
-    </div>
-
+    <!-- TODO, uncomment this block to work on reservations in cart
+        <ongoing-reservation-panel selected-slot="selectedEvent"
+                                   on-slot-added="markSlotAsAdded"
+                                   on-slot-removed="markSlotAsRemoved"
+                                   on-error="onError"
+                                   reservable-id="machine.id"
+                                   reservable-type="'Machine'"
+                                   operator="currentUser">
+        </ongoing-reservation-panel>
+    -->
     <packs-summary item="machine"
                    item-type="'Machine'"
                    customer="ctrl.member"
@@ -38,6 +50,10 @@
                    ng-if="isShowPacks()"
                    refresh="afterPaymentPromise">
     </packs-summary>
+
+    <div ng-if="isAuthorized(['admin', 'manager'])">
+      <select-member></select-member>
+    </div>
 
     <cart slot="selectedEvent"
           slot-selection-time="selectionTime"

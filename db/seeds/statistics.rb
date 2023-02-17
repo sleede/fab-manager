@@ -144,14 +144,46 @@ unless StatisticSubType.find_by(key: 'aborted')
 end
 Plan.find_each do |plan|
   type = plan.find_statistic_type
-  subtype = if StatisticSubType.find_by(key: plan.slug).nil?
-              StatisticSubType.create!(key: plan.slug, label: plan.name)
-            else
-              StatisticSubType.find_by(key: plan.slug)
-            end
+  subtype = StatisticSubType.create_with(label: plan.name).find_or_create_by(key: plan.slug)
+  StatisticTypeSubType.find_or_create_by(statistic_type: type, statistic_sub_type: subtype)
+end
 
-  if StatisticTypeSubType.find_by(statistic_type: type, statistic_sub_type: subtype).nil?
-    StatisticTypeSubType.create!(statistic_type: type, statistic_sub_type: subtype)
+statistic_index_machine = StatisticIndex.find_by(es_type_key: 'machine')
+Machine.find_each do |machine|
+  subtype = StatisticSubType.create_with(label: machine.name).find_or_create_by(key: machine.slug)
+  statistic_index_machine.statistic_types.find_each do |type|
+    StatisticTypeSubType.find_or_create_by(statistic_type: type, statistic_sub_type: subtype)
+  end
+end
+
+statistic_index_training = StatisticIndex.find_by(es_type_key: 'training')
+Training.find_each do |training|
+  subtype = StatisticSubType.create_with(label: training.name).find_or_create_by(key: training.slug)
+  statistic_index_training.statistic_types.find_each do |type|
+    StatisticTypeSubType.find_or_create_by(statistic_type: type, statistic_sub_type: subtype)
+  end
+end
+
+Space.find_each do |space|
+  subtype = StatisticSubType.create_with(label: space.name).find_or_create_by(key: space.slug)
+  statistic_index_space.statistic_types.find_each do |type|
+    StatisticTypeSubType.find_or_create_by(statistic_type: type, statistic_sub_type: subtype)
+  end
+end
+
+statistic_index_user = StatisticIndex.find_by(es_type_key: 'user')
+Group.find_each do |group|
+  subtype = StatisticSubType.create_with(label: group.name).find_or_create_by(key: group.slug)
+  statistic_index_user.statistic_types.find_each do |type|
+    StatisticTypeSubType.find_or_create_by(statistic_type: type, statistic_sub_type: subtype)
+  end
+end
+
+statistic_index_event = StatisticIndex.find_by(es_type_key: 'event')
+Category.find_each do |category|
+  subtype = StatisticSubType.create_with(label: category.name).find_or_create_by(key: category.slug)
+  statistic_index_event.statistic_types.find_each do |type|
+    StatisticTypeSubType.find_or_create_by(statistic_type: type, statistic_sub_type: subtype)
   end
 end
 

@@ -1,0 +1,6 @@
+<%= render 'notifications_mailer/shared/hello', recipient: @recipient %>
+
+<p>
+  <%= t('.body.order_placed', REFERENCE: @attached_object.order.reference, USER: @attached_object.order.statistic_profile.user.profile.full_name) %>
+  <%= link_to t('.body.view_details'), "#{root_url}#!/admin/store/orders/#{@attached_object.order_id}" %>
+</p>

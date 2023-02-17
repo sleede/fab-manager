@@ -1,0 +1,43 @@
+@mixin grid-col($col-count) {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat($col-count, minmax(0, 1fr));
+}
+
+@mixin layout-settings {
+  padding-bottom: 3.2rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.4rem 3.2rem;
+  border-bottom: 1px solid var(--gray-soft);
+  &:last-of-type {
+    padding-bottom: 0;
+    border: none;
+  }
+
+  & > header {
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+    .title {
+      @include title-base;
+      margin: 0;
+    }
+    .description {
+      color: var(--gray-hard-lightest);
+    }
+  }
+
+  & > .content {
+    padding: 1.6rem;
+    background-color: var(--gray-soft-light);
+    border: 1px solid var(--gray-soft-dark);
+    border-radius: var(--border-radius);
+  }
+
+  @media (min-width: 1024px) {
+    grid-template-areas: "header content";
+    grid-template-columns: 1fr 2fr;
+    & > header { grid-area: header; }
+  }
+}

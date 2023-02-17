@@ -2,14 +2,12 @@
 
 # perform various operations on PaymentSchedules
 class PaymentScheduleService
-  ##
   # Compute a payment schedule for a new subscription to the provided plan
-  # @param plan {Plan}
-  # @param total {Number} Total amount of the current shopping cart (which includes this plan) - without coupon
-  # @param customer {User} the customer
-  # @param coupon {Coupon} apply this coupon, if any
-  # @param start_at {DateTime} schedule the PaymentSchedule to start in the future
-  ##
+  # @param plan [Plan]
+  # @param total [Number] Total amount of the current shopping cart (which includes this plan) - without coupon
+  # @param customer [User] the customer
+  # @param coupon [Coupon] apply this coupon, if any
+  # @param start_at [Time] schedule the PaymentSchedule to start in the future
   def compute(plan, total, customer, coupon: nil, start_at: nil)
     other_items = total - plan.amount
     # base monthly price of the plan
@@ -35,7 +33,7 @@ class PaymentScheduleService
 
   def compute_deadline(deadline_index, payment_schedule, price_per_month, adjustment_price, other_items_price,
                        coupon: nil, schedule_start_at: nil)
-    date = (schedule_start_at || DateTime.current) + deadline_index.months
+    date = (schedule_start_at || Time.current) + deadline_index.months
     details = { recurring: price_per_month }
     amount = if deadline_index.zero?
                details[:adjustment] = adjustment_price.truncate
@@ -91,12 +89,10 @@ class PaymentScheduleService
     res
   end
 
-  ##
   # Generate the invoice associated with the given PaymentScheduleItem, with the children elements (InvoiceItems).
-  # @param payment_method {String} the payment method or gateway in use
-  # @param payment_id {String} the identifier of the payment as provided by the payment gateway, in case of card payment
-  # @param payment_type {String} the object type of payment_id
-  ##
+  # @param payment_method [String] the payment method or gateway in use
+  # @param payment_id [String] the identifier of the payment as provided by the payment gateway, in case of card payment
+  # @param payment_type [String] the object type of payment_id
   def generate_invoice(payment_schedule_item, payment_method: nil, payment_id: nil, payment_type: nil)
     # build the base invoice
     invoice = Invoice.new(
@@ -125,12 +121,10 @@ class PaymentScheduleService
     payment_schedule_item.update(invoice_id: invoice.id)
   end
 
-  ##
   # return a paginated list of PaymentSchedule, optionally filtered, with their associated PaymentScheduleItem
-  # @param page {number} page number, used to paginate results
-  # @param size {number} number of items per page
-  # @param filters {Hash} allowed filters: reference, customer, date.
-  ##
+  # @param page [Number] page number, used to paginate results
+  # @param size [Number] number of items per page
+  # @param filters [Hash] allowed filters: reference, customer, date.
   def self.list(page, size, filters = {})
     ps = PaymentSchedule.includes(:operator_profile, :payment_schedule_items, invoicing_profile: [:user])
                         .joins(:invoicing_profile)
@@ -154,7 +148,7 @@ class PaymentScheduleService
     unless filters[:date].nil?
       ps = ps.where(
         "date_trunc('day', payment_schedules.created_at) = :search OR date_trunc('day', payment_schedule_items.due_date) = :search",
-        search: "%#{DateTime.iso8601(filters[:date]).to_time.to_date}%"
+        search: "%#{Time.zone.iso8601(filters[:date]).to_date}%"
       )
     end
 
@@ -176,7 +170,7 @@ class PaymentScheduleService
     end
     # cancel subscription
     subscription = payment_schedule.payment_schedule_objects.find { |pso| pso.object_type == Subscription.name }.subscription
-    subscription.expire(DateTime.current)
+    subscription.expire
 
     subscription.canceled_at
   end
@@ -196,7 +190,7 @@ class PaymentScheduleService
   ##
   def reset_erroneous_payment_schedule_items(payment_schedule)
     results = payment_schedule.payment_schedule_items.where(state: %w[error gateway_canceled]).map do |item|
-      item.update(state: item.due_date < DateTime.current ? 'pending' : 'new')
+      item.update(state: item.due_date < Time.current ? 'pending' : 'new')
     end
     results.reduce(true) { |acc, item| acc && item }
   end

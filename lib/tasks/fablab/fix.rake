@@ -67,7 +67,12 @@ namespace :fablab do
 
     desc '[release 2.5.14] fix times of recursive events that crosses DST periods'
     task recursive_events_over_DST: :environment do
-      include ApplicationHelper
+      def dst_correction(reference, datetime)
+        res = datetime.in_time_zone(reference.time_zone.tzinfo.name)
+        res -= 1.hour if res.dst? && !reference.dst?
+        res += 1.hour if reference.dst? && !res.dst?
+        res
+      end
       failed_ids = []
       groups = Event.group(:recurrence_id).count
       groups.each_key do |recurrent_event_id|
@@ -129,7 +134,7 @@ namespace :fablab do
     desc '[release 3.1.2] fix users with invalid group_id'
     task users_group_ids: :environment do
       User.where.not(group_id: Group.all.map(&:id)).each do |u|
-        u.update_columns(group_id: Group.first.id, updated_at: DateTime.current) # rubocop:disable Rails/SkipsModelValidations
+        u.update_columns(group_id: Group.first.id, updated_at: Time.current) # rubocop:disable Rails/SkipsModelValidations
 
         meta_data = { ex_group_name: 'invalid group' }
 
@@ -208,19 +213,19 @@ namespace :fablab do
     desc '[release 5.4.24] fix prepaid pack hours dont count down after a reservation of machine'
     task :prepaid_pack_count_down, %i[start_date end_date] => :environment do |_task, args|
       # set start date to the date of deployment of v5.4.13 that product the bug
-      start_date = DateTime.parse('2022-07-28T10:00:00+02:00')
+      start_date = Time.zone.parse('2022-07-28T10:00:00+02:00')
       if args.start_date
         begin
-          start_date = DateTime.parse(args.start_date)
+          start_date = Time.zone.parse(args.start_date)
         rescue ArgumentError => e
           raise e
         end
       end
       # set end date to the date of deployment of v5.4.24 after fix the bug
-      end_date = DateTime.parse('2022-10-14T18:40:00+02:00')
+      end_date = Time.zone.parse('2022-10-14T18:40:00+02:00')
       if args.end_date
         begin
-          end_date = DateTime.parse(args.end_date)
+          end_date = Time.zone.parse(args.end_date)
         rescue ArgumentError => e
           raise e
         end
@@ -288,6 +293,16 @@ namespace :fablab do
 
       Fablab::Application.load_tasks if Rake::Task.tasks.empty?
       Rake::Task['fablab:chain:invoices_items'].invoke
+    end
+  end
+
+  desc '[release 5.7] fix operator of self-bought carts'
+  task cart_operator: :environment do |_task, _args|
+    Order.where.not(statistic_profile_id: nil).find_each do |order|
+      order.update(operator_profile_id: order.user&.invoicing_profile&.id)
+    end
+    Order.where.not(operator_profile_id: nil).find_each do |order|
+      order.update(statistic_profile_id: order.operator_profile&.user&.statistic_profile&.id)
     end
   end
 end

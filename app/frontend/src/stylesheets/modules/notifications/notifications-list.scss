@@ -1,0 +1,26 @@
+.notifications-list {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-bottom: 6rem;
+  display: flex;
+  flex-direction: column;
+
+  .notifications-header { @include header; }
+
+  .archives {
+    margin: 2rem 0;
+    padding: 1rem 3rem;
+    border-radius: 5px;
+    background-color: var(--gray-soft-light);
+
+    .title {
+      @include title-base;
+      color: var(--gray-hard-darkest) !important;
+    }
+
+  }
+  .notifications-loader {
+    width: fit-content;
+    margin-top: 2rem;
+  }
+}

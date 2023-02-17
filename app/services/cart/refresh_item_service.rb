@@ -5,7 +5,7 @@ class Cart::RefreshItemService
   def call(order, orderable)
     raise Cart::InactiveProductError unless orderable.is_active
 
-    item = order.order_items.find_by(orderable: orderable)
+    item = order.order_items.find_by(orderable_type: orderable.class.name, orderable_id: orderable.id)
 
     raise ActiveRecord::RecordNotFound if item.nil?
 

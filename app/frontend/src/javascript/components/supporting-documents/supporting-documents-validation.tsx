@@ -6,10 +6,10 @@ import _ from 'lodash';
 import { Loader } from '../base/loader';
 import { User } from '../../models/user';
 import { IApplication } from '../../models/application';
-import { ProofOfIdentityType } from '../../models/proof-of-identity-type';
-import { ProofOfIdentityFile } from '../../models/proof-of-identity-file';
-import ProofOfIdentityTypeAPI from '../../api/proof-of-identity-type';
-import ProofOfIdentityFileAPI from '../../api/proof-of-identity-file';
+import { SupportingDocumentType } from '../../models/supporting-document-type';
+import { SupportingDocumentFile } from '../../models/supporting-document-file';
+import SupportingDocumentTypeAPI from '../../api/supporting-document-type';
+import SupportingDocumentFileAPI from '../../api/supporting-document-file';
 import { SupportingDocumentsRefusalModal } from './supporting-documents-refusal-modal';
 import { FabButton } from '../base/fab-button';
 import { FabPanel } from '../base/fab-panel';
@@ -30,16 +30,16 @@ const SupportingDocumentsValidation: React.FC<SupportingDocumentsValidationProps
   const { t } = useTranslation('admin');
 
   // list of supporting documents type
-  const [documentsTypes, setDocumentsTypes] = useState<Array<ProofOfIdentityType>>([]);
-  const [documentsFiles, setDocumentsFiles] = useState<Array<ProofOfIdentityFile>>([]);
+  const [documentsTypes, setDocumentsTypes] = useState<Array<SupportingDocumentType>>([]);
+  const [documentsFiles, setDocumentsFiles] = useState<Array<SupportingDocumentFile>>([]);
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
 
   // get groups
   useEffect(() => {
-    ProofOfIdentityTypeAPI.index({ group_id: member.group_id }).then(tData => {
+    SupportingDocumentTypeAPI.index({ group_id: member.group_id }).then(tData => {
       setDocumentsTypes(tData);
     });
-    ProofOfIdentityFileAPI.index({ user_id: member.id }).then(fData => {
+    SupportingDocumentFileAPI.index({ user_id: member.id }).then(fData => {
       setDocumentsFiles(fData);
     });
   }, []);
@@ -47,8 +47,8 @@ const SupportingDocumentsValidation: React.FC<SupportingDocumentsValidationProps
   /**
    * Return the file associated with the provided type
    */
-  const getFileByType = (typeId: number): ProofOfIdentityFile => {
-    return _.find<ProofOfIdentityFile>(documentsFiles, { proof_of_identity_type_id: typeId });
+  const getFileByType = (typeId: number): SupportingDocumentFile => {
+    return _.find<SupportingDocumentFile>(documentsFiles, { supporting_document_type_id: typeId });
   };
 
   /**
@@ -62,7 +62,7 @@ const SupportingDocumentsValidation: React.FC<SupportingDocumentsValidationProps
    * Return the download URL of the given file
    */
   const getProofOfIdentityFileUrl = (documentId: number): string => {
-    return `/api/proof_of_identity_files/${documentId}/download`;
+    return `/api/supporting_document_files/${documentId}/download`;
   };
 
   /**
@@ -85,7 +85,7 @@ const SupportingDocumentsValidation: React.FC<SupportingDocumentsValidationProps
       <FabPanel>
         <h3>{t('app.admin.supporting_documents_validation.title')}</h3>
         <p className="info-area">{t('app.admin.supporting_documents_validation.find_below_documents_files')}</p>
-        {documentsTypes.map((documentType: ProofOfIdentityType) => {
+        {documentsTypes.map((documentType: SupportingDocumentType) => {
           return (
             <div key={documentType.id} className="document-type">
               <div className="type-name">{documentType.name}</div>

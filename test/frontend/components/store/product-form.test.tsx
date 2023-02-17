@@ -29,7 +29,7 @@ describe('ProductForm', () => {
     for (const machine of machines) {
       expect(screen.getByLabelText(machine.name)).toBeInTheDocument();
     }
-    expect(screen.getByLabelText(/app.admin.store.product_form.product_description/)).toBeInTheDocument();
+    expect(screen.getByLabelText(/app.admin.store.product_form.description/)).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /app.admin.store.product_form.add_product_file/ })).toBeInTheDocument();
     expect(screen.getByLabelText(/app.admin.advanced_accounting_form.code/)).toBeInTheDocument();
     expect(screen.getByLabelText(/app.admin.advanced_accounting_form.analytical_section/)).toBeInTheDocument();

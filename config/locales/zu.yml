@@ -49,10 +49,12 @@ zu:
       gateway_amount_too_large: "crwdns31693:0%{AMOUNT}crwdne31693:0"
       product_in_use: "crwdns31695:0crwdne31695:0"
       slug_already_used: "crwdns31697:0crwdne31697:0"
+  coupon:
+    code_format_error: "crwdns37201:0crwdne37201:0"
   apipie:
     api_documentation: "crwdns3257:0crwdne3257:0"
     code: "crwdns20914:0crwdne20914:0"
-  #error messages when importing an account from a SSO
+  #error messages when importing an account from an SSO
   omniauth:
     email_already_linked_to_another_account_please_input_your_authentication_code: "crwdns3259:0%{OLD_MAIL}crwdne3259:0"
     your_username_is_already_linked_to_another_account_unable_to_update_it: "crwdns3261:0%{USERNAME}crwdne3261:0"
@@ -61,6 +63,7 @@ zu:
   #availability slots in the calendar
   availabilities:
     not_available: "crwdns3267:0crwdne3267:0"
+    reserving: "crwdns37199:0crwdne37199:0"
     i_ve_reserved: "crwdns3269:0crwdne3269:0"
     length_must_be_slot_multiple: "crwdns3271:0%{MIN}crwdne3271:0"
     must_be_associated_with_at_least_1_machine: "crwdns3273:0crwdne3273:0"
@@ -178,6 +181,7 @@ zu:
   trainings:
     i_ve_reserved: "crwdns3413:0crwdne3413:0"
     completed: "crwdns3415:0crwdne3415:0"
+    refund_for_auto_cancel: "crwdns37081:0crwdne37081:0"
   #error messages when updating an event
   events:
     error_deleting_reserved_price: "crwdns3417:0crwdne3417:0"
@@ -189,6 +193,7 @@ zu:
   export_members:
     members: "crwdns3425:0crwdne3425:0"
     id: "crwdns3427:0crwdne3427:0"
+    external_id: "crwdns37203:0crwdne37203:0"
     surname: "crwdns3429:0crwdne3429:0"
     first_name: "crwdns3431:0crwdne3431:0"
     email: "crwdns3433:0crwdne3433:0"
@@ -214,6 +219,7 @@ zu:
     echo_sciences: "crwdns3473:0crwdne3473:0"
     organization: "crwdns3475:0crwdne3475:0"
     organization_address: "crwdns3477:0crwdne3477:0"
+    note: "crwdns37205:0crwdne37205:0"
     man: "crwdns3479:0crwdne3479:0"
     woman: "crwdns3481:0crwdne3481:0"
     without_subscriptions: "crwdns3483:0crwdne3483:0"
@@ -294,6 +300,10 @@ zu:
         USER_s_subscription_has_expired: "crwdns3575:0%{USER}crwdne3575:0"
       notify_admin_subscription_will_expire_in_7_days:
         USER_s_subscription_will_expire_in_7_days: "crwdns3577:0%{USER}crwdne3577:0"
+      notify_admin_training_auto_cancelled:
+        auto_cancelled_training: "crwdns37083:0%{TRAINING}crwdnd37083:0%{DATE}crwdne37083:0"
+        auto_refund: "crwdns37085:0crwdne37085:0"
+        manual_refund: "crwdns37087:0crwdne37087:0"
       notify_admin_user_group_changed:
         user_NAME_changed_his_group_html: "crwdns22438:0{NAME}crwdne22438:0" #messageFormat interpolation
       notify_admin_user_merged:
@@ -324,6 +334,13 @@ zu:
         your_subscription_has_expired: "crwdns3605:0crwdne3605:0"
       notify_member_subscription_will_expire_in_7_days:
         your_subscription_will_expire_in_7_days: "crwdns3607:0crwdne3607:0"
+      notify_member_training_authorization_expired:
+        training_authorization_revoked: "crwdns37089:0%{MACHINES}crwdne37089:0"
+      notify_member_training_auto_cancelled:
+        auto_cancelled_training: "crwdns37091:0%{TRAINING}crwdnd37091:0%{DATE}crwdne37091:0"
+        auto_refund: "crwdns37093:0crwdne37093:0"
+      notify_member_training_invalidated:
+        invalidated: "crwdns37095:0%{MACHINES}crwdne37095:0"
       notify_partner_subscribed_plan:
         subscription_partner_PLAN_has_been_subscribed_by_USER_html: "crwdns3609:0%{PLAN}crwdnd3609:0%{USER}crwdne3609:0"
       notify_project_author_when_collaborator_valid:
@@ -395,6 +412,8 @@ zu:
         user_NAME_changed_ROLE_html: "crwdns20454:0%{NAME}crwdnd20454:0%{ROLE}crwdne20454:0"
       notify_admin_objects_stripe_sync:
         all_objects_sync: "crwdns21572:0crwdne21572:0"
+      notify_admin_order_is_paid:
+        order_paid_html: "crwdns37379:0%{ID}crwdne37379:0"
       notify_user_when_payment_schedule_ready:
         your_schedule_is_ready_html: "crwdns21114:0%{REFERENCE}crwdnd21114:0%{AMOUNT}crwdnd21114:0%{SCHEDULE_ID}crwdne21114:0"
       notify_admin_payment_schedule_error:
@@ -413,18 +432,18 @@ zu:
         schedule_deadline: "crwdns21120:0%{DATE}crwdnd21120:0%{REFERENCE}crwdne21120:0"
       notify_admin_payment_schedule_transfer_deadline:
         schedule_deadline: "crwdns22305:0%{DATE}crwdnd22305:0%{REFERENCE}crwdne22305:0"
-      notify_admin_user_proof_of_identity_files_created:
-        proof_of_identity_files_uploaded: "crwdns23000:0%{NAME}crwdne23000:0"
-      notify_admin_user_proof_of_identity_files_updated:
-        proof_of_identity_files_uploaded: "crwdns23002:0%{NAME}crwdne23002:0"
+      notify_admin_user_supporting_document_files_created:
+        supporting_document_files_uploaded: "crwdns37341:0%{NAME}crwdne37341:0"
+      notify_admin_user_supporting_document_files_updated:
+        supporting_document_files_uploaded: "crwdns37343:0%{NAME}crwdne37343:0"
       notify_user_is_validated:
         account_validated: "crwdns23004:0crwdne23004:0"
       notify_user_is_invalidated:
         account_invalidated: "crwdns23006:0crwdne23006:0"
-      notify_user_proof_of_identity_refusal:
-        refusal: "crwdns23008:0crwdne23008:0"
-      notify_admin_user_proof_of_identity_refusal:
-        refusal: "crwdns23010:0%{NAME}crwdne23010:0"
+      notify_user_supporting_document_refusal:
+        refusal: "crwdns37345:0crwdne37345:0"
+      notify_admin_user_supporting_document_refusal:
+        refusal: "crwdns37347:0%{NAME}crwdne37347:0"
       notify_user_order_is_ready:
         order_ready: "crwdns31707:0%{REFERENCE}crwdne31707:0"
       notify_user_order_is_canceled:
@@ -501,11 +520,15 @@ zu:
     deadline: "crwdns36273:0%{MINUTES}crwdne36273:0"
     restricted: "crwdns36275:0crwdne36275:0"
     plan: "crwdns36277:0crwdne36277:0"
+    plan_group: "crwdns37207:0%{GROUP}crwdne37207:0"
     reserved: "crwdns36279:0crwdne36279:0"
     pack: "crwdns36281:0crwdne36281:0"
+    pack_group: "crwdns37209:0%{GROUP}crwdne37209:0"
     space: "crwdns36283:0crwdne36283:0"
     machine: "crwdns36285:0crwdne36285:0"
     reservable: "crwdns36287:0crwdne36287:0"
+  cart_validation:
+    select_user: "crwdns37211:0crwdne37211:0"
   settings:
     locked_setting: "crwdns21632:0crwdne21632:0"
     about_title: "crwdns21634:0crwdne21634:0"
@@ -662,3 +685,16 @@ zu:
     external_id: "crwdns32113:0crwdne32113:0"
     prevent_invoices_zero: "crwdns36211:0crwdne36211:0"
     invoice_VAT-name: "crwdns36213:0crwdne36213:0"
+    trainings_auto_cancel: "crwdns37097:0crwdne37097:0"
+    trainings_auto_cancel_threshold: "crwdns37099:0crwdne37099:0"
+    trainings_auto_cancel_deadline: "crwdns37101:0crwdne37101:0"
+    trainings_authorization_validity: "crwdns37103:0crwdne37103:0"
+    trainings_authorization_validity_duration: "crwdns37105:0crwdne37105:0"
+    trainings_invalidation_rule: "crwdns37107:0crwdne37107:0"
+    trainings_invalidation_rule_period: "crwdns37109:0crwdne37109:0"
+  #statuses of projects
+  statuses:
+    new: "crwdns37111:0crwdne37111:0"
+    pending: "crwdns37113:0crwdne37113:0"
+    done: "crwdns37115:0crwdne37115:0"
+    abandoned: "crwdns37117:0crwdne37117:0"

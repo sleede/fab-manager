@@ -1,0 +1,60 @@
+.prepaid-packs-panel {
+  display: flex;
+  flex-direction: column;
+  overflow: visible;
+  gap: 1.6rem;
+  .title { @include text-base(600); }
+  p { margin: 0; }
+
+  .prepaid-packs {
+    padding: 1.6rem;
+    background-color: var(--gray-soft-lightest);
+    border-radius: var(--border-radius);
+    &.is-low {
+      border: 1px solid var(--alert);
+      .countdown span { color: var(--alert); }
+    }
+  }
+
+  .prepaid-packs-list {
+    display: grid;
+    grid-template-columns: 2fr 1fr minmax(25%, max-content);
+    gap: 0 1.6rem;
+    .name { grid-column: 1 / 2; }
+    .end { grid-column: 2 / 3; }
+    .countdown, .date { grid-column: 3 / 4; }
+    &-label {
+      @include text-xs;
+      color: var(--gray-soft-darkest);
+    }
+
+    &-item {
+      display: contents;
+      @include text-base(600);
+    }
+  }
+
+  .prepaid-packs-list.is-history {
+    margin-top: 2.4rem;
+    .prepaid-packs-list-label {
+      margin-bottom: 0.8rem;
+      padding-bottom: 0.8rem;
+      grid-column: 1 / -1;
+      border-bottom: 1px solid var(--gray-soft-dark);
+    }
+    .prepaid-packs-list-item { font-weight: 400; }
+  }
+
+  .prepaid-packs-cta {
+    padding: 1.6rem;
+    background-color: var(--gray-soft-lightest);
+    border-radius: var(--border-radius);
+    & > form {
+      margin-top: 1.6rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap:2.4rem;
+    }
+  }
+}

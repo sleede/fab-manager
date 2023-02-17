@@ -6,47 +6,44 @@
   <div class="center">
     <h1 translate>{{ 'app.admin.machines.the_fablab_s_machines' }}</h1>
   </div>
-
-  <div class="right">
-    <div class="grpBtn wrapper">
-      <a ng-if="isAuthorized('admin')"
-         role="button"
-         class="btn btn-lg btn-warning bg-white b-2x rounded m-t-xs"
-         ui-sref="app.admin.machines_new"
-         title="{{'app.public.machines_list.add_a_machine' | translate}}">
-        <i class="fas fa-plus"></i>
-      </a>
-      <a ng-if="isAuthorized(['admin', 'manager'])"
-         role="button"
-         ui-sref="app.admin.calendar"
-         class="btn btn-lg btn-default rounded b-2x m-t-xs"
-         title="{{'app.public.machines_list.new_availability' | translate}}">
-        <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
-      </a>
-    </div>
-  </div>
 </div>
 
 <section class="m-lg admin-machines-manage">
-  <div class="row">
+  <uib-tabset justified="true" active="tabs.active">
 
-    <div>
-      <uib-tabset justified="true" active="tabs.active">
+    <uib-tab heading="{{ 'app.admin.machines.machines_settings' | translate }}" index="1">
+      <machines-settings on-error="onError" on-success="onSuccess" ui-router="uiRouter"></machines-settings>
+    </uib-tab>
 
-        <uib-tab heading="{{ 'app.admin.machines.all_machines' | translate }}" index="0" select="selectTab()">
-          <div ng-if="tabs.active === 0">
-            <ng-include src="'/admin/machines/machines.html'"></ng-include>
+    <uib-tab heading="{{ 'app.admin.machines.all_machines' | translate }}" index="0">
+      <div class="machines-list-container">
+        <header>
+          <h2 translate>{{ 'app.admin.machines.all_machines' }}</h2>
+          <div class="grpBtn">
+            <a ng-if="isAuthorized(['admin', 'manager'])"
+               role="button"
+               ui-sref="app.admin.calendar"
+               class="fab-button"
+               title="{{'app.public.machines_list.new_availability' | translate}}">
+              <i class="far fa-calendar" aria-hidden="true"></i>
+            </a>
+            <a ng-if="isAuthorized('admin')"
+                role="button"
+                class="fab-button is-main"
+                ui-sref="app.admin.machines_new"
+                title="{{'app.public.machines_list.add_a_machine' | translate}}"
+                translate>
+              {{ 'app.admin.machines.add_a_machine' }}
+            </a>
           </div>
-        </uib-tab>
+        </header>
+        <ng-include ng-if="tabs.active == 0" src="'/admin/machines/machines.html'"></ng-include>
+      </div>
+    </uib-tab>
 
-        <uib-tab heading="{{ 'app.admin.machines.manage_machines_categories' | translate }}" index="1" select="selectTab()">
-          <div ng-if="tabs.active === 1">
-            <ng-include src="'/admin/machines/categories.html'"></ng-include>
-          </div>
-        </uib-tab>
+    <uib-tab heading="{{ 'app.admin.machines.manage_machines_categories' | translate }}" index="2">
+      <ng-include src="'/admin/machines/categories.html'"></ng-include>
+    </uib-tab>
 
-      </uib-tabset>
-    </div>
-
-  </div>
+  </uib-tabset>
 </section>

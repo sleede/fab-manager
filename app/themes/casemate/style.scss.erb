@@ -13,17 +13,17 @@ $secondary-text-color: <%= Stylesheet.secondary_text_color %> !default;
 $primary-decoration-color: <%= Stylesheet.primary_decoration_color %> !default;
 
 :root {
-  --main-lightest: lighten(<%= Stylesheet.primary_light %>, 20%) !important;
+  --main-lightest: <%= Stylesheet.primary_lightest %> !important;
   --main-light: <%= Stylesheet.primary_light %> !important;
   --main: <%= Stylesheet.primary %> !important;
   --main-dark: <%= Stylesheet.primary_dark %> !important;
-  --main-darkest: darken(<%= Stylesheet.primary_dark %>, 20%) !important;
+  --main-darkest: <%= Stylesheet.primary_darkest %> !important;
 
-  --secondary-lightest: lighten(<%= Stylesheet.secondary_light %>, 20%) !important;
+  --secondary-lightest: <%= Stylesheet.secondary_lightest %> !important;
   --secondary-light: <%= Stylesheet.secondary_light %> !important;
   --secondary: <%= Stylesheet.secondary %> !important;
   --secondary-dark: <%= Stylesheet.secondary_dark %> !important;
-  --secondary-darkest: darken(<%= Stylesheet.secondary_dark %>, 20%) !important;
+  --secondary-darkest: <%= Stylesheet.secondary_darkest %> !important;
 
   --main-text-color: <%= Stylesheet.primary_text_color %> !important;
   --secondary-text-color: <%= Stylesheet.secondary_text_color %> !important;

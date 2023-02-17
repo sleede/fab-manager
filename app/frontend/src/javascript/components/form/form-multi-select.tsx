@@ -11,7 +11,7 @@ import { useTranslation } from 'react-i18next';
 import { Controller, FieldPathValue, Path } from 'react-hook-form';
 import { UnpackNestedValue } from 'react-hook-form/dist/types/form';
 
-interface CommonProps<TFieldValues, TContext extends object, TOptionValue> extends FormControlledComponent<TFieldValues, TContext>, AbstractFormItemProps<TFieldValues> {
+type CommonProps<TFieldValues, TContext extends object, TOptionValue> = FormControlledComponent<TFieldValues, TContext> & AbstractFormItemProps<TFieldValues> & {
   valuesDefault?: Array<TOptionValue>,
   onChange?: (values: Array<TOptionValue>) => void,
   placeholder?: string,

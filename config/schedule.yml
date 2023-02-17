@@ -1,44 +1,44 @@
 subscription_expire_in_7_days:
-  cron: "0 0 * * *" # every day, at midnight
+  cron: "0 0 0 * * *" # every day, at midnight
   class: SubscriptionExpireWorker
   queue: default
   args: [7]
 
 subscription_is_expired:
-  cron: "0 23 * * *" # every day, at 11pm
+  cron: "0 0 23 * * *" # every day, at 11pm
   class: SubscriptionExpireWorker
   queue: default
   args: [0]
 
 generate_statistic:
-  cron: "0 1 * * *" # every day, at 1am
+  cron: "0 0 1 * * *" # every day, at 1am
   class: StatisticWorker
   queue: default
 
 i_calendar_import:
-  cron: "0 * * * *" # every day, every hour
+  cron: "0 0 * * * *" # every day, every hour
   class: ICalendarImportWorker
   queue: default
 
 reservation_reminder:
-  cron: "1 * * * *" # every day, every hour + 1 minute
+  cron: "0 1 * * * *" # every day, every hour + 1 minute
   class: ReservationReminderWorker
   queue: default
 
 close_period_reminder_worker:
-  cron: "0 12 * * 1" # every monday at 12pm
+  cron: "0 0 12 * * 1" # every monday at 12pm
   class: ClosePeriodReminderWorker
   queue: default
 
 free_disk_space:
-  cron: "0 5 * * 0" # every sunday at 5am
+  cron: "0 0 5 * * 0" # every sunday at 5am
   class: FreeDiskSpaceWorker
   queue: system
 
 # this will prevent that all the instances query the hub simultaneously
 <% h = DateTime.current - 1.minute %>
 version_check:
-  cron: <%="#{h.strftime('%M %H')} * * #{h.cwday}" %> # every week, at current day+time
+  cron: <%="0 #{h.strftime('%M %H')} * * #{h.cwday}" %> # every week, at current day+time
   class: VersionCheckWorker
   queue: system
 
@@ -48,8 +48,18 @@ payment_schedule_item:
   queue: default
 
 accounting_data:
-  cron: "0 0 * * *" # every day, at midnight
+  cron: "0 0 0 * * *" # every day, at midnight
   class: AccountingWorker
+  queue: default
+
+auto_cancel_tranings:
+  cron: "0 */5 * * * *" # every day, every 5 minutes
+  class: TrainingAutoCancelWorker
+  queue: default
+
+auto_cancel_authorizations:
+  cron: "0 0 0 * * *" # every day, at midnight
+  class: TrainingAuthorizationWorker
   queue: default
 
 <%= PluginRegistry.insert_code('yml.schedule') %>

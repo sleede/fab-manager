@@ -28,15 +28,19 @@
     <div class="row">
       <div class="col-md-12" ng-if="isAuthorized('admin')">
         <uib-tabset justified="true" active="tabs.active">
-          <uib-tab heading="{{ 'app.admin.events.events_monitoring' | translate }}" index="0">
+          <uib-tab heading="{{ 'app.admin.events.settings' | translate }}" index="0">
+            <events-settings on-error="onError" on-success="onSuccess" ui-router="uiRouter"></events-settings>
+          </uib-tab>
+
+          <uib-tab heading="{{ 'app.admin.events.events_monitoring' | translate }}" index="1">
             <ng-include src="'/admin/events/monitoring.html'"></ng-include>
           </uib-tab>
 
-          <uib-tab heading="{{ 'app.admin.events.manage_filters' | translate }}" index="1">
+          <uib-tab heading="{{ 'app.admin.events.manage_filters' | translate }}" index="2">
             <ng-include src="'/admin/events/filters.html'"></ng-include>
           </uib-tab>
 
-          <uib-tab heading="{{ 'app.admin.events.manage_prices_categories' | translate }}" index="2" class="prices-tab">
+          <uib-tab heading="{{ 'app.admin.events.manage_prices_categories' | translate }}" index="3" class="prices-tab">
             <ng-include src="'/admin/events/prices.html'"></ng-include>
           </uib-tab>
         </uib-tabset>
@@ -47,5 +51,3 @@
     </div>
   </section>
 </section>
-
-

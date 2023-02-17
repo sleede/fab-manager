@@ -169,13 +169,12 @@ fr:
       projects_list:
         the_fablab_projects: "Les projets"
         add_a_project: "Ajouter un projet"
-        search_over_the_whole_network: "Chercher sur tout le réseau Fab-manager"
+        network_search: "Réseau Fab-Manager"
         tooltip_openlab_projects_switch: "La recherche sur tout le réseau vous permet de rechercher parmi les projets de tous les Fab-managers utilisant cette fonctionnalité !"
         openlab_search_not_available_at_the_moment: "La recherche sur tout le réseau n'est pas disponible pour le moment. Vous pouvez cependant effectuer une recherche parmi les projets de cette plateforme."
         project_search_result_is_empty: "Il n'y a pas de projets correspondant à vos critères de recherche."
         reset_all_filters: "Réinitialiser tous les filtres"
         keywords: "Mots-clés"
-        search: "Rechercher"
         all_projects: "Tous les projets"
         my_projects: "Mes projets"
         projects_to_whom_i_take_part_in: "Les projets auxquels je collabore"
@@ -184,6 +183,9 @@ fr:
         all_materials: "Tous les matériaux"
         load_next_projects: "Charger les projets suivants"
         rough_draft: "Brouillon"
+      status_filter:
+        all_statuses: "Tous les statuts"
+        select_status: "Sélectionnez un statut"
       #details of a projet
       projects_show:
         rough_draft: "Brouillon"
@@ -213,6 +215,7 @@ fr:
         message_is_required: "Le message est requis."
         report: "Signaler"
         do_you_really_want_to_delete_this_project: "Êtes-vous sur de vouloir supprimer ce projet ?"
+        status: "Statut"
       #list of machines
       machines_list:
         the_fablab_s_machines: "Les machines"
@@ -363,6 +366,8 @@ fr:
         spaces: "Espaces"
         events: "Événements"
         externals: "Autres calendriers"
+        choose_a_machine: "Choisissez une machine"
+        cancel: "Annuler"
       #list of spaces
       spaces_list:
         the_spaces: "Les espaces"
@@ -431,12 +436,6 @@ fr:
         checkout: "Valider mon panier"
         cart_is_empty: "Votre panier est vide"
         pickup: "Retirer vos produits"
-        reference_short: "réf. :"
-        minimum_purchase: "Achat minimum : "
-        stock_limit: "Vous avez atteint la limite actuelle de stock"
-        unit: "Unité"
-        total: "Total"
-        offer_product: "Offrir le produit"
         checkout_header: "Montant total pour votre panier"
         checkout_products_COUNT: "Votre panier contient {COUNT} {COUNT, plural, one {}=1{produit} other{produits}}"
         checkout_products_total: "Total des produits"
@@ -446,6 +445,16 @@ fr:
         checkout_error: "Une erreur inattendue s'est produite. Veuillez contacter l'administrateur."
         checkout_success: "Achat confirmé. Merci !"
         select_user: "Veuillez sélectionner un utilisateur avant de continuer."
+      abstract_item:
+        offer_product: "Offrir le produit"
+        total: "Total"
+        errors:
+          unauthorized_offering_product: "Vous ne pouvez rien offrir à vous-même"
+      cart_order_product:
+        reference_short: "réf. :"
+        minimum_purchase: "Achat minimum : "
+        stock_limit: "Vous avez atteint la limite du stock actuel"
+        unit: "Unité"
         update_item: "Mettre à jour"
         errors:
           product_not_found: "Ce produit n'est plus disponible, veuillez le retirer de votre panier."
@@ -453,7 +462,11 @@ fr:
           stock_limit_QUANTITY: "Seulement {QUANTITY} {QUANTITY, plural, one {}=1{unité} other{unités}} restant en stock, veuillez ajuster la quantité d'articles."
           quantity_min_QUANTITY: "Le nombre minimum de produits a été changé à {QUANTITY}, veuillez ajuster la quantité d'articles."
           price_changed_PRICE: "Le prix du produit a été modifié à {PRICE}"
-          unauthorized_offering_product: "Vous ne pouvez rien offrir à vous-même"
+      cart_order_reservation:
+        reservation: "Réservation"
+        offer_reservation: "Offrir la réservation"
+        slot: "{DATE} : {START} - {END}"
+        offered: "offert"
       orders_dashboard:
         heading: "Mes commandes"
         sort:

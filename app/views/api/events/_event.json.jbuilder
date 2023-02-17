@@ -5,7 +5,7 @@ if event.event_image
   json.event_image_attributes do
     json.id event.event_image.id
     json.attachment_name event.event_image.attachment_identifier
-    json.attachment_url event.event_image.attachment_url
+    json.attachment_url "#{event.event_image.attachment_url}?#{event.event_image.updated_at.to_i}"
   end
 end
 json.event_files_attributes event.event_files do |f|

@@ -1,0 +1,15 @@
+.edit-destroy-buttons {
+  button {
+    @include btn;
+    border-radius: 0;
+    color: var(--gray-soft-lightest);
+    &.edit-btn {background: var(--gray-hard-darkest) }
+    &.delete-btn {background: var(--main) }
+    &:hover,
+    &:focus {
+      opacity: 0.75;
+      color: var(--gray-soft-lightest);
+    }
+  }
+
+}

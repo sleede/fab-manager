@@ -13,14 +13,15 @@
   </div>
 </section>
 
-
-<section class="m-lg"
+<section class="machines"
          ui-tour="machines"
          ui-tour-backdrop="true"
          ui-tour-template-url="'/shared/tour-step-template.html'"
          ui-tour-use-hotkeys="true"
          ui-tour-scroll-parent-id="content-main"
          post-render="setupMachinesTour">
+
+  <machines-editorial-block on-error="onError"></machines-editorial-block>
 
   <machines-list user="currentUser"
                  on-error="onError"

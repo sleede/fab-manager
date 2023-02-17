@@ -17,6 +17,8 @@ class API::UserPacksController < API::ApiController
   end
 
   def item
+    return nil if params[:priceable_type].nil?
+
     params[:priceable_type].classify.constantize.find(params[:priceable_id])
   end
 end

@@ -3,7 +3,7 @@
 # Provides methods for remove order item to cart
 class Cart::RemoveItemService
   def call(order, orderable)
-    item = order.order_items.find_by(orderable: orderable)
+    item = order.order_items.find_by(orderable_type: orderable.class.name, orderable_id: orderable.id)
 
     raise ActiveRecord::RecordNotFound if item.nil?
 

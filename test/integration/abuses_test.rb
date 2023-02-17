@@ -30,7 +30,7 @@ class AbusesTest < ActionDispatch::IntegrationTest
     assert_equal 'Project', abuse[:reporting][:signaled_type], 'signaled object type mismatch'
 
     # Check notifications were sent for every admins
-    notifications = Notification.where(notification_type_id: NotificationType.find_by_name('notify_admin_abuse_reported'), # rubocop:disable Rails/DynamicFindBy
+    notifications = Notification.where(notification_type_id: NotificationType.find_by(name: 'notify_admin_abuse_reported'),
                                        attached_object_type: 'Abuse',
                                        attached_object_id: abuse[:reporting][:id])
     assert_not_empty notifications, 'no notifications were created'

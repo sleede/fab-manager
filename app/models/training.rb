@@ -32,6 +32,9 @@ class Training < ApplicationRecord
   has_one :advanced_accounting, as: :accountable, dependent: :destroy
   accepts_nested_attributes_for :advanced_accounting, allow_destroy: true
 
+  has_many :cart_item_training_reservations, class_name: 'CartItem::TrainingReservation', dependent: :destroy, inverse_of: :reservable,
+                                             foreign_type: 'reservable_type', foreign_key: 'reservable_id'
+
   after_create :create_statistic_subtype
   after_create :create_trainings_pricings
   after_create :update_gateway_product
@@ -49,9 +52,9 @@ class Training < ApplicationRecord
   end
 
   def update_statistic_subtype
-    index = StatisticIndex.where(es_type_key: 'training')
+    index = StatisticIndex.find_by(es_type_key: 'training')
     subtype = StatisticSubType.joins(statistic_type_sub_types: :statistic_type)
-                              .find_by(key: slug, statistic_types: { statistic_index_id: index.id })
+                              .find_by!(key: slug, statistic_types: { statistic_index_id: index.id })
     subtype.update(label: name)
   end
 
@@ -62,6 +65,12 @@ class Training < ApplicationRecord
 
   def destroyable?
     reservations.empty?
+  end
+
+  def override_settings?
+    Trainings::AutoCancelService.override_settings?(self) ||
+      Trainings::InvalidationService.override_settings?(self) ||
+      Trainings::AuthorizationService.override_settings?(self)
   end
 
   private

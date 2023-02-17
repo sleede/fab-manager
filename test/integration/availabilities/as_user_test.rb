@@ -12,7 +12,7 @@ class Availabilities::AsUserTest < ActionDispatch::IntegrationTest
     m = Machine.find_by(slug: 'decoupeuse-vinyle')
 
     # this simulates a fullCalendar (v2) call
-    start_date = DateTime.current.utc.strftime('%Y-%m-%d')
+    start_date = Time.current.utc.strftime('%Y-%m-%d')
     end_date = 7.days.from_now.utc.strftime('%Y-%m-%d')
     tz = Time.zone.tzinfo.name
 
@@ -29,13 +29,10 @@ class Availabilities::AsUserTest < ActionDispatch::IntegrationTest
     assert_not_nil availabilities[0][:machine], "first availability's machine was unexpectedly nil"
     assert_equal m.id, availabilities[0][:machine][:id], "first availability's machine does not match the required machine"
 
-    # Check that we din't get availabilities from the past
     availabilities.each do |a|
-      assert_not a[:start] < DateTime.current, 'retrieved a slot in the past'
-    end
-
-    # Check that we don't get availabilities in more than a month
-    availabilities.each do |a|
+      # Check that we din't get availabilities from the past
+      assert_not a[:start] < Time.current, 'retrieved a slot in the past'
+      # Check that we don't get availabilities in more than a month
       assert_not a[:start] > 1.month.from_now, 'retrieved a slot in more than 1 month for user who has no yearly subscription'
     end
   end

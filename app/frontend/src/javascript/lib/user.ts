@@ -21,6 +21,13 @@ export default class UserLib {
   };
 
   /**
+   * Check if the current user has a privileged role
+   */
+  hasPrivilegedRole = (): boolean => {
+    return (this.user?.role === 'admin' || this.user?.role === 'manager');
+  };
+
+  /**
    * Filter social networks from the user's profile
    */
   getUserSocialNetworks = (): { name: string, url: string }[] => {

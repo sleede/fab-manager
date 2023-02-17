@@ -2,7 +2,7 @@
 
 # Event is an happening organized by the Fablab about a general topic, which does not involve Machines or trainings member's skills.
 class Event < ApplicationRecord
-  include NotifyWith::NotificationAttachedObject
+  include NotificationAttachedObject
   include ApplicationHelper
 
   has_one :event_image, as: :viewable, dependent: :destroy
@@ -31,6 +31,8 @@ class Event < ApplicationRecord
   has_one :advanced_accounting, as: :accountable, dependent: :destroy
   accepts_nested_attributes_for :advanced_accounting, allow_destroy: true
 
+  has_many :cart_item_event_reservations, class_name: 'CartItem::EventReservation', dependent: :destroy
+
   attr_accessor :recurrence, :recurrence_end_at
 
   before_save :update_nb_free_places
@@ -49,7 +51,7 @@ class Event < ApplicationRecord
 
   def recurrence_events
     Event.includes(:availability)
-         .where('events.recurrence_id = ? AND events.id != ? AND availabilities.start_at >= ?', recurrence_id, id, DateTime.current)
+         .where('events.recurrence_id = ? AND events.id != ? AND availabilities.start_at >= ?', recurrence_id, id, Time.current)
          .references(:availabilities)
   end
 
@@ -58,7 +60,7 @@ class Event < ApplicationRecord
   end
 
   def soft_destroy!
-    update(deleted_at: DateTime.current)
+    update(deleted_at: Time.current)
   end
 
   ##

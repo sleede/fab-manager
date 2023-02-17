@@ -208,7 +208,9 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
                        label={t('app.shared.user_profile_form.date_of_birth')}
                        disabled={isDisabled}
                        rules={{ required: true }}
-                       type="date" />
+                       formState={formState}
+                       type="date"
+                       nullable />
             <FormInput id="profile_attributes.phone"
                        register={register}
                        rules={{
@@ -230,6 +232,7 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
                        register={register}
                        disabled={isDisabled}
                        rules={{ required: fieldsSettings.get('address_required') === 'true' }}
+                       formState={formState}
                        label={t('app.shared.user_profile_form.address')} />
           </div>
         </div>

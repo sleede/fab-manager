@@ -99,6 +99,7 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
      * @param message {string}
      */
     $scope.onError = function (message) {
+      console.error(message);
       growl.error(message);
     };
 

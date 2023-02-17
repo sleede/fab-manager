@@ -7,8 +7,8 @@ export default class ParsingLib {
    * Try to parse the given value to get the value with the matching type.
    * It supports parsing arrays.
    */
-  static parse = (value: string|string[]): NestedBaseArray => {
-    let parsedValue: NestedBaseArray = value;
+  static parse = (value: ValueOrArray<string>): NestedBaseArray => {
+    let parsedValue: NestedBaseArray;
     if (Array.isArray(value)) {
       parsedValue = [];
       for (const item of value) {

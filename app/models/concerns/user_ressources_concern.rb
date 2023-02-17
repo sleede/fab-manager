@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Add resources-related functionalities to the user model (eg. Reservation, Subscrtion, Project, etc.)
+# Add resources-related functionalities to the user model (eg. Reservation, Subscription, Project, etc.)
 module UserRessourcesConcern
   extend ActiveSupport::Concern
 
@@ -20,7 +20,7 @@ module UserRessourcesConcern
     def next_training_reservation_by_machine(machine)
       reservations.where(reservable_type: 'Training', reservable_id: machine.trainings.map(&:id))
                   .includes(:slots)
-                  .where('slots.start_at>= ?', DateTime.current)
+                  .where('slots.start_at>= ?', Time.current)
                   .order('slots.start_at': :asc)
                   .references(:slots)
                   .limit(1)
@@ -28,7 +28,7 @@ module UserRessourcesConcern
     end
 
     def subscribed_plan
-      return nil if subscription.nil? || subscription.expired_at < DateTime.current
+      return nil if subscription.nil? || subscription.expired_at < Time.current
 
       subscription.plan
     end

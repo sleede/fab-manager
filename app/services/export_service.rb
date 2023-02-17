@@ -53,7 +53,7 @@ class ExportService
         Profile.where(user_id: User.members).maximum('updated_at'),
         InvoicingProfile.where(user_id: User.members).maximum('updated_at'),
         StatisticProfile.where(user_id: User.members).maximum('updated_at'),
-        Subscription.maximum('updated_at') || DateTime.current
+        Subscription.maximum('updated_at') || Time.current
       ].max
 
       query_last_export('users', 'members', query, key, extension)

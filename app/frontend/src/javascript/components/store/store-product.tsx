@@ -45,7 +45,7 @@ export const StoreProduct: React.FC<StoreProductProps> = ({ productSlug, current
       setProduct(data);
       const productImage = _.find(data.product_images_attributes, { is_main: true });
       if (productImage) {
-        setShowImage(productImage.id);
+        setShowImage(productImage.id as number);
       }
       setToCartCount(data.quantity_min ? data.quantity_min : 1);
       setDisplayToggle(descContainer.current.offsetHeight < descContainer.current.scrollHeight);
@@ -108,7 +108,7 @@ export const StoreProduct: React.FC<StoreProductProps> = ({ productSlug, current
    */
   const addToCart = () => {
     if (toCartCount <= product.stock.external) {
-      CartAPI.addItem(cart, product.id, toCartCount).then(data => {
+      CartAPI.addItem(cart, product.id, 'Product', toCartCount).then(data => {
         setCart(data);
         onSuccess(t('app.public.store_product.add_to_cart_success'));
       }).catch(() => {
@@ -132,7 +132,7 @@ export const StoreProduct: React.FC<StoreProductProps> = ({ productSlug, current
             <div className='thumbnails'>
               {product.product_images_attributes.map(i => (
                 <div key={i.id} className={`picture ${i.id === showImage ? 'is-active' : ''}`}>
-                  <img alt='' onClick={() => setShowImage(i.id)} src={i.thumb_attachment_url} />
+                  <img alt='' onClick={() => setShowImage(i.id as number)} src={i.thumb_attachment_url} />
                 </div>
               ))}
             </div>

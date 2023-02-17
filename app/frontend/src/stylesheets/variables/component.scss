@@ -1,0 +1,15 @@
+@mixin component-border {
+  margin-bottom: 3.2rem;
+  padding: 1.6rem;
+  background-color: var(--gray-soft-lightest);
+  border: 1px solid var(--gray-soft-dark);
+  border-radius: var(--border-radius);
+}
+
+@mixin component-title {
+  margin: 0 0 2.4rem;
+  padding-bottom: 1.2rem;
+  border-bottom: 1px solid var(--gray-hard);
+  @include title-base;
+  color: var(--gray-hard-dark) !important;
+}

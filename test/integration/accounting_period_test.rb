@@ -76,8 +76,8 @@ class AccountingPeriodTest < ActionDispatch::IntegrationTest
   end
 
   test 'admin tries to close today' do
-    start_at = DateTime.current.beginning_of_day.iso8601
-    end_at = DateTime.current.end_of_day.iso8601
+    start_at = Time.current.beginning_of_day.iso8601
+    end_at = Time.current.end_of_day.iso8601
 
     post '/api/accounting_periods',
          params: {

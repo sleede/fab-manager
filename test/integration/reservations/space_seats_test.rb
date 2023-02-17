@@ -17,7 +17,7 @@ class Reservations::SpaceSeatsTest < ActionDispatch::IntegrationTest
 
     space = Space.first
 
-    date = (DateTime.current + 1.day).change(hour: 8, min: 0, sec: 0)
+    date = 1.day.from_now.change(hour: 8, min: 0, sec: 0)
 
     post '/api/availabilities',
          params: {
@@ -31,7 +31,8 @@ class Reservations::SpaceSeatsTest < ActionDispatch::IntegrationTest
              space_ids: [space.id],
              nb_total_places: 2,
              occurrences: [
-               { start_at: date.iso8601, end_at: (date + 1.hour).iso8601 }]
+               { start_at: date.iso8601, end_at: (date + 1.hour).iso8601 }
+             ]
            }
          }
 
@@ -42,6 +43,7 @@ class Reservations::SpaceSeatsTest < ActionDispatch::IntegrationTest
     # Check the availability
     res = json_response(response.body)
     availability = Availability.find(res[:id])
+    slot = availability.slots.first
 
     ### FIRST RESERVATION
 
@@ -61,7 +63,7 @@ class Reservations::SpaceSeatsTest < ActionDispatch::IntegrationTest
                  reservable_type: space.class.name,
                  slots_reservations_attributes: [
                    {
-                     slot_id: availability.slots.first.id
+                     slot_id: slot.id
                    }
                  ]
                }
@@ -106,6 +108,12 @@ class Reservations::SpaceSeatsTest < ActionDispatch::IntegrationTest
     # notification
     assert_not_empty Notification.where(attached_object: reservation)
 
+    # place cache
+    slot.reload
+    cached = slot.places.detect { |p| p['reservable_id'] == space.id && p['reservable_type'] == space.class.name }
+    assert_not_nil cached
+    assert_equal 1, cached['reserved_places']
+    assert_includes cached['user_ids'], @user1.id
 
     ### SECOND RESERVATION
     login_as(@user2, scope: :user)
@@ -169,6 +177,13 @@ class Reservations::SpaceSeatsTest < ActionDispatch::IntegrationTest
     # notification
     assert_not_empty Notification.where(attached_object: reservation)
 
+    # place cache
+    slot.reload
+    cached = slot.places.detect { |p| p['reservable_id'] == space.id && p['reservable_type'] == space.class.name }
+    assert_not_nil cached
+    assert_equal 2, cached['reserved_places']
+    assert_includes cached['user_ids'], @user2.id
+
     ### THIRD RESERVATION
     login_as(@user3, scope: :user)
 
@@ -214,5 +229,12 @@ class Reservations::SpaceSeatsTest < ActionDispatch::IntegrationTest
     assert_not_equal reservation.user.id, @user3.id
     assert_not_equal invoice.user.id, @user3.id
     assert_not_equal space.prices.find_by(group_id: @user3.group_id, plan_id: nil).amount, invoice_item.amount
+
+    # place cache
+    slot.reload
+    cached = slot.places.detect { |p| p['reservable_id'] == space.id && p['reservable_type'] == space.class.name }
+    assert_not_nil cached
+    assert_equal 2, cached['reserved_places']
+    assert_not_includes cached['user_ids'], @user3.id
   end
 end

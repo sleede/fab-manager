@@ -16,8 +16,8 @@ class OpenAPI::V1::AccountingController < OpenAPI::V1::BaseController
     @lines = AccountingLine.order(date: :desc)
                            .includes(:invoicing_profile, invoice: :payment_gateway_object)
 
-    @lines = @lines.where('date >= ?', DateTime.parse(params[:after])) if params[:after].present?
-    @lines = @lines.where('date <= ?', DateTime.parse(params[:before])) if params[:before].present?
+    @lines = @lines.where('date >= ?', Time.zone.parse(params[:after])) if params[:after].present?
+    @lines = @lines.where('date <= ?', Time.zone.parse(params[:before])) if params[:before].present?
     @lines = @lines.where(invoice_id: may_array(params[:invoice_id])) if params[:invoice_id].present?
     @lines = @lines.where(line_type: may_array(params[:type])) if params[:type].present?
 

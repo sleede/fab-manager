@@ -4,6 +4,43 @@ import { CreateTokenResponse } from './payzen';
 import { UserRole } from './user';
 import { Coupon } from './coupon';
 import { ApiFilter, PaginatedIndex } from './api';
+import type { CartItemReservationType, CartItemType } from './cart_item';
+
+export type OrderableType = 'Product' | CartItemType;
+
+export type OrderState = 'cart'|'paid'|'payment_failed'|'refunded'|'in_progress'|'ready'|'canceled'|'delivered';
+
+export interface OrderItem {
+  id: number,
+  orderable_type: OrderableType,
+  orderable_id: number,
+  orderable_name: string,
+  orderable_slug: string,
+  orderable_main_image_url?: string;
+  quantity: number,
+  amount: number,
+  is_offered: boolean
+}
+
+export interface OrderProduct extends OrderItem {
+  orderable_type: 'Product',
+  orderable_ref?: string,
+  orderable_external_stock: number,
+  quantity_min: number
+}
+
+export interface OrderCartItemReservation extends OrderItem {
+  orderable_type: CartItemReservationType
+  slots_reservations: Array<{
+    id: number,
+    offered: boolean,
+    slot: {
+      id: number,
+      start_at: TDateISO,
+      end_at: TDateISO
+    }
+  }>
+}
 
 export interface Order {
   id: number,
@@ -16,7 +53,7 @@ export interface Order {
   },
   operator_profile_id?: number,
   reference?: string,
-  state?: string,
+  state?: OrderState,
   total?: number,
   coupon?: Coupon,
   created_at?: TDateISO,
@@ -26,20 +63,7 @@ export interface Order {
   payment_date?: TDateISO,
   wallet_amount?: number,
   paid_total?: number,
-  order_items_attributes: Array<{
-    id: number,
-    orderable_type: string,
-    orderable_id: number,
-    orderable_name: string,
-    orderable_slug: string,
-    orderable_ref?: string,
-    orderable_main_image_url?: string,
-    orderable_external_stock: number,
-    quantity: number,
-    quantity_min: number,
-    amount: number,
-    is_offered: boolean
-  }>,
+  order_items_attributes: Array<OrderItem>,
 }
 
 export interface OrderPayment {
@@ -60,18 +84,19 @@ export interface OrderIndexFilter extends ApiFilter {
   },
   page?: number,
   sort?: OrderSortOption
-  states?: Array<string>,
+  states?: Array<OrderState>,
   period_from?: string,
   period_to?: string
 }
 
+export interface ItemError {
+  error: string,
+  value?: string|number
+}
 export interface OrderErrors {
   order_id: number,
   details: Array<{
     item_id: number,
-    errors: Array<{
-      error: string,
-      value: string|number
-    }>
+    errors: Array<ItemError>
   }>
 }

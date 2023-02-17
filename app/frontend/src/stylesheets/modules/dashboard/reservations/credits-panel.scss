@@ -1,26 +1,31 @@
 .credits-panel {
-  .no-credits {
-    list-style: none;
-    text-align: center;
-    font-style: italic;
-    color: #aaa;
-  }
-}
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  &.no-header > * { margin: 0; }
+  .title { @include text-base(600); }
 
-@media (min-width: 1460px) {
-  .credits-panel {
-    width: 45%;
-  }
-}
+  .credits-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 0.8rem;
 
-@media (max-width: 1459px) {
-  .credits-panel {
-    width: 95%;
-  }
-}
+    &-item {
+      padding: 1.6rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1.6rem 2.4rem;
+      background-color: var(--gray-soft-lightest);
+      border-radius: var(--border-radius);
 
-@media (max-width: 992px) {
-  .credits-panel {
-    width: 90%;
+      .title { @include text-base(600); }
+      p { margin: 0; }
+
+      @media (min-width: 640px) {
+        flex-direction: row;
+      }
+    }
   }
 }

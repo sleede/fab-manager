@@ -14,7 +14,7 @@ import { MemberSelect } from '../user/member-select';
 import { User } from '../../models/user';
 import { FormInput } from '../form/form-input';
 import OrderAPI from '../../api/order';
-import { Order, OrderIndexFilter, OrderSortOption } from '../../models/order';
+import { Order, OrderIndexFilter, OrderSortOption, OrderState } from '../../models/order';
 import { FabPagination } from '../base/fab-pagination';
 import { CaretDoubleUp, X } from 'phosphor-react';
 import { ChecklistOption, SelectOption } from '../../models/select';
@@ -50,7 +50,7 @@ const Orders: React.FC<OrdersProps> = ({ currentUser, onError }) => {
   const [pageCount, setPageCount] = useState<number>(0);
   const [totalCount, setTotalCount] = useState<number>(0);
   const [reference, setReference] = useState<string>(filters.reference);
-  const [states, setStates] = useState<Array<string>>(filters.states);
+  const [states, setStates] = useState<Array<OrderState>>(filters.states);
   const [user, setUser] = useState<{ id: number, name?: string }>(filters.user);
   const [periodFrom, setPeriodFrom] = useState<string>(filters.period_from);
   const [periodTo, setPeriodTo] = useState<string>(filters.period_to);
@@ -64,7 +64,7 @@ const Orders: React.FC<OrdersProps> = ({ currentUser, onError }) => {
     }).catch(onError);
   }, [filters]);
 
-  const statusOptions: ChecklistOption<string>[] = [
+  const statusOptions: ChecklistOption<OrderState>[] = [
     { value: 'cart', label: t('app.admin.store.orders.state.cart') },
     { value: 'paid', label: t('app.admin.store.orders.state.paid') },
     { value: 'payment_failed', label: t('app.admin.store.orders.state.payment_failed') },
@@ -108,7 +108,7 @@ const Orders: React.FC<OrdersProps> = ({ currentUser, onError }) => {
   /**
    * Clear filter by type
    */
-  const removeFilter = (filterType: string, state?: string) => {
+  const removeFilter = (filterType: string, state?: OrderState) => {
     return () => {
       setFilters(draft => {
         draft.page = 1;
@@ -185,7 +185,7 @@ const Orders: React.FC<OrdersProps> = ({ currentUser, onError }) => {
   /**
    * Filter: by status
    */
-  const handleSelectStatus = (s: ChecklistOption<string>, checked: boolean) => {
+  const handleSelectStatus = (s: ChecklistOption<OrderState>, checked: boolean) => {
     const list = [...states];
     checked
       ? list.push(s.value)

@@ -1,0 +1,48 @@
+.project-card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--gray-soft-lightest);
+  border: 1px solid var(--gray-soft-dark);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  &:hover {
+    border-color: var(--gray-hard);
+    cursor: pointer;
+  }
+
+  .project-image {
+    @include imageRatio(50%);
+    background-size: cover;
+    background-position: center;
+    border-bottom: 1px solid var(--gray-soft-dark);
+  }
+  .project-info {
+    flex: 1;
+    position: relative;
+    padding: 1.6rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    .badge {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .name {
+      margin: 0;
+      font-size: 1.6rem;
+      text-transform: uppercase;
+      font-weight: 600;
+      text-align: center;
+    }
+    .openlab {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-size: 1.2rem;
+      color: var(--main);
+    }
+  }
+}

@@ -2,7 +2,7 @@ import { FabModal } from '../base/fab-modal';
 import { useTranslation } from 'react-i18next';
 import { IntegerMappingForm } from './integer-mapping-form';
 import { UseFormRegister } from 'react-hook-form';
-import { Control } from 'react-hook-form/dist/types/form';
+import { Control, FormState } from 'react-hook-form/dist/types/form';
 import { FieldValues } from 'react-hook-form/dist/types/fields';
 import { mappingType } from '../../models/authentication-provider';
 import { BooleanMappingForm } from './boolean-mapping-form';
@@ -19,6 +19,7 @@ interface TypeMappingModalProps<TFieldValues, TContext extends object> {
   register: UseFormRegister<TFieldValues>,
   control: Control<TFieldValues, TContext>,
   fieldMappingId: number,
+  formState: FormState<TFieldValues>
 }
 
 /**
@@ -27,7 +28,7 @@ interface TypeMappingModalProps<TFieldValues, TContext extends object> {
  *
  * This component is intended to be used in a react-hook-form context.
  */
-export const TypeMappingModal = <TFieldValues extends FieldValues, TContext extends object>({ model, field, type, isOpen, toggleModal, register, control, fieldMappingId }:TypeMappingModalProps<TFieldValues, TContext>) => {
+export const TypeMappingModal = <TFieldValues extends FieldValues, TContext extends object>({ model, field, type, isOpen, toggleModal, register, control, fieldMappingId, formState }:TypeMappingModalProps<TFieldValues, TContext>) => {
   const { t } = useTranslation('admin');
 
   return (
@@ -42,10 +43,10 @@ export const TypeMappingModal = <TFieldValues extends FieldValues, TContext exte
                  id={`auth_provider_mappings_attributes.${fieldMappingId}.transformation.type`}
                  type="hidden"
                  defaultValue={type} />
-      {type === 'integer' && <IntegerMappingForm register={register} control={control} fieldMappingId={fieldMappingId} />}
-      {type === 'boolean' && <BooleanMappingForm register={register} fieldMappingId={fieldMappingId} />}
-      {type === 'date' && <DateMappingForm control={control} fieldMappingId={fieldMappingId} />}
-      {type === 'string' && <StringMappingForm register={register} control={control} fieldMappingId={fieldMappingId} />}
+      {type === 'integer' && <IntegerMappingForm register={register} control={control} fieldMappingId={fieldMappingId} formState={formState} />}
+      {type === 'boolean' && <BooleanMappingForm register={register} fieldMappingId={fieldMappingId} formState={formState} />}
+      {type === 'date' && <DateMappingForm control={control} fieldMappingId={fieldMappingId} formState={formState} />}
+      {type === 'string' && <StringMappingForm register={register} control={control} fieldMappingId={fieldMappingId} formState={formState} />}
     </FabModal>
   );
 };

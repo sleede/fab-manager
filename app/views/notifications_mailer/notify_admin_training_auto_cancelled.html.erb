@@ -1,0 +1,13 @@
+<%= render 'notifications_mailer/shared/hello', recipient: @recipient %>
+
+<p>
+  <%= t('.body.cancelled_training', {
+    TRAINING: @attached_object.trainings.first.name,
+    DATE: I18n.l(@attached_object.start_at.to_date),
+    START: I18n.l(@attached_object.start_at, format: :hour_minute),
+    END: I18n.l(@attached_object.end_at, format: :hour_minute)
+  }) %>
+</p>
+<p>
+  <%= @notification.get_meta_data(:auto_refund) ? t('.body.auto_refund') : t('.body.manual_refund') %>
+</p>

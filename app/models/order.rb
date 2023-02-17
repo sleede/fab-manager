@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Order is a model for the user hold information of order
+# Order is a model used to hold orders data
 class Order < PaymentDocument
   belongs_to :statistic_profile
   belongs_to :operator_profile, class_name: 'InvoicingProfile'
@@ -20,7 +20,7 @@ class Order < PaymentDocument
 
   delegate :user, to: :statistic_profile
 
-  def generate_reference(_date = DateTime.current)
+  def generate_reference(_date = Time.current)
     self.reference = PaymentDocumentService.generate_order_number(self)
   end
 

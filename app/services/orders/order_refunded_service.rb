@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Provides methods for refund an order
+# Provides a method to refund an order
 class Orders::OrderRefundedService
   def call(order, current_user)
     raise ::UpdateOrderStateError if %w[cart payment_error refunded delivered].include?(order.state)

@@ -131,6 +131,19 @@ de:
         your_plan: "Ihr Plan"
         expires_in_7_days: "läuft in 7 Tagen ab."
         to_renew_your_plan_follow_the_link: "Bitte folgen Sie diesem Link, um Ihren Plan zu erneuern"
+    notify_member_training_authorization_expired:
+      subject: "Your authorization was revoked"
+      body:
+        training_expired_html: "<p>You took the %{TRAINING} training, on %{DATE}.</p><p>Your authorization for this training, valid for %{PERIOD} months, has expired.</p><p>Please validate it again in order to be able to reserve the %{MACHINES}</p>."
+    notify_member_training_auto_cancelled:
+      subject: "Your training session was cancelled"
+      body:
+        cancelled_training: "The %{TRAINING} training session scheduled for %{DATE}, from %{START} to %{END} has been canceled due to an insufficient number of participants."
+        auto_refund: "You were refunded on your wallet and a credit note should be available."
+    notify_member_training_invalidated:
+      subject: "Your authorization was invalidated"
+      body:
+        training_invalidated_html: "<p>You took the %{TRAINING} training, on %{DATE} giving you access to the %{MACHINES}.</p><p>Due to the lack of reservations for one of these machines during the last %{PERIOD} months, your authorization has been invalidated.</p><p>Please validate the training again in order to continue reserving these machines.</p>."
     notify_member_subscription_is_expired:
       subject: "Ihr Abonnement ist abgelaufen"
       body:
@@ -142,6 +155,12 @@ de:
       subject: "Ein Mitgliedsabonnement läuft in 7 Tagen ab"
       body:
         subscription_will_expire_html: "Abonnement für Benutzer %{NAME} <strong><em>%{PLAN}</em></strong> läuft in 7 Tagen ab."
+    notify_admin_training_auto_cancelled:
+      subject: "A training was automatically cancelled"
+      body:
+        cancelled_training: "The %{TRAINING} training session scheduled for %{DATE}, from %{START} to %{END} has been automatically canceled due to an insufficient number of participants."
+        auto_refund: "The members who have booked this training session were automatically refunded on their wallet and credit notes was generated."
+        manual_refund: "Please manually refund all members who have booked this training session and generate the credit notes."
     notify_admin_subscription_is_expired:
       subject: "Ein Mitgliedsabonnement ist abgelaufen"
       body:
@@ -298,6 +317,11 @@ de:
       subject: "Stripe-Synchronisation"
       body:
         objects_sync: "Alle Mitglieder, Coupons, Maschinen, Schulungen, Räume und Pläne wurden erfolgreich auf Stripe synchronisiert."
+    notify_admin_order_is_paid:
+      subject: "New order"
+      body:
+        order_placed: "A new order (%{REFERENCE}) has been placed and paid by %{USER}."
+        view_details: ""
     notify_member_payment_schedule_ready:
       subject: "Ihr Zahlungsplan"
       body:
@@ -351,15 +375,15 @@ de:
         remember: "Gemäß Ihrem Zahlungsplan von %{REFERENCE} wurde zum %{DATE} eine Belastung der Karte in Höhe von %{AMOUNT} geplant."
         date: "Dies ist eine Erinnerung zur Prüfung, ob das Bankkonto erfolgreich belastet werden konnte."
         confirm: "Bitte bestätigen Sie den Erhalt des Guthabens in Ihrer Zahlungsverwaltung, damit die entsprechende Rechnung generiert werden kann."
-    notify_admin_user_proof_of_identity_files_created:
+    notify_admin_user_supporting_document_files_created:
       subject: "Supporting documents uploaded by a member"
       body:
-        proof_of_identity_files_uploaded_below: "Member %{NAME} has uploaded the following supporting documents:"
+        supporting_document_files_uploaded_below: "Member %{NAME} has uploaded the following supporting documents:"
         validate_user: "Please validate this account"
-    notify_admin_user_proof_of_identity_files_updated:
+    notify_admin_user_supporting_document_files_updated:
       subject: "Member's supporting documents have changed"
       body:
-        user_update_proof_of_identity_file: "Member %{NAME} has modified the supporting documents below:"
+        user_update_supporting_document_file: "Member %{NAME} has modified the supporting documents below:"
         validate_user: "Please validate this account"
     notify_user_is_validated:
       subject: "Account validated"
@@ -369,15 +393,15 @@ de:
       subject: "Account invalidated"
       body:
         account_invalidated: "Your account was invalidated. You won't be able to book anymore, until your account is validated again."
-    notify_user_proof_of_identity_refusal:
+    notify_user_supporting_document_refusal:
       subject: "Your supporting documents were refused"
       body:
-        user_proof_of_identity_files_refusal: "Your supporting documents were refused:"
+        user_supporting_document_files_refusal: "Your supporting documents were refused:"
         action: "Please re-upload some new supporting documents."
-    notify_admin_user_proof_of_identity_refusal:
+    notify_admin_user_supporting_document_refusal:
       subject: "A member's supporting documents were refused"
       body:
-        user_proof_of_identity_files_refusal: "Member %{NAME}'s supporting documents were rejected by %{OPERATOR}:"
+        user_supporting_document_files_refusal: "Member %{NAME}'s supporting documents were rejected by %{OPERATOR}:"
     shared:
       hello: "Hallo %{user_name}"
     notify_user_order_is_ready:

@@ -14,7 +14,7 @@ import { Trash } from 'phosphor-react';
 import { ImageType } from '../../models/file';
 import FileUploadLib from '../../lib/file-upload';
 
-interface FormImageUploadProps<TFieldValues, TContext extends object> extends FormComponent<TFieldValues>, FormControlledComponent<TFieldValues, TContext>, AbstractFormItemProps<TFieldValues> {
+type FormImageUploadProps<TFieldValues, TContext extends object> = FormComponent<TFieldValues> & FormControlledComponent<TFieldValues, TContext> & AbstractFormItemProps<TFieldValues> & {
   setValue: UseFormSetValue<TFieldValues>,
   defaultImage?: ImageType,
   accept?: string,

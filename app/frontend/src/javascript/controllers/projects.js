@@ -43,7 +43,7 @@
  *  - $state (Ui-Router) [ 'app.public.projects_show', 'app.public.projects_list' ]
  */
 class ProjectsController {
-  constructor ($rootScope, $scope, $state, Project, Machine, Member, Component, Theme, Licence, $document, Diacritics, dialogs, allowedExtensions, _t) {
+  constructor ($rootScope, $scope, $state, Project, Machine, Member, Component, Theme, Licence, Status, $document, Diacritics, dialogs, allowedExtensions, _t) {
     // remove codeview from summernote editor
     $scope.summernoteOptsProject = angular.copy($rootScope.summernoteOpts);
     $scope.summernoteOptsProject.toolbar[6][1].splice(1, 1);
@@ -81,6 +81,16 @@ class ProjectsController {
     // Retrieve the list of licences from the server
     Licence.query().$promise.then(function (data) {
       $scope.licences = data.map(function (d) {
+        return ({
+          id: d.id,
+          name: d.name
+        });
+      });
+    });
+
+    // Retrieve the list of statuses from the server
+    Status.query().$promise.then(function (data) {
+      $scope.statuses = data.map(function (d) {
         return ({
           id: d.id,
           name: d.name
@@ -296,7 +306,8 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
       from: ($location.$$search.from || undefined),
       machine_id: (parseInt($location.$$search.machine_id) || undefined),
       component_id: (parseInt($location.$$search.component_id) || undefined),
-      theme_id: (parseInt($location.$$search.theme_id) || undefined)
+      theme_id: (parseInt($location.$$search.theme_id) || undefined),
+      status_id: (parseInt($location.$$search.status_id) || undefined)
     };
 
     // list of projects to display
@@ -310,6 +321,16 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
 
     // list of components / used for filtering
     $scope.components = componentsPromise;
+
+    $scope.onStatusChange = function (status) {
+      if (status) {
+        $scope.search.status_id = status.id;
+      } else {
+        $scope.search.status_id = undefined;
+      }
+      $scope.setUrlQueryParams($scope.search);
+      $scope.triggerSearch();
+    };
 
     /**
      * Callback triggered when the button "search from the whole network" is toggled
@@ -333,13 +354,17 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
      * Reinitialize the search filters (used by the projects from the instance DB) and trigger a new search query
      */
     $scope.resetFiltersAndTriggerSearch = function () {
-      $scope.search.q = '';
-      $scope.search.from = undefined;
-      $scope.search.machine_id = undefined;
-      $scope.search.component_id = undefined;
-      $scope.search.theme_id = undefined;
-      $scope.setUrlQueryParams($scope.search);
-      $scope.triggerSearch();
+      setTimeout(() => {
+        $scope.search.q = '';
+        $scope.search.from = undefined;
+        $scope.search.machine_id = undefined;
+        $scope.search.component_id = undefined;
+        $scope.search.theme_id = undefined;
+        $scope.search.status_id = undefined;
+        $scope.$apply();
+        $scope.setUrlQueryParams($scope.search);
+        $scope.triggerSearch();
+      }, 50);
     };
 
     /**
@@ -394,6 +419,7 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
       updateUrlParam('theme_id', search.theme_id);
       updateUrlParam('component_id', search.component_id);
       updateUrlParam('machine_id', search.machine_id);
+      updateUrlParam('status_id', search.status_id);
       return true;
     };
 
@@ -470,8 +496,8 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
 /**
  * Controller used in the project creation page
  */
-Application.Controllers.controller('NewProjectController', ['$rootScope', '$scope', '$state', 'Project', 'Machine', 'Member', 'Component', 'Theme', 'Licence', '$document', 'CSRF', 'Diacritics', 'dialogs', 'allowedExtensions', '_t',
-  function ($rootScope, $scope, $state, Project, Machine, Member, Component, Theme, Licence, $document, CSRF, Diacritics, dialogs, allowedExtensions, _t) {
+Application.Controllers.controller('NewProjectController', ['$rootScope', '$scope', '$state', 'Project', 'Machine', 'Member', 'Component', 'Theme', 'Licence', 'Status', '$document', 'CSRF', 'Diacritics', 'dialogs', 'allowedExtensions', '_t',
+  function ($rootScope, $scope, $state, Project, Machine, Member, Component, Theme, Licence, Status, $document, CSRF, Diacritics, dialogs, allowedExtensions, _t) {
     CSRF.setMetaTags();
 
     // API URL where the form will be posted
@@ -503,15 +529,15 @@ Application.Controllers.controller('NewProjectController', ['$rootScope', '$scop
     };
 
     // Using the ProjectsController
-    return new ProjectsController($rootScope, $scope, $state, Project, Machine, Member, Component, Theme, Licence, $document, Diacritics, dialogs, allowedExtensions, _t);
+    return new ProjectsController($rootScope, $scope, $state, Project, Machine, Member, Component, Theme, Licence, Status, $document, Diacritics, dialogs, allowedExtensions, _t);
   }
 ]);
 
 /**
  * Controller used in the project edition page
  */
-Application.Controllers.controller('EditProjectController', ['$rootScope', '$scope', '$state', '$transition$', 'Project', 'Machine', 'Member', 'Component', 'Theme', 'Licence', '$document', 'CSRF', 'projectPromise', 'Diacritics', 'dialogs', 'allowedExtensions', '_t',
-  function ($rootScope, $scope, $state, $transition$, Project, Machine, Member, Component, Theme, Licence, $document, CSRF, projectPromise, Diacritics, dialogs, allowedExtensions, _t) {
+Application.Controllers.controller('EditProjectController', ['$rootScope', '$scope', '$state', '$transition$', 'Project', 'Machine', 'Member', 'Component', 'Theme', 'Licence', 'Status', '$document', 'CSRF', 'projectPromise', 'Diacritics', 'dialogs', 'allowedExtensions', '_t',
+  function ($rootScope, $scope, $state, $transition$, Project, Machine, Member, Component, Theme, Licence, Status, $document, CSRF, projectPromise, Diacritics, dialogs, allowedExtensions, _t) {
     /* PUBLIC SCOPE */
 
     // API URL where the form will be posted
@@ -557,7 +583,7 @@ Application.Controllers.controller('EditProjectController', ['$rootScope', '$sco
       }
 
       // Using the ProjectsController
-      return new ProjectsController($rootScope, $scope, $state, Project, Machine, Member, Component, Theme, Licence, $document, Diacritics, dialogs, allowedExtensions, _t);
+      return new ProjectsController($rootScope, $scope, $state, Project, Machine, Member, Component, Theme, Licence, Status, $document, Diacritics, dialogs, allowedExtensions, _t);
     };
 
     // !!! MUST BE CALLED AT THE END of the controller

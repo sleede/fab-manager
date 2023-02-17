@@ -52,10 +52,12 @@ class Subscriptions::CreateAsAdminTest < ActionDispatch::IntegrationTest
 
     # Check that the user benefit from prices of his plan
     printer = Machine.find_by(slug: 'imprimante-3d')
-    assert_equal 15, (printer.prices.find_by(group_id: user.group_id, plan_id: user.subscription.plan_id).amount / 100.00), 'machine hourly price does not match'
+    assert_equal 15,
+                 (printer.prices.find_by(group_id: user.group_id, plan_id: user.subscription.plan_id).amount / 100.00),
+                 'machine hourly price does not match'
 
     # Check notification was sent to the user
-    notification = Notification.find_by(notification_type_id: NotificationType.find_by_name('notify_member_subscribed_plan'),
+    notification = Notification.find_by(notification_type_id: NotificationType.find_by(name: 'notify_member_subscribed_plan'),
                                         attached_object_type: 'Subscription', attached_object_id: subscription.id)
     assert_not_nil notification, 'user notification was not created'
     assert_equal user.id, notification.receiver_id, 'wrong user notified'

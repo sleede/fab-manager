@@ -9,7 +9,7 @@
   }
 
   &.collapsed {
-    header .grpBtn svg { transform: rotateZ(-180deg); }
+    header .grpBtn .filters-toggle { transform: rotateZ(-180deg); }
     header .grpBtn button { display: flex; }
     .grp {
       max-height: 100vh;
@@ -23,10 +23,8 @@
     padding: 0 0 2.4rem 0;
 
     .grpBtn {
-      display: flex;
-      align-items: center;
       button { display: none; }
-      svg {
+      .filters-toggle {
         cursor: pointer;
         transition: transform 250ms ease-in-out;
       }

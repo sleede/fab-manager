@@ -1,7 +1,9 @@
 @import "variables/animations";
 @import "variables/colors";
-@import "variables/typography";
+@import "variables/component";
 @import "variables/decoration";
+@import "variables/layout";
+@import "variables/typography";
 @import "app.functions";
 @import "bootstrap_and_overrides";
 
@@ -22,6 +24,8 @@
 @import "modules/authentication-provider/openid-connect-data-mapping-form";
 @import "modules/authentication-provider/provider-form";
 @import "modules/authentication-provider/type-mapping-modal";
+@import "modules/base/edit-destroy-buttons";
+@import "modules/base/editorial-block";
 @import "modules/base/fab-alert";
 @import "modules/base/fab-button";
 @import "modules/base/fab-input";
@@ -37,13 +41,17 @@
 @import "modules/base/labelled-input";
 @import "modules/calendar/calendar";
 @import "modules/cart/cart-button";
+@import "modules/cart/cart-order-reservation";
 @import "modules/cart/store-cart";
 @import "modules/dashboard/reservations/credits-panel";
+@import "modules/dashboard/reservations/prepaid-packs-panel";
 @import "modules/dashboard/reservations/reservations-dashboard";
 @import "modules/dashboard/reservations/reservations-panel";
 @import "modules/events/event";
+@import "modules/events/events";
 @import "modules/events/event-form";
 @import "modules/events/update-recurrent-modal";
+@import "modules/events/events-settings.scss";
 @import "modules/form/abstract-form-item";
 @import "modules/form/form-input";
 @import "modules/form/form-multi-file-upload";
@@ -58,12 +66,18 @@
 @import "modules/invoices/invoices-settings-panel";
 @import "modules/invoices/vat-settings-modal";
 @import "modules/layout/header-page";
+@import "modules/machines/machines";
 @import "modules/machines/machine-card";
+@import "modules/machines/machine-categories";
 @import "modules/machines/machine-form";
 @import "modules/machines/machines-filters";
 @import "modules/machines/machines-list";
+@import "modules/machines/machines-settings";
 @import "modules/machines/required-training-modal";
-@import "modules/machines/machine-categories";
+@import "modules/notifications/notifications-list";
+@import "modules/notifications/notification-inline";
+@import "modules/notifications/notifications-category";
+@import "modules/notifications/notification-form";
 @import "modules/payment-schedule/payment-schedule-dashboard";
 @import "modules/payment-schedule/payment-schedule-summary";
 @import "modules/payment-schedule/payment-schedules-list";
@@ -90,7 +104,6 @@
 @import "modules/pricing/editable-price";
 @import "modules/pricing/machines/configure-packs-button";
 @import "modules/pricing/machines/create-pack";
-@import "modules/pricing/machines/delete-pack";
 @import "modules/pricing/machines/edit-pack";
 @import "modules/pricing/machines/machines-pricing";
 @import "modules/pricing/machines/pack-form";
@@ -102,6 +115,9 @@
 @import "modules/profile-completion/completion-header-info";
 @import "modules/profile-completion/profile-form-option";
 @import "modules/profile-custom-fields/profile-custom-fields-list";
+@import "modules/projects/project-card";
+@import "modules/projects/projects-setting.scss";
+@import "modules/projects/projects";
 @import "modules/select-gateway-modal";
 @import "modules/settings/boolean-setting";
 @import "modules/settings/check-list-setting";
@@ -109,6 +125,7 @@
 @import "modules/settings/user-validation-setting";
 @import "modules/socials/fab-socials";
 @import "modules/spaces/space-form";
+@import "modules/spaces/spaces";
 @import "modules/store/_utilities";
 @import "modules/store/order-actions.scss";
 @import "modules/store/order-item";
@@ -135,6 +152,8 @@
 @import "modules/supporting-documents/supporting-documents-type-form";
 @import "modules/supporting-documents/supporting-documents-types-list";
 @import "modules/trainings/training-form";
+@import "modules/trainings/trainings-settings";
+@import "modules/trainings/trainings";
 @import "modules/user/avatar";
 @import "modules/user/avatar-input";
 @import "modules/user/change-password";

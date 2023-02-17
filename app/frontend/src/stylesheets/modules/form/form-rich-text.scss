@@ -6,4 +6,9 @@
   &.is-disabled {
     opacity: 0.5;
   }
+  &.is-incorrect {
+    .fab-text-editor {
+      border-color: var(--alert);
+    }
+  }
 }

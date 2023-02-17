@@ -96,6 +96,7 @@ Application.Controllers.controller('NewTrainingController', ['$scope', '$state',
      * Callback triggered by react components
      */
     $scope.onError = function (message) {
+      console.error(message);
       growl.error(message);
     };
 
@@ -137,6 +138,7 @@ Application.Controllers.controller('EditTrainingController', ['$scope', '$state'
      * Callback triggered by react components
      */
     $scope.onError = function (message) {
+      console.error(message);
       growl.error(message);
     };
 
@@ -167,8 +169,11 @@ Application.Controllers.controller('EditTrainingController', ['$scope', '$state'
 /**
  * Controller used in the trainings management page, allowing admins users to see and manage the list of trainings and reservations.
  */
-Application.Controllers.controller('TrainingsAdminController', ['$scope', '$state', '$uibModal', 'Training', 'trainingsPromise', 'machinesPromise', '_t', 'growl', 'dialogs', 'Member', 'uiTourService', 'settingsPromise',
-  function ($scope, $state, $uibModal, Training, trainingsPromise, machinesPromise, _t, growl, dialogs, Member, uiTourService, settingsPromise) {
+Application.Controllers.controller('TrainingsAdminController', ['$scope', '$state', '$uibModal', 'Training', 'trainingsPromise', 'machinesPromise', '_t', 'growl', 'dialogs', 'Member', 'uiTourService', 'settingsPromise', '$uiRouter',
+  function ($scope, $state, $uibModal, Training, trainingsPromise, machinesPromise, _t, growl, dialogs, Member, uiTourService, settingsPromise, $uiRouter) {
+    // the following item is used by the UnsavedFormAlert component to detect a page change
+    $scope.uiRouter = $uiRouter;
+
     // list of trainings
     $scope.trainings = trainingsPromise;
 
@@ -352,6 +357,20 @@ Application.Controllers.controller('TrainingsAdminController', ['$scope', '$stat
         $scope.accordions[training.name][now.year()] = { isOpenFirst: true };
         $scope.accordions[training.name][now.year()][now.month()] = { isOpenFirst: true };
       });
+    };
+
+    /**
+     * Shows a success message forwarded from a child react component
+     */
+    $scope.onSuccess = function (message) {
+      growl.success(message);
+    };
+
+    /**
+     * Callback triggered by react components
+     */
+    $scope.onError = function (message) {
+      growl.error(message);
     };
 
     /**

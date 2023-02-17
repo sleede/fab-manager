@@ -36,5 +36,9 @@ Style/FormatString:
   EnforcedStyle: sprintf
 Rails/RedundantPresenceValidationOnBelongsTo:
   Enabled: false
+Style/DateTime:
+  Enabled: true
+Rails/TimeZone:
+  Enabled: true
 Rails/UnknownEnv:
  Environments: development, test, staging, production

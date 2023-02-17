@@ -51,9 +51,26 @@ class EventsController {
 /**
  * Controller used in the events listing page (admin view)
  */
-Application.Controllers.controller('AdminEventsController', ['$scope', '$state', 'dialogs', '$uibModal', 'growl', 'AuthService', 'Event', 'Category', 'EventTheme', 'AgeRange', 'PriceCategory', 'eventsPromise', 'categoriesPromise', 'themesPromise', 'ageRangesPromise', 'priceCategoriesPromise', '_t', 'Member', 'uiTourService', 'settingsPromise',
-  function ($scope, $state, dialogs, $uibModal, growl, AuthService, Event, Category, EventTheme, AgeRange, PriceCategory, eventsPromise, categoriesPromise, themesPromise, ageRangesPromise, priceCategoriesPromise, _t, Member, uiTourService, settingsPromise) {
+Application.Controllers.controller('AdminEventsController', ['$scope', '$state', 'dialogs', '$uibModal', 'growl', 'AuthService', 'Event', 'Category', 'EventTheme', 'AgeRange', 'PriceCategory', 'eventsPromise', 'categoriesPromise', 'themesPromise', 'ageRangesPromise', 'priceCategoriesPromise', '_t', 'Member', 'uiTourService', 'settingsPromise', '$uiRouter',
+  function ($scope, $state, dialogs, $uibModal, growl, AuthService, Event, Category, EventTheme, AgeRange, PriceCategory, eventsPromise, categoriesPromise, themesPromise, ageRangesPromise, priceCategoriesPromise, _t, Member, uiTourService, settingsPromise, $uiRouter) {
   /* PUBLIC SCOPE */
+
+    /**
+   * Callback triggered by react components
+   */
+    $scope.onSuccess = function (message) {
+      growl.success(message);
+    };
+
+    // the following item is used by the UnsavedFormAlert component to detect a page change
+    $scope.uiRouter = $uiRouter;
+
+    /**
+     * Callback triggered by react components
+     */
+    $scope.onError = function (message) {
+      growl.error(message);
+    };
 
     // By default, the pagination mode is activated to limit the page size
     $scope.paginateActive = true;
@@ -454,6 +471,7 @@ Application.Controllers.controller('NewEventController', ['$scope', '$state', 'C
      * Callback triggered by react components
      */
     $scope.onError = function (message) {
+      console.error(message);
       growl.error(message);
     };
 
@@ -483,6 +501,7 @@ Application.Controllers.controller('EditEventController', ['$scope', '$state', '
      * Callback triggered by react components
      */
     $scope.onError = function (message) {
+      console.error(message);
       growl.error(message);
     };
 

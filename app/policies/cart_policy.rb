@@ -6,7 +6,7 @@ class CartPolicy < ApplicationPolicy
     !Setting.get('store_hidden') || user&.privileged?
   end
 
-  %w[add_item remove_item set_quantity refresh_item validate].each do |action|
+  %w[add_item remove_item set_quantity refresh_item validate create_item].each do |action|
     define_method "#{action}?" do
       return user.privileged? || (record.statistic_profile_id == user.statistic_profile.id) if user
 
@@ -16,5 +16,9 @@ class CartPolicy < ApplicationPolicy
 
   def set_offer?
     !record.is_offered || (user.privileged? && record.customer_id != user.id)
+  end
+
+  def set_customer?
+    user.privileged?
   end
 end

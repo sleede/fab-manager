@@ -18,8 +18,9 @@ import MachineAPI from '../../api/machine';
 import { Machine } from '../../models/machine';
 import { SelectOption } from '../../models/select';
 import SettingAPI from '../../api/setting';
-import { Setting } from '../../models/setting';
+import { Setting, trainingsSettings } from '../../models/setting';
 import { AdvancedAccountingForm } from '../accounting/advanced-accounting-form';
+import { FabAlert } from '../base/fab-alert';
 
 declare const Application: IApplication;
 
@@ -34,13 +35,36 @@ interface TrainingFormProps {
  * Form to edit or create trainings
  */
 export const TrainingForm: React.FC<TrainingFormProps> = ({ action, training, onError, onSuccess }) => {
-  const [machineModule, setMachineModule] = useState<Setting>(null);
-  const { handleSubmit, register, control, setValue, formState } = useForm<Training>({ defaultValues: { ...training } });
-  const output = useWatch<Training>({ control });
   const { t } = useTranslation('admin');
+
+  const [machineModule, setMachineModule] = useState<Setting>(null);
+  const [isActiveAccounting, setIsActiveAccounting] = useState<boolean>(false);
+  const { handleSubmit, register, control, setValue, formState, reset } = useForm<Training>({ defaultValues: { ...training } });
+  const output = useWatch<Training>({ control });
+  const isActiveCancellation = useWatch({ control, name: 'auto_cancel' }) as boolean;
+  const isActiveAuthorizationValidity = useWatch({ control, name: 'authorization' }) as boolean;
+  const isActiveValidationRule = useWatch({ control, name: 'invalidation' });
 
   useEffect(() => {
     SettingAPI.get('machines_module').then(setMachineModule).catch(onError);
+    SettingAPI.get('advanced_accounting').then(res => setIsActiveAccounting(res.value === 'true')).catch(onError);
+
+    // on training creation, set the default auto-cancel/authorization/invalidation parameters from the general configuration
+    if (action === 'create') {
+      SettingAPI.query(trainingsSettings.filter(s => !s.match(/^trainings_banner/)))
+        .then(settings => {
+          reset({
+            auto_cancel: settings.get('trainings_auto_cancel') === 'true',
+            auto_cancel_threshold: parseInt(settings.get('trainings_auto_cancel_threshold'), 10),
+            auto_cancel_deadline: parseInt(settings.get('trainings_auto_cancel_deadline'), 10),
+            authorization: settings.get('trainings_authorization_validity') === 'true',
+            authorization_period: parseInt(settings.get('trainings_authorization_validity_duration'), 10),
+            invalidation: settings.get('trainings_invalidation_rule') === 'true',
+            invalidation_period: parseInt(settings.get('trainings_invalidation_rule_period'), 10)
+          });
+        })
+        .catch(onError);
+    }
   }, []);
 
   /**
@@ -72,52 +96,161 @@ export const TrainingForm: React.FC<TrainingFormProps> = ({ action, training, on
   };
 
   return (
-    <form className="training-form" onSubmit={handleSubmit(onSubmit)}>
-      <FormInput register={register} id="name"
-                 formState={formState}
-                 rules={{ required: true }}
-                 label={t('app.admin.training_form.name')} />
-      <FormImageUpload setValue={setValue}
-                       register={register}
-                       control={control}
+    <div className="training-form">
+      <header>
+        <h2>{t('app.admin.training_form.ACTION_title', { ACTION: action })}</h2>
+        <FabButton onClick={handleSubmit(onSubmit)} className="fab-button save-btn is-main">
+          {t('app.admin.training_form.save')}
+        </FabButton>
+      </header>
+      <form className='training-form-content'>
+        {action === 'create' &&
+          <FabAlert level='warning'>
+            {t('app.admin.training_form.beware_when_creating_a_training_its_reservation_prices_are_initialized_to_zero')} {t('app.admin.training_form.dont_forget_to_change_them_before_creating_slots_for_this_training')}
+          </FabAlert>
+        }
+        <section>
+          <header>
+            <p className="title">{t('app.admin.training_form.description')}</p>
+          </header>
+          <div className="content">
+            <FormInput register={register} id="name"
                        formState={formState}
                        rules={{ required: true }}
-                       id="training_image_attributes"
-                       accept="image/*"
-                       defaultImage={output.training_image_attributes}
-                       label={t('app.admin.training_form.illustration')} />
-      <FormRichText control={control}
-                    id="description"
-                    rules={{ required: true }}
-                    label={t('app.admin.training_form.description')}
-                    limit={null}
-                    heading bulletList blockquote link video image />
-      {machineModule?.value === 'true' && <FormMultiSelect control={control}
-                                                           id="machine_ids"
-                                                           formState={formState}
-                                                           label={t('app.admin.training_form.associated_machines')}
-                                                           tooltip={t('app.admin.training_form.associated_machines_help')}
-                                                           loadOptions={loadMachines} />}
-      <FormInput register={register}
-                 type="number"
-                 id="nb_total_places"
-                 formState={formState}
-                 nullable
-                 label={t('app.admin.training_form.default_seats')} />
-      <FormSwitch control={control}
-                  id="public_page"
-                  defaultValue={true}
-                  label={t('app.admin.training_form.public_page')}
-                  tooltip={t('app.admin.training_form.public_help')} />
-      <FormSwitch control={control}
-                  id="disabled"
-                  label={t('app.admin.training_form.disable_training')}
-                  tooltip={t('app.admin.training_form.disabled_help')} />
-      <AdvancedAccountingForm register={register} onError={onError} />
-      <FabButton type="submit" className="is-info submit-btn">
-        {t('app.admin.training_form.ACTION_training', { ACTION: action })}
-      </FabButton>
-    </form>
+                       label={t('app.admin.training_form.name')} />
+            <FormImageUpload setValue={setValue}
+                             register={register}
+                             control={control}
+                             formState={formState}
+                             rules={{ required: true }}
+                             id="training_image_attributes"
+                             accept="image/*"
+                             defaultImage={output.training_image_attributes}
+                             label={t('app.admin.training_form.illustration')} />
+            <FormRichText control={control}
+                          id="description"
+                          rules={{ required: true }}
+                          formState={formState}
+                          label={t('app.admin.training_form.description')}
+                          limit={null}
+                          heading bulletList blockquote link />
+          </div>
+        </section>
+
+        <section>
+          <header>
+            <p className="title">{t('app.admin.training_form.settings')}</p>
+          </header>
+          <div className="content">
+            {machineModule?.value === 'true' &&
+              <FormMultiSelect control={control}
+                              id="machine_ids"
+                              formState={formState}
+                              label={t('app.admin.training_form.associated_machines')}
+                              tooltip={t('app.admin.training_form.associated_machines_help')}
+                              loadOptions={loadMachines} />
+            }
+            <FormInput register={register}
+                    type="number"
+                    id="nb_total_places"
+                    formState={formState}
+                    nullable
+                    label={t('app.admin.training_form.default_seats')} />
+            <FormSwitch control={control}
+                        id="public_page"
+                        defaultValue={true}
+                        label={t('app.admin.training_form.public_page')}
+                        tooltip={t('app.admin.training_form.public_help')} />
+            <FormSwitch control={control}
+                        id="disabled"
+                        label={t('app.admin.training_form.disable_training')}
+                        tooltip={t('app.admin.training_form.disabled_help')} />
+          </div>
+        </section>
+
+        <section>
+          <header>
+            <p className="title">{t('app.admin.training_form.automatic_cancellation')}</p>
+            <p className="description">{t('app.admin.training_form.automatic_cancellation_info')}</p>
+          </header>
+          <div className="content">
+            <FormSwitch id="auto_cancel" control={control}
+              formState={formState}
+              defaultValue={isActiveCancellation}
+              label={t('app.admin.training_form.automatic_cancellation_switch')} />
+            {isActiveCancellation && <>
+              <FormInput register={register}
+                        type="number"
+                        step={1}
+                        id="auto_cancel_threshold"
+                        formState={formState}
+                        rules={{ required: isActiveCancellation }}
+                        nullable
+                        label={t('app.admin.training_form.automatic_cancellation_threshold')} />
+              <FormInput register={register}
+                        type="number"
+                        step={1}
+                        id="auto_cancel_deadline"
+                        formState={formState}
+                        rules={{ required: isActiveCancellation }}
+                        nullable
+                        label={t('app.admin.training_form.automatic_cancellation_deadline')} />
+            </>}
+          </div>
+
+        </section>
+
+        <section>
+          <header>
+            <p className="title">{t('app.admin.training_form.authorization_validity')}</p>
+            <p className="description">{t('app.admin.training_form.authorization_validity_info')}</p>
+          </header>
+          <div className="content">
+            <FormSwitch id="authorization" control={control}
+                        formState={formState}
+                        defaultValue={isActiveAuthorizationValidity}
+                        label={t('app.admin.training_form.authorization_validity_switch')} />
+            {isActiveAuthorizationValidity && <>
+              <FormInput id="authorization_period"
+                         type="number"
+                         register={register}
+                         rules={{ required: isActiveAuthorizationValidity, min: 1 }}
+                         step={1}
+                         formState={formState}
+                         label={t('app.admin.training_form.authorization_validity_period')} />
+            </>}
+          </div>
+        </section>
+
+        <section>
+          <header>
+            <p className="title">{t('app.admin.training_form.validation_rule')}</p>
+            <p className="description">{t('app.admin.training_form.validation_rule_info')}</p>
+          </header>
+          <div className="content">
+            <FormSwitch id="invalidation" control={control}
+              formState={formState}
+              defaultValue={isActiveValidationRule}
+              label={t('app.admin.training_form.validation_rule_switch')} />
+            {isActiveValidationRule && <>
+              <FormInput id="invalidation_period"
+                      type="number"
+                      register={register}
+                      rules={{ required: isActiveValidationRule, min: 1 }}
+                      step={1}
+                      formState={formState}
+                      label={t('app.admin.training_form.validation_rule_period')} />
+            </>}
+          </div>
+        </section>
+
+        {isActiveAccounting &&
+          <section>
+            <AdvancedAccountingForm register={register} onError={onError} />
+          </section>
+        }
+      </form>
+    </div>
   );
 };
 

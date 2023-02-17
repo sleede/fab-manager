@@ -31,7 +31,7 @@ class InvoicesService
     unless filters[:date].nil?
       invoices = invoices.where(
         "date_trunc('day', invoices.created_at) = :search",
-        search: "%#{DateTime.iso8601(filters[:date]).to_time.to_date}%"
+        search: "%#{Time.iso8601(filters[:date]).in_time_zone.to_date}%"
       )
     end
 

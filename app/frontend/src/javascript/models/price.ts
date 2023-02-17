@@ -23,6 +23,7 @@ export interface ComputePriceResult {
   price_without_coupon: number,
   details?: {
     slots: Array<{
+      slot_id: number,
       start_at: TDateISO,
       price: number,
       promo: boolean

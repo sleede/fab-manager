@@ -26,7 +26,7 @@ class StatisticProfile < ApplicationRecord
   has_many :trainings, through: :statistic_profile_trainings
 
   # Projects that the current user is the author
-  has_many :my_projects, foreign_key: :author_statistic_profile_id, class_name: 'Project', dependent: :destroy
+  has_many :my_projects, foreign_key: :author_statistic_profile_id, class_name: 'Project', dependent: :destroy, inverse_of: :author
 
   validate :check_birthday_in_past
 
@@ -36,7 +36,7 @@ class StatisticProfile < ApplicationRecord
 
   def age
     if birthday.present?
-      now = DateTime.current.utc.to_date
+      now = Time.current.utc.to_date
       (now - birthday).to_f / AVG_DAYS_PER_YEAR
     else
       ''

@@ -1,0 +1,21 @@
+.machines-settings {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-bottom: 6rem;
+  display: flex;
+  flex-direction: column;
+  & > header {
+    padding-bottom: 0;
+    @include header($sticky: true);
+    gap: 2.4rem;
+  }
+
+  &-content {
+    display: flex;
+    flex-direction: column;
+    gap: 3.2rem;
+
+    .settings-section { @include layout-settings; }
+    .save-btn { align-self: flex-start; }
+  }
+}

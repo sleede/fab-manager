@@ -125,18 +125,18 @@ If this parameter is not specified, the maximum size allowed will be 5MB.
 Maximum size (in bytes) allowed for import files uploaded on the platform.
 Currently, this is only used to import users from a CSV file.
 If this parameter is not specified, the maximum size allowed will be 5MB.
-<a name="MAX_PROOF_OF_IDENTITY_FILE_SIZE"></a>
+<a name="MAX_SUPPORTING_DOCUMENT_FILE_SIZE"></a>
 
-    MAX_PROOF_OF_IDENTITY_FILE_SIZE
+    MAX_SUPPORTING_DOCUMENT_FILE_SIZE
 
-Maximum size (in bytes) allowed for proof of identity files uploaded on the platform.
+Maximum size (in bytes) allowed for suporting document files uploaded on the platform.
 If this parameter is not specified, the maximum size allowed will be 5MB.
 <a name="DISK_SPACE_MB_ALERT"></a>
 
     DISK_SPACE_MB_ALERT
 
 Threshold in MB of the minimum free disk space available on the current mount point.
-The check will run every weeks and if the threshold is exceeded, an alert will be sent to every administrators.
+The check will run every week and if the threshold is exceeded, an alert will be sent to every administrator.
 <a name="ADMIN_EMAIL"></a><a name="ADMIN_PASSWORD"></a>
 
     ADMIN_EMAIL, ADMIN_PASSWORD

@@ -1,29 +1,16 @@
-<div>
-
-  <section class="heading b-b">
-    <div class="row no-gutter">
-      <div class="col-xs-2 col-sm-2 col-md-1">
-        <section class="heading-btn">
-          <a ng-click="cancel()"><i class="fas fa-long-arrow-alt-left"></i></a>
-        </section>
-      </div>
-      <div class="col-xs-10 col-sm-10 col-md-8 b-l ">
-        <section class="heading-title">
-          <h1 translate>{{ 'app.admin.events_edit.edit_the_event' }}</h1>
-        </section>
-      </div>
+<section class="heading b-b">
+  <div class="row no-gutter">
+    <div class="col-xs-2 col-sm-2 col-md-1">
+      <section class="heading-btn">
+        <a ng-click="cancel()"><i class="fas fa-long-arrow-alt-left"></i></a>
+      </section>
     </div>
-  </section>
-
-
-  <div class="row no-gutter" >
-
-    <div class="col-md-9 b-r nopadding">
-      <div class="panel panel-default bg-light m-lg">
-        <div class="panel-body m-r">
-          <event-form action="'update'" event="event" on-success="onSuccess" on-error="onError"></event-form>
-        </div>
-      </div>
+    <div class="col-xs-10 col-sm-10 col-md-8 b-l ">
+      <section class="heading-title">
+        <h1 translate>{{ 'app.admin.events_edit.edit_the_event' }}</h1>
+      </section>
     </div>
   </div>
-</div>
+</section>
+
+<event-form action="'update'" event="event" on-success="onSuccess" on-error="onError"></event-form>

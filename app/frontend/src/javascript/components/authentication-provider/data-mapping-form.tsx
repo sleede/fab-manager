@@ -3,7 +3,7 @@ import { UseFormRegister, useFieldArray, ArrayPath, useWatch, Path, FieldPathVal
 import { FieldValues } from 'react-hook-form/dist/types/fields';
 import AuthProviderAPI from '../../api/auth-provider';
 import { AuthenticationProviderMapping, MappingFields, mappingType, ProvidableType } from '../../models/authentication-provider';
-import { Control, UnpackNestedValue, UseFormSetValue } from 'react-hook-form/dist/types/form';
+import { Control, UnpackNestedValue, UseFormSetValue, FormState } from 'react-hook-form/dist/types/form';
 import { FormSelect } from '../form/form-select';
 import { FormInput } from '../form/form-input';
 import { useTranslation } from 'react-i18next';
@@ -19,6 +19,7 @@ export interface DataMappingFormProps<TFieldValues, TContext extends object> {
   providerType: ProvidableType,
   setValue: UseFormSetValue<TFieldValues>,
   currentFormValues: Array<AuthenticationProviderMapping>,
+  formState: FormState<TFieldValues>
 }
 
 type selectModelFieldOption = { value: string, label: string };
@@ -26,7 +27,7 @@ type selectModelFieldOption = { value: string, label: string };
 /**
  * Partial form to define the mapping of the data between the API of the authentication provider and the application internals.
  */
-export const DataMappingForm = <TFieldValues extends FieldValues, TContext extends object>({ register, control, providerType, setValue, currentFormValues }: DataMappingFormProps<TFieldValues, TContext>) => {
+export const DataMappingForm = <TFieldValues extends FieldValues, TContext extends object>({ register, control, providerType, setValue, currentFormValues, formState }: DataMappingFormProps<TFieldValues, TContext>) => {
   const { t } = useTranslation('admin');
   const [dataMapping, setDataMapping] = useState<MappingFields>(null);
   const [isOpenTypeMappingModal, updateIsOpenTypeMappingModal] = useImmer<Map<number, boolean>>(new Map());
@@ -144,20 +145,24 @@ export const DataMappingForm = <TFieldValues extends FieldValues, TContext exten
             <FormInput id={`auth_provider_mappings_attributes.${index}.id`} register={register} type="hidden" />
             <div className="local-data">
               <FormSelect id={`auth_provider_mappings_attributes.${index}.local_model`}
-                          control={control} rules={{ required: true }}
+                          control={control}
+                          rules={{ required: true }}
+                          formState={formState}
                           options={buildModelOptions()}
                           label={t('app.admin.authentication.data_mapping_form.model')}/>
               <FormSelect id={`auth_provider_mappings_attributes.${index}.local_field`}
                           options={buildFieldOptions(output, index)}
                           control={control}
                           rules={{ required: true }}
+                          formState={formState}
                           label={t('app.admin.authentication.data_mapping_form.field')} />
             </div>
             <div className="remote-data">
-              {providerType === 'OAuth2Provider' && <Oauth2DataMappingForm register={register} control={control} index={index} />}
+              {providerType === 'OAuth2Provider' && <Oauth2DataMappingForm register={register} control={control} index={index} formState={formState} />}
               {providerType === 'OpenIdConnectProvider' && <OpenidConnectDataMappingForm register={register}
                                                                                          index={index}
                                                                                          setValue={setValue}
+                                                                                         formState={formState}
                                                                                          currentFormValues={currentFormValues} />}
             </div>
           </div>
@@ -172,7 +177,9 @@ export const DataMappingForm = <TFieldValues extends FieldValues, TContext exten
                               type={getDataType(output, index)}
                               isOpen={isOpenTypeMappingModal.get(index)}
                               toggleModal={toggleTypeMappingModal(index)}
-                              control={control} register={register}
+                              control={control}
+                              register={register}
+                              formState={formState}
                               fieldMappingId={index} />
           </div>
         </div>

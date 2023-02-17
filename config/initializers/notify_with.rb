@@ -1,1 +1,0 @@
-NotifyWith.mailer = NotificationsMailer

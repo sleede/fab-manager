@@ -28,16 +28,22 @@ module Payments::PaymentConcern
                                payment_method
                              end
       order.state = 'paid'
-      order.created_at = DateTime.current
+      # we change the order creation date to the date of payment to be more consistent for admins when filtering on orders
+      order.created_at = Time.current
       if payment_id && payment_type
         order.payment_gateway_object = PaymentGatewayObject.new(gateway_object_id: payment_id, gateway_object_type: payment_type)
       end
-      order.order_activities.create(activity_type: 'paid', operator_profile_id: order.operator_profile_id)
+      activity = order.order_activities.create(activity_type: 'paid', operator_profile_id: order.operator_profile_id)
       order.order_items.each do |item|
         ProductService.update_stock(item.orderable,
                                     [{ stock_type: 'external', reason: 'sold', quantity: item.quantity, order_item_id: item.id }]).save
       end
-      create_invoice(order, coupon, payment_id, payment_type) if order.save
+      if order.save
+        create_invoice(order, coupon, payment_id, payment_type)
+        NotificationCenter.call type: 'notify_admin_order_is_paid',
+                                receiver: User.admins_and_managers,
+                                attached_object: activity
+      end
       order.reload
     end
   end

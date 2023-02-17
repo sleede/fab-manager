@@ -3,24 +3,23 @@ import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { react2angular } from 'react2angular';
 import { Loader } from '../base/loader';
-import { IApplication } from '../../models/application';
+import type { IApplication } from '../../models/application';
 import { FabButton } from '../base/fab-button';
 import useCart from '../../hooks/use-cart';
 import FormatLib from '../../lib/format';
 import CartAPI from '../../api/cart';
-import { User } from '../../models/user';
+import type { User } from '../../models/user';
 import { PaymentModal } from '../payment/stripe/payment-modal';
 import { PaymentMethod } from '../../models/payment';
-import { Order, OrderErrors } from '../../models/order';
+import type { Order, OrderCartItemReservation, OrderErrors, OrderProduct } from '../../models/order';
 import { MemberSelect } from '../user/member-select';
 import { CouponInput } from '../coupon/coupon-input';
-import { Coupon } from '../../models/coupon';
-import noImage from '../../../../images/no_image.png';
-import Switch from 'react-switch';
+import type { Coupon } from '../../models/coupon';
 import OrderLib from '../../lib/order';
-import { CaretDown, CaretUp } from 'phosphor-react';
 import _ from 'lodash';
 import OrderAPI from '../../api/order';
+import { CartOrderProduct } from './cart-order-product';
+import { CartOrderReservation } from './cart-order-reservation';
 
 declare const Application: IApplication;
 
@@ -53,59 +52,6 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
         .catch(onError);
     }
   }, [cart]);
-
-  /**
-   * Remove the product from cart
-   */
-  const removeProductFromCart = (item) => {
-    return (e: React.BaseSyntheticEvent) => {
-      e.preventDefault();
-      e.stopPropagation();
-      const errors = getItemErrors(item);
-      if (errors.length === 1 && errors[0].error === 'not_found') {
-        reloadCart().catch(onError);
-      } else {
-        CartAPI.removeItem(cart, item.orderable_id).then(data => {
-          setCart(data);
-        }).catch(onError);
-      }
-    };
-  };
-
-  /**
-   * Change product quantity
-   */
-  const changeProductQuantity = (e: React.BaseSyntheticEvent, item) => {
-    CartAPI.setQuantity(cart, item.orderable_id, e.target.value)
-      .then(data => {
-        setCart(data);
-      })
-      .catch(() => onError(t('app.public.store_cart.stock_limit')));
-  };
-
-  /**
-   * Increment/decrement product quantity
-   */
-  const increaseOrDecreaseProductQuantity = (item, direction: 'up' | 'down') => {
-    CartAPI.setQuantity(cart, item.orderable_id, direction === 'up' ? item.quantity + 1 : item.quantity - 1)
-      .then(data => {
-        setCart(data);
-      })
-      .catch(() => onError(t('app.public.store_cart.stock_limit')));
-  };
-
-  /**
-   * Refresh product amount
-   */
-  const refreshItem = (item) => {
-    return (e: React.BaseSyntheticEvent) => {
-      e.preventDefault();
-      e.stopPropagation();
-      CartAPI.refreshItem(cart, item.orderable_id).then(data => {
-        setCart(data);
-      }).catch(onError);
-    };
-  };
 
   /**
    * Check the current cart's items (available, price, stock, quantity_min)
@@ -150,15 +96,6 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
   };
 
   /**
-   * get givean item's error
-   */
-  const getItemErrors = (item) => {
-    if (!cartErrors) return [];
-    const errors = _.find(cartErrors.details, (e) => e.item_id === item.id);
-    return errors?.errors || [{ error: 'not_found' }];
-  };
-
-  /**
    * Open/closes the payment modal
    */
   const togglePaymentModal = (): void => {
@@ -179,17 +116,10 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
   };
 
   /**
-   * Change cart's customer by admin/manger
+   * Change cart's customer by admin/manager
    */
   const handleChangeMember = (user: User): void => {
-    // if the selected user is the operator, he cannot offer products to himself
-    if (user.id === currentUser.id && cart.order_items_attributes.filter(item => item.is_offered).length > 0) {
-      Promise.all(cart.order_items_attributes.filter(item => item.is_offered).map(item => {
-        return CartAPI.setOffer(cart, item.orderable_id, false);
-      })).then((data) => setCart({ ...data[data.length - 1], user: { id: user.id, role: user.role } }));
-    } else {
-      setCart({ ...cart, user: { id: user.id, role: user.role } });
-    }
+    CartAPI.setCustomer(cart, user.id).then(setCart).catch(onError);
   };
 
   /**
@@ -207,23 +137,6 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
   };
 
   /**
-   * Toggle product offer
-   */
-  const toggleProductOffer = (item) => {
-    return (checked: boolean) => {
-      CartAPI.setOffer(cart, item.orderable_id, checked).then(data => {
-        setCart(data);
-      }).catch(e => {
-        if (e.match(/code 403/)) {
-          onError(t('app.public.store_cart.errors.unauthorized_offering_product'));
-        } else {
-          onError(e);
-        }
-      });
-    };
-  };
-
-  /**
    * Apply coupon to current cart
    */
   const applyCoupon = (coupon?: Coupon): void => {
@@ -232,89 +145,36 @@ const StoreCart: React.FC<StoreCartProps> = ({ onSuccess, onError, currentUser, 
     }
   };
 
-  /**
-   * Show item error
-   */
-  const itemError = (item, error) => {
-    if (error.error === 'is_active' || error.error === 'not_found') {
-      return <div className='error'><p>{t('app.public.store_cart.errors.product_not_found')}</p></div>;
-    }
-    if (error.error === 'stock' && error.value === 0) {
-      return <div className='error'><p>{t('app.public.store_cart.errors.out_of_stock')}</p></div>;
-    }
-    if (error.error === 'stock' && error.value > 0) {
-      return <div className='error'><p>{t('app.public.store_cart.errors.stock_limit_QUANTITY', { QUANTITY: error.value })}</p></div>;
-    }
-    if (error.error === 'quantity_min') {
-      return <div className='error'><p>{t('app.public.store_cart.errors.quantity_min_QUANTITY', { QUANTITY: error.value })}</p></div>;
-    }
-    if (error.error === 'amount') {
-      return <div className='error'>
-        <p>{t('app.public.store_cart.errors.price_changed_PRICE', { PRICE: `${FormatLib.price(error.value)} / ${t('app.public.store_cart.unit')}` })}</p>
-        <span className='refresh-btn' onClick={refreshItem(item)}>{t('app.public.store_cart.update_item')}</span>
-        </div>;
-    }
-  };
-
   return (
     <div className='store-cart'>
       <div className="store-cart-list">
         {cart && cartIsEmpty() && <p>{t('app.public.store_cart.cart_is_empty')}</p>}
-        {cart && cart.order_items_attributes.map(item => (
-          <article key={item.id} className={`store-cart-list-item ${getItemErrors(item).length > 0 ? 'error' : ''}`}>
-            <div className='picture'>
-              <img alt='' src={item.orderable_main_image_url || noImage} />
-            </div>
-            <div className="ref">
-              <span>{t('app.public.store_cart.reference_short')} {item.orderable_ref || ''}</span>
-              <p><a className="text-black" href={`/#!/store/p/${item.orderable_slug}`}>{item.orderable_name}</a></p>
-              {item.quantity_min > 1 &&
-                <span className='min'>{t('app.public.store_cart.minimum_purchase')}{item.quantity_min}</span>
-              }
-              {getItemErrors(item).map(e => {
-                return itemError(item, e);
-              })}
-            </div>
-            <div className="actions">
-              <div className='price'>
-                <p>{FormatLib.price(item.amount)}</p>
-                <span>/ {t('app.public.store_cart.unit')}</span>
-              </div>
-              <div className='quantity'>
-                <input type='number'
-                  onChange={e => changeProductQuantity(e, item)}
-                  min={item.quantity_min}
-                  max={item.orderable_external_stock}
-                  value={item.quantity}
-                />
-                <button onClick={() => increaseOrDecreaseProductQuantity(item, 'up')}><CaretUp size={12} weight="fill" /></button>
-                <button onClick={() => increaseOrDecreaseProductQuantity(item, 'down')}><CaretDown size={12} weight="fill" /></button>
-              </div>
-              <div className='total'>
-                <span>{t('app.public.store_cart.total')}</span>
-                <p>{FormatLib.price(OrderLib.itemAmount(item))}</p>
-              </div>
-              <FabButton className="main-action-btn" onClick={removeProductFromCart(item)}>
-                <i className="fa fa-trash" />
-              </FabButton>
-            </div>
-            {isPrivileged() &&
-              <div className='offer'>
-                <label>
-                  <span>{t('app.public.store_cart.offer_product')}</span>
-                  <Switch
-                  checked={item.is_offered || false}
-                  onChange={toggleProductOffer(item)}
-                  width={40}
-                  height={19}
-                  uncheckedIcon={false}
-                  checkedIcon={false}
-                  handleDiameter={15} />
-                </label>
-              </div>
-            }
-          </article>
-        ))}
+        {cart && cart.order_items_attributes.map(item => {
+          if (item.orderable_type === 'Product') {
+            return (
+              <CartOrderProduct item={item as OrderProduct}
+                                key={item.id}
+                                className="store-cart-list-item"
+                                cartErrors={cartErrors}
+                                cart={cart}
+                                setCart={setCart}
+                                reloadCart={reloadCart}
+                                onError={onError}
+                                privilegedOperator={isPrivileged()} />
+            );
+          }
+          return (
+            <CartOrderReservation item={item as OrderCartItemReservation}
+                                  key={item.id}
+                                  className="store-cart-list-item"
+                                  cartErrors={cartErrors}
+                                  cart={cart}
+                                  reloadCart={reloadCart}
+                                  setCart={setCart}
+                                  onError={onError}
+                                  privilegedOperator={isPrivileged()} />
+          );
+        })}
       </div>
 
       <div className="group">

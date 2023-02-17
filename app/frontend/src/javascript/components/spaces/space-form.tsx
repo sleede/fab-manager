@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm, useWatch } from 'react-hook-form';
 import SpaceAPI from '../../api/space';
 import { useTranslation } from 'react-i18next';
@@ -14,6 +15,8 @@ import { FormMultiFileUpload } from '../form/form-multi-file-upload';
 import { FabButton } from '../base/fab-button';
 import { Space } from '../../models/space';
 import { AdvancedAccountingForm } from '../accounting/advanced-accounting-form';
+import SettingAPI from '../../api/setting';
+import { FabAlert } from '../base/fab-alert';
 
 declare const Application: IApplication;
 
@@ -32,6 +35,12 @@ export const SpaceForm: React.FC<SpaceFormProps> = ({ action, space, onError, on
   const output = useWatch<Space>({ control });
   const { t } = useTranslation('admin');
 
+  const [isActiveAccounting, setIsActiveAccounting] = useState<boolean>(false);
+
+  useEffect(() => {
+    SettingAPI.get('advanced_accounting').then(res => setIsActiveAccounting(res.value === 'true')).catch(onError);
+  }, []);
+
   /**
    * Callback triggered when the user validates the machine form: handle create or update
    */
@@ -45,58 +54,95 @@ export const SpaceForm: React.FC<SpaceFormProps> = ({ action, space, onError, on
   };
 
   return (
-    <form className="space-form" onSubmit={handleSubmit(onSubmit)}>
-      <FormInput register={register} id="name"
-                 formState={formState}
-                 rules={{ required: true }}
-                 label={t('app.admin.space_form.name')} />
-      <FormImageUpload setValue={setValue}
-                       register={register}
-                       control={control}
-                       formState={formState}
-                       rules={{ required: true }}
-                       id="space_image_attributes"
-                       accept="image/*"
-                       defaultImage={output.space_image_attributes}
-                       label={t('app.admin.space_form.illustration')} />
-      <FormInput register={register}
-                 type="number"
-                 id="default_places"
-                 formState={formState}
-                 rules={{ required: true }}
-                 label={t('app.admin.space_form.default_seats')} />
-      <FormRichText control={control}
-                    id="description"
-                    rules={{ required: true }}
-                    label={t('app.admin.space_form.description')}
-                    limit={null}
-                    heading bulletList blockquote link video image />
-      <FormRichText control={control}
-                    id="characteristics"
-                    label={t('app.admin.space_form.characteristics')}
-                    limit={null}
-                    heading bulletList blockquote link video image />
+    <div className="space-form">
+      <header>
+        <h2>{t('app.admin.space_form.ACTION_title', { ACTION: action })}</h2>
+        <FabButton onClick={handleSubmit(onSubmit)} className="fab-button save-btn is-main">
+          {t('app.admin.space_form.save')}
+        </FabButton>
+      </header>
+      <form className="space-form-content" onSubmit={handleSubmit(onSubmit)}>
+        {action === 'create' &&
+          <FabAlert level='warning'>
+            {t('app.admin.space_form.watch_out_when_creating_a_new_space_its_prices_are_initialized_at_0_for_all_subscriptions')} {t('app.admin.space_form.consider_changing_its_prices_before_creating_any_reservation_slot')}
+          </FabAlert>
+        }
+        <section>
+          <header>
+            <p className="title">{t('app.admin.space_form.description')}</p>
+          </header>
+          <div className="content">
+            <FormInput register={register} id="name"
+                      formState={formState}
+                      rules={{ required: true }}
+                        label={t('app.admin.space_form.name')} />
+            <FormImageUpload setValue={setValue}
+                            register={register}
+                            control={control}
+                            formState={formState}
+                            rules={{ required: true }}
+                            id="space_image_attributes"
+                            accept="image/*"
+                            defaultImage={output.space_image_attributes}
+                              label={t('app.admin.space_form.illustration')} />
+            <FormInput register={register}
+                      type="number"
+                      id="default_places"
+                      formState={formState}
+                      rules={{ required: true }}
+                        label={t('app.admin.space_form.default_seats')} />
+            <FormRichText control={control}
+                          id="description"
+                          rules={{ required: true }}
+                          formState={formState}
+                          label={t('app.admin.space_form.description')}
+                          limit={null}
+                          heading bulletList blockquote link video image />
+            <FormRichText control={control}
+                          id="characteristics"
+                          label={t('app.admin.space_form.characteristics')}
+                          limit={null}
+                          heading bulletList link />
+          </div>
+        </section>
 
-      <div className='form-item-header space-files-header'>
-        <p>{t('app.admin.space_form.attached_files_pdf')}</p>
-      </div>
-      <FormMultiFileUpload setValue={setValue}
-                           addButtonLabel={t('app.admin.space_form.add_an_attachment')}
-                           control={control}
-                           accept="application/pdf"
-                           register={register}
-                           id="space_files_attributes"
-                           className="space-files" />
+        <section>
+          <header>
+            <p className="title">{t('app.admin.space_form.attachments')}</p>
+          </header>
+          <div className="content">
+            <div className='form-item-header space-files-header'>
+              <p>{t('app.admin.space_form.attached_files_pdf')}</p>
+            </div>
+            <FormMultiFileUpload setValue={setValue}
+                                  addButtonLabel={t('app.admin.space_form.add_an_attachment')}
+                                  control={control}
+                                  accept="application/pdf"
+                                  register={register}
+                                  id="space_files_attributes"
+                                  className="space-files" />
+          </div>
+        </section>
 
-      <FormSwitch control={control}
-                  id="disabled"
-                  label={t('app.admin.space_form.disable_space')}
-                  tooltip={t('app.admin.space_form.disabled_help')} />
-      <AdvancedAccountingForm register={register} onError={onError} />
-      <FabButton type="submit" className="is-info submit-btn">
-        {t('app.admin.space_form.ACTION_space', { ACTION: action })}
-      </FabButton>
-    </form>
+        <section>
+          <header>
+            <p className="title">{t('app.admin.space_form.settings')}</p>
+          </header>
+          <div className="content">
+            <FormSwitch control={control}
+                        id="disabled"
+                        label={t('app.admin.space_form.disable_space')}
+                        tooltip={t('app.admin.space_form.disabled_help')} />
+          </div>
+        </section>
+
+        {isActiveAccounting &&
+          <section>
+            <AdvancedAccountingForm register={register} onError={onError} />
+          </section>
+        }
+      </form>
+    </div>
   );
 };
 

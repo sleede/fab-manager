@@ -66,7 +66,7 @@
       Fablab.weekStartingDay = <%= Date.parse(Rails.application.secrets.week_starting_day).strftime('%w') %>;
       Fablab.d3DateFormat = "<%= Rails.application.secrets.d3_date_format %>";
       Fablab.uibDateFormat = "<%= Rails.application.secrets.uib_date_format %>";
-      Fablab.maxProofOfIdentityFileSize = <%= Rails.application.secrets.max_proof_of_identity_file_size&.to_i || 5.megabytes.to_i %>;
+      Fablab.maxSupportingDocumentFileSize = <%= ENV.fetch('MAX_SUPPORTING_DOCUMENT_FILE_SIZE' ,5.megabytes.to_i) %>;
 
       // feature tour (used when feature_tour_display = session)
       Fablab.sessionTours = [];

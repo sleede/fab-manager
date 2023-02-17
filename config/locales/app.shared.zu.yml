@@ -152,6 +152,7 @@ zu:
         themes: "crwdns28772:0crwdne28772:0"
         tags: "crwdns28774:0crwdne28774:0"
         save_as_draft: "crwdns28776:0crwdne28776:0"
+        status: "crwdns37079:0crwdne37079:0"
       #button to book a machine reservation
       reserve_button:
         book_this_machine: "crwdns28804:0crwdne28804:0"
@@ -517,7 +518,7 @@ zu:
           order_delivered_success: "crwdns30622:0crwdne30622:0"
           confirm_order_canceled_html: "crwdns30718:0crwdne30718:0"
           order_canceled_success: "crwdns30626:0crwdne30626:0"
-          confirm_order_refunded_html: "crwdns30720:0crwdne30720:0"
+          confirm_order_refunded_html: "crwdns37371:0crwdne37371:0"
           order_refunded_success: "crwdns30630:0crwdne30630:0"
       unsaved_form_alert:
         modal_title: "crwdns30558:0crwdne30558:0"

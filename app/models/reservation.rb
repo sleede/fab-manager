@@ -4,7 +4,7 @@
 # Slots are for Machine, Space and Training reservations.
 # Tickets are for Event reservations.
 class Reservation < ApplicationRecord
-  include NotifyWith::NotificationAttachedObject
+  include NotificationAttachedObject
   include ICalendarConcern
 
   belongs_to :statistic_profile
@@ -121,7 +121,7 @@ class Reservation < ApplicationRecord
   end
 
   def extend_subscription
-    SubscriptionExtensionAfterReservation.new(self).extend_subscription_if_eligible
+    Subscriptions::ExtensionAfterReservation.new(self).extend_subscription_if_eligible
   end
 
   def notify_member_create_reservation

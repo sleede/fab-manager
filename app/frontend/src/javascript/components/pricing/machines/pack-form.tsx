@@ -1,13 +1,13 @@
-import { BaseSyntheticEvent } from 'react';
-import * as React from 'react';
-import Select from 'react-select';
-import Switch from 'react-switch';
+import { useEffect, useState } from 'react';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { PrepaidPack } from '../../../models/prepaid-pack';
 import { useTranslation } from 'react-i18next';
-import { useImmer } from 'use-immer';
-import { FabInput } from '../../base/fab-input';
 import { IFablab } from '../../../models/fablab';
 import { SelectOption } from '../../../models/select';
+import { FormInput } from '../../form/form-input';
+import { FormSelect } from '../../form/form-select';
+import { FormSwitch } from '../../form/form-switch';
+import { FabInput } from '../../base/fab-input';
 
 declare let Fablab: IFablab;
 
@@ -25,9 +25,17 @@ type interval = typeof ALL_INTERVALS[number];
  * The form validation must be created elsewhere, using the attribute form={formId}.
  */
 export const PackForm: React.FC<PackFormProps> = ({ formId, onSubmit, pack }) => {
-  const [packData, updatePackData] = useImmer<PrepaidPack>(pack || {} as PrepaidPack);
-
   const { t } = useTranslation('admin');
+
+  const { handleSubmit, register, control, formState, setValue } = useForm<PrepaidPack>({ defaultValues: { ...pack } });
+
+  const [formattedDuration, setFormattedDuration] = useState<number>(pack?.minutes || 60);
+  /**
+   * Callback triggered when the user validates the form
+   */
+  const submitForm: SubmitHandler<PrepaidPack> = (data:PrepaidPack) => {
+    onSubmit(data);
+  };
 
   /**
    * Convert all validity-intervals to the react-select format
@@ -41,101 +49,65 @@ export const PackForm: React.FC<PackFormProps> = ({ formId, onSubmit, pack }) =>
    */
   const intervalToOption = (value: interval): SelectOption<interval> => {
     if (!value) return { value, label: '' };
-
-    return { value, label: t(`app.admin.pack_form.intervals.${value}`, { COUNT: packData.validity_count || 0 }) };
+    return { value, label: t(`app.admin.pack_form.intervals.${value}`, { COUNT: pack?.validity_count || 0 }) };
   };
 
   /**
-   * Callback triggered when the user sends the form.
+   * Changes hours into minutes
    */
-  const handleSubmit = (event: BaseSyntheticEvent): void => {
-    event.preventDefault();
-    onSubmit(packData);
+  const formatDuration = (value) => {
+    setFormattedDuration(value * 60);
   };
-
-  /**
-   * Callback triggered when the user inputs an amount for the current pack.
-   */
-  const handleUpdateAmount = (amount: string) => {
-    updatePackData(draft => {
-      draft.amount = parseFloat(amount);
-    });
-  };
-
-  /**
-   * Callback triggered when the user inputs a number of hours for the current pack.
-   */
-  const handleUpdateHours = (hours: string) => {
-    updatePackData(draft => {
-      draft.minutes = parseInt(hours, 10) * 60;
-    });
-  };
-
-  /**
-   * Callback triggered when the user inputs a number of periods for the current pack.
-   */
-  const handleUpdateValidityCount = (count: string) => {
-    updatePackData(draft => {
-      draft.validity_count = parseInt(count, 10);
-    });
-  };
-
-  /**
-   * Callback triggered when the user selects a type of interval for the current pack.
-   */
-  const handleUpdateValidityInterval = (option: SelectOption<interval>) => {
-    updatePackData(draft => {
-      draft.validity_interval = option.value as interval;
-    });
-  };
-
-  /**
-   * Callback triggered when the user disables the pack.
-   */
-  const handleUpdateDisabled = (checked: boolean) => {
-    updatePackData(draft => {
-      draft.disabled = checked;
-    });
-  };
+  useEffect(() => {
+    setValue('minutes', formattedDuration);
+  }, [formattedDuration]);
 
   return (
-    <form id={formId} onSubmit={handleSubmit} className="pack-form">
-      <label htmlFor="hours">{t('app.admin.pack_form.hours')} *</label>
-      <FabInput id="hours"
-        type="number"
-        defaultValue={packData?.minutes / 60 || ''}
-        onChange={handleUpdateHours}
-        min={1}
-        icon={<i className="fas fa-clock" />}
-        required />
-      <label htmlFor="amount">{t('app.admin.pack_form.amount')} *</label>
-      <FabInput id="amount"
+    <form id={formId} onSubmit={handleSubmit(submitForm)} className="pack-form">
+      <div className="duration">
+        <label htmlFor="minutes">{t('app.admin.pack_form.hours')}</label>
+        <Controller control={control}
+                    name='minutes'
+                    render={() => (
+                      <FabInput id="minutes"
+                            type='number'
+                            min={1}
+                            required
+                            icon={<i className="fas fa-clock" />}
+                            onChange={formatDuration}
+                            defaultValue={formattedDuration / 60} />
+                    )} />
+      </div>
+
+      <FormInput id="amount"
+        register={register}
+        formState={formState}
         type="number"
         step={0.01}
-        min={0}
-        defaultValue={packData?.amount || ''}
-        onChange={handleUpdateAmount}
         icon={<i className="fas fa-money-bill" />}
         addOn={Fablab.intl_currency}
-        required />
-      <label htmlFor="validity_count">{t('app.admin.pack_form.validity_count')}</label>
+        rules={{ required: true, min: 0 }}
+        label={t('app.admin.pack_form.amount')} />
+
+      <label className='validity' htmlFor="validity_count">{t('app.admin.pack_form.validity_count')}</label>
       <div className="interval-inputs">
-        <FabInput id="validity_count"
+        <FormInput id="validity_count"
+          register={register}
+          formState={formState}
           type="number"
-          min={0}
-          defaultValue={packData?.validity_count || ''}
-          onChange={handleUpdateValidityCount}
-          icon={<i className="fas fa-calendar-week" />} />
-        <Select placeholder={t('app.admin.pack_form.select_interval')}
-          className="select-interval"
-          defaultValue={intervalToOption(packData?.validity_interval)}
-          onChange={handleUpdateValidityInterval}
-          options={buildOptions()} />
+          icon={<i className="fas fa-calendar-week" />}
+          rules={{ min: 0 }}/>
+        <FormSelect id="validity_interval"
+                    control={control}
+                    options={buildOptions()}
+                    className="select-interval"
+                    placeholder={t('app.admin.pack_form.select_interval')}/>
       </div>
-      <label htmlFor="disabled">{t('app.admin.pack_form.disabled')}</label>
-      <div>
-        <Switch checked={packData?.disabled || false} onChange={handleUpdateDisabled} id="disabled" />
-      </div>
+
+      <FormSwitch id="disabled"
+                  control={control}
+                  formState={formState}
+                  label={t('app.admin.pack_form.disabled')} />
     </form>
   );
 };

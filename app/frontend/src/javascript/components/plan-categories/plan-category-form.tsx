@@ -22,7 +22,7 @@ interface PlanCategoryFormProps {
 const PlanCategoryForm: React.FC<PlanCategoryFormProps> = ({ action, category, onSuccess, onError }) => {
   const { t } = useTranslation('admin');
 
-  const { register, control, handleSubmit } = useForm<PlanCategory>({ defaultValues: { ...category } });
+  const { register, control, handleSubmit, formState } = useForm<PlanCategory>({ defaultValues: { ...category } });
   /**
    * The action has been confirmed by the user.
    * Push the created/updated plan-category to the API.
@@ -48,7 +48,7 @@ const PlanCategoryForm: React.FC<PlanCategoryFormProps> = ({ action, category, o
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <FormInput id='name' register={register} rules={{ required: 'true' }} label={t('app.admin.plan_category_form.name')} />
+      <FormInput id='name' register={register} rules={{ required: 'true' }} formState={formState} label={t('app.admin.plan_category_form.name')} />
 
       <FormRichText control={control} id="description" label={t('app.admin.plan_category_form.description')} limit={100} />
 

@@ -131,6 +131,19 @@ fr:
         your_plan: "Votre abonnement"
         expires_in_7_days: "expire dans 7 jours"
         to_renew_your_plan_follow_the_link: "Si vous souhaitez renouveler votre abonnement, vous pouvez vous rendre sur"
+    notify_member_training_authorization_expired:
+      subject: "Votre autorisation a été révoquée"
+      body:
+        training_expired_html: "<p>Vous avez suivi la formation %{TRAINING} , le %{DATE}.</p><p>Votre habilitation pour cette formation, valable pour %{PERIOD} mois, a expirée.</p><p>Veuillez la valider à nouveau afin de pouvoir réserver les %{MACHINES}</p>."
+    notify_member_training_auto_cancelled:
+      subject: "Votre séance de formation a été annulée"
+      body:
+        cancelled_training: "La séance de formation %{TRAINING} prévue le %{DATE}, de %{START} à %{END}, a été annulée en raison d'un nombre insuffisant de participants."
+        auto_refund: "Vous avez été remboursé sur votre porte-monnaie et un avoir devrait être disponible."
+    notify_member_training_invalidated:
+      subject: "Votre autorisation a été invalidée"
+      body:
+        training_invalidated_html: "<p>Vous avez suivi la formation %{TRAINING}, le %{DATE} vous donnant accès aux %{MACHINES}.</p><p>En raison de l'abscence de réservation pour l'une de ces machines au cours des %{PERIOD} derniers mois, votre autorisation a été invalidée.</p><p>Veuillez valider la formation à nouveau afin de continuer à réserver ces machines.</p>."
     notify_member_subscription_is_expired:
       subject: "Votre abonnement est arrivé à expiration"
       body:
@@ -142,6 +155,12 @@ fr:
       subject: "L'abonnement d'un membre expire dans 7 jours"
       body:
         subscription_will_expire_html: "L'abonnement du membre %{NAME} <strong><em>%{PLAN}</em></strong> expire dans 7 jours."
+    notify_admin_training_auto_cancelled:
+      subject: "Une formation a été automatiquement annulée"
+      body:
+        cancelled_training: "La séance de formation %{TRAINING} prévue le %{DATE}, de %{START} à %{END}, a été annulée en raison d'un nombre insuffisant de participants."
+        auto_refund: "Les membres qui ont réservé cette séance de formation ont été automatiquement remboursés sur leur porte-monnaie et des avoirs ont été générés."
+        manual_refund: "Veuillez rembourser manuellement tous les membres qui ont réservé cette séance de formation et générer des avoirs."
     notify_admin_subscription_is_expired:
       subject: "L'abonnement d'un membre est arrivé à expiration"
       body:
@@ -298,6 +317,11 @@ fr:
       subject: "Synchronisation Stripe"
       body:
         objects_sync: "Tous les membres, codes promos, machines, formations, espaces et formules d'abonnements ont été synchronisés avec succès sur Stripe."
+    notify_admin_order_is_paid:
+      subject: "Nouvelle commande"
+      body:
+        order_placed: "Une nouvelle commande (%{REFERENCE}) a été passée et payée par %{USER}."
+        view_details: ""
     notify_member_payment_schedule_ready:
       subject: "Votre échéancier de paiement"
       body:
@@ -351,15 +375,15 @@ fr:
         remember: "Conformément à l'échéancier de paiement %{REFERENCE}, une échéance de %{AMOUNT} était prévu pour être prélevée le %{DATE}."
         date: "Ceci est un rappel pour vérifier que le prélèvement bancaire a bien été effectué."
         confirm: "Veuillez confirmer la réception des fonds dans votre interface de gestion des échéanciers de paiement, afin que la facture correspondante soit générée."
-    notify_admin_user_proof_of_identity_files_created:
+    notify_admin_user_supporting_document_files_created:
       subject: "Justificatif téléversé par un membre"
       body:
-        proof_of_identity_files_uploaded_below: "Le membre %{NAME} a téléversé le justificatif suivant:"
-        validate_user: "Veuillez valider ce compte"
-    notify_admin_user_proof_of_identity_files_updated:
+        supporting_document_files_uploaded_below: "Le membre %{NAME} a téléversé le justificatif suivant :"
+        validate_user: "Veuillez valider son compte"
+    notify_admin_user_supporting_document_files_updated:
       subject: "Le justificatif d'un membre a changé"
       body:
-        user_update_proof_of_identity_file: "Le membre %{NAME} a modifié le justificatif ci-dessous :"
+        user_update_supporting_document_file: "Le membre %{NAME} a modifié le justificatif ci-dessous :"
         validate_user: "Veuillez valider son compte"
     notify_user_is_validated:
       subject: "Compte validé"
@@ -369,15 +393,15 @@ fr:
       subject: "Compte invalidé"
       body:
         account_invalidated: "Votre compte a été invalidé. Vous ne pourrez plus réserver, jusqu'à ce que votre compte soit à nouveau validé."
-    notify_user_proof_of_identity_refusal:
-      subject: "Le justificatif a été refusé"
+    notify_user_supporting_document_refusal:
+      subject: "Vos pièces justificatives ont été refusées"
       body:
-        user_proof_of_identity_files_refusal: "Votre pièce justificative a été refusée :"
-        action: "Veuillez téléverser une nouvelle pièce justificative."
-    notify_admin_user_proof_of_identity_refusal:
-      subject: "Le justificatif d'un membre a été refusé"
+        user_supporting_document_files_refusal: "Vos pièces justificatives ont été refusées :"
+        action: "Veuillez téléverser de nouvelles pièces justificatives."
+    notify_admin_user_supporting_document_refusal:
+      subject: "Les justificatifs d'un membre ont été refusés"
       body:
-        user_proof_of_identity_files_refusal: "Le justificatif du membre %{NAME} a été refusé par %{OPERATOR} :"
+        user_supporting_document_files_refusal: "Le justificatif du membre %{NAME} a été refusé par %{OPERATOR} :"
     shared:
       hello: "Bonjour %{user_name}"
     notify_user_order_is_ready:

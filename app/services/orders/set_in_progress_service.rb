@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Provides methods for set in progress state to order
+# Provides a method to set the order state to "in progress"
 class Orders::SetInProgressService
   def call(order, current_user)
     raise ::UpdateOrderStateError if %w[cart payment_failed in_progress canceled refunded delivered].include?(order.state)

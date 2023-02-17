@@ -202,7 +202,7 @@ prepare_files()
 
   # create folders before starting the containers, otherwise root will own them
   local folders=(accounting config elasticsearch/config exports imports invoices log payment_schedules plugins postgresql \
-  proof_of_identity_files public/packs public/uploads)
+  supporting_document_files public/packs public/uploads)
   for folder in "${folders[@]}"; do
     mkdir -p "$FABMANAGER_PATH/$folder"
   done
@@ -376,9 +376,9 @@ configure_env_file()
   local doc variables secret
   doc=$(\curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/doc/environment.md)
   variables=(DEFAULT_HOST DEFAULT_PROTOCOL DELIVERY_METHOD SMTP_ADDRESS SMTP_PORT SMTP_USER_NAME SMTP_PASSWORD SMTP_AUTHENTICATION \
-   SMTP_ENABLE_STARTTLS_AUTO SMTP_OPENSSL_VERIFY_MODE SMTP_TLS LOG_LEVEL MAX_IMAGE_SIZE MAX_CAO_SIZE MAX_IMPORT_SIZE MAX_PROOF_OF_IDENTITY_FILE_SIZE DISK_SPACE_MB_ALERT \
+   SMTP_ENABLE_STARTTLS_AUTO SMTP_OPENSSL_VERIFY_MODE SMTP_TLS LOG_LEVEL MAX_IMAGE_SIZE MAX_CAO_SIZE MAX_IMPORT_SIZE MAX_SUPPORTING_DOCUMENT_FILE_SIZE \
    ADMINSYS_EMAIL APP_LOCALE RAILS_LOCALE MOMENT_LOCALE SUMMERNOTE_LOCALE ANGULAR_LOCALE FULLCALENDAR_LOCALE INTL_LOCALE INTL_CURRENCY\
-   POSTGRESQL_LANGUAGE_ANALYZER TIME_ZONE WEEK_STARTING_DAY D3_DATE_FORMAT UIB_DATE_FORMAT EXCEL_DATE_FORMAT)
+   POSTGRESQL_LANGUAGE_ANALYZER TIME_ZONE WEEK_STARTING_DAY D3_DATE_FORMAT UIB_DATE_FORMAT EXCEL_DATE_FORMAT DISK_SPACE_MB_ALERT)
   for variable in "${variables[@]}"; do
     local var_doc current
     var_doc=$(get_md_anchor "$doc" "$variable")

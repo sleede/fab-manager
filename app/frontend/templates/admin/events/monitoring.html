@@ -29,9 +29,9 @@
 	  <span ng-if="(event.start_date | amDateFormat:'LL')==(event.end_date | amDateFormat:'LL')">
 		{{ 'app.admin.events.on_DATE' | translate:{DATE:(event.start_date | amDateFormat:'LL')} }}
         <span ng-if="event.all_day === false">
-          {{ 'app.admin.events.from_TIME' | translate:{TIME:(event.start_date | amDateFormat:'LT')} }}
+          {{ 'app.admin.events.from_TIME' | translate:{TIME:event.start_time} }}
           <span class="text-sm font-thin" translate>{{ 'app.admin.events.to_time' }}</span>
-          {{event.end_date | amDateFormat:'LT'}}
+          {{event.end_time}}
         </span>
 	  </span>
 
@@ -41,9 +41,9 @@
 	    {{'app.admin.events.to_date' | translate}} {{event.end_date | amDateFormat:'LL'}}
         <br ng-if="event.all_day === false"/>
         <span ng-if="event.all_day === false">
-          {{ 'app.admin.events.from_TIME' | translate:{TIME:(event.start_date | amDateFormat:'LT')} }}
+          {{ 'app.admin.events.from_TIME' | translate:{TIME:event.start_time} }}
           <span class="text-sm font-thin" translate>{{ 'app.admin.events.to_time' }}</span>
-          {{event.end_date | amDateFormat:'LT'}}
+          {{event.end_time}}
         </span>
       </span>
     </td>

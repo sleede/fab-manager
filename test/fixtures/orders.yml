@@ -163,7 +163,7 @@ order_15:
 order_16:
   id: 16
   statistic_profile_id: 10
-  operator_profile_id:
+  operator_profile_id: 10
   token: 9VWkmJDSx7QixRusL7ppWg1666628033284
   reference: '005901-<%= DateTime.current.utc.strftime('%m') %>-<%= DateTime.current.utc.strftime('%d') %>'
   state: cart
@@ -199,7 +199,7 @@ order_17:
 order_18:
   id: 18
   statistic_profile_id: 9
-  operator_profile_id:
+  operator_profile_id: 9
   token: KbSmmD_gi9w_CrpwtK9OwA1666687433963
   reference: '005902-<%= DateTime.current.utc.strftime('%m') %>-<%= DateTime.current.utc.strftime('%d') %>'
   state: cart
@@ -234,7 +234,7 @@ order_19:
   invoice_id:
 order_20:
   id: 20
-  statistic_profile_id:
+  statistic_profile_id: 1
   operator_profile_id: 1
   token: 0DKxbAOzSXRx-amXyhmDdg1666691976019
   reference: '005904-<%= DateTime.current.utc.strftime('%m') %>-<%= DateTime.current.utc.strftime('%d') %>'

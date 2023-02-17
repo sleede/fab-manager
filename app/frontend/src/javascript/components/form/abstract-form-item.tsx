@@ -4,7 +4,7 @@ import { AbstractFormComponent } from '../../models/form-component';
 import { FieldValues } from 'react-hook-form/dist/types/fields';
 import { get as _get } from 'lodash';
 
-export interface AbstractFormItemProps<TFieldValues> extends PropsWithChildren<AbstractFormComponent<TFieldValues>> {
+export type AbstractFormItemProps<TFieldValues> = PropsWithChildren<AbstractFormComponent<TFieldValues>> & {
   id: string,
   label?: string|ReactNode,
   tooltip?: ReactNode,
@@ -21,17 +21,13 @@ export interface AbstractFormItemProps<TFieldValues> extends PropsWithChildren<A
  */
 export const AbstractFormItem = <TFieldValues extends FieldValues>({ id, label, tooltip, className, disabled, error, warning, rules, formState, onLabelClick, inLine, containerType, children }: AbstractFormItemProps<TFieldValues>) => {
   const [isDirty, setIsDirty] = useState<boolean>(false);
-  const [fieldError, setFieldError] = useState<{ message: string }>(error);
+  const [fieldError, setFieldError] = useState<{ message: string }>(null);
   const [isDisabled, setIsDisabled] = useState<boolean>(false);
 
   useEffect(() => {
     setIsDirty(_get(formState?.dirtyFields, id));
     setFieldError(_get(formState?.errors, id));
   }, [formState]);
-
-  useEffect(() => {
-    setFieldError(error);
-  }, [error]);
 
   useEffect(() => {
     if (typeof disabled === 'function') {
@@ -44,7 +40,7 @@ export const AbstractFormItem = <TFieldValues extends FieldValues>({ id, label, 
   // Compose classnames from props
   const classNames = [
     `${className || ''}`,
-    `${isDirty && fieldError ? 'is-incorrect' : ''}`,
+    `${(isDirty && error) || fieldError ? 'is-incorrect' : ''}`,
     `${isDirty && warning ? 'is-warned' : ''}`,
     `${rules && rules.required ? 'is-required' : ''}`,
     `${isDisabled ? 'is-disabled' : ''}`
@@ -79,7 +75,8 @@ export const AbstractFormItem = <TFieldValues extends FieldValues>({ id, label, 
         </div>}
         {children}
       </div>
-      {(isDirty && fieldError) && <div className="form-item-error">{fieldError.message}</div> }
+      { fieldError && <div className="form-item-error">{fieldError.message}</div> }
+      {(isDirty && error) && <div className="form-item-error">{error.message}</div> }
       {(isDirty && warning) && <div className="form-item-warning">{warning.message}</div> }
     </>
   ));

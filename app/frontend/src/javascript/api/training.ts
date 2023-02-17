@@ -28,4 +28,9 @@ export default class TrainingAPI {
     });
     return res?.data;
   }
+
+  static async destroy (trainingId: number): Promise<void> {
+    const res: AxiosResponse<void> = await apiClient.delete(`/api/trainings/${trainingId}`);
+    return res?.data;
+  }
 }

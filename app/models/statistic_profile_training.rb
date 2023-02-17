@@ -2,7 +2,7 @@
 
 # Stores trainings validated per user (non validated trainings are only recorded in reservations)
 class StatisticProfileTraining < ApplicationRecord
-  include NotifyWith::NotificationAttachedObject
+  include NotificationAttachedObject
 
   belongs_to :statistic_profile
   belongs_to :training

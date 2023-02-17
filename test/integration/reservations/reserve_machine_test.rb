@@ -14,6 +14,7 @@ class Reservations::ReserveMachineTest < ActionDispatch::IntegrationTest
 
     machine = Machine.find(6)
     availability = Availability.find(4)
+    slot = availability.slots.first
 
     reservations_count = Reservation.count
     invoice_count = Invoice.count
@@ -33,7 +34,7 @@ class Reservations::ReserveMachineTest < ActionDispatch::IntegrationTest
                      reservable_type: machine.class.name,
                      slots_reservations_attributes: [
                        {
-                         slot_id: availability.slots.first.id
+                         slot_id: slot.id
                        }
                      ]
                    }
@@ -79,6 +80,13 @@ class Reservations::ReserveMachineTest < ActionDispatch::IntegrationTest
 
     # notification
     assert_not_empty Notification.where(attached_object: reservation)
+
+    # place cache
+    slot.reload
+    cached = slot.places.detect { |p| p['reservable_id'] == machine.id && p['reservable_type'] == machine.class.name }
+    assert_not_nil cached
+    assert_equal 1, cached['reserved_places']
+    assert_includes cached['user_ids'], @user_without_subscription.id
   end
 
   test 'user without subscription reserves a machine with error' do

@@ -23,17 +23,19 @@ export const AdvancedAccountingForm = <TFieldValues extends FieldValues>({ regis
     SettingAPI.get('advanced_accounting').then(res => setIsEnabled(res.value === 'true')).catch(onError);
   }, []);
 
-  return (
-    <div className="advanced-accounting-form">
-      {isEnabled && <div>
-        <h4>{t('app.admin.advanced_accounting_form.title')}</h4>
+  return (<>
+    {isEnabled && <>
+      <header>
+        <p className="title" role="heading">{t('app.admin.advanced_accounting_form.title')}</p>
+      </header>
+      <div className="content">
         <FormInput register={register}
-                   id="advanced_accounting_attributes.code"
-                   label={t('app.admin.advanced_accounting_form.code')} />
+                  id="advanced_accounting_attributes.code"
+                  label={t('app.admin.advanced_accounting_form.code')} />
         <FormInput register={register}
-                   id="advanced_accounting_attributes.analytical_section"
-                   label={t('app.admin.advanced_accounting_form.analytical_section')} />
-      </div>}
-    </div>
-  );
+                  id="advanced_accounting_attributes.analytical_section"
+                  label={t('app.admin.advanced_accounting_form.analytical_section')} />
+      </div>
+    </>}
+  </>);
 };

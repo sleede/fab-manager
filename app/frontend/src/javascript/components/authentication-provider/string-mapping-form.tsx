@@ -1,5 +1,5 @@
 import { ArrayPath, useFieldArray, UseFormRegister } from 'react-hook-form';
-import { Control } from 'react-hook-form/dist/types/form';
+import { Control, FormState } from 'react-hook-form/dist/types/form';
 import { FieldValues } from 'react-hook-form/dist/types/fields';
 import { useTranslation } from 'react-i18next';
 import { FabButton } from '../base/fab-button';
@@ -9,12 +9,13 @@ export interface StringMappingFormProps<TFieldValues, TContext extends object> {
   register: UseFormRegister<TFieldValues>,
   control: Control<TFieldValues, TContext>,
   fieldMappingId: number,
+  formState: FormState<TFieldValues>
 }
 
 /**
  * Partial form to map an internal string field to an external API.
  */
-export const StringMappingForm = <TFieldValues extends FieldValues, TContext extends object>({ register, control, fieldMappingId }: StringMappingFormProps<TFieldValues, TContext>) => {
+export const StringMappingForm = <TFieldValues extends FieldValues, TContext extends object>({ register, control, fieldMappingId, formState }: StringMappingFormProps<TFieldValues, TContext>) => {
   const { t } = useTranslation('admin');
 
   const { fields, append, remove } = useFieldArray({ control, name: 'auth_provider_mappings_attributes_transformation_mapping' as ArrayPath<TFieldValues> });
@@ -33,10 +34,12 @@ export const StringMappingForm = <TFieldValues extends FieldValues, TContext ext
             <FormInput id={`auth_provider_mappings_attributes.${fieldMappingId}.transformation.mapping.${index}.from`}
                        register={register}
                        rules={{ required: true }}
+                       formState={formState}
                        label={t('app.admin.authentication.string_mapping_form.mapping_from')} />
             <FormInput id={`auth_provider_mappings_attributes.${fieldMappingId}.transformation.mapping.${index}.to`}
                        register={register}
                        rules={{ required: true }}
+                       formState={formState}
                        label={t('app.admin.authentication.string_mapping_form.mapping_to')} />
           </div>
           <div className="actions">

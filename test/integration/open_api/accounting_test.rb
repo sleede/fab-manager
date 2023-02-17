@@ -54,7 +54,7 @@ class OpenApi::AccountingTest < ActionDispatch::IntegrationTest
     lines = json_response(response.body)
     assert lines[:lines].count.positive?
     assert(lines[:lines].all? do |line|
-      date = DateTime.parse(line[:date])
+      date = Time.zone.parse(line[:date])
       date >= '2022-09-01'.to_date && date <= '2022-09-30'.to_date
     end)
   end

@@ -325,6 +325,7 @@ Application.Controllers.controller('SettingsController', ['$scope', '$rootScope'
      * Callback triggered by react components
      */
     $scope.onError = function (message) {
+      console.error(message);
       growl.error(message);
     };
 
@@ -471,6 +472,7 @@ Application.Controllers.controller('SettingsController', ['$scope', '$rootScope'
     };
 
     $scope.onError = function (message) {
+      console.error(message);
       growl.error(message);
     };
 

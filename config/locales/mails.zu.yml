@@ -131,6 +131,19 @@ zu:
         your_plan: "crwdns29650:0crwdne29650:0"
         expires_in_7_days: "crwdns29652:0crwdne29652:0"
         to_renew_your_plan_follow_the_link: "crwdns29654:0crwdne29654:0"
+    notify_member_training_authorization_expired:
+      subject: "crwdns37119:0crwdne37119:0"
+      body:
+        training_expired_html: "crwdns37121:0%{TRAINING}crwdnd37121:0%{DATE}crwdnd37121:0%{PERIOD}crwdnd37121:0%{MACHINES}crwdne37121:0"
+    notify_member_training_auto_cancelled:
+      subject: "crwdns37123:0crwdne37123:0"
+      body:
+        cancelled_training: "crwdns37125:0%{TRAINING}crwdnd37125:0%{DATE}crwdnd37125:0%{START}crwdnd37125:0%{END}crwdne37125:0"
+        auto_refund: "crwdns37127:0crwdne37127:0"
+    notify_member_training_invalidated:
+      subject: "crwdns37129:0crwdne37129:0"
+      body:
+        training_invalidated_html: "crwdns37131:0%{TRAINING}crwdnd37131:0%{DATE}crwdnd37131:0%{MACHINES}crwdnd37131:0%{PERIOD}crwdne37131:0"
     notify_member_subscription_is_expired:
       subject: "crwdns29656:0crwdne29656:0"
       body:
@@ -142,6 +155,12 @@ zu:
       subject: "crwdns29666:0crwdne29666:0"
       body:
         subscription_will_expire_html: "crwdns29668:0%{NAME}crwdnd29668:0%{PLAN}crwdne29668:0"
+    notify_admin_training_auto_cancelled:
+      subject: "crwdns37133:0crwdne37133:0"
+      body:
+        cancelled_training: "crwdns37135:0%{TRAINING}crwdnd37135:0%{DATE}crwdnd37135:0%{START}crwdnd37135:0%{END}crwdne37135:0"
+        auto_refund: "crwdns37137:0crwdne37137:0"
+        manual_refund: "crwdns37139:0crwdne37139:0"
     notify_admin_subscription_is_expired:
       subject: "crwdns29670:0crwdne29670:0"
       body:
@@ -298,6 +317,11 @@ zu:
       subject: "crwdns29870:0crwdne29870:0"
       body:
         objects_sync: "crwdns29872:0crwdne29872:0"
+    notify_admin_order_is_paid:
+      subject: "crwdns37381:0crwdne37381:0"
+      body:
+        order_placed: "crwdns37383:0%{REFERENCE}crwdnd37383:0%{USER}crwdne37383:0"
+        view_details: "crwdns37385:0crwdne37385:0"
     notify_member_payment_schedule_ready:
       subject: "crwdns29874:0crwdne29874:0"
       body:
@@ -351,16 +375,16 @@ zu:
         remember: "crwdns29938:0%{REFERENCE}crwdnd29938:0%{AMOUNT}crwdnd29938:0%{DATE}crwdne29938:0"
         date: "crwdns29940:0crwdne29940:0"
         confirm: "crwdns29942:0crwdne29942:0"
-    notify_admin_user_proof_of_identity_files_created:
-      subject: "crwdns29944:0crwdne29944:0"
+    notify_admin_user_supporting_document_files_created:
+      subject: "crwdns37349:0crwdne37349:0"
       body:
-        proof_of_identity_files_uploaded_below: "crwdns29946:0%{NAME}crwdne29946:0"
-        validate_user: "crwdns29948:0crwdne29948:0"
-    notify_admin_user_proof_of_identity_files_updated:
-      subject: "crwdns29950:0crwdne29950:0"
+        supporting_document_files_uploaded_below: "crwdns37351:0%{NAME}crwdne37351:0"
+        validate_user: "crwdns37353:0crwdne37353:0"
+    notify_admin_user_supporting_document_files_updated:
+      subject: "crwdns37355:0crwdne37355:0"
       body:
-        user_update_proof_of_identity_file: "crwdns29952:0%{NAME}crwdne29952:0"
-        validate_user: "crwdns29954:0crwdne29954:0"
+        user_update_supporting_document_file: "crwdns37357:0%{NAME}crwdne37357:0"
+        validate_user: "crwdns37359:0crwdne37359:0"
     notify_user_is_validated:
       subject: "crwdns29956:0crwdne29956:0"
       body:
@@ -369,15 +393,15 @@ zu:
       subject: "crwdns29960:0crwdne29960:0"
       body:
         account_invalidated: "crwdns29962:0crwdne29962:0"
-    notify_user_proof_of_identity_refusal:
-      subject: "crwdns29964:0crwdne29964:0"
+    notify_user_supporting_document_refusal:
+      subject: "crwdns37361:0crwdne37361:0"
       body:
-        user_proof_of_identity_files_refusal: "crwdns29966:0crwdne29966:0"
-        action: "crwdns29968:0crwdne29968:0"
-    notify_admin_user_proof_of_identity_refusal:
-      subject: "crwdns29970:0crwdne29970:0"
+        user_supporting_document_files_refusal: "crwdns37363:0crwdne37363:0"
+        action: "crwdns37365:0crwdne37365:0"
+    notify_admin_user_supporting_document_refusal:
+      subject: "crwdns37367:0crwdne37367:0"
       body:
-        user_proof_of_identity_files_refusal: "crwdns29972:0%{NAME}crwdnd29972:0%{OPERATOR}crwdne29972:0"
+        user_supporting_document_files_refusal: "crwdns37369:0%{NAME}crwdnd37369:0%{OPERATOR}crwdne37369:0"
     shared:
       hello: "crwdns29974:0%{user_name}crwdne29974:0"
     notify_user_order_is_ready:

@@ -1,23 +1,24 @@
 .fab-panel {
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 6px;
+  background-color: var(--gray-soft-lightest);
+  border: 1px solid var(--gray-soft-dark);
+  border-radius: var(--border-radius);
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
   margin: 30px 30px 30px 0;
   min-height: 1px;
   position: relative;
   display: block;
   border-spacing: 0;
+  overflow: hidden;
 
   .panel-header {
-    background-color: #f4f3f3;
+    background-color: var(--gray-soft-light);
     padding: 18px 15px;
-    border-bottom: 1px solid #ddd;
-    border-top-right-radius: 3px;
-    border-top-left-radius: 3px;
+    border-bottom: 1px solid var(--gray-soft-dark);
+    border-top-right-radius: var(--border-radius);
+    border-top-left-radius: var(--border-radius);
 
     &.small {
-      padding: 15px 15px;
+      padding: 24px;
     }
   }
 
@@ -25,9 +26,10 @@
     padding: 15px;
   }
 
-  .no-header {
+  &.no-header {
     padding: 15px;
-    background-color: #f4f3f3;
+    background-color: var(--gray-soft-light);
+    border-radius: var(--border-radius);
   }
 }
 

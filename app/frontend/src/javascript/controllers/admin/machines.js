@@ -4,9 +4,12 @@
 */
 'use strict';
 
-Application.Controllers.controller('AdminMachinesController', ['$scope', 'CSRF', 'growl', '$state', '_t', 'AuthService', 'settingsPromise', 'Member', 'uiTourService', 'machinesPromise', 'helpers',
-  function ($scope, CSRF, growl, $state, _t, AuthService, settingsPromise, Member, uiTourService, machinesPromise, helpers) {
+Application.Controllers.controller('AdminMachinesController', ['$scope', 'CSRF', 'growl', '$state', '_t', 'AuthService', 'settingsPromise', 'Member', 'uiTourService', 'machinesPromise', 'helpers', '$uiRouter',
+  function ($scope, CSRF, growl, $state, _t, AuthService, settingsPromise, Member, uiTourService, machinesPromise, helpers, $uiRouter) {
     /* PUBLIC SCOPE */
+
+    // the following item is used by the UnsavedFormAlert component to detect a page change
+    $scope.uiRouter = $uiRouter;
 
     // default tab: machines list
     $scope.tabs = { active: 0 };
@@ -23,6 +26,7 @@ Application.Controllers.controller('AdminMachinesController', ['$scope', 'CSRF',
      * Shows an error message forwarded from a child component
      */
     $scope.onError = function (message) {
+      console.error(message);
       growl.error(message);
     };
 

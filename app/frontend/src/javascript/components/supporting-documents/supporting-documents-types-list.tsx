@@ -6,12 +6,12 @@ import _ from 'lodash';
 import { HtmlTranslate } from '../base/html-translate';
 import { Loader } from '../base/loader';
 import { IApplication } from '../../models/application';
-import { ProofOfIdentityType } from '../../models/proof-of-identity-type';
+import { SupportingDocumentType } from '../../models/supporting-document-type';
 import { Group } from '../../models/group';
 import { SupportingDocumentsTypeModal } from './supporting-documents-type-modal';
 import { DeleteSupportingDocumentsTypeModal } from './delete-supporting-documents-type-modal';
 import GroupAPI from '../../api/group';
-import ProofOfIdentityTypeAPI from '../../api/proof-of-identity-type';
+import SupportingDocumentTypeAPI from '../../api/supporting-document-type';
 import { FabPanel } from '../base/fab-panel';
 import { FabAlert } from '../base/fab-alert';
 import { FabButton } from '../base/fab-button';
@@ -30,9 +30,9 @@ const SupportingDocumentsTypesList: React.FC<SupportingDocumentsTypesListProps> 
   const { t } = useTranslation('admin');
 
   // list of displayed supporting documents type
-  const [supportingDocumentsTypes, setSupportingDocumentsTypes] = useState<Array<ProofOfIdentityType>>([]);
+  const [supportingDocumentsTypes, setSupportingDocumentsTypes] = useState<Array<SupportingDocumentType>>([]);
   // currently added/edited type
-  const [supportingDocumentsType, setSupportingDocumentsType] = useState<ProofOfIdentityType>(null);
+  const [supportingDocumentsType, setSupportingDocumentsType] = useState<SupportingDocumentType>(null);
   // list ordering
   const [supportingDocumentsTypeOrder, setSupportingDocumentsTypeOrder] = useState<string>(null);
   // creation/edition modal
@@ -48,7 +48,7 @@ const SupportingDocumentsTypesList: React.FC<SupportingDocumentsTypesListProps> 
   useEffect(() => {
     GroupAPI.index({ disabled: false }).then(data => {
       setGroups(data);
-      ProofOfIdentityTypeAPI.index().then(pData => {
+      SupportingDocumentTypeAPI.index().then(pData => {
         setSupportingDocumentsTypes(pData);
       });
     });
@@ -72,7 +72,7 @@ const SupportingDocumentsTypesList: React.FC<SupportingDocumentsTypesListProps> 
   /**
    * Init the process of editing the given type
    */
-  const editType = (type: ProofOfIdentityType): () => void => {
+  const editType = (type: SupportingDocumentType): () => void => {
     return (): void => {
       setSupportingDocumentsType(type);
       setModalIsOpen(true);
@@ -91,7 +91,7 @@ const SupportingDocumentsTypesList: React.FC<SupportingDocumentsTypesListProps> 
    */
   const onSaveTypeSuccess = (message: string): void => {
     setModalIsOpen(false);
-    ProofOfIdentityTypeAPI.index().then(pData => {
+    SupportingDocumentTypeAPI.index().then(pData => {
       setSupportingDocumentsTypes(orderTypes(pData, supportingDocumentsTypeOrder));
       onSuccess(message);
     }).catch((error) => {
@@ -121,7 +121,7 @@ const SupportingDocumentsTypesList: React.FC<SupportingDocumentsTypesListProps> 
    */
   const onDestroySuccess = (message: string): void => {
     setDestroyModalIsOpen(false);
-    ProofOfIdentityTypeAPI.index().then(pData => {
+    SupportingDocumentTypeAPI.index().then(pData => {
       setSupportingDocumentsTypes(pData);
       setSupportingDocumentsTypes(orderTypes(pData, supportingDocumentsTypeOrder));
       onSuccess(message);
@@ -147,13 +147,13 @@ const SupportingDocumentsTypesList: React.FC<SupportingDocumentsTypesListProps> 
   /**
    * Sort the provided types according to the provided ordering key and return the resulting list
    */
-  const orderTypes = (types: Array<ProofOfIdentityType>, orderBy?: string): Array<ProofOfIdentityType> => {
+  const orderTypes = (types: Array<SupportingDocumentType>, orderBy?: string): Array<SupportingDocumentType> => {
     if (!orderBy) {
       return types;
     }
     const order = orderBy[0] === '-' ? 'desc' : 'asc';
     if (orderBy.search('group_name') !== -1) {
-      return _.orderBy(types, (type: ProofOfIdentityType) => getGroupsNames(type.group_ids), order);
+      return _.orderBy(types, (type: SupportingDocumentType) => getGroupsNames(type.group_ids), order);
     } else {
       return _.orderBy(types, 'name', order);
     }

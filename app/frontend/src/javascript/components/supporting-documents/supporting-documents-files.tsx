@@ -7,10 +7,10 @@ import { HtmlTranslate } from '../base/html-translate';
 import { Loader } from '../base/loader';
 import { User } from '../../models/user';
 import { IApplication } from '../../models/application';
-import { ProofOfIdentityType } from '../../models/proof-of-identity-type';
-import { ProofOfIdentityFile } from '../../models/proof-of-identity-file';
-import ProofOfIdentityTypeAPI from '../../api/proof-of-identity-type';
-import ProofOfIdentityFileAPI from '../../api/proof-of-identity-file';
+import { SupportingDocumentType } from '../../models/supporting-document-type';
+import { SupportingDocumentFile } from '../../models/supporting-document-file';
+import SupportingDocumentTypeAPI from '../../api/supporting-document-type';
+import SupportingDocumentFileAPI from '../../api/supporting-document-file';
 import { IFablab } from '../../models/fablab';
 import { FabAlert } from '../base/fab-alert';
 import { FabPanel } from '../base/fab-panel';
@@ -36,20 +36,20 @@ interface FilesType {
 export const SupportingDocumentsFiles: React.FC<SupportingDocumentsFilesProps> = ({ currentUser, onSuccess, onError }) => {
   const { t } = useTranslation('logged');
 
-  const maxProofOfIdentityFileSizeMb = (Fablab.maxProofOfIdentityFileSize / 1024 / 1024).toFixed();
+  const maxProofOfIdentityFileSizeMb = (Fablab.maxSupportingDocumentFileSize / 1024 / 1024).toFixed();
 
   // list of supporting documents type
-  const [supportingDocumentsTypes, setSupportingDocumentsTypes] = useState<Array<ProofOfIdentityType>>([]);
-  const [supportingDocumentsFiles, setSupportingDocumentsFiles] = useState<Array<ProofOfIdentityFile>>([]);
+  const [supportingDocumentsTypes, setSupportingDocumentsTypes] = useState<Array<SupportingDocumentType>>([]);
+  const [supportingDocumentsFiles, setSupportingDocumentsFiles] = useState<Array<SupportingDocumentFile>>([]);
   const [files, setFiles] = useState<FilesType>({});
   const [errors, setErrors] = useState<Array<number>>([]);
 
   // get supporting documents type and files
   useEffect(() => {
-    ProofOfIdentityTypeAPI.index({ group_id: currentUser.group_id }).then(tData => {
+    SupportingDocumentTypeAPI.index({ group_id: currentUser.group_id }).then(tData => {
       setSupportingDocumentsTypes(tData);
     });
-    ProofOfIdentityFileAPI.index({ user_id: currentUser.id }).then(fData => {
+    SupportingDocumentFileAPI.index({ user_id: currentUser.id }).then(fData => {
       setSupportingDocumentsFiles(fData);
     });
   }, []);
@@ -57,9 +57,9 @@ export const SupportingDocumentsFiles: React.FC<SupportingDocumentsFilesProps> =
   /**
    * Return the files matching the given type id
    */
-  const getSupportingDocumentsFileByType = (supportingDocumentsTypeId: number): ProofOfIdentityFile => {
-    return _.find<ProofOfIdentityFile>(supportingDocumentsFiles, {
-      proof_of_identity_type_id: supportingDocumentsTypeId
+  const getSupportingDocumentsFileByType = (supportingDocumentsTypeId: number): SupportingDocumentFile => {
+    return _.find<SupportingDocumentFile>(supportingDocumentsFiles, {
+      supporting_document_type_id: supportingDocumentsTypeId
     });
   };
 
@@ -84,7 +84,7 @@ export const SupportingDocumentsFiles: React.FC<SupportingDocumentsFilesProps> =
     return (event) => {
       const fileSize = event.target.files[0].size;
       let _errors: Array<number>;
-      if (fileSize > Fablab.maxProofOfIdentityFileSize) {
+      if (fileSize > Fablab.maxSupportingDocumentFileSize) {
         _errors = errors.concat(documentId);
         setErrors(_errors);
       } else {
@@ -106,18 +106,18 @@ export const SupportingDocumentsFiles: React.FC<SupportingDocumentsFilesProps> =
       for (const proofOfIdentityTypeId of Object.keys(files)) {
         const formData = new FormData();
 
-        formData.append('proof_of_identity_file[user_id]', currentUser.id.toString());
-        formData.append('proof_of_identity_file[proof_of_identity_type_id]', proofOfIdentityTypeId);
-        formData.append('proof_of_identity_file[attachment]', files[proofOfIdentityTypeId]);
+        formData.append('supporting_document_file[user_id]', currentUser.id.toString());
+        formData.append('supporting_document_file[supporting_document_type_id]', proofOfIdentityTypeId);
+        formData.append('supporting_document_file[attachment]', files[proofOfIdentityTypeId]);
         const proofOfIdentityFile = getSupportingDocumentsFileByType(parseInt(proofOfIdentityTypeId, 10));
         if (proofOfIdentityFile) {
-          await ProofOfIdentityFileAPI.update(proofOfIdentityFile.id, formData);
+          await SupportingDocumentFileAPI.update(proofOfIdentityFile.id, formData);
         } else {
-          await ProofOfIdentityFileAPI.create(formData);
+          await SupportingDocumentFileAPI.create(formData);
         }
       }
       if (Object.keys(files).length > 0) {
-        ProofOfIdentityFileAPI.index({ user_id: currentUser.id }).then(fData => {
+        SupportingDocumentFileAPI.index({ user_id: currentUser.id }).then(fData => {
           setSupportingDocumentsFiles(fData);
           setFiles({});
           onSuccess(t('app.logged.dashboard.supporting_documents_files.file_successfully_uploaded'));
@@ -132,7 +132,7 @@ export const SupportingDocumentsFiles: React.FC<SupportingDocumentsFilesProps> =
    * Return the download URL of the given file
    */
   const getSupportingDocumentsFileUrl = (documentId: number) => {
-    return `/api/proof_of_identity_files/${documentId}/download`;
+    return `/api/supporting_document_files/${documentId}/download`;
   };
 
   return (
@@ -144,7 +144,7 @@ export const SupportingDocumentsFiles: React.FC<SupportingDocumentsFilesProps> =
           options={{ SIZE: maxProofOfIdentityFileSizeMb }}/>
       </FabAlert>
       <div className="files-list">
-        {supportingDocumentsTypes.map((documentType: ProofOfIdentityType) => {
+        {supportingDocumentsTypes.map((documentType: SupportingDocumentType) => {
           return (
             <div className={`file-item ${errors.includes(documentType.id) ? 'has-error' : ''}`} key={documentType.id}>
               <label>{documentType.name}</label>

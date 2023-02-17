@@ -5,15 +5,21 @@
 class SlotsReservation < ApplicationRecord
   belongs_to :slot
   belongs_to :reservation
+  has_one :cart_item_reservation_slot, class_name: 'CartItem::ReservationSlot', dependent: :nullify
 
+  after_create :add_to_places_cache
   after_update :set_ex_start_end_dates_attrs, if: :slot_changed?
   after_update :notify_member_and_admin_slot_is_modified, if: :slot_changed?
+  after_update :switch_places_cache, if: :slot_changed?
 
   after_update :notify_member_and_admin_slot_is_canceled, if: :canceled?
   after_update :update_event_nb_free_places, if: :canceled?
+  after_update :remove_from_places_cache, if: :canceled?
+
+  before_destroy :remove_from_places_cache
 
   def set_ex_start_end_dates_attrs
-    update_columns(ex_start_at: previous_slot.start_at, ex_end_at: previous_slot.end_at)
+    update_columns(ex_start_at: previous_slot.start_at, ex_end_at: previous_slot.end_at) # rubocop:disable Rails/SkipsModelValidations
   end
 
   private
@@ -34,6 +40,40 @@ class SlotsReservation < ApplicationRecord
     return unless reservation.reservable_type == 'Event'
 
     reservation.update_event_nb_free_places
+  end
+
+  def switch_places_cache
+    old_slot_id = saved_change_to_slot_id[0]
+    remove_from_places_cache(Slot.find(old_slot_id))
+    add_to_places_cache
+  end
+
+  def add_to_places_cache
+    update_places_cache(:+)
+    Slots::PlacesCacheService.add_users(slot, reservation.reservable_type, reservation.reservable_id, [reservation.statistic_profile.user_id])
+  end
+
+  # @param target_slot [Slot]
+  def remove_from_places_cache(target_slot = slot)
+    update_places_cache(:-, target_slot)
+    Slots::PlacesCacheService.remove_users(target_slot,
+                                           reservation.reservable_type,
+                                           reservation.reservable_id,
+                                           [reservation.statistic_profile.user_id])
+  end
+
+  # @param operation [Symbol] :+ or :-
+  # @param target_slot [Slot]
+  def update_places_cache(operation, target_slot = slot)
+    if reservation.reservable_type == 'Event'
+      Slots::PlacesCacheService.change_places(target_slot,
+                                              reservation.reservable_type,
+                                              reservation.reservable_id,
+                                              reservation.total_booked_seats,
+                                              operation)
+    else
+      Slots::PlacesCacheService.change_places(target_slot, reservation.reservable_type, reservation.reservable_id, 1, operation)
+    end
   end
 
   def notify_member_and_admin_slot_is_modified

@@ -11,7 +11,7 @@ import { FileType } from '../../models/file';
 import { UnpackNestedValue } from 'react-hook-form/dist/types';
 import { FieldPathValue } from 'react-hook-form/dist/types/path';
 
-interface FormMultiFileUploadProps<TFieldValues, TContext extends object> extends FormComponent<TFieldValues>, FormControlledComponent<TFieldValues, TContext>, AbstractFormItemProps<TFieldValues> {
+type FormMultiFileUploadProps<TFieldValues, TContext extends object> = FormComponent<TFieldValues> & FormControlledComponent<TFieldValues, TContext> & AbstractFormItemProps<TFieldValues> & {
   setValue: UseFormSetValue<TFieldValues>,
   addButtonLabel: ReactNode,
   accept: string

@@ -5,7 +5,7 @@ class SlotsReservationsService
   class << self
     def cancel(slot_reservation)
       # first we mark ths slot reservation as cancelled in DB, to free a ticket
-      slot_reservation.update_attributes(canceled_at: DateTime.current)
+      slot_reservation.update(canceled_at: Time.current)
 
       # then we try to remove this reservation from ElasticSearch, to keep the statistics up-to-date
       model_name = slot_reservation.reservation.reservable.class.name

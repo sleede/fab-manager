@@ -1,0 +1,575 @@
+notification_type_1:
+  id: 1
+  name: notify_admin_when_project_published
+  category: projects
+  is_configurable: true
+  created_at: 2023-02-02 08:25:33.353635000 Z
+  updated_at: 2023-02-02 08:25:33.353635000 Z
+
+notification_type_2:
+  id: 2
+  name: notify_project_collaborator_to_valid
+  category: projects
+  is_configurable: true
+  created_at: 2023-02-02 08:25:33.355650000 Z
+  updated_at: 2023-02-02 08:25:33.355650000 Z
+
+notification_type_3:
+  id: 3
+  name: notify_project_author_when_collaborator_valid
+  category: projects
+  is_configurable: true
+  created_at: 2023-02-02 08:25:33.357169000 Z
+  updated_at: 2023-02-02 08:25:33.357169000 Z
+
+notification_type_4:
+  id: 4
+  name: notify_user_training_valid
+  category: trainings
+  is_configurable: false
+  created_at: 2023-02-02 08:25:33.358562000 Z
+  updated_at: 2023-02-02 08:25:33.358562000 Z
+
+notification_type_5:
+  id: 5
+  name: notify_member_subscribed_plan
+  category: subscriptions
+  is_configurable: false
+  created_at: 2023-02-02 08:25:33.359933000 Z
+  updated_at: 2023-02-02 08:25:33.359933000 Z
+
+notification_type_6:
+  id: 6
+  name: notify_member_create_reservation
+  category: agenda
+  is_configurable: false
+  created_at: 2023-02-02 08:25:33.361468000 Z
+  updated_at: 2023-02-02 08:25:33.361468000 Z
+
+notification_type_7:
+  id: 7
+  name: notify_member_subscribed_plan_is_changed
+  category: deprecated
+  is_configurable: false
+  created_at: 2023-02-02 08:25:33.362858000 Z
+  updated_at: 2023-02-02 08:25:33.362858000 Z
+
+notification_type_8:
+  id: 8
+  name: notify_admin_member_create_reservation
+  category: agenda
+  is_configurable: true
+  created_at: 2023-02-02 08:25:33.366800000 Z
+  updated_at: 2023-02-02 08:25:33.366800000 Z
+
+notification_type_9:
+  id: 9
+  name: notify_member_slot_is_modified
+  category: agenda
+  is_configurable: false
+  created_at: 2023-02-02 08:25:33.368308000 Z
+  updated_at: 2023-02-02 08:25:33.368308000 Z
+
+notification_type_10:
+  id: 10
+  name: notify_admin_slot_is_modified
+  category: agenda
+  is_configurable: true
+  created_at: 2023-02-02 08:25:33.369576000 Z
+  updated_at: 2023-02-02 08:25:33.369576000 Z
+
+notification_type_11:
+  id: 11
+  name: notify_admin_when_user_is_created
+  category: users_accounts
+  is_configurable: true
+  created_at: 2023-02-02 08:25:33.370910000 Z
+  updated_at: 2023-02-02 08:25:33.370910000 Z
+
+notification_type_12:
+  id: 12
+  name: notify_admin_subscribed_plan
+  category: subscriptions
+  is_configurable: true
+  created_at: 2023-02-02 08:25:33.372202000 Z
+  updated_at: 2023-02-02 08:25:33.372202000 Z
+
+notification_type_13:
+  id: 13
+  name: notify_user_when_invoice_ready
+  category: payments
+  is_configurable: true
+  created_at: 2023-02-02 08:25:33.373802000 Z
+  updated_at: 2023-02-02 08:25:33.373802000 Z
+
+notification_type_14:
+  id: 14
+  name: notify_member_subscription_will_expire_in_7_days
+  category: subscriptions
+  is_configurable: false
+  created_at: 2023-02-02 08:25:33.374910000 Z
+  updated_at: 2023-02-02 08:25:33.374910000 Z
+
+notification_type_15:
+  id: 15
+  name: notify_member_subscription_is_expired
+  category: subscriptions
+  is_configurable: false
+  created_at: 2023-02-02 08:25:33.376101000 Z
+  updated_at: 2023-02-02 08:25:33.376101000 Z
+
+notification_type_16:
+  id: 16
+  name: notify_admin_subscription_will_expire_in_7_days
+  category: subscriptions
+  is_configurable: true
+  created_at: 2023-02-02 08:25:33.377294000 Z
+  updated_at: 2023-02-02 08:25:33.377294000 Z
+
+notification_type_17:
+  id: 17
+  name: notify_admin_subscription_is_expired
+  category: subscriptions
+  is_configurable: true
+  created_at: 2023-02-02 08:25:33.385681000 Z
+  updated_at: 2023-02-02 08:25:33.385681000 Z
+
+notification_type_18:
+  id: 18
+  name: notify_admin_subscription_canceled
+  category: subscriptions
+  is_configurable: true
+  created_at: 2023-02-02 08:25:33.386650000 Z
+  updated_at: 2023-02-02 08:25:33.386650000 Z
+
+notification_type_19:
+  id: 19
+  name: notify_member_subscription_canceled
+  category: subscriptions
+  is_configurable: false
+  created_at: 2023-02-02 08:25:33.387317000 Z
+  updated_at: 2023-02-02 08:25:33.387317000 Z
+
+notification_type_20:
+  id: 20
+  name: notify_user_when_avoir_ready
+  category: wallet
+  is_configurable: false
+  created_at: 2023-02-02 08:25:33.387952000 Z
+  updated_at: 2023-02-02 08:25:33.387952000 Z
+
+notification_type_21:
+  id: 21
+  name: notify_member_slot_is_canceled
+  category: agenda
+  is_configurable: false
+  created_at: 2023-02-02 08:25:33.388799000 Z
+  updated_at: 2023-02-02 08:25:33.388799000 Z
+
+notification_type_22:
+  id: 22
+  name: notify_admin_slot_is_canceled
+  category: agenda
+  is_configurable: true
+  created_at: 2023-02-02 08:25:33.389610000 Z
+  updated_at: 2023-02-02 08:25:33.389610000 Z
+
+notification_type_23:
+  id: 23
+  name: notify_partner_subscribed_plan
+  category: subscriptions
+  is_configurable: false
+  created_at: 2023-02-02 08:25:33.390409000 Z
+  updated_at: 2023-02-02 08:25:33.390409000 Z
+
+notification_type_24:
+  id: 24
+  name: notify_member_subscription_extended
+  category: subscriptions
+  is_configurable: false
+  created_at: 2023-02-02 08:25:33.391438000 Z
+  updated_at: 2023-02-02 08:25:33.391438000 Z
+
+notification_type_25:
+  id: 25
+  name: notify_admin_subscription_extended
+  category: subscriptions
+  is_configurable: true
+  created_at: 2023-02-02 08:25:33.392302000 Z
+  updated_at: 2023-02-02 08:25:33.392302000 Z
+
+notification_type_26:
+  id: 26
+  name: notify_admin_user_group_changed
+  category: users_accounts
+  is_configurable: true
+  created_at: 2023-02-02 08:25:33.393157000 Z
+  updated_at: 2023-02-02 08:25:33.393157000 Z
+
+notification_type_27:
+  id: 27
+  name: notify_user_user_group_changed
+  category: users_accounts
+  is_configurable: false
+  created_at: 2023-02-02 08:25:33.394006000 Z
+  updated_at: 2023-02-02 08:25:33.394006000 Z
+
+notification_type_28:
+  id: 28
+  name: notify_admin_when_user_is_imported
+  category: users_accounts
+  is_configurable: true
+  created_at: 2023-02-02 08:25:33.394864000 Z
+  updated_at: 2023-02-02 08:25:33.394864000 Z
+
+notification_type_29:
+  id: 29
+  name: notify_user_profile_complete
+  category: users_accounts
+  is_configurable: false
+  created_at: 2023-02-02 08:25:33.395686000 Z
+  updated_at: 2023-02-02 08:25:33.395686000 Z
+
+notification_type_30:
+  id: 30
+  name: notify_user_auth_migration
+  category: user
+  is_configurable: false
+  created_at: 2023-02-02 08:25:33.396685000 Z
+  updated_at: 2023-02-02 08:25:33.396685000 Z
+
+notification_type_31:
+  id: 31
+  name: notify_admin_user_merged
+  category: users_accounts
+  is_configurable: true
+  created_at: 2023-02-02 08:25:33.397530000 Z
+  updated_at: 2023-02-02 08:25:33.397530000 Z
+
+notification_type_32:
+  id: 32
+  name: notify_admin_profile_complete
+  category: users_accounts
+  is_configurable: true
+  created_at: 2023-02-02 08:25:33.398364000 Z
+  updated_at: 2023-02-02 08:25:33.398364000 Z
+
+notification_type_33:
+  id: 33
+  name: notify_admin_abuse_reported
+  category: projects
+  is_configurable: true
+  created_at: 2023-02-02 08:25:33.399230000 Z
+  updated_at: 2023-02-02 08:25:33.399230000 Z
+
+notification_type_34:
+  id: 34
+  name: notify_admin_invoicing_changed
+  category: deprecated
+  is_configurable: false
+  created_at: 2023-02-02 08:25:33.400213000 Z
+  updated_at: 2023-02-02 08:25:33.400213000 Z
+
+notification_type_35:
+  id: 35
+  name: notify_user_wallet_is_credited
+  category: wallet
+  is_configurable: false
+  created_at: 2023-02-02 08:25:33.401163000 Z
+  updated_at: 2023-02-02 08:25:33.401163000 Z
+
+notification_type_36:
+  id: 36
+  name: notify_admin_user_wallet_is_credited
+  category: wallet
+  is_configurable: true
+  created_at: 2023-02-02 08:25:33.402912000 Z
+  updated_at: 2023-02-02 08:25:33.402912000 Z
+
+notification_type_37:
+  id: 37
+  name: notify_admin_export_complete
+  category: exports
+  is_configurable: false
+  created_at: 2023-02-02 08:25:33.403710000 Z
+  updated_at: 2023-02-02 08:25:33.403710000 Z
+
+notification_type_38:
+  id: 38
+  name: notify_member_about_coupon
+  category: agenda
+  is_configurable: false
+  created_at: 2023-02-02 08:25:33.405757000 Z
+  updated_at: 2023-02-02 08:25:33.405757000 Z
+
+notification_type_39:
+  id: 39
+  name: notify_member_reservation_reminder
+  category: agenda
+  is_configurable: false
+  created_at: 2023-02-02 08:25:33.414402000 Z
+  updated_at: 2023-02-02 08:25:33.414402000 Z
+
+notification_type_40:
+  id: 40
+  name: notify_admin_free_disk_space
+  category: app_management
+  is_configurable: false
+  created_at: 2023-02-02 08:25:33.415557000 Z
+  updated_at: 2023-02-02 08:25:33.415557000 Z
+
+notification_type_41:
+  id: 41
+  name: notify_admin_close_period_reminder
+  category: accountings
+  is_configurable: true
+  created_at: 2023-02-02 08:25:33.420521000 Z
+  updated_at: 2023-02-02 08:25:33.420521000 Z
+
+notification_type_42:
+  id: 42
+  name: notify_admin_archive_complete
+  category: accountings
+  is_configurable: true
+  created_at: 2023-02-02 08:25:33.423553000 Z
+  updated_at: 2023-02-02 08:25:33.423553000 Z
+
+notification_type_43:
+  id: 43
+  name: notify_privacy_policy_changed
+  category: app_management
+  is_configurable: false
+  created_at: 2023-02-02 08:25:33.424521000 Z
+  updated_at: 2023-02-02 08:25:33.424521000 Z
+
+notification_type_44:
+  id: 44
+  name: notify_admin_import_complete
+  category: app_management
+  is_configurable: false
+  created_at: 2023-02-02 08:25:33.425438000 Z
+  updated_at: 2023-02-02 08:25:33.425438000 Z
+
+notification_type_45:
+  id: 45
+  name: notify_admin_refund_created
+  category: wallet
+  is_configurable: true
+  created_at: 2023-02-02 08:25:33.426178000 Z
+  updated_at: 2023-02-02 08:25:33.426178000 Z
+
+notification_type_46:
+  id: 46
+  name: notify_admins_role_update
+  category: users_accounts
+  is_configurable: true
+  created_at: 2023-02-02 08:25:33.426875000 Z
+  updated_at: 2023-02-02 08:25:33.426875000 Z
+
+notification_type_47:
+  id: 47
+  name: notify_user_role_update
+  category: users_accounts
+  is_configurable: false
+  created_at: 2023-02-02 08:25:33.427568000 Z
+  updated_at: 2023-02-02 08:25:33.427568000 Z
+
+notification_type_48:
+  id: 48
+  name: notify_admin_objects_stripe_sync
+  category: payments
+  is_configurable: false
+  created_at: 2023-02-02 08:25:33.428271000 Z
+  updated_at: 2023-02-02 08:25:33.428271000 Z
+
+notification_type_49:
+  id: 49
+  name: notify_user_when_payment_schedule_ready
+  category: payments
+  is_configurable: false
+  created_at: 2023-02-02 08:25:33.429059000 Z
+  updated_at: 2023-02-02 08:25:33.429059000 Z
+
+notification_type_50:
+  id: 50
+  name: notify_admin_payment_schedule_failed
+  category: payments
+  is_configurable: true
+  created_at: 2023-02-02 08:25:33.429758000 Z
+  updated_at: 2023-02-02 08:25:33.429758000 Z
+
+notification_type_51:
+  id: 51
+  name: notify_member_payment_schedule_failed
+  category: payments
+  is_configurable: false
+  created_at: 2023-02-02 08:25:33.430469000 Z
+  updated_at: 2023-02-02 08:25:33.430469000 Z
+
+notification_type_52:
+  id: 52
+  name: notify_admin_payment_schedule_check_deadline
+  category: payments
+  is_configurable: true
+  created_at: 2023-02-02 08:25:33.431174000 Z
+  updated_at: 2023-02-02 08:25:33.431174000 Z
+
+notification_type_53:
+  id: 53
+  name: notify_admin_payment_schedule_transfer_deadline
+  category: payments
+  is_configurable: true
+  created_at: 2023-02-02 08:25:33.431950000 Z
+  updated_at: 2023-02-02 08:25:33.431950000 Z
+
+notification_type_54:
+  id: 54
+  name: notify_admin_payment_schedule_error
+  category: payments
+  is_configurable: true
+  created_at: 2023-02-02 08:25:33.432809000 Z
+  updated_at: 2023-02-02 08:25:33.432809000 Z
+
+notification_type_55:
+  id: 55
+  name: notify_member_payment_schedule_error
+  category: payments
+  is_configurable: false
+  created_at: 2023-02-02 08:25:33.433749000 Z
+  updated_at: 2023-02-02 08:25:33.433749000 Z
+
+notification_type_56:
+  id: 56
+  name: notify_admin_payment_schedule_gateway_canceled
+  category: payments
+  is_configurable: true
+  created_at: 2023-02-02 08:25:33.434479000 Z
+  updated_at: 2023-02-02 08:25:33.434479000 Z
+
+notification_type_57:
+  id: 57
+  name: notify_member_payment_schedule_gateway_canceled
+  category: payments
+  is_configurable: false
+  created_at: 2023-02-02 08:25:33.435161000 Z
+  updated_at: 2023-02-02 08:25:33.435161000 Z
+
+notification_type_58:
+  id: 58
+  name: notify_admin_user_supporting_document_files_created
+  category: supporting_documents
+  is_configurable: true
+  created_at: 2023-02-02 08:25:33.435886000 Z
+  updated_at: 2023-02-02 08:25:33.435886000 Z
+
+notification_type_59:
+  id: 59
+  name: notify_admin_user_supporting_document_files_updated
+  category: supporting_documents
+  is_configurable: true
+  created_at: 2023-02-02 08:25:33.436627000 Z
+  updated_at: 2023-02-02 08:25:33.436627000 Z
+
+notification_type_60:
+  id: 60
+  name: notify_user_is_validated
+  category: users_accounts
+  is_configurable: false
+  created_at: 2023-02-02 08:25:33.437360000 Z
+  updated_at: 2023-02-02 08:25:33.437360000 Z
+
+notification_type_61:
+  id: 61
+  name: notify_user_is_invalidated
+  category: users_accounts
+  is_configurable: false
+  created_at: 2023-02-02 08:25:33.438226000 Z
+  updated_at: 2023-02-02 08:25:33.438226000 Z
+
+notification_type_62:
+  id: 62
+  name: notify_user_supporting_document_refusal
+  category: supporting_documents
+  is_configurable: false
+  created_at: 2023-02-02 08:25:33.439078000 Z
+  updated_at: 2023-02-02 08:25:33.439078000 Z
+
+notification_type_63:
+  id: 63
+  name: notify_admin_user_supporting_document_refusal
+  category: supporting_documents
+  is_configurable: true
+  created_at: 2023-02-02 08:25:33.439926000 Z
+  updated_at: 2023-02-02 08:25:33.439926000 Z
+
+notification_type_64:
+  id: 64
+  name: notify_user_order_is_ready
+  category: shop
+  is_configurable: true
+  created_at: 2023-02-02 08:25:33.440769000 Z
+  updated_at: 2023-02-02 08:25:33.440769000 Z
+
+notification_type_65:
+  id: 65
+  name: notify_user_order_is_canceled
+  category: shop
+  is_configurable: true
+  created_at: 2023-02-02 08:25:33.441630000 Z
+  updated_at: 2023-02-02 08:25:33.441630000 Z
+
+notification_type_66:
+  id: 66
+  name: notify_user_order_is_refunded
+  category: shop
+  is_configurable: true
+  created_at: 2023-02-02 08:25:33.442370000 Z
+  updated_at: 2023-02-02 08:25:33.442370000 Z
+
+notification_type_67:
+  id: 67
+  name: notify_admin_low_stock_threshold
+  category: shop
+  is_configurable: true
+  created_at: 2023-02-02 08:25:33.443101000 Z
+  updated_at: 2023-02-02 08:25:33.443101000 Z
+
+notification_type_68:
+  id: 68
+  name: notify_admin_training_auto_cancelled
+  category: trainings
+  is_configurable: true
+  created_at: 2023-02-02 08:25:33.443888000 Z
+  updated_at: 2023-02-02 08:25:33.443888000 Z
+
+notification_type_69:
+  id: 69
+  name: notify_member_training_auto_cancelled
+  category: trainings
+  is_configurable: false
+  created_at: 2023-02-16 10:42:39.143888000 Z
+  updated_at: 2023-02-16 10:42:39.143888000 Z
+
+notification_type_70:
+  id: 70
+  name: notify_member_training_authorization_expired
+  category: trainings
+  is_configurable: false
+  created_at: 2023-02-16 10:42:39.143888000 Z
+  updated_at: 2023-02-16 10:42:39.143888000 Z
+
+notification_type_71:
+  id: 71
+  name: notify_member_training_invalidated
+  category: trainings
+  is_configurable: false
+  created_at: 2023-02-16 10:42:39.143888000 Z
+  updated_at: 2023-02-16 10:42:39.143888000 Z
+
+notification_type_72:
+  id: 72
+  name: notify_admin_order_is_paid
+  category: shop
+  is_configurable: true
+  created_at: 2023-02-16 10:42:39.143888000 Z
+  updated_at: 2023-02-16 10:42:39.143888000 Z

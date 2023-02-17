@@ -40,11 +40,11 @@ export const MachineCategoriesList: React.FC<MachineCategoriesListProps> = ({ on
   // retrieve the full list of machine categories on component mount
   useEffect(() => {
     MachineCategoryAPI.index()
-      .then(data => setMachineCategories(data))
-      .catch(e => onError(e));
-    MachineAPI.index()
-      .then(data => setMachines(data))
-      .catch(e => onError(e));
+      .then(setMachineCategories)
+      .catch(onError);
+    MachineAPI.index({ category: 'none' })
+      .then(setMachines)
+      .catch(onError);
   }, []);
 
   /**
@@ -59,6 +59,7 @@ export const MachineCategoriesList: React.FC<MachineCategoriesListProps> = ({ on
    */
   const onSaveTypeSuccess = (message: string): void => {
     setModalIsOpen(false);
+    MachineAPI.index({ category: 'none' }).then(setMachines).catch(onError);
     MachineCategoryAPI.index().then(data => {
       setMachineCategories(data);
       onSuccess(message);
@@ -117,8 +118,12 @@ export const MachineCategoriesList: React.FC<MachineCategoriesListProps> = ({ on
 
   return (
     <div className="machine-categories-list">
-      <h3 className="machines-categories">{t('app.admin.machine_categories_list.machine_categories')}</h3>
-      <FabButton onClick={addMachineCategory} className="is-secondary" >{t('app.admin.machine_categories_list.add_a_machine_category')}</FabButton>
+      <header>
+        <h2>{t('app.admin.machine_categories_list.machine_categories')}</h2>
+        <div className='grpBtn'>
+          <FabButton className="main-action-btn" onClick={addMachineCategory}>{t('app.admin.machine_categories_list.add_a_machine_category')}</FabButton>
+        </div>
+      </header>
       <MachineCategoryModal isOpen={modalIsOpen}
                             machines={machines}
                             machineCategory={machineCategory}

@@ -12,7 +12,7 @@ class ReservationReminderWorker
 
     delay = Setting.find_by(name: 'reminder_delay').try(:value).try(:to_i).try(:hours) || DEFAULT_REMINDER_DELAY
 
-    starting = DateTime.current.beginning_of_hour + delay
+    starting = Time.current.beginning_of_hour + delay
     ending = starting + 1.hour
 
     Reservation.joins(slots_reservations: :slot)
@@ -21,7 +21,7 @@ class ReservationReminderWorker
       already_sent = Notification.where(
         attached_object_type: Reservation.name,
         attached_object_id: r.id,
-        notification_type_id: NotificationType.find_by_name('notify_member_reservation_reminder')
+        notification_type_id: NotificationType.find_by(name: 'notify_member_reservation_reminder')
       ).count
       next if already_sent.positive?
 

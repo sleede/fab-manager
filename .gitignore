@@ -47,7 +47,7 @@
 /accounting/*
 
 # Proof of identity files
-/proof_of_identity_files/*
+/supporting_document_files/*
 
 .DS_Store
 

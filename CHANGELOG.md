@@ -1,10 +1,38 @@
 # Changelog Fab-manager
 
+## v5.7.0 2023 February 17
+
+- Report user's prepaid packs in the dashboard
+- Export external ID and private notes in the members excel export
+- Ability to buy a new prepaid pack from the user's dashboard
+- Improved calendars loading time
+- Admin notification when an order was placed
+- Management of notifications preferences for admins
+- Display custom banners in machines/trainings/events lists
+- Filter projects by status
+- Maximum validity period for trainings authorizations
+- Automatically cancel trainings with insufficient attendees
+- Check SCSS syntax before saving home page style
+- Use Time instead of DateTime objects
+- Fix a bug: missing statististics subtypes
+- Fix a bug: wrong times in admin/event monitoring
+- Fix a bug: daylight saving time is ignored and result in wrong dates and/or times when dealing around the DST day
+- Fix a bug: date shift in event creation/update
+- Fix a bug: unable to run `rails db:seed` when first setup Fab-manager
+- Fix a bug: cannot cancel a subscription after offering free days
+- Fix a bug: event image updates are not reflected unless the browser's cache is purged
+- Fix a bug: schedules jobs are not launched at the right time
+- Fix a bug: unable to update the title of a training
+- Fix a bug: members cannot update their cards for payment schedules
+- [TODO DEPLOY] `rails fablab:fix_availabilities` THEN `rails fablab:setup:build_places_cache`
+- [TODO DEPLOY] `\curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/scripts/rename-supporting-document.sh | bash`
+- [TODO DEPLOY] `rails db:seed`
+
 ## v5.6.11 2023 February 07
 
 - OpenAPI endpoint to fetch subscription data
 - Fix a bug: invalid date display in negative timezones
-- Fix a bug: unable to get latest payment_gateway_object for plan/machine/training/space
+- Fix a bug: unable to get the latest payment_gateway_object for plan/machine/training/space
 
 ## v5.6.10 2023 February 02
 
@@ -44,8 +72,7 @@
 - Fix a bug: unable to run task fix_invoice_item when some invoice items are associated with errors
 - Fix a bug: invalid event date reported when the timezone in before UTC
 - Fix a bug: unable to run accounting export if a line label was not defined
-- Fix a security issue: updated rack to 2.2.6.2 to fix [CVE-2022-44571](https
-- cgi-bin/cvename.cgi?name=CVE-2022-44571)
+- Fix a security issue: updated rack to 2.2.6.2 to fix [CVE-2022-44571](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-44571)
 - Fix a security issue: updated globalid to 1.0.1 to fix [CVE-2023-22799](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-22799)
 - [TODO DEPLOY] `rails fablab:fix:invoice_items_in_error` THEN `rails fablab:fix_invoice_items` THEN `rails db:migrate`
 
@@ -132,6 +159,7 @@
 - Updated tiptap editor and its dependencies to 2.0.0-beta.204
 - [TODO DEPLOY] `rails db:seed`
 - [TODO DEPLOY] `rails fablab:setup:build_accounting_lines`
+- [TODO DEPLOY] `rails fablab:fix:cart_operator`
 
 ## v5.5.8 2022 December 16
 

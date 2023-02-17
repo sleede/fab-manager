@@ -23,6 +23,7 @@ import AgeRangeAPI from '../../api/age-range';
 import { Plus, Trash } from 'phosphor-react';
 import FormatLib from '../../lib/format';
 import EventPriceCategoryAPI from '../../api/event-price-category';
+import SettingAPI from '../../api/setting';
 import { UpdateRecurrentModal } from './update-recurrent-modal';
 import { AdvancedAccountingForm } from '../accounting/advanced-accounting-form';
 
@@ -52,6 +53,7 @@ export const EventForm: React.FC<EventFormProps> = ({ action, event, onError, on
   const [priceCategoriesOptions, setPriceCategoriesOptions] = useState<Array<SelectOption<number>>>(null);
   const [isOpenRecurrentModal, setIsOpenRecurrentModal] = useState<boolean>(false);
   const [updatingEvent, setUpdatingEvent] = useState<Event>(null);
+  const [isActiveAccounting, setIsActiveAccounting] = useState<boolean>(false);
 
   useEffect(() => {
     EventCategoryAPI.index()
@@ -66,6 +68,7 @@ export const EventForm: React.FC<EventFormProps> = ({ action, event, onError, on
     EventPriceCategoryAPI.index()
       .then(data => setPriceCategoriesOptions(data.map(c => decorationToOption(c))))
       .catch(onError);
+    SettingAPI.get('advanced_accounting').then(res => setIsActiveAccounting(res.value === 'true')).catch(onError);
   }, []);
 
   /**
@@ -153,155 +156,193 @@ export const EventForm: React.FC<EventFormProps> = ({ action, event, onError, on
   };
 
   return (
-    <form className="event-form" onSubmit={handleSubmit(onSubmit)}>
-      <FormInput register={register}
-                 id="title"
-                 formState={formState}
-                 rules={{ required: true }}
-                 label={t('app.admin.event_form.title')} />
-      <FormImageUpload setValue={setValue}
-                       register={register}
-                       control={control}
+    <div className="event-form">
+      <header>
+        <h2>{t('app.admin.event_form.ACTION_title', { ACTION: action })}</h2>
+        <FabButton onClick={handleSubmit(onSubmit)} className="fab-button save-btn is-main">
+          {t('app.admin.event_form.save')}
+        </FabButton>
+      </header>
+      <form className="event-form-content" onSubmit={handleSubmit(onSubmit)}>
+        <section>
+          <header>
+            <p className="title">{t('app.admin.event_form.description')}</p>
+          </header>
+          <div className="content">
+            <FormInput register={register}
+                       id="title"
                        formState={formState}
                        rules={{ required: true }}
-                       id="event_image_attributes"
-                       accept="image/*"
-                       defaultImage={output.event_image_attributes}
-                       label={t('app.admin.event_form.matching_visual')} />
-      <FormRichText control={control}
-                    id="description"
-                    rules={{ required: true }}
-                    label={t('app.admin.event_form.description')}
-                    limit={null}
-                    heading bulletList blockquote link video image />
-      <FormSelect id="category_id"
-                  control={control}
-                  formState={formState}
-                  label={t('app.admin.event_form.event_category')}
-                  options={categoriesOptions}
-                  rules={{ required: true }} />
-      {themesOptions?.length > 0 && <FormMultiSelect control={control}
-                                         id="event_theme_ids"
-                                         formState={formState}
-                                         options={themesOptions}
-                                         label={t('app.admin.event_form.event_themes')} />}
-      {ageRangeOptions?.length > 0 && <FormSelect control={control}
-                                      id="age_range_id"
-                                      formState={formState}
-                                      options={ageRangeOptions}
-                                      label={t('app.admin.event_form.age_range')} />}
-      <div className="dates-times">
-        <h4>{t('app.admin.event_form.dates_and_opening_hours')}</h4>
-        <div className="dates">
-          <FormInput id="start_date"
-                     type="date"
-                     register={register}
-                     formState={formState}
-                     label={t('app.admin.event_form.start_date')}
-                     rules={{ required: true }} />
-          <FormInput id="end_date"
-                     type="date"
-                     register={register}
-                     formState={formState}
-                     label={t('app.admin.event_form.end_date')}
-                     rules={{ required: true }} />
-        </div>
-        <FormSwitch control={control}
-                    id="all_day"
-                    label={t('app.admin.event_form.all_day')}
-                    formState={formState}
-                    tooltip={t('app.admin.event_form.all_day_help')}
-                    onChange={setIsAllDay} />
-        {!isAllDay && <div className="times">
-          <FormInput id="start_time"
-                     type="time"
-                     register={register}
-                     formState={formState}
-                     label={t('app.admin.event_form.start_time')}
-                     rules={{ required: !isAllDay }} />
-          <FormInput id="end_time"
-                     type="time"
-                     register={register}
-                     formState={formState}
-                     label={t('app.admin.event_form.end_time')}
-                     rules={{ required: !isAllDay }} />
-        </div> }
-        {action === 'create' && <div className="recurring">
-          <FormSelect options={buildRecurrenceOptions()}
-                      control={control}
-                      formState={formState}
-                      id="recurrence"
-                      valueDefault="none"
-                      label={t('app.admin.event_form.recurrence')} />
-          <FormInput register={register}
-                     id="recurrence_end_at"
-                     type="date"
-                     formState={formState}
-                     nullable
-                     defaultValue={null}
-                     label={t('app.admin.event_form._and_ends_on')}
-                     rules={{ required: !['none', undefined].includes(output.recurrence) }} />
-        </div>}
-      </div>
-      <div className="seats-prices">
-        <h4>{t('app.admin.event_form.prices_and_availabilities')}</h4>
-        <FormInput register={register}
-                   id="nb_total_places"
-                   label={t('app.admin.event_form.seats_available')}
-                   type="number"
-                   tooltip={t('app.admin.event_form.seats_help')} />
-        <FormInput register={register}
-                   id="amount"
-                   formState={formState}
-                   rules={{ required: true }}
-                   label={t('app.admin.event_form.standard_rate')}
-                   tooltip={t('app.admin.event_form.0_equal_free')}
-                   addOn={FormatLib.currencySymbol()} />
-        {priceCategoriesOptions && <div className="additional-prices">
-          {fields.map((price, index) => (
-            <div key={index} className={`price-item ${output.event_price_categories_attributes && output.event_price_categories_attributes[index]?._destroy ? 'destroyed-item' : ''}`}>
-              <FormSelect options={priceCategoriesOptions}
-                          control={control}
-                          id={`event_price_categories_attributes.${index}.price_category_id`}
-                          rules={{ required: true }}
-                          label={t('app.admin.event_form.fare_class')} />
-              <FormInput id={`event_price_categories_attributes.${index}.amount`}
-                         register={register}
-                         type="number"
-                         rules={{ required: true }}
-                         label={t('app.admin.event_form.price')}
-                         addOn={FormatLib.currencySymbol()} />
-              <FabButton className="remove-price is-main" onClick={() => handlePriceRemove(price, index)} icon={<Trash size={20} />} />
-            </div>
-          ))}
-          <FabButton className="add-price is-secondary" onClick={() => append({})}>
-            <Plus size={20} />
-            {t('app.admin.event_form.add_price')}
-          </FabButton>
-        </div>}
-      </div>
-      <div className="attachments">
-        <div className='form-item-header event-files-header'>
-          <h4>{t('app.admin.event_form.attachments')}</h4>
-        </div>
-        <FormMultiFileUpload setValue={setValue}
-                             addButtonLabel={t('app.admin.event_form.add_a_new_file')}
-                             control={control}
-                             accept="application/pdf"
+                       label={t('app.admin.event_form.title')} />
+            <FormImageUpload setValue={setValue}
                              register={register}
-                             id="event_files_attributes"
-                             className="event-files" />
-      </div>
-      <AdvancedAccountingForm register={register} onError={onError} />
-      <FabButton type="submit" className="is-info submit-btn">
-        {t('app.admin.event_form.ACTION_event', { ACTION: action })}
-      </FabButton>
-      <UpdateRecurrentModal isOpen={isOpenRecurrentModal}
-                            toggleModal={toggleRecurrentModal}
-                            event={updatingEvent}
-                            onConfirmed={handleUpdateRecurrentConfirmed}
-                            datesChanged={datesHaveChanged()} />
-    </form>
+                             control={control}
+                             formState={formState}
+                             rules={{ required: true }}
+                             id="event_image_attributes"
+                             accept="image/*"
+                             defaultImage={output.event_image_attributes}
+                             label={t('app.admin.event_form.matching_visual')} />
+            <FormRichText control={control}
+                          id="description"
+                          rules={{ required: true }}
+                          formState={formState}
+                          label={t('app.admin.event_form.description')}
+                          limit={null}
+                          heading bulletList blockquote link video image />
+            <FormSelect id="category_id"
+                        control={control}
+                        formState={formState}
+                        label={t('app.admin.event_form.event_category')}
+                        options={categoriesOptions}
+                        rules={{ required: true }} />
+            {themesOptions?.length > 0 && <FormMultiSelect control={control}
+                                                           id="event_theme_ids"
+                                                           formState={formState}
+                                                           options={themesOptions}
+                                                           label={t('app.admin.event_form.event_themes')} />}
+            {ageRangeOptions?.length > 0 && <FormSelect control={control}
+                                                        id="age_range_id"
+                                                        formState={formState}
+                                                        options={ageRangeOptions}
+                                                        label={t('app.admin.event_form.age_range')} />}
+          </div>
+        </section>
+
+        <section>
+          <header>
+            <p className='title'>{t('app.admin.event_form.dates_and_opening_hours')}</p>
+          </header>
+          <div className="content">
+            <div className="grp">
+              <FormInput id="start_date"
+                        type="date"
+                        register={register}
+                        formState={formState}
+                        label={t('app.admin.event_form.start_date')}
+                        rules={{ required: true }} />
+              <FormInput id="end_date"
+                        type="date"
+                        register={register}
+                        formState={formState}
+                        label={t('app.admin.event_form.end_date')}
+                        rules={{ required: true }} />
+            </div>
+            <FormSwitch control={control}
+                      id="all_day"
+                      label={t('app.admin.event_form.all_day')}
+                      formState={formState}
+                      tooltip={t('app.admin.event_form.all_day_help')}
+                      onChange={setIsAllDay} />
+            {!isAllDay && <div className="grp">
+              <FormInput id="start_time"
+                        type="time"
+                        register={register}
+                        formState={formState}
+                        label={t('app.admin.event_form.start_time')}
+                        rules={{ required: !isAllDay }} />
+              <FormInput id="end_time"
+                        type="time"
+                        register={register}
+                        formState={formState}
+                        label={t('app.admin.event_form.end_time')}
+                        rules={{ required: !isAllDay }} />
+            </div>}
+            {action === 'create' && <div className="grp">
+              <FormSelect options={buildRecurrenceOptions()}
+                          control={control}
+                          formState={formState}
+                          id="recurrence"
+                          valueDefault="none"
+                          label={t('app.admin.event_form.recurrence')} />
+              <FormInput register={register}
+                        id="recurrence_end_at"
+                        type="date"
+                        formState={formState}
+                        nullable
+                        defaultValue={null}
+                        label={t('app.admin.event_form._and_ends_on')}
+                        rules={{ required: !['none', undefined].includes(output.recurrence) }} />
+            </div>}
+          </div>
+        </section>
+
+        <section>
+          <header>
+            <p className="title">{t('app.admin.event_form.prices_and_availabilities')}</p>
+          </header>
+          <div className="content">
+            <FormInput register={register}
+                      id="nb_total_places"
+                      label={t('app.admin.event_form.seats_available')}
+                      type="number"
+                      tooltip={t('app.admin.event_form.seats_help')} />
+            <FormInput register={register}
+                      id="amount"
+                      formState={formState}
+                      rules={{ required: true }}
+                      label={t('app.admin.event_form.standard_rate')}
+                      tooltip={t('app.admin.event_form.0_equal_free')}
+                      addOn={FormatLib.currencySymbol()} />
+
+            {priceCategoriesOptions && <div className="additional-prices">
+              {fields.map((price, index) => (
+                <div key={index} className={`price-item ${output.event_price_categories_attributes && output.event_price_categories_attributes[index]?._destroy ? 'destroyed-item' : ''}`}>
+                  <FormSelect options={priceCategoriesOptions}
+                              control={control}
+                              id={`event_price_categories_attributes.${index}.price_category_id`}
+                              rules={{ required: true }}
+                              formState={formState}
+                              label={t('app.admin.event_form.fare_class')} />
+                  <FormInput id={`event_price_categories_attributes.${index}.amount`}
+                            register={register}
+                            type="number"
+                            rules={{ required: true }}
+                            formState={formState}
+                            label={t('app.admin.event_form.price')}
+                            addOn={FormatLib.currencySymbol()} />
+                  <FabButton className="remove-price is-main" onClick={() => handlePriceRemove(price, index)} icon={<Trash size={20} />} />
+                </div>
+              ))}
+              <FabButton className="add-price is-secondary" onClick={() => append({})}>
+                <Plus size={20} />
+                {t('app.admin.event_form.add_price')}
+              </FabButton>
+            </div>}
+          </div>
+        </section>
+
+        <section>
+          <header>
+            <p className="title">{t('app.admin.event_form.attachments')}</p>
+          </header>
+          <div className="content">
+            <div className='form-item-header machine-files-header'>
+              <p>{t('app.admin.event_form.attached_files_pdf')}</p>
+            </div>
+            <FormMultiFileUpload setValue={setValue}
+                                 addButtonLabel={t('app.admin.event_form.add_a_new_file')}
+                                 control={control}
+                                 accept="application/pdf"
+                                 register={register}
+                                 id="event_files_attributes"
+                                 className="event-files" />
+          </div>
+        </section>
+
+        {isActiveAccounting &&
+          <section>
+            <AdvancedAccountingForm register={register} onError={onError} />
+          </section>
+        }
+
+        <UpdateRecurrentModal isOpen={isOpenRecurrentModal}
+                              toggleModal={toggleRecurrentModal}
+                              event={updatingEvent}
+                              onConfirmed={handleUpdateRecurrentConfirmed}
+                              datesChanged={datesHaveChanged()} />
+      </form>
+    </div>
   );
 };
 

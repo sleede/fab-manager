@@ -169,13 +169,12 @@
       projects_list:
         the_fablab_projects: "The projects"
         add_a_project: "Legg til et prosjekt"
-        search_over_the_whole_network: "Search over the whole Fab-manager network"
+        network_search: "Fab-manager network"
         tooltip_openlab_projects_switch: "Søk i hele nettverket lar deg søke i prosjekter for hver Fab-manager ved hjelp av denne funksjonen!"
         openlab_search_not_available_at_the_moment: "Det er ikke mulig å søke over hele nettverket for øyeblikket. Du kan fortsatt søke over prosjektene her."
         project_search_result_is_empty: "Beklager, fant vi ingen resultater som samsvarte med dine søkekriterier."
         reset_all_filters: "Tilbakestill alle filtre"
         keywords: "Nøkkelord"
-        search: "Search"
         all_projects: "Alle prosjekter"
         my_projects: "Mine prosjekter"
         projects_to_whom_i_take_part_in: "Prosjekter jeg deltar i"
@@ -184,6 +183,9 @@
         all_materials: "Alle materialer"
         load_next_projects: "Last neste prosjekt"
         rough_draft: "Tidlig utkast"
+      status_filter:
+        all_statuses: "All statuses"
+        select_status: "Select a status"
       #details of a projet
       projects_show:
         rough_draft: "Utkast"
@@ -213,6 +215,7 @@
         message_is_required: "Melding er påkrevd."
         report: "Rapporter"
         do_you_really_want_to_delete_this_project: "Vil du virkelig slette dette prosjektet?"
+        status: "Status"
       #list of machines
       machines_list:
         the_fablab_s_machines: "The machines"
@@ -230,7 +233,7 @@
         status_enabled: "Aktivert"
         status_disabled: "Deaktivert"
         status_all: "Alle"
-        filter_by_machine_category: "Filter by category"
+        filter_by_machine_category: "Filter by category:"
         all_machines: "All machines"
       machine_card:
         book: "Reserver"
@@ -363,6 +366,8 @@
         spaces: "Plasser/rom"
         events: "Arrangementer"
         externals: "Andre kalendere"
+        choose_a_machine: "Choose a machine"
+        cancel: "Cancel"
       #list of spaces
       spaces_list:
         the_spaces: "Plasser/rom"
@@ -431,12 +436,6 @@
         checkout: "Checkout"
         cart_is_empty: "Your cart is empty"
         pickup: "Pickup your products"
-        reference_short: "ref:"
-        minimum_purchase: "Minimum purchase: "
-        stock_limit: "You have reached the current stock limit"
-        unit: "Unit"
-        total: "Total"
-        offer_product: "Offer the product"
         checkout_header: "Total amount for your cart"
         checkout_products_COUNT: "Your cart contains {COUNT} {COUNT, plural, =1{product} other{products}}"
         checkout_products_total: "Products total"
@@ -446,6 +445,16 @@
         checkout_error: "An unexpected error occurred. Please contact the administrator."
         checkout_success: "Purchase confirmed. Thanks!"
         select_user: "Please select a user before continuing."
+      abstract_item:
+        offer_product: "Offer the product"
+        total: "Total"
+        errors:
+          unauthorized_offering_product: "You can't offer anything to yourself"
+      cart_order_product:
+        reference_short: "ref:"
+        minimum_purchase: "Minimum purchase: "
+        stock_limit: "You have reached the current stock limit"
+        unit: "Unit"
         update_item: "Update"
         errors:
           product_not_found: "This product is no longer available, please remove it from your cart."
@@ -453,7 +462,11 @@
           stock_limit_QUANTITY: "Only {QUANTITY} {QUANTITY, plural, =1{unit} other{units}} left in stock, please adjust the quantity of items."
           quantity_min_QUANTITY: "Minimum number of product was changed to {QUANTITY}, please adjust the quantity of items."
           price_changed_PRICE: "The product price was modified to {PRICE}"
-          unauthorized_offering_product: "You can't offer anything to yourself"
+      cart_order_reservation:
+        reservation: "Reservation"
+        offer_reservation: "Offer the reservation"
+        slot: "{DATE}: {START} - {END}"
+        offered: "offered"
       orders_dashboard:
         heading: "My orders"
         sort:

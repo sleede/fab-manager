@@ -1,7 +1,7 @@
 'use strict';
 
-Application.Controllers.controller('HeaderController', ['$scope', '$transitions', '$state', 'settingsPromise', 'ProofOfIdentityType', 'AuthService',
-  function ($scope, $transitions, $state, settingsPromise, ProofOfIdentityType, AuthService) {
+Application.Controllers.controller('HeaderController', ['$scope', '$transitions', '$state', 'settingsPromise', 'SupportingDocumentType', 'AuthService',
+  function ($scope, $transitions, $state, settingsPromise, SupportingDocumentType, AuthService) {
     $scope.aboutPage = ($state.current.name === 'app.public.about');
 
     $transitions.onStart({}, function (trans) {
@@ -17,7 +17,7 @@ Application.Controllers.controller('HeaderController', ['$scope', '$transitions'
 
     $scope.dropdownOnToggled = function (open) {
       if (open) {
-        ProofOfIdentityType.query({ group_id: $scope.currentUser.group_id }, function (proofOfIdentityTypes) {
+        SupportingDocumentType.query({ group_id: $scope.currentUser.group_id }, function (proofOfIdentityTypes) {
           $scope.hasProofOfIdentityTypes = proofOfIdentityTypes.length > 0;
         });
       }

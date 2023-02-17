@@ -72,8 +72,8 @@ Application.Controllers.controller('MembersController', ['$scope', 'Member', 'me
 /**
  * Controller used when editing the current user's profile (in dashboard)
  */
-Application.Controllers.controller('EditProfileController', ['$scope', '$rootScope', '$state', '$window', '$sce', '$cookies', '$injector', 'Member', 'Auth', 'Session', 'activeProviderPromise', 'settingsPromise', 'growl', 'dialogs', 'CSRF', 'memberPromise', 'groups', '_t', 'proofOfIdentityTypesPromise', 'ProofOfIdentityType',
-  function ($scope, $rootScope, $state, $window, $sce, $cookies, $injector, Member, Auth, Session, activeProviderPromise, settingsPromise, growl, dialogs, CSRF, memberPromise, groups, _t, proofOfIdentityTypesPromise, ProofOfIdentityType) {
+Application.Controllers.controller('EditProfileController', ['$scope', '$rootScope', '$state', '$window', '$sce', '$cookies', '$injector', 'Member', 'Auth', 'Session', 'activeProviderPromise', 'settingsPromise', 'growl', 'dialogs', 'CSRF', 'memberPromise', 'groups', '_t', 'proofOfIdentityTypesPromise', 'SupportingDocumentType',
+  function ($scope, $rootScope, $state, $window, $sce, $cookies, $injector, Member, Auth, Session, activeProviderPromise, settingsPromise, growl, dialogs, CSRF, memberPromise, groups, _t, proofOfIdentityTypesPromise, SupportingDocumentType) {
     /* PUBLIC SCOPE */
 
     // API URL where the form will be posted
@@ -98,7 +98,7 @@ Application.Controllers.controller('EditProfileController', ['$scope', '$rootSco
     // active authentication provider parameters
     $scope.activeProvider = activeProviderPromise;
 
-    // allow the user to change his password except if he connect from an SSO
+    // allow the user to change his password except if he connects from an SSO
     $scope.preventPassword = false;
 
     // get the status of cookies acceptance
@@ -152,8 +152,8 @@ Application.Controllers.controller('EditProfileController', ['$scope', '$rootSco
       }, 50);
       $rootScope.currentUser.group_id = user.group_id;
       Auth._currentUser.group_id = user.group_id;
-      ProofOfIdentityType.query({ group_id: user.group_id }, function (proofOfIdentityTypes) {
-        $scope.hasProofOfIdentityTypes = proofOfIdentityTypes.length > 0;
+      SupportingDocumentType.query({ group_id: user.group_id }, function (supportingDocumentTypes) {
+        $scope.hasProofOfIdentityTypes = supportingDocumentTypes.length > 0;
       });
     };
 
@@ -289,6 +289,7 @@ Application.Controllers.controller('EditProfileController', ['$scope', '$rootSco
      * @param message {string}
      */
     $scope.onError = function (message) {
+      console.error(message);
       growl.error(message);
     };
 

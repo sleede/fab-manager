@@ -28,7 +28,7 @@ class PayZen::Helper < Payment::Helper
     def generate_ref(cart_items, customer)
       require 'sha3'
 
-      content = { cart_items: cart_items, customer: customer }.to_json + DateTime.current.to_s
+      content = { cart_items: cart_items, customer: customer }.to_json + Time.current.iso8601
       # It's safe to truncate a hash. See https://crypto.stackexchange.com/questions/74646/sha3-255-one-bit-less
       SHA3::Digest.hexdigest(:sha224, content)[0...24]
     end

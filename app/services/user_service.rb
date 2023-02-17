@@ -20,7 +20,7 @@ class UserService
       )
       user.build_statistic_profile(
         gender: true,
-        birthday: DateTime.current
+        birthday: Time.current
       )
 
       saved = user.save
@@ -33,7 +33,7 @@ class UserService
 
     def create_admin(params)
       generated_password = SecurePassword.generate
-      admin = User.new(params.merge(password: generated_password, validated_at: DateTime.current))
+      admin = User.new(params.merge(password: generated_password, validated_at: Time.current))
       admin.send :set_slug
 
       # if the authentication is made through an SSO, generate a migration token

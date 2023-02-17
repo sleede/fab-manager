@@ -27,6 +27,25 @@ class InvoicingProfile < ApplicationRecord
 
   has_many :accounting_lines, dependent: :destroy
 
+  # as operator
+  has_many :operated_cart_item_event_reservations, class_name: 'CartItem::EventReservation', dependent: :nullify, inverse_of: :operator_profile
+  has_many :operated_cart_item_machine_reservations, class_name: 'CartItem::MachineReservation', dependent: :nullify,
+                                                     inverse_of: :operator_profile
+  has_many :operated_cart_item_space_reservations, class_name: 'CartItem::SpaceReservation', dependent: :nullify, inverse_of: :operator_profile
+  has_many :operated_cart_item_training_reservations, class_name: 'CartItem::TrainingReservation', dependent: :nullify,
+                                                      inverse_of: :operator_profile
+  has_many :operated_cart_item_coupon, class_name: 'CartItem::Coupon', dependent: :nullify, inverse_of: :operator_profile
+  # as customer
+  has_many :cart_item_event_reservations, class_name: 'CartItem::EventReservation', dependent: :destroy, inverse_of: :customer_profile
+  has_many :cart_item_machine_reservations, class_name: 'CartItem::MachineReservation', dependent: :destroy, inverse_of: :customer_profile
+  has_many :cart_item_space_reservations, class_name: 'CartItem::SpaceReservation', dependent: :destroy, inverse_of: :customer_profile
+  has_many :cart_item_training_reservations, class_name: 'CartItem::TrainingReservation', dependent: :destroy, inverse_of: :customer_profile
+  has_many :cart_item_free_extensions, class_name: 'CartItem::FreeExtension', dependent: :destroy, inverse_of: :customer_profile
+  has_many :cart_item_subscriptions, class_name: 'CartItem::Subscription', dependent: :destroy, inverse_of: :customer_profile
+  has_many :cart_item_prepaid_packs, class_name: 'CartItem::PrepaidPack', dependent: :destroy, inverse_of: :customer_profile
+  has_many :cart_item_coupons, class_name: 'CartItem::Coupon', dependent: :destroy, inverse_of: :customer_profile
+  has_many :cart_item_payment_schedules, class_name: 'CartItem::PaymentSchedule', dependent: :destroy, inverse_of: :customer_profile
+
   before_validation :set_external_id_nil
   validates :external_id, uniqueness: true, allow_blank: true
   validates :address, presence: true, if: -> { Setting.get('address_required') }

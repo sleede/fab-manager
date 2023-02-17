@@ -8,8 +8,8 @@ class Group < ApplicationRecord
   has_many :trainings_pricings, dependent: :destroy
   has_many :machines_prices, -> { where(priceable_type: 'Machine') }, class_name: 'Price', dependent: :destroy, inverse_of: :group
   has_many :spaces_prices, -> { where(priceable_type: 'Space') }, class_name: 'Price', dependent: :destroy, inverse_of: :group
-  has_many :proof_of_identity_types_groups, dependent: :destroy
-  has_many :proof_of_identity_types, through: :proof_of_identity_types_groups
+  has_many :supporting_document_types_groups, dependent: :destroy
+  has_many :supporting_document_types, through: :supporting_document_types_groups
 
   extend FriendlyId
   friendly_id :name, use: :slugged

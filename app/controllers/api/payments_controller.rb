@@ -41,6 +41,7 @@ class API::PaymentsController < API::ApiController
       { json: res[:errors].drop_while(&:empty?), status: :unprocessable_entity }
     end
   rescue StandardError => e
+    Rails.logger.debug e.backtrace
     { json: e, status: :unprocessable_entity }
   end
 end

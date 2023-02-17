@@ -22,6 +22,7 @@ class ShoppingCart
   end
 
   # compute the price details of the current shopping cart
+  # @return [Hash]
   def total
     total_amount = 0
     all_elements = { slots: [] }
@@ -70,7 +71,7 @@ class ShoppingCart
       payment.post_save(payment_id, payment_type)
     end
 
-    success = !payment.nil? && objects.map(&:errors).flatten.map(&:empty?).all? && items.map(&:errors).map(&:empty?).all?
+    success = !payment.nil? && objects.map(&:errors).flatten.map(&:empty?).all? && items.map(&:errors).map(&:blank?).all?
     errors = objects.map(&:errors).flatten.concat(items.map(&:errors))
     errors.push('Unable to create the PaymentDocument') if payment.nil?
     { success: success, payment: payment, errors: errors }

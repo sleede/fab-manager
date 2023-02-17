@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# API Controller for manage user's cart
+# API Controller to manage user's cart
 class API::CartController < API::ApiController
   include API::OrderConcern
 
@@ -11,6 +11,17 @@ class API::CartController < API::ApiController
     authorize :cart, :create?
     @order ||= Cart::FindOrCreateService.new(current_user).call(order_token)
     render 'api/orders/show'
+  end
+
+  def create_item
+    authorize @current_order, policy_class: CartPolicy
+    service = Cart::CreateCartItemService.new(@current_order)
+    @item = service.create(params)
+    if @item.save({ context: @current_order.order_items })
+      render 'api/orders/item', status: :created
+    else
+      render json: @item.errors.full_messages, status: :unprocessable_entity
+    end
   end
 
   def add_item
@@ -49,9 +60,16 @@ class API::CartController < API::ApiController
     render json: @order_errors
   end
 
+  def set_customer
+    authorize @current_order, policy_class: CartPolicy
+    customer = User.find(params[:user_id])
+    @order = Cart::SetCustomerService.new(current_user).call(@current_order, customer)
+    render 'api/orders/show'
+  end
+
   private
 
   def orderable
-    Product.find(cart_params[:orderable_id])
+    params[:orderable_type].classify.constantize.find(cart_params[:orderable_id])
   end
 end

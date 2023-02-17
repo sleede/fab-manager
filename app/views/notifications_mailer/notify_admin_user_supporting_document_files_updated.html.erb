@@ -1,0 +1,14 @@
+<%= render 'notifications_mailer/shared/hello', recipient: @recipient %>
+
+<p>
+  <%= t('.body.user_update_supporting_document_file',
+        NAME: @attached_object&.user&.profile&.full_name || t('api.notifications.deleted_user')) %>
+</p>
+<ul>
+  <li><%= @attached_object.supporting_document_type.name %></li>
+</ul>
+<% if Setting.get('user_validation_required') %>
+<p>
+  <%= t('.body.validate_user') %>
+</p>
+<% end %>

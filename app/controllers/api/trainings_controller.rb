@@ -8,6 +8,7 @@ class API::TrainingsController < API::ApiController
   before_action :set_training, only: %i[update destroy]
 
   def index
+    @requested_attributes = params[:requested_attributes]
     @trainings = TrainingService.list(params)
   end
 
@@ -77,6 +78,8 @@ class API::TrainingsController < API::ApiController
   def training_params
     params.require(:training)
           .permit(:id, :name, :description, :machine_ids, :plan_ids, :nb_total_places, :public_page, :disabled,
+                  :auto_cancel, :auto_cancel_threshold, :auto_cancel_deadline, :authorization, :authorization_period,
+                  :invalidation, :invalidation_period,
                   training_image_attributes: %i[id attachment], machine_ids: [], plan_ids: [],
                   advanced_accounting_attributes: %i[code analytical_section])
   end

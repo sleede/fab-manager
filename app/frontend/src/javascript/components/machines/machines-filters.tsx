@@ -15,8 +15,21 @@ interface MachinesFiltersProps {
 export const MachinesFilters: React.FC<MachinesFiltersProps> = ({ onFilterChangedBy, machineCategories }) => {
   const { t } = useTranslation('public');
 
-  const defaultValue = { value: true, label: t('app.public.machines_filters.status_enabled') };
+  const defaultValue = { value: false, label: t('app.public.machines_filters.status_enabled') };
   const categoryDefaultValue = { value: null, label: t('app.public.machines_filters.all_machines') };
+
+  // Styles the React-select component
+  const customStyles = {
+    control: base => ({
+      ...base,
+      width: '20ch',
+      border: 'none',
+      backgroundColor: 'transparent'
+    }),
+    indicatorSeparator: () => ({
+      display: 'none'
+    })
+  };
 
   /**
    * Provides boolean options in the react-select format (yes/no/all)
@@ -24,7 +37,7 @@ export const MachinesFilters: React.FC<MachinesFiltersProps> = ({ onFilterChange
   const buildBooleanOptions = (): Array<SelectOption<boolean>> => {
     return [
       defaultValue,
-      { value: false, label: t('app.public.machines_filters.status_disabled') },
+      { value: true, label: t('app.public.machines_filters.status_disabled') },
       { value: null, label: t('app.public.machines_filters.status_all') }
     ];
   };
@@ -43,7 +56,7 @@ export const MachinesFilters: React.FC<MachinesFiltersProps> = ({ onFilterChange
    * Callback triggered when the user selects a machine status in the dropdown list
    */
   const handleStatusSelected = (option: SelectOption<boolean>): void => {
-    onFilterChangedBy('status', option.value);
+    onFilterChangedBy('disabled', option.value);
   };
 
   /**
@@ -56,21 +69,23 @@ export const MachinesFilters: React.FC<MachinesFiltersProps> = ({ onFilterChange
   return (
     <div className="machines-filters">
       <div className="filter-item">
-        <label htmlFor="status">{t('app.public.machines_filters.show_machines')}</label>
+        <p>{t('app.public.machines_filters.show_machines')}</p>
         <Select defaultValue={defaultValue}
           id="status"
           className="status-select"
           onChange={handleStatusSelected}
-          options={buildBooleanOptions()}/>
+          options={buildBooleanOptions()}
+          styles={customStyles}/>
       </div>
       {machineCategories.length > 0 &&
         <div className="filter-item">
-          <label htmlFor="category">{t('app.public.machines_filters.filter_by_machine_category')}</label>
+          <p>{t('app.public.machines_filters.filter_by_machine_category')}</p>
           <Select defaultValue={categoryDefaultValue}
             id="machine_category"
             className="category-select"
             onChange={handleCategorySelected}
-            options={buildCategoriesOptions()}/>
+            options={buildCategoriesOptions()}
+            styles={customStyles}/>
         </div>
       }
     </div>

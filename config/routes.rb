@@ -45,6 +45,7 @@ Rails.application.routes.draw do
     resources :components
     resources :themes
     resources :licences
+    resources :statuses
     resources :admins, only: %i[index create destroy]
     resources :settings, only: %i[show update index], param: :name do
       patch '/bulk_update', action: 'bulk_update', on: :collection
@@ -70,6 +71,10 @@ Rails.application.routes.draw do
       match :update_all, path: '/', via: %i[put patch], on: :collection
       get 'polling', action: 'polling', on: :collection
       get 'last_unread', action: 'last_unread', on: :collection
+    end
+    resources :notification_types, only: %i[index]
+    resources :notification_preferences, only: %i[index update], param: :notification_type do
+      patch '/bulk_update', action: 'bulk_update', on: :collection
     end
     resources :wallet, only: [] do
       get '/by_user/:user_id', action: 'by_user', on: :collection
@@ -144,11 +149,11 @@ Rails.application.routes.draw do
       post 'sync', on: :member
     end
 
-    resources :proof_of_identity_types
-    resources :proof_of_identity_files, only: %i[index show create update] do
+    resources :supporting_document_types
+    resources :supporting_document_files, only: %i[index show create update] do
       get 'download', on: :member
     end
-    resources :proof_of_identity_refusals, only: %i[index show create]
+    resources :supporting_document_refusals, only: %i[index show create]
 
     resources :profile_custom_fields
 
@@ -167,6 +172,8 @@ Rails.application.routes.draw do
       put 'set_offer', on: :collection
       put 'refresh_item', on: :collection
       post 'validate', on: :collection
+      post 'create_item', on: :collection
+      put 'set_customer', on: :collection
     end
     resources :checkout, only: %i[] do
       post 'payment', on: :collection

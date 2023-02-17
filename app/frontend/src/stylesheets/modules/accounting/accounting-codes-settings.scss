@@ -24,3 +24,7 @@
     float: right;
   }
 }
+
+.advanced-accounting-form {
+  .title { @include text-base(600); }
+}

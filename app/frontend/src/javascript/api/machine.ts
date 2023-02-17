@@ -5,7 +5,7 @@ import ApiLib from '../lib/api';
 
 export default class MachineAPI {
   static async index (filters?: MachineIndexFilter): Promise<Array<Machine>> {
-    const res: AxiosResponse<Array<Machine>> = await apiClient.get(`/api/machines${ApiLib.filtersToQuery(filters)}`);
+    const res: AxiosResponse<Array<Machine>> = await apiClient.get(`/api/machines${ApiLib.filtersToQuery(filters, false)}`);
     return res?.data;
   }
 

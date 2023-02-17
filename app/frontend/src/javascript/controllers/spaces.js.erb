@@ -228,6 +228,7 @@ Application.Controllers.controller('NewSpaceController', ['$scope', '$state', 'C
    * Callback triggered by react components
    */
   $scope.onError = function (message) {
+    console.error(message);
     growl.error(message);
   };
 
@@ -256,6 +257,7 @@ Application.Controllers.controller('EditSpaceController', ['$scope', '$state', '
      * Callback triggered by react components
      */
     $scope.onError = function (message) {
+      console.error(message);
       growl.error(message);
     };
 

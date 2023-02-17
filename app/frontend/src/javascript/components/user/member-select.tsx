@@ -15,7 +15,7 @@ interface MemberSelectProps {
 }
 
 /**
- * This component renders the member select for manager.
+ * This component allows privileged users (managers/admins) to select a user on whose behalf to act.
  */
 export const MemberSelect: React.FC<MemberSelectProps> = ({ defaultUser, value, onSelected, noHeader, hasError }) => {
   const { t } = useTranslation('public');
@@ -30,6 +30,9 @@ export const MemberSelect: React.FC<MemberSelectProps> = ({ defaultUser, value, 
   useEffect(() => {
     if (!defaultUser && option) {
       onSelected({ id: option.value, name: option.label });
+    }
+    if (!option && defaultUser) {
+      setOption({ value: defaultUser.id, label: defaultUser.name });
     }
   }, [defaultUser]);
 
@@ -77,6 +80,7 @@ export const MemberSelect: React.FC<MemberSelectProps> = ({ defaultUser, value, 
                    defaultOptions
                    onChange={onChange}
                    value={option}
+                   defaultInputValue={defaultUser?.name}
       />
     </div>
   );

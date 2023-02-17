@@ -169,13 +169,12 @@ zu:
       projects_list:
         the_fablab_projects: "crwdns36237:0crwdne36237:0"
         add_a_project: "crwdns28062:0crwdne28062:0"
-        search_over_the_whole_network: "crwdns36783:0crwdne36783:0"
+        network_search: "crwdns37071:0crwdne37071:0"
         tooltip_openlab_projects_switch: "crwdns28066:0crwdne28066:0"
         openlab_search_not_available_at_the_moment: "crwdns28068:0crwdne28068:0"
         project_search_result_is_empty: "crwdns28070:0crwdne28070:0"
         reset_all_filters: "crwdns28072:0crwdne28072:0"
         keywords: "crwdns28074:0crwdne28074:0"
-        search: "crwdns36785:0crwdne36785:0"
         all_projects: "crwdns28078:0crwdne28078:0"
         my_projects: "crwdns28080:0crwdne28080:0"
         projects_to_whom_i_take_part_in: "crwdns28082:0crwdne28082:0"
@@ -184,6 +183,9 @@ zu:
         all_materials: "crwdns28088:0crwdne28088:0"
         load_next_projects: "crwdns28090:0crwdne28090:0"
         rough_draft: "crwdns28092:0crwdne28092:0"
+      status_filter:
+        all_statuses: "crwdns37073:0crwdne37073:0"
+        select_status: "crwdns37075:0crwdne37075:0"
       #details of a projet
       projects_show:
         rough_draft: "crwdns28094:0crwdne28094:0"
@@ -213,6 +215,7 @@ zu:
         message_is_required: "crwdns28142:0crwdne28142:0"
         report: "crwdns28144:0crwdne28144:0"
         do_you_really_want_to_delete_this_project: "crwdns28146:0crwdne28146:0"
+        status: "crwdns37077:0crwdne37077:0"
       #list of machines
       machines_list:
         the_fablab_s_machines: "crwdns36239:0crwdne36239:0"
@@ -363,6 +366,8 @@ zu:
         spaces: "crwdns28388:0crwdne28388:0"
         events: "crwdns28390:0crwdne28390:0"
         externals: "crwdns28392:0crwdne28392:0"
+        choose_a_machine: "crwdns37161:0crwdne37161:0"
+        cancel: "crwdns37163:0crwdne37163:0"
       #list of spaces
       spaces_list:
         the_spaces: "crwdns28394:0crwdne28394:0"
@@ -431,12 +436,6 @@ zu:
         checkout: "crwdns30380:0crwdne30380:0"
         cart_is_empty: "crwdns30382:0crwdne30382:0"
         pickup: "crwdns30384:0crwdne30384:0"
-        reference_short: "crwdns30386:0crwdne30386:0"
-        minimum_purchase: "crwdns30388:0crwdne30388:0"
-        stock_limit: "crwdns30390:0crwdne30390:0"
-        unit: "crwdns30392:0crwdne30392:0"
-        total: "crwdns30394:0crwdne30394:0"
-        offer_product: "crwdns30640:0crwdne30640:0"
         checkout_header: "crwdns30396:0crwdne30396:0"
         checkout_products_COUNT: "crwdns30398:0COUNT={COUNT}crwdnd30398:0COUNT={COUNT}crwdne30398:0"
         checkout_products_total: "crwdns30400:0crwdne30400:0"
@@ -446,14 +445,28 @@ zu:
         checkout_error: "crwdns30408:0crwdne30408:0"
         checkout_success: "crwdns30410:0crwdne30410:0"
         select_user: "crwdns30692:0crwdne30692:0"
-        update_item: "crwdns30696:0crwdne30696:0"
+      abstract_item:
+        offer_product: "crwdns37165:0crwdne37165:0"
+        total: "crwdns37167:0crwdne37167:0"
         errors:
-          product_not_found: "crwdns30698:0crwdne30698:0"
-          out_of_stock: "crwdns30700:0crwdne30700:0"
-          stock_limit_QUANTITY: "crwdns30702:0QUANTITY={QUANTITY}crwdnd30702:0QUANTITY={QUANTITY}crwdne30702:0"
-          quantity_min_QUANTITY: "crwdns30704:0{QUANTITY}crwdne30704:0"
-          price_changed_PRICE: "crwdns30706:0{PRICE}crwdne30706:0"
-          unauthorized_offering_product: "crwdns31681:0crwdne31681:0"
+          unauthorized_offering_product: "crwdns37169:0crwdne37169:0"
+      cart_order_product:
+        reference_short: "crwdns37171:0crwdne37171:0"
+        minimum_purchase: "crwdns37173:0crwdne37173:0"
+        stock_limit: "crwdns37175:0crwdne37175:0"
+        unit: "crwdns37177:0crwdne37177:0"
+        update_item: "crwdns37179:0crwdne37179:0"
+        errors:
+          product_not_found: "crwdns37181:0crwdne37181:0"
+          out_of_stock: "crwdns37183:0crwdne37183:0"
+          stock_limit_QUANTITY: "crwdns37185:0QUANTITY={QUANTITY}crwdnd37185:0QUANTITY={QUANTITY}crwdne37185:0"
+          quantity_min_QUANTITY: "crwdns37187:0{QUANTITY}crwdne37187:0"
+          price_changed_PRICE: "crwdns37189:0{PRICE}crwdne37189:0"
+      cart_order_reservation:
+        reservation: "crwdns37191:0crwdne37191:0"
+        offer_reservation: "crwdns37193:0crwdne37193:0"
+        slot: "crwdns37195:0{DATE}crwdnd37195:0{START}crwdnd37195:0{END}crwdne37195:0"
+        offered: "crwdns37197:0crwdne37197:0"
       orders_dashboard:
         heading: "crwdns30642:0crwdne30642:0"
         sort:

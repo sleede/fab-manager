@@ -15,7 +15,7 @@ services:
       - ./payment_schedules:/usr/src/app/payment_schedules
       - ./exports:/usr/src/app/exports
       - ./imports:/usr/src/app/imports
-      - ./proof_of_identity_files:/usr/src/app/proof_of_identity_files
+      - ./supporting_document_files:/usr/src/app/supporting_document_files
       - ./log:/var/log/supervisor
       - ./plugins:/usr/src/app/plugins
       - ./accounting:/usr/src/app/accounting

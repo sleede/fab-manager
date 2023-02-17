@@ -2,6 +2,8 @@
 
 require 'test_helper'
 
+module Subscriptions; end
+
 class Subscriptions::RenewAsUserTest < ActionDispatch::IntegrationTest
   setup do
     @user = User.find_by(username: 'atiermoulin')
@@ -44,14 +46,14 @@ class Subscriptions::RenewAsUserTest < ActionDispatch::IntegrationTest
     assert_not_nil @user.subscription, "user's subscription was not found"
 
     # Check the expiration date
-    assert @user.subscription.expired_at > DateTime.current,
+    assert @user.subscription.expired_at > Time.current,
            "user's subscription expiration was not updated ... VCR cassettes may be outdated, please check the gitlab wiki"
     assert_equal @user.subscription.expired_at.iso8601,
                  (@user.subscription.created_at + plan.duration).iso8601,
                  'subscription expiration date does not match'
 
     assert_in_delta 5,
-                    (DateTime.current.to_i - @user.subscription.updated_at.to_i),
+                    (Time.current.to_i - @user.subscription.updated_at.to_i),
                     10,
                     "user's subscription was not updated recently"
 
@@ -60,7 +62,7 @@ class Subscriptions::RenewAsUserTest < ActionDispatch::IntegrationTest
 
     # Check notifications were sent for every admins
     notifications = Notification.where(
-      notification_type_id: NotificationType.find_by_name('notify_admin_subscribed_plan'),
+      notification_type_id: NotificationType.find_by(name: 'notify_admin_subscribed_plan'),
       attached_object_type: 'Subscription',
       attached_object_id: subscription[:id]
     )

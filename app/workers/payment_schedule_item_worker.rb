@@ -10,7 +10,7 @@ class PaymentScheduleItemWorker
       psi = PaymentScheduleItem.find(record_id)
       check_item(psi)
     else
-      PaymentScheduleItem.where.not(state: 'paid').where('due_date < ?', DateTime.current).each do |item|
+      PaymentScheduleItem.where.not(state: 'paid').where('due_date < ?', Time.current).each do |item|
         check_item(item)
       end
     end

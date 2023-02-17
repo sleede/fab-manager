@@ -12,16 +12,16 @@ class AccountingWorker
 
   def today
     service = Accounting::AccountingService.new
-    start = DateTime.current.beginning_of_day
-    finish = DateTime.current.end_of_day
+    start = Time.current.beginning_of_day
+    finish = Time.current.end_of_day
     ids = service.build(start, finish)
     @performed = "today: #{start} -> #{finish}; invoices: #{ids}"
   end
 
   def yesterday
     service = Accounting::AccountingService.new
-    start = DateTime.yesterday.beginning_of_day
-    finish = DateTime.yesterday.end_of_day
+    start = 1.day.ago.beginning_of_day
+    finish = 1.day.ago.end_of_day
     ids = service.build(start, finish)
     @performed = "yesterday: #{start} -> #{finish}; invoices: #{ids}"
   end

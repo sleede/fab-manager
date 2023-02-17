@@ -6,11 +6,12 @@
   .content {
     position: absolute;
     top: 0;
-    right: 0;
+    left: 0;
     display: none;
     width: max-content;
-    max-width: min(75vw, 65ch);
+    max-width: min(75vw, 30ch);
     padding: 1rem;
+    transform: translate(-50%, -50%);
     background-color: var(--information-lightest);
     color: var(--information);
     border: 1px solid var(--information);

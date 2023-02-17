@@ -2,10 +2,10 @@ import { useState } from 'react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { FabModal } from '../base/fab-modal';
-import { ProofOfIdentityType } from '../../models/proof-of-identity-type';
-import { ProofOfIdentityRefusal } from '../../models/proof-of-identity-refusal';
+import { SupportingDocumentType } from '../../models/supporting-document-type';
+import { SupportingDocumentRefusal } from '../../models/supporting-document-refusal';
 import { User } from '../../models/user';
-import ProofOfIdentityRefusalAPI from '../../api/proof-of-identity-refusal';
+import SupportingDocumentRefusalAPI from '../../api/supporting-document-refusal';
 import { SupportingDocumentsRefusalForm } from './supporting-documents-refusal-form';
 
 interface SupportingDocumentsRefusalModalProps {
@@ -13,7 +13,7 @@ interface SupportingDocumentsRefusalModalProps {
   toggleModal: () => void,
   onSuccess: (message: string) => void,
   onError: (message: string) => void,
-  proofOfIdentityTypes: Array<ProofOfIdentityType>,
+  proofOfIdentityTypes: Array<SupportingDocumentType>,
   operator: User,
   member: User
 }
@@ -24,11 +24,11 @@ interface SupportingDocumentsRefusalModalProps {
 export const SupportingDocumentsRefusalModal: React.FC<SupportingDocumentsRefusalModalProps> = ({ isOpen, toggleModal, onSuccess, proofOfIdentityTypes, operator, member, onError }) => {
   const { t } = useTranslation('admin');
 
-  const [data, setData] = useState<ProofOfIdentityRefusal>({
+  const [data, setData] = useState<SupportingDocumentRefusal>({
     id: null,
     operator_id: operator.id,
     user_id: member.id,
-    proof_of_identity_type_ids: [],
+    supporting_document_type_ids: [],
     message: ''
   });
 
@@ -47,7 +47,7 @@ export const SupportingDocumentsRefusalModal: React.FC<SupportingDocumentsRefusa
    */
   const handleSaveRefusal = async (): Promise<void> => {
     try {
-      await ProofOfIdentityRefusalAPI.create(data);
+      await SupportingDocumentRefusalAPI.create(data);
       onSuccess(t('app.admin.supporting_documents_refusal_modal.refusal_successfully_sent'));
     } catch (e) {
       onError(t('app.admin.supporting_documents_refusal_modal.unable_to_send') + e);
@@ -58,7 +58,7 @@ export const SupportingDocumentsRefusalModal: React.FC<SupportingDocumentsRefusa
    * Check if the refusal can be saved (i.e. is not empty)
    */
   const isPreventedSaveRefusal = (): boolean => {
-    return !data.message || data.proof_of_identity_type_ids.length === 0;
+    return !data.message || data.supporting_document_type_ids.length === 0;
   };
 
   return (

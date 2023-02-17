@@ -1,6 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  id: 1
   slot_id: 1
   reservation_id: 1
   ex_start_at:
@@ -9,6 +10,7 @@ one:
   offered:
 
 two:
+  id: 2
   slot_id: 2
   reservation_id: 2
   ex_start_at:

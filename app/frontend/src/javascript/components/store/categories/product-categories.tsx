@@ -6,7 +6,6 @@ import ProductCategoryAPI from '../../../api/product-category';
 import { ManageProductCategory } from './manage-product-category';
 import { ProductCategoriesTree } from './product-categories-tree';
 import { FabAlert } from '../../base/fab-alert';
-import { HtmlTranslate } from '../../base/html-translate';
 import { IApplication } from '../../../models/application';
 import { Loader } from '../../base/loader';
 import { react2angular } from 'react2angular';
@@ -79,7 +78,7 @@ const ProductCategories: React.FC<ProductCategoriesProps> = ({ onSuccess, onErro
         </div>
       </header>
       <FabAlert level="warning">
-        <HtmlTranslate trKey="app.admin.store.product_categories.info" />
+        {t('app.admin.store.product_categories.info')}
       </FabAlert>
       <ProductCategoriesTree
         productCategories={productCategories}

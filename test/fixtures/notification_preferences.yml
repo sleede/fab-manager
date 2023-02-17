@@ -1,0 +1,35 @@
+notification_preference_1:
+  id: 1
+  user_id: 1
+  notification_type_id: 1
+  in_system: true
+  email: true
+  created_at: 2023-02-02 15:25:13.744539000 Z
+  updated_at: 2023-02-02 15:25:13.744539000 Z
+
+notification_preference_2:
+  id: 2
+  user_id: 1
+  notification_type_id: 2
+  in_system: true
+  email: true
+  created_at: 2023-02-02 15:25:13.744539000 Z
+  updated_at: 2023-02-02 15:25:13.744539000 Z
+
+notification_preference_3:
+  id: 3
+  user_id: 1
+  notification_type_id: 13
+  in_system: false
+  email: false
+  created_at: 2023-02-02 15:25:13.744539000 Z
+  updated_at: 2023-02-02 15:25:13.744539000 Z
+
+notification_preference_4:
+  id: 4
+  user_id: 2
+  notification_type_id: 35
+  in_system: false
+  email: false
+  created_at: 2023-02-02 15:25:13.744539000 Z
+  updated_at: 2023-02-02 15:25:13.744539000 Z

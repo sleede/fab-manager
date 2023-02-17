@@ -21,9 +21,9 @@ json.array!(@availabilities) do |availability|
     end
 
     json.is_completed availability.full?
-    json.is_reserved availability.is_reserved
+    json.is_reserved availability.reserved?
     json.borderColor availability_border_color(availability)
-    if availability.is_reserved && !availability.current_user_slots_reservations_ids.empty?
+    if availability.reserved? && !@user.nil? && availability.reserved_by?(@user.id)
       json.title "#{availability.title}' - #{t('trainings.i_ve_reserved')}"
     elsif availability.full?
       json.title "#{availability.title} - #{t('trainings.completed')}"
@@ -32,27 +32,28 @@ json.array!(@availabilities) do |availability|
 
   # slot object ( here => availability = slot ), for daily view
   elsif availability.instance_of? Slot
-    json.title availability.title
-    json.tag_ids availability.availability.tag_ids
-    json.tags availability.availability.tags do |t|
+    slot = availability
+    json.title Slots::TitleService.new(@user&.role, @user).call(slot)
+    json.tag_ids slot.availability.tag_ids
+    json.tags slot.availability.tags do |t|
       json.id t.id
       json.name t.name
     end
-    json.is_reserved availability.is_reserved
-    json.is_completed availability.full?
-    case availability.availability.available_type
+    json.is_reserved slot.reserved?
+    json.is_completed slot.full?
+    case slot.availability.available_type
     when 'machines'
-      json.machine_ids availability.availability.machines.map(&:id)
-      json.borderColor machines_slot_border_color(availability)
+      json.machine_ids slot.availability.machines.map(&:id)
+      json.borderColor machines_slot_border_color(slot)
     when 'space'
-      json.space_id availability.availability.spaces.first.id
-      json.borderColor space_slot_border_color(availability)
+      json.space_id slot.availability.spaces.first.id
+      json.borderColor space_slot_border_color(slot)
     when 'training'
-      json.training_id availability.availability.trainings.first.id
-      json.borderColor trainings_events_border_color(availability.availability)
+      json.training_id slot.availability.trainings.first.id
+      json.borderColor trainings_events_border_color(slot.availability)
     when 'event'
-      json.event_id availability.availability.event.id
-      json.borderColor trainings_events_border_color(availability.availability)
+      json.event_id slot.availability.event.id
+      json.borderColor trainings_events_border_color(slot.availability)
     else
       json.title 'Unknown slot'
     end

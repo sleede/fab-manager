@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { FabModal } from '../base/fab-modal';
-import ProofOfIdentityTypeAPI from '../../api/proof-of-identity-type';
+import SupportingDocumentTypeAPI from '../../api/supporting-document-type';
 
 interface DeleteSupportingDocumentsTypeModalProps {
   isOpen: boolean,
@@ -22,7 +22,7 @@ export const DeleteSupportingDocumentsTypeModal: React.FC<DeleteSupportingDocume
    */
   const handleDeleteProofOfIdentityType = async (): Promise<void> => {
     try {
-      await ProofOfIdentityTypeAPI.destroy(proofOfIdentityTypeId);
+      await SupportingDocumentTypeAPI.destroy(proofOfIdentityTypeId);
       onSuccess(t('app.admin.settings.account.delete_supporting_documents_type_modal.deleted'));
     } catch (e) {
       onError(t('app.admin.settings.account.delete_supporting_documents_type_modal.unable_to_delete') + e);

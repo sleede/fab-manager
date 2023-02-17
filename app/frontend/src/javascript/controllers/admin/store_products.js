@@ -16,6 +16,7 @@ Application.Controllers.controller('AdminStoreProductController', ['$scope', 'CS
      * Callback triggered in case of error
      */
     $scope.onError = (message) => {
+      console.error(message);
       growl.error(message);
     };
 

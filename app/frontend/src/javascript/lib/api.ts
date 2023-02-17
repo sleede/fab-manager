@@ -4,7 +4,7 @@ import { serialize } from 'object-to-formdata';
 
 export default class ApiLib {
   static filtersToQuery (filters?: ApiFilter, keepNullValues = true): string {
-    if (!filters) return '';
+    if (!filters || Object.keys(filters).length < 1) return '';
 
     return '?' + Object.entries(filters)
       .filter(filter => keepNullValues || !_.isNil(filter[1]))

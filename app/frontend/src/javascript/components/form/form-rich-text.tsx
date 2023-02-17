@@ -8,7 +8,7 @@ import { Controller, Path } from 'react-hook-form';
 import { FieldPath } from 'react-hook-form/dist/types/path';
 import { FieldPathValue, UnpackNestedValue } from 'react-hook-form/dist/types';
 
-interface FormRichTextProps<TFieldValues, TContext extends object> extends FormControlledComponent<TFieldValues, TContext>, AbstractFormItemProps<TFieldValues> {
+type FormRichTextProps<TFieldValues, TContext extends object> = FormControlledComponent<TFieldValues, TContext> & AbstractFormItemProps<TFieldValues> & {
   valueDefault?: string,
   limit?: number,
   heading?: boolean,

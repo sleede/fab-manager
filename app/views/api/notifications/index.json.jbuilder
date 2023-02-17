@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 json.totals @totals
 json.notifications(@notifications) do |notification|
   json.extract! notification, :id, :notification_type_id, :notification_type, :created_at, :is_read
@@ -9,4 +11,4 @@ json.notifications(@notifications) do |notification|
       json.partial! "/api/notifications/#{notification.notification_type}", notification: notification
     end
   end
-end.delete_if {|n| n['id'] == nil }
+end

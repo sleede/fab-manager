@@ -17,11 +17,11 @@ class API::EventsController < API::ApiController
     if current_user&.admin? || current_user&.manager?
       @events = case params[:scope]
                 when 'future'
-                  @events.where('availabilities.start_at >= ?', DateTime.current).order('availabilities.start_at DESC')
+                  @events.where('availabilities.start_at >= ?', Time.current).order('availabilities.start_at DESC')
                 when 'future_asc'
-                  @events.where('availabilities.start_at >= ?', DateTime.current).order('availabilities.start_at ASC')
+                  @events.where('availabilities.start_at >= ?', Time.current).order('availabilities.start_at ASC')
                 when 'passed'
-                  @events.where('availabilities.start_at < ?', DateTime.current).order('availabilities.start_at DESC')
+                  @events.where('availabilities.start_at < ?', Time.current).order('availabilities.start_at DESC')
                 else
                   @events.order('availabilities.start_at DESC')
                 end
@@ -42,11 +42,11 @@ class API::EventsController < API::ApiController
 
     @events = case Setting.get('upcoming_events_shown')
               when 'until_start'
-                @events.where('availabilities.start_at >= ?', DateTime.current)
+                @events.where('availabilities.start_at >= ?', Time.current)
               when '2h_before_end'
-                @events.where('availabilities.end_at >= ?', DateTime.current + 2.hours)
+                @events.where('availabilities.end_at >= ?', 2.hours.from_now)
               else
-                @events.where('availabilities.end_at >= ?', DateTime.current)
+                @events.where('availabilities.end_at >= ?', Time.current)
               end
   end
 

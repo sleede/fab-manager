@@ -29,6 +29,7 @@ class API::AvailabilitiesController < API::ApiController
       { machines: machine_ids, spaces: params[:s], trainings: params[:t] },
       events: (params[:evt] && params[:evt] == 'true')
     )
+    @user = current_user
 
     @title_filter = { machine_ids: machine_ids.map(&:to_i) }
     @availabilities = filter_availabilites(@availabilities)
@@ -50,6 +51,7 @@ class API::AvailabilitiesController < API::ApiController
     end
   end
 
+  # This endpoint is used to remove a machine or a plan from the given availability
   def update
     authorize Availability
     if @availability.update(availability_params)

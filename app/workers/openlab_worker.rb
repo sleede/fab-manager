@@ -30,5 +30,7 @@ class OpenlabWorker
     logger.debug ['Openlab sync', 'RESPONSE ERROR', response.inspect] unless response.success?
   rescue Errno::ECONNREFUSED => e
     logger.warn "Unable to connect to OpenProject, maybe the dev instance is not running: #{e}" if Rails.env.development?
+  rescue ActiveRecord::RecordNotFound => e
+    logger.warn "#{e.message}: Project #{project_id} was not found, unable to sync it on OpenLab"
   end
 end

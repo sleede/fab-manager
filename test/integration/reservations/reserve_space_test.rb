@@ -14,6 +14,7 @@ class Reservations::ReserveSpaceTest < ActionDispatch::IntegrationTest
 
     space = Space.first
     availability = space.availabilities.first
+    slot = availability.slots.first
 
     reservations_count = Reservation.count
     invoice_count = Invoice.count
@@ -33,7 +34,7 @@ class Reservations::ReserveSpaceTest < ActionDispatch::IntegrationTest
                      reservable_type: space.class.name,
                      slots_reservations_attributes: [
                        {
-                         slot_id: availability.slots.first.id
+                         slot_id: slot.id
                        }
                      ]
                    }
@@ -79,5 +80,12 @@ class Reservations::ReserveSpaceTest < ActionDispatch::IntegrationTest
 
     # notification
     assert_not_empty Notification.where(attached_object: reservation)
+
+    # place cache
+    slot.reload
+    cached = slot.places.detect { |p| p['reservable_id'] == space.id && p['reservable_type'] == space.class.name }
+    assert_not_nil cached
+    assert_equal 1, cached['reserved_places']
+    assert_includes cached['user_ids'], @user_without_subscription.id
   end
 end

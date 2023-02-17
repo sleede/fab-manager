@@ -28,7 +28,7 @@ const CreditsPanel: React.FC<CreditsPanelProps> = ({ userId, onError, reservable
   }, []);
 
   /**
-   * Compute the remainings hours for the given credit
+   * Compute the remaining hours for the given credit
    */
   const remainingHours = (credit: Credit): number => {
     return credit.hours - credit.hours_used;
@@ -39,29 +39,31 @@ const CreditsPanel: React.FC<CreditsPanelProps> = ({ userId, onError, reservable
    */
   const noCredits = (): ReactNode => {
     return (
-      <li className="no-credits">{t('app.logged.dashboard.reservations.credits_panel.no_credits')}</li>
-    );
-  };
-
-  /**
-   * Panel title
-   */
-  const header = (): ReactNode => {
-    return (
-      <div>
-        {t(`app.logged.dashboard.reservations.credits_panel.title_${reservableType}`)}
-      </div>
+      <div className="fab-alert fab-alert--warning">{t('app.logged.dashboard.reservations_dashboard.credits_panel.no_credits')}</div>
     );
   };
 
   return (
-    <FabPanel className="credits-panel" header={header()}>
-      <ul>
-      {credits.map(c => <li key={c.id}>
-        <HtmlTranslate trKey="app.logged.dashboard.reservations.credits_panel.reamaining_credits_html" options={{ NAME: c.creditable.name, REMAINING: remainingHours(c), USED: c.hours_used }} />
-      </li>)}
+    <FabPanel className="credits-panel">
+      <p className="title">{t('app.logged.dashboard.reservations_dashboard.credits_panel.title')}</p>
+      {credits.length !== 0 &&
+        <div className="fab-alert fab-alert--warning">
+          {t('app.logged.dashboard.reservations_dashboard.credits_panel.info')}
+        </div>
+      }
+
+      <div className="credits-list">
+        {credits.map(c => <div key={c.id} className="credits-list-item">
+          <p className="title">{c.creditable.name}</p>
+          <p>
+            <HtmlTranslate trKey="app.logged.dashboard.reservations_dashboard.credits_panel.remaining_credits_html" options={{ REMAINING: remainingHours(c) }} /><br />
+            {(c.hours_used && c.hours_used > 0) &&
+              <HtmlTranslate trKey="app.logged.dashboard.reservations_dashboard.credits_panel.used_credits_html" options={{ USED: c.hours_used }} />
+            }
+          </p>
+        </div>)}
+      </div>
       {credits.length === 0 && noCredits()}
-      </ul>
     </FabPanel>
   );
 };

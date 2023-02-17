@@ -30,6 +30,7 @@ import ProductLib from '../../lib/product';
 import { UIRouter } from '@uirouter/angularjs';
 import SettingAPI from '../../api/setting';
 import { SelectOption } from '../../models/select';
+import { CaretDoubleUp } from 'phosphor-react';
 
 declare const Application: IApplication;
 
@@ -66,7 +67,6 @@ const Store: React.FC<StoreProps> = ({ onError, onSuccess, currentUser, uiRouter
   const [resources, setResources] = useImmer<ProductResourcesFetching>(storeInitialResources);
   const [machinesModule, setMachinesModule] = useState<boolean>(false);
   const [categoriesTree, setCategoriesTree] = useState<CategoryTree[]>([]);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [filtersPanel, setFiltersPanel] = useState<boolean>(false);
   const [pageCount, setPageCount] = useState<number>(0);
   const [productsCount, setProductsCount] = useState<number>(0);
@@ -241,11 +241,14 @@ const Store: React.FC<StoreProps> = ({ onError, onSuccess, currentUser, uiRouter
         }
       </ul>
       <aside className={`store-filters ${filtersPanel ? '' : 'collapsed'}`}>
+        <header>
+          <h3>{t('app.public.store.products.filter_categories')}</h3>
+          <div className="grpBtn">
+            <CaretDoubleUp className='filters-toggle' size={16} weight="bold" onClick={() => setFiltersPanel(!filtersPanel)} />
+          </div>
+        </header>
         <div className='grp'>
           <div className="categories">
-            <header>
-              <h3>{t('app.public.store.products.filter_categories')}</h3>
-            </header>
             <div className="group u-scrollbar">
               {categoriesTree.map(c =>
                 <div key={c.parent.id} className={`parent ${selectedCategory?.id === c.parent.id || selectedCategory?.parent_id === c.parent.id ? 'is-active' : ''}`}>

@@ -15,7 +15,7 @@ class AccountingWorkerTest < ActiveSupport::TestCase
   end
 
   test 'build accounting lines for yesterday by default' do
-    date = DateTime.current.midnight
+    date = Time.current.midnight
     travel_to(date)
     @worker.perform
     assert_match(/^yesterday:/, @worker.performed)
@@ -25,7 +25,7 @@ class AccountingWorkerTest < ActiveSupport::TestCase
   test 'build accounting lines for today' do
     @worker.perform(:today)
     assert_match(/^today:/, @worker.performed)
-    assert_match(DateTime.current.to_date.iso8601, @worker.performed)
+    assert_match(Time.current.to_date.iso8601, @worker.performed)
   end
 
   test 'build specified invoices selection' do

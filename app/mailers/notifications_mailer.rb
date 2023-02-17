@@ -1,11 +1,8 @@
 # frozen_string_literal: true
 
 # Handle most of the emails sent by the platform. Triggered by notifications
-class NotificationsMailer < NotifyWith::NotificationsMailer
-  default from: ->(*) { Setting.get('email_from') }
-  layout 'notifications_mailer'
-
-  helper :application
+class NotificationsMailer < BaseMailer
+  after_action :mark_notification_as_send
 
   def send_mail_by(notification)
     @notification = notification
@@ -13,23 +10,19 @@ class NotificationsMailer < NotifyWith::NotificationsMailer
     @attached_object = notification.attached_object
 
     unless respond_to?(notification.notification_type)
-      class_eval %{
-        def #{notification.notification_type}
-          mail to: @recipient.email,
-               subject: t('notifications_mailer.#{notification.notification_type}.subject'),
-               template_name: '#{notification.notification_type}',
-               content_type: 'text/html'
-        end
-      }, __FILE__, __LINE__ - 7
+      class_eval(<<-RUBY, __FILE__, __LINE__ + 1)
+        def #{notification.notification_type}                                                # def notify_admin_when_project_published
+          mail to: @recipient.email,                                                         #   mail to: @recipient.email,
+               subject: t('notifications_mailer.#{notification.notification_type}.subject'), #   subject: t('notifications_mailer.notify_admin_when_project_published.subject'),
+               template_name: '#{notification.notification_type}',                           #   template_name: 'notify_admin_when_project_published',
+               content_type: 'text/html'                                                     #   content_type: 'text/html'
+        end                                                                                  # end
+      RUBY
     end
 
     send(notification.notification_type)
   rescue StandardError => e
     Rails.logger.error "[NotificationsMailer] notification cannot be sent: #{e}"
-  end
-
-  def helpers
-    ActionController::Base.helpers
   end
 
   def notify_user_when_invoice_ready
@@ -58,5 +51,11 @@ class NotificationsMailer < NotifyWith::NotificationsMailer
     mail(to: @recipient.email,
          subject: t('notifications_mailer.notify_member_create_reservation.subject'),
          template_name: 'notify_member_create_reservation')
+  end
+
+  private
+
+  def mark_notification_as_send
+    @notification.mark_as_send unless @notification.is_send
   end
 end

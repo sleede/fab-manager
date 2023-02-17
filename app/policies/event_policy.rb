@@ -8,7 +8,7 @@ class EventPolicy < ApplicationPolicy
       if user.nil? || (user && !user.admin? && !user.manager?)
         scope.includes(:event_image, :event_files, :availability, :category, :event_price_categories, :age_range, :events_event_themes,
                        :event_themes)
-             .where('availabilities.start_at >= ?', DateTime.current)
+             .where('availabilities.start_at >= ?', Time.current)
              .where(deleted_at: nil)
              .order('availabilities.start_at ASC')
              .references(:availabilities)

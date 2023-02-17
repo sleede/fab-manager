@@ -2,16 +2,18 @@
 
 # Coupon is a textual code associated with a discount rate or an amount of discount
 class Coupon < ApplicationRecord
-  has_many :invoices
-  has_many :payment_schedule
-  has_many :orders
+  has_many :invoices, dependent: :restrict_with_error
+  has_many :payment_schedule, dependent: :restrict_with_error
+  has_many :orders, dependent: :restrict_with_error
+
+  has_many :cart_item_coupons, class_name: 'CartItem::Coupon', dependent: :destroy
 
   after_create :create_gateway_coupon
   before_destroy :delete_gateway_coupon
 
   validates :name, presence: true
   validates :code, presence: true
-  validates :code, format: { with: /\A[A-Z0-9\-]+\z/, message: 'only caps letters, numbers, and dashes' }
+  validates :code, format: { with: /\A[A-Z0-9\-]+\z/, message: I18n.t('coupon.code_format_error') }
   validates :code, uniqueness: true
   validates :validity_per_user, presence: true
   validates :validity_per_user, inclusion: { in: %w[once forever] }
@@ -19,7 +21,7 @@ class Coupon < ApplicationRecord
   validates_with CouponExpirationValidator
 
   scope :disabled, -> { where(active: false) }
-  scope :expired, -> { where('valid_until IS NOT NULL AND valid_until < ?', DateTime.current) }
+  scope :expired, -> { where('valid_until IS NOT NULL AND valid_until < ?', Time.current) }
   scope :sold_out, lambda {
     joins(:invoices).select('coupons.*, COUNT(invoices.id) as invoices_count').group('coupons.id')
                     .where.not(max_usages: nil).having('COUNT(invoices.id) >= coupons.max_usages')
@@ -28,7 +30,7 @@ class Coupon < ApplicationRecord
     joins('LEFT OUTER JOIN invoices ON invoices.coupon_id = coupons.id')
       .select('coupons.*, COUNT(invoices.id) as invoices_count')
       .group('coupons.id')
-      .where('active = true AND (valid_until IS NULL OR valid_until >= ?)', DateTime.current)
+      .where('active = true AND (valid_until IS NULL OR valid_until >= ?)', Time.current)
       .having('COUNT(invoices.id) < coupons.max_usages OR coupons.max_usages IS NULL')
   }
 
@@ -61,7 +63,7 @@ class Coupon < ApplicationRecord
   def status(user_id = nil, amount = nil)
     if !active?
       'disabled'
-    elsif !valid_until.nil? && valid_until.at_end_of_day < DateTime.current
+    elsif !valid_until.nil? && valid_until.at_end_of_day < Time.current
       'expired'
     elsif !max_usages.nil? && invoices.count >= max_usages
       'sold_out'

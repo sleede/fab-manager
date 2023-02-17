@@ -49,10 +49,12 @@ pt:
       gateway_amount_too_large: "Payments above %{AMOUNT} are not supported. Please order directly at the reception."
       product_in_use: "This product have already been ordered"
       slug_already_used: "is already used"
+  coupon:
+    code_format_error: "only caps letters, numbers, and dashes are allowed"
   apipie:
     api_documentation: "Documentação da API"
     code: "Código HTTP"
-  #error messages when importing an account from a SSO
+  #error messages when importing an account from an SSO
   omniauth:
     email_already_linked_to_another_account_please_input_your_authentication_code: "E-mail \"%{OLD_MAIL}\" já está vinculado a outra conta, insira seu código de autenticação."
     your_username_is_already_linked_to_another_account_unable_to_update_it: "Seu nome de usuário ( %{USERNAME}) já está vinculado a outra conta, não conseguindo atualizá-lo."
@@ -61,6 +63,7 @@ pt:
   #availability slots in the calendar
   availabilities:
     not_available: "Não disponível "
+    reserving: "I'm reserving"
     i_ve_reserved: "Eu reservei"
     length_must_be_slot_multiple: "deve ser pelo menos %{MIN} minutos após a data de início"
     must_be_associated_with_at_least_1_machine: "deve estar associada a pelo menos uma máquina"
@@ -178,6 +181,7 @@ pt:
   trainings:
     i_ve_reserved: "Eu reservei"
     completed: "Cheio"
+    refund_for_auto_cancel: "This training session was cancelled due to an insufficient number of participants."
   #error messages when updating an event
   events:
     error_deleting_reserved_price: "Não permitido deletar o preço requisitado, pois está associado a algumas reservas"
@@ -189,6 +193,7 @@ pt:
   export_members:
     members: "Membros"
     id: "ID"
+    external_id: "External ID"
     surname: "Sobrenome"
     first_name: "Primeiro nome"
     email: "E-mail"
@@ -214,6 +219,7 @@ pt:
     echo_sciences: "Ecociências"
     organization: "Organização"
     organization_address: "Endereço da organização"
+    note: "Note"
     man: "Homem"
     woman: "Mulher"
     without_subscriptions: "Sem assinaturas"
@@ -294,6 +300,10 @@ pt:
         USER_s_subscription_has_expired: "A assinatura do usuário %{USER} expirou."
       notify_admin_subscription_will_expire_in_7_days:
         USER_s_subscription_will_expire_in_7_days: "A assinatura do usuário %{USER} expira em 7 dias."
+      notify_admin_training_auto_cancelled:
+        auto_cancelled_training: "The %{TRAINING} training session scheduled for %{DATE}, has been automatically canceled due to an insufficient number of participants."
+        auto_refund: "The members were automatically refunded on their wallet."
+        manual_refund: "Please refund each members."
       notify_admin_user_group_changed:
         user_NAME_changed_his_group_html: "O usuário <strong><em>{NAME}</strong></em> mudou de grupo." #messageFormat interpolation
       notify_admin_user_merged:
@@ -324,6 +334,13 @@ pt:
         your_subscription_has_expired: "Sua assinatura expirou."
       notify_member_subscription_will_expire_in_7_days:
         your_subscription_will_expire_in_7_days: "Sua assiantura expira em 7 dias."
+      notify_member_training_authorization_expired:
+        training_authorization_revoked: "Your authorization to use %{MACHINES} has been revoked because it has expired."
+      notify_member_training_auto_cancelled:
+        auto_cancelled_training: "The %{TRAINING} training session scheduled for %{DATE}, has been canceled due to an insufficient number of participants."
+        auto_refund: "You were refunded on your wallet."
+      notify_member_training_invalidated:
+        invalidated: "Your authorization to use %{MACHINES} has been invalidated due to a lack of reservations."
       notify_partner_subscribed_plan:
         subscription_partner_PLAN_has_been_subscribed_by_USER_html: "A assinatura de parceiros <strong> <em>%{PLAN} </em> </strong> foi assinada por <strong> <em> %{USER} </strong> </ em."
       notify_project_author_when_collaborator_valid:
@@ -395,6 +412,8 @@ pt:
         user_NAME_changed_ROLE_html: "O usuário <strong><em>%{NAME}</strong></em> agora é %{ROLE}."
       notify_admin_objects_stripe_sync:
         all_objects_sync: "Todos os dados foram sincronizados com sucesso no Stripe."
+      notify_admin_order_is_paid:
+        order_paid_html: "A new order has been placed. <a href='/#!/admin/store/orders/%{ID}'>View details</a>."
       notify_user_when_payment_schedule_ready:
         your_schedule_is_ready_html: "Sua fatura #%{REFERENCE}, de %{AMOUNT}, está pronta. <a href='api/invoices/%{SCHEDULE_ID}/download' target='_blank'>Clique aqui para fazer o download</a>."
       notify_admin_payment_schedule_error:
@@ -413,18 +432,18 @@ pt:
         schedule_deadline: "Você deve realizar a verificação para a data limite de %{DATE} para agendar %{REFERENCE}"
       notify_admin_payment_schedule_transfer_deadline:
         schedule_deadline: "Você deve realizar a verificação do débito para a data limite de %{DATE}, para o agendamento %{REFERENCE}"
-      notify_admin_user_proof_of_identity_files_created:
-        proof_of_identity_files_uploaded: "Comprovante de identidade enviado pelo membro <strong><em>%{NAME}</strong></em>."
-      notify_admin_user_proof_of_identity_files_updated:
-        proof_of_identity_files_uploaded: "Comprovante de identidade alterado pelo membro <strong><em>%{NAME}</strong></em>."
+      notify_admin_user_supporting_document_files_created:
+        supporting_document_files_uploaded: "Supporting document uploaded by member <strong><em>%{NAME}</strong></em>."
+      notify_admin_user_supporting_document_files_updated:
+        supporting_document_files_uploaded: "Supporting document changed by member <strong><em>%{NAME}</strong></em>."
       notify_user_is_validated:
         account_validated: "Sua conta é válida."
       notify_user_is_invalidated:
         account_invalidated: "Sua conta é inválida."
-      notify_user_proof_of_identity_refusal:
-        refusal: "Seu comprovante de identidade não foi aceito"
-      notify_admin_user_proof_of_identity_refusal:
-        refusal: "Prova de identidade do membro <strong><em>%{NAME}</strong></em> recusada."
+      notify_user_supporting_document_refusal:
+        refusal: "Your supporting documents were refused"
+      notify_admin_user_supporting_document_refusal:
+        refusal: "Member's supporting document <strong><em>%{NAME}</strong></em> was refused."
       notify_user_order_is_ready:
         order_ready: "Your command %{REFERENCE} is ready"
       notify_user_order_is_canceled:
@@ -501,11 +520,15 @@ pt:
     deadline: "You can't reserve a slot %{MINUTES} minutes prior to its start"
     restricted: "This availability is restricted for subscribers"
     plan: "This subscription plan is disabled"
+    plan_group: "This subscription plan is reserved for members of group %{GROUP}"
     reserved: "This slot is already reserved"
     pack: "This prepaid pack is disabled"
+    pack_group: "This prepaid pack is reserved for members of group %{GROUP}"
     space: "This space is disabled"
     machine: "This machine is disabled"
     reservable: "This machine is not reservable"
+  cart_validation:
+    select_user: "Please select a user before continuing"
   settings:
     locked_setting: "a configuração está bloqueada."
     about_title: "\"Sobre\" título da página"
@@ -662,3 +685,16 @@ pt:
     external_id: "external identifier"
     prevent_invoices_zero: "prevent building invoices at 0"
     invoice_VAT-name: "VAT name"
+    trainings_auto_cancel: "Trainings automatic cancellation"
+    trainings_auto_cancel_threshold: "Minimum participants for automatic cancellation"
+    trainings_auto_cancel_deadline: "Automatic cancellation deadline"
+    trainings_authorization_validity: "Trainings validity period"
+    trainings_authorization_validity_duration: "Trainings validity period duration"
+    trainings_invalidation_rule: "Trainings automatic invalidation"
+    trainings_invalidation_rule_period: "Grace period before invalidating a training"
+  #statuses of projects
+  statuses:
+    new: "New"
+    pending: "Pending"
+    done: "Done"
+    abandoned: "Abandoned"

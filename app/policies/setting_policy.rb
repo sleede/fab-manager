@@ -43,7 +43,10 @@ class SettingPolicy < ApplicationPolicy
        pack_only_for_subscription overlapping_categories public_registrations facebook twitter viadeo linkedin instagram
        youtube vimeo dailymotion github echosciences pinterest lastfm flickr machines_module user_change_group
        user_validation_required user_validation_required_list store_module store_withdrawal_instructions store_hidden
-       external_id]
+       external_id machines_banner_active machines_banner_text machines_banner_cta_active machines_banner_cta_label
+       machines_banner_cta_url trainings_banner_active trainings_banner_text trainings_banner_cta_active trainings_banner_cta_label
+       trainings_banner_cta_url events_banner_active events_banner_text events_banner_cta_active events_banner_cta_label
+       events_banner_cta_url]
   end
 
   ##

@@ -657,8 +657,8 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
 /**
  * Controller used in the member edition page
  */
-Application.Controllers.controller('EditMemberController', ['$scope', '$state', '$transition$', 'Member', 'Training', 'dialogs', 'growl', 'Group', 'Subscription', 'CSRF', 'memberPromise', 'tagsPromise', '$uibModal', 'Plan', '$filter', '_t', 'walletPromise', 'transactionsPromise', 'activeProviderPromise', 'Wallet', 'settingsPromise', 'ProofOfIdentityType',
-  function ($scope, $state, $transition$, Member, Training, dialogs, growl, Group, Subscription, CSRF, memberPromise, tagsPromise, $uibModal, Plan, $filter, _t, walletPromise, transactionsPromise, activeProviderPromise, Wallet, settingsPromise, ProofOfIdentityType) {
+Application.Controllers.controller('EditMemberController', ['$scope', '$state', '$transition$', 'Member', 'Training', 'dialogs', 'growl', 'Group', 'Subscription', 'CSRF', 'memberPromise', 'tagsPromise', '$uibModal', 'Plan', '$filter', '_t', 'walletPromise', 'transactionsPromise', 'activeProviderPromise', 'Wallet', 'settingsPromise', 'SupportingDocumentType',
+  function ($scope, $state, $transition$, Member, Training, dialogs, growl, Group, Subscription, CSRF, memberPromise, tagsPromise, $uibModal, Plan, $filter, _t, walletPromise, transactionsPromise, activeProviderPromise, Wallet, settingsPromise, SupportingDocumentType) {
   /* PUBLIC SCOPE */
 
     // API URL where the form will be posted
@@ -869,6 +869,7 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
      * Callback triggered in case of error
      */
     $scope.onError = (message) => {
+      console.error(message);
       growl.error(message);
     };
 
@@ -981,8 +982,8 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
         });
       }
 
-      ProofOfIdentityType.query({ group_id: $scope.user.group_id }, function (proofOfIdentityTypes) {
-        $scope.hasProofOfIdentityTypes = proofOfIdentityTypes.length > 0;
+      SupportingDocumentType.query({ group_id: $scope.user.group_id }, function (supportingDocumentTypes) {
+        $scope.hasProofOfIdentityTypes = supportingDocumentTypes.length > 0;
       });
 
       // Using the MembersController
@@ -1055,6 +1056,7 @@ Application.Controllers.controller('NewMemberController', ['$scope', '$state', '
      * Callback triggered in case of error
      */
     $scope.onError = (message) => {
+      console.error(message);
       growl.error(message);
     };
 

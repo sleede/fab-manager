@@ -2,43 +2,35 @@
 
 # A training reservation added to the shopping cart
 class CartItem::TrainingReservation < CartItem::Reservation
-  # @param plan {Plan} a subscription bought at the same time of the reservation OR an already running subscription
-  # @param new_subscription {Boolean} true is new subscription is being bought at the same time of the reservation
-  def initialize(customer, operator, training, slots, plan: nil, new_subscription: false)
-    raise TypeError unless training.is_a? Training
+  has_many :cart_item_reservation_slots, class_name: 'CartItem::ReservationSlot', dependent: :destroy, inverse_of: :cart_item,
+                                         foreign_key: 'cart_item_id', foreign_type: 'cart_item_type'
+  accepts_nested_attributes_for :cart_item_reservation_slots
 
-    super(customer, operator, training, slots)
-    @plan = plan
-    @new_subscription = new_subscription
-  end
+  belongs_to :operator_profile, class_name: 'InvoicingProfile'
+  belongs_to :customer_profile, class_name: 'InvoicingProfile'
+
+  belongs_to :reservable, polymorphic: true
+
+  belongs_to :plan
 
   def price
-    base_amount = @reservable.amount_by_group(@customer.group_id).amount
-    is_privileged = @operator.admin? || (@operator.manager? && @operator.id != @customer.id)
+    base_amount = reservable&.amount_by_group(customer.group_id)&.amount
+    is_privileged = operator.admin? || (operator.manager? && operator.id != customer.id)
 
     elements = { slots: [] }
     amount = 0
 
     hours_available = credits
-    @slots.each do |slot|
+    cart_item_reservation_slots.each do |sr|
       amount += get_slot_price(base_amount,
-                               slot,
+                               sr,
                                is_privileged,
                                elements: elements,
-                               has_credits: (@customer.training_credits.size < hours_available),
+                               has_credits: (customer.training_credits.size < hours_available),
                                is_division: false)
     end
 
     { elements: elements, amount: amount }
-  end
-
-  def to_object
-    ::Reservation.new(
-      reservable_id: @reservable.id,
-      reservable_type: Training.name,
-      slots_reservations_attributes: slots_params,
-      statistic_profile_id: StatisticProfile.find_by(user: @customer).id
-    )
   end
 
   def type
@@ -48,9 +40,9 @@ class CartItem::TrainingReservation < CartItem::Reservation
   protected
 
   def credits
-    return 0 if @plan.nil?
+    return 0 if plan.nil?
 
-    is_creditable = @plan.training_credits.select { |credit| credit.creditable_id == @reservable.id }.any?
-    is_creditable ? @plan.training_credit_nb : 0
+    is_creditable = plan&.training_credits&.select { |credit| credit.creditable_id == reservable&.id }&.any?
+    is_creditable ? plan&.training_credit_nb : 0
   end
 end

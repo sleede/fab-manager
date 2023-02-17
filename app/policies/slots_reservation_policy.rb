@@ -9,7 +9,7 @@ class SlotsReservationPolicy < ApplicationPolicy
 
     # these condition does not apply to admins
     user.admin? || user.manager? ||
-      (record.reservation.user == user && enabled && ((record.slot.start_at - DateTime.current).to_i / 3600 >= delay))
+      (record.reservation.user == user && enabled && ((record.slot.start_at - Time.current).to_i / 3600 >= delay))
   end
 
   def cancel?

@@ -6,6 +6,7 @@ slot_1:
   created_at: '2012-03-12 13:40:22.342717'
   updated_at: '2012-03-12 13:40:22.342717'
   availability_id: 12
+  places: [{"user_ids": [7], "reservable_id": 3, "reservable_type": "Training", "reserved_places": 1}]
 
 slot_2:
   id: 2
@@ -14,6 +15,7 @@ slot_2:
   created_at: '2015-06-10 11:20:01.341130'
   updated_at: '2015-06-10 11:20:01.341130'
   availability_id: 13
+  places: [{"user_ids": [3], "reservable_id": 2, "reservable_type": "Machine", "reserved_places": 1}]
 
 slot_9:
   id: 9
@@ -22,6 +24,7 @@ slot_9:
   created_at: '2022-07-12 15:18:43.880751'
   updated_at: '2022-07-12 15:18:43.880751'
   availability_id: 3
+  places: [{"user_ids": [], "reservable_id": 1, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 2, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 4, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 5, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 6, "reservable_type": "Machine", "reserved_places": 0}]
 
 slot_10:
   id: 10
@@ -30,6 +33,7 @@ slot_10:
   created_at: '2022-07-12 15:18:43.882957'
   updated_at: '2022-07-12 15:18:43.882957'
   availability_id: 3
+  places: [{"user_ids": [], "reservable_id": 1, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 2, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 4, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 5, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 6, "reservable_type": "Machine", "reserved_places": 0}]
 
 slot_11:
   id: 11
@@ -38,6 +42,7 @@ slot_11:
   created_at: '2022-07-12 15:18:43.884691'
   updated_at: '2022-07-12 15:18:43.884691'
   availability_id: 3
+  places: [{"user_ids": [], "reservable_id": 1, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 2, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 4, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 5, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 6, "reservable_type": "Machine", "reserved_places": 0}]
 
 slot_12:
   id: 12
@@ -46,6 +51,7 @@ slot_12:
   created_at: '2022-07-12 15:18:43.886431'
   updated_at: '2022-07-12 15:18:43.886431'
   availability_id: 3
+  places: [{"user_ids": [], "reservable_id": 1, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 2, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 4, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 5, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 6, "reservable_type": "Machine", "reserved_places": 0}]
 
 slot_13:
   id: 13
@@ -54,6 +60,7 @@ slot_13:
   created_at: '2022-07-12 15:18:43.888074'
   updated_at: '2022-07-12 15:18:43.888074'
   availability_id: 3
+  places: [{"user_ids": [], "reservable_id": 1, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 2, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 4, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 5, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 6, "reservable_type": "Machine", "reserved_places": 0}]
 
 slot_14:
   id: 14
@@ -62,6 +69,7 @@ slot_14:
   created_at: '2022-07-12 15:18:43.889691'
   updated_at: '2022-07-12 15:18:43.889691'
   availability_id: 3
+  places: [{"user_ids": [], "reservable_id": 1, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 2, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 4, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 5, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 6, "reservable_type": "Machine", "reserved_places": 0}]
 
 slot_15:
   id: 15
@@ -70,6 +78,7 @@ slot_15:
   created_at: '2022-07-12 15:18:43.893096'
   updated_at: '2022-07-12 15:18:43.893096'
   availability_id: 4
+  places: [{"user_ids": [], "reservable_id": 1, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 2, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 4, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 5, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 6, "reservable_type": "Machine", "reserved_places": 0}]
 
 slot_16:
   id: 16
@@ -78,6 +87,7 @@ slot_16:
   created_at: '2022-07-12 15:18:43.894777'
   updated_at: '2022-07-12 15:18:43.894777'
   availability_id: 4
+  places: [{"user_ids": [], "reservable_id": 1, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 2, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 4, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 5, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 6, "reservable_type": "Machine", "reserved_places": 0}]
 
 slot_17:
   id: 17
@@ -86,6 +96,7 @@ slot_17:
   created_at: '2022-07-12 15:18:43.896423'
   updated_at: '2022-07-12 15:18:43.896423'
   availability_id: 4
+  places: [{"user_ids": [], "reservable_id": 1, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 2, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 4, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 5, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 6, "reservable_type": "Machine", "reserved_places": 0}]
 
 slot_18:
   id: 18
@@ -94,6 +105,7 @@ slot_18:
   created_at: '2022-07-12 15:18:43.898021'
   updated_at: '2022-07-12 15:18:43.898021'
   availability_id: 4
+  places: [{"user_ids": [], "reservable_id": 1, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 2, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 4, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 5, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 6, "reservable_type": "Machine", "reserved_places": 0}]
 
 slot_19:
   id: 19
@@ -102,6 +114,7 @@ slot_19:
   created_at: '2022-07-12 15:18:43.899592'
   updated_at: '2022-07-12 15:18:43.899592'
   availability_id: 4
+  places: [{"user_ids": [], "reservable_id": 1, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 2, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 4, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 5, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 6, "reservable_type": "Machine", "reserved_places": 0}]
 
 slot_20:
   id: 20
@@ -110,6 +123,7 @@ slot_20:
   created_at: '2022-07-12 15:18:43.900938'
   updated_at: '2022-07-12 15:18:43.900938'
   availability_id: 4
+  places: [{"user_ids": [], "reservable_id": 1, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 2, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 4, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 5, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 6, "reservable_type": "Machine", "reserved_places": 0}]
 
 slot_21:
   id: 21
@@ -118,6 +132,7 @@ slot_21:
   created_at: '2022-07-12 15:18:43.904013'
   updated_at: '2022-07-12 15:18:43.904013'
   availability_id: 5
+  places: [{"user_ids": [], "reservable_id": 3, "reservable_type": "Machine", "reserved_places": 0}]
 
 slot_22:
   id: 22
@@ -126,6 +141,7 @@ slot_22:
   created_at: '2022-07-12 15:18:43.905470'
   updated_at: '2022-07-12 15:18:43.905470'
   availability_id: 5
+  places: [{"user_ids": [], "reservable_id": 3, "reservable_type": "Machine", "reserved_places": 0}]
 
 slot_23:
   id: 23
@@ -134,6 +150,7 @@ slot_23:
   created_at: '2022-07-12 15:18:43.907030'
   updated_at: '2022-07-12 15:18:43.907030'
   availability_id: 5
+  places: [{"user_ids": [], "reservable_id": 3, "reservable_type": "Machine", "reserved_places": 0}]
 
 slot_24:
   id: 24
@@ -142,6 +159,7 @@ slot_24:
   created_at: '2022-07-12 15:18:43.908585'
   updated_at: '2022-07-12 15:18:43.908585'
   availability_id: 5
+  places: [{"user_ids": [], "reservable_id": 3, "reservable_type": "Machine", "reserved_places": 0}]
 
 slot_25:
   id: 25
@@ -150,6 +168,7 @@ slot_25:
   created_at: '2022-07-12 15:18:43.910138'
   updated_at: '2022-07-12 15:18:43.910138'
   availability_id: 5
+  places: [{"user_ids": [], "reservable_id": 3, "reservable_type": "Machine", "reserved_places": 0}]
 
 slot_26:
   id: 26
@@ -158,6 +177,7 @@ slot_26:
   created_at: '2022-07-12 15:18:43.911643'
   updated_at: '2022-07-12 15:18:43.911643'
   availability_id: 5
+  places: [{"user_ids": [], "reservable_id": 3, "reservable_type": "Machine", "reserved_places": 0}]
 
 slot_27:
   id: 27
@@ -166,6 +186,7 @@ slot_27:
   created_at: '2022-07-12 15:18:43.914664'
   updated_at: '2022-07-12 15:18:43.914664'
   availability_id: 6
+  places: [{"user_ids": [], "reservable_id": 3, "reservable_type": "Machine", "reserved_places": 0}]
 
 slot_28:
   id: 28
@@ -174,6 +195,7 @@ slot_28:
   created_at: '2022-07-12 15:18:43.916047'
   updated_at: '2022-07-12 15:18:43.916047'
   availability_id: 6
+  places: [{"user_ids": [], "reservable_id": 3, "reservable_type": "Machine", "reserved_places": 0}]
 
 slot_29:
   id: 29
@@ -182,6 +204,7 @@ slot_29:
   created_at: '2022-07-12 15:18:43.917304'
   updated_at: '2022-07-12 15:18:43.917304'
   availability_id: 6
+  places: [{"user_ids": [], "reservable_id": 3, "reservable_type": "Machine", "reserved_places": 0}]
 
 slot_30:
   id: 30
@@ -190,6 +213,7 @@ slot_30:
   created_at: '2022-07-12 15:18:43.918798'
   updated_at: '2022-07-12 15:18:43.918798'
   availability_id: 6
+  places: [{"user_ids": [], "reservable_id": 3, "reservable_type": "Machine", "reserved_places": 0}]
 
 slot_31:
   id: 31
@@ -198,6 +222,7 @@ slot_31:
   created_at: '2022-07-12 15:18:43.920194'
   updated_at: '2022-07-12 15:18:43.920194'
   availability_id: 6
+  places: [{"user_ids": [], "reservable_id": 3, "reservable_type": "Machine", "reserved_places": 0}]
 
 slot_32:
   id: 32
@@ -206,6 +231,7 @@ slot_32:
   created_at: '2022-07-12 15:18:43.921662'
   updated_at: '2022-07-12 15:18:43.921662'
   availability_id: 6
+  places: [{"user_ids": [], "reservable_id": 3, "reservable_type": "Machine", "reserved_places": 0}]
 
 slot_33:
   id: 33
@@ -214,6 +240,7 @@ slot_33:
   created_at: '2022-07-12 15:18:43.924285'
   updated_at: '2022-07-12 15:18:43.924285'
   availability_id: 7
+  places: [{"user_ids": [], "reservable_id": 1, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 2, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 4, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 5, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 6, "reservable_type": "Machine", "reserved_places": 0}]
 
 slot_34:
   id: 34
@@ -222,6 +249,7 @@ slot_34:
   created_at: '2022-07-12 15:18:43.925669'
   updated_at: '2022-07-12 15:18:43.925669'
   availability_id: 7
+  places: [{"user_ids": [], "reservable_id": 1, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 2, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 4, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 5, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 6, "reservable_type": "Machine", "reserved_places": 0}]
 
 slot_35:
   id: 35
@@ -230,6 +258,7 @@ slot_35:
   created_at: '2022-07-12 15:18:43.927038'
   updated_at: '2022-07-12 15:18:43.927038'
   availability_id: 7
+  places: [{"user_ids": [], "reservable_id": 1, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 2, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 4, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 5, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 6, "reservable_type": "Machine", "reserved_places": 0}]
 
 slot_36:
   id: 36
@@ -238,6 +267,7 @@ slot_36:
   created_at: '2022-07-12 15:18:43.928407'
   updated_at: '2022-07-12 15:18:43.928407'
   availability_id: 7
+  places: [{"user_ids": [], "reservable_id": 1, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 2, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 4, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 5, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 6, "reservable_type": "Machine", "reserved_places": 0}]
 
 slot_37:
   id: 37
@@ -246,6 +276,7 @@ slot_37:
   created_at: '2022-07-12 15:18:43.929907'
   updated_at: '2022-07-12 15:18:43.929907'
   availability_id: 7
+  places: [{"user_ids": [], "reservable_id": 1, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 2, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 4, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 5, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 6, "reservable_type": "Machine", "reserved_places": 0}]
 
 slot_38:
   id: 38
@@ -254,6 +285,7 @@ slot_38:
   created_at: '2022-07-12 15:18:43.931295'
   updated_at: '2022-07-12 15:18:43.931295'
   availability_id: 7
+  places: [{"user_ids": [], "reservable_id": 1, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 2, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 4, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 5, "reservable_type": "Machine", "reserved_places": 0}, {"user_ids": [], "reservable_id": 6, "reservable_type": "Machine", "reserved_places": 0}]
 
 slot_39:
   id: 39
@@ -262,6 +294,7 @@ slot_39:
   created_at: '2022-07-12 15:18:43.934465'
   updated_at: '2022-07-12 15:18:43.934465'
   availability_id: 13
+  places: [{"user_ids": [], "reservable_id": 2, "reservable_type": "Machine", "reserved_places": 0}]
 
 slot_40:
   id: 40
@@ -270,6 +303,7 @@ slot_40:
   created_at: '2022-07-12 15:18:43.935716'
   updated_at: '2022-07-12 15:18:43.935716'
   availability_id: 13
+  places: [{"user_ids": [], "reservable_id": 2, "reservable_type": "Machine", "reserved_places": 0}]
 
 slot_41:
   id: 41
@@ -278,6 +312,7 @@ slot_41:
   created_at: '2022-07-12 15:18:43.937025'
   updated_at: '2022-07-12 15:18:43.937025'
   availability_id: 13
+  places: [{"user_ids": [], "reservable_id": 2, "reservable_type": "Machine", "reserved_places": 0}]
 
 slot_42:
   id: 42
@@ -286,6 +321,7 @@ slot_42:
   created_at: '2022-07-12 15:18:43.938379'
   updated_at: '2022-07-12 15:18:43.938379'
   availability_id: 13
+  places: [{"user_ids": [], "reservable_id": 2, "reservable_type": "Machine", "reserved_places": 0}]
 
 slot_43:
   id: 43
@@ -294,6 +330,7 @@ slot_43:
   created_at: '2022-07-12 15:18:43.939737'
   updated_at: '2022-07-12 15:18:43.939737'
   availability_id: 13
+  places: [{"user_ids": [], "reservable_id": 2, "reservable_type": "Machine", "reserved_places": 0}]
 
 slot_44:
   id: 44
@@ -302,6 +339,7 @@ slot_44:
   created_at: '2022-07-12 15:18:43.942392'
   updated_at: '2022-07-12 15:18:43.942392'
   availability_id: 14
+  places: [{"user_ids": [], "reservable_id": 2, "reservable_type": "Machine", "reserved_places": 0}]
 
 slot_45:
   id: 45
@@ -310,6 +348,7 @@ slot_45:
   created_at: '2022-07-12 15:18:43.943779'
   updated_at: '2022-07-12 15:18:43.943779'
   availability_id: 14
+  places: [{"user_ids": [], "reservable_id": 2, "reservable_type": "Machine", "reserved_places": 0}]
 
 slot_46:
   id: 46
@@ -318,6 +357,7 @@ slot_46:
   created_at: '2022-07-12 15:18:43.945154'
   updated_at: '2022-07-12 15:18:43.945154'
   availability_id: 14
+  places: [{"user_ids": [], "reservable_id": 2, "reservable_type": "Machine", "reserved_places": 0}]
 
 slot_47:
   id: 47
@@ -326,6 +366,7 @@ slot_47:
   created_at: '2022-07-12 15:18:43.946515'
   updated_at: '2022-07-12 15:18:43.946515'
   availability_id: 14
+  places: [{"user_ids": [], "reservable_id": 2, "reservable_type": "Machine", "reserved_places": 0}]
 
 slot_48:
   id: 48
@@ -334,6 +375,7 @@ slot_48:
   created_at: '2022-07-12 15:18:43.949178'
   updated_at: '2022-07-12 15:18:43.949178'
   availability_id: 15
+  places: [{"user_ids": [], "reservable_id": 2, "reservable_type": "Machine", "reserved_places": 0}]
 
 slot_49:
   id: 49
@@ -342,6 +384,7 @@ slot_49:
   created_at: '2022-07-12 15:18:43.950348'
   updated_at: '2022-07-12 15:18:43.950348'
   availability_id: 15
+  places: [{"user_ids": [], "reservable_id": 2, "reservable_type": "Machine", "reserved_places": 0}]
 
 slot_50:
   id: 50
@@ -350,6 +393,7 @@ slot_50:
   created_at: '2022-07-12 15:18:43.951535'
   updated_at: '2022-07-12 15:18:43.951535'
   availability_id: 15
+  places: [{"user_ids": [], "reservable_id": 2, "reservable_type": "Machine", "reserved_places": 0}]
 
 slot_51:
   id: 51
@@ -358,6 +402,7 @@ slot_51:
   created_at: '2022-07-12 15:18:43.952864'
   updated_at: '2022-07-12 15:18:43.952864'
   availability_id: 15
+  places: [{"user_ids": [], "reservable_id": 2, "reservable_type": "Machine", "reserved_places": 0}]
 
 slot_52:
   id: 52
@@ -366,6 +411,7 @@ slot_52:
   created_at: '2022-07-12 15:18:43.955443'
   updated_at: '2022-07-12 15:18:43.955443'
   availability_id: 16
+  places: [{"user_ids": [], "reservable_id": 2, "reservable_type": "Machine", "reserved_places": 0}]
 
 slot_53:
   id: 53
@@ -374,6 +420,7 @@ slot_53:
   created_at: '2022-07-12 15:18:43.956657'
   updated_at: '2022-07-12 15:18:43.956657'
   availability_id: 16
+  places: [{"user_ids": [], "reservable_id": 2, "reservable_type": "Machine", "reserved_places": 0}]
 
 slot_54:
   id: 54
@@ -382,6 +429,7 @@ slot_54:
   created_at: '2022-07-12 15:18:43.957811'
   updated_at: '2022-07-12 15:18:43.957811'
   availability_id: 16
+  places: [{"user_ids": [], "reservable_id": 2, "reservable_type": "Machine", "reserved_places": 0}]
 
 slot_55:
   id: 55
@@ -390,6 +438,7 @@ slot_55:
   created_at: '2022-07-12 15:18:43.959063'
   updated_at: '2022-07-12 15:18:43.959063'
   availability_id: 16
+  places: [{"user_ids": [], "reservable_id": 2, "reservable_type": "Machine", "reserved_places": 0}]
 
 slot_56:
   id: 56
@@ -398,6 +447,7 @@ slot_56:
   created_at: '2022-07-12 15:18:43.961319'
   updated_at: '2022-07-12 15:18:43.961319'
   availability_id: 17
+  places: [{"user_ids": [], "reservable_id": 4, "reservable_type": "Event", "reserved_places": 0}]
 
 slot_112:
   id: 112
@@ -406,6 +456,7 @@ slot_112:
   created_at: '2022-07-12 15:18:44.038089'
   updated_at: '2022-07-12 15:18:44.038089'
   availability_id: 18
+  places: [{"user_ids": [], "reservable_id": 1, "reservable_type": "Space", "reserved_places": 0}]
 
 slot_113:
   id: 113
@@ -414,6 +465,7 @@ slot_113:
   created_at: '2022-07-12 15:18:44.039392'
   updated_at: '2022-07-12 15:18:44.039392'
   availability_id: 18
+  places: [{"user_ids": [], "reservable_id": 1, "reservable_type": "Space", "reserved_places": 0}]
 
 slot_114:
   id: 114
@@ -422,6 +474,7 @@ slot_114:
   created_at: '2022-07-12 15:18:44.040522'
   updated_at: '2022-07-12 15:18:44.040522'
   availability_id: 18
+  places: [{"user_ids": [], "reservable_id": 1, "reservable_type": "Space", "reserved_places": 0}]
 
 slot_115:
   id: 115
@@ -430,6 +483,7 @@ slot_115:
   created_at: '2022-07-12 15:18:44.041937'
   updated_at: '2022-07-12 15:18:44.041937'
   availability_id: 18
+  places: [{"user_ids": [], "reservable_id": 1, "reservable_type": "Space", "reserved_places": 0}]
 
 slot_116:
   id: 116
@@ -438,6 +492,7 @@ slot_116:
   created_at: '2022-07-12 15:18:44.044421'
   updated_at: '2022-07-12 15:18:44.044421'
   availability_id: 19
+  places: [{"user_ids": [], "reservable_id": 1, "reservable_type": "Machine", "reserved_places": 0}]
 
 slot_117:
   id: 117
@@ -446,6 +501,7 @@ slot_117:
   created_at: '2022-07-12 15:18:44.045689'
   updated_at: '2022-07-12 15:18:44.045689'
   availability_id: 19
+  places: [{"user_ids": [], "reservable_id": 1, "reservable_type": "Machine", "reserved_places": 0}]
 
 slot_118:
   id: 118
@@ -454,6 +510,7 @@ slot_118:
   created_at: '2022-07-12 15:18:44.047009'
   updated_at: '2022-07-12 15:18:44.047009'
   availability_id: 19
+  places: [{"user_ids": [], "reservable_id": 1, "reservable_type": "Machine", "reserved_places": 0}]
 
 slot_119:
   id: 119
@@ -462,6 +519,7 @@ slot_119:
   created_at: '2022-07-12 15:18:44.048272'
   updated_at: '2022-07-12 15:18:44.048272'
   availability_id: 19
+  places: [{"user_ids": [], "reservable_id": 1, "reservable_type": "Machine", "reserved_places": 0}]
 
 slot_120:
   id: 120
@@ -470,6 +528,7 @@ slot_120:
   created_at: '2022-07-12 15:18:44.049599'
   updated_at: '2022-07-12 15:18:44.049599'
   availability_id: 19
+  places: [{"user_ids": [], "reservable_id": 1, "reservable_type": "Machine", "reserved_places": 0}]
 
 slot_121:
   id: 121
@@ -478,6 +537,7 @@ slot_121:
   created_at: '2022-07-12 15:18:44.050947'
   updated_at: '2022-07-12 15:18:44.050947'
   availability_id: 19
+  places: [{"user_ids": [], "reservable_id": 1, "reservable_type": "Machine", "reserved_places": 0}]
 
 slot_122:
   id: 122
@@ -486,6 +546,7 @@ slot_122:
   created_at: '2022-07-12 15:18:44.052817'
   updated_at: '2022-07-12 15:18:44.052817'
   availability_id: 19
+  places: [{"user_ids": [], "reservable_id": 1, "reservable_type": "Machine", "reserved_places": 0}]
 
 slot_123:
   id: 123
@@ -494,6 +555,7 @@ slot_123:
   created_at: '2022-07-12 15:18:44.054966'
   updated_at: '2022-07-12 15:18:44.054966'
   availability_id: 19
+  places: [{"user_ids": [], "reservable_id": 1, "reservable_type": "Machine", "reserved_places": 0}]
 
 slot_124:
   id: 124
@@ -502,6 +564,7 @@ slot_124:
   created_at: '2022-07-12 15:18:44.057217'
   updated_at: '2022-07-12 15:18:44.057217'
   availability_id: 19
+  places: [{"user_ids": [], "reservable_id": 1, "reservable_type": "Machine", "reserved_places": 0}]
 
 slot_125:
   id: 125
@@ -510,6 +573,7 @@ slot_125:
   created_at: '2022-07-12 15:18:44.059135'
   updated_at: '2022-07-12 15:18:44.059135'
   availability_id: 19
+  places: [{"user_ids": [], "reservable_id": 1, "reservable_type": "Machine", "reserved_places": 0}]
 
 slot_126:
   id: 126
@@ -518,6 +582,7 @@ slot_126:
   created_at: '2022-07-12 15:18:44.061887'
   updated_at: '2022-07-12 15:18:44.061887'
   availability_id: 1
+  places: [{"user_ids": [], "reservable_id": 2, "reservable_type": "Training", "reserved_places": 0}]
 
 slot_127:
   id: 127
@@ -526,6 +591,7 @@ slot_127:
   created_at: '2022-07-12 15:18:44.063528'
   updated_at: '2022-07-12 15:18:44.063528'
   availability_id: 2
+  places: [{"user_ids": [], "reservable_id": 1, "reservable_type": "Training", "reserved_places": 0}]
 
 slot_128:
   id: 128
@@ -534,6 +600,7 @@ slot_128:
   created_at: '2022-07-12 15:18:44.065114'
   updated_at: '2022-07-12 15:18:44.065114'
   availability_id: 8
+  places: [{"user_ids": [], "reservable_id": 4, "reservable_type": "Training", "reserved_places": 0}]
 
 slot_129:
   id: 129
@@ -542,6 +609,7 @@ slot_129:
   created_at: '2022-07-12 15:18:44.066837'
   updated_at: '2022-07-12 15:18:44.066837'
   availability_id: 9
+  places: [{"user_ids": [], "reservable_id": 1, "reservable_type": "Event", "reserved_places": 0}]
 
 slot_130:
   id: 130
@@ -550,6 +618,7 @@ slot_130:
   created_at: '2022-07-12 15:18:44.068259'
   updated_at: '2022-07-12 15:18:44.068259'
   availability_id: 10
+  places: [{"user_ids": [], "reservable_id": 2, "reservable_type": "Event", "reserved_places": 0}]
 
 slot_131:
   id: 131
@@ -558,6 +627,7 @@ slot_131:
   created_at: '2022-07-12 15:18:44.069870'
   updated_at: '2022-07-12 15:18:44.069870'
   availability_id: 11
+  places: [{"user_ids": [], "reservable_id": 3, "reservable_type": "Event", "reserved_places": 0}]
 
 slot_132:
   id: 132
@@ -566,6 +636,7 @@ slot_132:
   created_at: '2022-07-18 12:38:21.616510'
   updated_at: '2022-07-18 12:38:21.616510'
   availability_id: 20
+  places: [{"user_ids": [], "reservable_id": 2, "reservable_type": "Training", "reserved_places": 0}]
 
 slot_133:
   id: 133
@@ -574,3 +645,13 @@ slot_133:
   created_at: '2022-12-14 12:01:26.165110'
   updated_at: '2022-12-14 12:01:26.165110'
   availability_id: 21
+  places: [{"user_ids": [], "reservable_id": 1, "reservable_type": "Space", "reserved_places": 0}]
+
+slot_134:
+  id: 134
+  start_at: <%= 1.hour.from_now.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  end_at: <%= 2.hours.from_now.strftime('%Y-%m-%d %H:%M:%S.%9N Z')  %>
+  created_at: 2023-01-24 13:34:43.841240000 Z
+  updated_at: 2023-01-24 13:34:43.841240000 Z
+  availability_id: 22
+  places: [{"user_ids": [], "reservable_id": 4, "reservable_type": "Training", "reserved_places": 0}]

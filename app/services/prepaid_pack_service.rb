@@ -3,6 +3,10 @@
 # Provides methods for PrepaidPack
 class PrepaidPackService
   class << self
+    # @param filters [Hash{Symbol=>Integer,String}]
+    # @option filters [Integer] :group_id
+    # @option filters [Integer] :priceable_id
+    # @option filters [String] :priceable_type 'Machine' | 'Space'
     def list(filters)
       packs = PrepaidPack.where(nil)
 
@@ -19,18 +23,24 @@ class PrepaidPackService
     end
 
     # return the not expired packs for the given item bought by the given user
-    def user_packs(user, priceable)
-      StatisticProfilePrepaidPack
-        .includes(:prepaid_pack)
-        .references(:prepaid_packs)
-        .where('statistic_profile_id = ?', user.statistic_profile.id)
-        .where('expires_at > ? OR expires_at IS NULL', DateTime.current)
-        .where('prepaid_packs.priceable_id = ?', priceable.id)
-        .where('prepaid_packs.priceable_type = ?', priceable.class.name)
-        .where('minutes_used < prepaid_packs.minutes')
+    # @param user [User]
+    # @param priceable [Machine,Space,NilClass]
+    def user_packs(user, priceable = nil)
+      sppp = StatisticProfilePrepaidPack.includes(:prepaid_pack)
+                                        .references(:prepaid_packs)
+                                        .where(statistic_profile_id: user.statistic_profile.id)
+                                        .where('expires_at > ? OR expires_at IS NULL', Time.current)
+                                        .where('minutes_used < prepaid_packs.minutes')
+      unless priceable.nil?
+        sppp = sppp.where(prepaid_packs: { priceable_id: priceable.id })
+                   .where(prepaid_packs: { priceable_type: priceable.class.name })
+      end
+      sppp
     end
 
     # subtract the number of used prepaid minutes from the user's count
+    # @param user [User]
+    # @param reservation [Reservation]
     def update_user_minutes(user, reservation)
       # total number of minutes available in user's packs
       available_minutes = minutes_available(user, reservation.reservable)
@@ -53,13 +63,15 @@ class PrepaidPackService
         remaining = pack_available - consumed
         remaining = 0 if remaining.negative?
         pack_consumed = pack.prepaid_pack.minutes - remaining
-        pack.update_attributes(minutes_used: pack_consumed)
+        pack.update(minutes_used: pack_consumed)
 
         consumed -= pack_consumed
       end
     end
 
-    ## Total number of prepaid minutes available
+    # Total number of prepaid minutes available
+    # @param user [User]
+    # @param priceable [Machine,Space]
     def minutes_available(user, priceable)
       return 0 if Setting.get('pack_only_for_subscription') && !user.subscribed_plan
 

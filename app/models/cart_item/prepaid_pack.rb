@@ -2,18 +2,15 @@
 
 # A prepaid-pack added to the shopping cart
 class CartItem::PrepaidPack < CartItem::BaseItem
-  def initialize(pack, customer)
-    raise TypeError unless pack.is_a? PrepaidPack
+  belongs_to :prepaid_pack
+  belongs_to :customer_profile, class_name: 'InvoicingProfile'
 
-    @pack = pack
-    @customer = customer
-    super
+  def customer
+    customer_profile.user
   end
 
   def pack
-    raise InvalidGroupError if @pack.group_id != @customer.group_id
-
-    @pack
+    prepaid_pack
   end
 
   def price
@@ -24,13 +21,13 @@ class CartItem::PrepaidPack < CartItem::BaseItem
   end
 
   def name
-    "#{@pack.minutes / 60} h"
+    "#{pack.minutes / 60} h"
   end
 
   def to_object
     ::StatisticProfilePrepaidPack.new(
-      prepaid_pack_id: @pack.id,
-      statistic_profile_id: StatisticProfile.find_by(user: @customer).id
+      prepaid_pack_id: pack.id,
+      statistic_profile_id: StatisticProfile.find_by(user: customer).id
     )
   end
 
@@ -39,8 +36,12 @@ class CartItem::PrepaidPack < CartItem::BaseItem
   end
 
   def valid?(_all_items)
-    if @pack.disabled
-      @errors[:item] = I18n.t('cart_item_validation.pack')
+    if pack.disabled
+      errors.add(:prepaid_pack, I18n.t('cart_item_validation.pack'))
+      return false
+    end
+    if pack.group_id != customer.group_id
+      errors.add(:group, I18n.t('cart_item_validation.pack_group', { GROUP: pack.group.name }))
       return false
     end
     true

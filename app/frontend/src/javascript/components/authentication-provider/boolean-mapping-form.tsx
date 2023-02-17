@@ -1,4 +1,4 @@
-import { UseFormRegister } from 'react-hook-form';
+import { UseFormRegister, FormState } from 'react-hook-form';
 import { FieldValues } from 'react-hook-form/dist/types/fields';
 import { useTranslation } from 'react-i18next';
 import { FormInput } from '../form/form-input';
@@ -6,12 +6,13 @@ import { FormInput } from '../form/form-input';
 export interface BooleanMappingFormProps<TFieldValues> {
   register: UseFormRegister<TFieldValues>,
   fieldMappingId: number,
+  formState: FormState<TFieldValues>
 }
 
 /**
  * Partial form to map an internal boolean field to an external API providing a string value.
  */
-export const BooleanMappingForm = <TFieldValues extends FieldValues>({ register, fieldMappingId }: BooleanMappingFormProps<TFieldValues>) => {
+export const BooleanMappingForm = <TFieldValues extends FieldValues>({ register, fieldMappingId, formState }: BooleanMappingFormProps<TFieldValues>) => {
   const { t } = useTranslation('admin');
 
   return (
@@ -20,10 +21,12 @@ export const BooleanMappingForm = <TFieldValues extends FieldValues>({ register,
       <FormInput id={`auth_provider_mappings_attributes.${fieldMappingId}.transformation.true_value`}
                  register={register}
                  rules={{ required: true }}
+                 formState={formState}
                  label={t('app.admin.authentication.boolean_mapping_form.true_value')} />
       <FormInput id={`auth_provider_mappings_attributes.${fieldMappingId}.transformation.false_value`}
                  register={register}
                  rules={{ required: true }}
+                 formState={formState}
                  label={t('app.admin.authentication.boolean_mapping_form.false_value')} />
     </div>
   );

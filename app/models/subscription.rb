@@ -2,7 +2,7 @@
 
 # Subscription is an active or archived subscription of an User to a Plan
 class Subscription < ApplicationRecord
-  include NotifyWith::NotificationAttachedObject
+  include NotificationAttachedObject
 
   belongs_to :plan
   belongs_to :statistic_profile
@@ -11,6 +11,8 @@ class Subscription < ApplicationRecord
   has_one :payment_gateway_object, as: :item, dependent: :destroy
   has_many :invoice_items, as: :object, dependent: :destroy
   has_many :offer_days, dependent: :destroy
+
+  has_many :cart_item_free_extensions, class_name: 'CartItem::FreeExtension', dependent: :destroy
 
   validates :plan_id, presence: true
   validates_with SubscriptionGroupValidator
@@ -27,19 +29,12 @@ class Subscription < ApplicationRecord
     generate_invoice(operator_profile_id).save
   end
 
-  def expire(time)
-    if expired?
-      false
-    else
-      update_columns(expiration_date: time, canceled_at: time) # rubocop:disable Rails/SkipsModelValidations
-      notify_admin_subscription_canceled
-      notify_member_subscription_canceled
-      true
-    end
+  def expire
+    Subscriptions::ExpireService.call(self)
   end
 
   def expired?
-    expired_at <= DateTime.current
+    expired_at <= Time.current
   end
 
   def expired_at
@@ -76,18 +71,6 @@ class Subscription < ApplicationRecord
                             attached_object: self
   end
 
-  def notify_admin_subscription_canceled
-    NotificationCenter.call type: 'notify_admin_subscription_canceled',
-                            receiver: User.admins_and_managers,
-                            attached_object: self
-  end
-
-  def notify_member_subscription_canceled
-    NotificationCenter.call type: 'notify_member_subscription_canceled',
-                            receiver: user,
-                            attached_object: self
-  end
-
   def notify_partner_subscribed_plan
     NotificationCenter.call type: 'notify_partner_subscribed_plan',
                             receiver: plan.partners,
@@ -108,7 +91,7 @@ class Subscription < ApplicationRecord
   end
 
   def set_expiration_date
-    start_at = self.start_at || DateTime.current.in_time_zone
+    start_at = self.start_at || Time.current
     self.expiration_date = start_at + plan.duration
   end
 

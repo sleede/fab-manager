@@ -276,6 +276,7 @@ Application.Controllers.controller('AdminProjectsController', ['$scope', '$state
      * Callback triggered by react components
      */
     $scope.onError = function (message) {
+      console.error(message);
       growl.error(message);
     };
 

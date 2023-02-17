@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_31_104958) do
+ActiveRecord::Schema.define(version: 2023_02_13_134954) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
@@ -19,8 +19,8 @@ ActiveRecord::Schema.define(version: 2023_01_31_104958) do
   enable_extension "unaccent"
 
   create_table "abuses", id: :serial, force: :cascade do |t|
-    t.string "signaled_type"
     t.integer "signaled_id"
+    t.string "signaled_type"
     t.string "first_name"
     t.string "last_name"
     t.string "email"
@@ -68,8 +68,8 @@ ActiveRecord::Schema.define(version: 2023_01_31_104958) do
     t.string "locality"
     t.string "country"
     t.string "postal_code"
-    t.string "placeable_type"
     t.integer "placeable_id"
+    t.string "placeable_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -93,8 +93,8 @@ ActiveRecord::Schema.define(version: 2023_01_31_104958) do
   end
 
   create_table "assets", id: :serial, force: :cascade do |t|
-    t.string "viewable_type"
     t.integer "viewable_id"
+    t.string "viewable_type"
     t.string "attachment"
     t.string "type"
     t.datetime "created_at"
@@ -281,8 +281,8 @@ ActiveRecord::Schema.define(version: 2023_01_31_104958) do
   end
 
   create_table "credits", id: :serial, force: :cascade do |t|
-    t.string "creditable_type"
     t.integer "creditable_id"
+    t.string "creditable_type"
     t.integer "plan_id"
     t.integer "hours"
     t.datetime "created_at"
@@ -522,17 +522,37 @@ ActiveRecord::Schema.define(version: 2023_01_31_104958) do
     t.bigint "machine_id", null: false
   end
 
+  create_table "notification_preferences", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "notification_type_id", null: false
+    t.boolean "in_system", default: true
+    t.boolean "email", default: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["notification_type_id"], name: "index_notification_preferences_on_notification_type_id"
+    t.index ["user_id", "notification_type_id"], name: "index_notification_preferences_on_user_and_notification_type", unique: true
+  end
+
+  create_table "notification_types", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "category", null: false
+    t.boolean "is_configurable", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_notification_types_on_name", unique: true
+  end
+
   create_table "notifications", id: :serial, force: :cascade do |t|
     t.integer "receiver_id"
-    t.string "attached_object_type"
     t.integer "attached_object_id"
+    t.string "attached_object_type"
     t.integer "notification_type_id"
     t.boolean "is_read", default: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string "receiver_type"
     t.boolean "is_send", default: false
-    t.jsonb "meta_data", default: "{}"
+    t.jsonb "meta_data", default: {}
     t.index ["notification_type_id"], name: "index_notifications_on_notification_type_id"
     t.index ["receiver_id"], name: "index_notifications_on_receiver_id"
   end
@@ -772,8 +792,8 @@ ActiveRecord::Schema.define(version: 2023_01_31_104958) do
   create_table "prices", id: :serial, force: :cascade do |t|
     t.integer "group_id"
     t.integer "plan_id"
-    t.string "priceable_type"
     t.integer "priceable_id"
+    t.string "priceable_type"
     t.integer "amount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -932,52 +952,12 @@ ActiveRecord::Schema.define(version: 2023_01_31_104958) do
     t.index ["theme_id"], name: "index_projects_themes_on_theme_id"
   end
 
-  create_table "proof_of_identity_files", force: :cascade do |t|
-    t.bigint "proof_of_identity_type_id"
-    t.bigint "user_id"
-    t.string "attachment"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["proof_of_identity_type_id"], name: "index_proof_of_identity_files_on_proof_of_identity_type_id"
-    t.index ["user_id"], name: "index_proof_of_identity_files_on_user_id"
-  end
-
-  create_table "proof_of_identity_refusals", force: :cascade do |t|
-    t.bigint "user_id"
-    t.integer "operator_id"
-    t.text "message"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_proof_of_identity_refusals_on_user_id"
-  end
-
-  create_table "proof_of_identity_refusals_types", id: false, force: :cascade do |t|
-    t.bigint "proof_of_identity_type_id", null: false
-    t.bigint "proof_of_identity_refusal_id", null: false
-    t.index ["proof_of_identity_type_id", "proof_of_identity_refusal_id"], name: "proof_of_identity_type_id_and_proof_of_identity_refusal_id"
-  end
-
-  create_table "proof_of_identity_types", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "proof_of_identity_types_groups", force: :cascade do |t|
-    t.bigint "proof_of_identity_type_id"
-    t.bigint "group_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["group_id"], name: "index_p_o_i_t_groups_on_group_id"
-    t.index ["proof_of_identity_type_id"], name: "index_p_o_i_t_groups_on_proof_of_identity_type_id"
-  end
-
   create_table "reservations", id: :serial, force: :cascade do |t|
     t.text "message"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string "reservable_type"
     t.integer "reservable_id"
+    t.string "reservable_type"
     t.integer "nb_reserve_places"
     t.integer "statistic_profile_id"
     t.index ["reservable_type", "reservable_id"], name: "index_reservations_on_reservable_type_and_reservable_id"
@@ -986,8 +966,8 @@ ActiveRecord::Schema.define(version: 2023_01_31_104958) do
 
   create_table "roles", id: :serial, force: :cascade do |t|
     t.string "name"
-    t.string "resource_type"
     t.integer "resource_id"
+    t.string "resource_type"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
@@ -1167,6 +1147,46 @@ ActiveRecord::Schema.define(version: 2023_01_31_104958) do
     t.datetime "start_at"
     t.index ["plan_id"], name: "index_subscriptions_on_plan_id"
     t.index ["statistic_profile_id"], name: "index_subscriptions_on_statistic_profile_id"
+  end
+
+  create_table "supporting_document_files", force: :cascade do |t|
+    t.bigint "supporting_document_type_id"
+    t.bigint "user_id"
+    t.string "attachment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["supporting_document_type_id"], name: "index_supporting_document_files_on_supporting_document_type_id"
+    t.index ["user_id"], name: "index_supporting_document_files_on_user_id"
+  end
+
+  create_table "supporting_document_refusals", force: :cascade do |t|
+    t.bigint "user_id"
+    t.integer "operator_id"
+    t.text "message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_supporting_document_refusals_on_user_id"
+  end
+
+  create_table "supporting_document_refusals_types", id: false, force: :cascade do |t|
+    t.bigint "supporting_document_type_id", null: false
+    t.bigint "supporting_document_refusal_id", null: false
+    t.index ["supporting_document_type_id", "supporting_document_refusal_id"], name: "proof_of_identity_type_id_and_proof_of_identity_refusal_id"
+  end
+
+  create_table "supporting_document_types", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "supporting_document_types_groups", force: :cascade do |t|
+    t.bigint "supporting_document_type_id"
+    t.bigint "group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["group_id"], name: "index_p_o_i_t_groups_on_group_id"
+    t.index ["supporting_document_type_id"], name: "index_p_o_i_t_groups_on_proof_of_identity_type_id"
   end
 
   create_table "tags", id: :serial, force: :cascade do |t|
@@ -1377,6 +1397,9 @@ ActiveRecord::Schema.define(version: 2023_01_31_104958) do
   add_foreign_key "invoices", "wallet_transactions"
   add_foreign_key "invoicing_profiles", "users"
   add_foreign_key "machines", "machine_categories"
+  add_foreign_key "notification_preferences", "notification_types"
+  add_foreign_key "notification_preferences", "users"
+  add_foreign_key "notifications", "notification_types"
   add_foreign_key "order_activities", "invoicing_profiles", column: "operator_profile_id"
   add_foreign_key "order_activities", "orders"
   add_foreign_key "order_items", "orders"
@@ -1413,9 +1436,6 @@ ActiveRecord::Schema.define(version: 2023_01_31_104958) do
   add_foreign_key "projects_spaces", "spaces"
   add_foreign_key "projects_themes", "projects"
   add_foreign_key "projects_themes", "themes"
-  add_foreign_key "proof_of_identity_refusals", "users"
-  add_foreign_key "proof_of_identity_types_groups", "groups"
-  add_foreign_key "proof_of_identity_types_groups", "proof_of_identity_types"
   add_foreign_key "reservations", "statistic_profiles"
   add_foreign_key "slots_reservations", "reservations"
   add_foreign_key "slots_reservations", "slots"
@@ -1430,6 +1450,9 @@ ActiveRecord::Schema.define(version: 2023_01_31_104958) do
   add_foreign_key "statistic_profiles", "roles"
   add_foreign_key "statistic_profiles", "users"
   add_foreign_key "subscriptions", "statistic_profiles"
+  add_foreign_key "supporting_document_refusals", "users"
+  add_foreign_key "supporting_document_types_groups", "groups"
+  add_foreign_key "supporting_document_types_groups", "supporting_document_types"
   add_foreign_key "tickets", "event_price_categories"
   add_foreign_key "tickets", "reservations"
   add_foreign_key "user_profile_custom_fields", "invoicing_profiles"

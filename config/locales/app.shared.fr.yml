@@ -98,7 +98,7 @@ fr:
         trainings: "Formations"
         tags: "Étiquettes"
         note: "Note privée"
-        note_help: "Cette note est uniquement visible que par les administrateurs et les gestionnaires. Le membre ne peut pas la voir."
+        note_help: "Cette note est uniquement visible par les administrateurs et les gestionnaires. Le membre ne peut pas la voir."
         terms_and_conditions_html: "J'ai lu et j'accepte <a href=\"{POLICY_URL}\" target=\"_blank\">les conditions générales<a/>"
         must_accept_terms: "Vous devez accepter les conditions générales"
         save: "Enregistrer"
@@ -152,6 +152,7 @@ fr:
         themes: "Thématiques"
         tags: "Étiquettes"
         save_as_draft: "Enregistrer comme brouillon"
+        status: "Statut"
       #button to book a machine reservation
       reserve_button:
         book_this_machine: "Réserver cette machine"
@@ -258,7 +259,7 @@ fr:
           credit_AMOUNT_for_pay_ITEM: "Il vous reste {AMOUNT} à payer pour valider votre {ITEM}."
           client_have_AMOUNT_in_wallet: "Le membre a {AMOUNT} sur son porte-monnaie"
           client_wallet_pay_ITEM: "Le membre peut directement payer {ITEM, select, abonnement{son} achat{son} other{sa}} {ITEM}."
-          client_credit_AMOUNT_for_pay_ITEM: "Il reste {AMOUNT} à payer pour valider {ITEM, select, abonnement{l'} achat{l'} other{la }}{ITEM}"
+          client_credit_AMOUNT_for_pay_ITEM: "Il reste {AMOUNT} à payer pour valider {ITEM, select, abonnement{l''} achat{l''} other{la }}{ITEM}"
           other_deadlines_no_wallet: "Attention : le solde du porte-monnaie ne pourra pas être utilisé pour les échéances suivantes."
       #coupon (promotional) (creation/edition form)
       coupon:
@@ -517,7 +518,7 @@ fr:
           order_delivered_success: "La commande a été livrée"
           confirm_order_canceled_html: "<strong>Voulez-vous vraiment annuler cette commande ?</strong><p>Si cela impacte le stock, veuillez refléter le changement dans <em>modifier le produit &gt; gestion des stocks</em>. Ceci ne sera pas automatique.</p>"
           order_canceled_success: "La commande a été annulée"
-          confirm_order_refunded_html: "<stong>Voulez-vous vraiment rembourser cette commande ?</strong><p>Si cela impacte sur le stock, veuillez refléter le changement dans <em>modifier le produit &gt; gestion des stocks</em>. Ceci ne sera pas automatique.</p>"
+          confirm_order_refunded_html: "<strong>Voulez-vous vraiment rembourser cette commande ?</strong><p>Si c'est le cas, merci d'effecturer le remboursement et de générer l'avoir depuis l'onglet <em>Factures</em>.</p><p>Si cela impacte les stocks, veuillez modifier votre produit et refléter le changement dans l’onglet <em>gestion des stocks</em>.</p><p>Ces actions ne seront pas automatiques.</p>"
           order_refunded_success: "La commande a été remboursée"
       unsaved_form_alert:
         modal_title: "Vous avez des modifications non enregistrées"

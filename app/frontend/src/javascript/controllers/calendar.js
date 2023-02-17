@@ -16,8 +16,8 @@
  * Controller used in the public calendar global
  */
 
-Application.Controllers.controller('CalendarController', ['$scope', '$state', '$aside', 'moment', 'Availability', 'Setting', 'growl', 'dialogs', 'bookingWindowStart', 'bookingWindowEnd', '_t', 'uiCalendarConfig', 'CalendarConfig', 'trainingsPromise', 'machinesPromise', 'spacesPromise', 'iCalendarPromise', 'machineCategoriesPromise',
-  function ($scope, $state, $aside, moment, Availability, Setting, growl, dialogs, bookingWindowStart, bookingWindowEnd, _t, uiCalendarConfig, CalendarConfig, trainingsPromise, machinesPromise, spacesPromise, iCalendarPromise, machineCategoriesPromise) {
+Application.Controllers.controller('CalendarController', ['$scope', '$state', '$aside', '$uibModal', 'moment', 'Availability', 'Setting', 'growl', 'dialogs', 'bookingWindowStart', 'bookingWindowEnd', '_t', 'uiCalendarConfig', 'CalendarConfig', 'trainingsPromise', 'machinesPromise', 'spacesPromise', 'iCalendarPromise', 'machineCategoriesPromise',
+  function ($scope, $state, $aside, $uibModal, moment, Availability, Setting, growl, dialogs, bookingWindowStart, bookingWindowEnd, _t, uiCalendarConfig, CalendarConfig, trainingsPromise, machinesPromise, spacesPromise, iCalendarPromise, machineCategoriesPromise) {
   /* PRIVATE STATIC CONSTANTS */
     let currentMachineEvent = null;
     machinesPromise.forEach(m => m.checked = true);
@@ -263,8 +263,33 @@ Application.Controllers.controller('CalendarController', ['$scope', '$state', '$
         $state.go('app.public.training_show', { id: event.training_id });
       } else {
         if (event.machine_ids) {
-          // TODO open modal to ask the user to select the machine to show
-          $state.go('app.public.machines_show', { id: event.machine_ids[0] });
+          if (event.machine_ids.length === 1) {
+            $state.go('app.public.machines_show', { id: event.machine_ids[0] });
+          } else {
+            // open a modal to ask the user to select the machine to show
+            const modalInstance = $uibModal.open({
+              animation: true,
+              templateUrl: '/calendar/chooseMachine.html',
+              size: 'md',
+              controller: ['$scope', 'machinesPromise', '$uibModalInstance', function ($scope, machinesPromise, $uibModalInstance) {
+                $scope.machines = machinesPromise.filter(m => event.machine_ids.includes(m.id));
+                $scope.selectMachine = function (machineId) {
+                  $uibModalInstance.close(machineId);
+                };
+                $scope.cancel = function () {
+                  $uibModalInstance.dismiss('cancel');
+                };
+              }],
+              resolve: {
+                machinesPromise: ['Machine', function (Machine) {
+                  return Machine.query().$promise;
+                }]
+              }
+            });
+            modalInstance.result.then(function (res) {
+              $state.go('app.public.machines_show', { id: res });
+            });
+          }
         } else if (event.space_id) {
           $state.go('app.public.space_show', { id: event.space_id });
         }

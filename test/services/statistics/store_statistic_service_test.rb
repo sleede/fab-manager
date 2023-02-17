@@ -9,13 +9,13 @@ class StoreStatisticServiceTest < ActionDispatch::IntegrationTest
 
   test 'build stats about orders' do
     # Build the stats for the last 3 days, we expect the above invoices (reservations+subscription) to appear in the resulting stats
-    ::Statistics::BuilderService.generate_statistic({ start_date: DateTime.current.beginning_of_day,
-                                                      end_date: DateTime.current.end_of_day })
+    ::Statistics::BuilderService.generate_statistic({ start_date: Time.current.beginning_of_day,
+                                                      end_date: Time.current.end_of_day })
 
     Stats::Order.refresh_index!
 
     # we should find order id 15 (created today)
-    stat_order = Stats::Order.search(query: { bool: { must: [{ term: { date: DateTime.current.to_date.iso8601 } },
+    stat_order = Stats::Order.search(query: { bool: { must: [{ term: { date: Time.current.to_date.iso8601 } },
                                                              { term: { type: 'store' } }] } }).first
     assert_not_nil stat_order
     assert_equal @order.id, stat_order['orderId']

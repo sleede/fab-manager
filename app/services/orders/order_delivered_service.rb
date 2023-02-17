@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Provides methods for set order to delivered state
+# Provides a method to set the order state to delivered
 class Orders::OrderDeliveredService
   def call(order, current_user)
     raise ::UpdateOrderStateError if %w[cart payment_failed canceled refunded delivered].include?(order.state)

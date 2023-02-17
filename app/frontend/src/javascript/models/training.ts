@@ -14,6 +14,13 @@ export interface Training {
   disabled?: boolean,
   plan_ids?: number[],
   training_image_attributes?: FileType,
+  auto_cancel: boolean,
+  auto_cancel_threshold: number,
+  auto_cancel_deadline: number,
+  authorization: boolean,
+  authorization_period: number,
+  invalidation: boolean,
+  invalidation_period: number,
   availabilities?: Array<{
     id: number,
     start_at: TDateISO,
@@ -24,11 +31,12 @@ export interface Training {
       is_valid: boolean
     }>
   }>,
-  advanced_accounting_attributes?: AdvancedAccounting
+  advanced_accounting_attributes?: AdvancedAccounting,
+  override_settings?: boolean
 }
 
 export interface TrainingIndexFilter extends ApiFilter {
   disabled?: boolean,
   public_page?: boolean,
-  requested_attributes?: ['availabillities'],
+  requested_attributes?: ['availabilities' | 'override_settings'],
 }

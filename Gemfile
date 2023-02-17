@@ -103,8 +103,6 @@ gem 'elasticsearch-persistence', '~> 5'
 gem 'elasticsearch-rails', '~> 5'
 gem 'faraday', '~> 0.17'
 
-gem 'notify_with'
-
 gem 'pundit'
 
 gem 'oj'
