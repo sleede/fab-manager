@@ -170,7 +170,7 @@ class PaymentScheduleService
     end
     # cancel subscription
     subscription = payment_schedule.payment_schedule_objects.find { |pso| pso.object_type == Subscription.name }.subscription
-    subscription.expire(Time.current)
+    subscription.expire
 
     subscription.canceled_at
   end

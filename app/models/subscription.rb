@@ -29,15 +29,8 @@ class Subscription < ApplicationRecord
     generate_invoice(operator_profile_id).save
   end
 
-  def expire(time)
-    if expired?
-      false
-    else
-      update_columns(expiration_date: time, canceled_at: time) # rubocop:disable Rails/SkipsModelValidations
-      notify_admin_subscription_canceled
-      notify_member_subscription_canceled
-      true
-    end
+  def expire
+    Subscriptions::ExpireService.call(self)
   end
 
   def expired?
@@ -75,18 +68,6 @@ class Subscription < ApplicationRecord
   def notify_admin_subscribed_plan
     NotificationCenter.call type: 'notify_admin_subscribed_plan',
                             receiver: User.admins,
-                            attached_object: self
-  end
-
-  def notify_admin_subscription_canceled
-    NotificationCenter.call type: 'notify_admin_subscription_canceled',
-                            receiver: User.admins_and_managers,
-                            attached_object: self
-  end
-
-  def notify_member_subscription_canceled
-    NotificationCenter.call type: 'notify_member_subscription_canceled',
-                            receiver: user,
                             attached_object: self
   end
 

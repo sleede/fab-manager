@@ -11,7 +11,7 @@ class API::SlotsReservationsController < API::ApiController
   def update
     authorize @slot_reservation
     if @slot_reservation.update(slot_params)
-      SubscriptionExtensionAfterReservation.new(@slot_reservation.reservation).extend_subscription_if_eligible
+      Subscriptions::ExtensionAfterReservation.new(@slot_reservation.reservation).extend_subscription_if_eligible
       render :show, status: :ok, location: @slot_reservation
     else
       render json: @slot_reservation.errors, status: :unprocessable_entity

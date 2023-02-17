@@ -2,7 +2,7 @@
 
 # Extend the user's current subscription after his first training reservation if
 # he subscribed to a rolling plan
-class SubscriptionExtensionAfterReservation
+class Subscriptions::ExtensionAfterReservation
   attr_accessor :user, :reservation
 
   def initialize(reservation)
@@ -25,7 +25,7 @@ class SubscriptionExtensionAfterReservation
   end
 
   def extend_subscription
-    user.subscription.update_columns(
+    user.subscription.update_columns( # rubocop:disable Rails/SkipsModelValidations
       expiration_date: reservation.slots_reservations.first.slot.start_at + user.subscribed_plan.duration
     )
   end
