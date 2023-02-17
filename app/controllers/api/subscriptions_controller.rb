@@ -15,7 +15,7 @@ class API::SubscriptionsController < API::ApiController
 
   def cancel
     authorize @subscription
-    if @subscription.expire(DateTime.current)
+    if @subscription.expire(Time.current)
       render :show, status: :ok, location: @subscription
     else
       render json: { error: 'already expired' }, status: :unprocessable_entity

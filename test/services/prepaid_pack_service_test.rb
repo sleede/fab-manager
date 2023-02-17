@@ -25,7 +25,7 @@ class PrepaidPackServiceTest < ActiveSupport::TestCase
   test 'update user pack minutes' do
     availabilities_service = Availabilities::AvailabilitiesService.new(@acamus)
 
-    slots = availabilities_service.machines([@machine], @acamus, { start: DateTime.now, end: 1.day.from_now })
+    slots = availabilities_service.machines([@machine], @acamus, { start: Time.current, end: 1.day.from_now })
     reservation = Reservation.create(
       reservable_id: @machine.id,
       reservable_type: Machine.name,

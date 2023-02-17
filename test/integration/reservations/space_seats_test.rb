@@ -17,7 +17,7 @@ class Reservations::SpaceSeatsTest < ActionDispatch::IntegrationTest
 
     space = Space.first
 
-    date = (DateTime.current + 1.day).change(hour: 8, min: 0, sec: 0)
+    date = 1.day.from_now.change(hour: 8, min: 0, sec: 0)
 
     post '/api/availabilities',
          params: {

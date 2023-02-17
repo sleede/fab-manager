@@ -11,7 +11,7 @@ class Trainings::AuthorizationService
       return unless training.authorization
 
       training.statistic_profile_trainings
-              .where('created_at < ?', DateTime.current - training.authorization_period.months)
+              .where('created_at < ?', Time.current - training.authorization_period.months)
               .find_each do |spt|
         NotificationCenter.call type: 'notify_member_training_authorization_expired',
                                 receiver: spt.statistic_profile.user,

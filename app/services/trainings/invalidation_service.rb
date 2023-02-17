@@ -12,7 +12,7 @@ class Trainings::InvalidationService
       return unless training.invalidation
 
       training.statistic_profile_trainings
-              .where('created_at < ?', DateTime.current - training.invalidation_period.months)
+              .where('created_at < ?', Time.current - training.invalidation_period.months)
               .find_each do |spt|
         reservations_since = spt.statistic_profile
                                 .reservations

@@ -11,8 +11,8 @@ class OpenAPI::V1::SubscriptionsController < OpenAPI::V1::BaseController
                                  .includes(:plan, statistic_profile: :user)
                                  .references(:statistic_profile, :plan)
 
-    @subscriptions = @subscriptions.where('created_at >= ?', DateTime.parse(params[:after])) if params[:after].present?
-    @subscriptions = @subscriptions.where('created_at <= ?', DateTime.parse(params[:before])) if params[:before].present?
+    @subscriptions = @subscriptions.where('created_at >= ?', Time.zone.parse(params[:after])) if params[:after].present?
+    @subscriptions = @subscriptions.where('created_at <= ?', Time.zone.parse(params[:before])) if params[:before].present?
     @subscriptions = @subscriptions.where(plan_id: may_array(params[:plan_id])) if params[:plan_id].present?
     @subscriptions = @subscriptions.where(statistic_profiles: { user_id: may_array(params[:user_id]) }) if params[:user_id].present?
 

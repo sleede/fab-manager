@@ -4,8 +4,8 @@ require 'test_helper'
 
 class Availabilities::AsPublicTest < ActionDispatch::IntegrationTest
   test 'get public machines availabilities if machines module is active' do
-    start_date = DateTime.current.to_date
-    end_date = (DateTime.current + 7.days).to_date
+    start_date = Time.current.to_date
+    end_date = 7.days.from_now.to_date
 
     get "/api/availabilities/public?start=#{start_date}&end=#{end_date}&timezone=Europe%2FParis&#{all_machines}"
 
@@ -19,15 +19,15 @@ class Availabilities::AsPublicTest < ActionDispatch::IntegrationTest
     availabilities.each_with_index do |a, index|
       assert_not_nil a, "availability #{index} was unexpectedly nil"
       assert_equal 'machines', a[:available_type], "availability #{index} is not a machines availability"
-      assert DateTime.parse(a[:start]) > start_date, "availability #{index} starts before the requested period"
-      assert DateTime.parse(a[:end]) < end_date, "availability #{index} ends after the requested period"
+      assert Time.zone.parse(a[:start]) > start_date, "availability #{index} starts before the requested period"
+      assert Time.zone.parse(a[:end]) < end_date, "availability #{index} ends after the requested period"
     end
   end
 
   test 'get anymore machines availabilities if machines module is inactive' do
     Setting.set('machines_module', false)
-    start_date = DateTime.current.to_date
-    end_date = (DateTime.current + 7.days).to_date
+    start_date = Time.current.to_date
+    end_date = 7.days.from_now.to_date
 
     get "/api/availabilities/public?start=#{start_date}&end=#{end_date}&timezone=Europe%2FParis&#{all_machines}"
 
@@ -41,8 +41,8 @@ class Availabilities::AsPublicTest < ActionDispatch::IntegrationTest
   end
 
   test 'get public trainings availabilities' do
-    start_date = DateTime.current.to_date
-    end_date = (DateTime.current + 7.days).to_date
+    start_date = Time.current.to_date
+    end_date = 7.days.from_now.to_date
 
     get "/api/availabilities/public?start=#{start_date}&end=#{end_date}&timezone=Europe%2FParis&#{all_trainings}"
 
@@ -56,14 +56,14 @@ class Availabilities::AsPublicTest < ActionDispatch::IntegrationTest
     availabilities.each_with_index do |a, index|
       assert_not_nil a, "availability #{index} was unexpectedly nil"
       assert_equal 'training', a[:available_type], "availability #{index} is not a training availability"
-      assert DateTime.parse(a[:start]) > start_date, "availability #{index} starts before the requested period"
-      assert DateTime.parse(a[:end]) < end_date, "availability #{index} ends after the requested period"
+      assert Time.zone.parse(a[:start]) > start_date, "availability #{index} starts before the requested period"
+      assert Time.zone.parse(a[:end]) < end_date, "availability #{index} ends after the requested period"
     end
   end
 
   test 'get public spaces availabilities' do
-    start_date = DateTime.current.to_date
-    end_date = (DateTime.current + 7.days).to_date
+    start_date = Time.current.to_date
+    end_date = 7.days.from_now.to_date
 
     get "/api/availabilities/public?start=#{start_date}&end=#{end_date}&timezone=Europe%2FParis&#{all_spaces}"
 
@@ -77,8 +77,8 @@ class Availabilities::AsPublicTest < ActionDispatch::IntegrationTest
     availabilities.each_with_index do |a, index|
       assert_not_nil a, "availability #{index} was unexpectedly nil"
       assert_equal 'space', a[:available_type], "availability #{index} is not a space availability"
-      assert DateTime.parse(a[:start]) > start_date, "availability #{index} starts before the requested period"
-      assert DateTime.parse(a[:end]) < end_date, "availability #{index} ends after the requested period"
+      assert Time.zone.parse(a[:start]) > start_date, "availability #{index} starts before the requested period"
+      assert Time.zone.parse(a[:end]) < end_date, "availability #{index} ends after the requested period"
     end
   end
 
@@ -98,8 +98,8 @@ class Availabilities::AsPublicTest < ActionDispatch::IntegrationTest
     availabilities.each_with_index do |a, index|
       assert_not_nil a, "availability #{index} was unexpectedly nil"
       assert_equal 'event', a[:available_type], "availability #{index} is not a event availability"
-      assert DateTime.parse(a[:start]) > start_date, "availability #{index} starts before the requested period"
-      assert DateTime.parse(a[:end]) < end_date, "availability #{index} ends after the requested period"
+      assert Time.zone.parse(a[:start]) > start_date, "availability #{index} starts before the requested period"
+      assert Time.zone.parse(a[:end]) < end_date, "availability #{index} ends after the requested period"
     end
   end
 

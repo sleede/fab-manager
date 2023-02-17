@@ -81,6 +81,6 @@ class OpenApi::UsersTest < ActionDispatch::IntegrationTest
 
     users = json_response(response.body)
     assert users[:users].count.positive?
-    assert(users[:users].all? { |u| DateTime.parse(u[:created_at]) >= DateTime.parse('2018-01-01T00:00:00+01:00') })
+    assert(users[:users].all? { |u| Time.zone.parse(u[:created_at]) >= Time.zone.parse('2018-01-01T00:00:00+01:00') })
   end
 end

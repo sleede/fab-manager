@@ -82,9 +82,9 @@ class Accounting::VatExportService
     columns.each do |column|
       case column
       when 'start_date'
-        row << DateTime.parse(start_date).strftime(date_format)
+        row << Time.zone.parse(start_date).strftime(date_format)
       when 'end_date'
-        row << DateTime.parse(end_date).strftime(date_format)
+        row << Time.zone.parse(end_date).strftime(date_format)
       when 'vat_rate'
         row << vat_rate.to_s
       when 'amount'

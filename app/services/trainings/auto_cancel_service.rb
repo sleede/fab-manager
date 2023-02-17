@@ -14,8 +14,8 @@ class Trainings::AutoCancelService
               .includes(slots: :slots_reservations)
               .where(availabilities: { lock: false })
               .where('availabilities.start_at >= ? AND availabilities.start_at <= ?',
-                     DateTime.current,
-                     DateTime.current + training.auto_cancel_deadline.hours)
+                     Time.current,
+                     Time.current + training.auto_cancel_deadline.hours)
               .find_each do |availability|
         next if availability.reservations.count >= training.auto_cancel_threshold
 
@@ -33,7 +33,7 @@ class Trainings::AutoCancelService
                                   attached_object: sr,
                                   meta_data: { auto_refund: auto_refund }
 
-          sr.update(canceled_at: DateTime.current)
+          sr.update(canceled_at: Time.current)
           refund_after_cancel(sr.reservation) if auto_refund
         end
       end
@@ -80,7 +80,7 @@ class Trainings::AutoCancelService
 
       service = WalletService.new(user: reservation.user, wallet: reservation.user.wallet)
       transaction = service.credit(amount)
-      service.create_avoir(transaction, DateTime.current, I18n.t('trainings.refund_for_auto_cancel')) if transaction
+      service.create_avoir(transaction, Time.current, I18n.t('trainings.refund_for_auto_cancel')) if transaction
     end
   end
 end

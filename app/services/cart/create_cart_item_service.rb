@@ -104,7 +104,7 @@ class Cart::CreateCartItemService
     if cart_subscription
       { subscription: cart_subscription, new_subscription: true }
     elsif @customer.subscribed_plan
-      { subscription: @customer.subscription, new_subscription: false } unless @customer.subscription.expired_at < DateTime.current
+      { subscription: @customer.subscription, new_subscription: false } unless @customer.subscription.expired_at < Time.current
     else
       { subscription: nil, new_subscription: false }
     end

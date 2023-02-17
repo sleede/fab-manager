@@ -21,7 +21,7 @@ module ArchiveHelper
     archive_json = JSON.parse(archive)
     invoices = Invoice.where(
       'created_at >= :start_date AND created_at <= :end_date',
-      start_date: accounting_period.start_at.to_datetime, end_date: accounting_period.end_at.to_datetime
+      start_date: accounting_period.start_at.to_time.in_time_zone, end_date: accounting_period.end_at.to_time.in_time_zone
     )
 
     assert_equal invoices.count, archive_json['invoices'].count
