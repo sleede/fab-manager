@@ -12,6 +12,12 @@ class SettingService
       true
     end
 
+    # @param setting [Hash{Symbol->String}]
+    # @return [StandardError,NilClass]
+    def check_before_update(setting)
+      check_home_scss(setting)
+    end
+
     # @param settings [Array<Setting>]
     def run_after_update(settings)
       update_theme_stylesheet(settings)
@@ -35,6 +41,17 @@ class SettingService
       return unless (%w[main_color secondary_color] & settings.map(&:name)).count.positive?
 
       Stylesheet.theme&.rebuild!
+    end
+
+    # validate that the provided SCSS has a valid syntax
+    def check_home_scss(setting)
+      return nil unless setting[:name] == 'home_css'
+
+      engine = SassC::Engine.new(".home-page { #{setting[:value]} }", style: :compressed)
+      engine.render
+      nil
+    rescue StandardError => e
+      e
     end
 
     # rebuild the home page stylesheet

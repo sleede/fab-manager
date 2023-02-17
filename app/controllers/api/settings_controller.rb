@@ -14,6 +14,9 @@ class API::SettingsController < API::ApiController
     render status: :not_modified and return if setting_params[:value] == @setting.value
     render status: :locked, json: { error: I18n.t('settings.locked_setting') } and return unless SettingService.update_allowed?(@setting)
 
+    error = SettingService.check_before_update({ name: params[:name], value: setting_params[:value] })
+    render status: :unprocessable_entity, json: { error: error } and return if error
+
     if @setting.save && @setting.history_values.create(value: setting_params[:value], invoicing_profile: current_user.invoicing_profile)
       SettingService.run_after_update([@setting])
       render status: :ok
@@ -32,13 +35,18 @@ class API::SettingsController < API::ApiController
         next if !setting[:name] || !setting[:value] || setting[:value].blank?
 
         db_setting = Setting.find_or_initialize_by(name: setting[:name])
-        if !SettingService.update_allowed?(db_setting)
-          db_setting.errors.add(:-, "#{I18n.t("settings.#{setting[:name]}")}: #{I18n.t('settings.locked_setting')}")
-        elsif db_setting.save
-          if db_setting.value != setting[:value] &&
-             db_setting.history_values.create(value: setting[:value], invoicing_profile: current_user.invoicing_profile)
-            updated_settings.push(db_setting)
+        if SettingService.update_allowed?(db_setting)
+          error = SettingService.check_before_update(setting)
+          if error
+            db_setting.errors.add(:-, "#{I18n.t("settings.#{setting[:name]}")}: #{error}")
+          elsif db_setting.save
+            if db_setting.value != setting[:value] &&
+               db_setting.history_values.create(value: setting[:value], invoicing_profile: current_user.invoicing_profile)
+              updated_settings.push(db_setting)
+            end
           end
+        else
+          db_setting.errors.add(:-, "#{I18n.t("settings.#{setting[:name]}")}: #{I18n.t('settings.locked_setting')}")
         end
 
         @settings.push db_setting

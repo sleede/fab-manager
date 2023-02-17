@@ -10,6 +10,7 @@
 - Filter projects by status
 - Maximum validity period for trainings authorizations
 - Automatically cancel trainings with insufficient attendees
+- Check SCSS syntax before saving home page style
 - Fix a bug: cannot cancel a subscription after offering free days
 - Fix a bug: event image updates are not reflected unless the browser's cache is purged
 - Fix a bug: schedules jobs are not launched at the right time
