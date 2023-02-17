@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import * as React from 'react';
-import { Machine, MachineListFilter } from '../../models/machine';
+import { Machine, MachineIndexFilter } from '../../models/machine';
 import { IApplication } from '../../models/application';
 import { react2angular } from 'react2angular';
 import { Loader } from '../base/loader';
@@ -30,56 +30,30 @@ interface MachinesListProps {
 export const MachinesList: React.FC<MachinesListProps> = ({ onError, onSuccess, onShowMachine, onReserveMachine, onLoginRequested, onEnrollRequested, user, canProposePacks }) => {
   // shown machines
   const [machines, setMachines] = useState<Array<Machine>>(null);
-  // we keep the full list of machines, for filtering
-  const [allMachines, setAllMachines] = useState<Array<Machine>>(null);
   // shown machine categories
   const [machineCategories, setMachineCategories] = useState<Array<MachineCategory>>([]);
   // machine list filter
-  const [filter, setFilter] = useState<MachineListFilter>({
-    status: true,
+  const [filters, setFilters] = useState<MachineIndexFilter>({
+    disabled: false,
     category: null
   });
 
   // retrieve the full list of machines on component mount
   useEffect(() => {
-    MachineAPI.index()
-      .then(data => setAllMachines(data))
+    MachineAPI.index(filters)
+      .then(data => setMachines(data))
       .catch(e => onError(e));
     MachineCategoryAPI.index()
       .then(data => setMachineCategories(data))
       .catch(e => onError(e));
   }, []);
 
-  // filter the machines shown when the full list was retrieved
+  // refetch the machines when the filters change
   useEffect(() => {
-    handleFilter();
-  }, [allMachines]);
-
-  // filter the machines shown when the filter was changed
-  useEffect(() => {
-    handleFilter();
-  }, [filter]);
-
-  /**
-   * Callback triggered when the user changes the filter.
-   * filter the machines shown when the filter was changed.
-   */
-  const handleFilter = (): void => {
-    let machinesFiltered = [];
-    if (allMachines) {
-      if (filter.status === null) {
-        machinesFiltered = allMachines;
-      } else {
-        // enabled machines may have the m.disabled property null (for never disabled machines)
-        // or false (for re-enabled machines)
-        machinesFiltered = allMachines.filter(m => !!m.disabled === !filter.status);
-      }
-      if (filter.category !== null) {
-        machinesFiltered = machinesFiltered.filter(m => m.machine_category_id === filter.category);
-      }
-    }
-    setMachines(machinesFiltered);
-  };
+    MachineAPI.index(filters)
+      .then(data => setMachines(data))
+      .catch(e => onError(e));
+  }, [filters]);
 
   /**
    * Callback triggered when the user changes the filter.
@@ -87,8 +61,8 @@ export const MachinesList: React.FC<MachinesListProps> = ({ onError, onSuccess, 
    * @param value, status and category value
    */
   const handleFilterChangedBy = (type: string, value: number | boolean | void) => {
-    setFilter({
-      ...filter,
+    setFilters({
+      ...filters,
       [type]: value
     });
   };

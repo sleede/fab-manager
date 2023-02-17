@@ -40,7 +40,7 @@ class Machine < ApplicationRecord
   has_many :cart_item_machine_reservations, class_name: 'CartItem::MachineReservation', dependent: :destroy, inverse_of: :reservable,
                                             foreign_type: 'reservable_type', foreign_key: 'reservable_id'
 
-  belongs_to :category
+  belongs_to :machine_category
 
   after_create :create_statistic_subtype
   after_create :create_machine_prices

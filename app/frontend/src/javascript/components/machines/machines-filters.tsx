@@ -15,7 +15,7 @@ interface MachinesFiltersProps {
 export const MachinesFilters: React.FC<MachinesFiltersProps> = ({ onFilterChangedBy, machineCategories }) => {
   const { t } = useTranslation('public');
 
-  const defaultValue = { value: true, label: t('app.public.machines_filters.status_enabled') };
+  const defaultValue = { value: false, label: t('app.public.machines_filters.status_enabled') };
   const categoryDefaultValue = { value: null, label: t('app.public.machines_filters.all_machines') };
 
   // Styles the React-select component
@@ -37,7 +37,7 @@ export const MachinesFilters: React.FC<MachinesFiltersProps> = ({ onFilterChange
   const buildBooleanOptions = (): Array<SelectOption<boolean>> => {
     return [
       defaultValue,
-      { value: false, label: t('app.public.machines_filters.status_disabled') },
+      { value: true, label: t('app.public.machines_filters.status_disabled') },
       { value: null, label: t('app.public.machines_filters.status_all') }
     ];
   };
@@ -56,7 +56,7 @@ export const MachinesFilters: React.FC<MachinesFiltersProps> = ({ onFilterChange
    * Callback triggered when the user selects a machine status in the dropdown list
    */
   const handleStatusSelected = (option: SelectOption<boolean>): void => {
-    onFilterChangedBy('status', option.value);
+    onFilterChangedBy('disabled', option.value);
   };
 
   /**

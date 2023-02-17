@@ -4,12 +4,8 @@ import { FileType } from './file';
 import { AdvancedAccounting } from './advanced-accounting';
 
 export interface MachineIndexFilter extends ApiFilter {
-  disabled: boolean,
-}
-
-export interface MachineListFilter {
-  status?: boolean,
-  category?: number,
+  disabled?: boolean,
+  category?: number
 }
 
 export interface Machine {
