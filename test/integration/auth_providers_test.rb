@@ -86,6 +86,18 @@ class AuthProvidersTest < ActionDispatch::IntegrationTest
     assert_equal 'openidconnect-sleede', response.body
   end
 
+  test 'list all authentication providers' do
+    get '/api/auth_providers'
+
+    # Check response format & status
+    assert_equal 200, response.status, response.body
+    assert_equal Mime[:json], response.content_type
+
+    # Check the answer
+    res = json_response(response.body)
+    assert_equal AuthProvider.count, res.length
+  end
+
   test 'show an authentication provider' do
     provider = AuthProvider.first
     get "/api/auth_providers/#{provider.id}"
@@ -94,7 +106,7 @@ class AuthProvidersTest < ActionDispatch::IntegrationTest
     assert_equal 200, response.status, response.body
     assert_equal Mime[:json], response.content_type
 
-    # Check the provider was updated
+    # Check the provider
     res = json_response(response.body)
     assert_equal provider.id, res[:id]
     assert_equal provider.providable_type, res[:providable_type]
