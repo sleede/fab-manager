@@ -6,10 +6,10 @@
 # This migration is linked to the abandon of the NotifyWith gem. Notification Types
 # will now be store in database and we will manage ourself the Notification system.
 class CreateNotificationTypes < ActiveRecord::Migration[5.2]
-  # Index start at 1. This is required due to previous functionning of the NotifyWith gem
+  # Index start at 1. This is required due to previous behavior of the NotifyWith gem
   NOTIFICATIONS_TYPES = [
     { id: 1, name: 'notify_admin_when_project_published', category: 'projects', is_configurable: true },
-    { id: 2, name: 'notify_project_collaborator_to_valid', category: 'projects', is_configurable: true },
+    { id: 2, name: 'notify_project_collaborator_to_valid', category: 'projects', is_configurable: false },
     { id: 3, name: 'notify_project_author_when_collaborator_valid', category: 'projects', is_configurable: true },
     { id: 4, name: 'notify_user_training_valid', category: 'trainings', is_configurable: false },
     { id: 5, name: 'notify_member_subscribed_plan', category: 'subscriptions', is_configurable: false },
