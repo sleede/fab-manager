@@ -34,6 +34,8 @@ class MachineService
     def filter_by_category(machines, filters)
       return machines if filters[:category].blank?
 
+      return machines.where(machine_category_id: nil) if filters[:category] == 'none'
+
       machines.where(machine_category_id: filters[:category])
     end
   end

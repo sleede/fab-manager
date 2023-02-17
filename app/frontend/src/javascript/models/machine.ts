@@ -5,7 +5,7 @@ import { AdvancedAccounting } from './advanced-accounting';
 
 export interface MachineIndexFilter extends ApiFilter {
   disabled?: boolean,
-  category?: number
+  category?: number | 'none'
 }
 
 export interface Machine {

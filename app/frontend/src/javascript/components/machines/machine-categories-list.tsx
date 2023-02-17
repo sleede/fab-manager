@@ -40,11 +40,11 @@ export const MachineCategoriesList: React.FC<MachineCategoriesListProps> = ({ on
   // retrieve the full list of machine categories on component mount
   useEffect(() => {
     MachineCategoryAPI.index()
-      .then(data => setMachineCategories(data))
-      .catch(e => onError(e));
-    MachineAPI.index()
-      .then(data => setMachines(data))
-      .catch(e => onError(e));
+      .then(setMachineCategories)
+      .catch(onError);
+    MachineAPI.index({ category: 'none' })
+      .then(setMachines)
+      .catch(onError);
   }, []);
 
   /**
@@ -59,6 +59,7 @@ export const MachineCategoriesList: React.FC<MachineCategoriesListProps> = ({ on
    */
   const onSaveTypeSuccess = (message: string): void => {
     setModalIsOpen(false);
+    MachineAPI.index({ category: 'none' }).then(setMachines).catch(onError);
     MachineCategoryAPI.index().then(data => {
       setMachineCategories(data);
       onSuccess(message);
