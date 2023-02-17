@@ -209,7 +209,8 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
                        disabled={isDisabled}
                        rules={{ required: true }}
                        formState={formState}
-                       type="date" />
+                       type="date"
+                       nullable />
             <FormInput id="profile_attributes.phone"
                        register={register}
                        rules={{

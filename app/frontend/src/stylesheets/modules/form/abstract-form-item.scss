@@ -139,6 +139,7 @@
   }
   &.is-incorrect &-field {
     border-color: var(--alert);
+    input:focus { box-shadow: 0 0 0 2px var(--alert); }
     .icon {
       color: var(--alert);
       border-color: var(--alert);

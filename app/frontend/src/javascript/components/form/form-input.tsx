@@ -64,6 +64,13 @@ export const FormInput = <TFieldValues extends FieldValues, TInputType>({ id, re
         }
         return num;
       }
+      if (type === 'date') {
+        const date: Date = new Date(value);
+        if (Number.isNaN(date) && nullable) {
+          return null;
+        }
+        return date;
+      }
       setCharacterCount(value?.length || 0);
       return value;
     }
@@ -84,7 +91,6 @@ export const FormInput = <TFieldValues extends FieldValues, TInputType>({ id, re
         <input id={id} aria-label={ariaLabel}
           {...register(id as FieldPath<TFieldValues>, {
             ...rules,
-            valueAsDate: type === 'date',
             setValueAs: parseValue,
             value: defaultValue as FieldPathValue<TFieldValues, FieldPath<TFieldValues>>,
             onChange: (e) => { handleChange(e); }
