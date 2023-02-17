@@ -38,7 +38,7 @@ class SupportingDocumentFileService
         file = type.supporting_document_files.find_by(user_id: supporting_document_file.user_id)
         all_files_are_upload = false unless file
       end
-      if all_files_are_upload && !user.validated_at?
+      if all_files_are_upload
         NotificationCenter.call type: 'notify_admin_user_supporting_document_files_updated',
                                 receiver: User.admins_and_managers,
                                 attached_object: supporting_document_file
