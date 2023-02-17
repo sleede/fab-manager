@@ -1654,7 +1654,7 @@ pt:
         slot_duration: "duração dos slots"
         advanced: "Configurações Avançadas"
         customize_home_page_css: "Personalizar a folha de estilos da página inicial"
-        home_css_notice_html: "Você pode personalizar a folha de estilo que será aplicada à página inicial, usando a sintaxe <a href=\"https://sass-lang.com/documentation\" target=\"_blank\">SASS</a>. Estes estilos serão automaticamente subordinados ao <code>. Seletor de ome-page</code> para evitar qualquer risco de quebra do aplicativo. Enquanto isso, por favor, tenha cuidado, qualquer mudança no editor de página inicial no topo da página pode quebrar seus estilos, sempre se refere ao código HTML."
+        home_css_notice_html: "Você pode personalizar a folha de estilo que será aplicada à página inicial, usando a sintaxe <a href=\"https://sass-lang.com/documentation\" target=\"_blank\">SCSS</a>. Estes estilos serão automaticamente subordinados ao <code>. Seletor de ome-page</code> para evitar qualquer risco de quebra do aplicativo. Enquanto isso, por favor, tenha cuidado, qualquer mudança no editor de página inicial no topo da página pode quebrar seus estilos, sempre se refere ao código HTML."
         error_SETTING_locked: "Não foi possível atualizar a configuração: {SETTING} está bloqueado. Por favor contate o administrador do sistema."
         an_error_occurred_saving_the_setting: "Ocorreu um erro ao salvar a configuração. Por favor, tente novamente mais tarde."
         book_overlapping_slots_info: "Permitir / impedir a reserva de slots sobrepostos"
