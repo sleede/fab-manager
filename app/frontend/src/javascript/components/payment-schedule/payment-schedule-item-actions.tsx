@@ -1,8 +1,7 @@
 import {
   PaymentMethod,
   PaymentSchedule,
-  PaymentScheduleItem,
-  PaymentScheduleItemState
+  PaymentScheduleItem
 } from '../../models/payment-schedule';
 import { ReactElement, useState } from 'react';
 import * as React from 'react';
@@ -17,11 +16,7 @@ import { UpdateCardModal } from '../payment/update-card-modal';
 import { UpdatePaymentMeanModal } from './update-payment-mean-modal';
 
 // we want to display some buttons only once. This is the types of buttons it applies to.
-export enum TypeOnce {
-  CardUpdate = 'card-update',
-  SubscriptionCancel = 'subscription-cancel',
-  UpdatePaymentMean = 'update-payment-mean'
-}
+export type TypeOnce = 'card-update'|'subscription-cancel'|'update-payment-mean';
 
 interface PaymentScheduleItemActionsProps {
   paymentScheduleItem: PaymentScheduleItem,
@@ -79,9 +74,9 @@ export const PaymentScheduleItemActions: React.FC<PaymentScheduleItemActionsProp
    * Return a button to cancel the given subscription, if the user is privileged enough
    */
   const cancelSubscriptionButton = (): ReactElement => {
-    const displayOnceStatus = displayOnceMap.get(TypeOnce.SubscriptionCancel).get(paymentSchedule.id);
+    const displayOnceStatus = displayOnceMap.get('subscription-cancel').get(paymentSchedule.id);
     if (isPrivileged() && (!displayOnceStatus || displayOnceStatus === paymentScheduleItem.id)) {
-      displayOnceMap.get(TypeOnce.SubscriptionCancel).set(paymentSchedule.id, paymentScheduleItem.id);
+      displayOnceMap.get('subscription-cancel').set(paymentSchedule.id, paymentScheduleItem.id);
       return (
         <FabButton key={`cancel-subscription-${paymentSchedule.id}`}
           onClick={toggleCancelSubscriptionModal}
@@ -139,9 +134,9 @@ export const PaymentScheduleItemActions: React.FC<PaymentScheduleItemActionsProp
    * Return a button to update the default payment mean for the current payment schedule
    */
   const updatePaymentMeanButton = (): ReactElement => {
-    const displayOnceStatus = displayOnceMap.get(TypeOnce.UpdatePaymentMean).get(paymentSchedule.id);
+    const displayOnceStatus = displayOnceMap.get('update-payment-mean').get(paymentSchedule.id);
     if (isPrivileged() && (!displayOnceStatus || displayOnceStatus === paymentScheduleItem.id)) {
-      displayOnceMap.get(TypeOnce.UpdatePaymentMean).set(paymentSchedule.id, paymentScheduleItem.id);
+      displayOnceMap.get('update-payment-mean').set(paymentSchedule.id, paymentScheduleItem.id);
       return (
         <FabButton key={`update-payment-mean-${paymentScheduleItem.id}`}
           onClick={toggleUpdatePaymentMeanModal}
@@ -156,9 +151,9 @@ export const PaymentScheduleItemActions: React.FC<PaymentScheduleItemActionsProp
    * Return a button to update the credit card associated with the payment schedule
    */
   const updateCardButton = (): ReactElement => {
-    const displayOnceStatus = displayOnceMap.get(TypeOnce.SubscriptionCancel).get(paymentSchedule.id);
-    if (isPrivileged() && (!displayOnceStatus || displayOnceStatus === paymentScheduleItem.id)) {
-      displayOnceMap.get(TypeOnce.CardUpdate).set(paymentSchedule.id, paymentScheduleItem.id);
+    const displayOnceStatus = displayOnceMap.get('card-update').get(paymentSchedule.id);
+    if (!displayOnceStatus || displayOnceStatus === paymentScheduleItem.id) {
+      displayOnceMap.get('card-update').set(paymentSchedule.id, paymentScheduleItem.id);
       return (
         <FabButton key={`update-card-${paymentSchedule.id}`}
           onClick={toggleUpdateCardModal}
@@ -190,7 +185,7 @@ export const PaymentScheduleItemActions: React.FC<PaymentScheduleItemActionsProp
    */
   const errorActions = (): ReactElement[] => {
     // if the payment schedule is canceled/in error, the schedule is over, and we can't update the card
-    displayOnceMap.get(TypeOnce.CardUpdate).set(paymentSchedule.id, paymentScheduleItem.id);
+    displayOnceMap.get('card-update').set(paymentSchedule.id, paymentScheduleItem.id);
 
     const buttons = [];
     if (isPrivileged()) {
@@ -270,7 +265,7 @@ export const PaymentScheduleItemActions: React.FC<PaymentScheduleItemActionsProp
    */
   const onCheckCashingConfirmed = (): void => {
     PaymentScheduleAPI.cashCheck(paymentScheduleItem.id).then((res) => {
-      if (res.state === PaymentScheduleItemState.Paid) {
+      if (res.state === 'paid') {
         onSuccess();
         toggleConfirmCashingModal();
       }
@@ -282,7 +277,7 @@ export const PaymentScheduleItemActions: React.FC<PaymentScheduleItemActionsProp
    */
   const onTransferConfirmed = (): void => {
     PaymentScheduleAPI.confirmTransfer(paymentScheduleItem.id).then((res) => {
-      if (res.state === PaymentScheduleItemState.Paid) {
+      if (res.state === 'paid') {
         onSuccess();
         toggleConfirmTransferModal();
       }
@@ -293,7 +288,7 @@ export const PaymentScheduleItemActions: React.FC<PaymentScheduleItemActionsProp
    * When the card was successfully updated, pay the invoice (using the new payment method) and close the modal
    */
   const handleCardUpdateSuccess = (): void => {
-    if (paymentScheduleItem.state === PaymentScheduleItemState.RequirePaymentMethod) {
+    if (paymentScheduleItem.state === 'requires_payment_method') {
       PaymentScheduleAPI.payItem(paymentScheduleItem.id).then(() => {
         onSuccess();
         onCardUpdateSuccess();
@@ -342,13 +337,13 @@ export const PaymentScheduleItemActions: React.FC<PaymentScheduleItemActionsProp
 
   return (
     <span className="payment-schedule-item-actions">
-      {paymentScheduleItem.state === PaymentScheduleItemState.Paid && downloadInvoiceButton(paymentScheduleItem.invoice_id)}
-      {paymentScheduleItem.state === PaymentScheduleItemState.Pending && pendingActions()}
-      {paymentScheduleItem.state === PaymentScheduleItemState.RequireAction && solveActionButton()}
-      {paymentScheduleItem.state === PaymentScheduleItemState.RequirePaymentMethod && updateCardButton()}
-      {paymentScheduleItem.state === PaymentScheduleItemState.Error && errorActions()}
-      {paymentScheduleItem.state === PaymentScheduleItemState.GatewayCanceled && errorActions()}
-      {paymentScheduleItem.state === PaymentScheduleItemState.New && newActions()}
+      {paymentScheduleItem.state === 'paid' && downloadInvoiceButton(paymentScheduleItem.invoice_id)}
+      {paymentScheduleItem.state === 'pending' && pendingActions()}
+      {paymentScheduleItem.state === 'requires_action' && solveActionButton()}
+      {paymentScheduleItem.state === 'requires_payment_method' && updateCardButton()}
+      {paymentScheduleItem.state === 'error' && errorActions()}
+      {paymentScheduleItem.state === 'gateway_canceled' && errorActions()}
+      {paymentScheduleItem.state === 'new' && newActions()}
       <div className="modals">
         {/* Confirm the cashing of the current deadline by check */}
         <FabModal title={t('app.shared.payment_schedule_item_actions.confirm_check_cashing')}

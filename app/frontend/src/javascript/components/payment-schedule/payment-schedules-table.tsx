@@ -4,11 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Loader } from '../base/loader';
 import _ from 'lodash';
 import { User } from '../../models/user';
-import {
-  PaymentSchedule,
-  PaymentScheduleItem,
-  PaymentScheduleItemState
-} from '../../models/payment-schedule';
+import type { PaymentSchedule, PaymentScheduleItem } from '../../models/payment-schedule';
 import FormatLib from '../../lib/format';
 import { PaymentScheduleItemActions, TypeOnce } from './payment-schedule-item-actions';
 import { StripeElements } from '../payment/stripe/stripe-elements';
@@ -34,9 +30,9 @@ const PaymentSchedulesTable: React.FC<PaymentSchedulesTableProps> = ({ paymentSc
   const [showExpanded, setShowExpanded] = useState<Map<number, boolean>>(new Map());
   // we want to display some buttons only once. This map keep track of the buttons that have been displayed.
   const [displayOnceMap] = useState<Map<TypeOnce, Map<number, number>>>(new Map([
-    [TypeOnce.SubscriptionCancel, new Map()],
-    [TypeOnce.CardUpdate, new Map()],
-    [TypeOnce.UpdatePaymentMean, new Map()]
+    ['subscription-cancel', new Map()],
+    ['card-update', new Map()],
+    ['update-payment-mean', new Map()]
   ]));
   const [gateway, setGateway] = useState<Setting>(null);
 
@@ -109,7 +105,7 @@ const PaymentSchedulesTable: React.FC<PaymentSchedulesTableProps> = ({ paymentSc
    */
   const formatState = (item: PaymentScheduleItem, schedule: PaymentSchedule): JSX.Element => {
     let res = t(`app.shared.payment_schedules_table.state_${item.state}${item.state === 'pending' ? '_' + schedule.payment_method : ''}`);
-    if (item.state === PaymentScheduleItemState.Paid) {
+    if (item.state === 'paid') {
       const key = `app.shared.payment_schedules_table.method_${item.payment_method}`;
       res += ` (${t(key)})`;
     }

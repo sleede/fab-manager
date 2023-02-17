@@ -1,14 +1,6 @@
 import { TDateISO, TDateISODate } from '../typings/date-iso';
 
-export enum PaymentScheduleItemState {
-  New = 'new',
-  Pending = 'pending',
-  RequirePaymentMethod = 'requires_payment_method',
-  RequireAction = 'requires_action',
-  Paid = 'paid',
-  Error = 'error',
-  GatewayCanceled = 'gateway_canceled'
-}
+export type PaymentScheduleItemState = 'new'|'pending'|'requires_payment_method'|'requires_action'|'paid'|'error'|'gateway_canceled';
 
 export enum PaymentMethod {
   Card = 'card',
