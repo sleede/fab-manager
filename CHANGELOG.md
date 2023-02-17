@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+## v5.7.0 2023 February 17
+
 - Report user's prepaid packs in the dashboard
 - Export external ID and private notes in the members excel export
 - Ability to buy a new prepaid pack from the user's dashboard
@@ -11,6 +13,12 @@
 - Maximum validity period for trainings authorizations
 - Automatically cancel trainings with insufficient attendees
 - Check SCSS syntax before saving home page style
+- Use Time instead of DateTime objects
+- Fix a bug: missing statististics subtypes
+- Fix a bug: wrong times in admin/event monitoring
+- Fix a bug: daylight saving time is ignored and result in wrong dates and/or times when dealing around the DST day
+- Fix a bug: date shift in event creation/update
+- Fix a bug: unable to run `rails db:seed` when first setup Fab-manager
 - Fix a bug: cannot cancel a subscription after offering free days
 - Fix a bug: event image updates are not reflected unless the browser's cache is purged
 - Fix a bug: schedules jobs are not launched at the right time
@@ -18,13 +26,6 @@
 - Fix a bug: members cannot update their cards for payment schedules
 - [TODO DEPLOY] `rails fablab:fix_availabilities` THEN `rails fablab:setup:build_places_cache`
 - [TODO DEPLOY] `\curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/scripts/rename-supporting-document.sh | bash`
-
-- Use Time instead of DateTime objects
-- Fix a bug: missing statististics subtypes
-- Fix a bug: wrong times in admin/event monitoring
-- Fix a bug: daylight saving time is ignored and result in wrong dates and/or times when dealing around the DST day
-- Fix a bug: date shift in event creation/update
-- Fix a bug: unable to run `rails db:seed` when first setup Fab-manager
 - [TODO DEPLOY] `rails db:seed`
 
 ## v5.6.11 2023 February 07
