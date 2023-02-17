@@ -1654,7 +1654,7 @@ de:
         slot_duration: "Dauer der Slots"
         advanced: "Erweiterte Einstellungen"
         customize_home_page_css: "Das Stylesheet der Startseite anpassen"
-        home_css_notice_html: "Sie können das Stylesheet anpassen, das auf die Startseite angewendet wird, indem Sie die <a href=\"https://sass-lang.com/documentation\" target=\"_blank\">SASS</a> Syntax verwenden. Diese Stile werden automatisch dem <code>Homepage</code> Selektor untergeordnet, um das Risiko von Applikationsfehlern zu minimieren. Vorsicht: Änderungen im Homepage-Editor oben auf der Seite können Ihre Stile zerstören, beziehen Sie sich immer auf den HTML-Code."
+        home_css_notice_html: "Sie können das Stylesheet anpassen, das auf die Startseite angewendet wird, indem Sie die <a href=\"https://sass-lang.com/documentation\" target=\"_blank\">SCSS</a> Syntax verwenden. Diese Stile werden automatisch dem <code>Homepage</code> Selektor untergeordnet, um das Risiko von Applikationsfehlern zu minimieren. Vorsicht: Änderungen im Homepage-Editor oben auf der Seite können Ihre Stile zerstören, beziehen Sie sich immer auf den HTML-Code."
         error_SETTING_locked: "Die Einstellung konnte nicht aktualisiert werden: {SETTING} ist gesperrt. Bitte kontaktieren Sie Ihren Systemadministrator."
         an_error_occurred_saving_the_setting: "Beim Speichern der Einstellung ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut."
         book_overlapping_slots_info: "Erlauben / Verhindern der Reservierung von überlappenden Slots"

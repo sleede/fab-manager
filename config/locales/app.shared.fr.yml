@@ -98,7 +98,7 @@ fr:
         trainings: "Formations"
         tags: "Étiquettes"
         note: "Note privée"
-        note_help: "Cette note est uniquement visible que par les administrateurs et les gestionnaires. Le membre ne peut pas la voir."
+        note_help: "Cette note est uniquement visible par les administrateurs et les gestionnaires. Le membre ne peut pas la voir."
         terms_and_conditions_html: "J'ai lu et j'accepte <a href=\"{POLICY_URL}\" target=\"_blank\">les conditions générales<a/>"
         must_accept_terms: "Vous devez accepter les conditions générales"
         save: "Enregistrer"

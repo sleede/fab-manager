@@ -433,9 +433,9 @@ fr:
       notify_admin_payment_schedule_transfer_deadline:
         schedule_deadline: "Vous devez confirmer le prélèvement bancaire pour l'échéance du %{DATE} , pour l'échéancier %{REFERENCE}"
       notify_admin_user_supporting_document_files_created:
-        supporting_document_files_uploaded: "Justificatif téléchargé par le membre <strong><em>%{NAME}</strong></em>."
+        supporting_document_files_uploaded: "Le membre <strong><em>%{NAME}</strong></em> a téléversé un nouveau justificatif."
       notify_admin_user_supporting_document_files_updated:
-        supporting_document_files_uploaded: "Justificatif modifié par le Membre <strong><em>%{NAME}</strong></em>."
+        supporting_document_files_uploaded: "Le membre <strong><em>%{NAME}</strong></em> a modifié un justificatif."
       notify_user_is_validated:
         account_validated: "Votre compte est valide."
       notify_user_is_invalidated:
