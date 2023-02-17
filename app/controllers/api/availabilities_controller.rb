@@ -51,6 +51,7 @@ class API::AvailabilitiesController < API::ApiController
     end
   end
 
+  # This endpoint is used to remove a machine or a plan from the given availability
   def update
     authorize Availability
     if @availability.update(availability_params)
