@@ -376,6 +376,7 @@ es:
         statistics_subscription: "de estadísticas de suscripción"
         statistics_training: "de estadísticas de cursos"
         statistics_space: "de estadísticas sobre espacios"
+        statistics_order: "of statistics about store orders"
         users_members: "de la lista de miembros"
         users_subscriptions: "de la lista de suscripciones"
         users_reservations: "de la lista de reservas"

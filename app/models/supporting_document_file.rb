@@ -8,5 +8,5 @@ class SupportingDocumentFile < ApplicationRecord
   belongs_to :supporting_document_type
   belongs_to :user
 
-  validates :attachment, file_size: { maximum: ENV.fetch('MAX_SUPPORTING_DOCUMENT_FILE_SIZE', 5.megabytes.to_i) }
+  validates :attachment, file_size: { maximum: ENV.fetch('MAX_SUPPORTING_DOCUMENT_FILE_SIZE', 5.megabytes).to_i }
 end

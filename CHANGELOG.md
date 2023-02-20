@@ -1,5 +1,15 @@
 # Changelog Fab-manager
 
+## v5.7.1 2023 February 20
+
+- Fix a bug: timezone is ignored while configuring calendar opening/closing time
+- Fix a bug: unable to configure RAILS_LOCALE to fr-CA
+- Fix a bug: unable to fix availabilities for events
+- Fix a bug: unable to start Fab-manager with message: maximum must be a nonnegative Integer
+- Fix a bug: unable to export orders statistics
+- Fix a bug: invalid shell coloring during setup
+- [TODO DEPLOY] `fablab:maintenance:clean_availabilities`
+
 ## v5.7.0 2023 February 17
 
 - Report user's prepaid packs in the dashboard
