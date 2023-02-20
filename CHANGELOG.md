@@ -2,6 +2,7 @@
 
 - Fix a bug: unable to configure RAILS_LOCALE to fr-CA
 - Fix a bug: unable to fix availabilities for events
+- Fix a bug: unable to start Fab-manager with message: maximum must be a nonnegative Integer
 
 ## v5.7.0 2023 February 17
 
