@@ -17,7 +17,7 @@ class API::SettingsController < API::ApiController
     error = SettingService.check_before_update({ name: params[:name], value: setting_params[:value] })
     render status: :unprocessable_entity, json: { error: error } and return if error
 
-    if @setting.save && @setting.history_values.create(value: setting_params[:value], invoicing_profile: current_user.invoicing_profile)
+    if SettingService.save_and_update(@setting, setting_params[:value], current_user)
       SettingService.run_after_update([@setting])
       render status: :ok
     else
@@ -39,11 +39,8 @@ class API::SettingsController < API::ApiController
           error = SettingService.check_before_update(setting)
           if error
             db_setting.errors.add(:-, "#{I18n.t("settings.#{setting[:name]}")}: #{error}")
-          elsif db_setting.save
-            if db_setting.value != setting[:value] &&
-               db_setting.history_values.create(value: setting[:value], invoicing_profile: current_user.invoicing_profile)
-              updated_settings.push(db_setting)
-            end
+          elsif db_setting.value != setting[:value] && SettingService.save_and_update(db_setting, setting[:value], current_user)
+            updated_settings.push(db_setting)
           end
         else
           db_setting.errors.add(:-, "#{I18n.t("settings.#{setting[:name]}")}: #{I18n.t('settings.locked_setting')}")

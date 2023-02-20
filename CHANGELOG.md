@@ -1,5 +1,6 @@
 # Changelog Fab-manager
 
+- Fix a bug: timezone is ignored while configuring calendar opening/closing time
 - Fix a bug: unable to configure RAILS_LOCALE to fr-CA
 - Fix a bug: unable to fix availabilities for events
 - Fix a bug: unable to start Fab-manager with message: maximum must be a nonnegative Integer

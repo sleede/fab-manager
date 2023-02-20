@@ -18,6 +18,16 @@ class SettingService
       check_home_scss(setting)
     end
 
+    # @param setting [Setting]
+    # @param value [String]
+    # @param operator [User]
+    def save_and_update(setting, value, operator)
+      return false unless setting.save
+
+      val = parse_value(setting.name, value)
+      setting.history_values.create(value: val, invoicing_profile: operator.invoicing_profile)
+    end
+
     # @param settings [Array<Setting>]
     def run_after_update(settings)
       update_theme_stylesheet(settings)
@@ -35,6 +45,14 @@ class SettingService
 
     private
 
+    # @param setting [String]
+    # @param value [String]
+    def parse_value(setting, value)
+      return value unless %w[booking_window_start booking_window_end].include?(setting)
+
+      Time.zone.parse(value)
+    end
+
     # rebuild the theme stylesheet
     # @param settings [Array<Setting>]
     def update_theme_stylesheet(settings)
@@ -44,6 +62,7 @@ class SettingService
     end
 
     # validate that the provided SCSS has a valid syntax
+    # @param setting [Hash{Symbol->String}]
     def check_home_scss(setting)
       return nil unless setting[:name] == 'home_css'
 
