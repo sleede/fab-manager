@@ -139,6 +139,11 @@ namespace :fablab do
       puts '-> Done'
     end
 
+    desc 'Remove ghost availabilities and slots'
+    task clean_availabilities: :environment do
+      Availability.where(available_type: 'unknown').destroy_all
+    end
+
     def dates_from_args(args)
       year = args.year || Time.current.year
       month = args.month || Time.current.month
