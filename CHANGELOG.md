@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- Fix a bug: unable to configure RAILS_LOCALE to fr-CA
+
 ## v5.7.0 2023 February 17
 
 - Report user's prepaid packs in the dashboard
