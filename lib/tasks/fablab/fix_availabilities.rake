@@ -12,15 +12,17 @@ namespace :fablab do
         other_slots = Slot.where(availability_id: slot.availability_id)
         reservations = SlotsReservation.where(slot_id: other_slots.map(&:id))
 
+        type = available_type(reservations)
         a = Availability.new(
           id: slot.availability_id,
           start_at: other_slots.group('id').select('min(start_at) as min').first[:min],
           end_at: other_slots.group('id').select('max(end_at) as max').first[:max],
-          available_type: available_type(reservations),
+          available_type: type,
           machine_ids: machines_ids(reservations, slot.availability_id),
           space_ids: space_ids(reservations, slot.availability_id),
           training_ids: training_ids(reservations, slot.availability_id)
         )
+        create_mock_event(reservations, slot.availability_id) if type == 'event' && a.event.nil?
         raise StandardError, "unable to save availability for slot #{slot.id}: #{a.errors.full_messages}" unless a.save(validate: false)
       end
     end
@@ -84,5 +86,33 @@ namespace :fablab do
     return rv unless rv.empty?
 
     []
+  end
+
+  # @param reservations [ActiveRecord::Relation<SlotsReservation>]
+  # @param availability_id [Number]
+  def create_mock_event(reservations, availability_id)
+    model = find_similar_event(reservations)
+    invoice_item = reservations.first&.reservation&.invoice_items&.find_by(main: true)
+    Event.create!(
+      title: model&.title || invoice_item&.description,
+      description: model&.description || invoice_item&.description,
+      category: model&.category || Category.first,
+      availability_id: availability_id
+    )
+  end
+
+  # @param reservations [ActiveRecord::Relation<SlotsReservation>]
+  # @return [Event,NilClass]
+  def find_similar_event(reservations)
+    reservations.each do |reservation|
+      reservation.reservation.invoice_items.each do |invoice_item|
+        words = invoice_item.description.split
+        (0..words.count).each do |w|
+          try_title = words[0..words.count - w].join(' ')
+          event = Event.find_by("title LIKE '#{try_title}%'")
+          return event unless event.nil?
+        end
+      end
+    end
   end
 end
