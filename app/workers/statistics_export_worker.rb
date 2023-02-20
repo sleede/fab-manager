@@ -14,9 +14,9 @@ class StatisticsExportWorker
     service = StatisticsExportService.new
     method_name = "export_#{export.export_type}"
 
-    unless %w[account event machine project subscription training space global].include?(export.export_type) &&
+    unless %w[account event machine project subscription training space order global].include?(export.export_type) &&
            service.respond_to?(method_name)
-      return
+      raise TypeError("Invalid statistics export type #{export.export_type}")
     end
 
     service.public_send(method_name, export)
@@ -24,6 +24,5 @@ class StatisticsExportWorker
     NotificationCenter.call type: :notify_admin_export_complete,
                             receiver: export.user,
                             attached_object: export
-
   end
 end

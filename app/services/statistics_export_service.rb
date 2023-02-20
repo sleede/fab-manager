@@ -42,7 +42,7 @@ class StatisticsExportService
   end
 
   # rubocop:disable Style/DocumentDynamicEvalDefinition
-  %w[account event machine project subscription training space].each do |path|
+  %w[account event machine project subscription training space order].each do |path|
     class_eval %{
       def export_#{path}(export)
 

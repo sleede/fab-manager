@@ -376,6 +376,7 @@ de:
         statistics_subscription: "der Abonnementstatistiken"
         statistics_training: "der Schulungsstatistiken"
         statistics_space: "der Raumstatistiken"
+        statistics_order: "of statistics about store orders"
         users_members: "der Mitgliederliste"
         users_subscriptions: "der Abonnementliste"
         users_reservations: "der Reservierungsliste"

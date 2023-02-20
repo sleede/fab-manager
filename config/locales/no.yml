@@ -376,6 +376,7 @@
         statistics_subscription: "for abonnementsstatistikk"
         statistics_training: "av statistikk om opplæringer"
         statistics_space: "av statistikk om plasser/rom"
+        statistics_order: "of statistics about store orders"
         users_members: "fra medlemslisten"
         users_subscriptions: "fra abonnementslisten"
         users_reservations: "fra reservasjonslisten"
