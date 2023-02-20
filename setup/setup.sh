@@ -384,7 +384,7 @@ configure_env_file()
     var_doc=$(get_md_anchor "$doc" "$variable")
     current=$(grep "$variable=" "$FABMANAGER_PATH/config/env")
     echo "$var_doc" | bat --file-name "$variable" --language md --color=always
-    printf -- "- \e[1mCurrent value: %s\e[21m\n- New value? (leave empty to keep the current value)\n" "$current"
+    printf -- "- \e[1mCurrent value: %s\e[0m\n- New value? (leave empty to keep the current value)\n" "$current"
     read -rep "  > " value </dev/tty
     if [ "$value" != "" ]; then
       esc_val=$(printf '%s\n' "$value" | sed -e 's/\//\\\//g')
@@ -399,7 +399,7 @@ configure_env_file()
   # if DEFAULT_PROTOCOL was set to http, ALLOW_INSECURE_HTTP is probably required
   if grep "^DEFAULT_PROTOCOL=http$" "$FABMANAGER_PATH/config/env" 1>/dev/null; then
     get_md_anchor "$doc" "ALLOW_INSECURE_HTTP" | bat --file-name "ALLOW_INSECURE_HTTP" --language md --color=always
-    printf "You have set \e[1mDEFAULT_PROTOCOL\e[21m to \e[1mhttp\e[21m.\n"
+    printf "You have set \e[1mDEFAULT_PROTOCOL\e[0m to \e[1mhttp\e[21m.\n"
     read -rp "Do you want to allow insecure HTTP? (Y/n) " confirm </dev/tty
     if [ "$confirm" != "n" ]; then
       sed -i.bak "s/ALLOW_INSECURE_HTTP=.*/ALLOW_INSECURE_HTTP=true/g" "$FABMANAGER_PATH/config/env"
