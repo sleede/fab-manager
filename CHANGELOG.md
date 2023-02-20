@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+## v5.7.1 2023 February 20
+
 - Fix a bug: timezone is ignored while configuring calendar opening/closing time
 - Fix a bug: unable to configure RAILS_LOCALE to fr-CA
 - Fix a bug: unable to fix availabilities for events
