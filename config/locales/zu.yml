@@ -376,6 +376,7 @@ zu:
         statistics_subscription: "crwdns3647:0crwdne3647:0"
         statistics_training: "crwdns3649:0crwdne3649:0"
         statistics_space: "crwdns3651:0crwdne3651:0"
+        statistics_order: "crwdns37387:0crwdne37387:0"
         users_members: "crwdns3653:0crwdne3653:0"
         users_subscriptions: "crwdns3655:0crwdne3655:0"
         users_reservations: "crwdns3657:0crwdne3657:0"
