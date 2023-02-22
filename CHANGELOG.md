@@ -3,6 +3,8 @@
 - Improved upgrade script
 - Fix a bug: empty advanced accounting code is not defaulted to the general setting
 - Fix a bug: invalid style in accounting codes settings
+- Fix a bug: wrong namespace for task cart_operator
+- [TODO DEPLOY] `rails fablab:fix:cart_operator`
 - [TODO DEPLOY] `rails fablab:setup:build_accounting_lines`
 
 ## v5.8.1 2023 March 03
