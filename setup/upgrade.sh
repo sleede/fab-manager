@@ -178,12 +178,12 @@ version_check()
   target_version
   if [ "$TARGET" = 'custom' ] || [ "$IGNORE" = "true" ]; then return; fi
 
-  HTTP_CODE=$(curl -I -s -w "%{http_code}\n" -o /dev/null "https://hub.fab-manager.com/api/versions/check?version=$VERSION")
+  HTTP_CODE=$(curl -I -s -w "%{http_code}\n" -o /dev/null "https://hub.fab-manager.com/api/versions/next_step?version=$VERSION")
   if [ "$HTTP_CODE" != 200 ]; then
     printf "\n\n\e[91m[ ❌ ] Unable to check the next step version. Please check your internet connection or restart this script providing the \e[1m-i\e[0m\e[91m option\n\e[39m"
     exit 3
   fi
-  STEP=$(\curl -sSL "https://hub.fab-manager.com/api/versions/latest" | jq -r '.upgrade_to.semver')
+  STEP=$(\curl -sSL "https://hub.fab-manager.com/api/versions/next_step?version=$VERSION" | jq -r '.next_step.semver')
 
   if verlt "$VERSION" "$STEP" && verlt "$STEP" "$TARGET"; then
     version_error "$STEP first"
