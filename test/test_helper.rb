@@ -12,6 +12,7 @@ require 'sidekiq/testing'
 require 'minitest/reporters'
 require 'helpers/invoice_helper'
 require 'helpers/archive_helper'
+require 'fileutils'
 
 VCR.configure do |config|
   config.cassette_library_dir = 'test/vcr_cassettes'
