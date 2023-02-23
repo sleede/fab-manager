@@ -96,6 +96,9 @@ class Events::RecurrenceUpdateTest < ActionDispatch::IntegrationTest
       event: {
         title: event.title,
         description: event.description,
+        event_image_attributes: {
+          id: event.event_image.id
+        },
         category_id: 2,
         event_theme_ids: [1],
         age_range_id: 1,
@@ -122,6 +125,10 @@ class Events::RecurrenceUpdateTest < ActionDispatch::IntegrationTest
       assert res_event[:status]
       db_event = Event.find(res_event[:event][:id])
       assert_equal 2, db_event.category_id
+      assert FileUtils.compare_file(
+        File.join(ActionDispatch::IntegrationTest.fixture_path, new_image),
+        db_event.event_image.attachment.file.path
+      )
     end
   end
 end

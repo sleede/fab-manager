@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- Fix a bug: unable to update recurrent events
+
 ## v5.7.1 2023 February 20
 
 - Fix a bug: timezone is ignored while configuring calendar opening/closing time
