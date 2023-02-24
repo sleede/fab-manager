@@ -2,6 +2,7 @@
 
 - Fix a bug: unable to update recurrent events
 - Fix a bug: invalid border color for slots
+- Fix a bug: members can change/cancel their reservations
 
 ## v5.7.1 2023 February 20
 
