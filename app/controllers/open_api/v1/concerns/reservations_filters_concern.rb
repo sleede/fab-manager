@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Filter the list of reservations by the given parameters
-module ReservationsFiltersConcern
+module OpenAPI::V1::Concerns::ReservationsFiltersConcern
   extend ActiveSupport::Concern
 
   included do

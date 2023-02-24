@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # API Controller for resources of type Setting
-class API::SettingsController < API::ApiController
+class API::SettingsController < API::APIController
   before_action :authenticate_user!, only: %i[update bulk_update reset]
 
   def index
@@ -47,7 +47,7 @@ class API::SettingsController < API::ApiController
         end
 
         @settings.push db_setting
-        may_rollback(params[:transactional]) if db_setting.errors.keys.count.positive?
+        may_rollback(params[:transactional]) if db_setting.errors.attribute_names.count.positive?
       end
     end
     SettingService.run_after_update(updated_settings)

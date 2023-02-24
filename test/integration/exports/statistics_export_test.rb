@@ -17,18 +17,17 @@ class Exports::StatisticsExportTest < ActionDispatch::IntegrationTest
     ::Statistics::BuilderService.generate_statistic({ start_date: '2015-06-01'.to_date.beginning_of_day,
                                                       end_date: '2015-06-30'.to_date.end_of_day })
     # Create a new export
-    post '/stats/machine/export', {
-      params: {
-        type_key: 'booking',
-        body: '{"query":{"bool":{"must":[{"term":{"type":"booking"}},{"range":{"date":{"gte":"2015-06-01T02:00:00+02:00",' \
-              '"lte":"2015-06-30T23:59:59+02:00"}}}]}},"sort":[{"date":{"order":"desc"}}],"aggs":{"total_ca":{"sum":{"field":"ca"}}, ' \
-              '"average_age":{"avg":{"field":"age"}},"total_stat":{"sum":{"field":"stat"}}}}'
-      }
-    }
+    post '/stats/machine/export',
+         params: {
+           type_key: 'booking',
+           body: '{"query":{"bool":{"must":[{"term":{"type":"booking"}},{"range":{"date":{"gte":"2015-06-01T02:00:00+02:00",' \
+                 '"lte":"2015-06-30T23:59:59+02:00"}}}]}},"sort":[{"date":{"order":"desc"}}],"aggs":{"total_ca":{"sum":{"field":"ca"}}, ' \
+                 '"average_age":{"avg":{"field":"age"}},"total_stat":{"sum":{"field":"stat"}}}}'
+         }
 
     # Check response format & status
     assert_equal 200, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check the export was created correctly
     res = json_response(response.body)
@@ -76,16 +75,15 @@ class Exports::StatisticsExportTest < ActionDispatch::IntegrationTest
     ::Statistics::BuilderService.generate_statistic({ start_date: '2015-06-01'.to_date.beginning_of_day,
                                                       end_date: '2015-06-30'.to_date.end_of_day })
     # Create a new export
-    post '/stats/global/export', {
-      params: {
-        type_key: 'booking',
-        body: '{"query":{"bool":{"must":[{"range":{"date":{"gte":"2015-06-01T02:00:00+02:00","lte":"2015-06-30T23:59:59+02:00"}}}]}}}'
-      }
-    }
+    post '/stats/global/export',
+         params: {
+           type_key: 'booking',
+           body: '{"query":{"bool":{"must":[{"range":{"date":{"gte":"2015-06-01T02:00:00+02:00","lte":"2015-06-30T23:59:59+02:00"}}}]}}}'
+         }
 
     # Check response format & status
     assert_equal 200, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check the export was created correctly
     res = json_response(response.body)

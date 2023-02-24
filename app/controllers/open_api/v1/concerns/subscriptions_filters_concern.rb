@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Filter the list of subscriptions by the given parameters
-module SubscriptionsFiltersConcern
+module OpenAPI::V1::Concerns::SubscriptionsFiltersConcern
   extend ActiveSupport::Concern
 
   included do

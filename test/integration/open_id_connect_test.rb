@@ -9,7 +9,7 @@ class OpenIdConnectTest < ActionDispatch::IntegrationTest
   setup do
     @admin = User.find_by(username: 'admin')
     login_as(@admin, scope: :user)
-    Fablab::Application.load_tasks if Rake::Task.tasks.empty?
+    FabManager::Application.load_tasks if Rake::Task.tasks.empty?
   end
 
   test 'create and activate an OIDC provider' do
@@ -22,7 +22,7 @@ class OpenIdConnectTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_equal 201, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check the provider was correctly created
     db_provider = OpenIdConnectProvider.includes(:auth_provider).where('auth_providers.name': name).first&.auth_provider

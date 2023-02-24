@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # API Controller for resources of type Machine
-class API::MachinesController < API::ApiController
+class API::MachinesController < API::APIController
   before_action :authenticate_user!, except: %i[index show]
   before_action :set_machine, only: %i[update destroy]
   respond_to :json

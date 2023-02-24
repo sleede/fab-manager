@@ -4,9 +4,9 @@ require_relative 'concerns/reservations_filters_concern'
 
 # public API controller for resources of type Reservation
 class OpenAPI::V1::ReservationsController < OpenAPI::V1::BaseController
-  extend OpenAPI::ApiDoc
+  extend OpenAPI::APIDoc
   include Rails::Pagination
-  include ReservationsFiltersConcern
+  include OpenAPI::V1::Concerns::ReservationsFiltersConcern
   expose_doc
 
   def index

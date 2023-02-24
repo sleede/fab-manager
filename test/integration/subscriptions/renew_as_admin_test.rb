@@ -30,7 +30,7 @@ class Subscriptions::RenewAsAdminTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_equal 201, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check the correct plan was subscribed
     result = json_response(response.body)
@@ -103,7 +103,7 @@ class Subscriptions::RenewAsAdminTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_equal 201, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     res_subscription = json_response(response.body)
     assert_equal 'Subscription', res_subscription[:main_object][:type]

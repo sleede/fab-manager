@@ -2,7 +2,7 @@
 
 # public API controller for resources of type Training
 class OpenAPI::V1::TrainingsController < OpenAPI::V1::BaseController
-  extend OpenAPI::ApiDoc
+  extend OpenAPI::APIDoc
   expose_doc
 
   def index

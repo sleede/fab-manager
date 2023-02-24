@@ -2,7 +2,7 @@
 
 # API Controller for resources of type Group
 # Groups are used for categorizing Users
-class API::GroupsController < API::ApiController
+class API::GroupsController < API::APIController
   before_action :authenticate_user!, except: :index
 
   def index

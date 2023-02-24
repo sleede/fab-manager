@@ -93,7 +93,6 @@ It also provides another REST-JSON API, open to the 3rd-party applications, and 
 `  ╠═ pdfs/` PDF documents generation;<br>
 `  ╠═ policies/` Access policies for the API and OpenAPI endpoints;<br>
 `  ╠═ services/` Utilities arranged by data models; <br>
-`  ╠═ sweepers/` Build cached version of some data;<br>
 `  ╠═ themes/` SASS files that overrides the frontend styles. We plan to move all styles here to build multiple themes;   <br>
 `  ╠═ uploaders/` Handling of the uploaded files<br>
 `  ╠═ validators/` Custom data validation (before saving);<br>
@@ -126,4 +125,4 @@ For now, the main application is still using Angular.js but it uses some React.j
 `    ║ ║ ╠═ plugins.js.erb` Entrypoint for embedding Fab-manager's plugins in the frontend application;<br>
 `    ║ ║ ╚═ router.js` Configuration for UI-Router (mapping between routes, controllers and templates)<br>
 `    ║ ╚═ stylesheets/` SASS source for the application style<br>
-`    ╚═ templates/` Angular.js views (HTML) 
+`    ╚═ templates/` Angular.js views (HTML)

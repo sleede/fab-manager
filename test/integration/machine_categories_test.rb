@@ -21,7 +21,7 @@ class MachineCategoriesTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_equal 201, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check the machine category was correctly created
     category = MachineCategory.where(name: name).first
@@ -45,7 +45,7 @@ class MachineCategoriesTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_equal 200, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check the machine category was correctly updated
     category = MachineCategory.find(1)

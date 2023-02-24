@@ -14,7 +14,7 @@ class SlotsReservationsTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_equal 200, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check the reservation was correctly canceled
     slots_reservation = SlotsReservation.find(1)
@@ -77,7 +77,7 @@ class SlotsReservationsTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_equal 200, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check the reservation was correctly moved
     slots_reservation.reload

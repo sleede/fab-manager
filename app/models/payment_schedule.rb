@@ -69,7 +69,7 @@ class PaymentSchedule < PaymentDocument
 
   # for debug & used by rake task "fablab:maintenance:regenerate_schedules"
   def regenerate_pdf
-    pdf = ::PDF::PaymentSchedule.new(self).render
+    pdf = ::Pdf::PaymentSchedule.new(self).render
     File.binwrite(file, pdf)
   end
 

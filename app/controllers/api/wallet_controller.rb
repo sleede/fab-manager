@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # API Controller for resources of type Wallet
-class API::WalletController < API::ApiController
+class API::WalletController < API::APIController
   before_action :authenticate_user!
 
   def by_user

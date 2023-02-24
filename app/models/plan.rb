@@ -90,7 +90,7 @@ class Plan < ApplicationRecord
 
   def human_readable_duration
     i18n_key = "duration.#{interval}"
-    I18n.t(i18n_key, count: interval_count).to_s
+    I18n.t(i18n_key, **{ count: interval_count }).to_s
   end
 
   def human_readable_name(opts = {})

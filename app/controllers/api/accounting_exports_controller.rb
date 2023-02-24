@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 # API Controller for exporting accounting data to external accounting softwares
-class API::AccountingExportsController < API::ApiController
-
+class API::AccountingExportsController < API::APIController
   before_action :authenticate_user!
 
   def export
@@ -27,7 +26,7 @@ class API::AccountingExportsController < API::ApiController
         render json: @export.errors, status: :unprocessable_entity
       end
     else
-      send_file File.join(Rails.root, export.file),
+      send_file Rails.root.join(export.file),
                 type: 'text/csv',
                 disposition: 'attachment'
     end

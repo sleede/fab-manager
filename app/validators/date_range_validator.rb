@@ -7,6 +7,6 @@ class DateRangeValidator < ActiveModel::Validator
     the_start = record.start_at
     return if the_end.present? && the_end >= the_start
 
-    record.errors[:end_at] << I18n.t('errors.messages.end_before_start', START: the_start)
+    record.errors.add(:end_at, I18n.t('errors.messages.end_before_start', **{ START: the_start }))
   end
 end

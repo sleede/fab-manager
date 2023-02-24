@@ -15,7 +15,7 @@ class TrainingsTest < ActionDispatch::IntegrationTest
            training: {
              name: name,
              training_image_attributes: {
-               attachment: fixture_file_upload('/files/trainings/first-aid.jpg')
+               attachment: fixture_file_upload('trainings/first-aid.jpg')
              },
              description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore...',
              machine_ids: [],
@@ -32,7 +32,7 @@ class TrainingsTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_equal 201, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check the training was correctly created
     db_training = Training.where(name: name).first
@@ -61,7 +61,7 @@ class TrainingsTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_equal 200, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check the training was correctly updated
     db_training = Training.find(3)

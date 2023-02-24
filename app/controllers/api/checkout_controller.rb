@@ -4,7 +4,7 @@ require 'stripe/helper'
 require 'pay_zen/helper'
 
 # API Controller for cart checkout
-class API::CheckoutController < API::ApiController
+class API::CheckoutController < API::APIController
   include ::API::OrderConcern
   before_action :authenticate_user!
   before_action :current_order

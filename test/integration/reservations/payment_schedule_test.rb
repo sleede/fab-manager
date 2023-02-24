@@ -56,7 +56,7 @@ class Reservations::PaymentScheduleTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_equal 201, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
     assert_equal reservations_count + 1, Reservation.count, 'missing the reservation'
     assert_equal invoice_count, Invoice.count, "an invoice was generated but it shouldn't"
     assert_equal invoice_items_count, InvoiceItem.count, "some invoice items were generated but they shouldn't"

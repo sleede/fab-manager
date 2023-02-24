@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require_relative 'cart_item'
-
 # A relation table between a pending event reservation and a special price for this event
 class CartItem::EventReservationTicket < ApplicationRecord
   self.table_name = 'cart_item_event_reservation_tickets'

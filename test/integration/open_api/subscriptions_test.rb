@@ -12,7 +12,7 @@ class OpenApi::SubscriptionsTest < ActionDispatch::IntegrationTest
   test 'list subscriptions' do
     get '/open_api/v1/subscriptions', headers: open_api_headers(@token)
     assert_response :success
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     assert_not_empty json_response(response.body)[:subscriptions]
   end
@@ -20,7 +20,7 @@ class OpenApi::SubscriptionsTest < ActionDispatch::IntegrationTest
   test 'list subscriptions with pagination' do
     get '/open_api/v1/subscriptions?page=1&per_page=5', headers: open_api_headers(@token)
     assert_response :success
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     subscriptions = json_response(response.body)
     assert subscriptions[:subscriptions].count <= 5

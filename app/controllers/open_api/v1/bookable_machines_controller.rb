@@ -2,7 +2,7 @@
 
 # authorized 3rd party softwares can list the bookable machines through the OpenAPI
 class OpenAPI::V1::BookableMachinesController < OpenAPI::V1::BaseController
-  extend OpenAPI::ApiDoc
+  extend OpenAPI::APIDoc
   expose_doc
 
   def index

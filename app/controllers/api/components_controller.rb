@@ -2,7 +2,7 @@
 
 # API Controller for resources of type Component
 # Components are used in Projects
-class API::ComponentsController < API::ApiController
+class API::ComponentsController < API::APIController
   before_action :authenticate_user!, except: %i[index show]
   before_action :set_component, only: %i[show update destroy]
 

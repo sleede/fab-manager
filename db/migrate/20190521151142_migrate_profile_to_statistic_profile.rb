@@ -1,5 +1,7 @@
 # frozen_string_literal:true
 
+# From this migration, we split the user's profile into multiple tables:
+# StatisticProfile is intended to keep anonymous statisttical data about the user after his account was deleted
 class MigrateProfileToStatisticProfile < ActiveRecord::Migration[4.2]
   def up
     User.all.each do |u|
@@ -22,7 +24,7 @@ class MigrateProfileToStatisticProfile < ActiveRecord::Migration[4.2]
       p = sp.user.profile
       Rails.logger.warn "User #{sp.user_id} has no profile" and next unless p
 
-      p.update_attributes(
+      p.update(
         gender: sp.gender,
         birthday: sp.birthday
       )

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # API Controller for resources of type Space
-class API::SpacesController < API::ApiController
+class API::SpacesController < API::APIController
   before_action :authenticate_user!, except: %i[index show]
   before_action :set_space, only: %i[update destroy]
   respond_to :json

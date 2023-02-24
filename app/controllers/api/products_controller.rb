@@ -2,7 +2,7 @@
 
 # API Controller for resources of type Product
 # Products are used in store
-class API::ProductsController < API::ApiController
+class API::ProductsController < API::APIController
   before_action :authenticate_user!, except: %i[index show]
   before_action :set_product, only: %i[update clone destroy]
 

@@ -3,11 +3,11 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.2.8'
+gem 'rails', '~> 6.1'
 # Used by rails 5.2 to reduce the app boot time by over 50%
 gem 'bootsnap'
 # Use Puma as web server
-gem 'puma', '4.3.12'
+gem 'puma', '6.1.0'
 gem 'shakapacker', '6.5.5'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -17,7 +17,7 @@ gem 'json', '>= 2.3.0'
 gem 'jsonpath'
 
 gem 'forgery'
-gem 'responders', '~> 2.0'
+gem 'responders', '~> 3.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -62,7 +62,7 @@ gem 'pg'
 gem 'pg_search'
 
 # authentication
-gem 'devise', '>= 4.6.0'
+gem 'devise', '>= 4.9'
 gem 'omniauth', '~> 1.9.2'
 gem 'omniauth-oauth2'
 gem 'omniauth_openid_connect'
@@ -106,9 +106,6 @@ gem 'faraday', '~> 0.17'
 gem 'pundit'
 
 gem 'oj'
-
-gem 'actionpack-page_caching', '1.2.2'
-gem 'rails-observers'
 
 gem 'chroma'
 

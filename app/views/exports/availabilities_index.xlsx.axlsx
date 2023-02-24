@@ -15,7 +15,7 @@ wb.add_worksheet(name: ExcelService.name_safe(t('export_availabilities.machines'
   sheet.add_row columns, style: header
 
   # data rows
-  @availabilities.where(available_type: 'machines').order(:start_at).each do |a|
+  availabilities.where(available_type: 'machines').order(:start_at).each do |a|
     slot_duration = a.slot_duration || Setting.get('slot_duration').to_i
     a.machines.each do |m|
       ((a.end_at - a.start_at) / slot_duration.minutes).to_i.times do |i|
@@ -55,7 +55,7 @@ wb.add_worksheet(name: ExcelService.name_safe(t('export_availabilities.trainings
   sheet.add_row columns, style: header
 
   # data rows
-  @availabilities.where(available_type: 'training').order(:start_at).each do |a|
+  availabilities.where(available_type: 'training').order(:start_at).each do |a|
     data = [
       a.start_at.to_date,
       I18n.l(a.start_at, format: '%A').capitalize,
@@ -83,7 +83,7 @@ if Setting.get('spaces_module')
     sheet.add_row columns, style: header
 
     # data rows
-    @availabilities.where(available_type: 'space').order(:start_at).each do |a|
+    availabilities.where(available_type: 'space').order(:start_at).each do |a|
       slot_duration = a.slot_duration || Setting.get('slot_duration').to_i
       ((a.end_at - a.start_at) / slot_duration.minutes).to_i.times do |i|
         start_at = a.start_at + (i * slot_duration).minutes
@@ -119,7 +119,7 @@ wb.add_worksheet(name: ExcelService.name_safe(t('export_availabilities.events'))
   sheet.add_row columns, :style => header
 
   # data rows
-  @availabilities.where(available_type: 'event').order(:start_at).each do |a|
+  availabilities.where(available_type: 'event').order(:start_at).each do |a|
     data = [
       a.start_at.to_date,
       I18n.l(a.start_at, format: '%A').capitalize,

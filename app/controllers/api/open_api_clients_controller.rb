@@ -2,7 +2,7 @@
 
 # API Controller for resources of type OpenAPI::Client
 # OpenAPI::Clients are used to allow access to the public API
-class API::OpenAPIClientsController < API::ApiController
+class API::OpenAPIClientsController < API::APIController
   before_action :authenticate_user!
 
   def index
@@ -40,7 +40,7 @@ class API::OpenAPIClientsController < API::ApiController
     @client = OpenAPI::Client.find(params[:id])
     authorize @client
     @client.destroy
-    head 204
+    head :no_content
   end
 
   private

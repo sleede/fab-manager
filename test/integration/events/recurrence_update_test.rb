@@ -18,7 +18,7 @@ class Events::RecurrenceUpdateTest < ActionDispatch::IntegrationTest
            event: {
              title: name,
              event_image_attributes: {
-               attachment: fixture_file_upload('/files/event/Party.jpg')
+               attachment: fixture_file_upload('event/Party.jpg')
              },
              description: 'Come party tonight at the fablab...',
              start_date: 2.weeks.from_now,
@@ -36,7 +36,7 @@ class Events::RecurrenceUpdateTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_equal 201, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check the events were correctly created
     db_events = Event.where(title: name)
@@ -46,7 +46,7 @@ class Events::RecurrenceUpdateTest < ActionDispatch::IntegrationTest
     event = db_events.first
     new_title = 'Skateboard party'
     new_descr = 'Come make a skateboard tonight at the Fablab'
-    new_image = '/files/event/Skateboard.jpg'
+    new_image = 'event/Skateboard.jpg'
     put "/api/events/#{event&.id}", params: {
       event: {
         title: new_title,
@@ -69,7 +69,7 @@ class Events::RecurrenceUpdateTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_response :success, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check the events were correctly updated
     res = json_response(response.body)
@@ -85,7 +85,7 @@ class Events::RecurrenceUpdateTest < ActionDispatch::IntegrationTest
       assert_includes db_event.event_theme_ids, 1
       assert_equal 1, db_event.age_range_id
       assert FileUtils.compare_file(
-        File.join(ActionDispatch::IntegrationTest.fixture_path, new_image),
+        File.join(ActionDispatch::IntegrationTest.fixture_path, "files/#{new_image}"),
         db_event.event_image.attachment.file.path
       )
     end
@@ -114,7 +114,7 @@ class Events::RecurrenceUpdateTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_response :success, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check the events were correctly updated
     res = json_response(response.body)
@@ -126,7 +126,7 @@ class Events::RecurrenceUpdateTest < ActionDispatch::IntegrationTest
       db_event = Event.find(res_event[:event][:id])
       assert_equal 2, db_event.category_id
       assert FileUtils.compare_file(
-        File.join(ActionDispatch::IntegrationTest.fixture_path, new_image),
+        File.join(ActionDispatch::IntegrationTest.fixture_path, "files/#{new_image}"),
         db_event.event_image.attachment.file.path
       )
     end

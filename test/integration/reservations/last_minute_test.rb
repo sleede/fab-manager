@@ -40,7 +40,7 @@ class Reservations::LastMinuteTest < ActionDispatch::IntegrationTest
 
     # general assertions
     assert_equal 422, response.status
-    assert_match(I18n.t('cart_item_validation.deadline', { MINUTES: 120 }), response.body)
+    assert_match(I18n.t('cart_item_validation.deadline', **{ MINUTES: 120 }), response.body)
   end
 
   test 'user can reserve last minute booking' do

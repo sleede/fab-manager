@@ -2,7 +2,7 @@
 
 # API Controller for resources of type Theme
 # Themes are used in Projects
-class API::ThemesController < API::ApiController
+class API::ThemesController < API::APIController
   before_action :authenticate_user!, except: %i[index show]
   before_action :set_theme, only: %i[show update destroy]
 

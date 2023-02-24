@@ -45,7 +45,7 @@ class Invoices::RoundTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_equal 201, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # in the invoice, we should have:
     # - machine reservation = 121    (97, coupon applied)
@@ -108,7 +108,7 @@ class Invoices::RoundTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_equal 201, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # in the invoice, we should have:
     # - machine reservation = 1423    (1138, coupon applied)
@@ -171,7 +171,7 @@ class Invoices::RoundTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_equal 201, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # in the invoice, we should have:
     # - machine reservation = 121    (99, coupon applied)
@@ -234,7 +234,7 @@ class Invoices::RoundTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_equal 201, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # in the invoice, we should have:
     # - machine reservation = 1423    (1277, coupon applied)

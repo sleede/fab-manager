@@ -21,7 +21,7 @@ class PayZen::Helper < Payment::Helper
     end
 
     def human_error(error)
-      I18n.t('errors.messages.gateway_error', { MESSAGE: error.message })
+      I18n.t('errors.messages.gateway_error', **{ MESSAGE: error.message })
     end
 
     ## generate an unique string reference for the content of a cart

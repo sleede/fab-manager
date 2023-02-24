@@ -17,7 +17,7 @@ class Subscriptions::CancelTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_response :success
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check the subscription was canceled
     subscription.reload
@@ -55,7 +55,7 @@ class Subscriptions::CancelTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_response :success
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check the subscription was canceled
     subscription.reload

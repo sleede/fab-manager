@@ -31,7 +31,7 @@ class Subscriptions::CreateAsUserTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_equal 201, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check the correct plan was subscribed
     result = json_response(response.body)
@@ -99,7 +99,7 @@ class Subscriptions::CreateAsUserTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_equal 422, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check the error was handled
     assert_match(/plan is reserved for members of group/, response.body)
@@ -133,7 +133,7 @@ class Subscriptions::CreateAsUserTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_equal 201, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check the correct plan was subscribed
     result = json_response(response.body)
@@ -215,7 +215,7 @@ class Subscriptions::CreateAsUserTest < ActionDispatch::IntegrationTest
 
       # Check response format & status
       assert_equal 200, response.status, response.body
-      assert_equal Mime[:json], response.content_type
+      assert_match Mime[:json].to_s, response.content_type
 
       # Check the response
       res = json_response(response.body)
@@ -244,7 +244,7 @@ class Subscriptions::CreateAsUserTest < ActionDispatch::IntegrationTest
 
     # Check generalities
     assert_equal 200, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     res = json_response(response.body)
     assert res[:requires_action]

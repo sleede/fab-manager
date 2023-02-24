@@ -2,7 +2,7 @@
 
 # API Controller for resources of type Notification
 # Notifications are scoped by user
-class API::NotificationsController < API::ApiController
+class API::NotificationsController < API::APIController
   before_action :authenticate_user!
   before_action :set_notification, only: :update
 

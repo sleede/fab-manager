@@ -10,7 +10,7 @@ class CartItem::EventReservation < CartItem::Reservation
   accepts_nested_attributes_for :cart_item_event_reservation_tickets
 
   has_many :cart_item_reservation_slots, class_name: 'CartItem::ReservationSlot', dependent: :destroy, inverse_of: :cart_item,
-                                         foreign_key: 'cart_item_id', foreign_type: 'cart_item_type'
+                                         foreign_type: 'cart_item_type', as: :cart_item
   accepts_nested_attributes_for :cart_item_reservation_slots
 
   belongs_to :operator_profile, class_name: 'InvoicingProfile'
@@ -20,6 +20,14 @@ class CartItem::EventReservation < CartItem::Reservation
 
   def reservable
     event
+  end
+
+  def reservable_id
+    event_id
+  end
+
+  def reservable_type
+    'Event'
   end
 
   def price

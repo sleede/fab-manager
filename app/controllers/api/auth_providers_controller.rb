@@ -2,7 +2,7 @@
 
 # API Controller for resources of type AuthProvider
 # AuthProvider are used to connect users through single-sign on systems
-class API::AuthProvidersController < API::ApiController
+class API::AuthProvidersController < API::APIController
   before_action :set_provider, only: %i[show update destroy]
   def index
     @providers = policy_scope(AuthProvider)

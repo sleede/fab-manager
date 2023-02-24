@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # API Controller for resources of type Import
-class API::ImportsController < API::ApiController
+class API::ImportsController < API::APIController
   before_action :authenticate_user!
 
   def show

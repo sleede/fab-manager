@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Filter the list of accounting lines by the given parameters
-module AccountingsFiltersConcern
+module OpenAPI::V1::Concerns::AccountingsFiltersConcern
   extend ActiveSupport::Concern
 
   included do

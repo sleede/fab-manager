@@ -56,14 +56,14 @@ module ICalendarConcern
     def description(group_slots)
       case reservable_type
       when 'Machine', 'Space'
-        I18n.t('reservation_ics.description_slot', COUNT: group_slots.count, ITEM: reservable.name)
+        I18n.t('reservation_ics.description_slot', **{ COUNT: group_slots.count, ITEM: reservable.name })
       when 'Training'
-        I18n.t('reservation_ics.description_training', TYPE: reservable.name)
+        I18n.t('reservation_ics.description_training', **{ TYPE: reservable.name })
       when 'Event'
-        I18n.t('reservation_ics.description_event', NUMBER: nb_reserve_places + (tickets.map(&:booked).reduce(:+) || 0))
+        I18n.t('reservation_ics.description_event', **{ NUMBER: nb_reserve_places + (tickets.map(&:booked).reduce(:+) || 0) })
       else
         Rails.logger.warn "Unexpected reservable type #{reservable_type}"
-        I18n.t('reservation_ics.description_slot', COUNT: group_slots.count, ITEM: reservable_type)
+        I18n.t('reservation_ics.description_slot', **{ COUNT: group_slots.count, ITEM: reservable_type })
       end
     end
   end

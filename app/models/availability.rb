@@ -190,7 +190,7 @@ class Availability < ApplicationRecord
     duration = slot_duration || Setting.get('slot_duration').to_i
     return unless end_at < (start_at + duration.minutes)
 
-    errors.add(:end_at, I18n.t('availabilities.length_must_be_slot_multiple', MIN: duration))
+    errors.add(:end_at, I18n.t('availabilities.length_must_be_slot_multiple', **{ MIN: duration }))
   end
 
   def should_be_associated

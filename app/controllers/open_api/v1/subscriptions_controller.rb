@@ -4,9 +4,9 @@ require_relative 'concerns/subscriptions_filters_concern'
 
 # authorized 3rd party softwares can fetch the subscriptions through the OpenAPI
 class OpenAPI::V1::SubscriptionsController < OpenAPI::V1::BaseController
-  extend OpenAPI::ApiDoc
+  extend OpenAPI::APIDoc
   include Rails::Pagination
-  include SubscriptionsFiltersConcern
+  include OpenAPI::V1::Concerns::SubscriptionsFiltersConcern
   expose_doc
 
   def index

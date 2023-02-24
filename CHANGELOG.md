@@ -1,5 +1,12 @@
 # Changelog Fab-manager
 
+- Updated ruby to 2.7
+- Updated rails to 6.1
+- Updated puma to 6.1
+- Updated responders to 3.0
+- Updated devise to 4.9
+- Updated sassc to 2.3
+
 ## v5.9.1 2023 March 22
 
 - Fix a bug: logical sequence of invoices references has duplicates

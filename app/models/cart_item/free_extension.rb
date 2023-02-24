@@ -25,7 +25,7 @@ class CartItem::FreeExtension < CartItem::BaseItem
   end
 
   def name
-    I18n.t('cart_items.free_extension', DATE: I18n.l(new_expiration_date))
+    I18n.t('cart_items.free_extension', **{ DATE: I18n.l(new_expiration_date) })
   end
 
   def to_object

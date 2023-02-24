@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # API Controller for resources of type Users with role :partner or :manager
-class API::UsersController < API::ApiController
+class API::UsersController < API::APIController
   before_action :authenticate_user!
   before_action :set_user, only: %i[destroy]
 

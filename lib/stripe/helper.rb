@@ -25,14 +25,14 @@ class Stripe::Helper < Payment::Helper
       case error.code
       when 'amount_too_small'
         message.match(/\d+\.\d+\s\w+/) do |res|
-          message = I18n.t('errors.messages.gateway_amount_too_small', { AMOUNT: res })
+          message = I18n.t('errors.messages.gateway_amount_too_small', **{ AMOUNT: res })
         end
       when 'amount_too_large'
         message.match(/\d+\.\d+\s\w+/) do |res|
-          message = I18n.t('errors.messages.gateway_amount_too_large', { AMOUNT: res })
+          message = I18n.t('errors.messages.gateway_amount_too_large', **{ AMOUNT: res })
         end
       else
-        message = I18n.t('errors.messages.gateway_error', { MESSAGE: message })
+        message = I18n.t('errors.messages.gateway_error', **{ MESSAGE: message })
       end
       message
     end

@@ -4,11 +4,11 @@
 #
 # Controller extension with common API documentation shortcuts
 #
-module OpenAPI::ApiDoc
+module OpenAPI::APIDoc
   # Apipie doesn't allow to append anything to esisting
   #  description. It raises an error on double definition.
   #
-  def append_desc(desc = "")
+  def append_desc(desc = '')
     _apipie_dsl_data[:description] << desc << "\n"
   end
 
@@ -20,7 +20,7 @@ module OpenAPI::ApiDoc
   #
   def to_markdown_code(code)
     code.split("\n").map do |line|
-      (" " * 4) + line
+      (' ' * 4) + line
     end.join("\n")
   end
 
@@ -33,9 +33,8 @@ module OpenAPI::ApiDoc
   # @param schemas [Array<String>]
   #
   def include_response_schema(*schemas)
-    root = Rails.root.join('app/doc/responses')
     _apipie_dsl_data[:description] = _apipie_dsl_data[:description].strip_heredoc
-    append_desc("## Response schema")
+    append_desc('## Response schema')
 
     schemas.each do |relative_path|
       append_desc MarkdownJsonSchema.read(relative_path)

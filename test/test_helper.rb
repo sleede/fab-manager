@@ -114,9 +114,9 @@ class ActiveSupport::TestCase
     assert_equal expected.to_date, actual.to_date, msg
   end
 
-  def assert_datetimes_equal(expected, actual, msg = nil)
+  def assert_datetimes_near(expected, actual, msg = nil)
     assert_not_nil actual, msg
-    assert_equal expected.iso8601, actual.iso8601, msg
+    assert_in_delta expected.to_i, actual.to_i, 1, msg
   end
 end
 

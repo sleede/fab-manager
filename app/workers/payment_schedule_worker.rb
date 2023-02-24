@@ -8,7 +8,7 @@ class PaymentScheduleWorker
   def perform(payment_schedule_id)
     # generate a payment schedule document
     ps = PaymentSchedule.find(payment_schedule_id)
-    pdf = ::PDF::PaymentSchedule.new(ps).render
+    pdf = ::Pdf::PaymentSchedule.new(ps).render
 
     # save the file on the disk
     File.binwrite(ps.file, pdf)

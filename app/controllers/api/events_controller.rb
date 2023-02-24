@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # API Controller for resources of type Event
-class API::EventsController < API::ApiController
+class API::EventsController < API::APIController
   before_action :set_event, only: %i[show update destroy]
 
   def index

@@ -2,7 +2,7 @@
 
 # API Controller for resources of type PrepaidPack
 # PrepaidPacks are used to provide discounts to users that bought many hours at once
-class API::PrepaidPacksController < API::ApiController
+class API::PrepaidPacksController < API::APIController
   include ApplicationHelper
 
   before_action :authenticate_user!, except: :index

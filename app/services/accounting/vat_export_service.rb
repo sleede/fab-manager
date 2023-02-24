@@ -43,7 +43,7 @@ class Accounting::VatExportService
   def header_row
     row = ''
     columns.each do |column|
-      row << I18n.t("vat_export.#{column}", NAME: @vat_name) << separator
+      row << I18n.t("vat_export.#{column}", **{ NAME: @vat_name }) << separator
     end
     "#{row}\n"
   end

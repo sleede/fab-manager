@@ -17,7 +17,7 @@ class Exports::MembersExportTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_equal 200, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check the export was created correctly
     res = json_response(response.body)

@@ -17,7 +17,7 @@ class Events::RecurrenceTest < ActionDispatch::IntegrationTest
            event: {
              title: name,
              event_image_attributes: {
-               attachment: fixture_file_upload('/files/event/Skateboard.jpg')
+               attachment: fixture_file_upload('event/Skateboard.jpg')
              },
              description: 'Come make you own skatebord from stratch...',
              start_date: 1.week.from_now.utc,
@@ -30,8 +30,8 @@ class Events::RecurrenceTest < ActionDispatch::IntegrationTest
              recurrence: 'week',
              recurrence_end_at: 10.weeks.from_now.utc,
              event_files_attributes: [
-               { attachment: fixture_file_upload('/files/document.pdf', 'application/pdf', true) },
-               { attachment: fixture_file_upload('/files/document2.pdf', 'application/pdf', true) }
+               { attachment: fixture_file_upload('document.pdf', 'application/pdf', true) },
+               { attachment: fixture_file_upload('document2.pdf', 'application/pdf', true) }
              ],
              event_price_categories_attributes: [
                { price_category_id: 1, amount: 10 },
@@ -47,7 +47,7 @@ class Events::RecurrenceTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_equal 201, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check the events were correctly created
     db_events = Event.where(title: name)
@@ -81,7 +81,7 @@ class Events::RecurrenceTest < ActionDispatch::IntegrationTest
            event: {
              title: name,
              event_image_attributes: {
-               attachment: fixture_file_upload('/files/event/Party.jpg')
+               attachment: fixture_file_upload('event/Party.jpg')
              },
              description: 'Come party tonight at the fablab...',
              start_date: 2.weeks.from_now,
@@ -99,7 +99,7 @@ class Events::RecurrenceTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_equal 201, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check the events were correctly created
     db_events = Event.where(title: name)

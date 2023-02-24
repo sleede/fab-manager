@@ -64,7 +64,7 @@ class CartItem::Reservation < CartItem::BaseItem
     plan = pending_subscription&.plan || customer&.subscribed_plan
 
     unless ReservationLimitService.authorized?(plan, customer, self, all_items)
-      errors.add(:reservation, I18n.t('cart_item_validation.limit_reached', {
+      errors.add(:reservation, I18n.t('cart_item_validation.limit_reached', **{
                                         HOURS: ReservationLimitService.limit(plan, reservable).limit,
                                         RESERVABLE: reservable.name
                                       }))
@@ -273,7 +273,7 @@ class CartItem::Reservation < CartItem::BaseItem
     end
 
     if slot.start_at < reservation_deadline_minutes.minutes.since && !operator.privileged?
-      errors.add(:slot, I18n.t('cart_item_validation.deadline', { MINUTES: reservation_deadline_minutes }))
+      errors.add(:slot, I18n.t('cart_item_validation.deadline', **{ MINUTES: reservation_deadline_minutes }))
       return false
     end
 

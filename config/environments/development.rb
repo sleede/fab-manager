@@ -27,17 +27,13 @@ Rails.application.configure do
 
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
-  if Rails.root.join('tmp', 'caching-dev.txt').exist?
-    config.action_controller.perform_caching = true
-
-    config.cache_store = :memory_store
+  if Rails.root.join('tmp/caching-dev.txt').exist?
+    config.action_controller.cache_store = :memory_store
     config.public_file_server.headers = {
       'Cache-Control' => "public, max-age=#{2.days.to_i}"
     }
   else
     config.action_controller.perform_caching = false
-
-    config.cache_store = :null_store
   end
 
   config.action_controller.default_url_options = {
@@ -81,5 +77,6 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   config.log_level = Rails.application.secrets.log_level || :debug
-end
 
+  config.hosts << ENV.fetch('DEFAULT_HOST', 'localhost')
+end

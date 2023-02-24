@@ -12,7 +12,7 @@ class OpenApi::AccountingTest < ActionDispatch::IntegrationTest
   test 'list all accounting lines' do
     get '/open_api/v1/accounting', headers: open_api_headers(@token)
     assert_response :success
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     lines = json_response(response.body)
     assert_not_empty lines[:lines]
@@ -40,7 +40,7 @@ class OpenApi::AccountingTest < ActionDispatch::IntegrationTest
   test 'list all accounting lines with pagination' do
     get '/open_api/v1/accounting?page=1&per_page=5', headers: open_api_headers(@token)
     assert_response :success
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     lines = json_response(response.body)
     assert_equal 5, lines[:lines].count
@@ -49,7 +49,7 @@ class OpenApi::AccountingTest < ActionDispatch::IntegrationTest
   test 'list all accounting lines with dates filtering' do
     get '/open_api/v1/accounting?after=2022-09-01T00:00:00+02:00&before=2022-09-30T23:59:59+02:00', headers: open_api_headers(@token)
     assert_response :success
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     lines = json_response(response.body)
     assert lines[:lines].count.positive?
@@ -62,7 +62,7 @@ class OpenApi::AccountingTest < ActionDispatch::IntegrationTest
   test 'list all accounting lines with invoices filtering' do
     get '/open_api/v1/accounting?invoice_id=[1,2,3]', headers: open_api_headers(@token)
     assert_response :success
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     lines = json_response(response.body)
     assert lines[:lines].count.positive?
@@ -72,7 +72,7 @@ class OpenApi::AccountingTest < ActionDispatch::IntegrationTest
   test 'list all accounting lines with type filtering' do
     get '/open_api/v1/accounting?type=[payment,vat]', headers: open_api_headers(@token)
     assert_response :success
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     lines = json_response(response.body)
     assert lines[:lines].count.positive?
@@ -82,7 +82,7 @@ class OpenApi::AccountingTest < ActionDispatch::IntegrationTest
   test 'list all accounting payment lines should have payment details' do
     get '/open_api/v1/accounting?type=payment', headers: open_api_headers(@token)
     assert_response :success
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     card_code = Setting.get('accounting_payment_card_code')
     wallet_code = Setting.get('accounting_payment_wallet_code')

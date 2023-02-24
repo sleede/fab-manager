@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require_relative 'cart_item'
-
 # A payment schedule applied to plan in the shopping cart
 class CartItem::PaymentSchedule < ApplicationRecord
   self.table_name = 'cart_item_payment_schedules'

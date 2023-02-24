@@ -59,7 +59,7 @@ class Invoice < PaymentDocument
 
   # for debug & used by rake task "fablab:maintenance:regenerate_invoices"
   def regenerate_invoice_pdf
-    pdf = ::PDF::Invoice.new(self).render
+    pdf = ::Pdf::Invoice.new(self).render
     File.binwrite(file, pdf)
   end
 

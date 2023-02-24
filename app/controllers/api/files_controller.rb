@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # API Controller for handling special actions on files
-class API::FilesController < API::ApiController
+class API::FilesController < API::APIController
   before_action :authenticate_user!
 
   # test the mime type of the uploaded file

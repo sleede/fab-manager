@@ -34,17 +34,17 @@ class Invoices::PaymentDetailsService
         payment_verbose = I18n.t('invoices.settlement_by_wallet') if total.zero? && wallet_amount
 
         payment_verbose += " #{I18n.t('invoices.on_DATE_at_TIME',
-                                      DATE: I18n.l(invoice.created_at.to_date),
-                                      TIME: I18n.l(invoice.created_at, format: :hour_minute))}"
+                                      **{ DATE: I18n.l(invoice.created_at.to_date),
+                                          TIME: I18n.l(invoice.created_at, format: :hour_minute) })}"
         if total.positive? || !invoice.wallet_amount
-          payment_verbose += " #{I18n.t('invoices.for_an_amount_of_AMOUNT', AMOUNT: number_to_currency(total))}"
+          payment_verbose += " #{I18n.t('invoices.for_an_amount_of_AMOUNT', **{ AMOUNT: number_to_currency(total) })}"
         end
         if invoice.wallet_amount
           payment_verbose += if total.positive?
                                " #{I18n.t('invoices.and')} #{I18n.t('invoices.by_wallet')} " \
-                                 "#{I18n.t('invoices.for_an_amount_of_AMOUNT', AMOUNT: number_to_currency(wallet_amount))}"
+                                 "#{I18n.t('invoices.for_an_amount_of_AMOUNT', **{ AMOUNT: number_to_currency(wallet_amount) })}"
                              else
-                               " #{I18n.t('invoices.for_an_amount_of_AMOUNT', AMOUNT: number_to_currency(wallet_amount))}"
+                               " #{I18n.t('invoices.for_an_amount_of_AMOUNT', **{ AMOUNT: number_to_currency(wallet_amount) })}"
                              end
         end
         payment_verbose
@@ -57,7 +57,7 @@ class Invoices::PaymentDetailsService
     # @param total [Float]
     # @return [String]
     def build_avoir_details(invoice, total)
-      details = "#{I18n.t('invoices.refund_on_DATE', DATE: I18n.l(invoice.avoir_date.to_date))} "
+      details = "#{I18n.t('invoices.refund_on_DATE', **{ DATE: I18n.l(invoice.avoir_date.to_date) })} "
       case invoice.payment_method
       when 'stripe'
         details += I18n.t('invoices.by_card_online_payment')
@@ -74,7 +74,7 @@ class Invoices::PaymentDetailsService
       else
         Rails.logger.error "specified refunding method (#{details}) is unknown"
       end
-      "#{details} #{I18n.t('invoices.for_an_amount_of_AMOUNT', AMOUNT: number_to_currency(total))}"
+      "#{details} #{I18n.t('invoices.for_an_amount_of_AMOUNT', **{ AMOUNT: number_to_currency(total) })}"
     end
   end
 end

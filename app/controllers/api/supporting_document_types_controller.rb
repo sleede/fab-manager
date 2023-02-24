@@ -2,7 +2,7 @@
 
 # API Controller for resources of type SupportingDocumentType
 # ProofOfIdentityTypes are used to provide admin config proof of identity type by group
-class API::SupportingDocumentTypesController < API::ApiController
+class API::SupportingDocumentTypesController < API::APIController
   before_action :authenticate_user!, except: :index
   before_action :set_supporting_document_type, only: %i[show update destroy]
 

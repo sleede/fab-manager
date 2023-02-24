@@ -13,7 +13,7 @@ class NotificationPreferencesTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_equal 200, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check the list items are ok and don't include other users' notification preferences
     notification_preferences = json_response(response.body)
@@ -36,7 +36,7 @@ class NotificationPreferencesTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_equal 200, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check the status was updated
     res = json_response(response.body)

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # API Controller for resources of type Training
-class API::TrainingsController < API::ApiController
+class API::TrainingsController < API::APIController
   include ApplicationHelper
 
   before_action :authenticate_user!, except: %i[index show]

@@ -3,7 +3,7 @@
 # API Controller for resources of type Plan and PartnerPlan.
 # Plan are used to define subscription's characteristics.
 # PartnerPlan is a special kind of plan which send notifications to an external user
-class API::PlansController < API::ApiController
+class API::PlansController < API::APIController
   include ApplicationHelper
 
   before_action :authenticate_user!, except: %i[index durations]

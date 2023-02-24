@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # API Controller for fabAnalytics
-class API::AnalyticsController < API::ApiController
+class API::AnalyticsController < API::APIController
   before_action :authenticate_user!
 
   def data

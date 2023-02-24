@@ -2,7 +2,7 @@
 
 # API Controller for resources of type Price
 # Prices are used in reservations (Machine, Space)
-class API::PricesController < API::ApiController
+class API::PricesController < API::APIController
   include ApplicationHelper
 
   before_action :authenticate_user!

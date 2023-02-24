@@ -16,7 +16,7 @@ class Events::DeleteTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_response :success
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
     res = json_response(response.body)
     assert_equal 1, res[:deleted]
 

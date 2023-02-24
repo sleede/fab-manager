@@ -3,7 +3,7 @@
 require 'version'
 
 # API Controller to get the Fab-manager version
-class API::VersionController < API::ApiController
+class API::VersionController < API::APIController
   before_action :authenticate_user!
 
   def show

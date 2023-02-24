@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # API Controller for resources of PaymentSchedule
-class API::PaymentSchedulesController < API::ApiController
+class API::PaymentSchedulesController < API::APIController
   before_action :authenticate_user!
   before_action :set_payment_schedule, only: %i[download cancel update]
   before_action :set_payment_schedule_item, only: %i[show_item cash_check confirm_transfer refresh_item pay_item]
