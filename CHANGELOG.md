@@ -1,6 +1,7 @@
 # Changelog Fab-manager
 
 - Fix a bug: unable to update recurrent events
+- Fix a bug: invalid border color for slots
 
 ## v5.7.1 2023 February 20
 

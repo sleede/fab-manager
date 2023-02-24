@@ -2,7 +2,7 @@
 
 json.array!(@slots) do |slot|
   json.partial! 'api/availabilities/slot', slot: slot, operator_role: @operator_role, reservable: @machine
-  json.borderColor machines_slot_border_color(slot, @customer)
+  json.borderColor machines_slot_border_color(slot, @machine, @customer)
 
   json.machine do
     json.id @machine.id

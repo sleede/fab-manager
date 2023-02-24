@@ -11,7 +11,7 @@ class Slots::TitleService
   # @param reservables [Array<Machine, Space, Training, Event>]
   def call(slot, reservables = nil)
     reservables = all_reservables(slot) if reservables.nil?
-    is_reserved = slot.reserved?
+    is_reserved = reservables.map { |r| slot.reserved?(r) }.reduce(:|)
     is_reserved_by_user = slot.reserved_by?(@user&.id, reservables)
 
     name = reservables.map(&:name).join(', ')
@@ -37,6 +37,7 @@ class Slots::TitleService
   end
 
   # @param slot [Slot]
+  # @return [Array<Machine, Space, Training, Event>]
   def all_reservables(slot)
     slot.places.pluck('reservable_type', 'reservable_id').map { |r| r[0].classify.constantize.find(r[1]) }
   end
