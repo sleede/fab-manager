@@ -89,9 +89,9 @@ class Event::UpdateEventService
         )
       end
 
-      ef_attributes = file_attributes(base_event, occurrence, event_params)
       e_params.merge(
-        event_files_attributes: ef_attributes
+        event_files_attributes: file_attributes(base_event, occurrence, event_params),
+        event_image_attributes: image_attributes(occurrence, event_params)
       )
     end
 
@@ -136,6 +136,16 @@ class Event::UpdateEventService
         end
       end
       ef_attributes
+    end
+
+    # @param occurrence [Event]
+    # @param event_params [ActionController::Parameters]
+    def image_attributes(occurrence, event_params)
+      if event_params['event_image_attributes'].nil? || event_params['event_image_attributes']['id'].present?
+        { id: occurrence.event_image&.id }
+      else
+        event_params['event_image_attributes']
+      end
     end
   end
 end
