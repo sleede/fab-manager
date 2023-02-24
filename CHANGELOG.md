@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+## v5.7.2 2023 February 24
+
 - Fix a bug: unable to update recurrent events
 - Fix a bug: invalid border color for slots
 - Fix a bug: members can change/cancel their reservations
