@@ -63,7 +63,7 @@ gem 'pg_search'
 
 # authentication
 gem 'devise', '>= 4.6.0'
-gem 'omniauth', '~> 1.9.2'
+gem 'omniauth', '~> 2.0.0'
 gem 'omniauth-oauth2'
 gem 'omniauth_openid_connect'
 gem 'omniauth-rails_csrf_protection', '~> 0.1'
