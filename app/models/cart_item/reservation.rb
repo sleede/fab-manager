@@ -55,7 +55,6 @@ class CartItem::Reservation < CartItem::BaseItem
   def valid?(all_items = [])
     pending_subscription = all_items.find { |i| i.is_a?(CartItem::Subscription) }
 
-    reservation_deadline_minutes = Setting.get('reservation_deadline').to_i
     reservation_deadline = reservation_deadline_minutes.minutes.since
 
     cart_item_reservation_slots.each do |sr|
@@ -254,5 +253,12 @@ class CartItem::Reservation < CartItem::BaseItem
       (pending_subscription && availability.plan_ids.include?(pending_subscription.plan.id)) ||
       (operator.manager? && customer.id != operator.id) ||
       operator.admin?
+  end
+
+  ##
+  # Gets the deadline in minutes for slots in this reservation
+  ##
+  def reservation_deadline_minutes
+    return 0
   end
 end

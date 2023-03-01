@@ -58,7 +58,10 @@ module SettingsHelper
     space_explications_alert
     visibility_yearly
     visibility_others
-    reservation_deadline
+    machine_reservation_deadline
+    training_reservation_deadline
+    event_reservation_deadline
+    space_reservation_deadline
     display_name_enable
     machines_sort_by
     accounting_sales_journal_code

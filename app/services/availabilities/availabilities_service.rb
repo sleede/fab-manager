@@ -10,7 +10,12 @@ class Availabilities::AvailabilitiesService
       year: Setting.get('visibility_yearly').to_i.months.since,
       other: Setting.get('visibility_others').to_i.months.since
     }
-    @minimum_visibility = Setting.get('reservation_deadline').to_i.minutes.since
+    @minimum_visibility = {
+      machine: Setting.get('machine_reservation_deadline').to_i.minutes.since,
+      training: Setting.get('training_reservation_deadline').to_i.minutes.since,
+      event: Setting.get('event_reservation_deadline').to_i.minutes.since,
+      space: Setting.get('space_reservation_deadline').to_i.minutes.since
+    }
     @level = level
   end
 
@@ -138,8 +143,18 @@ class Availabilities::AvailabilitiesService
       end_at = @maximum_visibility[:other]
       end_at = @maximum_visibility[:year] if subscription_year?(user) && type != 'training'
       end_at = @maximum_visibility[:year] if show_more_trainings?(user) && type == 'training'
+
+      minimum_visibility = 0.minutes.since
+      minimum_visibility = @minimum_visibility[:machine] if type == 'machines'
+      minimum_visibility = @minimum_visibility[:training] if type == 'training'
+      minimum_visibility = @minimum_visibility[:event] if type == 'event'
+      minimum_visibility = @minimum_visibility[:space] if type == 'space'
+
+      print(minimum_visibility)
+      print(@minimum_visibility[:machine])
+
       window_end = [end_at, range_end].min
-      window_start = [range_start, @minimum_visibility].max
+      window_start = [range_start, minimum_visibility].max
       availabilities.includes(:tags, :slots)
                     .joins(:slots)
                     .where('availabilities.start_at <= ? AND availabilities.end_at >= ? AND available_type = ?', window_end, window_start, type)

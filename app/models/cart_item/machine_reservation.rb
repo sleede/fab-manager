@@ -49,4 +49,8 @@ class CartItem::MachineReservation < CartItem::Reservation
     machine_credit = plan.machine_credits.find { |credit| credit.creditable_id == reservable.id }
     credits_hours(machine_credit, new_plan_being_bought: new_subscription)
   end
+
+  def reservation_deadline_minutes
+    return Setting.get('machine_reservation_deadline').to_i
+  end
 end

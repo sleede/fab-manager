@@ -108,9 +108,33 @@
             <div class="row">
                 <h3 class="m-l m-t-lg" translate>{{ 'app.admin.settings.reservation_deadline' }}</h3>
                 <p class="alert alert-warning m-h-md" translate>{{ 'app.admin.settings.reservation_deadline_help' }}</p>
-                <number-setting name="reservation_deadline"
+                <number-setting name="machine_reservation_deadline"
                                 settings="allSettings"
-                                label="app.admin.settings.deadline_minutes"
+                                label="app.admin.settings.machine_deadline_minutes"
+                                classes="col-md-4"
+                                fa-icon="fas fa-clock"
+                                min="0"
+                                required="true">
+                </number-setting>
+                <number-setting name="training_reservation_deadline"
+                                settings="allSettings"
+                                label="app.admin.settings.training_deadline_minutes"
+                                classes="col-md-4"
+                                fa-icon="fas fa-clock"
+                                min="0"
+                                required="true">
+                </number-setting>
+                <number-setting name="event_reservation_deadline"
+                                settings="allSettings"
+                                label="app.admin.settings.event_deadline_minutes"
+                                classes="col-md-4"
+                                fa-icon="fas fa-clock"
+                                min="0"
+                                required="true">
+                </number-setting>
+                <number-setting name="space_reservation_deadline"
+                                settings="allSettings"
+                                label="app.admin.settings.space_deadline_minutes"
                                 classes="col-md-4"
                                 fa-icon="fas fa-clock"
                                 min="0"
