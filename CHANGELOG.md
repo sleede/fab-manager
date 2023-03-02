@@ -4,6 +4,7 @@
 - Fix a bug: admin events view should default to the list tab
 - Fix a bug: event creation form should not allow setting multiple times the same price category
 - Fix a bug: MAX_SIZE env varibles should not be quoted (#438)
+- Fix a bug: unable to add OIDC scopes without discovery
 
 ## v5.7.2 2023 February 24
 
