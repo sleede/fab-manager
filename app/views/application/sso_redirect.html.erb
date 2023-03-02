@@ -7,7 +7,7 @@
 </head>
 <body>
   <% param = @authorization_token ? "?auth_token=#{@authorization_token}" : '' %>
-  <% url_path = File.join(root_url, "users/auth/#{@active_provider.strategy_name}#{param}") %>
+  <% url_path = URI.join("#{ENV.fetch('DEFAULT_PROTOCOL')}://#{ENV.fetch('DEFAULT_HOST')}", "users/auth/#{@active_provider.strategy_name}#{param}") %>
   <form id="redirect-form" action="<%=url_path%>" method="post" target="_self">
     <%= hidden_field_tag :authenticity_token, @authentication_token %>
     <noscript>

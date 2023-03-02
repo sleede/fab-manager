@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Use this script to safely run the test suite.
+# Use this script to safely run the test suite after any database changes.
 # This must be preferred over `rails test`.
 
 stripe_public_key=$(RAILS_ENV='test' bin/rails runner "puts ENV['STRIPE_PUBLISHABLE_KEY']")
