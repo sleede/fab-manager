@@ -69,7 +69,7 @@ export interface Event {
 export interface EventDecoration {
   id?: number,
   name: string,
-  related_to?: number
+  related_to?: number // report the count of events related to the given decoration
 }
 
 export type EventTheme = EventDecoration;
