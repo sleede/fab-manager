@@ -43,7 +43,7 @@ class ActiveSupport::TestCase
   end
 
   def upload_headers
-    { 'Accept' => Mime[:json], 'Content-Type' => 'multipart/form-data' }
+    { 'Accept' => Mime[:json], 'Content-Type' => Mime[:multipart_form].to_s }
   end
 
   def open_api_headers(token)
