@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_02_13_134954) do
+ActiveRecord::Schema.define(version: 2023_03_02_120458) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
@@ -122,6 +122,7 @@ ActiveRecord::Schema.define(version: 2023_02_13_134954) do
     t.datetime "updated_at", null: false
     t.string "providable_type"
     t.integer "providable_id"
+    t.index ["name"], name: "index_auth_providers_on_name", unique: true
   end
 
   create_table "availabilities", id: :serial, force: :cascade do |t|
@@ -163,10 +164,10 @@ ActiveRecord::Schema.define(version: 2023_02_13_134954) do
 
   create_table "cart_item_event_reservation_tickets", force: :cascade do |t|
     t.integer "booked"
-    t.bigint "event_price_category_id"
     t.bigint "cart_item_event_reservation_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "event_price_category_id"
     t.index ["cart_item_event_reservation_id"], name: "index_cart_item_tickets_on_cart_item_event_reservation"
     t.index ["event_price_category_id"], name: "index_cart_item_tickets_on_event_price_category"
   end
@@ -287,6 +288,7 @@ ActiveRecord::Schema.define(version: 2023_02_13_134954) do
     t.integer "hours"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["plan_id", "creditable_id", "creditable_type"], name: "index_credits_on_plan_id_and_creditable_id_and_creditable_type", unique: true
     t.index ["plan_id"], name: "index_credits_on_plan_id"
   end
 
@@ -787,6 +789,8 @@ ActiveRecord::Schema.define(version: 2023_02_13_134954) do
     t.text "conditions"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index "btrim(lower((name)::text))", name: "index_price_categories_on_TRIM_BOTH_FROM_LOWER_name", unique: true
+    t.index ["name"], name: "index_price_categories_on_name", unique: true
   end
 
   create_table "prices", id: :serial, force: :cascade do |t|
@@ -799,6 +803,7 @@ ActiveRecord::Schema.define(version: 2023_02_13_134954) do
     t.datetime "updated_at", null: false
     t.integer "duration", default: 60
     t.index ["group_id"], name: "index_prices_on_group_id"
+    t.index ["plan_id", "priceable_id", "priceable_type", "group_id", "duration"], name: "index_prices_on_plan_priceable_group_and_duration", unique: true
     t.index ["plan_id"], name: "index_prices_on_plan_id"
     t.index ["priceable_type", "priceable_id"], name: "index_prices_on_priceable_type_and_priceable_id"
   end
