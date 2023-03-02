@@ -10,7 +10,7 @@ json.is_completed slot.full?(reservable)
 json.backgroundColor 'white'
 
 json.availability_id slot.availability_id
-json.slots_reservations_ids Slots::ReservationsService.user_reservations(slot, user, reservable)[:reservations]
+json.slots_reservations_ids Slots::ReservationsService.user_reservations(slot, user, reservable)[:reservations].map(&:id)
 
 json.tag_ids slot.availability.tag_ids
 json.tags slot.availability.tags do |t|
