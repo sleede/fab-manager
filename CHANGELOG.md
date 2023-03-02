@@ -1,5 +1,6 @@
 # Changelog Fab-manager
 
+- Extended OpenAPI endpoint to list events
 - Fix a bug: members can't change/cancel their reservations
 - Fix a bug: admin events view should default to the list tab
 - Fix a bug: event creation form should not allow setting multiple times the same price category

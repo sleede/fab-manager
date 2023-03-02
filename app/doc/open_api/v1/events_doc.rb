@@ -29,12 +29,21 @@ class OpenAPI::V1::EventsDoc < OpenAPI::V1::BaseDoc
             "created_at": "2016-04-25T10:49:40.055+02:00",
             "nb_total_places": 18,
             "nb_free_places": 16,
+            "start_at": "2016-05-02T18:00:00.000+02:00",
+            "end_at": "2016-05-02T22:00:00.000+02:00",
+            "category": "Openlab",
+            "event_image": {
+                "large_url": "https://example.com/uploads/event_image/3454/large_event_image.jpg",
+                "medium_url": "https://example.com/uploads/event_image/3454/medium_event_image.jpg",
+                "small_url": "https://example.com/uploads/event_image/3454/small_event_image.jpg"
+            },
             "prices": {
               "normal": {
                 "name": "Plein tarif",
                 "amount": 0
               }
-            }
+            },
+            "url": "https://example.com/#!/events/183"
           },
           {
             "id": 182,
@@ -44,6 +53,19 @@ class OpenAPI::V1::EventsDoc < OpenAPI::V1::BaseDoc
             "created_at": "2016-04-11T17:40:15.146+02:00",
             "nb_total_places": 8,
             "nb_free_places": 0,
+            "start_at": "2016-05-02T18:00:00.000+01:00",
+            "end_at": "2026-05-02T22:00:00.000+01:00",
+            "category": "Atelier",
+            "themes": [
+                "DIY",
+                "Sport"
+            ],
+            "age_range": "14 - 18 ans",
+            "event_image": {
+                "large_url": "https://example.com/uploads/event_image/3453/large_event_image.jpg",
+                "medium_url": "https://example.com/uploads/event_image/3453/medium_event_image.jpg",
+                "small_url": "https://example.com/uploads/event_image/3453/small_event_image.jpg"
+            },
             "prices": {
               "normal": {
                 "name": "Plein tarif",
@@ -53,7 +75,8 @@ class OpenAPI::V1::EventsDoc < OpenAPI::V1::BaseDoc
                 "name": "Tarif réduit",
                 "amount": 4000
               },
-            }
+            },
+            "url": "https://example.com/#!/events/182"
           }
         ]
       }
