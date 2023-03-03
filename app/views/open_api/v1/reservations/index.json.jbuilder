@@ -13,12 +13,18 @@ json.reservations @reservations do |reservation|
   end
 
   json.reservable do
-    if reservation.reservable_type == 'Training'
+    case reservation.reservable_type
+    when 'Training'
       json.partial! 'open_api/v1/trainings/training', training: reservation.reservable
-    elsif reservation.reservable_type == 'Machine'
+    when 'Machine'
       json.partial! 'open_api/v1/machines/machine', machine: reservation.reservable
-    elsif reservation.reservable_type == 'Event'
+    when 'Event'
       json.partial! 'open_api/v1/events/event', event: reservation.reservable
     end
+  end
+
+  json.reserved_slots reservation.slots_reservations do |slot_reservation|
+    json.extract! slot_reservation, :canceled_at
+    json.extract! slot_reservation.slot, :start_at, :end_at
   end
 end

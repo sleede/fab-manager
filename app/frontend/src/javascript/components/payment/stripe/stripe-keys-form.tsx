@@ -113,7 +113,7 @@ const StripeKeysForm: React.FC<StripeKeysFormProps> = ({ onValidKeys, onInvalidK
     }, reason => {
       if (!mounted.current) return;
 
-      if (reason.response.status === 401) {
+      if (reason.response?.status === 401) {
         setSecretKeyAddOn(<i className="fa fa-times" />);
         setSecretKeyAddOnClassName('key-invalid');
       }

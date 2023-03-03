@@ -17,7 +17,6 @@ class OpenAPI::V1::SubscriptionsController < OpenAPI::V1::BaseController
     @subscriptions = @subscriptions.where(statistic_profiles: { user_id: may_array(params[:user_id]) }) if params[:user_id].present?
 
     @subscriptions = @subscriptions.page(page).per(per_page)
-    @pageination_meta = pageination_meta
     paginate @subscriptions, per_page: per_page
   end
 
@@ -29,15 +28,5 @@ class OpenAPI::V1::SubscriptionsController < OpenAPI::V1::BaseController
 
   def per_page
     params[:per_page] || 20
-  end
-
-  def pageination_meta
-    total_count = Subscription.count
-    {
-      total_count: total_count,
-      total_pages: (total_count / per_page.to_f).ceil,
-      page: page.to_i,
-      page_size: per_page.to_i
-    }
   end
 end

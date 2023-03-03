@@ -13,6 +13,10 @@ import spaces from '../__fixtures__/spaces';
 import statuses from '../__fixtures__/statuses';
 import notificationTypes from '../__fixtures__/notification_types';
 import notifications from '../__fixtures__/notifications';
+import eventCategories from '../__fixtures__/event_categories';
+import eventThemes from '../__fixtures__/event_themes';
+import ageRanges from '../__fixtures__/age_ranges';
+import eventPriceCategories from '../__fixtures__/event_price_categories';
 
 const FixturesLib = {
   init: () => {
@@ -33,7 +37,11 @@ const FixturesLib = {
       spaces: JSON.parse(JSON.stringify(spaces)),
       statuses: JSON.parse(JSON.stringify(statuses)),
       notificationTypes: JSON.parse(JSON.stringify(notificationTypes)),
-      notifications: JSON.parse(JSON.stringify(notifications))
+      notifications: JSON.parse(JSON.stringify(notifications)),
+      eventCategories: JSON.parse(JSON.stringify(eventCategories)),
+      eventThemes: JSON.parse(JSON.stringify(eventThemes)),
+      ageRanges: JSON.parse(JSON.stringify(ageRanges)),
+      eventPriceCategories: JSON.parse(JSON.stringify(eventPriceCategories))
     };
   }
 };

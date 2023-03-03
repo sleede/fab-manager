@@ -3,7 +3,7 @@
 # OpenIdConnectProvider is a special type of AuthProvider which provides authentication through an external SSO server using
 # the OpenID Connect protocol.
 class OpenIdConnectProvider < ApplicationRecord
-  has_one :auth_provider, as: :providable
+  has_one :auth_provider, as: :providable, dependent: :destroy
 
   validates :issuer, presence: true
   validates :client__identifier, presence: true
@@ -28,8 +28,8 @@ class OpenIdConnectProvider < ApplicationRecord
   end
 
   def client_config
-    OpenIdConnectProvider.columns.map(&:name).filter { |n| n.start_with?('client__') }.map do |n|
+    OpenIdConnectProvider.columns.map(&:name).filter { |n| n.start_with?('client__') }.to_h do |n|
       [n.sub('client__', ''), send(n)]
-    end.to_h
+    end
   end
 end

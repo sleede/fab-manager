@@ -170,6 +170,8 @@
             cta_info: "You can buy prepaid hours packs to book machines and benefit from discounts. Choose a machine to buy a corresponding pack."
             select_machine: "Select a machine"
             cta_button: "Buy a pack"
+            no_packs: "No prepaid packs available for sale"
+            reserved_for_subscribers_html: 'The purchase of prepaid packs is reserved for subscribers. <a href="{LINK}">Subscribe now</a> to benefit.'
       #public profil of a member
       members_show:
         members_list: "Medlemsliste"

@@ -12,6 +12,7 @@ Apipie.configure do |config|
   config.app_info['v1'] = <<-RDOC
     = Pagination
     ---
+    Some endpoints are paginated, because they provides many data. Other provides optional pagination.
     You can ask for pagination on your requests, by providing the GET parameters *page* and *per_page* (when it's available).
     The meta-data about pagination will be returned in the headers, following RFC-5988 standard for web linking.
     It uses headers *Link*, *Total* and *Per-Page*.

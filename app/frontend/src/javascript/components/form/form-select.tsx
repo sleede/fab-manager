@@ -66,7 +66,8 @@ export const FormSelect = <TFieldValues extends FieldValues, TContext extends ob
                                     placeholder={placeholder}
                                     isDisabled={isDisabled}
                                     isClearable={clearable}
-                                    options={options} />
+                                    options={options}
+                                    isOptionDisabled={(option) => option.disabled}/>
                   } />
     </AbstractFormItem>
   );

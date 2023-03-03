@@ -13,14 +13,14 @@ class OpenAPI::V1::SubscriptionsDoc < OpenAPI::V1::BaseDoc
 
   doc_for :index do
     api :GET, "/#{API_VERSION}/subscriptions", 'Subscriptions index'
-    description "Index of users' subscriptions, with optional pagination. Order by *created_at* descendant."
+    description "Index of users' subscriptions, paginated. Order by *created_at* descendant."
     param_group :pagination
     param :user_id, [Integer, Array], optional: true, desc: 'Scope the request to one or various users.'
     param :plan_id, [Integer, Array], optional: true, desc: 'Scope the request to one or various plans.'
     example <<-SUBSCRIPTIONS
       # /open_api/v1/subscriptions?user_id=211&page=1&per_page=3
       {
-        "data": [
+        "subscriptions": [
           {
             "id": 2809,
             "user_id": 211,
@@ -45,11 +45,7 @@ class OpenAPI::V1::SubscriptionsDoc < OpenAPI::V1::BaseDoc
             "canceled_at": null,
             "plan_id": 1
           }
-        ],
-        "total_pages": 3,
-        "total_count": 9,
-        "page": 1,
-        "page_siez": 3
+        ]
       }
     SUBSCRIPTIONS
   end

@@ -32,4 +32,32 @@ module AuthProviderHelper
       ]
     }
   end
+
+  def keycloak_provider_params(name)
+    {
+      name: name,
+      providable_type: 'OpenIdConnectProvider',
+      providable_attributes: {
+        issuer: 'https://sso.sleede.dev/auth/realms/master',
+        discovery: true,
+        client_auth_method: 'basic',
+        scope: %w[openid profile email toto],
+        prompt: 'consent',
+        send_scope_to_token_endpoint: true,
+        profile_url: 'https://sso.sleede.dev/auth/realms/master/account/',
+        client__identifier: ENV.fetch('OIDC_CLIENT_ID', 'oidc-client-id'),
+        client__secret: ENV.fetch('OIDC_CLIENT_SECRET', 'oidc-client-secret'),
+        client__authorization_endpoint: '',
+        client__token_endpoint: '',
+        client__userinfo_endpoint: '',
+        client__end_session_endpoint: ''
+      },
+      auth_provider_mappings_attributes: [
+        { id: '', local_model: 'user', local_field: 'uid', api_endpoint: 'user_info', api_data_type: 'json', api_field: 'sub' },
+        { id: '', local_model: 'user', local_field: 'email', api_endpoint: 'user_info', api_data_type: 'json', api_field: 'email' },
+        { id: '', local_model: 'profile', local_field: 'first_name', api_endpoint: 'user_info', api_data_type: 'json', api_field: 'given_name' },
+        { id: '', local_model: 'profile', local_field: 'last_name', api_endpoint: 'user_info', api_data_type: 'json', api_field: 'family_name' }
+      ]
+    }
+  end
 end

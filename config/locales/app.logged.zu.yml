@@ -170,6 +170,8 @@ zu:
             cta_info: "crwdns37065:0crwdne37065:0"
             select_machine: "crwdns37067:0crwdne37067:0"
             cta_button: "crwdns37069:0crwdne37069:0"
+            no_packs: "crwdns37389:0crwdne37389:0"
+            reserved_for_subscribers_html: 'crwdns37391:0{LINK}crwdne37391:0'
       #public profil of a member
       members_show:
         members_list: "crwdns27656:0crwdne27656:0"

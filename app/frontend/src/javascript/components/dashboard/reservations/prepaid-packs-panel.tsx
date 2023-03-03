@@ -17,6 +17,7 @@ import * as React from 'react';
 import { User } from '../../../models/user';
 import PrepaidPackAPI from '../../../api/prepaid-pack';
 import { PrepaidPack } from '../../../models/prepaid-pack';
+import { HtmlTranslate } from '../../base/html-translate';
 
 interface PrepaidPacksPanelProps {
   user: User,
@@ -159,7 +160,10 @@ const PrepaidPacksPanel: React.FC<PrepaidPacksPanelProps> = ({ user, onError }) 
                              onDecline={togglePacksModal}
                              onSuccess={onPackBoughtSuccess} />}
       </div>}
-
+      {packs.length === 0 && <p>{t('app.logged.dashboard.reservations_dashboard.prepaid_packs_panel.no_packs')}</p>}
+      {(packsForSubscribers && user.subscribed_plan == null && packs.length > 0) &&
+        <HtmlTranslate trKey={'app.logged.dashboard.reservations_dashboard.prepaid_packs_panel.reserved_for_subscribers_html'} options={{ LINK: '#!/plans' }} />
+      }
     </FabPanel>
   );
 };

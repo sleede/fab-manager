@@ -13,7 +13,7 @@ class OpenAPI::V1::UsersDoc < OpenAPI::V1::BaseDoc
 
   doc_for :index do
     api :GET, "/#{API_VERSION}/users", 'Users index'
-    description 'Users index, with optional pagination. Order by *created_at* descendant.'
+    description 'Users index, paginated. Ordered by *created_at* descendant.'
     param_group :pagination
     param :email, [String, Array], optional: true, desc: 'Filter users by *email* using strict matching.'
     param :user_id, [Integer, Array], optional: true, desc: 'Filter users by *id* using strict matching.'

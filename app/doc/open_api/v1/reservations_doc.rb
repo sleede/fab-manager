@@ -13,7 +13,7 @@ class OpenAPI::V1::ReservationsDoc < OpenAPI::V1::BaseDoc
 
   doc_for :index do
     api :GET, "/#{API_VERSION}/reservations", 'Reservations index'
-    description 'Index of reservations made by users, with optional pagination. Order by *created_at* descendant.'
+    description 'Index of reservations made by users, paginated. Ordered by *created_at* descendant.'
     param_group :pagination
     param :user_id, [Integer, Array], optional: true, desc: 'Scope the request to one or various users.'
     param :reservable_type, %w[Event Machine Space Training], optional: true, desc: 'Scope the request to a specific type of reservable.'
@@ -42,7 +42,14 @@ class OpenAPI::V1::ReservationsDoc < OpenAPI::V1::BaseDoc
               "description": "A partir de 15 ans : \r\n\r\nDécouvrez le Fab Lab, familiarisez-vous avec les découpeuses laser, les imprimantes 3D, la découpeuse vinyle ... ! Fabriquez un objet simple, à ramener chez vous ! \r\n\r\nAdoptez la Fab Lab attitude !",
               "updated_at": "2016-03-21T15:55:56.306+01:00",
               "created_at": "2016-03-21T15:55:56.306+01:00"
-            }
+            },
+            "reserved_slots": [
+              {
+                "canceled_at": "2016-05-20T09:40:12.201+01:00",
+                "start_at": "2016-06-03T14:00:00.000+01:00",
+                "end_at": "2016-06-03T15:00:00.000+01:00"
+              }
+            ]
           },
           {
             "id": 3252,
@@ -63,7 +70,14 @@ class OpenAPI::V1::ReservationsDoc < OpenAPI::V1::BaseDoc
               "description": "A partir de 15 ans : \r\n\r\nDécouvrez le Fab Lab, familiarisez-vous avec les découpeuses laser, les imprimantes 3D, la découpeuse vinyle ... ! Fabriquez un objet simple, à ramener chez vous ! \r\n\r\nAdoptez la Fab Lab attitude !",
               "updated_at": "2016-05-03T13:53:47.172+02:00",
               "created_at": "2016-03-07T15:58:14.113+01:00"
-            }
+            },
+            "reserved_slots": [
+              {
+                "canceled_at": null,
+                "start_at": "2016-06-02T16:00:00.000+01:00",
+                "end_at": "2016-06-02T17:00:00.000+01:00"
+              }
+            ]
           },
           {
             "id": 3251,
@@ -84,7 +98,14 @@ class OpenAPI::V1::ReservationsDoc < OpenAPI::V1::BaseDoc
               "description": "A partir de 15 ans : \r\n\r\nDécouvrez le Fab Lab, familiarisez-vous avec les découpeuses laser, les imprimantes 3D, la découpeuse vinyle ... ! Fabriquez un objet simple, à ramener chez vous ! \r\n\r\nAdoptez la Fab Lab attitude !",
               "updated_at": "2016-03-21T15:55:56.306+01:00",
               "created_at": "2016-03-21T15:55:56.306+01:00"
-            }
+            },
+            "reserved_slots": [
+              {
+                "canceled_at": null,
+                "start_at": "2016-06-03T14:00:00.000+01:00",
+                "end_at": "2016-06-03T15:00:00.000+01:00"
+              }
+            ]
           }
         ]
       }
