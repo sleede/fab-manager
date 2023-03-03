@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+## v5.8.0 2023 March 03
+
 - OpenAPI events endpoint returns category, theme and age_range
 - OpenAPI reservation endpoint will return details for the reserved slots
 - Display info messages if the user cannot buy prepaid packs
