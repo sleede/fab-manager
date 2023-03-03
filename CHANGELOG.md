@@ -1,11 +1,20 @@
 # Changelog Fab-manager
 
-- Extended OpenAPI endpoint to list events
+- OpenAPI events endpoint returns category, theme and age_range
+- OpenAPI reservation endpoint will return details for the reserved slots
+- Fix a bug: some OpenAPI endpoints struggle and expire with timeout
+- Fix a bug: OpenAPI events endpoint documentation does not refect the returned data
 - Fix a bug: members can't change/cancel their reservations
 - Fix a bug: admin events view should default to the list tab
 - Fix a bug: event creation form should not allow setting multiple times the same price category
 - Fix a bug: MAX_SIZE env varibles should not be quoted (#438)
 - Fix a bug: unable to add OIDC scopes without discovery
+- [BREAKING CHANGE] GET `open_api/v1/events` will necessarily be paginated
+- [BREAKING CHANGE] GET `open_api/v1/invoices` will necessarily be paginated
+- [BREAKING CHANGE] GET `open_api/v1/reservations` will necessarily be paginated
+- [BREAKING CHANGE] GET `open_api/v1/users` will necessarily be paginated
+- [BREAKING CHANGE] GET `open_api/v1/subscriptions` won't return `total_count`, `total_pages`, `page` or `page_siez` anymore. RFC-5988 headers (*Link*, *Total* and *Per-Page*) will continue to provide these same data.
+- [BREAKING CHANGE] GET `open_api/v1/subscriptions` will return a `subscriptions` array instead of a `data` array.
 
 ## v5.7.2 2023 February 24
 

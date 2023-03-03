@@ -9,7 +9,7 @@ class OpenApi::EventsTest < ActionDispatch::IntegrationTest
     @token = OpenAPI::Client.find_by(name: 'minitest').token
   end
 
-  test 'list all events' do
+  test 'list events' do
     get '/open_api/v1/events', headers: open_api_headers(@token)
     assert_response :success
     events = json_response(response.body)
@@ -29,7 +29,7 @@ class OpenApi::EventsTest < ActionDispatch::IntegrationTest
     assert(events[:events].all? { |event| !event[:url].nil? })
   end
 
-  test 'list all events with pagination' do
+  test 'list events with pagination details' do
     get '/open_api/v1/events?page=1&per_page=5', headers: open_api_headers(@token)
     assert_response :success
   end
@@ -44,7 +44,7 @@ class OpenApi::EventsTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test 'list all upcoming events with pagination' do
+  test 'list all upcoming events with pagination details' do
     get '/open_api/v1/events?upcoming=true&page=1&per_page=5', headers: open_api_headers(@token)
     assert_response :success
   end

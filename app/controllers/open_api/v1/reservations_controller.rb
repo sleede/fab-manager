@@ -8,16 +8,14 @@ class OpenAPI::V1::ReservationsController < OpenAPI::V1::BaseController
 
   def index
     @reservations = Reservation.order(created_at: :desc)
-                               .includes(statistic_profile: :user)
+                               .includes(slots_reservations: :slot, statistic_profile: :user)
                                .references(:statistic_profiles)
 
     @reservations = @reservations.where(statistic_profiles: { user_id: may_array(params[:user_id]) }) if params[:user_id].present?
     @reservations = @reservations.where(reservable_type: format_type(params[:reservable_type])) if params[:reservable_type].present?
     @reservations = @reservations.where(reservable_id: may_array(params[:reservable_id])) if params[:reservable_id].present?
 
-    return if params[:page].blank?
-
-    @reservations = @reservations.page(params[:page]).per(per_page)
+    @reservations = @reservations.page(page).per(per_page)
     paginate @reservations, per_page: per_page
   end
 
@@ -25,6 +23,10 @@ class OpenAPI::V1::ReservationsController < OpenAPI::V1::BaseController
 
   def format_type(type)
     type.singularize.classify
+  end
+
+  def page
+    params[:page] || 1
   end
 
   def per_page

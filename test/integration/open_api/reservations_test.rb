@@ -9,12 +9,12 @@ class OpenApi::ReservationsTest < ActionDispatch::IntegrationTest
     @token = OpenAPI::Client.find_by(name: 'minitest').token
   end
 
-  test 'list all reservations' do
+  test 'list reservations ' do
     get '/open_api/v1/reservations', headers: open_api_headers(@token)
     assert_response :success
     assert_equal Mime[:json], response.content_type
 
-    assert_equal Reservation.count, json_response(response.body)[:reservations].length
+    assert_not_empty json_response(response.body)[:reservations]
   end
 
   test 'list all reservations with pagination' do

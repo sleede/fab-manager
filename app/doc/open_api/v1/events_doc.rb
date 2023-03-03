@@ -16,7 +16,7 @@ class OpenAPI::V1::EventsDoc < OpenAPI::V1::BaseDoc
     param_group :pagination
     param :id, [Integer, Array], optional: true, desc: 'Scope the request to one or various events.'
     param :upcoming, [FalseClass, TrueClass], optional: true, desc: 'Scope for the upcoming events.'
-    description 'Events index. Order by *created_at* desc.'
+    description 'Events index, pagniated. Ordered by *created_at* desc.'
     example <<-EVENTS
       # /open_api/v1/events?page=1&per_page=2
       {

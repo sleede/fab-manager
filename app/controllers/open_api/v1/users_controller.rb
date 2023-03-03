@@ -18,11 +18,15 @@ class OpenAPI::V1::UsersController < OpenAPI::V1::BaseController
 
     return if params[:page].blank?
 
-    @users = @users.page(params[:page]).per(per_page)
+    @users = @users.page(page).per(per_page)
     paginate @users, per_page: per_page
   end
 
   private
+
+  def page
+    params[:page] || 1
+  end
 
   def per_page
     params[:per_page] || 20
