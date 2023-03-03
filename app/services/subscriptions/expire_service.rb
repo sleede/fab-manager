@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+# Services around subscriptions
+module Subscriptions; end
+
 # Expire the given subscription
 class Subscriptions::ExpireService
   class << self
