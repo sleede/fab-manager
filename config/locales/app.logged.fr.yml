@@ -170,6 +170,8 @@ fr:
             cta_info: "Vous pouvez acheter des packs d'heures prépayées pour réserver des machines et bénéficier de réductions. Choisissez une machine pour acheter un pack correspondant."
             select_machine: "Sélectionnez une machine"
             cta_button: "Acheter un pack"
+            no_packs: "Aucun pack prépayé disponible à la vente"
+            reserved_for_subscribers_html: 'L''achat de packs prépayés est réservé aux abonnés. <a href="{LINK}">Abonnez-vous maintenant</a> pour en bénéficier.'
       #public profil of a member
       members_show:
         members_list: "Liste des membres"
