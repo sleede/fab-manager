@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+## v5.8.1 2023 March 03
+
 - Fix a bug: unable to reserve an event
 
 ## v5.8.0 2023 March 03
