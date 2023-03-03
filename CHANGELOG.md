@@ -2,6 +2,7 @@
 
 - OpenAPI events endpoint returns category, theme and age_range
 - OpenAPI reservation endpoint will return details for the reserved slots
+- Display info messages if the user cannot buy prepaid packs
 - Fix a bug: some OpenAPI endpoints struggle and expire with timeout
 - Fix a bug: OpenAPI events endpoint documentation does not refect the returned data
 - Fix a bug: members can't change/cancel their reservations
