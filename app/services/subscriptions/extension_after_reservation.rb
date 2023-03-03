@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+# Services around subscriptions
+module Subscriptions; end
+
 # Extend the user's current subscription after his first training reservation if
 # he subscribed to a rolling plan
 class Subscriptions::ExtensionAfterReservation

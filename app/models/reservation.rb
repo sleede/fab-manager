@@ -121,7 +121,7 @@ class Reservation < ApplicationRecord
   end
 
   def extend_subscription
-    Subscriptions::ExtensionAfterReservation.new(self).extend_subscription_if_eligible
+    ::Subscriptions::ExtensionAfterReservation.new(self).extend_subscription_if_eligible
   end
 
   def notify_member_create_reservation
