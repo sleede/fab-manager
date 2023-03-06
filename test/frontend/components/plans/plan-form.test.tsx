@@ -31,7 +31,7 @@ describe('PlanForm', () => {
     expect(screen.getByLabelText(/app.admin.plan_form.period/)).toBeInTheDocument();
     expect(screen.getByLabelText(/app.admin.plan_form.partner_plan/)).toBeInTheDocument();
     expect(screen.queryByTestId('plan-pricing-form')).toBeNull();
-    expect(screen.getByRole('button', { name: /app.admin.plan_form.ACTION_plan/ })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /app.admin.plan_form.save/ })).toBeInTheDocument();
   });
 
   test('create new plan', async () => {
@@ -66,7 +66,7 @@ describe('PlanForm', () => {
     // advanced_accounting_attributes.analytical_section
     fireEvent.change(screen.getByLabelText(/app.admin.advanced_accounting_form.analytical_section/), { target: { value: '9B20A' } });
     // send the form
-    fireEvent.click(screen.getByRole('button', { name: /app.admin.plan_form.ACTION_plan/ }));
+    fireEvent.click(screen.getByRole('button', { name: /app.admin.plan_form.save/ }));
     await waitFor(() => {
       const expected: Plan = {
         base_name: 'Test Plan',
@@ -119,7 +119,7 @@ describe('PlanForm', () => {
     expect(screen.getByLabelText(/app.admin.plan_form.notified_partner/)).toBeInTheDocument();
     expect(screen.getByText(/app.admin.plan_form.alert_partner_notification/)).toBeInTheDocument();
     expect(screen.getByTestId('plan-pricing-form')).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /app.admin.plan_form.ACTION_plan/ })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /app.admin.plan_form.save/ })).toBeInTheDocument();
   });
 
   test('selecting transversal plan disables group select', async () => {
@@ -162,7 +162,7 @@ describe('PlanForm', () => {
     // update machine price
     fireEvent.change(screen.getByLabelText(new RegExp(machine.name)), { target: { value: 42.42 } });
     // send the form
-    fireEvent.click(screen.getByRole('button', { name: /app.admin.plan_form.ACTION_plan/ }));
+    fireEvent.click(screen.getByRole('button', { name: /app.admin.plan_form.save/ }));
     await waitFor(() => {
       const expected = {
         prices_attributes: expect.arrayContaining([{

@@ -224,6 +224,7 @@ en:
         email: "Email address"
       plan_pricing_form:
         prices: "Prices"
+        about_prices: "The prices defined here will apply to members subscribing to this plan, for machines and spaces."
         copy_prices_from: "Copy prices from"
         copy_prices_from_help: "This will replace all the prices of this plan with the prices of the selected plan"
         machines: "Machines"

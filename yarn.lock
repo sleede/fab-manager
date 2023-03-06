@@ -4664,15 +4664,10 @@ caniuse-api@^3.0.0:
     lodash.memoize "^4.1.2"
     lodash.uniq "^4.5.0"
 
-caniuse-lite@^1.0.0, caniuse-lite@^1.0.30001219, caniuse-lite@^1.0.30001313, caniuse-lite@^1.0.30001332:
-  version "1.0.30001397"
-  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001397.tgz"
-  integrity sha512-SW9N2TbCdLf0eiNDRrrQXx2sOkaakNZbCjgNpPyMJJbiOrU5QzMIrXOVMRM1myBXTD5iTkdrtU/EguCrBocHlA==
-
-caniuse-lite@^1.0.30001400:
-  version "1.0.30001439"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001439.tgz#ab7371faeb4adff4b74dad1718a6fd122e45d9cb"
-  integrity sha512-1MgUzEkoMO6gKfXflStpYgZDlFM7M/ck/bgfVCACO5vnAf0fXoNVHdWtqGU+MYca+4bL9Z5bpOVmR33cWW9G2A==
+caniuse-lite@^1.0.0, caniuse-lite@^1.0.30001219, caniuse-lite@^1.0.30001313, caniuse-lite@^1.0.30001332, caniuse-lite@^1.0.30001400:
+  version "1.0.30001460"
+  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001460.tgz"
+  integrity sha512-Bud7abqjvEjipUkpLs4D7gR0l8hBYBHoa+tGtKJHvT2AYzLp1z7EmVkUT4ERpVUfca8S2HGIVs883D8pUH1ZzQ==
 
 chalk@4.1.1:
   version "4.1.1"
@@ -8242,6 +8237,7 @@ object-keys@^1.0.12, object-keys@^1.1.1:
   integrity sha512-NuAESUOUMrlIXOfHKzD6bpPu3tYt3xvjNdRIQ+FeT0lNb4K8WR70CaDxhuNguS2XG+GjkyMwOzsN5ZktImfhLA==
 
 object-to-formdata-tz@4.4.3, "object-to-formdata@npm:object-to-formdata-tz@4.4.3":
+  name object-to-formdata
   version "4.4.3"
   resolved "https://registry.yarnpkg.com/object-to-formdata-tz/-/object-to-formdata-tz-4.4.3.tgz#3059059d0f02ce90c7fdd9d83f491e8af34707ae"
   integrity sha512-3XK2hDLCUAfpwatU6Jr3WzzF3ncmzScXPUiIOWgXdYwnxijCojqH41w3DdHRLoPs3MgUHzHBAtLVOFmSlaDWlQ==

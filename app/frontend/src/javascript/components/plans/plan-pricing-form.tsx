@@ -95,12 +95,13 @@ export const PlanPricingForm = <TContext extends object>({ register, control, fo
     <section className="plan-pricing-form" data-testid="plan-pricing-form">
       <header>
         <p className="title">{t('app.admin.plan_pricing_form.prices')}</p>
-        <p className="description">{t('app.admin.plan_pricing_form.copy_prices_from_help')}</p>
+        <p className="description">{t('app.admin.plan_pricing_form.about_prices')}</p>
       </header>
       <div className="content">
         {plans && <FormSelect options={plans}
                               control={control}
                               label={t('app.admin.plan_pricing_form.copy_prices_from')}
+                              tooltip={t('app.admin.plan_pricing_form.copy_prices_from_help')}
                               onChange={handleCopyPrices}
                               id="parent_plan_id" />}
         {<FabTabs tabs={[
