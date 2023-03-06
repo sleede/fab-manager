@@ -2,6 +2,7 @@
 
 - Fix a bug: empty advanced accounting code is not defaulted to the general setting
 - Fix a bug: invalid style in accounting codes settings
+- [TODO DEPLOY] `rails fablab:setup:build_accounting_lines`
 
 ## v5.8.1 2023 March 03
 
