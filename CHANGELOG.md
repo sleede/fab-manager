@@ -1,6 +1,7 @@
 # Changelog Fab-manager
 
 - Improved upgrade script
+- OpenAPI reservation endpoint can be filtered by date
 - Fix a bug: empty advanced accounting code is not defaulted to the general setting
 - Fix a bug: invalid style in accounting codes settings
 - Fix a bug: wrong namespace for task cart_operator
