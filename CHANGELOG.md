@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- Fix a bug: empty advanced accounting code is not defaulted to the general setting
+
 ## v5.8.1 2023 March 03
 
 - Fix a bug: unable to reserve an event
