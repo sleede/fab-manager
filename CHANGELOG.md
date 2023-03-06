@@ -1,6 +1,7 @@
 # Changelog Fab-manager
 
 - Fix a bug: empty advanced accounting code is not defaulted to the general setting
+- Fix a bug: invalid style in accounting codes settings
 
 ## v5.8.1 2023 March 03
 
