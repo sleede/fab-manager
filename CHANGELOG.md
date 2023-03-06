@@ -1,5 +1,6 @@
 # Changelog Fab-manager
 
+- Improved upgrade script
 - Fix a bug: empty advanced accounting code is not defaulted to the general setting
 - Fix a bug: invalid style in accounting codes settings
 - [TODO DEPLOY] `rails fablab:setup:build_accounting_lines`
