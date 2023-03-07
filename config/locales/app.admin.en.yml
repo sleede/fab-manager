@@ -2244,8 +2244,6 @@ en:
           unexpected_error_occurred: "An unexpected error occurred. Please try again later."
           all_products: "All products"
           create_a_product: "Create a product"
-          successfully_deleted: "The product has been successfully deleted"
-          unable_to_delete: "Unable to delete the product: "
           filter: "Filter"
           filter_clear: "Clear all"
           filter_apply: "Apply"
@@ -2267,6 +2265,7 @@ en:
           sort: "Sort:"
           visible_only: "Visible products only"
         product_item:
+          product: "product"
           visible: "visible"
           hidden: "hidden"
           stock:

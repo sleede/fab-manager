@@ -1,22 +1,23 @@
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import { FabButton } from '../base/fab-button';
 import { Product } from '../../models/product';
-import { PencilSimple, Trash } from 'phosphor-react';
 import noImage from '../../../../images/no_image.png';
 import { FabStateLabel } from '../base/fab-state-label';
 import { ProductPrice } from './product-price';
+import { EditDestroyButtons } from '../base/edit-destroy-buttons';
+import ProductAPI from '../../api/product';
 
 interface ProductItemProps {
   product: Product,
   onEdit: (product: Product) => void,
-  onDelete: (productId: number) => void,
+  onDelete: (message: string) => void,
+  onError: (message: string) => void,
 }
 
 /**
  * This component shows a product item in the admin view
  */
-export const ProductItem: React.FC<ProductItemProps> = ({ product, onEdit, onDelete }) => {
+export const ProductItem: React.FC<ProductItemProps> = ({ product, onEdit, onDelete, onError }) => {
   const { t } = useTranslation('admin');
 
   /**
@@ -31,15 +32,6 @@ export const ProductItem: React.FC<ProductItemProps> = ({ product, onEdit, onDel
   const editProduct = (product: Product): () => void => {
     return (): void => {
       onEdit(product);
-    };
-  };
-
-  /**
-   * Init the process of delete the given product
-   */
-  const deleteProduct = (productId: number): () => void => {
-    return (): void => {
-      onDelete(productId);
     };
   };
 
@@ -80,14 +72,13 @@ export const ProductItem: React.FC<ProductItemProps> = ({ product, onEdit, onDel
         <ProductPrice product={product} className="price" />
       </div>
       <div className='actions'>
-        <div className='manage'>
-          <FabButton className='edit-btn' onClick={editProduct(product)}>
-            <PencilSimple size={20} weight="fill" />
-          </FabButton>
-          <FabButton className='delete-btn' onClick={deleteProduct(product.id)}>
-            <Trash size={20} weight="fill" />
-          </FabButton>
-        </div>
+        <EditDestroyButtons onDeleteSuccess={onDelete}
+                            className="manage"
+                            onError={onError}
+                            onEdit={editProduct(product)}
+                            itemId={product.id}
+                            itemType={t('app.admin.store.product_item.product')}
+                            apiDestroy={ProductAPI.destroy} />
       </div>
     </div>
   );
