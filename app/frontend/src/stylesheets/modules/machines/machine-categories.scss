@@ -14,18 +14,6 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    button {
-      border-radius: 5;
-      &:hover { opacity: 0.75; }
-    }
-    .edit-btn {
-      color: var(--gray-hard-darkest);
-      margin-right: 10px;
-    }
-    .delete-btn {
-      color: var(--gray-soft-lightest);
-      background: var(--main);
-    }
   }
 
   .machine-categories-table {

@@ -74,7 +74,7 @@ module ApplicationHelper
   def may_array(param)
     return param if param.is_a?(Array)
 
-    return param unless param&.chars&.first == '[' && param&.chars&.last == ']'
+    return param unless param.chars&.first == '[' && param.chars&.last == ']'
 
     param.gsub(/[\[\]]/i, '').split(',')
   end

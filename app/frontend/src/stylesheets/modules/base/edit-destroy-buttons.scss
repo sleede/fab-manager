@@ -1,4 +1,6 @@
 .edit-destroy-buttons {
+  border-radius: var(--border-radius-sm);
+  overflow: hidden;
   button {
     @include btn;
     border-radius: 0;

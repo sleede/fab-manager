@@ -1,25 +1,36 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FabModal, ModalSize } from '../base/fab-modal';
 import { MachineCategory } from '../../models/machine-category';
 import { Machine } from '../../models/machine';
 import MachineCategoryAPI from '../../api/machine-category';
 import { MachineCategoryForm } from './machine-category-form';
+import MachineAPI from '../../api/machine';
 
 interface MachineCategoryModalProps {
   isOpen: boolean,
   toggleModal: () => void,
   onSuccess: (message: string) => void,
   onError: (message: string) => void,
-  machines: Array<Machine>,
   machineCategory?: MachineCategory,
 }
 
 /**
  * Modal dialog to create/edit a machine category
  */
-export const MachineCategoryModal: React.FC<MachineCategoryModalProps> = ({ isOpen, toggleModal, onSuccess, onError, machines, machineCategory }) => {
+export const MachineCategoryModal: React.FC<MachineCategoryModalProps> = ({ isOpen, toggleModal, onSuccess, onError, machineCategory }) => {
   const { t } = useTranslation('admin');
+  // all machines, to assign to the category
+  const [machines, setMachines] = useState<Array<Machine>>([]);
+
+  // retrieve the full list of machines on component mount
+  useEffect(() => {
+    if (!isOpen) return;
+
+    MachineAPI.index({ category: [machineCategory?.id, 'none'] })
+      .then(setMachines)
+      .catch(onError);
+  }, [isOpen]);
 
   /**
    * Save the current machine category to the API
