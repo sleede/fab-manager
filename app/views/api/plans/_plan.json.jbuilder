@@ -27,3 +27,7 @@ if plan.advanced_accounting
   end
 end
 
+json.plan_limitations_attributes plan.plan_limitations do |limitation|
+  json.extract! limitation, :id, :limitable_id, :limitable_type, :limit
+end
+

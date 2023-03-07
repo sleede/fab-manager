@@ -42,6 +42,8 @@ class Machine < ApplicationRecord
 
   belongs_to :machine_category
 
+  has_many :plan_limitations, dependent: :destroy
+
   after_create :create_statistic_subtype
   after_create :create_machine_prices
   after_create :update_gateway_product

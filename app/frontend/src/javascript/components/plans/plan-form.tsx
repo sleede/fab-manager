@@ -326,7 +326,9 @@ export const PlanForm: React.FC<PlanFormProps> = ({ action, plan, onError, onSuc
             id: 'usageLimits',
             title: t('app.admin.plan_form.tab_usage_limits'),
             content: <PlanLimitForm control={control}
-                                    formState={formState} />
+                                    register={register}
+                                    formState={formState}
+                                    onError={onError} />
           }
         ]} />
       </form>
