@@ -60,11 +60,10 @@ class PrepaidPackService
       packs = user_packs(user, reservation.reservable).order(minutes_used: :desc)
       packs.each do |pack|
         pack_available = pack.prepaid_pack.minutes - pack.minutes_used
-        remaining = pack_available - consumed
-        remaining = 0 if remaining.negative?
-        pack_consumed = pack.prepaid_pack.minutes - remaining
-        pack.update(minutes_used: pack_consumed)
+        remaining = consumed > pack_available ? 0 : pack_available - consumed
+        pack.update(minutes_used: pack.prepaid_pack.minutes - remaining)
 
+        pack_consumed = consumed > pack_available ? pack_available : consumed
         consumed -= pack_consumed
       end
     end

@@ -3,11 +3,13 @@
 - Improved upgrade script
 - OpenAPI reservation endpoint can be filtered by date
 - OpenAPI users endpoint now returns the ID of the InvoicingProfile
+- Fix a bug: wrong counting of minutes used when using a prepaid pack
 - Fix a bug: empty advanced accounting code is not defaulted to the general setting
 - Fix a bug: invalid style in accounting codes settings
 - Fix a bug: wrong namespace for task cart_operator
 - [TODO DEPLOY] `rails fablab:fix:cart_operator`
 - [TODO DEPLOY] `rails fablab:setup:build_accounting_lines`
+- [TODO DEPLOY] `rails fablab:fix:pack_minutes_used`
 
 ## v5.8.1 2023 March 03
 

@@ -37,4 +37,40 @@ class PrepaidPackServiceTest < ActiveSupport::TestCase
     minutes_available = PrepaidPackService.minutes_available(@acamus, @machine)
     assert_equal minutes_available, 480
   end
+
+  test 'member has multiple active packs' do
+    availabilities_service = Availabilities::AvailabilitiesService.new(@acamus)
+
+    # user with current pack reserve 8 slots (on 10 available in the pack)
+    slots = availabilities_service.machines([@machine], @acamus, { start: Time.current, end: 10.days.from_now })
+    reservation = Reservation.create(
+      reservable_id: @machine.id,
+      reservable_type: Machine.name,
+      slots: [slots[0], slots[1], slots[2], slots[3], slots[4], slots[5], slots[6], slots[7]],
+      statistic_profile_id: @acamus.statistic_profile.id
+    )
+
+    PrepaidPackService.update_user_minutes(@acamus, reservation)
+    minutes_available = PrepaidPackService.minutes_available(@acamus, @machine)
+    assert_equal 120, minutes_available
+
+    # user buy a new pack
+    prepaid_pack = PrepaidPack.first
+    StatisticProfilePrepaidPack.create!(prepaid_pack: prepaid_pack, statistic_profile: @acamus.statistic_profile)
+
+    minutes_available = PrepaidPackService.minutes_available(@acamus, @machine)
+    assert_equal 720, minutes_available
+
+    # user books a new reservation of 4 slots
+    reservation = Reservation.create(
+      reservable_id: @machine.id,
+      reservable_type: Machine.name,
+      slots: [slots[8], slots[9], slots[10], slots[11]],
+      statistic_profile_id: @acamus.statistic_profile.id
+    )
+
+    PrepaidPackService.update_user_minutes(@acamus, reservation)
+    minutes_available = PrepaidPackService.minutes_available(@acamus, @machine)
+    assert_equal 480, minutes_available
+  end
 end
