@@ -19,10 +19,14 @@ class OpenApi::UsersTest < ActionDispatch::IntegrationTest
     assert_not_nil(users[:users].detect { |u| u[:external_id] == 'J5821-4' })
     assert(users[:users].all? { |u| %w[man woman].include?(u[:gender]) })
     assert(users[:users].all? { |u| u[:organization] != User.find(u[:id]).invoicing_profile.organization.nil? })
+    assert(users[:users].all? { |u| u[:invoicing_profile_id].present? })
     assert(users[:users].all? { |u| u[:full_name].present? })
     assert(users[:users].all? { |u| u[:first_name].present? })
     assert(users[:users].all? { |u| u[:last_name].present? })
     assert(users[:users].any? { |u| u[:address].present? })
+    assert(users[:users].all? { |u| u[:group][:id] == User.find(u[:id]).group_id })
+    assert(users[:users].all? { |u| u[:group][:name].present? })
+    assert(users[:users].all? { |u| u[:group][:slug].present? })
   end
 
   test 'list all users with pagination' do

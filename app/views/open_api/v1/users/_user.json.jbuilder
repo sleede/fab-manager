@@ -5,6 +5,7 @@ json.extract! user.profile, :full_name, :first_name, :last_name if user.associat
 json.gender user.statistic_profile.gender ? 'man' : 'woman'
 
 if user.association(:invoicing_profile).loaded?
+  json.invoicing_profile_id user.invoicing_profile.id
   json.external_id user.invoicing_profile.external_id
   json.organization !user.invoicing_profile.organization.nil?
   json.address user.invoicing_profile.invoicing_address
