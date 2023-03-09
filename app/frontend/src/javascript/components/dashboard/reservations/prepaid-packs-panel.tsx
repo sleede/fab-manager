@@ -41,7 +41,7 @@ const PrepaidPacksPanel: React.FC<PrepaidPacksPanelProps> = ({ user, onError }) 
   const { handleSubmit, control, formState } = useForm<{ machine_id: number }>();
 
   useEffect(() => {
-    UserPackAPI.index({ user_id: user.id })
+    UserPackAPI.index({ user_id: user.id, history: true })
       .then(setUserPacks)
       .catch(onError);
     SettingAPI.get('renew_pack_threshold')
@@ -106,7 +106,7 @@ const PrepaidPacksPanel: React.FC<PrepaidPacksPanelProps> = ({ user, onError }) 
    */
   const onPackBoughtSuccess = () => {
     togglePacksModal();
-    UserPackAPI.index({ user_id: user.id })
+    UserPackAPI.index({ user_id: user.id, history: true })
       .then(setUserPacks)
       .catch(onError);
   };
@@ -128,16 +128,18 @@ const PrepaidPacksPanel: React.FC<PrepaidPacksPanelProps> = ({ user, onError }) 
               <p className="countdown"><span>{(pack.prepaid_pack.minutes - pack.minutes_used) / 60}H</span> / {pack.prepaid_pack.minutes / 60}H</p>
             </div>
           </div>
-          { /* usage history is not saved for now
+          {pack.history?.length > 0 &&
           <div className="prepaid-packs-list is-history">
             <span className='prepaid-packs-list-label'>{t('app.logged.dashboard.reservations_dashboard.prepaid_packs_panel.history')}</span>
 
-            <div className='prepaid-packs-list-item'>
-              <p className='name'>00{t('app.logged.dashboard.reservations_dashboard.prepaid_packs_panel.consumed_hours')}</p>
-              <p className="date">00/00/00</p>
-            </div>
+            {pack.history.map(prepaidReservation => (
+              <div className='prepaid-packs-list-item' key={prepaidReservation.id}>
+                <p className='name'>{t('app.logged.dashboard.reservations_dashboard.prepaid_packs_panel.consumed_hours', { COUNT: prepaidReservation.consumed_minutes / 60 })}</p>
+                <p className="date">{FormatLib.date(prepaidReservation.reservation_date)}</p>
+              </div>
+            ))}
           </div>
-          */ }
+          }
         </div>
       ))}
 

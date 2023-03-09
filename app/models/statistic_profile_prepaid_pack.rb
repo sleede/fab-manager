@@ -8,6 +8,7 @@ class StatisticProfilePrepaidPack < ApplicationRecord
 
   has_many :invoice_items, as: :object, dependent: :destroy
   has_one :payment_schedule_object, as: :object, dependent: :destroy
+  has_many :prepaid_pack_reservations, dependent: :restrict_with_error
 
   before_create :set_expiration_date
 

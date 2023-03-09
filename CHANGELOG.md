@@ -1,6 +1,7 @@
 # Changelog Fab-manager
 
 - Improved upgrade script
+- Keep usage history of prepaid packs
 - OpenAPI reservation endpoint can be filtered by date
 - OpenAPI users endpoint now returns the ID of the InvoicingProfile
 - Fix a bug: wrong counting of minutes used when using a prepaid pack

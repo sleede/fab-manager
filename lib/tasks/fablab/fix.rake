@@ -307,7 +307,7 @@ namespace :fablab do
 
     desc '[release 5.8.2] fix prepaid packs minutes_used'
     task pack_minutes_used: :environment do |_task, _args|
-      StatisticProfilePrepaidPack.where('minutes_used < 0').find_each do |sppp|
+      StatisticProfilePrepaidPack.find_each do |sppp|
         previous_packs = sppp.statistic_profile.statistic_profile_prepaid_packs
                              .includes(:prepaid_pack)
                              .where(prepaid_packs: { priceable: sppp.prepaid_pack.priceable })
@@ -342,6 +342,7 @@ namespace :fablab do
               end
             end
             available_minutes -= consumed
+            PrepaidPackReservation.find_or_create_by!(statistic_profile_prepaid_pack: pack, reservation: reservation, consumed_minutes: consumed)
           end
           pack.update(minutes_used: pack.prepaid_pack.minutes - available_minutes)
         end
