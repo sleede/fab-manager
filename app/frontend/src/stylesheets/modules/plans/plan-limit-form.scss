@@ -22,7 +22,7 @@
       flex-direction: column;
       overflow-y: auto;
 
-      .title { @include text-base(500); }
+      & > .title { @include text-base(500); }
       .plan-limit-item {
         width: 100%;
         margin-bottom: 2.4rem;

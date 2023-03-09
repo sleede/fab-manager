@@ -740,13 +740,14 @@ ActiveRecord::Schema.define(version: 2023_03_09_094535) do
   end
 
   create_table "plan_limitations", force: :cascade do |t|
-    t.bigint "plan_id"
-    t.string "limitable_type"
-    t.bigint "limitable_id"
+    t.bigint "plan_id", null: false
+    t.string "limitable_type", null: false
+    t.bigint "limitable_id", null: false
     t.integer "limit", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["limitable_type", "limitable_id"], name: "index_plan_limitations_on_limitable_type_and_limitable_id"
+    t.index ["plan_id", "limitable_id", "limitable_type"], name: "index_plan_limitations_on_plan_and_limitable", unique: true
     t.index ["plan_id"], name: "index_plan_limitations_on_plan_id"
   end
 

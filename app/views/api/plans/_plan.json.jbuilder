@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 json.extract! plan, :id, :base_name, :name, :interval, :interval_count, :group_id, :training_credit_nb, :is_rolling, :description, :type,
-              :ui_weight, :disabled, :monthly_payment, :plan_category_id
+              :ui_weight, :disabled, :monthly_payment, :plan_category_id, :limiting
 json.amount plan.amount / 100.00
 json.prices_attributes plan.prices, partial: 'api/prices/price', as: :price
 if plan.plan_file

@@ -6,7 +6,7 @@ import { FabButton } from '../base/fab-button';
 import { PencilSimple, Trash } from 'phosphor-react';
 import { PlanLimitModal } from './plan-limit-modal';
 import { Plan, PlanLimitation } from '../../models/plan';
-import { useFieldArray, UseFormRegister } from 'react-hook-form';
+import { useFieldArray, UseFormRegister, useWatch } from 'react-hook-form';
 import { Machine } from '../../models/machine';
 import { MachineCategory } from '../../models/machine-category';
 import MachineAPI from '../../api/machine';
@@ -26,6 +26,7 @@ interface PlanLimitFormProps<TContext extends object> {
 export const PlanLimitForm = <TContext extends object> ({ register, control, formState, onError }: PlanLimitFormProps<TContext>) => {
   const { t } = useTranslation('admin');
   const { fields, append, remove } = useFieldArray<Plan, 'plan_limitations_attributes'>({ control, name: 'plan_limitations_attributes' });
+  const limiting = useWatch<Plan>({ control, name: 'limiting' });
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [machines, setMachines] = useState<Array<Machine>>([]);
@@ -90,7 +91,7 @@ export const PlanLimitForm = <TContext extends object> ({ register, control, for
         </div>
       </section>
 
-      <div className="plan-limit-grp">
+      {limiting && <div className="plan-limit-grp">
         <header>
           <p>{t('app.admin.plan_limit_form.all_limitations')}</p>
           <div className="grpBtn">
@@ -100,82 +101,86 @@ export const PlanLimitForm = <TContext extends object> ({ register, control, for
           </div>
         </header>
 
-        <div className='plan-limit-list'>
-          <p className="title">{t('app.admin.plan_limit_form.by_categories')}</p>
-          <div className="plan-limit-item">
-            <div className="grp">
-              <div>
-                <span>{t('app.admin.plan_limit_form.category')}</span>
-                <p>Plop</p>
-              </div>
-              <div>
-                <span>{t('app.admin.plan_limit_form.max_hours_per_day')}</span>
-                <p>5</p>
-              </div>
-            </div>
+        {fields.filter(f => f.limitable_type === 'MachineCategory').length > 0 &&
+          <div className='plan-limit-list'>
+            <p className="title">{t('app.admin.plan_limit_form.by_categories')}</p>
+            {fields.filter(f => f.limitable_type === 'MachineCategory' && !f.modified).map(limitation => (
+              <div className="plan-limit-item" key={limitation.id}>
+                <div className="grp">
+                  <div>
+                    <span>{t('app.admin.plan_limit_form.category')}</span>
+                    <p>{categories.find(c => c.id === limitation.limitable_id)?.name}</p>
+                  </div>
+                  <div>
+                    <span>{t('app.admin.plan_limit_form.max_hours_per_day')}</span>
+                    <p>{limitation.limit}</p>
+                  </div>
+                </div>
 
-            <div className='actions'>
-              <div className='grpBtn'>
-                {/* TODO, use <EditDestroyButtons> */}
-                <FabButton className='edit-btn'>
-                  <PencilSimple size={20} weight="fill" />
-                </FabButton>
-                <FabButton className='delete-btn'>
-                  <Trash size={20} weight="fill" />
-                </FabButton>
+                <div className='actions'>
+                  <div className='grpBtn'>
+                    <FabButton className='edit-btn'>
+                      <PencilSimple size={20} weight="fill" />
+                    </FabButton>
+                    <FabButton className='delete-btn'>
+                      <Trash size={20} weight="fill" />
+                    </FabButton>
+                  </div>
+                </div>
               </div>
-            </div>
+            ))}
+            <FormUnsavedList fields={fields}
+                             remove={remove}
+                             register={register}
+                             title={t('app.admin.plan_limit_form.ongoing_limitations')}
+                             shouldRenderField={(limit: PlanLimitation) => limit.limitable_type === 'MachineCategory' && limit.modified}
+                             formAttributeName="plan_limitations_attributes"
+                             formAttributes={['id', 'limitable_type', 'limitable_id', 'limit']}
+                             renderField={renderOngoingLimit}
+                             cancelLabel={t('app.admin.plan_limit_form.cancel')} />
           </div>
-        </div>
+        }
 
-        <FormUnsavedList fields={fields}
-                         remove={remove}
-                         register={register}
-                         title={t('app.admin.plan_limit_form.ongoing_limitations')}
-                         shouldRenderField={(limit: PlanLimitation) => limit.limitable_type === 'MachineCategory'}
-                         formAttributeName="plan_limitations_attributes"
-                         formAttributes={['limitable_id', 'limit']}
-                         renderField={renderOngoingLimit}
-                         cancelLabel={t('app.admin.plan_limit_form.cancel')} />
+        {fields.filter(f => f.limitable_type === 'Machine').length > 0 &&
+          <div className='plan-limit-list'>
+            <p className="title">{t('app.admin.plan_limit_form.by_machine')}</p>
+            {fields.filter(f => f.limitable_type === 'Machine' && !f.modified).map(limitation => (
+              <div className="plan-limit-item" key={limitation.id}>
+                <div className="grp">
+                  <div>
+                    <span>{t('app.admin.plan_limit_form.machine')}</span>
+                    <p>{machines.find(m => m.id === limitation.limitable_id)?.name}</p>
+                  </div>
+                  <div>
+                    <span>{t('app.admin.plan_limit_form.max_hours_per_day')}</span>
+                    <p>{limitation.limit}</p>
+                  </div>
+                </div>
 
-        <div className='plan-limit-list'>
-          <p className="title">{t('app.admin.plan_limit_form.by_machine')}</p>
-          <div className="plan-limit-item">
-            <div className="grp">
-              <div>
-                <span>{t('app.admin.plan_limit_form.machine')}</span>
-                <p>Pouet</p>
+                <div className='actions'>
+                  <div className='grpBtn'>
+                    <FabButton className='edit-btn'>
+                      <PencilSimple size={20} weight="fill" />
+                    </FabButton>
+                    <FabButton className='delete-btn'>
+                      <Trash size={20} weight="fill" />
+                    </FabButton>
+                  </div>
+                </div>
               </div>
-              <div>
-                <span>{t('app.admin.plan_limit_form.max_hours_per_day')}</span>
-                <p>5</p>
-              </div>
-            </div>
-
-            <div className='actions'>
-              <div className='grpBtn'>
-                <FabButton className='edit-btn'>
-                  <PencilSimple size={20} weight="fill" />
-                </FabButton>
-                <FabButton className='delete-btn'>
-                  <Trash size={20} weight="fill" />
-                </FabButton>
-              </div>
-            </div>
+            ))}
+            <FormUnsavedList fields={fields}
+                             remove={remove}
+                             register={register}
+                             title={t('app.admin.plan_limit_form.ongoing_limitations')}
+                             shouldRenderField={(limit: PlanLimitation) => limit.limitable_type === 'Machine' && limit.modified}
+                             formAttributeName="plan_limitations_attributes"
+                             formAttributes={['id', 'limitable_type', 'limitable_id', 'limit']}
+                             renderField={renderOngoingLimit}
+                             cancelLabel={t('app.admin.plan_limit_form.cancel')} />
           </div>
-        </div>
-      </div>
-
-      <FormUnsavedList fields={fields}
-                       remove={remove}
-                       register={register}
-                       title={t('app.admin.plan_limit_form.ongoing_limit')}
-                       shouldRenderField={(limit: PlanLimitation) => limit.limitable_type === 'Machine'}
-                       formAttributeName="plan_limitations_attributes"
-                       formAttributes={['limitable_id', 'limit']}
-                       renderField={renderOngoingLimit}
-                       saveReminderLabel={t('app.admin.plan_limit_form.save_reminder')}
-                       cancelLabel={t('app.admin.plan_limit_form.cancel')} />
+        }
+      </div>}
 
       <PlanLimitModal isOpen={isOpen}
                       machines={machines}

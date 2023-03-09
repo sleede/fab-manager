@@ -17,7 +17,8 @@ export interface PlanLimitation {
     id?: number,
     limitable_id: number,
     limitable_type: LimitableType,
-    limit: number
+    limit: number,
+    modified?: boolean,
 }
 
 export interface Plan {
@@ -42,6 +43,7 @@ export interface Plan {
     plan_file_url?: string,
     partner_id?: number,
     partnership?: boolean,
+    limiting?: boolean,
     partners?: Array<Partner>,
     advanced_accounting_attributes?: AdvancedAccounting,
     plan_limitations_attributes?: Array<PlanLimitation>

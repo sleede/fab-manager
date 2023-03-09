@@ -47,7 +47,7 @@ export const PlanLimitModal: React.FC<PlanLimitModalProps> = ({ isOpen, toggleMo
       event.preventDefault();
     }
     return handleSubmit((data: PlanLimitation) => {
-      onSuccess(data);
+      onSuccess({ ...data, modified: true });
       toggleModal();
     })(event);
   };
