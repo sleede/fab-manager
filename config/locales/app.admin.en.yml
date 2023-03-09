@@ -206,8 +206,7 @@ en:
         category: "Machines category"
         machine: "Machine name"
         max_hours_per_day: "Max. hours/day"
-        ongoing_limit: "Ongoing settings"
-        save_reminder: "Don't forget to save your settings"
+        ongoing_limitations: "Ongoing limitations"
         cancel: "Cancel this limitation"
       plan_limit_modal:
         title: "Manage limitation of use"

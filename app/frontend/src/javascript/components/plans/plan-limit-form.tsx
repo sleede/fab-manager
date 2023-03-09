@@ -3,11 +3,10 @@ import { Control, FormState } from 'react-hook-form/dist/types/form';
 import { FormSwitch } from '../form/form-switch';
 import { useTranslation } from 'react-i18next';
 import { FabButton } from '../base/fab-button';
-import { PencilSimple, Trash, X } from 'phosphor-react';
+import { PencilSimple, Trash } from 'phosphor-react';
 import { PlanLimitModal } from './plan-limit-modal';
 import { Plan, PlanLimitation } from '../../models/plan';
 import { useFieldArray, UseFormRegister } from 'react-hook-form';
-import { FormInput } from '../form/form-input';
 import { Machine } from '../../models/machine';
 import { MachineCategory } from '../../models/machine-category';
 import MachineAPI from '../../api/machine';
@@ -56,34 +55,24 @@ export const PlanLimitForm = <TContext extends object> ({ register, control, for
   };
 
   /**
-   * Render an attribute of an unsaved limitation of use
+   * Render an unsaved limitation of use
    */
-  const renderOngoingLimitAttribute = (limit: PlanLimitation, attribute: string): ReactNode => {
-    switch (attribute) {
-      case 'limitable_id':
-        if (limit.limitable_type === 'MachineCategory') {
-          return (
-            <>
-              <span>{t('app.admin.plan_limit_form.category')}</span>
-              <p>{categories?.find(c => c.id === limit.limitable_id)?.name}</p>
-            </>
-          );
-        }
-        return (
-          <>
-            <span>{t('app.admin.plan_limit_form.machine')}</span>
-            <p>{machines?.find(m => m.id === limit.limitable_id)?.name}</p>
-          </>
-        );
-      case 'limit':
-        return (
-          <>
-            <span>{t('app.admin.plan_limit_form.max_hours_per_day')}</span>
-            <p>{limit.limit}</p>
-          </>
-        );
-    }
-  };
+  const renderOngoingLimit = (limit: PlanLimitation): ReactNode => (
+    <>
+      {(limit.limitable_type === 'MachineCategory' && <div className="group">
+        <span>{t('app.admin.plan_limit_form.category')}</span>
+        <p>{categories?.find(c => c.id === limit.limitable_id)?.name}</p>
+      </div>) ||
+      <div className="group">
+        <span>{t('app.admin.plan_limit_form.machine')}</span>
+        <p>{machines?.find(m => m.id === limit.limitable_id)?.name}</p>
+      </div>}
+      <div className="group">
+        <span>{t('app.admin.plan_limit_form.max_hours_per_day')}</span>
+        <p>{limit.limit}</p>
+      </div>
+    </>
+  );
 
   return (
     <div className="plan-limit-form">
@@ -142,10 +131,12 @@ export const PlanLimitForm = <TContext extends object> ({ register, control, for
         <FormUnsavedList fields={fields}
                          remove={remove}
                          register={register}
-                         title={t('app.admin.plan_limit_form.ongoing_limit')}
+                         title={t('app.admin.plan_limit_form.ongoing_limitations')}
                          shouldRenderField={(limit: PlanLimitation) => limit.limitable_type === 'MachineCategory'}
                          formAttributeName="plan_limitations_attributes"
-                         renderFieldAttribute={renderOngoingLimitAttribute} />
+                         formAttributes={['limitable_id', 'limit']}
+                         renderField={renderOngoingLimit}
+                         cancelLabel={t('app.admin.plan_limit_form.cancel')} />
 
         <div className='plan-limit-list'>
           <p className="title">{t('app.admin.plan_limit_form.by_machine')}</p>
@@ -181,7 +172,10 @@ export const PlanLimitForm = <TContext extends object> ({ register, control, for
                        title={t('app.admin.plan_limit_form.ongoing_limit')}
                        shouldRenderField={(limit: PlanLimitation) => limit.limitable_type === 'Machine'}
                        formAttributeName="plan_limitations_attributes"
-                       renderFieldAttribute={renderOngoingLimitAttribute} />
+                       formAttributes={['limitable_id', 'limit']}
+                       renderField={renderOngoingLimit}
+                       saveReminderLabel={t('app.admin.plan_limit_form.save_reminder')}
+                       cancelLabel={t('app.admin.plan_limit_form.cancel')} />
 
       <PlanLimitModal isOpen={isOpen}
                       machines={machines}
