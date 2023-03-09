@@ -7,6 +7,7 @@ import userEvent from '@testing-library/user-event';
 import plans from '../../__fixtures__/plans';
 import machines from '../../__fixtures__/machines';
 import { tiptapEvent } from '../../__lib__/tiptap';
+import { uiRouter } from '../../__lib__/ui-router';
 
 describe('PlanForm', () => {
   const onError = jest.fn();
@@ -14,7 +15,7 @@ describe('PlanForm', () => {
   const beforeSubmit = jest.fn();
 
   test('render create PlanForm', async () => {
-    render(<PlanForm action="create" onError={onError} onSuccess={onSuccess} />);
+    render(<PlanForm action="create" onError={onError} onSuccess={onSuccess} uiRouter={uiRouter} />);
     await waitFor(() => screen.getByRole('combobox', { name: /app.admin.plan_form.group/ }));
     expect(screen.getByLabelText(/app.admin.plan_form.name/)).toBeInTheDocument();
     expect(screen.getByLabelText(/app.admin.plan_form.transversal/)).toBeInTheDocument();
@@ -35,7 +36,7 @@ describe('PlanForm', () => {
   });
 
   test('create new plan', async () => {
-    render(<PlanForm action="create" onError={onError} onSuccess={onSuccess} beforeSubmit={beforeSubmit} />);
+    render(<PlanForm action="create" onError={onError} onSuccess={onSuccess} beforeSubmit={beforeSubmit} uiRouter={uiRouter} />);
     await waitFor(() => screen.getByRole('combobox', { name: /app.admin.plan_form.group/ }));
     const user = userEvent.setup();
     // base_name
@@ -98,7 +99,7 @@ describe('PlanForm', () => {
 
   test('render update PlanForm with partner', async () => {
     const plan = plans[1];
-    render(<PlanForm action="update" plan={plan} onError={onError} onSuccess={onSuccess} />);
+    render(<PlanForm action="update" plan={plan} onError={onError} onSuccess={onSuccess} uiRouter={uiRouter} />);
     await waitFor(() => screen.getByRole('combobox', { name: /app.admin.plan_pricing_form.copy_prices_from/ }));
     expect(screen.getByLabelText(/app.admin.plan_form.name/)).toBeInTheDocument();
     expect(screen.queryByLabelText(/app.admin.plan_form.transversal/)).toBeNull();
@@ -123,14 +124,14 @@ describe('PlanForm', () => {
   });
 
   test('selecting transversal plan disables group select', async () => {
-    render(<PlanForm action="create" onError={onError} onSuccess={onSuccess} />);
+    render(<PlanForm action="create" onError={onError} onSuccess={onSuccess} uiRouter={uiRouter} />);
     await waitFor(() => screen.getByRole('combobox', { name: /app.admin.plan_form.group/ }));
     fireEvent.click(screen.getByRole('switch', { name: /app.admin.plan_form.transversal/ }));
     expect(screen.queryByRole('combobox', { name: /app.admin.plan_form.group/ })).toBeNull();
   });
 
   test('selecting partner plan shows partner selection', async () => {
-    render(<PlanForm action="create" onError={onError} onSuccess={onSuccess} />);
+    render(<PlanForm action="create" onError={onError} onSuccess={onSuccess} uiRouter={uiRouter} />);
     await waitFor(() => screen.getByRole('combobox', { name: /app.admin.plan_form.group/ }));
     fireEvent.click(screen.getByRole('switch', { name: /app.admin.plan_form.partner_plan/ }));
     expect(screen.getByLabelText(/app.admin.plan_form.notified_partner/));
@@ -138,7 +139,7 @@ describe('PlanForm', () => {
   });
 
   test('creating a new partner selects him by default', async () => {
-    render(<PlanForm action="create" onError={onError} onSuccess={onSuccess} />);
+    render(<PlanForm action="create" onError={onError} onSuccess={onSuccess} uiRouter={uiRouter} />);
     await waitFor(() => screen.getByRole('combobox', { name: /app.admin.plan_form.group/ }));
     fireEvent.click(screen.getByRole('switch', { name: /app.admin.plan_form.partner_plan/ }));
     fireEvent.click(screen.getByRole('button', { name: /app.admin.plan_form.new_user/ }));
@@ -157,7 +158,7 @@ describe('PlanForm', () => {
   test('update plan prices', async () => {
     const plan = plans[1];
     const machine = machines[1];
-    render(<PlanForm action="update" plan={plan} onError={onError} onSuccess={onSuccess} beforeSubmit={beforeSubmit} />);
+    render(<PlanForm action="update" plan={plan} onError={onError} onSuccess={onSuccess} beforeSubmit={beforeSubmit} uiRouter={uiRouter} />);
     await waitFor(() => screen.getByLabelText(new RegExp(machine.name)));
     // update machine price
     fireEvent.change(screen.getByLabelText(new RegExp(machine.name)), { target: { value: 42.42 } });

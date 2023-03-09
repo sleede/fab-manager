@@ -44,7 +44,7 @@ export interface Plan {
     partnership?: boolean,
     partners?: Array<Partner>,
     advanced_accounting_attributes?: AdvancedAccounting,
-    plan_limitations_attributes: Array<PlanLimitation>
+    plan_limitations_attributes?: Array<PlanLimitation>
 }
 
 export interface PlansDuration {

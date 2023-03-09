@@ -26,6 +26,8 @@ import { PlanPricingForm } from './plan-pricing-form';
 import { AdvancedAccountingForm } from '../accounting/advanced-accounting-form';
 import { FabTabs } from '../base/fab-tabs';
 import { PlanLimitForm } from './plan-limit-form';
+import { UnsavedFormAlert } from '../form/unsaved-form-alert';
+import { UIRouter } from '@uirouter/angularjs';
 
 declare const Application: IApplication;
 
@@ -35,12 +37,13 @@ interface PlanFormProps {
   onError: (message: string) => void,
   onSuccess: (message: string) => void,
   beforeSubmit?: (data: Plan) => void,
+  uiRouter: UIRouter
 }
 
 /**
  * Form to edit or create subscription plans
  */
-export const PlanForm: React.FC<PlanFormProps> = ({ action, plan, onError, onSuccess, beforeSubmit }) => {
+export const PlanForm: React.FC<PlanFormProps> = ({ action, plan, onError, onSuccess, beforeSubmit, uiRouter }) => {
   const { handleSubmit, register, control, formState, setValue } = useForm<Plan>({ defaultValues: { ...plan } });
   const output = useWatch<Plan>({ control }); // eslint-disable-line
   const { t } = useTranslation('admin');
@@ -316,6 +319,7 @@ export const PlanForm: React.FC<PlanFormProps> = ({ action, plan, onError, onSuc
       </header>
 
       <form onSubmit={handleSubmit(onSubmit)}>
+        <UnsavedFormAlert uiRouter={uiRouter} formState={formState} />
         <FabTabs tabs={[
           {
             id: 'settings',
@@ -350,4 +354,4 @@ const PlanFormWrapper: React.FC<PlanFormProps> = (props) => {
     </Loader>
   );
 };
-Application.Components.component('planForm', react2angular(PlanFormWrapper, ['action', 'plan', 'onError', 'onSuccess']));
+Application.Components.component('planForm', react2angular(PlanFormWrapper, ['action', 'plan', 'onError', 'onSuccess', 'uiRouter']));
