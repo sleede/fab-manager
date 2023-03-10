@@ -89,12 +89,16 @@ export const PlanLimitForm = <TContext extends object> ({ register, control, for
   };
 
   /**
-   * Callback triggered when the limitation was deleted. Return a callback accepting a message
+   * Callback triggered when a previously-saved limitation was deleted. Return a callback accepting a message.
    */
   const onLimitationDeleted = (index: number): (message: string) => void => {
     return (message: string) => {
       onSuccess(message);
       remove(index);
+      // This have a little drowback: remove(index) will set the form as "dirty", and trigger the "unsaved form alert", even if clicking on save or not
+      // won't change anything to the deleted item. To improve this we could do the following: do not destroy the limitation through the API and instead
+      // set {_destroy: true} and destroy the limitation when saving the form but we need some UI for items about to be deleted
+      // update(index, { ...getValues(`plan_limitations_attributes.${index}`), _destroy: true });
     };
   };
 
@@ -190,8 +194,8 @@ export const PlanLimitForm = <TContext extends object> ({ register, control, for
                     <EditDestroyButtons onDeleteSuccess={onLimitationDeleted(index)}
                                         onError={onError}
                                         onEdit={onEditLimitation(limitation, index)}
-                                        itemId={limitation.id}
-                                        itemType={t('app.admin.plan_limit_form.limitation')}
+                                        itemId={getValues(`plan_limitations_attributes.${index}.id`)}
+                                        deleteSuccessMessage={t('app.admin.plan_limit_form.delete_success')}
                                         confirmationTitle={t('app.admin.plan_limit_form.confirmation_title')}
                                         confirmationMessage={t('app.admin.plan_limit_form.confirmation_message')}
                                         apiDestroy={PlanLimitationAPI.destroy} />
@@ -225,10 +229,10 @@ export const PlanLimitForm = <TContext extends object> ({ register, control, for
                     <EditDestroyButtons onDeleteSuccess={onLimitationDeleted(index)}
                                         onError={onError}
                                         onEdit={onEditLimitation(limitation, index)}
-                                        itemId={limitation.id}
-                                        itemType={t('app.admin.plan_limit_form.limitation')}
+                                        itemId={getValues(`plan_limitations_attributes.${index}.id`)}
                                         confirmationTitle={t('app.admin.plan_limit_form.confirmation_title')}
                                         confirmationMessage={t('app.admin.plan_limit_form.confirmation_message')}
+                                        deleteSuccessMessage={t('app.admin.plan_limit_form.delete_success')}
                                         apiDestroy={PlanLimitationAPI.destroy} />
                   </div>
                 </div>

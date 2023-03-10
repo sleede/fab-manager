@@ -5,26 +5,29 @@ import { useTranslation } from 'react-i18next';
 import { FabButton } from './fab-button';
 import { FabModal } from './fab-modal';
 
-interface EditDestroyButtonsProps {
+type EditDestroyButtonsCommon = {
   onDeleteSuccess: (message: string) => void,
   onError: (message: string) => void,
   onEdit: () => void,
   itemId: number,
-  itemType: string,
   apiDestroy: (itemId: number) => Promise<void>,
-  confirmationTitle?: string,
-  confirmationMessage?: string|ReactNode,
   className?: string,
   iconSize?: number,
   showEditButton?: boolean,
 }
+
+type EditDestroyButtonsMessages =
+  { itemType: string, confirmationTitle?: string, confirmationMessage?: string|ReactNode, deleteSuccessMessage?: string } |
+  { itemType?: never, confirmationTitle: string, confirmationMessage: string|ReactNode, deleteSuccessMessage: string}
+
+type EditDestroyButtonsProps = EditDestroyButtonsCommon & EditDestroyButtonsMessages;
 
 /**
  * This component shows a group of two buttons.
  * Destroy : shows a modal dialog to ask the user for confirmation about the deletion of the provided item.
  * Edit : triggers the provided function.
  */
-export const EditDestroyButtons: React.FC<EditDestroyButtonsProps> = ({ onDeleteSuccess, onError, onEdit, itemId, itemType, apiDestroy, confirmationTitle, confirmationMessage, className, iconSize = 20, showEditButton = true }) => {
+export const EditDestroyButtons: React.FC<EditDestroyButtonsProps> = ({ onDeleteSuccess, onError, onEdit, itemId, itemType, apiDestroy, confirmationTitle, confirmationMessage, deleteSuccessMessage, className, iconSize = 20, showEditButton = true }) => {
   const { t } = useTranslation('admin');
 
   const [deletionModal, setDeletionModal] = useState<boolean>(false);
@@ -42,9 +45,9 @@ export const EditDestroyButtons: React.FC<EditDestroyButtonsProps> = ({ onDelete
    */
   const onDeleteConfirmed = (): void => {
     apiDestroy(itemId).then(() => {
-      onDeleteSuccess(t('app.admin.edit_destroy_buttons.deleted', { TYPE: itemType }));
+      onDeleteSuccess(deleteSuccessMessage || t('app.admin.edit_destroy_buttons.deleted', { TYPE: itemType }));
     }).catch((error) => {
-      onError(t('app.admin.edit_destroy_buttons.unable_to_delete', { TYPE: itemType }) + error);
+      onError(t('app.admin.edit_destroy_buttons.unable_to_delete') + error);
     });
     toggleDeletionModal();
   };
