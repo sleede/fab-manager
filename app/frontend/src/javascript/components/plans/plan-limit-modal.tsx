@@ -19,12 +19,13 @@ interface PlanLimitModalProps {
   machines: Array<Machine>
   categories: Array<MachineCategory>,
   limitation?: PlanLimitation,
+  existingLimitations: Array<PlanLimitation>;
 }
 
 /**
  * Form to manage subscriptions limitations of use
  */
-export const PlanLimitModal: React.FC<PlanLimitModalProps> = ({ isOpen, toggleModal, machines, categories, onSuccess, limitation }) => {
+export const PlanLimitModal: React.FC<PlanLimitModalProps> = ({ isOpen, toggleModal, machines, categories, onSuccess, limitation, existingLimitations = [] }) => {
   const { t } = useTranslation('admin');
 
   const { register, control, formState, setValue, handleSubmit, reset } = useForm<PlanLimitation>({ defaultValues: limitation || { limitable_type: 'MachineCategory' } });
@@ -54,7 +55,7 @@ export const PlanLimitModal: React.FC<PlanLimitModalProps> = ({ isOpen, toggleMo
     }
     return handleSubmit((data: PlanLimitation) => {
       onSuccess({ ...data, _modified: true });
-      reset({});
+      reset({ limitable_type: 'MachineCategory', limitable_id: null, limit: null });
       toggleModal();
     })(event);
   };
@@ -63,13 +64,17 @@ export const PlanLimitModal: React.FC<PlanLimitModalProps> = ({ isOpen, toggleMo
    */
   const buildOptions = (): Array<SelectOption<number>> => {
     if (limitType === 'MachineCategory') {
-      return categories.map(cat => {
-        return { value: cat.id, label: cat.name };
-      });
+      return categories
+        .filter(c => limitation || !existingLimitations.filter(l => l.limitable_type === 'MachineCategory').map(l => l.limitable_id).includes(c.id))
+        .map(cat => {
+          return { value: cat.id, label: cat.name };
+        });
     } else {
-      return machines.map(machine => {
-        return { value: machine.id, label: machine.name };
-      });
+      return machines
+        .filter(m => limitation || !existingLimitations.filter(l => l.limitable_type === 'Machine').map(l => l.limitable_id).includes(m.id))
+        .map(machine => {
+          return { value: machine.id, label: machine.name };
+        });
     }
   };
 
@@ -78,23 +83,27 @@ export const PlanLimitModal: React.FC<PlanLimitModalProps> = ({ isOpen, toggleMo
               width={ModalSize.large}
               isOpen={isOpen}
               toggleModal={toggleModal}
+              onClose={() => reset({ limitable_type: 'MachineCategory' })}
               closeButton>
       <form className='plan-limit-modal' onSubmit={onSubmit}>
         <p className='subtitle'>{t('app.admin.plan_limit_modal.limit_reservations')}</p>
         <div className="grp">
           <button onClick={evt => toggleLimitType(evt, 'MachineCategory')}
-            className={limitType === 'MachineCategory' ? 'is-active' : ''}>
-              {t('app.admin.plan_limit_modal.by_categories')}
+                  className={limitType === 'MachineCategory' ? 'is-active' : ''}
+                  disabled={!!limitation}>
+            {t('app.admin.plan_limit_modal.by_categories')}
           </button>
           <button onClick={evt => toggleLimitType(evt, 'Machine')}
-            className={limitType === 'Machine' ? 'is-active' : ''}>
-              {t('app.admin.plan_limit_modal.by_machine')}
+                  className={limitType === 'Machine' ? 'is-active' : ''}
+                  disabled={!!limitation}>
+            {t('app.admin.plan_limit_modal.by_machine')}
           </button>
         </div>
           <FabAlert level='info'>{t('app.admin.plan_limit_modal.machine_info')}</FabAlert>
           <FormInput register={register} id="id" type="hidden" />
           <FormInput register={register} id="limitable_type" type="hidden" />
           <FormSelect options={buildOptions()}
+                      disabled={!!limitation}
                       control={control}
                       id="limitable_id"
                       rules={{ required: true }}

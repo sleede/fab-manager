@@ -54,6 +54,13 @@ export const PlanLimitForm = <TContext extends object> ({ register, control, for
   };
 
   /**
+   * Triggered when the user clicks on 'add a limitation'
+   */
+  const onAddLimitation = (): void => {
+    setEdited(null);
+    toggleModal();
+  };
+  /**
    * Triggered when a new limit was added or an existing limit was modified
    */
   const onLimitationSuccess = (limitation: PlanLimitation): void => {
@@ -141,7 +148,7 @@ export const PlanLimitForm = <TContext extends object> ({ register, control, for
         <header>
           <p>{t('app.admin.plan_limit_form.all_limitations')}</p>
           <div className="grpBtn">
-            <FabButton onClick={toggleModal} className="is-main">
+            <FabButton onClick={onAddLimitation} className="is-main">
               {t('app.admin.plan_limit_form.new_usage_limitation')}
             </FabButton>
           </div>
@@ -185,6 +192,8 @@ export const PlanLimitForm = <TContext extends object> ({ register, control, for
                                         onEdit={onEditLimitation(limitation, index)}
                                         itemId={limitation.id}
                                         itemType={t('app.admin.plan_limit_form.limitation')}
+                                        confirmationTitle={t('app.admin.plan_limit_form.confirmation_title')}
+                                        confirmationMessage={t('app.admin.plan_limit_form.confirmation_message')}
                                         apiDestroy={PlanLimitationAPI.destroy} />
                   </div>
                 </div>
@@ -218,6 +227,8 @@ export const PlanLimitForm = <TContext extends object> ({ register, control, for
                                         onEdit={onEditLimitation(limitation, index)}
                                         itemId={limitation.id}
                                         itemType={t('app.admin.plan_limit_form.limitation')}
+                                        confirmationTitle={t('app.admin.plan_limit_form.confirmation_title')}
+                                        confirmationMessage={t('app.admin.plan_limit_form.confirmation_message')}
                                         apiDestroy={PlanLimitationAPI.destroy} />
                   </div>
                 </div>
@@ -232,7 +243,8 @@ export const PlanLimitForm = <TContext extends object> ({ register, control, for
                       categories={categories}
                       toggleModal={toggleModal}
                       onSuccess={onLimitationSuccess}
-                      limitation={edited?.limitation} />
+                      limitation={edited?.limitation}
+                      existingLimitations={fields} />
     </div>
   );
 };
