@@ -1,4 +1,4 @@
-import { FieldArrayWithId, UseFieldArrayRemove } from 'react-hook-form/dist/types/fieldArray';
+import { FieldArrayWithId } from 'react-hook-form/dist/types/fieldArray';
 import { UseFormRegister } from 'react-hook-form';
 import { FieldValues } from 'react-hook-form/dist/types/fields';
 import { useTranslation } from 'react-i18next';
@@ -9,7 +9,7 @@ import { FieldArrayPath } from 'react-hook-form/dist/types/path';
 
 interface FormUnsavedListProps<TFieldValues, TFieldArrayName extends FieldArrayPath<TFieldValues>, TKeyName extends string> {
   fields: Array<FieldArrayWithId<TFieldValues, TFieldArrayName, TKeyName>>,
-  remove: UseFieldArrayRemove,
+  onRemove?: (index: number) => void,
   register: UseFormRegister<TFieldValues>,
   className?: string,
   title: string,
@@ -25,7 +25,7 @@ interface FormUnsavedListProps<TFieldValues, TFieldArrayName extends FieldArrayP
  * This component render a list of unsaved attributes, created elsewhere than in the form (e.g. in a modal dialog)
  * and pending for the form to be saved.
  */
-export const FormUnsavedList = <TFieldValues extends FieldValues = FieldValues, TFieldArrayName extends FieldArrayPath<TFieldValues> = FieldArrayPath<TFieldValues>, TKeyName extends string = 'id'>({ fields, remove, register, className, title, shouldRenderField = () => true, renderField, formAttributeName, formAttributes, saveReminderLabel, cancelLabel }: FormUnsavedListProps<TFieldValues, TFieldArrayName, TKeyName>) => {
+export const FormUnsavedList = <TFieldValues extends FieldValues = FieldValues, TFieldArrayName extends FieldArrayPath<TFieldValues> = FieldArrayPath<TFieldValues>, TKeyName extends string = 'id'>({ fields, onRemove, register, className, title, shouldRenderField = () => true, renderField, formAttributeName, formAttributes, saveReminderLabel, cancelLabel }: FormUnsavedListProps<TFieldValues, TFieldArrayName, TKeyName>) => {
   const { t } = useTranslation('shared');
 
   /**
@@ -35,7 +35,7 @@ export const FormUnsavedList = <TFieldValues extends FieldValues = FieldValues, 
     return (
       <div key={index} className="unsaved-field">
         {renderField(field)}
-        <p className="cancel-action" onClick={() => remove(index)}>
+        <p className="cancel-action" onClick={() => onRemove(index)}>
           {cancelLabel || t('app.shared.form_unsaved_list.cancel')}
           <X size={20} />
         </p>

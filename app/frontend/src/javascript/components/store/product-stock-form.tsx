@@ -203,7 +203,7 @@ export const ProductStockForm = <TContext extends object> ({ currentFormValues, 
 
       <FormUnsavedList fields={fields}
                        className="ongoing-stocks"
-                       remove={remove}
+                       onRemove={remove}
                        register={register}
                        title={t('app.admin.store.product_stock_form.ongoing_operations')}
                        formAttributeName="product_stock_movements_attributes"

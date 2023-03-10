@@ -116,6 +116,7 @@ Rails.application.routes.draw do
       patch 'cancel', on: :member
     end
     resources :plan_categories
+    resources :plan_limitations, only: [:destroy]
     resources :plans do
       get 'durations', on: :collection
     end

@@ -85,7 +85,7 @@ class API::PlansController < API::ApiController
                                        plan_file_attributes: %i[id attachment _destroy],
                                        prices_attributes: %i[id amount],
                                        advanced_accounting_attributes: %i[code analytical_section],
-                                       plan_limitations_attributes: %i[id limitable_id limitable_type limit])
+                                       plan_limitations_attributes: %i[id limitable_id limitable_type limit _destroy])
     end
   end
 end

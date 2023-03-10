@@ -10,23 +10,29 @@ import { Machine } from '../../models/machine';
 import { MachineCategory } from '../../models/machine-category';
 import { SelectOption } from '../../models/select';
 import { FabButton } from '../base/fab-button';
+import { useEffect } from 'react';
 
 interface PlanLimitModalProps {
   isOpen: boolean,
   toggleModal: () => void,
   onSuccess: (limit: PlanLimitation) => void,
   machines: Array<Machine>
-  categories: Array<MachineCategory>
+  categories: Array<MachineCategory>,
+  limitation?: PlanLimitation,
 }
 
 /**
  * Form to manage subscriptions limitations of use
  */
-export const PlanLimitModal: React.FC<PlanLimitModalProps> = ({ isOpen, toggleModal, machines, categories, onSuccess }) => {
+export const PlanLimitModal: React.FC<PlanLimitModalProps> = ({ isOpen, toggleModal, machines, categories, onSuccess, limitation }) => {
   const { t } = useTranslation('admin');
 
-  const { register, control, formState, setValue, handleSubmit } = useForm<PlanLimitation>({ defaultValues: { limitable_type: 'MachineCategory' } });
+  const { register, control, formState, setValue, handleSubmit, reset } = useForm<PlanLimitation>({ defaultValues: limitation || { limitable_type: 'MachineCategory' } });
   const limitType = useWatch({ control, name: 'limitable_type' });
+
+  useEffect(() => {
+    reset(limitation);
+  }, [limitation]);
 
   /**
    * Toggle the form between 'categories' and 'machine'
@@ -47,7 +53,8 @@ export const PlanLimitModal: React.FC<PlanLimitModalProps> = ({ isOpen, toggleMo
       event.preventDefault();
     }
     return handleSubmit((data: PlanLimitation) => {
-      onSuccess({ ...data, modified: true });
+      onSuccess({ ...data, _modified: true });
+      reset({});
       toggleModal();
     })(event);
   };
@@ -85,6 +92,7 @@ export const PlanLimitModal: React.FC<PlanLimitModalProps> = ({ isOpen, toggleMo
           </button>
         </div>
           <FabAlert level='info'>{t('app.admin.plan_limit_modal.machine_info')}</FabAlert>
+          <FormInput register={register} id="id" type="hidden" />
           <FormInput register={register} id="limitable_type" type="hidden" />
           <FormSelect options={buildOptions()}
                       control={control}

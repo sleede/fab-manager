@@ -44,7 +44,7 @@ interface PlanFormProps {
  * Form to edit or create subscription plans
  */
 export const PlanForm: React.FC<PlanFormProps> = ({ action, plan, onError, onSuccess, beforeSubmit, uiRouter }) => {
-  const { handleSubmit, register, control, formState, setValue } = useForm<Plan>({ defaultValues: { ...plan } });
+  const { handleSubmit, register, control, formState, setValue, getValues, resetField } = useForm<Plan>({ defaultValues: { ...plan } });
   const output = useWatch<Plan>({ control }); // eslint-disable-line
   const { t } = useTranslation('admin');
 
@@ -332,7 +332,10 @@ export const PlanForm: React.FC<PlanFormProps> = ({ action, plan, onError, onSuc
             content: <PlanLimitForm control={control}
                                     register={register}
                                     formState={formState}
-                                    onError={onError} />
+                                    onError={onError}
+                                    onSuccess={onSuccess}
+                                    getValues={getValues}
+                                    resetField={resetField} />
           }
         ]} />
       </form>

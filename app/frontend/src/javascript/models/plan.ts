@@ -18,7 +18,8 @@ export interface PlanLimitation {
     limitable_id: number,
     limitable_type: LimitableType,
     limit: number,
-    modified?: boolean,
+    _modified?: boolean,
+    _destroy?: boolean,
 }
 
 export interface Plan {

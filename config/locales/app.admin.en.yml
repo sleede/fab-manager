@@ -207,7 +207,9 @@ en:
         machine: "Machine name"
         max_hours_per_day: "Max. hours/day"
         ongoing_limitations: "Ongoing limitations"
+        saved_limitations: "Saved limitations"
         cancel: "Cancel this limitation"
+        limitation: "Limitation"
       plan_limit_modal:
         title: "Manage limitation of use"
         limit_reservations: "Limit reservations"

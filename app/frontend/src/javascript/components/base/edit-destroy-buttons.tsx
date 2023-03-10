@@ -14,7 +14,8 @@ interface EditDestroyButtonsProps {
   apiDestroy: (itemId: number) => Promise<void>,
   confirmationMessage?: string|ReactNode,
   className?: string,
-  iconSize?: number
+  iconSize?: number,
+  showEditButton?: boolean,
 }
 
 /**
@@ -22,7 +23,7 @@ interface EditDestroyButtonsProps {
  * Destroy : shows a modal dialog to ask the user for confirmation about the deletion of the provided item.
  * Edit : triggers the provided function.
  */
-export const EditDestroyButtons: React.FC<EditDestroyButtonsProps> = ({ onDeleteSuccess, onError, onEdit, itemId, itemType, apiDestroy, confirmationMessage, className, iconSize = 20 }) => {
+export const EditDestroyButtons: React.FC<EditDestroyButtonsProps> = ({ onDeleteSuccess, onError, onEdit, itemId, itemType, apiDestroy, confirmationMessage, className, iconSize = 20, showEditButton = true }) => {
   const { t } = useTranslation('admin');
 
   const [deletionModal, setDeletionModal] = useState<boolean>(false);
@@ -50,9 +51,9 @@ export const EditDestroyButtons: React.FC<EditDestroyButtonsProps> = ({ onDelete
   return (
     <>
       <div className={`edit-destroy-buttons ${className || ''}`}>
-        <FabButton className='edit-btn' onClick={onEdit}>
+        {showEditButton && <FabButton className='edit-btn' onClick={onEdit}>
           <PencilSimple size={iconSize} weight="fill" />
-        </FabButton>
+        </FabButton>}
         <FabButton type='button' className='delete-btn' onClick={toggleDeletionModal}>
           <Trash size={iconSize} weight="fill" />
         </FabButton>
