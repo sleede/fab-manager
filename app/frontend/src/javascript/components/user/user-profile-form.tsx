@@ -32,6 +32,7 @@ import { ProfileCustomField } from '../../models/profile-custom-field';
 import { SettingName } from '../../models/setting';
 import SettingAPI from '../../api/setting';
 import { SelectOption } from '../../models/select';
+import ValidationLib from '../../lib/validation';
 
 declare const Application: IApplication;
 
@@ -54,10 +55,6 @@ interface UserProfileFormProps {
  */
 export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, user, operator, className, onError, onSuccess, showGroupInput, showTermsAndConditionsInput, showTrainingsInput, showTagsInput }) => {
   const { t } = useTranslation('shared');
-
-  // regular expression to validate the input fields
-  const phoneRegex = /^((00|\+)\d{2,3})?[\d -]{4,14}$/;
-  const urlRegex = /^(https?:\/\/)([^.]+)\.(.{2,30})(\/.*)*\/?$/;
 
   const { handleSubmit, register, control, formState, setValue, reset } = useForm<User>({ defaultValues: { ...user } });
   const output = useWatch<User>({ control });
@@ -215,7 +212,7 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
                        register={register}
                        rules={{
                          pattern: {
-                           value: phoneRegex,
+                           value: ValidationLib.phoneRegex,
                            message: t('app.shared.user_profile_form.phone_number_invalid')
                          },
                          required: fieldsSettings.get('phone_required') === 'true'
@@ -314,7 +311,7 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
                        register={register}
                        rules={{
                          pattern: {
-                           value: urlRegex,
+                           value: ValidationLib.urlRegex,
                            message: t('app.shared.user_profile_form.website_invalid')
                          }
                        }}
