@@ -28,7 +28,7 @@
         add_a_machine_category: "Add a machine category"
         name: "Name"
         machines_number: "Number of machines"
-        edit: "Edit"
+        machine_category: "Machine category"
       machine_category_modal:
         new_machine_category: "New category"
         edit_machine_category: "Edit category"
@@ -40,12 +40,6 @@
         name: "Name of category"
         assigning_machines: "Assign machines to this category"
         save: "Save"
-      delete_machine_category_modal:
-        confirmation_required: "Confirmation required"
-        confirm: "Confirm"
-        deleted: "The machine category has been successfully deleted."
-        unable_to_delete: "Unable to delete the machine category: "
-        confirm_machine_category: "Do you really want to remove this machine category?"
       machine_form:
         ACTION_title: "{ACTION, select, create{New} other{Update the}} machine"
         watch_out_when_creating_a_new_machine_its_prices_are_initialized_at_0_for_all_subscriptions: "Watch out! When creating a new machine, its prices are initialized at 0 for all subscriptions."
