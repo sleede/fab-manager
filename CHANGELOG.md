@@ -11,6 +11,7 @@
 - Fix a bug: empty advanced accounting code is not defaulted to the general setting
 - Fix a bug: invalid style in accounting codes settings
 - Fix a bug: wrong namespace for task cart_operator
+- Fix a security issue: updated rack to 2.2.6.3 to fix [CVE-2023-27530](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-27530)
 - [TODO DEPLOY] `rails fablab:fix:cart_operator`
 - [TODO DEPLOY] `rails fablab:setup:build_accounting_lines`
 - [TODO DEPLOY] `rails fablab:fix:pack_minutes_used`
