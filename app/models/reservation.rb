@@ -21,6 +21,8 @@ class Reservation < ApplicationRecord
   has_many :invoice_items, as: :object, dependent: :destroy
   has_one :payment_schedule_object, as: :object, dependent: :destroy
 
+  has_many :prepaid_pack_reservations, dependent: :destroy
+
   validates :reservable_id, :reservable_type, presence: true
   validate :machine_not_already_reserved, if: -> { reservable.is_a?(Machine) }
   validate :training_not_fully_reserved, if: -> { reservable.is_a?(Training) }

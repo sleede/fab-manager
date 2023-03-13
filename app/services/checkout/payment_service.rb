@@ -17,7 +17,7 @@ class Checkout::PaymentService
 
     CouponService.new.validate(coupon_code, order.statistic_profile.user.id)
 
-    amount = debit_amount(order)
+    amount = debit_amount(order, coupon_code)
     if (operator.privileged? && operator != order.statistic_profile.user) || amount.zero?
       Payments::LocalService.new.payment(order, coupon_code)
     elsif Stripe::Helper.enabled? && payment_id.present?

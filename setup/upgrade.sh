@@ -6,8 +6,11 @@ parseparams()
   SCRIPTS=()
   ENVIRONMENTS=()
   PREPROCESSING=()
-  while getopts "hyt:s:p:c:e:" opt; do
+  while getopts "hyit:s:p:c:e:" opt; do
     case "${opt}" in
+      i)
+        IGNORE=true
+        ;;
       y)
         Y=true
         ;;
@@ -173,20 +176,17 @@ version_check()
     VERSION=$(docker-compose exec -T "$SERVICE" cat package.json | jq -r '.version')
   fi
   target_version
-  if [ "$TARGET" = 'custom' ]; then return; fi
+  if [ "$TARGET" = 'custom' ] || [ "$IGNORE" = "true" ]; then return; fi
 
-  if verlt "$VERSION" 2.8.3 && verlt 2.8.3 "$TARGET"; then
-    version_error "v2.8.3 first"
-  elif verlt "$VERSION" 3.1.2 && verlt 3.1.2 "$TARGET"; then
-    version_error "v3.1.2 first"
-  elif verlt "$VERSION" 4.0.4 && verlt 4.0.4 "$TARGET"; then
-    version_error "v4.0.4 first"
-  elif verlt "$VERSION" 4.4.6 && verlt 4.4.6 "$TARGET"; then
-    version_error "v4.4.6 first"
-  elif verlt "$VERSION" 4.7.14 && verlt 4.7.14 "$TARGET"; then
-    version_error "v4.7.14 first"
-  elif verlt "$TARGET" "$VERSION"; then
-    version_error "a version > $VERSION"
+  HTTP_CODE=$(curl -I -s -w "%{http_code}\n" -o /dev/null "https://hub.fab-manager.com/api/versions/next_step?version=$VERSION")
+  if [ "$HTTP_CODE" != 200 ]; then
+    printf "\n\n\e[91m[ ❌ ] Unable to check the next step version. Please check your internet connection or restart this script providing the \e[1m-i\e[0m\e[91m option\n\e[39m"
+    exit 3
+  fi
+  STEP=$(\curl -sSL "https://hub.fab-manager.com/api/versions/next_step?version=$VERSION" | jq -r '.next_step.semver')
+
+  if verlt "$VERSION" "$STEP" && verlt "$STEP" "$TARGET"; then
+    version_error "$STEP first"
   fi
 }
 
@@ -262,7 +262,10 @@ restore_tag()
 
 upgrade()
 {
-  [[ "$YES_ALL" = "true" ]] && confirm="y" || read -rp "[91m::[0m [1mProceed with upgrading to version $TARGET ?[0m (Y/n) " confirm </dev/tty
+  local user_target="$TARGET"
+  if [ "$TARGET" = 'custom' ]; then user_target="$TAG"; fi
+
+  [[ "$YES_ALL" = "true" ]] && confirm="y" || read -rp "[91m::[0m [1mProceed with upgrading to version $user_target ?[0m (Y/n) " confirm </dev/tty
   if [[ "$confirm" = "n" ]]; then exit 2; fi
 
   add_environments
@@ -311,7 +314,6 @@ upgrade()
     fi
   done
   docker-compose up -d
-  restore_tag
   docker ps
 }
 
@@ -331,6 +333,7 @@ usage()
 Options:
   -h                 Print this message and quit
   -y                 Answer yes to all questions
+  -i                 Ignore the target version check
   -t <string>        Force the upgrade to target the specified version
   -p <string>        Run the preprocessing command (TODO DEPLOY)
   -c <string>        Provides additional upgrade command, run in the context of the app (TODO DEPLOY)

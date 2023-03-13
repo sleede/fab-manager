@@ -1,5 +1,23 @@
 # Changelog Fab-manager
 
+## v5.8.2 2023 March 13
+
+- Improved upgrade script
+- Keep usage history of prepaid packs
+- OpenAPI reservation endpoint can be filtered by date
+- OpenAPI users endpoint now returns the ID of the InvoicingProfile
+- Fix a bug: URL validation regex was wrong
+- Fix a bug: privileged users cannot order free carts for themselves in the store
+- Fix a bug: unable to select a new machine for an existing category
+- Fix a bug: wrong counting of minutes used when using a prepaid pack
+- Fix a bug: empty advanced accounting code is not defaulted to the general setting
+- Fix a bug: invalid style in accounting codes settings
+- Fix a bug: wrong namespace for task cart_operator
+- Fix a security issue: updated rack to 2.2.6.3 to fix [CVE-2023-27530](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-27530)
+- [TODO DEPLOY] `rails fablab:fix:cart_operator`
+- [TODO DEPLOY] `rails fablab:setup:build_accounting_lines`
+- [TODO DEPLOY] `rails fablab:fix:pack_minutes_used`
+
 ## v5.8.1 2023 March 03
 
 - Fix a bug: unable to reserve an event

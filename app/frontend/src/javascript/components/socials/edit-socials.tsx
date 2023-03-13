@@ -7,6 +7,7 @@ import Icons from '../../../../images/social-icons.svg';
 import { FormInput } from '../form/form-input';
 import { Trash } from 'phosphor-react';
 import { useTranslation } from 'react-i18next';
+import ValidationLib from '../../lib/validation';
 
 interface EditSocialsProps<TFieldValues> {
   register: UseFormRegister<TFieldValues>,
@@ -21,8 +22,6 @@ interface EditSocialsProps<TFieldValues> {
  */
 export const EditSocials = <TFieldValues extends FieldValues>({ register, setValue, networks, formState, disabled }: EditSocialsProps<TFieldValues>) => {
   const { t } = useTranslation('shared');
-  // regular expression to validate the input fields
-  const urlRegex = /^(https?:\/\/)([^.]+)\.(.{2,30})(\/.*)*\/?$/;
 
   const initSelectedNetworks = networks.filter(el => !['', null, undefined].includes(el.url));
   const [selectedNetworks, setSelectedNetworks] = useState(initSelectedNetworks);
@@ -72,7 +71,7 @@ export const EditSocials = <TFieldValues extends FieldValues>({ register, setVal
                      register={register}
                      rules= {{
                        pattern: {
-                         value: urlRegex,
+                         value: ValidationLib.urlRegex,
                          message: t('app.shared.edit_socials.website_invalid')
                        }
                      }}

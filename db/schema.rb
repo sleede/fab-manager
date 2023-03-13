@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_03_02_120458) do
+ActiveRecord::Schema.define(version: 2023_03_09_094535) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
@@ -739,6 +739,17 @@ ActiveRecord::Schema.define(version: 2023_03_02_120458) do
     t.text "description"
   end
 
+  create_table "plan_limitations", force: :cascade do |t|
+    t.bigint "plan_id"
+    t.string "limitable_type"
+    t.bigint "limitable_id"
+    t.integer "limit", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["limitable_type", "limitable_id"], name: "index_plan_limitations_on_limitable_type_and_limitable_id"
+    t.index ["plan_id"], name: "index_plan_limitations_on_plan_id"
+  end
+
   create_table "plans", id: :serial, force: :cascade do |t|
     t.string "name"
     t.integer "amount"
@@ -758,6 +769,7 @@ ActiveRecord::Schema.define(version: 2023_03_02_120458) do
     t.boolean "disabled"
     t.boolean "monthly_payment"
     t.bigint "plan_category_id"
+    t.boolean "limiting"
     t.index ["group_id"], name: "index_plans_on_group_id"
     t.index ["plan_category_id"], name: "index_plans_on_plan_category_id"
   end
@@ -767,6 +779,16 @@ ActiveRecord::Schema.define(version: 2023_03_02_120458) do
     t.integer "availability_id"
     t.index ["availability_id"], name: "index_plans_availabilities_on_availability_id"
     t.index ["plan_id"], name: "index_plans_availabilities_on_plan_id"
+  end
+
+  create_table "prepaid_pack_reservations", force: :cascade do |t|
+    t.bigint "statistic_profile_prepaid_pack_id"
+    t.bigint "reservation_id"
+    t.integer "consumed_minutes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["reservation_id"], name: "index_prepaid_pack_reservations_on_reservation_id"
+    t.index ["statistic_profile_prepaid_pack_id"], name: "index_prepaid_pack_reservations_on_sp_prepaid_pack_id"
   end
 
   create_table "prepaid_packs", force: :cascade do |t|
@@ -1422,7 +1444,10 @@ ActiveRecord::Schema.define(version: 2023_03_02_120458) do
   add_foreign_key "payment_schedules", "invoicing_profiles", column: "operator_profile_id"
   add_foreign_key "payment_schedules", "statistic_profiles"
   add_foreign_key "payment_schedules", "wallet_transactions"
+  add_foreign_key "plan_limitations", "plans"
   add_foreign_key "plans", "plan_categories"
+  add_foreign_key "prepaid_pack_reservations", "reservations"
+  add_foreign_key "prepaid_pack_reservations", "statistic_profile_prepaid_packs"
   add_foreign_key "prepaid_packs", "groups"
   add_foreign_key "prices", "groups"
   add_foreign_key "prices", "plans"

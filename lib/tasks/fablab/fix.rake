@@ -294,15 +294,59 @@ namespace :fablab do
       Fablab::Application.load_tasks if Rake::Task.tasks.empty?
       Rake::Task['fablab:chain:invoices_items'].invoke
     end
-  end
 
-  desc '[release 5.7] fix operator of self-bought carts'
-  task cart_operator: :environment do |_task, _args|
-    Order.where.not(statistic_profile_id: nil).find_each do |order|
-      order.update(operator_profile_id: order.user&.invoicing_profile&.id)
+    desc '[release 5.8.2] fix operator of self-bought carts'
+    task cart_operator: :environment do |_task, _args|
+      Order.where.not(statistic_profile_id: nil).find_each do |order|
+        order.update(operator_profile_id: order.user&.invoicing_profile&.id)
+      end
+      Order.where.not(operator_profile_id: nil).find_each do |order|
+        order.update(statistic_profile_id: order.operator_profile&.user&.statistic_profile&.id)
+      end
     end
-    Order.where.not(operator_profile_id: nil).find_each do |order|
-      order.update(statistic_profile_id: order.operator_profile&.user&.statistic_profile&.id)
+
+    desc '[release 5.8.2] fix prepaid packs minutes_used'
+    task pack_minutes_used: :environment do |_task, _args|
+      StatisticProfilePrepaidPack.find_each do |sppp|
+        previous_packs = sppp.statistic_profile.statistic_profile_prepaid_packs
+                             .includes(:prepaid_pack)
+                             .where(prepaid_packs: { priceable: sppp.prepaid_pack.priceable })
+                             .where("statistic_profile_prepaid_packs.created_at <= '#{sppp.created_at.utc.strftime('%Y-%m-%d %H:%M:%S.%6N')}'")
+                             .order('statistic_profile_prepaid_packs.created_at')
+        remaining = {}
+        previous_packs.each do |pack|
+          available_minutes = pack.prepaid_pack.minutes
+          reservations = Reservation.where(reservable: sppp.prepaid_pack.priceable)
+                                    .where(statistic_profile_id: sppp.statistic_profile_id)
+                                    .where("created_at > '#{pack.created_at.utc.strftime('%Y-%m-%d %H:%M:%S.%6N')}'")
+          reservations.each do |reservation|
+            next if available_minutes.zero?
+
+            # if the previous pack has not covered all the duration of this reservation, we substract the remaining minutes from the current pack
+            if remaining[reservation.id]
+              if remaining[reservation.id] > available_minutes
+                consumed = available_minutes
+                remaining[reservation.id] = remaining[reservation.id] - available_minutes
+              else
+                consumed = remaining[reservation.id]
+                remaining.except!(reservation.id)
+              end
+            else
+              # if there was no remaining from the previous pack, we substract the reservation duration from the current pack
+              reservation_minutes = reservation.slots.map { |slot| (slot.end_at.to_time - slot.start_at.to_time) / 60.0 }.reduce(:+) || 0
+              if reservation_minutes > available_minutes
+                consumed = available_minutes
+                remaining[reservation.id] = reservation_minutes - consumed
+              else
+                consumed = reservation_minutes
+              end
+            end
+            available_minutes -= consumed
+            PrepaidPackReservation.find_or_create_by!(statistic_profile_prepaid_pack: pack, reservation: reservation, consumed_minutes: consumed)
+          end
+          pack.update(minutes_used: pack.prepaid_pack.minutes - available_minutes)
+        end
+      end
     end
   end
 end

@@ -3,7 +3,7 @@
 require 'test_helper'
 
 class StatisticProfilePrepaidPackTest < ActiveSupport::TestCase
-  test 'coupon have a expries date' do
+  test 'prepaid pack have a expries date' do
     prepaid_pack = PrepaidPack.first
     user = User.find_by(username: 'jdupond')
     p = StatisticProfilePrepaidPack.create!(prepaid_pack: prepaid_pack, statistic_profile: user.statistic_profile)

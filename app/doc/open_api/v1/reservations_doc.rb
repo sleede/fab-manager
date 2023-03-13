@@ -15,6 +15,8 @@ class OpenAPI::V1::ReservationsDoc < OpenAPI::V1::BaseDoc
     api :GET, "/#{API_VERSION}/reservations", 'Reservations index'
     description 'Index of reservations made by users, paginated. Ordered by *created_at* descendant.'
     param_group :pagination
+    param :after, DateTime, optional: true, desc: 'Filter reservations to those created after the given date.'
+    param :before, DateTime, optional: true, desc: 'Filter reservations to those created before the given date.'
     param :user_id, [Integer, Array], optional: true, desc: 'Scope the request to one or various users.'
     param :reservable_type, %w[Event Machine Space Training], optional: true, desc: 'Scope the request to a specific type of reservable.'
     param :reservable_id, [Integer, Array], optional: true, desc: 'Scope the request to one or various reservables.'

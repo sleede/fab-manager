@@ -3,6 +3,8 @@
 # Provides methods for Machines
 class MachineService
   class << self
+    include ApplicationHelper
+
     # @param filters [ActionController::Parameters]
     def list(filters)
       sort_by = Setting.get('machines_sort_by') || 'default'
@@ -15,7 +17,7 @@ class MachineService
       machines = machines.where(deleted_at: nil)
 
       machines = filter_by_disabled(machines, filters)
-      filter_by_category(machines, filters)
+      filter_by_categories(machines, filters)
     end
 
     private
@@ -31,12 +33,10 @@ class MachineService
 
     # @param machines [ActiveRecord::Relation<Machine>]
     # @param filters [ActionController::Parameters]
-    def filter_by_category(machines, filters)
+    def filter_by_categories(machines, filters)
       return machines if filters[:category].blank?
 
-      return machines.where(machine_category_id: nil) if filters[:category] == 'none'
-
-      machines.where(machine_category_id: filters[:category])
+      machines.where(machine_category_id: filters[:category].split(',').map { |id| id == 'none' ? nil : id })
     end
   end
 end

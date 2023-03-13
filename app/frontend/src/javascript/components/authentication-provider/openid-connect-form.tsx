@@ -12,6 +12,7 @@ import SsoClient from '../../api/external/sso';
 import { FieldPathValue } from 'react-hook-form/dist/types/path';
 import { FormMultiSelect } from '../form/form-multi-select';
 import { difference } from 'lodash';
+import ValidationLib from '../../lib/validation';
 
 interface OpenidConnectFormProps<TFieldValues, TContext extends object> {
   register: UseFormRegister<TFieldValues>,
@@ -50,10 +51,6 @@ export const OpenidConnectForm = <TFieldValues extends FieldValues, TContext ext
   useEffect(() => {
     checkForDiscoveryEndpoint({ target: { value: currentFormValues?.issuer } } as React.ChangeEvent<HTMLInputElement>);
   }, []);
-
-  // regular expression to validate the input fields
-  const endpointRegex = /^\/?([-._~:?#[\]@!$&'()*+,;=%\w]+\/?)*$/;
-  const urlRegex = /^(https?:\/\/)([^.]+)\.(.{2,30})(\/.*)*\/?$/;
 
   /**
    * If the discovery endpoint is available, the user will be able to choose to use it or not.
@@ -109,7 +106,7 @@ export const OpenidConnectForm = <TFieldValues extends FieldValues, TContext ext
                  label={t('app.admin.authentication.openid_connect_form.issuer')}
                  placeholder="https://sso.exemple.com"
                  tooltip={t('app.admin.authentication.openid_connect_form.issuer_help')}
-                 rules={{ required: true, pattern: urlRegex }}
+                 rules={{ required: true, pattern: ValidationLib.urlRegex }}
                  onChange={checkForDiscoveryEndpoint}
                  debounce={400}
                  warning={!discoveryAvailable && { message: t('app.admin.authentication.openid_connect_form.discovery_unavailable') } }
@@ -161,7 +158,7 @@ export const OpenidConnectForm = <TFieldValues extends FieldValues, TContext ext
                  placeholder="https://sso.exemple.com/my-account"
                  label={t('app.admin.authentication.openid_connect_form.profile_edition_url')}
                  tooltip={t('app.admin.authentication.openid_connect_form.profile_edition_url_help')}
-                 rules={{ required: false, pattern: urlRegex }}
+                 rules={{ required: false, pattern: ValidationLib.urlRegex }}
                  formState={formState} />
       <h4>{t('app.admin.authentication.openid_connect_form.client_options')}</h4>
       <FormInput id="providable_attributes.client__identifier"
@@ -178,31 +175,31 @@ export const OpenidConnectForm = <TFieldValues extends FieldValues, TContext ext
         <FormInput id="providable_attributes.client__authorization_endpoint"
                    label={t('app.admin.authentication.openid_connect_form.client__authorization_endpoint')}
                    placeholder="/authorize"
-                   rules={{ required: !currentFormValues?.discovery, pattern: endpointRegex }}
+                   rules={{ required: !currentFormValues?.discovery, pattern: ValidationLib.endpointRegex }}
                    formState={formState}
                    register={register} />
         <FormInput id="providable_attributes.client__token_endpoint"
                    label={t('app.admin.authentication.openid_connect_form.client__token_endpoint')}
                    placeholder="/token"
-                   rules={{ required: !currentFormValues?.discovery, pattern: endpointRegex }}
+                   rules={{ required: !currentFormValues?.discovery, pattern: ValidationLib.endpointRegex }}
                    formState={formState}
                    register={register} />
         <FormInput id="providable_attributes.client__userinfo_endpoint"
                    label={t('app.admin.authentication.openid_connect_form.client__userinfo_endpoint')}
                    placeholder="/userinfo"
-                   rules={{ required: !currentFormValues?.discovery, pattern: endpointRegex }}
+                   rules={{ required: !currentFormValues?.discovery, pattern: ValidationLib.endpointRegex }}
                    formState={formState}
                    register={register} />
         {currentFormValues?.client_auth_method === 'jwks' && <FormInput id="providable_attributes.client__jwks_uri"
                    label={t('app.admin.authentication.openid_connect_form.client__jwks_uri')}
-                   rules={{ required: currentFormValues.client_auth_method === 'jwks', pattern: endpointRegex }}
+                   rules={{ required: currentFormValues.client_auth_method === 'jwks', pattern: ValidationLib.endpointRegex }}
                    formState={formState}
                    placeholder="/jwk"
                    register={register} />}
         <FormInput id="providable_attributes.client__end_session_endpoint"
                    label={t('app.admin.authentication.openid_connect_form.client__end_session_endpoint')}
                    tooltip={t('app.admin.authentication.openid_connect_form.client__end_session_endpoint_help')}
-                   rules={{ pattern: endpointRegex }}
+                   rules={{ pattern: ValidationLib.endpointRegex }}
                    formState={formState}
                    register={register} />
       </div>}

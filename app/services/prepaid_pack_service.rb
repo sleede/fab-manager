@@ -7,6 +7,7 @@ class PrepaidPackService
     # @option filters [Integer] :group_id
     # @option filters [Integer] :priceable_id
     # @option filters [String] :priceable_type 'Machine' | 'Space'
+    # @return [ActiveRecord::Relation<PrepaidPack>]
     def list(filters)
       packs = PrepaidPack.where(nil)
 
@@ -25,6 +26,7 @@ class PrepaidPackService
     # return the not expired packs for the given item bought by the given user
     # @param user [User]
     # @param priceable [Machine,Space,NilClass]
+    # @return [ActiveRecord::Relation<StatisticProfilePrepaidPack>]
     def user_packs(user, priceable = nil)
       sppp = StatisticProfilePrepaidPack.includes(:prepaid_pack)
                                         .references(:prepaid_packs)
@@ -60,12 +62,12 @@ class PrepaidPackService
       packs = user_packs(user, reservation.reservable).order(minutes_used: :desc)
       packs.each do |pack|
         pack_available = pack.prepaid_pack.minutes - pack.minutes_used
-        remaining = pack_available - consumed
-        remaining = 0 if remaining.negative?
-        pack_consumed = pack.prepaid_pack.minutes - remaining
-        pack.update(minutes_used: pack_consumed)
+        remaining = consumed > pack_available ? 0 : pack_available - consumed
+        pack.update(minutes_used: pack.prepaid_pack.minutes - remaining)
 
+        pack_consumed = consumed > pack_available ? pack_available : consumed
         consumed -= pack_consumed
+        PrepaidPackReservation.create!(statistic_profile_prepaid_pack: pack, reservation: reservation, consumed_minutes: pack_consumed)
       end
     end
 

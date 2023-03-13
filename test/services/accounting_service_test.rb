@@ -17,8 +17,16 @@ class AccountingServiceTest < ActionDispatch::IntegrationTest
 
     # enable the VAT
     Setting.set('invoice_VAT-active', true)
-    Setting.set('invoice_VAT-rate', 19.6)
+    Setting.set('invoice_VAT-rate', '19.6')
 
+    # enable advanced accounting on the plan
+    Setting.set('advanced_accounting', true)
+    plan.update(advanced_accounting_attributes: {
+                  code: '7021',
+                  analytical_section: 'PL21'
+                })
+
+    # book and pay
     post '/api/local_payment/confirm_payment', params: {
       customer_id: @vlonchamp.id,
       coupon_code: 'GIME3EUR',
@@ -73,11 +81,13 @@ class AccountingServiceTest < ActionDispatch::IntegrationTest
     assert_not_nil item_machine
     assert_equal invoice.main_item.net_amount, item_machine&.credit
     assert_equal Setting.get('accounting_sales_journal_code'), item_machine&.journal_code
+
     # Check the subscription line
-    item_suscription = lines.find { |l| l.account_code == Setting.get('accounting_subscription_code') }
+    item_suscription = lines.find { |l| l.account_code == '7021' }
     assert_not_nil item_suscription
     assert_equal invoice.other_items.last.net_amount, item_suscription&.credit
     assert_equal Setting.get('accounting_sales_journal_code'), item_suscription&.journal_code
+    assert_equal '7021', item_suscription&.account_code
 
     # Check the VAT line
     vat_service = VatHistoryService.new

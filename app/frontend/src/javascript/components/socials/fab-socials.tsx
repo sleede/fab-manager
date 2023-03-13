@@ -12,6 +12,7 @@ import Icons from '../../../../images/social-icons.svg';
 import { Trash } from 'phosphor-react';
 import { useTranslation } from 'react-i18next';
 import { FabButton } from '../base/fab-button';
+import ValidationLib from '../../lib/validation';
 
 declare const Application: IApplication;
 
@@ -26,8 +27,6 @@ interface FabSocialsProps {
  */
 export const FabSocials: React.FC<FabSocialsProps> = ({ show = false, onError, onSuccess }) => {
   const { t } = useTranslation('shared');
-  // regular expression to validate the input fields
-  const urlRegex = /^(https?:\/\/)([\da-z.-]+)\.([-a-z\d.]{2,30})([/\w .-]*)*\/?$/;
 
   const { handleSubmit, register, setValue, formState } = useForm();
 
@@ -109,7 +108,7 @@ export const FabSocials: React.FC<FabSocialsProps> = ({ show = false, onError, o
                       register={register}
                       rules={{
                         pattern: {
-                          value: urlRegex,
+                          value: ValidationLib.urlRegex,
                           message: t('app.shared.fab_socials.website_invalid')
                         }
                       }}

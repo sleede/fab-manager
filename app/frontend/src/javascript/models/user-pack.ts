@@ -4,7 +4,8 @@ import { ApiFilter } from './api';
 export interface UserPackIndexFilter extends ApiFilter {
   user_id: number,
   priceable_type?: string,
-  priceable_id?: number
+  priceable_id?: number,
+  history?: boolean
 }
 
 export interface UserPack {
@@ -17,5 +18,11 @@ export interface UserPack {
     priceable: {
       name: string
     }
-  }
+  },
+  history?: Array<{
+    id: number,
+    consumed_minutes: number,
+    reservation_id: number,
+    reservation_date: TDateISO
+  }>
 }

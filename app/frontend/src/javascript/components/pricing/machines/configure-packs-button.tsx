@@ -75,7 +75,7 @@ export const ConfigurePacksButton: React.FC<ConfigurePacksButtonProps> = ({ pack
   };
 
   /**
-   * When the user clicks on the edition button, query the full data of the current pack from the API, then open te edition modal
+   * When the user clicks on the edition button, query the full data of the current pack from the API, then open the edition modal
    */
   const handleRequestEdit = (pack: PrepaidPack): void => {
     PrepaidPackAPI.get(pack.id)
