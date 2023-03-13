@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+## v5.8.2 2023 March 13
+
 - Improved upgrade script
 - Keep usage history of prepaid packs
 - OpenAPI reservation endpoint can be filtered by date
