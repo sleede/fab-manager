@@ -10,4 +10,11 @@ class PlanLimitation < ApplicationRecord
 
   validates :limitable_id, :limitable_type, :limit, :plan_id, presence: true
   validates :limitable_id, uniqueness: { scope: %i[limitable_type plan_id] }
+
+  # @return [Array<Machine,Event,Space,Training>]
+  def reservables
+    return limitable.machines if limitable_type == 'MachineCategory'
+
+    [limitable]
+  end
 end

@@ -61,38 +61,18 @@ class CartItem::Reservation < CartItem::BaseItem
   # @return [Boolean]
   def valid?(all_items = [])
     pending_subscription = all_items.find { |i| i.is_a?(CartItem::Subscription) }
+    plan = pending_subscription&.plan || customer&.subscribed_plan
 
     reservation_deadline_minutes = Setting.get('reservation_deadline').to_i
     reservation_deadline = reservation_deadline_minutes.minutes.since
 
-    cart_item_reservation_slots.each do |sr|
-      slot = sr.slot
-      if slot.nil?
-        errors.add(:slot, I18n.t('cart_item_validation.slot'))
-        return false
-      end
-
-      availability = slot.availability
-      if availability.nil?
-        errors.add(:availability, I18n.t('cart_item_validation.availability'))
-        return false
-      end
-
-      if slot.full?
-        errors.add(:slot, I18n.t('cart_item_validation.full'))
-        return false
-      end
-
-      if slot.start_at < reservation_deadline && !operator.privileged?
-        errors.add(:slot, I18n.t('cart_item_validation.deadline', { MINUTES: reservation_deadline_minutes }))
-        return false
-      end
-
-      next if availability.plan_ids.empty?
-      next if required_subscription?(availability, pending_subscription)
-
-      errors.add(:availability, I18n.t('cart_item_validation.restricted'))
+    unless ReservationLimitService.authorized?(plan, customer, self, all_items)
+      errors.add(:reservation, I18n.t('cart_item_validation.limit_reached', { HOURS: ReservationLimitService.limit(plan, reservable) }))
       return false
+    end
+
+    cart_item_reservation_slots.each do |sr|
+      return false unless validate_slot_reservation(sr, pending_subscription, reservation_deadline, errors)
     end
 
     true
@@ -262,5 +242,41 @@ class CartItem::Reservation < CartItem::BaseItem
       (pending_subscription && availability.plan_ids.include?(pending_subscription.plan.id)) ||
       (operator.manager? && customer.id != operator.id) ||
       operator.admin?
+  end
+
+  # @param reservation_slot [CartItem::ReservationSlot]
+  # @param pending_subscription [CartItem::Subscription, NilClass]
+  # @param reservation_deadline [Date,Time]
+  # @param errors [ActiveModel::Errors]
+  # @return [Boolean]
+  def validate_slot_reservation(reservation_slot, pending_subscription, reservation_deadline, errors)
+    slot = reservation_slot.slot
+    if slot.nil?
+      errors.add(:slot, I18n.t('cart_item_validation.slot'))
+      return false
+    end
+
+    availability = slot.availability
+    if availability.nil?
+      errors.add(:availability, I18n.t('cart_item_validation.availability'))
+      return false
+    end
+
+    if slot.full?
+      errors.add(:slot, I18n.t('cart_item_validation.full'))
+      return false
+    end
+
+    if slot.start_at < reservation_deadline && !operator.privileged?
+      errors.add(:slot, I18n.t('cart_item_validation.deadline', { MINUTES: reservation_deadline_minutes }))
+      return false
+    end
+
+    unless availability.plan_ids.empty? && required_subscription?(availability, pending_subscription)
+      errors.add(:availability, I18n.t('cart_item_validation.restricted'))
+      return false
+    end
+
+    true
   end
 end
