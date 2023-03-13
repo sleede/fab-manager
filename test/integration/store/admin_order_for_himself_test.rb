@@ -206,4 +206,51 @@ class Store::AdminOrderForHimselfTest < ActionDispatch::IntegrationTest
 
     assert_equal 403, response.status
   end
+
+  test 'admin pay a free order with success' do
+    login_as(@admin, scope: :user)
+
+    invoice_count = Invoice.count
+    invoice_items_count = InvoiceItem.count
+
+    post '/api/checkout/payment',
+         params: {
+           coupon_code: 'INTERNCOUP100',
+           order_token: @cart1.token,
+           customer_id: @admin.id
+         }.to_json, headers: default_headers
+
+    @cart1.reload
+
+    # general assertions
+    assert_equal 200, response.status
+    assert_equal invoice_count + 1, Invoice.count
+    assert_equal invoice_items_count + 2, InvoiceItem.count
+
+    # invoice_items assertions
+    invoice_item = InvoiceItem.last
+
+    assert invoice_item.check_footprint
+
+    # invoice assertions
+    invoice = Invoice.last
+    assert_invoice_pdf invoice
+    assert_not_nil invoice.debug_footprint
+
+    assert @cart1.payment_gateway_object.blank?
+    assert invoice.payment_gateway_object.blank?
+    assert invoice.total.zero?
+    assert invoice.check_footprint
+
+    # notification
+    assert_not_empty Notification.where(attached_object: invoice)
+
+    assert_equal 'paid', @cart1.state
+    assert_equal 'local', @cart1.payment_method
+    assert_equal 0, @cart1.paid_total
+
+    activity = @cart1.order_activities.last
+    assert_equal 'paid', activity.activity_type
+    assert_equal @admin.invoicing_profile.id, activity.operator_profile_id
+  end
 end
