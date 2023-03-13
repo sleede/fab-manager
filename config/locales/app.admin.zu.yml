@@ -28,7 +28,7 @@ zu:
         add_a_machine_category: "crwdns36071:0crwdne36071:0"
         name: "crwdns36073:0crwdne36073:0"
         machines_number: "crwdns36075:0crwdne36075:0"
-        edit: "crwdns36077:0crwdne36077:0"
+        machine_category: "crwdns37393:0crwdne37393:0"
       machine_category_modal:
         new_machine_category: "crwdns36079:0crwdne36079:0"
         edit_machine_category: "crwdns36081:0crwdne36081:0"
@@ -40,12 +40,6 @@ zu:
         name: "crwdns36091:0crwdne36091:0"
         assigning_machines: "crwdns36093:0crwdne36093:0"
         save: "crwdns36095:0crwdne36095:0"
-      delete_machine_category_modal:
-        confirmation_required: "crwdns36097:0crwdne36097:0"
-        confirm: "crwdns36099:0crwdne36099:0"
-        deleted: "crwdns36101:0crwdne36101:0"
-        unable_to_delete: "crwdns36103:0crwdne36103:0"
-        confirm_machine_category: "crwdns36825:0crwdne36825:0"
       machine_form:
         ACTION_title: "crwdns36827:0ACTION={ACTION}crwdne36827:0"
         watch_out_when_creating_a_new_machine_its_prices_are_initialized_at_0_for_all_subscriptions: "crwdns36829:0crwdne36829:0"

@@ -28,7 +28,7 @@ fr:
         add_a_machine_category: "Ajouter une catégorie de machine"
         name: "Nom"
         machines_number: "Nombre de machines"
-        edit: "Modifier"
+        machine_category: "Catégorie de machines"
       machine_category_modal:
         new_machine_category: "Nouvelle catégorie"
         edit_machine_category: "Modifier la catégorie"
@@ -40,12 +40,6 @@ fr:
         name: "Nom de la catégorie"
         assigning_machines: "Affectation des machines à cette catégorie"
         save: "Enregistrer"
-      delete_machine_category_modal:
-        confirmation_required: "Confirmation requise"
-        confirm: "Confirmer"
-        deleted: "La catégorie de machine a bien été supprimée."
-        unable_to_delete: "Impossible de supprimer la catégorie de machines : "
-        confirm_machine_category: "Voulez-vous vraiment supprimer cette catégorie de machine ?"
       machine_form:
         ACTION_title: "{ACTION, select, create{Nouvelle} other{Mettre à jour la}} machine"
         watch_out_when_creating_a_new_machine_its_prices_are_initialized_at_0_for_all_subscriptions: "Attention ! Lors de la création d'une machine, ses tarifs de réservation sont initialisés à zéro pour tous les abonnements."
