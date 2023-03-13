@@ -166,7 +166,7 @@ zu:
             end: "crwdns37057:0crwdne37057:0"
             countdown: "crwdns37059:0crwdne37059:0"
             history: "crwdns37061:0crwdne37061:0"
-            consumed_hours: "crwdns37063:0crwdne37063:0"
+            consumed_hours: "crwdns37395:0COUNT={COUNT}crwdnd37395:0COUNT={COUNT}crwdne37395:0"
             cta_info: "crwdns37065:0crwdne37065:0"
             select_machine: "crwdns37067:0crwdne37067:0"
             cta_button: "crwdns37069:0crwdne37069:0"
