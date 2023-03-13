@@ -4,6 +4,7 @@
 - Keep usage history of prepaid packs
 - OpenAPI reservation endpoint can be filtered by date
 - OpenAPI users endpoint now returns the ID of the InvoicingProfile
+- Fix a bug: URL validation regex was wrong
 - Fix a bug: privileged users cannot order free carts for themselves in the store
 - Fix a bug: wrong counting of minutes used when using a prepaid pack
 - Fix a bug: empty advanced accounting code is not defaulted to the general setting
