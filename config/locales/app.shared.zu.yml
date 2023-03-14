@@ -540,3 +540,6 @@ zu:
         show_reserved_uniq: "crwdns36249:0crwdne36249:0"
       machine:
         machine_uncategorized: "crwdns36219:0crwdne36219:0"
+      form_unsaved_list:
+        save_reminder: "crwdns37471:0crwdne37471:0"
+        cancel: "crwdns37473:0crwdne37473:0"

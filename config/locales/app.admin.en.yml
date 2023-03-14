@@ -201,7 +201,7 @@ en:
         usage_limitation_switch: "Restrict machine reservations to a number of hours per day."
         new_usage_limitation: "Add a limitation of use"
         all_limitations: "All limitations"
-        by_category: "By machine category"
+        by_category: "By machines category"
         by_machine: "By machine"
         category: "Machines category"
         machine: "Machine name"
