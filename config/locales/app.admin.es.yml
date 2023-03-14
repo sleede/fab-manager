@@ -230,7 +230,7 @@ es:
         email: "Email address"
       plan_pricing_form:
         prices: "Prices"
-        about_prices: "The prices defined here will apply to members subscribing to this plan, for machines and spaces."
+        about_prices: "The prices defined here will apply to members subscribing to this plan, for machines and spaces. All prices are per hour."
         copy_prices_from: "Copy prices from"
         copy_prices_from_help: "This will replace all the prices of this plan with the prices of the selected plan"
         machines: "Machines"
@@ -321,7 +321,7 @@ es:
         manage_trainings: "Click here to add or remove trainings."
         number_of_tickets: "Número de tickets: "
         adjust_the_opening_hours: "Ajustar el horario de apertura"
-        to_time: "a" #eg. from 18:00 to 21:00
+        to_time: "a" #e.g. from 18:00 to 21:00
         restrict_options: "Restriction options"
         restrict_with_labels: "Restringir este horario con etiquetas"
         restrict_for_subscriptions: "Restrict this slot for subscription users"
@@ -543,8 +543,8 @@ es:
         on_DATE: "on {DATE}"
         from_DATE: "Desde {DATE}"
         from_TIME: "Desde {TIME}"
-        to_date: "to" #eg: from 01/01 to 01/05
-        to_time: "to" #eg. from 18:00 to 21:00
+        to_date: "to" #e.g.: from 01/01 to 01/05
+        to_time: "to" #e.g. from 18:00 to 21:00
         title: "Title"
         dates: "Dates"
         booking: "Booking"
@@ -1488,8 +1488,8 @@ es:
         statistics: "Statistics"
         evolution: "Evolución"
         age_filter: "Filtro de edad"
-        from_age: "Desde" #eg. from 8 to 40 years old
-        to_age: "a" #eg. from 8 to 40 years old
+        from_age: "Desde" #e.g. from 8 to 40 years old
+        to_age: "a" #e.g. from 8 to 40 years old
         start: "Principio:"
         end: "Final:"
         custom_filter: "Filtro personalizado"
