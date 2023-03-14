@@ -519,6 +519,7 @@ fr:
     availability: "La disponibilité n'existe pas"
     full: "Le créneau est déjà entièrement réservé"
     deadline: "Vous ne pouvez pas réserver un créneau %{MINUTES} minutes avant son début"
+    limit_reached: "You have reached the booking limit of %{HOURS}H per day for the %{RESERVABLE}, for your current subscription"
     restricted: "Cette disponibilité n'est disponible que pour les abonnés"
     plan: "Cette formule d'abonnement est désactivé"
     plan_group: "Cette formule d'abonnement est réservée aux membres du groupe %{GROUP}"
