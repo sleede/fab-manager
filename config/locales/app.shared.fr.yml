@@ -540,3 +540,6 @@ fr:
         show_reserved_uniq: "Afficher uniquement les créneaux avec réservation"
       machine:
         machine_uncategorized: "Machines non classés"
+      form_unsaved_list:
+        save_reminder: "Do not forget to save your changes"
+        cancel: "Cancel"
