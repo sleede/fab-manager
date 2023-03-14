@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useState } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import { Control, FormState, UseFormGetValues, UseFormResetField } from 'react-hook-form/dist/types/form';
 import { FormSwitch } from '../form/form-switch';
 import { useTranslation } from 'react-i18next';
@@ -12,14 +12,13 @@ import MachineAPI from '../../api/machine';
 import MachineCategoryAPI from '../../api/machine-category';
 import { FormUnsavedList } from '../form/form-unsaved-list';
 import { EditDestroyButtons } from '../base/edit-destroy-buttons';
-import PlanLimitationAPI from '../../api/plan-limitation';
+import { X } from 'phosphor-react';
 
 interface PlanLimitFormProps<TContext extends object> {
   register: UseFormRegister<Plan>,
   control: Control<Plan, TContext>,
   formState: FormState<Plan>,
   onError: (message: string) => void,
-  onSuccess: (message: string) => void,
   getValues: UseFormGetValues<Plan>,
   resetField: UseFormResetField<Plan>
 }
@@ -27,7 +26,7 @@ interface PlanLimitFormProps<TContext extends object> {
 /**
  * Form tab to manage a subscription's usage limit
  */
-export const PlanLimitForm = <TContext extends object> ({ register, control, formState, onError, onSuccess, getValues, resetField }: PlanLimitFormProps<TContext>) => {
+export const PlanLimitForm = <TContext extends object> ({ register, control, formState, onError, getValues, resetField }: PlanLimitFormProps<TContext>) => {
   const { t } = useTranslation('admin');
   const { fields, append, remove, update } = useFieldArray<Plan, 'plan_limitations_attributes'>({ control, name: 'plan_limitations_attributes' });
   const limiting = useWatch<Plan>({ control, name: 'limiting' });
@@ -89,16 +88,24 @@ export const PlanLimitForm = <TContext extends object> ({ register, control, for
   };
 
   /**
-   * Callback triggered when a previously-saved limitation was deleted. Return a callback accepting a message.
+   * Callback triggered when a saved limitation is requested to be deleted
    */
-  const onLimitationDeleted = (index: number): (message: string) => void => {
-    return (message: string) => {
-      onSuccess(message);
-      remove(index);
-      // This have a little drowback: remove(index) will set the form as "dirty", and trigger the "unsaved form alert", even if clicking on save or not
-      // won't change anything to the deleted item. To improve this we could do the following: do not destroy the limitation through the API and instead
-      // set {_destroy: true} and destroy the limitation when saving the form, but we need some UI for items about to be deleted
-      // update(index, { ...getValues(`plan_limitations_attributes.${index}`), _destroy: true });
+  const handleLimitationDelete = (index: number): () => Promise<void> => {
+    return () => {
+      return new Promise<void>((resolve) => {
+        update(index, { ...getValues(`plan_limitations_attributes.${index}`), _destroy: true });
+        resolve();
+      });
+    };
+  };
+
+  /**
+   * Triggered when the user clicks on "cancel" for a limitated previsouly marked as deleted
+   */
+  const cancelDeletion = (index: number): (event: React.MouseEvent<HTMLParagraphElement, MouseEvent>) => void => {
+    return (event) => {
+      event.preventDefault();
+      update(index, { ...getValues(`plan_limitations_attributes.${index}`), _destroy: false });
     };
   };
 
@@ -178,7 +185,7 @@ export const PlanLimitForm = <TContext extends object> ({ register, control, for
               if (limitation.limitable_type !== 'MachineCategory' || limitation._modified) return false;
 
               return (
-                <div className="plan-limit-item" key={limitation.id}>
+                <div className={`plan-limit-item ${limitation._destroy ? 'is-destroying' : ''}`} key={limitation.id}>
                   <div className="grp">
                     <div>
                       <span>{t('app.admin.plan_limit_form.category')}</span>
@@ -191,14 +198,11 @@ export const PlanLimitForm = <TContext extends object> ({ register, control, for
                   </div>
 
                   <div className='actions'>
-                    <EditDestroyButtons onDeleteSuccess={onLimitationDeleted(index)}
-                                        onError={onError}
+                    <EditDestroyButtons onError={onError}
                                         onEdit={onEditLimitation(limitation, index)}
                                         itemId={getValues(`plan_limitations_attributes.${index}.id`)}
-                                        deleteSuccessMessage={t('app.admin.plan_limit_form.delete_success')}
-                                        confirmationTitle={t('app.admin.plan_limit_form.confirmation_title')}
-                                        confirmationMessage={t('app.admin.plan_limit_form.confirmation_message')}
-                                        apiDestroy={PlanLimitationAPI.destroy} />
+                                        showDestroyConfirmation={false}
+                                        destroy={handleLimitationDelete(index)} />
                   </div>
                 </div>
               );
@@ -213,7 +217,7 @@ export const PlanLimitForm = <TContext extends object> ({ register, control, for
               if (limitation.limitable_type !== 'Machine' || limitation._modified) return false;
 
               return (
-                <div className="plan-limit-item" key={limitation.id}>
+                <div className={`plan-limit-item ${limitation._destroy ? 'is-destroying' : ''}`} key={limitation.id}>
                   <div className="grp">
                     <div>
                       <span>{t('app.admin.plan_limit_form.machine')}</span>
@@ -223,17 +227,20 @@ export const PlanLimitForm = <TContext extends object> ({ register, control, for
                       <span>{t('app.admin.plan_limit_form.max_hours_per_day')}</span>
                       <p>{limitation.limit}</p>
                     </div>
+                    {limitation._destroy && <div className="marker">{t('app.admin.plan_limit_form.ongoing_deletion')}</div>}
                   </div>
 
                   <div className='actions'>
-                    <EditDestroyButtons onDeleteSuccess={onLimitationDeleted(index)}
-                                        onError={onError}
+                    {(limitation._destroy &&
+                      <p className="cancel-action" onClick={cancelDeletion(index)}>
+                        {t('app.admin.plan_limit_form.cancel_deletion')}
+                        <X size={14} />
+                      </p>) ||
+                      <EditDestroyButtons onError={onError}
                                         onEdit={onEditLimitation(limitation, index)}
                                         itemId={getValues(`plan_limitations_attributes.${index}.id`)}
-                                        confirmationTitle={t('app.admin.plan_limit_form.confirmation_title')}
-                                        confirmationMessage={t('app.admin.plan_limit_form.confirmation_message')}
-                                        deleteSuccessMessage={t('app.admin.plan_limit_form.delete_success')}
-                                        apiDestroy={PlanLimitationAPI.destroy} />
+                                        showDestroyConfirmation={false}
+                                        destroy={handleLimitationDelete(index)} />}
                   </div>
                 </div>
               );

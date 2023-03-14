@@ -333,7 +333,6 @@ export const PlanForm: React.FC<PlanFormProps> = ({ action, plan, onError, onSuc
                                     register={register}
                                     formState={formState}
                                     onError={onError}
-                                    onSuccess={onSuccess}
                                     getValues={getValues}
                                     resetField={resetField} />
           }

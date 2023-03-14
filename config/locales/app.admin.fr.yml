@@ -208,9 +208,8 @@ fr:
         ongoing_limitations: "Limites en cours"
         saved_limitations: "Limites enregistrées"
         cancel: "Annuler cette limite"
-        confirmation_title: "Supprimer la limite"
-        confirmation_message: "Êtes-vous sûr de vouloir supprimer cette limite ? Cela prendra effet immédiatement et ne sera pas résersible."
-        delete_success: "La limite a bien été supprimée."
+        cancel_deletion: "Annuler"
+        ongoing_deletion: "Suppression en cours"
       plan_limit_modal:
         title: "Gérer la limite d'usage"
         limit_reservations: "Limiter les réservations"

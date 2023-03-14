@@ -6,28 +6,33 @@ import { FabButton } from './fab-button';
 import { FabModal } from './fab-modal';
 
 type EditDestroyButtonsCommon = {
-  onDeleteSuccess: (message: string) => void,
   onError: (message: string) => void,
   onEdit: () => void,
   itemId: number,
-  apiDestroy: (itemId: number) => Promise<void>,
+  destroy: (itemId: number) => Promise<void>,
   className?: string,
   iconSize?: number,
   showEditButton?: boolean,
 }
 
-type EditDestroyButtonsMessages =
-  { itemType: string, confirmationTitle?: string, confirmationMessage?: string|ReactNode, deleteSuccessMessage?: string } |
-  { itemType?: never, confirmationTitle: string, confirmationMessage: string|ReactNode, deleteSuccessMessage: string}
+type DeleteSuccess =
+  { onDeleteSuccess: (message: string) => void, deleteSuccessMessage: string } |
+  { onDeleteSuccess?: never, deleteSuccessMessage?: never }
 
-type EditDestroyButtonsProps = EditDestroyButtonsCommon & EditDestroyButtonsMessages;
+type DestroyMessages =
+  ({ showDestroyConfirmation?: true } &
+    ({ itemType: string, confirmationTitle?: string, confirmationMessage?: string|ReactNode } |
+     { itemType?: never, confirmationTitle: string, confirmationMessage: string|ReactNode })) |
+  { showDestroyConfirmation: false, itemType?: never, confirmationTitle?: never, confirmationMessage?: never };
+
+type EditDestroyButtonsProps = EditDestroyButtonsCommon & DeleteSuccess & DestroyMessages;
 
 /**
  * This component shows a group of two buttons.
  * Destroy : shows a modal dialog to ask the user for confirmation about the deletion of the provided item.
  * Edit : triggers the provided function.
  */
-export const EditDestroyButtons: React.FC<EditDestroyButtonsProps> = ({ onDeleteSuccess, onError, onEdit, itemId, itemType, apiDestroy, confirmationTitle, confirmationMessage, deleteSuccessMessage, className, iconSize = 20, showEditButton = true }) => {
+export const EditDestroyButtons: React.FC<EditDestroyButtonsProps> = ({ onDeleteSuccess, onError, onEdit, itemId, itemType, destroy, confirmationTitle, confirmationMessage, deleteSuccessMessage, className, iconSize = 20, showEditButton = true, showDestroyConfirmation = true }) => {
   const { t } = useTranslation('admin');
 
   const [deletionModal, setDeletionModal] = useState<boolean>(false);
@@ -40,16 +45,27 @@ export const EditDestroyButtons: React.FC<EditDestroyButtonsProps> = ({ onDelete
   };
 
   /**
+   * Triggered when the user clicks on the 'destroy' button
+   */
+  const handleDestroyRequest = (): void => {
+    if (showDestroyConfirmation) {
+      toggleDeletionModal();
+    } else {
+      onDeleteConfirmed();
+    }
+  };
+
+  /**
    * The deletion has been confirmed by the user.
    * Call the API to trigger the deletion of the given item
    */
   const onDeleteConfirmed = (): void => {
-    apiDestroy(itemId).then(() => {
-      onDeleteSuccess(deleteSuccessMessage || t('app.admin.edit_destroy_buttons.deleted', { TYPE: itemType }));
+    destroy(itemId).then(() => {
+      typeof onDeleteSuccess === 'function' && onDeleteSuccess(deleteSuccessMessage || t('app.admin.edit_destroy_buttons.deleted'));
     }).catch((error) => {
       onError(t('app.admin.edit_destroy_buttons.unable_to_delete') + error);
     });
-    toggleDeletionModal();
+    setDeletionModal(false);
   };
 
   return (
@@ -58,7 +74,7 @@ export const EditDestroyButtons: React.FC<EditDestroyButtonsProps> = ({ onDelete
         {showEditButton && <FabButton className='edit-btn' onClick={onEdit}>
           <PencilSimple size={iconSize} weight="fill" />
         </FabButton>}
-        <FabButton type='button' className='delete-btn' onClick={toggleDeletionModal}>
+        <FabButton type='button' className='delete-btn' onClick={handleDestroyRequest}>
           <Trash size={iconSize} weight="fill" />
         </FabButton>
       </div>

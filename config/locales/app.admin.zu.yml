@@ -2,7 +2,7 @@ zu:
   app:
     admin:
       edit_destroy_buttons:
-        deleted: "crwdns36793:0{TYPE}crwdne36793:0"
+        deleted: "crwdns36793:0crwdne36793:0"
         unable_to_delete: "crwdns36795:0crwdne36795:0"
         delete_item: "crwdns36797:0{TYPE}crwdne36797:0"
         confirm_delete: "crwdns36799:0crwdne36799:0"
@@ -208,9 +208,8 @@ zu:
         ongoing_limitations: "crwdns37433:0crwdne37433:0"
         saved_limitations: "crwdns37435:0crwdne37435:0"
         cancel: "crwdns37437:0crwdne37437:0"
-        confirmation_title: "crwdns37439:0crwdne37439:0"
-        confirmation_message: "crwdns37441:0crwdne37441:0"
-        delete_success: "crwdns37443:0crwdne37443:0"
+        cancel_deletion: "crwdns37487:0crwdne37487:0"
+        ongoing_deletion: "crwdns37489:0crwdne37489:0"
       plan_limit_modal:
         title: "crwdns37445:0crwdne37445:0"
         limit_reservations: "crwdns37447:0crwdne37447:0"

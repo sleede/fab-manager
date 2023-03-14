@@ -78,7 +78,7 @@ export const ProductItem: React.FC<ProductItemProps> = ({ product, onEdit, onDel
                             onEdit={editProduct(product)}
                             itemId={product.id}
                             itemType={t('app.admin.store.product_item.product')}
-                            apiDestroy={ProductAPI.destroy} />
+                            destroy={ProductAPI.destroy} />
       </div>
     </div>
   );

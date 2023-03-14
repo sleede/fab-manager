@@ -1,6 +1,7 @@
 # Changelog Fab-manager
 
 - [TODO DEPLOY] `rails db:seed`
+- [TODO DEPLOY] `rails fablab:maintenance:rebuild_stylesheet`
 
 ## v5.8.2 2023 March 13
 

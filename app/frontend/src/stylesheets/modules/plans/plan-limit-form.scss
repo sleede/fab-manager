@@ -58,6 +58,27 @@
             }
           }
         }
+
+        &.is-destroying {
+          background-color: var(--main-lightest);
+          .marker {
+            text-align: center;
+            font-weight: 500;
+            color: var(--main-dark);
+            margin: auto;
+          }
+          .actions > .cancel-action {
+            font-weight: normal;
+            svg {
+              vertical-align: middle;
+              margin-left: 1rem;
+            }
+            &:hover {
+              text-decoration: underline;
+              cursor: pointer;
+            }
+          }
+        }
       }
     }
   }
