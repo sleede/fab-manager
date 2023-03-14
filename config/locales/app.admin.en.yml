@@ -180,7 +180,6 @@ en:
         rolling_subscription_help: "A rolling subscription will begin the day of the first trainings. Otherwise, it will begin as soon as it is bought."
         monthly_payment: "Monthly payment?"
         monthly_payment_help: "If monthly payment is enabled, the members will be able to choose between a one-time payment or a payment schedule staged each months."
-        description: "Description"
         information_sheet: "Information sheet"
         notified_partner: "Notified partner"
         new_user: "New user"
@@ -231,7 +230,7 @@ en:
         email: "Email address"
       plan_pricing_form:
         prices: "Prices"
-        about_prices: "The prices defined here will apply to members subscribing to this plan, for machines and spaces."
+        about_prices: "The prices defined here will apply to members subscribing to this plan, for machines and spaces. All prices are per hour."
         copy_prices_from: "Copy prices from"
         copy_prices_from_help: "This will replace all the prices of this plan with the prices of the selected plan"
         machines: "Machines"
@@ -322,7 +321,7 @@ en:
         manage_trainings: "Click here to add or remove trainings."
         number_of_tickets: "Number of tickets: "
         adjust_the_opening_hours: "Adjust the opening hours"
-        to_time: "to"  #eg. from 18:00 to 21:00
+        to_time: "to"  #e.g. from 18:00 to 21:00
         restrict_options: "Restriction options"
         restrict_with_labels: "Restrict this slot with labels"
         restrict_for_subscriptions: "Restrict this slot for subscription users"
@@ -544,8 +543,8 @@ en:
         on_DATE: "on {DATE}"
         from_DATE: "from {DATE}"
         from_TIME: "from {TIME}"
-        to_date: "to" #eg: from 01/01 to 01/05
-        to_time: "to"  #eg. from 18:00 to 21:00
+        to_date: "to" #e.g.: from 01/01 to 01/05
+        to_time: "to"  #e.g. from 18:00 to 21:00
         title: "Title"
         dates: "Dates"
         booking: "Booking"
@@ -1489,8 +1488,8 @@ en:
         statistics: "Statistics"
         evolution: "Evolution"
         age_filter: "Age filter"
-        from_age: "From"  #eg. from 8 to 40 years old
-        to_age: "to"  #eg. from 8 to 40 years old
+        from_age: "From"  #e.g. from 8 to 40 years old
+        to_age: "to"  #e.g. from 8 to 40 years old
         start: "Start:"
         end: "End:"
         custom_filter: "Custom filter"

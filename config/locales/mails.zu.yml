@@ -375,6 +375,10 @@ zu:
         remember: "crwdns29938:0%{REFERENCE}crwdnd29938:0%{AMOUNT}crwdnd29938:0%{DATE}crwdne29938:0"
         date: "crwdns29940:0crwdne29940:0"
         confirm: "crwdns29942:0crwdne29942:0"
+    notify_member_reservation_limit_reached:
+      subject: "crwdns37483:0crwdne37483:0"
+      body:
+        limit_reached: "crwdns37485:0%{DATE}crwdnd37485:0%{HOURS}crwdnd37485:0%{ITEM}crwdne37485:0"
     notify_admin_user_supporting_document_files_created:
       subject: "crwdns37349:0crwdne37349:0"
       body:

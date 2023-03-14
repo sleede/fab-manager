@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- [TODO DEPLOY] `rails db:seed`
+
 ## v5.8.2 2023 March 13
 
 - Improved upgrade script

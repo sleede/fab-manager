@@ -230,7 +230,7 @@
         email: "Email address"
       plan_pricing_form:
         prices: "Prices"
-        about_prices: "The prices defined here will apply to members subscribing to this plan, for machines and spaces."
+        about_prices: "The prices defined here will apply to members subscribing to this plan, for machines and spaces. All prices are per hour."
         copy_prices_from: "Copy prices from"
         copy_prices_from_help: "This will replace all the prices of this plan with the prices of the selected plan"
         machines: "Machines"
@@ -321,7 +321,7 @@
         manage_trainings: "Klikk her for å legge til eller endre opplæring."
         number_of_tickets: "Antall billetter: "
         adjust_the_opening_hours: "Endre åpningstid"
-        to_time: "til" #eg. from 18:00 to 21:00
+        to_time: "til" #e.g. from 18:00 to 21:00
         restrict_options: "Alternativer for begrensning"
         restrict_with_labels: "Begrens denne reservasjonen med etiketter"
         restrict_for_subscriptions: "Begrens denne reservasjoen til medlemmer"
@@ -543,8 +543,8 @@
         on_DATE: "{DATE}"
         from_DATE: "fra {DATE}"
         from_TIME: "fra {TIME}"
-        to_date: "til" #eg: from 01/01 to 01/05
-        to_time: "til" #eg. from 18:00 to 21:00
+        to_date: "til" #e.g.: from 01/01 to 01/05
+        to_time: "til" #e.g. from 18:00 to 21:00
         title: "Tittel"
         dates: "Datoer"
         booking: "Reservasjon"
@@ -1488,8 +1488,8 @@
         statistics: "Statistikk"
         evolution: "Utvikling"
         age_filter: "Aldersfilter"
-        from_age: "Fra" #eg. from 8 to 40 years old
-        to_age: "til" #eg. from 8 to 40 years old
+        from_age: "Fra" #e.g. from 8 to 40 years old
+        to_age: "til" #e.g. from 8 to 40 years old
         start: "Start:"
         end: "Slutt:"
         custom_filter: "Egendefinerte filtre"

@@ -321,7 +321,7 @@ fr:
         manage_trainings: "Cliquez-ici pour ajouter ou supprimer des formations."
         number_of_tickets: "Nombre de places : "
         adjust_the_opening_hours: "Ajuster l'horaire"
-        to_time: "à" #eg. from 18:00 to 21:00
+        to_time: "à" #e.g. from 18:00 to 21:00
         restrict_options: "Options de restriction"
         restrict_with_labels: "Restreindre ce créneau avec des étiquettes"
         restrict_for_subscriptions: "Restreindre ce créneau pour les abonnements"
@@ -543,8 +543,8 @@ fr:
         on_DATE: "le {DATE}"
         from_DATE: "du {DATE}"
         from_TIME: "de {TIME}"
-        to_date: "au" #eg: from 01/01 to 01/05
-        to_time: "à" #eg. from 18:00 to 21:00
+        to_date: "au" #e.g.: from 01/01 to 01/05
+        to_time: "à" #e.g. from 18:00 to 21:00
         title: "Titre"
         dates: "Dates"
         booking: "Réservations"
@@ -1488,8 +1488,8 @@ fr:
         statistics: "Statistiques"
         evolution: "Évolution"
         age_filter: "Filtre d'âge"
-        from_age: "De" #eg. from 8 to 40 years old
-        to_age: "à" #eg. from 8 to 40 years old
+        from_age: "De" #e.g. from 8 to 40 years old
+        to_age: "à" #e.g. from 8 to 40 years old
         start: "Début :"
         end: "Fin :"
         custom_filter: "Filtre personnalisé"

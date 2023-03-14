@@ -50,7 +50,7 @@ class ReservationLimitServiceTest < ActiveSupport::TestCase
       customer_profile: @acamus.invoicing_profile,
       operator_profile: @acamus.invoicing_profile,
       reservable: @machine,
-      cart_item_reservation_slots_attributes: [{ slot: slots[0] }, { slot: slots[1] }, { slot: slots[2] }]
+      cart_item_reservation_slots_attributes: [{ slot: slots[2] }, { slot: slots[3] }, { slot: slots[4] }]
     )
     assert_not ReservationLimitService.authorized?(@plan, @acamus, reservation, [])
   end
@@ -118,7 +118,7 @@ class ReservationLimitServiceTest < ActiveSupport::TestCase
 
   test 'get plan limit' do
     @plan.update(limiting: true, plan_limitations_attributes: [{ limitable_id: @machine.id, limitable_type: 'Machine', limit: 2 }])
-    assert_equal 2, ReservationLimitService.limit(@plan, @machine)
+    assert_equal 2, ReservationLimitService.limit(@plan, @machine).limit
   end
 
   test 'get plan without limit' do
@@ -129,13 +129,45 @@ class ReservationLimitServiceTest < ActiveSupport::TestCase
     category = MachineCategory.find(1)
     category.update(machine_ids: [@machine.id])
     @plan.update(limiting: true, plan_limitations_attributes: [{ limitable: category, limit: 4 }])
-    assert_equal 4, ReservationLimitService.limit(@plan, @machine)
+    assert_equal 4, ReservationLimitService.limit(@plan, @machine).limit
   end
 
   test 'machine limit should override the category limit' do
     category = MachineCategory.find(1)
     category.update(machine_ids: [@machine.id])
     @plan.update(limiting: true, plan_limitations_attributes: [{ limitable: @machine, limit: 2 }, { limitable: category, limit: 4 }])
-    assert_equal 2, ReservationLimitService.limit(@plan, @machine)
+    limit = ReservationLimitService.limit(@plan, @machine)
+    assert_equal 2, limit.limit
+    assert_equal @machine, limit.limitable
+  end
+
+  test 'reservation reaches the limit' do
+    user = User.find_by(username: 'kdumas')
+    plan = user.subscribed_plan
+    plan.update(limiting: true, plan_limitations_attributes: [{ limitable: @machine, limit: 1 }])
+    slots = Availabilities::AvailabilitiesService.new(user)
+                                                 .machines([@machine], user, { start: Time.current, end: 10.days.from_now })
+    reservation = Reservation.create!(
+      statistic_profile: user.statistic_profile,
+      reservable: @machine,
+      slots_reservations_attributes: [{ slot: slots.last }]
+    )
+    reservation.reload
+    assert_equal slots.last.start_at.to_date, ReservationLimitService.reached_limit_date(reservation)
+  end
+
+  test 'reservation does not reaches the limit' do
+    user = User.find_by(username: 'kdumas')
+    plan = user.subscribed_plan
+    plan.update(limiting: true, plan_limitations_attributes: [{ limitable: @machine, limit: 2 }])
+    slots = Availabilities::AvailabilitiesService.new(user)
+                                                 .machines([@machine], user, { start: Time.current, end: 10.days.from_now })
+    reservation = Reservation.create!(
+      statistic_profile: user.statistic_profile,
+      reservable: @machine,
+      slots_reservations_attributes: [{ slot: slots.last }]
+    )
+    reservation.reload
+    assert_nil ReservationLimitService.reached_limit_date(reservation)
   end
 end
