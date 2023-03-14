@@ -519,6 +519,7 @@ pt:
     availability: "The availaility doesn't exist"
     full: "The slot is already fully reserved"
     deadline: "You can't reserve a slot %{MINUTES} minutes prior to its start"
+    limit_reached: "You have reached the booking limit of %{HOURS}H per day for the %{RESERVABLE}, for your current subscription"
     restricted: "This availability is restricted for subscribers"
     plan: "This subscription plan is disabled"
     plan_group: "This subscription plan is reserved for members of group %{GROUP}"
