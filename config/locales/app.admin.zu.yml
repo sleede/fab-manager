@@ -321,7 +321,7 @@ zu:
         manage_trainings: "crwdns24132:0crwdne24132:0"
         number_of_tickets: "crwdns24134:0crwdne24134:0"
         adjust_the_opening_hours: "crwdns24136:0crwdne24136:0"
-        to_time: "crwdns24138:0crwdne24138:0" #eg. from 18:00 to 21:00
+        to_time: "crwdns24138:0crwdne24138:0" #e.g. from 18:00 to 21:00
         restrict_options: "crwdns24140:0crwdne24140:0"
         restrict_with_labels: "crwdns24142:0crwdne24142:0"
         restrict_for_subscriptions: "crwdns24144:0crwdne24144:0"
@@ -543,8 +543,8 @@ zu:
         on_DATE: "crwdns24452:0{DATE}crwdne24452:0"
         from_DATE: "crwdns24454:0{DATE}crwdne24454:0"
         from_TIME: "crwdns24456:0{TIME}crwdne24456:0"
-        to_date: "crwdns24458:0crwdne24458:0" #eg: from 01/01 to 01/05
-        to_time: "crwdns24460:0crwdne24460:0" #eg. from 18:00 to 21:00
+        to_date: "crwdns24458:0crwdne24458:0" #e.g.: from 01/01 to 01/05
+        to_time: "crwdns24460:0crwdne24460:0" #e.g. from 18:00 to 21:00
         title: "crwdns24462:0crwdne24462:0"
         dates: "crwdns24464:0crwdne24464:0"
         booking: "crwdns24466:0crwdne24466:0"
@@ -1488,8 +1488,8 @@ zu:
         statistics: "crwdns26224:0crwdne26224:0"
         evolution: "crwdns26226:0crwdne26226:0"
         age_filter: "crwdns26228:0crwdne26228:0"
-        from_age: "crwdns26230:0crwdne26230:0" #eg. from 8 to 40 years old
-        to_age: "crwdns26232:0crwdne26232:0" #eg. from 8 to 40 years old
+        from_age: "crwdns26230:0crwdne26230:0" #e.g. from 8 to 40 years old
+        to_age: "crwdns26232:0crwdne26232:0" #e.g. from 8 to 40 years old
         start: "crwdns26234:0crwdne26234:0"
         end: "crwdns26236:0crwdne26236:0"
         custom_filter: "crwdns26238:0crwdne26238:0"
