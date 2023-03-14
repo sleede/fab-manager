@@ -541,5 +541,5 @@ fr:
       machine:
         machine_uncategorized: "Machines non classés"
       form_unsaved_list:
-        save_reminder: "Do not forget to save your changes"
-        cancel: "Cancel"
+        save_reminder: "N'oubliez pas d'enregistrer vos modifications"
+        cancel: "Annuler"
