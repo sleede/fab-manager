@@ -200,7 +200,7 @@ zu:
         usage_limitation_switch: "crwdns37417:0crwdne37417:0"
         new_usage_limitation: "crwdns37419:0crwdne37419:0"
         all_limitations: "crwdns37421:0crwdne37421:0"
-        by_categories: "crwdns37423:0crwdne37423:0"
+        by_category: "crwdns37477:0crwdne37477:0"
         by_machine: "crwdns37425:0crwdne37425:0"
         category: "crwdns37427:0crwdne37427:0"
         machine: "crwdns37429:0crwdne37429:0"
@@ -214,7 +214,7 @@ zu:
       plan_limit_modal:
         title: "crwdns37445:0crwdne37445:0"
         limit_reservations: "crwdns37447:0crwdne37447:0"
-        by_categories: "crwdns37449:0crwdne37449:0"
+        by_category: "crwdns37479:0crwdne37479:0"
         by_machine: "crwdns37451:0crwdne37451:0"
         category: "crwdns37453:0crwdne37453:0"
         machine: "crwdns37455:0crwdne37455:0"
