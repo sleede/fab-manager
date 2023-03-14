@@ -91,7 +91,7 @@ export const PlanLimitModal: React.FC<PlanLimitModalProps> = ({ isOpen, toggleMo
           <button onClick={evt => toggleLimitType(evt, 'MachineCategory')}
                   className={limitType === 'MachineCategory' ? 'is-active' : ''}
                   disabled={!!limitation}>
-            {t('app.admin.plan_limit_modal.by_categories')}
+            {t('app.admin.plan_limit_modal.by_category')}
           </button>
           <button onClick={evt => toggleLimitType(evt, 'Machine')}
                   className={limitType === 'Machine' ? 'is-active' : ''}
@@ -99,7 +99,7 @@ export const PlanLimitModal: React.FC<PlanLimitModalProps> = ({ isOpen, toggleMo
             {t('app.admin.plan_limit_modal.by_machine')}
           </button>
         </div>
-          <FabAlert level='info'>{t('app.admin.plan_limit_modal.machine_info')}</FabAlert>
+          <FabAlert level='info'>{limitType === 'Machine' ? t('app.admin.plan_limit_modal.machine_info') : t('app.admin.plan_limit_modal.categories_info')}</FabAlert>
           <FormInput register={register} id="id" type="hidden" />
           <FormInput register={register} id="limitable_type" type="hidden" />
           <FormSelect options={buildOptions()}

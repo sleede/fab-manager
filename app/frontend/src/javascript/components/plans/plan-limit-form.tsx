@@ -173,7 +173,7 @@ export const PlanLimitForm = <TContext extends object> ({ register, control, for
 
         {fields.filter(f => f.limitable_type === 'MachineCategory' && !f._modified).length > 0 &&
           <div className='plan-limit-list'>
-            <p className="title">{t('app.admin.plan_limit_form.by_categories')}</p>
+            <p className="title">{t('app.admin.plan_limit_form.by_category')}</p>
             {fields.map((limitation, index) => {
               if (limitation.limitable_type !== 'MachineCategory' || limitation._modified) return false;
 

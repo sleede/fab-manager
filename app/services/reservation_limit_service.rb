@@ -13,12 +13,13 @@ class ReservationLimitService
 
       return true if reservation.nil? || !reservation.is_a?(CartItem::Reservation)
 
-      plan.plan_limitations.filter { |limit| limit.reservables.include?(reservation.reservable) }.each do |limit|
-        reservation.cart_item_reservation_slots.group_by { |sr| sr.slot.start_at.to_date }.each_pair do |date, reservation_slots|
-          daily_duration = reservations_duration(customer, date, reservation, cart_items) +
-                           (reservation_slots.map { |sr| sr.slot.duration }.reduce(:+) || 0)
-          return false if Rational(daily_duration / 3600).to_f > limit.limit
-        end
+      limit = limit(plan, reservation.reservable)
+      return true if limit.nil?
+
+      reservation.cart_item_reservation_slots.group_by { |sr| sr.slot.start_at.to_date }.each_pair do |date, reservation_slots|
+        daily_duration = reservations_duration(customer, date, reservation, cart_items) +
+                         (reservation_slots.map { |sr| sr.slot.duration }.reduce(:+) || 0)
+        return false if Rational(daily_duration / 3600).to_f > limit
       end
 
       true
@@ -30,7 +31,8 @@ class ReservationLimitService
     def limit(plan, reservable)
       return nil unless plan&.limiting
 
-      plan&.plan_limitations&.find { |limit| limit.reservables.include?(reservable) }&.limit
+      limitations = plan&.plan_limitations&.filter { |limit| limit.reservables.include?(reservable) }
+      limitations&.find { |limit| limit.limitable_type != 'MachineCategory' }&.limit || limitations&.first&.limit
     end
 
     private

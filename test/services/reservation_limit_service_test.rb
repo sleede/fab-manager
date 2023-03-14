@@ -124,4 +124,18 @@ class ReservationLimitServiceTest < ActiveSupport::TestCase
   test 'get plan without limit' do
     assert_nil ReservationLimitService.limit(@plan, @machine)
   end
+
+  test 'get category limit' do
+    category = MachineCategory.find(1)
+    category.update(machine_ids: [@machine.id])
+    @plan.update(limiting: true, plan_limitations_attributes: [{ limitable: category, limit: 4 }])
+    assert_equal 4, ReservationLimitService.limit(@plan, @machine)
+  end
+
+  test 'machine limit should override the category limit' do
+    category = MachineCategory.find(1)
+    category.update(machine_ids: [@machine.id])
+    @plan.update(limiting: true, plan_limitations_attributes: [{ limitable: @machine, limit: 2 }, { limitable: category, limit: 4 }])
+    assert_equal 2, ReservationLimitService.limit(@plan, @machine)
+  end
 end
