@@ -69,7 +69,7 @@ export const PlanLimitForm = <TContext extends object> ({ register, control, for
       update(edited.index, { ...limitation, id });
       setEdited(null);
     } else {
-      append({ ...limitation });
+      append({ ...limitation, id });
     }
   };
 
@@ -97,7 +97,7 @@ export const PlanLimitForm = <TContext extends object> ({ register, control, for
       remove(index);
       // This have a little drowback: remove(index) will set the form as "dirty", and trigger the "unsaved form alert", even if clicking on save or not
       // won't change anything to the deleted item. To improve this we could do the following: do not destroy the limitation through the API and instead
-      // set {_destroy: true} and destroy the limitation when saving the form but we need some UI for items about to be deleted
+      // set {_destroy: true} and destroy the limitation when saving the form, but we need some UI for items about to be deleted
       // update(index, { ...getValues(`plan_limitations_attributes.${index}`), _destroy: true });
     };
   };

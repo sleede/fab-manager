@@ -67,7 +67,10 @@ class CartItem::Reservation < CartItem::BaseItem
     reservation_deadline = reservation_deadline_minutes.minutes.since
 
     unless ReservationLimitService.authorized?(plan, customer, self, all_items)
-      errors.add(:reservation, I18n.t('cart_item_validation.limit_reached', { HOURS: ReservationLimitService.limit(plan, reservable) }))
+      errors.add(:reservation, I18n.t('cart_item_validation.limit_reached', {
+                                        HOURS: ReservationLimitService.limit(plan, reservable),
+                                        RESERVABLE: reservable.name
+                                      }))
       return false
     end
 
