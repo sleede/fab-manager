@@ -376,9 +376,9 @@ fr:
         date: "Ceci est un rappel pour vérifier que le prélèvement bancaire a bien été effectué."
         confirm: "Veuillez confirmer la réception des fonds dans votre interface de gestion des échéanciers de paiement, afin que la facture correspondante soit générée."
     notify_member_reservation_limit_reached:
-      subject: "Daily reservation limit reached"
+      subject: "Limite de réservation quotidienne atteinte"
       body:
-        limit_reached: "For %{DATE}, you have reached your daily limit of %{HOURS} hours of %{ITEM} reservation."
+        limit_reached: "Pour le %{DATE}, vous avez atteint votre limite quotidienne de %{HOURS} heures de réservation de la %{ITEM}."
     notify_admin_user_supporting_document_files_created:
       subject: "Justificatif téléversé par un membre"
       body:
