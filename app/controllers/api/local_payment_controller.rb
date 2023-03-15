@@ -8,6 +8,8 @@ class API::LocalPaymentController < API::PaymentsController
 
     authorize LocalPaymentContext.new(cart, price[:amount])
 
+    render json: cart.errors, status: :unprocessable_entity and return unless cart.valid?
+
     render on_payment_success(nil, nil, cart)
   end
 

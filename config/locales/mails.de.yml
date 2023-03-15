@@ -375,6 +375,10 @@ de:
         remember: "Gemäß Ihrem Zahlungsplan von %{REFERENCE} wurde zum %{DATE} eine Belastung der Karte in Höhe von %{AMOUNT} geplant."
         date: "Dies ist eine Erinnerung zur Prüfung, ob das Bankkonto erfolgreich belastet werden konnte."
         confirm: "Bitte bestätigen Sie den Erhalt des Guthabens in Ihrer Zahlungsverwaltung, damit die entsprechende Rechnung generiert werden kann."
+    notify_member_reservation_limit_reached:
+      subject: "Daily reservation limit reached"
+      body:
+        limit_reached: "For %{DATE}, you have reached your daily limit of %{HOURS} hours of %{ITEM} reservation."
     notify_admin_user_supporting_document_files_created:
       subject: "Supporting documents uploaded by a member"
       body:

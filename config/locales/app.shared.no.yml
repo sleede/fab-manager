@@ -540,3 +540,6 @@
         show_reserved_uniq: "Show only slots with reservations"
       machine:
         machine_uncategorized: "Uncategorized machines"
+      form_unsaved_list:
+        save_reminder: "Do not forget to save your changes"
+        cancel: "Cancel"

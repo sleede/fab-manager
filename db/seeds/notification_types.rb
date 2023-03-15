@@ -23,3 +23,11 @@ unless NotificationType.find_by(name: 'notify_admin_order_is_paid')
     is_configurable: true
   )
 end
+
+unless NotificationType.find_by(name: 'notify_member_reservation_limit_reached')
+  NotificationType.create!(
+    name: 'notify_member_reservation_limit_reached',
+    category: 'agenda',
+    is_configurable: false
+  )
+end

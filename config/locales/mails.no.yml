@@ -375,6 +375,10 @@
         remember: "In accordance with your %{REFERENCE} payment schedule, %{AMOUNT} was due to be debited on %{DATE}."
         date: "This is a reminder to verify that the direct bank debit was successfull."
         confirm: "Please confirm the receipt of funds in your payment schedule management interface, so that the corresponding invoice will be generated."
+    notify_member_reservation_limit_reached:
+      subject: "Daily reservation limit reached"
+      body:
+        limit_reached: "For %{DATE}, you have reached your daily limit of %{HOURS} hours of %{ITEM} reservation."
     notify_admin_user_supporting_document_files_created:
       subject: "Supporting documents uploaded by a member"
       body:
