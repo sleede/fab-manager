@@ -433,6 +433,8 @@ en:
         schedule_deadline: "You must cash the check for the %{DATE} deadline, for schedule %{REFERENCE}"
       notify_admin_payment_schedule_transfer_deadline:
         schedule_deadline: "You must confirm the bank direct debit for the %{DATE} deadline, for schedule %{REFERENCE}"
+      notify_member_reservation_limit_reached:
+        limit_reached: "For %{DATE}, you have reached your daily limit of %{HOURS} hours of %{ITEM} reservation."
       notify_admin_user_supporting_document_files_created:
         supporting_document_files_uploaded: "Supporting document uploaded by member <strong><em>%{NAME}</strong></em>."
       notify_admin_user_supporting_document_files_updated:
@@ -519,6 +521,7 @@ en:
     availability: "The availaility doesn't exist"
     full: "The slot is already fully reserved"
     deadline: "You can't reserve a slot %{MINUTES} minutes prior to its start"
+    limit_reached: "You have reached the booking limit of %{HOURS}H per day for the %{RESERVABLE}, for your current subscription"
     restricted: "This availability is restricted for subscribers"
     plan: "This subscription plan is disabled"
     plan_group: "This subscription plan is reserved for members of group %{GROUP}"

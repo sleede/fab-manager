@@ -92,32 +92,37 @@ export const PlanPricingForm = <TContext extends object>({ register, control, fo
   };
 
   return (
-    <div data-testid="plan-pricing-form">
-      <h4>{t('app.admin.plan_pricing_form.prices')}</h4>
-      {plans && <FormSelect options={plans}
-                            label={t('app.admin.plan_pricing_form.copy_prices_from')}
-                            tooltip={t('app.admin.plan_pricing_form.copy_prices_from_help')}
-                            control={control}
-                            onChange={handleCopyPrices}
-                            id="parent_plan_id" />}
-      {<FabTabs tabs={[
-        machines && {
-          id: 'machines',
-          title: t('app.admin.plan_pricing_form.machines'),
-          content: fields.map((price, index) => {
-            if (price.priceable_type !== 'Machine') return false;
-            return renderPriceElement(price, index);
-          }).filter(Boolean)
-        },
-        spaces && {
-          id: 'spaces',
-          title: t('app.admin.plan_pricing_form.spaces'),
-          content: fields.map((price, index) => {
-            if (price.priceable_type !== 'Space') return false;
-            return renderPriceElement(price, index);
-          }).filter(Boolean)
-        }
-      ]} />}
-    </div>
+    <section className="plan-pricing-form" data-testid="plan-pricing-form">
+      <header>
+        <p className="title">{t('app.admin.plan_pricing_form.prices')}</p>
+        <p className="description">{t('app.admin.plan_pricing_form.about_prices')}</p>
+      </header>
+      <div className="content">
+        {plans && <FormSelect options={plans}
+                              control={control}
+                              label={t('app.admin.plan_pricing_form.copy_prices_from')}
+                              tooltip={t('app.admin.plan_pricing_form.copy_prices_from_help')}
+                              onChange={handleCopyPrices}
+                              id="parent_plan_id" />}
+        {<FabTabs tabs={[
+          machines && {
+            id: 'machines',
+            title: t('app.admin.plan_pricing_form.machines'),
+            content: fields.map((price, index) => {
+              if (price.priceable_type !== 'Machine') return false;
+              return renderPriceElement(price, index);
+            }).filter(Boolean)
+          },
+          spaces && {
+            id: 'spaces',
+            title: t('app.admin.plan_pricing_form.spaces'),
+            content: fields.map((price, index) => {
+              if (price.priceable_type !== 'Space') return false;
+              return renderPriceElement(price, index);
+            }).filter(Boolean)
+          }
+        ]} />}
+      </div>
+    </section>
   );
 };

@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import Select from 'react-select';
-import { PencilSimple, X } from 'phosphor-react';
+import { PencilSimple } from 'phosphor-react';
 import { useFieldArray, UseFormRegister } from 'react-hook-form';
 import { Control, FormState, UseFormSetValue } from 'react-hook-form/dist/types/form';
 import { useTranslation } from 'react-i18next';
 import {
-  Product,
+  Product, ProductStockMovement,
   stockMovementAllReasons, StockMovementIndex, StockMovementIndexFilter,
   StockMovementReason,
   StockType
@@ -20,6 +20,7 @@ import FormatLib from '../../lib/format';
 import ProductLib from '../../lib/product';
 import { useImmer } from 'use-immer';
 import { FabPagination } from '../base/fab-pagination';
+import { FormUnsavedList } from '../form/form-unsaved-list';
 
 interface ProductStockFormProps<TContext extends object> {
   currentFormValues: Product,
@@ -159,6 +160,25 @@ export const ProductStockForm = <TContext extends object> ({ currentFormValues, 
     }
   };
 
+  /**
+   * Render an attribute of an unsaved stock movement
+   */
+  const renderOngoingStockMovement = (movement: ProductStockMovement): ReactNode => (
+    <>
+      <div className="group">
+        <p>{t(`app.admin.store.product_stock_form.type_${ProductLib.stockMovementType(movement.reason)}`)}</p>
+      </div>
+      <div className="group">
+        <span>{t(`app.admin.store.product_stock_form.${movement.stock_type}`)}</span>
+        <p>{ProductLib.absoluteStockMovement(movement.quantity, movement.reason)}</p>
+      </div>
+      <div className="group">
+        <span>{t('app.admin.store.product_stock_form.reason')}</span>
+        <p>{t(ProductLib.stockMovementReasonTrKey(movement.reason))}</p>
+      </div>
+    </>
+  );
+
   return (
     <div className='product-stock-form'>
       <h4>{t('app.admin.store.product_stock_form.stock_up_to_date')}&nbsp;
@@ -178,36 +198,19 @@ export const ProductStockForm = <TContext extends object> ({ currentFormValues, 
           <span>{t('app.admin.store.product_stock_form.external')}</span>
           <p>{currentFormValues?.stock?.external}</p>
         </div>
-        <FabButton onClick={toggleModal} icon={<PencilSimple size={20} weight="fill" />} className="is-black">Modifier</FabButton>
+        <FabButton onClick={toggleModal} icon={<PencilSimple size={20} weight="fill" />} className="is-black">{t('app.admin.store.product_stock_form.edit')}</FabButton>
       </div>
 
-      {fields.length > 0 && <div className="ongoing-stocks">
-        <span className="title">{t('app.admin.store.product_stock_form.ongoing_operations')}</span>
-        <span className="save-notice">{t('app.admin.store.product_stock_form.save_reminder')}</span>
-        {fields.map((newMovement, index) => (
-          <div key={index} className="unsaved-stock-movement stock-item">
-            <div className="group">
-              <p>{t(`app.admin.store.product_stock_form.type_${ProductLib.stockMovementType(newMovement.reason)}`)}</p>
-            </div>
-            <div className="group">
-              <span>{t(`app.admin.store.product_stock_form.${newMovement.stock_type}`)}</span>
-              <p>{ProductLib.absoluteStockMovement(newMovement.quantity, newMovement.reason)}</p>
-            </div>
-            <div className="group">
-              <span>{t('app.admin.store.product_stock_form.reason')}</span>
-              <p>{t(ProductLib.stockMovementReasonTrKey(newMovement.reason))}</p>
-            </div>
-            <p className="cancel-action" onClick={() => remove(index)}>
-              {t('app.admin.store.product_stock_form.cancel')}
-              <X size={20} />
-            </p>
-            <FormInput id={`product_stock_movements_attributes.${index}.stock_type`} register={register}
-                       type="hidden" />
-            <FormInput id={`product_stock_movements_attributes.${index}.quantity`} register={register} type="hidden" />
-            <FormInput id={`product_stock_movements_attributes.${index}.reason`} register={register} type="hidden" />
-          </div>
-        ))}
-      </div>}
+      <FormUnsavedList fields={fields}
+                       className="ongoing-stocks"
+                       onRemove={remove}
+                       register={register}
+                       title={t('app.admin.store.product_stock_form.ongoing_operations')}
+                       formAttributeName="product_stock_movements_attributes"
+                       formAttributes={['stock_type', 'quantity', 'reason']}
+                       renderField={renderOngoingStockMovement}
+                       saveReminderLabel={t('app.admin.store.product_stock_form.save_reminder')}
+                       cancelLabel={t('app.admin.store.product_stock_form.cancel')} />
 
       <hr />
 

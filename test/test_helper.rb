@@ -111,6 +111,11 @@ class ActiveSupport::TestCase
     assert_not_nil actual, msg
     assert_equal expected.to_date, actual.to_date, msg
   end
+
+  def assert_datetimes_equal(expected, actual, msg = nil)
+    assert_not_nil actual, msg
+    assert_equal expected.iso8601, actual.iso8601, msg
+  end
 end
 
 class ActionDispatch::IntegrationTest

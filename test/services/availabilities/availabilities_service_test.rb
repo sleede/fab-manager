@@ -3,7 +3,7 @@
 require 'test_helper'
 
 # Test the service returning the availabilities for the given resources
-class AvailabilitiesServiceTest < ActiveSupport::TestCase
+class Availabilities::AvailabilitiesServiceTest < ActiveSupport::TestCase
   setup do
     @no_subscription = User.find_by(username: 'jdupond')
     @with_subscription = User.find_by(username: 'kdumas')

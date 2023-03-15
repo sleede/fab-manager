@@ -2,8 +2,8 @@ zu:
   app:
     admin:
       edit_destroy_buttons:
-        deleted: "crwdns36793:0{TYPE}crwdne36793:0"
-        unable_to_delete: "crwdns36795:0{TYPE}crwdne36795:0"
+        deleted: "crwdns36793:0crwdne36793:0"
+        unable_to_delete: "crwdns36795:0crwdne36795:0"
         delete_item: "crwdns36797:0{TYPE}crwdne36797:0"
         confirm_delete: "crwdns36799:0crwdne36799:0"
         delete_confirmation: "crwdns36801:0{TYPE}crwdne36801:0"
@@ -152,12 +152,19 @@ zu:
           every_month: "crwdns31885:0crwdne31885:0"
           every_year: "crwdns31887:0crwdne31887:0"
       plan_form:
-        general_information: "crwdns31889:0crwdne31889:0"
+        ACTION_title: "crwdns37397:0ACTION={ACTION}crwdne37397:0"
+        tab_settings: "crwdns37399:0crwdne37399:0"
+        tab_usage_limits: "crwdns37401:0crwdne37401:0"
+        description: "crwdns31931:0crwdne31931:0"
+        general_settings: "crwdns37403:0crwdne37403:0"
+        general_settings_info: "crwdns37405:0crwdne37405:0"
+        activation_and_payment: "crwdns37407:0crwdne37407:0"
         name: "crwdns31891:0crwdne31891:0"
         name_max_length: "crwdns31893:0crwdne31893:0"
         group: "crwdns31895:0crwdne31895:0"
         transversal: "crwdns31897:0crwdne31897:0"
         transversal_help: "crwdns31899:0crwdne31899:0"
+        display: "crwdns37409:0crwdne37409:0"
         category: "crwdns31901:0crwdne31901:0"
         category_help: "crwdns31903:0crwdne31903:0"
         number_of_periods: "crwdns31905:0crwdne31905:0"
@@ -173,7 +180,6 @@ zu:
         rolling_subscription_help: "crwdns31925:0crwdne31925:0"
         monthly_payment: "crwdns31927:0crwdne31927:0"
         monthly_payment_help: "crwdns31929:0crwdne31929:0"
-        description: "crwdns31931:0crwdne31931:0"
         information_sheet: "crwdns31933:0crwdne31933:0"
         notified_partner: "crwdns31935:0crwdne31935:0"
         new_user: "crwdns31937:0crwdne31937:0"
@@ -185,9 +191,39 @@ zu:
         partner_plan: "crwdns31949:0crwdne31949:0"
         partner_plan_help: "crwdns31951:0crwdne31951:0"
         partner_created: "crwdns31953:0crwdne31953:0"
-        ACTION_plan: "crwdns31955:0ACTION={ACTION}crwdne31955:0"
+        slots_visibility: "crwdns37491:0crwdne37491:0"
+        slots_visibility_help: "crwdns37493:0crwdne37493:0"
+        machines_visibility: "crwdns37495:0crwdne37495:0"
+        save: "crwdns37411:0crwdne37411:0"
         create_success: "crwdns31957:0crwdne31957:0"
         update_success: "crwdns31959:0crwdne31959:0"
+      plan_limit_form:
+        usage_limitation: "crwdns37413:0crwdne37413:0"
+        usage_limitation_info: "crwdns37415:0crwdne37415:0"
+        usage_limitation_switch: "crwdns37417:0crwdne37417:0"
+        new_usage_limitation: "crwdns37419:0crwdne37419:0"
+        all_limitations: "crwdns37421:0crwdne37421:0"
+        by_category: "crwdns37477:0crwdne37477:0"
+        by_machine: "crwdns37425:0crwdne37425:0"
+        category: "crwdns37427:0crwdne37427:0"
+        machine: "crwdns37429:0crwdne37429:0"
+        max_hours_per_day: "crwdns37431:0crwdne37431:0"
+        ongoing_limitations: "crwdns37433:0crwdne37433:0"
+        saved_limitations: "crwdns37435:0crwdne37435:0"
+        cancel: "crwdns37437:0crwdne37437:0"
+        cancel_deletion: "crwdns37487:0crwdne37487:0"
+        ongoing_deletion: "crwdns37489:0crwdne37489:0"
+      plan_limit_modal:
+        title: "crwdns37445:0crwdne37445:0"
+        limit_reservations: "crwdns37447:0crwdne37447:0"
+        by_category: "crwdns37479:0crwdne37479:0"
+        by_machine: "crwdns37451:0crwdne37451:0"
+        category: "crwdns37453:0crwdne37453:0"
+        machine: "crwdns37455:0crwdne37455:0"
+        categories_info: "crwdns37457:0crwdne37457:0"
+        machine_info: "crwdns37459:0crwdne37459:0"
+        max_hours_per_day: "crwdns37461:0crwdne37461:0"
+        confirm: "crwdns37463:0crwdne37463:0"
       partner_modal:
         title: "crwdns31961:0crwdne31961:0"
         create_partner: "crwdns31963:0crwdne31963:0"
@@ -196,6 +232,7 @@ zu:
         email: "crwdns31969:0crwdne31969:0"
       plan_pricing_form:
         prices: "crwdns31971:0crwdne31971:0"
+        about_prices: "crwdns37465:0crwdne37465:0"
         copy_prices_from: "crwdns31973:0crwdne31973:0"
         copy_prices_from_help: "crwdns31975:0crwdne31975:0"
         machines: "crwdns31977:0crwdne31977:0"
@@ -286,7 +323,7 @@ zu:
         manage_trainings: "crwdns24132:0crwdne24132:0"
         number_of_tickets: "crwdns24134:0crwdne24134:0"
         adjust_the_opening_hours: "crwdns24136:0crwdne24136:0"
-        to_time: "crwdns24138:0crwdne24138:0" #eg. from 18:00 to 21:00
+        to_time: "crwdns24138:0crwdne24138:0" #e.g. from 18:00 to 21:00
         restrict_options: "crwdns24140:0crwdne24140:0"
         restrict_with_labels: "crwdns24142:0crwdne24142:0"
         restrict_for_subscriptions: "crwdns24144:0crwdne24144:0"
@@ -508,8 +545,8 @@ zu:
         on_DATE: "crwdns24452:0{DATE}crwdne24452:0"
         from_DATE: "crwdns24454:0{DATE}crwdne24454:0"
         from_TIME: "crwdns24456:0{TIME}crwdne24456:0"
-        to_date: "crwdns24458:0crwdne24458:0" #eg: from 01/01 to 01/05
-        to_time: "crwdns24460:0crwdne24460:0" #eg. from 18:00 to 21:00
+        to_date: "crwdns24458:0crwdne24458:0" #e.g.: from 01/01 to 01/05
+        to_time: "crwdns24460:0crwdne24460:0" #e.g. from 18:00 to 21:00
         title: "crwdns24462:0crwdne24462:0"
         dates: "crwdns24464:0crwdne24464:0"
         booking: "crwdns24466:0crwdne24466:0"
@@ -1453,8 +1490,8 @@ zu:
         statistics: "crwdns26224:0crwdne26224:0"
         evolution: "crwdns26226:0crwdne26226:0"
         age_filter: "crwdns26228:0crwdne26228:0"
-        from_age: "crwdns26230:0crwdne26230:0" #eg. from 8 to 40 years old
-        to_age: "crwdns26232:0crwdne26232:0" #eg. from 8 to 40 years old
+        from_age: "crwdns26230:0crwdne26230:0" #e.g. from 8 to 40 years old
+        to_age: "crwdns26232:0crwdne26232:0" #e.g. from 8 to 40 years old
         start: "crwdns26234:0crwdne26234:0"
         end: "crwdns26236:0crwdne26236:0"
         custom_filter: "crwdns26238:0crwdne26238:0"
@@ -2215,8 +2252,6 @@ zu:
           unexpected_error_occurred: "crwdns31338:0crwdne31338:0"
           all_products: "crwdns31340:0crwdne31340:0"
           create_a_product: "crwdns31342:0crwdne31342:0"
-          successfully_deleted: "crwdns31344:0crwdne31344:0"
-          unable_to_delete: "crwdns31346:0crwdne31346:0"
           filter: "crwdns31348:0crwdne31348:0"
           filter_clear: "crwdns31350:0crwdne31350:0"
           filter_apply: "crwdns31352:0crwdne31352:0"
@@ -2238,6 +2273,7 @@ zu:
           sort: "crwdns31380:0crwdne31380:0"
           visible_only: "crwdns31382:0crwdne31382:0"
         product_item:
+          product: "crwdns37467:0crwdne37467:0"
           visible: "crwdns31384:0crwdne31384:0"
           hidden: "crwdns31386:0crwdne31386:0"
           stock:
@@ -2294,6 +2330,7 @@ zu:
           stocks: "crwdns31480:0crwdne31480:0"
           internal: "crwdns31482:0crwdne31482:0"
           external: "crwdns31484:0crwdne31484:0"
+          edit: "crwdns37469:0crwdne37469:0"
           all: "crwdns31486:0crwdne31486:0"
           remaining_stock: "crwdns31488:0crwdne31488:0"
           type_in: "crwdns31490:0crwdne31490:0"

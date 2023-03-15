@@ -15,8 +15,6 @@
     flex-direction: column;
     gap: 3.2rem;
 
-    .fab-alert { margin: 0; }
-
     section { @include layout-settings; }
     .save-btn { align-self: flex-start; }
   }
@@ -25,7 +23,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    gap: 2.4rem;
+    gap: 1.6rem 2.4rem;
 
     .add-price {
       max-width: fit-content;
@@ -36,6 +34,8 @@
       flex-direction: column;
       align-items: flex-end;
       gap: 0 2.4rem;
+
+      .form-item { margin: 0; }
 
       .remove-price {
         align-items: center;
@@ -61,8 +61,7 @@
     flex-direction: column;
     @media (min-width: 640px) {flex-direction: row; }
 
-    .form-item:first-child {
-      margin-right: 2.4rem;
-    }
+    .form-item { margin: 0; }
+    .form-item:first-child { margin-right: 2.4rem; }
   }
 }

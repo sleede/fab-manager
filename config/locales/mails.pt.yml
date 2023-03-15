@@ -375,6 +375,10 @@ pt:
         remember: "De acordo com a agenda de pagamento %{REFERENCE}, %{AMOUNT} deveria ser debitado em %{DATE}."
         date: "Este é um lembrete para verificar se o débito bancário foi bem sucedido."
         confirm: "Não se esqueça de confirmar o recibo na interface de gestão de pagamento, para que a fatura correspondente seja gerada."
+    notify_member_reservation_limit_reached:
+      subject: "Daily reservation limit reached"
+      body:
+        limit_reached: "For %{DATE}, you have reached your daily limit of %{HOURS} hours of %{ITEM} reservation."
     notify_admin_user_supporting_document_files_created:
       subject: "Supporting documents uploaded by a member"
       body:

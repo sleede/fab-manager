@@ -124,7 +124,7 @@ export const MachineCategoriesList: React.FC<MachineCategoriesListProps> = ({ on
                                         onEdit={editMachineCategory(category)}
                                         itemId={category.id}
                                         itemType={t('app.admin.machine_categories_list.machine_category')}
-                                        apiDestroy={MachineCategoryAPI.destroy} />
+                                        destroy={MachineCategoryAPI.destroy} />
                   </div>
                 </td>
               </tr>

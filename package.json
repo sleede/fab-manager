@@ -161,7 +161,7 @@
     "react-cool-onclickoutside": "^1.7.0",
     "react-custom-events": "^1.1.1",
     "react-dom": "^17.0.2",
-    "react-hook-form": "^7.30.0",
+    "react-hook-form": "~7.31.3",
     "react-i18next": "^11.15.6",
     "react-modal": "^3.16.1",
     "react-select": "^5.3.2",

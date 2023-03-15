@@ -1,0 +1,30 @@
+.plan-limit-modal {
+  .grp {
+    margin-bottom: 3.2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    button {
+      flex: 1;
+      padding: 1.6rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: var(--gray-soft-lightest);
+      border: 1px solid var(--gray-soft-dark);
+      color: var(--gray-soft-darkest);
+      @include text-base;
+      &.is-active {
+        border: 1px solid var(--gray-soft-darkest);
+        background-color: var(--gray-hard-darkest);
+        color: var(--gray-soft-lightest);
+      }
+    }
+    button:first-of-type {
+      border-radius: var(--border-radius) 0 0 var(--border-radius);
+    }
+    button:last-of-type {
+      border-radius: 0 var(--border-radius) var(--border-radius) 0;
+    }
+  }
+}

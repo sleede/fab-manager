@@ -29,10 +29,15 @@
   }
 
   & > .content {
+    display: flex;
+    flex-direction: column;
     padding: 1.6rem;
     background-color: var(--gray-soft-light);
     border: 1px solid var(--gray-soft-dark);
     border-radius: var(--border-radius);
+    & > * { margin-bottom: 0; }
+    & > *:not(:last-child) { margin-bottom: 3.2rem; }
+    .fab-alert { margin: 0 0 1.6rem; }
   }
 
   @media (min-width: 1024px) {
