@@ -2,7 +2,7 @@ de:
   app:
     admin:
       edit_destroy_buttons:
-        deleted: "The {TYPE} was successfully deleted."
+        deleted: "Successfully deleted."
         unable_to_delete: "Unable to delete: "
         delete_item: "Delete the {TYPE}"
         confirm_delete: "Delete"
@@ -208,9 +208,8 @@ de:
         ongoing_limitations: "Ongoing limitations"
         saved_limitations: "Saved limitations"
         cancel: "Cancel this limitation"
-        confirmation_title: "Delete the limitation"
-        confirmation_message: "Are you sure you want to delete this limitation? This will take effect immediately and cannot be undone."
-        delete_success: "The limitation was successfully deleted."
+        cancel_deletion: "Cancel"
+        ongoing_deletion: "Ongoing deletion"
       plan_limit_modal:
         title: "Manage limitation of use"
         limit_reservations: "Limit reservations"
