@@ -183,7 +183,7 @@
     "ui-select": "0.19",
     "underscore": "1.12",
     "use-immer": "^0.5.1",
-    "webpack": "5.72.0",
+    "webpack": "5.76.0",
     "webpack-assets-manifest": "5",
     "webpack-cli": "4",
     "webpack-merge": "5",
