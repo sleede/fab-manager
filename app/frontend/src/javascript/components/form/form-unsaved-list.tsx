@@ -9,7 +9,7 @@ import { FieldArrayPath } from 'react-hook-form/dist/types/path';
 
 interface FormUnsavedListProps<TFieldValues, TFieldArrayName extends FieldArrayPath<TFieldValues>, TKeyName extends string> {
   fields: Array<FieldArrayWithId<TFieldValues, TFieldArrayName, TKeyName>>,
-  onRemove?: (index: number) => void,
+  onRemove: (index: number) => void,
   register: UseFormRegister<TFieldValues>,
   className?: string,
   title: string,
@@ -24,6 +24,19 @@ interface FormUnsavedListProps<TFieldValues, TFieldArrayName extends FieldArrayP
 /**
  * This component render a list of unsaved attributes, created elsewhere than in the form (e.g. in a modal dialog)
  * and pending for the form to be saved.
+ *
+ * The `renderField` attribute should return a JSX element composed like the following example:
+ * ```
+ * <> <!-- empty tag -->
+ *   <div className="group"> <!-- the group class is important -->
+ *     <span>Attribute 1</span> <!-- a span tag for the title -->
+ *     <p>{item.attr1}</p> <!-- a paragraph tag for the value -->
+ *   </div>
+ *   <div className="group">
+ *     ...
+ *   </div>
+ * </>
+ * ```
  */
 export const FormUnsavedList = <TFieldValues extends FieldValues = FieldValues, TFieldArrayName extends FieldArrayPath<TFieldValues> = FieldArrayPath<TFieldValues>, TKeyName extends string = 'id'>({ fields, onRemove, register, className, title, shouldRenderField = () => true, renderField, formAttributeName, formAttributes, saveReminderLabel, cancelLabel }: FormUnsavedListProps<TFieldValues, TFieldArrayName, TKeyName>) => {
   const { t } = useTranslation('shared');

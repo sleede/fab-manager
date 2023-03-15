@@ -56,13 +56,19 @@ export const PlanForm: React.FC<PlanFormProps> = ({ action, plan, onError, onSuc
 
   useEffect(() => {
     GroupAPI.index({ disabled: false })
-      .then(res => setGroups(res.map(g => { return { value: g.id, label: g.name }; })))
+      .then(res => setGroups(res.map(g => {
+        return { value: g.id, label: g.name };
+      })))
       .catch(onError);
     PlanCategoryAPI.index()
-      .then(res => setCategories(res.map(c => { return { value: c.id, label: c.name }; })))
+      .then(res => setCategories(res.map(c => {
+        return { value: c.id, label: c.name };
+      })))
       .catch(onError);
     UserAPI.index({ role: 'partner' })
-      .then(res => setPartners(res.map(p => { return { value: p.id, label: p.name }; })))
+      .then(res => setPartners(res.map(p => {
+        return { value: p.id, label: p.name };
+      })))
       .catch(onError);
   }, []);
 
@@ -106,7 +112,9 @@ export const PlanForm: React.FC<PlanFormProps> = ({ action, plan, onError, onSuc
    * Return the available options for the plan period
    */
   const buildPeriodsOptions = (): Array<SelectOption<string>> => {
-    return ['week', 'month', 'year'].map(d => { return { value: d, label: t(`app.admin.plan_form.${d}`) }; });
+    return ['week', 'month', 'year'].map(d => {
+      return { value: d, label: t(`app.admin.plan_form.${d}`) };
+    });
   };
 
   /**
@@ -139,7 +147,7 @@ export const PlanForm: React.FC<PlanFormProps> = ({ action, plan, onError, onSuc
    * Render the content of the 'subscriptions settings' tab
    */
   const renderSettingsTab = () => (
-    <div className='plan-form-content'>
+    <div className="plan-form-content">
       <section>
         <header>
           <p className="title">{t('app.admin.plan_form.description')}</p>
@@ -183,12 +191,12 @@ export const PlanForm: React.FC<PlanFormProps> = ({ action, plan, onError, onSuc
                                               tooltip={t('app.admin.plan_form.transversal_help')}
                                               id="all_groups" />}
           {!allGroups && groups && <FormSelect options={groups}
-                                                formState={formState}
-                                                control={control}
-                                                rules={{ required: !allGroups }}
-                                                disabled={action === 'update'}
-                                                label={t('app.admin.plan_form.group')}
-                                                id="group_id" />}
+                                               formState={formState}
+                                               control={control}
+                                               rules={{ required: !allGroups }}
+                                               disabled={action === 'update'}
+                                               label={t('app.admin.plan_form.group')}
+                                               id="group_id" />}
           <div className="grp">
             <FormInput register={register}
                        rules={{ required: true, min: 1 }}
@@ -262,16 +270,31 @@ export const PlanForm: React.FC<PlanFormProps> = ({ action, plan, onError, onSuc
           <FormInput register={register} type="hidden" id="type" defaultValue="Plan" />
           {output.type === 'PartnerPlan' && <div className="partner">
             {partners && <FormSelect id="partner_id"
-                                      options={partners}
-                                      control={control}
-                                      formState={formState}
-                                      rules={{ required: output.type === 'PartnerPlan' }}
-                                      tooltip={t('app.admin.plan_form.alert_partner_notification')}
-                                      label={t('app.admin.plan_form.notified_partner')} />}
+                                     options={partners}
+                                     control={control}
+                                     formState={formState}
+                                     rules={{ required: output.type === 'PartnerPlan' }}
+                                     tooltip={t('app.admin.plan_form.alert_partner_notification')}
+                                     label={t('app.admin.plan_form.notified_partner')} />}
             <FabButton className="is-secondary" icon={<UserPlus size={20} />} onClick={tooglePartnerModal}>
               {t('app.admin.plan_form.new_user')}
             </FabButton>
           </div>}
+        </div>
+      </section>
+
+      <section>
+        <header>
+          <p className="title">{t('app.admin.plan_form.slots_visibility')}</p>
+          <p className="description">{t('app.admin.plan_form.slots_visibility_help')}</p>
+        </header>
+        <div className="content">
+          <FormInput register={register}
+                     formState={formState}
+                     nullable
+                     id="machines_visibility"
+                     type="number"
+                     label={t('app.admin.plan_form.machines_visibility')} />
         </div>
       </section>
 
@@ -287,11 +310,11 @@ export const PlanForm: React.FC<PlanFormProps> = ({ action, plan, onError, onSuc
                                                  tooltip={t('app.admin.plan_form.category_help')}
                                                  label={t('app.admin.plan_form.category')} />}
           <FormInput register={register}
-                      formState={formState}
-                      id="ui_weight"
-                      type="number"
-                      label={t('app.admin.plan_form.visual_prominence')}
-                      tooltip={t('app.admin.plan_form.visual_prominence_help')} />
+                     formState={formState}
+                     id="ui_weight"
+                     type="number"
+                     label={t('app.admin.plan_form.visual_prominence')}
+                     tooltip={t('app.admin.plan_form.visual_prominence_help')} />
         </div>
       </section>
 
@@ -300,10 +323,10 @@ export const PlanForm: React.FC<PlanFormProps> = ({ action, plan, onError, onSuc
       </section>
 
       {action === 'update' && <PlanPricingForm formState={formState}
-                                                control={control}
-                                                onError={onError}
-                                                setValue={setValue}
-                                                register={register} />}
+                                               control={control}
+                                               onError={onError}
+                                               setValue={setValue}
+                                               register={register} />}
     </div>
   );
 

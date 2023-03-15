@@ -64,7 +64,6 @@ class CartItem::Reservation < CartItem::BaseItem
     plan = pending_subscription&.plan || customer&.subscribed_plan
 
     reservation_deadline_minutes = Setting.get('reservation_deadline').to_i
-    reservation_deadline = reservation_deadline_minutes.minutes.since
 
     unless ReservationLimitService.authorized?(plan, customer, self, all_items)
       errors.add(:reservation, I18n.t('cart_item_validation.limit_reached', {
@@ -75,7 +74,7 @@ class CartItem::Reservation < CartItem::BaseItem
     end
 
     cart_item_reservation_slots.each do |sr|
-      return false unless validate_slot_reservation(sr, pending_subscription, reservation_deadline, errors)
+      return false unless validate_slot_reservation(sr, pending_subscription, reservation_deadline_minutes, errors)
     end
 
     true
@@ -249,7 +248,7 @@ class CartItem::Reservation < CartItem::BaseItem
 
   # @param reservation_slot [CartItem::ReservationSlot]
   # @param pending_subscription [CartItem::Subscription, NilClass]
-  # @param reservation_deadline [Date,Time]
+  # @param reservation_deadline [Integer]
   # @param errors [ActiveModel::Errors]
   # @return [Boolean]
   def validate_slot_reservation(reservation_slot, pending_subscription, reservation_deadline, errors)
@@ -270,12 +269,12 @@ class CartItem::Reservation < CartItem::BaseItem
       return false
     end
 
-    if slot.start_at < reservation_deadline && !operator.privileged?
-      errors.add(:slot, I18n.t('cart_item_validation.deadline', { MINUTES: reservation_deadline_minutes }))
+    if slot.start_at < reservation_deadline.minutes.since && !operator.privileged?
+      errors.add(:slot, I18n.t('cart_item_validation.deadline', { MINUTES: reservation_deadline }))
       return false
     end
 
-    unless availability.plan_ids.empty? && required_subscription?(availability, pending_subscription)
+    if availability.plan_ids.any? && !required_subscription?(availability, pending_subscription)
       errors.add(:availability, I18n.t('cart_item_validation.restricted'))
       return false
     end
