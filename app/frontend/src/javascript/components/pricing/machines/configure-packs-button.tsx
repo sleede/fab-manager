@@ -75,7 +75,7 @@ export const ConfigurePacksButton: React.FC<ConfigurePacksButtonProps> = ({ pack
   };
 
   /**
-   * When the user clicks on the edition button, query the full data of the current pack from the API, then open te edition modal
+   * When the user clicks on the edition button, query the full data of the current pack from the API, then open the edition modal
    */
   const handleRequestEdit = (pack: PrepaidPack): void => {
     PrepaidPackAPI.get(pack.id)
@@ -114,7 +114,7 @@ export const ConfigurePacksButton: React.FC<ConfigurePacksButtonProps> = ({ pack
                                   onEdit={() => handleRequestEdit(p)}
                                   itemId={p.id}
                                   itemType={t('app.admin.configure_packs_button.pack')}
-                                  apiDestroy={PrepaidPackAPI.destroy}/>
+                                  destroy={PrepaidPackAPI.destroy}/>
               <FabModal isOpen={isOpen}
                         toggleModal={toggleModal}
                         title={t('app.admin.configure_packs_button.edit_pack')}

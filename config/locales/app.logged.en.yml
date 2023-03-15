@@ -166,10 +166,12 @@ en:
             end: "Expiry date"
             countdown: "Countdown"
             history: "History"
-            consumed_hours: "H consumed"
+            consumed_hours: "{COUNT, plural, =1{1H consumed} other{{COUNT}H consumed}}"
             cta_info: "You can buy prepaid hours packs to book machines and benefit from discounts. Choose a machine to buy a corresponding pack."
             select_machine: "Select a machine"
             cta_button: "Buy a pack"
+            no_packs: "No prepaid packs available for sale"
+            reserved_for_subscribers_html: 'The purchase of prepaid packs is reserved for subscribers. <a href="{LINK}">Subscribe now</a> to benefit.'
       #public profil of a member
       members_show:
         members_list: "Members list"

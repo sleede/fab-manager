@@ -17,6 +17,7 @@ import * as React from 'react';
 import { User } from '../../../models/user';
 import PrepaidPackAPI from '../../../api/prepaid-pack';
 import { PrepaidPack } from '../../../models/prepaid-pack';
+import { HtmlTranslate } from '../../base/html-translate';
 
 interface PrepaidPacksPanelProps {
   user: User,
@@ -40,7 +41,7 @@ const PrepaidPacksPanel: React.FC<PrepaidPacksPanelProps> = ({ user, onError }) 
   const { handleSubmit, control, formState } = useForm<{ machine_id: number }>();
 
   useEffect(() => {
-    UserPackAPI.index({ user_id: user.id })
+    UserPackAPI.index({ user_id: user.id, history: true })
       .then(setUserPacks)
       .catch(onError);
     SettingAPI.get('renew_pack_threshold')
@@ -105,7 +106,7 @@ const PrepaidPacksPanel: React.FC<PrepaidPacksPanelProps> = ({ user, onError }) 
    */
   const onPackBoughtSuccess = () => {
     togglePacksModal();
-    UserPackAPI.index({ user_id: user.id })
+    UserPackAPI.index({ user_id: user.id, history: true })
       .then(setUserPacks)
       .catch(onError);
   };
@@ -124,19 +125,21 @@ const PrepaidPacksPanel: React.FC<PrepaidPacksPanelProps> = ({ user, onError }) 
             <div className='prepaid-packs-list-item'>
               <p className='name'>{pack.prepaid_pack.priceable.name}</p>
               {FormatLib.date(pack.expires_at) && <p className="end">{FormatLib.date(pack.expires_at)}</p>}
-              <p className="countdown"><span>{pack.minutes_used / 60}H</span> / {pack.prepaid_pack.minutes / 60}H</p>
+              <p className="countdown"><span>{(pack.prepaid_pack.minutes - pack.minutes_used) / 60}H</span> / {pack.prepaid_pack.minutes / 60}H</p>
             </div>
           </div>
-          { /* usage history is not saved for now
+          {pack.history?.length > 0 &&
           <div className="prepaid-packs-list is-history">
             <span className='prepaid-packs-list-label'>{t('app.logged.dashboard.reservations_dashboard.prepaid_packs_panel.history')}</span>
 
-            <div className='prepaid-packs-list-item'>
-              <p className='name'>00{t('app.logged.dashboard.reservations_dashboard.prepaid_packs_panel.consumed_hours')}</p>
-              <p className="date">00/00/00</p>
-            </div>
+            {pack.history.map(prepaidReservation => (
+              <div className='prepaid-packs-list-item' key={prepaidReservation.id}>
+                <p className='name'>{t('app.logged.dashboard.reservations_dashboard.prepaid_packs_panel.consumed_hours', { COUNT: prepaidReservation.consumed_minutes / 60 })}</p>
+                <p className="date">{FormatLib.date(prepaidReservation.reservation_date)}</p>
+              </div>
+            ))}
           </div>
-          */ }
+          }
         </div>
       ))}
 
@@ -159,7 +162,10 @@ const PrepaidPacksPanel: React.FC<PrepaidPacksPanelProps> = ({ user, onError }) 
                              onDecline={togglePacksModal}
                              onSuccess={onPackBoughtSuccess} />}
       </div>}
-
+      {packs.length === 0 && <p>{t('app.logged.dashboard.reservations_dashboard.prepaid_packs_panel.no_packs')}</p>}
+      {(packsForSubscribers && user.subscribed_plan == null && packs.length > 0) &&
+        <HtmlTranslate trKey={'app.logged.dashboard.reservations_dashboard.prepaid_packs_panel.reserved_for_subscribers_html'} options={{ LINK: '#!/plans' }} />
+      }
     </FabPanel>
   );
 };

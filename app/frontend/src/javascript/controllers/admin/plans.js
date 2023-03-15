@@ -21,10 +21,13 @@
 /**
  * Controller used in the plan creation form
  */
-Application.Controllers.controller('NewPlanController', ['$scope', '$uibModal', 'groups', 'prices', 'partners', 'CSRF', '$state', 'growl', '_t', 'planCategories',
-  function ($scope, $uibModal, groups, prices, partners, CSRF, $state, growl, _t, planCategories) {
+Application.Controllers.controller('NewPlanController', ['$scope', '$uibModal', 'groups', 'prices', 'partners', 'CSRF', '$state', 'growl', '_t', '$uiRouter',
+  function ($scope, $uibModal, groups, prices, partners, CSRF, $state, growl, _t, $uiRouter) {
     // protection against request forgery
     CSRF.setMetaTags();
+
+    // the following item is used by the UnsavedFormAlert component to detect a page change
+    $scope.uiRouter = $uiRouter;
 
     /**
      * Shows an error message forwarded from a child component
@@ -46,12 +49,15 @@ Application.Controllers.controller('NewPlanController', ['$scope', '$uibModal', 
 /**
  * Controller used in the plan edition form
  */
-Application.Controllers.controller('EditPlanController', ['$scope', 'groups', 'plans', 'planPromise', 'machines', 'spaces', 'prices', 'partners', 'CSRF', '$state', '$transition$', 'growl', '$filter', '_t', 'Plan', 'planCategories',
-  function ($scope, groups, plans, planPromise, machines, spaces, prices, partners, CSRF, $state, $transition$, growl, $filter, _t, Plan, planCategories) {
+Application.Controllers.controller('EditPlanController', ['$scope', 'groups', 'plans', 'planPromise', 'machines', 'spaces', 'prices', 'partners', 'CSRF', '$state', '$transition$', 'growl', '$filter', '_t', '$uiRouter',
+  function ($scope, groups, plans, planPromise, machines, spaces, prices, partners, CSRF, $state, $transition$, growl, $filter, _t, $uiRouter) {
     // protection against request forgery
     CSRF.setMetaTags();
 
     $scope.suscriptionPlan = cleanPlan(planPromise);
+
+    // the following item is used by the UnsavedFormAlert component to detect a page change
+    $scope.uiRouter = $uiRouter;
 
     /**
      * Shows an error message forwarded from a child component

@@ -433,6 +433,8 @@ fr:
         schedule_deadline: "Vous devez encaisser le chèque de l'échéance du %{DATE}, pour l'échéancier %{REFERENCE}"
       notify_admin_payment_schedule_transfer_deadline:
         schedule_deadline: "Vous devez confirmer le prélèvement bancaire pour l'échéance du %{DATE} , pour l'échéancier %{REFERENCE}"
+      notify_member_reservation_limit_reached:
+        limit_reached: "Pour le %{DATE}, vous avez atteint votre limite quotidienne de %{HOURS} heures de réservation de la %{ITEM}."
       notify_admin_user_supporting_document_files_created:
         supporting_document_files_uploaded: "Le membre <strong><em>%{NAME}</strong></em> a téléversé un nouveau justificatif."
       notify_admin_user_supporting_document_files_updated:
@@ -519,6 +521,7 @@ fr:
     availability: "La disponibilité n'existe pas"
     full: "Le créneau est déjà entièrement réservé"
     deadline: "Vous ne pouvez pas réserver un créneau %{MINUTES} minutes avant son début"
+    limit_reached: "Vous avez atteint la limite de réservation de %{HOURS}H par jour pour la %{RESERVABLE}, pour votre abonnement actuel"
     restricted: "Cette disponibilité n'est disponible que pour les abonnés"
     plan: "Cette formule d'abonnement est désactivé"
     plan_group: "Cette formule d'abonnement est réservée aux membres du groupe %{GROUP}"

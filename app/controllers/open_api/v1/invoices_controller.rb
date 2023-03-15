@@ -8,12 +8,10 @@ class OpenAPI::V1::InvoicesController < OpenAPI::V1::BaseController
 
   def index
     @invoices = Invoice.order(created_at: :desc)
-                       .includes(invoicing_profile: :user)
+                       .includes(:payment_gateway_object, :invoicing_profile)
                        .references(:invoicing_profiles)
 
     @invoices = @invoices.where(invoicing_profiles: { user_id: may_array(params[:user_id]) }) if params[:user_id].present?
-
-    return if params[:page].blank?
 
     @invoices = @invoices.page(params[:page]).per(per_page)
     paginate @invoices, per_page: per_page

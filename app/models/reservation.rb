@@ -21,6 +21,8 @@ class Reservation < ApplicationRecord
   has_many :invoice_items, as: :object, dependent: :destroy
   has_one :payment_schedule_object, as: :object, dependent: :destroy
 
+  has_many :prepaid_pack_reservations, dependent: :destroy
+
   validates :reservable_id, :reservable_type, presence: true
   validate :machine_not_already_reserved, if: -> { reservable.is_a?(Machine) }
   validate :training_not_fully_reserved, if: -> { reservable.is_a?(Training) }
@@ -30,6 +32,7 @@ class Reservation < ApplicationRecord
   after_commit :notify_member_create_reservation, on: :create
   after_commit :notify_admin_member_create_reservation, on: :create
   after_commit :extend_subscription, on: :create
+  after_commit :notify_member_limitation_reached, on: :create
 
   delegate :user, to: :statistic_profile
 
@@ -121,7 +124,7 @@ class Reservation < ApplicationRecord
   end
 
   def extend_subscription
-    Subscriptions::ExtensionAfterReservation.new(self).extend_subscription_if_eligible
+    ::Subscriptions::ExtensionAfterReservation.new(self).extend_subscription_if_eligible
   end
 
   def notify_member_create_reservation
@@ -134,5 +137,15 @@ class Reservation < ApplicationRecord
     NotificationCenter.call type: 'notify_admin_member_create_reservation',
                             receiver: User.admins_and_managers,
                             attached_object: self
+  end
+
+  def notify_member_limitation_reached
+    date = ReservationLimitService.reached_limit_date(self)
+    return if date.nil?
+
+    NotificationCenter.call type: 'notify_member_reservation_limit_reached',
+                            receiver: user,
+                            attached_object: ReservationLimitService.limit(user.subscribed_plan, reservable),
+                            meta_data: { date: date }
   end
 end

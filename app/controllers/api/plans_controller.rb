@@ -80,11 +80,13 @@ class API::PlansController < API::ApiController
       end
 
       @parameters = @parameters.require(:plan)
-                               .permit(:base_name, :type, :group_id, :amount, :interval, :interval_count, :is_rolling,
+                               .permit(:base_name, :type, :group_id, :amount, :interval, :interval_count, :is_rolling, :limiting,
                                        :training_credit_nb, :ui_weight, :disabled, :monthly_payment, :description, :plan_category_id,
+                                       :machines_visibility,
                                        plan_file_attributes: %i[id attachment _destroy],
                                        prices_attributes: %i[id amount],
-                                       advanced_accounting_attributes: %i[code analytical_section])
+                                       advanced_accounting_attributes: %i[code analytical_section],
+                                       plan_limitations_attributes: %i[id limitable_id limitable_type limit _destroy])
     end
   end
 end

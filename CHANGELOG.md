@@ -1,10 +1,57 @@
 # Changelog Fab-manager
 
+- Ability to restrict machine reservations per plan
+- Ability to restrict machine availabilities per plan
+- Fix a security issue: updated webpack to 5.76.0 to fix [CVE-2023-28154](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-28154)
+- [TODO DEPLOY] `rails db:seed`
+- [TODO DEPLOY] `rails fablab:maintenance:rebuild_stylesheet`
+
+## v5.8.2 2023 March 13
+
+- Improved upgrade script
+- Keep usage history of prepaid packs
+- OpenAPI reservation endpoint can be filtered by date
+- OpenAPI users endpoint now returns the ID of the InvoicingProfile
+- Fix a bug: URL validation regex was wrong
+- Fix a bug: privileged users cannot order free carts for themselves in the store
+- Fix a bug: unable to select a new machine for an existing category
+- Fix a bug: wrong counting of minutes used when using a prepaid pack
+- Fix a bug: empty advanced accounting code is not defaulted to the general setting
+- Fix a bug: invalid style in accounting codes settings
+- Fix a bug: wrong namespace for task cart_operator
+- Fix a security issue: updated rack to 2.2.6.3 to fix [CVE-2023-27530](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-27530)
+- [TODO DEPLOY] `rails fablab:fix:cart_operator`
+- [TODO DEPLOY] `rails fablab:setup:build_accounting_lines`
+- [TODO DEPLOY] `rails fablab:fix:pack_minutes_used`
+
+## v5.8.1 2023 March 03
+
+- Fix a bug: unable to reserve an event
+
+## v5.8.0 2023 March 03
+
+- OpenAPI events endpoint returns category, theme and age_range
+- OpenAPI reservation endpoint will return details for the reserved slots
+- Display info messages if the user cannot buy prepaid packs
+- Fix a bug: some OpenAPI endpoints struggle and expire with timeout
+- Fix a bug: OpenAPI events endpoint documentation does not refect the returned data
+- Fix a bug: members can't change/cancel their reservations
+- Fix a bug: admin events view should default to the list tab
+- Fix a bug: event creation form should not allow setting multiple times the same price category
+- Fix a bug: MAX_SIZE env varibles should not be quoted (#438)
+- Fix a bug: unable to add OIDC scopes without discovery
+- [BREAKING CHANGE] GET `open_api/v1/events` will necessarily be paginated
+- [BREAKING CHANGE] GET `open_api/v1/invoices` will necessarily be paginated
+- [BREAKING CHANGE] GET `open_api/v1/reservations` will necessarily be paginated
+- [BREAKING CHANGE] GET `open_api/v1/users` will necessarily be paginated
+- [BREAKING CHANGE] GET `open_api/v1/subscriptions` won't return `total_count`, `total_pages`, `page` or `page_siez` anymore. RFC-5988 headers (*Link*, *Total* and *Per-Page*) will continue to provide these same data.
+- [BREAKING CHANGE] GET `open_api/v1/subscriptions` will return a `subscriptions` array instead of a `data` array.
+
 ## v5.7.2 2023 February 24
 
 - Fix a bug: unable to update recurrent events
 - Fix a bug: invalid border color for slots
-- Fix a bug: members can change/cancel their reservations
+- Fix a bug: members can't change/cancel their reservations
 
 ## v5.7.1 2023 February 20
 

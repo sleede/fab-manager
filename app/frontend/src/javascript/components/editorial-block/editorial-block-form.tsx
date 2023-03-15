@@ -5,6 +5,7 @@ import { FormSwitch } from '../form/form-switch';
 import { FormRichText } from '../form/form-rich-text';
 import { FormInput } from '../form/form-input';
 import { SettingName, SettingValue } from '../../models/setting';
+import ValidationLib from '../../lib/validation';
 export type EditorialKeys = 'active_text_block' | 'text_block' | 'active_cta' | 'cta_label' | 'cta_url';
 
 interface EditorialBlockFormProps {
@@ -14,9 +15,6 @@ interface EditorialBlockFormProps {
   info?: string
   keys: Record<EditorialKeys, SettingName>
 }
-
-// regular expression to validate the input fields
-const urlRegex = /^(https?:\/\/)([^.]+)\.(.{2,30})(\/.*)*\/?$/;
 
 /**
  * Allows to create a formatted text and optional cta button in a form block, to be included in a resource form managed by react-hook-form.
@@ -78,7 +76,7 @@ export const EditorialBlockForm: React.FC<EditorialBlockFormProps> = ({ register
                       formState={formState}
                       rules={{
                         required: { value: isActiveCta, message: t('app.admin.editorial_block_form.url_is_required') },
-                        pattern: { value: urlRegex, message: t('app.admin.editorial_block_form.url_must_be_safe') }
+                        pattern: { value: ValidationLib.urlRegex, message: t('app.admin.editorial_block_form.url_must_be_safe') }
                       }}
                       label={t('app.admin.editorial_block_form.cta_url')} />
           </>}

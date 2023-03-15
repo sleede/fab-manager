@@ -19,7 +19,11 @@ VCR.configure do |config|
   config.hook_into :webmock
   config.filter_sensitive_data('sk_test_testfaketestfaketestfake') { Setting.get('stripe_secret_key') }
   config.filter_sensitive_data('pk_test_faketestfaketestfaketest') { Setting.get('stripe_public_key') }
-  config.ignore_request { |req| URI(req.uri).port == 9200 }
+  config.filter_sensitive_data('github-oauth-app-id') { ENV.fetch('OAUTH_CLIENT_ID') }
+  config.filter_sensitive_data('github-oauth-app-secret') { ENV.fetch('OAUTH_CLIENT_SECRET') }
+  config.filter_sensitive_data('oidc-client-id') { ENV.fetch('OIDC_CLIENT_ID') }
+  config.filter_sensitive_data('oidc-client-secret') { ENV.fetch('OIDC_CLIENT_SECRET') }
+  config.ignore_request { |req| URI(req.uri).port == 9200 || URI(req.uri).host == '127.0.0.1' }
 end
 
 Sidekiq::Testing.fake!
@@ -43,7 +47,7 @@ class ActiveSupport::TestCase
   end
 
   def upload_headers
-    { 'Accept' => Mime[:json], 'Content-Type' => 'multipart/form-data' }
+    { 'Accept' => Mime[:json], 'Content-Type' => Mime[:multipart_form].to_s }
   end
 
   def open_api_headers(token)
@@ -106,6 +110,11 @@ class ActiveSupport::TestCase
   def assert_dates_equal(expected, actual, msg = nil)
     assert_not_nil actual, msg
     assert_equal expected.to_date, actual.to_date, msg
+  end
+
+  def assert_datetimes_equal(expected, actual, msg = nil)
+    assert_not_nil actual, msg
+    assert_equal expected.iso8601, actual.iso8601, msg
   end
 end
 

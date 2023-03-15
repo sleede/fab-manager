@@ -13,7 +13,7 @@ class OpenAPI::V1::InvoicesDoc < OpenAPI::V1::BaseDoc
 
   doc_for :index do
     api :GET, "/#{API_VERSION}/invoices", 'Invoices index'
-    description "Index of users' invoices, with optional pagination. Order by *created_at* descendant."
+    description 'Index of invoices, paginated. Ordered by *created_at* descendant.'
     param_group :pagination
     param :user_id, [Integer, Array], optional: true, desc: 'Scope the request to one or various users.'
     example <<-INVOICES

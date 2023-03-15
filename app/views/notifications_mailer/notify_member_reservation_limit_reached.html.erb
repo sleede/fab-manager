@@ -1,0 +1,9 @@
+<%= render 'notifications_mailer/shared/hello', recipient: @recipient %>
+
+<p>
+  <%= t('.body.limit_reached',
+        HOURS: @attached_object.limit,
+        ITEM: @attached_object.limitable.name,
+        DATE: I18n.l(@notification.get_meta_data(:date).to_date)) %>
+</p>
+

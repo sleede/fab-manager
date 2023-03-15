@@ -9,12 +9,12 @@ class OpenApi::ReservationsTest < ActionDispatch::IntegrationTest
     @token = OpenAPI::Client.find_by(name: 'minitest').token
   end
 
-  test 'list all reservations' do
+  test 'list reservations ' do
     get '/open_api/v1/reservations', headers: open_api_headers(@token)
     assert_response :success
     assert_equal Mime[:json], response.content_type
 
-    assert_equal Reservation.count, json_response(response.body)[:reservations].length
+    assert_not_empty json_response(response.body)[:reservations]
   end
 
   test 'list all reservations with pagination' do
@@ -44,6 +44,19 @@ class OpenApi::ReservationsTest < ActionDispatch::IntegrationTest
     reservations = json_response(response.body)
     assert reservations[:reservations].count <= 5
     assert_equal [3], reservations[:reservations].pluck(:user_id).uniq
+  end
+
+  test 'list all reservations with dates filtering' do
+    get '/open_api/v1/reservations?after=2012-01-01T00:00:00+02:00&before=2012-12-31T23:59:59+02:00', headers: open_api_headers(@token)
+    assert_response :success
+    assert_equal Mime[:json], response.content_type
+
+    reservations = json_response(response.body)
+    assert reservations[:reservations].count.positive?
+    assert(reservations[:reservations].all? do |line|
+      date = Time.zone.parse(line[:created_at])
+      date >= '2012-01-01'.to_date && date <= '2012-12-31'.to_date
+    end)
   end
 
   test 'list all machine reservations for a user' do

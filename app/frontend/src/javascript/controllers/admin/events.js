@@ -105,7 +105,7 @@ Application.Controllers.controller('AdminEventsController', ['$scope', '$state',
       { selected: '' };
 
     // default tab: events list
-    $scope.tabs = { active: 0 };
+    $scope.tabs = { active: 1 };
 
     /**
      * Adds a bucket of events to the bottom of the page, grouped by month

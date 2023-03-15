@@ -47,3 +47,11 @@ twentyp:
   updated_at: '2021-06-18 14:53:54.770895'
   validity_per_user: forever
   amount_off:
+internal:
+  name: Internal use
+  code: INTERNCOUP100
+  percent_off: 100
+  valid_until:
+  max_usages:
+  active: true
+  validity_per_user: forever

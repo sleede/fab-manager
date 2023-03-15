@@ -71,6 +71,19 @@ export const EventForm: React.FC<EventFormProps> = ({ action, event, onError, on
     SettingAPI.get('advanced_accounting').then(res => setIsActiveAccounting(res.value === 'true')).catch(onError);
   }, []);
 
+  useEffect(() => {
+    // When a new custom price is added to the current event, we mark it as disabled to prevent setting the same category twice
+    const selectedCategoriesId = output.event_price_categories_attributes
+      ?.filter(epc => !epc._destroy && epc.price_category_id)
+      ?.map(epc => epc.price_category_id) || [];
+    setPriceCategoriesOptions(priceCategoriesOptions?.map(pco => {
+      return {
+        ...pco,
+        disabled: selectedCategoriesId.includes(pco.value)
+      };
+    }));
+  }, [output.event_price_categories_attributes]);
+
   /**
    * Callback triggered when the user clicks on the 'remove' button, in the additional prices area
    */
@@ -278,12 +291,14 @@ export const EventForm: React.FC<EventFormProps> = ({ action, event, onError, on
                       type="number"
                       tooltip={t('app.admin.event_form.seats_help')} />
             <FormInput register={register}
-                      id="amount"
-                      formState={formState}
-                      rules={{ required: true }}
-                      label={t('app.admin.event_form.standard_rate')}
-                      tooltip={t('app.admin.event_form.0_equal_free')}
-                      addOn={FormatLib.currencySymbol()} />
+                       type="number"
+                       id="amount"
+                       formState={formState}
+                       rules={{ required: true, min: 0 }}
+                       nullable
+                       label={t('app.admin.event_form.standard_rate')}
+                       tooltip={t('app.admin.event_form.0_equal_free')}
+                       addOn={FormatLib.currencySymbol()} />
 
             {priceCategoriesOptions && <div className="additional-prices">
               {fields.map((price, index) => (
@@ -293,14 +308,16 @@ export const EventForm: React.FC<EventFormProps> = ({ action, event, onError, on
                               id={`event_price_categories_attributes.${index}.price_category_id`}
                               rules={{ required: true }}
                               formState={formState}
+                              disabled={() => index < fields.length - 1}
                               label={t('app.admin.event_form.fare_class')} />
                   <FormInput id={`event_price_categories_attributes.${index}.amount`}
-                            register={register}
-                            type="number"
-                            rules={{ required: true }}
-                            formState={formState}
-                            label={t('app.admin.event_form.price')}
-                            addOn={FormatLib.currencySymbol()} />
+                             register={register}
+                             type="number"
+                             rules={{ required: true, min: 0 }}
+                             nullable
+                             formState={formState}
+                             label={t('app.admin.event_form.price')}
+                             addOn={FormatLib.currencySymbol()} />
                   <FabButton className="remove-price is-main" onClick={() => handlePriceRemove(price, index)} icon={<Trash size={20} />} />
                 </div>
               ))}

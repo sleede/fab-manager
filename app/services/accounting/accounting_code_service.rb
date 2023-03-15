@@ -44,7 +44,7 @@ class Accounting::AccountingCodeService
 
       if type == :code
         item_code = Setting.get('advanced_accounting') ? invoice_item.object.reservable.advanced_accounting&.send(section) : nil
-        return Setting.get("accounting_#{invoice_item.object.reservable_type}_code") if item_code.nil? && section == :code
+        return Setting.get("accounting_#{invoice_item.object.reservable_type}_code") if item_code.blank? && section == :code
 
         item_code
       else
@@ -58,7 +58,7 @@ class Accounting::AccountingCodeService
 
       if type == :code
         item_code = Setting.get('advanced_accounting') ? invoice_item.object.plan.advanced_accounting&.send(section) : nil
-        return Setting.get('accounting_subscription_code') if item_code.nil? && section == :code
+        return Setting.get('accounting_subscription_code') if item_code.blank? && section == :code
 
         item_code
       else
@@ -72,7 +72,7 @@ class Accounting::AccountingCodeService
 
       if type == :code
         item_code = Setting.get('advanced_accounting') ? invoice_item.object.orderable.advanced_accounting&.send(section) : nil
-        return Setting.get('accounting_Product_code') if item_code.nil? && section == :code
+        return Setting.get('accounting_Product_code') if item_code.blank? && section == :code
 
         item_code
       else

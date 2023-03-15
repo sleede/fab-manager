@@ -34,7 +34,7 @@ list_files() {
 
 update_file() {
   # params: FILE_ID, STORAGE_ID
-  curl -s -X PUT "https://api.crowdin.com/api/v2/projects/$PROJECT_ID/files/$1" -H "$(authorization)" -H "Content-Type: application/json" -d "{ \"storageId\": $2, \"updateOption\": \"keep_translations_and_approvals\" }"
+  curl -s -X PUT "https://api.crowdin.com/api/v2/projects/$PROJECT_ID/files/$1" -H "$(authorization)" -H "Content-Type: application/json" -d "{ \"storageId\": $2 }"
 }
 
 find_file_id() {

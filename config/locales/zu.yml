@@ -433,6 +433,8 @@ zu:
         schedule_deadline: "crwdns21120:0%{DATE}crwdnd21120:0%{REFERENCE}crwdne21120:0"
       notify_admin_payment_schedule_transfer_deadline:
         schedule_deadline: "crwdns22305:0%{DATE}crwdnd22305:0%{REFERENCE}crwdne22305:0"
+      notify_member_reservation_limit_reached:
+        limit_reached: "crwdns37481:0%{DATE}crwdnd37481:0%{HOURS}crwdnd37481:0%{ITEM}crwdne37481:0"
       notify_admin_user_supporting_document_files_created:
         supporting_document_files_uploaded: "crwdns37341:0%{NAME}crwdne37341:0"
       notify_admin_user_supporting_document_files_updated:
@@ -519,6 +521,7 @@ zu:
     availability: "crwdns36269:0crwdne36269:0"
     full: "crwdns36271:0crwdne36271:0"
     deadline: "crwdns36273:0%{MINUTES}crwdne36273:0"
+    limit_reached: "crwdns37475:0%{HOURS}crwdnd37475:0%{RESERVABLE}crwdne37475:0"
     restricted: "crwdns36275:0crwdne36275:0"
     plan: "crwdns36277:0crwdne36277:0"
     plan_group: "crwdns37207:0%{GROUP}crwdne37207:0"

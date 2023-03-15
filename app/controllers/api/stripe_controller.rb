@@ -19,7 +19,7 @@ class API::StripeController < API::PaymentsController
     res = nil # json of the API answer
 
     cart = shopping_cart
-    render json: { error: cart.errors }, status: :unprocessable_entity and return unless cart.valid?
+    render json: cart.errors, status: :unprocessable_entity and return unless cart.valid?
 
     begin
       amount = debit_amount(cart) # will contains the amount and the details of each invoice lines
@@ -73,7 +73,7 @@ class API::StripeController < API::PaymentsController
 
   def setup_subscription
     cart = shopping_cart
-    render json: { error: cart.errors }, status: :unprocessable_entity and return unless cart.valid?
+    render json: cart.errors, status: :unprocessable_entity and return unless cart.valid?
 
     service = Stripe::Service.new
     method = service.attach_method_as_default(

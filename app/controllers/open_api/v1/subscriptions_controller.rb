@@ -1,9 +1,12 @@
 # frozen_string_literal: true
 
+require_relative 'concerns/subscriptions_filters_concern'
+
 # authorized 3rd party softwares can fetch the subscriptions through the OpenAPI
 class OpenAPI::V1::SubscriptionsController < OpenAPI::V1::BaseController
   extend OpenAPI::ApiDoc
   include Rails::Pagination
+  include SubscriptionsFiltersConcern
   expose_doc
 
   def index
@@ -11,13 +14,12 @@ class OpenAPI::V1::SubscriptionsController < OpenAPI::V1::BaseController
                                  .includes(:plan, statistic_profile: :user)
                                  .references(:statistic_profile, :plan)
 
-    @subscriptions = @subscriptions.where('created_at >= ?', Time.zone.parse(params[:after])) if params[:after].present?
-    @subscriptions = @subscriptions.where('created_at <= ?', Time.zone.parse(params[:before])) if params[:before].present?
-    @subscriptions = @subscriptions.where(plan_id: may_array(params[:plan_id])) if params[:plan_id].present?
-    @subscriptions = @subscriptions.where(statistic_profiles: { user_id: may_array(params[:user_id]) }) if params[:user_id].present?
+    @subscriptions = filter_by_after(@subscriptions, params)
+    @subscriptions = filter_by_before(@subscriptions, params)
+    @subscriptions = filter_by_plan(@subscriptions, params)
+    @subscriptions = filter_by_user(@subscriptions, params)
 
     @subscriptions = @subscriptions.page(page).per(per_page)
-    @pageination_meta = pageination_meta
     paginate @subscriptions, per_page: per_page
   end
 
@@ -29,15 +31,5 @@ class OpenAPI::V1::SubscriptionsController < OpenAPI::V1::BaseController
 
   def per_page
     params[:per_page] || 20
-  end
-
-  def pageination_meta
-    total_count = Subscription.count
-    {
-      total_count: total_count,
-      total_pages: (total_count / per_page.to_f).ceil,
-      page: page.to_i,
-      page_size: per_page.to_i
-    }
   end
 end

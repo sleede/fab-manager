@@ -13,7 +13,7 @@ class OpenAPI::V1::UsersDoc < OpenAPI::V1::BaseDoc
 
   doc_for :index do
     api :GET, "/#{API_VERSION}/users", 'Users index'
-    description 'Users index, with optional pagination. Order by *created_at* descendant.'
+    description 'Users index, paginated. Ordered by *created_at* descendant.'
     param_group :pagination
     param :email, [String, Array], optional: true, desc: 'Filter users by *email* using strict matching.'
     param :user_id, [Integer, Array], optional: true, desc: 'Filter users by *id* using strict matching.'
@@ -26,6 +26,7 @@ class OpenAPI::V1::UsersDoc < OpenAPI::V1::BaseDoc
             "id": 1746,
             "email": "xxxxxxx@xxxx.com",
             "created_at": "2016-05-04T17:21:48.403+02:00",
+            "invoicing_profile_id": 7824,
             "external_id": "J5821-4"
             "full_name": "xxxx xxxx",
             "first_name": "xxxx",
@@ -43,6 +44,7 @@ class OpenAPI::V1::UsersDoc < OpenAPI::V1::BaseDoc
             "id": 1745,
             "email": "xxxxxxx@gmail.com",
             "created_at": "2016-05-03T15:21:13.125+02:00",
+            "invoicing_profile_id": 7823,
             "external_id": "J5846-4"
             "full_name": "xxxxx xxxxx",
             "first_name": "xxxxx",
@@ -60,6 +62,7 @@ class OpenAPI::V1::UsersDoc < OpenAPI::V1::BaseDoc
             "id": 1744,
             "email": "xxxxxxx@gmail.com",
             "created_at": "2016-05-03T13:51:03.223+02:00",
+            "invoicing_profile_id": 7822,
             "external_id": "J5900-1"
             "full_name": "xxxxxxx xxxx",
             "first_name": "xxxxxxx",
@@ -77,6 +80,7 @@ class OpenAPI::V1::UsersDoc < OpenAPI::V1::BaseDoc
             "id": 1743,
             "email": "xxxxxxxx@setecastronomy.eu",
             "created_at": "2016-05-03T12:24:38.724+02:00",
+            "invoicing_profile_id": 7821,
             "external_id": "P4172-4"
             "full_name": "xxx xxxxxxx",
             "first_name": "xxx",
@@ -100,6 +104,7 @@ class OpenAPI::V1::UsersDoc < OpenAPI::V1::BaseDoc
             "id": 1746,
             "email": "xxxxxxxxxxxx",
             "created_at": "2016-05-04T17:21:48.403+02:00",
+            "invoicing_profile_id": 7820,
             "external_id": "J5500-4"
             "full_name": "xxxx xxxxxx",
             "first_name": "xxxx",
@@ -117,6 +122,7 @@ class OpenAPI::V1::UsersDoc < OpenAPI::V1::BaseDoc
             "id": 1745,
             "email": "xxxxxxxxx@gmail.com",
             "created_at": "2016-05-03T15:21:13.125+02:00",
+            "invoicing_profile_id": 7819,
             "external_id": null,
             "full_name": "xxxxx xxxxxx",
             "first_name": "xxxx",

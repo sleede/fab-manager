@@ -136,7 +136,7 @@ export const FormMultiSelect = <TFieldValues extends FieldValues, TContext exten
                     if (creatable) {
                       Object.assign(selectProps, {
                         formatCreateLabel,
-                        onCreateOption: inputValue => handleCreate(inputValue, value, rhfOnChange)
+                        onCreateOption: inputValue => handleCreate(inputValue, value || [], rhfOnChange)
                       });
                     }
 

@@ -1,30 +1,33 @@
 # frozen_string_literal: true
 
+require_relative 'concerns/reservations_filters_concern'
+
 # public API controller for resources of type Reservation
 class OpenAPI::V1::ReservationsController < OpenAPI::V1::BaseController
   extend OpenAPI::ApiDoc
   include Rails::Pagination
+  include ReservationsFiltersConcern
   expose_doc
 
   def index
     @reservations = Reservation.order(created_at: :desc)
-                               .includes(statistic_profile: :user)
+                               .includes(slots_reservations: :slot, statistic_profile: :user)
                                .references(:statistic_profiles)
 
-    @reservations = @reservations.where(statistic_profiles: { user_id: may_array(params[:user_id]) }) if params[:user_id].present?
-    @reservations = @reservations.where(reservable_type: format_type(params[:reservable_type])) if params[:reservable_type].present?
-    @reservations = @reservations.where(reservable_id: may_array(params[:reservable_id])) if params[:reservable_id].present?
+    @reservations = filter_by_after(@reservations, params)
+    @reservations = filter_by_before(@reservations, params)
+    @reservations = filter_by_user(@reservations, params)
+    @reservations = filter_by_reservable_type(@reservations, params)
+    @reservations = filter_by_reservable_id(@reservations, params)
 
-    return if params[:page].blank?
-
-    @reservations = @reservations.page(params[:page]).per(per_page)
+    @reservations = @reservations.page(page).per(per_page)
     paginate @reservations, per_page: per_page
   end
 
   private
 
-  def format_type(type)
-    type.singularize.classify
+  def page
+    params[:page] || 1
   end
 
   def per_page

@@ -6,6 +6,9 @@ class API::UserPacksController < API::ApiController
 
   def index
     @user_packs = PrepaidPackService.user_packs(user, item)
+
+    @history = params[:history] == 'true'
+    @user_packs = @user_packs.includes(:prepaid_pack_reservations) if @history
   end
 
   private

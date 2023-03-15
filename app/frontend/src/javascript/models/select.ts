@@ -2,7 +2,7 @@
  * Option format, expected by react-select
  * @see https://github.com/JedWatson/react-select
  */
-export type SelectOption<TOptionValue, TOptionLabel = string> = { value: TOptionValue, label: TOptionLabel }
+export type SelectOption<TOptionValue, TOptionLabel = string> = { value: TOptionValue, label: TOptionLabel, disabled?: boolean }
 
 /**
  * Checklist Option format

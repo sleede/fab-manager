@@ -648,7 +648,7 @@ history_value_66:
 history_value_67:
   id: 67
   setting_id: 67
-  value: pk_test_aScrMu3y4AocfCN5XLJjGzmQ
+  value: <%=ENV.fetch('STRIPE_PUBLISHABLE_KEY', 'pk_test_faketestfaketestfaketest') %>
   created_at: '2020-06-08 17:12:16.846525'
   updated_at: '2021-05-31 15:00:37.210049'
   footprint: 4984215605d9f30ac4f9594bc0d552d6b5e280f650801399b698aa43188001a5
@@ -657,7 +657,7 @@ history_value_67:
 history_value_68:
   id: 68
   setting_id: 68
-  value: sk_test_mGokO9TGtrVxMOyK4yZiktBE
+  value: <%=ENV.fetch('STRIPE_API_KEY', 'sk_test_testfaketestfaketestfake') %>
   created_at: '2020-06-08 17:12:16.846525'
   updated_at: '2021-05-31 15:00:37.280668'
   footprint: 48db504877d3329e39d1e816b243629c44b47be9f2837e2e4af4f30ca7cbd3e8

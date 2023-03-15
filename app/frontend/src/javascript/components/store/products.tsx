@@ -111,14 +111,9 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError, uiRouter }) => 
   };
 
   /** Delete a product */
-  const deleteProduct = async (productId: number): Promise<void> => {
-    try {
-      await ProductAPI.destroy(productId);
-      await fetchProducts();
-      onSuccess(t('app.admin.store.products.successfully_deleted'));
-    } catch (e) {
-      onError(t('app.admin.store.products.unable_to_delete') + e);
-    }
+  const deleteProduct = async (message: string): Promise<void> => {
+    await fetchProducts();
+    onSuccess(message);
   };
 
   /** Goto new product page */
@@ -244,6 +239,7 @@ const Products: React.FC<ProductsProps> = ({ onSuccess, onError, uiRouter }) => 
             <ProductItem
               key={product.id}
               product={product}
+              onError={onError}
               onEdit={editProduct}
               onDelete={deleteProduct}
             />

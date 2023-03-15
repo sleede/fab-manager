@@ -113,10 +113,22 @@ export const server = setupServer(
     return res(ctx.json({ status }));
   }),
   rest.get('/api/notification_types', (req, res, ctx) => {
-    return res(ctx.json(fixtures.notification_types));
+    return res(ctx.json(fixtures.notificationTypes));
   }),
   rest.get('/api/notifications', (req, res, ctx) => {
     return res(ctx.json(fixtures.notifications));
+  }),
+  rest.get('/api/categories', (req, res, ctx) => {
+    return res(ctx.json(fixtures.eventCategories));
+  }),
+  rest.get('/api/event_themes', (req, res, ctx) => {
+    return res(ctx.json(fixtures.eventThemes));
+  }),
+  rest.get('/api/age_ranges', (req, res, ctx) => {
+    return res(ctx.json(fixtures.ageRanges));
+  }),
+  rest.get('/api/price_categories', (req, res, ctx) => {
+    return res(ctx.json(fixtures.eventPriceCategories));
   })
 );
 

@@ -1,9 +1,12 @@
 # frozen_string_literal: true
 
+require_relative 'concerns/accountings_filters_concern'
+
 # authorized 3rd party softwares can fetch the accounting lines through the OpenAPI
 class OpenAPI::V1::AccountingController < OpenAPI::V1::BaseController
   extend OpenAPI::ApiDoc
   include Rails::Pagination
+  include AccountingsFiltersConcern
   expose_doc
 
   def index
@@ -16,10 +19,10 @@ class OpenAPI::V1::AccountingController < OpenAPI::V1::BaseController
     @lines = AccountingLine.order(date: :desc)
                            .includes(:invoicing_profile, invoice: :payment_gateway_object)
 
-    @lines = @lines.where('date >= ?', Time.zone.parse(params[:after])) if params[:after].present?
-    @lines = @lines.where('date <= ?', Time.zone.parse(params[:before])) if params[:before].present?
-    @lines = @lines.where(invoice_id: may_array(params[:invoice_id])) if params[:invoice_id].present?
-    @lines = @lines.where(line_type: may_array(params[:type])) if params[:type].present?
+    @lines = filter_by_after(@lines, params)
+    @lines = filter_by_before(@lines, params)
+    @lines = filter_by_invoice(@lines, params)
+    @lines = filter_by_line_type(@lines, params)
 
     @lines = @lines.page(page).per(per_page)
     paginate @lines, per_page: per_page

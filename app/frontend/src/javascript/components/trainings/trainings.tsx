@@ -199,7 +199,7 @@ export const Trainings: React.FC<TrainingsProps> = ({ onError, onSuccess }) => {
                                     onEdit={() => toTrainingEdit(training)}
                                     itemId={training.id}
                                     itemType={t('app.admin.trainings.training')}
-                                    apiDestroy={TrainingAPI.destroy}/>
+                                    destroy={TrainingAPI.destroy}/>
               </div>
             </div>
           ))}

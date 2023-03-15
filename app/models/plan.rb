@@ -21,6 +21,9 @@ class Plan < ApplicationRecord
   has_many :cart_item_subscriptions, class_name: 'CartItem::Subscription', dependent: :destroy
   has_many :cart_item_payment_schedules, class_name: 'CartItem::PaymentSchedule', dependent: :destroy
 
+  has_many :plan_limitations, dependent: :destroy
+  accepts_nested_attributes_for :plan_limitations, allow_destroy: true
+
   extend FriendlyId
   friendly_id :base_name, use: :slugged
 

@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { MachineCategory } from '../../models/machine-category';
-import { Machine } from '../../models/machine';
 import { IApplication } from '../../models/application';
 import { react2angular } from 'react2angular';
 import { Loader } from '../base/loader';
 import MachineCategoryAPI from '../../api/machine-category';
-import MachineAPI from '../../api/machine';
 import { useTranslation } from 'react-i18next';
 import { FabButton } from '../base/fab-button';
 import { MachineCategoryModal } from './machine-category-modal';
-import { DeleteMachineCategoryModal } from './delete-machine-category-modal';
+import { EditDestroyButtons } from '../base/edit-destroy-buttons';
 
 declare const Application: IApplication;
 
@@ -26,24 +24,15 @@ export const MachineCategoriesList: React.FC<MachineCategoriesListProps> = ({ on
 
   // shown machine categories
   const [machineCategories, setMachineCategories] = useState<Array<MachineCategory>>([]);
-  // all machines, for assign to category
-  const [machines, setMachines] = useState<Array<Machine>>([]);
   // creation/edition modal
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
   // currently added/edited category
   const [machineCategory, setMachineCategory] = useState<MachineCategory>(null);
-  // deletion modal
-  const [destroyModalIsOpen, setDestroyModalIsOpen] = useState<boolean>(false);
-  // currently deleted machine category
-  const [machineCategoryId, setMachineCategoryId] = useState<number>(null);
 
   // retrieve the full list of machine categories on component mount
   useEffect(() => {
     MachineCategoryAPI.index()
       .then(setMachineCategories)
-      .catch(onError);
-    MachineAPI.index({ category: 'none' })
-      .then(setMachines)
       .catch(onError);
   }, []);
 
@@ -59,7 +48,6 @@ export const MachineCategoriesList: React.FC<MachineCategoriesListProps> = ({ on
    */
   const onSaveTypeSuccess = (message: string): void => {
     setModalIsOpen(false);
-    MachineAPI.index({ category: 'none' }).then(setMachines).catch(onError);
     MachineCategoryAPI.index().then(data => {
       setMachineCategories(data);
       onSuccess(message);
@@ -87,27 +75,9 @@ export const MachineCategoriesList: React.FC<MachineCategoriesListProps> = ({ on
   };
 
   /**
-   * Init the process of deleting a machine category (ask for confirmation)
-   */
-  const destroyMachineCategory = (id: number): () => void => {
-    return (): void => {
-      setMachineCategoryId(id);
-      setDestroyModalIsOpen(true);
-    };
-  };
-
-  /**
-   * Open/closes the confirmation before deletion modal
-   */
-  const toggleDestroyModal = (): void => {
-    setDestroyModalIsOpen(!destroyModalIsOpen);
-  };
-
-  /**
    * Callback triggred when the current machine category was successfully deleted
    */
   const onDestroySuccess = (message: string): void => {
-    setDestroyModalIsOpen(false);
     MachineCategoryAPI.index().then(data => {
       setMachineCategories(data);
       onSuccess(message);
@@ -125,16 +95,10 @@ export const MachineCategoriesList: React.FC<MachineCategoriesListProps> = ({ on
         </div>
       </header>
       <MachineCategoryModal isOpen={modalIsOpen}
-                            machines={machines}
                             machineCategory={machineCategory}
                             toggleModal={toggleCreateAndEditModal}
                             onSuccess={onSaveTypeSuccess}
                             onError={onError} />
-      <DeleteMachineCategoryModal isOpen={destroyModalIsOpen}
-                                  machineCategoryId={machineCategoryId}
-                                  toggleModal={toggleDestroyModal}
-                                  onSuccess={onDestroySuccess}
-                                  onError={onError}/>
       <table className="machine-categories-table">
         <thead>
           <tr>
@@ -155,12 +119,12 @@ export const MachineCategoriesList: React.FC<MachineCategoriesListProps> = ({ on
                 </td>
                 <td>
                   <div className="buttons">
-                    <FabButton className="edit-btn" onClick={editMachineCategory(category)}>
-                      <i className="fa fa-edit" /> {t('app.admin.machine_categories_list.edit')}
-                    </FabButton>
-                    <FabButton className="delete-btn" onClick={destroyMachineCategory(category.id)}>
-                      <i className="fa fa-trash" />
-                    </FabButton>
+                    <EditDestroyButtons onDeleteSuccess={onDestroySuccess}
+                                        onError={onError}
+                                        onEdit={editMachineCategory(category)}
+                                        itemId={category.id}
+                                        itemType={t('app.admin.machine_categories_list.machine_category')}
+                                        destroy={MachineCategoryAPI.destroy} />
                   </div>
                 </td>
               </tr>

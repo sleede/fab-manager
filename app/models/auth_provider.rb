@@ -41,10 +41,10 @@ class AuthProvider < ApplicationRecord
       provider = find_by(status: 'active')
       return local if provider.nil?
 
-      return provider
+      provider
     rescue ActiveRecord::StatementInvalid
       # we fall here on database creation because the table "active_providers" still does not exists at the moment
-      return local
+      local
     end
   end
 
@@ -59,7 +59,7 @@ class AuthProvider < ApplicationRecord
 
     parsed = /^([^-]+)-(.+)$/.match(strategy_name)
     ret = nil
-    all.each do |strategy|
+    all.find_each do |strategy|
       if strategy.provider_type == parsed[1] && strategy.name.downcase.parameterize == parsed[2]
         ret = strategy
         break
@@ -70,13 +70,13 @@ class AuthProvider < ApplicationRecord
 
   ## Return the name that should be registered in OmniAuth for the corresponding strategy
   def strategy_name
-    provider_type + '-' + name.downcase.parameterize
+    "#{provider_type}-#{name.downcase.parameterize}"
   end
 
   ## Return the provider type name without the "Provider" part.
   ## eg. DatabaseProvider will return 'database'
   def provider_type
-    providable_type[0..-9].downcase
+    providable_type[0..-9]&.downcase
   end
 
   ## Return the user's profile fields that are currently managed from the SSO
@@ -84,7 +84,7 @@ class AuthProvider < ApplicationRecord
   def sso_fields
     fields = []
     auth_provider_mappings.each do |mapping|
-      fields.push(mapping.local_model + '.' + mapping.local_field)
+      fields.push("#{mapping.local_model}.#{mapping.local_field}")
     end
     fields
   end
@@ -96,10 +96,10 @@ class AuthProvider < ApplicationRecord
   end
 
   def safe_destroy
-    if status != 'active'
-      destroy
-    else
+    if status == 'active'
       false
+    else
+      destroy
     end
   end
 
