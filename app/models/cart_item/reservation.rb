@@ -249,6 +249,7 @@ class CartItem::Reservation < CartItem::BaseItem
   ##
   def reservation_deadline_minutes
     return 0
+  end
 
   # @param reservation_slot [CartItem::ReservationSlot]
   # @param pending_subscription [CartItem::Subscription, NilClass]
