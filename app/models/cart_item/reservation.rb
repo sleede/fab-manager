@@ -67,7 +67,7 @@ class CartItem::Reservation < CartItem::BaseItem
 
     unless ReservationLimitService.authorized?(plan, customer, self, all_items)
       errors.add(:reservation, I18n.t('cart_item_validation.limit_reached', {
-                                        HOURS: ReservationLimitService.limit(plan, reservable),
+                                        HOURS: ReservationLimitService.limit(plan, reservable).limit,
                                         RESERVABLE: reservable.name
                                       }))
       return false

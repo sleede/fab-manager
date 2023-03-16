@@ -119,7 +119,7 @@ class Availabilities::AvailabilitiesService
   end
 
   # @param availabilities [ActiveRecord::Relation<Availability>]
-  # @param type [String]
+  # @param type [String] 'training', 'space', 'machines' or 'event'
   # @param user [User]
   # @param range_start [ActiveSupport::TimeWithZone]
   # @param range_end [ActiveSupport::TimeWithZone]

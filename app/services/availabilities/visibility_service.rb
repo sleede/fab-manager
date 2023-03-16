@@ -11,7 +11,7 @@ class Availabilities::VisibilityService
   end
 
   # @param user [User,NilClass]
-  # @param available_type [String] 'training', 'space', 'machine' or 'event'
+  # @param available_type [String] 'training', 'space', 'machines' or 'event'
   # @param range_start [ActiveSupport::TimeWithZone]
   # @param range_end [ActiveSupport::TimeWithZone]
   # @return [Array<ActiveSupport::TimeWithZone,Date,Time>] as: [start,end]
@@ -44,7 +44,7 @@ class Availabilities::VisibilityService
   # @return [Time,NilClass]
   def subscription_visibility(user, available_type)
     return nil unless user&.subscribed_plan
-    return nil unless available_type == 'machine'
+    return nil unless available_type == 'machines'
 
     machines = user&.subscribed_plan&.machines_visibility
     machines&.hours&.since

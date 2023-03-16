@@ -194,6 +194,7 @@ zu:
         slots_visibility: "crwdns37491:0crwdne37491:0"
         slots_visibility_help: "crwdns37493:0crwdne37493:0"
         machines_visibility: "crwdns37495:0crwdne37495:0"
+        visibility_minimum: "crwdns37589:0crwdne37589:0"
         save: "crwdns37411:0crwdne37411:0"
         create_success: "crwdns31957:0crwdne31957:0"
         update_success: "crwdns31959:0crwdne31959:0"

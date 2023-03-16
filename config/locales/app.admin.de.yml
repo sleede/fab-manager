@@ -194,6 +194,7 @@ de:
         slots_visibility: "Slots visibility"
         slots_visibility_help: "You can determine how far in advance subscribers can view and reserve machine slots. When this setting is set, it takes precedence over the general settings."
         machines_visibility: "Visibility time limit, in hours (machines)"
+        visibility_minimum: "Visibility cannot be less than 7 hours"
         save: "Save"
         create_success: "Plan(s) successfully created. Don't forget to redefine prices."
         update_success: "The plan was updated successfully"

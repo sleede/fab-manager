@@ -123,7 +123,7 @@ class Availabilities::VisibilityServiceTest < ActiveSupport::TestCase
     plan.update(machines_visibility: 48)
     starting = Time.current.beginning_of_day
     ending = 1.month.from_now.end_of_day
-    window = Availabilities::VisibilityService.new.visibility(@with_subscription, 'machine', starting, ending)
+    window = Availabilities::VisibilityService.new.visibility(@with_subscription, 'machines', starting, ending)
     assert_datetimes_equal Time.current, window[0]
     assert_datetimes_equal 48.hours.from_now, window[1]
   end

@@ -194,6 +194,7 @@ fr:
         slots_visibility: "Visibilité des créneaux"
         slots_visibility_help: "Vous pouvez déterminer combien de temps en avance les abonnés peuvent voir et réserver les créneaux machines. Lorsque ce paramètre est défini, il devient prioritaire sur les paramètres généraux."
         machines_visibility: "Délai de visibilité, en heures (machines)"
+        visibility_minimum: "La visibilité ne peut pas être inférieure à 7 heures"
         save: "Enregistrer"
         create_success: "Création du/des formule(s) d'abonnement réussie(s). N'oubliez pas de redéfinir les tarifs."
         update_success: "La formule d'abonnement a bien été mise à jour"
