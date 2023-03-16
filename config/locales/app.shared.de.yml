@@ -234,8 +234,6 @@ de:
         credit_label: 'Legen Sie den Betrag der Gutschrift fest'
         confirm_credit_label: 'Bestätigen Sie den Betrag der Gutschrift'
         generate_a_refund_invoice: "Erstelle eine Rückerstattungs-Rechnung"
-        creation_date_for_the_refund: "Erstellungsdatum für die Erstattung"
-        creation_date_is_required: "Erstellungsdatum ist erforderlich."
         description_optional: "Beschreibung (optional):"
         will_appear_on_the_refund_invoice: "Wird auf der Rückerstattungsrechnung angezeigt."
         to_credit: 'Guthaben'

@@ -923,8 +923,6 @@ de:
         deleted_user: "Gelöschter Nutzer"
         refund_invoice_successfully_created: "Rückerstattungsrechnung erfolgreich erstellt."
         create_a_refund_on_this_invoice: "Erstelle eine Rückerstattung mit dieser Rechnung"
-        creation_date_for_the_refund: "Erstellungsdatum für die Erstattung"
-        creation_date_is_required: "Erstellungsdatum ist erforderlich."
         refund_mode: "Erstattungsmodus:"
         do_you_want_to_disable_the_user_s_subscription: "Möchten Sie das Abonnement des Benutzers deaktivieren:"
         elements_to_refund: "Erstattungselemente"

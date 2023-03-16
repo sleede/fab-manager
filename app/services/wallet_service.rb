@@ -50,11 +50,10 @@ class WalletService
   end
 
   ## create a refund invoice associated with the given wallet transaction
-  def create_avoir(wallet_transaction, avoir_date, description)
+  def create_avoir(wallet_transaction, description)
     avoir = Avoir.new
     avoir.type = 'Avoir'
-    avoir.avoir_date = avoir_date
-    avoir.created_at = avoir_date
+    avoir.avoir_date = Time.current
     avoir.description = description
     avoir.payment_method = 'wallet'
     avoir.subscription_to_expire = false

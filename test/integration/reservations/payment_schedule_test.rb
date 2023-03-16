@@ -84,6 +84,7 @@ class Reservations::PaymentScheduleTest < ActionDispatch::IntegrationTest
     assert payment_schedule.check_footprint
     assert_equal @user_without_subscription.invoicing_profile.id, payment_schedule.invoicing_profile_id
     assert_equal @admin.invoicing_profile.id, payment_schedule.operator_profile_id
+    assert_schedule_pdf(payment_schedule)
 
     # Check the answer
     result = json_response(response.body)

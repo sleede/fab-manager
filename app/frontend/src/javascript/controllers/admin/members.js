@@ -896,9 +896,6 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
         // default: do not generate a refund invoice
           $scope.generate_avoir = false;
 
-          // date of the generated refund invoice
-          $scope.avoir_date = null;
-
           // optional description shown on the refund invoice
           $scope.description = '';
 
@@ -929,7 +926,6 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
               {
                 amount: $scope.amount,
                 avoir: $scope.generate_avoir,
-                avoir_date: $scope.avoir_date,
                 avoir_description: $scope.description
               },
               function (_wallet) {

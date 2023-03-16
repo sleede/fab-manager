@@ -923,8 +923,6 @@
         deleted_user: "Slettet bruker"
         refund_invoice_successfully_created: "Refusjon ble opprettet."
         create_a_refund_on_this_invoice: "Opprett en refusjon på denne fakturaen"
-        creation_date_for_the_refund: "Refusjonsdato"
-        creation_date_is_required: "Opprettelsesdato er påkrevd."
         refund_mode: "Refusjonsmodus:"
         do_you_want_to_disable_the_user_s_subscription: "Ønsker du å deaktivere brukerens abonnement/medlemskap:"
         elements_to_refund: "Elementer for tilbakebetaling"

@@ -80,7 +80,7 @@ class Trainings::AutoCancelService
 
       service = WalletService.new(user: reservation.user, wallet: reservation.user.wallet)
       transaction = service.credit(amount)
-      service.create_avoir(transaction, Time.current, I18n.t('trainings.refund_for_auto_cancel')) if transaction
+      service.create_avoir(transaction, I18n.t('trainings.refund_for_auto_cancel')) if transaction
     end
   end
 end

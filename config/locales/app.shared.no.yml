@@ -234,8 +234,6 @@
         credit_label: 'Velg beløp for kreditering'
         confirm_credit_label: 'Bekreft beløpet som skal krediteres'
         generate_a_refund_invoice: "Genererer en refusjons- faktura"
-        creation_date_for_the_refund: "Refusjonsdato"
-        creation_date_is_required: "Opprettelsesdato er påkrevd."
         description_optional: "Beskrivelse (valgfritt):"
         will_appear_on_the_refund_invoice: "Vises på refusjonsfakturaen."
         to_credit: 'Kreditt'

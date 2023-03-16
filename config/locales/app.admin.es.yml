@@ -923,8 +923,6 @@ es:
         deleted_user: "Usario eliminado"
         refund_invoice_successfully_created: "Factura de reembolso creada correctamente."
         create_a_refund_on_this_invoice: "Crear un reembolso en esta factura"
-        creation_date_for_the_refund: "Fecha de creación del reembolso"
-        creation_date_is_required: "Se requiere la fecha de creación."
         refund_mode: "Modo de reembolso:"
         do_you_want_to_disable_the_user_s_subscription: "¿Quieres inhabilitar la suscripción del usuario?:"
         elements_to_refund: "Elementos a reembolsar"

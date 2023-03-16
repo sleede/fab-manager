@@ -234,8 +234,6 @@ pt:
         credit_label: 'Digite a quantia a ser creditada'
         confirm_credit_label: 'Confirme a quantia a ser creditada'
         generate_a_refund_invoice: "Gerar uma fatura de reembolso"
-        creation_date_for_the_refund: "Data de criação de reembolso"
-        creation_date_is_required: "Data de criação é obrigatório."
         description_optional: "Descrição (opcional):"
         will_appear_on_the_refund_invoice: "Aparecerá na fatura de reembolso."
         to_credit: 'Crédito'

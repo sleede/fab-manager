@@ -234,8 +234,6 @@ zu:
         credit_label: 'crwdns29096:0crwdne29096:0'
         confirm_credit_label: 'crwdns29098:0crwdne29098:0'
         generate_a_refund_invoice: "crwdns29100:0crwdne29100:0"
-        creation_date_for_the_refund: "crwdns29102:0crwdne29102:0"
-        creation_date_is_required: "crwdns29104:0crwdne29104:0"
         description_optional: "crwdns29106:0crwdne29106:0"
         will_appear_on_the_refund_invoice: "crwdns29108:0crwdne29108:0"
         to_credit: 'crwdns29110:0crwdne29110:0'

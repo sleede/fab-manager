@@ -25,7 +25,7 @@ class API::WalletController < API::ApiController
     service = WalletService.new(user: current_user, wallet: @wallet)
     transaction = service.credit(credit_params[:amount].to_f)
     if transaction
-      service.create_avoir(transaction, credit_params[:avoir_date], credit_params[:avoir_description]) if credit_params[:avoir]
+      service.create_avoir(transaction, credit_params[:avoir_description]) if credit_params[:avoir]
       render :show
     else
       head :unprocessable_entity
@@ -35,6 +35,6 @@ class API::WalletController < API::ApiController
   private
 
   def credit_params
-    params.permit(:id, :amount, :avoir, :avoir_date, :avoir_description)
+    params.permit(:id, :amount, :avoir, :avoir_description)
   end
 end

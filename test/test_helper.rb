@@ -10,8 +10,9 @@ require 'rails/test_help'
 require 'vcr'
 require 'sidekiq/testing'
 require 'minitest/reporters'
-require 'helpers/invoice_helper'
 require 'helpers/archive_helper'
+require 'helpers/invoice_helper'
+require 'helpers/payment_schedule_helper'
 require 'fileutils'
 
 VCR.configure do |config|
@@ -31,8 +32,9 @@ Minitest::Reporters.use! [Minitest::Reporters::DefaultReporter.new(color: true)]
 
 class ActiveSupport::TestCase
   include ActionDispatch::TestProcess
-  include InvoiceHelper
   include ArchiveHelper
+  include InvoiceHelper
+  include PaymentScheduleHelper
 
   # Add more helper methods to be used by all tests here...
   ActiveRecord::Migration.check_pending!
