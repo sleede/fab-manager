@@ -687,6 +687,13 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
               $scope.amountTotal = res.price;
               $scope.schedule.payment_schedule = res.schedule;
               $scope.totalNoCoupon = res.price_without_coupon;
+              if (res.errors && Object.keys(res.errors).length > 0) {
+                for (const error in res.errors) {
+                  for (const message of res.errors[error]) {
+                    growl.error(message);
+                  }
+                }
+              }
               setSlotsDetails(res.details);
             });
           } else {
