@@ -184,7 +184,7 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
       <div className="fields-group">
         <div className="personnal-data">
           <h4>{t('app.shared.user_profile_form.personal_data')}</h4>
-          <GenderInput register={register} disabled={isDisabled} />
+          <GenderInput register={register} disabled={isDisabled} required />
           <div className="names">
             <FormInput id="profile_attributes.last_name"
                        register={register}

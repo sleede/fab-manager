@@ -7,12 +7,13 @@ import { useTranslation } from 'react-i18next';
 interface GenderInputProps<TFieldValues> {
   register: UseFormRegister<TFieldValues>,
   disabled?: boolean|((id: string) => boolean),
+  required?: boolean
 }
 
 /**
  * Input component to set the gender for the user
  */
-export const GenderInput = <TFieldValues extends FieldValues>({ register, disabled = false }: GenderInputProps<TFieldValues>) => {
+export const GenderInput = <TFieldValues extends FieldValues>({ register, disabled = false, required }: GenderInputProps<TFieldValues>) => {
   const { t } = useTranslation('shared');
 
   const [isDisabled, setIsDisabled] = useState<boolean>(false);
@@ -26,21 +27,25 @@ export const GenderInput = <TFieldValues extends FieldValues>({ register, disabl
   }, [disabled]);
 
   return (
-    <div className="gender-input">
+    <fieldset className="gender-input">
+      <legend className={required ? 'is-required' : ''}>{t('app.shared.gender_input.label')}</legend>
       <label>
         <p>{t('app.shared.gender_input.man')}</p>
         <input type="radio"
+               name='gender'
                value="true"
+               required={required}
                disabled={isDisabled}
                {...register('statistic_profile_attributes.gender' as FieldPath<TFieldValues>)} />
       </label>
       <label>
         <p>{t('app.shared.gender_input.woman')}</p>
         <input type="radio"
+               name='gender'
                value="false"
                disabled={isDisabled}
                {...register('statistic_profile_attributes.gender' as FieldPath<TFieldValues>)} />
       </label>
-    </div>
+    </fieldset>
   );
 };

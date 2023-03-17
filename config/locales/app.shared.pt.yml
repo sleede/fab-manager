@@ -103,6 +103,7 @@ pt:
         must_accept_terms: "Você deve aceitar os termos e condições"
         save: "Salvar"
       gender_input:
+        label: "Gender"
         man: "Homem"
         woman: "Mulher"
       change_password:

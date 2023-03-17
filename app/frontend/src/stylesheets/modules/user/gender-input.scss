@@ -1,5 +1,17 @@
 .gender-input {
   margin-bottom: 1.6rem;
+  legend {
+    @include text-sm;
+    margin: 0 0 0.8rem;
+    border: none;
+    cursor: pointer;
+    &::first-letter { text-transform: uppercase; }
+    &.is-required::after {
+      content: "*";
+      margin-left: 0.5ch;
+      color: var(--alert);
+    }
+  }
 
   label {
     display: inline-flex;
