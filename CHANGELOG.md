@@ -2,6 +2,7 @@
 
 - Ability to restrict machine reservations per plan
 - Ability to restrict machine availabilities per plan
+- Ability to configure a prior period for each reservation type to prevent booking (#440)
 - Admins cannot select the date when creating a refund invoice anymore
 - Fix a bug: user's profile field gender is now marked as required
 - Fix a bug: logical sequence of invoices references is broken, when using the store module or the payments schedules
