@@ -47,6 +47,6 @@ class CartItem::TrainingReservation < CartItem::Reservation
   end
 
   def reservation_deadline_minutes
-    return Setting.get('training_reservation_deadline').to_i
+    Setting.get('training_reservation_deadline').to_i
   end
 end

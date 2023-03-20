@@ -244,11 +244,10 @@ class CartItem::Reservation < CartItem::BaseItem
       operator.admin?
   end
 
-  ##
   # Gets the deadline in minutes for slots in this reservation
-  ##
+  # @return [Integer]
   def reservation_deadline_minutes
-    return 0
+    0
   end
 
   # @param reservation_slot [CartItem::ReservationSlot]
@@ -274,7 +273,7 @@ class CartItem::Reservation < CartItem::BaseItem
     end
 
     if slot.start_at < reservation_deadline_minutes.minutes.since && !operator.privileged?
-      errors.add(:slot, I18n.t('cart_item_validation.deadline', { MINUTES: reservation_deadline }))
+      errors.add(:slot, I18n.t('cart_item_validation.deadline', { MINUTES: reservation_deadline_minutes }))
       return false
     end
 
