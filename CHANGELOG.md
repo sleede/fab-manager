@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+## v5.9.0 2023 March 20
+
 - Ability to restrict machine reservations per plan
 - Ability to restrict machine availabilities per plan
 - Ability to configure a prior period for each reservation type to prevent booking (#440)
