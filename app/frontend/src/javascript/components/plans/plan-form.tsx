@@ -293,7 +293,7 @@ export const PlanForm: React.FC<PlanFormProps> = ({ action, plan, onError, onSuc
                      formState={formState}
                      nullable
                      id="machines_visibility"
-                     rules={{ min: { value: 7, message: t('app.admin.plan_form.visibility_minimum') } }}
+                     rules={{ validate: v => { return (v === null || v >= 7 || t('app.admin.plan_form.visibility_minimum') as string); } }}
                      type="number"
                      label={t('app.admin.plan_form.machines_visibility')} />
         </div>
