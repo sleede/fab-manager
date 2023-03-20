@@ -740,25 +740,25 @@ export const settings: Array<Setting> = [
     name: 'machine_reservation_deadline',
     value: '0',
     last_update: '2023-03-01T16:28:23-0300',
-    localized: "Empêcher la réservation avant qu'elle ne commence"
+    localized: 'Machine prior period (minutes)'
   },
   {
     name: 'training_reservation_deadline',
     value: '0',
     last_update: '2023-03-01T16:28:23-0300',
-    localized: "Empêcher la réservation avant qu'elle ne commence"
+    localized: 'Training prior period (minutes)'
   },
   {
     name: 'event_reservation_deadline',
     value: '0',
     last_update: '2023-03-01T16:28:23-0300',
-    localized: "Empêcher la réservation avant qu'elle ne commence"
+    localized: 'Event prior period (minutes)'
   },
   {
     name: 'space_reservation_deadline',
     value: '0',
     last_update: '2023-03-01T16:28:23-0300',
-    localized: "Empêcher la réservation avant qu'elle ne commence"
+    localized: 'Space prior period (minutes)'
   },
   {
     name: 'invoice_VAT-name',
