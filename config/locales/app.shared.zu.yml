@@ -103,7 +103,7 @@ zu:
         must_accept_terms: "crwdns28700:0crwdne28700:0"
         save: "crwdns28702:0crwdne28702:0"
       gender_input:
-        label: "crwdns37591:0crwdne37591:0"
+        label: "crwdns37601:0crwdne37601:0"
         man: "crwdns28704:0crwdne28704:0"
         woman: "crwdns28706:0crwdne28706:0"
       change_password:

@@ -63,8 +63,6 @@ class CartItem::Reservation < CartItem::BaseItem
     pending_subscription = all_items.find { |i| i.is_a?(CartItem::Subscription) }
     plan = pending_subscription&.plan || customer&.subscribed_plan
 
-    reservation_deadline_minutes = Setting.get('reservation_deadline').to_i
-
     unless ReservationLimitService.authorized?(plan, customer, self, all_items)
       errors.add(:reservation, I18n.t('cart_item_validation.limit_reached', {
                                         HOURS: ReservationLimitService.limit(plan, reservable).limit,
@@ -74,7 +72,7 @@ class CartItem::Reservation < CartItem::BaseItem
     end
 
     cart_item_reservation_slots.each do |sr|
-      return false unless validate_slot_reservation(sr, pending_subscription, reservation_deadline_minutes, errors)
+      return false unless validate_slot_reservation(sr, pending_subscription, errors)
     end
 
     true
@@ -246,12 +244,18 @@ class CartItem::Reservation < CartItem::BaseItem
       operator.admin?
   end
 
+  ##
+  # Gets the deadline in minutes for slots in this reservation
+  ##
+  def reservation_deadline_minutes
+    return 0
+  end
+
   # @param reservation_slot [CartItem::ReservationSlot]
   # @param pending_subscription [CartItem::Subscription, NilClass]
-  # @param reservation_deadline [Integer]
   # @param errors [ActiveModel::Errors]
   # @return [Boolean]
-  def validate_slot_reservation(reservation_slot, pending_subscription, reservation_deadline, errors)
+  def validate_slot_reservation(reservation_slot, pending_subscription, errors)
     slot = reservation_slot.slot
     if slot.nil?
       errors.add(:slot, I18n.t('cart_item_validation.slot'))
@@ -269,7 +273,7 @@ class CartItem::Reservation < CartItem::BaseItem
       return false
     end
 
-    if slot.start_at < reservation_deadline.minutes.since && !operator.privileged?
+    if slot.start_at < reservation_deadline_minutes.minutes.since && !operator.privileged?
       errors.add(:slot, I18n.t('cart_item_validation.deadline', { MINUTES: reservation_deadline }))
       return false
     end
