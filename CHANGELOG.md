@@ -4,6 +4,7 @@
 - Ability to restrict machine availabilities per plan
 - Ability to configure a prior period for each reservation type to prevent booking (#440)
 - Admins cannot select the date when creating a refund invoice anymore
+- Fix a bug: JS date is initalialized 1 day before in negative timezones (#445)
 - Fix a bug: user's profile field gender is now marked as required
 - Fix a bug: logical sequence of invoices references is broken, when using the store module or the payments schedules
 - Fix a bug: refund invoices may generate duplicates in invoices references
