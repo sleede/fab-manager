@@ -1175,7 +1175,8 @@ angular.module('application.router', ['ui.router'])
                      "'renew_pack_threshold', 'pack_only_for_subscription', 'overlapping_categories', 'public_registrations'," +
                      "'extended_prices_in_same_day', 'recaptcha_site_key', 'recaptcha_secret_key', 'user_validation_required', " +
                      "'user_validation_required_list', 'machines_module', 'user_change_group', 'show_username_in_admin_list', " +
-                     "'store_module', 'reservation_deadline']"
+                     "'store_module', 'machine_reservation_deadline', 'training_reservation_deadline', 'event_reservation_deadline', " +
+                     "'space_reservation_deadline']"
             }).$promise;
           }],
           privacyDraftsPromise: ['Setting', function (Setting) { return Setting.get({ name: 'privacy_draft', history: true }).$promise; }],

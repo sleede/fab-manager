@@ -13,7 +13,7 @@ class Reservations::LastMinuteTest < ActionDispatch::IntegrationTest
   end
 
   test 'user cannot reserve last minute booking' do
-    Setting.set('reservation_deadline', '120')
+    Setting.set('space_reservation_deadline', '120')
 
     login_as(@user, scope: :user)
 
@@ -44,7 +44,7 @@ class Reservations::LastMinuteTest < ActionDispatch::IntegrationTest
   end
 
   test 'user can reserve last minute booking' do
-    Setting.set('reservation_deadline', '0')
+    Setting.set('space_reservation_deadline', '0')
 
     login_as(@user, scope: :user)
 
@@ -85,7 +85,7 @@ class Reservations::LastMinuteTest < ActionDispatch::IntegrationTest
   end
 
   test 'admin can reserve last minute booking anyway' do
-    Setting.set('reservation_deadline', '120')
+    Setting.set('space_reservation_deadline', '120')
 
     login_as(@admin, scope: :user)
 

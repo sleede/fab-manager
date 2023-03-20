@@ -6,11 +6,6 @@ class Availabilities::AvailabilitiesService
   # @param level [String] 'slot' | 'availability'
   def initialize(current_user, level = 'slot')
     @current_user = current_user
-    @maximum_visibility = {
-      year: Setting.get('visibility_yearly').to_i.months.since,
-      other: Setting.get('visibility_others').to_i.months.since
-    }
-    @minimum_visibility = Setting.get('reservation_deadline').to_i.minutes.since
     @level = level
   end
 
