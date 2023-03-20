@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- Fix a bug: in some cases, unable to export to excel files
+
 ## v5.9.0 2023 March 20
 
 - Ability to restrict machine reservations per plan

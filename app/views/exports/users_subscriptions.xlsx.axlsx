@@ -5,7 +5,7 @@ wb = xlsx_package.workbook
 header = wb.styles.add_style b: true, bg_color: Stylesheet.primary.upcase.gsub('#', 'FF'), fg_color: 'FFFFFFFF'
 date = wb.styles.add_style format_code: Rails.application.secrets.excel_date_format
 
-wb.add_worksheet(name: t('export_subscriptions.subscriptions')) do |sheet|
+wb.add_worksheet(name: ExcelService.name_safe(t('export_subscriptions.subscriptions'))) do |sheet|
 
   ## data table
   # heading labels
