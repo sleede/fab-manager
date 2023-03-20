@@ -72,7 +72,7 @@ class Reservations::RestrictedTest < ActionDispatch::IntegrationTest
            }.to_json, headers: default_headers
     end
 
-    assert_equal 201, response.status
+    assert_equal 201, response.status, response.body
 
     assert_equal reservations_count + 1, Reservation.count
     assert_equal invoices_count + 1, Invoice.count
@@ -105,7 +105,7 @@ class Reservations::RestrictedTest < ActionDispatch::IntegrationTest
            }
          }
 
-    assert_equal 201, response.status
+    assert_equal 201, response.status, response.body
 
     # Check the id
     availability = json_response(response.body)
@@ -141,7 +141,7 @@ class Reservations::RestrictedTest < ActionDispatch::IntegrationTest
            }.to_json, headers: default_headers
     end
 
-    assert_equal 422, response.status
+    assert_equal 422, response.status, response.body
     assert_match(/availability is restricted for subscribers/, response.body)
 
     assert_equal reservations_count, Reservation.count
@@ -175,7 +175,7 @@ class Reservations::RestrictedTest < ActionDispatch::IntegrationTest
            }
          }
 
-    assert_equal 201, response.status
+    assert_equal 201, response.status, response.body
 
     # Check the id
     availability = json_response(response.body)
@@ -187,27 +187,25 @@ class Reservations::RestrictedTest < ActionDispatch::IntegrationTest
     slot = Availability.find(availability[:id]).slots.first
 
     # book a reservation
-    VCR.use_cassette('reservations_create_for_restricted_slot_forced') do
-      post '/api/local_payment/confirm_payment',
-           params: {
-             customer_id: @jdupont.id,
-             items: [
-               {
-                 reservation: {
-                   reservable_id: 2,
-                   reservable_type: 'Machine',
-                   slots_reservations_attributes: [
-                     {
-                       slot_id: slot.id
-                     }
-                   ]
-                 }
+    post '/api/local_payment/confirm_payment',
+         params: {
+           customer_id: @jdupont.id,
+           items: [
+             {
+               reservation: {
+                 reservable_id: 2,
+                 reservable_type: 'Machine',
+                 slots_reservations_attributes: [
+                   {
+                     slot_id: slot.id
+                   }
+                 ]
                }
-             ]
-           }.to_json, headers: default_headers
-    end
+             }
+           ]
+         }.to_json, headers: default_headers
 
-    assert_equal 201, response.status
+    assert_equal 201, response.status, response.body
 
     # Check the result
     result = json_response(response.body)
@@ -246,7 +244,7 @@ class Reservations::RestrictedTest < ActionDispatch::IntegrationTest
            }
          }
 
-    assert_equal 201, response.status
+    assert_equal 201, response.status, response.body
 
     # Check the id
     availability = json_response(response.body)
@@ -287,7 +285,7 @@ class Reservations::RestrictedTest < ActionDispatch::IntegrationTest
            }.to_json, headers: default_headers
     end
 
-    assert_equal 201, response.status
+    assert_equal 201, response.status, response.body
 
     # Check the result
     result = json_response(response.body)

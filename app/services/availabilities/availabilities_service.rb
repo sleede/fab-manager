@@ -6,11 +6,6 @@ class Availabilities::AvailabilitiesService
   # @param level [String] 'slot' | 'availability'
   def initialize(current_user, level = 'slot')
     @current_user = current_user
-    @maximum_visibility = {
-      year: Setting.get('visibility_yearly').to_i.months.since,
-      other: Setting.get('visibility_others').to_i.months.since
-    }
-    @minimum_visibility = Setting.get('reservation_deadline').to_i.minutes.since
     @level = level
   end
 
@@ -119,33 +114,23 @@ class Availabilities::AvailabilitiesService
   end
 
   # @param availabilities [ActiveRecord::Relation<Availability>]
-  # @param type [String]
+  # @param type [String] 'training', 'space', 'machines' or 'event'
   # @param user [User]
   # @param range_start [ActiveSupport::TimeWithZone]
   # @param range_end [ActiveSupport::TimeWithZone]
   # @return ActiveRecord::Relation<Availability>
   def availabilities(availabilities, type, user, range_start, range_end)
-    # who made the request?
-    # 1) an admin (he can see all availabilities from 1 month ago to anytime in the future)
-    if @current_user&.admin? || @current_user&.manager?
-      window_start = [range_start, 1.month.ago].max
-      availabilities.includes(:tags, :slots)
-                    .joins(:slots)
-                    .where('availabilities.start_at <= ? AND availabilities.end_at >= ? AND available_type = ?', range_end, window_start, type)
-                    .where('slots.start_at > ? AND slots.end_at < ?', window_start, range_end)
-    # 2) an user (he cannot see past availabilities neither those further than 1 (or 3) months in the future)
-    else
-      end_at = @maximum_visibility[:other]
-      end_at = @maximum_visibility[:year] if subscription_year?(user) && type != 'training'
-      end_at = @maximum_visibility[:year] if show_more_trainings?(user) && type == 'training'
-      window_end = [end_at, range_end].min
-      window_start = [range_start, @minimum_visibility].max
-      availabilities.includes(:tags, :slots)
-                    .joins(:slots)
-                    .where('availabilities.start_at <= ? AND availabilities.end_at >= ? AND available_type = ?', window_end, window_start, type)
-                    .where('slots.start_at > ? AND slots.end_at < ?', window_start, window_end)
-                    .where('availability_tags.tag_id' => user&.tag_ids&.concat([nil]))
-                    .where(lock: false)
+    window = Availabilities::VisibilityService.new.visibility(@current_user, type, range_start, range_end)
+    qry = availabilities.includes(:tags, :slots)
+                        .joins(:slots)
+                        .where('availabilities.start_at <= ? AND availabilities.end_at >= ? AND available_type = ?', window[1], window[0], type)
+                        .where('slots.start_at > ? AND slots.end_at < ?', window[0], window[1])
+    unless @current_user&.privileged?
+      # non priviledged users cannot see availabilities with tags different than their own and locked tags
+      qry = qry.where('availability_tags.tag_id' => user&.tag_ids&.concat([nil]))
+               .where(lock: false)
     end
+
+    qry
   end
 end

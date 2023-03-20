@@ -12,6 +12,8 @@ class Avoir < Invoice
 
   attr_accessor :invoice_items_ids
 
+  delegate :order_number, to: :invoice
+
   def generate_reference
     super(created_at)
   end

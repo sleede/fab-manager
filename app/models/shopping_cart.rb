@@ -160,6 +160,7 @@ class ShoppingCart
 
   # Check if the current cart needs the user to have been validated, and if the condition is satisfied.
   # Return an array of errors, if any; false otherwise
+  # @return [Array<String>,FalseClass]
   def check_user_validation(items)
     user_validation_required = Setting.get('user_validation_required')
     user_validation_required_list = Setting.get('user_validation_required_list')

@@ -103,6 +103,7 @@ fr:
         must_accept_terms: "Vous devez accepter les conditions générales"
         save: "Enregistrer"
       gender_input:
+        label: "Genre"
         man: "Homme"
         woman: "Femme"
       change_password:
@@ -233,8 +234,6 @@ fr:
         credit_label: 'Indiquez le montant à créditer'
         confirm_credit_label: 'Confirmez le montant à créditer'
         generate_a_refund_invoice: "Générer une facture d'avoir"
-        creation_date_for_the_refund: "Date d'émission de l'avoir"
-        creation_date_is_required: "La date d'émission est requise."
         description_optional: "Description (optionnelle) :"
         will_appear_on_the_refund_invoice: "Apparaîtra sur la facture de remboursement."
         to_credit: 'Créditer'
@@ -540,3 +539,6 @@ fr:
         show_reserved_uniq: "Afficher uniquement les créneaux avec réservation"
       machine:
         machine_uncategorized: "Machines non classés"
+      form_unsaved_list:
+        save_reminder: "N'oubliez pas d'enregistrer vos modifications"
+        cancel: "Annuler"

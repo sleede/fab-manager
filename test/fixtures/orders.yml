@@ -150,8 +150,8 @@ order_15:
   reference: '005900-10-22'
   state: ready
   total: 3000
-  created_at: <%= DateTime.current.utc.change({:hour => 10}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  updated_at: <%= DateTime.current.utc.change({:hour => 15}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  created_at: <%= DateTime.current.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  updated_at: <%= DateTime.current.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
   wallet_amount:
   wallet_transaction_id:
   payment_method: local
@@ -168,8 +168,8 @@ order_16:
   reference: '005901-<%= DateTime.current.utc.strftime('%m') %>-<%= DateTime.current.utc.strftime('%d') %>'
   state: cart
   total: 0
-  created_at: <%= DateTime.current.utc.change({:hour => 10}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  updated_at: <%= DateTime.current.utc.change({:hour => 15}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  created_at: <%= DateTime.current.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  updated_at: <%= DateTime.current.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
   wallet_amount:
   wallet_transaction_id:
   payment_method:
@@ -186,8 +186,8 @@ order_17:
   reference: '005902-<%= DateTime.current.utc.strftime('%m') %>-<%= DateTime.current.utc.strftime('%d') %>'
   state: cart
   total: 0
-  created_at: <%= DateTime.current.utc.change({:hour => 10}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  updated_at: <%= DateTime.current.utc.change({:hour => 15}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  created_at: <%= DateTime.current.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  updated_at: <%= DateTime.current.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
   wallet_amount:
   wallet_transaction_id:
   payment_method:
@@ -204,8 +204,8 @@ order_18:
   reference: '005902-<%= DateTime.current.utc.strftime('%m') %>-<%= DateTime.current.utc.strftime('%d') %>'
   state: cart
   total: 500
-  created_at: <%= DateTime.current.utc.change({:hour => 10}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  updated_at: <%= DateTime.current.utc.change({:hour => 15}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  created_at: <%= DateTime.current.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  updated_at: <%= DateTime.current.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
   wallet_amount:
   wallet_transaction_id:
   payment_method:
@@ -222,8 +222,8 @@ order_19:
   reference: '005903-<%= DateTime.current.utc.strftime('%m') %>-<%= DateTime.current.utc.strftime('%d') %>'
   state: cart
   total: 261500
-  created_at: <%= DateTime.current.utc.change({:hour => 10}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  updated_at: <%= DateTime.current.utc.change({:hour => 15}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  created_at: <%= DateTime.current.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  updated_at: <%= DateTime.current.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
   wallet_amount:
   wallet_transaction_id:
   payment_method:
@@ -240,8 +240,8 @@ order_20:
   reference: '005904-<%= DateTime.current.utc.strftime('%m') %>-<%= DateTime.current.utc.strftime('%d') %>'
   state: cart
   total: 262500
-  created_at: <%= DateTime.current.utc.change({:hour => 10}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  updated_at: <%= DateTime.current.utc.change({:hour => 15}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  created_at: <%= DateTime.current.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  updated_at: <%= DateTime.current.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
   wallet_amount:
   wallet_transaction_id:
   payment_method:

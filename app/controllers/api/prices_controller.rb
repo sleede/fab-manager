@@ -46,6 +46,9 @@ class API::PricesController < API::ApiController
     cs = CartService.new(current_user)
     cart = cs.from_hash(params)
     @amount = cart.total
+    # TODO, remove this when the cart is refactored
+    cart.valid?
+    @errors = cart.errors
   end
 
   private

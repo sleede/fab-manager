@@ -4,8 +4,8 @@
 module InvoiceHelper
   # Force the invoice generation worker to run NOW and check the resulting file generated.
   # Delete the file afterwards.
-  # @param invoice {Invoice}
-  # @param &block an optional block may be provided for additional specific assertions on the invoices PDF lines
+  # @param invoice [Invoice]
+  # @yield an optional block may be provided for additional specific assertions on the invoices PDF lines
   def assert_invoice_pdf(invoice)
     assert_not_nil invoice, 'Invoice was not created'
 
@@ -25,6 +25,43 @@ module InvoiceHelper
     yield lines if block_given?
 
     File.delete(invoice.file)
+  end
+
+  # @param customer [User]
+  # @param operator [User]
+  # @return [Invoice] saved
+  def sample_reservation_invoice(customer, operator)
+    machine = Machine.first
+    slot = Availabilities::AvailabilitiesService.new(operator)
+                                                .machines([machine], customer, { start: Time.current, end: 1.year.from_now })
+                                                .find { |s| !s.full?(machine) }
+    reservation = Reservation.new(
+      reservable: machine,
+      slots_reservations: [SlotsReservation.new({ slot_id: slot.id })],
+      statistic_profile: customer.statistic_profile
+    )
+    reservation.save
+    invoice = Invoice.new(
+      invoicing_profile: customer.invoicing_profile,
+      statistic_profile: customer.statistic_profile,
+      operator_profile: operator.invoicing_profile,
+      payment_method: '',
+      invoice_items: [InvoiceItem.new(
+        amount: 1000,
+        description: "reservation #{machine.name}",
+        object: reservation,
+        main: true
+      )]
+    )
+    unless operator.privileged?
+      invoice.payment_method = 'card'
+      invoice.payment_gateway_object = PaymentGatewayObject.new(
+        gateway_object_id: 'pi_3LpALs2sOmf47Nz91QyFI7nP',
+        gateway_object_type: 'Stripe::PaymentIntent'
+      )
+    end
+    invoice.save
+    invoice
   end
 
   private

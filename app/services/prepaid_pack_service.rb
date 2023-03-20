@@ -73,7 +73,7 @@ class PrepaidPackService
 
     # Total number of prepaid minutes available
     # @param user [User]
-    # @param priceable [Machine,Space]
+    # @param priceable [Machine,Space,NilClass]
     def minutes_available(user, priceable)
       return 0 if Setting.get('pack_only_for_subscription') && !user.subscribed_plan
 

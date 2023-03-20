@@ -12,6 +12,16 @@ export interface Partner {
     email: string
 }
 
+export type LimitableType = 'Machine'|'MachineCategory';
+export interface PlanLimitation {
+    id?: number,
+    limitable_id: number,
+    limitable_type: LimitableType,
+    limit: number,
+    _modified?: boolean,
+    _destroy?: boolean,
+}
+
 export interface Plan {
     id?: number,
     base_name: string,
@@ -34,8 +44,10 @@ export interface Plan {
     plan_file_url?: string,
     partner_id?: number,
     partnership?: boolean,
+    limiting?: boolean,
     partners?: Array<Partner>,
-    advanced_accounting_attributes?: AdvancedAccounting
+    advanced_accounting_attributes?: AdvancedAccounting,
+    plan_limitations_attributes?: Array<PlanLimitation>
 }
 
 export interface PlansDuration {

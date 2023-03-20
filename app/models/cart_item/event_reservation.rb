@@ -71,4 +71,8 @@ class CartItem::EventReservation < CartItem::Reservation
   def total_tickets
     (normal_tickets || 0) + (cart_item_event_reservation_tickets.map(&:booked).reduce(:+) || 0)
   end
+
+  def reservation_deadline_minutes
+    Setting.get('event_reservation_deadline').to_i
+  end
 end

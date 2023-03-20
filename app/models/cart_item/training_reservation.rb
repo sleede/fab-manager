@@ -45,4 +45,8 @@ class CartItem::TrainingReservation < CartItem::Reservation
     is_creditable = plan&.training_credits&.select { |credit| credit.creditable_id == reservable&.id }&.any?
     is_creditable ? plan&.training_credit_nb : 0
   end
+
+  def reservation_deadline_minutes
+    Setting.get('training_reservation_deadline').to_i
+  end
 end

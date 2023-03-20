@@ -14,8 +14,9 @@ class Invoice < PaymentDocument
   belongs_to :coupon
 
   has_one :avoir, class_name: 'Invoice', dependent: :destroy, inverse_of: :avoir
-  has_one :payment_schedule_item, dependent: :nullify
+  has_one :payment_schedule_item, dependent: :restrict_with_error
   has_one :payment_gateway_object, as: :item, dependent: :destroy
+  has_one :order, dependent: :restrict_with_error
   belongs_to :operator_profile, class_name: 'InvoicingProfile'
 
   has_many :accounting_lines, dependent: :destroy
@@ -49,6 +50,12 @@ class Invoice < PaymentDocument
   end
 
   def order_number
+    return order.reference unless order.nil?
+
+    if !payment_schedule_item.nil? && !payment_schedule_item.first?
+      return payment_schedule_item.payment_schedule.ordered_items.first.invoice.order_number
+    end
+
     PaymentDocumentService.generate_order_number(self)
   end
 
@@ -66,8 +73,7 @@ class Invoice < PaymentDocument
     avoir.attributes = attrs
     avoir.reference = nil
     avoir.invoice_id = id
-    # override created_at to compute CA in stats
-    avoir.created_at = avoir.avoir_date
+    avoir.avoir_date = Time.current
     avoir.total = 0
     # refunds of invoices with cash coupons: we need to ventilate coupons on paid items
     paid_items = 0
@@ -79,7 +85,6 @@ class Invoice < PaymentDocument
 
       refund_items += 1 unless ii.amount.zero?
       avoir_ii = avoir.invoice_items.build(ii.dup.attributes)
-      avoir_ii.created_at = avoir.avoir_date
       avoir_ii.invoice_item_id = ii.id
       avoir.total += avoir_ii.amount
     end

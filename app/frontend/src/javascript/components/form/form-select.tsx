@@ -58,10 +58,10 @@ export const FormSelect = <TFieldValues extends FieldValues, TContext extends ob
                     <AbstractSelect ref={ref}
                                     classNamePrefix="rs"
                                     className="rs"
-                                    value={options.find(c => c.value === value)}
+                                    value={value === null ? null : options.find(c => c.value === value)}
                                     onChange={val => {
-                                      onChangeCb(val.value);
-                                      onChange(val.value);
+                                      onChangeCb(val?.value);
+                                      onChange(val?.value);
                                     }}
                                     placeholder={placeholder}
                                     isDisabled={isDisabled}

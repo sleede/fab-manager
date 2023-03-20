@@ -103,6 +103,7 @@ de:
         must_accept_terms: "You must accept the terms and conditions"
         save: "Save"
       gender_input:
+        label: "Gender"
         man: "Man"
         woman: "Woman"
       change_password:
@@ -233,8 +234,6 @@ de:
         credit_label: 'Legen Sie den Betrag der Gutschrift fest'
         confirm_credit_label: 'Bestätigen Sie den Betrag der Gutschrift'
         generate_a_refund_invoice: "Erstelle eine Rückerstattungs-Rechnung"
-        creation_date_for_the_refund: "Erstellungsdatum für die Erstattung"
-        creation_date_is_required: "Erstellungsdatum ist erforderlich."
         description_optional: "Beschreibung (optional):"
         will_appear_on_the_refund_invoice: "Wird auf der Rückerstattungsrechnung angezeigt."
         to_credit: 'Guthaben'
@@ -540,3 +539,6 @@ de:
         show_reserved_uniq: "Show only slots with reservations"
       machine:
         machine_uncategorized: "Uncategorized machines"
+      form_unsaved_list:
+        save_reminder: "Do not forget to save your changes"
+        cancel: "Cancel"

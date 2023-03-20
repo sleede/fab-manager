@@ -1,3 +1,4 @@
+# admin without subscription
 user_1:
   id: 1
   username: admin
@@ -30,6 +31,7 @@ user_1:
   merged_at:
   is_allow_newsletter: true
 
+# member without subscription
 user_2:
   id: 2
   username: jdupond
@@ -62,6 +64,7 @@ user_2:
   merged_at:
   is_allow_newsletter: true
 
+# member with 1 month subscription (plan 2/standard)
 user_3:
   id: 3
   username: pdurand
@@ -94,6 +97,7 @@ user_3:
   merged_at:
   is_allow_newsletter: false
 
+# member with 1 month subscription (plan 3/students)
 user_4:
   id: 4
   username: kdumas
@@ -126,6 +130,7 @@ user_4:
   merged_at:
   is_allow_newsletter: false
 
+# member with 10€ on wallet
 user_5:
   id: 5
   username: vlonchamp
@@ -158,6 +163,7 @@ user_5:
   merged_at:
   is_allow_newsletter: true
 
+# partner of plan 2
 user_6:
   id: 6
   username: GilbertPartenaire
@@ -190,6 +196,7 @@ user_6:
   merged_at:
   is_allow_newsletter: true
 
+# member with 255€ on wallet
 user_7:
   id: 7
   username: lseguin
@@ -286,6 +293,7 @@ user_9:
   merged_at:
   is_allow_newsletter: true
 
+# member with 1 year subscription
 user_10:
   id: 10
   username: acamus

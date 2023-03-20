@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_03_09_094535) do
+ActiveRecord::Schema.define(version: 2023_03_15_095054) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
@@ -19,8 +19,8 @@ ActiveRecord::Schema.define(version: 2023_03_09_094535) do
   enable_extension "unaccent"
 
   create_table "abuses", id: :serial, force: :cascade do |t|
-    t.integer "signaled_id"
     t.string "signaled_type"
+    t.integer "signaled_id"
     t.string "first_name"
     t.string "last_name"
     t.string "email"
@@ -68,8 +68,8 @@ ActiveRecord::Schema.define(version: 2023_03_09_094535) do
     t.string "locality"
     t.string "country"
     t.string "postal_code"
-    t.integer "placeable_id"
     t.string "placeable_type"
+    t.integer "placeable_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -93,8 +93,8 @@ ActiveRecord::Schema.define(version: 2023_03_09_094535) do
   end
 
   create_table "assets", id: :serial, force: :cascade do |t|
-    t.integer "viewable_id"
     t.string "viewable_type"
+    t.integer "viewable_id"
     t.string "attachment"
     t.string "type"
     t.datetime "created_at"
@@ -164,10 +164,10 @@ ActiveRecord::Schema.define(version: 2023_03_09_094535) do
 
   create_table "cart_item_event_reservation_tickets", force: :cascade do |t|
     t.integer "booked"
+    t.bigint "event_price_category_id"
     t.bigint "cart_item_event_reservation_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "event_price_category_id"
     t.index ["cart_item_event_reservation_id"], name: "index_cart_item_tickets_on_cart_item_event_reservation"
     t.index ["event_price_category_id"], name: "index_cart_item_tickets_on_event_price_category"
   end
@@ -282,8 +282,8 @@ ActiveRecord::Schema.define(version: 2023_03_09_094535) do
   end
 
   create_table "credits", id: :serial, force: :cascade do |t|
-    t.integer "creditable_id"
     t.string "creditable_type"
+    t.integer "creditable_id"
     t.integer "plan_id"
     t.integer "hours"
     t.datetime "created_at"
@@ -546,15 +546,15 @@ ActiveRecord::Schema.define(version: 2023_03_09_094535) do
 
   create_table "notifications", id: :serial, force: :cascade do |t|
     t.integer "receiver_id"
-    t.integer "attached_object_id"
     t.string "attached_object_type"
+    t.integer "attached_object_id"
     t.integer "notification_type_id"
     t.boolean "is_read", default: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string "receiver_type"
     t.boolean "is_send", default: false
-    t.jsonb "meta_data", default: {}
+    t.jsonb "meta_data", default: "{}"
     t.index ["notification_type_id"], name: "index_notifications_on_notification_type_id"
     t.index ["receiver_id"], name: "index_notifications_on_receiver_id"
   end
@@ -740,13 +740,14 @@ ActiveRecord::Schema.define(version: 2023_03_09_094535) do
   end
 
   create_table "plan_limitations", force: :cascade do |t|
-    t.bigint "plan_id"
-    t.string "limitable_type"
-    t.bigint "limitable_id"
+    t.bigint "plan_id", null: false
+    t.string "limitable_type", null: false
+    t.bigint "limitable_id", null: false
     t.integer "limit", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["limitable_type", "limitable_id"], name: "index_plan_limitations_on_limitable_type_and_limitable_id"
+    t.index ["plan_id", "limitable_id", "limitable_type"], name: "index_plan_limitations_on_plan_and_limitable", unique: true
     t.index ["plan_id"], name: "index_plan_limitations_on_plan_id"
   end
 
@@ -770,6 +771,7 @@ ActiveRecord::Schema.define(version: 2023_03_09_094535) do
     t.boolean "monthly_payment"
     t.bigint "plan_category_id"
     t.boolean "limiting"
+    t.integer "machines_visibility"
     t.index ["group_id"], name: "index_plans_on_group_id"
     t.index ["plan_category_id"], name: "index_plans_on_plan_category_id"
   end
@@ -811,15 +813,14 @@ ActiveRecord::Schema.define(version: 2023_03_09_094535) do
     t.text "conditions"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index "btrim(lower((name)::text))", name: "index_price_categories_on_TRIM_BOTH_FROM_LOWER_name", unique: true
     t.index ["name"], name: "index_price_categories_on_name", unique: true
   end
 
   create_table "prices", id: :serial, force: :cascade do |t|
     t.integer "group_id"
     t.integer "plan_id"
-    t.integer "priceable_id"
     t.string "priceable_type"
+    t.integer "priceable_id"
     t.integer "amount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -983,8 +984,8 @@ ActiveRecord::Schema.define(version: 2023_03_09_094535) do
     t.text "message"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer "reservable_id"
     t.string "reservable_type"
+    t.integer "reservable_id"
     t.integer "nb_reserve_places"
     t.integer "statistic_profile_id"
     t.index ["reservable_type", "reservable_id"], name: "index_reservations_on_reservable_type_and_reservable_id"
@@ -993,8 +994,8 @@ ActiveRecord::Schema.define(version: 2023_03_09_094535) do
 
   create_table "roles", id: :serial, force: :cascade do |t|
     t.string "name"
-    t.integer "resource_id"
     t.string "resource_type"
+    t.integer "resource_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"

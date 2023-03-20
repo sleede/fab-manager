@@ -737,10 +737,28 @@ export const settings: Array<Setting> = [
     localized: 'éviter la génération de factures à 0'
   },
   {
-    name: 'reservation_deadline',
+    name: 'machine_reservation_deadline',
     value: '0',
-    last_update: '2022-11-29T21:02:47-0300',
-    localized: "Empêcher la réservation avant qu'elle ne commence"
+    last_update: '2023-03-01T16:28:23-0300',
+    localized: 'Machine prior period (minutes)'
+  },
+  {
+    name: 'training_reservation_deadline',
+    value: '0',
+    last_update: '2023-03-01T16:28:23-0300',
+    localized: 'Training prior period (minutes)'
+  },
+  {
+    name: 'event_reservation_deadline',
+    value: '0',
+    last_update: '2023-03-01T16:28:23-0300',
+    localized: 'Event prior period (minutes)'
+  },
+  {
+    name: 'space_reservation_deadline',
+    value: '0',
+    last_update: '2023-03-01T16:28:23-0300',
+    localized: 'Space prior period (minutes)'
   },
   {
     name: 'invoice_VAT-name',

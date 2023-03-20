@@ -21,3 +21,4 @@ if @amount[:schedule]
     end
   end
 end
+json.errors @errors

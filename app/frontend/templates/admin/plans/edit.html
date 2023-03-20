@@ -10,24 +10,7 @@
                 <h1>{{ 'app.admin.plans.edit.subscription_plan' | translate }} {{ suscriptionPlan.base_name }}</h1>
             </section>
         </div>
-
-        <div class="col-md-3">
-            <section class="heading-actions wrapper">
-                <a class="btn btn-lg btn-block btn-default m-t-xs" ui-sref="app.admin.pricing" translate>{{ 'app.shared.buttons.cancel' }}</a>
-            </section>
-
-        </div>
     </div>
 </section>
 
-<div class="row no-gutter">
-    <div class=" col-sm-12 col-md-9 b-r nopadding">
-
-      <div class="panel panel-default bg-light m-lg">
-        <div class="panel-body m-r">
-          <plan-form action="'update'" plan="suscriptionPlan" on-error="onError" on-success="onSuccess"></plan-form>
-        </div>
-      </div>
-
-    </div>
-</div>
+<plan-form action="'update'" plan="suscriptionPlan" on-error="onError" on-success="onSuccess" ui-router="uiRouter"></plan-form>

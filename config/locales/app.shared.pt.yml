@@ -103,6 +103,7 @@ pt:
         must_accept_terms: "Você deve aceitar os termos e condições"
         save: "Salvar"
       gender_input:
+        label: "Gender"
         man: "Homem"
         woman: "Mulher"
       change_password:
@@ -233,8 +234,6 @@ pt:
         credit_label: 'Digite a quantia a ser creditada'
         confirm_credit_label: 'Confirme a quantia a ser creditada'
         generate_a_refund_invoice: "Gerar uma fatura de reembolso"
-        creation_date_for_the_refund: "Data de criação de reembolso"
-        creation_date_is_required: "Data de criação é obrigatório."
         description_optional: "Descrição (opcional):"
         will_appear_on_the_refund_invoice: "Aparecerá na fatura de reembolso."
         to_credit: 'Crédito'
@@ -540,3 +539,6 @@ pt:
         show_reserved_uniq: "Show only slots with reservations"
       machine:
         machine_uncategorized: "Uncategorized machines"
+      form_unsaved_list:
+        save_reminder: "Do not forget to save your changes"
+        cancel: "Cancel"

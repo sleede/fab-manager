@@ -65,7 +65,7 @@ export const FormInput = <TFieldValues extends FieldValues, TInputType>({ id, re
         return num;
       }
       if (type === 'date') {
-        const date: Date = new Date(value);
+        const date: Date = new Date(value + 'T00:00:00');
         if (Number.isNaN(date) && nullable) {
           return null;
         }

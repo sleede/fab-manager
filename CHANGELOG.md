@@ -1,5 +1,19 @@
 # Changelog Fab-manager
 
+## v5.9.0 2023 March 20
+
+- Ability to restrict machine reservations per plan
+- Ability to restrict machine availabilities per plan
+- Ability to configure a prior period for each reservation type to prevent booking (#440)
+- Admins cannot select the date when creating a refund invoice anymore
+- Fix a bug: JS date is initalialized 1 day before in negative timezones (#445)
+- Fix a bug: user's profile field gender is now marked as required
+- Fix a bug: logical sequence of invoices references is broken, when using the store module or the payments schedules
+- Fix a bug: refund invoices may generate duplicates in invoices references
+- Fix a security issue: updated webpack to 5.76.0 to fix [CVE-2023-28154](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-28154)
+- [TODO DEPLOY] `rails db:seed`
+- [TODO DEPLOY] `rails fablab:maintenance:rebuild_stylesheet`
+
 ## v5.8.2 2023 March 13
 
 - Improved upgrade script
