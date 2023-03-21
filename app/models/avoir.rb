@@ -14,10 +14,6 @@ class Avoir < Invoice
 
   delegate :order_number, to: :invoice
 
-  def generate_reference
-    super(created_at)
-  end
-
   def expire_subscription
     user.subscription.expire
   end

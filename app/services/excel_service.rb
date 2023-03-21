@@ -19,9 +19,9 @@ class ExcelService
       # see https://msdn.microsoft.com/fr-fr/library/c6bdca6y(v=vs.90).aspx for unauthorized character list
       name = "#{type.statistic_index.label} - #{type.label}".gsub(%r{[*|\\:"<>?/]}, '')
       # sheet name is limited to 31 characters
-      name = if name.length > 31
-               "#{type.statistic_index.label.truncate(4, omission: '.')} - #{type.label}".gsub(%r{[*|\\:"<>?/]}, '').truncate(31)
-             end
+      if name.length > 31
+        name = "#{type.statistic_index.label.truncate(4, omission: '.')} - #{type.label}".gsub(%r{[*|\\:"<>?/]}, '').truncate(31)
+      end
       # we cannot have two sheets with the same name
       name = name[0..30] + String((rand * 10).to_i) until workbook.sheet_by_name(name).nil?
       name

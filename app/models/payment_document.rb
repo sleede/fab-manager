@@ -4,7 +4,7 @@
 class PaymentDocument < Footprintable
   self.abstract_class = true
 
-  def generate_reference(date = Time.current)
+  def generate_reference(date = created_at)
     self.reference = PaymentDocumentService.generate_reference(self, date: date)
   end
 

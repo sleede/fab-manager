@@ -41,6 +41,9 @@ class Availability < ApplicationRecord
   validate :length_must_be_slot_multiple, unless: proc { end_at.blank? or start_at.blank? }
   validate :should_be_associated
 
+  # cache
+  after_update :refresh_places_cache
+
   ## elastic callbacks
   after_save { AvailabilityIndexerWorker.perform_async(:index, id) }
   after_destroy { AvailabilityIndexerWorker.perform_async(:delete, id) }
@@ -128,7 +131,7 @@ class Availability < ApplicationRecord
     slots.map(&:reserved_users).flatten
   end
 
-  # @param user [User]
+  # @param user_id [Integer]
   # @return [Boolean]
   def reserved_by?(user_id)
     reserved_users.include?(user_id)
@@ -194,5 +197,11 @@ class Availability < ApplicationRecord
     return unless available_type == 'machines' && machine_ids.count.zero?
 
     errors.add(:machine_ids, I18n.t('availabilities.must_be_associated_with_at_least_1_machine'))
+  end
+
+  def refresh_places_cache
+    slots.each do |slot|
+      Slots::PlacesCacheService.refresh(slot)
+    end
   end
 end

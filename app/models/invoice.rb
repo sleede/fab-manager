@@ -50,11 +50,9 @@ class Invoice < PaymentDocument
   end
 
   def order_number
-    return order.reference unless order.nil?
+    return order.reference unless order.nil? || order.reference.nil?
 
-    if !payment_schedule_item.nil? && !payment_schedule_item.first?
-      return payment_schedule_item.payment_schedule.ordered_items.first.invoice.order_number
-    end
+    return payment_schedule_item.payment_schedule.order_number if !payment_schedule_item.nil? && !payment_schedule_item.first?
 
     PaymentDocumentService.generate_order_number(self)
   end

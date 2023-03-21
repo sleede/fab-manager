@@ -1,5 +1,5 @@
 # admin without subscription
-user_1:
+user1:
   id: 1
   username: admin
   email: admin@fab-manager.com
@@ -32,7 +32,7 @@ user_1:
   is_allow_newsletter: true
 
 # member without subscription
-user_2:
+user2:
   id: 2
   username: jdupond
   email: jean.dupond@gmail.com
@@ -65,7 +65,7 @@ user_2:
   is_allow_newsletter: true
 
 # member with 1 month subscription (plan 2/standard)
-user_3:
+user3:
   id: 3
   username: pdurand
   email: paulette.durand@hotmail.fr
@@ -98,7 +98,7 @@ user_3:
   is_allow_newsletter: false
 
 # member with 1 month subscription (plan 3/students)
-user_4:
+user4:
   id: 4
   username: kdumas
   email: kevin.dumas@orange.fr
@@ -131,7 +131,7 @@ user_4:
   is_allow_newsletter: false
 
 # member with 10€ on wallet
-user_5:
+user5:
   id: 5
   username: vlonchamp
   email: vanessa.lonchamp@sfr.fr
@@ -164,7 +164,7 @@ user_5:
   is_allow_newsletter: true
 
 # partner of plan 2
-user_6:
+user6:
   id: 6
   username: GilbertPartenaire
   email: gilbert.partenaire@nicolas.com
@@ -197,7 +197,7 @@ user_6:
   is_allow_newsletter: true
 
 # member with 255€ on wallet
-user_7:
+user7:
   id: 7
   username: lseguin
   email: lucile.seguin@live.fr
@@ -229,7 +229,7 @@ user_7:
   merged_at:
   is_allow_newsletter: false
 
-user_8:
+user8:
   id: 8
   username: atiermoulin
   email: a.tiermoulin@mail.fr
@@ -261,7 +261,7 @@ user_8:
   merged_at:
   is_allow_newsletter: false
 
-user_9:
+user9:
   id: 9
   username: pjproudhon
   email: pj.proudhon@la-propriete.org
@@ -294,7 +294,7 @@ user_9:
   is_allow_newsletter: true
 
 # member with 1 year subscription
-user_10:
+user10:
   id: 10
   username: acamus
   email: albert.camus@letranger.org

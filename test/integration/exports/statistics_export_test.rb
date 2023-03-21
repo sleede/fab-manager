@@ -104,11 +104,7 @@ class Exports::StatisticsExportTest < ActionDispatch::IntegrationTest
     workbook = RubyXL::Parser.parse(e.file)
 
     # test worksheets
-    StatisticIndex.where(table: true).includes(:statistic_fields, statistic_types: [:statistic_sub_types]).each do |index|
-      index.statistic_types.each do |type|
-        sheet_name = "#{index.label} - #{type.label}".gsub(%r{[*|\\:"<>?/]}, '').truncate(31)
-        assert_not_nil workbook[sheet_name], "#{sheet_name} not found"
-      end
-    end
+    assert_equal StatisticIndex.where(table: true).includes(:statistic_types).map(&:statistic_types).flatten.count,
+                 workbook.worksheets.length
   end
 end

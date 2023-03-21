@@ -27,10 +27,10 @@ module PaymentScheduleHelper
       options = { payment_method: 'card', payment_id: 'pi_3LpALs2sOmf47Nz91QyFI7nP', payment_type: 'Stripe::PaymentIntent' }
     end
     schedule = PaymentScheduleService.new.create([subscription], 113_600, customer, operator: operator, **options)
-    schedule.save
+    schedule.save!
     first_item = schedule.ordered_items.first
     PaymentScheduleService.new.generate_invoice(first_item, **options)
-    first_item.update(state: 'paid', payment_method: operator.privileged? ? 'check' : 'card')
+    first_item.update!(state: 'paid', payment_method: operator.privileged? ? 'check' : 'card')
     schedule
   end
 

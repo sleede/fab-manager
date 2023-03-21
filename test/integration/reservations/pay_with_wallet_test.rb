@@ -188,7 +188,8 @@ class Reservations::PayWithWalletTest < ActionDispatch::IntegrationTest
     wallet_transactions_count = WalletTransaction.count
 
     machine = Machine.find(1)
-    availability = machine.availabilities.last
+    slots = Availabilities::AvailabilitiesService.new(user)
+                                                 .machines([machine], user, { start: Time.current, end: 1.day.from_now })
     plan = Plan.find_by(group_id: user.group.id, type: 'Plan', base_name: 'Abonnement mensualisable')
 
     VCR.use_cassette('reservations_machine_subscription_with_payment_schedule_coupon_wallet') do
@@ -203,7 +204,7 @@ class Reservations::PayWithWalletTest < ActionDispatch::IntegrationTest
                      reservable_type: machine.class.name,
                      slots_reservations_attributes: [
                        {
-                         slot_id: availability.slots.first.id
+                         slot_id: slots.first.id
                        }
                      ]
                    }

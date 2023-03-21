@@ -1,5 +1,6 @@
 # Changelog Fab-manager
 
+- Fix a bug: logical sequence of invoices references is broken
 - Fix a bug: in some cases, unable to export to excel files
 - Fix a security issue: updated rack to 2.2.6.4 to fix [CVE-2023-27539](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-27539)
 
