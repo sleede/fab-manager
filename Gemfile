@@ -10,6 +10,13 @@ gem 'bootsnap'
 gem 'puma', '6.1.0'
 gem 'shakapacker', '6.5.5'
 
+# rails 6 compatibility with ruby 3 (may not be required after upgrade to rails 7)
+gem 'matrix'
+gem 'net-imap', require: false
+gem 'net-pop', require: false
+gem 'net-smtp', require: false
+gem 'psych', '< 4'
+
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 gem 'jbuilder_cache_multi'
@@ -52,7 +59,7 @@ group :test do
   gem 'minitest-reporters'
   gem 'pdf-reader'
   gem 'rubyXL'
-  gem 'vcr', '6.0.0'
+  gem 'vcr', '~> 6.1.0'
   gem 'webmock'
 end
 

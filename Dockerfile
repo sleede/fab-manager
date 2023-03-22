@@ -1,4 +1,4 @@
-FROM ruby:2.7.7-alpine
+FROM ruby:3.1.3-alpine
 MAINTAINER contact@fab-manager.com
 
 # Install upgrade system packages

@@ -40,7 +40,7 @@ class AuthProvidersTest < ActionDispatch::IntegrationTest
     db_provider&.reload
     assert_equal 'active', db_provider&.status
     assert_equal AuthProvider.active.id, db_provider&.id
-    User.all.each do |u|
+    User.find_each do |u|
       assert_not_nil u.auth_token
     end
   end

@@ -141,7 +141,7 @@ if Training.count.zero?
                      }
                    ])
 
-  TrainingsPricing.all.each do |p|
+  TrainingsPricing.find_each do |p|
     p.update(amount: ((rand * 50) + 5).floor * 100)
   end
 end
@@ -222,7 +222,7 @@ if Machine.count.zero?
                     }
                   ])
 
-  Price.all.each do |p|
+  Price.find_each do |p|
     p.update(amount: ((rand * 50) + 5).floor * 100)
   end
 end

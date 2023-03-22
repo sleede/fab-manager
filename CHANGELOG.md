@@ -1,6 +1,6 @@
 # Changelog Fab-manager
 
-- Updated ruby to 2.7
+- Updated ruby to 3.1
 - Updated rails to 6.1
 - Updated puma to 6.1
 - Updated responders to 3.0

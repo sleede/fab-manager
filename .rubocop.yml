@@ -38,6 +38,8 @@ Rails/RedundantPresenceValidationOnBelongsTo:
   Enabled: false
 Style/DateTime:
   Enabled: true
+Style/HashSyntax:
+  EnforcedShorthandSyntax: never
 Rails/TimeZone:
   Enabled: true
 Rails/UnknownEnv:
