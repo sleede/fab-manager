@@ -3,7 +3,6 @@
 # SSO and authentication relative tasks
 namespace :fablab do
   namespace :auth do
-
     desc 'switch the active authentication provider'
     task :switch_provider, [:provider] => :environment do |_task, args|
       providers = AuthProvider.all.inject('') { |str, item| "#{str}#{item[:name]}, " }
@@ -24,18 +23,18 @@ namespace :fablab do
 
       # disable previous provider
       prev_prev = AuthProvider.previous
-      prev_prev&.update_attribute(:status, 'pending')
+      prev_prev&.update(status: 'pending')
 
-      AuthProvider.active.update_attribute(:status, 'previous') unless AuthProvider.active.name == 'DatabaseProvider::SimpleAuthProvider'
+      AuthProvider.active.update(status: 'previous') unless AuthProvider.active.name == 'DatabaseProvider::SimpleAuthProvider'
 
       # enable given provider
-      AuthProvider.find_by(name: args.provider).update_attribute(:status, 'active')
+      AuthProvider.find_by(name: args.provider).update(status: 'active')
 
       # migrate the current users.
       if AuthProvider.active.providable_type == DatabaseProvider.name
         User.all.each do |user|
           # Concerns local database provider
-          user.update_attribute(:auth_token, nil)
+          user.update(auth_token: nil)
         end
       else
         # Concerns any providers except local database
@@ -54,7 +53,6 @@ namespace :fablab do
 
     desc 'notify users that the auth provider has changed'
     task notify_changed: :environment do
-
       I18n.locale = I18n.default_locale
 
       # notify every users if the provider is not local database provider

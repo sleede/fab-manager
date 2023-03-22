@@ -22,7 +22,6 @@ module OmniAuth::Strategies
     # Strategy name.
     option :name, active_provider.strategy_name
 
-
     option :client_options,
            site: active_provider.providable.base_url,
            authorize_url: active_provider.providable.authorization_endpoint,
@@ -39,7 +38,7 @@ module OmniAuth::Strategies
       "#{url[:protocol]}://#{url[:host]}#{script_name}#{callback_path}"
     end
 
-    uid { parsed_info['user.uid'.to_sym] }
+    uid { parsed_info[:'user.uid'] }
 
     info do
       {

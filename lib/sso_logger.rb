@@ -2,9 +2,9 @@
 
 # This class provides logging functionalities for SSO authentication
 class SsoLogger
-  def initialize()
-    @logger = ActiveSupport::TaggedLogging.new(Logger.new(STDOUT))
-    @log_status = ENV.fetch('SSO_DEBUG') { false }
+  def initialize
+    @logger = ActiveSupport::TaggedLogging.new(Logger.new($stdout))
+    @log_status = ENV.fetch('SSO_DEBUG', false)
   end
 
   def debug(message)

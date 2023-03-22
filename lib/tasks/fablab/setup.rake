@@ -20,7 +20,7 @@ namespace :fablab do
           setting_id: setting.id,
           user_id: User.admins.first.id,
           value: 'false',
-          created_at: DateTime.parse(args.date)
+          created_at: Time.zone.parse(args.date)
         )
       else
         setting = Setting.find_by(name: 'invoice_VAT-rate')
@@ -28,7 +28,7 @@ namespace :fablab do
           setting_id: setting.id,
           user_id: User.admins.first.id,
           value: args.rate,
-          created_at: DateTime.parse(args.date)
+          created_at: Time.zone.parse(args.date)
         )
       end
     end
@@ -120,15 +120,15 @@ namespace :fablab do
       Group.find_by(slug: 'admins').destroy
       if Setting.get('user_validation_required')
         print "\e[91m::\e[0m \e[1mValidating the 'admins'...\e[0m\n"
-        User.admins.each { |admin| admin.update(validated_at: DateTime.current) if admin.validated_at.nil? }
+        User.admins.each { |admin| admin.update(validated_at: Time.current) if admin.validated_at.nil? }
       end
       print "\e[32m✅\e[0m \e[1mDone\e[0m\n"
     end
 
     desc 'generate acconting lines'
     task build_accounting_lines: :environment do
-      start_date = Invoice.order(created_at: :asc).first&.created_at || DateTime.current
-      end_date = DateTime.current
+      start_date = Invoice.order(created_at: :asc).first&.created_at || Time.current
+      end_date = Time.current
       AccountingLine.where(date: start_date..end_date).destroy_all
       Accounting::AccountingService.new.build(start_date&.beginning_of_day, end_date.end_of_day)
       puts '-> Done'

@@ -7381,6 +7381,14 @@ CREATE UNIQUE INDEX unique_not_null_external_id ON public.invoicing_profiles USI
 
 
 --
+-- Name: accounting_periods accounting_periods_del_protect; Type: RULE; Schema: public; Owner: -
+--
+
+CREATE RULE accounting_periods_del_protect AS
+    ON DELETE TO public.accounting_periods DO INSTEAD NOTHING;
+
+
+--
 -- Name: accounting_periods accounting_periods_upd_protect; Type: RULE; Schema: public; Owner: -
 --
 
