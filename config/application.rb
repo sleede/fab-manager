@@ -53,12 +53,6 @@ class FabManager::Application < Rails::Application
     g.test_framework :mini_test
   end
 
-  if Rails.env.development?
-    config.web_console.whitelisted_ips << '192.168.0.0/16'
-    config.web_console.whitelisted_ips << '192.168.99.0/16' # docker
-    config.web_console.whitelisted_ips << '10.0.2.2' # vagrant
-  end
-
   # load locales for subdirectories
   config.i18n.load_path += Dir[Rails.root.join('config/locales/**/*.yml').to_s]
 

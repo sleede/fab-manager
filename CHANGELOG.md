@@ -6,6 +6,8 @@
 - Updated responders to 3.0
 - Updated devise to 4.9
 - Updated sassc to 2.3
+- Updated sentry to 5.8
+- Updated web-console to 4.2
 - Fix a bug: broken display after a plan category was deleted
 
 ## v5.9.1 2023 March 22

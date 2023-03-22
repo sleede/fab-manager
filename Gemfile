@@ -40,7 +40,7 @@ group :development do
   gem 'bullet'
   gem 'coveralls_reborn', '~> 0.18.0', require: false
   gem 'foreman'
-  gem 'web-console', '>= 3.3.0'
+  gem 'web-console', '>= 4.2.0'
   # Preview mail in the browser
   gem 'listen', '~> 3.0.5'
   gem 'overcommit'

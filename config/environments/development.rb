@@ -12,6 +12,9 @@ Rails.application.configure do
     Bullet.add_footer    = true
   end
 
+  # whitelist IP for web-console: local network, docker and vagrant
+  config.web_console.permissions = %w[192.168.0.0/16 192.168.99.0/16 10.0.2.2]
+
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded on
