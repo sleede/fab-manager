@@ -6,7 +6,7 @@ header = wb.styles.add_style b: true, bg_color: Stylesheet.primary.upcase.gsub('
 date = wb.styles.add_style format_code: Rails.application.secrets.excel_date_format
 
 ## Machines slots
-wb.add_worksheet(name: t('export_availabilities.machines')) do |sheet|
+wb.add_worksheet(name: ExcelService.name_safe(t('export_availabilities.machines'))) do |sheet|
 
   ## data table
   # heading labels
@@ -45,7 +45,7 @@ end
 
 
 ## Trainings availabilities
-wb.add_worksheet(name: t('export_availabilities.trainings')) do |sheet|
+wb.add_worksheet(name: ExcelService.name_safe(t('export_availabilities.trainings'))) do |sheet|
 
   ## data table
   # heading labels
@@ -73,7 +73,7 @@ end
 
 ## Spaces slots
 if Setting.get('spaces_module')
-  wb.add_worksheet(name: t('export_availabilities.spaces')) do |sheet|
+  wb.add_worksheet(name: ExcelService.name_safe(t('export_availabilities.spaces'))) do |sheet|
 
     ## data table
     # heading labels
@@ -109,7 +109,7 @@ end
 
 
 ## Events availabilities
-wb.add_worksheet(name: t('export_availabilities.events')) do |sheet|
+wb.add_worksheet(name: ExcelService.name_safe(t('export_availabilities.events'))) do |sheet|
 
   ## data table
   # heading labels

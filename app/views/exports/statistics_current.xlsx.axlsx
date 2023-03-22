@@ -6,12 +6,10 @@ bold = wb.styles.add_style b: true
 header = wb.styles.add_style b: true, bg_color: Stylesheet.primary.upcase.gsub('#', 'FF'), fg_color: 'FFFFFFFF'
 date = wb.styles.add_style format_code: Rails.application.secrets.excel_date_format
 
-wb.add_worksheet(name: @index.label) do |sheet|
+wb.add_worksheet(name: ExcelService.name_safe(@index.label)) do |sheet|
   ## heading stats for the current page
   sheet.add_row [t('export.entries'), @results['hits']['total']], style: [bold, nil], types: %i[string integer]
-  if @index.ca
-    sheet.add_row [t('export.revenue'), @results['aggregations']['total_ca']['value']], style: [bold, nil], types: %i[string float]
-  end
+  sheet.add_row [t('export.revenue'), @results['aggregations']['total_ca']['value']], style: [bold, nil], types: %i[string float] if @index.ca
   sheet.add_row [t('export.average_age'), @results['aggregations']['average_age']['value']], style: [bold, nil], types: %i[string float]
   unless @type.simple
     sheet.add_row ["#{t('export.total')} #{@type.label}", @results['aggregations']['total_stat']['value']],

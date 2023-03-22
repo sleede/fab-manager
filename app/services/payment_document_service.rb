@@ -7,56 +7,23 @@ class PaymentDocumentService
     # @param document [PaymentDocument]
     # @param date [Time]
     def generate_reference(document, date: Time.current)
-      pattern = Setting.get('invoice_reference').to_s
+      pattern = Invoices::NumberService.pattern(document, 'invoice_reference')
 
-      reference = replace_document_number_pattern(pattern, document, document.created_at)
+      reference = replace_document_number_pattern(pattern, document)
       reference = replace_date_pattern(reference, date)
-
-      case document
-      when Avoir
-        # information about refund/avoir (R[text])
-        reference.gsub!(/R\[([^\]]+)\]/, '\1')
-
-        # remove information about online selling (X[text])
-        reference.gsub!(/X\[([^\]]+)\]/, ''.to_s)
-        # remove information about payment schedule (S[text])
-        reference.gsub!(/S\[([^\]]+)\]/, ''.to_s)
-      when PaymentSchedule
-        # information about payment schedule
-        reference.gsub!(/S\[([^\]]+)\]/, '\1')
-        # remove information about online selling (X[text])
-        reference.gsub!(/X\[([^\]]+)\]/, ''.to_s)
-        # remove information about refunds (R[text])
-        reference.gsub!(/R\[([^\]]+)\]/, ''.to_s)
-      when Invoice
-        # information about online selling (X[text])
-        if document.paid_by_card?
-          reference.gsub!(/X\[([^\]]+)\]/, '\1')
-        else
-          reference.gsub!(/X\[([^\]]+)\]/, ''.to_s)
-        end
-
-        # remove information about refunds (R[text])
-        reference.gsub!(/R\[([^\]]+)\]/, ''.to_s)
-        # remove information about payment schedule (S[text])
-        reference.gsub!(/S\[([^\]]+)\]/, ''.to_s)
-      else
-        raise TypeError
-      end
-
-      reference
+      replace_document_type_pattern(document, reference)
     end
 
     # @param document [PaymentDocument]
     def generate_order_number(document)
-      pattern = Setting.get('invoice_order-nb')
+      pattern = Invoices::NumberService.pattern(document, 'invoice_order-nb')
 
       # global document number (nn..nn)
       reference = pattern.gsub(/n+(?![^\[]*\])/) do |match|
-        pad_and_truncate(number_of_order('global', document, document.created_at), match.to_s.length)
+        pad_and_truncate(order_number(document, 'global'), match.to_s.length)
       end
 
-      reference = replace_document_number_pattern(reference, document, document.created_at, :number_of_order)
+      reference = replace_document_number_pattern(reference, document, :order_number)
       replace_date_pattern(reference, document.created_at)
     end
 
@@ -70,58 +37,65 @@ class PaymentDocumentService
       value.to_s.rjust(length, '0').gsub(/^.*(.{#{length},}?)$/m, '\1')
     end
 
-    # Returns the number of current invoices in the given range around the current date.
-    # If range is invalid or not specified, the total number of invoices is returned.
-    # @param range [String] 'day', 'month', 'year'
     # @param document [PaymentDocument]
-    # @param date [Time] the ending date
-    # @return [Integer]
-    def number_of_documents(range, document, date = Time.current)
-      start = case range.to_s
-              when 'day'
-                date.beginning_of_day
-              when 'month'
-                date.beginning_of_month
-              when 'year'
-                date.beginning_of_year
-              else
-                nil
-              end
-      ending = date
+    # @param periodicity [String] 'day' | 'month' | 'year' | 'global'
+    # @return [PaymentDocument,NilClass]
+    def previous_document(document, periodicity)
+      previous = document.class.base_class.where('created_at < ?', db_time(document.created_at))
+                         .order(created_at: :desc)
+                         .limit(1)
+      if %w[day month year].include?(periodicity)
+        previous = previous.where('date_trunc(:periodicity, created_at) = :date',
+                                  periodicity: periodicity,
+                                  date: document.created_at.utc.send("beginning_of_#{periodicity}").to_date)
+      end
 
-      documents = document.class.base_class
-                          .where('created_at <= :end_date', end_date: db_time(ending))
-
-      documents = documents.where('created_at >= :start_date', start_date: db_time(start)) unless start.nil?
-
-      documents.count
+      previous.first
     end
 
-    def number_of_order(range, _document, date = Time.current)
-      start = case range.to_s
-              when 'day'
-                date.beginning_of_day
-              when 'month'
-                date.beginning_of_month
-              when 'year'
-                date.beginning_of_year
-              else
-                nil
-              end
-      ending = date
-      orders = Order.where('created_at <= :end_date', end_date: db_time(ending))
-      orders = orders.where('created_at >= :start_date', start_date: db_time(start)) unless start.nil?
-
-      schedules = PaymentSchedule.where('created_at <= :end_date', end_date: db_time(ending))
-      schedules = schedules.where('created_at >= :start_date', start_date: db_time(start)) unless start.nil?
+    # @param document [PaymentDocument]
+    # @param periodicity [String] 'day' | 'month' | 'year' | 'global'
+    def previous_order(document, periodicity)
+      start = periodicity == 'global' ? nil : document.created_at.send("beginning_of_#{periodicity}")
+      ending = document.created_at
+      orders = orders_in_range(document, start, ending)
+      schedules = schedules_in_range(document, start, ending)
 
       invoices = Invoice.where(type: nil)
                         .where.not(id: orders.map(&:invoice_id))
                         .where.not(id: schedules.map(&:payment_schedule_items).flatten.map(&:invoice_id).filter(&:present?))
-                        .where('created_at <= :end_date', end_date: db_time(ending))
+                        .where('created_at < :end_date', end_date: db_time(ending))
       invoices = invoices.where('created_at >= :start_date', start_date: db_time(start)) unless start.nil?
 
-      orders.count + schedules.count + invoices.count
+      [
+        orders.order(created_at: :desc).limit(1).first,
+        schedules.order(created_at: :desc).limit(1).first,
+        invoices.order(created_at: :desc).limit(1).first
+      ].filter(&:present?).max_by { |item| item&.created_at }
+    end
+
+    # @param document [PaymentDocument] invoice to exclude
+    # @param start [Time,NilClass]
+    # @param ending [Time]
+    # @return [ActiveRecord::Relation<Order>,ActiveRecord::QueryMethods::WhereChain]
+    def orders_in_range(document, start, ending)
+      orders = Order.where('created_at < :end_date', end_date: db_time(ending))
+      orders = orders.where('created_at >= :start_date', start_date: db_time(start)) unless start.nil?
+      orders = orders.where.not(id: document.order.id) if document.is_a?(Invoice) && document.order.present?
+      orders
+    end
+
+    # @param document [PaymentDocument] invoice to exclude
+    # @param start [Time,NilClass]
+    # @param ending [Time]
+    # @return [ActiveRecord::Relation<PaymentSchedule>,ActiveRecord::QueryMethods::WhereChain]
+    def schedules_in_range(document, start, ending)
+      schedules = PaymentSchedule.where('created_at < :end_date', end_date: db_time(ending))
+      schedules = schedules.where('created_at >= :start_date', start_date: db_time(start)) unless start.nil?
+      if document.is_a?(Invoice) && document.payment_schedule_item.present?
+        schedules = schedules.where.not(id: document.payment_schedule_item.payment_schedule.id)
+      end
+      schedules
     end
 
     # Replace the date elements in the provided pattern with the date values, from the provided date
@@ -155,25 +129,92 @@ class PaymentDocumentService
       copy
     end
 
+    # @param document [PaymentDocument]
+    # @param periodicity [String] 'day' | 'month' | 'year' | 'global'
+    # @return [Integer]
+    def document_number(document, periodicity)
+      previous = previous_document(document, periodicity)
+      number = Invoices::NumberService.number(previous) if Invoices::NumberService.number_periodicity(previous) == periodicity
+      number ||= 0
+
+      number + 1
+    end
+
+    # @param document [PaymentDocument]
+    # @param periodicity [String] 'day' | 'month' | 'year' | 'global'
+    # @return [Integer]
+    def order_number(document, periodicity)
+      previous = previous_order(document, periodicity)
+      if Invoices::NumberService.number_periodicity(previous, 'invoice_order-nb') == periodicity
+        number = Invoices::NumberService.number(previous, 'invoice_order-nb')
+      end
+      number ||= 0
+
+      number + 1
+    end
+
     # Replace the document number elements in the provided pattern with counts from the database
     # @param reference [String]
     # @param document [PaymentDocument]
-    # @param date [Time]
-    # @param count_method [Symbol] :number_of_documents OR :number_of_order
-    def replace_document_number_pattern(reference, document, date, count_method = :number_of_documents)
+    # @param numeration_method [Symbol] :document_number OR :order_number
+    def replace_document_number_pattern(reference, document, numeration_method = :document_number)
       copy = reference.dup
 
       # document number per year (yy..yy)
       copy.gsub!(/y+(?![^\[]*\])/) do |match|
-        pad_and_truncate(send(count_method, 'year', document, date), match.to_s.length)
+        pad_and_truncate(send(numeration_method, document, 'year'), match.to_s.length)
       end
       # document number per month (mm..mm)
       copy.gsub!(/m+(?![^\[]*\])/) do |match|
-        pad_and_truncate(send(count_method, 'month', document, date), match.to_s.length)
+        pad_and_truncate(send(numeration_method, document, 'month'), match.to_s.length)
       end
       # document number per day (dd..dd)
       copy.gsub!(/d+(?![^\[]*\])/) do |match|
-        pad_and_truncate(send(count_method, 'day', document, date), match.to_s.length)
+        pad_and_truncate(send(numeration_method, document, 'day'), match.to_s.length)
+      end
+
+      copy
+    end
+
+    # @param document [PaymentDocument]
+    # @param pattern [String]
+    # @return [String]
+    def replace_document_type_pattern(document, pattern)
+      copy = pattern.dup
+      case document
+      when Avoir
+        # information about refund/avoir (R[text])
+        copy.gsub!(/R\[([^\]]+)\]/, '\1')
+
+        # remove information about online selling (X[text])
+        copy.gsub!(/X\[([^\]]+)\]/, ''.to_s)
+        # remove information about payment schedule (S[text])
+        copy.gsub!(/S\[([^\]]+)\]/, ''.to_s)
+      when PaymentSchedule
+        # information about payment schedule
+        copy.gsub!(/S\[([^\]]+)\]/, '\1')
+        # remove information about online selling (X[text])
+        copy.gsub!(/X\[([^\]]+)\]/, ''.to_s)
+        # remove information about refunds (R[text])
+        copy.gsub!(/R\[([^\]]+)\]/, ''.to_s)
+      when Invoice
+        # information about online selling (X[text])
+        if document.paid_by_card?
+          copy.gsub!(/X\[([^\]]+)\]/, '\1')
+        else
+          copy.gsub!(/X\[([^\]]+)\]/, ''.to_s)
+        end
+
+        # remove information about refunds (R[text])
+        copy.gsub!(/R\[([^\]]+)\]/, ''.to_s)
+        # remove information about payment schedule (S[text])
+        copy.gsub!(/S\[([^\]]+)\]/, ''.to_s)
+      else
+        # maybe an Order or anything else,
+        # remove all informations
+        copy.gsub!(/S\[([^\]]+)\]/, ''.to_s)
+        copy.gsub!(/X\[([^\]]+)\]/, ''.to_s)
+        copy.gsub!(/R\[([^\]]+)\]/, ''.to_s)
       end
 
       copy

@@ -39,7 +39,7 @@ class WalletsTest < ActionDispatch::IntegrationTest
   end
 
   test 'cant get wallet of an user if not admin' do
-    user5 = users(:user_4)
+    user5 = users(:user4)
     get "/api/wallet/by_user/#{user5.id}"
     assert_equal 403, response.status
   end
@@ -55,13 +55,13 @@ class WalletsTest < ActionDispatch::IntegrationTest
   end
 
   test 'only admin and wallet owner can show their transactions' do
-    user5 = users(:user_4)
+    user5 = users(:user4)
     get "/api/wallet/#{user5.wallet.id}/transactions"
     assert_equal 403, response.status
   end
 
   test 'admin can credit amount to a wallet' do
-    admin = users(:user_1)
+    admin = users(:user1)
     login_as(admin, scope: :user)
     w = @vlonchamp.wallet
     amount = 10.5
@@ -81,7 +81,7 @@ class WalletsTest < ActionDispatch::IntegrationTest
   end
 
   test 'admin credit wallet with refund invoice generation' do
-    admin = users(:user_1)
+    admin = users(:user1)
     login_as(admin, scope: :user)
     w = @vlonchamp.wallet
     amount = 10

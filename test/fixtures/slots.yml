@@ -655,3 +655,12 @@ slot_134:
   updated_at: 2023-01-24 13:34:43.841240000 Z
   availability_id: 22
   places: [{"user_ids": [], "reservable_id": 4, "reservable_type": "Training", "reserved_places": 0}]
+
+slot_135:
+  id: 135
+  start_at: 2022-01-01 10:00:00.00000000 Z
+  end_at: 2022-01-01 11:00:00.00000000 Z
+  created_at: 2021-12-24 13:34:43.841240000 Z
+  updated_at: 2021-12-24 13:34:43.841240000 Z
+  availability_id: 23
+  places: [{"user_ids": [], "reservable_id": 1, "reservable_type": "Machine", "reserved_places": 0}]

@@ -1,7 +1,7 @@
 payment_schedule_12:
   id: 12
   total: 180000
-  reference: 210600309/E
+  reference: 2106309/E
   payment_method: card
   wallet_amount:
   wallet_transaction_id:
@@ -17,7 +17,7 @@ payment_schedule_12:
 payment_schedule_13:
   id: 13
   total: 180000
-  reference: <%= 9.months.ago.utc.strftime('%y%m00310/E') %>
+  reference: <%= 9.months.ago.utc.strftime('%y%m310/E') %>
   payment_method: card
   wallet_amount:
   wallet_transaction_id:

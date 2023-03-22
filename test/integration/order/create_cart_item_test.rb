@@ -31,6 +31,8 @@ class CreateCartItemTest < ActionDispatch::IntegrationTest
 
   test 'create a machine reservation' do
     machine = Machine.first
+    slots = Availabilities::AvailabilitiesService.new(@user)
+                                                 .machines([machine], @user, { start: Time.current, end: 10.days.from_now })
     post '/api/cart/create_item',
          params: {
            order_token: @order.token,
@@ -38,7 +40,7 @@ class CreateCartItemTest < ActionDispatch::IntegrationTest
              reservable_id: machine.id,
              reservable_type: 'Machine',
              slots_reservations_attributes: [
-               { slot_id: machine.availabilities.last&.slots&.last&.id }
+               { slot_id: slots&.last&.id }
              ]
            }
          }

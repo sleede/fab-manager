@@ -38,6 +38,10 @@ class PaymentSchedule < PaymentDocument
     "#{prefix}-#{id}_#{created_at.strftime('%d%m%Y')}.pdf"
   end
 
+  def order_number
+    ordered_items.first&.invoice&.order_number || PaymentDocumentService.generate_order_number(self)
+  end
+
   ##
   # This is useful to check the first item because its amount may be different from the others
   ##

@@ -219,3 +219,13 @@ availability_22:
   updated_at: 2023-01-24 13:34:43.841240000 Z
   nb_total_places: 5
   destroying: false
+
+availbility_23:
+  id: 23
+  start_at: 2022-01-01 10:00:00.00000000 Z
+  end_at: 2022-01-01 11:00:00.00000000 Z
+  available_type: machines
+  created_at: 2021-12-24 13:34:43.841240000 Z
+  updated_at: 2021-12-24 13:34:43.841240000 Z
+  nb_total_places:
+  destroying: false

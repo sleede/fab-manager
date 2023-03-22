@@ -60,7 +60,7 @@ module InvoiceHelper
         gateway_object_type: 'Stripe::PaymentIntent'
       )
     end
-    invoice.save
+    invoice.save!
     invoice
   end
 

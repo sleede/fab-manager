@@ -44,13 +44,14 @@ class ReservationLimitServiceTest < ActiveSupport::TestCase
   test 'reservation exceeds plan limit' do
     @plan.update(limiting: true, plan_limitations_attributes: [{ limitable_id: @machine.id, limitable_type: 'Machine', limit: 2 }])
     slots = Availabilities::AvailabilitiesService.new(@acamus)
-                                                 .machines([@machine], @acamus, { start: Time.current, end: 10.days.from_now })
+                                                 .machines([@machine], @acamus, { start: 1.day.from_now.beginning_of_day,
+                                                                                  end: 1.day.from_now.end_of_day })
 
     reservation = CartItem::MachineReservation.new(
       customer_profile: @acamus.invoicing_profile,
       operator_profile: @acamus.invoicing_profile,
       reservable: @machine,
-      cart_item_reservation_slots_attributes: [{ slot: slots[2] }, { slot: slots[3] }, { slot: slots[4] }]
+      cart_item_reservation_slots_attributes: [{ slot: slots[0] }, { slot: slots[1] }, { slot: slots[2] }]
     )
     assert_not ReservationLimitService.authorized?(@plan, @acamus, reservation, [])
   end

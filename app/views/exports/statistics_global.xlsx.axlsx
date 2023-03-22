@@ -9,9 +9,7 @@ date = wb.styles.add_style format_code: Rails.application.secrets.excel_date_for
   next unless index.table
 
   index.statistic_types.each do |type|
-    # see https://msdn.microsoft.com/fr-fr/library/c6bdca6y(v=vs.90).aspx for unauthorized character list
-    sheet_name = "#{index.label} - #{type.label}".gsub(%r{[*|\\:"<>?/]}, '').truncate(31)
-    wb.add_worksheet(name: sheet_name) do |sheet|
+    wb.add_worksheet(name: ExcelService.statistic_type_sheet_name(type, wb)) do |sheet|
       ## data table
       # heading labels
       columns = [t('export.date'), t('export.user'), t('export.email'), t('export.phone'), t('export.gender'), t('export.age'),
