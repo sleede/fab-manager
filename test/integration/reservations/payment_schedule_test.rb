@@ -81,7 +81,7 @@ class Reservations::PaymentScheduleTest < ActionDispatch::IntegrationTest
     assert_nil payment_schedule.wallet_amount
     assert_nil payment_schedule.coupon_id
     assert_equal 'test', payment_schedule.environment
-    assert payment_schedule.check_footprint
+    assert payment_schedule.check_footprint, payment_schedule.debug_footprint
     assert_equal @user_without_subscription.invoicing_profile.id, payment_schedule.invoicing_profile_id
     assert_equal @admin.invoicing_profile.id, payment_schedule.operator_profile_id
     assert_schedule_pdf(payment_schedule)

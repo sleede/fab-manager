@@ -15,6 +15,9 @@ require 'helpers/invoice_helper'
 require 'helpers/payment_schedule_helper'
 require 'fileutils'
 
+# We remove this constraint before running tests, otherwise it will prevent loading the fixtures into the DB
+ActiveRecord::Base.connection.execute("DROP RULE IF EXISTS accounting_periods_del_protect ON #{AccountingPeriod.arel_table.name};")
+
 VCR.configure do |config|
   config.cassette_library_dir = 'test/vcr_cassettes'
   config.hook_into :webmock

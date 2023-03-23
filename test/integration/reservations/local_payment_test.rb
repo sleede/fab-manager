@@ -70,7 +70,6 @@ class Reservations::LocalPaymentTest < ActionDispatch::IntegrationTest
     item = InvoiceItem.find_by(object: reservation)
     invoice = item.invoice
     assert_invoice_pdf invoice
-    assert_not_nil invoice.debug_footprint
 
     # notification
     assert_not_empty Notification.where(attached_object: reservation)
@@ -129,7 +128,6 @@ class Reservations::LocalPaymentTest < ActionDispatch::IntegrationTest
     item = InvoiceItem.find_by(object: reservation)
     invoice = item.invoice
     assert_invoice_pdf invoice
-    assert_not_nil invoice.debug_footprint
 
     # notification
     assert_not_empty Notification.where(attached_object: reservation)
@@ -206,7 +204,6 @@ class Reservations::LocalPaymentTest < ActionDispatch::IntegrationTest
     item = InvoiceItem.find_by(object: reservation)
     invoice = item.invoice
     assert_invoice_pdf invoice
-    assert_not_nil invoice.debug_footprint
 
     # notification
     assert_not_empty Notification.where(attached_object: reservation)
@@ -290,7 +287,6 @@ class Reservations::LocalPaymentTest < ActionDispatch::IntegrationTest
     item = InvoiceItem.find_by(object: reservation)
     invoice = item.invoice
     assert_invoice_pdf invoice
-    assert_not_nil invoice.debug_footprint
 
     # notification
     assert_not_empty Notification.where(attached_object: reservation)

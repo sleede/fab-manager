@@ -14,7 +14,7 @@ class Import < ApplicationRecord
   after_commit :proceed_import, on: [:create]
 
   def results_hash
-    YAML.safe_load(results, [Symbol]) if results
+    YAML.safe_load(results, permitted_classes: [Symbol]) if results
   end
 
   private

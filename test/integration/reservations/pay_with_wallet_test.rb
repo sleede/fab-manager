@@ -74,7 +74,6 @@ class Reservations::PayWithWalletTest < ActionDispatch::IntegrationTest
     item = InvoiceItem.find_by(object: reservation)
     invoice = item.invoice
     assert_invoice_pdf invoice
-    assert_not_nil invoice.debug_footprint
 
     assert_not invoice.payment_gateway_object.blank?
     assert_not invoice.total.blank?
@@ -155,7 +154,6 @@ class Reservations::PayWithWalletTest < ActionDispatch::IntegrationTest
     item = InvoiceItem.find_by(object: reservation)
     invoice = item.invoice
     assert_invoice_pdf invoice
-    assert_not_nil invoice.debug_footprint
 
     assert_not invoice.payment_gateway_object.blank?
     assert_not invoice.total.blank?

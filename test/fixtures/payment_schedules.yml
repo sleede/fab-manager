@@ -6,7 +6,6 @@ payment_schedule_12:
   wallet_amount:
   wallet_transaction_id:
   coupon_id:
-  footprint: d4b66236895cdf18e21f64429a388050407f29bc228141ed95c89686b7daa716
   environment: development
   invoicing_profile_id: 9
   statistic_profile_id: 9
@@ -22,7 +21,6 @@ payment_schedule_13:
   wallet_amount:
   wallet_transaction_id:
   coupon_id:
-  footprint: fakefakefakefakefakefake
   environment: development
   invoicing_profile_id: 10
   statistic_profile_id: 10

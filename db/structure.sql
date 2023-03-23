@@ -85,11 +85,11 @@ CREATE FUNCTION public.fill_search_vector_for_project() RETURNS trigger
         select string_agg(description, ' ') as content into step_description from project_steps where project_id = new.id;
 
         new.search_vector :=
-          setweight(to_tsvector('pg_catalog.french', unaccent(coalesce(new.name, ''))), 'A') ||
-          setweight(to_tsvector('pg_catalog.french', unaccent(coalesce(new.tags, ''))), 'B') ||
-          setweight(to_tsvector('pg_catalog.french', unaccent(coalesce(new.description, ''))), 'D') ||
-          setweight(to_tsvector('pg_catalog.french', unaccent(coalesce(step_title.title, ''))), 'C') ||
-          setweight(to_tsvector('pg_catalog.french', unaccent(coalesce(step_description.content, ''))), 'D');
+          setweight(to_tsvector('pg_catalog.norwegian', unaccent(coalesce(new.name, ''))), 'A') ||
+          setweight(to_tsvector('pg_catalog.norwegian', unaccent(coalesce(new.tags, ''))), 'B') ||
+          setweight(to_tsvector('pg_catalog.norwegian', unaccent(coalesce(new.description, ''))), 'D') ||
+          setweight(to_tsvector('pg_catalog.norwegian', unaccent(coalesce(step_title.title, ''))), 'C') ||
+          setweight(to_tsvector('pg_catalog.norwegian', unaccent(coalesce(step_description.content, ''))), 'D');
 
         return new;
       end
@@ -335,8 +335,8 @@ ALTER SEQUENCE public.age_ranges_id_seq OWNED BY public.age_ranges.id;
 CREATE TABLE public.ar_internal_metadata (
     key character varying NOT NULL,
     value character varying,
-    created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
 );
 
 
@@ -858,6 +858,41 @@ ALTER SEQUENCE public.categories_id_seq OWNED BY public.categories.id;
 
 
 --
+-- Name: chained_elements; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.chained_elements (
+    id bigint NOT NULL,
+    element_type character varying NOT NULL,
+    element_id bigint NOT NULL,
+    previous_id integer,
+    content jsonb NOT NULL,
+    footprint character varying NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: chained_elements_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.chained_elements_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: chained_elements_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.chained_elements_id_seq OWNED BY public.chained_elements.id;
+
+
+--
 -- Name: components; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1191,39 +1226,6 @@ ALTER SEQUENCE public.exports_id_seq OWNED BY public.exports.id;
 
 
 --
--- Name: footprint_debugs; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.footprint_debugs (
-    id bigint NOT NULL,
-    footprint character varying,
-    data character varying,
-    klass character varying,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: footprint_debugs_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE public.footprint_debugs_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: footprint_debugs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE public.footprint_debugs_id_seq OWNED BY public.footprint_debugs.id;
-
-
---
 -- Name: friendly_id_slugs; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1299,7 +1301,6 @@ CREATE TABLE public.history_values (
     value character varying,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    footprint character varying,
     invoicing_profile_id integer
 );
 
@@ -1442,7 +1443,6 @@ CREATE TABLE public.invoice_items (
     updated_at timestamp without time zone,
     description text,
     invoice_item_id integer,
-    footprint character varying,
     object_type character varying NOT NULL,
     object_id bigint NOT NULL,
     main boolean
@@ -1487,7 +1487,6 @@ CREATE TABLE public.invoices (
     wallet_amount integer,
     wallet_transaction_id integer,
     coupon_id integer,
-    footprint character varying,
     environment character varying,
     invoicing_profile_id integer,
     operator_profile_id integer,
@@ -2142,7 +2141,6 @@ CREATE TABLE public.payment_schedule_items (
     client_secret character varying,
     payment_schedule_id bigint,
     invoice_id bigint,
-    footprint character varying,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
@@ -2177,7 +2175,6 @@ CREATE TABLE public.payment_schedule_objects (
     object_id bigint,
     payment_schedule_id bigint,
     main boolean,
-    footprint character varying,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
@@ -2214,7 +2211,6 @@ CREATE TABLE public.payment_schedules (
     wallet_amount integer,
     wallet_transaction_id bigint,
     coupon_id bigint,
-    footprint character varying,
     environment character varying,
     invoicing_profile_id bigint,
     statistic_profile_id bigint,
@@ -4385,6 +4381,13 @@ ALTER TABLE ONLY public.categories ALTER COLUMN id SET DEFAULT nextval('public.c
 
 
 --
+-- Name: chained_elements id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.chained_elements ALTER COLUMN id SET DEFAULT nextval('public.chained_elements_id_seq'::regclass);
+
+
+--
 -- Name: components id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -4452,13 +4455,6 @@ ALTER TABLE ONLY public.events_event_themes ALTER COLUMN id SET DEFAULT nextval(
 --
 
 ALTER TABLE ONLY public.exports ALTER COLUMN id SET DEFAULT nextval('public.exports_id_seq'::regclass);
-
-
---
--- Name: footprint_debugs id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.footprint_debugs ALTER COLUMN id SET DEFAULT nextval('public.footprint_debugs_id_seq'::regclass);
 
 
 --
@@ -5233,6 +5229,14 @@ ALTER TABLE ONLY public.categories
 
 
 --
+-- Name: chained_elements chained_elements_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.chained_elements
+    ADD CONSTRAINT chained_elements_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: components components_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5310,14 +5314,6 @@ ALTER TABLE ONLY public.events
 
 ALTER TABLE ONLY public.exports
     ADD CONSTRAINT exports_pkey PRIMARY KEY (id);
-
-
---
--- Name: footprint_debugs footprint_debugs_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.footprint_debugs
-    ADD CONSTRAINT footprint_debugs_pkey PRIMARY KEY (id);
 
 
 --
@@ -6244,6 +6240,13 @@ CREATE INDEX index_cart_item_tickets_on_event_price_category ON public.cart_item
 --
 
 CREATE UNIQUE INDEX index_categories_on_slug ON public.categories USING btree (slug);
+
+
+--
+-- Name: index_chained_elements_on_element; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_chained_elements_on_element ON public.chained_elements USING btree (element_type, element_id);
 
 
 --
@@ -7669,6 +7672,14 @@ ALTER TABLE ONLY public.payment_schedule_items
 
 
 --
+-- Name: chained_elements fk_rails_4fad806cca; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.chained_elements
+    ADD CONSTRAINT fk_rails_4fad806cca FOREIGN KEY (previous_id) REFERENCES public.chained_elements(id);
+
+
+--
 -- Name: cart_item_event_reservation_tickets fk_rails_5307e8aab8; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8660,6 +8671,10 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230307123611'),
 ('20230307123841'),
 ('20230309094535'),
-('20230315095054');
+('20230315095054'),
+('20230323085947'),
+('20230323104259'),
+('20230323104727'),
+('20230324090312');
 
 
