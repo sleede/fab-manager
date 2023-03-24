@@ -13,6 +13,8 @@ class InvoiceItem < Footprintable
   after_create :chain_record
   after_update :log_changes
 
+  delegate :footprint, to: :chained_element
+
   def amount_after_coupon
     # deduct coupon discount
     coupon_service = CouponService.new

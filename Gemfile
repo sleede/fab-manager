@@ -43,6 +43,7 @@ group :development do
   # Preview mail in the browser
   gem 'listen', '~> 3.0.5'
   gem 'overcommit'
+  gem 'pry'
   gem 'rb-readline'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'railroady'
@@ -56,7 +57,6 @@ group :test do
   gem 'database_cleaner'
   gem 'faker'
   gem 'minitest-reporters'
-  gem 'pdf-reader'
   gem 'rubyXL'
   gem 'vcr', '~> 6.1.0'
   gem 'webmock'
@@ -101,6 +101,7 @@ gem 'stripe', '5.29.0'
 gem 'recurrence'
 
 # PDF
+gem 'pdf-reader'
 gem 'prawn'
 gem 'prawn-table'
 

@@ -15,8 +15,17 @@ class ChainedElement < ApplicationRecord
 
   # @return [Boolean]
   def corrupted?
-    comparable(FootprintService.chained_data(element, previous&.footprint)) != comparable(content) ||
+    comparable(FootprintService.chained_data(element, previous&.footprint, columns)) != comparable(content) ||
       footprint != Integrity::Checksum.text(comparable(content).to_json)
+  end
+
+  # return ths list of columns in the saved JSON. This is used to do the comparison with the
+  # saved item, as it may have changed between (some columns may have been added)
+  # @return [Array<String>]
+  def columns
+    %w[id].concat(content.keys.delete_if do |column|
+      %w[id previous].concat(element.class.columns_out_of_footprint).include?(column)
+    end.sort)
   end
 
   private

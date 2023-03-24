@@ -36,6 +36,7 @@ class ChainedElementTest < ActiveSupport::TestCase
     source1 = sample_reservation_invoice(users(:user2), users(:user1))
     element1 = source1.chained_element
     assert element1.persisted?
+    assert source1.check_footprint
 
     source2 = sample_reservation_invoice(users(:user3), users(:user1))
     element2 = source2.chained_element
@@ -46,6 +47,7 @@ class ChainedElementTest < ActiveSupport::TestCase
 
     assert_not element1.corrupted?
     assert_not element2.corrupted?
+    assert source2.check_footprint
   end
 
   test 'chain element with children embedded json' do
@@ -78,5 +80,6 @@ class ChainedElementTest < ActiveSupport::TestCase
 
       previous = element
     end
+    assert source.check_footprint
   end
 end

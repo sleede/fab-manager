@@ -9,6 +9,8 @@ class PaymentScheduleItem < Footprintable
 
   after_create :chain_record
 
+  delegate :footprint, to: :chained_element
+
   def first?
     payment_schedule.ordered_items.first == self
   end

@@ -1,16 +1,12 @@
 # frozen_string_literal: true
 
-require 'integrity/archive_helper'
-
 namespace :fablab do
-  desc 'Fill the holes in the logical sequence of invoices references and regenerate invoices w/ duplicate reference'
+  desc 'Fill the holes in the logical sequence of invoices references'
   task fix_references: :environment do |_task, _args|
     include ActionView::Helpers::NumberHelper
 
     user = User.adminsys || User.admins.first
 
-    # check the footprints
-    Integrity::ArchiveHelper.check_footprints
     ActiveRecord::Base.transaction do
       missing_references = {}
 
@@ -48,11 +44,6 @@ namespace :fablab do
           )
         end
       end
-
-      # chain records
-      puts 'Chaining all record. This may take a while...'
-      not_closed(InvoiceItem).order(:id).find_each(&:chain_record)
-      not_closed(Invoice).order(:id).find_each(&:chain_record)
     end
   end
 

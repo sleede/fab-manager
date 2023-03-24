@@ -8,9 +8,10 @@ class FootprintService
   class << self
     # @param item [Footprintable]
     # @param previous_footprint [String,NilClass]
-    # @return {Hash<Symbol->String,Integer,Hash>}
-    def chained_data(item, previous_footprint = nil)
-      columns = footprint_columns(item.class)
+    # @param columns [Array<String>]
+    # @return [Hash<Symbol->String,Integer,Hash>]
+    def chained_data(item, previous_footprint = nil, columns = nil)
+      columns ||= footprint_columns(item.class)
       res = {}
       columns.each do |column|
         next if column.blank? || item[column].blank?
@@ -35,7 +36,7 @@ class FootprintService
     # @param klass [Class] a class inheriting from Footprintable
     # @param item [Footprintable] an instance of the provided class
     def debug_footprint(klass, item)
-      current = chained_data(item, item.chained_element.previous&.footprint)
+      current = chained_data(item, item.chained_element.previous&.footprint, item.chained_element.columns)
       saved = item.chained_element&.content&.sort&.to_h&.transform_values { |val| val.is_a?(Hash) ? val.sort.to_h : val }
 
       if saved.nil?

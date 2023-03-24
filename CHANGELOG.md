@@ -12,7 +12,10 @@
 - Updated bootsnap to 1.16
 - Updated pg to 1.4
 - Updated nodejs to 18.15
+- Updated oj to 3.14
+- Updated multi_json to 1.15
 - Fix a bug: broken display after a plan category was deleted
+- [TODO DEPLOY] `rails fablab:restore_order_number` THEN `rails fablab:fix_references`
 
 ## v5.9.1 2023 March 22
 

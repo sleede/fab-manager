@@ -44,8 +44,7 @@ class Pdf::Invoice < Prawn::Document
       end
       text I18n.t('invoices.code', **{ CODE: Setting.get('invoice_code-value') }), leading: 3 if Setting.get('invoice_code-active')
       if invoice.main_item&.object_type != WalletTransaction.name
-        order_number = invoice.main_item&.object_type == OrderItem.name ? invoice.main_item&.object&.order&.reference : invoice.order_number
-        text I18n.t('invoices.order_number', **{ NUMBER: order_number }), leading: 3
+        text I18n.t('invoices.order_number', **{ NUMBER: invoice.order_number }), leading: 3
       end
       if invoice.is_a?(Avoir)
         text I18n.t('invoices.refund_invoice_issued_on_DATE', **{ DATE: I18n.l(invoice.avoir_date.to_date) })

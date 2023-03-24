@@ -55,5 +55,8 @@ class OpenIdConnectTest < ActionDispatch::IntegrationTest
     # end
     # User.devise :omniauthable, omniauth_providers: [db_provider&.strategy_name&.to_sym]
     # Rails.application.reload_routes!
+    #
+    # === OR === (need to try)
+    # Rails.application.reloader.reload!
   end
 end

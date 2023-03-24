@@ -23,9 +23,10 @@ class Invoice < PaymentDocument
   has_many :accounting_lines, dependent: :destroy
 
   delegate :user, to: :invoicing_profile
+  delegate :footprint, to: :chained_element
 
   before_create :add_environment
-  after_create :update_reference, :chain_record
+  after_create :generate_order_number, :update_reference, :chain_record
   after_update :log_changes
   after_commit :generate_and_send_invoice, on: [:create], if: :persisted?
 
@@ -50,12 +51,15 @@ class Invoice < PaymentDocument
     "#{prefix}-#{id}_#{created_at.strftime('%d%m%Y')}.pdf"
   end
 
-  def order_number
-    return order.reference unless order.nil? || order.reference.nil?
+  def generate_order_number
+    self.order_number = order.reference and return unless order.nil? || order.reference.nil?
 
-    return payment_schedule_item.payment_schedule.order_number if !payment_schedule_item.nil? && !payment_schedule_item.first?
+    if !payment_schedule_item.nil? && !payment_schedule_item.first?
+      self.order_number = payment_schedule_item.payment_schedule.order_number
+      return
+    end
 
-    PaymentDocumentService.generate_order_number(self)
+    super
   end
 
   # for debug & used by rake task "fablab:maintenance:regenerate_invoices"

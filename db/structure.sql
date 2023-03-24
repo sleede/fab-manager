@@ -1490,7 +1490,8 @@ CREATE TABLE public.invoices (
     environment character varying,
     invoicing_profile_id integer,
     operator_profile_id integer,
-    statistic_profile_id integer
+    statistic_profile_id integer,
+    order_number character varying
 );
 
 
@@ -2217,7 +2218,8 @@ CREATE TABLE public.payment_schedules (
     operator_profile_id bigint,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    start_at timestamp without time zone
+    start_at timestamp without time zone,
+    order_number character varying
 );
 
 
@@ -7384,20 +7386,21 @@ CREATE UNIQUE INDEX unique_not_null_external_id ON public.invoicing_profiles USI
 
 
 --
--- Name: accounting_periods accounting_periods_del_protect; Type: RULE; Schema: public; Owner: -
---
-
-CREATE RULE accounting_periods_del_protect AS
-    ON DELETE TO public.accounting_periods DO INSTEAD NOTHING;
-
-
---
 -- Name: accounting_periods accounting_periods_upd_protect; Type: RULE; Schema: public; Owner: -
 --
 
 CREATE RULE accounting_periods_upd_protect AS
     ON UPDATE TO public.accounting_periods
    WHERE ((new.start_at <> old.start_at) OR (new.end_at <> old.end_at) OR (new.closed_at <> old.closed_at) OR (new.period_total <> old.period_total) OR (new.perpetual_total <> old.perpetual_total)) DO INSTEAD NOTHING;
+
+
+--
+-- Name: chained_elements chained_elements_upd_protect; Type: RULE; Schema: public; Owner: -
+--
+
+CREATE RULE chained_elements_upd_protect AS
+    ON UPDATE TO public.chained_elements
+   WHERE ((new.content <> old.content) OR ((new.footprint)::text <> (old.footprint)::text) OR (new.previous_id <> old.previous_id) OR (new.element_id <> old.element_id) OR ((new.element_type)::text <> (old.element_type)::text)) DO INSTEAD NOTHING;
 
 
 --
@@ -8675,6 +8678,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230323085947'),
 ('20230323104259'),
 ('20230323104727'),
-('20230324090312');
+('20230324090312'),
+('20230324095639');
 
 

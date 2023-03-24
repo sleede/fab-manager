@@ -10,4 +10,6 @@ class PaymentScheduleObject < Footprintable
   has_one :chained_element, as: :element, dependent: :restrict_with_exception
 
   after_create :chain_record
+
+  delegate :footprint, to: :chained_element
 end
