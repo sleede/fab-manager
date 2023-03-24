@@ -8,7 +8,7 @@ gem 'rails', '~> 6.1'
 gem 'bootsnap'
 # Use Puma as web server
 gem 'puma', '6.1.0'
-gem 'shakapacker', '6.5.5'
+gem 'shakapacker', '6.6.0'
 
 # rails 6 compatibility with ruby 3 (may not be required after upgrade to rails 7)
 gem 'matrix'
@@ -139,7 +139,7 @@ gem 'icalendar'
 gem 'tzinfo-data'
 
 # compilation of dynamic stylesheets (home page & theme)
-gem 'sassc', '= 2.3.0'
+gem 'sassc', '= 2.4.0'
 
 gem 'redis-session-store'
 

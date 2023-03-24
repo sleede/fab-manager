@@ -172,7 +172,7 @@
     "resolve-url-loader": "^4.0.0",
     "sass": "^1.49.9",
     "sass-loader": "^12.6.0",
-    "shakapacker": "6.5.5",
+    "shakapacker": "6.6.0",
     "slugify": "^1.6.5",
     "sortablejs": "^1.15.0",
     "style-loader": "^3.3.1",

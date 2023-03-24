@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-load 'plugin/instance'
+load 'plugin/instance.rb'
 
 # the FabManager application
 module FabManager

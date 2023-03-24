@@ -1,13 +1,17 @@
 # Changelog Fab-manager
 
-- Updated ruby to 3.1
+- Updated ruby to 3.2
 - Updated rails to 6.1
 - Updated puma to 6.1
 - Updated responders to 3.0
 - Updated devise to 4.9
-- Updated sassc to 2.3
+- Updated sassc to 2.4
 - Updated sentry to 5.8
 - Updated web-console to 4.2
+- Updated shakapacker to 6.6
+- Updated bootsnap to 1.16
+- Updated pg to 1.4
+- Updated nodejs to 18.15
 - Fix a bug: broken display after a plan category was deleted
 
 ## v5.9.1 2023 March 22
