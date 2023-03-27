@@ -117,8 +117,8 @@ class PaymentScheduleService
     set_total_and_coupon(payment_schedule_item, invoice, user, coupon)
 
     # save the results
+    invoice.payment_schedule_item = payment_schedule_item
     invoice.save
-    payment_schedule_item.update(invoice_id: invoice.id)
   end
 
   # return a paginated list of PaymentSchedule, optionally filtered, with their associated PaymentScheduleItem

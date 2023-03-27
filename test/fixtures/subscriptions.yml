@@ -3,18 +3,18 @@ subscription_1:
   id: 1
   plan_id: 2
   statistic_profile_id: 3
-  created_at: <%= 10.days.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  updated_at: <%= 10.days.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  expiration_date: <%= (1.month.from_now - 11.days).utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  canceled_at: <%= (10.days.ago + 1.minute).utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  created_at: <%= 10.days.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  updated_at: <%= 10.days.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  expiration_date: <%= (1.month.from_now - 11.days).utc.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  canceled_at: <%= (10.days.ago + 1.minute).utc.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
 
 subscription_2:
   id: 2
   plan_id: 3
   statistic_profile_id: 4
-  created_at: <%= 10.days.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  updated_at: <%= 10.days.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  expiration_date: <%= (1.month.from_now - 11.days).utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  created_at: <%= 10.days.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  updated_at: <%= 10.days.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  expiration_date: <%= (1.month.from_now - 11.days).utc.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   canceled_at:
 
 # subscription has expired (do not change dates)
@@ -50,7 +50,7 @@ subscription_6:
   id: 6
   plan_id: 4
   statistic_profile_id: 10
-  created_at: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  updated_at: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  expiration_date: <%= 3.months.from_now.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  created_at: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  updated_at: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  expiration_date: <%= 3.months.from_now.utc.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   canceled_at:

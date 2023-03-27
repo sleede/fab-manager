@@ -23,7 +23,7 @@ class Subscriptions::FreeExtensionTest < ActionDispatch::IntegrationTest
              items: [
                {
                  free_extension: {
-                   end_at: new_date.strftime('%Y-%m-%d %H:%M:%S.%9N Z')
+                   end_at: new_date.strftime('%Y-%m-%d %H:%M:%S.%9N %Z')
                  }
                }
              ]
@@ -69,7 +69,7 @@ class Subscriptions::FreeExtensionTest < ActionDispatch::IntegrationTest
            items: [
              {
                free_extension: {
-                 end_at: new_date.strftime('%Y-%m-%d %H:%M:%S.%9N Z')
+                 end_at: new_date.strftime('%Y-%m-%d %H:%M:%S.%9N %Z')
                }
              }
            ]

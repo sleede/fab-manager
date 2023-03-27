@@ -92,7 +92,7 @@ class Subscriptions::RenewAsAdminTest < ActionDispatch::IntegrationTest
              items: [
                {
                  subscription: {
-                   start_at: subscription.expired_at.strftime('%Y-%m-%d %H:%M:%S.%9N Z'),
+                   start_at: subscription.expired_at.strftime('%Y-%m-%d %H:%M:%S.%9N %Z'),
                    plan_id: subscription.plan_id
                  }
                }

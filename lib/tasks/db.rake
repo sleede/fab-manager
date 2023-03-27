@@ -20,7 +20,7 @@ namespace :db do
           data = rows.each_with_object({}) do |record, hash|
             suffix = record['id'].presence || counter.succ!
             # FIXME, this is broken with jsonb columns: it records a String but a Hash must be saved
-            hash["#{table_name.singularize}#{suffix}"] = record
+            hash["#{table_name.singularize}#{suffix}"] = yamlize(record, rows.column_types)
           end
           puts "Writing table '#{table_name}' to '#{file_path}'"
           file.write(data.to_yaml)
@@ -28,6 +28,12 @@ namespace :db do
       end
     ensure
       ActiveRecord::Base.connection&.close
+    end
+  end
+
+  def yamlize(record, column_types)
+    record.each_with_object({}) do |(key, value), hash|
+      hash[key] = column_types.include?(key) && column_types[key].type == :jsonb ? JSON.parse(value) : value
     end
   end
 end

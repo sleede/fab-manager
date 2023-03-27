@@ -46,7 +46,7 @@ class Subscriptions::CancelTest < ActionDispatch::IntegrationTest
     post '/api/local_payment/confirm_payment',
          params: {
            customer_id: subscription.user.id,
-           items: [{ free_extension: { end_at: new_date.strftime('%Y-%m-%d %H:%M:%S.%9N Z') } }]
+           items: [{ free_extension: { end_at: new_date.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') } }]
          }.to_json, headers: default_headers
 
     assert_response :success

@@ -1,8 +1,8 @@
 
 availability_1:
   id: 1
-  start_at: <%= DateTime.current.change({:hour => 6}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= DateTime.current.change({:hour => 10}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= DateTime.current.change({:hour => 6}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= DateTime.current.change({:hour => 10}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   available_type: training
   created_at: 2016-04-04 15:24:01.517486000 Z
   updated_at: 2016-04-04 15:24:01.517486000 Z
@@ -11,8 +11,8 @@ availability_1:
 
 availability_2:
   id: 2
-  start_at: <%= (DateTime.current + 1.day).change({:hour => 6}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= (DateTime.current + 1.day).change({:hour => 10}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= (DateTime.current + 1.day).change({:hour => 6}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= (DateTime.current + 1.day).change({:hour => 10}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   available_type: training
   created_at: 2016-04-04 15:24:09.169364000 Z
   updated_at: 2016-04-04 15:24:09.169364000 Z
@@ -21,8 +21,8 @@ availability_2:
 
 availability_3:
   id: 3
-  start_at: <%= DateTime.current.change({:hour => 12}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= DateTime.current.change({:hour => 18}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= DateTime.current.change({:hour => 12}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= DateTime.current.change({:hour => 18}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   available_type: machines
   created_at: 2016-04-04 15:24:27.587583000 Z
   updated_at: 2016-04-04 15:24:27.587583000 Z
@@ -31,8 +31,8 @@ availability_3:
 
 availability_4:
   id: 4
-  start_at: <%= (DateTime.current + 1.day).change({:hour => 12}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= (DateTime.current + 1.day).change({:hour => 18}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= (DateTime.current + 1.day).change({:hour => 12}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= (DateTime.current + 1.day).change({:hour => 18}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   available_type: machines
   created_at: 2016-04-04 15:24:44.044908000 Z
   updated_at: 2016-04-04 15:24:44.044908000 Z
@@ -41,8 +41,8 @@ availability_4:
 
 availability_5:
   id: 5
-  start_at: <%= (DateTime.current + 2.day).change({:hour => 12}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= (DateTime.current + 2.day).change({:hour => 18}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= (DateTime.current + 2.day).change({:hour => 12}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= (DateTime.current + 2.day).change({:hour => 18}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   available_type: machines
   created_at: 2016-04-04 15:25:48.584444000 Z
   updated_at: 2016-04-04 15:25:48.584444000 Z
@@ -51,8 +51,8 @@ availability_5:
 
 availability_6:
   id: 6
-  start_at: <%= (DateTime.current + 3.day).change({:hour => 12}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= (DateTime.current + 3.day).change({:hour => 18}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= (DateTime.current + 3.day).change({:hour => 12}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= (DateTime.current + 3.day).change({:hour => 18}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   available_type: machines
   created_at: 2016-04-04 15:26:17.953216000 Z
   updated_at: 2016-04-04 15:26:17.953216000 Z
@@ -61,8 +61,8 @@ availability_6:
 
 availability_7:
   id: 7
-  start_at: <%= (DateTime.current + 3.day).change({:hour => 12}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= (DateTime.current + 3.day).change({:hour => 18}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= (DateTime.current + 3.day).change({:hour => 12}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= (DateTime.current + 3.day).change({:hour => 18}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   available_type: machines
   created_at: 2016-04-04 15:26:39.278627000 Z
   updated_at: 2016-04-04 15:26:39.278627000 Z
@@ -71,8 +71,8 @@ availability_7:
 
 availability_8:
   id: 8
-  start_at: <%= (DateTime.current + 2.day).change({:hour => 6}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= (DateTime.current + 2.day).change({:hour => 10}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= (DateTime.current + 2.day).change({:hour => 6}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= (DateTime.current + 2.day).change({:hour => 10}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   available_type: training
   created_at: 2016-04-04 15:26:49.572724000 Z
   updated_at: 2016-04-04 15:26:49.572724000 Z
@@ -132,8 +132,8 @@ availability_13:
 
 availability_14:
   id: 14
-  start_at: <%= 20.days.from_now.change({:hour => 6}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= 20.days.from_now.change({:hour => 10}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= 20.days.from_now.change({:hour => 6}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= 20.days.from_now.change({:hour => 10}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   available_type: machines
   created_at: 2016-04-04 15:44:04.023557000 Z
   updated_at: 2016-04-04 15:44:04.023557000 Z
@@ -142,8 +142,8 @@ availability_14:
 
 availability_15:
   id: 15
-  start_at: <%= 40.days.from_now.change({:hour => 6}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= 40.days.from_now.change({:hour => 10}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= 40.days.from_now.change({:hour => 6}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= 40.days.from_now.change({:hour => 10}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   available_type: machines
   created_at: 2016-04-04 15:44:04.023557000 Z
   updated_at: 2016-04-04 15:44:04.023557000 Z
@@ -152,8 +152,8 @@ availability_15:
 
 availability_16:
   id: 16
-  start_at: <%= 80.days.from_now.change({:hour => 6}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= 80.days.from_now.change({:hour => 10}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= 80.days.from_now.change({:hour => 6}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= 80.days.from_now.change({:hour => 10}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   available_type: machines
   created_at: 2016-04-04 15:44:04.023557000 Z
   updated_at: 2016-04-04 15:44:04.023557000 Z
@@ -162,8 +162,8 @@ availability_16:
 
 availability_17:
   id: 17
-  start_at: <%= 10.days.from_now.change({:hour => 10}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= 12.days.from_now.change({:hour => 18}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= 10.days.from_now.change({:hour => 10}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= 12.days.from_now.change({:hour => 18}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   available_type: event
   created_at: 2016-04-04 15:44:04.023557000 Z
   updated_at: 2016-04-04 15:44:04.023557000 Z
@@ -172,8 +172,8 @@ availability_17:
 
 availability_18:
   id: 18
-  start_at: <%= 2.days.from_now.change({:hour => 8}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= 2.days.from_now.change({:hour => 12}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= 2.days.from_now.change({:hour => 8}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= 2.days.from_now.change({:hour => 12}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   available_type: space
   created_at: 2017-02-15 15:53:35.154433000 Z
   updated_at: 2017-02-15 15:53:35.154433000 Z
@@ -182,8 +182,8 @@ availability_18:
 
 availability_19:
   id: 19
-  start_at: <%= 1.day.from_now.change({:hour => 8}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= 1.day.from_now.change({:hour => 18}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= 1.day.from_now.change({:hour => 8}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= 1.day.from_now.change({:hour => 18}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   available_type: machines
   created_at: 2017-02-15 15:53:35.154433000 Z
   updated_at: 2017-02-15 15:53:35.154433000 Z
@@ -192,8 +192,8 @@ availability_19:
 
 availability_20:
   id: 20
-  start_at: <%= 10.days.ago.change({:hour => 8}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= 10.days.ago.change({:hour => 10}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= 10.days.ago.change({:hour => 8}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= 10.days.ago.change({:hour => 10}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   available_type: training
   created_at: 2022-07-18 12:38:21.616510000 Z
   updated_at: 2022-07-18 12:38:21.616510000 Z
@@ -202,8 +202,8 @@ availability_20:
 
 availability_21:
   id: 21
-  start_at: <%= 10.minutes.from_now.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= (10.minutes.from_now + 1.hour).strftime('%Y-%m-%d %H:%M:%S.%9N Z')  %>
+  start_at: <%= 10.minutes.from_now.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= (10.minutes.from_now + 1.hour).strftime('%Y-%m-%d %H:%M:%S.%9N %Z')  %>
   available_type: space
   created_at: 2022-12-14 12:01:26.165110000 Z
   updated_at: 2022-12-14 12:01:26.165110000 Z
@@ -212,8 +212,8 @@ availability_21:
 
 availability_22:
   id: 22
-  start_at: <%= 1.hour.from_now.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= 2.hours.from_now.strftime('%Y-%m-%d %H:%M:%S.%9N Z')  %>
+  start_at: <%= 1.hour.from_now.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= 2.hours.from_now.strftime('%Y-%m-%d %H:%M:%S.%9N %Z')  %>
   available_type: training
   created_at: 2023-01-24 13:34:43.841240000 Z
   updated_at: 2023-01-24 13:34:43.841240000 Z

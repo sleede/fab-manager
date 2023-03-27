@@ -13,5 +13,5 @@ payment_schedule_object_11:
   object_id: 6
   payment_schedule_id: 13
   main: true
-  created_at: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  updated_at: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  created_at: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  updated_at: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>

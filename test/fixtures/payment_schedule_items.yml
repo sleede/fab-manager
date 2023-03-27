@@ -158,156 +158,156 @@ payment_schedule_item_116:
 payment_schedule_item_117:
   id: 117
   amount: 9474
-  due_date: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  due_date: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   state: paid
   details: {"recurring": 9466, "adjustment": 8, "other_items": 0}
   payment_method: card
   client_secret:
   payment_schedule_id: 13
   invoice_id:
-  created_at: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  updated_at: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  created_at: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  updated_at: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
 
 payment_schedule_item_118:
   id: 118
   amount: 9466
-  due_date: <%= 8.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  due_date: <%= 8.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   state: paid
   details: {"recurring": 9466}
   payment_method: card
   client_secret:
   payment_schedule_id: 13
   invoice_id:
-  created_at: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  updated_at: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  created_at: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  updated_at: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
 
 
 payment_schedule_item_119:
   id: 119
   amount: 9466
-  due_date: <%= 7.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  due_date: <%= 7.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   state: paid
   details: {"recurring": 9466}
   payment_method: card
   client_secret:
   payment_schedule_id: 13
   invoice_id:
-  created_at: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  updated_at: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  created_at: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  updated_at: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
 
 payment_schedule_item_120:
   id: 120
   amount: 9466
-  due_date: <%= 6.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  due_date: <%= 6.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   state: paid
   details: {"recurring": 9466}
   payment_method: card
   client_secret:
   payment_schedule_id: 13
   invoice_id:
-  created_at: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  updated_at: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  created_at: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  updated_at: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
 
 payment_schedule_item_121:
   id: 121
   amount: 9466
-  due_date: <%= 5.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  due_date: <%= 5.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   state: paid
   details: {"recurring": 9466}
   payment_method: card
   client_secret:
   payment_schedule_id: 13
   invoice_id:
-  created_at: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  updated_at: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  created_at: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  updated_at: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
 
 payment_schedule_item_122:
   id: 122
   amount: 9466
-  due_date: <%= 4.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  due_date: <%= 4.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   state: paid
   details: {"recurring": 9466}
   payment_method: card
   client_secret:
   payment_schedule_id: 13
   invoice_id:
-  created_at: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  updated_at: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  created_at: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  updated_at: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
 
 payment_schedule_item_123:
   id: 123
   amount: 9466
-  due_date: <%= 3.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  due_date: <%= 3.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   state: paid
   details: {"recurring": 9466}
   payment_method: card
   client_secret:
   payment_schedule_id: 13
   invoice_id:
-  created_at: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  updated_at: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  created_at: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  updated_at: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
 
 payment_schedule_item_124:
   id: 124
   amount: 9466
-  due_date: <%= 2.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  due_date: <%= 2.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   state: paid
   details: {"recurring": 9466}
   payment_method: card
   client_secret:
   payment_schedule_id: 13
   invoice_id:
-  created_at: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  updated_at: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  created_at: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  updated_at: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
 
 payment_schedule_item_125:
   id: 125
   amount: 9466
-  due_date: <%= 1.month.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  due_date: <%= 1.month.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   state: paid
   details: {"recurring": 9466}
   payment_method: card
   client_secret:
   payment_schedule_id: 13
   invoice_id:
-  created_at: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  updated_at: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  created_at: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  updated_at: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
 
 payment_schedule_item_126:
   id: 126
   amount: 9466
-  due_date: <%= DateTime.current.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  due_date: <%= DateTime.current.utc.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   state: new
   details: {"recurring": 9466}
   payment_method:
   client_secret:
   payment_schedule_id: 13
   invoice_id:
-  created_at: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  updated_at: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  created_at: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  updated_at: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
 
 payment_schedule_item_127:
   id: 127
   amount: 9466
-  due_date: <%= 1.month.from_now.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  due_date: <%= 1.month.from_now.utc.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   state: new
   details: {"recurring": 9466}
   payment_method:
   client_secret:
   payment_schedule_id: 13
   invoice_id:
-  created_at: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  updated_at: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  created_at: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  updated_at: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
 
 payment_schedule_item_128:
   id: 128
   amount: 9466
-  due_date: <%= 2.months.from_now.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  due_date: <%= 2.months.from_now.utc.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   state: new
   details: {"recurring": 9466}
   payment_method:
   client_secret:
   payment_schedule_id: 13
   invoice_id:
-  created_at: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  updated_at: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  created_at: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  updated_at: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>

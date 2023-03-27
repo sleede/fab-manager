@@ -126,8 +126,8 @@ order_item_24:
   amount: 3000
   quantity: 1
   is_offered:
-  created_at: <%= DateTime.current.utc.change({:hour => 10}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  updated_at: <%= DateTime.current.utc.change({:hour => 10}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  created_at: <%= DateTime.current.utc.change({:hour => 10}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  updated_at: <%= DateTime.current.utc.change({:hour => 10}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
 order_item_25:
   id: 25
   order_id: 18
@@ -136,8 +136,8 @@ order_item_25:
   amount: 500
   quantity: 1
   is_offered:
-  created_at: <%= DateTime.current.utc.change({:hour => 10}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  updated_at: <%= DateTime.current.utc.change({:hour => 15}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  created_at: <%= DateTime.current.utc.change({:hour => 10}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  updated_at: <%= DateTime.current.utc.change({:hour => 15}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
 order_item_26:
   id: 26
   order_id: 19
@@ -146,8 +146,8 @@ order_item_26:
   amount: 52300
   quantity: 5
   is_offered:
-  created_at: <%= DateTime.current.utc.change({:hour => 10}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  updated_at: <%= DateTime.current.utc.change({:hour => 15}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  created_at: <%= DateTime.current.utc.change({:hour => 10}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  updated_at: <%= DateTime.current.utc.change({:hour => 15}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
 order_item_27:
   id: 27
   order_id: 20
@@ -156,8 +156,8 @@ order_item_27:
   amount: 52300
   quantity: 5
   is_offered:
-  created_at: <%= DateTime.current.utc.change({:hour => 10}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  updated_at: <%= DateTime.current.utc.change({:hour => 15}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  created_at: <%= DateTime.current.utc.change({:hour => 10}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  updated_at: <%= DateTime.current.utc.change({:hour => 15}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
 order_item_28:
   id: 28
   order_id: 20
@@ -166,5 +166,5 @@ order_item_28:
   amount: 500
   quantity: 2
   is_offered:
-  created_at: <%= DateTime.current.utc.change({:hour => 10}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  updated_at: <%= DateTime.current.utc.change({:hour => 15}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  created_at: <%= DateTime.current.utc.change({:hour => 10}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  updated_at: <%= DateTime.current.utc.change({:hour => 15}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>

@@ -26,6 +26,6 @@ payment_schedule_13:
   invoicing_profile_id: 10
   statistic_profile_id: 10
   operator_profile_id: 10
-  created_at: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  updated_at: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  created_at: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  updated_at: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   order_number: <%= 9.months.ago.utc.strftime('000008-%m-%y') %>
