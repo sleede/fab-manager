@@ -47,11 +47,15 @@ class Events::RecurrenceUpdateTest < ActionDispatch::IntegrationTest
     new_title = 'Skateboard party'
     new_descr = 'Come make a skateboard tonight at the Fablab'
     new_image = '/files/event/Skateboard.jpg'
+    new_file = '/files/document.pdf'
     put "/api/events/#{event&.id}", params: {
       event: {
         title: new_title,
         event_image_attributes: {
           attachment: fixture_file_upload(new_image)
+        },
+        event_files_attributes: {
+          '0' => { attachment: fixture_file_upload(new_file) }
         },
         description: new_descr,
         category_id: 1,
@@ -87,6 +91,10 @@ class Events::RecurrenceUpdateTest < ActionDispatch::IntegrationTest
       assert FileUtils.compare_file(
         File.join(ActionDispatch::IntegrationTest.fixture_path, new_image),
         db_event.event_image.attachment.file.path
+      )
+      assert FileUtils.compare_file(
+        File.join(ActionDispatch::IntegrationTest.fixture_path, new_file),
+        db_event.event_files[0].attachment.file.path
       )
     end
 

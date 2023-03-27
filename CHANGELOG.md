@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- Fix a bug: unable to update recurring event
+
 ## v5.9.1 2023 March 22
 
 - Fix a bug: logical sequence of invoices references has duplicates
