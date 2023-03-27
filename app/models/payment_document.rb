@@ -13,7 +13,7 @@ class PaymentDocument < Footprintable
   end
 
   def update_reference
-    generate_reference
+    generate_reference if reference.blank?
     save
   end
 

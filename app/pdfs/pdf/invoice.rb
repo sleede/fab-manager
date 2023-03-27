@@ -33,15 +33,10 @@ class Pdf::Invoice < Prawn::Document
       Rails.logger.error "Unable to decode invoice logo from base64: #{e}"
     end
     move_down 20
-    # the following line is a special comment to workaround RubyMine inspection problem
-    # noinspection RubyScope
     font('Open-Sans', size: 10) do
       # general information
-      if invoice.is_a?(Avoir)
-        text I18n.t('invoices.refund_invoice_reference', **{ REF: invoice.reference }), leading: 3
-      else
-        text I18n.t('invoices.invoice_reference', **{ REF: invoice.reference }), leading: 3
-      end
+      text I18n.t(invoice.is_a?(Avoir) ? 'invoices.refund_invoice_reference' : 'invoices.invoice_reference',
+                  **{ REF: invoice.reference }), leading: 3
       text I18n.t('invoices.code', **{ CODE: Setting.get('invoice_code-value') }), leading: 3 if Setting.get('invoice_code-active')
       if invoice.main_item&.object_type != WalletTransaction.name
         text I18n.t('invoices.order_number', **{ NUMBER: invoice.order_number }), leading: 3

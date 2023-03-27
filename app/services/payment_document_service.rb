@@ -7,7 +7,7 @@ class PaymentDocumentService
     # @param document [PaymentDocument]
     # @param date [Time]
     def generate_reference(document, date: Time.current)
-      pattern = Invoices::NumberService.pattern(document, 'invoice_reference')
+      pattern = Invoices::NumberService.pattern(document.created_at, 'invoice_reference')
 
       reference = replace_document_number_pattern(pattern, document)
       reference = replace_date_pattern(reference, date)
@@ -16,7 +16,7 @@ class PaymentDocumentService
 
     # @param document [PaymentDocument]
     def generate_order_number(document)
-      pattern = Invoices::NumberService.pattern(document, 'invoice_order-nb')
+      pattern = Invoices::NumberService.pattern(document.created_at, 'invoice_order-nb')
 
       # global document number (nn..nn)
       reference = pattern.gsub(/n+(?![^\[]*\])/) do |match|
@@ -25,6 +25,19 @@ class PaymentDocumentService
 
       reference = replace_document_number_pattern(reference, document, :order_number)
       replace_date_pattern(reference, document.created_at)
+    end
+
+    # Generate a reference for the given document using the given document number
+    # @param number [Integer]
+    # @param document [PaymentDocument]
+    def generate_numbered_reference(number, document)
+      pattern = Invoices::NumberService.pattern(document.created_at, 'invoice_reference')
+
+      reference = pattern.gsub(/n+|y+|m+|d+(?![^\[]*\])/) do |match|
+        pad_and_truncate(number, match.to_s.length)
+      end
+      reference = replace_date_pattern(reference, document.created_at)
+      replace_document_type_pattern(document, reference)
     end
 
     private

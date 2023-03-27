@@ -21,7 +21,7 @@ class Invoices::LabelService
         when 'OfferDay'
           offer_day_label(invoice.main_item.object, username)
         when 'Error'
-          I18n.t('invoices.error_invoice')
+          invoice.main_item&.object_id&.zero? ? I18n.t('invoices.error_invoice') : invoice.main_item&.description
         when 'StatisticProfilePrepaidPack'
           I18n.t('invoices.prepaid_pack')
         when 'OrderItem'

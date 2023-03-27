@@ -22,20 +22,32 @@ class Invoices::NumberService
       saved_number[indices[0]..indices[1]]&.to_i
     end
 
-    # Replace the number of the reference of the given document and return the new reference
-    # @param document [PaymentDocument,NilClass]
+    # Search for any document matching the provided period and number
+    # @param number [Integer] the number to search
+    # @param date [Time] the date to search around, when using periodicity != 'global'
     # @param setting [String] 'invoice_reference' | 'invoice_order-nb'
-    # @return [String,NilClass]
-    def change_number(document, new_number, setting = 'invoice_reference')
+    # @param klass [Class] Invoice | Order | PaymentSchedule
+    # @return [PaymentDocument,NilClass]
+    def find_by_number(number, date: Time.current, setting: 'invoice_reference', klass: Invoice)
       raise TypeError, "invalid setting #{setting}" unless %w[invoice_order-nb invoice_reference].include?(setting)
-      return nil if document.nil?
+      return nil if number.nil?
 
-      saved_number = setting == 'invoice_reference' ? document.reference : document.order_number
-      return nil if saved_number.nil?
+      pattern = pattern(date, setting)
+      pattern = pattern.gsub(/([SXR]\[[^\]]+\])+/, '%')
+      if pattern.match?(/n+/)
+        pattern = pattern.gsub(/n+(?![^\[]*\])/) do |match|
+          pad_and_truncate(number, match.to_s.length)
+        end
+      else
+        start_idx = pattern.index(/y+|m+|d+/)
+        end_idx = pattern.rindex(/y+|m+|d+/)
+        pattern[start_idx..end_idx] = pad_and_truncate(number, end_idx - start_idx + 1)
+      end
+      pattern = PaymentDocumentService.send(:replace_date_pattern, pattern, date)
 
-      indices = number_indices(document, setting)
-      saved_number[indices[0]..indices[1]] = pad_and_truncate(new_number, indices[1] - indices[0])
-      saved_number
+      field = setting == 'invoice_reference' ? 'reference' : 'order_number'
+      field = 'reference' if klass == Order
+      klass.where("#{field} LIKE '#{pattern}'").first
     end
 
     # @param document [PaymentDocument,NilClass]
@@ -45,7 +57,7 @@ class Invoices::NumberService
       raise TypeError, "invalid setting #{setting}" unless %w[invoice_order-nb invoice_reference].include?(setting)
       return nil if document.nil?
 
-      pattern = pattern(document, setting)
+      pattern = pattern(document.created_at, setting)
       pattern = PaymentDocumentService.send(:replace_document_type_pattern, document, pattern)
 
       return 'global' if pattern.match?(/n+/)
@@ -56,15 +68,15 @@ class Invoices::NumberService
       nil
     end
 
-    # Get the pattern applicable to generate the number of the given invoice.
-    # @param document [PaymentDocument]
+    # Get the pattern applicable to generate the given number at the given date.
+    # @param date [Time]
     # @param setting [String] 'invoice_reference' | 'invoice_order-nb'
     # @return [String]
-    def pattern(document, setting = 'invoice_reference')
+    def pattern(date, setting = 'invoice_reference')
       raise TypeError, "invalid setting #{setting}" unless %w[invoice_order-nb invoice_reference].include?(setting)
 
-      value = Setting.find_by(name: setting).value_at(document.created_at)
-      value || if document.created_at < Setting.find_by(name: setting).first_update
+      value = Setting.find_by(name: setting).value_at(date)
+      value || if date < Setting.find_by(name: setting).first_update
                  Setting.find_by(name: setting).first_value
                else
                  Setting.get(setting)
@@ -89,7 +101,7 @@ class Invoices::NumberService
       raise TypeError, "invalid setting #{setting}" unless %w[invoice_order-nb invoice_reference].include?(setting)
       return nil if document.nil?
 
-      pattern = pattern(document, setting)
+      pattern = pattern(document.created_at, setting)
       pattern = PaymentDocumentService.send(:replace_document_type_pattern, document, pattern)
       start_idx = pattern.index(/n+|y+|m+|d+/)
       end_idx = pattern.rindex(/n+|y+|m+|d+/)

@@ -8,7 +8,9 @@ namespace :fablab do
       I18n.t('invoices.order_number', locale: 'en', **{ NUMBER: 'REPLACE' }).gsub('REPLACE', ''),
       I18n.t('invoices.order_number', locale: 'fr', **{ NUMBER: 'REPLACE' }).gsub('REPLACE', '')
     ]
+    max_id = ActiveRecord::Base.connection.execute('SELECT max(id) as max_id FROM invoices').first['max_id']
     Invoice.order(id: :asc).find_each do |invoice|
+      puts "Processing: #{invoice.id} / #{max_id}"
       next unless File.exist?(invoice.file)
 
       found = false
@@ -21,7 +23,7 @@ namespace :fablab do
         order_text.each do |label|
           next unless line.include? label
 
-          number = line.gsub(label, '').strip
+          number = line.gsub(label, '').gsub(/\s{5,}.+$/, '').strip
           invoice.update(order_number: number)
           found = true
         end
@@ -45,6 +47,13 @@ namespace :fablab do
       schedule.ordered_items.each do |item|
         item.invoice&.update(order_number: schedule.order_number)
       end
+    end
+    Avoir.where(order_number: nil).order(id: :asc).find_each do |refund|
+      next if refund.invoice.nil?
+
+      # refunds are validated against their avoir_date for inclusion in closed periods, so we must bypass the validation
+      # (Invoices are validated on Time.current, so this was not necesseary above)
+      refund.update_attribute('order_number', refund.invoice.order_number) # rubocop:disable Rails/SkipsModelValidations
     end
   end
 end
