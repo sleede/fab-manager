@@ -14,7 +14,7 @@ class Invoice < PaymentDocument
   belongs_to :coupon
 
   has_one :chained_element, as: :element, dependent: :restrict_with_exception
-  has_one :avoir, class_name: 'Invoice', dependent: :destroy, inverse_of: :avoir
+  has_one :avoir, class_name: 'Avoir', dependent: :destroy, inverse_of: :invoice
   has_one :payment_schedule_item, dependent: :restrict_with_error
   has_one :payment_gateway_object, as: :item, dependent: :destroy
   has_one :order, dependent: :restrict_with_error

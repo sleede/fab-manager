@@ -23,6 +23,7 @@ class SlotsReservationsTest < ActionDispatch::IntegrationTest
 
     # place cache
     slot = slots_reservation.slot
+    slot.reload
     cached = slot.places.detect do |p|
       p['reservable_id'] == slots_reservation.reservation.reservable_id && p['reservable_type'] == slots_reservation.reservation.reservable_type
     end

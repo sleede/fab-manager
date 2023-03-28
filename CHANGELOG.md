@@ -1,7 +1,7 @@
 # Changelog Fab-manager
 
 - Updated ruby to 3.2
-- Updated rails to 6.1
+- Updated rails to 7.0
 - Updated puma to 6.1
 - Updated responders to 3.0
 - Updated devise to 4.9
@@ -14,6 +14,10 @@
 - Updated nodejs to 18.15
 - Updated oj to 3.14
 - Updated multi_json to 1.15
+- Updated spring to 4.0
+- Updated spring-watcher-listen to 2.1
+- Fill the holes in the logical sequence of invoices references with nil invoices
+- Updated the invoices chaining method with a more flexible model
 - Fix a bug: broken display after a plan category was deleted
 - [TODO DEPLOY] `rails fablab:restore_order_number` THEN `rails fablab:fix_references`
 

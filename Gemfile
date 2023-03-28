@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.1'
+gem 'rails', '~> 7.0'
 # Used by rails 5.2 to reduce the app boot time by over 50%
 gem 'bootsnap'
 # Use Puma as web server
@@ -49,8 +49,8 @@ group :development do
   gem 'railroady'
   gem 'rubocop', '~> 1.31', require: false
   gem 'rubocop-rails', require: false
-  gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'spring', '~> 4'
+  gem 'spring-watcher-listen', '~> 2.1.0'
 end
 
 group :test do

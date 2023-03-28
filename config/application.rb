@@ -28,7 +28,10 @@ class FabManager::Application < Rails::Application
   require 'fab_manager'
 
   # Initialize configuration defaults for originally generated Rails version.
-  config.load_defaults 6.0
+  config.load_defaults 7.0
+  config.active_support.cache_format_version = 6.1
+  config.action_dispatch.cookies_serializer = :hybrid
+  config.active_record.verify_foreign_keys_for_fixtures = false
   # prevent this new behavior with rails >= 5.0
   # see https://edgeguides.rubyonrails.org/upgrading_ruby_on_rails.html#active-record-belongs-to-required-by-default-option
   config.active_record.belongs_to_required_by_default = false
