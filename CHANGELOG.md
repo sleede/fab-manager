@@ -16,6 +16,9 @@
 - Updated multi_json to 1.15
 - Updated spring to 4.0
 - Updated spring-watcher-listen to 2.1
+- Updated omniauth to 2.1
+- Updated omniauth-rails_csrf_protection to 1.0
+- Updated omniauth_openid_connect to 0.6
 - Fill the holes in the logical sequence of invoices references with nil invoices
 - Updated the invoices chaining method with a more flexible model
 - Fix a bug: broken display after a plan category was deleted

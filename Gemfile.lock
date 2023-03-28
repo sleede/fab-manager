@@ -72,8 +72,8 @@ GEM
       tzinfo (~> 2.0)
     acts_as_list (1.0.4)
       activerecord (>= 4.2)
-    addressable (2.8.0)
-      public_suffix (>= 2.0.2, < 5.0)
+    addressable (2.8.1)
+      public_suffix (>= 2.0.2, < 6.0)
     aes_key_wrap (1.1.0)
     afm (0.2.2)
     ansi (1.5.0)
@@ -88,7 +88,7 @@ GEM
       ice_nine (~> 0.11.0)
       thread_safe (~> 0.3, >= 0.3.1)
     bcrypt (3.1.18)
-    bindata (2.4.10)
+    bindata (2.4.15)
     bindex (0.8.1)
     bootsnap (1.16.0)
       msgpack (~> 1.2)
@@ -208,10 +208,11 @@ GEM
     jbuilder_cache_multi (0.1.0)
       jbuilder (>= 1.5.0, < 3)
     json (2.3.1)
-    json-jwt (1.13.0)
+    json-jwt (1.15.3)
       activesupport (>= 4.2)
       aes_key_wrap
       bindata
+      httpclient
     jsonpath (1.1.0)
       multi_json
     jwt (2.2.1)
@@ -233,8 +234,11 @@ GEM
     loofah (2.19.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
-    mail (2.7.1)
+    mail (2.8.1)
       mini_mime (>= 0.1.1)
+      net-imap
+      net-pop
+      net-smtp
     marcel (1.0.2)
     matrix (0.4.2)
     message_format (0.0.6)
@@ -274,29 +278,30 @@ GEM
       multi_xml (~> 0.5)
       rack (>= 1.2, < 3)
     oj (3.14.2)
-    omniauth (1.9.2)
+    omniauth (2.1.1)
       hashie (>= 3.4.6)
-      rack (>= 1.6.2, < 3)
-    omniauth-oauth2 (1.6.0)
-      oauth2 (~> 1.1)
-      omniauth (~> 1.9)
-    omniauth-rails_csrf_protection (0.1.2)
+      rack (>= 2.2.3)
+      rack-protection
+    omniauth-oauth2 (1.8.0)
+      oauth2 (>= 1.4, < 3)
+      omniauth (~> 2.0)
+    omniauth-rails_csrf_protection (1.0.1)
       actionpack (>= 4.2)
-      omniauth (>= 1.3.1)
-    omniauth_openid_connect (0.4.0)
-      addressable (~> 2.5)
+      omniauth (~> 2.0)
+    omniauth_openid_connect (0.6.1)
       omniauth (>= 1.9, < 3)
       openid_connect (~> 1.1)
-    openid_connect (1.3.0)
+    openid_connect (1.4.2)
       activemodel
       attr_required (>= 1.0.0)
-      json-jwt (>= 1.5.0)
-      rack-oauth2 (>= 1.6.1)
-      swd (>= 1.0.0)
+      json-jwt (>= 1.15.0)
+      net-smtp
+      rack-oauth2 (~> 1.21)
+      swd (~> 1.3)
       tzinfo
       validate_email
       validate_url
-      webfinger (>= 1.0.1)
+      webfinger (~> 1.2)
     openlab_ruby (0.0.7)
       httparty (~> 0.20)
     orm_adapter (0.5.0)
@@ -326,7 +331,7 @@ GEM
     pry (0.14.2)
       coderay (~> 1.1)
       method_source (~> 1.0)
-    public_suffix (4.0.6)
+    public_suffix (5.0.1)
     puma (6.1.0)
       nio4r (~> 2.0)
     pundit (2.1.0)
@@ -334,12 +339,14 @@ GEM
     raabro (1.4.0)
     racc (1.6.2)
     rack (2.2.6.4)
-    rack-oauth2 (1.19.0)
+    rack-oauth2 (1.21.3)
       activesupport
       attr_required
       httpclient
       json-jwt (>= 1.11.0)
       rack (>= 2.1.0)
+    rack-protection (3.0.5)
+      rack
     rack-proxy (0.7.6)
       rack
     rack-test (2.1.0)
@@ -488,7 +495,7 @@ GEM
     validate_email (0.1.6)
       activemodel (>= 3.0)
       mail (>= 2.2.5)
-    validate_url (1.0.13)
+    validate_url (1.0.15)
       activemodel (>= 3.0.0)
       public_suffix
     vcr (6.1.0)
@@ -559,9 +566,9 @@ DEPENDENCIES
   net-pop
   net-smtp
   oj
-  omniauth (~> 1.9.2)
+  omniauth (~> 2.1)
   omniauth-oauth2
-  omniauth-rails_csrf_protection (~> 0.1)
+  omniauth-rails_csrf_protection (~> 1.0)
   omniauth_openid_connect
   openlab_ruby
   overcommit
