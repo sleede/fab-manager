@@ -20,6 +20,7 @@
 - Updated the invoices chaining method with a more flexible model
 - Fix a bug: broken display after a plan category was deleted
 - [TODO DEPLOY] `rails fablab:restore_order_number` THEN `rails fablab:fix_references`
+- Fix a security issue: updated json5 to 2.2.2 to fix [CVE-2022-46175](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-46175)
 
 ## v5.9.1 2023 March 22
 
