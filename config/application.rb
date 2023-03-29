@@ -76,6 +76,9 @@ class FabManager::Application < Rails::Application
   # disable ANSI color escape codes in active_record if NO_COLOR is defined.
   config.colorize_logging = ENV['NO_COLOR'] ? false : true
 
+  require 'provider_config'
+  config.auth_provider = ProviderConfig.new
+
   FabManager.activate_plugins!
 
   config.action_view.sanitized_allowed_tags = %w[a acronym hr pre table b strong i em li ul ol h1 h2 h3 h4 h5 h6 blockquote br cite sub sup ins p

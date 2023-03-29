@@ -7,8 +7,8 @@ module SingleSignOnConcern
 
   included do
     # enable OmniAuth authentication only if needed
-    devise :omniauthable, omniauth_providers: [AuthProvider.active.strategy_name.to_sym] unless
-      AuthProvider.active.providable_type == DatabaseProvider.name
+    devise :omniauthable, omniauth_providers: [Rails.configuration.auth_provider.strategy_name.to_sym] unless
+      Rails.configuration.auth_provider.providable_type == 'DatabaseProvider'
 
     ## Retrieve the requested data in the User and user's Profile tables
     ## @param sso_mapping {String} must be of form 'user._field_' or 'profile._field_'. Eg. 'user.email'
@@ -39,7 +39,7 @@ module SingleSignOnConcern
     ## link the current user to the given provider (omniauth attributes hash)
     ## and remove the auth_token to mark his account as "migrated"
     def link_with_omniauth_provider(auth)
-      active_provider = AuthProvider.active
+      active_provider = Rails.configuration.auth_provider
       raise SecurityError, 'The identity provider does not match the activated one' if active_provider.strategy_name != auth.provider
 
       if User.where(provider: auth.provider, uid: auth.uid).size.positive?
@@ -104,7 +104,7 @@ module SingleSignOnConcern
     def from_omniauth(auth)
       logger = SsoLogger.new
       logger.debug "[User::from_omniauth] initiated with parameter #{auth}"
-      active_provider = AuthProvider.active
+      active_provider = Rails.configuration.auth_provider
       raise SecurityError, 'The identity provider does not match the activated one' if active_provider.strategy_name != auth.provider
 
       where(provider: auth.provider, uid: auth.uid).first_or_create.tap do |user|

@@ -11,6 +11,10 @@ class AuthProvider < ApplicationRecord
     def name
       'DatabaseProvider::SimpleAuthProvider'
     end
+
+    def strategy_name
+      "database-#{name.downcase.parameterize}"
+    end
   end
 
   PROVIDABLE_TYPES = %w[DatabaseProvider OAuth2Provider OpenIdConnectProvider].freeze

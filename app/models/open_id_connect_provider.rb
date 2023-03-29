@@ -16,20 +16,4 @@ class OpenIdConnectProvider < ApplicationRecord
   validates :display, inclusion: { in: %w[page popup touch wap], allow_nil: true }
   validates :prompt, inclusion: { in: %w[none login consent select_account], allow_nil: true }
   validates :client_auth_method, inclusion: { in: %w[basic jwks] }
-
-  def scope
-    self[:scope]&.join(' ')
-  end
-
-  def config
-    OpenIdConnectProvider.columns.map(&:name).filter { |n| !n.start_with?('client__') && n != 'profile_url' }.map do |n|
-      [n, send(n)]
-    end.push(['client_options', client_config]).to_h
-  end
-
-  def client_config
-    OpenIdConnectProvider.columns.map(&:name).filter { |n| n.start_with?('client__') }.to_h do |n|
-      [n.sub('client__', ''), send(n)]
-    end
-  end
 end

@@ -41,6 +41,10 @@ namespace :fablab do
         User.all.each(&:generate_auth_migration_token)
       end
 
+      # write the configuration to file
+      require 'provider_config'
+      ProviderConfig.write_active_provider
+
       # ask the user to restart the application
       next if Rails.env.test?
 
@@ -70,6 +74,12 @@ namespace :fablab do
     desc 'display the current active authentication provider'
     task current: :environment do
       puts "Current active authentication provider: #{AuthProvider.active.name}"
+    end
+
+    desc 'write the provider config to a configuration file'
+    task write_provider: :environment do
+      require 'provider_config'
+      ProviderConfig.write_active_provider
     end
   end
 end

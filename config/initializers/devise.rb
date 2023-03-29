@@ -227,17 +227,23 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', :scope => 'user,public_repo'
-  Rails.application.reloader.to_prepare do
-    active_provider = AuthProvider.active
-    if active_provider.providable_type == OAuth2Provider.name
+  active_provider = Rails.configuration.auth_provider
+  unless active_provider.nil?
+    # noinspection RubyCaseWithoutElseBlockInspection
+    case active_provider.providable_type
+    when 'OAuth2Provider'
       require_relative '../../lib/omni_auth/oauth2'
-      config.omniauth OmniAuth::Strategies::SsoOauth2Provider.name.to_sym,
+      config.omniauth active_provider.strategy_name.to_sym,
                       active_provider.providable.client_id,
-                      active_provider.providable.client_secret
-    elsif active_provider.providable_type == OpenIdConnectProvider.name
+                      active_provider.providable.client_secret,
+                      strategy_class: OmniAuth::Strategies::SsoOauth2Provider
+
+    when 'OpenIdConnectProvider'
       require_relative '../../lib/omni_auth/openid_connect'
-      config.omniauth OmniAuth::Strategies::SsoOpenidConnectProvider.name.to_sym,
-                      active_provider.providable.config
+      config.omniauth active_provider.strategy_name.to_sym,
+                      active_provider.oidc_config.merge(
+                        strategy_class: OmniAuth::Strategies::SsoOpenidConnectProvider
+                      )
     end
   end
 

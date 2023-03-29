@@ -22,8 +22,10 @@
 - Fill the holes in the logical sequence of invoices references with nil invoices
 - Updated the invoices chaining method with a more flexible model
 - Fix a bug: broken display after a plan category was deleted
-- [TODO DEPLOY] `rails fablab:restore_order_number` THEN `rails fablab:fix_references`
 - Fix a security issue: updated json5 to 2.2.2 to fix [CVE-2022-46175](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-46175)
+- [TODO DEPLOY] `\curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/scripts/mount-auth-provider.sh | bash`
+- [TODO DEPLOY] `rails fablab:auth:write_provider`
+- [TODO DEPLOY] `rails fablab:restore_order_number` THEN `rails fablab:fix_references`
 
 ## v5.9.1 2023 March 22
 

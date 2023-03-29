@@ -249,6 +249,9 @@ unless DatabaseProvider.count.positive?
     provider.providable = db_provider
     provider.status = 'active'
     provider.save
+
+    require 'provider_config'
+    ProviderConfig.write_active_provider
   end
 end
 
