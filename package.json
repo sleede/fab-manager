@@ -176,6 +176,7 @@
     "sortablejs": "^1.15.0",
     "style-loader": "^3.3.1",
     "summernote": "0.8.18",
+    "terser": "^5.7.2",
     "terser-webpack-plugin": "5",
     "twitter-fetcher": "^18.0.2",
     "typescript": "^4.6.3",
