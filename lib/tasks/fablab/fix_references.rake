@@ -40,7 +40,7 @@ namespace :fablab do
       counter = 1
       missing_references.each_pair do |date, numbers|
         numbers.reverse_each.with_index do |number, index|
-          puts "#{counter} / #{total}"
+          print "#{counter} / #{total}\r"
           invoice = Invoice.new(
             total: 0,
             invoicing_profile: user.invoicing_profile,
@@ -61,6 +61,7 @@ namespace :fablab do
           counter += 1
         end
       end
+      print "\n"
     end
   end
 
