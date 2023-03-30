@@ -13,7 +13,7 @@ class AuthProvider < ApplicationRecord
     end
 
     def strategy_name
-      "database-#{name.downcase.parameterize}"
+      'database-simpleauthprovider'
     end
   end
 

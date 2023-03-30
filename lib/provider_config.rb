@@ -3,7 +3,11 @@
 # Deals with the yml file keeping the configuration of the current authentication provider
 class ProviderConfig
   def initialize
-    @config = YAML.safe_load_file('config/auth_provider.yml').with_indifferent_access if File.exist?('config/auth_provider.yml')
+    @config = if File.exist?('config/auth_provider.yml')
+                YAML.safe_load_file('config/auth_provider.yml').with_indifferent_access
+              else
+                { providable_type: 'DatabaseProvider', name: 'DatabaseProvider::SimpleAuthProvider' }
+              end
   end
 
   def db
