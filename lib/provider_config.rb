@@ -6,7 +6,11 @@ class ProviderConfig
     @config = if File.exist?('config/auth_provider.yml')
                 YAML.safe_load_file('config/auth_provider.yml').with_indifferent_access
               else
-                { providable_type: 'DatabaseProvider', name: 'DatabaseProvider::SimpleAuthProvider' }
+                {
+                  providable_type: 'DatabaseProvider',
+                  name: 'DatabaseProvider::SimpleAuthProvider',
+                  strategy_name: 'database-simpleauthprovider'
+                }
               end
   end
 
