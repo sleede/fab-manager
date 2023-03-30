@@ -23,6 +23,8 @@
 - Fill the holes in the logical sequence of invoices references with nil invoices
 - Use a cached configuration file to read the authentification provider settings
 - Order numbers are now saved in database instead of generated on-the-fly
+- OpenAPI availabilities endpoint
+- Ability to filter OpenAPI reservations endpoint by availability_id
 - Support for ARM64 CPU architecture
 - Fix a bug: broken display after a plan category was deleted
 - Fix a security issue: updated json5 to 2.2.2 to fix [CVE-2022-46175](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-46175)

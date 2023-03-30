@@ -79,4 +79,14 @@ class OpenApi::ReservationsTest < ActionDispatch::IntegrationTest
     assert_not_empty reservations[:reservations]
     assert_equal [2], reservations[:reservations].pluck(:reservable_id).uniq
   end
+
+  test 'list reservations filtered by availability' do
+    get '/open_api/v1/reservations?availability_id=13', headers: open_api_headers(@token)
+    assert_response :success
+    assert_match Mime[:json].to_s, response.content_type
+
+    reservations = json_response(response.body)
+    assert_not_empty reservations[:reservations]
+    assert_equal [13], reservations[:reservations].pluck(:reserved_slots).flatten.pluck(:availability_id).uniq
+  end
 end

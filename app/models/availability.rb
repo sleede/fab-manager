@@ -113,6 +113,22 @@ class Availability < ApplicationRecord
     end
   end
 
+  # @return [Array<Integer>]
+  def available_ids
+    case available_type
+    when 'training'
+      training_ids
+    when 'machines'
+      machine_ids
+    when 'event'
+      [event&.id]
+    when 'space'
+      space_ids
+    else
+      []
+    end
+  end
+
   # check if the reservations are complete?
   # if a nb_total_places hasn't been defined, then places are unlimited
   # @return [Boolean]
