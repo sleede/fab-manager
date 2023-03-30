@@ -49,6 +49,7 @@ class ProviderConfig
     )
     file_path = Rails.root.join('config/auth_provider.yml')
     File.open(file_path, File::WRONLY | File::CREAT) do |file|
+      file.truncate(0)
       file.write(JSON.parse(data).to_yaml)
     end
   end

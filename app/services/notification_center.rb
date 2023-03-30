@@ -3,7 +3,7 @@
 # send notification to one or several receiver with a type, an attached object and an optional meta data
 class NotificationCenter
   class << self
-    def call(type: nil, receiver: nil, attached_object: nil)
+    def call(type: nil, receiver: nil, attached_object: nil, meta_data: {})
       return if prevent_notify?(type: type, attached_object: attached_object)
 
       receiver = [receiver] unless receiver.respond_to?(:each)

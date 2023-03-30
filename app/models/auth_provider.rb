@@ -45,7 +45,7 @@ class AuthProvider < ApplicationRecord
       provider = find_by(status: 'active')
       return local if provider.nil?
 
-      provider
+      provider.reload
     rescue ActiveRecord::StatementInvalid
       # we fall here on database creation because the table "active_providers" still does not exists at the moment
       local
