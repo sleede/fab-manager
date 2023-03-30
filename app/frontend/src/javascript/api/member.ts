@@ -1,6 +1,6 @@
 import apiClient from './clients/api-client';
 import { AxiosResponse } from 'axios';
-import { serialize } from 'object-to-formdata';
+import { serialize } from 'object-to-formdata-tz';
 import { User, MemberIndexFilter, UserRole } from '../models/user';
 
 export default class MemberAPI {
