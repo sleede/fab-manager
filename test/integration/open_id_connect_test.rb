@@ -13,6 +13,9 @@ class OpenIdConnectTest < ActionDispatch::IntegrationTest
   end
 
   test 'create and activate an OIDC provider' do
+    # clean any existing auth provider config
+    FileUtils.rm('config/auth_provider.yml', force: true)
+
     name = 'Sleede'
     post '/api/auth_providers',
          params: {
@@ -42,21 +45,13 @@ class OpenIdConnectTest < ActionDispatch::IntegrationTest
     assert_equal 'active', db_provider&.status
     assert_equal AuthProvider.active.id, db_provider&.id
 
-    # TODO, login with the SSO (need debugging)
-    ## The following doesn't work but I can't find out why... Maybe configuring Devise like this is not the right way,
-    ## but when testing the process with Capybara, I always fall with the message "Not found. Authentication passthru."
+    # Check the configuration file
+    assert File.exist?('config/auth_provider.yml')
+    config = ProviderConfig.new
+    assert_equal 'OpenIdConnectProvider', config.providable_type
+    assert_equal name, config.name
 
-    # Simulate an application restart (reload routes and change devise setup)
-    # logout
-    # Devise.setup do |config|
-    #   require_relative '../../lib/omni_auth/openid_connect'
-    #   config.omniauth OmniAuth::Strategies::SsoOpenidConnectProvider.name&.to_sym,
-    #                   db_provider&.providable&.config
-    # end
-    # User.devise :omniauthable, omniauth_providers: [db_provider&.strategy_name&.to_sym]
-    # Rails.application.reload_routes!
-    #
-    # === OR === (need to try)
-    # Rails.application.reloader.reload!
+    # clean test provider config
+    FileUtils.rm('config/auth_provider.yml', force: true)
   end
 end

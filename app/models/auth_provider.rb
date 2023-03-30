@@ -30,6 +30,7 @@ class AuthProvider < ApplicationRecord
   validates_with UserUidMappedValidator, if: -> { %w[OAuth2Provider OpenIdConnectProvider].include?(providable_type) }
 
   before_create :set_initial_state
+  after_update :write_config
 
   def build_providable(params)
     raise "Unknown providable_type: #{providable_type}" unless PROVIDABLE_TYPES.include?(providable_type)
@@ -113,5 +114,11 @@ class AuthProvider < ApplicationRecord
     # the initial state of a new AuthProvider will be 'pending', except if there is currently
     # no providers in the database, he we will be 'active' (see seeds.rb)
     self.status = 'pending' unless AuthProvider.count.zero?
+  end
+
+  def write_config
+    return unless status == 'active'
+
+    ProviderConfig.write_active_provider
   end
 end

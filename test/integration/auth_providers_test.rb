@@ -13,6 +13,9 @@ class AuthProvidersTest < ActionDispatch::IntegrationTest
   end
 
   test 'create an auth external provider and activate it' do
+    # clean any existing auth provider config
+    FileUtils.rm('config/auth_provider.yml', force: true)
+
     name = 'GitHub'
     post '/api/auth_providers',
          params: {
@@ -43,6 +46,15 @@ class AuthProvidersTest < ActionDispatch::IntegrationTest
     User.find_each do |u|
       assert_not_nil u.auth_token
     end
+
+    # Check the configuration file
+    assert File.exist?('config/auth_provider.yml')
+    config = ProviderConfig.new
+    assert_equal 'OAuth2Provider', config.providable_type
+    assert_equal name, config.name
+
+    # clean test provider config
+    FileUtils.rm('config/auth_provider.yml', force: true)
   end
 
   test 'update an authentication provider' do
