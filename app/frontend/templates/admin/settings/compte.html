@@ -52,6 +52,17 @@
       </div>
     </div>
     <div class="row">
+      <h3 class="m-l" translate>{{ 'app.admin.settings.family_account' }}</h3>
+      <p class="alert alert-warning m-h-md" ng-bind-html="'app.admin.settings.family_account_info_html' | translate"></p>
+      <div class="col-md-6">
+        <boolean-setting name="'family_account'"
+                         settings="allSettings"
+                         label="'app.admin.settings.enable_family_account' | translate"
+                         on-success="onSuccess"
+                         on-error="onError">
+      </div>
+    </div>
+    <div class="row">
       <h3 class="m-l" translate>{{ 'app.admin.settings.captcha' }}</h3>
       <p class="alert alert-warning m-h-md" ng-bind-html="'app.admin.settings.captcha_info_html' | translate"></p>
       <div class="col-md-6">

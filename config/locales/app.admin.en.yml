@@ -1773,6 +1773,9 @@ en:
         extended_prices_in_same_day: "Extended prices in the same day"
         public_registrations: "Public registrations"
         show_username_in_admin_list: "Show the username in the list"
+        family_account: "family account"
+        family_account_info_html: "By activating this option, you offer your members the possibility to add their child(ren) to their own account. You can also request proof if you wish to validate them."
+        enable_family_account: "Enable the Family Account option"
         overlapping_options:
           training_reservations: "Trainings"
           machine_reservations: "Machines"

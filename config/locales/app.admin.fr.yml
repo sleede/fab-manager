@@ -1773,6 +1773,9 @@ fr:
         extended_prices_in_same_day: "Prix étendus le même jour"
         public_registrations: "Inscriptions publiques"
         show_username_in_admin_list: "Afficher le nom d'utilisateur dans la liste"
+        family_account: "Compte famille"
+        family_account_info_html: "En activant cette option, vous offrez à vos membres la possibilité d'ajouter sur leur propre compte leur(s) enfants. Vous pouvez aussi demander un justificatif si vous souhaitez les valider."
+        enable_family_account: "Activer l'option Compte Famille"
         overlapping_options:
           training_reservations: "Formations"
           machine_reservations: "Machines"

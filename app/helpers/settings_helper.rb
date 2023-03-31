@@ -167,6 +167,7 @@ module SettingsHelper
     user_validation_required
     user_validation_required_list
     show_username_in_admin_list
+    family_account
     store_module
     store_withdrawal_instructions
     store_hidden
