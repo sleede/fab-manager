@@ -30,7 +30,7 @@ class AuthProvider < ApplicationRecord
   validates_with UserUidMappedValidator, if: -> { %w[OAuth2Provider OpenIdConnectProvider].include?(providable_type) }
 
   before_create :set_initial_state
-  after_update :write_config
+  after_update :write_reload_config
 
   def build_providable(params)
     raise "Unknown providable_type: #{providable_type}" unless PROVIDABLE_TYPES.include?(providable_type)
@@ -116,9 +116,12 @@ class AuthProvider < ApplicationRecord
     self.status = 'pending' unless AuthProvider.count.zero?
   end
 
-  def write_config
+  def write_reload_config
     return unless status == 'active'
 
     ProviderConfig.write_active_provider
+    Rails.application.configure do
+      config.auth_provider = ProviderConfig.new
+    end
   end
 end
