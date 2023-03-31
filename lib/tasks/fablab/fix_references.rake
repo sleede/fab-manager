@@ -36,7 +36,7 @@ namespace :fablab do
       total = missing_references.values.filter(&:present?).flatten.count
       counter = 1
       missing_references.each_pair do |date, numbers|
-        numbers.reverse_each.with_index do |number, index|
+        numbers.uniq.sort.reverse_each.with_index do |number, index|
           print "#{counter} / #{total}\r"
           invoice = Invoice.new(
             total: 0,

@@ -35,13 +35,27 @@ class Invoices::NumberService
       pattern = pattern(date, setting)
       pattern = pattern.gsub(/([SXR]\[[^\]]+\])+/, '%')
       if pattern.match?(/n+/)
-        pattern = pattern.gsub(/n+(?![^\[]*\])/) do |match|
+        pattern = pattern.gsub(/n+/) do |match|
           pad_and_truncate(number, match.to_s.length)
         end
+        pattern = pattern.gsub(/[YMD]+/) { |match| '_' * match.to_s.length }
       else
-        start_idx = pattern.index(/y+|m+|d+/)
-        end_idx = pattern.rindex(/y+|m+|d+/)
-        pattern[start_idx..end_idx] = pad_and_truncate(number, end_idx - start_idx + 1)
+        case pattern
+        when /y+/
+          pattern = pattern.gsub(/y+/) do |match|
+            pad_and_truncate(number, match.to_s.length)
+          end
+          pattern = pattern.gsub(/[MD]+/) { |match| '_' * match.to_s.length }
+        when /m+/
+          pattern = pattern.gsub(/m+/) do |match|
+            pad_and_truncate(number, match.to_s.length)
+          end
+          pattern = pattern.gsub(/D+/) { |match| '_' * match.to_s.length }
+        when /d+/
+          pattern = pattern.gsub(/d+/) do |match|
+            pad_and_truncate(number, match.to_s.length)
+          end
+        end
       end
       pattern = PaymentDocumentService.send(:replace_date_pattern, pattern, date)
 

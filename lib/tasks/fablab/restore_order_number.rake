@@ -29,11 +29,14 @@ namespace :fablab do
         end
       end
     end
-    print "\n"
+    print "\nRestoring the store orders numbers...\n"
     Order.where(reference: nil).order(id: :asc).find_each do |order|
       order.update(reference: PaymentDocumentService.generate_order_number(order))
     end
-    Invoice.where(order_number: nil).order(id: :asc).find_each do |invoice|
+    puts 'Filling the gaps for invoices numbers...'
+    max = Invoice.where(order_number: nil).count
+    Invoice.where(order_number: nil).order(id: :asc).find_each.with_index do |invoice, index|
+      print "Processing: #{index} / #{max}\r"
       next unless invoice.payment_schedule_item.nil?
 
       unless invoice.order.nil?
@@ -43,12 +46,14 @@ namespace :fablab do
 
       invoice.update(order_number: PaymentDocumentService.generate_order_number(invoice))
     end
+    puts 'Restoring the payment schedules numbers...'
     PaymentSchedule.order(id: :asc).find_each do |schedule|
       schedule.update(order_number: PaymentDocumentService.generate_order_number(schedule))
       schedule.ordered_items.each do |item|
         item.invoice&.update(order_number: schedule.order_number)
       end
     end
+    puts 'Restoring the refund invoices numbers...'
     Avoir.where(order_number: nil).order(id: :asc).find_each do |refund|
       next if refund.invoice.nil?
 
