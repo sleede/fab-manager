@@ -1783,6 +1783,9 @@ fr:
         projects_list_date_filters_presence: "Presence of date filters on projects list"
         project_categories_filter_placeholder: "Placeholder for categories filter in project gallery"
         project_categories_wording: "Wording used to replace \"Categories\" on public pages"
+        family_account: "Compte famille"
+        family_account_info_html: "En activant cette option, vous offrez à vos membres la possibilité d'ajouter sur leur propre compte leur(s) enfants. Vous pouvez aussi demander un justificatif si vous souhaitez les valider."
+        enable_family_account: "Activer l'option Compte Famille"
         overlapping_options:
           training_reservations: "Formations"
           machine_reservations: "Machines"
