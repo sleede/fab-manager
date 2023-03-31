@@ -17,20 +17,17 @@ namespace :fablab do
         number = Invoices::NumberService.number(invoice)
         next if number == 1
 
-        previous = Invoice.where('created_at < :date', date: db_time(invoice.created_at))
-                          .order(created_at: :desc)
-                          .limit(1)
-                          .first
-        previous_number = Invoices::NumberService.number(previous)
-        next if previous_number.nil? || previous_number == number - 1
+        previous_number = number - 1
+        loop do
+          break if previous_number.zero?
 
-        missing_references[invoice.created_at] ||= []
+          previous_invoice = Invoices::NumberService.find_by_number(previous_number, date: invoice.created_at)
+          break if previous_invoice.present?
 
-        # ignore numbers of already existing invoices
-        (previous_number + 1...number).to_a.each do |num|
-          next unless Invoices::NumberService.find_by_number(num, date: invoice.created_at).nil?
+          missing_references[invoice.created_at] ||= []
+          missing_references[invoice.created_at].push(previous_number)
 
-          missing_references[invoice.created_at].push(num)
+          previous_number -= 1
         end
       end
 

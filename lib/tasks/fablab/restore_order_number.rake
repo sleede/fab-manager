@@ -10,7 +10,7 @@ namespace :fablab do
     ]
     max_id = ActiveRecord::Base.connection.execute('SELECT max(id) as max_id FROM invoices').first['max_id']
     Invoice.order(id: :asc).find_each do |invoice|
-      puts "Processing: #{invoice.id} / #{max_id}"
+      print "Processing: #{invoice.id} / #{max_id}\r"
       next unless File.exist?(invoice.file)
 
       found = false
@@ -29,6 +29,7 @@ namespace :fablab do
         end
       end
     end
+    print "\n"
     Order.where(reference: nil).order(id: :asc).find_each do |order|
       order.update(reference: PaymentDocumentService.generate_order_number(order))
     end
