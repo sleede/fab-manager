@@ -34,30 +34,19 @@ class Invoices::NumberService
 
       pattern = pattern(date, setting)
       pattern = pattern.gsub(/([SXR]\[[^\]]+\])+/, '%')
-      if pattern.match?(/n+/)
-        pattern = pattern.gsub(/n+/) do |match|
-          pad_and_truncate(number, match.to_s.length)
-        end
+      case pattern
+      when /n+/
         pattern = pattern.gsub(/[YMD]+/) { |match| '_' * match.to_s.length }
-      else
-        case pattern
-        when /y+/
-          pattern = pattern.gsub(/y+/) do |match|
-            pad_and_truncate(number, match.to_s.length)
-          end
-          pattern = pattern.gsub(/[MD]+/) { |match| '_' * match.to_s.length }
-        when /m+/
-          pattern = pattern.gsub(/m+/) do |match|
-            pad_and_truncate(number, match.to_s.length)
-          end
-          pattern = pattern.gsub(/D+/) { |match| '_' * match.to_s.length }
-        when /d+/
-          pattern = pattern.gsub(/d+/) do |match|
-            pad_and_truncate(number, match.to_s.length)
-          end
-        end
+      when /y+/
+        pattern = pattern.gsub(/[MD]+/) { |match| '_' * match.to_s.length }
+      when /m+/
+        pattern = pattern.gsub(/D+/) { |match| '_' * match.to_s.length }
       end
       pattern = PaymentDocumentService.send(:replace_date_pattern, pattern, date)
+
+      pattern = pattern.gsub(/n+|y+|m+|d+/) do |match|
+        pad_and_truncate(number, match.to_s.length)
+      end
 
       field = setting == 'invoice_reference' ? 'reference' : 'order_number'
       field = 'reference' if klass == Order

@@ -13,13 +13,18 @@ namespace :fablab do
 
       # browse invoices to list missing reference
       puts 'Computing missing references...'
-      not_closed(Invoice).order(created_at: :desc).each do |invoice|
+      not_closed(Invoice).find_each do |invoice|
         number = Invoices::NumberService.number(invoice)
         next if number == 1
 
+        previous = Invoice.where('created_at < :date', date: db_time(invoice.created_at))
+                          .order(created_at: :desc)
+                          .limit(1)
+                          .first
+        previous_saved_number = Invoices::NumberService.number(previous)
         previous_number = number - 1
         loop do
-          break if previous_number.zero?
+          break if previous_number.zero? || previous_number == previous_saved_number
 
           previous_invoice = Invoices::NumberService.find_by_number(previous_number, date: invoice.created_at)
           break if previous_invoice.present?
@@ -36,7 +41,7 @@ namespace :fablab do
       total = missing_references.values.filter(&:present?).flatten.count
       counter = 1
       missing_references.each_pair do |date, numbers|
-        numbers.uniq.sort.reverse_each.with_index do |number, index|
+        numbers.each_with_index do |number, index|
           print "#{counter} / #{total}\r"
           invoice = Invoice.new(
             total: 0,

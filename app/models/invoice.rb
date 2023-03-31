@@ -191,7 +191,7 @@ class Invoice < PaymentDocument
   end
 
   def paid_by_card?
-    !payment_gateway_object.nil? && payment_method == 'card'
+    payment_method == 'card'
   end
 
   def paid_by_wallet?
