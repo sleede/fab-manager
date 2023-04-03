@@ -21,7 +21,7 @@
 - Updated omniauth_openid_connect to 0.6
 - Updated the invoices chaining method with a more flexible model
 - Fill the holes in the logical sequence of invoices references with nil invoices
-- Use a cached configuration file to read the authentification provider settings
+- Use a cached configuration file to read the authentication provider settings
 - Order numbers are now saved in database instead of generated on-the-fly
 - OpenAPI availabilities endpoint
 - Ability to filter OpenAPI reservations endpoint by availability_id
