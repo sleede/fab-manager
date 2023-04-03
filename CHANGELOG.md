@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+## v6.0.1 2023 April 03
+
 - Fix a bug: unable to write the configuration of the auth provider
 
 ## v6.0.0 2023 April 03
