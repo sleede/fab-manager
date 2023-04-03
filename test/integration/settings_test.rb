@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'test_helper'
+
 class SettingsTest < ActionDispatch::IntegrationTest
   # Called before every test method runs. Can be used
   # to set up fixture information.
@@ -16,7 +18,7 @@ class SettingsTest < ActionDispatch::IntegrationTest
           }
         }
     assert_equal 200, response.status
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
     resp = json_response(response.body)
     assert_equal 'fablab_name', resp[:setting][:name]
     assert_equal 'Test Fablab', resp[:setting][:value]
@@ -37,14 +39,14 @@ class SettingsTest < ActionDispatch::IntegrationTest
           }
         }
     assert_equal 422, response.status
-    assert_match /Name is not included in the list/, response.body
+    assert_match(/Name is not included in the list/, response.body)
   end
 
   test 'show setting' do
     get '/api/settings/fablab_name'
 
     assert_equal 200, response.status
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
     resp = json_response(response.body)
     assert_equal 'fablab_name', resp[:setting][:name], 'wrong parameter name'
     assert_equal 'Fab Lab de La Casemate', resp[:setting][:value], 'wrong parameter value'

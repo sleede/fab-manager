@@ -5,7 +5,7 @@ http_interactions:
     uri: https://api.stripe.com/v1/payment_methods
     body:
       encoding: UTF-8
-      string: type=card&card[number]=4242424242424242&card[exp_month]=4&card[exp_year]=2023&card[cvc]=314
+      string: type=card&card[number]=4242424242424242&card[exp_month]=4&card[exp_year]=2024&card[cvc]=314
     headers:
       User-Agent:
       - Stripe/v1 RubyBindings/5.29.0
@@ -13,14 +13,12 @@ http_interactions:
       - Bearer sk_test_testfaketestfaketestfake
       Content-Type:
       - application/x-www-form-urlencoded
-      X-Stripe-Client-Telemetry:
-      - '{"last_request_metrics":{"request_id":"req_amT9NxCRaztTRy","request_duration_ms":1}}'
       Stripe-Version:
       - '2019-08-14'
       X-Stripe-Client-User-Agent:
-      - '{"bindings_version":"5.29.0","lang":"ruby","lang_version":"2.6.10 p210 (2022-04-12)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
-        version 6.0.12-arch1-1 (linux@archlinux) (gcc (GCC) 12.2.0, GNU ld (GNU Binutils)
-        2.39.0) #1 SMP PREEMPT_DYNAMIC Thu, 08 Dec 2022 11:03:38 +0000","hostname":"Sylvain-desktop"}'
+      - '{"bindings_version":"5.29.0","lang":"ruby","lang_version":"3.2.1 p31 (2023-02-08)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 6.2.5-arch1-1 (linux@archlinux) (gcc (GCC) 12.2.1 20230201, GNU ld
+        (GNU Binutils) 2.40) #1 SMP PREEMPT_DYNAMIC Sat, 11 Mar 2023 14:28:13 +0000","hostname":"Sylvain-desktop"}'
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -33,7 +31,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Thu, 22 Dec 2022 10:09:41 GMT
+      - Mon, 27 Mar 2023 07:58:29 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -53,11 +51,11 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Idempotency-Key:
-      - d9ca78cb-ea0a-4ed1-a984-940ce3e62de7
+      - 652a03e5-1c3f-4641-9791-7667a9348880
       Original-Request:
-      - req_DNouBb0WOLWrs9
+      - req_qtg1gz6QhbwWR6
       Request-Id:
-      - req_DNouBb0WOLWrs9
+      - req_qtg1gz6QhbwWR6
       Stripe-Should-Retry:
       - 'false'
       Stripe-Version:
@@ -68,7 +66,7 @@ http_interactions:
       encoding: UTF-8
       string: |-
         {
-          "id": "pm_1MHlia2sOmf47Nz9eMYr41dZ",
+          "id": "pm_1MqAwj2sOmf47Nz9Wozdxx5g",
           "object": "payment_method",
           "billing_details": {
             "address": {
@@ -92,7 +90,7 @@ http_interactions:
             },
             "country": "US",
             "exp_month": 4,
-            "exp_year": 2023,
+            "exp_year": 2024,
             "fingerprint": "o52jybR7bnmNn6AT",
             "funding": "credit",
             "generated_from": null,
@@ -108,11 +106,11 @@ http_interactions:
             },
             "wallet": null
           },
-          "created": 1671703781,
+          "created": 1679903909,
           "customer": null,
           "livemode": false,
           "metadata": {},
           "type": "card"
         }
-  recorded_at: Thu, 22 Dec 2022 10:09:41 GMT
-recorded_with: VCR 6.0.0
+  recorded_at: Mon, 27 Mar 2023 07:58:29 GMT
+recorded_with: VCR 6.1.0

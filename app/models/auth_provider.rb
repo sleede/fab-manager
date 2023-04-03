@@ -11,6 +11,10 @@ class AuthProvider < ApplicationRecord
     def name
       'DatabaseProvider::SimpleAuthProvider'
     end
+
+    def strategy_name
+      'database-simpleauthprovider'
+    end
   end
 
   PROVIDABLE_TYPES = %w[DatabaseProvider OAuth2Provider OpenIdConnectProvider].freeze
@@ -26,6 +30,7 @@ class AuthProvider < ApplicationRecord
   validates_with UserUidMappedValidator, if: -> { %w[OAuth2Provider OpenIdConnectProvider].include?(providable_type) }
 
   before_create :set_initial_state
+  after_update :write_reload_config
 
   def build_providable(params)
     raise "Unknown providable_type: #{providable_type}" unless PROVIDABLE_TYPES.include?(providable_type)
@@ -41,7 +46,7 @@ class AuthProvider < ApplicationRecord
       provider = find_by(status: 'active')
       return local if provider.nil?
 
-      provider
+      provider.reload
     rescue ActiveRecord::StatementInvalid
       # we fall here on database creation because the table "active_providers" still does not exists at the moment
       local
@@ -109,5 +114,14 @@ class AuthProvider < ApplicationRecord
     # the initial state of a new AuthProvider will be 'pending', except if there is currently
     # no providers in the database, he we will be 'active' (see seeds.rb)
     self.status = 'pending' unless AuthProvider.count.zero?
+  end
+
+  def write_reload_config
+    return unless status == 'active'
+
+    ProviderConfig.write_active_provider
+    Rails.application.configure do
+      config.auth_provider = ProviderConfig.new
+    end
   end
 end

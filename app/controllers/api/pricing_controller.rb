@@ -3,7 +3,7 @@
 # @deprecated
 # <b>DEPRECATED:</b> Please use <tt>API::PriceController</tt> instead.
 # API Controller for managing Plans prices
-class API::PricingController < API::ApiController
+class API::PricingController < API::APIController
   include ApplicationHelper
 
   before_action :authenticate_user!, except: %i[index update]

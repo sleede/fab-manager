@@ -40,8 +40,13 @@ class SubscriptionExtensionAfterReservationTest < ActiveSupport::TestCase
   end
 
   test "not eligible if user doesn't have subscription" do
-    @user.subscriptions.destroy_all
-    assert_not Subscriptions::ExtensionAfterReservation.new(@reservation_training).eligible_to_extension?
+    user = users(:user2) # no subscriptions
+    reservation_training = Reservation.new(
+      statistic_profile: user.statistic_profile,
+      reservable: @training,
+      slots_reservations: [@slot_reservation_training]
+    )
+    assert_not Subscriptions::ExtensionAfterReservation.new(reservation_training).eligible_to_extension?
   end
 
   test 'not eligible if subscription is expired' do

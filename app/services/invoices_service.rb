@@ -129,11 +129,11 @@ class InvoicesService
                          "- #{I18n.l slot.end_at, format: :hour_minute}"
                      else
                        "#{I18n.t('events.from_STARTDATE_to_ENDDATE',
-                                 STARTDATE: I18n.l(slot.start_at.to_date, format: :long),
-                                 ENDDATE: I18n.l(slot.end_at.to_date, format: :long))} " \
+                                 **{ STARTDATE: I18n.l(slot.start_at.to_date, format: :long),
+                                     ENDDATE: I18n.l(slot.end_at.to_date, format: :long) })} " \
                          "#{I18n.t('events.from_STARTTIME_to_ENDTIME',
-                                   STARTTIME: I18n.l(slot.start_at, format: :hour_minute),
-                                   ENDTIME: I18n.l(slot.end_at, format: :hour_minute))}"
+                                   **{ STARTTIME: I18n.l(slot.start_at, format: :hour_minute),
+                                       ENDTIME: I18n.l(slot.end_at, format: :hour_minute) })}"
                      end
 
       price_slot = payment_details[:elements][:slots].detect { |p_slot| p_slot[:start_at].to_time.in_time_zone == slot[:start_at] }
@@ -191,7 +191,7 @@ class InvoicesService
 
     invoice.invoice_items.push InvoiceItem.new(
       amount: payment_details[:elements][:pack],
-      description: I18n.t('invoices.pack_item', COUNT: pack.prepaid_pack.minutes / 60, ITEM: pack.prepaid_pack.priceable.name),
+      description: I18n.t('invoices.pack_item', **{ COUNT: pack.prepaid_pack.minutes / 60, ITEM: pack.prepaid_pack.priceable.name }),
       object: pack,
       main: main
     )

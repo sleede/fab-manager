@@ -11,7 +11,7 @@ class NotificationsTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_equal 200, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check the list items are ok
     # ! Only works if notifications fixtures for this user are < NOTIFICATIONS_PER_PAGE (See NotificationsController#index)
@@ -29,7 +29,7 @@ class NotificationsTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_equal 200, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check the list items are ok
     notifications_total = json_response(response.body)[:totals][:total]
@@ -51,7 +51,7 @@ class NotificationsTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_equal 200, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check the list items are ok
     # Beware that the order of last unread notifications is descending,
@@ -76,7 +76,7 @@ class NotificationsTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_equal 200, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check the list items are ok
     updated_notification = json_response(response.body)

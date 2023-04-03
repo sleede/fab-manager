@@ -25,7 +25,7 @@ class PrepaidPacksTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_equal 201, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check the correct prepaid pack was created
     res = json_response(response.body)
@@ -52,7 +52,7 @@ class PrepaidPacksTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_equal 200, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check the prepaid pack was updated
     res = json_response(response.body)
@@ -65,7 +65,7 @@ class PrepaidPacksTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_equal 200, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check the list items are ok
     pack = json_response(response.body)

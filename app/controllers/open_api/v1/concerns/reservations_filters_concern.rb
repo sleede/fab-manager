@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Filter the list of reservations by the given parameters
-module ReservationsFiltersConcern
+module OpenAPI::V1::Concerns::ReservationsFiltersConcern
   extend ActiveSupport::Concern
 
   included do
@@ -43,6 +43,15 @@ module ReservationsFiltersConcern
       return reservations if filters[:reservable_id].blank?
 
       reservations.where(reservable_id: may_array(filters[:reservable_id]))
+    end
+
+    # @param reservations [ActiveRecord::Relation<Reservation>]
+    # @param filters [ActionController::Parameters]
+    def filter_by_availability_id(reservations, filters)
+      return reservations if filters[:availability_id].blank?
+
+      reservations.joins(:slots_reservations, :slots)
+                  .where(slots_reservations: { slots: { availability_id: may_array(filters[:availability_id]) } })
     end
 
     # @param type [String]

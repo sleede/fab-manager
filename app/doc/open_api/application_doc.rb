@@ -19,7 +19,7 @@
 #   end
 #
 class OpenAPI::ApplicationDoc
-  extend OpenAPI::ApiDoc
+  extend OpenAPI::APIDoc
 
   class << self
     # Stores provided resource description
@@ -53,7 +53,7 @@ class OpenAPI::ApplicationDoc
     # @return [Hash]
     #
     def docs
-      @_docs ||= {}
+      @docs ||= {}
     end
 
     def define_param_group(param_group_name, &block)
@@ -61,7 +61,7 @@ class OpenAPI::ApplicationDoc
     end
 
     def param_groups
-      @_param_groups ||= {}
+      @param_groups ||= {}
     end
 
     # Applies all defined DSL to provided controller class

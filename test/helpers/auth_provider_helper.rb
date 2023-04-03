@@ -41,7 +41,7 @@ module AuthProviderHelper
         issuer: 'https://sso.sleede.dev/auth/realms/master',
         discovery: true,
         client_auth_method: 'basic',
-        scope: %w[openid profile email toto],
+        scope: %w[openid profile email],
         prompt: 'consent',
         send_scope_to_token_endpoint: true,
         profile_url: 'https://sso.sleede.dev/auth/realms/master/account/',

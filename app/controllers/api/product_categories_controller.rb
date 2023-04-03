@@ -2,7 +2,7 @@
 
 # API Controller for resources of type ProductCategory
 # ProductCategories are used to group Products
-class API::ProductCategoriesController < API::ApiController
+class API::ProductCategoriesController < API::APIController
   before_action :authenticate_user!, except: :index
   before_action :set_product_category, only: %i[update destroy position]
 

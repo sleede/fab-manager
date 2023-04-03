@@ -89,13 +89,17 @@ namespace :fablab do
 
     desc 'save the footprint original data'
     task save_footprint_data: :environment do
-      [Invoice, InvoiceItem, HistoryValue, PaymentSchedule, PaymentScheduleItem].each do |klass|
-        klass.all.each do |item|
-          FootprintDebug.create!(
-            footprint: item.footprint,
-            data: FootprintService.footprint_data(klass, item),
-            klass: klass
+      [Invoice, InvoiceItem, HistoryValue, PaymentSchedule, PaymentScheduleItem, PaymentScheduleObject].each do |klass|
+        next if klass == PaymentScheduleObject && !ActiveRecord::Base.connection.table_exists?(PaymentScheduleObject.arel_table)
+
+        order = klass == HistoryValue ? :created_at : :id
+        previous = nil
+        klass.order(order).find_each do |item|
+          created = ChainedElement.create!(
+            element: item,
+            previous: previous
           )
+          previous = created
         end
       end
     end

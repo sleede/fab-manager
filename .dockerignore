@@ -1,5 +1,6 @@
 # Ignore bundler config.
 config/database.yml
+config/auth_provider.yml
 
 # Ignore database files.
 postgresql

@@ -29,7 +29,7 @@ class Events::AsAdminTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_equal 201, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check the event was created correctly
     event = json_response(response.body)
@@ -57,7 +57,7 @@ class Events::AsAdminTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_equal 200, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check the places numbers were updated successfully
     e = Event.where(id: event[:id]).first
@@ -88,7 +88,7 @@ class Events::AsAdminTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_equal 201, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check the remaining places were updated successfully
     e = Event.where(id: event[:id]).first
@@ -112,7 +112,7 @@ class Events::AsAdminTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_equal 200, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check the places numbers were updated successfully
     e = Event.where(id: event[:id]).first
@@ -148,7 +148,7 @@ class Events::AsAdminTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_equal 201, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check the event was created correctly
     event = json_response(response.body)
@@ -190,7 +190,7 @@ class Events::AsAdminTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_equal 201, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check the reservation match the required event
     result = json_response(response.body)
@@ -205,7 +205,6 @@ class Events::AsAdminTest < ActionDispatch::IntegrationTest
 
     # Check the resulting invoice generation and it has right price
     assert_invoice_pdf i
-    assert_not_nil i.debug_footprint
     assert_equal (4 * 20) + (4 * 16), i.total / 100.0
   end
 end

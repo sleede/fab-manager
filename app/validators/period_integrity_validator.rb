@@ -6,7 +6,7 @@ class PeriodIntegrityValidator < ActiveModel::Validator
     invoices = record.invoices.includes(:invoice_items)
 
     invoices.each do |i|
-      record.errors["invoice_#{i.reference}".to_sym] << I18n.t('errors.messages.invalid_footprint') unless i.check_footprint
+      record.errors.add("invoice_#{i.reference}".to_sym, I18n.t('errors.messages.invalid_footprint')) unless i.check_footprint
     end
   end
 end

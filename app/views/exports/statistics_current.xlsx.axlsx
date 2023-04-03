@@ -6,13 +6,13 @@ bold = wb.styles.add_style b: true
 header = wb.styles.add_style b: true, bg_color: Stylesheet.primary.upcase.gsub('#', 'FF'), fg_color: 'FFFFFFFF'
 date = wb.styles.add_style format_code: Rails.application.secrets.excel_date_format
 
-wb.add_worksheet(name: ExcelService.name_safe(@index.label)) do |sheet|
+wb.add_worksheet(name: ExcelService.name_safe(index.label)) do |sheet|
   ## heading stats for the current page
-  sheet.add_row [t('export.entries'), @results['hits']['total']], style: [bold, nil], types: %i[string integer]
-  sheet.add_row [t('export.revenue'), @results['aggregations']['total_ca']['value']], style: [bold, nil], types: %i[string float] if @index.ca
-  sheet.add_row [t('export.average_age'), @results['aggregations']['average_age']['value']], style: [bold, nil], types: %i[string float]
-  unless @type.simple
-    sheet.add_row ["#{t('export.total')} #{@type.label}", @results['aggregations']['total_stat']['value']],
+  sheet.add_row [t('export.entries'), results['hits']['total']], style: [bold, nil], types: %i[string integer]
+  sheet.add_row [t('export.revenue'), results['aggregations']['total_ca']['value']], style: [bold, nil], types: %i[string float] if index.ca
+  sheet.add_row [t('export.average_age'), results['aggregations']['average_age']['value']], style: [bold, nil], types: %i[string float]
+  unless type.simple
+    sheet.add_row ["#{t('export.total')} #{type.label}", results['aggregations']['total_stat']['value']],
                   style: [bold, nil],
                   types: %i[string integer]
   end
@@ -22,22 +22,22 @@ wb.add_worksheet(name: ExcelService.name_safe(@index.label)) do |sheet|
   # heading labels
   columns = [t('export.date'), t('export.user'), t('export.email'), t('export.phone'), t('export.gender'), t('export.age'),
              t('export.type')]
-  columns.push @type.label unless @type.simple
-  @fields.each do |f|
+  columns.push type.label unless type.simple
+  fields.each do |f|
     columns.push f.label
   end
-  columns.push t('export.revenue') if @index.ca
+  columns.push t('export.revenue') if index.ca
   sheet.add_row columns, style: header
 
   # data rows
-  @results['hits']['hits'].each do |hit|
-    user = get_item(@users, hit['_source']['userId'])
-    subtype = get_item(@subtypes, hit['_source']['subType'], 'key')
-    data, styles, types = statistics_line(hit, user, @type, subtype, date)
-    @fields.each do |f|
+  results['hits']['hits'].each do |hit|
+    user = get_item(users, hit['_source']['userId'])
+    subtype = get_item(subtypes, hit['_source']['subType'], 'key')
+    data, styles, types = statistics_line(hit, user, type, subtype, date)
+    fields.each do |f|
       format_xlsx_cell(hit['_source'][f.key], data, styles, types, source_data_type: f.data_type, date_format: date)
     end
-    add_ca_cell(@index, hit, data, styles, types)
+    add_ca_cell(index, hit, data, styles, types)
 
     sheet.add_row data, style: styles, types: types
   end

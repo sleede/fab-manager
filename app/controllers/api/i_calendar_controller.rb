@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # API Controller for resources of type iCalendar
-class API::ICalendarController < API::ApiController
+class API::ICalendarController < API::APIController
   before_action :authenticate_user!, except: %i[index events]
   before_action :set_i_cal, only: [:destroy]
   respond_to :json

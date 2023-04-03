@@ -13,7 +13,7 @@ pt:
   activerecord:
     attributes:
       product:
-        amount: "The price"
+        amount: "O preço"
         slug: "URL"
   errors:
     #CarrierWave
@@ -43,12 +43,12 @@ pt:
       invalid_duration: "A duração permitida deve ter entre 1 dia e 1 ano. Sua menstruação tem %{DAYS} dias."
       must_be_in_the_past: "O período deve ser estritamente anterior à data de hoje."
       registration_disabled: "Registo está desabilitado"
-      undefined_in_store: "must be defined to make the product available in the store"
-      gateway_error: "Payement gateway error: %{MESSAGE}"
+      undefined_in_store: "deve ser definido para tornar o produto disponível na loja"
+      gateway_error: "Erro do gateway de pagamento: %{MESSAGE}"
       gateway_amount_too_small: "Payments under %{AMOUNT} are not supported. Please order directly at the reception."
       gateway_amount_too_large: "Payments above %{AMOUNT} are not supported. Please order directly at the reception."
-      product_in_use: "This product have already been ordered"
-      slug_already_used: "is already used"
+      product_in_use: "Este produto já foi comprado"
+      slug_already_used: "já está em uso"
   coupon:
     code_format_error: "only caps letters, numbers, and dashes are allowed"
   apipie:
@@ -102,6 +102,7 @@ pt:
     training_reservation_DESCRIPTION: "Reserva de treinamneto - %{DESCRIPTION}"
     event_reservation_DESCRIPTION: "Reserva de evento - %{DESCRIPTION}"
     from_payment_schedule: "Due %{NUMBER} out of %{TOTAL}, from %{DATE}. Repayment schedule %{SCHEDULE}"
+    null_invoice: "Invoice at nil, billing jump following a malfunction of the Fab Manager software"
     full_price_ticket:
       one: "Um ticket de preço cheio"
       other: "%{count} tickets de preço cheio"
@@ -510,29 +511,29 @@ pt:
     reduced_fare_if_you_are_under_25_student_or_unemployed: "Tarifa reduzida se tiver menos de 25 anos, estudante ou desempregado."
   cart_items:
     free_extension: "Extensão gratuita de uma assinatura, até %{DATE}"
-    must_be_after_expiration: "The new expiration date must be set after the current expiration date"
-    group_subscription_mismatch: "Your group mismatch with your subscription. Please report this error."
+    must_be_after_expiration: "A nova data de expiração deve ser definida após a data de expiração atual"
+    group_subscription_mismatch: "Seu grupo não coincide com sua assinatura. Por favor, reporte este erro."
   statistic_profile:
     birthday_in_past: "A data de nascimento deve estar no passado"
   order:
-    please_contact_FABLAB: "Please contact us for withdrawal instructions."
+    please_contact_FABLAB: "Por favor, entre em contato conosco para instruções de retirada."
   cart_item_validation:
-    slot: "The slot doesn't exist"
-    availability: "The availaility doesn't exist"
-    full: "The slot is already fully reserved"
-    deadline: "You can't reserve a slot %{MINUTES} minutes prior to its start"
-    limit_reached: "You have reached the booking limit of %{HOURS}H per day for the %{RESERVABLE}, for your current subscription. Please adjust your reservation."
-    restricted: "This availability is restricted for subscribers"
-    plan: "This subscription plan is disabled"
-    plan_group: "This subscription plan is reserved for members of group %{GROUP}"
-    reserved: "This slot is already reserved"
-    pack: "This prepaid pack is disabled"
-    pack_group: "This prepaid pack is reserved for members of group %{GROUP}"
-    space: "This space is disabled"
-    machine: "This machine is disabled"
-    reservable: "This machine is not reservable"
+    slot: "O slot não existe"
+    availability: "A disponibilidade não existe"
+    full: "O slot já está totalmente reservado"
+    deadline: "Você não pode reservar um slot %{MINUTES} minutos antes do seu início"
+    limit_reached: "Você atingiu o limite de reserva de %{HOURS}H por dia para %{RESERVABLE}, para sua assinatura atual. Por favor, ajuste sua reserva."
+    restricted: "Essa disponibilidade é restrita para assinantes"
+    plan: "Este plano de assinatura está desativado"
+    plan_group: "Este plano de assinatura é reservado para membros do grupo %{GROUP}"
+    reserved: "Este slot já está reservado"
+    pack: "Este pacote pré-pago está desativado"
+    pack_group: "Esse pacote pré-pago é reservado para membros do grupo %{GROUP}"
+    space: "Este espaço está desativado"
+    machine: "Esta máquina está desativada"
+    reservable: "Esta máquina não é reservável"
   cart_validation:
-    select_user: "Please select a user before continuing"
+    select_user: "Por favor, selecione um usuário antes de continuar"
   settings:
     locked_setting: "a configuração está bloqueada."
     about_title: "\"Sobre\" título da página"
@@ -698,7 +699,7 @@ pt:
     trainings_invalidation_rule_period: "Grace period before invalidating a training"
   #statuses of projects
   statuses:
-    new: "New"
-    pending: "Pending"
-    done: "Done"
-    abandoned: "Abandoned"
+    new: "Novo"
+    pending: "Pendente"
+    done: "Concluído"
+    abandoned: "Abandonado"

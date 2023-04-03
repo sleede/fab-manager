@@ -114,7 +114,7 @@ class SettingService
       return unless (%w[openlab_app_id openlab_app_secret] & settings.map(&:name)).count.positive? &&
                     Setting.get('openlab_app_id').present? && Setting.get('openlab_app_secret').present?
 
-      Project.all.each(&:openlab_create)
+      Project.find_each(&:openlab_create)
     end
 
     # automatically validate the admins

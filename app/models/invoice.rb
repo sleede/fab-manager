@@ -13,7 +13,8 @@ class Invoice < PaymentDocument
   belongs_to :wallet_transaction
   belongs_to :coupon
 
-  has_one :avoir, class_name: 'Invoice', dependent: :destroy, inverse_of: :avoir
+  has_one :chained_element, as: :element, dependent: :restrict_with_exception
+  has_one :avoir, class_name: 'Avoir', dependent: :destroy, inverse_of: :invoice
   has_one :payment_schedule_item, dependent: :restrict_with_error
   has_one :payment_gateway_object, as: :item, dependent: :destroy
   has_one :order, dependent: :restrict_with_error
@@ -22,9 +23,10 @@ class Invoice < PaymentDocument
   has_many :accounting_lines, dependent: :destroy
 
   delegate :user, to: :invoicing_profile
+  delegate :footprint, to: :chained_element
 
   before_create :add_environment
-  after_create :update_reference, :chain_record
+  after_create :generate_order_number, :update_reference, :chain_record
   after_update :log_changes
   after_commit :generate_and_send_invoice, on: [:create], if: :persisted?
 
@@ -49,17 +51,20 @@ class Invoice < PaymentDocument
     "#{prefix}-#{id}_#{created_at.strftime('%d%m%Y')}.pdf"
   end
 
-  def order_number
-    return order.reference unless order.nil? || order.reference.nil?
+  def generate_order_number
+    self.order_number = order.reference and return unless order.nil? || order.reference.nil?
 
-    return payment_schedule_item.payment_schedule.order_number if !payment_schedule_item.nil? && !payment_schedule_item.first?
+    if !payment_schedule_item.nil? && !payment_schedule_item.first?
+      self.order_number = payment_schedule_item.payment_schedule.order_number
+      return
+    end
 
-    PaymentDocumentService.generate_order_number(self)
+    super
   end
 
   # for debug & used by rake task "fablab:maintenance:regenerate_invoices"
   def regenerate_invoice_pdf
-    pdf = ::PDF::Invoice.new(self).render
+    pdf = ::Pdf::Invoice.new(self).render
     File.binwrite(file, pdf)
   end
 
@@ -186,7 +191,7 @@ class Invoice < PaymentDocument
   end
 
   def paid_by_card?
-    !payment_gateway_object.nil? && payment_method == 'card'
+    payment_method == 'card'
   end
 
   def paid_by_wallet?

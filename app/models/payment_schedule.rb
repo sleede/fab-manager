@@ -11,14 +11,17 @@ class PaymentSchedule < PaymentDocument
   belongs_to :statistic_profile
   belongs_to :operator_profile, class_name: 'InvoicingProfile'
 
+  has_one :chained_element, as: :element, dependent: :restrict_with_exception
   has_many :payment_schedule_items, dependent: :destroy
   has_many :payment_gateway_objects, as: :item, dependent: :destroy
   has_many :payment_schedule_objects, dependent: :destroy
 
   before_create :add_environment
-  after_create :update_reference, :chain_record
+  after_create :generate_order_number, :update_reference, :chain_record
   after_commit :generate_and_send_document, on: [:create], if: :persisted?
   after_commit :generate_initial_invoice, on: [:create], if: :persisted?
+
+  delegate :footprint, to: :chained_element
 
   def file
     dir = "payment_schedules/#{invoicing_profile.id}"
@@ -36,10 +39,6 @@ class PaymentSchedule < PaymentDocument
                  Setting.get('payment_schedule_prefix')
                end
     "#{prefix}-#{id}_#{created_at.strftime('%d%m%Y')}.pdf"
-  end
-
-  def order_number
-    ordered_items.first&.invoice&.order_number || PaymentDocumentService.generate_order_number(self)
   end
 
   ##
@@ -69,7 +68,7 @@ class PaymentSchedule < PaymentDocument
 
   # for debug & used by rake task "fablab:maintenance:regenerate_schedules"
   def regenerate_pdf
-    pdf = ::PDF::PaymentSchedule.new(self).render
+    pdf = ::Pdf::PaymentSchedule.new(self).render
     File.binwrite(file, pdf)
   end
 

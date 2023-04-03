@@ -2,7 +2,7 @@
 
 # API Controller for resources of type Category
 # Categories are used to classify Events
-class API::CategoriesController < API::ApiController
+class API::CategoriesController < API::APIController
   before_action :authenticate_user!, except: [:index]
   before_action :set_category, only: %i[show update destroy]
 
@@ -21,7 +21,6 @@ class API::CategoriesController < API::ApiController
       render json: @category.errors, status: :unprocessable_entity
     end
   end
-
 
   def update
     authorize Category

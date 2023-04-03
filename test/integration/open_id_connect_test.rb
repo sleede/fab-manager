@@ -9,10 +9,13 @@ class OpenIdConnectTest < ActionDispatch::IntegrationTest
   setup do
     @admin = User.find_by(username: 'admin')
     login_as(@admin, scope: :user)
-    Fablab::Application.load_tasks if Rake::Task.tasks.empty?
+    FabManager::Application.load_tasks if Rake::Task.tasks.empty?
   end
 
   test 'create and activate an OIDC provider' do
+    # clean any existing auth provider config
+    FileUtils.rm('config/auth_provider.yml', force: true)
+
     name = 'Sleede'
     post '/api/auth_providers',
          params: {
@@ -22,7 +25,7 @@ class OpenIdConnectTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_equal 201, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check the provider was correctly created
     db_provider = OpenIdConnectProvider.includes(:auth_provider).where('auth_providers.name': name).first&.auth_provider
@@ -42,18 +45,13 @@ class OpenIdConnectTest < ActionDispatch::IntegrationTest
     assert_equal 'active', db_provider&.status
     assert_equal AuthProvider.active.id, db_provider&.id
 
-    # TODO, login with the SSO (need debugging)
-    ## The following doesn't work but I can't find out why... Maybe configuring Devise like this is not the right way,
-    ## but when testing the process with Capybara, I always fall with the message "Not found. Authentication passthru."
+    # Check the configuration file
+    assert File.exist?('config/auth_provider.yml')
+    config = ProviderConfig.new
+    assert_equal 'OpenIdConnectProvider', config.providable_type
+    assert_equal name, config.name
 
-    # Simulate an application restart (reload routes and change devise setup)
-    # logout
-    # Devise.setup do |config|
-    #   require_relative '../../lib/omni_auth/openid_connect'
-    #   config.omniauth OmniAuth::Strategies::SsoOpenidConnectProvider.name&.to_sym,
-    #                   db_provider&.providable&.config
-    # end
-    # User.devise :omniauthable, omniauth_providers: [db_provider&.strategy_name&.to_sym]
-    # Rails.application.reload_routes!
+    # clean test provider config
+    FileUtils.rm('config/auth_provider.yml', force: true)
   end
 end

@@ -4,9 +4,9 @@ require_relative 'concerns/accountings_filters_concern'
 
 # authorized 3rd party softwares can fetch the accounting lines through the OpenAPI
 class OpenAPI::V1::AccountingController < OpenAPI::V1::BaseController
-  extend OpenAPI::ApiDoc
+  extend OpenAPI::APIDoc
   include Rails::Pagination
-  include AccountingsFiltersConcern
+  include OpenAPI::V1::Concerns::AccountingsFiltersConcern
   expose_doc
 
   def index

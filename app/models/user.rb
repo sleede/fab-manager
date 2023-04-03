@@ -176,15 +176,6 @@ class User < ApplicationRecord
     add_role(:member) if roles.blank?
   end
 
-  def cached_has_role?(role)
-    roles = Rails.cache.fetch(
-      roles_for: { object_id: object_id },
-      expires_in: 1.day,
-      race_condition_ttl: 2.seconds
-    ) { roles.map(&:name) }
-    roles.include?(role.to_s)
-  end
-
   def cgu_must_accept
     errors.add(:cgu, I18n.t('activerecord.errors.messages.empty')) if cgu == '0'
   end

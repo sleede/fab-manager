@@ -11,7 +11,7 @@ class ImportTest < ActionDispatch::IntegrationTest
   end
 
   test 'bulk import members through CSV' do
-    bulk_csv = fixture_file_upload('files/members.csv', 'text/csv')
+    bulk_csv = fixture_file_upload('members.csv', 'text/csv')
     post '/api/imports/members',
          params: {
            import_members: bulk_csv,
@@ -19,7 +19,7 @@ class ImportTest < ActionDispatch::IntegrationTest
          }, headers: default_headers
 
     assert_equal 201, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check that the returned import was created
     import = json_response(response.body)

@@ -2,7 +2,7 @@
 
 # OpenAPI controller for the invoices
 class OpenAPI::V1::InvoicesController < OpenAPI::V1::BaseController
-  extend OpenAPI::ApiDoc
+  extend OpenAPI::APIDoc
   include Rails::Pagination
   expose_doc
 

@@ -7,10 +7,13 @@ class InvoiceItem < Footprintable
   has_one :invoice_item, dependent: :destroy # associates invoice_items of an invoice to invoice_items of an Avoir
   has_one :payment_gateway_object, as: :item, dependent: :destroy
 
+  has_one :chained_element, as: :element, dependent: :restrict_with_exception
   belongs_to :object, polymorphic: true
 
   after_create :chain_record
   after_update :log_changes
+
+  delegate :footprint, to: :chained_element
 
   def amount_after_coupon
     # deduct coupon discount

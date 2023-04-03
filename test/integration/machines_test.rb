@@ -15,13 +15,13 @@ class MachinesTest < ActionDispatch::IntegrationTest
            machine: {
              name: name,
              machine_image_attributes: {
-               attachment: fixture_file_upload('/files/machines/Laser_cutting_machine.jpg')
+               attachment: fixture_file_upload('machines/Laser_cutting_machine.jpg')
              },
              description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore...',
              spec: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium...',
              machine_files_attributes: [
-               { attachment: fixture_file_upload('/files/document.pdf', 'application/pdf', true) },
-               { attachment: fixture_file_upload('/files/document2.pdf', 'application/pdf', true) }
+               { attachment: fixture_file_upload('document.pdf', 'application/pdf', true) },
+               { attachment: fixture_file_upload('document2.pdf', 'application/pdf', true) }
              ],
              disabled: false,
              machine_category_id: 1
@@ -31,7 +31,7 @@ class MachinesTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_equal 201, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check the machine was correctly created
     db_machine = Machine.where(name: name).first
@@ -59,7 +59,7 @@ class MachinesTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_equal 200, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check the machine was correctly updated
     db_machine = Machine.find(3)

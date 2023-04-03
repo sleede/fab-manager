@@ -116,8 +116,8 @@ order_activity_21:
   operator_profile_id:
   activity_type: paid
   note:
-  created_at: <%= DateTime.current.utc.change({:hour => 10}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  updated_at: <%= DateTime.current.utc.change({:hour => 10}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  created_at: <%= DateTime.current.utc.change({:hour => 10}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  updated_at: <%= DateTime.current.utc.change({:hour => 10}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
 order_activity_22:
   id: 22
   order_id: 15
@@ -125,5 +125,5 @@ order_activity_22:
   activity_type: ready
   note: "<p>Votre <em>commande</em> est prête, merci de venir la récupérer <strong>jeudi</strong>
     <u>après 14 h</u>.</p>"
-  created_at: <%= DateTime.current.utc.change({:hour => 15}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  updated_at: <%= DateTime.current.utc.change({:hour => 15}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  created_at: <%= DateTime.current.utc.change({:hour => 15}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  updated_at: <%= DateTime.current.utc.change({:hour => 15}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>

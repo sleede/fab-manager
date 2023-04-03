@@ -4,7 +4,7 @@ invoice_1:
   total: 10000
   created_at: '2012-03-12 11:03:31.651441'
   updated_at: '2021-05-27 09:26:26.481266'
-  reference: 1604001/VL
+  reference: 1203001/VL
   payment_method: card
   avoir_date:
   invoice_id:
@@ -14,18 +14,18 @@ invoice_1:
   wallet_amount:
   wallet_transaction_id:
   coupon_id:
-  footprint: e4edca90b74e7d1a6f59cd62a9434027ab8cec8f3f71737938123686afaa53f6
   environment: test
   invoicing_profile_id: 3
   operator_profile_id: 3
   statistic_profile_id: 3
+  order_number: 000001-03-12
 
 invoice_2:
   id: 2
   total: 2000
   created_at: '2012-03-12 13:40:22.342717'
   updated_at: '2021-05-27 09:26:26.485839'
-  reference: '1604002'
+  reference: '1203002'
   payment_method:
   avoir_date:
   invoice_id:
@@ -35,11 +35,11 @@ invoice_2:
   wallet_amount:
   wallet_transaction_id:
   coupon_id:
-  footprint: 52f5c2cb9e58d0ad421c93437f57fe2dd364ca412c85775cd59e7510031f1091
   environment: test
   invoicing_profile_id: 4
   operator_profile_id: 1
   statistic_profile_id: 4
+  order_number: 000002-03-12
 
 invoice_3:
   id: 3
@@ -56,18 +56,18 @@ invoice_3:
   wallet_amount:
   wallet_transaction_id:
   coupon_id:
-  footprint: 2396b77776092cf80e3b2c1effef36e655af63a52a781eb73f27d9f44e546bae
   environment: test
   invoicing_profile_id: 7
   operator_profile_id: 1
   statistic_profile_id: 7
+  order_number: 000003-06-15
 
 invoice_4:
   id: 4
   total: 0
   created_at: '2016-04-05 08:35:52.931187'
   updated_at: '2021-05-27 09:26:26.494005'
-  reference: '1203002'
+  reference: '1604002'
   payment_method:
   avoir_date:
   invoice_id:
@@ -77,18 +77,18 @@ invoice_4:
   wallet_amount:
   wallet_transaction_id:
   coupon_id:
-  footprint: c0809383b304668ac5226fb502f92eb26c51701380ea9ba9526b80b0295b603d
   environment: test
   invoicing_profile_id: 7
   operator_profile_id: 1
   statistic_profile_id: 7
+  order_number: 000004-04-16
 
 invoice_5:
   id: 5
   total: 1500
   created_at: '2016-04-05 08:36:46.853368'
   updated_at: '2021-05-27 09:26:26.498207'
-  reference: '1506031'
+  reference: '1604031'
   payment_method:
   avoir_date:
   invoice_id:
@@ -98,11 +98,11 @@ invoice_5:
   wallet_amount:
   wallet_transaction_id:
   coupon_id:
-  footprint: f5d538feef1e83fd8f2b1431e7797e1d267f034e3612bdd9725a58e7ba947b27
   environment: test
   invoicing_profile_id: 3
   operator_profile_id: 1
   statistic_profile_id: 3
+  order_number: 000005-04-16
 
 invoice_6:
   id: 6
@@ -119,11 +119,11 @@ invoice_6:
   wallet_amount:
   wallet_transaction_id:
   coupon_id:
-  footprint: eb22a99b5fec426dda0214bbaca3ea938fabe42c73bbf1f86712f67a5f61d236
   environment: test
   invoicing_profile_id: 8
   operator_profile_id: 1
   statistic_profile_id: 8
+  order_number: 000006-01-21
 invoice_5811:
   id: 5811
   total: 4500
@@ -139,11 +139,11 @@ invoice_5811:
   wallet_amount:
   wallet_transaction_id:
   coupon_id:
-  footprint: '094590df6330de6a2b5d2ce7230673c7178f2639ca8ceb51ba272795349fff95'
   environment: development
   invoicing_profile_id: 3
   operator_profile_id: 1
   statistic_profile_id: 3
+  order_number: 000009-08-22
 invoice_5812:
   id: 5812
   total: 6000
@@ -159,11 +159,11 @@ invoice_5812:
   wallet_amount:
   wallet_transaction_id:
   coupon_id:
-  footprint: ea5cc57a8af956f9a3e66ec1f9bd7fe5fe51e1220955cacb11a3cc99d2e6aa54
   environment: development
   invoicing_profile_id: 7
   operator_profile_id: 1
   statistic_profile_id: 7
+  order_number: 005877-09-22
 invoice_5816:
   id: 5816
   total: 319
@@ -179,11 +179,11 @@ invoice_5816:
   wallet_amount:
   wallet_transaction_id:
   coupon_id:
-  footprint: ca8879f07cf1bd29500a9df29ce110843fb204ab0da8140bb4c6e8e908a65e0b
   environment: development
   invoicing_profile_id: 4
   operator_profile_id: 4
   statistic_profile_id: 4
+  order_number: 005888-10-22
 invoice_5817:
   id: 5817
   total: 1295
@@ -199,11 +199,11 @@ invoice_5817:
   wallet_amount:
   wallet_transaction_id:
   coupon_id: 30
-  footprint: 838ae505dfba54f6a69cd341abf8f97fd9370c2acb81e37c6e70d98049d80646
   environment: development
   invoicing_profile_id: 4
   operator_profile_id: 4
   statistic_profile_id: 4
+  order_number: 005890-10-22
 invoice_5818:
   id: 5818
   total: 1000
@@ -219,11 +219,11 @@ invoice_5818:
   wallet_amount:
   wallet_transaction_id:
   coupon_id:
-  footprint: 93db8c6ded7066a71927b6950cf5a9ea69aff25036df3a5a4259615347f2c8b2
   environment: development
   invoicing_profile_id: 4
   operator_profile_id: 4
   statistic_profile_id: 4
+  order_number: 005892-10-22
 invoice_5819:
   id: 5819
   total: 4002
@@ -239,11 +239,11 @@ invoice_5819:
   wallet_amount:
   wallet_transaction_id:
   coupon_id:
-  footprint: bfd2f78a99aadd137f3f28fe8258a46ff8afa69b458f0a6f2dce1205fab22784
   environment: development
   invoicing_profile_id: 4
   operator_profile_id: 4
   statistic_profile_id: 4
+  order_number: 005894-10-22
 invoice_5820:
   id: 5820
   total: 12000
@@ -259,11 +259,11 @@ invoice_5820:
   wallet_amount:
   wallet_transaction_id:
   coupon_id:
-  footprint: db6a663a25e19229ee93868765e1463ec7bd7856b173c5dd326d70d98369cfc0
   environment: development
   invoicing_profile_id: 3
   operator_profile_id: 1
   statistic_profile_id: 3
+  order_number: 005882-09-22
 invoice_5821:
   id: 5821
   total: 12000
@@ -279,11 +279,11 @@ invoice_5821:
   wallet_amount:
   wallet_transaction_id:
   coupon_id:
-  footprint: 3ed9a13e5c7155bc3b186f3215b90345cc5520822728796e7c1c00ad5128ed01
   environment: development
   invoicing_profile_id: 2
   operator_profile_id: 1
   statistic_profile_id: 2
+  order_number: 005898-10-22
 invoice_5822:
   id: 5822
   total: 3000
@@ -299,8 +299,8 @@ invoice_5822:
   wallet_amount:
   wallet_transaction_id:
   coupon_id:
-  footprint: 63d069e72b4992244861e9450b0c3ba3b9b30638af972a631b81578091d2925d
   environment: development
   invoicing_profile_id: 2
   operator_profile_id: 1
   statistic_profile_id: 2
+  order_number: 005900-10-22

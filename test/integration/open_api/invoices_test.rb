@@ -12,7 +12,7 @@ class OpenApi::InvoicesTest < ActionDispatch::IntegrationTest
   test 'list invoices' do
     get '/open_api/v1/invoices', headers: open_api_headers(@token)
     assert_response :success
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     assert_not_empty json_response(response.body)[:invoices]
   end

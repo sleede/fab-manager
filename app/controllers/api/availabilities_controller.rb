@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # API Controller for resources of type Availability
-class API::AvailabilitiesController < API::ApiController
+class API::AvailabilitiesController < API::APIController
   before_action :authenticate_user!, except: [:public]
   before_action :set_availability, only: %i[show update reservations lock]
   before_action :set_operator_role, only: %i[machine spaces trainings]

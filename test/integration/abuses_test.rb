@@ -22,7 +22,7 @@ class AbusesTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_equal 201, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check the correct object was signaled
     abuse = json_response(response.body)
@@ -67,7 +67,7 @@ class AbusesTest < ActionDispatch::IntegrationTest
     get '/api/abuses'
     # Check response format & status
     assert_equal 200, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check the abuses
     abuses = json_response(response.body)

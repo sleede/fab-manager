@@ -2,7 +2,7 @@
 
 # authorized 3rd party softwares can manage the events through the OpenAPI
 class OpenAPI::V1::EventsController < OpenAPI::V1::BaseController
-  extend OpenAPI::ApiDoc
+  extend OpenAPI::APIDoc
   include Rails::Pagination
   expose_doc
 

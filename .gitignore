@@ -26,6 +26,7 @@
 # Ignore application configurations
 /config/application.yml
 /config/database.yml
+/config/auth_provider.yml
 .env
 
 *.DS_Store

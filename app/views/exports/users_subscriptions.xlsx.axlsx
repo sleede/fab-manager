@@ -15,7 +15,7 @@ wb.add_worksheet(name: ExcelService.name_safe(t('export_subscriptions.subscripti
   sheet.add_row columns, style: header
 
   # data rows
-  @subscriptions.each do |sub|
+  subscriptions.each do |sub|
     data = [
       sub.user&.id,
       sub.user&.profile&.full_name || t('export_subscriptions.deleted_user'),

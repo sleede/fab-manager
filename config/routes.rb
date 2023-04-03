@@ -4,7 +4,7 @@ require 'sidekiq_unique_jobs/web'
 require 'sidekiq-scheduler/web'
 
 Rails.application.routes.draw do
-  if AuthProvider.active.providable_type == DatabaseProvider.name
+  if Rails.configuration.auth_provider.providable_type == 'DatabaseProvider'
     # with local authentication we do not use omniAuth so we must differentiate the config
     devise_for :users, controllers: {
       registrations: 'registrations', sessions: 'sessions', confirmations: 'confirmations', passwords: 'passwords'

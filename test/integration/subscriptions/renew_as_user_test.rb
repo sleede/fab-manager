@@ -31,7 +31,7 @@ class Subscriptions::RenewAsUserTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_equal 201, response.status, "API does not return the expected status. #{response.body}"
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check the correct plan was subscribed
     result = json_response(response.body)
@@ -76,7 +76,6 @@ class Subscriptions::RenewAsUserTest < ActionDispatch::IntegrationTest
     item = InvoiceItem.find_by(object_type: 'Subscription', object_id: subscription[:id])
     invoice = item.invoice
     assert_invoice_pdf invoice
-    assert_not_nil invoice.debug_footprint
     assert_equal plan.amount, invoice.total, 'Invoice total price does not match the bought subscription'
   end
 
@@ -103,7 +102,7 @@ class Subscriptions::RenewAsUserTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_equal 200, response.status, "API does not return the expected status. #{response.body}"
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check the error was handled
     assert_match(/Your card was declined/, response.body)

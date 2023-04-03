@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # API Controller for resources of type User with role 'member'
-class API::MembersController < API::ApiController
+class API::MembersController < API::APIController
   before_action :authenticate_user!, except: [:last_subscribed]
   before_action :set_member, only: %i[update destroy merge complete_tour update_role validate]
   before_action :set_operator, only: %i[show update create merge validate]

@@ -15,14 +15,14 @@ class SpacesTest < ActionDispatch::IntegrationTest
            space: {
              name: name,
              space_image_attributes: {
-               attachment: fixture_file_upload('/files/spaces/Biology_laboratory.jpg')
+               attachment: fixture_file_upload('spaces/Biology_laboratory.jpg')
              },
              description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ante mi, porta ac dictum quis, feugiat...',
              characteristics: 'Sed fermentum ante ut elit lobortis, id auctor libero cursus. Sed augue lectus, mollis at luctus eu...',
              default_places: 6,
              space_files_attributes: [
-               { attachment: fixture_file_upload('/files/document.pdf', 'application/pdf', true) },
-               { attachment: fixture_file_upload('/files/document2.pdf', 'application/pdf', true) }
+               { attachment: fixture_file_upload('document.pdf', 'application/pdf', true) },
+               { attachment: fixture_file_upload('document2.pdf', 'application/pdf', true) }
              ],
              disabled: false
            }
@@ -31,7 +31,7 @@ class SpacesTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_equal 201, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check the space was correctly created
     db_space = Space.where(name: name).first
@@ -59,7 +59,7 @@ class SpacesTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_equal 200, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check the space was correctly updated
     db_space = Space.find(1)

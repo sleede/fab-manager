@@ -4,10 +4,10 @@ statistic_profile_prepaid_pack_1:
   prepaid_pack_id: 1
   statistic_profile_id: 10
   minutes_used: 600
-  expires_at: <%= 11.month.from_now.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  expires_at: <%= 11.month.from_now.utc.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
 
 statistic_profile_prepaid_pack_2:
   prepaid_pack_id: 1
   statistic_profile_id: 10
   minutes_used: 0
-  expires_at: <%= 12.month.from_now.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  expires_at: <%= 12.month.from_now.utc.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>

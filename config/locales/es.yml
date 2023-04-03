@@ -102,6 +102,7 @@ es:
     training_reservation_DESCRIPTION: "Reserva de curso - %{DESCRIPTION}"
     event_reservation_DESCRIPTION: "Reserva de evento - %{DESCRIPTION}"
     from_payment_schedule: "Due %{NUMBER} out of %{TOTAL}, from %{DATE}. Repayment schedule %{SCHEDULE}"
+    null_invoice: "Invoice at nil, billing jump following a malfunction of the Fab Manager software"
     full_price_ticket:
       one: "Una entrada de precio completo"
       other: "%{count} entradas de precio completo"

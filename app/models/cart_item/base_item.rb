@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require_relative 'cart_item'
-
 # This is an abstract class implemented by classes that can be added to the shopping cart
 class CartItem::BaseItem < ApplicationRecord
   self.abstract_class = true

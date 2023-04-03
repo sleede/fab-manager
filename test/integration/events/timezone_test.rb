@@ -31,7 +31,7 @@ class Events::TimezoneTest < ActionDispatch::IntegrationTest
                analytical_section: ''
              },
              event_image_attributes: {
-               attachment: fixture_file_upload('/files/event/Skateboard.jpg')
+               attachment: fixture_file_upload('event/Skateboard.jpg')
              }
            }
          }.to_json,
@@ -39,7 +39,7 @@ class Events::TimezoneTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_equal 201, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check the event was created correctly
     event = json_response(response.body)

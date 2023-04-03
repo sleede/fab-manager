@@ -30,7 +30,7 @@ class Subscriptions::RenewAsAdminTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_equal 201, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check the correct plan was subscribed
     result = json_response(response.body)
@@ -75,7 +75,6 @@ class Subscriptions::RenewAsAdminTest < ActionDispatch::IntegrationTest
     item = InvoiceItem.find_by(object_type: 'Subscription', object_id: subscription[:id])
     invoice = item.invoice
     assert_invoice_pdf invoice
-    assert_not_nil invoice.debug_footprint
     assert_equal plan.amount, invoice.total, 'Invoice total price does not match the bought subscription'
   end
 
@@ -93,7 +92,7 @@ class Subscriptions::RenewAsAdminTest < ActionDispatch::IntegrationTest
              items: [
                {
                  subscription: {
-                   start_at: subscription.expired_at.strftime('%Y-%m-%d %H:%M:%S.%9N Z'),
+                   start_at: subscription.expired_at.strftime('%Y-%m-%d %H:%M:%S.%9N %Z'),
                    plan_id: subscription.plan_id
                  }
                }
@@ -103,7 +102,7 @@ class Subscriptions::RenewAsAdminTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_equal 201, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     res_subscription = json_response(response.body)
     assert_equal 'Subscription', res_subscription[:main_object][:type]

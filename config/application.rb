@@ -19,69 +19,76 @@ require 'elasticsearch/persistence/model'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module Fablab
-  class Application < Rails::Application
-    require 'fab_manager'
+# module declaration
+module FabManager; end
 
-    # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 5.2
-    # prevent this new behavior with rails >= 5.0
-    # see https://edgeguides.rubyonrails.org/upgrading_ruby_on_rails.html#active-record-belongs-to-required-by-default-option
-    config.active_record.belongs_to_required_by_default = false
+# Fab-Manager is the FabLab management solution. It provides a comprehensive, web-based, open-source tool to simplify your
+# administrative tasks and your marker's projects.
+class FabManager::Application < Rails::Application
+  require 'fab_manager'
 
-    # Settings in config/environments/* take precedence over those specified here.
-    # Application configuration should go into files in config/initializers
-    # -- all .rb files in that directory are automatically loaded.
+  # Initialize configuration defaults for originally generated Rails version.
+  config.load_defaults 7.0
+  config.active_support.cache_format_version = 6.1
+  config.action_dispatch.cookies_serializer = :hybrid
+  config.active_record.verify_foreign_keys_for_fixtures = false
+  # prevent this new behavior with rails >= 5.0
+  # see https://edgeguides.rubyonrails.org/upgrading_ruby_on_rails.html#active-record-belongs-to-required-by-default-option
+  config.active_record.belongs_to_required_by_default = false
+  config.active_record.schema_format = :sql
 
-    # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
-    # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
-    config.time_zone = Rails.application.secrets.time_zone
+  config.active_record.yaml_column_permitted_classes = [Symbol, Date, Time]
 
-    config.to_prepare do
-      Devise::Mailer.layout 'notifications_mailer'
-    end
+  # Settings in config/environments/* take precedence over those specified here.
+  # Application configuration should go into files in config/initializers
+  # -- all .rb files in that directory are automatically loaded.
 
-    config.active_job.queue_adapter = :sidekiq
+  # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
+  # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
+  config.time_zone = Rails.application.secrets.time_zone
 
-    config.generators do |g|
-      g.orm :active_record
-      g.test_framework :mini_test
-    end
+  config.to_prepare do
+    Devise::Mailer.layout 'notifications_mailer'
+  end
 
-    if Rails.env.development?
-      config.web_console.whitelisted_ips << '192.168.0.0/16'
-      config.web_console.whitelisted_ips << '192.168.99.0/16' # docker
-      config.web_console.whitelisted_ips << '10.0.2.2' # vagrant
-    end
+  config.active_job.queue_adapter = :sidekiq
 
-    # load locales for subdirectories
-    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**/*.yml').to_s]
+  config.generators do |g|
+    g.orm :active_record
+    g.test_framework :mini_test
+  end
 
-    # enable the app to find locales in plugins locales directory
-    config.i18n.load_path += Dir["#{Rails.root}/plugins/*/config/locales/*.yml"]
+  # load locales for subdirectories
+  config.i18n.load_path += Dir[Rails.root.join('config/locales/**/*.yml').to_s]
 
-    # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
-    # the I18n.default_locale when a translation cannot be found).
-    config.i18n.fallbacks = true
+  # enable the app to find locales in plugins locales directory
+  config.i18n.load_path += Dir[Rails.root.join('plugins/*/config/locales/*.yml').to_s]
 
-    # enable the app to find views in plugins views directory
-    Dir["#{Rails.root}/plugins/*/views"].each do |path|
-      Rails.application.config.paths['app/views'] << path
-    end
+  # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
+  # the I18n.default_locale when a translation cannot be found).
+  config.i18n.fallbacks = true
 
-    # disable ANSI color escape codes in active_record if NO_COLOR is defined.
-    config.colorize_logging = ENV['NO_COLOR'] ? false : true
+  # enable the app to find views in plugins views directory
+  Dir[Rails.root.join('plugins/*/views').to_s].each do |path|
+    Rails.application.config.paths['app/views'] << path
+  end
 
-    FabManager.activate_plugins!
+  # disable ANSI color escape codes in active_record if NO_COLOR is defined.
+  config.colorize_logging = ENV['NO_COLOR'] ? false : true
 
-    config.action_view.sanitized_allowed_tags = %w(a acronym hr pre table b strong i em li ul ol h1 h2 h3 h4 h5 h6 blockquote br cite sub sup ins p image iframe style)
+  require 'provider_config'
+  config.auth_provider = ProviderConfig.new
 
-    config.after_initialize do
-      plugins = FabManager.plugins
-      plugins&.each(&:notify_after_initialize)
+  FabManager.activate_plugins!
 
-      require 'version'
-      Version.check
-    end
+  config.action_view.sanitized_allowed_tags = %w[a acronym hr pre table b strong i em li ul ol h1 h2 h3 h4 h5 h6 blockquote br cite sub sup ins p
+                                                 image iframe style]
+
+  config.after_initialize do
+    plugins = FabManager.plugins
+    plugins&.each(&:notify_after_initialize)
+
+    require 'version'
+    Version.check
   end
 end

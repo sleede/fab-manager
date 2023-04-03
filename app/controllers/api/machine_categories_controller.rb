@@ -2,7 +2,7 @@
 
 # API Controller for resources of type Machine Category
 # Categories are used to classify Machine
-class API::MachineCategoriesController < API::ApiController
+class API::MachineCategoriesController < API::APIController
   before_action :authenticate_user!, except: [:index]
   before_action :set_machine_category, only: %i[show update destroy]
 

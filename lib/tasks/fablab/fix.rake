@@ -291,7 +291,7 @@ namespace :fablab do
 
       InvoiceItem.where(object_type: 'Error').update_all(object_id: 0) # rubocop:disable Rails/SkipsModelValidations
 
-      Fablab::Application.load_tasks if Rake::Task.tasks.empty?
+      FabManager::Application.load_tasks if Rake::Task.tasks.empty?
       Rake::Task['fablab:chain:invoices_items'].invoke
     end
 

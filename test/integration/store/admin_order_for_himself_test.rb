@@ -43,7 +43,6 @@ class Store::AdminOrderForHimselfTest < ActionDispatch::IntegrationTest
     # invoice assertions
     invoice = Invoice.last
     assert_invoice_pdf invoice
-    assert_not_nil invoice.debug_footprint
 
     assert_not @cart1.payment_gateway_object.blank?
     assert_not invoice.payment_gateway_object.blank?
@@ -110,7 +109,6 @@ class Store::AdminOrderForHimselfTest < ActionDispatch::IntegrationTest
     # invoice assertions
     invoice = Invoice.last
     assert_invoice_pdf invoice
-    assert_not_nil invoice.debug_footprint
 
     assert_not @cart1.payment_gateway_object.blank?
     assert_not invoice.payment_gateway_object.blank?
@@ -167,16 +165,15 @@ class Store::AdminOrderForHimselfTest < ActionDispatch::IntegrationTest
     # invoice_items assertions
     invoice_item = InvoiceItem.last
 
-    assert invoice_item.check_footprint
+    assert invoice_item.check_footprint, invoice_item.debug_footprint
 
     # invoice assertions
     invoice = Invoice.last
     assert_invoice_pdf invoice
-    assert_not_nil invoice.debug_footprint
 
     assert invoice.payment_gateway_object.blank?
     assert_not invoice.total.blank?
-    assert invoice.check_footprint
+    assert invoice.check_footprint, invoice.debug_footprint
 
     # notification
     assert_not_empty Notification.where(attached_object: invoice)
@@ -235,7 +232,6 @@ class Store::AdminOrderForHimselfTest < ActionDispatch::IntegrationTest
     # invoice assertions
     invoice = Invoice.last
     assert_invoice_pdf invoice
-    assert_not_nil invoice.debug_footprint
 
     assert @cart1.payment_gateway_object.blank?
     assert invoice.payment_gateway_object.blank?

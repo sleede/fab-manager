@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # API Controller for various statistical resources (gateway to elasticsearch DB)
-class API::StatisticsController < API::ApiController
+class API::StatisticsController < API::APIController
   before_action :authenticate_user!
 
   def index

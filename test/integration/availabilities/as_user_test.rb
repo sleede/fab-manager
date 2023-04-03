@@ -20,7 +20,7 @@ class Availabilities::AsUserTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_equal 200, response.status
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check the correct availabilities was returned
     availabilities = json_response(response.body)

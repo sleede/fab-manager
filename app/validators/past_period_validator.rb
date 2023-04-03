@@ -5,8 +5,8 @@ class PastPeriodValidator < ActiveModel::Validator
   def validate(record)
     the_end = record.end_at
 
-    return if the_end.present? && the_end < Date.today
+    return if the_end.present? && the_end < Time.zone.today
 
-    record.errors[:end_at] << I18n.t('errors.messages.must_be_in_the_past')
+    record.errors.add(:end_at, I18n.t('errors.messages.must_be_in_the_past'))
   end
 end

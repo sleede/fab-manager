@@ -2,7 +2,7 @@
 
 # API Controller for resources of type ProfileCustomField
 # ProfileCustomFields are fields configured by an admin, added to the user's profile
-class API::ProfileCustomFieldsController < API::ApiController
+class API::ProfileCustomFieldsController < API::APIController
   before_action :authenticate_user!, except: :index
   before_action :set_profile_custom_field, only: %i[show update destroy]
 

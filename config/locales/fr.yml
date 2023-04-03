@@ -102,6 +102,7 @@ fr:
     training_reservation_DESCRIPTION: "Réservation Formation - %{DESCRIPTION}"
     event_reservation_DESCRIPTION: "Réservation Événement - %{DESCRIPTION}"
     from_payment_schedule: "Échéance %{NUMBER} sur %{TOTAL}, du %{DATE}. Échéancier de paiement %{SCHEDULE}"
+    null_invoice: "Facture à néant, saut de facturation suite à un dysfonctionnement du logiciel Fab Manager"
     full_price_ticket:
       one: "Une place plein tarif"
       other: "%{count} places plein tarif"

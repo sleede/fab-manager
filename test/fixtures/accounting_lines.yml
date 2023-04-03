@@ -5,7 +5,7 @@ accounting_line_43:
   date: '2012-03-12 11:03:31.651441'
   account_code: '5801'
   account_label: Payment by card
-  analytical_code: ''
+  analytical_code:
   invoice_id: 1
   invoicing_profile_id: 3
   debit: 10000
@@ -39,7 +39,7 @@ accounting_line_45:
   date: '2012-03-12 13:40:22.342717'
   account_code: '5803'
   account_label: Payment by other
-  analytical_code: ''
+  analytical_code:
   invoice_id: 2
   invoicing_profile_id: 4
   debit: 2000
@@ -73,7 +73,7 @@ accounting_line_47:
   date: '2015-06-10 11:20:01.341130'
   account_code: '5803'
   account_label: Payment by other
-  analytical_code: ''
+  analytical_code:
   invoice_id: 3
   invoicing_profile_id: 7
   debit: 3000
@@ -107,7 +107,7 @@ accounting_line_49:
   date: '2016-04-05 08:35:52.931187'
   account_code: '5803'
   account_label: Payment by other
-  analytical_code: ''
+  analytical_code:
   invoice_id: 4
   invoicing_profile_id: 7
   debit: 0
@@ -141,7 +141,7 @@ accounting_line_51:
   date: '2016-04-05 08:36:46.853368'
   account_code: '5803'
   account_label: Payment by other
-  analytical_code: ''
+  analytical_code:
   invoice_id: 5
   invoicing_profile_id: 3
   debit: 1500
@@ -175,7 +175,7 @@ accounting_line_53:
   date: '2021-01-04 14:51:21.616153'
   account_code: '5803'
   account_label: Payment by other
-  analytical_code: ''
+  analytical_code:
   invoice_id: 6
   invoicing_profile_id: 8
   debit: 3000
@@ -209,7 +209,7 @@ accounting_line_55:
   date: '2022-09-20 15:14:22.873707'
   account_code: '5803'
   account_label: Payment by other
-  analytical_code: ''
+  analytical_code:
   invoice_id: 5811
   invoicing_profile_id: 3
   debit: 4500
@@ -260,7 +260,7 @@ accounting_line_58:
   date: '2022-09-20 15:14:48.345927'
   account_code: '5803'
   account_label: Payment by other
-  analytical_code: ''
+  analytical_code:
   invoice_id: 5812
   invoicing_profile_id: 7
   debit: 6000
@@ -294,7 +294,7 @@ accounting_line_60:
   date: '2022-10-04 12:36:03.060832'
   account_code: '5801'
   account_label: Payment by card
-  analytical_code: ''
+  analytical_code:
   invoice_id: 5816
   invoicing_profile_id: 4
   debit: 319
@@ -345,7 +345,7 @@ accounting_line_63:
   date: '2022-10-04 13:54:42.975196'
   account_code: '5801'
   account_label: Payment by card
-  analytical_code: ''
+  analytical_code:
   invoice_id: 5817
   invoicing_profile_id: 4
   debit: 1295
@@ -396,7 +396,7 @@ accounting_line_66:
   date: '2022-10-04 14:04:12.742685'
   account_code: '5801'
   account_label: Payment by card
-  analytical_code: ''
+  analytical_code:
   invoice_id: 5818
   invoicing_profile_id: 4
   debit: 1000
@@ -430,7 +430,7 @@ accounting_line_68:
   date: '2022-10-04 14:17:52.854636'
   account_code: '5801'
   account_label: Payment by card
-  analytical_code: ''
+  analytical_code:
   invoice_id: 5819
   invoicing_profile_id: 4
   debit: 4002
@@ -481,7 +481,7 @@ accounting_line_71:
   date: '2022-10-04 14:25:37.291945'
   account_code: '5803'
   account_label: Payment by other
-  analytical_code: ''
+  analytical_code:
   invoice_id: 5820
   invoicing_profile_id: 3
   debit: 12000
@@ -515,7 +515,7 @@ accounting_line_73:
   date: '2022-10-04 14:32:28.204985'
   account_code: '5803'
   account_label: Payment by other
-  analytical_code: ''
+  analytical_code:
   invoice_id: 5821
   invoicing_profile_id: 2
   debit: 12000
@@ -549,7 +549,7 @@ accounting_line_75:
   date: '2022-10-04 14:35:40.584472'
   account_code: '5803'
   account_label: Payment by other
-  analytical_code: ''
+  analytical_code:
   invoice_id: 5822
   invoicing_profile_id: 2
   debit: 3000

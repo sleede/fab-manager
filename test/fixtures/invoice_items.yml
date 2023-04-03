@@ -7,7 +7,6 @@ invoice_item_1:
   updated_at: '2021-05-27 09:26:26.450083'
   description: Sleede - standard, association - month
   invoice_item_id:
-  footprint: d2b756f158d6332c32b7b262118f5bdcfd68221ab089c355e6776c1298d937b8
   object_type: Subscription
   object_id: 1
   main: true
@@ -20,7 +19,6 @@ invoice_item_2:
   description: Mensuel tarif réduit - étudiant, - de 25 ans, enseignant, demandeur
     d'emploi - month
   invoice_item_id:
-  footprint: f02559738cb3674e74021ac1894e512e1864eb9fc177e885283a214fa5e0dd74
   object_type: Subscription
   object_id: 2
   main: true
@@ -32,7 +30,6 @@ invoice_item_3:
   updated_at: '2021-05-27 09:26:26.465302'
   description: Mensuel - standard, association - month
   invoice_item_id:
-  footprint: e6141fbc1db017356f855ebc784cb2e084fbf82ed56a0dc295c8a39dcc2a0f92
   object_type: Subscription
   object_id: 3
   main: true
@@ -44,7 +41,6 @@ invoice_item_4:
   updated_at: '2021-05-27 09:26:26.468890'
   description: Formation Laser / Vinyle April 11, 2012 08:00 - 12:00 PM
   invoice_item_id:
-  footprint: b66ade050a2ef9ebb18067ac1af2828fec2077037100d7068481e00097af4bc0
   object_type: Reservation
   object_id: 1
   main: true
@@ -56,7 +52,6 @@ invoice_item_5:
   updated_at: '2021-05-27 09:26:26.472232'
   description: Imprimante 3D June 15, 2015 12:00 - 01:00 PM
   invoice_item_id:
-  footprint: a0f096de802df8d5708d4dcc23d7384ab95f246fb80e59564b2c3363db103b02
   object_type: Reservation
   object_id: 2
   main: true
@@ -68,7 +63,6 @@ invoice_item_6:
   updated_at: '2021-05-27 09:26:26.475460'
   description: Mensuel - standard, association - month
   invoice_item_id:
-  footprint: 88e73e7d2f29fe8f029a646a54e5e8884ddf9cd9b207544e9f3d18c70d181749
   object_type: Subscription
   object_id: 4
   main: true
@@ -80,7 +74,6 @@ invoice_item_11702:
   updated_at: '2022-09-20 15:14:23.180166'
   description: Tablette lamellé-collé x 1
   invoice_item_id:
-  footprint: 1d112a787e89d444f2817b909d7857a3a26fc2a3cd4c4404fb50bec282988a02
   object_type: OrderItem
   object_id: 1
   main: true
@@ -92,7 +85,6 @@ invoice_item_11703:
   updated_at: '2022-09-20 15:14:23.289957'
   description: Panneaux de MDF x 1
   invoice_item_id:
-  footprint: 67f143564abfeab7cb93988a02987a5a2b04a2632d0f9cfde61fa39c398cd02b
   object_type: OrderItem
   object_id: 2
   main: false
@@ -104,7 +96,6 @@ invoice_item_11704:
   updated_at: '2022-09-20 15:14:48.385139'
   description: Panneau de contre-plaqué x 4
   invoice_item_id:
-  footprint: ea51c614632c018f0fae53c2bf8503c71d18c082ae3246155971e19ac2db143a
   object_type: OrderItem
   object_id: 3
   main: true
@@ -116,7 +107,6 @@ invoice_item_11712:
   updated_at: '2022-10-04 12:36:03.282529'
   description: Filament PLA blanc x 1
   invoice_item_id:
-  footprint: 4c5c8a1d7884502ea7791aeed1701cf3761562855d51ed19396b344c665c308b
   object_type: OrderItem
   object_id: 16
   main: true
@@ -128,7 +118,6 @@ invoice_item_11713:
   updated_at: '2022-10-04 12:36:03.290235'
   description: Filament PLA bleu x 1
   invoice_item_id:
-  footprint: 12c1a2c7fdb0f4b35d0c24137e6e0bdbbb39fa5c6500aa7837c67f92084d5071
   object_type: OrderItem
   object_id: 17
   main: false
@@ -140,7 +129,6 @@ invoice_item_11714:
   updated_at: '2022-10-04 13:54:42.992564'
   description: Filament PLA blanc x 1
   invoice_item_id:
-  footprint: cdb07fe1f0b986b9a53b6ec71f91a96e8b8d438592e88fd0041133b2ab46c8ca
   object_type: OrderItem
   object_id: 18
   main: true
@@ -152,7 +140,6 @@ invoice_item_11715:
   updated_at: '2022-10-04 13:54:43.024326'
   description: Panneau de contre-plaqué x 1
   invoice_item_id:
-  footprint: 3ac08745b737bc370424ee9f1b68b421000eb98e0f3e65d7395d905d75de05c6
   object_type: OrderItem
   object_id: 19
   main: false
@@ -164,7 +151,6 @@ invoice_item_11716:
   updated_at: '2022-10-04 14:04:12.749266'
   description: Bulldozer x 1
   invoice_item_id:
-  footprint: 1f4b6489579d7f045c846b97bc8ed402ec91f6fd7a5c2fa93b74eb7d21c7de39
   object_type: OrderItem
   object_id: 20
   main: true
@@ -176,7 +162,6 @@ invoice_item_11717:
   updated_at: '2022-10-04 14:17:52.871262'
   description: Sticker Hello x 2
   invoice_item_id:
-  footprint: 0fbecff886d9c2ffc332def13fa2c8869be8a40d2be7a3126a77974bd920c563
   object_type: OrderItem
   object_id: 21
   main: true
@@ -188,7 +173,6 @@ invoice_item_11718:
   updated_at: '2022-10-04 14:17:52.878780'
   description: Tablette lamellé-collé x 1
   invoice_item_id:
-  footprint: ad160b9357518b31f63661fe38998b8c1d97fda61bc744876826ae638a8142a0
   object_type: OrderItem
   object_id: 22
   main: false
@@ -200,7 +184,6 @@ invoice_item_11719:
   updated_at: '2022-10-04 14:25:37.322782'
   description: Tablette lamellé-collé x 3
   invoice_item_id:
-  footprint: 409a6f0b9f67510038a8b9a407db6d09b97f12d7169d6f6f121eedb2941d1bfc
   object_type: OrderItem
   object_id: 11
   main: true
@@ -212,7 +195,6 @@ invoice_item_11720:
   updated_at: '2022-10-04 14:32:28.226556'
   description: Tablette lamellé-collé x 3
   invoice_item_id:
-  footprint: 733610b9c8e33f6a63f497d867d40386c623f12a526814d09d88a96f53741b7b
   object_type: OrderItem
   object_id: 23
   main: true
@@ -224,7 +206,6 @@ invoice_item_11721:
   updated_at: '2022-10-04 14:35:40.608505'
   description: Panneau de 3 plis mélèze x 1
   invoice_item_id:
-  footprint: c1ad8c20d080ebc8267ff0d1b668feb8c989c2561be75d311f29f49a03405895
   object_type: OrderItem
   object_id: 24
   main: true

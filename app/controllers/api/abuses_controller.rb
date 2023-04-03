@@ -2,7 +2,7 @@
 
 # API Controller for resources of type Abuse.
 # Typical action is an user reporting an abuse on a project
-class API::AbusesController < API::ApiController
+class API::AbusesController < API::APIController
   before_action :authenticate_user!, except: :create
   before_action :set_abuse, only: %i[destroy]
 

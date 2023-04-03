@@ -113,6 +113,22 @@ class Availability < ApplicationRecord
     end
   end
 
+  # @return [Array<Integer>]
+  def available_ids
+    case available_type
+    when 'training'
+      training_ids
+    when 'machines'
+      machine_ids
+    when 'event'
+      [event&.id]
+    when 'space'
+      space_ids
+    else
+      []
+    end
+  end
+
   # check if the reservations are complete?
   # if a nb_total_places hasn't been defined, then places are unlimited
   # @return [Boolean]
@@ -190,7 +206,7 @@ class Availability < ApplicationRecord
     duration = slot_duration || Setting.get('slot_duration').to_i
     return unless end_at < (start_at + duration.minutes)
 
-    errors.add(:end_at, I18n.t('availabilities.length_must_be_slot_multiple', MIN: duration))
+    errors.add(:end_at, I18n.t('availabilities.length_must_be_slot_multiple', **{ MIN: duration }))
   end
 
   def should_be_associated

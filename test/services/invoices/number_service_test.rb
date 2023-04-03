@@ -140,4 +140,9 @@ class Invoices::NumberServiceTest < ActiveSupport::TestCase
     periodicity = Invoices::NumberService.number_periodicity(invoice, 'invoice_order-nb')
     assert_equal 'month', periodicity
   end
+
+  test 'find document by number' do
+    invoice = Invoices::NumberService.find_by_number(1, date: Time.zone.parse('2012-03-01'))
+    assert_equal Invoice.first, invoice
+  end
 end

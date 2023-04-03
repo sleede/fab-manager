@@ -5,7 +5,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   require 'sso_logger'
   logger = SsoLogger.new
 
-  active_provider = AuthProvider.active
+  active_provider = Rails.configuration.auth_provider
   define_method active_provider.strategy_name do
     logger.info "[Users::OmniauthCallbacksController##{active_provider.strategy_name}] initiated"
     if request.env['omniauth.params'].blank?
@@ -18,7 +18,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         logger.debug 'trying to create a new user'
         # If the username is mapped, we just check its uniqueness as it would break the postgresql
         # unique constraint otherwise. If the name is not unique, another unique is generated
-        if active_provider.sso_fields.include?('user.username')
+        if active_provider.db.sso_fields.include?('user.username')
           logger.debug 'the username was already in use, generating a new one'
           @user.username = generate_unique_username(@user.username)
         end
@@ -26,7 +26,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         # unique random string, because:
         # - if it is the same user, his email will be filled from the SSO when he merge his accounts
         # - if it is not the same user, this will prevent the raise of PG::UniqueViolation
-        if active_provider.sso_fields.include?('user.email') && email_exists?(@user.email)
+        if active_provider.db.sso_fields.include?('user.email') && email_exists?(@user.email)
           logger.debug 'the email was already in use, marking it as duplicate'
           old_mail = @user.email
           @user.email = "<#{old_mail}>#{Devise.friendly_token}-duplicate"
@@ -46,13 +46,14 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
           @user.email = User.find(@user.id).email
         end
       end
+      # For users imported from the SSO, we consider the SSO as a source of trust so the email is automatically validated
+      @user.confirmed_at = Time.current if active_provider.db.sso_fields.include?('user.email') && !email_exists?(@user.email)
 
-      # We BYPASS THE VALIDATION because, in case of a new user, we want to save him anyway, we'll ask him later to complete his profile (on first login).
+      # We BYPASS THE VALIDATION because, in case of a new user, we want to save him anyway,
+      # we'll ask him later to complete his profile (on first login).
       # In case of an existing user, we trust the SSO validation as we want the SSO to have authority on users management and policy.
       logger.debug 'saving the user'
-      unless @user.save(validate: false)
-        logger.error "unable to save the user, an error occurred : #{@user.errors.full_messages.join(', ')}"
-      end
+      logger.error "unable to save the user, an error occurred : #{@user.errors.full_messages.join(', ')}" unless @user.save(validate: false)
 
       logger.debug 'signing-in the user and redirecting'
       sign_in_and_redirect @user, event: :authentication # this will throw if @user is not activated
@@ -77,7 +78,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         raise e
       end
     end
-
   end
 
   private

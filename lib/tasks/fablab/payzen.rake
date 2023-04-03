@@ -3,7 +3,6 @@
 # PayZen relative tasks
 namespace :fablab do
   namespace :payzen do
-
     # example: rails fablab:payzen:replay_on_payment_success[54a35f3f6fdd729ac72b6da0,53,57,3,247]
     # to find the parameters, search the logs, example:
     # Started POST "/api/payzen/confirm_payment" for 93.27.29.108 at 2022-04-04 20:26:12 +0000
@@ -22,7 +21,7 @@ namespace :fablab do
     # ], "payment_method"=>"card"}, "order_id"=>"704cc55e23f00ac3d238d8de"}}
     desc 'replay PayzenController#on_payment_success for a given event'
     task :replay_on_payment_success, %i[gateway_item_id user_id event_id nb_reserve_places slot_id] => :environment do |_task, args|
-      ActiveRecord::Base.logger = Logger.new STDOUT
+      ActiveRecord::Base.logger = Logger.new $stdout
 
       gateway_item_type = 'PayZen::Order'
 

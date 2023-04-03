@@ -38,7 +38,7 @@ class CartItem::Subscription < CartItem::BaseItem
       return false
     end
     if plan.group_id != customer.group_id
-      errors.add(:group, I18n.t('cart_item_validation.plan_group', { GROUP: plan.group.name }))
+      errors.add(:group, I18n.t('cart_item_validation.plan_group', **{ GROUP: plan.group.name }))
       return false
     end
     true

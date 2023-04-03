@@ -100,7 +100,7 @@ class Members::ListService
                     'users.id'
                   end
 
-      "#{order_key} #{direction}, users.id ASC LIMIT #{limit} OFFSET #{offset}"
+      Arel.sql("#{order_key} #{direction}, users.id ASC LIMIT #{limit} OFFSET #{offset}")
     end
   end
 end

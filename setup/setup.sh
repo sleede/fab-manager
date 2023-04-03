@@ -437,8 +437,7 @@ setup_assets_and_databases()
   read -rp "Continue? (Y/n) " confirm </dev/tty
   if [ "$confirm" = "n" ]; then return; fi
 
-  docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --rm "$SERVICE" bundle exec rake db:create </dev/tty # create the database
-  docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --rm "$SERVICE" bundle exec rake db:migrate </dev/tty # run all the migrations
+  docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --rm "$SERVICE" bundle exec rake rails db:schema:load </dev/tty # create the database
   # prompt default admin email/password
   printf "\n\nWe will now create the default administrator of Fab-manager.\n"
   read_email

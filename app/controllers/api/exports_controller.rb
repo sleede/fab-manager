@@ -2,7 +2,7 @@
 
 # API Controller for resources of type Export
 # Export are used to download data tables in offline files
-class API::ExportsController < API::ApiController
+class API::ExportsController < API::APIController
   before_action :authenticate_user!
   before_action :set_export, only: [:download]
 

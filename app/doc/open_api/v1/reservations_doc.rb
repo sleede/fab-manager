@@ -20,6 +20,7 @@ class OpenAPI::V1::ReservationsDoc < OpenAPI::V1::BaseDoc
     param :user_id, [Integer, Array], optional: true, desc: 'Scope the request to one or various users.'
     param :reservable_type, %w[Event Machine Space Training], optional: true, desc: 'Scope the request to a specific type of reservable.'
     param :reservable_id, [Integer, Array], optional: true, desc: 'Scope the request to one or various reservables.'
+    param :availability_id, [Integer, Array], optional: true, desc: 'Scope the request to one or various availabilities.'
 
     example <<-RESERVATIONS
       # /open_api/v1/reservations?reservable_type=Event&page=1&per_page=3
@@ -48,6 +49,7 @@ class OpenAPI::V1::ReservationsDoc < OpenAPI::V1::BaseDoc
             "reserved_slots": [
               {
                 "canceled_at": "2016-05-20T09:40:12.201+01:00",
+                "availability_id": 5200,
                 "start_at": "2016-06-03T14:00:00.000+01:00",
                 "end_at": "2016-06-03T15:00:00.000+01:00"
               }
@@ -76,6 +78,7 @@ class OpenAPI::V1::ReservationsDoc < OpenAPI::V1::BaseDoc
             "reserved_slots": [
               {
                 "canceled_at": null,
+                "availability_id": 5199,
                 "start_at": "2016-06-02T16:00:00.000+01:00",
                 "end_at": "2016-06-02T17:00:00.000+01:00"
               }
@@ -104,6 +107,7 @@ class OpenAPI::V1::ReservationsDoc < OpenAPI::V1::BaseDoc
             "reserved_slots": [
               {
                 "canceled_at": null,
+                "availability_id": 5066,
                 "start_at": "2016-06-03T14:00:00.000+01:00",
                 "end_at": "2016-06-03T15:00:00.000+01:00"
               }

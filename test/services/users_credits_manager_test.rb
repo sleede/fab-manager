@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class UsersCreditsManagerTest < ActiveSupport::TestCase
@@ -18,10 +20,14 @@ class UsersCreditsManagerTest < ActiveSupport::TestCase
 
   ## context machine reservation
   test 'machine reservation from user without subscribed plan' do
-    @user.subscriptions.destroy_all
+    user = users(:user2) # no subscriptions
+    reservation_machine = Reservation.new(
+      statistic_profile: user.statistic_profile,
+      reservable: @machine
+    )
 
-    @reservation_machine.assign_attributes(slots_reservations_attributes: [{ slot_id: @availability.slots.first }])
-    manager = UsersCredits::Manager.new(reservation: @reservation_machine)
+    reservation_machine.assign_attributes(slots_reservations_attributes: [{ slot_id: @availability.slots.first }])
+    manager = UsersCredits::Manager.new(reservation: reservation_machine)
 
     assert_equal false, manager.will_use_credits?
     assert_equal 0, manager.free_hours_count
@@ -114,9 +120,14 @@ class UsersCreditsManagerTest < ActiveSupport::TestCase
   # context training reservation
 
   test 'training reservation from user without subscribed plan' do
-    @user.subscriptions.destroy_all
+    user = users(:user2) # no subscriptions
+    reservation_training = Reservation.new(
+      statistic_profile: user.statistic_profile,
+      reservable: @training,
+      slots_reservations_attributes: [{ slot_id: @training.availabilities.first.slots.first.id }]
+    )
 
-    manager = UsersCredits::Manager.new(reservation: @reservation_training)
+    manager = UsersCredits::Manager.new(reservation: reservation_training)
 
     assert_equal false, manager.will_use_credits?
 

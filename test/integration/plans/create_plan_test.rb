@@ -27,7 +27,7 @@ class CreatePlanTest < ActionDispatch::IntegrationTest
              description: 'lorem ipsum dolor sit amet',
              partner_id: 6,
              plan_file_attributes: {
-               attachment: fixture_file_upload('/files/document.pdf')
+               attachment: fixture_file_upload('document.pdf')
              }
            }
          }.to_json,
@@ -35,7 +35,7 @@ class CreatePlanTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_equal 201, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check the created plans
     res = json_response(response.body)
@@ -68,7 +68,7 @@ class CreatePlanTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_equal 201, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check the created plan
     res = json_response(response.body)

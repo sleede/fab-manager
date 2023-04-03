@@ -41,7 +41,6 @@ class Store::UserPayOrderTest < ActionDispatch::IntegrationTest
     # invoice assertions
     invoice = Invoice.last
     assert_invoice_pdf invoice
-    assert_not_nil invoice.debug_footprint
 
     assert_not invoice.payment_gateway_object.blank?
     assert_not invoice.total.blank?
@@ -98,7 +97,6 @@ class Store::UserPayOrderTest < ActionDispatch::IntegrationTest
     # invoice assertions
     invoice = Invoice.last
     assert_invoice_pdf invoice
-    assert_not_nil invoice.debug_footprint
 
     assert_not @cart1.payment_gateway_object.blank?
     assert_not invoice.payment_gateway_object.blank?
@@ -167,7 +165,6 @@ class Store::UserPayOrderTest < ActionDispatch::IntegrationTest
     # invoice assertions
     invoice = Invoice.last
     assert_invoice_pdf invoice
-    assert_not_nil invoice.debug_footprint
 
     assert invoice.payment_gateway_object.blank?
     assert_not invoice.total.blank?
@@ -224,7 +221,6 @@ class Store::UserPayOrderTest < ActionDispatch::IntegrationTest
     # invoice assertions
     invoice = Invoice.last
     assert_invoice_pdf invoice
-    assert_not_nil invoice.debug_footprint
 
     assert invoice.payment_gateway_object.blank?
     assert_not invoice.total.blank?

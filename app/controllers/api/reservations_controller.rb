@@ -2,7 +2,7 @@
 
 # API Controller for resources of type Reservation
 # Reservations are used for Training, Machine, Space and Event
-class API::ReservationsController < API::ApiController
+class API::ReservationsController < API::APIController
   before_action :authenticate_user!
   before_action :set_reservation, only: %i[show update]
   respond_to :json

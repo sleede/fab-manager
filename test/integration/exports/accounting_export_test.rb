@@ -32,7 +32,7 @@ class Exports::AccountingExportTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_equal 200, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check the export was created correctly
     res = json_response(response.body)
@@ -139,6 +139,7 @@ class Exports::AccountingExportTest < ActionDispatch::IntegrationTest
 
     client_code = Setting.get("accounting_payment_#{mean}_code")
     assert_equal client_code, client_line[I18n.t('accounting_export.account_code')], 'Account code for client is wrong'
+    # the test above fails randomly... we don't know why!
 
     client_label = Setting.get("accounting_payment_#{mean}_label")
     assert_equal client_label, client_line[I18n.t('accounting_export.account_label')], 'Account label for client is wrong'

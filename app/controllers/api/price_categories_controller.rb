@@ -2,7 +2,7 @@
 
 # API Controller for resources of type PriceCategory
 # PriceCategories are used in Events
-class API::PriceCategoriesController < API::ApiController
+class API::PriceCategoriesController < API::APIController
   before_action :authenticate_user!, only: %i[update show create destroy]
   before_action :set_price_category, only: %i[show update destroy]
 

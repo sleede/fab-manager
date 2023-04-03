@@ -27,16 +27,12 @@ class StatisticsExportService
 
     @indices = StatisticIndex.all.includes(:statistic_fields, statistic_types: [:statistic_sub_types])
 
-    ActionController::Base.prepend_view_path './app/views/'
-    # place data in view_assigns
-    view_assigns = { results: @results, users: @users, indices: @indices }
-    av = ActionView::Base.new(ActionController::Base.view_paths, view_assigns)
-    av.class_eval do
-      # include any needed helpers (for the view)
-      include ExcelHelper
-    end
-
-    content = av.render template: 'exports/statistics_global.xlsx.axlsx'
+    content = ApplicationController.render(
+      template: 'exports/statistics_global',
+      locals: { results: @results, users: @users, indices: @indices },
+      handlers: [:axlsx],
+      formats: [:xlsx]
+    )
     # write content to file
     File.binwrite(export.file, content)
   end
@@ -65,20 +61,16 @@ class StatisticsExportService
         @subtypes = @type.statistic_sub_types
         @fields = @index.statistic_fields
 
-        ActionController::Base.prepend_view_path './app/views/'
-        # place data in view_assigns
-        view_assigns = {results: @results, users: @users, index: @index, type: @type, subtypes: @subtypes, fields: @fields}
-        av = ActionView::Base.new(ActionController::Base.view_paths, view_assigns)
-        av.class_eval do
-          # include any needed helpers (for the view)
-          include ExcelHelper
-        end
-
-        content = av.render template: 'exports/statistics_current.xlsx.axlsx'
+        content = ApplicationController.render(
+          template: 'exports/statistics_current',
+          locals: { results: @results, users: @users, index: @index, type: @type, subtypes: @subtypes, fields: @fields },
+          handlers: [:axlsx],
+          formats: [:xlsx]
+        )
         # write content to file
         File.binwrite(export.file, content)
       end
-    }, __FILE__, __LINE__ - 35
+    }, __FILE__, __LINE__ - 31
   end
   # rubocop:enable Style/DocumentDynamicEvalDefinition
 end

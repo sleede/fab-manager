@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # API Controller for resources of type Notification Types
-class API::NotificationTypesController < API::ApiController
+class API::NotificationTypesController < API::APIController
   before_action :authenticate_user!
 
   def index

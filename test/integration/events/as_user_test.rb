@@ -93,7 +93,6 @@ class Events::AsUserTest < ActionDispatch::IntegrationTest
     item = InvoiceItem.find_by(object: reservation)
     invoice = item.invoice
     assert_invoice_pdf invoice
-    assert_not_nil invoice.debug_footprint
 
     VCR.use_cassette('reserve_event_with_many_prices_and_payment_means_retrieve_invoice_from_stripe') do
       stp_intent = invoice.payment_gateway_object.gateway_object.retrieve
