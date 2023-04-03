@@ -93,7 +93,7 @@ class Events::RecurrenceUpdateTest < ActionDispatch::IntegrationTest
         db_event.event_image.attachment.file.path
       )
       assert FileUtils.compare_file(
-        File.join(ActionDispatch::IntegrationTest.fixture_path, new_file),
+        File.join(ActionDispatch::IntegrationTest.fixture_path, "files/#{new_file}"),
         db_event.event_files[0].attachment.file.path
       )
     end
