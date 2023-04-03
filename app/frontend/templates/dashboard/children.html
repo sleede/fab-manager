@@ -1,0 +1,11 @@
+<div>
+  <section class="heading">
+    <div class="row no-gutter">
+      <ng-include src="'/dashboard/nav.html'"></ng-include>
+    </div>
+
+  </section>
+
+
+  <children-list current-user="currentUser" on-success="onSuccess" on-error="onError" />
+</div>

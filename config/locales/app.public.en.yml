@@ -14,6 +14,7 @@ en:
         #dashboard sections
         dashboard: "Dashboard"
         my_profile: "My Profile"
+        my_children: "My Children"
         my_settings: "My Settings"
         my_supporting_documents_files: "My supporting documents"
         my_projects: "My Projects"
@@ -475,6 +476,8 @@ en:
       member_select:
         select_a_member: "Select a member"
         start_typing: "Start typing..."
+      children_list:
+        heading: "My children"
       tour:
         conclusion:
           title: "Thank you for your attention"

@@ -183,6 +183,8 @@ Rails.application.routes.draw do
       get 'withdrawal_instructions', on: :member
     end
 
+    resources :children, only: %i[index show create update destroy]
+
     # for admin
     resources :trainings do
       get :availabilities, on: :member
