@@ -394,7 +394,7 @@ de:
       body:
         account_validated: "Your account was validated. Now, you have access to booking features."
     notify_user_is_invalidated:
-      subject: "Account invalidated"
+      subject: "Konto ungültig"
       body:
         account_invalidated: "Your account was invalidated. You won't be able to book anymore, until your account is validated again."
     notify_user_supporting_document_refusal:

@@ -111,7 +111,7 @@ pt:
     notify_member_invoice_ready:
       subject: "Fatura do seu FabLab"
       body:
-        please_find_attached_html: "Please find as attached file your invoice from {DATE}, with an amount of {AMOUNT} concerning your {TYPE, select, Reservation{reservation} OrderItem{order} other{subscription}}." #messageFormat interpolation
+        please_find_attached_html: "Por favor, encontre como arquivo anexado sua fatura a partir de {DATE}, com um valor de {AMOUNT} relativo {TYPE, select, Reservation{a sua reserva} OrderItem{ao seu pedido} other{a sua assinatura}}." #messageFormat interpolation
         invoice_in_your_dashboard_html: "Você pode acessar sua fatura em %{DASHBOARD} no site Fab Lab."
         your_dashboard: "seu dashboard"
     notify_member_reservation_reminder:
@@ -132,18 +132,18 @@ pt:
         expires_in_7_days: "expira em 7 dias."
         to_renew_your_plan_follow_the_link: "Por favor, siga este link para renovar seu plano"
     notify_member_training_authorization_expired:
-      subject: "Your authorization was revoked"
+      subject: "Sua autorização foi revogada"
       body:
-        training_expired_html: "<p>You took the %{TRAINING} training, on %{DATE}.</p><p>Your authorization for this training, valid for %{PERIOD} months, has expired.</p><p>Please validate it again in order to be able to reserve the %{MACHINES}</p>."
+        training_expired_html: "<p>Você fez o treinamento %{TRAINING} em %{DATE}.</p><p>A sua autorização para este treinamento, válida por %{PERIOD} meses, expirou.</p><p>Por favor, valide novamente para poder reservar %{MACHINES}</p>."
     notify_member_training_auto_cancelled:
-      subject: "Your training session was cancelled"
+      subject: "Sua sessão de treinamento foi cancelada"
       body:
-        cancelled_training: "The %{TRAINING} training session scheduled for %{DATE}, from %{START} to %{END} has been canceled due to an insufficient number of participants."
-        auto_refund: "You were refunded on your wallet and a credit note should be available."
+        cancelled_training: "A sessão de treinamento %{TRAINING} agendada para %{DATE}, de %{START} a %{END} foi cancelada devido a um número insuficiente de participantes."
+        auto_refund: "Você foi reembolsado na sua carteira e uma nota de crédito deve estar disponível."
     notify_member_training_invalidated:
-      subject: "Your authorization was invalidated"
+      subject: "Sua autorização foi invalidada"
       body:
-        training_invalidated_html: "<p>You took the %{TRAINING} training, on %{DATE} giving you access to the %{MACHINES}.</p><p>Due to the lack of reservations for one of these machines during the last %{PERIOD} months, your authorization has been invalidated.</p><p>Please validate the training again in order to continue reserving these machines.</p>."
+        training_invalidated_html: "<p>Você realizou o treinamento %{TRAINING} em %{DATE} que dá acesso a %{MACHINES}.</p><p>Por falta de reservas para uma dessas máquinas nos últimos %{PERIOD} meses sua autorização foi invalidada.</p><p>Por favor, valide o treinamento novamente para continuar a reservar estas máquinas.</p>."
     notify_member_subscription_is_expired:
       subject: "Sua assinatura expirou"
       body:
@@ -156,11 +156,11 @@ pt:
       body:
         subscription_will_expire_html: "O plano de assinatura do usuário %{NAME} <strong> <em> %{PLAN} </ em> </ strong> expirará em 7 dias."
     notify_admin_training_auto_cancelled:
-      subject: "A training was automatically cancelled"
+      subject: "Um treinamento foi automaticamente cancelado"
       body:
-        cancelled_training: "The %{TRAINING} training session scheduled for %{DATE}, from %{START} to %{END} has been automatically canceled due to an insufficient number of participants."
-        auto_refund: "The members who have booked this training session were automatically refunded on their wallet and credit notes was generated."
-        manual_refund: "Please manually refund all members who have booked this training session and generate the credit notes."
+        cancelled_training: "A sessão de treinamento %{TRAINING} agendada para %{DATE}, de %{START} a %{END} foi cancelada devido ao número insuficiente de participantes."
+        auto_refund: "Os membros que reservaram essa sessão de treinamento foram automaticamente reembolsados em suas carteiras e as notas de crédito foram geradas."
+        manual_refund: "Por favor, reembolse manualmente todos os membros que reservaram esta sessão de treinamento e gere as notas de créditos."
     notify_admin_subscription_is_expired:
       subject: "A assinatura de um membro expirou"
       body:
@@ -266,11 +266,11 @@ pt:
         category_members: "dos membros"
         click_to_view_results: "Clique aqui para ver os resultados"
     notify_admin_low_stock_threshold:
-      subject: "Low stock alert"
+      subject: "Alerta de estoque baixo"
       body:
-        low_stock: "A new stock movement of %{PRODUCT} has exceeded the low stock threshold."
-        stocks_state_html: "Current stock status: <ul><li>internal: %{INTERNAL}</li><li>external: %{EXTERNAL}</li></ul>"
-        manage_stock: "Manage stocks for this product"
+        low_stock: "Um novo movimento de estoque de %{PRODUCT} excedeu o limite de estoque baixo."
+        stocks_state_html: "Status atual do estoque: <ul><li>interno: %{INTERNAL}</li><li>externo: %{EXTERNAL}</li></ul>"
+        manage_stock: "Gerenciar estoque para este produto"
     notify_member_about_coupon:
       subject: "Cupom"
       body:
@@ -318,9 +318,9 @@ pt:
       body:
         objects_sync: "Todos os membros, cupons, máquinas, treinamentos, espaços e planos foram sincronizados com sucesso no Stripe."
     notify_admin_order_is_paid:
-      subject: "New order"
+      subject: "Novo pedido"
       body:
-        order_placed: "A new order (%{REFERENCE}) has been placed and paid by %{USER}."
+        order_placed: "Um novo pedido (%{REFERENCE}) foi realizado e pago por %{USER}."
         view_details: ""
     notify_member_payment_schedule_ready:
       subject: "Sua agenda de pagamentos"
@@ -376,19 +376,19 @@ pt:
         date: "Este é um lembrete para verificar se o débito bancário foi bem sucedido."
         confirm: "Não se esqueça de confirmar o recibo na interface de gestão de pagamento, para que a fatura correspondente seja gerada."
     notify_member_reservation_limit_reached:
-      subject: "Daily reservation limit reached"
+      subject: "Limite diário de reservas atingido"
       body:
-        limit_reached: "For %{DATE}, you have reached your daily limit of %{HOURS} hours of %{ITEM} reservation."
+        limit_reached: "Para %{DATE}, você atingiu seu limite diário de %{HOURS} horas de reserva em %{ITEM}."
     notify_admin_user_supporting_document_files_created:
-      subject: "Supporting documents uploaded by a member"
+      subject: "Documentos de suporte enviados por um membro"
       body:
-        supporting_document_files_uploaded_below: "Member %{NAME} has uploaded the following supporting documents:"
-        validate_user: "Please validate this account"
+        supporting_document_files_uploaded_below: "O membro %{NAME} enviou os seguintes documentos de suporte:"
+        validate_user: "Por favor, valide esta conta"
     notify_admin_user_supporting_document_files_updated:
-      subject: "Member's supporting documents have changed"
+      subject: "Os documentos de apoio dos membros mudaram"
       body:
-        user_update_supporting_document_file: "Member %{NAME} has modified the supporting documents below:"
-        validate_user: "Please validate this account"
+        user_update_supporting_document_file: "O membro %{NAME} modificou os documentos de suporte abaixo:"
+        validate_user: "Por favor, valide esta conta"
     notify_user_is_validated:
       subject: "Conta validada"
       body:
@@ -398,25 +398,25 @@ pt:
       body:
         account_invalidated: "Sua conta foi invalidada. Você não poderá mais reservar até que sua conta seja validada novamente."
     notify_user_supporting_document_refusal:
-      subject: "Your supporting documents were refused"
+      subject: "Seus documentos de apoio foram recusados"
       body:
-        user_supporting_document_files_refusal: "Your supporting documents were refused:"
-        action: "Please re-upload some new supporting documents."
+        user_supporting_document_files_refusal: "Os seus documentos de apoio foram recusados:"
+        action: "Por favor, recarregue novos documentos de apoio."
     notify_admin_user_supporting_document_refusal:
-      subject: "A member's supporting documents were refused"
+      subject: "Documentos de apoio de um membro foram recusados"
       body:
-        user_supporting_document_files_refusal: "Member %{NAME}'s supporting documents were rejected by %{OPERATOR}:"
+        user_supporting_document_files_refusal: "Os documentos de apoio do membro %{NAME} foram rejeitados por %{OPERATOR}:"
     shared:
       hello: "Olá %{user_name}"
     notify_user_order_is_ready:
-      subject: "Your command is ready"
+      subject: "Seu pedido está pronto"
       body:
-        notify_user_order_is_ready: "Your command %{REFERENCE} is ready:"
+        notify_user_order_is_ready: "Seu pedido %{REFERENCE} está pronto:"
     notify_user_order_is_canceled:
-      subject: "Your command was canceled"
+      subject: "Seu pedido foi cancelado"
       body:
-        notify_user_order_is_canceled: "Your command %{REFERENCE} was canceled."
+        notify_user_order_is_canceled: "Seu pedido %{REFERENCE} foi cancelado."
     notify_user_order_is_refunded:
-      subject: "Your command was refunded"
+      subject: "Seu pedido foi reembolsado"
       body:
-        notify_user_order_is_refunded: "Your command %{REFERENCE} was refunded."
+        notify_user_order_is_refunded: "Seu pedido %{REFERENCE} foi reembolsado."
