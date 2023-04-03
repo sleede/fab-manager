@@ -20,9 +20,10 @@ config()
 add_mount()
 {
   if [[ ! $(yq eval ".services.$SERVICE.volumes.[] | select (. == \"*auth_provider.yml\")" docker-compose.yml) ]]; then
+    touch ./config/auth_provider.yml
     # change docker-compose.yml permissions for fix yq can't modify file issue
     chmod 666 docker-compose.yml
-    yq -i eval ".services.$SERVICE.volumes += [\"./config/auth_provider.yml:/usr/src/app/auth_provider.yml\"]" docker-compose.yml
+    yq -i eval ".services.$SERVICE.volumes += [\"./config/auth_provider.yml:/usr/src/app/config/auth_provider.yml\"]" docker-compose.yml
     chmod 644 docker-compose.yml
   fi
 }

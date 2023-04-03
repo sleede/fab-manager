@@ -4,13 +4,10 @@
 class ProviderConfig
   def initialize
     @config = if File.exist?('config/auth_provider.yml')
-                YAML.safe_load_file('config/auth_provider.yml').with_indifferent_access
+                content = YAML.safe_load_file('config/auth_provider.yml')
+                content.blank? ? simple_provider : content.with_indifferent_access
               else
-                {
-                  providable_type: 'DatabaseProvider',
-                  name: 'DatabaseProvider::SimpleAuthProvider',
-                  strategy_name: 'database-simpleauthprovider'
-                }
+                simple_provider
               end
   end
 
@@ -66,5 +63,14 @@ class ProviderConfig
     return item.map { |v| map_value(v) } if item.is_a?(Array)
 
     item
+  end
+
+  # @return [Hash{Symbol->String}]
+  def simple_provider
+    {
+      providable_type: 'DatabaseProvider',
+      name: 'DatabaseProvider::SimpleAuthProvider',
+      strategy_name: 'database-simpleauthprovider'
+    }
   end
 end
