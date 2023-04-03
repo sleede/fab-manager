@@ -53,6 +53,9 @@ class User < ApplicationRecord
   has_many :notifications, as: :receiver, dependent: :destroy
   has_many :notification_preferences, dependent: :destroy
 
+  has_many :children, dependent: :destroy
+  accepts_nested_attributes_for :children, allow_destroy: true
+
   # fix for create admin user
   before_save do
     email&.downcase!

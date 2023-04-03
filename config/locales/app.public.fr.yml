@@ -14,6 +14,7 @@ fr:
         #dashboard sections
         dashboard: "Tableau de bord"
         my_profile: "Mon profil"
+        my_children: "Mes enfants"
         my_settings: "Mes paramètres"
         my_supporting_documents_files: "Mes justificatifs"
         my_projects: "Mes projets"
@@ -481,6 +482,21 @@ fr:
       member_select:
         select_a_member: "Sélectionnez un membre"
         start_typing: "Commencez à écrire..."
+      children_list:
+        heading: "Mes enfants"
+        add_child: "Ajouter un enfant"
+      child_modal:
+        edit_child: "Modifier un enfant"
+        new_child: "Ajouter un enfant"
+        save: "Enregistrer"
+      child_form:
+        child_form_info: "Notez que vous ne pouvez ajouter que vos enfants de moins de 18 ans. Des pièces justificatives sont demandés par votre administrateur, elles lui seront utiles pour valider le compte de votre enfant et ainsi autoriser la réservation d'événements."
+        first_name: "Prénom"
+        last_name: "Nom"
+      child_item:
+        first_name: "Prénom de l'enfant"
+        last_name: "Nom de l'enfant"
+        birthday: "Date de naissance"
       tour:
         conclusion:
           title: "Merci de votre attention"
