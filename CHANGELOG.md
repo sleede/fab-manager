@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+## v6.0.0 2023 April 03
+
 - Updated ruby to 3.2
 - Updated rails to 7.0
 - Updated puma to 6.1
