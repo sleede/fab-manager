@@ -26,6 +26,7 @@
 - OpenAPI availabilities endpoint
 - Ability to filter OpenAPI reservations endpoint by availability_id
 - Support for ARM64 CPU architecture
+- Fix a bug: by default, invoices should be ordered by date descending
 - Fix a bug: broken display after a plan category was deleted
 - Fix a security issue: updated json5 to 2.2.2 to fix [CVE-2022-46175](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-46175)
 - Fix a security issue: updated terser to 5.16.8 to fix [CVE-2022-25858](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-25858)
