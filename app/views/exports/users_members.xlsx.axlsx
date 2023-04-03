@@ -39,7 +39,7 @@ wb.add_worksheet(name: ExcelService.name_safe(t('export_members.members'))) do |
   sheet.add_row columns, style: header
 
   # data rows
-  @members.each do |member|
+  members.each do |member|
     expiration = member&.subscription&.expired_at
     data = [
       member.id,

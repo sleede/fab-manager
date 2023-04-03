@@ -2,7 +2,7 @@
 
 # API Controller for resources of type SupportingDocumentFile
 # SupportingDocumentFiles are used in settings
-class API::SupportingDocumentFilesController < API::ApiController
+class API::SupportingDocumentFilesController < API::APIController
   before_action :authenticate_user!
   before_action :set_supporting_document_file, only: %i[show update download]
 

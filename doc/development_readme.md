@@ -125,13 +125,11 @@ This procedure is not easy to follow so if you don't need to write some code for
 
    ```bash
    # for dev
-   rails db:create
-   rails db:migrate
+   rails db:schema:load
    ADMIN_EMAIL='youradminemail' ADMIN_PASSWORD='youradminpassword' rails db:seed
    rails fablab:es:build_stats
    # for tests
-   RAILS_ENV=test rails db:create
-   RAILS_ENV=test rails db:migrate
+   RAILS_ENV=test rails db:schema:load
    ```
 
 14. Enable Overcommit

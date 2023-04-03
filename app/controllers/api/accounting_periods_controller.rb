@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # API Controller for resources of AccountingPeriod
-class API::AccountingPeriodsController < API::ApiController
+class API::AccountingPeriodsController < API::APIController
   before_action :authenticate_user!
   before_action :set_period, only: %i[show download_archive]
 

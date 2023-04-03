@@ -2,7 +2,7 @@
 
 # authorized 3rd party softwares can fetch data about plans through the OpenAPI
 class OpenAPI::V1::PlansController < OpenAPI::V1::BaseController
-  extend OpenAPI::ApiDoc
+  extend OpenAPI::APIDoc
   expose_doc
 
   before_action :set_plan, only: %i[show]

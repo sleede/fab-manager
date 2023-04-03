@@ -5,8 +5,11 @@ class PaymentScheduleItem < Footprintable
   belongs_to :payment_schedule
   belongs_to :invoice
   has_one :payment_gateway_object, as: :item, dependent: :destroy
+  has_one :chained_element, as: :element, dependent: :restrict_with_exception
 
   after_create :chain_record
+
+  delegate :footprint, to: :chained_element
 
   def first?
     payment_schedule.ordered_items.first == self

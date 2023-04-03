@@ -196,9 +196,9 @@ export const PlansList: React.FC<PlansListProps> = ({ onError, onPlanSelection, 
         {Array.from(plans).sort(compareCategories).map(([categoryId, plansByCategory]) => {
           const category = findCategory(categoryId);
           const categoryPlans = plansByCategory.filter(filterPlan);
-          const isShown = !!categoryId && categoryPlans.length > 0;
+          const isShown = !!category && categoryPlans.length > 0;
           return (
-            <div key={categoryId} className={`plans-per-category ${categoryId ? 'with-category' : 'no-category'}`}>
+            <div key={categoryId} className={`plans-per-category ${category ? 'with-category' : 'no-category'}`}>
               {isShown && <h3 className="category-title">{ category.name }</h3>}
               {isShown && <p className="category-description" dangerouslySetInnerHTML={{ __html: category.description }} />}
               {renderPlans(categoryPlans)}

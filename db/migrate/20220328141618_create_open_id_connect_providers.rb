@@ -9,7 +9,6 @@ class CreateOpenIdConnectProviders < ActiveRecord::Migration[5.2]
       t.string :client_auth_method
       t.string :scope
       t.string :response_type
-      t.string :response_type
       t.string :response_mode
       t.string :display
       t.string :prompt

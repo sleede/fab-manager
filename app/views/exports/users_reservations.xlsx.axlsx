@@ -15,7 +15,7 @@ wb.add_worksheet(name: ExcelService.name_safe(t('export_reservations.reservation
   sheet.add_row columns, style: header
 
   # data rows
-  @reservations.each do |resrv|
+  reservations.each do |resrv|
     invoice = resrv.original_invoice
     data = [
       resrv.user&.id,

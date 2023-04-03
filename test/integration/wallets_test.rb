@@ -20,7 +20,7 @@ class WalletsTest < ActionDispatch::IntegrationTest
   test 'get my wallet' do
     get "/api/wallet/by_user/#{@vlonchamp.id}"
     assert_equal 200, response.status
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
     wallet = json_response(response.body)
     assert_equal @vlonchamp.wallet.invoicing_profile_id, wallet[:invoicing_profile_id]
     assert_equal @vlonchamp.wallet.amount, wallet[:amount]
@@ -32,7 +32,7 @@ class WalletsTest < ActionDispatch::IntegrationTest
     @user1 = User.first
     get "/api/wallet/by_user/#{@user1.id}"
     assert_equal 200, response.status
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
     wallet = json_response(response.body)
     assert_equal @user1.wallet.invoicing_profile_id, wallet[:invoicing_profile_id]
     assert_equal @user1.wallet.amount, wallet[:amount]
@@ -48,7 +48,7 @@ class WalletsTest < ActionDispatch::IntegrationTest
     w = @vlonchamp.wallet
     get "/api/wallet/#{w.id}/transactions"
     assert_equal 200, response.status
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
     transactions = json_response(response.body)
     assert_equal w.wallet_transactions.count, transactions.size
     assert_equal wallet_transactions(:transaction1).id, transactions.first[:id]
@@ -70,7 +70,7 @@ class WalletsTest < ActionDispatch::IntegrationTest
         params: { amount: amount }
 
     assert_equal 200, response.status
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
     wallet = json_response(response.body)
     w.reload
     assert_equal w.amount, expected_amount
@@ -96,7 +96,7 @@ class WalletsTest < ActionDispatch::IntegrationTest
         }
 
     assert_equal 200, response.status
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
     wallet = json_response(response.body)
     w.reload
     assert_equal w.amount, expected_amount
@@ -108,6 +108,5 @@ class WalletsTest < ActionDispatch::IntegrationTest
     assert_equal amount, (invoice.total / 100.0), 'Avoir total does not match the amount credited to the wallet'
     assert_equal amount, (invoice.invoice_items.first.amount / 100.0), 'Invoice item amount does not match'
     assert_invoice_pdf invoice
-    assert_not_nil invoice.debug_footprint
   end
 end

@@ -70,7 +70,6 @@ class Reservations::LocalPaymentTest < ActionDispatch::IntegrationTest
     item = InvoiceItem.find_by(object: reservation)
     invoice = item.invoice
     assert_invoice_pdf invoice
-    assert_not_nil invoice.debug_footprint
 
     # notification
     assert_not_empty Notification.where(attached_object: reservation)
@@ -129,7 +128,6 @@ class Reservations::LocalPaymentTest < ActionDispatch::IntegrationTest
     item = InvoiceItem.find_by(object: reservation)
     invoice = item.invoice
     assert_invoice_pdf invoice
-    assert_not_nil invoice.debug_footprint
 
     # notification
     assert_not_empty Notification.where(attached_object: reservation)
@@ -206,7 +204,6 @@ class Reservations::LocalPaymentTest < ActionDispatch::IntegrationTest
     item = InvoiceItem.find_by(object: reservation)
     invoice = item.invoice
     assert_invoice_pdf invoice
-    assert_not_nil invoice.debug_footprint
 
     # notification
     assert_not_empty Notification.where(attached_object: reservation)
@@ -247,7 +244,7 @@ class Reservations::LocalPaymentTest < ActionDispatch::IntegrationTest
 
     # general assertions
     assert_equal 201, response.status
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
     result = json_response(response.body)
 
     # Check the DB objects have been created as they should
@@ -290,7 +287,6 @@ class Reservations::LocalPaymentTest < ActionDispatch::IntegrationTest
     item = InvoiceItem.find_by(object: reservation)
     invoice = item.invoice
     assert_invoice_pdf invoice
-    assert_not_nil invoice.debug_footprint
 
     # notification
     assert_not_empty Notification.where(attached_object: reservation)

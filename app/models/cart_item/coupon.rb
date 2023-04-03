@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require_relative 'cart_item'
-
 # A discount coupon applied to the whole shopping cart
 class CartItem::Coupon < ApplicationRecord
   self.table_name = 'cart_item_coupons'

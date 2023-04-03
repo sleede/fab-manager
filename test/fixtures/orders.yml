@@ -3,7 +3,7 @@ order_1:
   statistic_profile_id: 3
   operator_profile_id: 1
   token: 3R9wtsPjyYMHKqy-I2V5Cg1661868752184
-  reference:
+  reference: 000009-08-22
   state: paid
   total: 4500
   created_at: '2022-08-30 14:12:32.213832'
@@ -150,8 +150,8 @@ order_15:
   reference: '005900-10-22'
   state: ready
   total: 3000
-  created_at: <%= DateTime.current.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  updated_at: <%= DateTime.current.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  created_at: <%= DateTime.current.utc.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  updated_at: <%= DateTime.current.utc.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   wallet_amount:
   wallet_transaction_id:
   payment_method: local
@@ -168,8 +168,8 @@ order_16:
   reference: '005901-<%= DateTime.current.utc.strftime('%m') %>-<%= DateTime.current.utc.strftime('%d') %>'
   state: cart
   total: 0
-  created_at: <%= DateTime.current.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  updated_at: <%= DateTime.current.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  created_at: <%= DateTime.current.utc.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  updated_at: <%= DateTime.current.utc.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   wallet_amount:
   wallet_transaction_id:
   payment_method:
@@ -186,8 +186,8 @@ order_17:
   reference: '005902-<%= DateTime.current.utc.strftime('%m') %>-<%= DateTime.current.utc.strftime('%d') %>'
   state: cart
   total: 0
-  created_at: <%= DateTime.current.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  updated_at: <%= DateTime.current.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  created_at: <%= DateTime.current.utc.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  updated_at: <%= DateTime.current.utc.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   wallet_amount:
   wallet_transaction_id:
   payment_method:
@@ -204,8 +204,8 @@ order_18:
   reference: '005902-<%= DateTime.current.utc.strftime('%m') %>-<%= DateTime.current.utc.strftime('%d') %>'
   state: cart
   total: 500
-  created_at: <%= DateTime.current.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  updated_at: <%= DateTime.current.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  created_at: <%= DateTime.current.utc.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  updated_at: <%= DateTime.current.utc.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   wallet_amount:
   wallet_transaction_id:
   payment_method:
@@ -222,8 +222,8 @@ order_19:
   reference: '005903-<%= DateTime.current.utc.strftime('%m') %>-<%= DateTime.current.utc.strftime('%d') %>'
   state: cart
   total: 261500
-  created_at: <%= DateTime.current.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  updated_at: <%= DateTime.current.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  created_at: <%= DateTime.current.utc.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  updated_at: <%= DateTime.current.utc.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   wallet_amount:
   wallet_transaction_id:
   payment_method:
@@ -240,8 +240,8 @@ order_20:
   reference: '005904-<%= DateTime.current.utc.strftime('%m') %>-<%= DateTime.current.utc.strftime('%d') %>'
   state: cart
   total: 262500
-  created_at: <%= DateTime.current.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  updated_at: <%= DateTime.current.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  created_at: <%= DateTime.current.utc.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  updated_at: <%= DateTime.current.utc.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   wallet_amount:
   wallet_transaction_id:
   payment_method:

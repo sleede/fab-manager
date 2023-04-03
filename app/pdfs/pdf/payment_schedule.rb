@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Generate a downloadable PDF file for the recorded payment schedule
-class PDF::PaymentSchedule < Prawn::Document
+class Pdf::PaymentSchedule < Prawn::Document
   require 'stringio'
   include ActionView::Helpers::NumberHelper
   include ApplicationHelper
@@ -37,8 +37,8 @@ class PDF::PaymentSchedule < Prawn::Document
     move_down 20
     font('Open-Sans', size: 10) do
       # general information
-      text I18n.t('payment_schedules.schedule_reference', REF: payment_schedule.reference), leading: 3
-      text I18n.t('payment_schedules.schedule_issued_on_DATE', DATE: I18n.l(payment_schedule.created_at.to_date))
+      text I18n.t('payment_schedules.schedule_reference', **{ REF: payment_schedule.reference }), leading: 3
+      text I18n.t('payment_schedules.schedule_issued_on_DATE', **{ DATE: I18n.l(payment_schedule.created_at.to_date) })
 
       # user/organization's information
       if payment_schedule.invoicing_profile&.organization
@@ -67,7 +67,7 @@ class PDF::PaymentSchedule < Prawn::Document
 
       # object
       move_down 25
-      text I18n.t('payment_schedules.object', ITEM: subscription_verbose(subscription, name))
+      text I18n.t('payment_schedules.object', **{ ITEM: subscription_verbose(subscription, name) })
 
       # details table of the deadlines
       move_down 20
@@ -77,7 +77,6 @@ class PDF::PaymentSchedule < Prawn::Document
 
       # going through the payment_schedule_items
       payment_schedule.payment_schedule_items.each do |item|
-
         price = item.amount.to_i / 100.00
         date = I18n.l(item.due_date.to_date)
 
@@ -101,7 +100,7 @@ class PDF::PaymentSchedule < Prawn::Document
       payment_verbose = _t('payment_schedules.settlement_by_METHOD', METHOD: payment_schedule.payment_method)
       if payment_schedule.wallet_amount
         payment_verbose += I18n.t('payment_schedules.settlement_by_wallet',
-                                  AMOUNT: number_to_currency(payment_schedule.wallet_amount / 100.00))
+                                  **{ AMOUNT: number_to_currency(payment_schedule.wallet_amount / 100.00) })
       end
       text payment_verbose
 
@@ -111,7 +110,6 @@ class PDF::PaymentSchedule < Prawn::Document
       txt.each_line do |line|
         text line, style: :bold, inline_format: true
       end
-
 
       # address and legals information
       move_down 40
@@ -126,7 +124,7 @@ class PDF::PaymentSchedule < Prawn::Document
 
     transparent(0.1) do
       rotate(45, origin: [0, 0]) do
-        image "#{Rails.root}/app/pdfs/data/watermark-#{I18n.default_locale}.png", at: [90, 150]
+        image Rails.root.join("app/pdfs/data/watermark-#{I18n.default_locale}.png"), at: [90, 150]
       end
     end
   end
@@ -137,9 +135,9 @@ class PDF::PaymentSchedule < Prawn::Document
     subscription_start_at = subscription.expired_at - subscription.plan.duration
     duration_verbose = I18n.t("duration.#{subscription.plan.interval}", count: subscription.plan.interval_count)
     I18n.t('payment_schedules.subscription_of_NAME_for_DURATION_starting_from_DATE',
-           NAME: username,
-           DURATION: duration_verbose,
-           DATE: I18n.l(subscription_start_at.to_date))
+           **{ NAME: username,
+               DURATION: duration_verbose,
+               DATE: I18n.l(subscription_start_at.to_date) })
   end
 
   ##

@@ -2,7 +2,7 @@
 
 # public API controller for users
 class OpenAPI::V1::UsersController < OpenAPI::V1::BaseController
-  extend OpenAPI::ApiDoc
+  extend OpenAPI::APIDoc
   include Rails::Pagination
   expose_doc
 

@@ -2,7 +2,7 @@
 
 # API Controller for resources of type Coupon
 # Coupons are used in payments
-class API::CouponsController < API::ApiController
+class API::CouponsController < API::APIController
   include ApplicationHelper
 
   before_action :authenticate_user!, except: %i[validate]

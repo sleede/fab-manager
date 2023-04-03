@@ -2,7 +2,7 @@
 
 # API Controller for resources of type Licence
 # Licenses are used in Projects
-class API::LicencesController < API::ApiController
+class API::LicencesController < API::APIController
   before_action :authenticate_user!, except: %i[index show]
   before_action :set_licence, only: %i[show update destroy]
 

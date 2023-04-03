@@ -1,6 +1,39 @@
 # Changelog Fab-manager
 
+- Updated ruby to 3.2
+- Updated rails to 7.0
+- Updated puma to 6.1
+- Updated responders to 3.0
+- Updated devise to 4.9
+- Updated sassc to 2.4
+- Updated sentry to 5.8
+- Updated web-console to 4.2
+- Updated shakapacker to 6.6
+- Updated bootsnap to 1.16
+- Updated pg to 1.4
+- Updated nodejs to 18.15
+- Updated oj to 3.14
+- Updated multi_json to 1.15
+- Updated spring to 4.0
+- Updated spring-watcher-listen to 2.1
+- Updated omniauth to 2.1
+- Updated omniauth-rails_csrf_protection to 1.0
+- Updated omniauth_openid_connect to 0.6
+- Updated the invoices chaining method with a more flexible model
+- Fill the holes in the logical sequence of invoices references with nil invoices
+- Use a cached configuration file to read the authentication provider settings
+- Order numbers are now saved in database instead of generated on-the-fly
+- OpenAPI availabilities endpoint
+- Ability to filter OpenAPI reservations endpoint by availability_id
+- Support for ARM64 CPU architecture
+- Fix a bug: by default, invoices should be ordered by date descending
+- Fix a bug: broken display after a plan category was deleted
 - Fix a bug: unable to update recurring event
+- Fix a security issue: updated json5 to 2.2.2 to fix [CVE-2022-46175](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-46175)
+- Fix a security issue: updated terser to 5.16.8 to fix [CVE-2022-25858](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-25858)
+- [TODO DEPLOY] `\curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/scripts/mount-auth-provider.sh | bash`
+- [TODO DEPLOY] `rails fablab:auth:write_provider`
+- [TODO DEPLOY] `rails fablab:restore_order_number` THEN `rails fablab:fix_references`
 
 ## v5.9.1 2023 March 22
 

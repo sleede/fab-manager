@@ -6,7 +6,6 @@ module Integrity; end
 # Provides various helpers methods for interacting with accounting archives
 class Integrity::ArchiveHelper
   class << self
-
     ## Checks the validity of all closed periods and raise an error otherwise
     def check_footprints
       if AccountingPeriod.count.positive?
@@ -20,7 +19,7 @@ class Integrity::ArchiveHelper
         end
       else
         Rails.logger.info 'Checking all invoices footprints. This may take a while...'
-        Invoice.order(:id).all.each do |i|
+        Invoice.order(:id).find_each do |i|
           next if i.check_footprint
 
           i.debug_footprint
@@ -48,7 +47,7 @@ class Integrity::ArchiveHelper
         )
       end
       # 3. Delete periods from database
-      range_periods.each do |ap|
+      range_periods.each do |ap| # rubocop:disable Style/CombinableLoops
         execute("DELETE FROM accounting_periods WHERE ID=#{ap.id};")
       end
       periods

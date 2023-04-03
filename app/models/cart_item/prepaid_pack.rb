@@ -41,7 +41,7 @@ class CartItem::PrepaidPack < CartItem::BaseItem
       return false
     end
     if pack.group_id != customer.group_id
-      errors.add(:group, I18n.t('cart_item_validation.pack_group', { GROUP: pack.group.name }))
+      errors.add(:group, I18n.t('cart_item_validation.pack_group', **{ GROUP: pack.group.name }))
       return false
     end
     true

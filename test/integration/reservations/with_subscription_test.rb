@@ -82,7 +82,6 @@ class Reservations::WithSubscriptionTest < ActionDispatch::IntegrationTest
     item = InvoiceItem.find_by(object: reservation)
     invoice = item.invoice
     assert_invoice_pdf invoice
-    assert_not_nil invoice.debug_footprint
 
     assert_not invoice.payment_gateway_object.blank?
     assert_not invoice.total.blank?
@@ -150,7 +149,6 @@ class Reservations::WithSubscriptionTest < ActionDispatch::IntegrationTest
     item = InvoiceItem.find_by(object: reservation)
     invoice = item.invoice
     assert_invoice_pdf invoice
-    assert_not_nil invoice.debug_footprint
 
     assert invoice.payment_gateway_object.blank?
     assert_not invoice.total.blank?
@@ -223,13 +221,12 @@ class Reservations::WithSubscriptionTest < ActionDispatch::IntegrationTest
     invoice_item = InvoiceItem.last
 
     assert_equal machine.prices.find_by(group_id: @vlonchamp.group_id, plan_id: nil).amount, invoice_item.amount
-    assert invoice_item.check_footprint
+    assert invoice_item.check_footprint, invoice_item.debug_footprint
 
     # invoice assertions
     item = InvoiceItem.find_by(object: reservation)
     invoice = item.invoice
     assert_invoice_pdf invoice
-    assert_not_nil invoice.debug_footprint
 
     assert_not invoice.payment_gateway_object.blank?
     assert_not invoice.total.blank?

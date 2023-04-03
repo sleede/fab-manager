@@ -4,7 +4,6 @@ payment_schedule_object_10:
   object_id: 5
   payment_schedule_id: 12
   main: true
-  footprint: a1ef3a0c3abac7e02bc11193458c0d1e90a5acf290c9e3b4e7c049a7efcbeb30
   created_at: '2021-06-14 12:24:45.890373'
   updated_at: '2021-06-14 12:24:45.894701'
 
@@ -14,6 +13,5 @@ payment_schedule_object_11:
   object_id: 6
   payment_schedule_id: 13
   main: true
-  footprint: fakefakefakefakefakefake
-  created_at: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  updated_at: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  created_at: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  updated_at: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>

@@ -2,7 +2,7 @@
 
 # API Controller for resources of type Openlab::Projects
 # Openlab::Projects are Projects shared between different instances
-class API::OpenlabProjectsController < API::ApiController
+class API::OpenlabProjectsController < API::APIController
   before_action :init_openlab
 
   def index

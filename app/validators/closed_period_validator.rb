@@ -9,7 +9,7 @@ class ClosedPeriodValidator < ActiveModel::Validator
              Time.current
            end
 
-    AccountingPeriod.all.each do |period|
+    AccountingPeriod.find_each do |period|
       record.errors.add(:date, I18n.t('errors.messages.in_closed_period')) if date >= period.start_at && date <= period.end_at
     end
   end

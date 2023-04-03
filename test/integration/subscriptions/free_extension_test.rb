@@ -23,7 +23,7 @@ class Subscriptions::FreeExtensionTest < ActionDispatch::IntegrationTest
              items: [
                {
                  free_extension: {
-                   end_at: new_date.strftime('%Y-%m-%d %H:%M:%S.%9N Z')
+                   end_at: new_date.strftime('%Y-%m-%d %H:%M:%S.%9N %Z')
                  }
                }
              ]
@@ -32,7 +32,7 @@ class Subscriptions::FreeExtensionTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_equal 201, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check that the subscribed plan was not altered
     res = json_response(response.body)
@@ -69,7 +69,7 @@ class Subscriptions::FreeExtensionTest < ActionDispatch::IntegrationTest
            items: [
              {
                free_extension: {
-                 end_at: new_date.strftime('%Y-%m-%d %H:%M:%S.%9N Z')
+                 end_at: new_date.strftime('%Y-%m-%d %H:%M:%S.%9N %Z')
                }
              }
            ]
@@ -77,7 +77,7 @@ class Subscriptions::FreeExtensionTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_equal 422, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check that the subscribed plan was not altered
     res = json_response(response.body)

@@ -19,8 +19,8 @@ slot_2:
 
 slot_9:
   id: 9
-  start_at: <%= DateTime.current.change({:hour => 12}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= DateTime.current.change({:hour => 13}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= DateTime.current.change({:hour => 12}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= DateTime.current.change({:hour => 13}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   created_at: '2022-07-12 15:18:43.880751'
   updated_at: '2022-07-12 15:18:43.880751'
   availability_id: 3
@@ -28,8 +28,8 @@ slot_9:
 
 slot_10:
   id: 10
-  start_at: <%= DateTime.current.change({:hour => 13}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= DateTime.current.change({:hour => 14}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= DateTime.current.change({:hour => 13}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= DateTime.current.change({:hour => 14}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   created_at: '2022-07-12 15:18:43.882957'
   updated_at: '2022-07-12 15:18:43.882957'
   availability_id: 3
@@ -37,8 +37,8 @@ slot_10:
 
 slot_11:
   id: 11
-  start_at: <%= DateTime.current.change({:hour => 14}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= DateTime.current.change({:hour => 15}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= DateTime.current.change({:hour => 14}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= DateTime.current.change({:hour => 15}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   created_at: '2022-07-12 15:18:43.884691'
   updated_at: '2022-07-12 15:18:43.884691'
   availability_id: 3
@@ -46,8 +46,8 @@ slot_11:
 
 slot_12:
   id: 12
-  start_at: <%= DateTime.current.change({:hour => 15}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= DateTime.current.change({:hour => 16}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= DateTime.current.change({:hour => 15}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= DateTime.current.change({:hour => 16}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   created_at: '2022-07-12 15:18:43.886431'
   updated_at: '2022-07-12 15:18:43.886431'
   availability_id: 3
@@ -55,8 +55,8 @@ slot_12:
 
 slot_13:
   id: 13
-  start_at: <%= DateTime.current.change({:hour => 16}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= DateTime.current.change({:hour => 17}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= DateTime.current.change({:hour => 16}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= DateTime.current.change({:hour => 17}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   created_at: '2022-07-12 15:18:43.888074'
   updated_at: '2022-07-12 15:18:43.888074'
   availability_id: 3
@@ -64,8 +64,8 @@ slot_13:
 
 slot_14:
   id: 14
-  start_at: <%= DateTime.current.change({:hour => 17}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= DateTime.current.change({:hour => 18}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= DateTime.current.change({:hour => 17}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= DateTime.current.change({:hour => 18}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   created_at: '2022-07-12 15:18:43.889691'
   updated_at: '2022-07-12 15:18:43.889691'
   availability_id: 3
@@ -73,8 +73,8 @@ slot_14:
 
 slot_15:
   id: 15
-  start_at: <%= (DateTime.current + 1.day).change({:hour => 12}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= (DateTime.current + 1.day).change({:hour => 13}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= (DateTime.current + 1.day).change({:hour => 12}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= (DateTime.current + 1.day).change({:hour => 13}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   created_at: '2022-07-12 15:18:43.893096'
   updated_at: '2022-07-12 15:18:43.893096'
   availability_id: 4
@@ -82,8 +82,8 @@ slot_15:
 
 slot_16:
   id: 16
-  start_at: <%= (DateTime.current + 1.day).change({:hour => 13}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= (DateTime.current + 1.day).change({:hour => 14}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= (DateTime.current + 1.day).change({:hour => 13}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= (DateTime.current + 1.day).change({:hour => 14}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   created_at: '2022-07-12 15:18:43.894777'
   updated_at: '2022-07-12 15:18:43.894777'
   availability_id: 4
@@ -91,8 +91,8 @@ slot_16:
 
 slot_17:
   id: 17
-  start_at: <%= (DateTime.current + 1.day).change({:hour => 14}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= (DateTime.current + 1.day).change({:hour => 15}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= (DateTime.current + 1.day).change({:hour => 14}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= (DateTime.current + 1.day).change({:hour => 15}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   created_at: '2022-07-12 15:18:43.896423'
   updated_at: '2022-07-12 15:18:43.896423'
   availability_id: 4
@@ -100,8 +100,8 @@ slot_17:
 
 slot_18:
   id: 18
-  start_at: <%= (DateTime.current + 1.day).change({:hour => 15}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= (DateTime.current + 1.day).change({:hour => 16}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= (DateTime.current + 1.day).change({:hour => 15}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= (DateTime.current + 1.day).change({:hour => 16}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   created_at: '2022-07-12 15:18:43.898021'
   updated_at: '2022-07-12 15:18:43.898021'
   availability_id: 4
@@ -109,8 +109,8 @@ slot_18:
 
 slot_19:
   id: 19
-  start_at: <%= (DateTime.current + 1.day).change({:hour => 16}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= (DateTime.current + 1.day).change({:hour => 17}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= (DateTime.current + 1.day).change({:hour => 16}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= (DateTime.current + 1.day).change({:hour => 17}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   created_at: '2022-07-12 15:18:43.899592'
   updated_at: '2022-07-12 15:18:43.899592'
   availability_id: 4
@@ -118,8 +118,8 @@ slot_19:
 
 slot_20:
   id: 20
-  start_at: <%= (DateTime.current + 1.day).change({:hour => 17}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= (DateTime.current + 1.day).change({:hour => 18}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= (DateTime.current + 1.day).change({:hour => 17}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= (DateTime.current + 1.day).change({:hour => 18}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   created_at: '2022-07-12 15:18:43.900938'
   updated_at: '2022-07-12 15:18:43.900938'
   availability_id: 4
@@ -127,8 +127,8 @@ slot_20:
 
 slot_21:
   id: 21
-  start_at: <%= (DateTime.current + 2.day).change({:hour => 12}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= (DateTime.current + 2.day).change({:hour => 13}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= (DateTime.current + 2.day).change({:hour => 12}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= (DateTime.current + 2.day).change({:hour => 13}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   created_at: '2022-07-12 15:18:43.904013'
   updated_at: '2022-07-12 15:18:43.904013'
   availability_id: 5
@@ -136,8 +136,8 @@ slot_21:
 
 slot_22:
   id: 22
-  start_at: <%= (DateTime.current + 2.day).change({:hour => 13}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= (DateTime.current + 2.day).change({:hour => 14}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= (DateTime.current + 2.day).change({:hour => 13}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= (DateTime.current + 2.day).change({:hour => 14}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   created_at: '2022-07-12 15:18:43.905470'
   updated_at: '2022-07-12 15:18:43.905470'
   availability_id: 5
@@ -145,8 +145,8 @@ slot_22:
 
 slot_23:
   id: 23
-  start_at: <%= (DateTime.current + 2.day).change({:hour => 14}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= (DateTime.current + 2.day).change({:hour => 15}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= (DateTime.current + 2.day).change({:hour => 14}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= (DateTime.current + 2.day).change({:hour => 15}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   created_at: '2022-07-12 15:18:43.907030'
   updated_at: '2022-07-12 15:18:43.907030'
   availability_id: 5
@@ -154,8 +154,8 @@ slot_23:
 
 slot_24:
   id: 24
-  start_at: <%= (DateTime.current + 2.day).change({:hour => 15}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= (DateTime.current + 2.day).change({:hour => 16}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= (DateTime.current + 2.day).change({:hour => 15}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= (DateTime.current + 2.day).change({:hour => 16}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   created_at: '2022-07-12 15:18:43.908585'
   updated_at: '2022-07-12 15:18:43.908585'
   availability_id: 5
@@ -163,8 +163,8 @@ slot_24:
 
 slot_25:
   id: 25
-  start_at: <%= (DateTime.current + 2.day).change({:hour => 16}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= (DateTime.current + 2.day).change({:hour => 17}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= (DateTime.current + 2.day).change({:hour => 16}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= (DateTime.current + 2.day).change({:hour => 17}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   created_at: '2022-07-12 15:18:43.910138'
   updated_at: '2022-07-12 15:18:43.910138'
   availability_id: 5
@@ -172,8 +172,8 @@ slot_25:
 
 slot_26:
   id: 26
-  start_at: <%= (DateTime.current + 2.day).change({:hour => 17}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= (DateTime.current + 2.day).change({:hour => 18}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= (DateTime.current + 2.day).change({:hour => 17}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= (DateTime.current + 2.day).change({:hour => 18}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   created_at: '2022-07-12 15:18:43.911643'
   updated_at: '2022-07-12 15:18:43.911643'
   availability_id: 5
@@ -181,8 +181,8 @@ slot_26:
 
 slot_27:
   id: 27
-  start_at: <%= (DateTime.current + 3.day).change({:hour => 12}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= (DateTime.current + 3.day).change({:hour => 13}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= (DateTime.current + 3.day).change({:hour => 12}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= (DateTime.current + 3.day).change({:hour => 13}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   created_at: '2022-07-12 15:18:43.914664'
   updated_at: '2022-07-12 15:18:43.914664'
   availability_id: 6
@@ -190,8 +190,8 @@ slot_27:
 
 slot_28:
   id: 28
-  start_at: <%= (DateTime.current + 3.day).change({:hour => 13}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= (DateTime.current + 3.day).change({:hour => 14}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= (DateTime.current + 3.day).change({:hour => 13}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= (DateTime.current + 3.day).change({:hour => 14}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   created_at: '2022-07-12 15:18:43.916047'
   updated_at: '2022-07-12 15:18:43.916047'
   availability_id: 6
@@ -199,8 +199,8 @@ slot_28:
 
 slot_29:
   id: 29
-  start_at: <%= (DateTime.current + 3.day).change({:hour => 14}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= (DateTime.current + 3.day).change({:hour => 15}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= (DateTime.current + 3.day).change({:hour => 14}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= (DateTime.current + 3.day).change({:hour => 15}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   created_at: '2022-07-12 15:18:43.917304'
   updated_at: '2022-07-12 15:18:43.917304'
   availability_id: 6
@@ -208,8 +208,8 @@ slot_29:
 
 slot_30:
   id: 30
-  start_at: <%= (DateTime.current + 3.day).change({:hour => 15}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= (DateTime.current + 3.day).change({:hour => 16}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= (DateTime.current + 3.day).change({:hour => 15}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= (DateTime.current + 3.day).change({:hour => 16}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   created_at: '2022-07-12 15:18:43.918798'
   updated_at: '2022-07-12 15:18:43.918798'
   availability_id: 6
@@ -217,8 +217,8 @@ slot_30:
 
 slot_31:
   id: 31
-  start_at: <%= (DateTime.current + 3.day).change({:hour => 16}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= (DateTime.current + 3.day).change({:hour => 17}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= (DateTime.current + 3.day).change({:hour => 16}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= (DateTime.current + 3.day).change({:hour => 17}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   created_at: '2022-07-12 15:18:43.920194'
   updated_at: '2022-07-12 15:18:43.920194'
   availability_id: 6
@@ -226,8 +226,8 @@ slot_31:
 
 slot_32:
   id: 32
-  start_at: <%= (DateTime.current + 3.day).change({:hour => 17}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= (DateTime.current + 3.day).change({:hour => 18}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= (DateTime.current + 3.day).change({:hour => 17}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= (DateTime.current + 3.day).change({:hour => 18}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   created_at: '2022-07-12 15:18:43.921662'
   updated_at: '2022-07-12 15:18:43.921662'
   availability_id: 6
@@ -235,8 +235,8 @@ slot_32:
 
 slot_33:
   id: 33
-  start_at: <%= (DateTime.current + 3.day).change({:hour => 12}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= (DateTime.current + 3.day).change({:hour => 13}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= (DateTime.current + 3.day).change({:hour => 12}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= (DateTime.current + 3.day).change({:hour => 13}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   created_at: '2022-07-12 15:18:43.924285'
   updated_at: '2022-07-12 15:18:43.924285'
   availability_id: 7
@@ -244,8 +244,8 @@ slot_33:
 
 slot_34:
   id: 34
-  start_at: <%= (DateTime.current + 3.day).change({:hour => 13}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= (DateTime.current + 3.day).change({:hour => 14}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= (DateTime.current + 3.day).change({:hour => 13}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= (DateTime.current + 3.day).change({:hour => 14}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   created_at: '2022-07-12 15:18:43.925669'
   updated_at: '2022-07-12 15:18:43.925669'
   availability_id: 7
@@ -253,8 +253,8 @@ slot_34:
 
 slot_35:
   id: 35
-  start_at: <%= (DateTime.current + 3.day).change({:hour => 14}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= (DateTime.current + 3.day).change({:hour => 15}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= (DateTime.current + 3.day).change({:hour => 14}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= (DateTime.current + 3.day).change({:hour => 15}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   created_at: '2022-07-12 15:18:43.927038'
   updated_at: '2022-07-12 15:18:43.927038'
   availability_id: 7
@@ -262,8 +262,8 @@ slot_35:
 
 slot_36:
   id: 36
-  start_at: <%= (DateTime.current + 3.day).change({:hour => 15}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= (DateTime.current + 3.day).change({:hour => 16}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= (DateTime.current + 3.day).change({:hour => 15}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= (DateTime.current + 3.day).change({:hour => 16}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   created_at: '2022-07-12 15:18:43.928407'
   updated_at: '2022-07-12 15:18:43.928407'
   availability_id: 7
@@ -271,8 +271,8 @@ slot_36:
 
 slot_37:
   id: 37
-  start_at: <%= (DateTime.current + 3.day).change({:hour => 16}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= (DateTime.current + 3.day).change({:hour => 17}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= (DateTime.current + 3.day).change({:hour => 16}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= (DateTime.current + 3.day).change({:hour => 17}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   created_at: '2022-07-12 15:18:43.929907'
   updated_at: '2022-07-12 15:18:43.929907'
   availability_id: 7
@@ -280,8 +280,8 @@ slot_37:
 
 slot_38:
   id: 38
-  start_at: <%= (DateTime.current + 3.day).change({:hour => 17}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= (DateTime.current + 3.day).change({:hour => 18}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= (DateTime.current + 3.day).change({:hour => 17}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= (DateTime.current + 3.day).change({:hour => 18}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   created_at: '2022-07-12 15:18:43.931295'
   updated_at: '2022-07-12 15:18:43.931295'
   availability_id: 7
@@ -334,8 +334,8 @@ slot_43:
 
 slot_44:
   id: 44
-  start_at:  <%= 20.days.from_now.change({:hour => 6}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at:  <%= 20.days.from_now.change({:hour => 7}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at:  <%= 20.days.from_now.change({:hour => 6}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at:  <%= 20.days.from_now.change({:hour => 7}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   created_at: '2022-07-12 15:18:43.942392'
   updated_at: '2022-07-12 15:18:43.942392'
   availability_id: 14
@@ -343,8 +343,8 @@ slot_44:
 
 slot_45:
   id: 45
-  start_at:  <%= 20.days.from_now.change({:hour => 7}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at:  <%= 20.days.from_now.change({:hour => 8}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at:  <%= 20.days.from_now.change({:hour => 7}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at:  <%= 20.days.from_now.change({:hour => 8}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   created_at: '2022-07-12 15:18:43.943779'
   updated_at: '2022-07-12 15:18:43.943779'
   availability_id: 14
@@ -352,8 +352,8 @@ slot_45:
 
 slot_46:
   id: 46
-  start_at:  <%= 20.days.from_now.change({:hour => 8}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at:  <%= 20.days.from_now.change({:hour => 9}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at:  <%= 20.days.from_now.change({:hour => 8}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at:  <%= 20.days.from_now.change({:hour => 9}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   created_at: '2022-07-12 15:18:43.945154'
   updated_at: '2022-07-12 15:18:43.945154'
   availability_id: 14
@@ -361,8 +361,8 @@ slot_46:
 
 slot_47:
   id: 47
-  start_at:  <%= 20.days.from_now.change({:hour => 9}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at:  <%= 20.days.from_now.change({:hour => 10}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at:  <%= 20.days.from_now.change({:hour => 9}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at:  <%= 20.days.from_now.change({:hour => 10}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   created_at: '2022-07-12 15:18:43.946515'
   updated_at: '2022-07-12 15:18:43.946515'
   availability_id: 14
@@ -370,8 +370,8 @@ slot_47:
 
 slot_48:
   id: 48
-  start_at: <%= 40.days.from_now.change({:hour => 6}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= 40.days.from_now.change({:hour => 7}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= 40.days.from_now.change({:hour => 6}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= 40.days.from_now.change({:hour => 7}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   created_at: '2022-07-12 15:18:43.949178'
   updated_at: '2022-07-12 15:18:43.949178'
   availability_id: 15
@@ -379,8 +379,8 @@ slot_48:
 
 slot_49:
   id: 49
-  start_at: <%= 40.days.from_now.change({:hour => 7}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= 40.days.from_now.change({:hour => 8}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= 40.days.from_now.change({:hour => 7}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= 40.days.from_now.change({:hour => 8}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   created_at: '2022-07-12 15:18:43.950348'
   updated_at: '2022-07-12 15:18:43.950348'
   availability_id: 15
@@ -388,8 +388,8 @@ slot_49:
 
 slot_50:
   id: 50
-  start_at: <%= 40.days.from_now.change({:hour => 8}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= 40.days.from_now.change({:hour => 9}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= 40.days.from_now.change({:hour => 8}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= 40.days.from_now.change({:hour => 9}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   created_at: '2022-07-12 15:18:43.951535'
   updated_at: '2022-07-12 15:18:43.951535'
   availability_id: 15
@@ -397,8 +397,8 @@ slot_50:
 
 slot_51:
   id: 51
-  start_at: <%= 40.days.from_now.change({:hour => 9}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= 40.days.from_now.change({:hour => 10}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= 40.days.from_now.change({:hour => 9}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= 40.days.from_now.change({:hour => 10}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   created_at: '2022-07-12 15:18:43.952864'
   updated_at: '2022-07-12 15:18:43.952864'
   availability_id: 15
@@ -406,8 +406,8 @@ slot_51:
 
 slot_52:
   id: 52
-  start_at: <%= 80.days.from_now.change({:hour => 6}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= 80.days.from_now.change({:hour => 7}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= 80.days.from_now.change({:hour => 6}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= 80.days.from_now.change({:hour => 7}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   created_at: '2022-07-12 15:18:43.955443'
   updated_at: '2022-07-12 15:18:43.955443'
   availability_id: 16
@@ -415,8 +415,8 @@ slot_52:
 
 slot_53:
   id: 53
-  start_at: <%= 80.days.from_now.change({:hour => 7}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= 80.days.from_now.change({:hour => 8}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= 80.days.from_now.change({:hour => 7}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= 80.days.from_now.change({:hour => 8}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   created_at: '2022-07-12 15:18:43.956657'
   updated_at: '2022-07-12 15:18:43.956657'
   availability_id: 16
@@ -424,8 +424,8 @@ slot_53:
 
 slot_54:
   id: 54
-  start_at: <%= 80.days.from_now.change({:hour => 8}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= 80.days.from_now.change({:hour => 9}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= 80.days.from_now.change({:hour => 8}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= 80.days.from_now.change({:hour => 9}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   created_at: '2022-07-12 15:18:43.957811'
   updated_at: '2022-07-12 15:18:43.957811'
   availability_id: 16
@@ -433,8 +433,8 @@ slot_54:
 
 slot_55:
   id: 55
-  start_at: <%= 80.days.from_now.change({:hour => 9}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= 80.days.from_now.change({:hour => 10}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= 80.days.from_now.change({:hour => 9}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= 80.days.from_now.change({:hour => 10}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   created_at: '2022-07-12 15:18:43.959063'
   updated_at: '2022-07-12 15:18:43.959063'
   availability_id: 16
@@ -442,8 +442,8 @@ slot_55:
 
 slot_56:
   id: 56
-  start_at: <%= 10.days.from_now.change({:hour => 10}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= 12.days.from_now.change({:hour => 18}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= 10.days.from_now.change({:hour => 10}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= 12.days.from_now.change({:hour => 18}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   created_at: '2022-07-12 15:18:43.961319'
   updated_at: '2022-07-12 15:18:43.961319'
   availability_id: 17
@@ -451,8 +451,8 @@ slot_56:
 
 slot_112:
   id: 112
-  start_at: <%= 2.days.from_now.change({:hour => 8}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= 2.days.from_now.change({:hour => 9}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= 2.days.from_now.change({:hour => 8}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= 2.days.from_now.change({:hour => 9}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   created_at: '2022-07-12 15:18:44.038089'
   updated_at: '2022-07-12 15:18:44.038089'
   availability_id: 18
@@ -460,8 +460,8 @@ slot_112:
 
 slot_113:
   id: 113
-  start_at: <%= 2.days.from_now.change({:hour => 9}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= 2.days.from_now.change({:hour => 10}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= 2.days.from_now.change({:hour => 9}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= 2.days.from_now.change({:hour => 10}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   created_at: '2022-07-12 15:18:44.039392'
   updated_at: '2022-07-12 15:18:44.039392'
   availability_id: 18
@@ -469,8 +469,8 @@ slot_113:
 
 slot_114:
   id: 114
-  start_at: <%= 2.days.from_now.change({:hour => 10}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= 2.days.from_now.change({:hour => 11}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= 2.days.from_now.change({:hour => 10}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= 2.days.from_now.change({:hour => 11}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   created_at: '2022-07-12 15:18:44.040522'
   updated_at: '2022-07-12 15:18:44.040522'
   availability_id: 18
@@ -478,8 +478,8 @@ slot_114:
 
 slot_115:
   id: 115
-  start_at: <%= 2.days.from_now.change({:hour => 11}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= 2.days.from_now.change({:hour => 12}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= 2.days.from_now.change({:hour => 11}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= 2.days.from_now.change({:hour => 12}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   created_at: '2022-07-12 15:18:44.041937'
   updated_at: '2022-07-12 15:18:44.041937'
   availability_id: 18
@@ -487,8 +487,8 @@ slot_115:
 
 slot_116:
   id: 116
-  start_at: <%= 1.day.from_now.change({:hour => 8}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= 1.day.from_now.change({:hour => 9}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= 1.day.from_now.change({:hour => 8}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= 1.day.from_now.change({:hour => 9}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   created_at: '2022-07-12 15:18:44.044421'
   updated_at: '2022-07-12 15:18:44.044421'
   availability_id: 19
@@ -496,8 +496,8 @@ slot_116:
 
 slot_117:
   id: 117
-  start_at: <%= 1.day.from_now.change({:hour => 9}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= 1.day.from_now.change({:hour => 10}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= 1.day.from_now.change({:hour => 9}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= 1.day.from_now.change({:hour => 10}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   created_at: '2022-07-12 15:18:44.045689'
   updated_at: '2022-07-12 15:18:44.045689'
   availability_id: 19
@@ -505,8 +505,8 @@ slot_117:
 
 slot_118:
   id: 118
-  start_at: <%= 1.day.from_now.change({:hour => 10}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= 1.day.from_now.change({:hour => 11}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= 1.day.from_now.change({:hour => 10}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= 1.day.from_now.change({:hour => 11}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   created_at: '2022-07-12 15:18:44.047009'
   updated_at: '2022-07-12 15:18:44.047009'
   availability_id: 19
@@ -514,8 +514,8 @@ slot_118:
 
 slot_119:
   id: 119
-  start_at: <%= 1.day.from_now.change({:hour => 11}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= 1.day.from_now.change({:hour => 12}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= 1.day.from_now.change({:hour => 11}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= 1.day.from_now.change({:hour => 12}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   created_at: '2022-07-12 15:18:44.048272'
   updated_at: '2022-07-12 15:18:44.048272'
   availability_id: 19
@@ -523,8 +523,8 @@ slot_119:
 
 slot_120:
   id: 120
-  start_at: <%= 1.day.from_now.change({:hour => 12}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= 1.day.from_now.change({:hour => 13}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= 1.day.from_now.change({:hour => 12}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= 1.day.from_now.change({:hour => 13}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   created_at: '2022-07-12 15:18:44.049599'
   updated_at: '2022-07-12 15:18:44.049599'
   availability_id: 19
@@ -532,8 +532,8 @@ slot_120:
 
 slot_121:
   id: 121
-  start_at: <%= 1.day.from_now.change({:hour => 13}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= 1.day.from_now.change({:hour => 14}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= 1.day.from_now.change({:hour => 13}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= 1.day.from_now.change({:hour => 14}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   created_at: '2022-07-12 15:18:44.050947'
   updated_at: '2022-07-12 15:18:44.050947'
   availability_id: 19
@@ -541,8 +541,8 @@ slot_121:
 
 slot_122:
   id: 122
-  start_at: <%= 1.day.from_now.change({:hour => 14}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= 1.day.from_now.change({:hour => 15}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= 1.day.from_now.change({:hour => 14}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= 1.day.from_now.change({:hour => 15}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   created_at: '2022-07-12 15:18:44.052817'
   updated_at: '2022-07-12 15:18:44.052817'
   availability_id: 19
@@ -550,8 +550,8 @@ slot_122:
 
 slot_123:
   id: 123
-  start_at: <%= 1.day.from_now.change({:hour => 15}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= 1.day.from_now.change({:hour => 16}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= 1.day.from_now.change({:hour => 15}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= 1.day.from_now.change({:hour => 16}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   created_at: '2022-07-12 15:18:44.054966'
   updated_at: '2022-07-12 15:18:44.054966'
   availability_id: 19
@@ -559,8 +559,8 @@ slot_123:
 
 slot_124:
   id: 124
-  start_at: <%= 1.day.from_now.change({:hour => 16}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= 1.day.from_now.change({:hour => 17}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= 1.day.from_now.change({:hour => 16}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= 1.day.from_now.change({:hour => 17}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   created_at: '2022-07-12 15:18:44.057217'
   updated_at: '2022-07-12 15:18:44.057217'
   availability_id: 19
@@ -568,8 +568,8 @@ slot_124:
 
 slot_125:
   id: 125
-  start_at: <%= 1.day.from_now.change({:hour => 17}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= 1.day.from_now.change({:hour => 18}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= 1.day.from_now.change({:hour => 17}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= 1.day.from_now.change({:hour => 18}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   created_at: '2022-07-12 15:18:44.059135'
   updated_at: '2022-07-12 15:18:44.059135'
   availability_id: 19
@@ -577,8 +577,8 @@ slot_125:
 
 slot_126:
   id: 126
-  start_at: <%= DateTime.current.change({:hour => 6}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= DateTime.current.change({:hour => 10}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= DateTime.current.change({:hour => 6}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= DateTime.current.change({:hour => 10}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   created_at: '2022-07-12 15:18:44.061887'
   updated_at: '2022-07-12 15:18:44.061887'
   availability_id: 1
@@ -586,8 +586,8 @@ slot_126:
 
 slot_127:
   id: 127
-  start_at: <%= (DateTime.current + 1.day).change({:hour => 6}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= (DateTime.current + 1.day).change({:hour => 10}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= (DateTime.current + 1.day).change({:hour => 6}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= (DateTime.current + 1.day).change({:hour => 10}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   created_at: '2022-07-12 15:18:44.063528'
   updated_at: '2022-07-12 15:18:44.063528'
   availability_id: 2
@@ -595,8 +595,8 @@ slot_127:
 
 slot_128:
   id: 128
-  start_at: <%= (DateTime.current + 2.day).change({:hour => 6}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= (DateTime.current + 2.day).change({:hour => 10}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= (DateTime.current + 2.day).change({:hour => 6}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= (DateTime.current + 2.day).change({:hour => 10}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   created_at: '2022-07-12 15:18:44.065114'
   updated_at: '2022-07-12 15:18:44.065114'
   availability_id: 8
@@ -631,8 +631,8 @@ slot_131:
 
 slot_132:
   id: 132
-  start_at: <%= 10.days.ago.change({:hour => 8}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= 10.days.ago.change({:hour => 10}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= 10.days.ago.change({:hour => 8}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= 10.days.ago.change({:hour => 10}).strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   created_at: '2022-07-18 12:38:21.616510'
   updated_at: '2022-07-18 12:38:21.616510'
   availability_id: 20
@@ -640,8 +640,8 @@ slot_132:
 
 slot_133:
   id: 133
-  start_at: <%= 10.minutes.from_now.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= (10.minutes.from_now + 1.hour).strftime('%Y-%m-%d %H:%M:%S.%9N Z')  %>
+  start_at: <%= 10.minutes.from_now.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= (10.minutes.from_now + 1.hour).strftime('%Y-%m-%d %H:%M:%S.%9N %Z')  %>
   created_at: '2022-12-14 12:01:26.165110'
   updated_at: '2022-12-14 12:01:26.165110'
   availability_id: 21
@@ -649,8 +649,8 @@ slot_133:
 
 slot_134:
   id: 134
-  start_at: <%= 1.hour.from_now.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= 2.hours.from_now.strftime('%Y-%m-%d %H:%M:%S.%9N Z')  %>
+  start_at: <%= 1.hour.from_now.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  end_at: <%= 2.hours.from_now.strftime('%Y-%m-%d %H:%M:%S.%9N %Z')  %>
   created_at: 2023-01-24 13:34:43.841240000 Z
   updated_at: 2023-01-24 13:34:43.841240000 Z
   availability_id: 22

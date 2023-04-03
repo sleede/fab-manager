@@ -3,7 +3,7 @@
 # API Controller for resources of type Slot
 # Slots are used to cut Availabilities into reservable slots. The duration of these slots is configured per
 # availability by Availability.slot_duration, or otherwise globally by Setting.get('slot_duration')
-class API::SlotsReservationsController < API::ApiController
+class API::SlotsReservationsController < API::APIController
   before_action :authenticate_user!
   before_action :set_slots_reservation, only: %i[update cancel]
   respond_to :json

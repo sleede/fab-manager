@@ -2,7 +2,7 @@
 
 # API Controller for resources of type Credit
 # Credits are used to give free reservations to users
-class API::CreditsController < API::ApiController
+class API::CreditsController < API::APIController
   before_action :authenticate_user!
   before_action :set_credit, only: %i[show update destroy]
 
@@ -14,6 +14,8 @@ class API::CreditsController < API::ApiController
                  Credit.includes(:creditable).all
                end
   end
+
+  def show; end
 
   def create
     authorize Credit

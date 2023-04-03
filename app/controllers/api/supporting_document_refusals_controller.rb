@@ -2,7 +2,7 @@
 
 # API Controller for resources of type SupportingDocumentRefusal
 # SupportingDocumentRefusal are used by admin refuse user's proof of identity file
-class API::SupportingDocumentRefusalsController < API::ApiController
+class API::SupportingDocumentRefusalsController < API::APIController
   before_action :authenticate_user!
 
   def index

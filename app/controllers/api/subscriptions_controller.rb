@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # API Controller for resources of type Subscription
-class API::SubscriptionsController < API::ApiController
+class API::SubscriptionsController < API::APIController
   before_action :set_subscription, only: %i[show payment_details cancel]
   before_action :authenticate_user!
 

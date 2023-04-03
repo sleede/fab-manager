@@ -13,5 +13,4 @@ class OpenApi::TrainingsTest < ActionDispatch::IntegrationTest
     get '/open_api/v1/trainings', headers: open_api_headers(@token)
     assert_response :success
   end
-
 end

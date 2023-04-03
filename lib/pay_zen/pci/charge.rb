@@ -32,6 +32,4 @@ class PayZen::PCI::Charge < PayZen::Client
          device: device,
          paymentForms: payment_forms)
   end
-
 end
-

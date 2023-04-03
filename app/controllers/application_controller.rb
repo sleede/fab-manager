@@ -7,7 +7,6 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   after_action :set_csrf_cookie
-  cache_sweeper :stylesheet_sweeper
 
   respond_to :html, :json
 
@@ -42,7 +41,7 @@ class ApplicationController < ActionController::Base
                                         {
                                           profile_attributes: %i[phone last_name first_name interest software_mastered],
                                           invoicing_profile_attributes: [
-                                            organization_attributes: [:name, address_attributes: [:address]],
+                                            organization_attributes: [:name, { address_attributes: [:address] }],
                                             user_profile_custom_fields_attributes: %i[profile_custom_field_id value],
                                             address_attributes: [:address]
                                           ],
@@ -60,14 +59,14 @@ class ApplicationController < ActionController::Base
   end
 
   def permission_denied
-    head 403
+    head :forbidden
   end
 
   # Set the configured locale for each action (API call)
   # @see https://guides.rubyonrails.org/i18n.html
-  def switch_locale(&action)
+  def switch_locale(&)
     locale = params[:locale] || Rails.application.secrets.rails_locale
-    I18n.with_locale(locale, &action)
+    I18n.with_locale(locale, &)
   end
 
   # @return [User]

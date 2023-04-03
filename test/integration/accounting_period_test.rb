@@ -22,7 +22,7 @@ class AccountingPeriodTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_equal 201, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check the correct period was closed successfully
     period = json_response(response.body)
@@ -49,10 +49,10 @@ class AccountingPeriodTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_equal 422, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # check the error
-    assert_match(/#{I18n.t('errors.messages.invalid_duration', DAYS: diff)}/, response.body)
+    assert_match(/#{I18n.t('errors.messages.invalid_duration', **{ DAYS: diff })}/, response.body)
   end
 
   test 'admin tries to close an overlapping period' do
@@ -69,7 +69,7 @@ class AccountingPeriodTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_equal 422, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # check the error
     assert_match(/#{I18n.t('errors.messages.cannot_overlap')}/, response.body)
@@ -89,7 +89,7 @@ class AccountingPeriodTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_equal 422, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # check the error
     assert_match(/#{I18n.t('errors.messages.must_be_in_the_past')}/, response.body)
@@ -99,7 +99,7 @@ class AccountingPeriodTest < ActionDispatch::IntegrationTest
     get '/api/accounting_periods/last_closing_end'
 
     assert_equal 200, response.status
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
     resp = json_response(response.body)
 
     period_end = AccountingPeriod.first.end_at
@@ -117,7 +117,7 @@ class AccountingPeriodTest < ActionDispatch::IntegrationTest
     get '/api/accounting_periods'
     # Check response format & status
     assert_equal 200, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check the periods
     periods = json_response(response.body)

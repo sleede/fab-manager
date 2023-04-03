@@ -2,7 +2,7 @@
 
 # public API controller for resources of type Price
 class OpenAPI::V1::PricesController < OpenAPI::V1::BaseController
-  extend OpenAPI::ApiDoc
+  extend OpenAPI::APIDoc
   include Rails::Pagination
   expose_doc
 

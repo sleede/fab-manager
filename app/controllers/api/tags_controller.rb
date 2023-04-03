@@ -2,8 +2,7 @@
 
 # API Controller for resources of type Tag
 # Tags are used to restrict access to Availabilities
-class API::TagsController < API::ApiController
-
+class API::TagsController < API::APIController
   before_action :authenticate_user!, except: %i[index show]
   before_action :set_tag, only: %i[show update destroy]
 

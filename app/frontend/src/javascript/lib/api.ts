@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import { ApiFilter } from '../models/api';
-import { serialize } from 'object-to-formdata';
+import { serialize } from 'object-to-formdata-tz';
 
 export default class ApiLib {
   static filtersToQuery (filters?: ApiFilter, keepNullValues = true): string {

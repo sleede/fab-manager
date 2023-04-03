@@ -6,6 +6,8 @@ Layout/LineLength:
   Max: 145
 Metrics/MethodLength:
   Max: 35
+  Exclude:
+    - 'app/pdfs/pdf/*.rb'
 Metrics/CyclomaticComplexity:
   Max: 14
 Metrics/PerceivedComplexity:
@@ -19,6 +21,7 @@ Metrics/BlockLength:
   Exclude:
     - 'lib/tasks/**/*.rake'
     - 'config/routes.rb'
+    - 'config/environments/*.rb'
     - 'app/pdfs/pdf/*.rb'
     - 'test/**/*.rb'
     - '**/*_concern.rb'
@@ -38,6 +41,8 @@ Rails/RedundantPresenceValidationOnBelongsTo:
   Enabled: false
 Style/DateTime:
   Enabled: true
+Style/HashSyntax:
+  EnforcedShorthandSyntax: never
 Rails/TimeZone:
   Enabled: true
 Rails/UnknownEnv:

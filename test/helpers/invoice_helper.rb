@@ -42,6 +42,7 @@ module InvoiceHelper
     )
     reservation.save
     invoice = Invoice.new(
+      total: 1000,
       invoicing_profile: customer.invoicing_profile,
       statistic_profile: customer.statistic_profile,
       operator_profile: operator.invoicing_profile,

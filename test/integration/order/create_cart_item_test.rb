@@ -20,7 +20,7 @@ class CreateCartItemTest < ActionDispatch::IntegrationTest
          }
     # general assertions
     assert_equal 201, response.status
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check the cart item was created correctly
     res = json_response(response.body)
@@ -46,7 +46,7 @@ class CreateCartItemTest < ActionDispatch::IntegrationTest
          }
     # general assertions
     assert_equal 201, response.status
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check the cart item was created correctly
     res = json_response(response.body)
@@ -70,7 +70,7 @@ class CreateCartItemTest < ActionDispatch::IntegrationTest
          }
     # general assertions
     assert_equal 201, response.status
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check the cart item was created correctly
     res = json_response(response.body)
@@ -94,7 +94,7 @@ class CreateCartItemTest < ActionDispatch::IntegrationTest
          }
     # general assertions
     assert_equal 201, response.status
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check the cart item was created correctly
     res = json_response(response.body)
@@ -119,7 +119,7 @@ class CreateCartItemTest < ActionDispatch::IntegrationTest
          }
     # general assertions
     assert_equal 201, response.status
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check the cart item was created correctly
     res = json_response(response.body)
@@ -138,7 +138,7 @@ class CreateCartItemTest < ActionDispatch::IntegrationTest
          }
     # general assertions
     assert_equal 201, response.status
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check the cart item was created correctly
     res = json_response(response.body)
@@ -156,7 +156,7 @@ class CreateCartItemTest < ActionDispatch::IntegrationTest
          }
     # general assertions
     assert_equal 201, response.status
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check the cart item was created correctly
     res = json_response(response.body)

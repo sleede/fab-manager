@@ -26,12 +26,12 @@ class ProductsTest < ActionDispatch::IntegrationTest
              low_stock_threshold: 100,
              machine_ids: [4, 6],
              product_files_attributes: [
-               { attachment: fixture_file_upload('/files/document.pdf', 'application/pdf', true) },
-               { attachment: fixture_file_upload('/files/document2.pdf', 'application/pdf', true) }
+               { attachment: fixture_file_upload('document.pdf', 'application/pdf', true) },
+               { attachment: fixture_file_upload('document2.pdf', 'application/pdf', true) }
              ],
              product_images_attributes: [
-               { attachment: fixture_file_upload('/files/products/pla-filament.jpg', 'image/jpg'), is_main: true },
-               { attachment: fixture_file_upload('/files/products/pla-filament2.jpg', 'image/jpg'), is_main: false }
+               { attachment: fixture_file_upload('products/pla-filament.jpg', 'image/jpg'), is_main: true },
+               { attachment: fixture_file_upload('products/pla-filament2.jpg', 'image/jpg'), is_main: false }
              ],
              advanced_accounting_attributes: {
                code: '704611',
@@ -47,7 +47,7 @@ class ProductsTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_equal 201, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check the poduct was correctly created
     db_product = Product.where(name: name).first
@@ -90,7 +90,7 @@ class ProductsTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_equal 200, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check the product was correctly updated
     db_product.reload
@@ -121,7 +121,7 @@ class ProductsTest < ActionDispatch::IntegrationTest
         }.to_json,
         headers: default_headers
     assert_response :success
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check the new product
     product = Product.last

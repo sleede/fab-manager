@@ -9,10 +9,13 @@ class AuthProvidersTest < ActionDispatch::IntegrationTest
   def setup
     @admin = User.find_by(username: 'admin')
     login_as(@admin, scope: :user)
-    Fablab::Application.load_tasks if Rake::Task.tasks.empty?
+    FabManager::Application.load_tasks if Rake::Task.tasks.empty?
   end
 
   test 'create an auth external provider and activate it' do
+    # clean any existing auth provider config
+    FileUtils.rm('config/auth_provider.yml', force: true)
+
     name = 'GitHub'
     post '/api/auth_providers',
          params: {
@@ -22,7 +25,7 @@ class AuthProvidersTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_equal 201, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check the provider was correctly created
     db_provider = OAuth2Provider.includes(:auth_provider).where('auth_providers.name': name).first&.auth_provider
@@ -40,9 +43,18 @@ class AuthProvidersTest < ActionDispatch::IntegrationTest
     db_provider&.reload
     assert_equal 'active', db_provider&.status
     assert_equal AuthProvider.active.id, db_provider&.id
-    User.all.each do |u|
+    User.find_each do |u|
       assert_not_nil u.auth_token
     end
+
+    # Check the configuration file
+    assert File.exist?('config/auth_provider.yml')
+    config = ProviderConfig.new
+    assert_equal 'OAuth2Provider', config.providable_type
+    assert_equal name, config.name
+
+    # clean test provider config
+    FileUtils.rm('config/auth_provider.yml', force: true)
   end
 
   test 'update an authentication provider' do
@@ -61,7 +73,7 @@ class AuthProvidersTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_equal 200, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     provider.reload
 
@@ -91,7 +103,7 @@ class AuthProvidersTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_equal 200, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check the answer
     res = json_response(response.body)
@@ -104,7 +116,7 @@ class AuthProvidersTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_equal 200, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check the provider
     res = json_response(response.body)
@@ -116,7 +128,7 @@ class AuthProvidersTest < ActionDispatch::IntegrationTest
     get '/api/auth_providers/mapping_fields'
 
     assert_equal 200, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check the returned fields
     res = json_response(response.body)
@@ -130,7 +142,7 @@ class AuthProvidersTest < ActionDispatch::IntegrationTest
     get '/api/auth_providers/active'
 
     assert_equal 200, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check the returned fields
     res = json_response(response.body)
@@ -153,7 +165,7 @@ class AuthProvidersTest < ActionDispatch::IntegrationTest
          headers: default_headers
 
     assert_equal 200, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # check resulting notification
     notification = Notification.find_by(

@@ -6,16 +6,10 @@ class PeriodOverlapValidator < ActiveModel::Validator
     the_end = record.end_at
     the_start = record.start_at
 
-    AccountingPeriod.all.each do |period|
-      if the_start >= period.start_at && the_start <= period.end_at
-        record.errors[:start_at] << I18n.t('errors.messages.cannot_overlap')
-      end
-      if the_end >= period.start_at && the_end <= period.end_at
-        record.errors[:end_at] << I18n.t('errors.messages.cannot_overlap')
-      end
-      if period.start_at >= the_start && period.end_at <= the_end
-        record.errors[:end_at] << I18n.t('errors.messages.cannot_encompass')
-      end
+    AccountingPeriod.find_each do |period|
+      record.errors.add(:start_at, I18n.t('errors.messages.cannot_overlap')) if the_start >= period.start_at && the_start <= period.end_at
+      record.errors.add(:end_at, I18n.t('errors.messages.cannot_overlap')) if the_end >= period.start_at && the_end <= period.end_at
+      record.errors.add(:end_at, I18n.t('errors.messages.cannot_encompass')) if period.start_at >= the_start && period.end_at <= the_end
     end
   end
 end

@@ -15,8 +15,4 @@ if [[ -z "$stripe_secret_key" ]]; then
   if [[ -z "$stripe_secret_key" ]]; then echo "Key was not set, exiting..."; exit 1; fi
 fi
 
-RAILS_ENV='test' bin/rails db:drop
-RAILS_ENV='test' bin/rails db:create
-RAILS_ENV='test' bin/rails db:migrate
-clear
-STRIPE_PUBLISHABLE_KEY="$stripe_public_key" STRIPE_API_KEY="$stripe_secret_key" RAILS_ENV='test' bundle exec bin/rails test "$@"
+STRIPE_PUBLISHABLE_KEY="$stripe_public_key" STRIPE_API_KEY="$stripe_secret_key" RAILS_ENV='test' bin/rails test "$@"

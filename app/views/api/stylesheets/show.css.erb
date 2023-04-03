@@ -1,1 +1,3 @@
-<%= @stylesheet.contents.html_safe %>
+<% cache @stylesheet do %>
+  <%= @stylesheet.contents.html_safe %>
+<% end %>

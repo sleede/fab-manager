@@ -3,12 +3,18 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.2.8'
+gem 'rails', '~> 7.0'
 # Used by rails 5.2 to reduce the app boot time by over 50%
 gem 'bootsnap'
 # Use Puma as web server
-gem 'puma', '4.3.12'
-gem 'shakapacker', '6.5.5'
+gem 'puma', '6.1.0'
+gem 'shakapacker', '6.6.0'
+
+# rails 6 compatibility with ruby 3 (may not be required after upgrade to rails 7)
+gem 'matrix'
+gem 'net-imap', require: false
+gem 'net-pop', require: false
+gem 'net-smtp', require: false
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
@@ -17,7 +23,7 @@ gem 'json', '>= 2.3.0'
 gem 'jsonpath'
 
 gem 'forgery'
-gem 'responders', '~> 2.0'
+gem 'responders', '~> 3.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -33,26 +39,26 @@ group :development do
   gem 'bullet'
   gem 'coveralls_reborn', '~> 0.18.0', require: false
   gem 'foreman'
-  gem 'web-console', '>= 3.3.0'
+  gem 'web-console', '>= 4.2.0'
   # Preview mail in the browser
   gem 'listen', '~> 3.0.5'
   gem 'overcommit'
+  gem 'pry'
   gem 'rb-readline'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'railroady'
   gem 'rubocop', '~> 1.31', require: false
   gem 'rubocop-rails', require: false
-  gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'spring', '~> 4'
+  gem 'spring-watcher-listen', '~> 2.1.0'
 end
 
 group :test do
   gem 'database_cleaner'
   gem 'faker'
   gem 'minitest-reporters'
-  gem 'pdf-reader'
   gem 'rubyXL'
-  gem 'vcr', '6.0.0'
+  gem 'vcr', '~> 6.1.0'
   gem 'webmock'
 end
 
@@ -62,11 +68,11 @@ gem 'pg'
 gem 'pg_search'
 
 # authentication
-gem 'devise', '>= 4.6.0'
-gem 'omniauth', '~> 1.9.2'
+gem 'devise', '>= 4.9'
+gem 'omniauth', '~> 2.1'
 gem 'omniauth-oauth2'
 gem 'omniauth_openid_connect'
-gem 'omniauth-rails_csrf_protection', '~> 0.1'
+gem 'omniauth-rails_csrf_protection', '~> 1.0'
 
 gem 'rolify'
 
@@ -95,6 +101,7 @@ gem 'stripe', '5.29.0'
 gem 'recurrence'
 
 # PDF
+gem 'pdf-reader'
 gem 'prawn'
 gem 'prawn-table'
 
@@ -106,9 +113,6 @@ gem 'faraday', '~> 0.17'
 gem 'pundit'
 
 gem 'oj'
-
-gem 'actionpack-page_caching', '1.2.2'
-gem 'rails-observers'
 
 gem 'chroma'
 
@@ -136,7 +140,7 @@ gem 'icalendar'
 gem 'tzinfo-data'
 
 # compilation of dynamic stylesheets (home page & theme)
-gem 'sassc', '= 2.1.0'
+gem 'sassc', '= 2.4.0'
 
 gem 'redis-session-store'
 

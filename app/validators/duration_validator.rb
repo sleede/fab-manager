@@ -7,8 +7,8 @@ class DurationValidator < ActiveModel::Validator
     the_start = record.start_at
     diff = (the_end - the_start).to_i
     # 0.day means that (the_start == the_end), so it's a one day period
-    return if diff.days >= 0.day && diff.days <= 1.year
+    return if diff.days >= 0.days && diff.days <= 1.year
 
-    record.errors[:end_at] << I18n.t('errors.messages.invalid_duration', DAYS: diff)
+    record.errors.add(:end_at, I18n.t('errors.messages.invalid_duration', **{ DAYS: diff }))
   end
 end

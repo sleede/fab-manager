@@ -10,23 +10,17 @@ require './app/helpers/application_helper'
 
 # Retrieve all availabilities and their related objects and write the result as a table in an excel file
 class AvailabilitiesExportService
-
   # export all availabilities
   def export_index(export)
     @availabilities = Availability.all.includes(:machines, :trainings, :spaces, :event, :slots)
 
-    ActionController::Base.prepend_view_path './app/views/'
-    # place data in view_assigns
-    view_assigns = { availabilities: @availabilities }
-    av = ActionView::Base.new(ActionController::Base.view_paths, view_assigns)
-    av.class_eval do
-      # include any needed helpers (for the view)
-      include ApplicationHelper
-    end
-
-    content = av.render template: 'exports/availabilities_index.xlsx.axlsx'
+    content = ApplicationController.render(
+      template: 'exports/availabilities_index',
+      locals: { availabilities: @availabilities },
+      handlers: [:axlsx],
+      formats: [:xlsx]
+    )
     # write content to file
-    File.open(export.file, 'w+b') { |f| f.write content }
+    File.binwrite(export.file, content)
   end
-
 end

@@ -5,7 +5,7 @@ wb = xlsx_package.workbook
 header = wb.styles.add_style b: true, bg_color: Stylesheet.primary.upcase.gsub('#', 'FF'), fg_color: 'FFFFFFFF'
 date = wb.styles.add_style format_code: Rails.application.secrets.excel_date_format
 
-@indices.each do |index|
+indices.each do |index|
   next unless index.table
 
   index.statistic_types.each do |type|
@@ -22,12 +22,12 @@ date = wb.styles.add_style format_code: Rails.application.secrets.excel_date_for
       sheet.add_row columns, style: header
 
       # data rows
-      @results['hits']['hits'].each do |hit|
+      results['hits']['hits'].each do |hit|
         # check that the current result is for the given index and type
         next unless hit['_type'] == index.es_type_key && hit['_source']['type'] == type.key
 
         # get matching objects
-        user = get_item(@users, hit['_source']['userId'])
+        user = get_item(users, hit['_source']['userId'])
         subtype = get_item(type.statistic_sub_types, hit['_source']['subType'], 'key')
         # start to fill data and associated styles and data-types
         data, styles, types = statistics_line(hit, user, type, subtype, date)

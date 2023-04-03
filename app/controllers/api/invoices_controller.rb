@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # API Controller for resources of Invoice and Avoir
-class API::InvoicesController < API::ApiController
+class API::InvoicesController < API::APIController
   before_action :authenticate_user!
   before_action :set_invoice, only: %i[show download]
 

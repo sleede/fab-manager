@@ -6,13 +6,13 @@ payment_schedule_12:
   wallet_amount:
   wallet_transaction_id:
   coupon_id:
-  footprint: d4b66236895cdf18e21f64429a388050407f29bc228141ed95c89686b7daa716
   environment: development
   invoicing_profile_id: 9
   statistic_profile_id: 9
   operator_profile_id: 1
   created_at: '2021-06-14 12:24:45.843714'
   updated_at: '2021-06-14 12:24:45.908386'
+  order_number: 000007-06-21
 
 payment_schedule_13:
   id: 13
@@ -22,10 +22,10 @@ payment_schedule_13:
   wallet_amount:
   wallet_transaction_id:
   coupon_id:
-  footprint: fakefakefakefakefakefake
   environment: development
   invoicing_profile_id: 10
   statistic_profile_id: 10
   operator_profile_id: 10
-  created_at: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  updated_at: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  created_at: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  updated_at: <%= 9.months.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
+  order_number: <%= 9.months.ago.utc.strftime('000008-%m-%y') %>

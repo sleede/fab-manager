@@ -32,7 +32,7 @@ class Space < ApplicationRecord
   accepts_nested_attributes_for :advanced_accounting, allow_destroy: true
 
   has_many :cart_item_space_reservations, class_name: 'CartItem::SpaceReservation', dependent: :destroy, inverse_of: :reservable,
-                                          foreign_type: 'reservable_type', foreign_key: 'reservable_id'
+                                          foreign_type: 'reservable_type', as: :reservable
 
   after_create :create_statistic_subtype
   after_create :create_space_prices

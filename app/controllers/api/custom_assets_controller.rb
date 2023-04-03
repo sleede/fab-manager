@@ -2,9 +2,9 @@
 
 # API Controller for resources of type CustomAsset
 # CustomAssets are used in settings
-class API::CustomAssetsController < API::ApiController
-  before_action :authenticate_user!, only: %i[index update create destroy]
-  before_action :set_custom_asset, only: %i[show update destroy]
+class API::CustomAssetsController < API::APIController
+  before_action :authenticate_user!, only: %i[update create]
+  before_action :set_custom_asset, only: %i[show update]
 
   # PUT /api/custom_assets/1/
   def update
@@ -40,5 +40,4 @@ class API::CustomAssetsController < API::ApiController
   def custom_asset_params
     params.required(:custom_asset).permit(:name, custom_asset_file_attributes: [:attachment])
   end
-
 end

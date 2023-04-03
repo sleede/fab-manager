@@ -7,7 +7,7 @@ class InvoiceWorker
   def perform(invoice_id)
     # generate a invoice
     invoice = Invoice.find invoice_id
-    pdf = ::PDF::Invoice.new(invoice).render
+    pdf = ::Pdf::Invoice.new(invoice).render
 
     # store invoice on drive
     File.binwrite(invoice.file, pdf)

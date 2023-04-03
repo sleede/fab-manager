@@ -24,7 +24,7 @@ class Availabilities::UpdateTest < ActionDispatch::IntegrationTest
           }
 
     assert_response :success
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     res = json_response(response.body)
     assert_not_includes res[:machine_ids], machine.id

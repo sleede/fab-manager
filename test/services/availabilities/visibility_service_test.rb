@@ -42,15 +42,15 @@ class Availabilities::VisibilityServiceTest < ActiveSupport::TestCase
     starting = Time.current.beginning_of_day
     ending = 1.month.from_now.end_of_day
     window = Availabilities::VisibilityService.new.visibility(@no_subscription, 'space', starting, ending)
-    assert_datetimes_equal Time.current, window[0]
-    assert_datetimes_equal 1.month.from_now, window[1]
+    assert_datetimes_near Time.current, window[0]
+    assert_datetimes_near 1.month.from_now, window[1]
   end
 
   test 'member visibility for the previous month' do
     starting = 1.month.ago.end_of_day
     ending = Time.current.beginning_of_day
     window = Availabilities::VisibilityService.new.visibility(@no_subscription, 'space', starting, ending)
-    assert_datetimes_equal Time.current, window[0]
+    assert_datetimes_near Time.current, window[0]
     assert_equal ending, window[1]
   end
 
@@ -58,23 +58,23 @@ class Availabilities::VisibilityServiceTest < ActiveSupport::TestCase
     starting = Time.current.beginning_of_day
     ending = 1.year.from_now.end_of_day
     window = Availabilities::VisibilityService.new.visibility(@no_subscription, 'space', starting, ending)
-    assert_datetimes_equal Time.current, window[0]
-    assert_datetimes_equal 1.month.from_now, window[1]
+    assert_datetimes_near Time.current, window[0]
+    assert_datetimes_near 1.month.from_now, window[1]
   end
 
   test 'subscriber visibility for the coming month' do
     starting = Time.current.beginning_of_day
     ending = 1.month.from_now.end_of_day
     window = Availabilities::VisibilityService.new.visibility(@with_subscription, 'space', starting, ending)
-    assert_datetimes_equal Time.current, window[0]
-    assert_datetimes_equal 1.month.from_now, window[1]
+    assert_datetimes_near Time.current, window[0]
+    assert_datetimes_near 1.month.from_now, window[1]
   end
 
   test 'subscriber visibility for the previous month' do
     starting = 1.month.ago.end_of_day
     ending = Time.current.beginning_of_day
     window = Availabilities::VisibilityService.new.visibility(@with_subscription, 'space', starting, ending)
-    assert_datetimes_equal Time.current, window[0]
+    assert_datetimes_near Time.current, window[0]
     assert_equal ending, window[1]
   end
 
@@ -82,15 +82,15 @@ class Availabilities::VisibilityServiceTest < ActiveSupport::TestCase
     starting = Time.current.beginning_of_day
     ending = 1.year.from_now.end_of_day
     window = Availabilities::VisibilityService.new.visibility(@with_subscription, 'space', starting, ending)
-    assert_datetimes_equal Time.current, window[0]
-    assert_datetimes_equal 1.month.from_now, window[1]
+    assert_datetimes_near Time.current, window[0]
+    assert_datetimes_near 1.month.from_now, window[1]
   end
 
   test '1 year subscriber visibility for the coming month' do
     starting = Time.current.beginning_of_day
     ending = 1.month.from_now.end_of_day
     window = Availabilities::VisibilityService.new.visibility(@with_1y_subscription, 'space', starting, ending)
-    assert_datetimes_equal Time.current, window[0]
+    assert_datetimes_near Time.current, window[0]
     assert_equal ending, window[1]
   end
 
@@ -98,7 +98,7 @@ class Availabilities::VisibilityServiceTest < ActiveSupport::TestCase
     starting = 1.month.ago.end_of_day
     ending = Time.current.beginning_of_day
     window = Availabilities::VisibilityService.new.visibility(@with_1y_subscription, 'space', starting, ending)
-    assert_datetimes_equal Time.current, window[0]
+    assert_datetimes_near Time.current, window[0]
     assert_equal ending, window[1]
   end
 
@@ -106,16 +106,16 @@ class Availabilities::VisibilityServiceTest < ActiveSupport::TestCase
     starting = Time.current.beginning_of_day
     ending = 1.year.from_now.end_of_day
     window = Availabilities::VisibilityService.new.visibility(@with_1y_subscription, 'space', starting, ending)
-    assert_datetimes_equal Time.current, window[0]
-    assert_datetimes_equal 3.months.from_now, window[1]
+    assert_datetimes_near Time.current, window[0]
+    assert_datetimes_near 3.months.from_now, window[1]
   end
 
   test '1 year subscriber visibility for trainings in the coming year' do
     starting = Time.current.beginning_of_day
     ending = 1.year.from_now.end_of_day
     window = Availabilities::VisibilityService.new.visibility(@with_1y_subscription, 'training', starting, ending)
-    assert_datetimes_equal Time.current, window[0]
-    assert_datetimes_equal 1.month.from_now, window[1]
+    assert_datetimes_near Time.current, window[0]
+    assert_datetimes_near 1.month.from_now, window[1]
   end
 
   test 'subscriber with plan custom visibility' do
@@ -124,7 +124,7 @@ class Availabilities::VisibilityServiceTest < ActiveSupport::TestCase
     starting = Time.current.beginning_of_day
     ending = 1.month.from_now.end_of_day
     window = Availabilities::VisibilityService.new.visibility(@with_subscription, 'machines', starting, ending)
-    assert_datetimes_equal Time.current, window[0]
-    assert_datetimes_equal 48.hours.from_now, window[1]
+    assert_datetimes_near Time.current, window[0]
+    assert_datetimes_near 48.hours.from_now, window[1]
   end
 end

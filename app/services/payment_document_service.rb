@@ -7,7 +7,7 @@ class PaymentDocumentService
     # @param document [PaymentDocument]
     # @param date [Time]
     def generate_reference(document, date: Time.current)
-      pattern = Invoices::NumberService.pattern(document, 'invoice_reference')
+      pattern = Invoices::NumberService.pattern(document.created_at, 'invoice_reference')
 
       reference = replace_document_number_pattern(pattern, document)
       reference = replace_date_pattern(reference, date)
@@ -16,7 +16,7 @@ class PaymentDocumentService
 
     # @param document [PaymentDocument]
     def generate_order_number(document)
-      pattern = Invoices::NumberService.pattern(document, 'invoice_order-nb')
+      pattern = Invoices::NumberService.pattern(document.created_at, 'invoice_order-nb')
 
       # global document number (nn..nn)
       reference = pattern.gsub(/n+(?![^\[]*\])/) do |match|
@@ -25,6 +25,19 @@ class PaymentDocumentService
 
       reference = replace_document_number_pattern(reference, document, :order_number)
       replace_date_pattern(reference, document.created_at)
+    end
+
+    # Generate a reference for the given document using the given document number
+    # @param number [Integer]
+    # @param document [PaymentDocument]
+    def generate_numbered_reference(number, document)
+      pattern = Invoices::NumberService.pattern(document.created_at, 'invoice_reference')
+
+      reference = pattern.gsub(/n+|y+|m+|d+(?![^\[]*\])/) do |match|
+        pad_and_truncate(number, match.to_s.length)
+      end
+      reference = replace_date_pattern(reference, document.created_at)
+      replace_document_type_pattern(document, reference)
     end
 
     private
@@ -55,6 +68,7 @@ class PaymentDocumentService
 
     # @param document [PaymentDocument]
     # @param periodicity [String] 'day' | 'month' | 'year' | 'global'
+    # @return [Hash<Symbol->Footprintable,Number>]
     def previous_order(document, periodicity)
       start = periodicity == 'global' ? nil : document.created_at.send("beginning_of_#{periodicity}")
       ending = document.created_at
@@ -67,11 +81,30 @@ class PaymentDocumentService
                         .where('created_at < :end_date', end_date: db_time(ending))
       invoices = invoices.where('created_at >= :start_date', start_date: db_time(start)) unless start.nil?
 
-      [
-        orders.order(created_at: :desc).limit(1).first,
-        schedules.order(created_at: :desc).limit(1).first,
-        invoices.order(created_at: :desc).limit(1).first
+      last_with_number = [
+        orders.where.not(reference: nil).order(created_at: :desc).limit(1).first,
+        schedules.where.not(order_number: nil).order(created_at: :desc).limit(1).first,
+        invoices.where.not(order_number: nil).order(created_at: :desc).limit(1).first
       ].filter(&:present?).max_by { |item| item&.created_at }
+      {
+        last_order: last_with_number,
+        unnumbered: orders_without_number(orders, schedules, invoices, last_with_number)
+      }
+    end
+
+    def orders_without_number(orders, schedules, invoices, last_item_with_number = nil)
+      items_after(orders.where(reference: nil), last_item_with_number).count +
+        items_after(schedules.where(order_number: nil), last_item_with_number).count +
+        items_after(invoices.where(order_number: nil), last_item_with_number).count
+    end
+
+    # @param items [ActiveRecord::Relation]
+    # @param previous_item [Footprintable,NilClass]
+    # @return [ActiveRecord::Relation]
+    def items_after(items, previous_item = nil)
+      return items if previous_item.nil?
+
+      items.where('created_at > :date', date: previous_item&.created_at)
     end
 
     # @param document [PaymentDocument] invoice to exclude
@@ -145,12 +178,12 @@ class PaymentDocumentService
     # @return [Integer]
     def order_number(document, periodicity)
       previous = previous_order(document, periodicity)
-      if Invoices::NumberService.number_periodicity(previous, 'invoice_order-nb') == periodicity
-        number = Invoices::NumberService.number(previous, 'invoice_order-nb')
+      if Invoices::NumberService.number_periodicity(previous[:last_order], 'invoice_order-nb') == periodicity
+        number = Invoices::NumberService.number(previous[:last_order], 'invoice_order-nb')
       end
       number ||= 0
 
-      number + 1
+      number + previous[:unnumbered] + 1
     end
 
     # Replace the document number elements in the provided pattern with counts from the database

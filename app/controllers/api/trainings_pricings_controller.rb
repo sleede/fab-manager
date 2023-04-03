@@ -3,7 +3,7 @@
 # @deprecated
 # <b>DEPRECATED:</b> Please use <tt>API::PriceController</tt> instead.
 # API Controller for managing Training prices
-class API::TrainingsPricingsController < API::ApiController
+class API::TrainingsPricingsController < API::APIController
   include ApplicationHelper
 
   before_action :authenticate_user!

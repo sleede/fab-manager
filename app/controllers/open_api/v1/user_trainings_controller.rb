@@ -2,7 +2,7 @@
 
 # public API controller for user's trainings
 class OpenAPI::V1::UserTrainingsController < OpenAPI::V1::BaseController
-  extend OpenAPI::ApiDoc
+  extend OpenAPI::APIDoc
   include Rails::Pagination
   expose_doc
 

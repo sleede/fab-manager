@@ -39,7 +39,7 @@ class MembersTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_equal 201, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check that the user's match
     user = json_response(response.body)
@@ -57,7 +57,7 @@ class MembersTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_equal 422, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check error message
     res = json_response(response.body)
@@ -80,7 +80,7 @@ class MembersTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_equal 200, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check update result
     res = json_response(response.body)
@@ -93,7 +93,7 @@ class MembersTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_equal 200, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check search result
     res = json_response(response.body)
@@ -114,7 +114,7 @@ class MembersTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_equal 200, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     # Check search result
     res = json_response(response.body)

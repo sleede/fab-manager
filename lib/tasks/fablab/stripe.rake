@@ -3,7 +3,6 @@
 # Stripe relative tasks
 namespace :fablab do
   namespace :stripe do
-
     desc 'find any invoices with incoherent total between stripe and DB'
     task :find_incoherent_invoices, [:start_date] => :environment do |_task, args|
       puts 'DEPRECATION WARNING: Will not work for invoices created from version 4.1.0 and above'
@@ -61,8 +60,9 @@ namespace :fablab do
 
     desc 'set stripe as the default payment gateway'
     task set_gateway: :environment do
-      if Setting.find_by(name: 'stripe_public_key').try(:value) && Setting.find_by(name: 'stripe_secret_key').try(:value)
-        Setting.set('payment_gateway', 'stripe') unless Setting.find_by(name: 'payment_gateway').try(:value)
+      if Setting.find_by(name: 'stripe_public_key').try(:value) && Setting.find_by(name: 'stripe_secret_key').try(:value) &&
+         !Setting.find_by(name: 'payment_gateway').try(:value)
+        Setting.set('payment_gateway', 'stripe')
       end
     end
 
@@ -72,7 +72,7 @@ namespace :fablab do
     task reset_cards: :environment do
       unless Rails.env.test?
         print "You're about to detach all payment cards from all customers. This was only made for test mode. Are you sure? (y/n) "
-        confirm = STDIN.gets.chomp
+        confirm = $stdin.gets.chomp
         next unless confirm == 'y'
       end
       User.all.each do |user|

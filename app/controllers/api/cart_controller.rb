@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # API Controller to manage user's cart
-class API::CartController < API::ApiController
+class API::CartController < API::APIController
   include API::OrderConcern
 
   before_action :current_order, except: %i[create]
@@ -17,7 +17,7 @@ class API::CartController < API::ApiController
     authorize @current_order, policy_class: CartPolicy
     service = Cart::CreateCartItemService.new(@current_order)
     @item = service.create(params)
-    if @item.save({ context: @current_order.order_items })
+    if @item.save(**{ context: @current_order.order_items })
       render 'api/orders/item', status: :created
     else
       render json: @item.errors.full_messages, status: :unprocessable_entity

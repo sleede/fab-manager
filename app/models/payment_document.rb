@@ -8,8 +8,12 @@ class PaymentDocument < Footprintable
     self.reference = PaymentDocumentService.generate_reference(self, date: date)
   end
 
+  def generate_order_number
+    self.order_number = PaymentDocumentService.generate_order_number(self)
+  end
+
   def update_reference
-    generate_reference
+    generate_reference if reference.blank?
     save
   end
 

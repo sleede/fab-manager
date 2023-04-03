@@ -2,7 +2,7 @@
 
 # authorized 3rd party softwares can manage the machines through the OpenAPI
 class OpenAPI::V1::MachinesController < OpenAPI::V1::BaseController
-  extend OpenAPI::ApiDoc
+  extend OpenAPI::APIDoc
   expose_doc
 
   before_action :set_machine, only: %i[show update destroy]

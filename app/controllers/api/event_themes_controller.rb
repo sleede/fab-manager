@@ -2,7 +2,7 @@
 
 # API Controller for resources of type EventTheme
 # EventTheme are used to classify Events
-class API::EventThemesController < API::ApiController
+class API::EventThemesController < API::APIController
   before_action :authenticate_user!, except: [:index]
   before_action :set_event_theme, only: %i[show update destroy]
 
@@ -21,7 +21,6 @@ class API::EventThemesController < API::ApiController
       render json: @event_theme.errors, status: :unprocessable_entity
     end
   end
-
 
   def update
     authorize EventTheme

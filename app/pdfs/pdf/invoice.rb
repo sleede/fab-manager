@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Generate a downloadable PDF file for the recorded invoice
-class PDF::Invoice < Prawn::Document
+class Pdf::Invoice < Prawn::Document
   require 'stringio'
   include ActionView::Helpers::NumberHelper
   include ApplicationHelper
@@ -33,24 +33,18 @@ class PDF::Invoice < Prawn::Document
       Rails.logger.error "Unable to decode invoice logo from base64: #{e}"
     end
     move_down 20
-    # the following line is a special comment to workaround RubyMine inspection problem
-    # noinspection RubyScope
     font('Open-Sans', size: 10) do
       # general information
-      if invoice.is_a?(Avoir)
-        text I18n.t('invoices.refund_invoice_reference', REF: invoice.reference), leading: 3
-      else
-        text I18n.t('invoices.invoice_reference', REF: invoice.reference), leading: 3
-      end
-      text I18n.t('invoices.code', CODE: Setting.get('invoice_code-value')), leading: 3 if Setting.get('invoice_code-active')
+      text I18n.t(invoice.is_a?(Avoir) ? 'invoices.refund_invoice_reference' : 'invoices.invoice_reference',
+                  **{ REF: invoice.reference }), leading: 3
+      text I18n.t('invoices.code', **{ CODE: Setting.get('invoice_code-value') }), leading: 3 if Setting.get('invoice_code-active')
       if invoice.main_item&.object_type != WalletTransaction.name
-        order_number = invoice.main_item&.object_type == OrderItem.name ? invoice.main_item&.object&.order&.reference : invoice.order_number
-        text I18n.t('invoices.order_number', NUMBER: order_number), leading: 3
+        text I18n.t('invoices.order_number', **{ NUMBER: invoice.order_number }), leading: 3
       end
       if invoice.is_a?(Avoir)
-        text I18n.t('invoices.refund_invoice_issued_on_DATE', DATE: I18n.l(invoice.avoir_date.to_date))
+        text I18n.t('invoices.refund_invoice_issued_on_DATE', **{ DATE: I18n.l(invoice.avoir_date.to_date) })
       else
-        text I18n.t('invoices.invoice_issued_on_DATE', DATE: I18n.l(invoice.created_at.to_date))
+        text I18n.t('invoices.invoice_issued_on_DATE', **{ DATE: I18n.l(invoice.created_at.to_date) })
       end
 
       # user/organization's information
@@ -120,9 +114,9 @@ class PDF::Invoice < Prawn::Document
         data += [[I18n.t('invoices.total_including_all_taxes'), number_to_currency(total)]]
         vat_rate_group.each do |_type, rate|
           data += [[I18n.t('invoices.including_VAT_RATE',
-                           RATE: rate[:vat_rate],
-                           AMOUNT: number_to_currency(rate[:amount] / 100.00),
-                           NAME: Setting.get('invoice_VAT-name')),
+                           **{ RATE: rate[:vat_rate],
+                               AMOUNT: number_to_currency(rate[:amount] / 100.00),
+                               NAME: Setting.get('invoice_VAT-name') }),
                     number_to_currency(rate[:total_vat] / 100.00)]]
         end
         data += [[I18n.t('invoices.including_total_excluding_taxes'), number_to_currency(total_ht / 100.00)]]

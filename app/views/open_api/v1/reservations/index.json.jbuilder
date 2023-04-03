@@ -25,6 +25,6 @@ json.reservations @reservations do |reservation|
 
   json.reserved_slots reservation.slots_reservations do |slot_reservation|
     json.extract! slot_reservation, :canceled_at
-    json.extract! slot_reservation.slot, :start_at, :end_at
+    json.extract! slot_reservation.slot, :availability_id, :start_at, :end_at
   end
 end

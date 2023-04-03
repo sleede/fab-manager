@@ -2,7 +2,7 @@
 
 # API Controller for resources of type AgeRange
 # AgeRange are used in Events
-class API::AgeRangesController < API::ApiController
+class API::AgeRangesController < API::APIController
   before_action :authenticate_user!, except: [:index]
   before_action :set_age_range, only: %i[show update destroy]
 

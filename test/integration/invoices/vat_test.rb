@@ -32,14 +32,14 @@ class Invoices::VATTest < ActionDispatch::IntegrationTest
 
     # Check response format & status
     assert_equal 201, response.status, response.body
-    assert_equal Mime[:json], response.content_type
+    assert_match Mime[:json].to_s, response.content_type
 
     invoice = Invoice.last
     assert_invoice_pdf invoice do |lines|
       vat_line = I18n.t('invoices.including_VAT_RATE',
-                        RATE: Setting.get('invoice_VAT-rate'),
-                        AMOUNT: number_to_currency(invoice.total / 100.00),
-                        NAME: 'TVQ+TPS')
+                        **{ RATE: Setting.get('invoice_VAT-rate'),
+                            AMOUNT: number_to_currency(invoice.total / 100.00),
+                            NAME: 'TVQ+TPS' })
       assert(lines.any? { |l| /#{Regexp.escape(vat_line)}/.match(l) })
     end
   end
