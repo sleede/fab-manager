@@ -2,6 +2,7 @@ import React from 'react';
 import { Child } from '../../models/child';
 import { useTranslation } from 'react-i18next';
 import { FabButton } from '../base/fab-button';
+import FormatLib from '../../lib/format';
 
 interface ChildItemProps {
   child: Child;
@@ -27,7 +28,7 @@ export const ChildItem: React.FC<ChildItemProps> = ({ child, onEdit, onDelete })
       </div>
       <div>
         <div>{t('app.public.child_item.birthday')}</div>
-        <div>{child.birthday}</div>
+        <div>{FormatLib.date(child.birthday)}</div>
       </div>
       <div className="actions">
         <FabButton icon={<i className="fa fa-edit" />} onClick={() => onEdit(child)} className="edit-button" />

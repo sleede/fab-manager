@@ -2,7 +2,7 @@
 
 # API Controller for resources of type Child
 # Children are used to provide a way to manage multiple users in the family account
-class API::ChildrenController < API::ApiController
+class API::ChildrenController < API::APIController
   before_action :authenticate_user!
   before_action :set_child, only: %i[show update destroy]
 

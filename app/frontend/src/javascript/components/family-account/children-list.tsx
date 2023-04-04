@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { react2angular } from 'react2angular';
 import { Child } from '../../models/child';
-// import { ChildListItem } from './child-list-item';
 import ChildAPI from '../../api/child';
 import { User } from '../../models/user';
 import { useTranslation } from 'react-i18next';
@@ -15,12 +14,14 @@ declare const Application: IApplication;
 
 interface ChildrenListProps {
   currentUser: User;
+  onSuccess: (error: string) => void;
+  onError: (error: string) => void;
 }
 
 /**
  * A list of children belonging to the current user.
  */
-export const ChildrenList: React.FC<ChildrenListProps> = ({ currentUser }) => {
+export const ChildrenList: React.FC<ChildrenListProps> = ({ currentUser, onError }) => {
   const { t } = useTranslation('public');
 
   const [children, setChildren] = useState<Array<Child>>([]);
@@ -52,8 +53,15 @@ export const ChildrenList: React.FC<ChildrenListProps> = ({ currentUser }) => {
    */
   const deleteChild = (child: Child) => {
     ChildAPI.destroy(child.id).then(() => {
-      setChildren(children.filter(c => c.id !== child.id));
+      ChildAPI.index({ user_id: currentUser.id }).then(setChildren);
     });
+  };
+
+  /**
+   * Handle save child success from the API
+   */
+  const handleSaveChildSuccess = () => {
+    ChildAPI.index({ user_id: currentUser.id }).then(setChildren);
   };
 
   return (
@@ -70,7 +78,7 @@ export const ChildrenList: React.FC<ChildrenListProps> = ({ currentUser }) => {
           <ChildItem key={child.id} child={child} onEdit={editChild} onDelete={deleteChild} />
         ))}
       </div>
-      <ChildModal child={child} isOpen={isOpenChildModal} toggleModal={() => setIsOpenChildModal(false)} />
+      <ChildModal child={child} isOpen={isOpenChildModal} toggleModal={() => setIsOpenChildModal(false)} onSuccess={handleSaveChildSuccess} onError={onError} />
     </section>
   );
 };
@@ -83,4 +91,4 @@ const ChildrenListWrapper: React.FC<ChildrenListProps> = (props) => {
   );
 };
 
-Application.Components.component('childrenList', react2angular(ChildrenListWrapper, ['currentUser']));
+Application.Components.component('childrenList', react2angular(ChildrenListWrapper, ['currentUser', 'onSuccess', 'onError']));
