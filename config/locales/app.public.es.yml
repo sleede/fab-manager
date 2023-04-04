@@ -325,7 +325,7 @@ es:
         cancelled: "Cancelado"
         ticket: "{NUMBER, plural, one{ticket} other{tickets}}"
         make_a_gift_of_this_reservation: "Regalar esta reserva"
-        thank_you_your_payment_has_been_successfully_registered: "Tank you. Your payment has been successfully registered!"
+        thank_you_your_payment_has_been_successfully_registered: "Thank you. Your payment has been successfully registered!"
         you_can_find_your_reservation_s_details_on_your_: "Puede encontrar los detalles de su reserva en"
         dashboard: "panel"
         you_booked_DATE: "You booked ({DATE}):"

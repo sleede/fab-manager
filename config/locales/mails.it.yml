@@ -1,80 +1,80 @@
 it:
   layouts:
     notifications_mailer:
-      see_you_later: "See you soon on {GENDER, select, neutral{} other{the}}" #messageFormat interpolation
-      sincerely: "Sincerely,"
-      signature: "The Fab Lab team."
-      do_not_reply: "Please do not reply to this email."
+      see_you_later: "Ci vediamo presto {GENDER, select, neutral{} other{il}}" #messageFormat interpolation
+      sincerely: "Cordialmente,"
+      signature: "Il team del Fab Lab."
+      do_not_reply: "Non rispondere a questa email."
   users_mailer:
     notify_user_account_created:
-      subject: "Your FabLab account has been successfully created"
+      subject: "Il tuo account FabLab è stato creato con successo"
       body:
-        hello: "Hello %{NAME},"
-        intro: "The FabLab team has just created an account for you, on {GENDER, select, neutral{} other{the}} {FABLAB} website:" #messageFormat interpolation
-        connection_parameters: "Here are your connection parameters:"
-        account_name: "Account name:"
+        hello: "Ciao %{NAME},"
+        intro: "Il team del FabLab ha appena creato un account per te, il {GENDER, select, neutral{} other{il}} {FABLAB} sito web:" #messageFormat interpolation
+        connection_parameters: "Ecco i parametri di connessione:"
+        account_name: "Nome account:"
         password: "Password:"
-        temporary_password: "This is a temporary password, you can modify it in your «My account» screen."
-        keep_advantages: "With this account, you keep all the advantages linked to your Fab Lab user profile (trainings, subscriptions plans)."
-        to_use_platform: "To use the website, please"
-        logon_or_login: "create a new account or log in by clicking here."
-        token_if_link_problem: "If you experience issues with the link, you can enter the following code at your first connection attempt:"
+        temporary_password: "Questa è una password temporanea, puoi modificarla nella sezione «Il mio account»."
+        keep_advantages: "Con questo account, mantieni tutti i vantaggi legati al tuo profilo utente FabLab (corsi di formazione, piani di abbonamento)."
+        to_use_platform: "Per utilizzare il sito web, si prega di"
+        logon_or_login: "crea un nuovo account o accedi cliccando qui."
+        token_if_link_problem: "Se si verificano problemi con il link, è possibile inserire il seguente codice al primo tentativo di connessione:"
   notifications_mailer:
     notify_user_user_group_changed:
-      subject: "You have changed group"
+      subject: "Hai cambiato gruppo"
       body:
-        warning: "You have changed group. Inspections can be conducted at the lab to verify the legitimacy of this change."
-        user_invalidated: "Your account was invalidated, please upload your new supporting documents to validate your account."
+        warning: "Hai cambiato gruppo. Verifichermo la legittimità del cambiamento."
+        user_invalidated: "Il tuo account è stato invalidato, carica nuovi documenti di supporto per convalidare il tuo account."
     notify_admin_user_group_changed:
-      subject: "A member has changed group"
+      subject: "Un membro ha cambiato gruppo"
       body:
-        user_changed_group_html: "User <em><strong>%{NAME}</strong></em> has changed group."
-        previous_group: "Previous group:"
-        new_group: "New group:"
-        user_invalidated: "The user's account was invalidated."
+        user_changed_group_html: "L'utente <em><strong>%{NAME}</strong></em> ha cambiato gruppo."
+        previous_group: "Gruppo precedente:"
+        new_group: "Nuovo gruppo:"
+        user_invalidated: "L'account dell'utente è stato invalidato."
     notify_admin_subscription_extended:
-      subject: "A subscription has been extended"
+      subject: "Un abbonamento è stato esteso"
       body:
-        subscription_extended_html: "Subscription <strong><em>{PLAN}</em></strong> for user <strong><em>{NAME}</strong></em> has been extended {FREE, select, true{for free} other{}} until {DATE}." #messageFormat interpolation
+        subscription_extended_html: "L'abbonamento <strong><em>{PLAN}</em></strong> per l'utente <strong><em>{NAME}</strong></em> è stato esteso {FREE, select, true{gratis} other{}} fino a {DATE}." #messageFormat interpolation
     notify_member_subscription_extended:
-      subject: "Your subscription plan has been extended"
+      subject: "Il tuo abbonamento è stato esteso"
       body:
-        your_plan: "Your subscription plan"
-        has_been_extended: "has been extended"
-        free: "for free"
-        until: "until"
+        your_plan: "Il tuo abbonamento"
+        has_been_extended: "è stato esteso"
+        free: "gratis"
+        until: "fino a"
     notify_partner_subscribed_plan:
-      subject: "A subscription plan has been purchased"
+      subject: "Un abbonamento è stato acquistato"
       body:
-        a_plan: "A subscription plan"
-        was_purchased_by_member: "has been purchased by user"
+        a_plan: "Un piano di abbonamento"
+        was_purchased_by_member: "è stato acquistato dall'utente"
     notify_admin_when_project_published:
-      subject: "A project has been published"
+      subject: "Un progetto è stato pubblicato"
       body:
-        new_project_published: "A new project has been published:"
+        new_project_published: "È stato pubblicato un nuovo progetto:"
     notify_project_collaborator_to_valid:
-      subject: "Invitation to collaborate on a project"
+      subject: "Invito a collaborare a un progetto"
       body:
-        your_are_invited_to_take_part_in_a_project: "You are invited to join this project:"
-        to_accept_the_invitation_click_on_following_link: "To accept this invitation, please click on the following link:"
+        your_are_invited_to_take_part_in_a_project: "Sei invitato a partecipare a questo progetto:"
+        to_accept_the_invitation_click_on_following_link: "Per accettare questo invito, clicca il seguente link:"
     notify_project_author_when_collaborator_valid:
-      subject: "New collaborator in your project"
+      subject: "Nuova collaborazione al tuo progetto"
       body:
-        the_member: "the user"
-        accepted_your_invitation_to_take_part_in_the_project: "has accepted your invitation to join your project:"
+        the_member: "l'utente"
+        accepted_your_invitation_to_take_part_in_the_project: "ha accettato il tuo invito a partecipare al tuo progetto:"
     notify_user_training_valid:
-      subject: "Your training has been validated"
+      subject: "La tua abilitazione è stata convalidata"
       body:
-        your_training: "Your training"
-        has_been_validated: "has been validated"
+        your_training: "Le tue abilitazioni"
+        has_been_validated: "è stato convalidato"
     notify_member_subscribed_plan:
-      subject: "Your subscription has been successfully purchased"
+      subject: "Il tuo abbonamento è stato acquistato con successo"
       body:
-        plan_subscribed_html: "You have subscribed the plan: <strong><em>%{PLAN}</em></strong>."
-        rolling_subscription_stops_on: "Your subscription will end %{DURATION} after your first training. Otherwise, it will stop on %{DATE}."
-        subscription_stops_on: "Your subscription will end on %{DATE}."
+        plan_subscribed_html: "Hai sottoscritto il piano: <strong><em>%{PLAN}</em></strong>."
+        rolling_subscription_stops_on: "Il tuo abbonamento terminerà %{DURATION} dopo al tua prima abilitazione. Altrimenti, si fermerà il %{DATE}."
+        subscription_stops_on: "Il tuo abbonamento terminerà il %{DATE}."
     notify_member_create_reservation:
-      subject: "Your reservation has been successfully saved"
+      subject: "La tua prenotazione è stata salvata con successo"
       body:
         reservation_saved_html: "You reservation <strong><em>%{RESERVATION}</em></strong> has been successfully saved"
         your_reserved_slots: "Your reserved slots are:"

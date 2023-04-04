@@ -4,7 +4,7 @@ it:
       #translations of common buttons
       buttons:
         confirm_changes: "Confirm changes"
-        consult: "Consult"
+        consult: "Guarda"
         edit: "Edit"
         change: "Change"
         delete: "Delete"
@@ -13,9 +13,9 @@ it:
         close: "Close"
         clear: "Clear"
         today: "Today"
-        confirm: "Confirm"
+        confirm: "Conferma"
         save: "Save"
-        "yes": "Yes"
+        "yes": "Si"
         "no": "No"
         apply: "Apply"
       messages:
@@ -529,13 +529,13 @@ it:
         stock_external: "Public stock"
       calendar:
         calendar: "Calendar"
-        show_unavailables: "Show complete slots"
-        filter_calendar: "Filter calendar"
-        trainings: "Trainings"
-        machines: "Machines"
-        spaces: "Spaces"
-        events: "Events"
-        externals: "Other calendars"
+        show_unavailables: "Mostra tutti gli slot"
+        filter_calendar: "Esegui filtro"
+        trainings: "Addestramento"
+        machines: "Macchine"
+        spaces: "Spazi"
+        events: "Eventi"
+        externals: "Altri calendari"
         show_reserved_uniq: "Show only slots with reservations"
       machine:
         machine_uncategorized: "Uncategorized machines"

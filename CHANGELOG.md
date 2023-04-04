@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- Italian language support (credits to https://crowdin.com/profile/olazzari)
+
 ## v6.0.1 2023 April 03
 
 - Fix a bug: unable to write the configuration of the auth provider

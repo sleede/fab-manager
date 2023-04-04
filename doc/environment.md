@@ -196,7 +196,7 @@ Please, be aware that **the configured locale will imply the CURRENCY symbol use
 
 _Eg.: configuring **es-ES** will set the currency symbol to **€** but **es-MX** will set **$** as currency symbol, so setting the `RAILS_LOCALE` to simple **es** (without country indication) will probably not do what you expect._
 
-Available values: `en, en-AU-CA, en-GB, en-IE, en-IN, en-NZ, en-US, en-ZA, fr, fr-CA, fr-CH, fr-CM, fr-FR, es, es-419, es-AR, es-CL, es-CO, es-CR, es-DO, es-EC, es-ES, es-MX, es-MX, es-PA, es-PE, es-US, es-VE, no, pt, pt-BR, zu`.
+Available values: `en, en-AU-CA, en-GB, en-IE, en-IN, en-NZ, en-US, en-ZA, fr, fr-CA, fr-CH, fr-CM, fr-FR, es, es-419, es-AR, es-CL, es-CO, es-CR, es-DO, es-EC, es-ES, es-MX, es-MX, es-PA, es-PE, es-US, es-VE, no, pt, pt-BR, it, it-CH, zu`.
 When not defined, it defaults to **en**.
 
 If your locale is not present in that list or any locale doesn't have your exact expectations, please open a pull request to share your modifications with the community and obtain a rebuilt docker image.

@@ -325,7 +325,7 @@ de:
         cancelled: "Storniert"
         ticket: "{NUMBER, plural, one{Ticket} other{Tickets}}"
         make_a_gift_of_this_reservation: "Diese Reservierung verschenken"
-        thank_you_your_payment_has_been_successfully_registered: "Vielen Dank. Ihre Zahlung wurde erfolgreich gebucht!"
+        thank_you_your_payment_has_been_successfully_registered: "Thank you. Your payment has been successfully registered!"
         you_can_find_your_reservation_s_details_on_your_: "Sie finden die Reservierungsdetails in Ihrem"
         dashboard: "Dashboard"
         you_booked_DATE: "Sie haben gebucht ({DATE}):"
