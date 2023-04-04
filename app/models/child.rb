@@ -6,9 +6,11 @@ class Child < ApplicationRecord
 
   validates :first_name, presence: true
   validates :last_name, presence: true
+  validates :email, presence: true, format: { with: Devise.email_regexp }
   validate :validate_age
 
+  # birthday should less than 18 years ago
   def validate_age
-    errors.add(:birthday, 'You should be over 18 years old.') if birthday.blank? && birthday < 18.years.ago
+    errors.add(:birthday, I18n.t('.errors.messages.birthday_less_than_18_years_ago')) if birthday.blank? || birthday > 18.years.ago
   end
 end

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FabModal, ModalSize } from '../base/fab-modal';
 import { Child } from '../../models/child';
@@ -11,15 +11,20 @@ interface ChildModalProps {
   child?: Child;
   isOpen: boolean;
   toggleModal: () => void;
+  onSuccess: (child: Child) => void;
+  onError: (error: string) => void;
 }
 
 /**
  * A modal for creating or editing a child.
  */
-export const ChildModal: React.FC<ChildModalProps> = ({ child, isOpen, toggleModal }) => {
+export const ChildModal: React.FC<ChildModalProps> = ({ child, isOpen, toggleModal, onSuccess, onError }) => {
   const { t } = useTranslation('public');
   const [data, setData] = useState<Child>(child);
-  console.log(child, data);
+
+  useEffect(() => {
+    setData(child);
+  }, [child]);
 
   /**
    * Save the child to the API
@@ -32,16 +37,10 @@ export const ChildModal: React.FC<ChildModalProps> = ({ child, isOpen, toggleMod
         await ChildAPI.create(data);
       }
       toggleModal();
+      onSuccess(data);
     } catch (error) {
-      console.error(error);
+      onError(error);
     }
-  };
-
-  /**
-   * Check if the form is valid to save the child
-   */
-  const isPreventedSaveChild = (): boolean => {
-    return !data?.first_name || !data?.last_name;
   };
 
   /**
@@ -60,10 +59,9 @@ export const ChildModal: React.FC<ChildModalProps> = ({ child, isOpen, toggleMod
       isOpen={isOpen}
       toggleModal={toggleModal}
       closeButton={true}
-      confirmButton={t('app.public.child_modal.save')}
-      onConfirm={handleSaveChild}
-      preventConfirm={isPreventedSaveChild()}>
-      <ChildForm child={child} onChange={handleChildChanged} />
+      confirmButton={false}
+      onConfirm={handleSaveChild} >
+      <ChildForm child={child} onChange={handleChildChanged} onSubmit={handleSaveChild} />
     </FabModal>
   );
 };

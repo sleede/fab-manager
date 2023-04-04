@@ -49,6 +49,7 @@ fr:
       gateway_amount_too_large: "Les paiements supérieurs à %{AMOUNT} ne sont pas pris en charge. Merci de passer commande directement à l'accueil."
       product_in_use: "Ce produit a déjà été commandé"
       slug_already_used: "est déjà utilisée"
+      birthday_less_than_18_years_ago: "l'age devez avoir au moins 18 ans."
   coupon:
     code_format_error: "seules les majuscules, chiffres et tirets sont autorisés"
   apipie:

@@ -488,11 +488,14 @@ fr:
       child_modal:
         edit_child: "Modifier un enfant"
         new_child: "Ajouter un enfant"
-        save: "Enregistrer"
       child_form:
         child_form_info: "Notez que vous ne pouvez ajouter que vos enfants de moins de 18 ans. Des pièces justificatives sont demandés par votre administrateur, elles lui seront utiles pour valider le compte de votre enfant et ainsi autoriser la réservation d'événements."
         first_name: "Prénom"
         last_name: "Nom"
+        birthday: "Date de naissance"
+        email: "Courriel"
+        phone: "Téléphone"
+        save: "Enregistrer"
       child_item:
         first_name: "Prénom de l'enfant"
         last_name: "Nom de l'enfant"

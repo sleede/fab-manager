@@ -484,6 +484,22 @@ en:
         start_typing: "Start typing..."
       children_list:
         heading: "My children"
+        add_child: "Add a child"
+      child_modal:
+        edit_child: "Edit child"
+        new_child: "New child"
+      child_form:
+        child_form_info: "Note that you can only add your children under 18 years old. Supporting documents are requested by your administrator, they will be useful to validate your child's account and authorize the reservation of events."
+        first_name: "First name"
+        last_name: "Last name"
+        birthday: "Birthday"
+        email: "Email"
+        phone: "Phone"
+        save: "Save"
+      child_item:
+        first_name: "First name of the child"
+        last_name: "Last name of the child"
+        birthday: "Birthday"
       tour:
         conclusion:
           title: "Thank you for your attention"

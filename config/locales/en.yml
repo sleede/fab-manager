@@ -49,6 +49,7 @@ en:
       gateway_amount_too_large: "Payments above %{AMOUNT} are not supported. Please order directly at the reception."
       product_in_use: "This product have already been ordered"
       slug_already_used: "is already used"
+      birthday_less_than_18_years_ago: "Birthday must be under 18 years ago"
   coupon:
     code_format_error: "only caps letters, numbers, and dashes are allowed"
   apipie:
