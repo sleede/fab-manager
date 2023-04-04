@@ -1,6 +1,7 @@
 # Changelog Fab-manager
 
 - Italian language support (credits to https://crowdin.com/profile/olazzari)
+- Fix a bug: broken admin notifications if an order has been paid
 
 ## v6.0.1 2023 April 03
 
