@@ -5,11 +5,11 @@ it:
       buttons:
         confirm_changes: "Confirm changes"
         consult: "Guarda"
-        edit: "Edit"
+        edit: "Modifica"
         change: "Change"
         delete: "Delete"
         browse: "Browse"
-        cancel: "Cancel"
+        cancel: "Annulla"
         close: "Close"
         clear: "Clear"
         today: "Today"
@@ -163,8 +163,8 @@ it:
         do_not_subscribe: "do not subscribe"
       #admin: choose a member to interact with
       member_select:
-        select_a_member: "Select a member"
-        start_typing: "Start typing..."
+        select_a_member: "Seleziona un membro"
+        start_typing: "Iniziare a digitare..."
         member_not_validated: "Warning:<br> The member was not validated."
       #payment modal
       abstract_payment_modal:
@@ -370,9 +370,9 @@ it:
         user_validation_required_alert: "Warning!<br>Your administrator must validate your account. Then, you'll then be able to access all the booking features."
       #feature-tour modal
       tour:
-        previous: "Previous"
-        next: "Next"
-        end: "End the tour"
+        previous: "Indietro"
+        next: "Avanti"
+        end: "Termina il tour"
       #help modal
       help:
         title: "Help"
