@@ -49,6 +49,9 @@ class SettingsTest < ActionDispatch::IntegrationTest
   end
 
   test 'transactional bulk update fails' do
+    old_css = Setting.get('home_css')
+    old_color = Setting.get('main_color')
+
     patch '/api/settings/bulk_update?transactional=true',
           params: {
             settings: [
@@ -61,6 +64,10 @@ class SettingsTest < ActionDispatch::IntegrationTest
     resp = json_response(response.body)
     assert_not_nil resp[:settings].first[:error]
     assert_match(/Error: Invalid CSS after/, resp[:settings].first[:error].first)
+
+    # Check values havn't changed
+    assert_equal old_css, Setting.get('home_css')
+    assert_equal old_color, Setting.get('main_color')
   end
 
   test 'update setting with wrong name' do
