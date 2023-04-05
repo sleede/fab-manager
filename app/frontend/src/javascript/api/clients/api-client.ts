@@ -27,19 +27,22 @@ client.interceptors.response.use(function (response) {
 function extractHumanReadableMessage (error: string|Error): string {
   if (typeof error === 'string') {
     if (error.match(/^<!DOCTYPE html>/)) {
-      // parse ruby error pages
+      // parse ruby error pages (when an unhandled exception is raised)
       const parser = new DOMParser();
       const htmlDoc = parser.parseFromString(error, 'text/html');
       if (htmlDoc.querySelectorAll('h2').length > 2) {
         return htmlDoc.querySelector('h2').textContent;
       } else {
+        if (htmlDoc.querySelector('.exception-message .message')) {
+          return htmlDoc.querySelector('.exception-message .message').textContent;
+        }
         return htmlDoc.querySelector('h1').textContent;
       }
     }
     return error;
   }
 
-  // parse Rails errors (as JSON) or API errors
+  // parse Rails errors (as JSON) or API errors (i.e. the API returns a JSON like {error: ...})
   let message = '';
   if (error instanceof Object) {
     // API errors

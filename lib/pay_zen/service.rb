@@ -28,7 +28,7 @@ class PayZen::Service < Payment::Service
       params[:initial_amount] = payzen_amount(first_item.amount)
       params[:initial_amount_number] = 1
     end
-    pz_subscription = client.create_subscription(params)
+    pz_subscription = client.create_subscription(**params)
 
     # save payment token
     pgo_tok = PaymentGatewayObject.new(
@@ -113,6 +113,8 @@ class PayZen::Service < Payment::Service
 
   def payzen_amount(amount)
     currency = Setting.get('payzen_currency')
+    raise ConfigurationError, 'PayZen currency is not configured. Unable to process online payments.' if currency.nil?
+
     return amount / 100 if zero_decimal_currencies.any? { |s| s.casecmp(currency).zero? }
     return amount * 10 if three_decimal_currencies.any? { |s| s.casecmp(currency).zero? }
 

@@ -2,34 +2,34 @@ it:
   #subscription plan duration
   duration:
     year:
-      one: 'one year'
-      other: '%{count} years'
+      one: 'un anno'
+      other: '%{count} anni'
     month:
-      one: 'one month'
-      other: '%{count} months'
+      one: 'un mese'
+      other: '%{count} mesi'
     week:
-      one: 'one week'
-      other: '%{count} weeks'
+      one: 'una settimana'
+      other: '%{count} settimane'
   activerecord:
     attributes:
       product:
-        amount: "The price"
+        amount: "Il prezzo"
         slug: "URL"
   errors:
     #CarrierWave
     messages:
-      carrierwave_processing_error: "failed to be processed"
-      carrierwave_integrity_error: "is not of an allowed file type"
-      carrierwave_download_error: "could not be downloaded"
-      extension_whitelist_error: "You are not allowed to upload %{extension} files, allowed types: %{allowed_types}"
-      extension_blacklist_error: "You are not allowed to upload %{extension} files, prohibited types: %{prohibited_types}"
-      content_type_whitelist_error: "You are not allowed to upload %{content_type} files, allowed types: %{allowed_types}"
+      carrierwave_processing_error: "errore di elaborazione"
+      carrierwave_integrity_error: "non è di un tipo di file consentito"
+      carrierwave_download_error: "download fallito"
+      extension_whitelist_error: "Non sei autorizzato a caricare file %{extension}, tipi consentiti: %{allowed_types}"
+      extension_blacklist_error: "Non sei autorizzato a caricare file %{extension}, tipi vietati: %{prohibited_types}"
+      content_type_whitelist_error: "Non sei autorizzato a caricare file %{content_type}, tipi consentiti: %{allowed_types}"
       rmagick_processing_error: "Failed to manipulate with rmagick, maybe it is not an image?"
-      mime_types_processing_error: "Failed to process file with MIME::Types, maybe not valid content-type?"
+      mime_types_processing_error: "Impossibile elaborare il file con MIME::Types, forse non è un tipo di contenuto valido?"
       mini_magick_processing_error: "Failed to manipulate the file, maybe it is not an image?"
-      wrong_size: "is the wrong size (should be %{file_size})"
-      size_too_small: "is too small (should be at least %{file_size})"
-      size_too_big: "is too big (should be at most %{file_size})"
+      wrong_size: "è la dimensione sbagliata (dovrebbe essere %{file_size})"
+      size_too_small: "è troppo piccolo (dovrebbe essere almeno %{file_size})"
+      size_too_big: "è troppo grande (dovrebbe essere al massimo %{file_size})"
       export_not_found: "Requested export was not found. It was probably deleted, please generate a new export."
       percentage_out_of_range: "Percentage must be included between 0 and 100"
       cannot_be_blank_at_same_time: "cannot be blank when %{field} is blank too"
@@ -699,7 +699,7 @@ it:
     trainings_invalidation_rule_period: "Grace period before invalidating a training"
   #statuses of projects
   statuses:
-    new: "New"
-    pending: "Pending"
-    done: "Done"
-    abandoned: "Abandoned"
+    new: "Nuovo"
+    pending: "In corso"
+    done: "Completato"
+    abandoned: "Abbandonato"

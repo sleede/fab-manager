@@ -1,5 +1,16 @@
 # Changelog Fab-manager
 
+## v6.0.2 2023 April 05
+
+- Italian language support (credits to https://crowdin.com/profile/olazzari)
+- Improved error message on payzen misconfigured currency
+- Improved reporting error messages in UI, from ruby exceptions
+- Fix a bug: unable to subscribe with a payment schedule using PayZen
+- Fix a bug: unable to list supporting documents types for a deleted group
+- Fix a bug: notification is broken when updating payzen currency
+- Fix a bug: broken notifications
+- Fix a bug: unable to bulk update settings
+
 ## v6.0.1 2023 April 03
 
 - Fix a bug: unable to write the configuration of the auth provider

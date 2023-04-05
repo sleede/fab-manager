@@ -31,6 +31,45 @@ class SettingsTest < ActionDispatch::IntegrationTest
     assert_includes setting.history_values.map(&:value), 'Test Fablab', 'current parameter was not saved'
   end
 
+  test 'bulk update some settings' do
+    patch '/api/settings/bulk_update',
+          params: {
+            settings: [
+              { name: 'fablab_name', value: 'Test Fablab' },
+              { name: 'name_genre', value: 'male' },
+              { name: 'main_color', value: '#ea519a' }
+            ]
+          }
+    assert_equal 200, response.status
+    assert_match Mime[:json].to_s, response.content_type
+    resp = json_response(response.body)
+    assert(resp[:settings].any? { |s| s[:name] == 'fablab_name' && s[:value] == 'Test Fablab' })
+    assert(resp[:settings].any? { |s| s[:name] == 'name_genre' && s[:value] == 'male' })
+    assert(resp[:settings].any? { |s| s[:name] == 'main_color' && s[:value] == '#ea519a' })
+  end
+
+  test 'transactional bulk update fails' do
+    old_css = Setting.get('home_css')
+    old_color = Setting.get('main_color')
+
+    patch '/api/settings/bulk_update?transactional=true',
+          params: {
+            settings: [
+              { name: 'home_css', value: 'INVALID CSS{{!!' },
+              { name: 'main_color', value: '#ea519a' }
+            ]
+          }
+    assert_equal 200, response.status
+    assert_match Mime[:json].to_s, response.content_type
+    resp = json_response(response.body)
+    assert_not_nil resp[:settings].first[:error]
+    assert_match(/Error: Invalid CSS after/, resp[:settings].first[:error].first)
+
+    # Check values havn't changed
+    assert_equal old_css, Setting.get('home_css')
+    assert_equal old_color, Setting.get('main_color')
+  end
+
   test 'update setting with wrong name' do
     put '/api/settings/does_not_exists',
         params: {
