@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+## v6.0.2 2023 April 05
+
 - Italian language support (credits to https://crowdin.com/profile/olazzari)
 - Improved error message on payzen misconfigured currency
 - Improved reporting error messages in UI, from ruby exceptions
