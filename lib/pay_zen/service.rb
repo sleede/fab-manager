@@ -28,7 +28,7 @@ class PayZen::Service < Payment::Service
       params[:initial_amount] = payzen_amount(first_item.amount)
       params[:initial_amount_number] = 1
     end
-    pz_subscription = client.create_subscription(params)
+    pz_subscription = client.create_subscription(**params)
 
     # save payment token
     pgo_tok = PaymentGatewayObject.new(
