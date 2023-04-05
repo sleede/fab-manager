@@ -6,7 +6,7 @@
 - Fix a bug: unable to subscribe with a payment schedule using PayZen
 - Fix a bug: unable to list supporting documents types for a deleted group
 - Fix a bug: notification is broken when updating payzen currency
-- Fix a bug: broken admin notifications if an order has been paid
+- Fix a bug: broken notifications
 - Fix a bug: unable to bulk update settings
 
 ## v6.0.1 2023 April 03
