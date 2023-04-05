@@ -1,6 +1,7 @@
 # Changelog Fab-manager
 
 - Italian language support (credits to https://crowdin.com/profile/olazzari)
+- Improved error message on payzen misconfigured currency
 - Fix a bug: broken admin notifications if an order has been paid
 - Fix a bug: unable to bulk update settings
 

@@ -113,6 +113,8 @@ class PayZen::Service < Payment::Service
 
   def payzen_amount(amount)
     currency = Setting.get('payzen_currency')
+    raise ConfigurationError, 'PayZen currency is not configured. Unable to process online payments.' if currency.nil?
+
     return amount / 100 if zero_decimal_currencies.any? { |s| s.casecmp(currency).zero? }
     return amount * 10 if three_decimal_currencies.any? { |s| s.casecmp(currency).zero? }
 
