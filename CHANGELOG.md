@@ -3,6 +3,7 @@
 - Italian language support (credits to https://crowdin.com/profile/olazzari)
 - Improved error message on payzen misconfigured currency
 - Improved reporting error messages in UI, from ruby exceptions
+- Fix a bug: notification is broken when updating payzen currency
 - Fix a bug: broken admin notifications if an order has been paid
 - Fix a bug: unable to bulk update settings
 

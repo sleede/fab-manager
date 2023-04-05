@@ -549,7 +549,7 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
      * Callback triggered when the PayZen currency was successfully updated
      */
     $scope.alertPayZenCurrencyUpdated = function (currency) {
-      growl.success(_t('app.admin.invoices.payment.payzen.currency_updated', { CURRENCY: currency }));
+      growl.success(_t('app.admin.invoices.payment.payzen_settings.currency_updated', { CURRENCY: currency }));
     };
 
     /**
