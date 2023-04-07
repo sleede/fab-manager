@@ -449,11 +449,11 @@ it:
       notify_admin_user_supporting_document_refusal:
         refusal: "Member's supporting document <strong><em>%{NAME}</strong></em> was refused."
       notify_user_order_is_ready:
-        order_ready: "Your command %{REFERENCE} is ready"
+        order_ready: "Il tuo ordine %{REFERENCE} è pronto"
       notify_user_order_is_canceled:
-        order_canceled: "Your command %{REFERENCE} is canceled"
+        order_canceled: "Il tuo ordine %{REFERENCE} è stato annullato"
       notify_user_order_is_refunded:
-        order_refunded: "Your command %{REFERENCE} is refunded"
+        order_refunded: "Il tuo ordine %{REFERENCE} è stato rimborsato"
   #statistics tools for admins
   statistics:
     subscriptions: "Subscriptions"
@@ -507,7 +507,7 @@ it:
     deleted_user: "Deleted user"
   #initial price's category for events, created to replace the old "reduced amount" property
   price_category:
-    reduced_fare: "Reduced fare"
+    reduced_fare: "Tariffa ridotta"
     reduced_fare_if_you_are_under_25_student_or_unemployed: "Reduced fare if you are under 25, student or unemployed."
   cart_items:
     free_extension: "Free extension of a subscription, until %{DATE}"

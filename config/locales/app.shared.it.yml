@@ -43,7 +43,7 @@ it:
           add_image: "Insert an image"
       #modal dialog
       fab_modal:
-        close: "Close"
+        close: "Chiudi"
       fab_socials:
         follow_us: "Follow us"
         networks_update_success: "Social networks update successful"
@@ -205,19 +205,19 @@ it:
         deleted_user: "deleted user"
       #user public profile
       public_profile:
-        last_activity_html: "Last activity <br><strong>on {DATE}</strong>"
+        last_activity_html: "Ultima attività <br><strong>il {DATE}</strong>"
         to_come: "to come"
         approved: "approved"
-        projects: "Projects"
+        projects: "Progetti"
         no_projects: "No projects"
         author: "Author"
         collaborator: "Collaborator"
-        private_profile: "Private profile"
-        interests: "Interests"
-        CAD_softwares_mastered: "CAD softwares mastered"
-        email_address: "Email address"
-        trainings: "Trainings"
-        no_trainings: "No trainings"
+        private_profile: "Profilo privato"
+        interests: "Interessi"
+        CAD_softwares_mastered: "Software CAD"
+        email_address: "Indirizzo email"
+        trainings: "Abilitazioni"
+        no_trainings: "Nessuna abilitazione"
       #wallet
       wallet:
         wallet: 'Wallet'
@@ -520,9 +520,9 @@ it:
           confirm_order_refunded_html: "<strong>Do you really want to refund this order?</strong><p>If so, please refund the customer and generate the credit note from the <em>Invoices</em> tab.</p><p>If this affects stocks, please edit your product and reflect the change in the <em>stock management</em> tab.</p><p>These actions will not be automatic.</p>"
           order_refunded_success: "Order was refunded"
       unsaved_form_alert:
-        modal_title: "You have some unsaved changes"
-        confirmation_message: "If you leave this page, your changes will be lost. Are you sure you want to continue?"
-        confirmation_button: "Yes, don't save"
+        modal_title: "Hai alcune modifiche non salvate"
+        confirmation_message: "Se lasci questa pagina, le modifiche andranno perse. Sei sicuro di voler continuare?"
+        confirmation_button: "Sì, non salvare"
       active_filters_tags:
         keyword: "Keyword: {KEYWORD}"
         stock_internal: "Private stock"
