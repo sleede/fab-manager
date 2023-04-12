@@ -1,5 +1,12 @@
 # Changelog Fab-manager
 
+## v6.0.3 2023 April 12
+
+- Fix a bug: unable to install Fab-manager by setup.sh
+- Update translations from Crowdin
+- Fix a security issue: updated Ruby to 3.2.2 to fix [CVE-2023-28755](https://www.ruby-lang.org/en/news/2023/03/28/redos-in-uri-cve-2023-28755/)
+- Fix a security issue: updated Ruby to 3.2.2 to fix [CVE-2023-28756](https://www.ruby-lang.org/en/news/2023/03/30/redos-in-time-cve-2023-28756/)
+
 ## v6.0.2 2023 April 05
 
 - Italian language support (credits to https://crowdin.com/profile/olazzari)

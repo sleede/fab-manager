@@ -134,16 +134,16 @@ it:
     notify_member_training_authorization_expired:
       subject: "La tua autorizzazione è stata revocata"
       body:
-        training_expired_html: "<p>Hai ottenuto la certificazione per %{TRAINING}, il %{DATE}.</p><p>La tua certificazione valida per %{PERIOD} mesi, è scaduta.</p><p>Si prega di convalidarla di nuovo per poter prenotare il %{MACHINES}</p>."
+        training_expired_html: "<p>Hai ottenuto l'abilitazione per %{TRAINING}, il %{DATE}.</p><p>La tua abilitazione valida per %{PERIOD} mesi, è scaduta.</p><p>Si prega di convalidarla di nuovo per poter prenotare il %{MACHINES}</p>."
     notify_member_training_auto_cancelled:
-      subject: "La tua sessione per la certificazione è stata annullata"
+      subject: "La tua sessione per l'abilitazione è stata annullata"
       body:
-        cancelled_training: "La sessione di certificazione %{TRAINING} prevista per %{DATE}, da %{START} a %{END} è stata annullata a causa di un numero insufficiente di partecipanti."
+        cancelled_training: "La sessione di abilitazione %{TRAINING} prevista per %{DATE}, da %{START} a %{END} è stata annullata a causa di un numero insufficiente di partecipanti."
         auto_refund: "Sei stato rimborsato sul tuo portafoglio e una nota di credito dovrebbe essere disponibile."
     notify_member_training_invalidated:
       subject: "La tua autorizzazione è stata invalidata"
       body:
-        training_invalidated_html: "<p>Hai preso la certificazione %{TRAINING}, il %{DATE} che ti permette di usare %{MACHINES}.</p><p>A causa della mancanza di prenotazioni per una di queste macchine durante gli ultimi %{PERIOD} mesi, la tua autorizzazione è stata invalidata.</p><p>Si prega di convalidare nuovamente l'addestramento per continuare a prenotare queste macchine.</p>."
+        training_invalidated_html: "<p>Hai preso l'abilitazione %{TRAINING}, il %{DATE} che ti permette di usare %{MACHINES}.</p><p>A causa della mancanza di prenotazioni per una di queste macchine durante gli ultimi %{PERIOD} mesi, la tua autorizzazione è stata invalidata.</p><p>Si prega di convalidare nuovamente l'addestramento per continuare a prenotare queste macchine.</p>."
     notify_member_subscription_is_expired:
       subject: "La tua iscrizione è scaduta"
       body:
@@ -156,10 +156,10 @@ it:
       body:
         subscription_will_expire_html: "Il piano di abbonamento per l'utente %{NAME} <strong><em>%{PLAN}</em></strong> scadrà tra 7 giorni."
     notify_admin_training_auto_cancelled:
-      subject: "Una certificazione è stata annullata automaticamente"
+      subject: "Un'abilitazione è stata annullata automaticamente"
       body:
-        cancelled_training: "La sessione di certificazione %{TRAINING} prevista per %{DATE}, da %{START} a %{END} è stata annullata a causa di un numero insufficiente di partecipanti."
-        auto_refund: "I membri che hanno prenotato questa certificazione sono stati automaticamente rimborsati sul loro portafoglio e le note di credito sono state generate."
+        cancelled_training: "La sessione di abilitazione %{TRAINING} prevista per %{DATE}, da %{START} a %{END} è stata annullata a causa di un numero insufficiente di partecipanti."
+        auto_refund: "I membri che hanno prenotato questa abilitazione sono stati automaticamente rimborsati sul loro portafoglio e le note di credito sono state generate."
         manual_refund: "Si prega di rimborsare manualmente tutti i membri che hanno prenotato questa sessione di allenamento e generare le note di credito."
     notify_admin_subscription_is_expired:
       subject: "L'iscrizione di un membro è scaduta"
@@ -246,7 +246,7 @@ it:
         statistics_machine: "delle statistiche sugli slot macchina"
         statistics_project: "delle statistiche sui progetti"
         statistics_subscription: "delle statistiche delle sottoscrizioni"
-        statistics_training: "delle statistiche sulle certificazioni"
+        statistics_training: "delle statistiche sulle abilitazioni"
         statistics_space: "delle statistiche sugli spazi"
         users_members: "dell'elenco dei membri"
         users_subscriptions: "della lista degli abbonamenti"
@@ -316,7 +316,7 @@ it:
     notify_admin_objects_stripe_sync:
       subject: "Sincronizzazione Stripe"
       body:
-        objects_sync: "Tutti i membri, buoni, macchine, certificazioni, spazi e piani sono stati sincronizzati con successo su Stripe."
+        objects_sync: "Tutti i membri, buoni, macchine, abilitazioni, spazi e piani sono stati sincronizzati con successo su Stripe."
     notify_admin_order_is_paid:
       subject: "Nuovo ordine"
       body:
@@ -409,14 +409,14 @@ it:
     shared:
       hello: "Ciao %{user_name}"
     notify_user_order_is_ready:
-      subject: "Il tuo comando è pronto"
+      subject: "Il tuo ordine è pronto"
       body:
-        notify_user_order_is_ready: "Il tuo comando %{REFERENCE} è pronto:"
+        notify_user_order_is_ready: "Il tuo ordine %{REFERENCE} è pronto:"
     notify_user_order_is_canceled:
-      subject: "Il tuo comando è stato annullato"
+      subject: "Il tuo ordine è stato annullato"
       body:
-        notify_user_order_is_canceled: "Il tuo comando %{REFERENCE} è stato annullato."
+        notify_user_order_is_canceled: "Il tuo ordine %{REFERENCE} è stato annullato."
     notify_user_order_is_refunded:
-      subject: "Il tuo comando è stato rimborsato"
+      subject: "Il tuo ordine è stato rimborsato"
       body:
-        notify_user_order_is_refunded: "Il tuo comando %{REFERENCE} è stato rimborsato."
+        notify_user_order_is_refunded: "Il tuo ordine %{REFERENCE} è stato rimborsato."
