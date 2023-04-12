@@ -325,7 +325,7 @@
         cancelled: "Avslyst"
         ticket: "{NUMBER, plural, one{Billett} other{Billetter}}"
         make_a_gift_of_this_reservation: "Gi denne reservasjonen som gave"
-        thank_you_your_payment_has_been_successfully_registered: "Tusen takk, betalingen din er registrert!"
+        thank_you_your_payment_has_been_successfully_registered: "Thank you. Your payment has been successfully registered!"
         you_can_find_your_reservation_s_details_on_your_: "Du kan finne reservasjonens detaljer på din"
         dashboard: "kontrollpanel"
         you_booked_DATE: "Du booket ({DATE}):"

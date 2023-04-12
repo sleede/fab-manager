@@ -1,0 +1,63 @@
+#Additional translations at https://github.com/plataformatec/devise/wiki/I18n
+it:
+  devise:
+    confirmations:
+      confirmed: "Il tuo account è stato confermato con successo."
+      send_instructions: "Riceverai un'email con le istruzioni su come confermare il tuo account in pochi minuti."
+      send_paranoid_instructions: "Se il tuo indirizzo email esiste nel nostro database, riceverai un'email con le istruzioni su come confermare il tuo account in pochi minuti."
+    failure:
+      already_authenticated: "Hai già effettuato l'accesso."
+      inactive: "Il tuo account non è ancora stato attivato."
+      invalid: "Email o password non valide."
+      locked: "Il tuo account è bloccato."
+      last_attempt: "Hai ancora un tentativo prima che il tuo account venga bloccato."
+      not_found_in_database: "Email o password non valide."
+      timeout: "La sessione è scaduta. Effettua nuovamente l'accesso per continuare."
+      unauthenticated: "Devi accedere o iscriverti per continuare."
+      unconfirmed: "Devi confermare il tuo account prima di continuare. Clicca il link nel modulo."
+    mailer:
+      confirmation_instructions:
+        action: "Conferma il mio indirizzo email"
+        instruction: "Puoi completare la tua registrazione confermando il tuo indirizzo email. Clicca sul seguente link:"
+        subject: "Istruzioni per la conferma"
+      reset_password_instructions:
+        action: "Cambia la mia password"
+        instruction: "Qualcuno ha chiesto un link per cambiare la password. Puoi farlo tramite il link sottostante."
+        ignore_otherwise: "Se non hai fatto tu questa richiesta, ignora il messaggio."
+        subject: "Istruzioni per resettare la password"
+      unlock_instructions:
+        subject: "Sblocca Istruzioni"
+    omniauth_callbacks:
+      failure: "Impossibile autenticarti da %{kind} perché \"%{reason}\"."
+      success: "Autenticato con successo dall'account %{kind}."
+    passwords:
+      no_token: "Non puoi accedere a questa pagina senza provenire da un'email di ripristino password. Se provieni da un'email di ripristino, sei pregato di assicurarti di aver utilizzato l'URL completo fornito."
+      send_instructions: "Entro qualche minuto riceverai un messaggio email con le istruzioni per reimpostare la tua password."
+      send_paranoid_instructions: "Se il tuo indirizzo e-mail è presente nella nostra banca dati, tra pochi minuti riceverai un link per il recupero della password."
+      updated: "Password modificata correttamente. Ora hai eseguito l'accesso."
+      updated_not_active: "La password è stata cambiata con successo."
+    registrations:
+      destroyed: "Ciao! Il tuo account è stato cancellato con successo. Speriamo di rivederti presto."
+      signed_up: "Benvenuto! Ti sei registrato con successo."
+      signed_up_but_inactive: "Ti sei registrato con successo. Tuttavia, non siamo riusciti a farti accedere perché il tuo account non è ancora attivato."
+      signed_up_but_locked: "Ti sei registrato con successo. Tuttavia, non siamo riusciti a farti accedere perché il tuo profilo è bloccato."
+      signed_up_but_unconfirmed: "Un messaggio con un link di conferma è stato inviato al tuo indirizzo email. Per favore aprilo per attivare il tuo account."
+      update_needs_confirmation: "Il tuo account è stato aggiornato, tuttavia è necessario verificare il tuo nuovo indirizzo email. Entro qualche minuto riceverai un messaggio email con le istruzioni per confermare il tuo nuovo indirizzo."
+      updated: "Hai aggiornato il tuo account con successo."
+    sessions:
+      signed_in: "Accesso effettuato con successo."
+      signed_out: "Ora sei disconnesso."
+    unlocks:
+      send_instructions: "Riceverai un'email con le istruzioni su come sbloccare il tuo account in pochi minuti."
+      send_paranoid_instructions: "Se il tuo account esiste, riceverai un'email con le istruzioni su come sbloccarlo in pochi minuti."
+      unlocked: "Il tuo account è stato sbloccato con successo. Accedi per continuare."
+  errors:
+    messages:
+      already_confirmed: "Questa email è già stata confermata, prova ad accedere."
+      confirmation_period_expired: "deve essere confermato entro %{period}, si prega di richiederne uno nuovo"
+      expired: "è scaduto, si prega di richiederne uno nuovo"
+      not_found: "Questa email non è stata trovata"
+      not_locked: "non è stato bloccato"
+      not_saved:
+        one: "Un errore ha impedito al %{resource} di essere salvato:"
+        other: "%{count} errori hanno impedito al %{resource} di essere salvato:"

@@ -64,9 +64,9 @@ class ApplicationController < ActionController::Base
 
   # Set the configured locale for each action (API call)
   # @see https://guides.rubyonrails.org/i18n.html
-  def switch_locale(&action)
+  def switch_locale(&)
     locale = params[:locale] || Rails.application.secrets.rails_locale
-    I18n.with_locale(locale, &action)
+    I18n.with_locale(locale, &)
   end
 
   # @return [User]

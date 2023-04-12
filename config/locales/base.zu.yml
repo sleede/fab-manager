@@ -1,5 +1,5 @@
 zu:
   time:
     formats:
-      # See http://apidock.com/ruby/DateTime/strftime for a list of available directives
-      hour_minute: "%I:%M %p"
+      #See http://apidock.com/ruby/DateTime/strftime for a list of available directives
+      hour_minute: "crwdns37607:0%I:%Mcrwdnd37607:0%pcrwdne37607:0"

@@ -102,6 +102,7 @@ zu:
     training_reservation_DESCRIPTION: "crwdns3321:0%{DESCRIPTION}crwdne3321:0"
     event_reservation_DESCRIPTION: "crwdns3323:0%{DESCRIPTION}crwdne3323:0"
     from_payment_schedule: "crwdns36355:0%{NUMBER}crwdnd36355:0%{TOTAL}crwdnd36355:0%{DATE}crwdnd36355:0%{SCHEDULE}crwdne36355:0"
+    null_invoice: "crwdns37603:0crwdne37603:0"
     full_price_ticket:
       one: "crwdns3325:1crwdne3325:1"
       other: "crwdns3325:5%{count}crwdne3325:5"

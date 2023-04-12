@@ -1,0 +1,568 @@
+it:
+  app:
+    public:
+      #header and "about" page
+      common:
+        about_the_fablab: "Riguardo {GENDER, select, male{il} female{il} neutral{} other{il}} {NAME}"
+        return: "Indietro"
+        #cookies
+        cookies:
+          about_cookies: "Questo sito web utilizza cookie."
+          learn_more: "Ulteriori informazioni"
+          accept: "Accetta i cookie"
+          decline: "Rifiuta"
+        #dashboard sections
+        dashboard: "Scrivania"
+        my_profile: "Il mio profilo"
+        my_settings: "Le mie impostazioni"
+        my_supporting_documents_files: "I miei documenti"
+        my_projects: "I miei progetti"
+        my_trainings: "Le mie abilitazioni"
+        my_reservations: "Le mie prenotazioni"
+        my_events: "I miei eventi"
+        my_invoices: "Le mie fatture"
+        my_payment_schedules: "Le mie scadenze di pagamento"
+        my_orders: "I miei ordini"
+        my_wallet: "Il mio portafoglio"
+        #contextual help
+        help: "Aiuto"
+        #login/logout
+        sign_out: "Esci"
+        sign_up: "Registrati"
+        sign_in: "Accedi"
+        #left menu
+        notifications: "Notifiche"
+        admin: "Amministratore"
+        manager: "Manager"
+        reduce_panel: "Riduci pannello"
+        #left menu (public)
+        home: "Home"
+        reserve_a_machine: "Prenota una macchina"
+        trainings_registrations: "Abilitazioni"
+        events_registrations: "Iscriviti agli eventi"
+        reserve_a_space: "Prenota uno spazio"
+        projects_gallery: "Galleria progetti"
+        subscriptions: "Abbonamenti"
+        public_calendar: "Calendario"
+        fablab_store: "Negozio"
+        #left menu (admin)
+        trainings_monitoring: "Abilitazioni"
+        manage_the_calendar: "Calendario"
+        manage_the_users: "Utenti"
+        manage_the_invoices: "Fatture"
+        subscriptions_and_prices: "Iscrizioni e prezzi"
+        manage_the_events: "Eventi"
+        manage_the_machines: "Macchine"
+        manage_the_store: "Negozio"
+        manage_the_spaces: "Spazi"
+        projects: "Progetti"
+        statistics: "Statistiche"
+        customization: "Personalizzazione"
+        open_api_clients: "Client OpenAPI"
+        #account creation modal
+        create_your_account: "Crea il tuo account"
+        man: "Uomo"
+        woman: "Donna"
+        gender_is_required: "Il genere è un campo obbligatorio."
+        your_first_name: "Nome"
+        first_name_is_required: "È necessario inserire il nome."
+        your_surname: "Cognome"
+        surname_is_required: "È necessario inserire il cognome."
+        your_pseudonym: "Nome utente"
+        pseudonym_is_required: "Il nome utente è obbligatorio."
+        your_email_address: "Indirizzo e-mail"
+        email_is_required: "L'indirizzo e-mail è obbligatorio."
+        your_password: "Password"
+        password_is_required: "La password è obbligatoria."
+        password_is_too_short: "La password è troppo corta (minimo 12 caratteri)"
+        password_is_too_weak: "La password è troppo debole:"
+        password_is_too_weak_explanations: "minimo 12 caratteri, almeno una lettera maiuscola, una lettera minuscola, un numero e un carattere speciale"
+        type_your_password_again: "Digita nuovamente la password"
+        password_confirmation_is_required: "La conferma della password è obbligatoria."
+        password_does_not_match_with_confirmation: "La password non corrisponde."
+        i_am_an_organization: "Sono un'organizzazione"
+        name_of_your_organization: "Nome della tua organizzazione"
+        organization_name_is_required: "Il nome dell'organizzazione è obbligatorio."
+        address_of_your_organization: "Indirizzo della tua organizzazione"
+        organization_address_is_required: "L'indirizzo dell'organizzazione è obbligatorio."
+        your_user_s_profile: "Profilo del tuo utente"
+        user_s_profile_is_required: "Il profilo dell'utente è obbligatorio."
+        birth_date: "Data di nascita"
+        birth_date_is_required: "La data di nascita è obbligatoria."
+        phone_number: "Numero di telefono"
+        phone_number_is_required: "Il numero di telefono è obbligatorio."
+        address: "Indirizzo"
+        address_is_required: "L'indirizzo è obbligatorio"
+        i_authorize_Fablab_users_registered_on_the_site_to_contact_me: "Autorizzo gli utenti, registrati sul sito, a contattarmi"
+        i_accept_to_receive_information_from_the_fablab: "Autorizzo FabLab all'invio di informative"
+        i_ve_read_and_i_accept_: "Ho letto e accetto"
+        _the_fablab_policy: "le condizioni di utilizzo"
+        field_required: "Campo obbligatorio"
+        profile_custom_field_is_required: "{FEILD} è obbligatorio"
+        user_supporting_documents_required: "Attenzione!<br>Hai dichiarato di essere \"{GROUP}\", potrebbe essere necessario fornire documenti aggiuntivi."
+        unexpected_error_occurred: "Si è verificato un errore imprevisto. Riprovare più tardi."
+        used_for_statistics: "Questi dati saranno utilizzati a fini statistici"
+        used_for_invoicing: "Questi dati saranno utilizzati per la fatturazione"
+        used_for_reservation: "Questi dati saranno utilizzati in caso di modifica di una delle tue prenotazioni"
+        used_for_profile: "Questi dati saranno visualizzati solo sul tuo profilo"
+        public_profile: "Avrai un profilo pubblico e altri utenti saranno in grado di associarti ai loro progetti"
+        you_will_receive_confirmation_instructions_by_email_detailed: "Se il tuo indirizzo e-mail è valido, riceverai un'email con le istruzioni su come confermare il tuo account in pochi minuti."
+        #password modification modal
+        change_your_password: "Modifica la password"
+        your_new_password: "La tua nuova password"
+        your_password_was_successfully_changed: "La tua password è stata cambiata correttamente."
+        #connection modal
+        connection: "Accedi"
+        password_forgotten: "Password dimenticata?"
+        confirm_my_account: "Conferma la mia e-mail"
+        not_registered_to_the_fablab: "Non sei ancora registrato?"
+        create_an_account: "Crea un account"
+        wrong_email_or_password: "Email o password sbagliate."
+        caps_lock_is_on: "Blocco maiuscole attivo."
+        #confirmation modal
+        you_will_receive_confirmation_instructions_by_email: "Riceverai istruzioni di conferma via email."
+        #forgotten password modal
+        you_will_receive_in_a_moment_an_email_with_instructions_to_reset_your_password: "Se il tuo indirizzo e-mail è valido, riceverai a breve un'e-mail con le istruzioni per reimpostare la password."
+        #Fab-manager's version
+        version: "Versione:"
+        upgrade_fabmanager: "Aggiorna Fab-manager"
+        current_version: "Attualmente stai usando la versione {VERSION} di Fab-manager."
+        upgrade_to: "È disponibile una nuova versione. Puoi aggiornare alla versione {VERSION}."
+        read_more: "Visualizza i dettagli di questa release"
+        security_version_html: "<strong>La tua versione attuale è vulnerabile!</strong><br> Una versione successiva, attualmente disponibile, include correzioni per la sicurezza. Aggiorna il prima possibile!"
+        how_to: "Come aggiornare?"
+        #Notifications
+        and_NUMBER_other_notifications: "e {NUMBER, plural, one {}=0{nessun'altra notifica} =1{un'altra notifica} other{{NUMBER} altre notifiche}}..."
+      #about page
+      about:
+        read_the_fablab_policy: "Termini e condizioni d'uso"
+        read_the_fablab_s_general_terms_and_conditions: "Leggi i termini e le condizioni generali"
+        your_fablab_s_contacts: "Contattaci"
+        privacy_policy: "Informativa sulla privacy"
+      #'privacy policy' page
+      privacy:
+        title: "Informativa sulla privacy"
+        dpo: "Responsabile della protezione dei dati"
+        last_update: "Ultimo aggiornamento"
+      #home page
+      home:
+        latest_documented_projects: "Ultimi progetti documentati"
+        follow_us: "Seguici"
+        latest_tweets: "Tweet recenti"
+        latest_registered_members: "Ultimi membri registrati"
+        create_an_account: "Crea un account"
+        discover_members: "Cerca i membri"
+        #next events summary on the home page
+        fablab_s_next_events: "Prossimi eventi"
+        every_events: "Tutti gli eventi"
+      event_card:
+        on_the_date: "Il {DATE}"
+        from_date_to_date: "Da {START} a {END}"
+        from_time_to_time: "Da {START} a {END}"
+        all_day: "Tutto il giorno"
+        still_available: "Spazi disponibili: "
+        event_full: "Evento completo"
+        without_reservation: "Senza prenotazione"
+        free_admission: "Ingresso libero"
+        full_price: "Prezzo intero: "
+      #projects gallery
+      projects_list:
+        the_fablab_projects: "Progetti"
+        add_a_project: "Aggiungi un progetto"
+        network_search: "Fab-manager network"
+        tooltip_openlab_projects_switch: "La ricerca in rete ti permette di vedere i progetti di ogni Fab-manager utilizzando questa funzione!"
+        openlab_search_not_available_at_the_moment: "La ricerca in rete non è disponibile al momento. Puoi cercare tra progetti di questa piattaforma."
+        project_search_result_is_empty: "Siamo spiacenti, non abbiamo trovato alcun risultato corrispondente ai criteri di ricerca."
+        reset_all_filters: "Elimina tutto"
+        keywords: "Termini per la ricerca"
+        all_projects: "Tutti i progetti"
+        my_projects: "I miei progetti"
+        projects_to_whom_i_take_part_in: "Progetti a cui partecipo"
+        all_machines: "Tutte le macchine"
+        all_themes: "Tutti i temi"
+        all_materials: "Tutti i materiali"
+        load_next_projects: "Carica i progetti successivi"
+        rough_draft: "Bozza preliminare"
+      status_filter:
+        all_statuses: "Tutti gli stati"
+        select_status: "Seleziona uno stato"
+      #details of a projet
+      projects_show:
+        rough_draft: "Bozza"
+        project_description: "Descrizione del progetto"
+        by_name: "Per {NAME}"
+        step_N: "Fase {INDEX}"
+        share_on_facebook: "Condividi su Facebook"
+        share_on_twitter: "Condividi su Twitter"
+        deleted_user: "Utente eliminato"
+        posted_on_: "Pubblicato su"
+        CAD_file_to_download: "{COUNT, plural, one {}=0{Nessun file CAD} =1{File CAD da scaricare} other{File CAD da scaricare}}"
+        machines_and_materials: "Macchine e materiali"
+        collaborators: "Collaboratori"
+        licence: "Licenza"
+        confirmation_required: "Conferma richiesta"
+        report_an_abuse: "Segnala un abuso"
+        unauthorized_operation: "Azione non autorizzata"
+        your_report_was_successful_thanks: "Il messaggio è stato inviato - grazie."
+        an_error_occured_while_sending_your_report: "Si è verificato un errore durante l'invio del messaggio."
+        your_first_name: "Nome"
+        your_first_name_is_required: "Il nome è obbligatorio."
+        your_surname: "Cognome"
+        your_surname_is_required: "Il cognome è obbligatorio."
+        your_email_address: "Il tuo indirizzo email"
+        your_email_address_is_required: "L'indirizzo email è obbligatorio."
+        tell_us_why_this_looks_abusive: "Spiega il perché della segnalazione"
+        message_is_required: "È necessario inserire un messaggio."
+        report: "Segnalazione"
+        do_you_really_want_to_delete_this_project: "Vuoi davvero eliminare questo progetto?"
+        status: "Stato"
+      #list of machines
+      machines_list:
+        the_fablab_s_machines: "Le macchine"
+        add_a_machine: "Aggiungi una nuova macchina"
+        new_availability: "Prenotazioni aperte"
+        book: "Prenota"
+        _or_the_: " o il "
+        store_ad:
+          title: "Scopri il negozio"
+          buy: "Scopri i prodotti impiegati nei progetti dai soci e quelli di consumo relativi alle diverse macchine/utensili del laboratorio."
+          sell: "Se volete anche vendere le vostre creazioni, fatecelo sapere."
+          link: "Vai al negozio"
+      machines_filters:
+        show_machines: "Mostra le macchine:"
+        status_enabled: "Abilitate"
+        status_disabled: "Disabilitate"
+        status_all: "Tutte"
+        filter_by_machine_category: "Filtra per categoria:"
+        all_machines: "Tutte le macchine"
+      machine_card:
+        book: "Prenota"
+        consult: "Guarda"
+      #details of a machine
+      machines_show:
+        book_this_machine: "Modifica questa macchina"
+        technical_specifications: "Caratteristiche tecniche"
+        files_to_download: "File da scaricare"
+        projects_using_the_machine: "Progetti che utilizzano la macchina"
+        _or_the_: " o il "
+        confirmation_required: "Conferma richiesta"
+        do_you_really_want_to_delete_this_machine: "Vuoi davvero eliminare questa macchina?"
+        unauthorized_operation: "Operazione non autorizzata"
+        the_machine_cant_be_deleted_because_it_is_already_reserved_by_some_users: "La macchina non può essere cancellata perché è già prenotata da alcuni utenti."
+      #list of trainings
+      trainings_list:
+        book: "Prenota"
+        the_trainings: "Abilitazioni all'uso delle macchine"
+      #details of a training
+      training_show:
+        book_this_training: "Prenota questa abilitazione"
+        do_you_really_want_to_delete_this_training: "Vuoi davvero eliminare questa abilitazione?"
+        unauthorized_operation: "Operazione non autorizzata"
+        confirmation_required: "Conferma richiesta"
+        the_training_cant_be_deleted_because_it_is_already_reserved_by_some_users: "L'abilitazione non può essere eliminata perché è già prenotata da alcuni utenti."
+      plan_card:
+        AMOUNT_per_month: "{AMOUNT} / mese"
+        i_subscribe_online: "Sottoscrivi online"
+        more_information: "Ulteriori informazioni"
+        i_choose_that_plan: "Scelgo quel piano"
+        i_already_subscribed: "Ho già sottoscritto"
+      #summary of the subscriptions
+      plans:
+        subscriptions: "Abbonamenti"
+        your_subscription_expires_on_the_DATE: "Il tuo abbonamento scade il {DATE}"
+        no_plans: "Nessun piano disponibile per il tuo gruppo"
+        my_group: "Il mio gruppo"
+        his_group: "Gruppo utente"
+        he_wants_to_change_group: "Cambia gruppo"
+        change_my_group: "Convalida modifica gruppo"
+        summary: "Riepilogo"
+        your_subscription_has_expired_on_the_DATE: "Il tuo abbonamento è scaduto il {DATE}"
+        subscription_price: "Prezzo dell'abbonamento"
+        you_ve_just_payed_the_subscription_html: "Hai appena pagato <strong>l'abbonamento</strong>:"
+        thank_you_your_subscription_is_successful: "Grazie. Il tuo abbonamento è confermato!"
+        your_invoice_will_be_available_soon_from_your_dashboard: "La tua fattura sarà disponibile presto dalla tua scrivania"
+        your_group_was_successfully_changed: "Il tuo gruppo è stato modificato con successo."
+        the_user_s_group_was_successfully_changed: "Il gruppo dell'utente è stato modificato con successo."
+        an_error_prevented_your_group_from_being_changed: "Un errore ha impedito la modifica del tuo gruppo."
+        an_error_prevented_to_change_the_user_s_group: "Un errore ha impedito di cambiare il gruppo dell'utente."
+      plans_filter:
+        i_am: "Io sono"
+        select_group: "seleziona un gruppo"
+        i_want_duration: "Voglio iscrivermi a"
+        all_durations: "Tutte"
+        select_duration: "seleziona una durata"
+      #Fablab's events list
+      events_list:
+        the_fablab_s_events: "Gli eventi"
+        all_categories: "Tutte le categorie"
+        for_all: "Per tutti"
+        sold_out: "Esaurito"
+        cancelled: "Annullato"
+        free_admission: "Ingresso libero"
+        still_available: "luogo(i) disponibile(i)"
+        without_reservation: "Senza prenotazione"
+        add_an_event: "Aggiungi un evento"
+        load_the_next_events: "Carica gli eventi successivi..."
+        full_price_: "Prezzo intero:"
+        to_date: "a" #e.g. from 01/01 to 01/05
+        all_themes: "Tutti i temi"
+      #details and booking of an event
+      events_show:
+        event_description: "Descrizione dell'evento"
+        downloadable_documents: "Documenti scaricabili"
+        information_and_booking: "Informazioni e prenotazioni"
+        dates: "Date"
+        beginning: "Inizio:"
+        ending: "Fine:"
+        opening_hours: "Orari di apertura:"
+        all_day: "Tutto il giorno"
+        from_time: "Da" #e.g. from 18:00 to 21:00
+        to_time: "a" #e.g. from 18:00 to 21:00
+        full_price_: "Prezzo intero:"
+        tickets_still_availables: "Biglietti ancora disponibili:"
+        sold_out: "Esaurito."
+        without_reservation: "Senza prenotazione"
+        cancelled: "Annullato"
+        ticket: "{NUMBER, plural, one{biglietto} other{biglietti}}"
+        make_a_gift_of_this_reservation: "Regala questa prenotazione"
+        thank_you_your_payment_has_been_successfully_registered: "Grazie. Il tuo pagamento è stato registrato con successo!"
+        you_can_find_your_reservation_s_details_on_your_: "Puoi trovare i dettagli della tua prenotazione nella tua"
+        dashboard: "scrivania"
+        you_booked_DATE: "Hai prenotato ({DATE}):"
+        canceled_reservation_SEATS: "Prenotazione annullata ({SEATS} posti)"
+        book: "Prenota"
+        confirm_and_pay: "Conferma e paga"
+        confirm_payment_of_html: "{ROLE, select, admin{Contanti} other{Paga}}: {AMOUNT}" #(contexte : validate a payment of $20,00)
+        online_payment_disabled: "Il pagamento con carta di credito non è disponibile. Contattaci direttamente."
+        please_select_a_member_first: "Prima seleziona un membro"
+        change_the_reservation: "Modificare la prenotazione"
+        you_can_shift_this_reservation_on_the_following_slots: "È possibile spostare questa prenotazione sui seguenti slot:"
+        confirmation_required: "Conferma richiesta"
+        do_you_really_want_to_delete_this_event: "Volete davvero cancellare questo evento?"
+        delete_recurring_event: "Stai per eliminare un evento multiplo. Cosa vuoi fare?"
+        delete_this_event: "Solo questo evento"
+        delete_this_and_next: "Questo evento e il successivo"
+        delete_all: "Tutti gli eventi"
+        event_successfully_deleted: "Evento eliminato correttamente."
+        events_deleted: "L'evento, e {COUNT, plural, =1{un altro} other{{COUNT} altri}}, sono stati eliminati"
+        unable_to_delete_the_event: "Impossibile eliminare l'evento, può darsi che sia prenotato da un membro"
+        events_not_deleted: "Su {TOTAL} eventi, {COUNT, plural, =1{uno non è stato cancellato} other{{COUNT} non sono stati cancellati}}. Alcune prenotazioni potrebbero esistere su {COUNT, plural,=1{di esso} other{alcuni}}."
+        cancel_the_reservation: "Annulla la prenotazione"
+        do_you_really_want_to_cancel_this_reservation_this_apply_to_all_booked_tickets: "Vuoi davvero annullare questa prenotazione? Questo si applica a TUTTI i biglietti prenotati."
+        reservation_was_successfully_cancelled: "La prenotazione è stata annullata correttamente."
+        cancellation_failed: "Annullamento fallito."
+        event_is_over: "L'evento è finito."
+        thanks_for_coming: "Grazie per aver partecipato!"
+        view_event_list: "Visualizza gli eventi in programma"
+        share_on_facebook: "Condividi su Facebook"
+        share_on_twitter: "Condividi su Twitter"
+      #public calendar
+      calendar:
+        calendar: "Calendario"
+        show_unavailables: "Mostra gli slot non disponibili"
+        filter_calendar: "Filtro sul calendario"
+        trainings: "Abilitazioni"
+        machines: "Macchine"
+        spaces: "Spazi"
+        events: "Eventi"
+        externals: "Altri calendari"
+        choose_a_machine: "Scegli una macchina"
+        cancel: "Annulla"
+      #list of spaces
+      spaces_list:
+        the_spaces: "Gli spazi"
+        new_availability: "Prenotazioni aperte"
+        add_a_space: "Aggiungi uno spazio"
+        status_enabled: "Disponibili"
+        status_disabled: "Non disponibili"
+        status_all: "Tutti"
+        book: "Prenota"
+      #display the details of a space
+      space_show:
+        book_this_space: "Prenota questo spazio"
+        unauthorized_operation: "Operazione non autorizzata"
+        confirmation_required: "Conferma richiesta"
+        do_you_really_want_to_delete_this_space: "Vuoi davvero eliminare questo spazio?"
+        the_space_cant_be_deleted_because_it_is_already_reserved_by_some_users: "Impossibile eliminare questo spazio, perché è già prenotato da alcuni utenti."
+        characteristics: "Caratteristiche"
+        files_to_download: "File da scaricare"
+        projects_using_the_space: "Progetti che utilizzano lo spazio"
+      #public store
+      store:
+        fablab_store: "Negozio"
+        unexpected_error_occurred: "Si è verificato un errore imprevisto. Riprova più tardi."
+        add_to_cart_success: "Prodotto aggiunto al carrello."
+        products:
+          all_products: "Tutti i prodotti"
+          filter: "Filtro"
+          filter_clear: "Elimina tutto"
+          filter_apply: "Applica"
+          filter_categories: "Categorie"
+          filter_machines: "Per macchina"
+          filter_keywords_reference: "Per parole chiave o riferimento"
+          in_stock_only: "Solo prodotti disponibili"
+          sort:
+            name_az: "A-Z"
+            name_za: "Z-A"
+            price_low: "Prezzo: dal più basso al più alto"
+            price_high: "Prezzo: dal più alto al più basso"
+      store_product:
+        ref: "ref: {REF}"
+        add_to_cart_success: "Prodotto aggiunto al carrello."
+        unexpected_error_occurred: "Si è verificato un errore imprevisto. Riprova più tardi."
+        show_more: "Mostra di più"
+        show_less: "Mostra meno"
+        documentation: "Documentazione"
+        minimum_purchase: "Acquisto minimo: "
+        add_to_cart: "Aggiungi al carrello"
+        stock_limit: "Hai raggiunto il limite attuale delle scorte"
+      stock_status:
+        available: "Disponibile"
+        limited_stock: "Scorte limitate"
+        out_of_stock: "Esaurito"
+      store_product_item:
+        minimum_purchase: "Acquisto minimo: "
+        add: "Aggiungi"
+        add_to_cart: "Aggiungi al carrello"
+        stock_limit: "Hai raggiunto il limite attuale delle scorte"
+      product_price:
+        per_unit: "/ unità"
+        free: "Gratis"
+      cart:
+        my_cart: "Il Mio Carrello"
+      cart_button:
+        my_cart: "Il Mio Carrello"
+      store_cart:
+        checkout: "Vai alla cassa"
+        cart_is_empty: "Il tuo carrello è vuoto"
+        pickup: "Ritira i tuoi prodotti"
+        checkout_header: "Importo totale per il tuo carrello"
+        checkout_products_COUNT: "Il tuo carrello contiene {COUNT} {COUNT, plural, =1{un prodotto} other{i prodotti}}"
+        checkout_products_total: "Totale prodotti"
+        checkout_gift_total: "Sconto totale"
+        checkout_coupon: "Buono acquisto"
+        checkout_total: "Totale carrello"
+        checkout_error: "Si è verificato un errore imprevisto. Contatta l'amministratore."
+        checkout_success: "Acquisto confermato. Grazie!"
+        select_user: "Seleziona un utente prima di continuare."
+      abstract_item:
+        offer_product: "Offri il prodotto"
+        total: "Totale"
+        errors:
+          unauthorized_offering_product: "Non puoi offrire nulla a te stesso"
+      cart_order_product:
+        reference_short: "ref:"
+        minimum_purchase: "Acquisto minimo: "
+        stock_limit: "Hai raggiunto il limite attuale delle scorte"
+        unit: "Unità"
+        update_item: "Aggiorna"
+        errors:
+          product_not_found: "Questo prodotto non è più disponibile, si prega di rimuoverlo dal carrello."
+          out_of_stock: "Questo prodotto è esaurito, si prega di rimuoverlo dal carrello."
+          stock_limit_QUANTITY: "Solo {QUANTITY} {QUANTITY, plural, =1{unità} other{unità}} rimanenti in magazzino, si prega di regolare la quantità degli oggetti."
+          quantity_min_QUANTITY: "Il numero minimo di prodotti è stato modificato a {QUANTITY}, si prega di regolare la quantità degli oggetti."
+          price_changed_PRICE: "Il prezzo del prodotto è stato modificato a {PRICE}"
+      cart_order_reservation:
+        reservation: "Prenotazione"
+        offer_reservation: "Offri la prenotazione"
+        slot: "{DATE}: {START} - {END}"
+        offered: "offerto"
+      orders_dashboard:
+        heading: "I miei ordini"
+        sort:
+          newest: "Più recenti in alto"
+          oldest: "Meno recenti in alto"
+      member_select:
+        select_a_member: "Seleziona un membro"
+        start_typing: "Iniziare a digitare..."
+      tour:
+        conclusion:
+          title: "Grazie per la vostra attenzione"
+          content: "<p>Se vuoi riavviare questo aiuto contestuale, premi <strong>F1</strong> in qualsiasi momento o clicca su « ? Aiuto » dal menu dell'utente.</p><p>Se hai bisogno di aiuto aggiuntivo, puoi <a href='http://guide-fr.fab.mn' target='_blank'>controllare la guida utente</a> (solo in francese per ora).</p><p>Il team di Fab-manager fornisce anche supporto personalizzato (aiuto per iniziare, nell'installazione, personalizzazione, ecc.), <a href='mailto:contact@fab-manager.com'>contattateci</a> per ulteriori informazioni.</p>"
+        welcome:
+          welcome:
+            title: "Benvenuto in Fab-manager"
+            content: "Per aiutarvi a iniziare con l'applicazione, faremo un rapido tour delle caratteristiche."
+          home:
+            title: "Home page"
+            content: "Cliccando qui tornerai alla home page dove ti trovi attualmente."
+          machines:
+            title: "Macchine"
+            content: "<p>Questa pagina vi permetterà di consultare l'elenco di tutte le macchine e di prenotare uno slot per conto di un membro.</p><p>Una macchina può essere, ad esempio, una stampante 3D.</p><p>I membri possono anche accedere a questa pagina e prenotare una macchina da soli; se il pagamento con carta di credito è abilitato, o se il costo è nullo.</p>"
+          trainings:
+            title: "Abilitazioni"
+            content: "<p>Questa pagina ti permetterà di consultare l'elenco di tutte le sessioni di abilitazione e di registrare un membro.</p><p>L'abilitazione può essere impostata come prerequisito prima di consentire la prenotazione di alcune macchine.</p><p>I membri possono anche accedere a questa pagina e registrarsi per un'abilitazione, se il pagamento con carta di credito è abilitato, o se il costo è nullo.</p>"
+          spaces:
+            title: "Spazi"
+            content: "<p>Questa pagina ti permetterà di consultare l'elenco di tutti gli spazi disponibili e di prenotare un posto su uno slot, a nome di un membro.</p><p>Uno spazio può essere, ad esempio, un tavolo da lavoro di legno o una sala riunioni.</p><p>La loro particolarità è che possono essere prenotati da più persone allo stesso tempo.</p><p>I membri possono anche accedere a questa pagina e riservare una macchina da soli; se il pagamento con carta di credito è abilitato, o il costo è nullo.</p>"
+          events:
+            title: "Eventi"
+            content: "<p>Una serata o uno stage per costruire la tua lampada da scrivania? Ecco l'occasione!</p><p>Gli eventi possono essere gratuiti o a pagamento (a vari prezzi), con o senza prenotazione.</p><p>Inoltre, i membri possono accedere a questa pagina e prenotare luoghi per eventi gratuiti, o eventi a pagamento se il pagamento con carta di credito è abilitato.</p>"
+          calendar:
+            title: "Calendario"
+            content: "Visualizza a colpo d'occhio tutto ciò che è in programma per le prossime settimane (eventi, abilitazioni, macchine disponibili, ecc.)."
+          projects:
+            title: "Progetti"
+            content: "<p>Documenta e condividi tutte le tue creazioni con la comunità.</p><p>Se utilizzi OpenLab, potrai anche consultare i progetti dell'intera rete Fab-manager. <a href='mailto:contact@fab-manager.com'>Contattateci</a> per ottenere il vostro accesso, è gratuito!</p>"
+          plans:
+            title: "Abbonamenti"
+            content: "Gli abbonamenti forniscono un modo per segmentare i prezzi e fornire benefici agli utenti."
+          admin:
+            title: "{ROLE} sezione"
+            content: "<p>Tutti gli elementi sottostanti sono accessibili solo agli amministratori e ai manager. Consentono di gestire e configurare Fab-manager.</p><p>Alla fine di questa visita, clicca su uno di loro per saperne di più.</p>"
+          about:
+            title: "Informazioni su"
+            content: "Una pagina che puoi personalizzare completamente, per presentare la tua attività e la tua struttura."
+          notifications:
+            title: "Centro notifiche"
+            content: "<p>Ogni volta che succede qualcosa di importante (prenotazioni, creazione di account, attività dei tuoi membri, ecc.), sarai avvisato qui.</p><p>Anche i tuoi membri ricevono le notifiche qui.</p>"
+          profile:
+            title: "Menu utente"
+            content: "<p>Cerca qui le tue informazioni personali e tutte le tue attività su Fab-manager.</p><p>Questo spazio è disponibile anche per tutti i tuoi membri.</p>"
+          news:
+            title: "News"
+            content: "<p>Questo spazio ti permette di visualizzare le ultime news dalla tua struttura.</p><p>Puoi facilmente cambiare il suo contenuto da « Personalizzazione », « Home page ».</p>"
+          last_projects:
+            title: "Ultimi progetti"
+            content: "<p>Questo carosello scorre mostrando gli ultimi progetti documentati dai tuoi membri.</p>"
+          last_tweet:
+            title: "Tweet recenti"
+            content: "<p>L'ultimo tweet del tuo feed Tweeter può essere mostrato qui.</p><p>Configuralo da « Personalizzazione », « Home page ».</p>"
+          last_members:
+            title: "Ultimi membri"
+            content: "Gli ultimi iscritti che hanno convalidato il loro indirizzo e hanno accettato di essere contattati saranno mostrati qui."
+          next_events:
+            title: "Eventi in programma"
+            content: "I prossimi tre eventi programmati sono visualizzati in questo spazio."
+          customize:
+            title: "Personalizza la home page"
+            content: "<p>Questa pagina può essere completamente personalizzata.</p><p>Puoi <a href='mailto:contact@fab-manager.com'>contattarci</a> per effettuare una personalizzazione della home page.</p>"
+          version:
+            title: "Versione dell'applicazione"
+            content: "Passa il cursore su questa icona per scoprire la versione di Fab-manager. Se la versione non è aggiornata, verrà segnalato qui e sarai in grado di ottenere i dettagli cliccandoci sopra."
+        machines:
+          welcome:
+            title: "Macchine"
+            content: "<p>Le macchine sono gli strumenti disponibili per i tuoi utenti. È necessario creare qui le macchine che possono essere poi prenotate dai membri.</p><p>È anche possibile creare voci per macchine ad accesso libero o non prenotabili, quindi è sufficiente non associare loro nessuno slot.</p>"
+          welcome_manager:
+            title: "Macchine"
+            content: "Le macchine sono gli utensili a disposizione degli utenti da prenotare."
+          view:
+            title: "Visualizza"
+            content: "Per modificare o eliminare una macchina, prima clicca qui. Non sarai in grado di eliminare una macchina che è già stata associata a uno slot, ma potrai disattivarla."
+          reserve:
+            title: "Prenota"
+            content: "Clicca qui per accedere a un calendario che mostra slot liberi. Questo ti permetterà di prenotare questa macchina per un utente e di gestire le prenotazioni esistenti."
+        spaces:
+          welcome:
+            title: "Spazi"
+            content: "<p>Gli spazi sono posti a disposizione per i tuoi utenti. Ad esempio, una sala riunioni o un tavolo da lavoro. È necessario creare qui gli spazi che possono poi essere prenotati dai membri.</p><p>La particolarità degli spazi è che possono essere prenotati da più utenti contemporaneamente.</p>"
+          welcome_manager:
+            title: "Spazi"
+            content: "<p>Gli spazi sono posti a disposizione degli utenti, su prenotazione. Ad esempio, una sala riunioni o un tavolo da lavoro.</p><p>La particolarità degli spazi è che possono essere prenotati da più utenti contemporaneamente.</p>"
+          view:
+            title: "Visualizza"
+            content: "Per modificare o eliminare uno spazio, prima clicca qui. Non potrai eliminare uno spazio che è già stato associato a uno slot, ma potrai disattivarlo."
+          reserve:
+            title: "Prenota"
+            content: "Clicca qui per accedere a un calendario che mostra slot liberi. Questo ti permetterà di prenotare questo spazio per un utente e di gestire le prenotazioni esistenti."

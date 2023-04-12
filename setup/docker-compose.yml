@@ -19,7 +19,7 @@ services:
       - ./log:/var/log/supervisor
       - ./plugins:/usr/src/app/plugins
       - ./accounting:/usr/src/app/accounting
-      - ./config/auth_provider.yml:/usr/src/app/auth_provider.yml
+      - ./config/auth_provider.yml:/usr/src/app/config/auth_provider.yml
     depends_on:
       - postgres
       - redis

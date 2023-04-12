@@ -979,7 +979,7 @@ angular.module('application.router', ['ui.router'])
           onlinePaymentStatus: ['Payment', function (Payment) { return Payment.onlinePaymentStatus().$promise; }],
           invoices: ['Invoice', function (Invoice) {
             return Invoice.list({
-              query: { number: '', customer: '', date: null, order_by: '-reference', page: 1, size: 20 }
+              query: { number: '', customer: '', date: null, order_by: '-date', page: 1, size: 20 }
             }).$promise;
           }],
           closedPeriods: ['AccountingPeriod', function (AccountingPeriod) { return AccountingPeriod.query().$promise; }]

@@ -325,7 +325,7 @@ zu:
         cancelled: "crwdns28310:0crwdne28310:0"
         ticket: "crwdns28312:0NUMBER={NUMBER}crwdne28312:0"
         make_a_gift_of_this_reservation: "crwdns28314:0crwdne28314:0"
-        thank_you_your_payment_has_been_successfully_registered: "crwdns28316:0crwdne28316:0"
+        thank_you_your_payment_has_been_successfully_registered: "crwdns37605:0crwdne37605:0"
         you_can_find_your_reservation_s_details_on_your_: "crwdns28318:0crwdne28318:0"
         dashboard: "crwdns28320:0crwdne28320:0"
         you_booked_DATE: "crwdns28322:0{DATE}crwdne28322:0"

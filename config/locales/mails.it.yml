@@ -1,0 +1,422 @@
+it:
+  layouts:
+    notifications_mailer:
+      see_you_later: "Ci vediamo presto {GENDER, select, neutral{} other{il}}" #messageFormat interpolation
+      sincerely: "Cordialmente,"
+      signature: "Il team del Fab Lab."
+      do_not_reply: "Non rispondere a questa email."
+  users_mailer:
+    notify_user_account_created:
+      subject: "Il tuo account FabLab è stato creato con successo"
+      body:
+        hello: "Ciao %{NAME},"
+        intro: "Il team del FabLab ha appena creato un account per te, il {GENDER, select, neutral{} other{il}} {FABLAB} sito web:" #messageFormat interpolation
+        connection_parameters: "Ecco i parametri di connessione:"
+        account_name: "Nome account:"
+        password: "Password:"
+        temporary_password: "Questa è una password temporanea, puoi modificarla nella sezione «Il mio account»."
+        keep_advantages: "Con questo account, mantieni tutti i vantaggi legati al tuo profilo utente FabLab (corsi di formazione, piani di abbonamento)."
+        to_use_platform: "Per utilizzare il sito web, si prega di"
+        logon_or_login: "crea un nuovo account o accedi cliccando qui."
+        token_if_link_problem: "Se si verificano problemi con il link, è possibile inserire il seguente codice al primo tentativo di connessione:"
+  notifications_mailer:
+    notify_user_user_group_changed:
+      subject: "Hai cambiato gruppo"
+      body:
+        warning: "Hai cambiato gruppo. Verifichermo la legittimità del cambiamento."
+        user_invalidated: "Il tuo account è stato invalidato, carica nuovi documenti di supporto per convalidare il tuo account."
+    notify_admin_user_group_changed:
+      subject: "Un membro ha cambiato gruppo"
+      body:
+        user_changed_group_html: "L'utente <em><strong>%{NAME}</strong></em> ha cambiato gruppo."
+        previous_group: "Gruppo precedente:"
+        new_group: "Nuovo gruppo:"
+        user_invalidated: "L'account dell'utente è stato invalidato."
+    notify_admin_subscription_extended:
+      subject: "Un abbonamento è stato esteso"
+      body:
+        subscription_extended_html: "L'abbonamento <strong><em>{PLAN}</em></strong> per l'utente <strong><em>{NAME}</strong></em> è stato esteso {FREE, select, true{gratis} other{}} fino a {DATE}." #messageFormat interpolation
+    notify_member_subscription_extended:
+      subject: "Il tuo abbonamento è stato esteso"
+      body:
+        your_plan: "Il tuo abbonamento"
+        has_been_extended: "è stato esteso"
+        free: "gratis"
+        until: "fino a"
+    notify_partner_subscribed_plan:
+      subject: "Un abbonamento è stato acquistato"
+      body:
+        a_plan: "Un piano di abbonamento"
+        was_purchased_by_member: "è stato acquistato dall'utente"
+    notify_admin_when_project_published:
+      subject: "Un progetto è stato pubblicato"
+      body:
+        new_project_published: "È stato pubblicato un nuovo progetto:"
+    notify_project_collaborator_to_valid:
+      subject: "Invito a collaborare a un progetto"
+      body:
+        your_are_invited_to_take_part_in_a_project: "Sei invitato a partecipare a questo progetto:"
+        to_accept_the_invitation_click_on_following_link: "Per accettare questo invito, clicca il seguente link:"
+    notify_project_author_when_collaborator_valid:
+      subject: "Nuova collaborazione al tuo progetto"
+      body:
+        the_member: "l'utente"
+        accepted_your_invitation_to_take_part_in_the_project: "ha accettato il tuo invito a partecipare al tuo progetto:"
+    notify_user_training_valid:
+      subject: "La tua abilitazione è stata convalidata"
+      body:
+        your_training: "Le tue abilitazioni"
+        has_been_validated: "è stato convalidato"
+    notify_member_subscribed_plan:
+      subject: "Il tuo abbonamento è stato acquistato con successo"
+      body:
+        plan_subscribed_html: "Hai sottoscritto il piano: <strong><em>%{PLAN}</em></strong>."
+        rolling_subscription_stops_on: "Il tuo abbonamento terminerà %{DURATION} dopo al tua prima abilitazione. Altrimenti, si fermerà il %{DATE}."
+        subscription_stops_on: "Il tuo abbonamento terminerà il %{DATE}."
+    notify_member_create_reservation:
+      subject: "La tua prenotazione è stata salvata con successo"
+      body:
+        reservation_saved_html: "La prenotazione <strong><em>%{RESERVATION}</em></strong> è stata salvata con successo"
+        your_reserved_slots: "I tuoi slot riservati sono:"
+    notify_member_subscribed_plan_is_changed:
+      subject: "Il tuo abbonamento è stato aggiornato"
+      body:
+        new_plan_html: "Hai cambiato il tuo piano in <strong><em>%{PLAN}</em></strong>."
+    notify_admin_member_create_reservation:
+      subject: "Nuova prenotazione"
+      body:
+        member_reserved_html: "L'utente %{NAME} ha riservato <strong><em>%{RESERVABLE}</em></strong>."
+        reserved_slots: "Gli slot riservati sono:"
+    notify_member_slot_is_modified:
+      subject: "Il tuo slot di prenotazione è stato modificato con successo"
+      body:
+        reservation_changed_to: "Il tuo slot di prenotazione è stato cambiato in:"
+        previous_date: "Data precedente:"
+    notify_admin_slot_is_modified:
+      subject: "Uno slot di prenotazione è stato modificato"
+      body:
+        slot_modified: "L'utente %{NAME} ha modificato il suo slot di prenotazione"
+        new_date: "Nuovo slot"
+        old_date: "Slot precedente"
+    notify_admin_when_user_is_created:
+      subject: "Un account utente è stato creato"
+      body:
+        new_account_created: "Un nuovo account utente è stato creato sul sito:"
+        user_of_group_html: "L'utente si è registrato al gruppo <strong>%{GROUP}</strong>"
+        account_for_organization: "Questo account gestisce un'organizzazione:"
+    notify_admin_subscribed_plan:
+      subject: "Un abbonamento è stato acquistato"
+      body:
+        plan_subscribed_html: "Un piano <strong><em>%{PLAN}</em></strong> è stato sottoscritto dall'utente <strong><em>%{NAME}</strong></em>."
+    notify_member_invoice_ready:
+      subject: "La fattura del tuo FabLab"
+      body:
+        please_find_attached_html: "Si veda la fattura allegata del {DATE}, con un importo di {AMOUNT} per quanto riguarda {TYPE, select, Reservation{la tua prenotazione} OrderItem{il tuo ordine} other{il tuo abbonamento}}." #messageFormat interpolation
+        invoice_in_your_dashboard_html: "Puoi accedere alla tua fattura dalla %{DASHBOARD} sul sito web del Fab Lab."
+        your_dashboard: "tua scrivania"
+    notify_member_reservation_reminder:
+      subject: "Promemoria di prenotazione"
+      body:
+        this_is_a_reminder_about_your_reservation_RESERVABLE_to_be_held_on_DATE_html: "Questo è un promemoria sulla tua prenotazione <strong>%{RESERVABLE}</strong> fatta per il <em>%{DATE}</em>"
+        this_reservation_concerns_the_following_slots: "Questa prenotazione riguarda i seguenti slot orari:"
+    notify_member_avoir_ready:
+      subject: "La fattura di rimborso del tuo Fab Lab"
+      body:
+        please_find_attached_html: "Si veda la fattura allegata del {DATE}, con un importo di {AMOUNT} per quanto riguarda {TYPE, select, Reservation{la tua prenotazione} WalletTransaction{il tuo ordine} other{il tuo abbonamento}}." #messageFormat interpolation
+        invoice_in_your_dashboard_html: "Puoi accedere alla tua fattura di rimborso dalla %{DASHBOARD} sul sito web di Fab Lab."
+        your_dashboard: "tua scrivania"
+    notify_member_subscription_will_expire_in_7_days:
+      subject: "Il tuo abbonamento scade tra 7 giorni"
+      body:
+        your_plan: "il tuo abbonamento"
+        expires_in_7_days: "scadrà tra 7 giorni."
+        to_renew_your_plan_follow_the_link: "Segui questo link per rinnovare il tuo abbonamento"
+    notify_member_training_authorization_expired:
+      subject: "La tua autorizzazione è stata revocata"
+      body:
+        training_expired_html: "<p>Hai ottenuto l'abilitazione per %{TRAINING}, il %{DATE}.</p><p>La tua abilitazione valida per %{PERIOD} mesi, è scaduta.</p><p>Si prega di convalidarla di nuovo per poter prenotare il %{MACHINES}</p>."
+    notify_member_training_auto_cancelled:
+      subject: "La tua sessione per l'abilitazione è stata annullata"
+      body:
+        cancelled_training: "La sessione di abilitazione %{TRAINING} prevista per %{DATE}, da %{START} a %{END} è stata annullata a causa di un numero insufficiente di partecipanti."
+        auto_refund: "Sei stato rimborsato sul tuo portafoglio e una nota di credito dovrebbe essere disponibile."
+    notify_member_training_invalidated:
+      subject: "La tua autorizzazione è stata invalidata"
+      body:
+        training_invalidated_html: "<p>Hai preso l'abilitazione %{TRAINING}, il %{DATE} che ti permette di usare %{MACHINES}.</p><p>A causa della mancanza di prenotazioni per una di queste macchine durante gli ultimi %{PERIOD} mesi, la tua autorizzazione è stata invalidata.</p><p>Si prega di convalidare nuovamente l'addestramento per continuare a prenotare queste macchine.</p>."
+    notify_member_subscription_is_expired:
+      subject: "La tua iscrizione è scaduta"
+      body:
+        your_plan: "Il tuo abbonamento"
+        has_expired: "è scaduto."
+        you_can_go_to: "Per favore, vai a"
+        to_renew_your_plan: "per rinnovare il piano"
+    notify_admin_subscription_will_expire_in_7_days:
+      subject: "Un abbonamento membro scade tra 7 giorni"
+      body:
+        subscription_will_expire_html: "Il piano di abbonamento per l'utente %{NAME} <strong><em>%{PLAN}</em></strong> scadrà tra 7 giorni."
+    notify_admin_training_auto_cancelled:
+      subject: "Un'abilitazione è stata annullata automaticamente"
+      body:
+        cancelled_training: "La sessione di abilitazione %{TRAINING} prevista per %{DATE}, da %{START} a %{END} è stata annullata a causa di un numero insufficiente di partecipanti."
+        auto_refund: "I membri che hanno prenotato questa abilitazione sono stati automaticamente rimborsati sul loro portafoglio e le note di credito sono state generate."
+        manual_refund: "Si prega di rimborsare manualmente tutti i membri che hanno prenotato questa sessione di allenamento e generare le note di credito."
+    notify_admin_subscription_is_expired:
+      subject: "L'iscrizione di un membro è scaduta"
+      body:
+        subscription_expired_html: "Il piano di abbonamento per l'utente %{NAME} <strong><em>%{PLAN}</em></strong> è scaduto ora."
+    notify_admin_subscription_canceled:
+      subject: "L'abbonamento di un membro è stato annullato"
+      body:
+        subscription_canceled_html: "L'abbonamento <strong><em>%{PLAN}</em></strong> per l'utente %{NAME} è stato annullato."
+    notify_member_subscription_canceled:
+      subject: "La tua iscrizione è stato annullata"
+      body:
+        your_plan_was_canceled: "La tua iscrizione è stato annullata."
+        your_plan: "il tuo abbonamento"
+        end_at: "termina il"
+    notify_member_slot_is_canceled:
+      subject: "La tua prenotazione è stata annullata"
+      body:
+        reservation_canceled: "La tua prenotazione per %{RESERVABLE} è stata annullata"
+    notify_admin_slot_is_canceled:
+      subject: "Una prenotazione è stata annullata"
+      body:
+        member_cancelled: "L'utente %{NAME} ha annullato la sua prenotazione"
+        item_details: "%{START} - %{END}, relativo a %{RESERVABLE}"
+        generate_refund: "Non dimenticare di generare una nota di credito o un rimborso per questa cancellazione."
+    notify_admin_when_user_is_imported:
+      subject: "Un account utente è stato importato dall'SSO"
+      body:
+        new_account_imported: "Un nuovo account utente (ID: %{ID}) è stato importato sul sito web tramite %{PROVIDER}."
+        provider_uid: "il suo ID provider è: "
+        known_information: "Ecco cosa sappiamo di questo fornitore:"
+        address_already_used: "Questo indirizzo è già associato ad un altro utente"
+        no_more_info_available: "Nessuna altra informazione su questo utente può essere fornita prima che questi completi il suo profilo."
+    notify_user_profile_complete:
+      subject: "Ora hai accesso a tutto il sito web"
+      body:
+        message: "Le informazioni del tuo account sono state correttamente aggiornate, ora hai accesso all'intero sito web."
+    notify_user_auth_migration:
+      subject: "Modifica importante al tuo account FabLab"
+      body:
+        the_platform: "il sito web"
+        is_changing_its_auth_system_and_will_now_use: "sta effettivamente cambiando il suo sistema di identificazione degli utenti e userà"
+        instead_of: "invece di"
+        consequence_of_the_modification: "A causa di questa modifica non sarai in grado di accedere al sito web con i tuoi attuali nomi utente"
+        to_use_the_platform_thanks_for: "Per continuare a utilizzare il sito web, si prega di"
+        create_an_account_on: "crea un account su"
+        or_use_an_existing_account_clicking_here: "o utilizzare un account esistente cliccando qui"
+        in_case_of_problem_enter_the_following_code: "In caso di problema con questo link, è possibile inserire il seguente codice al primo tentativo di connessione al fine di migrare il proprio account nel nuovo sistema di autenticazione:"
+    notify_admin_user_merged:
+      subject: "Un account importato è stato unito con un account esistente"
+      body:
+        imported_account_merged: "Un account utente precedentemente importato tramite %{PROVIDER) è stato unito con l'account esistente %{NAME}"
+        provider_uid: "il suo ID provider è:"
+    notify_admin_profile_complete:
+      subject: "Un account importato ha completato il suo profilo"
+      body:
+        account_completed: "Un account importato ha completato il suo profilo:"
+        imported_account_completed: "Un account utente, precedentemente importato attraverso %{PROVIDER}, ha completato il suo profilo:"
+        provider_id: "il suo ID provider è:"
+    notify_admin_abuse_reported:
+      subject: "È stato segnalato un contenuto inappropriato"
+      body:
+        intro: "Un utente ha contrassegnato un contenuto come abusivo"
+        signaled_content: "contenuto contrassegnato:"
+        signaled_by: "segnalato da:"
+        signaled_on: "contrassegnato su:"
+        message: "Messaggio:"
+        visit_management_interface: "Consultare l'interfaccia di gestione delle segnalazioni per maggiori informazioni."
+    notify_user_wallet_is_credited:
+      subject: "Il tuo portafoglio è stato accreditato"
+      body:
+        wallet_credit_html: "Il tuo portafoglio è stato accreditato %{AMOUNT} dall'amministratore."
+    notify_admin_user_wallet_is_credited:
+      subject: "Il portafoglio di un utente è stato accreditato"
+      body:
+        wallet_credit_html: "Il portafoglio del membro %{USER} è stato accreditato %{AMOUNT} dall'amministratore %{ADMIN}."
+    notify_admin_export_complete:
+      subject: "Esportazione completata"
+      body:
+        you_asked_for_an_export: "Hai richiesto un'esportazione"
+        statistics_global: "di tutte le statistiche"
+        statistics_account: "delle statistiche sulle registrazioni"
+        statistics_event: "delle statistiche sugli eventi"
+        statistics_machine: "delle statistiche sugli slot macchina"
+        statistics_project: "delle statistiche sui progetti"
+        statistics_subscription: "delle statistiche delle sottoscrizioni"
+        statistics_training: "delle statistiche sulle abilitazioni"
+        statistics_space: "delle statistiche sugli spazi"
+        users_members: "dell'elenco dei membri"
+        users_subscriptions: "della lista degli abbonamenti"
+        users_reservations: "della lista delle prenotazioni"
+        availabilities_index: "della disponibilità delle prenotazioni"
+        accounting_acd: "dei dati contabili verso ACD"
+        accounting_vat: "dei dati IVA raccolti"
+        click_to_download: "Foglio di calcolo generato con successo. Per scaricarlo, fare clic su"
+        here: "qui"
+        file_type:
+          xlsx: "xlsx"
+          csv: "CSV"
+    notify_admin_import_complete:
+      subject: "Importazione completata"
+      body:
+        you_made_an_import: "Hai avviato un'importazione %{CATEGORY}"
+        category_members: "dei membri"
+        click_to_view_results: "Clicca qui per vedere i risultati"
+    notify_admin_low_stock_threshold:
+      subject: "Avviso scorte ridotte"
+      body:
+        low_stock: "Un nuovo movimento di magazzino di %{PRODUCT} ha superato la soglia inferiore di stock."
+        stocks_state_html: "Stato attuale del magazzino: <ul><li>interno: %{INTERNAL}</li><li>esterno: %{EXTERNAL}</li></ul>"
+        manage_stock: "Gestisci scorte per questo prodotto"
+    notify_member_about_coupon:
+      subject: "Buono acquisto"
+      body:
+        enjoy_a_discount_of_PERCENT_with_code_CODE: "Goditi uno sconto di %{PERCENT}% su tutto il sito con il codice %{CODE}."
+        enjoy_a_discount_of_AMOUNT_with_code_CODE: "Goditi uno sconto di %{AMOUNT}% su tutto il sito con il codice %{CODE}."
+        this_coupon_is_valid_USAGE_times_until_DATE_for_all_your_purchases: "Questo buono è valido {USAGE, plural, =1{just once} other{many times}}: per tutti i tuoi acquisti {TYPE, select, amount_off{at least equal to the amount of the coupon} other{}}, da adesso {DATE, select, NO-DATE{and without time limit} other{e fino al {DATE}}}."
+    notify_admin_free_disk_space:
+      subject: "Spazio su disco in esaurimento"
+      body: "Attenzione: lo spazio su disco disponibile sul server che ospita Fab-manager è inferiore a %{THRESHOLD} MiB. Questo può influenzare il suo funzionamento e impedire il salvataggio di alcuni dati. Attualmente, %{AVAILABLE} MiB di spazio libero su disco rimane disponibile nel punto di montaggio."
+    notify_admin_close_period_reminder:
+      subject: "Ricorda di chiudere i tuoi periodi contabili"
+      body:
+        warning_last_closed_period_over_1_year: "Ricorda di chiudere periodicamente i tuoi esercizi contabili. L'ultimo periodo chiuso è terminato il %{LAST_END}."
+        warning_no_closed_periods: "Ricorda di chiudere periodicamente i tuoi esercizi contabili. Devi chiudere i periodi dal %{FIRST_DATE}."
+    notify_admin_archive_complete:
+      subject: "Archiviazione completata"
+      body:
+        archive_complete: "Hai chiuso il periodo contabile dal %{START} al %{END}. L'archiviazione dei dati è ora completa."
+        click_to_download: "Per scaricare l'archivio ZIP, fare clic"
+        here: "qui."
+        save_on_secured: "Ricorda che è necessario salvare questo archivio su un supporto esterno sicuro, può essere richiesto dalle autorità fiscali durante un controllo."
+    notify_privacy_policy_changed:
+      subject: "Informativa sulla privacy aggiornata"
+      body:
+        content_html: "<p>Ti informiamo che abbiamo appena aggiornato la nostra politica sulla privacy.</p><p>Possiamo modificare regolarmente la nostra politica sulla privacy. In conformità con le regole, riceverai una notifica per ogni aggiornamento.</p><p>Accedendo o utilizzando i nostri servizi dopo l'aggiornamento dell'informativa sulla privacy, considereremo accettati i suoi termini, aggiornamenti inclusi.</p>"
+        link_to_policy: "Clicca qui per leggere l'informativa sulla privacy."
+    notify_admin_refund_created:
+      subject: "Un rimborso è stato generato"
+      body:
+        refund_created: "È stato generato un rimborso di %{AMOUNT} sulla fattura %{INVOICE} dell'utente %{USER}"
+        wallet_refund_created: "È stato generato un rimborso di %{AMOUNT} per il credito del portafoglio dell'utente %{USER}"
+        download: "Clicca qui per scaricare questa fattura di rimborso"
+    notify_admins_role_update:
+      subject: "Il ruolo di un utente è cambiato"
+      body:
+        user_role_changed_html: "Il ruolo dell'utente <em><strong>%{NAME}</strong></em> è cambiato."
+        previous_role: "Ruolo precedente:"
+        new_role: "Nuovo ruolo:"
+    notify_user_role_update:
+      subject: "Il tuo ruolo è cambiato"
+      body:
+        role_changed_html: "Il tuo ruolo su {GENDER, select, male{il} female{il} neutral{} other{il}} {NAME} è cambiato. Ora sei <strong>{ROLE}</strong><br/>Da grandi poteri derivano grandi responsabilità, usa i tuoi nuovi privilegi in modo saggio e rispettoso."
+    notify_admin_objects_stripe_sync:
+      subject: "Sincronizzazione Stripe"
+      body:
+        objects_sync: "Tutti i membri, buoni, macchine, abilitazioni, spazi e piani sono stati sincronizzati con successo su Stripe."
+    notify_admin_order_is_paid:
+      subject: "Nuovo ordine"
+      body:
+        order_placed: "Un nuovo ordine (%{REFERENCE}) è stato effettuato e pagato da %{USER}."
+        view_details: ""
+    notify_member_payment_schedule_ready:
+      subject: "Il tuo programma di pagamento"
+      body:
+        please_find_attached_html: "Si veda il programma di pagamento allegato, emesso il {DATE}, con un importo di {AMOUNT} per quanto riguarda {TYPE, select, Reservation{la tua prenotazione} other{il tuo abbonamento}}." #messageFormat interpolation
+        schedule_in_your_dashboard_html: "Puoi avvedere al programma di pagamento in qualsiasi momento dalla %{DASHBOARD} sul sito web di Fab Lab."
+        your_dashboard: "tua scrivania"
+    notify_admin_payment_schedule_error:
+      subject: "[URGENT] Errore carta di debito"
+      body:
+        remember: "In conformità con il calendario dei pagamenti di %{REFERENCE}, un addebito tramite carta di %{AMOUNT} è stato programmato per il %{DATE}."
+        error: "Sfortunatamente, si è verificato un errore e questo addebito su carta non è stato portato a termine con successo."
+        action: "Si prega di consultare il pannello %{GATEWAY} e contattare il membro al più presto per risolvere il problema."
+    notify_member_payment_schedule_error:
+      subject: "[URGENT] Errore carta di debito"
+      body:
+        remember: "In conformità con il tuo programma dei pagamenti in %{REFERENCE}, un addebito su carta di %{AMOUNT} è stato programmato per il %{DATE}."
+        error: "Sfortunatamente, si è verificato un errore e questo addebito su carta non è stato completato con successo."
+        action: "Si prega di contattare un manager il prima possibile per risolvere il problema."
+    notify_admin_payment_schedule_failed:
+      subject: "[URGENT] Carte di debito fallita"
+      body:
+        remember: "In conformità con il calendario dei pagamenti di %{REFERENCE}, un addebito su carta di %{AMOUNT} è stato programmato per il %{DATE}."
+        error: "Sfortunatamente, questo addebito su carta non è stato completato con successo."
+        action: "Si prega di contattare il membro il prima possibile, quindi andare all'interfaccia di gestione delle scadenze dei pagamento per risolvere il problema. Dopo un certo periodo di tempo, l'abbonamento alla carta potrebbe essere annullato."
+    notify_member_payment_schedule_failed:
+      subject: "[URGENT] Carte di debito fallita"
+      body:
+        remember: "In conformità con il tuo programma dei pagamenti in %{REFERENCE}, un addebito su carta di %{AMOUNT} è stato programmato per il %{DATE}."
+        error: "Sfortunatamente, questo addebito su carta non è stato completato con successo."
+        action_html: "Controlla %{DASHBOARD} o contatta rapidamente un manager, altrimenti il tuo abbonamento potrebbe essere interrotto."
+        your_dashboard: "tua scrivania"
+    notify_admin_payment_schedule_gateway_canceled:
+      subject: "[URGENT] Programma di pagamento annullato dal gateway dei pagamenti"
+      body:
+        error: "Il pagamento programmato %{REFERENCE} è stato annullato dal gateway dei pagamenti (%{GATEWAY}). Nessun ulteriore addebito sarà effettuato su questo mezzo di pagamento."
+        action: "Si prega di consultare l'interfaccia di gestione dei pagamenti programmati e contattare il membro al più presto per risolvere il problema."
+    notify_member_payment_schedule_gateway_canceled:
+      subject: "[URGENT] Programma di pagamento annullato dal gateway dei pagamenti"
+      body:
+        error: "Il tuo pagamento programmato %{REFERENCE} è stato annullato dal gateway dei pagamenti. Nessun ulteriore addebito sarà effettuato su questo mezzo di pagamento."
+        action: "Si prega di contattare un manager il prima possibile per risolvere il problema."
+    notify_admin_payment_schedule_check_deadline:
+      subject: "Termine per il pagamento"
+      body:
+        remember: "In conformità con il calendario dei pagamenti di %{REFERENCE}, %{AMOUNT} doveva essere addebitato il %{DATE}."
+        date: "Questo è un promemoria per incassare il controllo programmato il più presto possibile."
+        confirm: "Non dimenticate di confermare la ricevuta nella vostra interfaccia di gestione del programma dei pagamenti, in modo che la fattura corrispondente venga generata."
+    notify_member_payment_schedule_transfer_deadline:
+      subject: "Termine per il pagamento"
+      body:
+        remember: "In conformità con il tuo programma dei pagamenti in %{REFERENCE}, %{AMOUNT} doveva essere addebitato il %{DATE}."
+        date: "Questo è un promemoria per verificare che l'addebito bancario diretto sia andato a buon fine."
+        confirm: "Si prega di confermare la ricezione dei fondi nell'interfaccia di gestione dei pagamenti programmati, in modo che la fattura corrispondente venga generata."
+    notify_member_reservation_limit_reached:
+      subject: "Limite giornaliero per la prenotazione raggiunto"
+      body:
+        limit_reached: "Per %{DATE} hai raggiunto il limite giornaliero di %{HOURS} ore di prenotazione per %{ITEM}."
+    notify_admin_user_supporting_document_files_created:
+      subject: "Documenti aggiuntivi caricati da un membro"
+      body:
+        supporting_document_files_uploaded_below: "Il membro %{NAME} ha caricato i seguenti documenti di supporto:"
+        validate_user: "Convalida questo account"
+    notify_admin_user_supporting_document_files_updated:
+      subject: "I documenti aggiuntivi del membro sono stati modificati"
+      body:
+        user_update_supporting_document_file: "Il membro %{NAME} ha modificato i documenti aggiuntivi qui sotto:"
+        validate_user: "Convalida questo account"
+    notify_user_is_validated:
+      subject: "Account convalidato"
+      body:
+        account_validated: "Il tuo account è stato convalidato. Ora hai accesso alle funzionalità di prenotazione."
+    notify_user_is_invalidated:
+      subject: "Account invalidato"
+      body:
+        account_invalidated: "Il tuo account è stato invalidato. Non sarai più in grado di prenotare finché il tuo account non sarà nuovamente convalidato."
+    notify_user_supporting_document_refusal:
+      subject: "I tuoi documenti aggiuntivi sono stati rifiutati"
+      body:
+        user_supporting_document_files_refusal: "I tuoi documenti aggiuntivi sono stati rifiutati:"
+        action: "Si prega di ricaricare nuovi documenti di supporto."
+    notify_admin_user_supporting_document_refusal:
+      subject: "I documenti aggiuntivi di un membro sono stati rifiutati"
+      body:
+        user_supporting_document_files_refusal: "I documenti aggiuntivi del membro %{NAME} sono stati rifiutati da %{OPERATOR}:"
+    shared:
+      hello: "Ciao %{user_name}"
+    notify_user_order_is_ready:
+      subject: "Il tuo ordine è pronto"
+      body:
+        notify_user_order_is_ready: "Il tuo ordine %{REFERENCE} è pronto:"
+    notify_user_order_is_canceled:
+      subject: "Il tuo ordine è stato annullato"
+      body:
+        notify_user_order_is_canceled: "Il tuo ordine %{REFERENCE} è stato annullato."
+    notify_user_order_is_refunded:
+      subject: "Il tuo ordine è stato rimborsato"
+      body:
+        notify_user_order_is_refunded: "Il tuo ordine %{REFERENCE} è stato rimborsato."

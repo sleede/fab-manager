@@ -443,7 +443,7 @@ es:
           open_lab_info_html: "Enable OpenLab to share your projects with other Fab Labs and display a gallery of shared projects. Please send an email to <a href='mailto:contact@fab-manager.com'>contact@fab-manager.com</a> to get your access credentials for free."
           open_lab_app_id: "ID"
           open_lab_app_secret: "Secret"
-          openlab_default_info_html: "In the projects gallery, visitors can switch between two views: all shared projets from the whole OpenLab network, or only the projects documented in your Fab Lab.<br/>Here, you can choose which view is shown by default."
+          openlab_default_info_html: "In the projects gallery, visitors can switch between two views: all shared projects from the whole OpenLab network, or only the projects documented in your Fab Lab.<br/>Here, you can choose which view is shown by default."
           default_to_openlab: "Display OpenLab by default"
       projects_setting:
         add: "Add"

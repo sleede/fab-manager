@@ -49,7 +49,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       # For users imported from the SSO, we consider the SSO as a source of trust so the email is automatically validated
       @user.confirmed_at = Time.current if active_provider.db.sso_fields.include?('user.email') && !email_exists?(@user.email)
 
-      # We BYPASS THE VALIDATION because, in case of a new user, we want to save him anyway, we'll ask him later to complete his profile (on first login).
+      # We BYPASS THE VALIDATION because, in case of a new user, we want to save him anyway,
+      # we'll ask him later to complete his profile (on first login).
       # In case of an existing user, we trust the SSO validation as we want the SSO to have authority on users management and policy.
       logger.debug 'saving the user'
       logger.error "unable to save the user, an error occurred : #{@user.errors.full_messages.join(', ')}" unless @user.save(validate: false)

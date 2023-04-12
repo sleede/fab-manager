@@ -120,7 +120,7 @@ class Event::UpdateEventService
 
     def file_attributes(base_event, occurrence, event_params)
       ef_attributes = []
-      event_params['event_files_attributes']&.each do |efa|
+      event_params['event_files_attributes']&.values&.each do |efa|
         if efa['id'].present?
           event_file = base_event.event_files.find(efa['id'])
           ef = occurrence.event_files.find_by(attachment: event_file.attachment.file.filename)

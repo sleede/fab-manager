@@ -580,3 +580,9 @@ setting_98:
   name: machines_module
   created_at: 2020-04-15 14:38:40.000421500 Z
   updated_at: 2020-04-15 14:38:40.000421500 Z
+
+setting_99:
+  id: 99
+  name: home_css
+  created_at: 2023-04-05 09:16:08.000511500 Z
+  updated_at: 2023-04-05 09:16:08.000511500 Z

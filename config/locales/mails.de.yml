@@ -318,7 +318,7 @@ de:
       body:
         objects_sync: "Alle Mitglieder, Coupons, Maschinen, Schulungen, Räume und Pläne wurden erfolgreich auf Stripe synchronisiert."
     notify_admin_order_is_paid:
-      subject: "New order"
+      subject: "Neue Bestellung"
       body:
         order_placed: "A new order (%{REFERENCE}) has been placed and paid by %{USER}."
         view_details: ""
@@ -376,25 +376,25 @@ de:
         date: "Dies ist eine Erinnerung zur Prüfung, ob das Bankkonto erfolgreich belastet werden konnte."
         confirm: "Bitte bestätigen Sie den Erhalt des Guthabens in Ihrer Zahlungsverwaltung, damit die entsprechende Rechnung generiert werden kann."
     notify_member_reservation_limit_reached:
-      subject: "Daily reservation limit reached"
+      subject: "Tägliches Reservierungslimit erreicht"
       body:
         limit_reached: "For %{DATE}, you have reached your daily limit of %{HOURS} hours of %{ITEM} reservation."
     notify_admin_user_supporting_document_files_created:
       subject: "Supporting documents uploaded by a member"
       body:
         supporting_document_files_uploaded_below: "Member %{NAME} has uploaded the following supporting documents:"
-        validate_user: "Please validate this account"
+        validate_user: "Bitte validieren Sie dieses Konto"
     notify_admin_user_supporting_document_files_updated:
       subject: "Member's supporting documents have changed"
       body:
         user_update_supporting_document_file: "Member %{NAME} has modified the supporting documents below:"
         validate_user: "Please validate this account"
     notify_user_is_validated:
-      subject: "Account validated"
+      subject: "Konto validiert"
       body:
         account_validated: "Your account was validated. Now, you have access to booking features."
     notify_user_is_invalidated:
-      subject: "Account invalidated"
+      subject: "Konto ungültig"
       body:
         account_invalidated: "Your account was invalidated. You won't be able to book anymore, until your account is validated again."
     notify_user_supporting_document_refusal:

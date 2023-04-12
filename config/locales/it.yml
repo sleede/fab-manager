@@ -1,0 +1,705 @@
+it:
+  #subscription plan duration
+  duration:
+    year:
+      one: 'un anno'
+      other: '%{count} anni'
+    month:
+      one: 'un mese'
+      other: '%{count} mesi'
+    week:
+      one: 'una settimana'
+      other: '%{count} settimane'
+  activerecord:
+    attributes:
+      product:
+        amount: "Il prezzo"
+        slug: "URL"
+  errors:
+    #CarrierWave
+    messages:
+      carrierwave_processing_error: "errore di elaborazione"
+      carrierwave_integrity_error: "non è di un tipo di file consentito"
+      carrierwave_download_error: "download fallito"
+      extension_whitelist_error: "Non sei autorizzato a caricare file %{extension}, tipi consentiti: %{allowed_types}"
+      extension_blacklist_error: "Non sei autorizzato a caricare file %{extension}, tipi vietati: %{prohibited_types}"
+      content_type_whitelist_error: "Non sei autorizzato a caricare file %{content_type}, tipi consentiti: %{allowed_types}"
+      rmagick_processing_error: "Impossibile caricare la foto, sicuro che sia un'immagine?"
+      mime_types_processing_error: "Impossibile elaborare il file con MIME::Types, forse non è un tipo di contenuto valido?"
+      mini_magick_processing_error: "Impossibile caricare la foto, sicuro che sia un'immagine?"
+      wrong_size: "è la dimensione sbagliata (dovrebbe essere %{file_size})"
+      size_too_small: "è troppo piccolo (dovrebbe essere almeno %{file_size})"
+      size_too_big: "è troppo grande (dovrebbe essere al massimo %{file_size})"
+      export_not_found: "L'esportazione richiesta non è stata trovata. Probabilmente è stata eliminata, genera una nuova esportazione."
+      percentage_out_of_range: "La percentuale deve essere compresa tra 0 e 100"
+      cannot_be_blank_at_same_time: "non può essere vuoto quando anche %{field} è vuoto"
+      cannot_be_in_the_past: "la data non può essere nel passato"
+      cannot_be_before_previous_value: "non può essere prima del valore precedente"
+      cannot_overlap: "non è possibile sovrapporre un periodo contabile esistente"
+      cannot_encompass: "non è possibile sovrapporre un periodo contabile esistente"
+      in_closed_period: "non può essere entro un periodo contabile chiuso"
+      invalid_footprint: "checksum della fattura non valido"
+      end_before_start: "La data di fine non può essere prima della data di inizio. Scegli una data dopo %{START}"
+      invalid_duration: "La durata consentita deve essere compresa tra 1 giorno e 1 anno. Il tuo periodo è di %{DAYS} giorni."
+      must_be_in_the_past: "Il periodo deve essere rigorosamente prima della data odierna."
+      registration_disabled: "Registrazione disabilitata"
+      undefined_in_store: "deve essere definito per rendere disponibile il prodotto nel negozio"
+      gateway_error: "Payement gateway error: %{MESSAGE}"
+      gateway_amount_too_small: "I pagamenti sotto %{AMOUNT} non sono supportati. Si prega di ordinare direttamente alla reception."
+      gateway_amount_too_large: "I pagamenti superiori a %{AMOUNT} non sono supportati. Si prega di ordinare direttamente alla reception."
+      product_in_use: "Questo prodotto è già stato ordinato"
+      slug_already_used: "e' già in uso"
+  coupon:
+    code_format_error: "solo lettere, numeri e trattini sono consentiti"
+  apipie:
+    api_documentation: "Documentazione API"
+    code: "Codice HTTP"
+  #error messages when importing an account from an SSO
+  omniauth:
+    email_already_linked_to_another_account_please_input_your_authentication_code: "L'indirizzo email \"%{OLD_MAIL}\" è già collegato con un altro account, inserisci il tuo codice di autenticazione."
+    your_username_is_already_linked_to_another_account_unable_to_update_it: "Il tuo nome utente (%{USERNAME}) è già collegato ad un altro account, impossibile aggiornarlo."
+    your_email_address_is_already_linked_to_another_account_unable_to_update_it: "Il tuo indirizzo e-mail (%{EMAIL}) è già collegato a un altro account, impossibile aggiornarlo."
+    this_account_is_already_linked_to_an_user_of_the_platform: "Questo account %{NAME} è già collegato a un utente della piattaforma."
+  #availability slots in the calendar
+  availabilities:
+    not_available: "Non disponibile"
+    reserving: "Sto prenotando"
+    i_ve_reserved: "Ho prenotato"
+    length_must_be_slot_multiple: "deve essere almeno %{MIN} minuti dopo la data di inizio"
+    must_be_associated_with_at_least_1_machine: "deve essere associata ad almeno 1 macchina"
+    deleted_user: "Utente eliminato"
+  #members management
+  members:
+    unable_to_change_the_group_while_a_subscription_is_running: "Impossibile cambiare il gruppo mentre è in esecuzione una sottoscrizione"
+    please_input_the_authentication_code_sent_to_the_address: "Inserisci il codice di autenticazione inviato all'indirizzo email %{EMAIL}"
+    your_authentication_code_is_not_valid: "Il tuo codice di attivazione non è valido"
+    current_authentication_method_no_code: "Il metodo di autenticazione corrente non richiede alcun codice di migrazione"
+    requested_account_does_not_exists: "Il modello richiesto non esiste"
+  #SSO external authentication
+  authentication_providers:
+    local_database_provider_already_exists: 'Esiste già un provider di "Database locale". Impossibile crearne un altro.'
+    matching_between_User_uid_and_API_required: "È necessario impostare la corrispondenza tra User.uid e API per aggiungere questo provider."
+  #PDF invoices generation
+  invoices:
+    refund_invoice_reference: "Riferimento della fattura di rimborso: %{REF}"
+    invoice_reference: "Riferimento fattura: %{REF}"
+    code: "Codice: %{CODE}"
+    order_number: "Ordine #: %{NUMBER}"
+    invoice_issued_on_DATE: "Fattura emessa il %{DATE}"
+    refund_invoice_issued_on_DATE: "Fattura di rimborso emessa il %{DATE}"
+    wallet_credit: "Credito del portafoglio"
+    cancellation_of_invoice_REF: "Annullamento della fattura %{REF}"
+    reservation_of_USER_on_DATE_at_TIME: "Prenotazione di %{USER} il %{DATE} alle %{TIME}"
+    cancellation: "Annullamento"
+    object: "Oggetto:"
+    order_summary: "Riepilogo ordine:"
+    details: "Dettagli"
+    amount: "Importo"
+    subscription_extended_for_free_from_START_to_END: "L'abbonamento esteso gratuitamente - Dal %{START} al %{END}"
+    subscription_NAME_from_START_to_END: "Abbonamento %{NAME} - Dal %{START} al %{END}"
+    machine_reservation_DESCRIPTION: "Prenotazione macchina - %{DESCRIPTION}"
+    space_reservation_DESCRIPTION: "Prenotazione spazio - %{DESCRIPTION}"
+    training_reservation_DESCRIPTION: "Prenotazione abilitazione - %{DESCRIPTION}"
+    event_reservation_DESCRIPTION: "Prenotazione evento - %{DESCRIPTION}"
+    from_payment_schedule: "Scadenza %{NUMBER} su %{TOTAL}, da %{DATE}. Pagamento programmato %{SCHEDULE}"
+    null_invoice: "Fattura a nulla, salto di fatturazione a seguito di un malfunzionamento del software Fab Manager"
+    full_price_ticket:
+      one: "Un biglietto a prezzo intero"
+      other: "%{count} biglietti a prezzo pieno"
+    other_rate_ticket:
+      one: "Un biglietto %{NAME}"
+      other: "%{count} %{NAME} biglietti"
+    coupon_CODE_discount_of_DISCOUNT: "Buono sconto {CODE}: sconto di {DISCOUNT}{TYPE, select, percent_off{%} other{}}" #messageFormat interpolation
+    total_including_all_taxes: "Totale Iva inclusa"
+    VAT: "IVA"
+    including_VAT_RATE: "Incluso %{NAME} %{RATE}% di %{AMOUNT}"
+    including_total_excluding_taxes: "Compreso il totale delle imposte escl"
+    including_amount_payed_on_ordering: "Incluso l'importo pagato al momento dell'ordine"
+    total_amount: "Importo totale"
+    refund_on_DATE: "Rimborsato il %{DATE}"
+    by_card_online_payment: "con carta (pagamento online)"
+    by_cheque: "con assegno"
+    by_transfer: "con bonifico bancario"
+    by_cash: "in contanti"
+    by_wallet: "mediante il portafoglio"
+    no_refund: "Nessun rimborso"
+    settlement_by_debit_card: "Pagamento con carta di debito"
+    settlement_done_at_the_reception: "Pagamento effettuato al banco"
+    settlement_by_wallet: "Pagamento effettuato tramite il portafoglio"
+    on_DATE_at_TIME: "il %{DATE} alle %{TIME},"
+    for_an_amount_of_AMOUNT: "per un importo di %{AMOUNT}"
+    on_DATE_from_START_to_END: "Il %{DATE} da %{START} a %{END}" #eg: on feb. 7 from 7AM to 9AM
+    from_STARTDATE_to_ENDDATE_from_STARTTIME_to_ENDTIME: "Dal %{STARTDATE} al %{ENDDATE}, dal %{STARTTIME} al %{ENDTIME}" #eg: from feb. 7 to feb. 10, from 6PM to 10PM
+    subscription_of_NAME_for_DURATION_starting_from_DATE: "Abbonamento di %{NAME} per %{DURATION} a partire dal %{DATE}"
+    subscription_of_NAME_extended_starting_from_STARTDATE_until_ENDDATE: "Abbonamento di %{NAME} esteso (giorni gratuiti) a partire dal %{STARTDATE} fino a %{ENDDATE}"
+    and: 'e'
+    invoice_text_example: "La nostra associazione non è soggetta a IVA"
+    error_invoice: "Fattura errata. Gli articoli sottostanti non sono prenotati. Si prega di contattare FabLab per un rimborso."
+    prepaid_pack: "Pacchetto prepagato di ore"
+    pack_item: "Pacchetto di %{COUNT} ore per il %{ITEM}"
+    order: "Il tuo ordine sul negozio"
+    unable_to_find_pdf: "Non possiamo trovare la tua fattura. Se hai ordinato di recente, potrebbe non essere stata ancora generata. Riprova tra un attimo."
+  #PDF payment schedule generation
+  payment_schedules:
+    schedule_reference: "Riferimento al pagamento rateizzato: %{REF}"
+    schedule_issued_on_DATE: "Rata emessa il %{DATE}"
+    object: "Oggetto: Pagamento rateizzato per %{ITEM}"
+    subscription_of_NAME_for_DURATION_starting_from_DATE: "abbonamento di %{NAME} per %{DURATION} a partire da %{DATE}"
+    deadlines: "Tabella delle scadenze"
+    deadline_date: "Data di pagamento"
+    deadline_amount: "Importo tasse incluse"
+    total_amount: "Importo totale"
+    settlement_by_METHOD: "Gli addebiti saranno effettuati con {METHOD, select, card{carta} transfer{bonifico bancario} other{assegno}} per ogni scadenza."
+    settlement_by_wallet: "%{AMOUNT} verrà addebitato sul tuo portafoglio per regolare la prima scadenza."
+  #CVS accounting export (columns headers)
+  accounting_export:
+    journal_code: "Codice giornale"
+    date: "Data di inserimento"
+    account_code: "Codice account"
+    account_label: "Etichetta account"
+    piece: "Documento"
+    line_label: "Data di inserimento"
+    debit_origin: "Addebito di origine"
+    credit_origin: "Addebito di origine"
+    debit_euro: "Debito in euro"
+    credit_euro: "Crediti in euro"
+    lettering: "Lettering"
+    VAT: 'IVA'
+  accounting_summary:
+    subscription_abbreviation: "abbonam."
+    Machine_reservation_abbreviation: "prenot. macchina"
+    Training_reservation_abbreviation: "prenot. macchina"
+    Event_reservation_abbreviation: "prenot. evento"
+    Space_reservation_abbreviation: "prenot. spazio"
+    wallet_abbreviation: "portafoglio"
+    shop_order_abbreviation: "ordini negozio"
+  vat_export:
+    start_date: "Data di inizio"
+    end_date: "Data di fine"
+    vat_rate: "%{NAME} iva"
+    amount: "Importo totale"
+  #training availabilities
+  trainings:
+    i_ve_reserved: "Ho prenotato"
+    completed: "Completo"
+    refund_for_auto_cancel: "Questa sessione di formazione è stata annullata a causa di un numero insufficiente di partecipanti."
+  #error messages when updating an event
+  events:
+    error_deleting_reserved_price: "Impossibile eliminare il prezzo richiesto perché è associato ad alcune prenotazioni"
+    other_error: "Si è verificato un errore imprevisto durante l'aggiornamento dell'evento"
+    #event duration
+    from_STARTDATE_to_ENDDATE: "Da %{STARTDATE} a %{ENDDATE},"
+    from_STARTTIME_to_ENDTIME: "da %{STARTTIME} a %{ENDTIME}"
+  #members list export to EXCEL format
+  export_members:
+    members: "Membri"
+    id: "ID"
+    external_id: "ID Esterno"
+    surname: "Cognome"
+    first_name: "Nome"
+    email: "Email"
+    newsletter: "Newsletter"
+    last_login: "Ultimo accesso"
+    gender: "Genere"
+    age: "Età"
+    address: "Indirizzo"
+    phone: "Telefono"
+    website: "Sito"
+    job: "Lavoro"
+    interests: "Interessi"
+    cad_software_mastered: "Software CAD"
+    group: "Gruppo"
+    subscription: "Abbonamento"
+    subscription_end_date: "Data di sottoscrizione"
+    validated_trainings: "Convalida i corsi di formazione"
+    tags: "Etichette"
+    number_of_invoices: "Numero di fatture"
+    projects: "Progetti"
+    facebook: "Facebook"
+    twitter: "Twitter"
+    echo_sciences: "Echosciences"
+    organization: "Organizzazione"
+    organization_address: "Indirizzo dell'organizzazione"
+    note: "Nota"
+    man: "Uomo"
+    woman: "Donna"
+    without_subscriptions: "Senza abbonamenti"
+  #machines/trainings/events reservations list to EXCEL format
+  export_reservations:
+    reservations: "Le tue prenotazioni"
+    customer_id: "ID Cliente"
+    customer: "Cliente"
+    email: "Email"
+    reservation_date: "Data di prenotazione"
+    reservation_type: "Tipo di prenotazione"
+    reservation_object: "Oggetto prenotazione"
+    slots_number_hours_tickets: "Numero di slot (ore/biglietti)"
+    payment_method: "Metodo di pagamento"
+    local_payment: "Pagamento alla reception"
+    online_payment: "Pagamento online"
+    deleted_user: "Utente eliminato"
+    coupon: "Buono acquisto utilizzato"
+  #subscriptions list export to EXCEL format
+  export_subscriptions:
+    subscriptions: "Abbonamenti"
+    id: "ID"
+    customer: "Cliente"
+    email: "Email"
+    subscription: "Abbonamento"
+    period: "Periodo"
+    start_date: "Data di inizio"
+    expiration_date: "Scadenza"
+    amount: "Importo"
+    local_payment: "Pagamento alla reception"
+    online_payment: "Pagamento online"
+    deleted_user: "Utente eliminato"
+  #reservation slots export, by type, to EXCEL format
+  export_availabilities:
+    machines: "Macchine"
+    trainings: "Abilitazioni"
+    spaces: "Spazi"
+    events: "Eventi"
+    day_of_week: "Giorno della settimana"
+    date: "Data"
+    slot: "Slot"
+    machine: "Macchina"
+    training: "Abilitazione"
+    space: "Spazio"
+    event: "Evento"
+    reservations: "Le tue prenotazioni"
+    available_seats: "Posti disponibili"
+  reservation_ics:
+    description_slot: "Hai prenotato %{COUNT} slot di %{ITEM}"
+    description_training: "Hai prenotato un'abilitazione in %{TYPE}"
+    description_event: "Hai prenotato %{NUMBER} biglietti per questo evento"
+    alarm_summary: "Ricorda la tua prenotazione"
+  roles:
+    member: "Membro"
+    manager: "Manager"
+    admin: "Amministratore"
+  api:
+    #internal app notifications
+    notifications:
+      deleted_user: "Utente eliminato"
+      notify_admin_abuse_reported:
+        an_abuse_was_reported_on_TYPE_ID_NAME_html: "È stato segnalato un abuso verso <strong>%{TYPE} %{ID}: <em>%{NAME}</em></strong>."
+      notify_admin_member_create_reservation:
+        a_RESERVABLE_reservation_was_made_by_USER_html: "Una prenotazione <strong><em>%{RESERVABLE}</em></strong> è stata effettuata da <strong><em>%{USER}</em></strong>."
+      notify_admin_profile_complete:
+        account_imported_from_PROVIDER_UID_has_completed_its_information_html: "L'account importato da <strong><em>%{PROVIDER}</strong> (%{UID})</em> ha completato le sue informazioni."
+      notify_admin_slot_is_canceled:
+        USER_s_reservation_on_the_DATE_was_cancelled_remember_to_generate_a_refund_invoice_if_applicable_html: "La prenotazione di <strong><em>%{USER}</em></strong>, del %{DATE}, è stata cancellata. Ricordati di generare una fattura di rimborso se necessario."
+      notify_admin_slot_is_modified:
+        a_booking_slot_was_modified: "È stato modificato uno slot di prenotazione."
+      notify_admin_subscribed_plan:
+        subscription_PLAN_has_been_subscribed_by_USER_html: "Un abbonamento <strong><em>%{PLAN}</em></strong> è stato sottoscritto dall'utente <strong><em>%{USER}</strong></em>."
+      notify_admin_subscription_canceled:
+        USER_s_subscription_has_been_cancelled: "L'abbonamento di %{USER} è stato annullato."
+      notify_admin_subscription_extended:
+        subscription_PLAN_of_the_member_USER_has_been_extended_FREE_until_DATE_html: "L'abbonamento <strong><em>{PLAN}</em></strong> per l'utente <strong><em>{USER}</strong></em> è stato esteso {FREE, select, true{gratis} other{}} fino al {DATE}." #messageFormat interpolation
+      notify_admin_subscription_is_expired:
+        USER_s_subscription_has_expired: "Il tuo abbonamento è scaduto."
+      notify_admin_subscription_will_expire_in_7_days:
+        USER_s_subscription_will_expire_in_7_days: "Il tuo abbonamento scadrà tra 7 giorni."
+      notify_admin_training_auto_cancelled:
+        auto_cancelled_training: "La sessione di abilitazione %{TRAINING} prevista per il %{DATE}, è stata annullata a causa di un numero insufficiente di partecipanti."
+        auto_refund: "I membri sono stati rimborsati automaticamente sul loro portafoglio."
+        manual_refund: "Si prega di rimborsare ogni membro."
+      notify_admin_user_group_changed:
+        user_NAME_changed_his_group_html: "L'utente <strong><em>{NAME}</strong></em> ha cambiato gruppo." #messageFormat interpolation
+      notify_admin_user_merged:
+        user_NAME_has_merged_his_account_with_the_one_imported_from_PROVIDER_UID_html: "L'account <strong><em>{NAME}</strong></em> è stato unito con quello importato da <strong><em>{PROVIDER} </strong> ({%UID})</em>." #messageFormat interpolation
+      notify_admin_when_project_published:
+        project_NAME_has_been_published_html: "Il progetto <a href='/#!/projects/%{ID}'><strong><em>%{NAME}<em></strong></a> è stato pubblicato."
+      notify_admin_when_user_is_created:
+        a_new_user_account_has_been_created_NAME_EMAIL_html: "Un nuovo account utente è stato creato: <strong><em>%{NAME} &lt;%{EMAIL}&gt;</strong></em>."
+      notify_admin_when_user_is_imported:
+        a_new_user_account_has_been_imported_from_PROVIDER_UID_html: "Un nuovo account utente è stato importato da: <strong><em>%{PROVIDER}}</strong>(%{UID})</em>."
+      notify_member_create_reservation:
+        your_reservation_RESERVABLE_was_successfully_saved_html: "La prenotazione <strong><em>%{RESERVABLE}</em></strong> è stata salvata con successo."
+      notify_member_reservation_reminder:
+        reminder_you_have_a_reservation_RESERVABLE_to_be_held_on_DATE_html: "Questo è un promemoria sulla tua prenotazione <strong>%{RESERVABLE}</strong> fatta per il <em>%{DATE}</em>"
+      notify_member_slot_is_canceled:
+        your_reservation_RESERVABLE_of_DATE_was_successfully_cancelled: "La prenotazione %{RESERVABLE} è stata salvata con successo."
+      notify_member_slot_is_modified:
+        your_reservation_slot_was_successfully_changed: "Il tuo slot di prenotazione è stato modificato con successo."
+      notify_member_subscribed_plan:
+        you_have_subscribed_to_PLAN_html: "Hai sottoscritto il piano: <strong><em>%{PLAN}</em></strong>."
+      notify_member_subscribed_plan_is_changed:
+        you_have_changed_your_subscription_to_PLAN_html: "Hai cambiato il tuo piano in <strong><em>%{PLAN}</em></strong>."
+      notify_member_subscription_canceled:
+        your_subscription_PLAN_was_successfully_cancelled_html: "Il tuo abbonamento <strong><em>%{PLAN}</em></strong> è stato annullato con successo."
+      notify_member_subscription_extended:
+        your_subscription_PLAN_has_been_extended_FREE_until_DATE_html: "Il tuo abbonamento <strong><em>{PLAN}</em></strong> è stato esteso {FREE, select, true{gratis} other{}} fino a {DATE}." #messageFormat interpolation
+      notify_member_subscription_is_expired:
+        your_subscription_has_expired: "La tua iscrizione è scaduta."
+      notify_member_subscription_will_expire_in_7_days:
+        your_subscription_will_expire_in_7_days: "Il tuo abbonamento scadrà tra 7 giorni."
+      notify_member_training_authorization_expired:
+        training_authorization_revoked: "La tua autorizzazione a utilizzare %{MACHINES} è stata revocata perché scaduta."
+      notify_member_training_auto_cancelled:
+        auto_cancelled_training: "La sessione di abilitazione %{TRAINING} prevista per il %{DATE}, è stata annullata a causa di un numero insufficiente di partecipanti."
+        auto_refund: "Sei stato rimborsato sul tuo portafoglio."
+      notify_member_training_invalidated:
+        invalidated: "La tua abilitazione a utilizzare %{MACHINES} è stata invalidata a causa di una mancanza di riserve."
+      notify_partner_subscribed_plan:
+        subscription_partner_PLAN_has_been_subscribed_by_USER_html: "Un piano <strong><em>%{PLAN}</em></strong> è stato sottoscritto dall'utente <strong><em>%{USER}</strong></em>."
+      notify_project_author_when_collaborator_valid:
+        USER_became_collaborator_of_your_project: "%{USER} è diventato collaboratore del tuo progetto:"
+      notify_project_collaborator_to_valid:
+        you_are_invited_to_collaborate_on_the_project: "Sei invitato a collaborare a un progetto:"
+      notify_user_auth_migration:
+        your_account_was_migrated: "Il tuo account è stato migrato correttamente al nuovo sistema di autenticazione."
+      notify_user_profile_complete:
+        your_profile_was_completed: "Il tuo profilo è stato completato con successo, ora hai accesso all'intera piattaforma."
+      notify_user_training_valid:
+        your_TRAINING_was_validated_html: "Il tuo abbonamento <strong><em>%{TRAINING}</em></strong> è stato annullato con successo."
+      notify_user_user_group_changed:
+        your_group_has_changed: "Il tuo ruolo è cambiato."
+      notify_user_when_avoir_ready:
+        your_avoir_is_ready_html: "La tua fattura di rimborso #%{REFERENCE}, di %{AMOUNT}, è pronta. <a href='api/invoices/%{INVOICE_ID}/download' target='_blank'> Clicca qui per scaricarla</a>."
+      notify_user_when_invoice_ready:
+        your_invoice_is_ready_html: "La tua fattura di rimborso #%{REFERENCE}, di %{AMOUNT}, è pronta. <a href='api/invoices/%{INVOICE_ID}/download' target='_blank'> Clicca qui per scaricarla</a>."
+      undefined_notification:
+        unknown_notification: "Notifiche sconosciute"
+        notification_ID_wrong_type_TYPE_unknown: "Notifica %{ID} errata (tipo %{TYPE} sconosciuto)"
+      notify_user_wallet_is_credited:
+        your_wallet_is_credited: "Il tuo portafoglio è stato accreditato dall'amministratore"
+      notify_admin_user_wallet_is_credited:
+        wallet_is_credited: "Il portafoglio del membro %{USER} è stato accreditato %{AMOUNT}"
+      notify_admin_export_complete:
+        export: "L'esportazione"
+        statistics_global: "di tutte le statistiche"
+        statistics_account: "delle statistiche sulle registrazioni"
+        statistics_event: "delle statistiche sugli eventi"
+        statistics_machine: "delle statistiche sugli slot macchina"
+        statistics_project: "delle statistiche sui progetti"
+        statistics_subscription: "delle statistiche sugli abbonamenti"
+        statistics_training: "delle statistiche sulle abilitazioni"
+        statistics_space: "delle statistiche sugli spazi"
+        statistics_order: "di statistiche sugli ordini dei negozi"
+        users_members: "dell'elenco dei membri"
+        users_subscriptions: "della lista degli abbonamenti"
+        users_reservations: "della lista delle prenotazioni"
+        availabilities_index: "della disponibilità delle prenotazioni"
+        accounting_acd: "dei dati contabili verso ACD"
+        accounting_vat: "dei dati IVA raccolti"
+        is_over: "è finita."
+        download_here: "Scarica qui"
+      notify_admin_import_complete:
+        import_over: "%{CATEGORY} importazione terminata. "
+        members: "Membri"
+        view_results: "Vedi risultati."
+      notify_admin_low_stock_threshold:
+        low_stock: "Scorte ridotte per %{PRODUCT}. "
+        view_product: "Mostra il prodotto."
+      notify_member_about_coupon:
+        enjoy_a_discount_of_PERCENT_with_code_CODE: "Goditi uno sconto di %{PERCENT}% con il codice %{CODE}"
+        enjoy_a_discount_of_AMOUNT_with_code_CODE: "Goditi uno sconto di %{AMOUNT}% con il codice %{CODE}"
+      notify_admin_free_disk_space:
+        warning_free_disk_space: "Attenzione: lo spazio su disco disponibile del server è ora %{AVAILABLE} MiB"
+      notify_admin_close_period_reminder:
+        warning_last_closed_period_over_1_year: "Ricorda di chiudere periodicamente i tuoi esercizi contabili. L'ultimo periodo chiuso è terminato il %{LAST_END}"
+        warning_no_closed_periods: "Ricorda di chiudere periodicamente i tuoi esercizi contabili. Devi chiudere i periodi dal %{FIRST_DATE}"
+      notify_admin_archive_complete:
+        archive_complete: "L'archiviazione dei dati dal %{START} al %{END} è terminata. <a href='api/accounting_periods/%{ID}/archive' target='_blank'>clicca qui per scaricare</a>. Ricordati di salvarli su un supporto protetto esterno."
+      notify_privacy_policy_changed:
+        policy_updated: "Informativa sulla privacy aggiornata."
+        click_to_show: "Fai clic qui per continuare"
+      notify_admin_refund_created:
+        refund_created: "È stato creato un rimborso di %{AMOUNT} per l'utente %{USER}"
+      notify_user_role_update:
+        your_role_is_ROLE: "Il tuo ruolo è stato cambiato in %{ROLE}."
+      notify_admins_role_update:
+        user_NAME_changed_ROLE_html: "L'utente <strong><em>%{NAME}</strong></em> ora è %{ROLE}."
+      notify_admin_objects_stripe_sync:
+        all_objects_sync: "Tutti i dati sono stati sincronizzati con successo su Stripe."
+      notify_admin_order_is_paid:
+        order_paid_html: "Un nuovo ordine è stato inserito. <a href='/#!/admin/store/orders/%{ID}'>Visualizza dettagli</a>."
+      notify_user_when_payment_schedule_ready:
+        your_schedule_is_ready_html: "La tua rata di pagamento #%{REFERENCE}, di %{AMOUNT}, è pronta. <a href='api/invoices/%{SCHEDULE_ID}/download' target='_blank'> Clicca qui per scaricarla</a>."
+      notify_admin_payment_schedule_error:
+        schedule_error: "Si è verificato un errore con l'addebito su carta della scadenza del %{DATE}, per la rata %{REFERENCE}"
+      notify_member_payment_schedule_error:
+        schedule_error: "Si è verificato un errore per il debito con carta della scadenza %{DATE}, per la pianificazione %{REFERENCE}"
+      notify_admin_payment_schedule_failed:
+        schedule_failed: "Si è verificato un errore nell'addebito con carta alla scadenza del %{DATE}, per la rata %{REFERENCE}"
+      notify_member_payment_schedule_failed:
+        schedule_failed: "Si è verificato un errore nell'addebito con carta alla scadenza del %{DATE}, per la tua rata %{REFERENCE}"
+      notify_admin_payment_schedule_gateway_canceled:
+        schedule_canceled: "Il pagamento programmato %{REFERENCE} è stato annullato dal gateway. È necessaria un'azione."
+      notify_member_payment_schedule_gateway_canceled:
+        schedule_canceled: "Il tuo programma di pagamenti %{REFERENCE} è stato annullato dal gateway."
+      notify_admin_payment_schedule_check_deadline:
+        schedule_deadline: "Devi incassare l'assegno per la scadenza del %{DATE}, per la rata %{REFERENCE}"
+      notify_admin_payment_schedule_transfer_deadline:
+        schedule_deadline: "Devi confermare l'addebito bancario diretto per la scadenza di %{DATE}, per la rata %{REFERENCE}"
+      notify_member_reservation_limit_reached:
+        limit_reached: "Per il %{DATE} hai raggiunto il limite giornaliero di %{HOURS} ore di prenotazione per %{ITEM}."
+      notify_admin_user_supporting_document_files_created:
+        supporting_document_files_uploaded: "Documento aggiuntivo caricato dal membro <strong><em>%{NAME}</strong></em>."
+      notify_admin_user_supporting_document_files_updated:
+        supporting_document_files_uploaded: "Documento aggiuntivo caricato dal membro <strong><em>%{NAME}</strong></em>."
+      notify_user_is_validated:
+        account_validated: "Il tuo account è valido."
+      notify_user_is_invalidated:
+        account_invalidated: "Il tuo account non è valido."
+      notify_user_supporting_document_refusal:
+        refusal: "I tuoi documenti aggiuntivi sono stati rifiutati"
+      notify_admin_user_supporting_document_refusal:
+        refusal: "Il documento aggiuntivo del membro <strong><em>%{NAME}</strong></em> è stato rifiutato."
+      notify_user_order_is_ready:
+        order_ready: "Il tuo ordine %{REFERENCE} è pronto"
+      notify_user_order_is_canceled:
+        order_canceled: "Il tuo ordine %{REFERENCE} è stato annullato"
+      notify_user_order_is_refunded:
+        order_refunded: "Il tuo ordine %{REFERENCE} è stato rimborsato"
+  #statistics tools for admins
+  statistics:
+    subscriptions: "Abbonamenti"
+    machines_hours: "Slot macchine"
+    machine_dates: "Slot date"
+    space_dates: "Slot date"
+    spaces: "Spazi"
+    orders: "Ordini"
+    trainings: "Abilitazioni"
+    events: "Eventi"
+    registrations: "Registrazioni"
+    projects: "Progetti"
+    users: "Utenti"
+    training_id: "ID dell'abilitazione"
+    training_date: "Data dell'abilitazione"
+    event_id: "ID Evento"
+    event_date: "Data Evento"
+    event_name: "Nome evento"
+    event_theme: "Tema"
+    age_range: "Fascia d'età"
+    themes: "Temi"
+    components: "Componenti"
+    machines: "Macchine"
+    user_id: "ID utente"
+    group: "Gruppo"
+    bookings: "Prenotazioni"
+    hours_number: "Numero ore"
+    tickets_number: "Numero dei ticket"
+    revenue: "Entrate"
+    account_creation: "Creazione account"
+    project_publication: "Pubblicazione progetti"
+    duration: "Durata"
+    store: "Negozio"
+    paid-processed: "Pagato e/o processato"
+    aborted: "Interruzione"
+  #statistics exports to the Excel file format
+  export:
+    entries: "Voci"
+    revenue: "Entrate"
+    average_age: "Età media"
+    total: "Totale"
+    date: "Data"
+    user: "Utente"
+    email: "Email"
+    phone: "Telefono"
+    gender: "Genere"
+    age: "Età"
+    type: "Tipo"
+    male: "Uomo"
+    female: "Donna"
+    deleted_user: "Utente eliminato"
+  #initial price's category for events, created to replace the old "reduced amount" property
+  price_category:
+    reduced_fare: "Tariffa ridotta"
+    reduced_fare_if_you_are_under_25_student_or_unemployed: "Tariffa ridotta se hai meno di 25 anni, studente o disoccupato."
+  cart_items:
+    free_extension: "Estensione gratuita di un abbonamento, fino al %{DATE}"
+    must_be_after_expiration: "La nuova data di scadenza deve essere impostata dopo la data di scadenza corrente"
+    group_subscription_mismatch: "Il tuo gruppo non corrisponde con il tuo abbonamento. Segnala questo errore."
+  statistic_profile:
+    birthday_in_past: "La data di nascita deve essere nel passato"
+  order:
+    please_contact_FABLAB: "Vi preghiamo di contattarci per le istruzioni di prelievo."
+  cart_item_validation:
+    slot: "Lo slot non esiste"
+    availability: "La disponibilità non esiste"
+    full: "Lo slot è già completamente riservato"
+    deadline: "Non puoi riservare uno slot %{MINUTES} minuti prima del suo inizio"
+    limit_reached: "Hai raggiunto il limite di prenotazione di %{HOURS}H al giorno per il %{RESERVABLE}, per il tuo abbonamento corrente. Si prega di modificare la prenotazione."
+    restricted: "Questa disponibilità è limitata per gli abbonati"
+    plan: "Questo piano di abbonamento è disabilitato"
+    plan_group: "Questo piano di abbonamento è riservato ai membri del gruppo %{GROUP}"
+    reserved: "Lo slot è già completamente riservato"
+    pack: "Questo pacchetto prepagato è disabilitato"
+    pack_group: "Questo pacchetto prepagato è riservato ai membri del gruppo %{GROUP}"
+    space: "Questo spazio è disabilitato"
+    machine: "Questa macchina è disabilitata"
+    reservable: "Questa macchina non è prenotabile"
+  cart_validation:
+    select_user: "Seleziona un utente prima di continuare"
+  settings:
+    locked_setting: "l'impostazione è bloccata."
+    about_title: "Il titolo della tua pagina"
+    about_body: "Il titolo della tua pagina"
+    about_contacts: "Contatti pagina \"About\""
+    privacy_draft: "Bozza informativa sulla privacy"
+    privacy_body: "Informativa sulla privacy"
+    privacy_dpo: "Responsabile della protezione dei dati"
+    twitter_name: "Twitter nome feed"
+    home_blogpost: "Sintesi homepage"
+    machine_explications_alert: "Messaggio informativo sulla pagina di prenotazione delle macchine"
+    training_explications_alert: "Messaggio informativo sulla pagina di prenotazione delle abilitazioni"
+    training_information_message: "Messaggio informativo sulla pagina di prenotazione delle macchine"
+    subscription_explications_alert: "Messaggio informativo sulla pagina degli abbonamenti"
+    invoice_logo: "Logo delle fatture"
+    invoice_reference: "Riferimento fattura"
+    invoice_code-active: "Attivazione del codice delle fatture"
+    invoice_code-value: "Codice fattura"
+    invoice_order-nb: "Numero ordine della fattura"
+    invoice_VAT-active: "Attivazione dell'IVA"
+    invoice_VAT-rate: "Aliquota IVA"
+    invoice_VAT-rate_Product: "Aliquota IVA per le vendite di prodotti da negozio"
+    invoice_VAT-rate_Event: "Aliquota IVA per le prenotazioni di eventi"
+    invoice_VAT-rate_Machine: "Aliquota IVA per le prenotazioni di macchine"
+    invoice_VAT-rate_Subscription: "Aliquota IVA per gli abbonamenti"
+    invoice_VAT-rate_Space: "Aliquota IVA per le prenotazioni di spazi"
+    invoice_VAT-rate_Training: "Aliquota IVA per le prenotazioni delle abilitazioni"
+    invoice_text: "Testo della fattura"
+    invoice_legals: "Informazione legale delle fatture"
+    booking_window_start: "Orari di apertura"
+    booking_window_end: "Orario di chiusura"
+    booking_move_enable: "Attivazione della possibilità di spotare le prenotazioni"
+    booking_move_delay: "Ritardo preventivo prima di qualsiasi spostamento della prenotazione"
+    booking_cancel_enable: "Attivazione della possibilità di cancellare le prenotazioni"
+    booking_cancel_delay: "Ritardo preventivo per la cancellazione delle prenotazioni"
+    main_color: "Colore principale"
+    secondary_color: "Colore secondario"
+    fablab_name: "Nome del Fablab"
+    name_genre: "Corrispondenza del titolo"
+    reminder_enable: "Attivazione del promemoria delle prenotazioni"
+    reminder_delay: "Ritardo prima di inviare il promemoria"
+    event_explications_alert: "Messaggio istruzioni sulla pagina di prenotazione dell'evento"
+    space_explications_alert: "Messaggio istruzioni sulla pagina di prenotazione dell'evento"
+    visibility_yearly: "Massima visibilità per gli abbonati annuali"
+    visibility_others: "Massima visibilità per gli altri membri"
+    reservation_deadline: "Impedisci la prenotazione prima che inizi"
+    display_name_enable: "Mostra i nomi nel calendario"
+    machines_sort_by: "Ordine di visualizzazione macchine"
+    accounting_sales_journal_code: "Codice del giornale Iva"
+    accounting_payment_card_code: "Codice dei pagamenti con carta"
+    accounting_payment_card_label: "Etichetta pagamenti con carta"
+    accounting_payment_card_journal_code: "Codice giornale carta clienti"
+    accounting_payment_wallet_code: "Codice pagamenti portafoglio"
+    accounting_payment_wallet_label: "Etichetta pagamenti portafoglio"
+    accounting_payment_wallet_journal_code: "Codice giornale pagamenti con portafoglio"
+    accounting_payment_other_code: "Codice altri mezzi di pagamento"
+    accounting_payment_other_label: "Etichetta altri mezzi di pagamento"
+    accounting_payment_other_journal_code: "Codice giornale altri mezzi di pagamento"
+    accounting_wallet_code: "Codice del credito portafoglio"
+    accounting_wallet_label: "Etichetta del credito portafoglio"
+    accounting_wallet_journal_code: "Codice giornale del credito portafoglio"
+    accounting_VAT_code: "Partita IVA"
+    accounting_VAT_label: "Etichetta IVA"
+    accounting_VAT_journal_code: "Codice del giornale IVA"
+    accounting_subscription_code: "Codice abbonamenti"
+    accounting_subscription_label: "Etichetta abbonamenti"
+    accounting_Machine_code: "Codice macchine"
+    accounting_Machine_label: "Etichetta macchine"
+    accounting_Training_code: "Codice dell'abilitazione"
+    accounting_Training_label: "Etichetta dell'abilitazione"
+    accounting_Event_code: "Codice eventi"
+    accounting_Event_label: "Etichetta eventi"
+    accounting_Space_code: "Codice spazi"
+    accounting_Space_label: "Etichetta spazi"
+    accounting_Pack_code: "Codice pacchetto ore prepagate"
+    accounting_Pack_label: "Etichetta pacchetto ore prepagate"
+    accounting_Product_code: "Codice prodotti negozio"
+    accounting_Product_label: "Etichetta prodotti negozio"
+    hub_last_version: "Ultima versione di Fab-manager"
+    hub_public_key: "Allega chiave pubblica"
+    fab_analytics: "Fab Analytics"
+    link_name: "Link titolo alla pagina \"About\""
+    home_content: "Home page"
+    home_css: "Stylesheet della home page"
+    origin: "URL istanza"
+    uuid: "ID dell'Istanza"
+    phone_required: "Telefono richiesto?"
+    tracking_id: "Tracking ID"
+    book_overlapping_slots: "Libri che si sovrappongono"
+    slot_duration: "Durata predefinita degli slot di prenotazione"
+    events_in_calendar: "Mostra gli eventi nel calendario"
+    spaces_module: "Modulo spazi"
+    plans_module: "Moduli piani"
+    invoicing_module: "Modulo fatturazione"
+    facebook_app_id: "Id App Facebook"
+    twitter_analytics: "Account analytics Twitter"
+    recaptcha_site_key: "chiave sito ReCAPTCHA"
+    recaptcha_secret_key: "chiave segreta ReCAPTCHA"
+    feature_tour_display: "Modalità visualizzazione tour delle funzionalità"
+    email_from: "Indirizzo del mittente"
+    disqus_shortname: "Abbreviazione Disqus"
+    allowed_cad_extensions: "Estensioni dei file CAD consentite"
+    allowed_cad_mime_types: "Tipi MIME consentiti per i file CAD"
+    openlab_app_id: "Id OpenLab"
+    openlab_app_secret: "Riservato OpenLab"
+    openlab_default: "Visualizzazione predefinita della galleria progetti"
+    online_payment_module: "Modulo pagamenti online"
+    stripe_public_key: "Chiave pubblica Stripe"
+    stripe_secret_key: "Chiave Segreta di Stripe"
+    stripe_currency: "Valuta Stripe"
+    invoice_prefix: "Prefisso del file di fatturazione"
+    confirmation_required: "Conferma richiesta"
+    wallet_module: "Modulo portafoglio"
+    statistics_module: "Modulo statistiche"
+    upcoming_events_shown: "Limite di visualizzazione per i prossimi eventi"
+    payment_schedule_prefix: "Prefisso file dei pagamenti pianificati"
+    trainings_module: "Modulo dell'abilitazione"
+    address_required: "Indirizzo richiesto"
+    accounting_Error_code: "Codice errore"
+    accounting_Error_label: "Etichetta errori"
+    payment_gateway: "Gateway di pagamento"
+    payzen_username: "Nome utente PayZen"
+    payzen_password: "Password di PayZen"
+    payzen_endpoint: "PayZen API endpoint"
+    payzen_public_key: "Chiave pubblica del client PayZen"
+    payzen_hmac: "PayZen HMAC-SHA-256 key"
+    payzen_currency: "PayZen valuta"
+    public_agenda_module: "Modulo agenda pubblica"
+    renew_pack_threshold: "Soglia per rinnovo pacchetti"
+    pack_only_for_subscription: "Limita i pacchetti per gli abbonati"
+    overlapping_categories: "Categorie per la prevenzione delle prenotazioni sovrapposte"
+    extended_prices_in_same_day: "Prezzi prolungati nello stesso giorno"
+    public_registrations: "Registrazioni pubbliche"
+    facebook: "facebook"
+    twitter: "twitter"
+    viadeo: "viadeo"
+    linkedin: "linkedin"
+    instagram: "instagram"
+    youtube: "youtube"
+    vimeo: "vimeo"
+    dailymotion: "dailymotion"
+    github: "github"
+    echosciences: "echosciences"
+    pinterest: "pinterest"
+    lastfm: "lastfm"
+    flickr: "flickr"
+    machines_module: "Modulo macchine"
+    user_change_group: "Consenti all'utente di cambiare il loro gruppo"
+    show_username_in_admin_list: "Mostra il nome utente nell'elenco dei membri dell'amministratore"
+    store_module: "Modulo del negozio"
+    store_withdrawal_instructions: "Istruzioni per il ritiro"
+    store_hidden: "Negozio nascosto al pubblico"
+    advanced_accounting: "Contabilità avanzata"
+    external_id: "identificatore esterno"
+    prevent_invoices_zero: "prevenire emissione delle fatture ad importo 0"
+    invoice_VAT-name: "Denominazione IVA"
+    trainings_auto_cancel: "Annullamento automatico delle abilitazioni"
+    trainings_auto_cancel_threshold: "Partecipanti minimi per la cancellazione automatica"
+    trainings_auto_cancel_deadline: "Scadenza cancellazione automatica"
+    trainings_authorization_validity: "Periodo di validità delle abilitazioni"
+    trainings_authorization_validity_duration: "Durata del periodo di validità delle abilitazioni"
+    trainings_invalidation_rule: "Annullamento automatico delle abilitazioni"
+    trainings_invalidation_rule_period: "Periodo di tolleranza prima di invalidare un'abilitazione"
+  #statuses of projects
+  statuses:
+    new: "Nuovo"
+    pending: "In corso"
+    done: "Completato"
+    abandoned: "Abbandonato"

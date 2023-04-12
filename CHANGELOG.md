@@ -1,5 +1,29 @@
 # Changelog Fab-manager
 
+## v6.0.3 2023 April 12
+
+- Fix a bug: unable to install Fab-manager by setup.sh
+- Update translations from Crowdin
+- Fix a security issue: updated Ruby to 3.2.2 to fix [CVE-2023-28755](https://www.ruby-lang.org/en/news/2023/03/28/redos-in-uri-cve-2023-28755/)
+- Fix a security issue: updated Ruby to 3.2.2 to fix [CVE-2023-28756](https://www.ruby-lang.org/en/news/2023/03/30/redos-in-time-cve-2023-28756/)
+
+## v6.0.2 2023 April 05
+
+- Italian language support (credits to https://crowdin.com/profile/olazzari)
+- Improved error message on payzen misconfigured currency
+- Improved reporting error messages in UI, from ruby exceptions
+- Fix a bug: unable to subscribe with a payment schedule using PayZen
+- Fix a bug: unable to list supporting documents types for a deleted group
+- Fix a bug: notification is broken when updating payzen currency
+- Fix a bug: broken notifications
+- Fix a bug: unable to bulk update settings
+
+## v6.0.1 2023 April 03
+
+- Fix a bug: unable to write the configuration of the auth provider
+
+## v6.0.0 2023 April 03
+
 - Updated ruby to 3.2
 - Updated rails to 7.0
 - Updated puma to 6.1
@@ -21,12 +45,14 @@
 - Updated omniauth_openid_connect to 0.6
 - Updated the invoices chaining method with a more flexible model
 - Fill the holes in the logical sequence of invoices references with nil invoices
-- Use a cached configuration file to read the authentification provider settings
+- Use a cached configuration file to read the authentication provider settings
 - Order numbers are now saved in database instead of generated on-the-fly
 - OpenAPI availabilities endpoint
 - Ability to filter OpenAPI reservations endpoint by availability_id
 - Support for ARM64 CPU architecture
+- Fix a bug: by default, invoices should be ordered by date descending
 - Fix a bug: broken display after a plan category was deleted
+- Fix a bug: unable to update recurring event
 - Fix a security issue: updated json5 to 2.2.2 to fix [CVE-2022-46175](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-46175)
 - Fix a security issue: updated terser to 5.16.8 to fix [CVE-2022-25858](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-25858)
 - [TODO DEPLOY] `\curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/scripts/mount-auth-provider.sh | bash`

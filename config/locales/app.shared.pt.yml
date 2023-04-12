@@ -68,7 +68,7 @@ pt:
         declare_organization: "Declaro ser uma organização"
         declare_organization_help: "Se você declarar ser uma organização, suas faturas serão emitidas no nome da organização."
         pseudonym: "Usuário"
-        external_id: "External identifier"
+        external_id: "Identificador externo"
         first_name: "Primeiro nome"
         surname: "Sobrenome"
         email_address: "Endereço de e-mail"
@@ -97,13 +97,13 @@ pt:
         group: "Grupo"
         trainings: "Treinamentos"
         tags: "Tags"
-        note: "Private note"
-        note_help: "This note is only visible to administrators and managers. The member cannot see it."
+        note: "Anotação privada"
+        note_help: "Esta anotação só é visível para administradores e gerentes. O membro não pode vê-la."
         terms_and_conditions_html: "Eu li e aceito <a href=\"{POLICY_URL}\" target=\"_blank\">os termos e condições<a/>"
         must_accept_terms: "Você deve aceitar os termos e condições"
         save: "Salvar"
       gender_input:
-        label: "Gender"
+        label: "Gênero"
         man: "Homem"
         woman: "Mulher"
       change_password:
@@ -114,16 +114,16 @@ pt:
       password_input:
         new_password: "Nova senha"
         confirm_password: "Confirmar a senha"
-        help: "Your password must be minimum 12 characters long, have at least one uppercase letter, one lowercase letter, one number and one special character."
-        password_too_short: "Password is too short (must be at least 12 characters)"
+        help: "Sua senha deve ter no mínimo 12 caracteres, ter pelo menos uma letra maiúscula, uma letra minúscula, um número e um caractere especial."
+        password_too_short: "Senha muito curta (mínimo de 12 caracteres)"
         confirmation_mismatch: "Confirmação de senha é diferente da senha."
       password_strength:
-        not_in_requirements: "Your password doesn't meet the minimal requirements"
-        0: "Very weak password"
-        1: "Weak password"
-        2: "Almost ok"
-        3: "Good password"
-        4: "Excellent password"
+        not_in_requirements: "Sua senha não atende aos requisitos mínimos"
+        0: "Senha muito fraca"
+        1: "Senha fraca"
+        2: "Quase boa"
+        3: "Senha boa"
+        4: "Senha excelente"
       #project edition form
       project:
         name: "Nome"
@@ -330,7 +330,7 @@ pt:
         you_have_settled_a_: "Você tem liquidado:"
         total_: "TOTAL:"
         thank_you_your_payment_has_been_successfully_registered: "Obrigado. Seu pagamento foi registrado com sucesso !"
-        your_invoice_will_be_available_soon_from_your_: "Sua fatura estará disponível em breve"
+        your_invoice_will_be_available_soon_from_your_: "Your invoice will be available soon from your"
         dashboard: "Painel de controle"
         i_want_to_change_the_following_reservation: "Eu quero mudar a seguinte reserva:"
         cancel_my_modification: "Cancelar minha modificação"
@@ -355,8 +355,8 @@ pt:
         slot_restrict_plans: "Este slot está restrito para os planos abaixo:"
         slot_restrict_subscriptions_must_select_plan: "O slot está restrito para os assinantes. Por favor, selecione um plano primeiro."
         slot_restrict_plans_of_others_groups: "O slot está restrito para os assinantes de outros grupos."
-        selected_plan_dont_match_slot: "O plano selecionado não corresponde a este slot"
-        user_plan_dont_match_slot: "Plano do usuário não corresponde a esse slot"
+        selected_plan_dont_match_slot: "Selected plan don't match this slot"
+        user_plan_dont_match_slot: "User subscribed plan don't match this slot"
         no_plan_match_slot: "Você não tem nenhum plano que corresponda a esse slot"
         slot_at_same_time: "Conflito com outras reservas"
         do_you_really_want_to_book_slot_at_same_time: "Você realmente quer reservar este slot? Outras reservas ocorrerão ao mesmo tempo"
@@ -437,14 +437,14 @@ pt:
       form_multi_select:
         create_label: "Adicionar {VALUE}"
       form_checklist:
-        select_all: "Select all"
-        unselect_all: "Unselect all"
+        select_all: "Selecionar todos"
+        unselect_all: "Remover seleção"
       form_file_upload:
         browse: "Browse"
-        edit: "Edit"
+        edit: "Editar"
       form_image_upload:
         browse: "Browse"
-        edit: "Edit"
+        edit: "Editar"
         main_image: "Main visual"
       store:
         order_item:
@@ -453,7 +453,7 @@ pt:
           created_at: "Order creation"
           last_update: "Last update"
           state:
-            cart: 'Cart'
+            cart: 'Carrinho'
             in_progress: 'Under preparation'
             paid: "Paid"
             payment_failed: "Payment error"
@@ -503,42 +503,42 @@ pt:
             paid: "Paid"
             payment_failed: "Payment error"
             canceled: "Canceled"
-            ready: "Ready"
-            refunded: "Refunded"
-            delivered: "Delivered"
-          confirm: 'Confirm'
-          confirmation_required: "Confirmation required"
-          confirm_order_in_progress_html: "Please confirm that this order in being prepared."
-          order_in_progress_success: "Order is under preparation"
-          confirm_order_ready_html: "Please confirm that this order is ready."
-          order_ready_note: 'You can leave a message to the customer about withdrawal instructions'
-          order_ready_success: "Order is ready"
-          confirm_order_delivered_html: "Please confirm that this order was delivered."
-          order_delivered_success: "Order was delivered"
+            ready: "Pronto"
+            refunded: "Reembolsado"
+            delivered: "Entregue"
+          confirm: 'Confirmar'
+          confirmation_required: "Confirmação necessária"
+          confirm_order_in_progress_html: "Por favor, confirme que este pedido está sendo preparado."
+          order_in_progress_success: "O pedido está em preparação"
+          confirm_order_ready_html: "Por favor, confirme que este pedido está pronto."
+          order_ready_note: 'Você pode deixar uma mensagem para o cliente sobre as instruções de retirada'
+          order_ready_success: "O pedido está pronto"
+          confirm_order_delivered_html: "Por favor, confirme que este pedido foi entregue."
+          order_delivered_success: "O pedido foi entregue"
           confirm_order_canceled_html: "<strong>Do you really want to cancel this order?</strong><p>If this impacts stock, please reflect the change in <em>edit product &gt; stock management</em>. This won't be automatic.</p>"
           order_canceled_success: "Order was canceled"
           confirm_order_refunded_html: "<strong>Do you really want to refund this order?</strong><p>If so, please refund the customer and generate the credit note from the <em>Invoices</em> tab.</p><p>If this affects stocks, please edit your product and reflect the change in the <em>stock management</em> tab.</p><p>These actions will not be automatic.</p>"
-          order_refunded_success: "Order was refunded"
+          order_refunded_success: "O pedido foi reembolsado"
       unsaved_form_alert:
-        modal_title: "You have some unsaved changes"
-        confirmation_message: "If you leave this page, your changes will be lost. Are you sure you want to continue?"
-        confirmation_button: "Yes, don't save"
+        modal_title: "Você tem algumas alterações não salvas"
+        confirmation_message: "Se você sair desta página, suas alterações serão perdidas. Tem certeza de que deseja continuar?"
+        confirmation_button: "Sim, não salvar"
       active_filters_tags:
         keyword: "Keyword: {KEYWORD}"
         stock_internal: "Private stock"
         stock_external: "Public stock"
       calendar:
-        calendar: "Calendar"
+        calendar: "Agenda"
         show_unavailables: "Show complete slots"
         filter_calendar: "Filter calendar"
-        trainings: "Trainings"
-        machines: "Machines"
-        spaces: "Spaces"
-        events: "Events"
-        externals: "Other calendars"
-        show_reserved_uniq: "Show only slots with reservations"
+        trainings: "Treinamentos"
+        machines: "Máquinas"
+        spaces: "Espaços"
+        events: "Eventos"
+        externals: "Outras agendas"
+        show_reserved_uniq: "Mostrar apenas slots com reservas"
       machine:
-        machine_uncategorized: "Uncategorized machines"
+        machine_uncategorized: "Máquinas sem categoria"
       form_unsaved_list:
-        save_reminder: "Do not forget to save your changes"
-        cancel: "Cancel"
+        save_reminder: "Não se esqueça de salvar suas alterações"
+        cancel: "Cancelar"

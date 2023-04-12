@@ -7,6 +7,7 @@ I18n.config.available_locales += %i[de de-AT de-CH de-DE
                                     es es-419 es-AR es-CL es-CO es-CR es-DO es-EC es-ES es-MX es-PA es-PE es-US es-VE
                                     no
                                     pt pt-BR
+                                    it it-CH
                                     zu]
 # we allow the Zulu locale (zu) as it is used for In-Context translation
 # @see https://support.crowdin.com/in-context-localization/
