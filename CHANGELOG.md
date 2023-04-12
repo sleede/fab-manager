@@ -1,5 +1,9 @@
 # Changelog Fab-manager
 
+## v6.0.3 2023 April 12
+
+- Fix a bug: unable to install Fab-manager by setup.sh
+
 ## v6.0.2 2023 April 05
 
 - Italian language support (credits to https://crowdin.com/profile/olazzari)

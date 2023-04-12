@@ -210,6 +210,9 @@ prepare_files()
   # Fab-manager environment variables
   \curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/setup/env.example > "$FABMANAGER_PATH/config/env"
 
+  # Fab-manager auth provider configuration file
+  touch "$FABMANAGER_PATH/config/auth_provider.yml"
+
   # nginx configuration
   if [ "$NGINX" != "n" ]; then
     mkdir -p "$FABMANAGER_PATH/config/nginx"
@@ -272,7 +275,7 @@ prepare_nginx()
       if [ "$network" = "" ]; then network="web"; fi
 
       echo "Adding a network configuration to the docker-compose.yml file..."
-      yq -i eval ".networks.$network.external = \"true\"" docker-compose.yml
+      yq -i eval ".networks.$network.external = true" docker-compose.yml
       yq -i eval '.networks.db = "" | .networks.db tag="!!null"' docker-compose.yml
       yq -i eval '.services.fabmanager.networks += ["web"]' docker-compose.yml
       yq -i eval '.services.fabmanager.networks += ["db"]' docker-compose.yml
@@ -368,6 +371,10 @@ configure_env_file()
     sed -i.bak "s/DEFAULT_HOST=.*/DEFAULT_HOST=${MAIN_DOMAIN[0]}/g" "$FABMANAGER_PATH/config/env"
   fi
 
+  # we automatically generate the SECRET_KEY_BASE
+  secret=$(docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --rm "$SERVICE" bundle exec rake secret)
+  sed -i.bak "s/SECRET_KEY_BASE=/SECRET_KEY_BASE=$secret/g" "$FABMANAGER_PATH/config/env"
+
   printf "\n\nWe will now configure the environment variables.\n"
   echo "This allows you to customize Fab-manager's appearance and behavior."
   read -rp "Proceed? (Y/n) " confirm </dev/tty
@@ -392,9 +399,6 @@ configure_env_file()
       sed -i.bak "s/$esc_curr/$variable=$esc_val/g" "$FABMANAGER_PATH/config/env"
     fi
   done
-  # we automatically generate the SECRET_KEY_BASE
-  secret=$(docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --rm "$SERVICE" bundle exec rake secret)
-  sed -i.bak "s/SECRET_KEY_BASE=/SECRET_KEY_BASE=$secret/g" "$FABMANAGER_PATH/config/env"
 
   # if DEFAULT_PROTOCOL was set to http, ALLOW_INSECURE_HTTP is probably required
   if grep "^DEFAULT_PROTOCOL=http$" "$FABMANAGER_PATH/config/env" 1>/dev/null; then
@@ -437,7 +441,10 @@ setup_assets_and_databases()
   read -rp "Continue? (Y/n) " confirm </dev/tty
   if [ "$confirm" = "n" ]; then return; fi
 
-  docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --rm "$SERVICE" bundle exec rake rails db:schema:load </dev/tty # create the database
+  # create the database
+  docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --rm "$SERVICE" bundle exec rails db:create </dev/tty
+  docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --rm "$SERVICE" bundle exec rails db:schema:load </dev/tty
+
   # prompt default admin email/password
   printf "\n\nWe will now create the default administrator of Fab-manager.\n"
   read_email
