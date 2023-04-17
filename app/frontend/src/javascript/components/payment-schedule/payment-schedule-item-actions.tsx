@@ -54,7 +54,7 @@ export const PaymentScheduleItemActions: React.FC<PaymentScheduleItemActionsProp
    * Check if the current operator has administrative rights or is a normal member
    */
   const isPrivileged = (): boolean => {
-    return (operator.role === 'admin' || operator.role === 'manager');
+    return (operator?.role === 'admin' || operator?.role === 'manager');
   };
 
   /**
