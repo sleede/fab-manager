@@ -155,5 +155,12 @@ namespace :fablab do
       end_date = args.end == 'today' ? Time.current.end_of_day : start_date.next_month
       [start_date, end_date]
     end
+
+    desc 'Clean the abuse notifications if signaled object is null'
+    task clean_abuse_notifications: :environment do
+      Abuse.all.each do |abuse|
+        abuse.destroy if abuse.signaled.nil?
+      end
+    end
   end
 end
