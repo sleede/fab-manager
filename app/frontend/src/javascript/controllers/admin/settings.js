@@ -487,8 +487,12 @@ Application.Controllers.controller('SettingsController', ['$scope', '$rootScope'
 
       // we prevent the admin from setting the closing time before the opening time
       $scope.$watch('windowEnd.value', function (newValue, oldValue, scope) {
-        if ($scope.windowStart && moment($scope.windowStart.value).isAfter(newValue)) {
-          return $scope.windowEnd.value = oldValue;
+        if (scope.windowStart) {
+          const startTime = moment($scope.windowStart.value).format('HH:mm:ss');
+          const endTime = moment(newValue).format('HH:mm:ss');
+          if (startTime >= endTime) {
+            scope.windowEnd.value = oldValue;
+          }
         }
       });
 
