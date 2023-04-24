@@ -1,7 +1,7 @@
 <%= render 'notifications_mailer/shared/hello', recipient: @recipient %>
 
 <p>
-  <%= t('.body.cancelled_training', {
+  <%= t('.body.cancelled_training', **{
     TRAINING: @attached_object.reservation.reservable.name,
     DATE: I18n.l(@attached_object.start_at.to_date),
     START: I18n.l(@attached_object.start_at, format: :hour_minute),

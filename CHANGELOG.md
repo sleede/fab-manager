@@ -1,6 +1,7 @@
 # Changelog Fab-manager
 
 - Fix a bug: notification is broken when delete a project
+- Fix a bug: broken notifications email
 - [TODO DEPLOY] `rails fablab:maintenance:clean_abuse_notifications`
 
 ## v6.0.3 2023 April 12
