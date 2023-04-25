@@ -4,7 +4,7 @@ it:
       #translations of common buttons
       buttons:
         confirm_changes: "Conferma le modifiche"
-        consult: "Guarda"
+        consult: "Vedi"
         edit: "Modifica"
         change: "Modifica"
         delete: "Elimina"

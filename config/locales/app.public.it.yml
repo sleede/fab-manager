@@ -185,12 +185,12 @@ it:
         rough_draft: "Bozza preliminare"
       status_filter:
         all_statuses: "Tutti gli stati"
-        select_status: "Seleziona uno stato"
+        select_status: "Seleziona uno status"
       #details of a projet
       projects_show:
         rough_draft: "Bozza"
         project_description: "Descrizione del progetto"
-        by_name: "Per {NAME}"
+        by_name: "di {NAME}"
         step_N: "Fase {INDEX}"
         share_on_facebook: "Condividi su Facebook"
         share_on_twitter: "Condividi su Twitter"
@@ -237,7 +237,7 @@ it:
         all_machines: "Tutte le macchine"
       machine_card:
         book: "Prenota"
-        consult: "Guarda"
+        consult: "Vedi"
       #details of a machine
       machines_show:
         book_this_machine: "Modifica questa macchina"
@@ -549,7 +549,7 @@ it:
             content: "Le macchine sono gli utensili a disposizione degli utenti da prenotare."
           view:
             title: "Visualizza"
-            content: "Per modificare o eliminare una macchina, prima clicca qui. Non sarai in grado di eliminare una macchina che è già stata associata a uno slot, ma potrai disattivarla."
+            content: "Per modificare o eliminare una macchina, clicca qui. Non sarai in grado di eliminare una macchina che è già stata associata a uno slot di disponibilità, ma potrai disattivarla."
           reserve:
             title: "Prenota"
             content: "Clicca qui per accedere a un calendario che mostra slot liberi. Questo ti permetterà di prenotare questa macchina per un utente e di gestire le prenotazioni esistenti."

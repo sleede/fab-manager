@@ -447,8 +447,8 @@ Application.Controllers.controller('ReserveMachineController', ['$scope', '$tran
 
     // fullCalendar (v2) configuration
     $scope.calendarConfig = CalendarConfig({
-      minTime: moment.duration(moment(settingsPromise.booking_window_start).format('HH:mm:ss')),
-      maxTime: moment.duration(moment(settingsPromise.booking_window_end).format('HH:mm:ss')),
+      minTime: moment.duration(moment.utc(settingsPromise.booking_window_start).format('HH:mm:ss')),
+      maxTime: moment.duration(moment.utc(settingsPromise.booking_window_end).format('HH:mm:ss')),
       eventClick (event, jsEvent, view) {
         return calendarEventClickCb(event, jsEvent, view);
       },

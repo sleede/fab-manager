@@ -72,7 +72,7 @@ class API::PayzenController < API::PaymentsController
 
     cart = shopping_cart
 
-    if order['answer']['transactions'].any? { |transaction| transaction['status'] == 'PAID' }
+    if order['answer']['transactions'].all? { |transaction| transaction['status'] == 'PAID' }
       render on_payment_success(params[:order_id], cart)
     else
       render json: order['answer'], status: :unprocessable_entity
@@ -86,10 +86,11 @@ class API::PayzenController < API::PaymentsController
 
     client = PayZen::Transaction.new
     transaction = client.get(params[:transaction_uuid])
+    order = PayZen::Order.new.get(params[:order_id])
 
     cart = shopping_cart
 
-    if transaction['answer']['status'] == 'PAID'
+    if transaction['answer']['status'] == 'PAID' && order['answer']['transactions'].all? { |t| t['status'] == 'PAID' }
       render on_payment_success(params[:order_id], cart)
     else
       render json: transaction['answer'], status: :unprocessable_entity

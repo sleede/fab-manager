@@ -40,6 +40,8 @@ class Project < ApplicationRecord
   has_many :project_steps, dependent: :destroy
   accepts_nested_attributes_for :project_steps, allow_destroy: true
 
+  has_many :abuses, as: :signaled, dependent: :destroy, class_name: 'Abuse'
+
   # validations
   validates :author, :name, presence: true
 

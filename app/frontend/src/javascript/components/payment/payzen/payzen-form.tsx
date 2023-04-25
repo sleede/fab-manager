@@ -75,7 +75,7 @@ export const PayzenForm: React.FC<PayzenFormProps> = ({ onSubmit, onSuccess, onE
         if (updateCard) return onSuccess(null);
 
         const transaction = event.clientAnswer.transactions[0];
-        if (event.clientAnswer.orderStatus === 'PAID') {
+        if (event.clientAnswer.orderStatus === 'PAID' && transaction?.status === 'PAID') {
           confirmPayment(event, transaction).then((confirmation) => {
             PayZenKR.current.removeForms().then(() => {
               onSuccess(confirmation);
