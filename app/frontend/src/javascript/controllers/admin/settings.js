@@ -71,8 +71,8 @@ Application.Controllers.controller('SettingsController', ['$scope', '$rootScope'
     $scope.subscriptionExplicationsAlert = { name: 'subscription_explications_alert', value: settingsPromise.subscription_explications_alert };
     $scope.eventExplicationsAlert = { name: 'event_explications_alert', value: settingsPromise.event_explications_alert };
     $scope.spaceExplicationsAlert = { name: 'space_explications_alert', value: settingsPromise.space_explications_alert };
-    $scope.windowStart = { name: 'booking_window_start', value: settingsPromise.booking_window_start };
-    $scope.windowEnd = { name: 'booking_window_end', value: settingsPromise.booking_window_end };
+    $scope.windowStart = { name: 'booking_window_start', value: moment.utc(settingsPromise.booking_window_start).format('YYYY-MM-DD HH:mm:ss') };
+    $scope.windowEnd = { name: 'booking_window_end', value: moment.utc(settingsPromise.booking_window_end).format('YYYY-MM-DD HH:mm:ss') };
     $scope.mainColorSetting = { name: 'main_color', value: settingsPromise.main_color };
     $scope.secondColorSetting = { name: 'secondary_color', value: settingsPromise.secondary_color };
     $scope.nameGenre = { name: 'name_genre', value: settingsPromise.name_genre };
