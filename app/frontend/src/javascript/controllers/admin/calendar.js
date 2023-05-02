@@ -69,8 +69,8 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
       snapDuration: BOOKING_SNAP,
       selectable: true,
       selectHelper: true,
-      minTime: moment.duration(moment.utc(bookingWindowStart.setting.value.match(/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/)[0]).format('HH:mm:ss')),
-      maxTime: moment.duration(moment.utc(bookingWindowEnd.setting.value.match(/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/)[0]).format('HH:mm:ss')),
+      minTime: moment.duration(moment.utc(bookingWindowStart.setting.value.match(/\d{4}-\d{2}-\d{2}(?: |T)\d{2}:\d{2}:\d{2}/)[0]).format('HH:mm:ss')),
+      maxTime: moment.duration(moment.utc(bookingWindowEnd.setting.value.match(/\d{4}-\d{2}-\d{2}(?: |T)\d{2}:\d{2}:\d{2}/)[0]).format('HH:mm:ss')),
       select (start, end, jsEvent, view) {
         return calendarSelectCb(start, end, jsEvent, view);
       },
