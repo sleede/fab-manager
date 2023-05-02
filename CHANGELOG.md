@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- Fix a bug: unable to show calendar for Firefox and Safari
+
 ## v6.0.4 2023 April 25
 
 - Fix a bug: notification is broken when delete a project
