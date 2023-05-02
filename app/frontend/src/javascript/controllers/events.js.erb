@@ -372,7 +372,7 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
       }
       , function (response) {
       // reservation failed
-        growl.error(response && response.data && response.data.card && response.data.card[0] || 'server error');
+        growl.error(response && response.data && _.keys(response.data)[0] && response.data[_.keys(response.data)[0]][0] || 'server error');
         // unset the attempting marker
         $scope.attempting = false;
       })
