@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+## v6.0.5 2023 May 2
+
 - Fix a bug: unable to show calendar for Firefox and Safari
 - Improved error message for event reservation
 
