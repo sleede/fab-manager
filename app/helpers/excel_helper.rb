@@ -41,7 +41,7 @@ module ExcelHelper
     unless type.simple
       data.push hit['_source']['stat']
       styles.push nil
-      types.push :string
+      types.push :float
     end
 
     [data, styles, types]
