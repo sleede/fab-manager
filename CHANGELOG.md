@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+## v6.0.6 2023 May 4
+
 - Fix a bug: invalid duration for machine/spaces reservations in statistics, when using slots of not 1 hour
 - [TODO DEPLOY] `rails fablab:es:build_stats` THEN `rails fablab:maintenance:regenerate_statistics[2014,1]`
 
