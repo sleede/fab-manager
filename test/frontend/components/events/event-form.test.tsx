@@ -27,6 +27,7 @@ describe('EventForm', () => {
     expect(screen.getByLabelText(/app.admin.event_form._and_ends_on/)).toBeInTheDocument();
     expect(screen.getByLabelText(/app.admin.event_form.seats_available/)).toBeInTheDocument();
     expect(screen.getByLabelText(/app.admin.event_form.standard_rate/)).toBeInTheDocument();
+    expect(screen.getByLabelText(/app.admin.event_form.booking_nominative/)).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /app.admin.event_form.add_price/ })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /app.admin.event_form.add_a_new_file/ })).toBeInTheDocument();
     expect(screen.getByLabelText(/app.admin.advanced_accounting_form.code/)).toBeInTheDocument();

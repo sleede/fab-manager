@@ -116,15 +116,27 @@
                 <div class="row">
                   <label class="col-sm-6 control-label">{{ 'app.public.events_show.full_price_' | translate }} <span class="text-blue">{{event.amount | currency}}</span></label>
                   <div class="col-sm-6">
-                    <select ng-model="reserve.nbReservePlaces" ng-change="changeNbPlaces()" ng-options="i for i in reserve.nbPlaces.normal">
+                    <select ng-model="reserve.nbReservePlaces" ng-change="changeNbPlaces('normal')" ng-options="i for i in reserve.nbPlaces.normal">
                     </select> {{ 'app.public.events_show.ticket' | translate:{NUMBER:reserve.nbReservePlaces} }}
+                  </div>
+                  <div class="col-sm-12" ng-if="event.booking_nominative && reserve.nbReservePlaces > 0">
+                    <div ng-repeat="user in reserve.bookingUsers.normal">
+                      <label class="">Name</label>
+                      <input type="text" class="form-control" ng-model="user.name">
+                    </div>
                   </div>
                 </div>
                 <div class="row" ng-repeat="price in event.event_price_categories_attributes">
                   <label class="col-sm-6 control-label">{{price.category.name}} : <span class="text-blue">{{price.amount | currency}}</span></label>
                   <div class="col-sm-6">
-                    <select ng-model="reserve.tickets[price.id]" ng-change="changeNbPlaces()" ng-options="i for i in reserve.nbPlaces[price.id]">
+                    <select ng-model="reserve.tickets[price.id]" ng-change="changeNbPlaces(price.id)" ng-options="i for i in reserve.nbPlaces[price.id]">
                     </select> {{ 'app.public.events_show.ticket' | translate:{NUMBER:reserve.tickets[price.id]} }}
+                  </div>
+                  <div class="col-sm-12" ng-if="event.booking_nominative && reserve.tickets[price.id] > 0">
+                    <div ng-repeat="user in reserve.bookingUsers[price.id]">
+                      <label class="">Name</label>
+                      <input type="text" class="form-control" ng-model="user.name">
+                    </div>
                   </div>
                 </div>
 

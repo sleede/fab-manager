@@ -63,7 +63,8 @@ export interface Event {
   }>,
   recurrence: RecurrenceOption,
   recurrence_end_at: Date,
-  advanced_accounting_attributes?: AdvancedAccounting
+  advanced_accounting_attributes?: AdvancedAccounting,
+  booking_nominative: boolean,
 }
 
 export interface EventDecoration {

@@ -160,7 +160,10 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
       toReserve: false,
       amountTotal: 0,
       totalNoCoupon: 0,
-      totalSeats: 0
+      totalSeats: 0,
+      bookingUsers: {
+        normal: []
+      },
     };
 
     // Discount coupon to apply to the basket, if any
@@ -223,10 +226,20 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
       });
     };
 
+    const hasMemberInBookingUsers = function () {
+      const keys = Object.keys($scope.reserve.bookingUsers);
+      for (const key of keys) {
+        if ($scope.reserve.bookingUsers[key].find(u => u.booked_id === $scope.ctrl.member.id && u.booked_type === 'User')) {
+          return true;
+        }
+      }
+      return false;
+    };
+
     /**
      * Callback to call when the number of tickets to book changes in the current booking
      */
-    $scope.changeNbPlaces = function () {
+    $scope.changeNbPlaces = function (priceType) {
       // compute the total remaining places
       let remain = $scope.event.nb_free_places - $scope.reserve.nbReservePlaces;
       for (let ticket in $scope.reserve.tickets) {
@@ -245,6 +258,22 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
           const priceRemain = $scope.reserve.tickets[key] + remain;
           $scope.reserve.nbPlaces[key] = __range__(0, priceRemain, true);
         }
+      }
+
+      const nbBookingUsers = $scope.reserve.bookingUsers[priceType].length;
+      const nbReservePlaces = priceType === 'normal' ? $scope.reserve.nbReservePlaces : $scope.reserve.tickets[priceType];
+      if (nbReservePlaces > nbBookingUsers) {
+        _.times(nbReservePlaces - nbBookingUsers, () => {
+          if (!hasMemberInBookingUsers()) {
+            $scope.reserve.bookingUsers[priceType].push({ event_price_category_id: priceType === 'normal' ? null : priceType, booked_id: $scope.ctrl.member.id, booked_type: 'User', name: $scope.ctrl.member.name });
+          } else {
+            $scope.reserve.bookingUsers[priceType].push({ event_price_category_id: priceType === 'normal' ? null : priceType });
+          }
+        });
+      } else {
+        _.times(nbBookingUsers - nbReservePlaces, () => {
+          $scope.reserve.bookingUsers[priceType].pop();
+        });
       }
 
       // recompute the total price
@@ -638,7 +667,8 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
         reservable_type: 'Event',
         slots_reservations_attributes: [],
         nb_reserve_places: reserve.nbReservePlaces,
-        tickets_attributes: []
+        tickets_attributes: [],
+        booking_users_attributes: []
       };
 
       reservation.slots_reservations_attributes.push({
@@ -654,6 +684,15 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
             booked
           });
         }
+      }
+
+      if (event.booking_nominative) {
+        for (const key of Object.keys($scope.reserve.bookingUsers)) {
+          for (const user of $scope.reserve.bookingUsers[key]) {
+            reservation.booking_users_attributes.push(user);
+          }
+        }
+        console.log(reservation);
       }
 
       return { reservation };
@@ -688,11 +727,15 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
           tickets: {},
           toReserve: false,
           amountTotal: 0,
-          totalSeats: 0
+          totalSeats: 0,
+          bookingUsers: {
+            normal: [],
+          },
         };
 
         for (let evt_px_cat of Array.from($scope.event.event_price_categories_attributes)) {
           $scope.reserve.nbPlaces[evt_px_cat.id] = __range__(0, $scope.event.nb_free_places, true);
+          $scope.reserve.bookingUsers[evt_px_cat.id] = [];
           $scope.reserve.tickets[evt_px_cat.id] = 0;
         }
 
