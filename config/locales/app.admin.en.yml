@@ -139,6 +139,8 @@ en:
         event_themes: "Event themes"
         age_range: "Age range"
         add_price: "Add a price"
+        booking_nominative: "Nominative booking"
+        booking_nominative_help: "If you check this option, the members will have to enter the names of the participants when booking."
         save: "Save"
         create_success: "The event was created successfully"
         events_updated: "{COUNT, plural, =1{One event was} other{{COUNT} Events were}} successfully updated"
