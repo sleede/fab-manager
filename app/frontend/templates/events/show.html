@@ -119,9 +119,9 @@
                     <select ng-model="reserve.nbReservePlaces" ng-change="changeNbPlaces('normal')" ng-options="i for i in reserve.nbPlaces.normal">
                     </select> {{ 'app.public.events_show.ticket' | translate:{NUMBER:reserve.nbReservePlaces} }}
                   </div>
-                  <div class="col-sm-12" ng-if="event.booking_nominative && reserve.nbReservePlaces > 0">
+                  <div class="col-sm-12 m-b" ng-if="event.booking_nominative && reserve.nbReservePlaces > 0">
                     <div ng-repeat="user in reserve.bookingUsers.normal">
-                      <label class="">Name</label>
+                      <label class="" translate>{{ 'app.public.events_show.last_name_and_first_name '}}</label>
                       <input type="text" class="form-control" ng-model="user.name">
                     </div>
                   </div>
@@ -132,9 +132,9 @@
                     <select ng-model="reserve.tickets[price.id]" ng-change="changeNbPlaces(price.id)" ng-options="i for i in reserve.nbPlaces[price.id]">
                     </select> {{ 'app.public.events_show.ticket' | translate:{NUMBER:reserve.tickets[price.id]} }}
                   </div>
-                  <div class="col-sm-12" ng-if="event.booking_nominative && reserve.tickets[price.id] > 0">
+                  <div class="col-sm-12 m-b" ng-if="event.booking_nominative && reserve.tickets[price.id] > 0">
                     <div ng-repeat="user in reserve.bookingUsers[price.id]">
-                      <label class="">Name</label>
+                      <label class="" translate>{{ 'app.public.events_show.last_name_and_first_name '}}</label>
                       <input type="text" class="form-control" ng-model="user.name">
                     </div>
                   </div>
@@ -169,7 +169,7 @@
             <div ng-hide="isCancelled(reservation)" class="well well-warning">
               <div class="font-sbold text-u-c text-sm">{{ 'app.public.events_show.you_booked_DATE' | translate:{DATE:(reservation.created_at | amDateFormat:'L LT')} }}</div>
               <div class="font-sbold text-sm" ng-if="reservation.nb_reserve_places > 0">{{ 'app.public.events_show.full_price_' | translate }} {{reservation.nb_reserve_places}} {{ 'app.public.events_show.ticket' | translate:{NUMBER:reservation.nb_reserve_places} }}</div>
-              <div class="font-sbold text-sm" ng-repeat="ticket in reservation.tickets">
+              <div class="font-sbold text-sm" ng-repeat="ticket in reservation.tickets_attributes">
                 {{ticket.event_price_category.price_category.name}} : {{ticket.booked}} {{ 'app.public.events_show.ticket' | translate:{NUMBER:ticket.booked} }}
               </div>
               <div class="clear" ng-if="event.recurrence_events.length > 0 && reservationCanModify(reservation)">

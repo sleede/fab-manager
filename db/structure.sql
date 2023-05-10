@@ -589,6 +589,41 @@ ALTER SEQUENCE public.cart_item_coupons_id_seq OWNED BY public.cart_item_coupons
 
 
 --
+-- Name: cart_item_event_reservation_booking_users; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.cart_item_event_reservation_booking_users (
+    id bigint NOT NULL,
+    name character varying,
+    cart_item_event_reservation_id bigint,
+    event_price_category_id bigint,
+    booked_type character varying,
+    booked_id bigint,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: cart_item_event_reservation_booking_users_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.cart_item_event_reservation_booking_users_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: cart_item_event_reservation_booking_users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.cart_item_event_reservation_booking_users_id_seq OWNED BY public.cart_item_event_reservation_booking_users.id;
+
+
+--
 -- Name: cart_item_event_reservation_tickets; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -4399,6 +4434,13 @@ ALTER TABLE ONLY public.cart_item_coupons ALTER COLUMN id SET DEFAULT nextval('p
 
 
 --
+-- Name: cart_item_event_reservation_booking_users id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.cart_item_event_reservation_booking_users ALTER COLUMN id SET DEFAULT nextval('public.cart_item_event_reservation_booking_users_id_seq'::regclass);
+
+
+--
 -- Name: cart_item_event_reservation_tickets id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -5250,6 +5292,14 @@ ALTER TABLE ONLY public.booking_users
 
 ALTER TABLE ONLY public.cart_item_coupons
     ADD CONSTRAINT cart_item_coupons_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: cart_item_event_reservation_booking_users cart_item_event_reservation_booking_users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.cart_item_event_reservation_booking_users
+    ADD CONSTRAINT cart_item_event_reservation_booking_users_pkey PRIMARY KEY (id);
 
 
 --
@@ -6193,6 +6243,20 @@ CREATE INDEX index_booking_users_on_reservation_id ON public.booking_users USING
 
 
 --
+-- Name: index_cart_item_booking_users_on_cart_item_event_reservation; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_cart_item_booking_users_on_cart_item_event_reservation ON public.cart_item_event_reservation_booking_users USING btree (cart_item_event_reservation_id);
+
+
+--
+-- Name: index_cart_item_booking_users_on_event_price_category; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_cart_item_booking_users_on_event_price_category ON public.cart_item_event_reservation_booking_users USING btree (event_price_category_id);
+
+
+--
 -- Name: index_cart_item_coupons_on_coupon_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -6211,6 +6275,13 @@ CREATE INDEX index_cart_item_coupons_on_customer_profile_id ON public.cart_item_
 --
 
 CREATE INDEX index_cart_item_coupons_on_operator_profile_id ON public.cart_item_coupons USING btree (operator_profile_id);
+
+
+--
+-- Name: index_cart_item_event_reservation_booking_users_on_booked; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_cart_item_event_reservation_booking_users_on_booked ON public.cart_item_event_reservation_booking_users USING btree (booked_type, booked_id);
 
 
 --
@@ -7549,6 +7620,14 @@ ALTER TABLE ONLY public.payment_schedules
 
 
 --
+-- Name: cart_item_event_reservation_booking_users fk_rails_0964335a37; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.cart_item_event_reservation_booking_users
+    ADD CONSTRAINT fk_rails_0964335a37 FOREIGN KEY (event_price_category_id) REFERENCES public.event_price_categories(id);
+
+
+--
 -- Name: cart_item_free_extensions fk_rails_0d11862969; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -7818,6 +7897,14 @@ ALTER TABLE ONLY public.payment_schedule_items
 
 ALTER TABLE ONLY public.chained_elements
     ADD CONSTRAINT fk_rails_4fad806cca FOREIGN KEY (previous_id) REFERENCES public.chained_elements(id);
+
+
+--
+-- Name: cart_item_event_reservation_booking_users fk_rails_5206c6ca4a; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.cart_item_event_reservation_booking_users
+    ADD CONSTRAINT fk_rails_5206c6ca4a FOREIGN KEY (cart_item_event_reservation_id) REFERENCES public.cart_item_event_reservations(id);
 
 
 --
@@ -8839,6 +8926,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230328094809'),
 ('20230331132506'),
 ('20230509121907'),
-('20230509161557');
+('20230509161557'),
+('20230510141305');
 
 

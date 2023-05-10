@@ -357,6 +357,7 @@ fr:
         view_event_list: "Voir les événements à venir"
         share_on_facebook: "Partager sur Facebook"
         share_on_twitter: "Partager sur Twitter"
+        last_name_and_first_name: "Nom et prénom"
       #public calendar
       calendar:
         calendar: "Calendrier"

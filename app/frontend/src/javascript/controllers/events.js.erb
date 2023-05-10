@@ -264,11 +264,14 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
       const nbReservePlaces = priceType === 'normal' ? $scope.reserve.nbReservePlaces : $scope.reserve.tickets[priceType];
       if (nbReservePlaces > nbBookingUsers) {
         _.times(nbReservePlaces - nbBookingUsers, () => {
+          /*
           if (!hasMemberInBookingUsers()) {
             $scope.reserve.bookingUsers[priceType].push({ event_price_category_id: priceType === 'normal' ? null : priceType, booked_id: $scope.ctrl.member.id, booked_type: 'User', name: $scope.ctrl.member.name });
           } else {
             $scope.reserve.bookingUsers[priceType].push({ event_price_category_id: priceType === 'normal' ? null : priceType });
           }
+          */
+          $scope.reserve.bookingUsers[priceType].push({ event_price_category_id: priceType === 'normal' ? null : priceType });
         });
       } else {
         _.times(nbBookingUsers - nbReservePlaces, () => {
@@ -689,10 +692,14 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
       if (event.booking_nominative) {
         for (const key of Object.keys($scope.reserve.bookingUsers)) {
           for (const user of $scope.reserve.bookingUsers[key]) {
-            reservation.booking_users_attributes.push(user);
+            reservation.booking_users_attributes.push({
+              event_price_category_id: user.event_price_category_id,
+              name: user.name,
+              booked_id: user.booked_id,
+              booked_type: user.booked_type
+            });
           }
         }
-        console.log(reservation);
       }
 
       return { reservation };
