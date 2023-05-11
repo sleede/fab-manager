@@ -689,7 +689,7 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
         }
       }
 
-      if (event.booking_nominative) {
+      if (event.event_type === 'nominative' || event.event_type === 'family') {
         for (const key of Object.keys($scope.reserve.bookingUsers)) {
           for (const user of $scope.reserve.bookingUsers[key]) {
             reservation.booking_users_attributes.push({

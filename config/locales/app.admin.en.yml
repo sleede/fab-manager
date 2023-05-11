@@ -139,8 +139,6 @@ en:
         event_themes: "Event themes"
         age_range: "Age range"
         add_price: "Add a price"
-        booking_nominative: "Nominative booking"
-        booking_nominative_help: "If you check this option, the members will have to enter the names of the participants when booking."
         save: "Save"
         create_success: "The event was created successfully"
         events_updated: "{COUNT, plural, =1{One event was} other{{COUNT} Events were}} successfully updated"
@@ -153,6 +151,11 @@ en:
           every_week: "Every week"
           every_month: "Every month"
           every_year: "Every year"
+        event_type: "Event type"
+        event_types:
+          standard: "Event standard"
+          nominative: "Event nominative"
+          family: "Event family"
       plan_form:
         ACTION_title: "{ACTION, select, create{New} other{Update the}} plan"
         tab_settings: "Settings"
