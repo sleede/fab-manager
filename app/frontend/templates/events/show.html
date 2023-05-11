@@ -119,7 +119,7 @@
                     <select ng-model="reserve.nbReservePlaces" ng-change="changeNbPlaces('normal')" ng-options="i for i in reserve.nbPlaces.normal">
                     </select> {{ 'app.public.events_show.ticket' | translate:{NUMBER:reserve.nbReservePlaces} }}
                   </div>
-                  <div class="col-sm-12 m-b" ng-if="event.booking_nominative && reserve.nbReservePlaces > 0">
+                  <div class="col-sm-12 m-b" ng-if="event.event_type === 'nominative' && reserve.nbReservePlaces > 0">
                     <div ng-repeat="user in reserve.bookingUsers.normal">
                       <label class="" translate>{{ 'app.public.events_show.last_name_and_first_name '}}</label>
                       <input type="text" class="form-control" ng-model="user.name">
@@ -132,7 +132,7 @@
                     <select ng-model="reserve.tickets[price.id]" ng-change="changeNbPlaces(price.id)" ng-options="i for i in reserve.nbPlaces[price.id]">
                     </select> {{ 'app.public.events_show.ticket' | translate:{NUMBER:reserve.tickets[price.id]} }}
                   </div>
-                  <div class="col-sm-12 m-b" ng-if="event.booking_nominative && reserve.tickets[price.id] > 0">
+                  <div class="col-sm-12 m-b" ng-if="event.event_type === 'nominative' && reserve.tickets[price.id] > 0">
                     <div ng-repeat="user in reserve.bookingUsers[price.id]">
                       <label class="" translate>{{ 'app.public.events_show.last_name_and_first_name '}}</label>
                       <input type="text" class="form-control" ng-model="user.name">

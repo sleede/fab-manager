@@ -139,8 +139,6 @@ fr:
         event_themes: "Thèmes de l'événement"
         age_range: "Tranche d'âge"
         add_price: "Ajouter un tarif"
-        booking_nominative: "Réservation nominative"
-        booking_nominative_help: "Si cette option est activée, les réservations seront nominatives. Les participants devront s'identifier pour réserver."
         save: "Enregistrer"
         create_success: "L'événement a bien été créé"
         events_updated: "{COUNT, plural, one {}=1{Un événement à été} other{{COUNT} événements ont été}} mis à jour avec succès"
@@ -153,6 +151,11 @@ fr:
           every_week: "Chaque semaine"
           every_month: "Chaque mois"
           every_year: "Chaque année"
+        event_type: "Type d'événement"
+        event_types:
+          standard: "Evénement standard"
+          nominative: "Evénement nominatif"
+          family: "Evénement famille"
       plan_form:
         ACTION_title: "{ACTION, select, create{Nouvelle} other{Mettre à jour la}} formule d'abonnement"
         tab_settings: "Paramètres"
