@@ -54,6 +54,7 @@ export const EventForm: React.FC<EventFormProps> = ({ action, event, onError, on
   const [isOpenRecurrentModal, setIsOpenRecurrentModal] = useState<boolean>(false);
   const [updatingEvent, setUpdatingEvent] = useState<Event>(null);
   const [isActiveAccounting, setIsActiveAccounting] = useState<boolean>(false);
+  const [isActiveFamilyAccount, setIsActiveFamilyAccount] = useState<boolean>(false);
 
   useEffect(() => {
     EventCategoryAPI.index()
@@ -69,6 +70,7 @@ export const EventForm: React.FC<EventFormProps> = ({ action, event, onError, on
       .then(data => setPriceCategoriesOptions(data.map(c => decorationToOption(c))))
       .catch(onError);
     SettingAPI.get('advanced_accounting').then(res => setIsActiveAccounting(res.value === 'true')).catch(onError);
+    SettingAPI.get('family_account').then(res => setIsActiveFamilyAccount(res.value === 'true')).catch(onError);
   }, []);
 
   useEffect(() => {
@@ -172,11 +174,14 @@ export const EventForm: React.FC<EventFormProps> = ({ action, event, onError, on
    * This method provides event type options
    */
   const buildEventTypeOptions = (): Array<SelectOption<EventType>> => {
-    return [
-      { label: t('app.admin.event_form.event_types.standard'), value: 'standard' },
-      { label: t('app.admin.event_form.event_types.nominative'), value: 'nominative' },
-      { label: t('app.admin.event_form.event_types.family'), value: 'family' }
+    const options = [
+      { label: t('app.admin.event_form.event_types.standard'), value: 'standard' as EventType },
+      { label: t('app.admin.event_form.event_types.nominative'), value: 'nominative' as EventType }
     ];
+    if (isActiveFamilyAccount) {
+      options.push({ label: t('app.admin.event_form.event_types.family'), value: 'family' as EventType });
+    }
+    return options;
   };
 
   return (
