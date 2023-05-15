@@ -45,6 +45,13 @@ export interface Reservation {
   },
   total_booked_seats?: number,
   created_at?: TDateISO,
+  booking_users_attributes?: {
+    id: number,
+    name: string,
+    event_price_category_id: number,
+    booked_id: number,
+    booked_type: string,
+  }
 }
 
 export interface ReservationIndexFilter extends ApiFilter {

@@ -29,7 +29,11 @@
           <tbody>
           <tr ng-repeat="reservation in reservations" ng-class="{'disabled': isCancelled(reservation)}">
             <td class="text-c">
-              <a ui-sref="app.logged.members_show({id: reservation.user_id})">{{ reservation.user_full_name }} </a>
+              <a ui-sref="app.logged.members_show({id: reservation.user_id})" ng-if="event.event_type === 'standard'">{{ reservation.user_full_name }} </a>
+              <div ng-repeat="bu in reservation.booking_users_attributes">
+                <span ng-if="bu.booked_type !== 'User'">{{bu.name}}</span>
+                <a ui-sref="app.logged.members_show({id: bu.booked_id})" ng-if="bu.booked_type === 'User'">{{bu.name}}</a>
+              </div>
             </td>
             <td>{{ reservation.created_at | amDateFormat:'LL LTS' }}</td>
             <td>
