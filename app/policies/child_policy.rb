@@ -2,13 +2,6 @@
 
 # Check the access policies for API::ChildrenController
 class ChildPolicy < ApplicationPolicy
-  # Defines the scope of the children index, depending on the current user
-  class Scope < Scope
-    def resolve
-      scope.where(user_id: user.id)
-    end
-  end
-
   def index?
     !user.organization?
   end
