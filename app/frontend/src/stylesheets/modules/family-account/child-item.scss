@@ -1,0 +1,12 @@
+.child-item {
+  width: 100%;
+  display: grid;
+  grid-template-rows: repeat(3, min-content);
+  grid-template-columns: 1fr 1fr;
+  gap: 1.6rem 2.4rem;
+  align-items: center;
+  padding: 1.6rem;
+  border: 1px solid var(--gray-soft-dark);
+  border-radius: var(--border-radius);
+  background-color: var(--gray-soft-lightest);
+}

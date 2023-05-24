@@ -18,16 +18,16 @@ export const ChildItem: React.FC<ChildItemProps> = ({ child, onEdit, onDelete })
 
   return (
     <div className="child-item">
-      <div>
-        <div>{t('app.public.child_item.last_name')}</div>
+      <div className="child-lastname">
+        <span>{t('app.public.child_item.last_name')}</span>
         <div>{child.last_name}</div>
       </div>
-      <div>
-        <div>{t('app.public.child_item.first_name')}</div>
+      <div className="child-firstname">
+        <span>{t('app.public.child_item.first_name')}</span>
         <div>{child.first_name}</div>
       </div>
-      <div>
-        <div>{t('app.public.child_item.birthday')}</div>
+      <div className="date">
+        <span>{t('app.public.child_item.birthday')}</span>
         <div>{FormatLib.date(child.birthday)}</div>
       </div>
       <div className="actions">
