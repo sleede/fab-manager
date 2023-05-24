@@ -15,12 +15,22 @@ export default class ChildAPI {
   }
 
   static async create (child: Child): Promise<Child> {
-    const res: AxiosResponse<Child> = await apiClient.post('/api/children', { child });
+    const data = ApiLib.serializeAttachments(child, 'child', ['supporting_document_files_attributes']);
+    const res: AxiosResponse<Child> = await apiClient.post('/api/children', data, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
     return res?.data;
   }
 
   static async update (child: Child): Promise<Child> {
-    const res: AxiosResponse<Child> = await apiClient.patch(`/api/children/${child.id}`, { child });
+    const data = ApiLib.serializeAttachments(child, 'child', ['supporting_document_files_attributes']);
+    const res: AxiosResponse<Child> = await apiClient.put(`/api/children/${child.id}`, data, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
     return res?.data;
   }
 

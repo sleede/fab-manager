@@ -50,6 +50,9 @@ class API::ChildrenController < API::APIController
   end
 
   def child_params
-    params.require(:child).permit(:first_name, :last_name, :email, :phone, :birthday, :user_id)
+    params.require(:child).permit(:first_name, :last_name, :email, :phone, :birthday, :user_id,
+                                  supporting_document_files_attributes: %i[id supportable_id supportable_type
+                                                                           supporting_document_type_id
+                                                                           attachment _destroy])
   end
 end

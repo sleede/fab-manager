@@ -63,6 +63,12 @@
       </div>
     </div>
     <div class="row">
+      <div class="col-md-12">
+        <supporting-documents-types-list on-success="onSuccess" on-error="onError" document-type="'Child'" />
+      </div>
+    </div>
+
+    <div class="row">
       <h3 class="m-l" translate>{{ 'app.admin.settings.captcha' }}</h3>
       <p class="alert alert-warning m-h-md" ng-bind-html="'app.admin.settings.captcha_info_html' | translate"></p>
       <div class="col-md-6">
@@ -167,4 +173,4 @@
 </div>
 
 
-<supporting-documents-types-list on-success="onSuccess" on-error="onError"/>
+<supporting-documents-types-list on-success="onSuccess" on-error="onError" document-type="'User'" />

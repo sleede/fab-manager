@@ -9,7 +9,7 @@ class SupportingDocumentTypeService
 
       group.supporting_document_types.includes(:groups)
     else
-      SupportingDocumentType.all
+      SupportingDocumentType.where(document_type: filters[:document_type] || 'User')
     end
   end
 end
