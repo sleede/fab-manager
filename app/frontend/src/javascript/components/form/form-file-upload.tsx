@@ -19,12 +19,13 @@ type FormFileUploadProps<TFieldValues> = FormComponent<TFieldValues> & AbstractF
   accept?: string,
   onFileChange?: (value: FileType) => void,
   onFileRemove?: () => void,
+  showRemoveButton?: boolean,
 }
 
 /**
  * This component allows to upload file, in forms managed by react-hook-form.
  */
-export const FormFileUpload = <TFieldValues extends FieldValues>({ id, label, register, defaultFile, className, rules, disabled, error, warning, formState, onFileChange, onFileRemove, accept, setValue }: FormFileUploadProps<TFieldValues>) => {
+export const FormFileUpload = <TFieldValues extends FieldValues>({ id, label, register, defaultFile, className, rules, disabled, error, warning, formState, onFileChange, onFileRemove, accept, setValue, showRemoveButton = true }: FormFileUploadProps<TFieldValues>) => {
   const { t } = useTranslation('shared');
 
   const [file, setFile] = useState<FileType>(defaultFile);
@@ -100,7 +101,7 @@ export const FormFileUpload = <TFieldValues extends FieldValues>({ id, label, re
                    id={`${id}[attachment_files]`}
                    onChange={onFileSelected}
                    placeholder={placeholder()}/>
-        {hasFile() &&
+        {showRemoveButton && hasFile() &&
           <FabButton onClick={onRemoveFile} icon={<Trash size={20} weight="fill" />} className="is-main" />
         }
       </div>

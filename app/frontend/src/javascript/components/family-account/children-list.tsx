@@ -9,6 +9,8 @@ import { IApplication } from '../../models/application';
 import { ChildModal } from './child-modal';
 import { ChildItem } from './child-item';
 import { FabButton } from '../base/fab-button';
+import { SupportingDocumentType } from '../../models/supporting-document-type';
+import SupportingDocumentTypeAPI from '../../api/supporting-document-type';
 
 declare const Application: IApplication;
 
@@ -27,9 +29,13 @@ export const ChildrenList: React.FC<ChildrenListProps> = ({ currentUser, onError
   const [children, setChildren] = useState<Array<Child>>([]);
   const [isOpenChildModal, setIsOpenChildModal] = useState<boolean>(false);
   const [child, setChild] = useState<Child>();
+  const [supportingDocumentsTypes, setSupportingDocumentsTypes] = useState<Array<SupportingDocumentType>>([]);
 
   useEffect(() => {
     ChildAPI.index({ user_id: currentUser.id }).then(setChildren);
+    SupportingDocumentTypeAPI.index({ document_type: 'Child' }).then(tData => {
+      setSupportingDocumentsTypes(tData);
+    });
   }, [currentUser]);
 
   /**
@@ -37,7 +43,12 @@ export const ChildrenList: React.FC<ChildrenListProps> = ({ currentUser, onError
    */
   const addChild = () => {
     setIsOpenChildModal(true);
-    setChild({ user_id: currentUser.id } as Child);
+    setChild({
+      user_id: currentUser.id,
+      supporting_document_files_attributes: supportingDocumentsTypes.map(t => {
+        return { supporting_document_type_id: t.id };
+      })
+    } as Child);
   };
 
   /**
@@ -45,7 +56,13 @@ export const ChildrenList: React.FC<ChildrenListProps> = ({ currentUser, onError
    */
   const editChild = (child: Child) => {
     setIsOpenChildModal(true);
-    setChild(child);
+    setChild({
+      ...child,
+      supporting_document_files_attributes: supportingDocumentsTypes.map(t => {
+        const file = child.supporting_document_files_attributes.find(f => f.supporting_document_type_id === t.id);
+        return file || { supporting_document_type_id: t.id };
+      })
+    } as Child);
   };
 
   /**
@@ -78,7 +95,7 @@ export const ChildrenList: React.FC<ChildrenListProps> = ({ currentUser, onError
           <ChildItem key={child.id} child={child} onEdit={editChild} onDelete={deleteChild} />
         ))}
       </div>
-      <ChildModal child={child} isOpen={isOpenChildModal} toggleModal={() => setIsOpenChildModal(false)} onSuccess={handleSaveChildSuccess} onError={onError} />
+      <ChildModal child={child} isOpen={isOpenChildModal} toggleModal={() => setIsOpenChildModal(false)} onSuccess={handleSaveChildSuccess} onError={onError} supportingDocumentsTypes={supportingDocumentsTypes} />
     </section>
   );
 };

@@ -3802,10 +3802,11 @@ ALTER SEQUENCE public.subscriptions_id_seq OWNED BY public.subscriptions.id;
 CREATE TABLE public.supporting_document_files (
     id bigint NOT NULL,
     supporting_document_type_id bigint,
-    user_id bigint,
+    supportable_id bigint,
     attachment character varying,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    supportable_type character varying DEFAULT 'User'::character varying
 );
 
 
@@ -3834,11 +3835,12 @@ ALTER SEQUENCE public.supporting_document_files_id_seq OWNED BY public.supportin
 
 CREATE TABLE public.supporting_document_refusals (
     id bigint NOT NULL,
-    user_id bigint,
+    supportable_id bigint,
     operator_id integer,
     message text,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    supportable_type character varying DEFAULT 'User'::character varying
 );
 
 
@@ -3879,7 +3881,8 @@ CREATE TABLE public.supporting_document_types (
     id bigint NOT NULL,
     name character varying,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    document_type character varying DEFAULT 'User'::character varying
 );
 
 
@@ -7428,6 +7431,13 @@ CREATE INDEX index_subscriptions_on_statistic_profile_id ON public.subscriptions
 
 
 --
+-- Name: index_supporting_document_files_on_supportable_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_supporting_document_files_on_supportable_id ON public.supporting_document_files USING btree (supportable_id);
+
+
+--
 -- Name: index_supporting_document_files_on_supporting_document_type_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -7435,17 +7445,10 @@ CREATE INDEX index_supporting_document_files_on_supporting_document_type_id ON p
 
 
 --
--- Name: index_supporting_document_files_on_user_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_supporting_document_refusals_on_supportable_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_supporting_document_files_on_user_id ON public.supporting_document_files USING btree (user_id);
-
-
---
--- Name: index_supporting_document_refusals_on_user_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_supporting_document_refusals_on_user_id ON public.supporting_document_refusals USING btree (user_id);
+CREATE INDEX index_supporting_document_refusals_on_supportable_id ON public.supporting_document_refusals USING btree (supportable_id);
 
 
 --
@@ -8251,7 +8254,7 @@ ALTER TABLE ONLY public.orders
 --
 
 ALTER TABLE ONLY public.supporting_document_refusals
-    ADD CONSTRAINT fk_rails_91d424352e FOREIGN KEY (user_id) REFERENCES public.users(id);
+    ADD CONSTRAINT fk_rails_91d424352e FOREIGN KEY (supportable_id) REFERENCES public.users(id);
 
 
 --
@@ -9053,6 +9056,9 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230510141305');
 ('20230511080650'),
 ('20230511081018');
+('20230524080448'),
+('20230524083558'),
+('20230524110215');
 ('20230626122844'),
 ('20230626122947');
 

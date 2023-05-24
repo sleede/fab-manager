@@ -1,33 +1,34 @@
 import React from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import moment from 'moment';
 import { Child } from '../../models/child';
-import { TDateISODate } from '../../typings/date-iso';
 import { FormInput } from '../form/form-input';
 import { FabButton } from '../base/fab-button';
+import { FormFileUpload } from '../form/form-file-upload';
+import { FileType } from '../../models/file';
+import { SupportingDocumentType } from '../../models/supporting-document-type';
 
 interface ChildFormProps {
   child: Child;
-  onChange: (field: string, value: string | TDateISODate) => void;
   onSubmit: (data: Child) => void;
+  supportingDocumentsTypes: Array<SupportingDocumentType>;
 }
 
 /**
  * A form for creating or editing a child.
  */
-export const ChildForm: React.FC<ChildFormProps> = ({ child, onChange, onSubmit }) => {
+export const ChildForm: React.FC<ChildFormProps> = ({ child, onSubmit, supportingDocumentsTypes }) => {
   const { t } = useTranslation('public');
 
-  const { register, formState, handleSubmit } = useForm<Child>({
+  const { register, formState, handleSubmit, setValue, control } = useForm<Child>({
     defaultValues: child
   });
+  const output = useWatch<Child>({ control }); // eslint-disable-line
 
-  /**
-   * Handle the change of a child form field
-   */
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    onChange(event.target.id, event.target.value);
+  const getSupportingDocumentsTypeName = (id: number): string => {
+    const supportingDocumentType = supportingDocumentsTypes.find((supportingDocumentType) => supportingDocumentType.id === id);
+    return supportingDocumentType ? supportingDocumentType.name : '';
   };
 
   return (
@@ -41,14 +42,12 @@ export const ChildForm: React.FC<ChildFormProps> = ({ child, onChange, onSubmit 
           rules={{ required: true }}
           formState={formState}
           label={t('app.public.child_form.first_name')}
-          onChange={handleChange}
         />
         <FormInput id="last_name"
           register={register}
           rules={{ required: true }}
           formState={formState}
           label={t('app.public.child_form.last_name')}
-          onChange={handleChange}
         />
         <FormInput id="birthday"
           register={register}
@@ -57,22 +56,31 @@ export const ChildForm: React.FC<ChildFormProps> = ({ child, onChange, onSubmit 
           label={t('app.public.child_form.birthday')}
           type="date"
           max={moment().subtract(18, 'year').format('YYYY-MM-DD')}
-          onChange={handleChange}
         />
         <FormInput id="phone"
           register={register}
           formState={formState}
           label={t('app.public.child_form.phone')}
-          onChange={handleChange}
           type="tel"
         />
         <FormInput id="email"
           register={register}
-          rules={{ required: true }}
           formState={formState}
           label={t('app.public.child_form.email')}
-          onChange={handleChange}
         />
+        {output.supporting_document_files_attributes.map((sf, index) => {
+          return (
+            <FormFileUpload key={index}
+              defaultFile={sf as FileType}
+              id={`supporting_document_files_attributes.${index}`}
+              accept="application/pdf"
+              setValue={setValue}
+              label={getSupportingDocumentsTypeName(sf.supporting_document_type_id)}
+              showRemoveButton={false}
+              register={register}
+              formState={formState} />
+          );
+        })}
 
         <div className="actions">
           <FabButton type="button" onClick={handleSubmit(onSubmit)}>

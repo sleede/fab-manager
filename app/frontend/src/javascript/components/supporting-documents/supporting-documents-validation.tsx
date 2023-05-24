@@ -39,7 +39,7 @@ const SupportingDocumentsValidation: React.FC<SupportingDocumentsValidationProps
     SupportingDocumentTypeAPI.index({ group_id: member.group_id }).then(tData => {
       setDocumentsTypes(tData);
     });
-    SupportingDocumentFileAPI.index({ user_id: member.id }).then(fData => {
+    SupportingDocumentFileAPI.index({ supportable_id: member.id, supportable_type: 'User' }).then(fData => {
       setDocumentsFiles(fData);
     });
   }, []);

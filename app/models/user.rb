@@ -47,8 +47,8 @@ class User < ApplicationRecord
 
   has_many :accounting_periods, foreign_key: 'closed_by', dependent: :nullify, inverse_of: :user
 
-  has_many :supporting_document_files, dependent: :destroy
-  has_many :supporting_document_refusals, dependent: :destroy
+  has_many :supporting_document_files, as: :supportable, dependent: :destroy
+  has_many :supporting_document_refusals, as: :supportable, dependent: :destroy
 
   has_many :notifications, as: :receiver, dependent: :destroy
   has_many :notification_preferences, dependent: :destroy

@@ -8,4 +8,6 @@ class SupportingDocumentType < ApplicationRecord
 
   has_many :supporting_document_refusals_types, dependent: :destroy
   has_many :supporting_document_refusals, through: :supporting_document_refusals_types
+
+  validates :document_type, presence: true, inclusion: { in: %w[User Child] }
 end

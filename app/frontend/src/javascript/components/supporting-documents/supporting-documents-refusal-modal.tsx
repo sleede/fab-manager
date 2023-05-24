@@ -27,7 +27,8 @@ export const SupportingDocumentsRefusalModal: React.FC<SupportingDocumentsRefusa
   const [data, setData] = useState<SupportingDocumentRefusal>({
     id: null,
     operator_id: operator.id,
-    user_id: member.id,
+    supportable_id: member.id,
+    supportable_type: 'User',
     supporting_document_type_ids: [],
     message: ''
   });

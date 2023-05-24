@@ -48,6 +48,6 @@ class API::SupportingDocumentFilesController < API::APIController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def supporting_document_file_params
-    params.required(:supporting_document_file).permit(:supporting_document_type_id, :attachment, :user_id)
+    params.required(:supporting_document_file).permit(:supporting_document_type_id, :attachment, :supportable_id, :supportable_type)
   end
 end
