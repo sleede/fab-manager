@@ -73,7 +73,7 @@ export const ChildrenList: React.FC<ChildrenListProps> = ({ currentUser, onError
         </FabButton>
       </header>
 
-      <div>
+      <div className="children-list">
         {children.map(child => (
           <ChildItem key={child.id} child={child} onEdit={editChild} onDelete={deleteChild} />
         ))}
