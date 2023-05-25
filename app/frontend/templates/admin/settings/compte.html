@@ -54,10 +54,17 @@
     <div class="row">
       <h3 class="m-l" translate>{{ 'app.admin.settings.family_account' }}</h3>
       <p class="alert alert-warning m-h-md" ng-bind-html="'app.admin.settings.family_account_info_html' | translate"></p>
-      <div class="col-md-6">
+      <div class="col-md-10 col-md-offset-1">
         <boolean-setting name="'family_account'"
                          settings="allSettings"
                          label="'app.admin.settings.enable_family_account' | translate"
+                         on-success="onSuccess"
+                         on-error="onError">
+      </div>
+      <div class="col-md-10 col-md-offset-1">
+        <boolean-setting name="'child_validation_required'"
+                         settings="allSettings"
+                         label="'app.admin.settings.child_validation_required_label' | translate"
                          on-success="onSuccess"
                          on-error="onError">
       </div>

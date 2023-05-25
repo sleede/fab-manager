@@ -201,6 +201,9 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
     // Global config: is the user validation required ?
     $scope.enableUserValidationRequired = settingsPromise.user_validation_required === 'true';
 
+    // Global config: is the child validation required ?
+    $scope.enableChildValidationRequired = settingsPromise.child_validation_required === 'true';
+
     // online payments (by card)
     $scope.onlinePayment = {
       showModal: false,
@@ -635,6 +638,9 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
             if (!user.booked) {
               return false;
             }
+            if ($scope.enableChildValidationRequired && user.booked.type === 'Child' && !user.booked.validatedAt) {
+              return false;
+            }
           }
         }
       }
@@ -731,7 +737,8 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
             key,
             name: child.first_name + ' ' + child.last_name,
             id: child.id,
-            type: 'Child'
+            type: 'Child',
+            validatedAt: child.validated_at
           });
         }
       }

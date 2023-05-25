@@ -4,7 +4,7 @@
 # Children are used to provide a way to manage multiple users in the family account
 class API::ChildrenController < API::APIController
   before_action :authenticate_user!
-  before_action :set_child, only: %i[show update destroy]
+  before_action :set_child, only: %i[show update destroy validate]
 
   def index
     authorize Child
@@ -41,6 +41,17 @@ class API::ChildrenController < API::APIController
     authorize @child
     @child.destroy
     head :no_content
+  end
+
+  def validate
+    authorize @child
+
+    cparams = params.require(:child).permit(:validated_at)
+    if @child.update(validated_at: cparams[:validated_at].present? ? Time.current : nil)
+      render :show, status: :ok, location: child_path(@child)
+    else
+      render json: @child.errors, status: :unprocessable_entity
+    end
   end
 
   private

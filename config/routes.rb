@@ -183,7 +183,9 @@ Rails.application.routes.draw do
       get 'withdrawal_instructions', on: :member
     end
 
-    resources :children, only: %i[index show create update destroy]
+    resources :children do
+      patch ':id/validate', action: 'validate', on: :collection
+    end
 
     # for admin
     resources :trainings do

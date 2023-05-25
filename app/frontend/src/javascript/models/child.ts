@@ -13,6 +13,7 @@ export interface Child {
   phone?: string,
   birthday: TDateISODate,
   user_id: number,
+  validated_at?: TDateISODate,
   supporting_document_files_attributes?: Array<{
     id?: number,
     supportable_id?: number,

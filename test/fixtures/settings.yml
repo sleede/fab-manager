@@ -592,3 +592,9 @@ setting_100:
   name: family_account
   created_at: 2023-03-31 14:38:40.000421500 Z
   updated_at: 2023-03-31 14:38:40.000421500 Z
+
+setting_101:
+  id: 101
+  name: child_validation_required
+  created_at: 2023-03-31 14:38:40.000421500 Z
+  updated_at: 2023-03-31 14:38:40.000421500 Z

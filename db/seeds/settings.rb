@@ -730,3 +730,4 @@ Setting.set('accounting_Error_label', 'Erroneous invoices to refund') unless Set
 Setting.set('external_id', false) unless Setting.find_by(name: 'external_id').try(:value)
 
 Setting.set('family_account', false) unless Setting.find_by(name: 'family_account').try(:value)
+Setting.set('child_validation_required', false) unless Setting.find_by(name: 'child_validation_required').try(:value)

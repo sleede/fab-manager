@@ -195,6 +195,7 @@ en:
         group_is_required: "Group is required."
         trainings: "Trainings"
         tags: "Tags"
+        children: "Children"
       #machine/training slot modification modal
       confirm_modify_slot_modal:
         change_the_slot: "Change the slot"
@@ -368,6 +369,7 @@ en:
         user_tags: "User tags"
         no_tags: "No tags"
         user_validation_required_alert: "Warning!<br>Your administrator must validate your account. Then, you'll then be able to access all the booking features."
+        child_validation_required_alert: "Warning!<br>Your administrator must validate your child account. Then, you'll then be able to book the event."
       # feature-tour modal
       tour:
         previous: "Previous"
