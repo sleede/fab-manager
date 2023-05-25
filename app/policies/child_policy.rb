@@ -11,14 +11,18 @@ class ChildPolicy < ApplicationPolicy
   end
 
   def show?
-    user.id == record.user_id
+    user.privileged? || user.id == record.user_id
   end
 
   def update?
-    user.id == record.user_id
+    user.privileged? || user.id == record.user_id
   end
 
   def destroy?
-    user.id == record.user_id
+    user.privileged? || user.id == record.user_id
+  end
+
+  def validate?
+    user.privileged?
   end
 end

@@ -62,6 +62,10 @@
 
         </uib-tab>
 
+        <uib-tab heading="{{ 'app.shared.user_admin.children' | translate }}" ng-if="$root.settings.familyAccount">
+          <children-list user="user" operator="currentUser" on-success="onSuccess" on-error="onError" />
+        </uib-tab>
+
         <uib-tab heading="{{ 'app.admin.members_edit.supporting_documents' | translate }}" ng-show="hasProofOfIdentityTypes">
           <supporting-documents-validation
             operator="currentUser"

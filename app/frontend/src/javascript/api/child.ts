@@ -38,4 +38,9 @@ export default class ChildAPI {
     const res: AxiosResponse<void> = await apiClient.delete(`/api/children/${childId}`);
     return res?.data;
   }
+
+  static async validate (child: Child): Promise<Child> {
+    const res: AxiosResponse<Child> = await apiClient.patch(`/api/children/${child.id}/validate`, { child });
+    return res?.data;
+  }
 }

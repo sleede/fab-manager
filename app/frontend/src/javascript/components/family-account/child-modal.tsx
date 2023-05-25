@@ -5,12 +5,15 @@ import { Child } from '../../models/child';
 import ChildAPI from '../../api/child';
 import { ChildForm } from './child-form';
 import { SupportingDocumentType } from '../../models/supporting-document-type';
+import { ChildValidation } from './child-validation';
+import { User } from '../../models/user';
 
 interface ChildModalProps {
   child?: Child;
+  operator: User;
   isOpen: boolean;
   toggleModal: () => void;
-  onSuccess: (child: Child) => void;
+  onSuccess: (child: Child, msg: string) => void;
   onError: (error: string) => void;
   supportingDocumentsTypes: Array<SupportingDocumentType>;
 }
@@ -18,7 +21,7 @@ interface ChildModalProps {
 /**
  * A modal for creating or editing a child.
  */
-export const ChildModal: React.FC<ChildModalProps> = ({ child, isOpen, toggleModal, onSuccess, onError, supportingDocumentsTypes }) => {
+export const ChildModal: React.FC<ChildModalProps> = ({ child, isOpen, toggleModal, onSuccess, onError, supportingDocumentsTypes, operator }) => {
   const { t } = useTranslation('public');
 
   /**
@@ -32,7 +35,7 @@ export const ChildModal: React.FC<ChildModalProps> = ({ child, isOpen, toggleMod
         await ChildAPI.create(data);
       }
       toggleModal();
-      onSuccess(data);
+      onSuccess(data, '');
     } catch (error) {
       onError(error);
     }
@@ -45,7 +48,10 @@ export const ChildModal: React.FC<ChildModalProps> = ({ child, isOpen, toggleMod
       toggleModal={toggleModal}
       closeButton={true}
       confirmButton={false} >
-      <ChildForm child={child} onSubmit={handleSaveChild} supportingDocumentsTypes={supportingDocumentsTypes}/>
+      {(operator?.role === 'admin' || operator?.role === 'manager') &&
+        <ChildValidation child={child} onSuccess={onSuccess} onError={onError} />
+      }
+      <ChildForm child={child} onSubmit={handleSaveChild} supportingDocumentsTypes={supportingDocumentsTypes} operator={operator}/>
     </FabModal>
   );
 };

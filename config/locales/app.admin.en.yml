@@ -1242,6 +1242,12 @@ en:
         validate_member_error: "An unexpected error occurred: unable to validate this member."
         invalidate_member_error: "An unexpected error occurred: unable to invalidate this member."
         validate_account: "Validate the account"
+      child_validation:
+        validate_child_success: "Child successfully validated"
+        invalidate_child_success: "Child successfully invalidated"
+        validate_child_error: "An unexpected error occurred: unable to validate this child."
+        invalidate_child_error: "An unexpected error occurred: unable to invalidate this child."
+        validate_child: "Validate the child"
       supporting_documents_refusal_form:
         refusal_comment: "Comment"
         comment_placeholder: "Please type a comment here"
@@ -1791,6 +1797,7 @@ en:
         family_account: "family account"
         family_account_info_html: "By activating this option, you offer your members the possibility to add their child(ren) to their own account. You can also request proof if you wish to validate them."
         enable_family_account: "Enable the Family Account option"
+        child_validation_required_label: "Activate the account validation option for children"
         overlapping_options:
           training_reservations: "Trainings"
           machine_reservations: "Machines"

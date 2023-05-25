@@ -734,3 +734,4 @@ Setting.set('projects_list_date_filters_presence', false) unless Setting.find_by
 Setting.set('project_categories_filter_placeholder', 'Toutes les catégories') unless Setting.find_by(name: 'project_categories_filter_placeholder').try(:value)
 Setting.set('project_categories_wording', 'Catégories') unless Setting.find_by(name: 'project_categories_wording').try(:value)
 Setting.set('family_account', false) unless Setting.find_by(name: 'family_account').try(:value)
+Setting.set('child_validation_required', false) unless Setting.find_by(name: 'child_validation_required').try(:value)

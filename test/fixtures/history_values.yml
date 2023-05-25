@@ -890,3 +890,11 @@ history_value_105:
   created_at: '2023-03-31 14:38:40.000421'
   updated_at: '2023-03-31 14:38:40.000421'
   invoicing_profile_id: 1
+
+history_value_102:
+  id: 102
+  setting_id: 101
+  value: 'false'
+  created_at: '2023-03-31 14:38:40.000421'
+  updated_at: '2023-03-31 14:38:40.000421'
+  invoicing_profile_id: 1

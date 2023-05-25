@@ -968,7 +968,8 @@ CREATE TABLE public.children (
     phone character varying,
     email character varying,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    validated_at timestamp(6) without time zone
 );
 
 
@@ -9061,5 +9062,6 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230524110215');
 ('20230626122844'),
 ('20230626122947');
+('20230525101006');
 
 

@@ -631,7 +631,7 @@ angular.module('application.router', ['ui.router'])
         resolve: {
           eventPromise: ['Event', '$transition$', function (Event, $transition$) { return Event.get({ id: $transition$.params().id }).$promise; }],
           priceCategoriesPromise: ['PriceCategory', function (PriceCategory) { return PriceCategory.query().$promise; }],
-          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['booking_move_enable', 'booking_move_delay', 'booking_cancel_enable', 'booking_cancel_delay', 'event_explications_alert', 'online_payment_module', 'user_validation_required', 'user_validation_required_list']" }).$promise; }]
+          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['booking_move_enable', 'booking_move_delay', 'booking_cancel_enable', 'booking_cancel_delay', 'event_explications_alert', 'online_payment_module', 'user_validation_required', 'user_validation_required_list', 'child_validation_required']" }).$promise; }]
         }
       })
 
