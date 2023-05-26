@@ -503,6 +503,12 @@ fr:
         first_name: "Prénom de l'enfant"
         last_name: "Nom de l'enfant"
         birthday: "Date de naissance"
+        deleted: "L'enfant a bien été supprimée."
+        unable_to_delete: "Impossible de supprimer la demande de l'enfant."
+      delete_child_modal:
+        confirmation_required: "Confirmation requise"
+        confirm: "Valider"
+        confirm_delete_child: "Êtes-vous sûr de vouloir supprimer la demande de cet enfant ?"
       tour:
         conclusion:
           title: "Merci de votre attention"

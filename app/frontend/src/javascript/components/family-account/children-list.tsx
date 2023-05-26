@@ -69,10 +69,9 @@ export const ChildrenList: React.FC<ChildrenListProps> = ({ user, operator, onEr
   /**
    * Delete a child
    */
-  const deleteChild = (child: Child) => {
-    ChildAPI.destroy(child.id).then(() => {
-      ChildAPI.index({ user_id: user.id }).then(setChildren);
-    });
+  const handleDeleteChildSuccess = (msg: string) => {
+    ChildAPI.index({ user_id: user.id }).then(setChildren);
+    onSuccess(msg);
   };
 
   /**
@@ -105,7 +104,7 @@ export const ChildrenList: React.FC<ChildrenListProps> = ({ user, operator, onEr
 
       <div className="children-list">
         {children.map(child => (
-          <ChildItem key={child.id} child={child} onEdit={editChild} onDelete={deleteChild} />
+          <ChildItem key={child.id} child={child} onEdit={editChild} onDelete={handleDeleteChildSuccess} onError={onError} />
         ))}
       </div>
       <ChildModal child={child} isOpen={isOpenChildModal} toggleModal={() => setIsOpenChildModal(false)} onSuccess={handleSaveChildSuccess} onError={onError} supportingDocumentsTypes={supportingDocumentsTypes} operator={operator} />

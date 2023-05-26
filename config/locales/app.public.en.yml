@@ -503,6 +503,12 @@ en:
         first_name: "First name of the child"
         last_name: "Last name of the child"
         birthday: "Birthday"
+        deleted: "The child has been deleted."
+        unable_to_delete: "Unable to delete the child."
+      delete_child_modal:
+        confirmation_required: "Confirmation required"
+        confirm: "Confirm"
+        confirm_delete_child: "Do you really want to remove this child?"
       tour:
         conclusion:
           title: "Thank you for your attention"
