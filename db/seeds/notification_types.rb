@@ -103,3 +103,11 @@ unless NotificationType.find_by(name: 'notify_user_child_supporting_document_ref
     is_configurable: false
   )
 end
+
+unless NotificationType.find_by(name: 'notify_admin_child_created')
+  NotificationType.create!(
+    name: 'notify_admin_child_created',
+    category: 'users_accounts',
+    is_configurable: true
+  )
+end

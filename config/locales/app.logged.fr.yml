@@ -284,6 +284,7 @@ fr:
         app_management: "Au sujet de la gestion de l'application"
       notification_form:
         notify_admin_when_user_is_created: "Un compte utilisateur a été créé"
+        notify_admin_child_created: "Un compte enfant a été créé"
         notify_admin_when_user_is_imported: "Un compte utilisateur a été importé"
         notify_admin_profile_complete: "Un compte importé a complété ses informations"
         notify_admin_user_merged: "Un compte importé a été fusionné avec un compte existant"

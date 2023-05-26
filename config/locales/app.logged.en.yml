@@ -284,6 +284,7 @@ en:
         app_management: "Concerning app management notifications"
       notification_form:
         notify_admin_when_user_is_created: "A user account has been created"
+        notify_admin_child_created: "A child has been created"
         notify_admin_when_user_is_imported: "A user account has been imported"
         notify_admin_profile_complete: "An imported account has completed its profile"
         notify_admin_user_merged: "An imported account has been merged with an existing account"
