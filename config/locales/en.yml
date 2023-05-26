@@ -449,6 +449,10 @@ en:
         refusal: "Your supporting documents were refused"
       notify_admin_user_supporting_document_refusal:
         refusal: "Member's supporting document <strong><em>%{NAME}</strong></em> was refused."
+      notify_user_child_supporting_document_refusal:
+        refusal: "Your child's supporting documents were refused"
+      notify_admin_user_child_supporting_document_refusal:
+        refusal: "Child's supporting document <strong><em>%{NAME}</strong></em> was refused."
       notify_user_order_is_ready:
         order_ready: "Your command %{REFERENCE} is ready"
       notify_user_order_is_canceled:

@@ -492,6 +492,7 @@ en:
         phone: "Phone"
         save: "Save"
         to_complete: "To complete"
+        refuse_documents: "Refusing the documents"
       child_item:
         first_name: "First name of the child"
         last_name: "Last name of the child"

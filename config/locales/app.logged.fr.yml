@@ -291,6 +291,7 @@ fr:
         notify_admin_import_complete: "Un import est terminé"
         notify_admin_user_group_changed: "Un utilisateur a changé de groupe"
         notify_admin_user_supporting_document_refusal: "Un justificatif a été refusé"
+        notify_admin_user_child_supporting_document_refusal: "Un justificatif de l'enfant a été refusé"
         notify_admin_user_supporting_document_files_created: "Un utilisateur a téléversé un justificatif"
         notify_admin_user_supporting_document_files_updated: "Un utilisateur a mis à jour un justificatif"
         notify_admin_member_create_reservation: "Un membre fait une réservation"

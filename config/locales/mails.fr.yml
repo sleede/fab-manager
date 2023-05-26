@@ -406,6 +406,15 @@ fr:
       subject: "Les justificatifs d'un membre ont été refusés"
       body:
         user_supporting_document_files_refusal: "Le justificatif du membre %{NAME} a été refusé par %{OPERATOR} :"
+    notify_user_child_supporting_document_refusal:
+      subject: "Vos pièces justificatives de l'enfant ont été refusées"
+      body:
+        user_child_supporting_document_files_refusal: "Vos pièces justificatives ont été refusées :"
+        action: "Veuillez téléverser de nouvelles pièces justificatives."
+    notify_admin_user_child_supporting_document_refusal:
+      subject: "Les justificatifs d'un enfant ont été refusés"
+      body:
+        user_child_supporting_document_files_refusal: "Le justificatif de l'enfant %{NAME} a été refusé par %{OPERATOR} :"
     shared:
       hello: "Bonjour %{user_name}"
     notify_user_order_is_ready:

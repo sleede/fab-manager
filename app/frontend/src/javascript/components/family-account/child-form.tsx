@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import moment from 'moment';
@@ -9,25 +9,32 @@ import { FormFileUpload } from '../form/form-file-upload';
 import { FileType } from '../../models/file';
 import { SupportingDocumentType } from '../../models/supporting-document-type';
 import { User } from '../../models/user';
+import { SupportingDocumentsRefusalModal } from '../supporting-documents/supporting-documents-refusal-modal';
 
 interface ChildFormProps {
   child: Child;
   operator: User;
   onSubmit: (data: Child) => void;
   supportingDocumentsTypes: Array<SupportingDocumentType>;
+  onSuccess: (message: string) => void,
+  onError: (message: string) => void,
 }
 
 /**
  * A form for creating or editing a child.
  */
-export const ChildForm: React.FC<ChildFormProps> = ({ child, onSubmit, supportingDocumentsTypes, operator }) => {
+export const ChildForm: React.FC<ChildFormProps> = ({ child, onSubmit, supportingDocumentsTypes, operator, onSuccess, onError }) => {
   const { t } = useTranslation('public');
 
   const { register, formState, handleSubmit, setValue, control } = useForm<Child>({
     defaultValues: child
   });
   const output = useWatch<Child>({ control }); // eslint-disable-line
+  const [refuseModalIsOpen, setRefuseModalIsOpen] = useState<boolean>(false);
 
+  /**
+   * get the name of the supporting document type by id
+   */
   const getSupportingDocumentsTypeName = (id: number): string => {
     const supportingDocumentType = supportingDocumentsTypes.find((supportingDocumentType) => supportingDocumentType.id === id);
     return supportingDocumentType ? supportingDocumentType.name : '';
@@ -40,9 +47,24 @@ export const ChildForm: React.FC<ChildFormProps> = ({ child, onSubmit, supportin
     return (operator?.role === 'admin' || operator?.role === 'manager');
   };
 
+  /**
+   * Open/closes the modal dialog to refuse the documents
+   */
+  const toggleRefuseModal = (): void => {
+    setRefuseModalIsOpen(!refuseModalIsOpen);
+  };
+
+  /**
+   * Callback triggered when the refusal was successfully saved
+   */
+  const onSaveRefusalSuccess = (message: string): void => {
+    setRefuseModalIsOpen(false);
+    onSuccess(message);
+  };
+
   return (
     <div className="child-form">
-      {isPrivileged() &&
+      {!isPrivileged() &&
         <div className="info-area">
           {t('app.public.child_form.child_form_info')}
         </div>
@@ -113,6 +135,20 @@ export const ChildForm: React.FC<ChildFormProps> = ({ child, onSubmit, supportin
           <FabButton type="button" onClick={handleSubmit(onSubmit)}>
             {t('app.public.child_form.save')}
           </FabButton>
+          {isPrivileged() &&
+            <div>
+              <FabButton className="refuse-btn" onClick={toggleRefuseModal}>{t('app.public.child_form.refuse_documents')}</FabButton>
+              <SupportingDocumentsRefusalModal
+                isOpen={refuseModalIsOpen}
+                proofOfIdentityTypes={supportingDocumentsTypes}
+                toggleModal={toggleRefuseModal}
+                operator={operator}
+                supportable={child}
+                documentType="Child"
+                onError={onError}
+                onSuccess={onSaveRefusalSuccess} />
+            </div>
+          }
         </div>
       </form>
     </div>

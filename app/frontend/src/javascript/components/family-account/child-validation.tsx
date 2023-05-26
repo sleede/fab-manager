@@ -9,7 +9,7 @@ import { TDateISO } from '../../typings/date-iso';
 
 interface ChildValidationProps {
   child: Child
-  onSuccess: (child: Child, message: string) => void,
+  onSuccess: (message: string) => void,
   onError: (message: string) => void,
 }
 
@@ -37,8 +37,8 @@ export const ChildValidation: React.FC<ChildValidationProps> = ({ child, onSucce
       _child.validated_at = null;
     }
     ChildAPI.validate(_child)
-      .then((child: Child) => {
-        onSuccess(child, t(`app.admin.child_validation.${_value ? 'validate' : 'invalidate'}_child_success`));
+      .then(() => {
+        onSuccess(t(`app.admin.child_validation.${_value ? 'validate' : 'invalidate'}_child_success`));
       }).catch(err => {
         setValue(!_value);
         onError(t(`app.admin.child_validation.${_value ? 'validate' : 'invalidate'}_child_error`) + err);

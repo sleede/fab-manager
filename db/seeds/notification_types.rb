@@ -31,3 +31,19 @@ unless NotificationType.find_by(name: 'notify_member_reservation_limit_reached')
     is_configurable: false
   )
 end
+
+unless NotificationType.find_by(name: 'notify_admin_user_child_supporting_document_refusal')
+  NotificationType.create!(
+    name: 'notify_admin_user_child_supporting_document_refusal',
+    category: 'supporting_documents',
+    is_configurable: true
+  )
+end
+
+unless NotificationType.find_by(name: 'notify_user_child_supporting_document_refusal')
+  NotificationType.create!(
+    name: 'notify_user_child_supporting_document_refusal',
+    category: 'supporting_documents',
+    is_configurable: false
+  )
+end

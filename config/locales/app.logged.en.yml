@@ -291,6 +291,7 @@ en:
         notify_admin_import_complete: "An import is done"
         notify_admin_user_group_changed: "A user has changed his group"
         notify_admin_user_supporting_document_refusal: "A supporting document has been rejected"
+        notify_admin_user_child_supporting_document_refusal: "A supporting document of child has been rejected"
         notify_admin_user_supporting_document_files_created: "A user has uploaded a supporting document"
         notify_admin_user_supporting_document_files_updated: "A user has updated a supporting document"
         notify_admin_member_create_reservation: "A member books a reservation"
