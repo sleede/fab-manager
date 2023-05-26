@@ -447,6 +447,10 @@ en:
         account_validated: "Your account is valid."
       notify_user_is_invalidated:
         account_invalidated: "Your account is invalid."
+      notify_user_child_is_validated:
+        child_validated: "Your account child is valid."
+      notify_user_child_is_invalidated:
+        child_invalidated: "Your account child is invalid."
       notify_user_supporting_document_refusal:
         refusal: "Your supporting documents were refused"
       notify_admin_user_supporting_document_refusal:

@@ -47,7 +47,7 @@ class API::ChildrenController < API::APIController
     authorize @child
 
     cparams = params.require(:child).permit(:validated_at)
-    if @child.update(validated_at: cparams[:validated_at].present? ? Time.current : nil)
+    if ChildService.validate(@child, cparams[:validated_at].present?)
       render :show, status: :ok, location: child_path(@child)
     else
       render json: @child.errors, status: :unprocessable_entity

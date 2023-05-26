@@ -447,6 +447,10 @@ fr:
         account_validated: "Votre compte est valide."
       notify_user_is_invalidated:
         account_invalidated: "Votre compte est invalide."
+      notify_user_child_is_validated:
+        child_validated: "Votre compte enfant est valide."
+      notify_user_child_is_invalidated:
+        child_invalidated: "Votre compte enfant est invalide."
       notify_user_supporting_document_refusal:
         refusal: "Vos pièces justificatives ont été refusées"
       notify_admin_user_supporting_document_refusal:

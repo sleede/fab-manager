@@ -15,4 +15,20 @@ class ChildService
   def self.update(child, child_params)
     child.update(child_params)
   end
+
+  def self.validate(child, is_valid)
+    is_updated = child.update(validated_at: is_valid ? Time.current : nil)
+    if is_updated
+      if is_valid
+        NotificationCenter.call type: 'notify_user_child_is_validated',
+                                receiver: child.user,
+                                attached_object: child
+      else
+        NotificationCenter.call type: 'notify_user_child_is_invalidated',
+                                receiver: child.user,
+                                attached_object: child
+      end
+    end
+    is_updated
+  end
 end

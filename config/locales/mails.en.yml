@@ -401,6 +401,14 @@ en:
       subject: "Account invalidated"
       body:
         account_invalidated: "Your account was invalidated. You won't be able to book anymore, until your account is validated again."
+    notify_user_child_is_validated:
+      subject: "Child account validated"
+      body:
+        child_validated: "Your child account was validated. Now, you have access to event booking features."
+    notify_user_child_is_invalidated:
+      subject: "Child account invalidated"
+      body:
+        account_invalidated: "Your child account was invalidated. You won't be able to book event, until your child account is validated again."
     notify_user_supporting_document_refusal:
       subject: "Your supporting documents were refused"
       body:
