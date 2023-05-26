@@ -78,7 +78,7 @@ export const ChildrenList: React.FC<ChildrenListProps> = ({ user, operator, onEr
   /**
    * Handle save child success from the API
    */
-  const handleSaveChildSuccess = (_child: Child, msg: string) => {
+  const handleSaveChildSuccess = (msg: string) => {
     ChildAPI.index({ user_id: user.id }).then(setChildren);
     if (msg) {
       onSuccess(msg);

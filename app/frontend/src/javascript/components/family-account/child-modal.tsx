@@ -13,7 +13,7 @@ interface ChildModalProps {
   operator: User;
   isOpen: boolean;
   toggleModal: () => void;
-  onSuccess: (child: Child, msg: string) => void;
+  onSuccess: (msg: string) => void;
   onError: (error: string) => void;
   supportingDocumentsTypes: Array<SupportingDocumentType>;
 }
@@ -35,7 +35,7 @@ export const ChildModal: React.FC<ChildModalProps> = ({ child, isOpen, toggleMod
         await ChildAPI.create(data);
       }
       toggleModal();
-      onSuccess(data, '');
+      onSuccess('');
     } catch (error) {
       onError(error);
     }
@@ -51,7 +51,14 @@ export const ChildModal: React.FC<ChildModalProps> = ({ child, isOpen, toggleMod
       {(operator?.role === 'admin' || operator?.role === 'manager') &&
         <ChildValidation child={child} onSuccess={onSuccess} onError={onError} />
       }
-      <ChildForm child={child} onSubmit={handleSaveChild} supportingDocumentsTypes={supportingDocumentsTypes} operator={operator}/>
+      <ChildForm
+        child={child}
+        onSubmit={handleSaveChild}
+        supportingDocumentsTypes={supportingDocumentsTypes}
+        operator={operator}
+        onSuccess={onSuccess}
+        onError={onError}
+      />
     </FabModal>
   );
 };

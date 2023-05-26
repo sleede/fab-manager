@@ -498,6 +498,7 @@ fr:
         phone: "Téléphone"
         save: "Enregistrer"
         to_complete: "À compléter"
+        refuse_documents: "Refuser les documents"
       child_item:
         first_name: "Prénom de l'enfant"
         last_name: "Nom de l'enfant"

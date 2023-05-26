@@ -87,3 +87,19 @@ NOTIFICATIONS_TYPES.each do |notification_type|
     is_configurable: notification_type[:is_configurable]
   )
 end
+
+unless NotificationType.find_by(name: 'notify_admin_user_child_supporting_document_refusal')
+  NotificationType.create!(
+    name: 'notify_admin_user_child_supporting_document_refusal',
+    category: 'supporting_documents',
+    is_configurable: true
+  )
+end
+
+unless NotificationType.find_by(name: 'notify_user_child_supporting_document_refusal')
+  NotificationType.create!(
+    name: 'notify_user_child_supporting_document_refusal',
+    category: 'supporting_documents',
+    is_configurable: false
+  )
+end

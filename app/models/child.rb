@@ -17,4 +17,8 @@ class Child < ApplicationRecord
   def validate_age
     errors.add(:birthday, I18n.t('.errors.messages.birthday_less_than_18_years_ago')) if birthday.blank? || birthday > 18.years.ago
   end
+
+  def full_name
+    "#{(first_name || '').humanize.titleize} #{(last_name || '').humanize.titleize}"
+  end
 end

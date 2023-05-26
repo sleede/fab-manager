@@ -449,6 +449,10 @@ fr:
         refusal: "Vos pièces justificatives ont été refusées"
       notify_admin_user_supporting_document_refusal:
         refusal: "Le justificatif du membre <strong><em>%{NAME}</strong></em> a été refusé."
+      notify_user_child_supporting_document_refusal:
+        refusal: "Vos pièces justificatives de l'enfant ont été refusées"
+      notify_admin_user_child_supporting_document_refusal:
+        refusal: "Le justificatif de l'enfant <strong><em>%{NAME}</strong></em> a été refusé."
       notify_user_order_is_ready:
         order_ready: "Votre commande %{REFERENCE} est prête"
       notify_user_order_is_canceled:
