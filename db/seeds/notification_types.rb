@@ -55,3 +55,19 @@ unless NotificationType.find_by(name: 'notify_admin_child_created')
     is_configurable: true
   )
 end
+
+unless NotificationType.find_by(name: 'notify_user_child_is_validated')
+  NotificationType.create!(
+    name: 'notify_user_child_is_validated',
+    category: 'users_accounts',
+    is_configurable: false
+  )
+end
+
+unless NotificationType.find_by(name: 'notify_user_child_is_invalidated')
+  NotificationType.create!(
+    name: 'notify_user_child_is_invalidated',
+    category: 'users_accounts',
+    is_configurable: false
+  )
+end
