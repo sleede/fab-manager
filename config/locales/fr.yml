@@ -314,6 +314,8 @@ fr:
         project_NAME_has_been_published_html: "Le projet <a href='/#!/projects/%{ID}'><strong><em>%{NAME}<em></strong></a> vient d'être publié."
       notify_admin_when_user_is_created:
         a_new_user_account_has_been_created_NAME_EMAIL_html: "Un nouveau compte utilisateur vient d'être créé : <strong><em>%{NAME} &lt;%{EMAIL}&gt;</strong></em>."
+      notify_admin_child_created:
+        a_new_child_has_been_created_NAME_html: "Un nouveau enfant vient d'être créé : <strong><em>%{NAME}</em></strong>."
       notify_admin_when_user_is_imported:
         a_new_user_account_has_been_imported_from_PROVIDER_UID_html: "Un nouveau compte utilisateur vient d'être importé depuis : <strong><em>%{PROVIDER}</strong> (%{UID})</em>."
       notify_member_create_reservation:

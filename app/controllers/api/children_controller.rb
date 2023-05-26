@@ -20,7 +20,7 @@ class API::ChildrenController < API::APIController
   def create
     @child = Child.new(child_params)
     authorize @child
-    if @child.save
+    if ChildService.create(@child)
       render status: :created
     else
       render json: @child.errors.full_messages, status: :unprocessable_entity
