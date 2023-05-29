@@ -647,6 +647,10 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
       return true;
     }
 
+    $scope.isUnder18YearsAgo = (date) => {
+      return moment(date).isAfter(moment().subtract(18, 'year'));
+    }
+
     /* PRIVATE SCOPE */
 
     /**
@@ -738,7 +742,8 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
             name: child.first_name + ' ' + child.last_name,
             id: child.id,
             type: 'Child',
-            validatedAt: child.validated_at
+            validatedAt: child.validated_at,
+            birthday: child.birthday
           });
         }
       }
