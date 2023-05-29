@@ -393,6 +393,16 @@ en:
       body:
         user_update_supporting_document_file: "Member %{NAME} has modified the supporting documents below:"
         validate_user: "Please validate this account"
+    notify_admin_user_child_supporting_document_files_created:
+      subject: "Supporting documents of child uploaded by a member"
+      body:
+        supporting_document_files_uploaded_below: "Child %{NAME} has uploaded the following supporting documents:"
+        validate_child: "Please validate this child account"
+    notify_admin_user_child_supporting_document_files_updated:
+      subject: "Child's supporting documents have changed"
+      body:
+        child_update_supporting_document_file: "Child %{NAME} has modified the supporting documents below:"
+        validate_child: "Please validate this child account"
     notify_user_is_validated:
       subject: "Account validated"
       body:

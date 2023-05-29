@@ -71,3 +71,19 @@ unless NotificationType.find_by(name: 'notify_user_child_is_invalidated')
     is_configurable: false
   )
 end
+
+unless NotificationType.find_by(name: 'notify_admin_user_child_supporting_document_files_updated')
+  NotificationType.create!(
+    name: 'notify_admin_user_child_supporting_document_files_updated',
+    category: 'supporting_documents',
+    is_configurable: true
+  )
+end
+
+unless NotificationType.find_by(name: 'notify_admin_user_child_supporting_document_files_created')
+  NotificationType.create!(
+    name: 'notify_admin_user_child_supporting_document_files_created',
+    category: 'supporting_documents',
+    is_configurable: true
+  )
+end
