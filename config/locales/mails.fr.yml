@@ -393,6 +393,16 @@ fr:
       body:
         user_update_supporting_document_file: "Le membre %{NAME} a modifié le justificatif ci-dessous :"
         validate_user: "Veuillez valider son compte"
+    notify_admin_user_child_supporting_document_files_created:
+      subject: "Justificatif de l'enfant téléversé par un membre"
+      body:
+        supporting_document_files_uploaded_below: "L'enfant %{NAME} a téléversé le justificatif suivant :"
+        validate_child: "Veuillez valider son compte enfant"
+    notify_admin_user_child_supporting_document_files_updated:
+      subject: "Le justificatif d'un enfant a changé"
+      body:
+        child_update_supporting_document_file: "L'enfant %{NAME} a modifié le justificatif ci-dessous :"
+        validate_child: "Veuillez valider son compte enfant"
     notify_user_is_validated:
       subject: "Compte validé"
       body:

@@ -295,6 +295,8 @@ fr:
         notify_admin_user_child_supporting_document_refusal: "Un justificatif de l'enfant a été refusé"
         notify_admin_user_supporting_document_files_created: "Un utilisateur a téléversé un justificatif"
         notify_admin_user_supporting_document_files_updated: "Un utilisateur a mis à jour un justificatif"
+        notify_admin_user_child_supporting_document_files_created: "Un enfant a téléversé un justificatif"
+        notify_admin_user_child_supporting_document_files_updated: "Un enfant a mis à jour un justificatif"
         notify_admin_member_create_reservation: "Un membre fait une réservation"
         notify_admin_slot_is_modified: "Un créneau de réservation a été modifié"
         notify_admin_slot_is_canceled: "Une réservation a été annulée"

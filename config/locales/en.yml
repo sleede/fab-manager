@@ -443,6 +443,10 @@ en:
         supporting_document_files_uploaded: "Supporting document uploaded by member <strong><em>%{NAME}</strong></em>."
       notify_admin_user_supporting_document_files_updated:
         supporting_document_files_uploaded: "Supporting document changed by member <strong><em>%{NAME}</strong></em>."
+      notify_admin_user_child_supporting_document_files_created:
+        supporting_document_files_uploaded: "Child's <strong><em>%{NAME}</strong></em> supporting document uploaded."
+      notify_admin_user_child_supporting_document_files_updated:
+        supporting_document_files_uploaded: "Supporting document changed by child <strong><em>%{NAME}</strong></em>."
       notify_user_is_validated:
         account_validated: "Your account is valid."
       notify_user_is_invalidated:

@@ -295,6 +295,8 @@ en:
         notify_admin_user_child_supporting_document_refusal: "A supporting document of child has been rejected"
         notify_admin_user_supporting_document_files_created: "A user has uploaded a supporting document"
         notify_admin_user_supporting_document_files_updated: "A user has updated a supporting document"
+        notify_admin_user_child_supporting_document_files_created: "A child has uploaded a supporting document"
+        notify_admin_user_child_supporting_document_files_updated: "A child has updated a supporting document"
         notify_admin_member_create_reservation: "A member books a reservation"
         notify_admin_slot_is_modified: "A reservation slot has been modified"
         notify_admin_slot_is_canceled: "A reservation has been cancelled"
