@@ -374,6 +374,7 @@ en:
         no_tags: "No tags"
         user_validation_required_alert: "Warning!<br>Your administrator must validate your account. Then, you'll then be able to access all the booking features."
         child_validation_required_alert: "Warning!<br>Your administrator must validate your child account. Then, you'll then be able to book the event."
+        child_birthday_must_be_under_18_years_ago_alert: "Warning!<br>Your child must be under 18 years ago. Then, you'll then be able to book the event."
       # feature-tour modal
       tour:
         previous: "Previous"

@@ -374,6 +374,7 @@ fr:
         no_tags: "Aucune étiquette"
         user_validation_required_alert: "Attention !<br>Votre administrateur doit valider votre compte. Vous pourrez alors accéder à l'ensemble des fonctionnalités de réservation."
         child_validation_required_alert: "Attention !<br>Votre administrateur doit valider votre compte enfant. Vous pourrez alors réserver l'événement."
+        child_birthday_must_be_under_18_years_ago_alert: "Attention !<br>La date de naissance de l'enfant doit être inférieure à 18 ans. Vous pourrez alors réserver l'événement."
       #feature-tour modal
       tour:
         previous: "Précédent"
