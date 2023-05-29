@@ -4,7 +4,7 @@
 class Members::ListService
   class << self
     def list(params)
-      @query = User.includes(:profile, :group, :statistic_profile)
+      @query = User.includes(:profile, :group, :statistic_profile, :children)
                    .joins(:profile,
                           :statistic_profile,
                           :group,
@@ -27,10 +27,10 @@ class Members::ListService
       # ILIKE => PostgreSQL case-insensitive LIKE
       if params[:search].size.positive?
         @query = @query.where('users.username ILIKE :search OR ' \
-                              'profiles.first_name ILIKE :search OR ' \
-                              'profiles.last_name ILIKE :search OR ' \
+                              "profiles.first_name || ' ' || profiles.last_name  ILIKE :search OR " \
                               'profiles.phone ILIKE :search OR ' \
-                              'email ILIKE :search OR ' \
+                              'users.email ILIKE :search OR ' \
+                              "children.first_name || ' ' || children.last_name ILIKE :search OR " \
                               'groups.name ILIKE :search OR ' \
                               'plans.base_name ILIKE :search', search: "%#{params[:search]}%")
       end
