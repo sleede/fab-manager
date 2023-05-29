@@ -24,12 +24,13 @@ type FormInputProps<TFieldValues, TInputType> = FormComponent<TFieldValues> & Ab
   ariaLabel?: string,
   maxLength?: number,
   max?: number | string,
+  min?: number | string,
 }
 
 /**
  * This component is a template for an input component to use within React Hook Form
  */
-export const FormInput = <TFieldValues extends FieldValues, TInputType>({ id, register, label, tooltip, defaultValue, icon, className, rules, disabled, type, addOn, addOnAction, addOnClassName, addOnAriaLabel, placeholder, error, warning, formState, step, onChange, debounce, accept, nullable = false, ariaLabel, maxLength, max }: FormInputProps<TFieldValues, TInputType>) => {
+export const FormInput = <TFieldValues extends FieldValues, TInputType>({ id, register, label, tooltip, defaultValue, icon, className, rules, disabled, type, addOn, addOnAction, addOnClassName, addOnAriaLabel, placeholder, error, warning, formState, step, onChange, debounce, accept, nullable = false, ariaLabel, maxLength, max, min }: FormInputProps<TFieldValues, TInputType>) => {
   const [characterCount, setCharacterCount] = useState<number>(0);
 
   /**
@@ -102,7 +103,8 @@ export const FormInput = <TFieldValues extends FieldValues, TInputType>({ id, re
           placeholder={placeholder}
           accept={accept}
           maxLength={maxLength}
-          max={max} />
+          max={max}
+          min={min}/>
         {(type === 'file' && placeholder) && <span className='fab-button is-black file-placeholder'>{placeholder}</span>}
         {maxLength && <span className='countdown'>{characterCount} / {maxLength}</span>}
         {addOn && addOnAction && <button aria-label={addOnAriaLabel} type="button" onClick={addOnAction} className={`addon ${addOnClassName || ''} is-btn`}>{addOn}</button>}

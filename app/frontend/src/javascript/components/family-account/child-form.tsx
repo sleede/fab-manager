@@ -84,11 +84,12 @@ export const ChildForm: React.FC<ChildFormProps> = ({ child, onSubmit, supportin
         />
         <FormInput id="birthday"
           register={register}
-          rules={{ required: true, validate: (value) => moment(value).isBefore(moment().subtract(18, 'year')) }}
+          rules={{ required: true, validate: (value) => moment(value).isAfter(moment().subtract(18, 'year')) }}
           formState={formState}
           label={t('app.public.child_form.birthday')}
           type="date"
-          max={moment().subtract(18, 'year').format('YYYY-MM-DD')}
+          max={moment().format('YYYY-MM-DD')}
+          min={moment().subtract(18, 'year').format('YYYY-MM-DD')}
         />
         <FormInput id="phone"
           register={register}
