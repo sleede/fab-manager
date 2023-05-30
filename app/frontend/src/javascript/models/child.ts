@@ -1,4 +1,4 @@
-import { TDateISODate } from '../typings/date-iso';
+import { TDateISODate, TDateISO } from '../typings/date-iso';
 import { ApiFilter } from './api';
 
 export interface ChildIndexFilter extends ApiFilter {
@@ -13,7 +13,7 @@ export interface Child {
   phone?: string,
   birthday: TDateISODate,
   user_id: number,
-  validated_at?: TDateISODate,
+  validated_at?: TDateISO,
   supporting_document_files_attributes?: Array<{
     id?: number,
     supportable_id?: number,
