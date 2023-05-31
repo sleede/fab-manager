@@ -1,6 +1,9 @@
 .edit-destroy-buttons {
+  width: fit-content;
+  flex-shrink: 0;
   border-radius: var(--border-radius-sm);
   overflow: hidden;
+
   button {
     @include btn;
     border-radius: 0;

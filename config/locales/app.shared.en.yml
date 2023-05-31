@@ -165,7 +165,7 @@ en:
       member_select:
         select_a_member: "Select a member"
         start_typing: "Start typing..."
-        member_not_validated: "Warning:<br> The member was not validated."
+        member_not_validated: "This member has not yet been validated."
       #payment modal
       abstract_payment_modal:
         online_payment: "Online payment"
@@ -368,9 +368,9 @@ en:
         slot_tags: "Slot tags"
         user_tags: "User tags"
         no_tags: "No tags"
-        user_validation_required_alert: "Warning!<br>Your administrator must validate your account. Then, you'll then be able to access all the booking features."
-        child_validation_required_alert: "Warning!<br>Your administrator must validate your child account. Then, you'll then be able to book the event."
-        child_birthday_must_be_under_18_years_ago_alert: "Warning!<br>Your child must be under 18 years ago. Then, you'll then be able to book the event."
+        user_validation_required_alert: "Your administrator must validate your account. Then, you'll then be able to access all the booking features."
+        child_validation_required_alert: "Your administrator must validate your child account. Then, you'll then be able to book the event."
+        child_birthday_must_be_under_18_years_ago_alert: "Your child must be under 18. Then, you'll then be able to book the event."
       # feature-tour modal
       tour:
         previous: "Previous"
@@ -443,6 +443,7 @@ en:
         select_all: "Select all"
         unselect_all: "Unselect all"
       form_file_upload:
+        placeholder: "Add a file"
         browse: "Browse"
         edit: "Edit"
       form_image_upload:

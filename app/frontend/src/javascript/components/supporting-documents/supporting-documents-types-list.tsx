@@ -15,6 +15,7 @@ import SupportingDocumentTypeAPI from '../../api/supporting-document-type';
 import { FabPanel } from '../base/fab-panel';
 import { FabAlert } from '../base/fab-alert';
 import { FabButton } from '../base/fab-button';
+import { PencilSimple, Trash } from 'phosphor-react';
 
 declare const Application: IApplication;
 
@@ -248,12 +249,12 @@ const SupportingDocumentsTypesList: React.FC<SupportingDocumentsTypesListProps> 
                     <td>{getGroupsNames(poit.group_ids)}</td>
                     <td>{poit.name}</td>
                     <td>
-                      <div className="buttons">
+                      <div className="edit-destroy-buttons">
                         <FabButton className="edit-btn" onClick={editType(poit)}>
-                          <i className="fa fa-edit" />
+                          <PencilSimple size={20} weight="fill" />
                         </FabButton>
                         <FabButton className="delete-btn" onClick={destroyType(poit.id)}>
-                          <i className="fa fa-trash" />
+                          <Trash size={20} weight="fill" />
                         </FabButton>
                       </div>
                     </td>
@@ -292,38 +293,26 @@ const SupportingDocumentsTypesList: React.FC<SupportingDocumentsTypesListProps> 
                                               onSuccess={onDestroySuccess}
                                               onError={onError}/>
 
-          <table>
-            <thead>
-              <tr>
-                <th className="name">
-                  <a onClick={setTypeOrder('name')}>
-                    {t('app.admin.settings.account.supporting_documents_types_list.name')}
-                    <i className={orderClassName('name')} />
-                  </a>
-                </th>
-                <th className="actions"></th>
-              </tr>
-            </thead>
-            <tbody>
-              {supportingDocumentsTypes.map(poit => {
-                return (
-                  <tr key={poit.id}>
-                    <td>{poit.name}</td>
-                    <td>
-                      <div className="buttons">
-                        <FabButton className="edit-btn" onClick={editType(poit)}>
-                          <i className="fa fa-edit" />
-                        </FabButton>
-                        <FabButton className="delete-btn" onClick={destroyType(poit.id)}>
-                          <i className="fa fa-trash" />
-                        </FabButton>
-                      </div>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
+          <div className="document-list">
+          {supportingDocumentsTypes.map(poit => {
+            return (
+              <div key={poit.id} className="document-list-item">
+                <div className='file'>
+                  <p>{poit.name}</p>
+                  <div className="edit-destroy-buttons">
+                    <FabButton className="edit-btn" onClick={editType(poit)}>
+                      <PencilSimple size={20} weight="fill" />
+                    </FabButton>
+                    <FabButton className="delete-btn" onClick={destroyType(poit.id)}>
+                      <Trash size={20} weight="fill" />
+                    </FabButton>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+          </div>
+
           {!hasTypes() && (
             <p className="no-types-info">
               <HtmlTranslate trKey="app.admin.settings.account.supporting_documents_types_list.no_types" />

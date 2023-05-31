@@ -75,9 +75,10 @@ export const FormFileUpload = <TFieldValues extends FieldValues>({ id, label, re
 
   return (
     <div className={`form-file-upload ${label ? 'with-label' : ''} ${classNames}`}>
-      {hasFile() && (
-        <span>{file.attachment_name}</span>
-      )}
+      {hasFile()
+        ? <span>{file.attachment_name}</span>
+        : <span className='placeholder'>{t('app.shared.form_file_upload.placeholder')}</span>
+      }
       <div className="actions">
         {file?.id && file?.attachment_url && (
           <a href={file.attachment_url}

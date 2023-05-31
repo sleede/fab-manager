@@ -14,9 +14,10 @@ import SupportingDocumentTypeAPI from '../../api/supporting-document-type';
 
 declare const Application: IApplication;
 
-interface ChildrenListProps {
+interface ChildrenDashboardProps {
   user: User;
   operator: User;
+  adminPanel?: boolean;
   onSuccess: (error: string) => void;
   onError: (error: string) => void;
 }
@@ -24,7 +25,7 @@ interface ChildrenListProps {
 /**
  * A list of children belonging to the current user.
  */
-export const ChildrenList: React.FC<ChildrenListProps> = ({ user, operator, onError, onSuccess }) => {
+export const ChildrenDashboard: React.FC<ChildrenDashboardProps> = ({ user, operator, adminPanel, onError, onSuccess }) => {
   const { t } = useTranslation('public');
 
   const [children, setChildren] = useState<Array<Child>>([]);
@@ -92,19 +93,24 @@ export const ChildrenList: React.FC<ChildrenListProps> = ({ user, operator, onEr
   };
 
   return (
-    <section>
+    <section className='children-dashboard'>
       <header>
-        <h2>{t('app.public.children_list.heading')}</h2>
+        {adminPanel
+          ? <h2>{t('app.public.children_dashboard.heading')}</h2>
+          : <h2>{t('app.public.children_dashboard.member_heading')}</h2>
+        }
         {!isPrivileged() && (
-          <FabButton onClick={addChild}>
-            {t('app.public.children_list.add_child')}
-          </FabButton>
+          <div className="grpBtn">
+            <FabButton className="main-action-btn" onClick={addChild}>
+              {t('app.public.children_dashboard.add_child')}
+            </FabButton>
+          </div>
         )}
       </header>
 
       <div className="children-list">
         {children.map(child => (
-          <ChildItem key={child.id} child={child} onEdit={editChild} onDelete={handleDeleteChildSuccess} onError={onError} />
+          <ChildItem key={child.id} child={child} size='lg' onEdit={editChild} onDelete={handleDeleteChildSuccess} onError={onError} />
         ))}
       </div>
       <ChildModal child={child} isOpen={isOpenChildModal} toggleModal={() => setIsOpenChildModal(false)} onSuccess={handleSaveChildSuccess} onError={onError} supportingDocumentsTypes={supportingDocumentsTypes} operator={operator} />
@@ -112,12 +118,12 @@ export const ChildrenList: React.FC<ChildrenListProps> = ({ user, operator, onEr
   );
 };
 
-const ChildrenListWrapper: React.FC<ChildrenListProps> = (props) => {
+const ChildrenDashboardWrapper: React.FC<ChildrenDashboardProps> = (props) => {
   return (
     <Loader>
-      <ChildrenList {...props} />
+      <ChildrenDashboard {...props} />
     </Loader>
   );
 };
 
-Application.Components.component('childrenList', react2angular(ChildrenListWrapper, ['user', 'operator', 'onSuccess', 'onError']));
+Application.Components.component('childrenDashboard', react2angular(ChildrenDashboardWrapper, ['user', 'operator', 'adminPanel', 'onSuccess', 'onError']));
