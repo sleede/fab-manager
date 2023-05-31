@@ -128,7 +128,7 @@
                       <input type="text" class="form-control" ng-model="user.name" ng-required="true">
                     </div>
                   </div>
-                  <div class="col-sm-12 m-b" ng-if="event.event_type === 'family' && reserve.nbReservePlaces > 0">
+                  <div class="col-sm-12 m-b" ng-if="ctrl.member.id && event.event_type === 'family' && reserve.nbReservePlaces > 0">
                     <div ng-repeat="user in reserve.bookingUsers.normal">
                       <label class="" translate>{{ 'app.public.events_show.last_name_and_first_name '}}</label>
                       <select ng-model="user.booked"
@@ -166,7 +166,7 @@
                       <input type="text" class="form-control" ng-model="user.name" ng-required="true">
                     </div>
                   </div>
-                  <div class="col-sm-12 m-b" ng-if="event.event_type === 'family' && reserve.tickets[price.id] > 0">
+                  <div class="col-sm-12 m-b" ng-if="ctrl.member.id && event.event_type === 'family' && reserve.tickets[price.id] > 0">
                     <div ng-repeat="user in reserve.bookingUsers[price.id]">
                       <label class="" translate>{{ 'app.public.events_show.last_name_and_first_name '}}</label>
                       <select ng-model="user.booked"
