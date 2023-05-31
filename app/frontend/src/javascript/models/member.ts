@@ -1,4 +1,5 @@
 import { TDateISO } from '../typings/date-iso';
+import { Child } from './child';
 
 export interface Member {
   maxMembers: number
@@ -16,6 +17,7 @@ export interface Member {
   }
   subscribed_plan?: Plan
   validated_at: TDateISO
+  children: Child[]
 }
 
 interface Plan {

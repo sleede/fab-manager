@@ -70,7 +70,7 @@ export const ChildrenDashboard: React.FC<ChildrenDashboardProps> = ({ user, oper
   /**
    * Delete a child
    */
-  const handleDeleteChildSuccess = (msg: string) => {
+  const handleDeleteChildSuccess = (_child: Child, msg: string) => {
     ChildAPI.index({ user_id: user.id }).then(setChildren);
     onSuccess(msg);
   };
@@ -78,7 +78,7 @@ export const ChildrenDashboard: React.FC<ChildrenDashboardProps> = ({ user, oper
   /**
    * Handle save child success from the API
    */
-  const handleSaveChildSuccess = (msg: string) => {
+  const handleSaveChildSuccess = (_data: Child, msg: string) => {
     ChildAPI.index({ user_id: user.id }).then(setChildren);
     if (msg) {
       onSuccess(msg);

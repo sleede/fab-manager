@@ -11,7 +11,7 @@ interface ChildItemProps {
   child: Child;
   size: 'sm' | 'lg';
   onEdit: (child: Child) => void;
-  onDelete: (error: string) => void;
+  onDelete: (child: Child, error: string) => void;
   onError: (error: string) => void;
 }
 
@@ -33,8 +33,9 @@ export const ChildItem: React.FC<ChildItemProps> = ({ child, size, onEdit, onDel
   const deleteChild = () => {
     ChildAPI.destroy(child.id).then(() => {
       toggleDeleteChildModal();
-      onDelete(t('app.public.child_item.deleted'));
-    }).catch(() => {
+      onDelete(child, t('app.public.child_item.deleted'));
+    }).catch((e) => {
+      console.error(e);
       onError(t('app.public.child_item.unable_to_delete'));
     });
   };

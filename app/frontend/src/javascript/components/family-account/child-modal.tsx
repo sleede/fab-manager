@@ -13,7 +13,7 @@ interface ChildModalProps {
   operator: User;
   isOpen: boolean;
   toggleModal: () => void;
-  onSuccess: (msg: string) => void;
+  onSuccess: (child: Child, msg: string) => void;
   onError: (error: string) => void;
   supportingDocumentsTypes: Array<SupportingDocumentType>;
 }
@@ -35,7 +35,7 @@ export const ChildModal: React.FC<ChildModalProps> = ({ child, isOpen, toggleMod
         await ChildAPI.create(data);
       }
       toggleModal();
-      onSuccess('');
+      onSuccess(data, '');
     } catch (error) {
       onError(error);
     }
