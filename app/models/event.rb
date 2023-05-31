@@ -33,6 +33,8 @@ class Event < ApplicationRecord
 
   has_many :cart_item_event_reservations, class_name: 'CartItem::EventReservation', dependent: :destroy
 
+  validates :event_type, inclusion: { in: %w[standard nominative family] }, presence: true
+
   attr_accessor :recurrence, :recurrence_end_at
 
   before_save :update_nb_free_places

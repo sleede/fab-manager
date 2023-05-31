@@ -28,9 +28,9 @@ angular.module('application.router', ['ui.router'])
           logoBlackFile: ['CustomAsset', function (CustomAsset) { return CustomAsset.get({ name: 'logo-black-file' }).$promise; }],
           sharedTranslations: ['Translations', function (Translations) { return Translations.query(['app.shared', 'app.public.common']).$promise; }],
           modulesPromise: ['Setting', function (Setting) { return Setting.query({ names: "['machines_module', 'spaces_module', 'plans_module', 'invoicing_module', 'wallet_module', 'statistics_module', 'trainings_module', 'public_agenda_module', 'store_module']" }).$promise; }],
-          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['public_registrations', 'store_hidden']" }).$promise; }]
+          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['public_registrations', 'store_hidden', 'family_account']" }).$promise; }]
         },
-        onEnter: ['$rootScope', 'logoFile', 'logoBlackFile', 'modulesPromise', 'CSRF', function ($rootScope, logoFile, logoBlackFile, modulesPromise, CSRF) {
+        onEnter: ['$rootScope', 'logoFile', 'logoBlackFile', 'modulesPromise', 'settingsPromise', 'CSRF', function ($rootScope, logoFile, logoBlackFile, modulesPromise, settingsPromise, CSRF) {
           // Retrieve Anti-CSRF tokens from cookies
           CSRF.setMetaTags();
           // Application logo
@@ -46,6 +46,9 @@ angular.module('application.router', ['ui.router'])
             wallet: (modulesPromise.wallet_module === 'true'),
             publicAgenda: (modulesPromise.public_agenda_module === 'true'),
             statistics: (modulesPromise.statistics_module === 'true')
+          };
+          $rootScope.settings = {
+            familyAccount: (settingsPromise.family_account === 'true')
           };
         }]
       })
@@ -148,6 +151,15 @@ angular.module('application.router', ['ui.router'])
           'main@': {
             templateUrl: '/dashboard/profile.html',
             controller: 'DashboardController'
+          }
+        }
+      })
+      .state('app.logged.dashboard.children', {
+        url: '/children',
+        views: {
+          'main@': {
+            templateUrl: '/dashboard/children.html',
+            controller: 'ChildrenController'
           }
         }
       })
@@ -615,7 +627,7 @@ angular.module('application.router', ['ui.router'])
         resolve: {
           eventPromise: ['Event', '$transition$', function (Event, $transition$) { return Event.get({ id: $transition$.params().id }).$promise; }],
           priceCategoriesPromise: ['PriceCategory', function (PriceCategory) { return PriceCategory.query().$promise; }],
-          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['booking_move_enable', 'booking_move_delay', 'booking_cancel_enable', 'booking_cancel_delay', 'event_explications_alert', 'online_payment_module', 'user_validation_required', 'user_validation_required_list']" }).$promise; }]
+          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['booking_move_enable', 'booking_move_delay', 'booking_cancel_enable', 'booking_cancel_delay', 'event_explications_alert', 'online_payment_module', 'user_validation_required', 'user_validation_required_list', 'child_validation_required']" }).$promise; }]
         }
       })
 

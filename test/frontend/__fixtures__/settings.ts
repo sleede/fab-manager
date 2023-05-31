@@ -825,6 +825,12 @@ export const settings: Array<Setting> = [
     value: 'https://www.sleede.com/',
     last_update: '2022-12-23T14:39:12+0100',
     localized: 'Url'
+  },
+  {
+    name: 'family_account',
+    value: 'false',
+    last_update: '2023-03-31T14:39:12+0100',
+    localized: 'Family account'
   }
 ];
 

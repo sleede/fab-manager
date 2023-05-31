@@ -1,6 +1,6 @@
 <%= render 'notifications_mailer/shared/hello', recipient: @recipient %>
 
-<%= t('.body.training_invalidated_html', {
+<%= t('.body.training_invalidated_html', **{
   TRAINING: @attached_object.name,
   MACHINES: @attached_object.machines.map(&:name).join(', '),
   DATE: I18n.l((DateTime.current - @attached_object.authorization_period.months).to_date),

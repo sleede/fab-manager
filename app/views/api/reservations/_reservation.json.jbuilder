@@ -32,3 +32,10 @@ json.reservable do
   json.id reservation.reservable.id
   json.name reservation.reservable.name
 end
+json.booking_users_attributes reservation.booking_users.order(booked_type: :desc) do |bu|
+  json.id bu.id
+  json.name bu.name
+  json.event_price_category_id bu.event_price_category_id
+  json.booked_id bu.booked_id
+  json.booked_type bu.booked_type
+end

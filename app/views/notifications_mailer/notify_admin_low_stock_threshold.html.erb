@@ -1,10 +1,10 @@
 <%= render 'notifications_mailer/shared/hello', recipient: @recipient %>
 
 <p>
-  <%= t('.body.low_stock', { PRODUCT: @attached_object.name }) %>
+  <%= t('.body.low_stock', **{ PRODUCT: @attached_object.name }) %>
 </p>
 <p>
-  <%= t('.body.stocks_state_html', { INTERNAL: @attached_object.stock['internal'], EXTERNAL: @attached_object.stock['external'] }) %>
+<%= t('.body.stocks_state_html', **{ INTERNAL: @attached_object.stock['internal'], EXTERNAL: @attached_object.stock['external'] }) %>
 </p>
 <p>
   <%=link_to( t('.body.manage_stock'), "#{root_url}#!/admin/store/products/#{@attached_object.id}/edit", target: "_blank" )%>

@@ -26,11 +26,19 @@
                     translate-values="{NUMBER: r.nb_reserve_places}">
                 {{ 'app.logged.dashboard.events.NUMBER_normal_places_reserved' }}
               </span>
+              <span ng-repeat="bu in r.booking_users_attributes | filter:{event_price_category_id:null}">
+                <br/>
+                <span>{{bu.name}}</span>
+              </span>
               <span ng-repeat="ticket in r.tickets">
                 <br/>
                 <span translate
                       translate-values="{NUMBER: ticket.booked, NAME: ticket.price_category.name}">
                   {{ 'app.logged.dashboard.events.NUMBER_of_NAME_places_reserved' }}
+                </span>
+                <span ng-repeat="bu in r.booking_users_attributes | filter:{event_price_category_id:ticket.event_price_category_id}">
+                  <br/>
+                  <span>{{bu.name}}</span>
                 </span>
               </span>
             </li>

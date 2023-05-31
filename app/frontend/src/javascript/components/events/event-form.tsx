@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import * as React from 'react';
 import { SubmitHandler, useFieldArray, useForm, useWatch } from 'react-hook-form';
-import { Event, EventDecoration, EventPriceCategoryAttributes, RecurrenceOption } from '../../models/event';
+import { Event, EventDecoration, EventPriceCategoryAttributes, RecurrenceOption, EventType } from '../../models/event';
 import EventAPI from '../../api/event';
 import { useTranslation } from 'react-i18next';
 import { FormInput } from '../form/form-input';
@@ -40,7 +40,7 @@ interface EventFormProps {
  * Form to edit or create events
  */
 export const EventForm: React.FC<EventFormProps> = ({ action, event, onError, onSuccess }) => {
-  const { handleSubmit, register, control, setValue, formState } = useForm<Event>({ defaultValues: { ...event } });
+  const { handleSubmit, register, control, setValue, formState } = useForm<Event>({ defaultValues: Object.assign({ event_type: 'standard' }, event) });
   const output = useWatch<Event>({ control });
   const { fields, append, remove } = useFieldArray({ control, name: 'event_price_categories_attributes' });
 
@@ -54,6 +54,7 @@ export const EventForm: React.FC<EventFormProps> = ({ action, event, onError, on
   const [isOpenRecurrentModal, setIsOpenRecurrentModal] = useState<boolean>(false);
   const [updatingEvent, setUpdatingEvent] = useState<Event>(null);
   const [isActiveAccounting, setIsActiveAccounting] = useState<boolean>(false);
+  const [isActiveFamilyAccount, setIsActiveFamilyAccount] = useState<boolean>(false);
 
   useEffect(() => {
     EventCategoryAPI.index()
@@ -69,6 +70,7 @@ export const EventForm: React.FC<EventFormProps> = ({ action, event, onError, on
       .then(data => setPriceCategoriesOptions(data.map(c => decorationToOption(c))))
       .catch(onError);
     SettingAPI.get('advanced_accounting').then(res => setIsActiveAccounting(res.value === 'true')).catch(onError);
+    SettingAPI.get('family_account').then(res => setIsActiveFamilyAccount(res.value === 'true')).catch(onError);
   }, []);
 
   useEffect(() => {
@@ -168,6 +170,20 @@ export const EventForm: React.FC<EventFormProps> = ({ action, event, onError, on
     ];
   };
 
+  /**
+   * This method provides event type options
+   */
+  const buildEventTypeOptions = (): Array<SelectOption<EventType>> => {
+    const options = [
+      { label: t('app.admin.event_form.event_types.standard'), value: 'standard' as EventType },
+      { label: t('app.admin.event_form.event_types.nominative'), value: 'nominative' as EventType }
+    ];
+    if (isActiveFamilyAccount) {
+      options.push({ label: t('app.admin.event_form.event_types.family'), value: 'family' as EventType });
+    }
+    return options;
+  };
+
   return (
     <div className="event-form">
       <header>
@@ -203,6 +219,12 @@ export const EventForm: React.FC<EventFormProps> = ({ action, event, onError, on
                           label={t('app.admin.event_form.description')}
                           limit={null}
                           heading bulletList blockquote link video image />
+            <FormSelect id="event_type"
+                        control={control}
+                        formState={formState}
+                        label={t('app.admin.event_form.event_type')}
+                        options={buildEventTypeOptions()}
+                        rules={{ required: true }} />
             <FormSelect id="category_id"
                         control={control}
                         formState={formState}

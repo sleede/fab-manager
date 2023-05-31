@@ -2,7 +2,7 @@
 <%= render 'notifications_mailer/shared/hello', recipient: @recipient %>
 
 <p><%= t('.body.new_account_imported', ID: @attached_object.id, PROVIDER: provider.name) %><br/>
-   <%= t('.body.provider_uid', UID:@attached_object.uid) %></p>
+   <%= t('.body.provider_uid', UID: @attached_object.uid) %></p>
 <% if provider.sso_fields.size > 1 %>
   <p><%= t('.body.known_information') %></p>
     <ul>

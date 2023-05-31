@@ -46,8 +46,8 @@ class Events::TimezoneTest < ActionDispatch::IntegrationTest
     e = Event.find_by(id: event[:id])
     assert_not_nil e, 'Event was not created in database'
 
-    assert_equal '2023-06-15', e.availability.start_at.to_date.iso8601
-    assert_equal '2023-06-15', e.availability.end_at.to_date.iso8601
+    assert_equal '2023-06-14', e.availability.start_at.to_date.iso8601
+    assert_equal '2023-06-14', e.availability.end_at.to_date.iso8601
     assert_equal '09:48', e.availability.start_at.strftime('%R')
     assert_equal '11:48', e.availability.end_at.strftime('%R')
   end

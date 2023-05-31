@@ -96,7 +96,7 @@ class API::EventsController < API::APIController
     # handle general properties
     event_preparams = params.required(:event).permit(:title, :description, :start_date, :start_time, :end_date, :end_time,
                                                      :amount, :nb_total_places, :availability_id, :all_day, :recurrence,
-                                                     :recurrence_end_at, :category_id, :event_theme_ids, :age_range_id,
+                                                     :recurrence_end_at, :category_id, :event_theme_ids, :age_range_id, :event_type,
                                                      event_theme_ids: [],
                                                      event_image_attributes: %i[id attachment],
                                                      event_files_attributes: %i[id attachment _destroy],

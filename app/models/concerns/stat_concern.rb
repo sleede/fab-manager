@@ -8,7 +8,7 @@ module StatConcern
     attribute :type, String
     attribute :subType, String
     attribute :date, String
-    attribute :stat, Integer
+    attribute :stat, Float
     attribute :userId, Integer
     attribute :gender, String
     attribute :age, Integer

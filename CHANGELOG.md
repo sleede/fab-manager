@@ -1,5 +1,23 @@
 # Changelog Fab-manager
 
+## v6.0.6 2023 May 4
+
+- Fix a bug: invalid duration for machine/spaces reservations in statistics, when using slots of not 1 hour
+- [TODO DEPLOY] `rails fablab:es:build_stats` THEN `rails fablab:maintenance:regenerate_statistics[2014,1]`
+
+## v6.0.5 2023 May 2
+
+- Fix a bug: unable to show calendar for Firefox and Safari
+- Improved error message for event reservation
+
+## v6.0.4 2023 April 25
+
+- Fix a bug: notification is broken when delete a project
+- Fix a bug: broken notifications email
+- Fix a bug: unable to show calendar
+- Update translations from Crowdin
+- [TODO DEPLOY] `rails fablab:maintenance:clean_abuse_notifications`
+
 ## v6.0.3 2023 April 12
 
 - Fix a bug: unable to install Fab-manager by setup.sh

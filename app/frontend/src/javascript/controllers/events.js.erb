@@ -136,8 +136,8 @@ Application.Controllers.controller('EventsController', ['$scope', '$state', 'Eve
   }
 ]);
 
-Application.Controllers.controller('ShowEventController', ['$scope', '$state', '$rootScope', 'Event', '$uibModal', 'Member', 'Reservation', 'Price', 'CustomAsset', 'SlotsReservation', 'eventPromise', 'growl', '_t', 'Wallet', 'AuthService', 'helpers', 'dialogs', 'priceCategoriesPromise', 'settingsPromise', 'LocalPayment',
-  function ($scope, $state,$rootScope, Event, $uibModal, Member, Reservation, Price, CustomAsset, SlotsReservation, eventPromise, growl, _t, Wallet, AuthService, helpers, dialogs, priceCategoriesPromise, settingsPromise, LocalPayment) {
+Application.Controllers.controller('ShowEventController', ['$scope', '$state', '$rootScope', 'Event', '$uibModal', 'Member', 'Reservation', 'Price', 'CustomAsset', 'SlotsReservation', 'eventPromise', 'growl', '_t', 'Wallet', 'AuthService', 'helpers', 'dialogs', 'priceCategoriesPromise', 'settingsPromise', 'LocalPayment', 'Child',
+  function ($scope, $state,$rootScope, Event, $uibModal, Member, Reservation, Price, CustomAsset, SlotsReservation, eventPromise, growl, _t, Wallet, AuthService, helpers, dialogs, priceCategoriesPromise, settingsPromise, LocalPayment, Child) {
     /* PUBLIC SCOPE */
 
     // reservations for the currently shown event
@@ -150,6 +150,9 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
     $scope.ctrl =
       { member: {} };
 
+    // children for the member
+    $scope.children = [];
+
     // parameters for a new reservation
     $scope.reserve = {
       nbPlaces: {
@@ -160,7 +163,10 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
       toReserve: false,
       amountTotal: 0,
       totalNoCoupon: 0,
-      totalSeats: 0
+      totalSeats: 0,
+      bookingUsers: {
+        normal: []
+      },
     };
 
     // Discount coupon to apply to the basket, if any
@@ -195,6 +201,9 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
     // Global config: is the user validation required ?
     $scope.enableUserValidationRequired = settingsPromise.user_validation_required === 'true';
 
+    // Global config: is the child validation required ?
+    $scope.enableChildValidationRequired = settingsPromise.child_validation_required === 'true';
+
     // online payments (by card)
     $scope.onlinePayment = {
       showModal: false,
@@ -226,9 +235,9 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
     /**
      * Callback to call when the number of tickets to book changes in the current booking
      */
-    $scope.changeNbPlaces = function () {
+    $scope.changeNbPlaces = function (priceType) {
       // compute the total remaining places
-      let remain = $scope.event.nb_free_places - $scope.reserve.nbReservePlaces;
+      let remain = ($scope.event.event_type === 'family' ? ($scope.children.length + 1) : $scope.event.nb_free_places) - $scope.reserve.nbReservePlaces;
       for (let ticket in $scope.reserve.tickets) {
         remain -= $scope.reserve.tickets[ticket];
       }
@@ -247,9 +256,31 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
         }
       }
 
+      if ($scope.event.event_type === 'nominative' || $scope.event.event_type === 'family') {
+        const nbBookingUsers = $scope.reserve.bookingUsers[priceType].length;
+        const nbReservePlaces = priceType === 'normal' ? $scope.reserve.nbReservePlaces : $scope.reserve.tickets[priceType];
+        if (nbReservePlaces > nbBookingUsers) {
+          _.times(nbReservePlaces - nbBookingUsers, () => {
+            $scope.reserve.bookingUsers[priceType].push({ event_price_category_id: priceType === 'normal' ? null : priceType, bookedUsers: buildBookedUsersOptions() });
+          });
+        } else {
+          _.times(nbBookingUsers - nbReservePlaces, () => {
+            $scope.reserve.bookingUsers[priceType].pop();
+          });
+        }
+      }
+
       // recompute the total price
       return $scope.computeEventAmount();
     };
+
+    $scope.changeBookedUser = function () {
+      for (const key of Object.keys($scope.reserve.bookingUsers)) {
+        for (const user of $scope.reserve.bookingUsers[key]) {
+          user.bookedUsers = buildBookedUsersOptions(user.booked);
+        }
+      }
+    }
 
     /**
      * Callback to reset the current reservation parameters
@@ -257,7 +288,9 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
      */
     $scope.cancelReserve = function (e) {
       e.preventDefault();
-      return resetEventReserve();
+      resetEventReserve();
+      updateNbReservePlaces();
+      return;
     };
 
     $scope.isUserValidatedByType = () => {
@@ -322,6 +355,9 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
         Member.get({ id: $scope.ctrl.member.id }, function (member) {
           $scope.ctrl.member = member;
           getReservations($scope.event.id, 'Event', $scope.ctrl.member.id);
+          getChildren($scope.ctrl.member.id).then(() => {
+            updateNbReservePlaces();
+          });
         });
       }
     };
@@ -372,7 +408,7 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
       }
       , function (response) {
       // reservation failed
-        growl.error(response && response.data && response.data.card && response.data.card[0] || 'server error');
+        growl.error(response && response.data && _.keys(response.data)[0] && response.data[_.keys(response.data)[0]][0] || 'server error');
         // unset the attempting marker
         $scope.attempting = false;
       })
@@ -583,6 +619,38 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
       growl.error(message);
     };
 
+    /**
+     * Checks if the reservation of current event is valid
+     */
+    $scope.reservationIsValid = () => {
+      if ($scope.event.event_type === 'nominative') {
+        for (const key of Object.keys($scope.reserve.bookingUsers)) {
+          for (const user of $scope.reserve.bookingUsers[key]) {
+            if (!_.trim(user.name)) {
+              return false;
+            }
+          }
+        }
+      }
+      if ($scope.event.event_type === 'family') {
+        for (const key of Object.keys($scope.reserve.bookingUsers)) {
+          for (const user of $scope.reserve.bookingUsers[key]) {
+            if (!user.booked) {
+              return false;
+            }
+            if ($scope.enableChildValidationRequired && user.booked.type === 'Child' && !user.booked.validatedAt) {
+              return false;
+            }
+          }
+        }
+      }
+      return true;
+    }
+
+    $scope.isUnder18YearsAgo = (date) => {
+      return moment(date).isAfter(moment().subtract(18, 'year'));
+    }
+
     /* PRIVATE SCOPE */
 
     /**
@@ -602,6 +670,9 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
       // get the current user's reservations into $scope.reservations
       if ($scope.currentUser) {
         getReservations($scope.event.id, 'Event', $scope.currentUser.id);
+        getChildren($scope.currentUser.id).then(function (children) {
+          updateNbReservePlaces();
+        });
       }
 
       // watch when a coupon is applied to re-compute the total price
@@ -627,6 +698,74 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
     };
 
     /**
+     * Retrieve the children for the user
+     * @param user_id {number} the user's id (current or managed)
+     */
+    const getChildren = function (user_id) {
+      return Child.query({
+        user_id
+      }).$promise.then(function (children) {
+        $scope.children = children;
+        return $scope.children;
+      });
+    };
+
+    /**
+     * Update the number of places reserved by the current user
+     */
+    const hasBookedUser = function (userKey) {
+      for (const key of Object.keys($scope.reserve.bookingUsers)) {
+        for (const user of $scope.reserve.bookingUsers[key]) {
+          if (user.booked && user.booked.key === userKey) {
+            return true;
+          }
+        }
+      }
+      return false;
+    };
+
+    /**
+     * Build the list of options for the select box of the booked users
+     * @param booked {object} the booked user
+     */
+    const buildBookedUsersOptions = function (booked) {
+      const options = [];
+      const userKey = `user_${$scope.ctrl.member.id}`;
+      if ((booked && booked.key === userKey) || !hasBookedUser(userKey)) {
+        options.push({ key: userKey, name: $scope.ctrl.member.name, type: 'User', id: $scope.ctrl.member.id });
+      }
+      for (const child of $scope.children) {
+        const key = `child_${child.id}`;
+        if ((booked && booked.key === key) || !hasBookedUser(key)) {
+          options.push({
+            key,
+            name: child.first_name + ' ' + child.last_name,
+            id: child.id,
+            type: 'Child',
+            validatedAt: child.validated_at,
+            birthday: child.birthday
+          });
+        }
+      }
+      return options;
+    };
+
+    /**
+     * update number of places available for each price category for the family event
+     */
+    const updateNbReservePlaces = function () {
+      if ($scope.event.event_type === 'family') {
+        const maxPlaces = $scope.children.length + 1;
+        if ($scope.event.nb_free_places > maxPlaces) {
+          $scope.reserve.nbPlaces.normal = __range__(0, maxPlaces, true);
+          for (let evt_px_cat of Array.from($scope.event.event_price_categories_attributes)) {
+            $scope.reserve.nbPlaces[evt_px_cat.id] = __range__(0, maxPlaces, true);
+          }
+        }
+      }
+    };
+
+    /**
      * Create a hash map implementing the Reservation specs
      * @param reserve {Object} Reservation parameters (places...)
      * @param event {Object} Current event
@@ -638,7 +777,8 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
         reservable_type: 'Event',
         slots_reservations_attributes: [],
         nb_reserve_places: reserve.nbReservePlaces,
-        tickets_attributes: []
+        tickets_attributes: [],
+        booking_users_attributes: []
       };
 
       reservation.slots_reservations_attributes.push({
@@ -653,6 +793,19 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
             event_price_category_id: evt_px_cat.id,
             booked
           });
+        }
+      }
+
+      if (event.event_type === 'nominative' || event.event_type === 'family') {
+        for (const key of Object.keys($scope.reserve.bookingUsers)) {
+          for (const user of $scope.reserve.bookingUsers[key]) {
+            reservation.booking_users_attributes.push({
+              event_price_category_id: user.event_price_category_id,
+              name: user.booked ? user.booked.name : _.trim(user.name),
+              booked_id: user.booked ? user.booked.id : undefined,
+              booked_type: user.booked ? user.booked.type : undefined,
+            });
+          }
         }
       }
 
@@ -688,11 +841,15 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
           tickets: {},
           toReserve: false,
           amountTotal: 0,
-          totalSeats: 0
+          totalSeats: 0,
+          bookingUsers: {
+            normal: [],
+          },
         };
 
         for (let evt_px_cat of Array.from($scope.event.event_price_categories_attributes)) {
           $scope.reserve.nbPlaces[evt_px_cat.id] = __range__(0, $scope.event.nb_free_places, true);
+          $scope.reserve.bookingUsers[evt_px_cat.id] = [];
           $scope.reserve.tickets[evt_px_cat.id] = 0;
         }
 
@@ -815,6 +972,7 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
         $scope.reservations.push(reservation);
       });
       resetEventReserve();
+      updateNbReservePlaces();
       $scope.reserveSuccess = true;
       $scope.coupon.applied = null;
       if ($scope.currentUser.role === 'admin') {

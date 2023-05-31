@@ -104,6 +104,10 @@ fr:
         new_account_created: "Un nouveau compte utilisateur vient d'être créé sur la plateforme :"
         user_of_group_html: "L'utilisateur s'est inscrit dans le groupe <strong>%{GROUP}</strong>"
         account_for_organization: "Ce compte gère une structure :"
+    notify_admin_child_created:
+      subject: "Un enfant a été créé"
+      body:
+        new_child_created: "Un nouveau enfant vient d'être créé sur la plateforme"
     notify_admin_subscribed_plan:
       subject: "Un abonnement a été souscrit"
       body:
@@ -389,6 +393,16 @@ fr:
       body:
         user_update_supporting_document_file: "Le membre %{NAME} a modifié le justificatif ci-dessous :"
         validate_user: "Veuillez valider son compte"
+    notify_admin_user_child_supporting_document_files_created:
+      subject: "Justificatif de l'enfant téléversé par un membre"
+      body:
+        supporting_document_files_uploaded_below: "L'enfant %{NAME} a téléversé le justificatif suivant :"
+        validate_child: "Veuillez valider son compte enfant"
+    notify_admin_user_child_supporting_document_files_updated:
+      subject: "Le justificatif d'un enfant a changé"
+      body:
+        child_update_supporting_document_file: "L'enfant %{NAME} a modifié le justificatif ci-dessous :"
+        validate_child: "Veuillez valider son compte enfant"
     notify_user_is_validated:
       subject: "Compte validé"
       body:
@@ -397,6 +411,14 @@ fr:
       subject: "Compte invalidé"
       body:
         account_invalidated: "Votre compte a été invalidé. Vous ne pourrez plus réserver, jusqu'à ce que votre compte soit à nouveau validé."
+    notify_user_child_is_validated:
+      subject: "Compte enfant validé"
+      body:
+        account_validated: "Votre compte enfant a été validé. Vous avez maintenant accès aux fonctionnalités de réservation de l'événement."
+    notify_user_child_is_invalidated:
+      subject: "Compte enfant invalidé"
+      body:
+        account_invalidated: "Votre compte enfant a été invalidé. Vous ne pourrez plus réserver l'événement, jusqu'à ce que votre compte enfant soit à nouveau validé."
     notify_user_supporting_document_refusal:
       subject: "Vos pièces justificatives ont été refusées"
       body:
@@ -406,6 +428,15 @@ fr:
       subject: "Les justificatifs d'un membre ont été refusés"
       body:
         user_supporting_document_files_refusal: "Le justificatif du membre %{NAME} a été refusé par %{OPERATOR} :"
+    notify_user_child_supporting_document_refusal:
+      subject: "Vos pièces justificatives de l'enfant ont été refusées"
+      body:
+        user_child_supporting_document_files_refusal: "Vos pièces justificatives ont été refusées :"
+        action: "Veuillez téléverser de nouvelles pièces justificatives."
+    notify_admin_user_child_supporting_document_refusal:
+      subject: "Les justificatifs d'un enfant ont été refusés"
+      body:
+        user_child_supporting_document_files_refusal: "Le justificatif de l'enfant %{NAME} a été refusé par %{OPERATOR} :"
     shared:
       hello: "Bonjour %{user_name}"
     notify_user_order_is_ready:

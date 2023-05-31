@@ -49,7 +49,7 @@
 
   <div class="col-sm-12 col-md-12 col-lg-4">
 
-    <section class="widget panel b-a m" ng-if="event.event_files_attributes">
+    <section class="widget panel b-a m" ng-if="event.event_files_attributes.length">
       <div class="panel-heading b-b">
         <span class="badge bg-warning pull-right">{{event.event_files_attributes.length}}</span>
         <h3 translate>{{ 'app.public.events_show.downloadable_documents' }}</h3>
@@ -72,8 +72,11 @@
       </div>
 
       <div class="panel-content wrapper">
+        <div>
+          <span ng-if="event.event_type === 'nominative'" class="v-middle badge text-base bg-event" translate="">{{ 'app.public.events_show.event_type.nominative' }}</span>
+          <span ng-if="event.event_type === 'family'" class="v-middle badge text-base bg-event" translate="">{{ 'app.public.events_show.event_type.family' }}</span>
+        </div>
 
-        <h5>{{event.category.name}}</h5>
         <dl class="text-sm">
           <dt ng-repeat="theme in event.event_themes">
             <i class="fa fa-tags" aria-hidden="true"></i> {{theme.name}}
@@ -116,15 +119,77 @@
                 <div class="row">
                   <label class="col-sm-6 control-label">{{ 'app.public.events_show.full_price_' | translate }} <span class="text-blue">{{event.amount | currency}}</span></label>
                   <div class="col-sm-6">
-                    <select ng-model="reserve.nbReservePlaces" ng-change="changeNbPlaces()" ng-options="i for i in reserve.nbPlaces.normal">
+                    <select ng-model="reserve.nbReservePlaces" ng-change="changeNbPlaces('normal')" ng-options="i for i in reserve.nbPlaces.normal">
                     </select> {{ 'app.public.events_show.ticket' | translate:{NUMBER:reserve.nbReservePlaces} }}
+                  </div>
+                  <div class="col-sm-12 m-b" ng-if="event.event_type === 'nominative' && reserve.nbReservePlaces > 0">
+                    <div ng-repeat="user in reserve.bookingUsers.normal">
+                      <label class="" translate>{{ 'app.public.events_show.last_name_and_first_name '}}</label>
+                      <input type="text" class="form-control" ng-model="user.name" ng-required="true">
+                    </div>
+                  </div>
+                  <div class="col-sm-12 m-b" ng-if="ctrl.member.id && event.event_type === 'family' && reserve.nbReservePlaces > 0">
+                    <div ng-repeat="user in reserve.bookingUsers.normal">
+                      <label class="" translate>{{ 'app.public.events_show.last_name_and_first_name '}}</label>
+                      <select ng-model="user.booked"
+                              ng-options="option.name for option in user.bookedUsers track by option.key"
+                              ng-change="changeBookedUser()"
+                              name="booked"
+                              ng-required="true"
+                              class="form-control">
+                        <option value=""></option>
+                      </select>
+                      <uib-alert type="danger" ng-if="enableChildValidationRequired && user.booked && user.booked.type === 'Child' && !user.booked.validatedAt" style="margin-bottom: 0.8rem;">
+                        <span class="text-sm">
+                          <i class="fa fa-warning"></i>
+                          <span translate>{{ 'app.shared.cart.child_validation_required_alert' }}</span>
+                        </span>
+                      </uib-alert>
+                      <uib-alert type="danger" ng-if="user.booked && user.booked.type === 'Child' && !isUnder18YearsAgo(user.booked.birthday)" style="margin-bottom: 0.8rem;">
+                        <span class="text-sm">
+                          <i class="fa fa-warning"></i>
+                          <span translate>{{ 'app.shared.cart.child_birthday_must_be_under_18_years_ago_alert' }}</span>
+                        </span>
+                      </uib-alert>
+                    </div>
                   </div>
                 </div>
                 <div class="row" ng-repeat="price in event.event_price_categories_attributes">
                   <label class="col-sm-6 control-label">{{price.category.name}} : <span class="text-blue">{{price.amount | currency}}</span></label>
                   <div class="col-sm-6">
-                    <select ng-model="reserve.tickets[price.id]" ng-change="changeNbPlaces()" ng-options="i for i in reserve.nbPlaces[price.id]">
+                    <select ng-model="reserve.tickets[price.id]" ng-change="changeNbPlaces(price.id)" ng-options="i for i in reserve.nbPlaces[price.id]">
                     </select> {{ 'app.public.events_show.ticket' | translate:{NUMBER:reserve.tickets[price.id]} }}
+                  </div>
+                  <div class="col-sm-12 m-b" ng-if="event.event_type === 'nominative' && reserve.tickets[price.id] > 0">
+                    <div ng-repeat="user in reserve.bookingUsers[price.id]">
+                      <label class="" translate>{{ 'app.public.events_show.last_name_and_first_name '}}</label>
+                      <input type="text" class="form-control" ng-model="user.name" ng-required="true">
+                    </div>
+                  </div>
+                  <div class="col-sm-12 m-b" ng-if="ctrl.member.id && event.event_type === 'family' && reserve.tickets[price.id] > 0">
+                    <div ng-repeat="user in reserve.bookingUsers[price.id]">
+                      <label class="" translate>{{ 'app.public.events_show.last_name_and_first_name '}}</label>
+                      <select ng-model="user.booked"
+                              ng-options="option.name for option in user.bookedUsers track by option.key"
+                              ng-change="changeBookedUser()"
+                              name="booked"
+                              ng-required="true"
+                              class="form-control">
+                        <option value=""></option>
+                      </select>
+                      <uib-alert type="danger" ng-if="enableChildValidationRequired && user.booked && user.booked.type === 'Child' && !user.booked.validatedAt">
+                        <p class="text-sm">
+                          <i class="fa fa-warning"></i>
+                          <span translate>{{ 'app.shared.cart.child_validation_required_alert' }}</span>
+                        </p>
+                      </uib-alert>
+                      <uib-alert type="danger" ng-if="user.booked && user.booked.type === 'Child' && !isUnder18YearsAgo(user.booked.birthday)">
+                        <p class="text-sm">
+                          <i class="fa fa-warning"></i>
+                          <span translate>{{ 'app.shared.cart.child_birthday_must_be_under_18_years_ago_alert' }}</span>
+                        </p>
+                      </uib-alert>
+                    </div>
                   </div>
                 </div>
 
@@ -157,7 +222,7 @@
             <div ng-hide="isCancelled(reservation)" class="well well-warning">
               <div class="font-sbold text-u-c text-sm">{{ 'app.public.events_show.you_booked_DATE' | translate:{DATE:(reservation.created_at | amDateFormat:'L LT')} }}</div>
               <div class="font-sbold text-sm" ng-if="reservation.nb_reserve_places > 0">{{ 'app.public.events_show.full_price_' | translate }} {{reservation.nb_reserve_places}} {{ 'app.public.events_show.ticket' | translate:{NUMBER:reservation.nb_reserve_places} }}</div>
-              <div class="font-sbold text-sm" ng-repeat="ticket in reservation.tickets">
+              <div class="font-sbold text-sm" ng-repeat="ticket in reservation.tickets_attributes">
                 {{ticket.event_price_category.price_category.name}} : {{ticket.booked}} {{ 'app.public.events_show.ticket' | translate:{NUMBER:ticket.booked} }}
               </div>
               <div class="clear" ng-if="event.recurrence_events.length > 0 && reservationCanModify(reservation)">
@@ -190,11 +255,11 @@
         </div>
       </div>
 
-      <div class="panel-footer no-padder ng-scope" ng-if="event.amount">
+      <div class="panel-footer no-padder ng-scope" ng-if="event.amount && reservationIsValid()">
         <button class="btn btn-valid btn-info btn-block p-l btn-lg text-u-c r-b text-base" ng-click="payEvent()" ng-if="reserve.totalSeats > 0">{{ 'app.public.events_show.confirm_and_pay' | translate }} {{reserve.amountTotal | currency}}</button>
       </div>
 
-      <div class="panel-footer no-padder ng-scope" ng-if="event.amount == 0">
+      <div class="panel-footer no-padder ng-scope" ng-if="event.amount == 0 && reservationIsValid()">
         <button class="btn btn-valid btn-info btn-block p-l btn-lg text-u-c r-b text-base" ng-click="validReserveEvent()" ng-if="reserve.totalSeats > 0" ng-disabled="attempting">{{ 'app.shared.buttons.confirm' | translate }}</button>
       </div>
 

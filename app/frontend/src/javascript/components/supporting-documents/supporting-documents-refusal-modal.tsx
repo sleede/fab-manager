@@ -5,6 +5,7 @@ import { FabModal } from '../base/fab-modal';
 import { SupportingDocumentType } from '../../models/supporting-document-type';
 import { SupportingDocumentRefusal } from '../../models/supporting-document-refusal';
 import { User } from '../../models/user';
+import { Child } from '../../models/child';
 import SupportingDocumentRefusalAPI from '../../api/supporting-document-refusal';
 import { SupportingDocumentsRefusalForm } from './supporting-documents-refusal-form';
 
@@ -15,19 +16,21 @@ interface SupportingDocumentsRefusalModalProps {
   onError: (message: string) => void,
   proofOfIdentityTypes: Array<SupportingDocumentType>,
   operator: User,
-  member: User
+  supportable: User | Child,
+  documentType: 'User' | 'Child',
 }
 
 /**
  * Modal dialog to notify the member that his documents are refused
  */
-export const SupportingDocumentsRefusalModal: React.FC<SupportingDocumentsRefusalModalProps> = ({ isOpen, toggleModal, onSuccess, proofOfIdentityTypes, operator, member, onError }) => {
+export const SupportingDocumentsRefusalModal: React.FC<SupportingDocumentsRefusalModalProps> = ({ isOpen, toggleModal, onSuccess, proofOfIdentityTypes, operator, supportable, onError, documentType }) => {
   const { t } = useTranslation('admin');
 
   const [data, setData] = useState<SupportingDocumentRefusal>({
     id: null,
     operator_id: operator.id,
-    user_id: member.id,
+    supportable_id: supportable.id,
+    supportable_type: documentType,
     supporting_document_type_ids: [],
     message: ''
   });

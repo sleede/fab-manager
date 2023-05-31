@@ -14,6 +14,7 @@ fr:
         #dashboard sections
         dashboard: "Tableau de bord"
         my_profile: "Mon profil"
+        my_children: "Mes enfants"
         my_settings: "Mes paramètres"
         my_supporting_documents_files: "Mes justificatifs"
         my_projects: "Mes projets"
@@ -311,6 +312,9 @@ fr:
         event_description: "Description de l’événement"
         downloadable_documents: "Documents à télécharger"
         information_and_booking: "Informations et réservation"
+        event_type:
+          family: "Evénement famille"
+          nominative: "Evénement nominatif"
         dates: "Dates"
         beginning: "Début :"
         ending: "Fin :"
@@ -356,6 +360,7 @@ fr:
         view_event_list: "Voir les événements à venir"
         share_on_facebook: "Partager sur Facebook"
         share_on_twitter: "Partager sur Twitter"
+        last_name_and_first_name: "Nom et prénom"
       #public calendar
       calendar:
         calendar: "Calendrier"
@@ -475,6 +480,34 @@ fr:
       member_select:
         select_a_member: "Sélectionnez un membre"
         start_typing: "Commencez à écrire..."
+      children_dashboard:
+        heading: "Mes enfants"
+        add_child: "Ajouter un enfant"
+      child_modal:
+        edit_child: "Modifier un enfant"
+        new_child: "Ajouter un enfant"
+      child_form:
+        child_form_info: "Notez que vous ne pouvez ajouter que vos enfants de moins de 18 ans. Des pièces justificatives sont demandés par votre administrateur, elles lui seront utiles pour valider le compte de votre enfant et ainsi autoriser la réservation d'événements."
+        first_name: "Prénom"
+        last_name: "Nom"
+        birthday: "Date de naissance"
+        email: "Courriel"
+        phone: "Téléphone"
+        save: "Enregistrer"
+        supporting_documents: "Documents justificatifs"
+        to_complete: "À compléter"
+        refuse_documents: "Refuser les documents"
+        refuse_documents_info: "Vous pouvez refuser une sélection de documents en cliquant sur le bouton suivant."
+      child_item:
+        first_name: "Prénom de l'enfant"
+        last_name: "Nom de l'enfant"
+        birthday: "Date de naissance"
+        deleted: "L'enfant a bien été supprimée."
+        unable_to_delete: "Impossible de supprimer la demande de l'enfant."
+      delete_child_modal:
+        confirmation_required: "Confirmation requise"
+        confirm: "Valider"
+        confirm_delete_child: "Êtes-vous sûr de vouloir supprimer la demande de cet enfant ?"
       tour:
         conclusion:
           title: "Merci de votre attention"

@@ -62,10 +62,15 @@
 
         </uib-tab>
 
+        <uib-tab heading="{{ 'app.shared.user_admin.children' | translate }}" ng-if="$root.settings.familyAccount">
+          <children-dashboard user="user" operator="currentUser" admin-panel="true" on-success="onSuccess" on-error="onError" />
+        </uib-tab>
+
         <uib-tab heading="{{ 'app.admin.members_edit.supporting_documents' | translate }}" ng-show="hasProofOfIdentityTypes">
           <supporting-documents-validation
             operator="currentUser"
             member="user"
+            document-type="User"
             on-error="onError"
             on-success="onSuccess" />
         </uib-tab>
@@ -208,10 +213,20 @@
                     <span ng-if="r.nb_reserve_places > 0">
                       <br/>
                       <span translate translate-values="{ NUMBER: r.nb_reserve_places }">{{ 'app.admin.members_edit.NUMBER_full_price_tickets_reserved' }}</span>
+                      <span ng-repeat="bu in r.booking_users_attributes | filter:{event_price_category_id:null}">
+                        <br/>
+                        <span ng-if="bu.booked_type !== 'User'">{{bu.name}}</span>
+                        <a ui-sref="app.logged.members_show({id: bu.booked_id})" ng-if="bu.booked_type === 'User'">{{bu.name}}</a>
+                      </span>
                     </span>
                     <span ng-repeat="ticket in r.tickets">
                       <br/>
                       <span translate translate-values="{ NUMBER: ticket.booked, NAME: ticket.price_category.name }">{{ 'app.admin.members_edit.NUMBER_NAME_tickets_reserved' }}</span>
+                      <span ng-repeat="bu in r.booking_users_attributes | filter:{event_price_category_id:ticket.event_price_category_id}">
+                        <br/>
+                        <span ng-if="bu.booked_type !== 'User'">{{bu.name}}</span>
+                        <a ui-sref="app.logged.members_show({id: bu.booked_id})" ng-if="bu.booked_type === 'User'">{{bu.name}}</a>
+                      </span>
                     </span>
                   </li>
                 </ul>

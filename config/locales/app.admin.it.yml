@@ -112,7 +112,7 @@ it:
         create_success: "Lo spazio è stato creato correttamente"
         update_success: "Lo spazio è stato aggiornato correttamente"
       event_form:
-        ACTION_title: "{ACTION, select, create{Nuovo} other{Aggiorna l'}} evento"
+        ACTION_title: "{ACTION, select, create{Nuovo} other{Aggiorna}} evento"
         title: "Titolo"
         matching_visual: "Corrispondenza illustazione"
         description: "Descrizione"
@@ -152,7 +152,7 @@ it:
           every_month: "Ogni mese"
           every_year: "Ogni anno"
       plan_form:
-        ACTION_title: "{ACTION, select, create{Nuovo} other{Aggiorna l'}}evento"
+        ACTION_title: "{ACTION, select, create{Nuovo} other{Aggiorna}}evento"
         tab_settings: "Impostazioni"
         tab_usage_limits: "Limiti di utilizzo"
         description: "Descrizione"
@@ -285,7 +285,7 @@ it:
       #manage the trainings & machines slots
       calendar:
         calendar_management: "Gestione calendario"
-        trainings: "Certificazioni"
+        trainings: "Abilitazioni"
         machines: "Macchine"
         spaces: "Spazi"
         events: "Eventi"
@@ -416,7 +416,7 @@ it:
         themes: "Temi"
         add_a_new_theme: "Aggiungi un nuovo tema"
         licences: "Licenze"
-        statuses: "Statuto"
+        statuses: "Status"
         description: "Descrizione"
         add_a_new_licence: "Aggiungere una nuova licenza"
         manage_abuses: "Gestisci i report"
@@ -1783,7 +1783,7 @@ it:
           title: "Titolo"
           fablab_title: "Titolo del FabLab"
           title_concordance: "Corrispondenza del titolo"
-          male: "Machio."
+          male: "Maschio."
           female: "Femmina."
           neutral: "Neutrale."
           eg: "es:"
@@ -1804,7 +1804,7 @@ it:
           public_registrations_allowed: "Registrazioni pubbliche consentite"
           help: "Aiuto"
           feature_tour: "Tour delle funzionalità"
-          feature_tour_info_html: "<p>Quando un amministratore o un manager è connesso, un tour di funzionalità verrà attivato la prima volta che visita ogni sezione dell'applicazione. È possibile modificare questo comportamento in uno dei seguenti valori:</p><ul><li>« Una volta » per mantenere il comportamento predefinito.</li><li>« Per sessione » per visualizzare i tour ogni volta che riapri l'applicazione.</li><li>« trigger manuale» per impedire la visualizzazione automatica dei tour. Sarà comunque possibile attivarli premendo il tasto F1 o cliccando su « Aiuto » nel menu dell'utente.</li></ul>"
+          feature_tour_info_html: "<p>Quando un amministratore o un manager è connesso, un tour di funzionalità verrà attivato la prima volta che visita ogni sezione dell'applicazione. È possibile modificare questo comportamento in uno dei seguenti valori:</p><ul><li>« Una volta » per mantenere il comportamento predefinito.</li><li>« Per sessione » per visualizzare i tour ogni volta che riapri l'applicazione.</li><li>« Trigger manuale» per impedire la visualizzazione automatica dei tour. Sarà comunque possibile attivarli premendo il tasto F1 o cliccando su « Aiuto » nel menu dell'utente.</li></ul>"
           feature_tour_display_mode: "Modalità visualizzazione tour funzionalità"
           display_mode:
             once: "Una volta"
@@ -2373,7 +2373,7 @@ it:
           filter_clear: "Cancella tutto"
           filter_apply: "Applica"
           filter_ref: "Per riferimento"
-          filter_status: "Per stato"
+          filter_status: "Per status"
           filter_client: "Per cliente"
           filter_period: "Per periodo"
           filter_period_from: "Da"

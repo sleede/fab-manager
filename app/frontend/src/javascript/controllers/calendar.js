@@ -204,8 +204,8 @@ Application.Controllers.controller('CalendarController', ['$scope', '$state', '$
           center: 'title',
           right: ''
         },
-        minTime: moment.duration(moment(bookingWindowStart.setting.value).format('HH:mm:ss')),
-        maxTime: moment.duration(moment(bookingWindowEnd.setting.value).format('HH:mm:ss')),
+        minTime: moment.duration(moment.utc(bookingWindowStart.setting.value.match(/\d{4}-\d{2}-\d{2}(?: |T)\d{2}:\d{2}:\d{2}/)[0]).format('HH:mm:ss')),
+        maxTime: moment.duration(moment.utc(bookingWindowEnd.setting.value.match(/\d{4}-\d{2}-\d{2}(?: |T)\d{2}:\d{2}:\d{2}/)[0]).format('HH:mm:ss')),
         defaultView: window.innerWidth <= 480 ? 'agendaDay' : 'agendaWeek',
         eventClick (event, jsEvent, view) {
           return calendarEventClickCb(event, jsEvent, view);

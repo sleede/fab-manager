@@ -151,6 +151,11 @@ en:
           every_week: "Every week"
           every_month: "Every month"
           every_year: "Every year"
+        event_type: "Event type"
+        event_types:
+          standard: "Event standard"
+          nominative: "Event nominative"
+          family: "Event family"
       plan_form:
         ACTION_title: "{ACTION, select, create{New} other{Update the}} plan"
         tab_settings: "Settings"
@@ -1184,6 +1189,14 @@ en:
           member_filter_all: "All"
           member_filter_not_confirmed: "Unconfirmed"
           member_filter_inactive_for_3_years: "Inactive for 3 years"
+      members_list_item:
+        item_type: "member"
+        surname: "Surname"
+        first_name: "First name"
+        phone: "Phone"
+        email: "Email"
+        group: "Group"
+        subscription: "Subscription"
       #add a member
       members_new:
         add_a_member: "Add a member"
@@ -1231,6 +1244,12 @@ en:
         validate_member_error: "An unexpected error occurred: unable to validate this member."
         invalidate_member_error: "An unexpected error occurred: unable to invalidate this member."
         validate_account: "Validate the account"
+      child_validation:
+        validate_child_success: "Child successfully validated"
+        invalidate_child_success: "Child successfully invalidated"
+        validate_child_error: "An unexpected error occurred: unable to validate this child."
+        invalidate_child_error: "An unexpected error occurred: unable to invalidate this child."
+        validate_child: "Validate the child"
       supporting_documents_refusal_form:
         refusal_comment: "Comment"
         comment_placeholder: "Please type a comment here"
@@ -1773,6 +1792,10 @@ en:
         extended_prices_in_same_day: "Extended prices in the same day"
         public_registrations: "Public registrations"
         show_username_in_admin_list: "Show the username in the list"
+        family_account: "family account"
+        family_account_info_html: "By activating this option, you offer your members the possibility to add their child(ren) to their own account. You can also request proof if you wish to validate them."
+        enable_family_account: "Enable the Family Account option"
+        child_validation_required_label: "Activate the account validation option for children"
         overlapping_options:
           training_reservations: "Trainings"
           machine_reservations: "Machines"
@@ -1870,7 +1893,7 @@ en:
             no_groups_info: "Supporting documents are necessarily applied to groups.<br>If you do not have any group yet, you can create one from the \"Users/Groups\" page (button on the right)."
             create_groups: "Create groups"
             supporting_documents_type_title: "Supporting documents requests"
-            add_type: "New supporting documents request"
+            add_type: "Add new document"
             group_name: "Group"
             name: "Supporting documents"
             no_types: "You do not have any supporting documents requests.<br>Make sure you have created at least one group in order to add a request."

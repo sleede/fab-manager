@@ -63,13 +63,15 @@ export const SupportingDocumentsTypeForm: React.FC<SupportingDocumentsTypeFormPr
         {t('app.admin.settings.account.supporting_documents_type_form.type_form_info')}
       </div>
       <form name="supportingDocumentTypeForm">
-        <div className="field">
-          <Select defaultValue={groupsValues()}
-            placeholder={t('app.admin.settings.account.supporting_documents_type_form.select_group')}
-            onChange={handleGroupsChange}
-            options={buildOptions()}
-            isMulti />
-        </div>
+        {supportingDocumentType?.document_type === 'User' &&
+          <div className="field">
+            <Select defaultValue={groupsValues()}
+              placeholder={t('app.admin.settings.account.supporting_documents_type_form.select_group')}
+              onChange={handleGroupsChange}
+              options={buildOptions()}
+              isMulti />
+          </div>
+        }
         <div className="field">
           <FabInput id="supporting_document_type_name"
             icon={<i className="fa fa-edit" />}

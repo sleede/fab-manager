@@ -14,6 +14,7 @@ en:
         #dashboard sections
         dashboard: "Dashboard"
         my_profile: "My Profile"
+        my_children: "My Children"
         my_settings: "My Settings"
         my_supporting_documents_files: "My supporting documents"
         my_projects: "My Projects"
@@ -311,6 +312,9 @@ en:
         event_description: "Event description"
         downloadable_documents: "Downloadable documents"
         information_and_booking: "Information and booking"
+        event_type:
+          family: "Family event"
+          nominative: "Nominative event"
         dates: "Dates"
         beginning: "Beginning:"
         ending: "Ending:"
@@ -356,6 +360,7 @@ en:
         view_event_list: "View events to come"
         share_on_facebook: "Share on Facebook"
         share_on_twitter: "Share on Twitter"
+        last_name_and_first_name: "Last name and first name"
       #public calendar
       calendar:
         calendar: "Calendar"
@@ -475,6 +480,35 @@ en:
       member_select:
         select_a_member: "Select a member"
         start_typing: "Start typing..."
+      children_dashboard:
+        heading: "Children"
+        member_heading: "My Children"
+        add_child: "Add a child"
+      child_modal:
+        edit_child: "Edit child"
+        new_child: "New child"
+      child_form:
+        child_form_info: "Please note that you can only add a child under the age of 18. Supporting documents are requested by your administrator, they will be useful to validate your child's account and authorize the reservation of events."
+        first_name: "First name"
+        last_name: "Last name"
+        birthday: "Birthday"
+        email: "Email"
+        phone: "Phone"
+        save: "Save"
+        supporting_documents: "Supporting documents"
+        to_complete: "To complete"
+        refuse_documents_info: "You can refuse a selection of documents by clicking on the following button."
+        refuse_documents: "Refuse documents"
+      child_item:
+        first_name: "Child first name"
+        last_name: "Child last name"
+        birthday: "Birthday"
+        deleted: "The child has been deleted."
+        unable_to_delete: "Unable to delete the child."
+      delete_child_modal:
+        confirmation_required: "Confirmation required"
+        confirm: "Confirm"
+        confirm_delete_child: "Do you really want to remove this child?"
       tour:
         conclusion:
           title: "Thank you for your attention"

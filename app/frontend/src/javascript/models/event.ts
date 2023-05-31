@@ -11,6 +11,7 @@ export interface EventPriceCategoryAttributes {
 }
 
 export type RecurrenceOption = 'none' | 'day' | 'week' | 'month' | 'year';
+export type EventType = 'standard' | 'nominative' | 'family';
 
 export interface Event {
   id?: number,
@@ -63,7 +64,8 @@ export interface Event {
   }>,
   recurrence: RecurrenceOption,
   recurrence_end_at: Date,
-  advanced_accounting_attributes?: AdvancedAccounting
+  advanced_accounting_attributes?: AdvancedAccounting,
+  event_type: EventType,
 }
 
 export interface EventDecoration {

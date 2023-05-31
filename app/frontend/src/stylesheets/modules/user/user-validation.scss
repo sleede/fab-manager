@@ -1,4 +1,4 @@
-.user-validation {
+.user-validation, .child-validation {
   label {
     margin-bottom: 0;
     vertical-align: middle;
@@ -8,4 +8,8 @@
   .switch {
     vertical-align: middle;
   }
+}
+.child-validation {
+  margin: 0 0 2rem;
+  text-align: center;
 }

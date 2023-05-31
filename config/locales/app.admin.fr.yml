@@ -151,6 +151,11 @@ fr:
           every_week: "Chaque semaine"
           every_month: "Chaque mois"
           every_year: "Chaque année"
+        event_type: "Type d'événement"
+        event_types:
+          standard: "Evénement standard"
+          nominative: "Evénement nominatif"
+          family: "Evénement famille"
       plan_form:
         ACTION_title: "{ACTION, select, create{Nouvelle} other{Mettre à jour la}} formule d'abonnement"
         tab_settings: "Paramètres"
@@ -1231,6 +1236,12 @@ fr:
         validate_member_error: "Une erreur inattendue est survenue. Impossible de valider ce compte membre."
         invalidate_member_error: "Une erreur inattendue est survenue. Impossible d'invalider ce compte membre."
         validate_account: "Valider le compte"
+      child_validation:
+        validate_child_success: "Le compte enfant a bien été validé"
+        invalidate_child_success: "Le compte enfant a bien été invalidé"
+        validate_child_error: "Une erreur inattendue est survenue. Impossible de valider ce compte enfant."
+        invalidate_child_error: "Une erreur inattendue est survenue. Impossible d'invalider ce compte enfant."
+        validate_child: "Valider le compte enfant"
       supporting_documents_refusal_form:
         refusal_comment: "Commentaire"
         comment_placeholder: "Veuillez saisir un commentaire ici"
@@ -1773,6 +1784,10 @@ fr:
         extended_prices_in_same_day: "Prix étendus le même jour"
         public_registrations: "Inscriptions publiques"
         show_username_in_admin_list: "Afficher le nom d'utilisateur dans la liste"
+        family_account: "Compte famille"
+        family_account_info_html: "En activant cette option, vous offrez à vos membres la possibilité d'ajouter sur leur propre compte leur(s) enfants. Vous pouvez aussi demander un justificatif si vous souhaitez les valider."
+        enable_family_account: "Activer l'option Compte Famille"
+        child_validation_required_label: "Activer l'option de validation des comptes enfants"
         overlapping_options:
           training_reservations: "Formations"
           machine_reservations: "Machines"

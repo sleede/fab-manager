@@ -2,7 +2,7 @@
 
 <p>
   <%= t('.body.user_supporting_document_files_refusal',
-        NAME: @attached_object&.user&.profile&.full_name || t('api.notifications.deleted_user'),
+        NAME: @attached_object&.supportable&.profile&.full_name || t('api.notifications.deleted_user'),
         OPERATOR: @attached_object&.operator&.profile&.full_name || t('api.notifications.deleted_user')) %>
 </p>
 <ul>
