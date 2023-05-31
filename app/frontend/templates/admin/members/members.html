@@ -35,7 +35,9 @@
     <iframe name="export-frame" height="0" width="0" class="none"></iframe>
   </div>
 
-  <members-list members="members" on-success="onSuccess" onError="onError" />
+  <div>
+    <members-list members="members" on-success="onSuccess" on-error="onError" operator="currentUser" on-delete-member="deleteMember" on-deleted-child="onDeletedChild" on-updated-child="onUpdatedChild" />
+  </div>
 
   <div class="text-center">
     <button class="btn btn-warning show-more" ng-click="showNextMembers()" ng-hide="member.noMore"><i class="fa fa-search-plus" aria-hidden="true"></i> {{ 'app.admin.members.display_more_users' | translate }}</button>
