@@ -318,6 +318,9 @@ fr:
         event_description: "Description de l’événement"
         downloadable_documents: "Documents à télécharger"
         information_and_booking: "Informations et réservation"
+        event_type:
+          family: "Evénement famille"
+          nominative: "Evénement nominatif"
         dates: "Dates"
         beginning: "Début :"
         ending: "Fin :"
@@ -497,8 +500,10 @@ fr:
         email: "Courriel"
         phone: "Téléphone"
         save: "Enregistrer"
+        supporting_documents: "Documents justificatifs"
         to_complete: "À compléter"
         refuse_documents: "Refuser les documents"
+        refuse_documents_info: "Vous pouvez refuser une sélection de documents en cliquant sur le bouton suivant."
       child_item:
         first_name: "Prénom de l'enfant"
         last_name: "Nom de l'enfant"
