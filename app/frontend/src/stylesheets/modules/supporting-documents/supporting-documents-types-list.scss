@@ -37,6 +37,7 @@
     }
 
     .title {
+      margin-bottom: 1.6rem;
       display: flex;
       flex-direction: row;
       justify-content: space-between;
@@ -54,22 +55,26 @@
       }
     }
 
-    table {
-      thead > tr {
-        th.group-name,
-        th.name {
-          width: 40%
-        }
-        th.actions {
-          width: 20%;
-        }
-      }
+    .document-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min-content, 50rem));
+      gap: 1.6rem;
 
-      tbody {
-        .buttons {
-          .edit-btn {
-            margin-right: 5px;
-          }
+      &-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem;
+        .type {
+          @include text-sm;
+        }
+        .file {
+          padding: 0.8rem 0.8rem 0.8rem 1.6rem;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          border: 1px solid var(--gray-soft-dark);
+          border-radius: var(--border-radius);
+          p { margin: 0; }
         }
       }
     }

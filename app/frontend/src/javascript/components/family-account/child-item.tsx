@@ -5,9 +5,11 @@ import { FabButton } from '../base/fab-button';
 import FormatLib from '../../lib/format';
 import { DeleteChildModal } from './delete-child-modal';
 import ChildAPI from '../../api/child';
+import { PencilSimple, Trash, UserSquare } from 'phosphor-react';
 
 interface ChildItemProps {
   child: Child;
+  size: 'sm' | 'lg';
   onEdit: (child: Child) => void;
   onDelete: (error: string) => void;
   onError: (error: string) => void;
@@ -16,7 +18,7 @@ interface ChildItemProps {
 /**
  * A child item.
  */
-export const ChildItem: React.FC<ChildItemProps> = ({ child, onEdit, onDelete, onError }) => {
+export const ChildItem: React.FC<ChildItemProps> = ({ child, size, onEdit, onDelete, onError }) => {
   const { t } = useTranslation('public');
   const [isOpenDeleteChildModal, setIsOpenDeleteChildModal] = React.useState<boolean>(false);
 
@@ -38,22 +40,29 @@ export const ChildItem: React.FC<ChildItemProps> = ({ child, onEdit, onDelete, o
   };
 
   return (
-    <div className="child-item">
-      <div className="child-lastname">
+    <div className={`child-item ${size} ${child.validated_at ? 'is-validated' : ''}`}>
+      <div className='status'>
+        <UserSquare size={24} weight="light" />
+      </div>
+      <div>
         <span>{t('app.public.child_item.last_name')}</span>
-        <div>{child.last_name}</div>
+        <p>{child.last_name}</p>
       </div>
-      <div className="child-firstname">
+      <div>
         <span>{t('app.public.child_item.first_name')}</span>
-        <div>{child.first_name}</div>
+        <p>{child.first_name}</p>
       </div>
-      <div className="date">
+      <div>
         <span>{t('app.public.child_item.birthday')}</span>
-        <div>{FormatLib.date(child.birthday)}</div>
+        <p>{FormatLib.date(child.birthday)}</p>
       </div>
-      <div className="actions">
-        <FabButton icon={<i className="fa fa-edit" />} onClick={() => onEdit(child)} className="edit-button" />
-        <FabButton icon={<i className="fa fa-trash" />} onClick={toggleDeleteChildModal} className="delete-button" />
+      <div className="actions edit-destroy-buttons">
+        <FabButton onClick={() => onEdit(child)} className="edit-btn">
+          <PencilSimple size={20} weight="fill" />
+        </FabButton>
+        <FabButton onClick={toggleDeleteChildModal} className="delete-btn">
+          <Trash size={20} weight="fill" />
+        </FabButton>
         <DeleteChildModal isOpen={isOpenDeleteChildModal} toggleModal={toggleDeleteChildModal} child={child} onDelete={deleteChild} />
       </div>
     </div>

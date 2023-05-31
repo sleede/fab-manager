@@ -10,6 +10,7 @@ import { FileType } from '../../models/file';
 import { SupportingDocumentType } from '../../models/supporting-document-type';
 import { User } from '../../models/user';
 import { SupportingDocumentsRefusalModal } from '../supporting-documents/supporting-documents-refusal-modal';
+import { FabAlert } from '../base/fab-alert';
 
 interface ChildFormProps {
   child: Child;
@@ -65,92 +66,114 @@ export const ChildForm: React.FC<ChildFormProps> = ({ child, onSubmit, supportin
   return (
     <div className="child-form">
       {!isPrivileged() &&
-        <div className="info-area">
-          {t('app.public.child_form.child_form_info')}
-        </div>
+        <FabAlert level='info'>
+          <p>{t('app.public.child_form.child_form_info')}</p>
+        </FabAlert>
       }
       <form onSubmit={handleSubmit(onSubmit)}>
-        <FormInput id="first_name"
-          register={register}
-          rules={{ required: true }}
-          formState={formState}
-          label={t('app.public.child_form.first_name')}
-        />
-        <FormInput id="last_name"
-          register={register}
-          rules={{ required: true }}
-          formState={formState}
-          label={t('app.public.child_form.last_name')}
-        />
-        <FormInput id="birthday"
-          register={register}
-          rules={{ required: true, validate: (value) => moment(value).isAfter(moment().subtract(18, 'year')) }}
-          formState={formState}
-          label={t('app.public.child_form.birthday')}
-          type="date"
-          max={moment().format('YYYY-MM-DD')}
-          min={moment().subtract(18, 'year').format('YYYY-MM-DD')}
-        />
-        <FormInput id="phone"
-          register={register}
-          formState={formState}
-          label={t('app.public.child_form.phone')}
-          type="tel"
-        />
+        <div className="grp">
+          <FormInput id="first_name"
+            register={register}
+            rules={{ required: true }}
+            formState={formState}
+            label={t('app.public.child_form.first_name')}
+          />
+          <FormInput id="last_name"
+            register={register}
+            rules={{ required: true }}
+            formState={formState}
+            label={t('app.public.child_form.last_name')}
+          />
+        </div>
+        <div className="grp">
+          <FormInput id="birthday"
+            register={register}
+            rules={{ required: true, validate: (value) => moment(value).isAfter(moment().subtract(18, 'year')) }}
+            formState={formState}
+            label={t('app.public.child_form.birthday')}
+            type="date"
+            max={moment().format('YYYY-MM-DD')}
+            min={moment().subtract(18, 'year').format('YYYY-MM-DD')}
+          />
+          <FormInput id="phone"
+            register={register}
+            formState={formState}
+            label={t('app.public.child_form.phone')}
+            type="tel"
+          />
+        </div>
         <FormInput id="email"
           register={register}
           formState={formState}
           label={t('app.public.child_form.email')}
         />
-        {output.supporting_document_files_attributes.map((sf, index) => {
-          if (isPrivileged()) {
+
+        {!isPrivileged() && <>
+          <h3 className="missing-file">{t('app.public.child_form.supporting_documents')}</h3>
+          {output.supporting_document_files_attributes.map((sf, index) => {
             return (
-              <div key={index} className="document-type">
-                <div className="type-name">{getSupportingDocumentsTypeName(sf.supporting_document_type_id)}</div>
-                {sf.attachment_url && (
-                  <a href={sf.attachment_url} target="_blank" rel="noreferrer">
-                    <span className="filename">{sf.attachment}</span>
-                    <i className="fa fa-download"></i>
-                  </a>
-                )}
-                {!sf.attachment_url && (
-                  <div className="missing-file">{t('app.public.child_form.to_complete')}</div>
-                )}
-              </div>
+              <FormFileUpload key={index}
+                              defaultFile={sf as FileType}
+                              id={`supporting_document_files_attributes.${index}`}
+                              accept="application/pdf"
+                              setValue={setValue}
+                              label={getSupportingDocumentsTypeName(sf.supporting_document_type_id)}
+                              showRemoveButton={false}
+                              register={register}
+                              formState={formState} />
             );
-          }
-          return (
-            <FormFileUpload key={index}
-              defaultFile={sf as FileType}
-              id={`supporting_document_files_attributes.${index}`}
-              accept="application/pdf"
-              setValue={setValue}
-              label={getSupportingDocumentsTypeName(sf.supporting_document_type_id)}
-              showRemoveButton={false}
-              register={register}
-              formState={formState} />
-          );
-        })}
+          })}
+        </>}
 
         <div className="actions">
-          <FabButton type="button" onClick={handleSubmit(onSubmit)}>
+          <FabButton type="button" className='is-secondary' onClick={handleSubmit(onSubmit)}>
             {t('app.public.child_form.save')}
           </FabButton>
-          {isPrivileged() &&
-            <div>
-              <FabButton className="refuse-btn" onClick={toggleRefuseModal}>{t('app.public.child_form.refuse_documents')}</FabButton>
-              <SupportingDocumentsRefusalModal
-                isOpen={refuseModalIsOpen}
-                proofOfIdentityTypes={supportingDocumentsTypes}
-                toggleModal={toggleRefuseModal}
-                operator={operator}
-                supportable={child}
-                documentType="Child"
-                onError={onError}
-                onSuccess={onSaveRefusalSuccess} />
-            </div>
-          }
         </div>
+
+        {isPrivileged() && <>
+          <h3 className="missing-file">{t('app.public.child_form.supporting_documents')}</h3>
+          <div className="document-list">
+            {output.supporting_document_files_attributes.map((sf, index) => {
+              return (
+                <div key={index} className="document-list-item">
+                  <span className="type">{getSupportingDocumentsTypeName(sf.supporting_document_type_id)}</span>
+                  {sf.attachment_url && (
+                    <div className='file'>
+                      <p>{sf.attachment}</p>
+                      <a href={sf.attachment_url} target="_blank" rel="noreferrer" className='fab-button is-black'>
+                        <span className="fab-button--icon-only"><i className="fas fa-eye"></i></span>
+                      </a>
+                    </div>
+                  )}
+                  {!sf.attachment_url && (
+                    <div className="missing">
+                      <p>{t('app.public.child_form.to_complete')}</p>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </>}
+
+        {isPrivileged() && <>
+          <FabAlert level='info'>
+            <p>{t('app.public.child_form.refuse_documents_info')}</p>
+          </FabAlert>
+          <div className="actions">
+            <FabButton className="refuse-btn is-secondary" onClick={toggleRefuseModal}>{t('app.public.child_form.refuse_documents')}</FabButton>
+            <SupportingDocumentsRefusalModal
+              isOpen={refuseModalIsOpen}
+              proofOfIdentityTypes={supportingDocumentsTypes}
+              toggleModal={toggleRefuseModal}
+              operator={operator}
+              supportable={child}
+              documentType="Child"
+              onError={onError}
+              onSuccess={onSaveRefusalSuccess} />
+          </div>
+        </>}
       </form>
     </div>
   );

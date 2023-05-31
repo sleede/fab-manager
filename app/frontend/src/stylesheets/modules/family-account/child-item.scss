@@ -1,12 +1,62 @@
 .child-item {
   width: 100%;
   display: grid;
-  grid-template-rows: repeat(3, min-content);
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: min-content 1fr;
+  align-items: flex-start;
   gap: 1.6rem 2.4rem;
-  align-items: center;
-  padding: 1.6rem;
-  border: 1px solid var(--gray-soft-dark);
-  border-radius: var(--border-radius);
   background-color: var(--gray-soft-lightest);
+  &.lg {
+    padding: 1.6rem;
+    border: 1px solid var(--gray-soft-dark);
+    border-radius: var(--border-radius);
+  }
+  &.sm {
+    .actions button {
+      height: 3rem !important;
+      min-height: auto;
+    }
+  }
+
+  & > div:not(.actions) {
+    display: flex;
+    flex-direction: column;
+    span {
+      @include text-xs;
+      color: var(--gray-hard-light);
+    }
+  }
+  p {
+    margin: 0;
+    @include text-base(600);
+  }
+  &.sm p {
+    @include text-sm(500);
+  }
+
+  .status {
+    grid-row: 1/5;
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+  }
+  &.is-validated .status svg {
+    color: var(--success-dark);
+  }
+
+  .actions {
+    align-self: center;
+    justify-self: flex-end;
+  }
+
+  @media (min-width: 768px) {
+    grid-template-columns: min-content repeat(3, 1fr);
+    .status { grid-row: auto; }
+    .actions {
+      grid-column-end: -1;
+      display: flex;
+    }
+  }
+  @media (min-width: 1024px) {
+    grid-template-columns: min-content repeat(3, 1fr) max-content;
+  }
 }

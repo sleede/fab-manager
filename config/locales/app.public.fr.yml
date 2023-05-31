@@ -483,7 +483,7 @@ fr:
       member_select:
         select_a_member: "Sélectionnez un membre"
         start_typing: "Commencez à écrire..."
-      children_list:
+      children_dashboard:
         heading: "Mes enfants"
         add_child: "Ajouter un enfant"
       child_modal:

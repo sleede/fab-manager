@@ -49,7 +49,7 @@
 
   <div class="col-sm-12 col-md-12 col-lg-4">
 
-    <section class="widget panel b-a m" ng-if="event.event_files_attributes">
+    <section class="widget panel b-a m" ng-if="event.event_files_attributes.length">
       <div class="panel-heading b-b">
         <span class="badge bg-warning pull-right">{{event.event_files_attributes.length}}</span>
         <h3 translate>{{ 'app.public.events_show.downloadable_documents' }}</h3>
@@ -72,8 +72,11 @@
       </div>
 
       <div class="panel-content wrapper">
+        <div>
+          <span ng-if="event.event_type === 'nominative'" class="v-middle badge text-base bg-event" translate="">{{ 'app.public.events_show.event_type.nominative' }}</span>
+          <span ng-if="event.event_type === 'family'" class="v-middle badge text-base bg-event" translate="">{{ 'app.public.events_show.event_type.family' }}</span>
+        </div>
 
-        <h5>{{event.category.name}}</h5>
         <dl class="text-sm">
           <dt ng-repeat="theme in event.event_themes">
             <i class="fa fa-tags" aria-hidden="true"></i> {{theme.name}}
@@ -136,17 +139,17 @@
                               class="form-control">
                         <option value=""></option>
                       </select>
-                      <uib-alert type="danger" ng-if="enableChildValidationRequired && user.booked && user.booked.type === 'Child' && !user.booked.validatedAt">
-                        <p class="text-sm">
+                      <uib-alert type="danger" ng-if="enableChildValidationRequired && user.booked && user.booked.type === 'Child' && !user.booked.validatedAt" style="margin-bottom: 0.8rem;">
+                        <span class="text-sm">
                           <i class="fa fa-warning"></i>
                           <span translate>{{ 'app.shared.cart.child_validation_required_alert' }}</span>
-                        </p>
+                        </span>
                       </uib-alert>
-                      <uib-alert type="danger" ng-if="user.booked && user.booked.type === 'Child' && !isUnder18YearsAgo(user.booked.birthday)">
-                        <p class="text-sm">
+                      <uib-alert type="danger" ng-if="user.booked && user.booked.type === 'Child' && !isUnder18YearsAgo(user.booked.birthday)" style="margin-bottom: 0.8rem;">
+                        <span class="text-sm">
                           <i class="fa fa-warning"></i>
                           <span translate>{{ 'app.shared.cart.child_birthday_must_be_under_18_years_ago_alert' }}</span>
-                        </p>
+                        </span>
                       </uib-alert>
                     </div>
                   </div>
