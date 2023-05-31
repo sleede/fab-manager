@@ -55,6 +55,18 @@
       }
     }
 
+    table {
+      thead > tr {
+        th.group-name,
+        th.name {
+          width: 40%
+        }
+        th.actions {
+          width: 20%;
+        }
+      }
+    }
+
     .document-list {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(min-content, 50rem));
