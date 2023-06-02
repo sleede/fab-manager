@@ -175,8 +175,8 @@ class Invoice < PaymentDocument
       if paid_by_card?
         {
           payment_mean: mean,
-          gateway_object_id: payment_gateway_object.gateway_object_id,
-          gateway_object_type: payment_gateway_object.gateway_object_type
+          gateway_object_id: payment_gateway_object&.gateway_object_id,
+          gateway_object_type: payment_gateway_object&.gateway_object_type
         }
       end
     when :wallet

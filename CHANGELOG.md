@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- Fix a bug: OpenAPI accounting gateway_object_id missing error
+
 ## v6.0.6 2023 May 4
 
 - Fix a bug: invalid duration for machine/spaces reservations in statistics, when using slots of not 1 hour
