@@ -115,17 +115,17 @@ export const ConfigurePacksButton: React.FC<ConfigurePacksButtonProps> = ({ pack
                                   itemId={p.id}
                                   itemType={t('app.admin.configure_packs_button.pack')}
                                   destroy={PrepaidPackAPI.destroy}/>
-              <FabModal isOpen={isOpen}
-                        toggleModal={toggleModal}
-                        title={t('app.admin.configure_packs_button.edit_pack')}
-                        className="edit-pack-modal"
-                        closeButton
-                        confirmButton={t('app.admin.configure_packs_button.confirm_changes')}
-                        onConfirmSendFormId="edit-pack">
-                        {packData && <PackForm formId="edit-pack" onSubmit={handleUpdate} pack={packData} />}
-              </FabModal>
             </li>)}
         </ul>
+        <FabModal isOpen={isOpen}
+                  toggleModal={toggleModal}
+                  title={t('app.admin.configure_packs_button.edit_pack')}
+                  className="edit-pack-modal"
+                  closeButton
+                  confirmButton={t('app.admin.configure_packs_button.confirm_changes')}
+                  onConfirmSendFormId="edit-pack">
+                  {packData && <PackForm formId="edit-pack" onSubmit={handleUpdate} pack={packData} />}
+        </FabModal>
         {packs?.length === 0 && <span>{t('app.admin.configure_packs_button.no_packs')}</span>}
       </FabPopover>}
     </div>
