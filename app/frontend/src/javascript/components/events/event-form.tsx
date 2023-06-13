@@ -55,6 +55,7 @@ export const EventForm: React.FC<EventFormProps> = ({ action, event, onError, on
   const [updatingEvent, setUpdatingEvent] = useState<Event>(null);
   const [isActiveAccounting, setIsActiveAccounting] = useState<boolean>(false);
   const [isActiveFamilyAccount, setIsActiveFamilyAccount] = useState<boolean>(false);
+  const [isAcitvePreRegistration, setIsActivePreRegistration] = useState<boolean>(event?.pre_registration);
 
   useEffect(() => {
     EventCategoryAPI.index()
@@ -241,6 +242,19 @@ export const EventForm: React.FC<EventFormProps> = ({ action, event, onError, on
                                                         formState={formState}
                                                         options={ageRangeOptions}
                                                         label={t('app.admin.event_form.age_range')} />}
+            <FormSwitch control={control}
+                        id="pre_registration"
+                        label={t('app.admin.event_form.pre_registration')}
+                        formState={formState}
+                        tooltip={t('app.admin.event_form.pre_registration_help')}
+                        onChange={setIsActivePreRegistration} />
+            {isAcitvePreRegistration &&
+              <FormInput id="pre_registration_end_date"
+                        type="date"
+                        register={register}
+                        formState={formState}
+                        label={t('app.admin.event_form.pre_registration_end_date')} />
+            }
           </div>
         </section>
 

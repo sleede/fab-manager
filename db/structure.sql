@@ -1237,7 +1237,9 @@ CREATE TABLE public.events (
     age_range_id integer,
     category_id integer,
     deleted_at timestamp without time zone,
-    event_type character varying DEFAULT 'standard'::character varying
+    event_type character varying DEFAULT 'standard'::character varying,
+    pre_registration boolean DEFAULT false,
+    pre_registration_end_date timestamp(6) without time zone
 );
 
 
@@ -9060,8 +9062,9 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230524080448'),
 ('20230524083558'),
 ('20230524110215');
+('20230525101006');
 ('20230626122844'),
 ('20230626122947');
-('20230525101006');
+('20230612123250');
 
 

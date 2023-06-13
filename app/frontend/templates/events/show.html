@@ -255,11 +255,11 @@
         </div>
       </div>
 
-      <div class="panel-footer no-padder ng-scope" ng-if="event.amount && reservationIsValid()">
+      <div class="panel-footer no-padder ng-scope" ng-if="!event.pre_registration && event.amount && reservationIsValid()">
         <button class="btn btn-valid btn-info btn-block p-l btn-lg text-u-c r-b text-base" ng-click="payEvent()" ng-if="reserve.totalSeats > 0">{{ 'app.public.events_show.confirm_and_pay' | translate }} {{reserve.amountTotal | currency}}</button>
       </div>
 
-      <div class="panel-footer no-padder ng-scope" ng-if="event.amount == 0 && reservationIsValid()">
+      <div class="panel-footer no-padder ng-scope" ng-if="(event.pre_registration || event.amount == 0) && reservationIsValid()">
         <button class="btn btn-valid btn-info btn-block p-l btn-lg text-u-c r-b text-base" ng-click="validReserveEvent()" ng-if="reserve.totalSeats > 0" ng-disabled="attempting">{{ 'app.shared.buttons.confirm' | translate }}</button>
       </div>
 

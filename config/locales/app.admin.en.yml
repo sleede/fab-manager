@@ -156,6 +156,9 @@ en:
           standard: "Event standard"
           nominative: "Event nominative"
           family: "Event family"
+        pre_registration: "Pre-registration"
+        pre_registration_help: "If this option is checked, administrators and managers must validate registrations before they become final."
+        pre_registration_end_date: "Pre-registration end date"
       plan_form:
         ACTION_title: "{ACTION, select, create{New} other{Update the}} plan"
         tab_settings: "Settings"

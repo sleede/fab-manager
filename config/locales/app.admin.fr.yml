@@ -156,6 +156,9 @@ fr:
           standard: "Evénement standard"
           nominative: "Evénement nominatif"
           family: "Evénement famille"
+        pre_registration: "Pré-inscription"
+        pre_registration_help: "Si cette option est cochée, les administrateurs et les gestionnaires devent valider les inscriptions avant qu'elles ne soient définitives."
+        pre_registration_end_date: "Date de fin de pré-inscription"
       plan_form:
         ACTION_title: "{ACTION, select, create{Nouvelle} other{Mettre à jour la}} formule d'abonnement"
         tab_settings: "Paramètres"
