@@ -89,6 +89,8 @@
           <dt><i class="fas fa-clock"></i> {{ 'app.public.events_show.opening_hours' | translate }}</dt>
           <dd ng-if="event.all_day"><span translate>{{ 'app.public.events_show.all_day' }}</span></dd>
           <dd ng-if="!event.all_day">{{ 'app.public.events_show.from_time' | translate }} <span class="text-u-l">{{event.start_time}}</span> {{ 'app.public.events_show.to_time' | translate }} <span class="text-u-l">{{event.end_time}}</span></dd>
+          <dt ng-if="event.pre_registration_end_date"><i class="fa fa-calendar" aria-hidden="true"></i> {{ 'app.public.events_show.pre_registration_end_date' | translate }}</dt>
+          <dd ng-if="event.pre_registration_end_date">{{ 'app.public.events_show.ending' | translate }} <span class="text-u-l">{{event.pre_registration_end_date | amDateFormat:'L'}}</span></dd>
         </dl>
 
         <div class="text-sm" ng-if="event.amount">
@@ -220,7 +222,8 @@
           </div>
           <div class="m-t-sm" ng-if="reservations && !reserve.toReserve" ng-repeat="reservation in reservations">
             <div ng-hide="isCancelled(reservation)" class="well well-warning">
-              <div class="font-sbold text-u-c text-sm">{{ 'app.public.events_show.you_booked_DATE' | translate:{DATE:(reservation.created_at | amDateFormat:'L LT')} }}</div>
+              <div class="font-sbold text-u-c text-sm" ng-if="!event.pre_registration">{{ 'app.public.events_show.you_booked_DATE' | translate:{DATE:(reservation.created_at | amDateFormat:'L LT')} }}</div>
+              <div class="font-sbold text-u-c text-sm" ng-if="event.pre_registration">{{ 'app.public.events_show.you_pre_booked_DATE' | translate:{DATE:(reservation.created_at | amDateFormat:'L LT')} }}</div>
               <div class="font-sbold text-sm" ng-if="reservation.nb_reserve_places > 0">{{ 'app.public.events_show.full_price_' | translate }} {{reservation.nb_reserve_places}} {{ 'app.public.events_show.ticket' | translate:{NUMBER:reservation.nb_reserve_places} }}</div>
               <div class="font-sbold text-sm" ng-repeat="ticket in reservation.tickets_attributes">
                 {{ticket.event_price_category.price_category.name}} : {{ticket.booked}} {{ 'app.public.events_show.ticket' | translate:{NUMBER:ticket.booked} }}
@@ -243,7 +246,10 @@
             <span ng-show="reservations.length > 0" translate>{{ 'app.public.events_show.thanks_for_coming' }}</span>
             <a ui-sref="app.public.events_list" translate>{{ 'app.public.events_show.view_event_list' }}</a>
           </div>
-          <button class="btn btn-warning-full rounded btn-block text-sm" ng-click="reserveEvent()" ng-show="isShowReserveEventButton()">{{ 'app.public.events_show.book' | translate }}</button>
+          <button class="btn btn-warning-full rounded btn-block text-sm" ng-click="reserveEvent()" ng-show="isShowReserveEventButton()">
+            <span ng-if="event.pre_registration">{{ 'app.public.events_show.pre_book' | translate }}</span>
+            <span ng-if="!event.pre_registration">{{ 'app.public.events_show.book' | translate }}</span>
+          </button>
           <uib-alert type="danger" ng-if="ctrl.member.id && !isUserValidatedByType()">
             <p class="text-sm">
               <i class="fa fa-warning"></i>
