@@ -339,6 +339,7 @@ en:
         you_can_find_your_reservation_s_details_on_your_: "You can find your reservation's details on your"
         dashboard: "dashboard"
         you_booked_DATE: "You booked ({DATE}):"
+        you_pre_booked_DATE: "You pre-booked ({DATE}):"
         canceled_reservation_SEATS: "Reservation canceled ({SEATS} seats)"
         book: "Book"
         confirm_and_pay: "Confirm and pay"
@@ -367,6 +368,8 @@ en:
         share_on_facebook: "Share on Facebook"
         share_on_twitter: "Share on Twitter"
         last_name_and_first_name: "Last name and first name"
+        pre_book: "Pre-book"
+        pre_registration_end_date: "Pre-registration end date"
       #public calendar
       calendar:
         calendar: "Calendar"
