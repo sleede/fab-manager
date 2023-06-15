@@ -75,7 +75,24 @@ NOTIFICATIONS_TYPES = [
   { name: 'notify_user_order_is_refunded', category: 'shop', is_configurable: false },
   { name: 'notify_admin_low_stock_threshold', category: 'shop', is_configurable: true },
   { name: 'notify_admin_training_auto_cancelled', category: 'trainings', is_configurable: true },
-  { name: 'notify_member_training_auto_cancelled', category: 'trainings', is_configurable: false }
+  { name: 'notify_member_training_auto_cancelled', category: 'trainings', is_configurable: false },
+
+  { name: 'notify_member_training_authorization_expired', category: 'trainings', is_configurable: false },
+  { name: 'notify_member_training_invalidated', category: 'trainings', is_configurable: false },
+  { name: 'notify_admin_order_is_paid', category: 'shop', is_configurable: true },
+  { name: 'notify_member_reservation_limit_reached', category: 'agenda', is_configurable: false },
+  { name: 'notify_admin_user_child_supporting_document_refusal', category: 'supporting_documents', is_configurable: true },
+  { name: 'notify_user_child_supporting_document_refusal', category: 'supporting_documents', is_configurable: false },
+  { name: 'notify_admin_child_created', category: 'users_accounts', is_configurable: true },
+  { name: 'notify_user_child_is_validated', category: 'users_accounts', is_configurable: false },
+  { name: 'notify_user_child_is_invalidated', category: 'users_accounts', is_configurable: false },
+  { name: 'notify_admin_user_child_supporting_document_files_updated', category: 'supporting_documents', is_configurable: true },
+  { name: 'notify_admin_user_child_supporting_document_files_created', category: 'supporting_documents', is_configurable: true },
+
+  { name: 'notify_member_reservation_validated', category: 'agenda', is_configurable: false },
+  { name: 'notify_admin_reservation_validated', category: 'agenda', is_configurable: true },
+  { name: 'notify_member_pre_booked_reservation', category: 'agenda', is_configurable: false },
+  { name: 'notify_admin_member_pre_booked_reservation', category: 'agenda', is_configurable: true }
 ].freeze
 
 NOTIFICATIONS_TYPES.each do |notification_type|
@@ -85,61 +102,5 @@ NOTIFICATIONS_TYPES.each do |notification_type|
     name: notification_type[:name],
     category: notification_type[:category],
     is_configurable: notification_type[:is_configurable]
-  )
-end
-
-unless NotificationType.find_by(name: 'notify_admin_user_child_supporting_document_refusal')
-  NotificationType.create!(
-    name: 'notify_admin_user_child_supporting_document_refusal',
-    category: 'supporting_documents',
-    is_configurable: true
-  )
-end
-
-unless NotificationType.find_by(name: 'notify_user_child_supporting_document_refusal')
-  NotificationType.create!(
-    name: 'notify_user_child_supporting_document_refusal',
-    category: 'supporting_documents',
-    is_configurable: false
-  )
-end
-
-unless NotificationType.find_by(name: 'notify_admin_child_created')
-  NotificationType.create!(
-    name: 'notify_admin_child_created',
-    category: 'users_accounts',
-    is_configurable: true
-  )
-end
-
-unless NotificationType.find_by(name: 'notify_user_child_is_validated')
-  NotificationType.create!(
-    name: 'notify_user_child_is_validated',
-    category: 'users_accounts',
-    is_configurable: false
-  )
-end
-
-unless NotificationType.find_by(name: 'notify_user_child_is_invalidated')
-  NotificationType.create!(
-    name: 'notify_user_child_is_invalidated',
-    category: 'users_accounts',
-    is_configurable: false
-  )
-end
-
-unless NotificationType.find_by(name: 'notify_admin_user_child_supporting_document_files_updated')
-  NotificationType.create!(
-    name: 'notify_admin_user_child_supporting_document_files_updated',
-    category: 'supporting_documents',
-    is_configurable: true
-  )
-end
-
-unless NotificationType.find_by(name: 'notify_admin_user_child_supporting_document_files_created')
-  NotificationType.create!(
-    name: 'notify_admin_user_child_supporting_document_files_created',
-    category: 'supporting_documents',
-    is_configurable: true
   )
 end
