@@ -3,6 +3,7 @@
 - Fix a bug: OpenAPI accounting gateway_object_id missing error
 - Fix a bug: unable to modify the price of prepaid pack
 - Fix a bug: notification type missing
+- Fix critical bug: Incorrect amount calculation when paying monthly subcription with a wallet for PayZen
 
 ## v6.0.6 2023 May 4
 
