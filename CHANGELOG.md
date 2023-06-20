@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+## v6.0.7 2023 June 20
+
 - Fix a bug: OpenAPI accounting gateway_object_id missing error
 - Fix a bug: unable to modify the price of prepaid pack
 - Fix a bug: notification type missing
