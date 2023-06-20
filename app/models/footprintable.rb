@@ -20,7 +20,7 @@ class Footprintable < ApplicationRecord
     return false unless persisted?
 
     reload
-    footprint_children.map(&:check_footprint).all? && !chained_element.corrupted?
+    footprint_children.map(&:check_footprint).all? && chained_element && !chained_element.corrupted?
   end
 
   # @return [ChainedElement]

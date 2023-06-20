@@ -14,8 +14,8 @@ if payment_schedule.operator_profile
   end
 end
 json.main_object do
-  json.type payment_schedule.main_object.object_type
-  json.id payment_schedule.main_object.object_id
+  json.type payment_schedule.main_object&.object_type
+  json.id payment_schedule.main_object&.object_id
 end
 if payment_schedule.gateway_subscription
   # this attribute is used to known which gateway should we interact with, in the front-end
