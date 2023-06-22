@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- Fix a bug: unable to refresh machine/space/training calender after pay an reservation
+
 ## v6.0.7 2023 June 20
 
 - Fix a bug: OpenAPI accounting gateway_object_id missing error

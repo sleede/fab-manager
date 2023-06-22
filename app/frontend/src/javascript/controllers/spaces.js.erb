@@ -609,20 +609,9 @@ Application.Controllers.controller('ReserveSpaceController', ['$scope', '$transi
      * Refetch all events from the API and re-populate the calendar with the resulting slots
      */
     const refreshCalendar = function () {
-      const view = uiCalendarConfig.calendars.calendar.fullCalendar('getView');
-      return Availability.spaces({
-        spaceId: $scope.space.id,
-        member_id: $scope.ctrl.member.id,
-        start: view.start,
-        end: view.end,
-        timezone: Fablab.timezone
-      }, function (spaces) {
-        uiCalendarConfig.calendars.calendar.fullCalendar('removeEvents');
-        return $scope.eventSources.splice(0, 1, {
-            events: spaces,
-            textColor: 'black'
-          }
-        );
+      $scope.eventSources.splice(0, 1, {
+        url: `/api/availabilities/spaces/${$transition$.params().id}?member_id=${$scope.ctrl.member.id}`,
+        textColor: 'black'
       });
     };
 
