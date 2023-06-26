@@ -336,6 +336,7 @@ fr:
         ticket: "{NUMBER, plural, =0{place} one{place} other{places}}"
         make_a_gift_of_this_reservation: "Offrir cette réservation"
         thank_you_your_payment_has_been_successfully_registered: "Merci. Votre paiement a bien été pris en compte !"
+        thank_you_your_pre_registration_has_been_successfully_saved: "Merci. Votre pré-inscription a bien été pris en compte !"
         you_can_find_your_reservation_s_details_on_your_: "Vous pouvez retrouver le détail de votre réservation sur votre"
         dashboard: "tableau de bord"
         you_booked_DATE: "Vous avez réservé ({DATE}) :"
