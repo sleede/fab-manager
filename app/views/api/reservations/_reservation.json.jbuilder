@@ -8,6 +8,7 @@ json.slots_reservations_attributes reservation.slots_reservations do |sr|
   json.id sr.id
   json.canceled_at sr.canceled_at&.iso8601
   json.validated_at sr.validated_at&.iso8601
+  json.slot_id sr.slot_id
   json.slot_attributes do
     json.id sr.slot_id
     json.start_at sr.slot.start_at.iso8601

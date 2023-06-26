@@ -651,6 +651,8 @@ en:
         do_you_really_want_to_validate_this_reservation_this_apply_to_all_booked_tickets: "Do you really want to validate this reservation? This apply to ALL booked tickets."
         reservation_was_successfully_validated: "Reservation was successfully validated."
         validation_failed: "Validation failed."
+        confirm_payment: "Confirm payment"
+        confirm_payment_of_html: "{ROLE, select, admin{Cash} other{Pay}}: {AMOUNT}" #(contexte : validate a payment of $20,00)
       events_settings:
         title: "Settings"
         generic_text_block: "Editorial text block"

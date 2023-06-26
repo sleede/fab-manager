@@ -55,7 +55,7 @@
               <button class="btn btn-default" ng-click="validateReservation(reservation)" ng-if="!isValidated(reservation) && !isCancelled(reservation)" translate>
                 {{ 'app.admin.event_reservations.validate' }}
               </button>
-              <button class="btn btn-default" ng-if="isValidated(reservation) && !isCancelled(reservation)" translate>
+              <button class="btn btn-default" ng-click="payReservation(reservation)" ng-if="isValidated(reservation) && !isCancelled(reservation)" translate>
                 {{ 'app.admin.event_reservations.pay' }}
               </button>
             </td>

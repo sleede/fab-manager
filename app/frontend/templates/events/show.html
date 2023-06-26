@@ -195,7 +195,7 @@
                   </div>
                 </div>
 
-                <div ng-show="currentUser.role == 'admin'" class="m-t">
+                <div ng-show="currentUser.role == 'admin' && !event.pre_registration" class="m-t">
                     <label for="offerSlot" class="control-label m-r" translate>{{ 'app.public.events_show.make_a_gift_of_this_reservation' }}</label>
                     <input bs-switch
                            ng-model="event.offered"
@@ -217,7 +217,10 @@
             <a class="pull-right m-t-xs text-u-l ng-scope" ng-click="cancelReserve($event)" ng-show="reserve.toReserve" translate>{{ 'app.shared.buttons.cancel' }}</a>
           </div>
 
-          <div ng-if="reserveSuccess" class="alert alert-success">{{ 'app.public.events_show.thank_you_your_payment_has_been_successfully_registered' | translate }}<br>
+          <div ng-if="reserveSuccess && !event.pre_registration" class="alert alert-success">{{ 'app.public.events_show.thank_you_your_payment_has_been_successfully_registered' | translate }}<br>
+            {{ 'app.public.events_show.you_can_find_your_reservation_s_details_on_your_' | translate }} <a ui-sref="app.logged.dashboard.invoices" translate>{{ 'app.public.events_show.dashboard' }}</a>
+          </div>
+          <div ng-if="reserveSuccess && event.pre_registration" class="alert alert-success">{{ 'app.public.events_show.thank_you_your_pre_registration_has_been_successfully_saved' | translate }}<br>
             {{ 'app.public.events_show.you_can_find_your_reservation_s_details_on_your_' | translate }} <a ui-sref="app.logged.dashboard.invoices" translate>{{ 'app.public.events_show.dashboard' }}</a>
           </div>
           <div class="m-t-sm" ng-if="reservations && !reserve.toReserve" ng-repeat="reservation in reservations">
@@ -257,7 +260,7 @@
             </p>
           </uib-alert>
 
-          <coupon show="reserve.totalSeats > 0 && ctrl.member" coupon="coupon.applied" total="reserve.totalNoCoupon" user-id="{{ctrl.member.id}}"></coupon>
+          <coupon show="reserve.totalSeats > 0 && ctrl.member && !event.pre_registration" coupon="coupon.applied" total="reserve.totalNoCoupon" user-id="{{ctrl.member.id}}"></coupon>
         </div>
       </div>
 

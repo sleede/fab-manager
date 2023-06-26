@@ -651,6 +651,8 @@ fr:
         do_you_really_want_to_validate_this_reservation_this_apply_to_all_booked_tickets: "Êtes vous sur de vouloir valider cette réservation? Ceci s'applique à TOUTES les places réservées."
         reservation_was_successfully_validated: "La réservation a bien été validé."
         validation_failed: "La validation a échoué."
+        confirm_payment: "Confirmer le paiement"
+        confirm_payment_of_html: "{ROLE, select, admin{Encaisser} other{Payer}} : {AMOUNT}" #(contexte : validate a payment of $20,00)
       events_settings:
         title: "Paramètres"
         generic_text_block: "Bloc de texte rédactionnel"

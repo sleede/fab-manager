@@ -330,6 +330,7 @@ en:
         ticket: "{NUMBER, plural, one{ticket} other{tickets}}"
         make_a_gift_of_this_reservation: "Make a gift of this reservation"
         thank_you_your_payment_has_been_successfully_registered: "Thank you. Your payment has been successfully registered!"
+        thank_you_your_pre_registration_has_been_successfully_saved: "Thank you. Your pre-registration has been successfully saved!"
         you_can_find_your_reservation_s_details_on_your_: "You can find your reservation's details on your"
         dashboard: "dashboard"
         you_booked_DATE: "You booked ({DATE}):"
