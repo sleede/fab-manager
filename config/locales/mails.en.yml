@@ -451,3 +451,13 @@ en:
       subject: "Your command was refunded"
       body:
         notify_user_order_is_refunded: "Your command %{REFERENCE} was refunded."
+    notify_member_reservation_validated:
+      subject: "Your reservation was validated"
+      body:
+        reservation_validated_html: "<strong><em>%{RESERVABLE}</em></strong> was validated."
+        your_reserved_slots: "Your reserved slots are:"
+    notify_admin_reservation_validated:
+      subject: "Réservation a bien été validé"
+      body:
+        reservation_validated_html: "<strong><em>%{RESERVABLE}</em></strong> of %{NAME} was validated."
+        reserved_slots: "Reserved slots are:"

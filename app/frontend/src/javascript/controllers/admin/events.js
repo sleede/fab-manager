@@ -436,7 +436,7 @@ Application.Controllers.controller('AdminEventsController', ['$scope', '$state',
 /**
  * Controller used in the reservations listing page for a specific event
  */
-Application.Controllers.controller('ShowEventReservationsController', ['$scope', 'eventPromise', 'reservationsPromise', function ($scope, eventPromise, reservationsPromise) {
+Application.Controllers.controller('ShowEventReservationsController', ['$scope', 'eventPromise', 'reservationsPromise', 'dialogs', 'SlotsReservation', 'growl', '_t', function ($scope, eventPromise, reservationsPromise, dialogs, SlotsReservation, growl, _t) {
   // retrieve the event from the ID provided in the current URL
   $scope.event = eventPromise;
 
@@ -450,6 +450,42 @@ Application.Controllers.controller('ShowEventReservationsController', ['$scope',
    */
   $scope.isCancelled = function (reservation) {
     return !!(reservation.slots_reservations_attributes[0].canceled_at);
+  };
+
+  /**
+   * Test if the provided reservation has been validated
+   * @param reservation {Reservation}
+   * @returns {boolean}
+   */
+  $scope.isValidated = function (reservation) {
+    return !!(reservation.slots_reservations_attributes[0].validated_at);
+  };
+
+  /**
+   * Callback to validate a reservation
+   * @param reservation {Reservation}
+   */
+  $scope.validateReservation = function (reservation) {
+    dialogs.confirm({
+      resolve: {
+        object: function () {
+          return {
+            title: _t('app.admin.event_reservations.validate_the_reservation'),
+            msg: _t('app.admin.event_reservations.do_you_really_want_to_validate_this_reservation_this_apply_to_all_booked_tickets')
+          };
+        }
+      }
+    }, function () { // validate confirmed
+      SlotsReservation.validate({
+        id: reservation.slots_reservations_attributes[0].id
+      }, () => { // successfully validated
+        growl.success(_t('app.admin.event_reservations.reservation_was_successfully_validated'));
+        const index = $scope.reservations.indexOf(reservation);
+        $scope.reservations[index].slots_reservations_attributes[0].validated_at = new Date();
+      }, () => {
+        growl.warning(_t('app.admin.event_reservations.validation_failed'));
+      });
+    });
   };
 }]);
 
