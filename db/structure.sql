@@ -3216,7 +3216,8 @@ CREATE TABLE public.slots_reservations (
     ex_start_at timestamp without time zone,
     ex_end_at timestamp without time zone,
     canceled_at timestamp without time zone,
-    offered boolean DEFAULT false
+    offered boolean DEFAULT false,
+    validated_at timestamp(6) without time zone
 );
 
 
@@ -8940,6 +8941,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230524083558'),
 ('20230524110215'),
 ('20230525101006'),
-('20230612123250');
+('20230612123250'),
+('20230626103314');
 
 

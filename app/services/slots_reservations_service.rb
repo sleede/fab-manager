@@ -21,5 +21,18 @@ class SlotsReservationsService
     rescue Faraday::ConnectionFailed
       warn 'Unable to update data in elasticsearch'
     end
+
+    def validate(slot_reservation)
+      if slot_reservation.update(validated_at: Time.current)
+        NotificationCenter.call type: 'notify_member_reservation_validated',
+                                receiver: slot_reservation.reservation.user,
+                                attached_object: slot_reservation.reservation
+        NotificationCenter.call type: 'notify_admin_reservation_validated',
+                                receiver: User.admins_and_managers,
+                                attached_object: slot_reservation.reservation
+        return true
+      end
+      false
+    end
   end
 end

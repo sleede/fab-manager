@@ -451,3 +451,13 @@ fr:
       subject: "Votre commande est remboursée"
       body:
         notify_user_order_is_refunded: "Votre commande %{REFERENCE} est remboursée :"
+    notify_member_reservation_validated:
+      subject: "Votre réservation a bien été validé"
+      body:
+        reservation_validated_html: "Votre réservation <strong><em>%{RESERVATION}</em></strong> a bien été validé."
+        your_reserved_slots: "Les créneaux que vous avez réservés sont :"
+    notify_admin_reservation_validated:
+      subject: "Réservation a bien été validé"
+      body:
+        reservation_validated_html: "<strong><em>%{RESERVABLE}</em></strong> du membre %{NAME} a bien été validé."
+        reserved_slots: "Les créneaux réservés sont :"

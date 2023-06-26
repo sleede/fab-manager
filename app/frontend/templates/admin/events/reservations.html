@@ -20,31 +20,49 @@
         <table class="table" ng-if="reservations.length > 0">
           <thead>
           <tr>
-            <th style="width:25%" translate>{{ 'app.admin.event_reservations.user' }}</th>
-            <th style="width:25%" translate>{{ 'app.admin.event_reservations.payment_date' }}</th>
+            <th style="width:25%" translate>{{ 'app.admin.event_reservations.booked_by' }}</th>
+            <th style="width:25%" translate>{{ 'app.admin.event_reservations.reservations' }}</th>
+            <th style="width:25%" translate>{{ 'app.admin.event_reservations.date' }}</th>
             <th style="width:25%" translate>{{ 'app.admin.event_reservations.reserved_tickets' }}</th>
-            <th style="width:25%"></th>
+            <th ng-if="event.pre_registration" style="width:25%" translate>{{ 'app.admin.event_reservations.status' }}</th>
+            <th ng-if="event.pre_registration" style="width:25%" translate>{{ 'app.admin.event_reservations.gestion' }}</th>
+            <th style="width:5%"></th>
           </tr>
           </thead>
           <tbody>
           <tr ng-repeat="reservation in reservations" ng-class="{'disabled': isCancelled(reservation)}">
             <td class="text-c">
-              <a ui-sref="app.logged.members_show({id: reservation.user_id})" ng-if="event.event_type === 'standard'">{{ reservation.user_full_name }} </a>
+              <a ui-sref="app.logged.members_show({id: reservation.user_id})">{{ reservation.user_full_name }} </a>
+            </td>
+            <td>
+              <span ng-if="event.event_type === 'standard'">{{ reservation.user_full_name }} </span>
               <div ng-repeat="bu in reservation.booking_users_attributes">
-                <span ng-if="bu.booked_type !== 'User'">{{bu.name}}</span>
-                <a ui-sref="app.logged.members_show({id: bu.booked_id})" ng-if="bu.booked_type === 'User'">{{bu.name}}</a>
+                <span>{{bu.name}}</span>
               </div>
             </td>
             <td>{{ reservation.created_at | amDateFormat:'LL LTS' }}</td>
             <td>
               <span ng-if="reservation.nb_reserve_places > 0">{{ 'app.admin.event_reservations.full_price_' | translate }} {{reservation.nb_reserve_places}}<br/></span>
               <span ng-repeat="ticket in reservation.tickets_attributes">{{ticket.event_price_category.price_category.name}} : {{ticket.booked}}</span>
-              <div ng-show="isCancelled(reservation)" class="canceled-marker" translate>{{ 'app.admin.event_reservations.canceled' }}</div>
+            </td>
+            <td ng-if="event.pre_registration">
+              <span ng-if="!isValidated(reservation) && !isCancelled(reservation)" class="v-middle badge text-base bg-info" translate="">{{ 'app.admin.event_reservations.event_status.pre_registered' }}</span>
+              <span ng-if="isValidated(reservation) && !isCancelled(reservation)" class="v-middle badge text-base bg-stage" translate="">{{ 'app.admin.event_reservations.event_status.to_pay' }}</span>
+              <span ng-if="reservation.is_paid && !isCancelled(reservation)" class="v-middle badge text-base bg-success" translate="">{{ 'app.admin.event_reservations.event_status.paid' }}</span>
+              <span ng-if="isCancelled(reservation)" class="v-middle badge text-base bg-event" translate="">{{ 'app.admin.event_reservations.event_status.canceled' }}</span>
+            </td>
+            <td ng-if="event.pre_registration">
+              <button class="btn btn-default" ng-click="validateReservation(reservation)" ng-if="!isValidated(reservation) && !isCancelled(reservation)" translate>
+                {{ 'app.admin.event_reservations.validate' }}
+              </button>
+              <button class="btn btn-default" ng-if="isValidated(reservation) && !isCancelled(reservation)" translate>
+                {{ 'app.admin.event_reservations.pay' }}
+              </button>
             </td>
             <td>
               <div class="buttons">
                 <button class="btn btn-default" ui-sref="app.public.events_show({id: event.id})">
-                  <i class="fa fa-tag"></i> {{ 'app.admin.event_reservations.show_the_event' | translate }}
+                  <i class="fa fa-eye"></i>
                 </button>
               </div>
             </td>

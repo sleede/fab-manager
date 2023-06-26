@@ -87,7 +87,10 @@ NOTIFICATIONS_TYPES = [
   { name: 'notify_user_child_is_validated', category: 'users_accounts', is_configurable: false },
   { name: 'notify_user_child_is_invalidated', category: 'users_accounts', is_configurable: false },
   { name: 'notify_admin_user_child_supporting_document_files_updated', category: 'supporting_documents', is_configurable: true },
-  { name: 'notify_admin_user_child_supporting_document_files_created', category: 'supporting_documents', is_configurable: true }
+  { name: 'notify_admin_user_child_supporting_document_files_created', category: 'supporting_documents', is_configurable: true },
+
+  { name: 'notify_member_reservation_validated', category: 'agenda', is_configurable: false },
+  { name: 'notify_admin_reservation_validated', category: 'agenda', is_configurable: true }
 ].freeze
 
 NOTIFICATIONS_TYPES.each do |notification_type|

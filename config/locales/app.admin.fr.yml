@@ -595,6 +595,12 @@ fr:
         do_you_really_want_to_delete_this_price_category: "Êtes vous sur de vouloir supprimer cette catégorie tarifaire ?"
         price_category_successfully_deleted: "Catégorie tarifaire supprimée avec succès."
         price_category_deletion_failed: "Échec de la suppression de la catégorie tarifaire."
+        types: 'Types'
+        event_type:
+          standard: 'Standard'
+          family: "Famille"
+          nominative: "Nominatif"
+        pre_registration: "Pré-inscription"
       #add a new event
       events_new:
         add_an_event: "Ajouter un événement"
@@ -629,6 +635,22 @@ fr:
         no_reservations_for_now: "Aucune réservation pour le moment."
         back_to_monitoring: "Retour au suivi"
         canceled: "Annulée"
+        date: "Date"
+        booked_by: "Réservé par"
+        reservations: "Réservations"
+        status: "Statut"
+        gestion: "Gestion"
+        event_status:
+          pre_registered: "Pré-inscrit"
+          to_pay: "À payer"
+          paid: "Payé"
+          canceled: "Annulée"
+        validate: "Valider"
+        pay: "Payer"
+        validate_the_reservation: "Valider la réservation"
+        do_you_really_want_to_validate_this_reservation_this_apply_to_all_booked_tickets: "Êtes vous sur de vouloir valider cette réservation? Ceci s'applique à TOUTES les places réservées."
+        reservation_was_successfully_validated: "La réservation a bien été validé."
+        validation_failed: "La validation a échoué."
       events_settings:
         title: "Paramètres"
         generic_text_block: "Bloc de texte rédactionnel"

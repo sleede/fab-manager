@@ -595,6 +595,12 @@ en:
         do_you_really_want_to_delete_this_price_category: "Do you really want to delete this price category?"
         price_category_successfully_deleted: "Price category successfully deleted."
         price_category_deletion_failed: "Price category deletion failed."
+        types: "Types"
+        event_type:
+          standard: "Standard"
+          family: "Family"
+          nominative: "Nominative"
+        pre_registration: "Pre-registration"
       #add a new event
       events_new:
         add_an_event: "Add an event"
@@ -629,6 +635,22 @@ en:
         no_reservations_for_now: "No reservation for now."
         back_to_monitoring: "Back to monitoring"
         canceled: "Canceled"
+        date: "Date"
+        booked_by: "Booked by"
+        reservations: "Reservations"
+        status: "Status"
+        gestion: "Gestion"
+        event_status:
+          pre_registered: "Pre-registered"
+          to_pay: "To pay"
+          paid: "Paid"
+          canceled: "Canceled"
+        validate: "Validate"
+        pay: "Pay"
+        validate_the_reservation: "Validate the reservation"
+        do_you_really_want_to_validate_this_reservation_this_apply_to_all_booked_tickets: "Do you really want to validate this reservation? This apply to ALL booked tickets."
+        reservation_was_successfully_validated: "Reservation was successfully validated."
+        validation_failed: "Validation failed."
       events_settings:
         title: "Settings"
         generic_text_block: "Editorial text block"
