@@ -494,7 +494,11 @@ Application.Controllers.controller('ShowEventReservationsController', ['$scope',
       items: [{
         reservation: {
           ...reservation,
-          slots_reservations_attributes: reservation.slots_reservations_attributes.map(sr => ({ slot_id: sr.slot_id }))
+          slots_reservations_attributes: reservation.slots_reservations_attributes.map(sr => ({ slot_id: sr.slot_id })),
+          tickets_attributes: reservation.tickets_attributes.map(t => ({ booked: t.booked, event_price_category_id: t.event_price_category.id })),
+          booking_users_attributes: reservation.booking_users_attributes.map(bu => (
+            { name: bu.name, event_price_category_id: bu.event_price_category_id, booked_id: bu.booked_id, booked_type: bu.booked_type }
+          ))
         }
       }],
       coupon_code: ((coupon ? coupon.code : undefined)),
