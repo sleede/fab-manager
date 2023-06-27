@@ -9,4 +9,8 @@ class ReservationPolicy < ApplicationPolicy
   def update?
     user.admin? || user.manager? || record.user == user
   end
+
+  def confirm_payment?
+    user.admin? || user.manager?
+  end
 end

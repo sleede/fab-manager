@@ -68,7 +68,9 @@ Rails.application.routes.draw do
       patch ':id/update_role', action: 'update_role', on: :collection
       patch ':id/validate', action: 'validate', on: :collection
     end
-    resources :reservations, only: %i[show index update]
+    resources :reservations, only: %i[show index update] do
+      post :confirm_payment, on: :collection
+    end
     resources :notifications, only: %i[index show update] do
       match :update_all, path: '/', via: %i[put patch], on: :collection
       get 'polling', action: 'polling', on: :collection
