@@ -607,6 +607,7 @@ en:
           family: "Family"
           nominative: "Nominative"
         pre_registration: "Pre-registration"
+        NUMBER_pre_registered: " {NUMBER} pre-registered"
       #add a new event
       events_new:
         add_an_event: "Add an event"

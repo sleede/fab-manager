@@ -20,13 +20,27 @@ class ReservationConfirmPaymentService
         offered: @offered
       }
     end
+    tickets = @reservation.tickets.map do |t|
+      {
+        event_price_category_id: t.event_price_category_id,
+        booked: t.booked
+      }
+    end
+    booking_users = @reservation.booking_users.map do |bu|
+      {
+        name: bu.name,
+        event_price_category_id: bu.event_price_category_id,
+        booked_id: bu.booked_id,
+        booked_type: bu.booked_type
+      }
+    end
     event_reservation = CartItem::EventReservation.new(customer_profile: @reservation.user.invoicing_profile,
                                                        operator_profile: @operator.invoicing_profile,
                                                        event: @reservation.reservable,
                                                        cart_item_reservation_slots_attributes: slots_reservations,
                                                        normal_tickets: @reservation.nb_reserve_places,
-                                                       cart_item_event_reservation_tickets_attributes: @reservation.tickets.to_a,
-                                                       cart_item_event_reservation_booking_users_attributes: @reservation.booking_users.to_a)
+                                                       cart_item_event_reservation_tickets_attributes: tickets,
+                                                       cart_item_event_reservation_booking_users_attributes: booking_users)
 
     all_elements = {
       slots: @reservation.slots_reservations.map do |sr|

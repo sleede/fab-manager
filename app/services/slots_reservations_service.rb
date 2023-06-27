@@ -24,6 +24,11 @@ class SlotsReservationsService
 
     def validate(slot_reservation)
       if slot_reservation.update(validated_at: Time.current)
+        reservable = slot_reservation.reservation.reservable
+        if reservable.is_a?(Event)
+          reservable.update_nb_free_places
+          reservable.save
+        end
         NotificationCenter.call type: 'notify_member_reservation_validated',
                                 receiver: slot_reservation.reservation.user,
                                 attached_object: slot_reservation.reservation
