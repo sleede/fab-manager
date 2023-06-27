@@ -653,6 +653,8 @@ en:
         validation_failed: "Validation failed."
         confirm_payment: "Confirm payment"
         confirm_payment_of_html: "{ROLE, select, admin{Cash} other{Pay}}: {AMOUNT}" #(contexte : validate a payment of $20,00)
+        offer_this_reservation: "I offer this reservation"
+        i_have_received_the_payment:  "I have received the payment"
       events_settings:
         title: "Settings"
         generic_text_block: "Editorial text block"

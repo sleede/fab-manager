@@ -503,7 +503,7 @@ Application.Controllers.controller('ShowEventReservationsController', ['$scope',
   };
 
   $scope.payReservation = function (reservation) {
-    $uibModal.open({
+    const modalInstance = $uibModal.open({
       templateUrl: '/admin/events/pay_reservation_modal.html',
       size: 'sm',
       resolve: {
@@ -520,13 +520,13 @@ Application.Controllers.controller('ShowEventReservationsController', ['$scope',
           return mkCartItems(reservation);
         }
       },
-      controller: ['$scope', '$uibModalInstance', 'reservation', 'price', 'wallet', 'cartItems', 'helpers', '$filter', '_t',
-        function ($scope, $uibModalInstance, reservation, price, wallet, cartItems, helpers, $filter, _t) {
+      controller: ['$scope', '$uibModalInstance', 'reservation', 'price', 'wallet', 'cartItems', 'helpers', '$filter', '_t', 'Reservation',
+        function ($scope, $uibModalInstance, reservation, price, wallet, cartItems, helpers, $filter, _t, Reservation) {
           // User's wallet amount
           $scope.wallet = wallet;
 
           // Price
-          $scope.price = price.price;
+          $scope.price = price;
 
           // Cart items
           $scope.cartItems = cartItems;
@@ -539,17 +539,76 @@ Application.Controllers.controller('ShowEventReservationsController', ['$scope',
 
           $scope.coupon = { applied: null };
 
+          $scope.offered = false;
+
+          $scope.payment = false;
+
           // Button label
-          if ($scope.amount > 0) {
-            $scope.validButtonName = _t('app.admin.event_reservations.confirm_payment_of_html', { ROLE: $scope.currentUser.role, AMOUNT: $filter('currency')($scope.amount) });
-          } else {
-            if ((price.price > 0) && ($scope.walletAmount === 0)) {
-              $scope.validButtonName = _t('app.admin.event_reservations.confirm_payment_of_html', { ROLE: $scope.currentUser.role, AMOUNT: $filter('currency')(price.price) });
+          $scope.setValidButtonName = function () {
+            if ($scope.amount > 0 && !$scope.offered) {
+              $scope.validButtonName = _t('app.admin.event_reservations.confirm_payment_of_html', { ROLE: $scope.currentUser.role, AMOUNT: $filter('currency')($scope.amount) });
             } else {
               $scope.validButtonName = _t('app.shared.buttons.confirm');
             }
-          }
+          };
+
+          /**
+           * Compute the total amount for the current reservation according to the previously set parameters
+           */
+          $scope.computeEventAmount = function () {
+            Price.compute(mkCartItems(reservation, $scope.coupon.applied), function (res) {
+              $scope.price = res;
+              $scope.amount = helpers.getAmountToPay($scope.price.price, wallet.amount);
+              $scope.setValidButtonName();
+            });
+          };
+
+          // Callback to validate the payment
+          $scope.ok = function () {
+            $scope.attempting = true;
+            return Reservation.confirm_payment({
+              id: reservation.id,
+              coupon_code: $scope.coupon.applied ? $scope.coupon.applied.code : null,
+              offered: $scope.offered
+            }, function (res) {
+              $uibModalInstance.close(res);
+              return $scope.attempting = true;
+            }
+            , function (response) {
+              $scope.alerts = [];
+              angular.forEach(response, function (v, k) {
+                angular.forEach(v, function (err) {
+                  $scope.alerts.push({
+                    msg: k + ': ' + err,
+                    type: 'danger'
+                  });
+                });
+              });
+              return $scope.attempting = false;
+            });
+          };
+
+          // Callback to cancel the payment
+          $scope.cancel = function () { $uibModalInstance.dismiss('cancel'); };
+
+          $scope.$watch('coupon.applied', function (newValue, oldValue) {
+            if ((newValue !== null) || (oldValue !== null)) {
+              return $scope.computeEventAmount();
+            }
+          });
+
+          $scope.setValidButtonName();
         }]
+    });
+    modalInstance.result.then(function (reservation) {
+      $scope.reservations = $scope.reservations.map((r) => {
+        if (r.id === reservation.id) {
+          return reservation;
+        }
+        return r;
+      });
+    }, function () {
+      $log.info('Pay reservation modal dismissed at: ' + new Date());
     });
   };
 }]);

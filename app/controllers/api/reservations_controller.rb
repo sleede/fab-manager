@@ -4,7 +4,7 @@
 # Reservations are used for Training, Machine, Space and Event
 class API::ReservationsController < API::APIController
   before_action :authenticate_user!
-  before_action :set_reservation, only: %i[show update]
+  before_action :set_reservation, only: %i[show update confirm_payment]
   respond_to :json
 
   def index
@@ -28,6 +28,16 @@ class API::ReservationsController < API::APIController
   def update
     authorize @reservation
     if @reservation.update(reservation_params)
+      render :show, status: :ok, location: @reservation
+    else
+      render json: @reservation.errors, status: :unprocessable_entity
+    end
+  end
+
+  def confirm_payment
+    authorize @reservation
+    invoice = ReservationConfirmPaymentService.new(@reservation, current_user, params[:coupon_code], params[:offered]).call
+    if invoice
       render :show, status: :ok, location: @reservation
     else
       render json: @reservation.errors, status: :unprocessable_entity
