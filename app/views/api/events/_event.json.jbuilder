@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
-json.extract! event, :id, :title, :description, :event_type
+json.extract! event, :id, :title, :description, :event_type, :pre_registration, :pre_registration_end_date
+json.pre_registration_end_date event.pre_registration_end_date&.to_date
+json.nb_places_for_pre_registration event.nb_places_for_pre_registration
 if event.event_image
   json.event_image_attributes do
     json.id event.event_image.id

@@ -1,0 +1,45 @@
+<div class="modal-header">
+  <img ng-src="{{logoBlack.custom_asset_file_attributes.attachment_url}}" alt="{{logo.custom_asset_file_attributes.attachment}}" class="modal-logo"/>
+  <h1 translate ng-show="reservation">{{ 'app.admin.event_reservations.confirm_payment' }}</h1>
+</div>
+<div class="modal-body">
+  <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
+  <div class="row" ng-show="!offered">
+    <wallet-info current-user="currentUser"
+                 cart="cartItems"
+                 price="price.price"
+                 wallet="wallet"/>
+  </div>
+  <div class="row m-b">
+    <div class="col-md-12">
+      <label for="offerSlot" class="control-label m-r" translate>{{ 'app.admin.event_reservations.offer_this_reservation' }}</label>
+      <input bs-switch
+             ng-model="offered"
+             id="offerSlot"
+             type="checkbox"
+             class="form-control"
+             switch-on-text="{{ 'app.shared.buttons.yes' | translate }}"
+             switch-off-text="{{ 'app.shared.buttons.no' | translate }}"
+             switch-animate="true"
+             ng-change="computeEventAmount()"/>
+    </div>
+  </div>
+
+  <coupon show="true" coupon="coupon.applied" total="price.price_without_coupon" user-id="{{reservation.user_id}}"></coupon>
+
+  <div class="row">
+    <div class="form-group col-sm-12">
+      <div class="checkbox-group">
+        <input type="checkbox"
+          name="paymentReceived"
+          id="paymentReceived"
+          ng-model="payment" />
+        <label for="paymentReceived" translate>{{ 'app.admin.event_reservations.i_have_received_the_payment' }}</label>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-info" ng-click="ok()" ng-disabled="attempting || !payment" ng-bind-html="validButtonName"></button>
+  <button class="btn btn-default" ng-click="cancel()" translate>{{ 'app.shared.buttons.cancel' }}</button>
+</div>

@@ -60,15 +60,26 @@ class ShoppingCart
       items.each do |item|
         objects.push(save_item(item))
       end
-      update_credits(objects)
-      update_packs(objects)
+      event_reservation = objects.find { |o| o.is_a?(Reservation) && o.reservable_type == 'Event' }
+      if event_reservation&.reservable&.pre_registration
+        payment = Invoice.new(
+          invoicing_profile: @customer.invoicing_profile,
+          statistic_profile: @customer.statistic_profile,
+          operator_profile_id: @operator.invoicing_profile.id,
+          payment_method: @payment_method,
+          total: 0
+        )
+      else
+        update_credits(objects)
+        update_packs(objects)
 
-      payment = create_payment_document(price, objects, payment_id, payment_type)
-      WalletService.debit_user_wallet(payment, @customer)
-      next if Setting.get('prevent_invoices_zero') && price[:total].zero?
+        payment = create_payment_document(price, objects, payment_id, payment_type)
+        WalletService.debit_user_wallet(payment, @customer)
+        next if Setting.get('prevent_invoices_zero') && price[:total].zero?
 
-      payment.save
-      payment.post_save(payment_id, payment_type)
+        payment.save
+        payment.post_save(payment_id, payment_type)
+      end
     end
 
     success = !payment.nil? && objects.map(&:errors).flatten.map(&:empty?).all? && items.map(&:errors).map(&:blank?).all?

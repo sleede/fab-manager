@@ -9,6 +9,10 @@ Application.Services.factory('SlotsReservation', ['$resource', function ($resour
       cancel: {
         method: 'PUT',
         url: '/api/slots_reservations/:id/cancel'
+      },
+      validate: {
+        method: 'PUT',
+        url: '/api/slots_reservations/:id/validate'
       }
     }
   );

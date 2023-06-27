@@ -469,6 +469,10 @@ fr:
         order_canceled: "Votre commande %{REFERENCE} est annulée"
       notify_user_order_is_refunded:
         order_refunded: "Votre commande %{REFERENCE} est remboursée"
+      notify_member_reservation_validated:
+        your_reservation_RESERVABLE_was_validated_html: "Votre réservation de <strong><em>%{RESERVABLE}</em></strong> a été validée."
+      notify_admin_reservation_validated:
+        a_RESERVABLE_reservation_was_validated_html: "La réservation de <strong><em>%{RESERVABLE}</em></strong> de <strong><em>%{NAME}</em></strong> a été validée."
   #statistics tools for admins
   statistics:
     subscriptions: "Abonnements"

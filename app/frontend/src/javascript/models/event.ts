@@ -66,6 +66,8 @@ export interface Event {
   recurrence_end_at: Date,
   advanced_accounting_attributes?: AdvancedAccounting,
   event_type: EventType,
+  pre_registration?: boolean,
+  pre_registration_end_date?: TDateISODate | Date,
 }
 
 export interface EventDecoration {
