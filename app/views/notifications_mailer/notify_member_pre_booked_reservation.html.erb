@@ -1,0 +1,16 @@
+<%= render 'notifications_mailer/shared/hello', recipient: @recipient %>
+
+<p><%= t('.body.reservation_saved_html', RESERVATION: @attached_object.reservable.name) %></p>
+
+<p><%= t('.body.your_reserved_slots') %> </p>
+<ul>
+<% @attached_object.slots.each do |slot| %>
+  <% if @attached_object.reservable_type == 'Event' %>
+    <% (slot.start_at.to_date..slot.end_at.to_date).each do |d| %>
+      <li><%= "#{I18n.l d, format: :long} #{I18n.l slot.start_at, format: :hour_minute} - #{I18n.l slot.end_at, format: :hour_minute}" %></li>
+    <% end %>
+  <% else %>
+    <li><%= "#{I18n.l slot.start_at, format: :long} - #{I18n.l slot.end_at, format: :hour_minute}" %></li>
+  <% end %>
+<% end %>
+</ul>

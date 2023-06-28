@@ -286,6 +286,8 @@ en:
         an_abuse_was_reported_on_TYPE_ID_NAME_html: "An abuse was reported on <strong>%{TYPE} %{ID}: <em>%{NAME}</em></strong>."
       notify_admin_member_create_reservation:
         a_RESERVABLE_reservation_was_made_by_USER_html: "A <strong><em>%{RESERVABLE}</em></strong> reservation was made by <strong><em>%{USER}</em></strong>."
+      notify_admin_member_pre_booked_reservation:
+        a_RESERVABLE_reservation_was_made_by_USER_html: "A <strong><em>%{RESERVABLE}</em></strong> pre-registration was made by <strong><em>%{USER}</em></strong>."
       notify_admin_profile_complete:
         account_imported_from_PROVIDER_UID_has_completed_its_information_html: "Account imported from <strong><em>%{PROVIDER}</strong> (%{UID})</em> has completed its information."
       notify_admin_slot_is_canceled:
@@ -320,6 +322,8 @@ en:
         a_new_user_account_has_been_imported_from_PROVIDER_UID_html: "A new user account has been imported from: <strong><em>%{PROVIDER}</strong> (%{UID})</em>."
       notify_member_create_reservation:
         your_reservation_RESERVABLE_was_successfully_saved_html: "Your reservation <strong><em>%{RESERVABLE}</em></strong> was successfully saved."
+      notify_member_pre_booked_reservation:
+        your_reservation_RESERVABLE_was_successfully_saved_html: "Your pre-registration <strong><em>%{RESERVABLE}</em></strong> was successfully saved."
       notify_member_reservation_reminder:
         reminder_you_have_a_reservation_RESERVABLE_to_be_held_on_DATE_html: "Reminder: You have a reservation <strong>%{RESERVABLE}</strong> to be held on <em>%{DATE}</em>"
       notify_member_slot_is_canceled:
