@@ -487,13 +487,14 @@ fr:
         select_a_member: "Sélectionnez un membre"
         start_typing: "Commencez à écrire..."
       children_dashboard:
-        heading: "Mes enfants"
+        heading: "Enfants"
+        member_heading: "Mes enfants"
         add_child: "Ajouter un enfant"
       child_modal:
         edit_child: "Modifier un enfant"
         new_child: "Ajouter un enfant"
       child_form:
-        child_form_info: "Notez que vous ne pouvez ajouter que vos enfants de moins de 18 ans. Des pièces justificatives sont demandés par votre administrateur, elles lui seront utiles pour valider le compte de votre enfant et ainsi autoriser la réservation d'événements."
+        child_form_info: "Seuls les enfants de moins de 18 ans peuvent être ajoutés au sein de votre compte Famille. Des justificatifs peuvent être demandés afin de valider le compte de votre enfant et de vous permettre ensuite de l'inscrire à des évènements."
         first_name: "Prénom"
         last_name: "Nom"
         birthday: "Date de naissance"

@@ -116,6 +116,7 @@ export const ChildForm: React.FC<ChildFormProps> = ({ child, onSubmit, supportin
                               defaultFile={sf as FileType}
                               id={`supporting_document_files_attributes.${index}`}
                               accept="application/pdf"
+                              rules={{ required: true }}
                               setValue={setValue}
                               label={getSupportingDocumentsTypeName(sf.supporting_document_type_id)}
                               showRemoveButton={false}

@@ -494,7 +494,7 @@ en:
         edit_child: "Edit child"
         new_child: "New child"
       child_form:
-        child_form_info: "Please note that you can only add a child under the age of 18. Supporting documents are requested by your administrator, they will be useful to validate your child's account and authorize the reservation of events."
+        child_form_info: "Only children under 18 years old can be added to your Family account. Supporting documents may be requested to validate your child's account and allow you to register them for events."
         first_name: "First name"
         last_name: "Last name"
         birthday: "Birthday"
