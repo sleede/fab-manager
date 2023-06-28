@@ -365,6 +365,7 @@ fr:
         last_name_and_first_name: "Nom et prénom"
         pre_book: "Pré-réserver"
         pre_registration_end_date: "Date de fin de pré-réservation"
+        pre_registration: "Pré-réservation"
       #public calendar
       calendar:
         calendar: "Calendrier"
