@@ -662,6 +662,7 @@ fr:
         confirm_payment_of_html: "{ROLE, select, admin{Encaisser} other{Payer}} : {AMOUNT}" #(contexte : validate a payment of $20,00)
         offer_this_reservation: "J'offre cette réservation"
         i_have_received_the_payment:  "J'ai reçu le paiement"
+        reservation_was_successfully_paid: "La réservation a bien été payée."
       events_settings:
         title: "Paramètres"
         generic_text_block: "Bloc de texte rédactionnel"
