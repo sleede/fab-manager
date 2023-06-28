@@ -332,9 +332,10 @@ en:
         thank_you_your_payment_has_been_successfully_registered: "Thank you. Your payment has been successfully registered!"
         thank_you_your_pre_registration_has_been_successfully_saved: "Thank you. Your pre-registration has been successfully saved!"
         you_can_find_your_reservation_s_details_on_your_: "You can find your reservation's details on your"
+        informed_by_email_your_pre_registration: "You will be kept informed by email of the progress made regarding your pre-registration."
         dashboard: "dashboard"
         you_booked_DATE: "You booked ({DATE}):"
-        you_pre_booked_DATE: "You pre-booked ({DATE}):"
+        you_pre_booked_DATE: "Your pre-registration ({DATE}):"
         canceled_reservation_SEATS: "Reservation canceled ({SEATS} seats)"
         book: "Book"
         confirm_and_pay: "Confirm and pay"
@@ -364,7 +365,7 @@ en:
         share_on_twitter: "Share on Twitter"
         last_name_and_first_name: "Last name and first name"
         pre_book: "Pre-book"
-        pre_registration_end_date: "Pre-registration end date"
+        pre_registration_end_date: "Deadline for pre-registration"
         pre_registration: "Pre-registration"
       #public calendar
       calendar:

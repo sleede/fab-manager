@@ -78,6 +78,11 @@ en:
       body:
         reservation_saved_html: "You reservation <strong><em>%{RESERVATION}</em></strong> has been successfully saved"
         your_reserved_slots: "Your reserved slots are:"
+    notify_member_pre_booked_reservation:
+      subject: "Your pre-registration has been successfully saved"
+      body:
+        reservation_saved_html: "You pre-registration <strong><em>%{RESERVATION}</em></strong> has been successfully saved"
+        your_reserved_slots: "Your pre-booked slots are:"
     notify_member_subscribed_plan_is_changed:
       subject: "Your subscription has been updated"
       body:
@@ -87,6 +92,11 @@ en:
       body:
         member_reserved_html: "User %{NAME} has reserved <strong><em>%{RESERVABLE}</em></strong>."
         reserved_slots: "Reserved slots are:"
+    notify_admin_member_pre_booked_reservation:
+      subject: "New pre-registration"
+      body:
+        member_reserved_html: "User %{NAME} has pre-reserved <strong><em>%{RESERVABLE}</em></strong>."
+        reserved_slots: "Pre-reserved slots are:"
     notify_member_slot_is_modified:
       subject: "Your reservation slot has been successfully changed"
       body:
