@@ -30,8 +30,15 @@ export const MembersListItem: React.FC<MembersListItemProps> = ({ member, onErro
     window.location.href = `/#!/admin/members/${memberId}/edit`;
   };
 
+  /**
+   * member and all his children are validated
+   */
+  const memberIsValidated = (): boolean => {
+    return member.validated_at && member.children.every((child) => child.validated_at);
+  };
+
   return (
-    <div key={member.id} className={`members-list-item ${member.validated_at ? 'is-validated' : ''} ${member.need_completion ? 'is-incomplet' : ''}`}>
+    <div key={member.id} className={`members-list-item ${memberIsValidated() ? 'is-validated' : ''} ${member.need_completion ? 'is-incomplet' : ''}`}>
       <div className="left-col">
         <div className='status'>
           {(member.children.length > 0)

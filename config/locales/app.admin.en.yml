@@ -1834,8 +1834,9 @@ en:
         project_categories_filter_placeholder: "Placeholder for categories filter in project gallery"
         project_categories_wording: "Wording used to replace \"Categories\" on public pages"
         family_account: "family account"
-        family_account_info_html: "By activating this option, you offer your members the possibility to add their child(ren) to their own account. You can also request proof if you wish to validate them."
+        family_account_info_html: "The Family account allows your members to add their children under 18 years old to their own account and directly register them for Family events. You can also request supporting documents for each child and validate their account."
         enable_family_account: "Enable the Family Account option"
+        child_validation_required: "the account validation option for children"
         child_validation_required_label: "Activate the account validation option for children"
         overlapping_options:
           training_reservations: "Trainings"

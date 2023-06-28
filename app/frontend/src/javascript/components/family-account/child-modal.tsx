@@ -28,14 +28,15 @@ export const ChildModal: React.FC<ChildModalProps> = ({ child, isOpen, toggleMod
    * Save the child to the API
    */
   const handleSaveChild = async (data: Child): Promise<void> => {
+    let c: Child = data;
     try {
       if (child?.id) {
-        await ChildAPI.update(data);
+        c = await ChildAPI.update(data);
       } else {
-        await ChildAPI.create(data);
+        c = await ChildAPI.create(data);
       }
       toggleModal();
-      onSuccess(data, '');
+      onSuccess(c, '');
     } catch (error) {
       onError(error);
     }
@@ -56,7 +57,7 @@ export const ChildModal: React.FC<ChildModalProps> = ({ child, isOpen, toggleMod
         onSubmit={handleSaveChild}
         supportingDocumentsTypes={supportingDocumentsTypes}
         operator={operator}
-        onSuccess={onSuccess}
+        onSuccess={(msg) => onSuccess(child, msg)}
         onError={onError}
       />
     </FabModal>
