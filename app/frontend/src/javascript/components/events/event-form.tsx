@@ -100,6 +100,9 @@ export const EventForm: React.FC<EventFormProps> = ({ action, event, onError, on
    * Callback triggered when the user validates the machine form: handle create or update
    */
   const onSubmit: SubmitHandler<Event> = (data: Event) => {
+    if (data.pre_registration_end_date.toString() === 'Invalid Date') {
+      data.pre_registration_end_date = null;
+    }
     if (action === 'update') {
       if (event?.recurrence_events?.length > 0) {
         setUpdatingEvent(data);

@@ -371,6 +371,7 @@ en:
         last_name_and_first_name: "Last name and first name"
         pre_book: "Pre-book"
         pre_registration_end_date: "Pre-registration end date"
+        pre_registration: "Pre-registration"
       #public calendar
       calendar:
         calendar: "Calendar"
