@@ -21,6 +21,7 @@ class ProjectService
     records = records.with_machine(query_params['machine_id']) if query_params['machine_id'].present?
     records = records.with_component(query_params['component_id']) if query_params['component_id'].present?
     records = records.with_theme(query_params['theme_id']) if query_params['theme_id'].present?
+    records = records.with_project_category(query_params['project_category_id']) if query_params['project_category_id'].present?
     records = records.with_space(query_params['space_id']) if query_params['space_id'].present?
     records = records.with_status(query_params['status_id']) if query_params['status_id'].present?
     records = if query_params['q'].present?

@@ -69,7 +69,7 @@ class API::ProjectsController < API::APIController
 
   def project_params
     params.require(:project).permit(:name, :description, :tags, :machine_ids, :component_ids, :theme_ids, :licence_id, :status_id, :state,
-                                    user_ids: [], machine_ids: [], component_ids: [], theme_ids: [],
+                                    user_ids: [], machine_ids: [], component_ids: [], theme_ids: [], project_category_ids: [],
                                     project_image_attributes: [:attachment],
                                     project_caos_attributes: %i[id attachment _destroy],
                                     project_steps_attributes: [

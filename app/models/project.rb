@@ -41,6 +41,8 @@ class Project < ApplicationRecord
   accepts_nested_attributes_for :project_steps, allow_destroy: true
 
   has_many :abuses, as: :signaled, dependent: :destroy, class_name: 'Abuse'
+  has_many :projects_project_categories, dependent: :destroy
+  has_many :project_categories, through: :projects_project_categories
 
   # validations
   validates :author, :name, presence: true
@@ -68,6 +70,7 @@ class Project < ApplicationRecord
   scope :with_component, ->(component_ids) { joins(:projects_components).where(projects_components: { component_id: component_ids }) }
   scope :with_space, ->(spaces_ids) { joins(:projects_spaces).where(projects_spaces: { space_id: spaces_ids }) }
   scope :with_status, ->(statuses_ids) { where(status_id: statuses_ids) }
+  scope :with_project_category, ->(project_category_ids) { joins(:projects_project_categories).where(projects_project_categories: { project_category_id: project_category_ids }) }
   pg_search_scope :search,
                   against: :search_vector,
                   using: {

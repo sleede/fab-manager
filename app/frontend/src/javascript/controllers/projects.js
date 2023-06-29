@@ -29,6 +29,7 @@
  *  - $scope.themes = [{Theme}]
  *  - $scope.licences = [{Licence}]
  *  - $scope.allowedExtensions = [{String}]
+ *  - $scope.projectCategoriesWording = [{String}]
  *  - $scope.submited(content)
  *  - $scope.cancel()
  *  - $scope.addFile()
@@ -43,7 +44,7 @@
  *  - $state (Ui-Router) [ 'app.public.projects_show', 'app.public.projects_list' ]
  */
 class ProjectsController {
-  constructor ($rootScope, $scope, $state, Project, Machine, Member, Component, Theme, Licence, Status, $document, Diacritics, dialogs, allowedExtensions, _t) {
+  constructor ($rootScope, $scope, $state, Project, Machine, Member, Component, Theme, ProjectCategory, Licence, Status, $document, Diacritics, dialogs, allowedExtensions, projectCategoriesWording, _t) {
     // remove codeview from summernote editor
     $scope.summernoteOptsProject = angular.copy($rootScope.summernoteOpts);
     $scope.summernoteOptsProject.toolbar[6][1].splice(1, 1);
@@ -78,6 +79,16 @@ class ProjectsController {
       });
     });
 
+    // Retrieve the list of themes from the server
+    ProjectCategory.query().$promise.then(function (data) {
+      $scope.projectCategories = data.map(function (d) {
+        return ({
+          id: d.id,
+          name: d.name
+        });
+      });
+    });
+
     // Retrieve the list of licences from the server
     Licence.query().$promise.then(function (data) {
       $scope.licences = data.map(function (d) {
@@ -103,6 +114,8 @@ class ProjectsController {
 
     // List of extensions allowed for CAD attachements upload
     $scope.allowedExtensions = allowedExtensions.setting.value.split(' ');
+
+    $scope.projectCategoriesWording = projectCategoriesWording.setting.value;
 
     /**
      * For use with ngUpload (https://github.com/twilson63/ngUpload).
@@ -281,8 +294,8 @@ class ProjectsController {
 /**
  *  Controller used on projects listing page
  */
-Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'Project', 'machinesPromise', 'themesPromise', 'componentsPromise', 'paginationService', 'OpenlabProject', '$window', 'growl', '_t', '$location', '$timeout', 'settingsPromise', 'openLabActive',
-  function ($scope, $state, Project, machinesPromise, themesPromise, componentsPromise, paginationService, OpenlabProject, $window, growl, _t, $location, $timeout, settingsPromise, openLabActive) {
+Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'Project', 'machinesPromise', 'themesPromise', 'projectCategoriesPromise', 'componentsPromise', 'paginationService', 'OpenlabProject', '$window', 'growl', '_t', '$location', '$timeout', 'settingsPromise', 'openLabActive',
+  function ($scope, $state, Project, machinesPromise, themesPromise, projectCategoriesPromise, componentsPromise, paginationService, OpenlabProject, $window, growl, _t, $location, $timeout, settingsPromise, openLabActive) {
   /* PRIVATE STATIC CONSTANTS */
 
     // Number of projects added to the page when the user clicks on 'load more projects'
@@ -293,6 +306,8 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
 
     // Fab-manager's instance ID in the openLab network
     $scope.openlabAppId = settingsPromise.openlab_app_id;
+
+    $scope.projectCategoriesFilterPlaceholder = settingsPromise.project_categories_filter_placeholder;
 
     // Is openLab enabled on the instance?
     $scope.openlab = {
@@ -318,6 +333,9 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
 
     // list of themes / used for filtering
     $scope.themes = themesPromise;
+
+    // list of projectCategories / used for filtering
+    $scope.projectCategories = projectCategoriesPromise;
 
     // list of components / used for filtering
     $scope.components = componentsPromise;
@@ -420,6 +438,7 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
       updateUrlParam('component_id', search.component_id);
       updateUrlParam('machine_id', search.machine_id);
       updateUrlParam('status_id', search.status_id);
+      updateUrlParam('project_category_id', search.project_category_id);
       return true;
     };
 
@@ -496,8 +515,8 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
 /**
  * Controller used in the project creation page
  */
-Application.Controllers.controller('NewProjectController', ['$rootScope', '$scope', '$state', 'Project', 'Machine', 'Member', 'Component', 'Theme', 'Licence', 'Status', '$document', 'CSRF', 'Diacritics', 'dialogs', 'allowedExtensions', '_t',
-  function ($rootScope, $scope, $state, Project, Machine, Member, Component, Theme, Licence, Status, $document, CSRF, Diacritics, dialogs, allowedExtensions, _t) {
+Application.Controllers.controller('NewProjectController', ['$rootScope', '$scope', '$state', 'Project', 'Machine', 'Member', 'Component', 'Theme', 'ProjectCategory', 'Licence', 'Status', '$document', 'CSRF', 'Diacritics', 'dialogs', 'allowedExtensions', 'projectCategoriesWording', '_t',
+  function ($rootScope, $scope, $state, Project, Machine, Member, Component, Theme, ProjectCategory, Licence, Status, $document, CSRF, Diacritics, dialogs, allowedExtensions, projectCategoriesWording, _t) {
     CSRF.setMetaTags();
 
     // API URL where the form will be posted
@@ -529,15 +548,15 @@ Application.Controllers.controller('NewProjectController', ['$rootScope', '$scop
     };
 
     // Using the ProjectsController
-    return new ProjectsController($rootScope, $scope, $state, Project, Machine, Member, Component, Theme, Licence, Status, $document, Diacritics, dialogs, allowedExtensions, _t);
+    return new ProjectsController($rootScope, $scope, $state, Project, Machine, Member, Component, Theme, ProjectCategory, Licence, Status, $document, Diacritics, dialogs, allowedExtensions, projectCategoriesWording, _t);
   }
 ]);
 
 /**
  * Controller used in the project edition page
  */
-Application.Controllers.controller('EditProjectController', ['$rootScope', '$scope', '$state', '$transition$', 'Project', 'Machine', 'Member', 'Component', 'Theme', 'Licence', 'Status', '$document', 'CSRF', 'projectPromise', 'Diacritics', 'dialogs', 'allowedExtensions', '_t',
-  function ($rootScope, $scope, $state, $transition$, Project, Machine, Member, Component, Theme, Licence, Status, $document, CSRF, projectPromise, Diacritics, dialogs, allowedExtensions, _t) {
+Application.Controllers.controller('EditProjectController', ['$rootScope', '$scope', '$state', '$transition$', 'Project', 'Machine', 'Member', 'Component', 'Theme', 'ProjectCategory', 'Licence', 'Status', '$document', 'CSRF', 'projectPromise', 'Diacritics', 'dialogs', 'allowedExtensions', 'projectCategoriesWording', '_t',
+  function ($rootScope, $scope, $state, $transition$, Project, Machine, Member, Component, Theme, ProjectCategory, Licence, Status, $document, CSRF, projectPromise, Diacritics, dialogs, allowedExtensions, projectCategoriesWording, _t) {
     /* PUBLIC SCOPE */
 
     // API URL where the form will be posted
@@ -583,7 +602,7 @@ Application.Controllers.controller('EditProjectController', ['$rootScope', '$sco
       }
 
       // Using the ProjectsController
-      return new ProjectsController($rootScope, $scope, $state, Project, Machine, Member, Component, Theme, Licence, Status, $document, Diacritics, dialogs, allowedExtensions, _t);
+      return new ProjectsController($rootScope, $scope, $state, Project, Machine, Member, Component, Theme, ProjectCategory, Licence, Status, $document, Diacritics, dialogs, allowedExtensions, projectCategoriesWording, _t);
     };
 
     // !!! MUST BE CALLED AT THE END of the controller
@@ -594,14 +613,15 @@ Application.Controllers.controller('EditProjectController', ['$rootScope', '$sco
 /**
  * Controller used in the public project's details page
  */
-Application.Controllers.controller('ShowProjectController', ['$scope', '$state', 'projectPromise', 'shortnamePromise', '$location', '$uibModal', 'dialogs', '_t',
-  function ($scope, $state, projectPromise, shortnamePromise, $location, $uibModal, dialogs, _t) {
+Application.Controllers.controller('ShowProjectController', ['$scope', '$state', 'projectPromise', 'shortnamePromise', 'projectCategoriesWording', '$location', '$uibModal', 'dialogs', '_t',
+  function ($scope, $state, projectPromise, shortnamePromise, projectCategoriesWording, $location, $uibModal, dialogs, _t) {
   /* PUBLIC SCOPE */
 
     // Store the project's details
     $scope.project = projectPromise;
     $scope.projectUrl = $location.absUrl();
     $scope.disqusShortname = shortnamePromise.setting.value;
+    $scope.projectCategoriesWording = projectCategoriesWording.setting.value;
 
     /**
      * Test if the provided user has the edition rights on the current project
