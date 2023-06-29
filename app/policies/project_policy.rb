@@ -19,6 +19,10 @@ class ProjectPolicy < ApplicationPolicy
     user.admin? or record.author.user_id == user.id or record.users.include?(user)
   end
 
+  def markdown?
+    user.admin? or record.author.user_id == user.id or record.users.include?(user)
+  end
+
   def destroy?
     user.admin? or record.author.user_id == user.id
   end

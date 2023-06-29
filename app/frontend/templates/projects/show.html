@@ -174,12 +174,17 @@
       </div>
     </section>
 
-      <section class="widget b-t">
+    <div class="text-center m m-b-lg" ng-if="projectEditableBy(currentUser) || isAuthorized('admin')">
+      <a class="btn btn-default" ng-href="api/projects/{{ project.id}}/markdown" target="_blank">
+        <i class="fa fa-download"></i> {{ 'app.public.projects_show.markdown_file' | translate }}
+      </a>
+    </div>
 
-          <div class="widget-content text-center m-t">
-              <a ng-click="signalAbuse($event)"><i class="fa fa-warning"></i> {{ 'app.public.projects_show.report_an_abuse' | translate }}</a>
-          </div>
-      </section>
+    <section class="widget b-t">
+      <div class="widget-content text-center m-t">
+          <a ng-click="signalAbuse($event)"><i class="fa fa-warning"></i> {{ 'app.public.projects_show.report_an_abuse' | translate }}</a>
+      </div>
+    </section>
   </div>
 </div>
 

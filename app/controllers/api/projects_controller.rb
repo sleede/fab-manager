@@ -18,6 +18,12 @@ class API::ProjectsController < API::APIController
     @project = Project.friendly.find(params[:id])
   end
 
+  def markdown
+    @project = Project.friendly.find(params[:id])
+    authorize @project
+    send_data ProjectToMarkdown.new(@project).call, filename: "#{@project.name.parameterize}-#{@project.id}.md", disposition: 'attachment', type: 'text/markdown'
+  end
+
   def create
     @project = Project.new(project_params.merge(author_statistic_profile_id: current_user.statistic_profile.id))
     if @project.save

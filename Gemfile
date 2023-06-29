@@ -149,3 +149,5 @@ gem 'acts_as_list'
 # Error reporting
 gem 'sentry-rails'
 gem 'sentry-ruby'
+
+gem "reverse_markdown"

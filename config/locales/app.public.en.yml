@@ -216,6 +216,7 @@ en:
         report: "Report"
         do_you_really_want_to_delete_this_project: "Do you really want to delete this project?"
         status: "Status"
+        markdown_file: "Markdown file"
       #list of machines
       machines_list:
         the_fablab_s_machines: "The machines"

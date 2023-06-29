@@ -216,6 +216,7 @@ fr:
         report: "Signaler"
         do_you_really_want_to_delete_this_project: "Êtes-vous sur de vouloir supprimer ce projet ?"
         status: "Statut"
+        markdown_file: "Fichier Markdown"
       #list of machines
       machines_list:
         the_fablab_s_machines: "Les machines"
