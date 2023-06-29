@@ -30,7 +30,7 @@ export interface Reservation {
     name: string
   },
   nb_reserve_places?: number,
-  tickets_attributes?: {
+  tickets_attributes?: Array<{
     event_price_category_id: number,
     event_price_category?: {
       id: number,
@@ -40,18 +40,38 @@ export interface Reservation {
         name: string
       }
     },
-    booked: boolean,
+    booked: number,
     created_at?: TDateISO
-  },
+  }>,
+  tickets?: Array<{
+    event_price_category_id: number,
+    event_price_category?: {
+      id: number,
+      price_category_id: number,
+      price_category: {
+        id: number,
+        name: string
+      }
+    },
+    booked: number,
+    created_at?: TDateISO
+  }>,
   total_booked_seats?: number,
   created_at?: TDateISO,
-  booking_users_attributes?: {
+  booking_users_attributes?: Array<{
     id: number,
     name: string,
     event_price_category_id: number,
     booked_id: number,
     booked_type: string,
-  }
+  }>,
+  start_at: TDateISO,
+  end_at: TDateISO,
+  event_type?: string,
+  event_title?: string,
+  event_pre_registration?: boolean
+  validated_at?: TDateISO,
+  is_paid?: boolean,
 }
 
 export interface ReservationIndexFilter extends ApiFilter {
