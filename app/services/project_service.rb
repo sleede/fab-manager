@@ -23,6 +23,14 @@ class ProjectService
     records = records.with_theme(query_params['theme_id']) if query_params['theme_id'].present?
     records = records.with_space(query_params['space_id']) if query_params['space_id'].present?
     records = records.with_status(query_params['status_id']) if query_params['status_id'].present?
+
+    if query_params['member_id'].present?
+      member = User.find(query_params['member_id'])
+      if member
+        records = records.where(id: Project.user_projects(member.statistic_profile.id)).or(Project.where(id: Project.collaborations(member.id)))
+      end
+    end
+
     records = if query_params['q'].present?
                 records.search(query_params['q'])
               else

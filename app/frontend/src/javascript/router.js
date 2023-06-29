@@ -301,7 +301,7 @@ angular.module('application.router', ['ui.router'])
           themesPromise: ['Theme', function (Theme) { return Theme.query().$promise; }],
           componentsPromise: ['Component', function (Component) { return Component.query().$promise; }],
           machinesPromise: ['Machine', function (Machine) { return Machine.query().$promise; }],
-          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['openlab_app_id', 'openlab_default']" }).$promise; }],
+          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['openlab_app_id', 'openlab_default', 'projects_list_member_filter_presence']" }).$promise; }],
           openLabActive: ['Setting', function (Setting) { return Setting.isPresent({ name: 'openlab_app_secret' }).$promise; }]
         }
       })

@@ -198,7 +198,8 @@ export const fabHubSettings = [
 export const projectsSettings = [
   'allowed_cad_extensions',
   'allowed_cad_mime_types',
-  'disqus_shortname'
+  'disqus_shortname',
+  'projects_list_member_filter_presence'
 ] as const;
 
 export const prepaidPacksSettings = [

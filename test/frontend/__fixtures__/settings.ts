@@ -825,6 +825,12 @@ export const settings: Array<Setting> = [
     value: 'https://www.sleede.com/',
     last_update: '2022-12-23T14:39:12+0100',
     localized: 'Url'
+  },
+  {
+    name: 'projects_list_member_filter_presence',
+    value: 'false',
+    last_update: '2022-12-23T14:39:12+0100',
+    localized: 'Projects list member filter presence'
   }
 ];
 

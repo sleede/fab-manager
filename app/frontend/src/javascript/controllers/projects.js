@@ -281,8 +281,8 @@ class ProjectsController {
 /**
  *  Controller used on projects listing page
  */
-Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'Project', 'machinesPromise', 'themesPromise', 'componentsPromise', 'paginationService', 'OpenlabProject', '$window', 'growl', '_t', '$location', '$timeout', 'settingsPromise', 'openLabActive',
-  function ($scope, $state, Project, machinesPromise, themesPromise, componentsPromise, paginationService, OpenlabProject, $window, growl, _t, $location, $timeout, settingsPromise, openLabActive) {
+Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'Project', 'machinesPromise', 'themesPromise', 'componentsPromise', 'paginationService', 'OpenlabProject', '$window', 'growl', '_t', '$location', '$timeout', 'settingsPromise', 'openLabActive', 'Member', 'Diacritics',
+  function ($scope, $state, Project, machinesPromise, themesPromise, componentsPromise, paginationService, OpenlabProject, $window, growl, _t, $location, $timeout, settingsPromise, openLabActive, Member, Diacritics) {
   /* PRIVATE STATIC CONSTANTS */
 
     // Number of projects added to the page when the user clicks on 'load more projects'
@@ -294,11 +294,17 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
     // Fab-manager's instance ID in the openLab network
     $scope.openlabAppId = settingsPromise.openlab_app_id;
 
+    $scope.memberFilterPresence = settingsPromise.projects_list_member_filter_presence !== 'false';
+
     // Is openLab enabled on the instance?
     $scope.openlab = {
       projectsActive: openLabActive.isPresent,
       searchOverWholeNetwork: settingsPromise.openlab_default === 'true'
     };
+
+    if (!$scope.memberFilterPresence) {
+      $location.$$search.member_id = '';
+    }
 
     // default search parameters
     $scope.search = {
@@ -307,7 +313,24 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
       machine_id: (parseInt($location.$$search.machine_id) || undefined),
       component_id: (parseInt($location.$$search.component_id) || undefined),
       theme_id: (parseInt($location.$$search.theme_id) || undefined),
-      status_id: (parseInt($location.$$search.status_id) || undefined)
+      status_id: (parseInt($location.$$search.status_id) || undefined),
+      member_id: (parseInt($location.$$search.member_id) || undefined)
+    };
+
+    $scope.autoCompleteMemberName = function (nameLookup) {
+      if (!nameLookup) {
+        return;
+      }
+      $scope.isLoadingMembers = true;
+      const asciiName = Diacritics.remove(nameLookup);
+
+      const q = { query: asciiName };
+
+      Member.search(q, function (users) {
+        $scope.matchingMembers = users;
+        $scope.isLoadingMembers = false;
+      }
+      , function (error) { console.error(error); });
     };
 
     // list of projects to display
@@ -361,6 +384,7 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
         $scope.search.component_id = undefined;
         $scope.search.theme_id = undefined;
         $scope.search.status_id = undefined;
+        $scope.search.member_id = undefined;
         $scope.$apply();
         $scope.setUrlQueryParams($scope.search);
         $scope.triggerSearch();
@@ -420,6 +444,16 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
       updateUrlParam('component_id', search.component_id);
       updateUrlParam('machine_id', search.machine_id);
       updateUrlParam('status_id', search.status_id);
+      updateUrlParam('member_id', search.member_id);
+      return true;
+    };
+
+    $scope.setSearchMemberId = function (searchMember) {
+      if (searchMember) {
+        $scope.search.member_id = searchMember.id;
+      } else {
+        $scope.search.member_id = undefined;
+      }
       return true;
     };
 
@@ -449,6 +483,11 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
         $scope.openlab.searchOverWholeNetwork = $scope.openlab.projectsActive && settingsPromise.openlab_default === 'true';
       } else {
         $scope.openlab.searchOverWholeNetwork = $scope.openlab.projectsActive;
+      }
+      if ($location.$$search.member_id && $scope.memberFilterPresence) {
+        Member.get({ id: $location.$$search.member_id }, function (member) {
+          $scope.searchMember = member;
+        });
       }
       return $scope.triggerSearch();
     };

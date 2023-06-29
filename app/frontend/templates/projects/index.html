@@ -65,6 +65,15 @@
         <option value="" translate>{{ 'app.public.projects_list.all_materials' }}</option>
       </select>
 
+      <ui-select ng-if="currentUser && memberFilterPresence" ng-model="searchMember" on-select="setSearchMemberId(searchMember) && setUrlQueryParams(search) && triggerSearch()">
+        <ui-select-match allow-clear="true" placeholder="{{ 'app.public.projects_list.filter_by_member' | translate }}">
+          <span ng-bind="$select.selected.name"></span>
+        </ui-select-match>
+        <ui-select-choices repeat="m in matchingMembers" refresh="autoCompleteMemberName($select.search)" refresh-delay="300">
+          <span ng-bind-html="m.name | highlight: $select.search"></span>
+        </ui-select-choices>
+      </ui-select>
+
       <status-filter on-filter-change="onStatusChange" current-status-index="search.status_id"/>
     </div>
   </div>
