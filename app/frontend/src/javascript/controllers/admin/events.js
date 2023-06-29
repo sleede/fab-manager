@@ -609,10 +609,11 @@ Application.Controllers.controller('ShowEventReservationsController', ['$scope',
         if (r.id === reservation.id) {
           return reservation;
         }
+        growl.success(_t('app.admin.event_reservations.reservation_was_successfully_paid'));
         return r;
       });
     }, function () {
-      $log.info('Pay reservation modal dismissed at: ' + new Date());
+      console.log('Pay reservation modal dismissed at: ' + new Date());
     });
   };
 }]);

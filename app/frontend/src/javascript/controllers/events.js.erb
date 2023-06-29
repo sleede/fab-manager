@@ -303,7 +303,8 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
         $scope.now.isBefore($scope.eventEndDateTime) &&
         helpers.isUserValidatedByType($scope.ctrl.member, $scope.settings, 'event');
       if ($scope.event.pre_registration) {
-        return bookable && $scope.event.pre_registration_end_date && $scope.now.isSameOrBefore($scope.event.pre_registration_end_date, 'day');
+        const endDate = $scope.event.pre_registration_end_date || $scope.event.end_date
+        return bookable && $scope.now.isSameOrBefore(endDate, 'day');
       } else {
         return bookable;
       }

@@ -322,7 +322,6 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
             }
             return c;
           });
-          console.log(member.children);
           return member;
         }
         return member;

@@ -656,6 +656,7 @@ en:
         confirm_payment_of_html: "{ROLE, select, admin{Cash} other{Pay}}: {AMOUNT}" #(contexte : validate a payment of $20,00)
         offer_this_reservation: "I offer this reservation"
         i_have_received_the_payment:  "I have received the payment"
+        reservation_was_successfully_paid: "Reservation was successfully paid."
       events_settings:
         title: "Settings"
         generic_text_block: "Editorial text block"
@@ -1823,8 +1824,9 @@ en:
         public_registrations: "Public registrations"
         show_username_in_admin_list: "Show the username in the list"
         family_account: "family account"
-        family_account_info_html: "By activating this option, you offer your members the possibility to add their child(ren) to their own account. You can also request proof if you wish to validate them."
+        family_account_info_html: "The Family account allows your members to add their children under 18 years old to their own account and directly register them for Family events. You can also request supporting documents for each child and validate their account."
         enable_family_account: "Enable the Family Account option"
+        child_validation_required: "the account validation option for children"
         child_validation_required_label: "Activate the account validation option for children"
         overlapping_options:
           training_reservations: "Trainings"

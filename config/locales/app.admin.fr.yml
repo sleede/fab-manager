@@ -656,6 +656,7 @@ fr:
         confirm_payment_of_html: "{ROLE, select, admin{Encaisser} other{Payer}} : {AMOUNT}" #(contexte : validate a payment of $20,00)
         offer_this_reservation: "J'offre cette réservation"
         i_have_received_the_payment:  "J'ai reçu le paiement"
+        reservation_was_successfully_paid: "La réservation a bien été payée."
       events_settings:
         title: "Paramètres"
         generic_text_block: "Bloc de texte rédactionnel"
@@ -1815,8 +1816,9 @@ fr:
         public_registrations: "Inscriptions publiques"
         show_username_in_admin_list: "Afficher le nom d'utilisateur dans la liste"
         family_account: "Compte famille"
-        family_account_info_html: "En activant cette option, vous offrez à vos membres la possibilité d'ajouter sur leur propre compte leur(s) enfants. Vous pouvez aussi demander un justificatif si vous souhaitez les valider."
+        family_account_info_html: "Le compte Famille permet à vos membres d'ajouter leurs enfants de moins de 18 ans sur leur propre compte et de les inscrire directement aux évènements de type Famille. Vous pouvez aussi demander des justificatifs pour chaque enfant et valider leur compte."
         enable_family_account: "Activer l'option Compte Famille"
+        child_validation_required: "l'option de validation des comptes enfants"
         child_validation_required_label: "Activer l'option de validation des comptes enfants"
         overlapping_options:
           training_reservations: "Formations"
