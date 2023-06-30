@@ -2,17 +2,17 @@
 
 # Provides methods for Project
 class ProjectService
-  def search(params, current_user)
+  def search(params, current_user, paginate: true)
     connection = ActiveRecord::Base.connection
     return { error: 'invalid adapter' } unless connection.instance_values['config'][:adapter] == 'postgresql'
 
-    search_from_postgre(params, current_user)
+    search_from_postgre(params, current_user, paginate: paginate)
   end
 
   private
 
-  def search_from_postgre(params, current_user)
-    query_params = JSON.parse(params[:search])
+  def search_from_postgre(params, current_user, paginate: true)
+    query_params = JSON.parse(params[:search] || "{}")
 
     records = Project.published_or_drafts(current_user&.statistic_profile&.id)
     records = Project.user_projects(current_user&.statistic_profile&.id) if query_params['from'] == 'mine'
@@ -29,6 +29,9 @@ class ProjectService
                 records.order(created_at: :desc)
               end
 
-    { total: records.count, projects: records.includes(:users, :project_image).page(params[:page]) }
+    records = records.includes(:users, :project_image)
+    records = records.page(params[:page]) if paginate
+
+    { total: records.count, projects: records }
   end
 end

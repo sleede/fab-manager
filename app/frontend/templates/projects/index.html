@@ -67,6 +67,12 @@
 
       <status-filter on-filter-change="onStatusChange" current-status-index="search.status_id"/>
     </div>
+
+    <div class="text-center m m-b-lg" ng-if="!openlab.searchOverWholeNetwork && (projects.length != 0) && (isAuthorized('admin') || isAuthorized('manager'))">
+      <a class="btn bg-light text-black" ng-href="{{ zipUrl }}" target="_blank">
+        <i class="fa fa-download"></i> {{ 'app.public.projects_list.download_archive' | translate }}
+      </a>
+    </div>
   </div>
 
   <div class="projects-list">

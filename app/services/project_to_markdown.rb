@@ -14,7 +14,7 @@ class ProjectToMarkdown
 
     md << ReverseMarkdown.convert(project.description.to_s)
 
-    project_steps = project.project_steps.order(:step_nb)
+    project_steps = project.project_steps
 
     if project_steps.present?
       md << "## #{I18n.t('app.shared.project.steps')}"
@@ -29,6 +29,9 @@ class ProjectToMarkdown
       end
     end
 
+    md << "## #{I18n.t('app.shared.project.author')}"
+    md << project.author&.user&.profile&.full_name
+
     if project.themes.present?
       md << "## #{I18n.t('app.shared.project.themes')}"
       md << project.themes.map(&:name).join(', ')
@@ -41,8 +44,10 @@ class ProjectToMarkdown
       end
     end
 
-    md << "## #{I18n.t('app.shared.project.status')}"
-    md << project.status.name
+    if project.status
+      md << "## #{I18n.t('app.shared.project.status')}"
+      md << project.status.name
+    end
 
     if project.machines.present?
       md << "## #{I18n.t('app.shared.project.employed_machines')}"
@@ -54,9 +59,9 @@ class ProjectToMarkdown
       md << project.components.map(&:name).join(', ')
     end
 
-    if project.project_users.present?
+    if project.users.present?
       md << "## #{I18n.t('app.shared.project.collaborators')}"
-      md << project.project_users.map { |pu| pu.user.profile.full_name }.join(', ')
+      md << project.users.map { |u| u.profile.full_name }.join(', ')
     end
 
     if project.licence.present?

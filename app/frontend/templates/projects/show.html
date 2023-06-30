@@ -174,8 +174,8 @@
       </div>
     </section>
 
-    <div class="text-center m m-b-lg" ng-if="projectEditableBy(currentUser) || isAuthorized('admin')">
-      <a class="btn btn-default" ng-href="api/projects/{{ project.id}}/markdown" target="_blank">
+    <div class="text-center m m-b-lg" ng-if="projectEditableBy(currentUser) || isAuthorized('admin') || isAuthorized('manager')">
+      <a class="btn bg-light text-black" ng-href="api/projects/{{ project.id}}/markdown" target="_blank">
         <i class="fa fa-download"></i> {{ 'app.public.projects_show.markdown_file' | translate }}
       </a>
     </div>

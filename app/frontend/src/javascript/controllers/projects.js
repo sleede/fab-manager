@@ -332,6 +332,8 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
       $scope.triggerSearch();
     };
 
+    $scope.zipUrl = '/api/projects/search.zip';
+
     /**
      * Callback triggered when the button "search from the whole network" is toggled
      */
@@ -420,6 +422,9 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
       updateUrlParam('component_id', search.component_id);
       updateUrlParam('machine_id', search.machine_id);
       updateUrlParam('status_id', search.status_id);
+
+      $scope.zipUrl = '/api/projects/search.zip?' + new URLSearchParams({ search: JSON.stringify($location.search()) }).toString();
+
       return true;
     };
 

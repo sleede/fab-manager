@@ -16,14 +16,14 @@ class ProjectPolicy < ApplicationPolicy
   end
 
   def update?
-    user.admin? or record.author.user_id == user.id or record.users.include?(user)
+    user.admin? || record.author.user_id == user.id || record.users.include?(user)
   end
 
   def markdown?
-    user.admin? or record.author.user_id == user.id or record.users.include?(user)
+    user.admin? || user.manager? || record.author.user_id == user.id || record.users.include?(user)
   end
 
   def destroy?
-    user.admin? or record.author.user_id == user.id
+    user.admin? || record.author.user_id == user.id
   end
 end

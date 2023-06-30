@@ -183,6 +183,7 @@ en:
         all_materials: "All materials"
         load_next_projects: "Load next projects"
         rough_draft: "Rough draft"
+        download_archive: Download
       status_filter:
         all_statuses: "All statuses"
         select_status: "Select a status"

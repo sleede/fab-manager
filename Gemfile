@@ -30,6 +30,7 @@ group :development, :test do
   # comment over to use visual debugger (eg. RubyMine), uncomment to use manual debugging
   # gem 'byebug'
   gem 'dotenv-rails'
+  gem 'pry'
 end
 
 group :development do
@@ -43,7 +44,6 @@ group :development do
   # Preview mail in the browser
   gem 'listen', '~> 3.0.5'
   gem 'overcommit'
-  gem 'pry'
   gem 'rb-readline'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'railroady'

@@ -59,12 +59,23 @@ class API::ProjectsController < API::APIController
 
   def search
     service = ProjectService.new
-    res = service.search(params, current_user)
+    paginate = request.format.zip? ? false : true
+    res = service.search(params, current_user, paginate: paginate)
+
     render json: res, status: :unprocessable_entity and return if res[:error]
 
-    @total = res[:total]
-    @projects = res[:projects]
-    render :index
+    respond_to do |format|
+      format.json do
+        @total = res[:total]
+        @projects = res[:projects]
+        render :index
+      end
+      format.zip do
+        head :forbidden unless current_user.admin? || current_user.manager?
+
+        send_data ProjectsArchive.new(res[:projects]).call, filename: "projets.zip", disposition: 'attachment', type: 'application/zip'
+      end
+    end
   end
 
   private
