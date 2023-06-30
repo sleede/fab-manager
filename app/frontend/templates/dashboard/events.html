@@ -8,7 +8,7 @@
   </section>
 
 
-  <div class="row no-gutter">
+  <div class="row events-dashboard">
 
     <div class="col-md-6">
       <div class="widget panel b-a m m-t-lg">
@@ -16,8 +16,8 @@
           <h4 class="text-u-c"><i class="fa fa-tag m-r-xs"></i> {{ 'app.logged.dashboard.events.your_next_events' | translate }}</h4>
         </div>
         <div class="widget-content bg-light wrapper r-b">
-          <div class="list-unstyled" ng-if="user.events_reservations.length > 0">
-            <div ng-repeat="r in user.events_reservations | eventsReservationsFilter:'future'" class="m-b">
+          <div class="list-unstyled event-reservation" ng-if="user.events_reservations.length > 0">
+            <div ng-repeat="r in user.events_reservations | eventsReservationsFilter:'future'">
               <event-reservation-item reservation="r"></event-reservation-item>
             </div>
           </div>
