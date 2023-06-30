@@ -322,7 +322,8 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
       machine_id: (parseInt($location.$$search.machine_id) || undefined),
       component_id: (parseInt($location.$$search.component_id) || undefined),
       theme_id: (parseInt($location.$$search.theme_id) || undefined),
-      status_id: (parseInt($location.$$search.status_id) || undefined)
+      status_id: (parseInt($location.$$search.status_id) || undefined),
+      project_category_id: (parseInt($location.$$search.project_category_id) || undefined)
     };
 
     // list of projects to display
@@ -379,6 +380,7 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
         $scope.search.component_id = undefined;
         $scope.search.theme_id = undefined;
         $scope.search.status_id = undefined;
+        $scope.search.project_category_id = undefined;
         $scope.$apply();
         $scope.setUrlQueryParams($scope.search);
         $scope.triggerSearch();
