@@ -37,6 +37,18 @@ en:
           edit_profile: "Change my data"
           after_edition_info_html: "Once your data are up to date, <strong>click on the synchronization button below</strong>, or <strong>disconnect then reconnect</strong> for your changes to take effect."
           sync_profile: "Sync my profile"
+      event_reservation_item:
+        event: "Event"
+        family: "Family"
+        nominative: "Nominative"
+        pre_registration: "Pre-registration"
+        NUMBER_normal_places_reserved: "{NUMBER} {NUMBER, plural, =0{} =1{normal place reserved} other{normal places reserved}}"
+        NUMBER_of_NAME_places_reserved: "{NUMBER} {NUMBER, plural, =0{} =1{of {NAME} place reserved} other{of {NAME} places reserved}}"
+        tracking_your_reservation: "Tracking your reservation"
+        in_the_process_of_validation: "In the process of validation"
+        settle_your_payment: "Come to the reception desk to settle"
+        paid: "Paid"
+        canceled: "Canceled"
       dashboard:
         #dashboard: public profile
         profile:
