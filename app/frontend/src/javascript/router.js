@@ -743,7 +743,7 @@ angular.module('application.router', ['ui.router'])
           settingsPromise: ['Setting', function (Setting) {
             return Setting.query({
               names: "['feature_tour_display', 'disqus_shortname', 'allowed_cad_extensions', " +
-                     "'allowed_cad_mime_types', 'openlab_app_id', 'openlab_app_secret', 'openlab_default', 'project_categories_filter_placeholder']"
+                     "'allowed_cad_mime_types', 'openlab_app_id', 'openlab_app_secret', 'openlab_default', 'project_categories_filter_placeholder', 'project_categories_wording']"
             }).$promise;
           }]
         }
