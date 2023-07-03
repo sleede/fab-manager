@@ -27,8 +27,6 @@ class AccountingWorker
   end
 
   def invoices(invoices_ids)
-    # clean
-    AccountingLine.where(invoice_id: invoices_ids).delete_all
     # build
     service = Accounting::AccountingService.new
     invoices = Invoice.where(id: invoices_ids)
@@ -37,8 +35,6 @@ class AccountingWorker
   end
 
   def all
-    # clean
-    AccountingLine.delete_all
     # build
     service = Accounting::AccountingService.new
     ids = service.build_from_invoices(Invoice.all)
