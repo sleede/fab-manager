@@ -2,6 +2,7 @@
 
 - Fix a bug: unable to refresh machine/space/training calender after pay an reservation
 - Fix a bug: Accouning Line in duplicate
+- Fix a bug: displays "my orders" link only if store module is active
 - [TODO DEPLOY] `rails fablab:setup:build_accounting_lines`
 
 ## v6.0.7 2023 June 20
