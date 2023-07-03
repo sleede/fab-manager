@@ -61,9 +61,6 @@
             buttons: <%= I18n.t('app.shared.buttons').to_json.html_safe %>,
             messages: <%= I18n.t('app.shared.messages').to_json.html_safe %>
           }
-        },
-        date: {
-          month_names: <%= I18n.t('date.month_names').to_json.html_safe %>
         }
       };
       Fablab.weekStartingDay = <%= Date.parse(Rails.application.secrets.week_starting_day).strftime('%w') %>;

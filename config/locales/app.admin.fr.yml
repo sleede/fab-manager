@@ -1775,6 +1775,7 @@ fr:
         public_registrations: "Inscriptions publiques"
         show_username_in_admin_list: "Afficher le nom d'utilisateur dans la liste"
         projects_list_member_filter_presence: "Présence du filtre par membre dans la vue liste des projets"
+        projects_list_date_filters_presence: "Présence des filtres par date dans la vue liste des projets"
         overlapping_options:
           training_reservations: "Formations"
           machine_reservations: "Machines"

@@ -294,7 +294,9 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
     // Fab-manager's instance ID in the openLab network
     $scope.openlabAppId = settingsPromise.openlab_app_id;
 
+    // settings of optional filters
     $scope.memberFilterPresence = settingsPromise.projects_list_member_filter_presence !== 'false';
+    $scope.dateFiltersPresence = settingsPromise.projects_list_date_filters_presence !== 'false';
 
     // Is openLab enabled on the instance?
     $scope.openlab = {
@@ -306,6 +308,9 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
       $location.$$search.member_id = '';
     }
 
+    fromDate = $location.$$search.from_date ? new Date($location.$$search.from_date) : undefined;
+    toDate = $location.$$search.to_date ? new Date($location.$$search.to_date) : undefined;
+
     // default search parameters
     $scope.search = {
       q: ($location.$$search.q || ''),
@@ -314,7 +319,9 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
       component_id: (parseInt($location.$$search.component_id) || undefined),
       theme_id: (parseInt($location.$$search.theme_id) || undefined),
       status_id: (parseInt($location.$$search.status_id) || undefined),
-      member_id: (parseInt($location.$$search.member_id) || undefined)
+      member_id: (parseInt($location.$$search.member_id) || undefined),
+      from_date: fromDate,
+      to_date: toDate
     };
 
     $scope.autoCompleteMemberName = function (nameLookup) {
@@ -385,6 +392,8 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
         $scope.search.theme_id = undefined;
         $scope.search.status_id = undefined;
         $scope.search.member_id = undefined;
+        $scope.search.from_date = undefined;
+        $scope.search.to_date = undefined;
         $scope.$apply();
         $scope.setUrlQueryParams($scope.search);
         $scope.triggerSearch();
@@ -413,7 +422,10 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
       } else {
         updateUrlParam('whole_network', 'f');
         $scope.projectsPagination = new paginationService.Instance(Project, currentPage, PROJECTS_PER_PAGE, null, { }, loadMoreCallback, 'search');
-        Project.search({ search: $scope.search, page: currentPage, per_page: PROJECTS_PER_PAGE }, function (projectsPromise) {
+        const fromDate = $scope.search.from_date ? $scope.search.from_date.toLocaleDateString() : undefined;
+        const toDate = $scope.search.to_date ? $scope.search.to_date.toLocaleDateString() : undefined;
+        const searchParams = Object.assign({}, $scope.search, { from_date: fromDate, to_date: toDate });
+        Project.search({ search: searchParams, page: currentPage, per_page: PROJECTS_PER_PAGE }, function (projectsPromise) {
           $scope.projectsPagination.totalCount = projectsPromise.meta.total;
           $scope.projects = projectsPromise.projects;
         });
@@ -445,6 +457,10 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
       updateUrlParam('machine_id', search.machine_id);
       updateUrlParam('status_id', search.status_id);
       updateUrlParam('member_id', search.member_id);
+      const fromDate = search.from_date ? search.from_date.toDateString() : undefined;
+      updateUrlParam('from_date', fromDate);
+      const toDate = search.to_date ? search.to_date.toDateString() : undefined;
+      updateUrlParam('to_date', toDate);
       return true;
     };
 

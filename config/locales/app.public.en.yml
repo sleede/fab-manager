@@ -167,6 +167,7 @@ en:
         full_price: "Full price: "
       #projects gallery
       projects_list:
+        filter: Filter
         the_fablab_projects: "The projects"
         add_a_project: "Add a project"
         network_search: "Fab-manager network"
@@ -184,6 +185,8 @@ en:
         load_next_projects: "Load next projects"
         rough_draft: "Rough draft"
         filter_by_member: "Filter by member"
+        created_from: Created from
+        created_to: Created to
       status_filter:
         all_statuses: "All statuses"
         select_status: "Select a status"

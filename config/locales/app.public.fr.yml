@@ -167,6 +167,7 @@ fr:
         full_price: "Plein tarif : "
       #projects gallery
       projects_list:
+        filter: Filtrer
         the_fablab_projects: "Les projets"
         add_a_project: "Ajouter un projet"
         network_search: "Réseau Fab-Manager"
@@ -184,6 +185,8 @@ fr:
         load_next_projects: "Charger les projets suivants"
         rough_draft: "Brouillon"
         filter_by_member: "Filter par membre"
+        created_from: Créés à partir du
+        created_to: Créés jusqu'au
       status_filter:
         all_statuses: "Tous les statuts"
         select_status: "Sélectionnez un statut"

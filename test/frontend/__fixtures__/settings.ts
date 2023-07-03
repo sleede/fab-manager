@@ -831,6 +831,12 @@ export const settings: Array<Setting> = [
     value: 'false',
     last_update: '2022-12-23T14:39:12+0100',
     localized: 'Projects list member filter presence'
+  },
+  {
+    name: 'projects_list_date_filters_presence',
+    value: 'false',
+    last_update: '2022-12-23T14:39:12+0100',
+    localized: 'Projects list date filters presence'
   }
 ];
 

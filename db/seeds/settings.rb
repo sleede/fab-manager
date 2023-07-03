@@ -730,3 +730,4 @@ Setting.set('accounting_Error_label', 'Erroneous invoices to refund') unless Set
 Setting.set('external_id', false) unless Setting.find_by(name: 'external_id').try(:value)
 
 Setting.set('projects_list_member_filter_presence', false) unless Setting.find_by(name: 'projects_list_member_filter_presence')
+Setting.set('projects_list_date_filters_presence', false) unless Setting.find_by(name: 'projects_list_date_filters_presence')
