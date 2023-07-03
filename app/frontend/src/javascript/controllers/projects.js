@@ -380,6 +380,8 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
       $scope.triggerSearch();
     };
 
+    $scope.zipUrl = '/api/projects/search.zip';
+
     /**
      * Callback triggered when the button "search from the whole network" is toggled
      */
@@ -481,6 +483,7 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
       const toDate = search.to_date ? search.to_date.toDateString() : undefined;
       updateUrlParam('to_date', toDate);
       updateUrlParam('project_category_id', search.project_category_id);
+      $scope.zipUrl = '/api/projects/search.zip?' + new URLSearchParams({ search: JSON.stringify($location.search()) }).toString();
       return true;
     };
 

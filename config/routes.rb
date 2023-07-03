@@ -38,6 +38,7 @@ Rails.application.routes.draw do
         get :last_published
         get :search
       end
+      get :markdown, on: :member
     end
     resources :openlab_projects, only: :index
     resources :machines

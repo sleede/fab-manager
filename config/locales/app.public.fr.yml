@@ -187,6 +187,7 @@ fr:
         filter_by_member: "Filter par membre"
         created_from: Créés à partir du
         created_to: Créés jusqu'au
+        download_archive: Télécharger
       status_filter:
         all_statuses: "Tous les statuts"
         select_status: "Sélectionnez un statut"
@@ -220,6 +221,7 @@ fr:
         report: "Signaler"
         do_you_really_want_to_delete_this_project: "Êtes-vous sur de vouloir supprimer ce projet ?"
         status: "Statut"
+        markdown_file: "Fichier Markdown"
       #list of machines
       machines_list:
         the_fablab_s_machines: "Les machines"

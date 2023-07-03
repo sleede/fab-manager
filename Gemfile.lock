@@ -398,6 +398,8 @@ GEM
     responders (3.1.0)
       actionpack (>= 5.2)
       railties (>= 5.2)
+    reverse_markdown (2.1.1)
+      nokogiri
     rexml (3.2.5)
     rolify (5.3.0)
     rubocop (1.31.2)
@@ -590,6 +592,7 @@ DEPENDENCIES
   redis-session-store
   repost
   responders (~> 3.0)
+  reverse_markdown
   rolify
   rubocop (~> 1.31)
   rubocop-rails
