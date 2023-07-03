@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+## v6.0.8 2023 July 03
+
 - Improved projects list filter
 - Fix a bug: unable to refresh machine/space/training calender after pay an reservation
 - Fix a bug: Accouning Line in duplicate
