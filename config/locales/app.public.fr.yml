@@ -372,7 +372,7 @@ fr:
         last_name_and_first_name: "Nom et prénom"
         pre_book: "Pré-inscrire"
         pre_registration_end_date: "Date limite de pré-inscription"
-        pre_registration: "Pré-réservation"
+        pre_registration: "Pré-inscription"
       #public calendar
       calendar:
         calendar: "Calendrier"
