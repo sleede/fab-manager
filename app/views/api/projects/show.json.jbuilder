@@ -39,6 +39,11 @@ json.themes @project.themes do |t|
   json.id t.id
   json.name t.name
 end
+json.project_category_ids @project.project_category_ids
+json.project_categories @project.project_categories do |t|
+  json.id t.id
+  json.name t.name
+end
 json.user_ids @project.user_ids
 json.project_users @project.project_users do |pu|
   json.id pu.user.id

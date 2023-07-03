@@ -22,7 +22,7 @@
 <section class="projects">
   <div class="projects-filters">
     <header>
-      <h3>Filter</h3>
+      <h3 translate>{{ 'app.public.projects_list.filter' }}</h3>
       <a href="javascript:void(0);" class="fab-button is-black" name="button" ng-click="resetFiltersAndTriggerSearch()" ng-show="!openlab.searchOverWholeNetwork">{{ 'app.public.projects_list.reset_all_filters' | translate }}</a>
     </header>
     <span class="switch" ng-if="openlab.projectsActive" uib-tooltip="{{ 'app.public.projects_list.tooltip_openlab_projects_switch' | translate }}" tooltip-trigger="mouseenter">
@@ -61,11 +61,56 @@
         <option value="" translate>{{ 'app.public.projects_list.all_themes' }}</option>
       </select>
 
+      <select ng-model="search.project_category_id" ng-change="setUrlQueryParams(search) && triggerSearch()" class="form-control" ng-options="pc.id as pc.name for pc in projectCategories">
+        <option value="" translate>{{ projectCategoriesFilterPlaceholder }}</option>
+      </select>
+
       <select ng-model="search.component_id" ng-change="setUrlQueryParams(search) && triggerSearch()" class="form-control" ng-options="t.id as t.name for t in components">
         <option value="" translate>{{ 'app.public.projects_list.all_materials' }}</option>
       </select>
 
+      <ui-select ng-if="currentUser && memberFilterPresence" ng-model="searchMember" on-select="setSearchMemberId(searchMember) && setUrlQueryParams(search) && triggerSearch()">
+        <ui-select-match allow-clear="true" placeholder="{{ 'app.public.projects_list.filter_by_member' | translate }}">
+          <span ng-bind="$select.selected.name"></span>
+        </ui-select-match>
+        <ui-select-choices repeat="m in matchingMembers" refresh="autoCompleteMemberName($select.search)" refresh-delay="300">
+          <span ng-bind-html="m.name | highlight: $select.search"></span>
+        </ui-select-choices>
+      </ui-select>
+
+      <label class="form-group m-n" ng-if="dateFiltersPresence">
+        <div class="form-item-header">
+          <p translate>{{ 'app.public.projects_list.created_from' }}</p>
+        </div>
+        <input class="form-control"
+               ng-model="search.from_date"
+               ng-model-options='{ debounce: 1000 }'
+               ng-change="setUrlQueryParams(search) && triggerSearch()"
+               type="date"
+               min="2000-01-01"
+               max="2060-01-01"/>
+      </label>
+
+      <label class="form-group m-n" ng-if="dateFiltersPresence">
+        <div class="form-item-header">
+          <p translate>{{ 'app.public.projects_list.created_to' }}</p>
+        </div>
+        <input class="form-control"
+               ng-model="search.to_date"
+               ng-model-options='{ debounce: 1000 }'
+               ng-change="setUrlQueryParams(search) && triggerSearch()"
+               type="date"
+               min="2000-01-01"
+               max="2060-01-01"/>
+      </label>
+
       <status-filter on-filter-change="onStatusChange" current-status-index="search.status_id"/>
+    </div>
+
+    <div class="text-center m m-b-lg" ng-if="!openlab.searchOverWholeNetwork && (projects.length != 0) && (isAuthorized('admin') || isAuthorized('manager'))">
+      <a class="btn bg-light text-black" ng-href="{{ zipUrl }}" target="_blank">
+        <i class="fa fa-download"></i> {{ 'app.public.projects_list.download_archive' | translate }}
+      </a>
     </div>
   </div>
 
