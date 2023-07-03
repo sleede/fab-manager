@@ -415,6 +415,8 @@ de:
         add_a_material: "Materialien hinfügen"
         themes: "Themen"
         add_a_new_theme: "Neues Thema hinzufügen"
+        project_categories: "Categories"
+        add_a_new_project_category: "Add a new category"
         licences: "Lizenzen"
         statuses: "Statuses"
         description: "Beschreibung"
@@ -445,6 +447,10 @@ de:
           open_lab_app_secret: "Geheimnis"
           openlab_default_info_html: "In der Projektgalerie können Besucher zwischen zwei Ansichten wechseln: alle gemeinsam geteilten Projekte des OpenLab-Netzwerkes oder nur die in Ihrem FabLab dokumentierten Projekte.<br/>Hier können Sie die standardmäßig angezeigte Ansicht auswählen."
           default_to_openlab: "OpenLab standardmäßig anzeigen"
+          filters: Projects list filters
+          project_categories: Categories
+      project_categories:
+        name: "Name"
       projects_setting:
         add: "Hinzufügen"
         actions_controls: "Actions"
@@ -1773,6 +1779,10 @@ de:
         extended_prices_in_same_day: "Erweiterte Preise am selben Tag"
         public_registrations: "Öffentliche Registrierungen"
         show_username_in_admin_list: "Show the username in the list"
+        projects_list_member_filter_presence: "Presence of member filter on projects list"
+        projects_list_date_filters_presence: "Presence of date filters on projects list"
+        project_categories_filter_placeholder: "Placeholder for categories filter in project gallery"
+        project_categories_wording: "Wording used to replace \"Categories\" on public pages"
         overlapping_options:
           training_reservations: "Schulungen"
           machine_reservations: "Maschinen"

@@ -415,6 +415,8 @@
         add_a_material: "Legg til et materiale"
         themes: "Temaer"
         add_a_new_theme: "Legge til et nytt tema"
+        project_categories: "Categories"
+        add_a_new_project_category: "Add a new category"
         licences: "Lisenser"
         statuses: "Statuses"
         description: "Beskrivelse"
@@ -445,6 +447,10 @@
           open_lab_app_secret: "Hemmelighet"
           openlab_default_info_html: "I prosjektgalleriet kan besøkende bytte mellom to visninger: alle delte projetter fra hele OpenLab-nettverket. eller bare prosjektene som er dokumentert i din Fab Lab.<br/>Her kan du velge hvilken visning som standard."
           default_to_openlab: "Vis OpenLab som standard"
+          filters: Projects list filters
+          project_categories: Categories
+      project_categories:
+        name: "Name"
       projects_setting:
         add: "Add"
         actions_controls: "Actions"
@@ -1773,6 +1779,10 @@
         extended_prices_in_same_day: "Extended prices in the same day"
         public_registrations: "Public registrations"
         show_username_in_admin_list: "Show the username in the list"
+        projects_list_member_filter_presence: "Presence of member filter on projects list"
+        projects_list_date_filters_presence: "Presence of date filters on projects list"
+        project_categories_filter_placeholder: "Placeholder for categories filter in project gallery"
+        project_categories_wording: "Wording used to replace \"Categories\" on public pages"
         overlapping_options:
           training_reservations: "Trainings"
           machine_reservations: "Machines"

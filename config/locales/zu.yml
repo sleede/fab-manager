@@ -697,6 +697,10 @@ zu:
     trainings_authorization_validity_duration: "crwdns37105:0crwdne37105:0"
     trainings_invalidation_rule: "crwdns37107:0crwdne37107:0"
     trainings_invalidation_rule_period: "crwdns37109:0crwdne37109:0"
+    projects_list_member_filter_presence: "crwdns37655:0crwdne37655:0"
+    projects_list_date_filters_presence: "crwdns37657:0crwdne37657:0"
+    project_categories_filter_placeholder: "crwdns37659:0crwdne37659:0"
+    project_categories_wording: "crwdns37661:0crwdne37661:0"
   #statuses of projects
   statuses:
     new: "crwdns37111:0crwdne37111:0"

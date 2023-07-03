@@ -167,7 +167,7 @@ fr:
         full_price: "Plein tarif : "
       #projects gallery
       projects_list:
-        filter: Filtrer
+        filter: Filter
         the_fablab_projects: "Les projets"
         add_a_project: "Ajouter un projet"
         network_search: "Réseau Fab-Manager"
@@ -184,10 +184,10 @@ fr:
         all_materials: "Tous les matériaux"
         load_next_projects: "Charger les projets suivants"
         rough_draft: "Brouillon"
-        filter_by_member: "Filter par membre"
-        created_from: Créés à partir du
-        created_to: Créés jusqu'au
-        download_archive: Télécharger
+        filter_by_member: "Filter by member"
+        created_from: Created from
+        created_to: Created to
+        download_archive: Download
       status_filter:
         all_statuses: "Tous les statuts"
         select_status: "Sélectionnez un statut"
@@ -221,7 +221,7 @@ fr:
         report: "Signaler"
         do_you_really_want_to_delete_this_project: "Êtes-vous sur de vouloir supprimer ce projet ?"
         status: "Statut"
-        markdown_file: "Fichier Markdown"
+        markdown_file: "Markdown file"
       #list of machines
       machines_list:
         the_fablab_s_machines: "Les machines"
