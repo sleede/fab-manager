@@ -697,6 +697,10 @@ it:
     trainings_authorization_validity_duration: "Durata del periodo di validità delle abilitazioni"
     trainings_invalidation_rule: "Annullamento automatico delle abilitazioni"
     trainings_invalidation_rule_period: "Periodo di tolleranza prima di invalidare un'abilitazione"
+    projects_list_member_filter_presence: "Presence of member filter on projects list"
+    projects_list_date_filters_presence: "Presence of dates filter on projects list"
+    project_categories_filter_placeholder: "Placeholder for categories filter in project gallery"
+    project_categories_wording: "Wording used to replace \"Categories\" on public pages"
   #statuses of projects
   statuses:
     new: "Nuovo"

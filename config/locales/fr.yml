@@ -697,6 +697,10 @@ fr:
     trainings_authorization_validity_duration: "Durée de la période de validité des formations"
     trainings_invalidation_rule: "Invalidation automatique des formations"
     trainings_invalidation_rule_period: "Période de grâce avant d'invalider une formation"
+    projects_list_member_filter_presence: "Presence of member filter on projects list"
+    projects_list_date_filters_presence: "Presence of dates filter on projects list"
+    project_categories_filter_placeholder: "Placeholder for categories filter in project gallery"
+    project_categories_wording: "Wording used to replace \"Categories\" on public pages"
   #statuses of projects
   statuses:
     new: "Nouveau"

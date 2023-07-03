@@ -22,11 +22,19 @@ class Accounting::AccountingService
     lines = []
     processed = []
     invoices.find_each do |i|
-      Rails.logger.debug { "processing invoice #{i.id}..." } unless Rails.env.test?
-      lines.concat(generate_lines(i))
-      processed.push(i.id)
+      Rails.logger.debug { "[AccountLine] processing invoice #{i.id}..." } unless Rails.env.test?
+      if i.main_item.nil?
+        Rails.logger.error { "[AccountLine] invoice #{i.id} main_item is nil" } unless Rails.env.test?
+      else
+        lines.concat(generate_lines(i))
+        processed.push(i.id)
+      end
     end
-    AccountingLine.create!(lines)
+    ActiveRecord::Base.transaction do
+      ids = invoices.map(&:id)
+      AccountingLine.where(invoice_id: ids).delete_all
+      AccountingLine.create!(lines)
+    end
     processed
   end
 

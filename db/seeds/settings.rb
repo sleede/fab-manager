@@ -728,3 +728,8 @@ Setting.set('accounting_Error_code', 'ERROR') unless Setting.find_by(name: 'acco
 Setting.set('accounting_Error_label', 'Erroneous invoices to refund') unless Setting.find_by(name: 'accounting_Error_label').try(:value)
 
 Setting.set('external_id', false) unless Setting.find_by(name: 'external_id').try(:value)
+
+Setting.set('projects_list_member_filter_presence', false) unless Setting.find_by(name: 'projects_list_member_filter_presence')
+Setting.set('projects_list_date_filters_presence', false) unless Setting.find_by(name: 'projects_list_date_filters_presence')
+Setting.set('project_categories_filter_placeholder', 'Toutes les catégories') unless Setting.find_by(name: 'project_categories_filter_placeholder').try(:value)
+Setting.set('project_categories_wording', 'Catégories') unless Setting.find_by(name: 'project_categories_wording').try(:value)

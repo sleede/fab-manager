@@ -167,6 +167,7 @@ it:
         full_price: "Prezzo intero: "
       #projects gallery
       projects_list:
+        filter: Filter
         the_fablab_projects: "Progetti"
         add_a_project: "Aggiungi un progetto"
         network_search: "Fab-manager network"
@@ -183,6 +184,10 @@ it:
         all_materials: "Tutti i materiali"
         load_next_projects: "Carica i progetti successivi"
         rough_draft: "Bozza preliminare"
+        filter_by_member: "Filter by member"
+        created_from: Created from
+        created_to: Created to
+        download_archive: Download
       status_filter:
         all_statuses: "Tutti gli stati"
         select_status: "Seleziona uno status"
@@ -216,6 +221,7 @@ it:
         report: "Segnalazione"
         do_you_really_want_to_delete_this_project: "Vuoi davvero eliminare questo progetto?"
         status: "Stato"
+        markdown_file: "Markdown file"
       #list of machines
       machines_list:
         the_fablab_s_machines: "Le macchine"

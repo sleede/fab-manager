@@ -385,20 +385,9 @@ Application.Controllers.controller('ReserveTrainingController', ['$scope', '$tra
      * Refetch all events from the API and re-populate the calendar with the resulting slots
      */
     const refreshCalendar = function () {
-      const view = uiCalendarConfig.calendars.calendar.fullCalendar('getView');
-      const id = $transition$.params().id === 'all' ? $transition$.params().id : $scope.training.id;
-      Availability.trainings({
-        trainingId: id,
-        member_id: $scope.ctrl.member.id,
-        start: view.start,
-        end: view.end,
-        timezone: Fablab.timezone
-      }, function (trainings) {
-        uiCalendarConfig.calendars.calendar.fullCalendar('removeEvents');
-        $scope.eventSources.splice(0, 1, {
-          events: trainings,
-          textColor: 'black'
-        });
+      $scope.eventSources.splice(0, 1, {
+        url: `/api/availabilities/trainings/${$transition$.params().id}`,
+        textColor: 'black'
       });
     }
 

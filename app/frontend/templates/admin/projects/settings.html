@@ -95,3 +95,49 @@
     </div>
   </div>
 </div>
+
+<div class="panel panel-default m-t-lg">
+  <div class="panel-heading">
+    <span class="font-sbold" translate>{{ 'app.admin.projects.settings.filters' }}</span>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <boolean-setting name="'projects_list_member_filter_presence'"
+                       label="'app.admin.settings.projects_list_member_filter_presence' | translate"
+                       on-success="onSuccess"
+                       on-error="onError"
+                       class-name="'m-l'"></boolean-setting>
+    </div>
+    <div class="row">
+      <boolean-setting name="'projects_list_date_filters_presence'"
+                       label="'app.admin.settings.projects_list_date_filters_presence' | translate"
+                       on-success="onSuccess"
+                       on-error="onError"
+                       class-name="'m-l'"></boolean-setting>
+    </div>
+  </div>
+</div>
+
+<div class="panel panel-default m-t-lg">
+  <div class="panel-heading">
+    <span class="font-sbold" translate>{{ 'app.admin.projects.settings.project_categories' }}</span>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-md-6">
+        <text-setting name="project_categories_filter_placeholder"
+                      settings="allSettings"
+                      label="app.admin.settings.project_categories_filter_placeholder">
+        </text-setting>
+      </div>
+    </div>
+    <div class="row m-t">
+      <div class="col-md-6">
+        <text-setting name="project_categories_wording"
+                      settings="allSettings"
+                      label="app.admin.settings.project_categories_wording">
+        </text-setting>
+      </div>
+    </div>
+  </div>
+</div>

@@ -12,8 +12,8 @@
  */
 'use strict';
 
-Application.Controllers.controller('AdminProjectsController', ['$scope', '$state', 'Component', 'Licence', 'Theme', 'componentsPromise', 'licencesPromise', 'themesPromise', '_t', 'Member', 'uiTourService', 'settingsPromise', 'growl',
-  function ($scope, $state, Component, Licence, Theme, componentsPromise, licencesPromise, themesPromise, _t, Member, uiTourService, settingsPromise, growl) {
+Application.Controllers.controller('AdminProjectsController', ['$scope', '$state', 'Component', 'Licence', 'Theme', 'ProjectCategory', 'componentsPromise', 'licencesPromise', 'themesPromise', 'projectCategoriesPromise', '_t', 'Member', 'uiTourService', 'settingsPromise', 'growl',
+  function ($scope, $state, Component, Licence, Theme, ProjectCategory, componentsPromise, licencesPromise, themesPromise, projectCategoriesPromise, _t, Member, uiTourService, settingsPromise, growl) {
     // Materials list (plastic, wood ...)
     $scope.components = componentsPromise;
 
@@ -22,6 +22,9 @@ Application.Controllers.controller('AdminProjectsController', ['$scope', '$state
 
     // Themes list (cooking, sport ...)
     $scope.themes = themesPromise;
+
+    // Project categories list (generic categorization)
+    $scope.projectCategories = projectCategoriesPromise;
 
     // Application settings
     $scope.allSettings = settingsPromise;
@@ -112,6 +115,49 @@ Application.Controllers.controller('AdminProjectsController', ['$scope', '$state
         rowform.$cancel();
       } else {
         $scope.themes.splice(index, 1);
+      }
+    };
+
+    /**
+     * Saves a new project category / Update an existing project category to the server (form validation callback)
+     * @param data {Object} project category name
+     * @param [data] {number} project category id, in case of update
+     */
+    $scope.saveProjectCategory = function (data, id) {
+      if (id != null) {
+        return ProjectCategory.update({ id }, data);
+      } else {
+        return ProjectCategory.save(data, resp => $scope.projectCategories[$scope.projectCategories.length - 1].id = resp.id);
+      }
+    };
+
+    /**
+     * Deletes the project category at the specified index
+     * @param index {number} project category index in the $scope.projectCategories array
+     */
+    $scope.removeProjectCategory = function (index) {
+      ProjectCategory.delete($scope.projectCategories[index]);
+      return $scope.projectCategories.splice(index, 1);
+    };
+
+    /**
+     * Creates a new empty entry in the $scope.projectCategories array
+     */
+    $scope.addProjectCategory = function () {
+      $scope.inserted = { name: '' };
+      $scope.projectCategories.push($scope.inserted);
+    };
+
+    /**
+     * Removes the newly inserted but not saved project category / Cancel the current project category modification
+     * @param rowform {Object} see http://vitalets.github.io/angular-xeditable/
+     * @param index {number} project category index in the $scope.projectCategories array
+     */
+    $scope.cancelProjectCategory = function (rowform, index) {
+      if ($scope.projectCategories[index].id != null) {
+        rowform.$cancel();
+      } else {
+        $scope.projectCategories.splice(index, 1);
       }
     };
 

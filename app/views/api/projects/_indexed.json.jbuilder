@@ -7,6 +7,7 @@ json.user_ids project.user_ids
 json.machine_ids project.machine_ids
 json.theme_ids project.theme_ids
 json.component_ids project.component_ids
+json.project_category_ids project.project_category_ids
 json.tags project.tags
 json.name project.name
 json.description project.description
