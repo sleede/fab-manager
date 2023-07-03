@@ -852,6 +852,20 @@ history_value_100:
   updated_at: 2023-04-05 09:16:08.000511500 Z
   invoicing_profile_id: 1
 
+history_value_101:
+  setting_id: 100
+  value: 'Toutes les catégories'
+  created_at: 2023-04-05 09:16:08.000511500 Z
+  updated_at: 2023-04-05 09:16:08.000511500 Z
+  invoicing_profile_id: 1
+
+history_value_102:
+  setting_id: 101
+  value: 'Catégories'
+  created_at: 2023-04-05 09:16:08.000511500 Z
+  updated_at: 2023-04-05 09:16:08.000511500 Z
+  invoicing_profile_id: 1
+
 history_value_103:
   id: 103
   setting_id: 102

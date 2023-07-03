@@ -29,6 +29,7 @@
  *  - $scope.themes = [{Theme}]
  *  - $scope.licences = [{Licence}]
  *  - $scope.allowedExtensions = [{String}]
+ *  - $scope.projectCategoriesWording = [{String}]
  *  - $scope.submited(content)
  *  - $scope.cancel()
  *  - $scope.addFile()
@@ -43,7 +44,7 @@
  *  - $state (Ui-Router) [ 'app.public.projects_show', 'app.public.projects_list' ]
  */
 class ProjectsController {
-  constructor ($rootScope, $scope, $state, Project, Machine, Member, Component, Theme, Licence, Status, $document, Diacritics, dialogs, allowedExtensions, _t) {
+  constructor ($rootScope, $scope, $state, Project, Machine, Member, Component, Theme, ProjectCategory, Licence, Status, $document, Diacritics, dialogs, allowedExtensions, projectCategoriesWording, _t) {
     // remove codeview from summernote editor
     $scope.summernoteOptsProject = angular.copy($rootScope.summernoteOpts);
     $scope.summernoteOptsProject.toolbar[6][1].splice(1, 1);
@@ -78,6 +79,16 @@ class ProjectsController {
       });
     });
 
+    // Retrieve the list of themes from the server
+    ProjectCategory.query().$promise.then(function (data) {
+      $scope.projectCategories = data.map(function (d) {
+        return ({
+          id: d.id,
+          name: d.name
+        });
+      });
+    });
+
     // Retrieve the list of licences from the server
     Licence.query().$promise.then(function (data) {
       $scope.licences = data.map(function (d) {
@@ -103,6 +114,8 @@ class ProjectsController {
 
     // List of extensions allowed for CAD attachements upload
     $scope.allowedExtensions = allowedExtensions.setting.value.split(' ');
+
+    $scope.projectCategoriesWording = projectCategoriesWording.setting.value;
 
     /**
      * For use with ngUpload (https://github.com/twilson63/ngUpload).
@@ -281,8 +294,8 @@ class ProjectsController {
 /**
  *  Controller used on projects listing page
  */
-Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'Project', 'machinesPromise', 'themesPromise', 'componentsPromise', 'paginationService', 'OpenlabProject', '$window', 'growl', '_t', '$location', '$timeout', 'settingsPromise', 'openLabActive', 'Member', 'Diacritics',
-  function ($scope, $state, Project, machinesPromise, themesPromise, componentsPromise, paginationService, OpenlabProject, $window, growl, _t, $location, $timeout, settingsPromise, openLabActive, Member, Diacritics) {
+Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'Project', 'machinesPromise', 'themesPromise', 'projectCategoriesPromise', 'componentsPromise', 'paginationService', 'OpenlabProject', '$window', 'growl', '_t', '$location', '$timeout', 'settingsPromise', 'openLabActive', 'Member', 'Diacritics',
+  function ($scope, $state, Project, machinesPromise, themesPromise, projectCategoriesPromise, componentsPromise, paginationService, OpenlabProject, $window, growl, _t, $location, $timeout, settingsPromise, openLabActive, Member, Diacritics) {
   /* PRIVATE STATIC CONSTANTS */
 
     // Number of projects added to the page when the user clicks on 'load more projects'
@@ -297,6 +310,7 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
     // settings of optional filters
     $scope.memberFilterPresence = settingsPromise.projects_list_member_filter_presence !== 'false';
     $scope.dateFiltersPresence = settingsPromise.projects_list_date_filters_presence !== 'false';
+    $scope.projectCategoriesFilterPlaceholder = settingsPromise.project_categories_filter_placeholder;
 
     // Is openLab enabled on the instance?
     $scope.openlab = {
@@ -319,6 +333,7 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
       component_id: (parseInt($location.$$search.component_id) || undefined),
       theme_id: (parseInt($location.$$search.theme_id) || undefined),
       status_id: (parseInt($location.$$search.status_id) || undefined),
+      project_category_id: (parseInt($location.$$search.project_category_id) || undefined),
       member_id: (parseInt($location.$$search.member_id) || undefined),
       from_date: fromDate,
       to_date: toDate
@@ -348,6 +363,9 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
 
     // list of themes / used for filtering
     $scope.themes = themesPromise;
+
+    // list of projectCategories / used for filtering
+    $scope.projectCategories = projectCategoriesPromise;
 
     // list of components / used for filtering
     $scope.components = componentsPromise;
@@ -394,6 +412,7 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
         $scope.search.member_id = undefined;
         $scope.search.from_date = undefined;
         $scope.search.to_date = undefined;
+        $scope.search.project_category_id = undefined;
         $scope.$apply();
         $scope.setUrlQueryParams($scope.search);
         $scope.triggerSearch();
@@ -461,6 +480,7 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
       updateUrlParam('from_date', fromDate);
       const toDate = search.to_date ? search.to_date.toDateString() : undefined;
       updateUrlParam('to_date', toDate);
+      updateUrlParam('project_category_id', search.project_category_id);
       return true;
     };
 
@@ -551,8 +571,8 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
 /**
  * Controller used in the project creation page
  */
-Application.Controllers.controller('NewProjectController', ['$rootScope', '$scope', '$state', 'Project', 'Machine', 'Member', 'Component', 'Theme', 'Licence', 'Status', '$document', 'CSRF', 'Diacritics', 'dialogs', 'allowedExtensions', '_t',
-  function ($rootScope, $scope, $state, Project, Machine, Member, Component, Theme, Licence, Status, $document, CSRF, Diacritics, dialogs, allowedExtensions, _t) {
+Application.Controllers.controller('NewProjectController', ['$rootScope', '$scope', '$state', 'Project', 'Machine', 'Member', 'Component', 'Theme', 'ProjectCategory', 'Licence', 'Status', '$document', 'CSRF', 'Diacritics', 'dialogs', 'allowedExtensions', 'projectCategoriesWording', '_t',
+  function ($rootScope, $scope, $state, Project, Machine, Member, Component, Theme, ProjectCategory, Licence, Status, $document, CSRF, Diacritics, dialogs, allowedExtensions, projectCategoriesWording, _t) {
     CSRF.setMetaTags();
 
     // API URL where the form will be posted
@@ -584,15 +604,15 @@ Application.Controllers.controller('NewProjectController', ['$rootScope', '$scop
     };
 
     // Using the ProjectsController
-    return new ProjectsController($rootScope, $scope, $state, Project, Machine, Member, Component, Theme, Licence, Status, $document, Diacritics, dialogs, allowedExtensions, _t);
+    return new ProjectsController($rootScope, $scope, $state, Project, Machine, Member, Component, Theme, ProjectCategory, Licence, Status, $document, Diacritics, dialogs, allowedExtensions, projectCategoriesWording, _t);
   }
 ]);
 
 /**
  * Controller used in the project edition page
  */
-Application.Controllers.controller('EditProjectController', ['$rootScope', '$scope', '$state', '$transition$', 'Project', 'Machine', 'Member', 'Component', 'Theme', 'Licence', 'Status', '$document', 'CSRF', 'projectPromise', 'Diacritics', 'dialogs', 'allowedExtensions', '_t',
-  function ($rootScope, $scope, $state, $transition$, Project, Machine, Member, Component, Theme, Licence, Status, $document, CSRF, projectPromise, Diacritics, dialogs, allowedExtensions, _t) {
+Application.Controllers.controller('EditProjectController', ['$rootScope', '$scope', '$state', '$transition$', 'Project', 'Machine', 'Member', 'Component', 'Theme', 'ProjectCategory', 'Licence', 'Status', '$document', 'CSRF', 'projectPromise', 'Diacritics', 'dialogs', 'allowedExtensions', 'projectCategoriesWording', '_t',
+  function ($rootScope, $scope, $state, $transition$, Project, Machine, Member, Component, Theme, ProjectCategory, Licence, Status, $document, CSRF, projectPromise, Diacritics, dialogs, allowedExtensions, projectCategoriesWording, _t) {
     /* PUBLIC SCOPE */
 
     // API URL where the form will be posted
@@ -638,7 +658,7 @@ Application.Controllers.controller('EditProjectController', ['$rootScope', '$sco
       }
 
       // Using the ProjectsController
-      return new ProjectsController($rootScope, $scope, $state, Project, Machine, Member, Component, Theme, Licence, Status, $document, Diacritics, dialogs, allowedExtensions, _t);
+      return new ProjectsController($rootScope, $scope, $state, Project, Machine, Member, Component, Theme, ProjectCategory, Licence, Status, $document, Diacritics, dialogs, allowedExtensions, projectCategoriesWording, _t);
     };
 
     // !!! MUST BE CALLED AT THE END of the controller
@@ -649,14 +669,15 @@ Application.Controllers.controller('EditProjectController', ['$rootScope', '$sco
 /**
  * Controller used in the public project's details page
  */
-Application.Controllers.controller('ShowProjectController', ['$scope', '$state', 'projectPromise', 'shortnamePromise', '$location', '$uibModal', 'dialogs', '_t',
-  function ($scope, $state, projectPromise, shortnamePromise, $location, $uibModal, dialogs, _t) {
+Application.Controllers.controller('ShowProjectController', ['$scope', '$state', 'projectPromise', 'shortnamePromise', 'projectCategoriesWording', '$location', '$uibModal', 'dialogs', '_t',
+  function ($scope, $state, projectPromise, shortnamePromise, projectCategoriesWording, $location, $uibModal, dialogs, _t) {
   /* PUBLIC SCOPE */
 
     // Store the project's details
     $scope.project = projectPromise;
     $scope.projectUrl = $location.absUrl();
     $scope.disqusShortname = shortnamePromise.setting.value;
+    $scope.projectCategoriesWording = projectCategoriesWording.setting.value;
 
     /**
      * Test if the provided user has the edition rights on the current project

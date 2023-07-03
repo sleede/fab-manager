@@ -837,6 +837,18 @@ export const settings: Array<Setting> = [
     value: 'false',
     last_update: '2022-12-23T14:39:12+0100',
     localized: 'Projects list date filters presence'
+  },
+  {
+    name: 'project_categories_filter_placeholder',
+    value: 'Toutes les catégories',
+    last_update: '2022-12-23T14:39:12+0100',
+    localized: 'Placeholder for categories filter in project gallery'
+  },
+  {
+    name: 'project_categories_wording',
+    value: 'Catégories',
+    last_update: '2022-12-23T14:39:12+0100',
+    localized: 'Project categories overridden name'
   }
 ];
 

@@ -61,6 +61,10 @@
         <option value="" translate>{{ 'app.public.projects_list.all_themes' }}</option>
       </select>
 
+      <select ng-model="search.project_category_id" ng-change="setUrlQueryParams(search) && triggerSearch()" class="form-control" ng-options="pc.id as pc.name for pc in projectCategories">
+        <option value="" translate>{{ projectCategoriesFilterPlaceholder }}</option>
+      </select>
+
       <select ng-model="search.component_id" ng-change="setUrlQueryParams(search) && triggerSearch()" class="form-control" ng-options="t.id as t.name for t in components">
         <option value="" translate>{{ 'app.public.projects_list.all_materials' }}</option>
       </select>

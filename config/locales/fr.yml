@@ -699,6 +699,8 @@ fr:
     trainings_invalidation_rule_period: "Période de grâce avant d'invalider une formation"
     projects_list_member_filter_presence: "Présence du filtre par membre dans la vue liste des projets"
     projects_list_date_filters_presence: "Présence des filtres par date dans la vue liste des projets"
+    project_categories_filter_placeholder: "Texte du filtre par catégories de la galerie de projets"
+    project_categories_wording: "Mot utilisé en remplacement du mot \"Catégories\" sur les pages publiques"
   #statuses of projects
   statuses:
     new: "Nouveau"

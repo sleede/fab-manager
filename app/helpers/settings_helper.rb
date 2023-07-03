@@ -198,6 +198,8 @@ module SettingsHelper
     events_banner_cta_url
     projects_list_member_filter_presence
     projects_list_date_filters_presence
+    project_categories_filter_placeholder
+    project_categories_wording
   ].freeze
 end
 # rubocop:enable Metrics/ModuleLength

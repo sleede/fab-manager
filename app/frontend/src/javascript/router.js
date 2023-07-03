@@ -301,8 +301,9 @@ angular.module('application.router', ['ui.router'])
           themesPromise: ['Theme', function (Theme) { return Theme.query().$promise; }],
           componentsPromise: ['Component', function (Component) { return Component.query().$promise; }],
           machinesPromise: ['Machine', function (Machine) { return Machine.query().$promise; }],
-          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['openlab_app_id', 'openlab_default', 'projects_list_member_filter_presence', 'projects_list_date_filters_presence']" }).$promise; }],
-          openLabActive: ['Setting', function (Setting) { return Setting.isPresent({ name: 'openlab_app_secret' }).$promise; }]
+          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['openlab_app_id', 'openlab_default', 'projects_list_member_filter_presence', 'projects_list_date_filters_presence', 'project_categories_filter_placeholder']" }).$promise; }],
+          openLabActive: ['Setting', function (Setting) { return Setting.isPresent({ name: 'openlab_app_secret' }).$promise; }],
+          projectCategoriesPromise: ['ProjectCategory', function (ProjectCategory) { return ProjectCategory.query().$promise; }]
         }
       })
       .state('app.logged.projects_new', {
@@ -314,7 +315,8 @@ angular.module('application.router', ['ui.router'])
           }
         },
         resolve: {
-          allowedExtensions: ['Setting', function (Setting) { return Setting.get({ name: 'allowed_cad_extensions' }).$promise; }]
+          allowedExtensions: ['Setting', function (Setting) { return Setting.get({ name: 'allowed_cad_extensions' }).$promise; }],
+          projectCategoriesWording: ['Setting', function (Setting) { return Setting.get({ name: 'project_categories_wording' }).$promise; }]
         }
       })
       .state('app.public.projects_show', {
@@ -327,7 +329,8 @@ angular.module('application.router', ['ui.router'])
         },
         resolve: {
           projectPromise: ['$transition$', 'Project', function ($transition$, Project) { return Project.get({ id: $transition$.params().id }).$promise; }],
-          shortnamePromise: ['Setting', function (Setting) { return Setting.get({ name: 'disqus_shortname' }).$promise; }]
+          shortnamePromise: ['Setting', function (Setting) { return Setting.get({ name: 'disqus_shortname' }).$promise; }],
+          projectCategoriesWording: ['Setting', function (Setting) { return Setting.get({ name: 'project_categories_wording' }).$promise; }]
         }
       })
       .state('app.logged.projects_edit', {
@@ -340,7 +343,8 @@ angular.module('application.router', ['ui.router'])
         },
         resolve: {
           projectPromise: ['$transition$', 'Project', function ($transition$, Project) { return Project.get({ id: $transition$.params().id }).$promise; }],
-          allowedExtensions: ['Setting', function (Setting) { return Setting.get({ name: 'allowed_cad_extensions' }).$promise; }]
+          allowedExtensions: ['Setting', function (Setting) { return Setting.get({ name: 'allowed_cad_extensions' }).$promise; }],
+          projectCategoriesWording: ['Setting', function (Setting) { return Setting.get({ name: 'project_categories_wording' }).$promise; }]
         }
       })
 
@@ -735,10 +739,11 @@ angular.module('application.router', ['ui.router'])
           componentsPromise: ['Component', function (Component) { return Component.query().$promise; }],
           licencesPromise: ['Licence', function (Licence) { return Licence.query().$promise; }],
           themesPromise: ['Theme', function (Theme) { return Theme.query().$promise; }],
+          projectCategoriesPromise: ['ProjectCategory', function (ProjectCategory) { return ProjectCategory.query().$promise; }],
           settingsPromise: ['Setting', function (Setting) {
             return Setting.query({
               names: "['feature_tour_display', 'disqus_shortname', 'allowed_cad_extensions', " +
-                     "'allowed_cad_mime_types', 'openlab_app_id', 'openlab_app_secret', 'openlab_default']"
+                     "'allowed_cad_mime_types', 'openlab_app_id', 'openlab_app_secret', 'openlab_default', 'project_categories_filter_placeholder', 'project_categories_wording']"
             }).$promise;
           }]
         }

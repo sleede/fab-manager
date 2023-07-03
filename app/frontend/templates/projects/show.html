@@ -174,12 +174,24 @@
       </div>
     </section>
 
-      <section class="widget b-t">
+    <section class="widget panel b-a m" ng-if="project.project_categories">
+      <div class="panel-heading b-b">
+        <h3 translate>{{ projectCategoriesWording }}</h3>
+      </div>
 
-          <div class="widget-content text-center m-t">
-              <a ng-click="signalAbuse($event)"><i class="fa fa-warning"></i> {{ 'app.public.projects_show.report_an_abuse' | translate }}</a>
-          </div>
-      </section>
+      <ul class="widget-content list-group list-group-lg no-bg auto">
+        <li ng-repeat="projectCategory in project.project_categories" class="list-group-item no-b clearfix">
+          {{projectCategory.name}}
+        </li>
+      </ul>
+    </section>
+
+    <section class="widget b-t">
+
+        <div class="widget-content text-center m-t">
+            <a ng-click="signalAbuse($event)"><i class="fa fa-warning"></i> {{ 'app.public.projects_show.report_an_abuse' | translate }}</a>
+        </div>
+    </section>
   </div>
 </div>
 

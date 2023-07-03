@@ -587,6 +587,18 @@ setting_99:
   created_at: 2023-04-05 09:16:08.000511500 Z
   updated_at: 2023-04-05 09:16:08.000511500 Z
 
+setting_100:
+  id: 100
+  name: project_categories_filter_placeholder
+  created_at: 2023-04-05 09:16:08.000511500 Z
+  updated_at: 2023-04-05 09:16:08.000511500 Z
+
+setting_101:
+  id: 101
+  name: project_categories_wording
+  created_at: 2023-04-05 09:16:08.000511500 Z
+  updated_at: 2023-04-05 09:16:08.000511500 Z
+
 setting_102:
   id: 102
   name: projects_list_member_filter_presence
