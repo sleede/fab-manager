@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- Fix a bug: unable to show project step image in markdown file
+
 ## v6.0.8 2023 July 03
 
 - Improved projects list filter
