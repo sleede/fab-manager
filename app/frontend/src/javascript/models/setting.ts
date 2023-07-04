@@ -199,7 +199,11 @@ export const fabHubSettings = [
 export const projectsSettings = [
   'allowed_cad_extensions',
   'allowed_cad_mime_types',
-  'disqus_shortname'
+  'disqus_shortname',
+  'projects_list_member_filter_presence',
+  'projects_list_date_filters_presence',
+  'project_categories_filter_placeholder',
+  'project_categories_wording'
 ] as const;
 
 export const prepaidPacksSettings = [
@@ -222,7 +226,7 @@ export const pricingSettings = [
   'extended_prices_in_same_day'
 ] as const;
 
-export const poymentSettings = [
+export const paymentSettings = [
   'payment_gateway'
 ] as const;
 
@@ -292,7 +296,7 @@ export const allSettings = [
   ...registrationSettings,
   ...adminSettings,
   ...pricingSettings,
-  ...poymentSettings,
+  ...paymentSettings,
   ...displaySettings,
   ...storeSettings,
   ...trainingsSettings,

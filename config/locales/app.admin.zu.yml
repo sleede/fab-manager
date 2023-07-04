@@ -415,6 +415,8 @@ zu:
         add_a_material: "crwdns24306:0crwdne24306:0"
         themes: "crwdns24308:0crwdne24308:0"
         add_a_new_theme: "crwdns24310:0crwdne24310:0"
+        project_categories: "crwdns37617:0crwdne37617:0"
+        add_a_new_project_category: "crwdns37619:0crwdne37619:0"
         licences: "crwdns24312:0crwdne24312:0"
         statuses: "crwdns36893:0crwdne36893:0"
         description: "crwdns24314:0crwdne24314:0"
@@ -445,6 +447,10 @@ zu:
           open_lab_app_secret: "crwdns24362:0crwdne24362:0"
           openlab_default_info_html: "crwdns37609:0crwdne37609:0"
           default_to_openlab: "crwdns24366:0crwdne24366:0"
+          filters: crwdns37621:0crwdne37621:0
+          project_categories: crwdns37623:0crwdne37623:0
+      project_categories:
+        name: "crwdns37625:0crwdne37625:0"
       projects_setting:
         add: "crwdns36895:0crwdne36895:0"
         actions_controls: "crwdns36897:0crwdne36897:0"
@@ -1773,6 +1779,10 @@ zu:
         extended_prices_in_same_day: "crwdns26752:0crwdne26752:0"
         public_registrations: "crwdns26754:0crwdne26754:0"
         show_username_in_admin_list: "crwdns26756:0crwdne26756:0"
+        projects_list_member_filter_presence: "crwdns37627:0crwdne37627:0"
+        projects_list_date_filters_presence: "crwdns37629:0crwdne37629:0"
+        project_categories_filter_placeholder: "crwdns37631:0crwdne37631:0"
+        project_categories_wording: "crwdns37633:0crwdne37633:0"
         overlapping_options:
           training_reservations: "crwdns26758:0crwdne26758:0"
           machine_reservations: "crwdns26760:0crwdne26760:0"

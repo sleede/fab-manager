@@ -167,6 +167,7 @@ zu:
         full_price: "crwdns28058:0crwdne28058:0"
       #projects gallery
       projects_list:
+        filter: crwdns37635:0crwdne37635:0
         the_fablab_projects: "crwdns36237:0crwdne36237:0"
         add_a_project: "crwdns28062:0crwdne28062:0"
         network_search: "crwdns37071:0crwdne37071:0"
@@ -183,6 +184,10 @@ zu:
         all_materials: "crwdns28088:0crwdne28088:0"
         load_next_projects: "crwdns28090:0crwdne28090:0"
         rough_draft: "crwdns28092:0crwdne28092:0"
+        filter_by_member: "crwdns37637:0crwdne37637:0"
+        created_from: crwdns37639:0crwdne37639:0
+        created_to: crwdns37641:0crwdne37641:0
+        download_archive: crwdns37643:0crwdne37643:0
       status_filter:
         all_statuses: "crwdns37073:0crwdne37073:0"
         select_status: "crwdns37075:0crwdne37075:0"
@@ -216,6 +221,7 @@ zu:
         report: "crwdns28144:0crwdne28144:0"
         do_you_really_want_to_delete_this_project: "crwdns28146:0crwdne28146:0"
         status: "crwdns37077:0crwdne37077:0"
+        markdown_file: "crwdns37645:0crwdne37645:0"
       #list of machines
       machines_list:
         the_fablab_s_machines: "crwdns36239:0crwdne36239:0"

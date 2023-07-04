@@ -10,13 +10,6 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- Name: public; Type: SCHEMA; Schema: -; Owner: -
---
-
--- *not* creating schema, since initdb creates it
-
-
---
 -- Name: fuzzystrmatch; Type: EXTENSION; Schema: -; Owner: -
 --
 
@@ -2836,6 +2829,37 @@ ALTER SEQUENCE public.profiles_id_seq OWNED BY public.profiles.id;
 
 
 --
+-- Name: project_categories; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.project_categories (
+    id bigint NOT NULL,
+    name character varying,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: project_categories_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.project_categories_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: project_categories_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.project_categories_id_seq OWNED BY public.project_categories.id;
+
+
+--
 -- Name: project_steps; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -3001,6 +3025,38 @@ CREATE SEQUENCE public.projects_machines_id_seq
 --
 
 ALTER SEQUENCE public.projects_machines_id_seq OWNED BY public.projects_machines.id;
+
+
+--
+-- Name: projects_project_categories; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.projects_project_categories (
+    id bigint NOT NULL,
+    project_id bigint NOT NULL,
+    project_category_id bigint NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: projects_project_categories_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.projects_project_categories_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: projects_project_categories_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.projects_project_categories_id_seq OWNED BY public.projects_project_categories.id;
 
 
 --
@@ -4882,6 +4938,13 @@ ALTER TABLE ONLY public.profiles ALTER COLUMN id SET DEFAULT nextval('public.pro
 
 
 --
+-- Name: project_categories id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.project_categories ALTER COLUMN id SET DEFAULT nextval('public.project_categories_id_seq'::regclass);
+
+
+--
 -- Name: project_steps id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -4914,6 +4977,13 @@ ALTER TABLE ONLY public.projects_components ALTER COLUMN id SET DEFAULT nextval(
 --
 
 ALTER TABLE ONLY public.projects_machines ALTER COLUMN id SET DEFAULT nextval('public.projects_machines_id_seq'::regclass);
+
+
+--
+-- Name: projects_project_categories id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.projects_project_categories ALTER COLUMN id SET DEFAULT nextval('public.projects_project_categories_id_seq'::regclass);
 
 
 --
@@ -5806,6 +5876,14 @@ ALTER TABLE ONLY public.profiles
 
 
 --
+-- Name: project_categories project_categories_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.project_categories
+    ADD CONSTRAINT project_categories_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: project_steps project_steps_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5843,6 +5921,14 @@ ALTER TABLE ONLY public.projects_machines
 
 ALTER TABLE ONLY public.projects
     ADD CONSTRAINT projects_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: projects_project_categories projects_project_categories_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.projects_project_categories
+    ADD CONSTRAINT projects_project_categories_pkey PRIMARY KEY (id);
 
 
 --
@@ -6163,6 +6249,13 @@ ALTER TABLE ONLY public.wallet_transactions
 
 ALTER TABLE ONLY public.wallets
     ADD CONSTRAINT wallets_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: idx_projects_project_categories; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX idx_projects_project_categories ON public.projects_project_categories USING btree (project_id, project_category_id);
 
 
 --
@@ -7108,6 +7201,20 @@ CREATE UNIQUE INDEX index_projects_on_slug ON public.projects USING btree (slug)
 --
 
 CREATE INDEX index_projects_on_status_id ON public.projects USING btree (status_id);
+
+
+--
+-- Name: index_projects_project_categories_on_project_category_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_projects_project_categories_on_project_category_id ON public.projects_project_categories USING btree (project_category_id);
+
+
+--
+-- Name: index_projects_project_categories_on_project_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_projects_project_categories_on_project_id ON public.projects_project_categories USING btree (project_id);
 
 
 --
@@ -8291,6 +8398,14 @@ ALTER TABLE ONLY public.projects
 
 
 --
+-- Name: projects_project_categories fk_rails_ba4a985e85; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.projects_project_categories
+    ADD CONSTRAINT fk_rails_ba4a985e85 FOREIGN KEY (project_id) REFERENCES public.projects(id);
+
+
+--
 -- Name: statistic_profiles fk_rails_bba64e5eb9; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8440,6 +8555,14 @@ ALTER TABLE ONLY public.product_stock_movements
 
 ALTER TABLE ONLY public.event_price_categories
     ADD CONSTRAINT fk_rails_dcd2787d07 FOREIGN KEY (event_id) REFERENCES public.events(id);
+
+
+--
+-- Name: projects_project_categories fk_rails_de9f22810e; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.projects_project_categories
+    ADD CONSTRAINT fk_rails_de9f22810e FOREIGN KEY (project_category_id) REFERENCES public.project_categories(id);
 
 
 --
@@ -8941,7 +9064,9 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230524083558'),
 ('20230524110215'),
 ('20230525101006'),
-('20230612123250'),
+('20230612123250');
 ('20230626103314');
+('20230626122844'),
+('20230626122947');
 
 

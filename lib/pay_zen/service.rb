@@ -25,8 +25,15 @@ class PayZen::Service < Payment::Service
       order_id: order_id
     }
     unless first_item.details['adjustment']&.zero? && first_item.details['other_items']&.zero?
-      params[:initial_amount] = payzen_amount(first_item.amount)
-      params[:initial_amount_number] = 1
+      initial_amount = first_item.amount
+      initial_amount -= payment_schedule.wallet_amount if payment_schedule.wallet_amount
+      if initial_amount.zero?
+        params[:effect_date] = (first_item.due_date + 1.month).iso8601
+        params[:rrule] = rrule(payment_schedule, -1)
+      else
+        params[:initial_amount] = payzen_amount(initial_amount)
+        params[:initial_amount_number] = 1
+      end
     end
     pz_subscription = client.create_subscription(**params)
 
@@ -123,16 +130,21 @@ class PayZen::Service < Payment::Service
 
   private
 
-  def rrule(payment_schedule)
+  def rrule(payment_schedule, offset = 0)
     count = payment_schedule.payment_schedule_items.count
-    "RRULE:FREQ=MONTHLY;COUNT=#{count}"
+    "RRULE:FREQ=MONTHLY;COUNT=#{count + offset}"
   end
 
   # check if the given transaction matches the given PaymentScheduleItem
   def transaction_matches?(transaction, payment_schedule_item)
     transaction_date = Time.zone.parse(transaction['creationDate']).to_date
 
-    transaction['amount'] == payment_schedule_item.amount &&
+    amount = payment_schedule_item.amount
+    if !payment_schedule_item.details['adjustment']&.zero? && payment_schedule_item.payment_schedule.wallet_amount
+      amount -= payment_schedule_item.payment_schedule.wallet_amount
+    end
+
+    transaction['amount'] == amount &&
       transaction_date >= payment_schedule_item.due_date.to_date &&
       transaction_date <= payment_schedule_item.due_date.to_date + 7.days
   end

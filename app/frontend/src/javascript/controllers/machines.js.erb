@@ -692,20 +692,9 @@ Application.Controllers.controller('ReserveMachineController', ['$scope', '$tran
      * Refetch all events from the API and re-populate the calendar with the resulting slots
      */
     const refreshCalendar = function () {
-      const view = uiCalendarConfig.calendars.calendar.fullCalendar('getView');
-      return Availability.machine({
-        machineId: $scope.machine.id,
-        member_id: $scope.ctrl.member.id,
-        start: view.start,
-        end: view.end,
-        timezone: Fablab.timezone
-      }, function (slots) {
-        uiCalendarConfig.calendars.calendar.fullCalendar('removeEvents');
-        return $scope.eventSources.splice(0, 1, {
-            events: slots,
-            textColor: 'black'
-          }
-        );
+      $scope.eventSources.splice(0, 1, {
+        url: `/api/availabilities/machines/${$transition$.params().id}?member_id=${$scope.ctrl.member.id}`,
+        textColor: 'black'
       });
     }
 

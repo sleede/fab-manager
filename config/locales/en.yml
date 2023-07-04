@@ -720,6 +720,10 @@ en:
     trainings_authorization_validity_duration: "Trainings validity period duration"
     trainings_invalidation_rule: "Trainings automatic invalidation"
     trainings_invalidation_rule_period: "Grace period before invalidating a training"
+    projects_list_member_filter_presence: "Presence of member filter on projects list"
+    projects_list_date_filters_presence: "Presence of dates filter on projects list"
+    project_categories_filter_placeholder: "Placeholder for categories filter in project gallery"
+    project_categories_wording: "Wording used to replace \"Categories\" on public pages"
     family_account: "Family account"
   #statuses of projects
   statuses:

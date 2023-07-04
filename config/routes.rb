@@ -38,6 +38,7 @@ Rails.application.routes.draw do
         get :last_published
         get :search
       end
+      get :markdown, on: :member
     end
     resources :openlab_projects, only: :index
     resources :machines
@@ -46,6 +47,7 @@ Rails.application.routes.draw do
     resources :themes
     resources :licences
     resources :statuses
+    resources :project_categories
     resources :admins, only: %i[index create destroy]
     resources :settings, only: %i[show update index], param: :name do
       patch '/bulk_update', action: 'bulk_update', on: :collection
