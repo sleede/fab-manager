@@ -322,8 +322,8 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
       $location.$$search.member_id = '';
     }
 
-    fromDate = $location.$$search.from_date ? new Date($location.$$search.from_date) : undefined;
-    toDate = $location.$$search.to_date ? new Date($location.$$search.to_date) : undefined;
+    const fromDate = $location.$$search.from_date ? new Date($location.$$search.from_date) : undefined;
+    const toDate = $location.$$search.to_date ? new Date($location.$$search.to_date) : undefined;
 
     // default search parameters
     $scope.search = {
