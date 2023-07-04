@@ -24,7 +24,7 @@ class ProjectToMarkdown
         md << ReverseMarkdown.convert(project_step.description.to_s)
 
         project_step.project_step_images.each_with_index do |image, i|
-          md << "![#{I18n.t('app.shared.project.step_image')} #{i+1}](#{full_url(project.project_image.attachment.url)})"
+          md << "![#{I18n.t('app.shared.project.step_image')} #{i+1}](#{full_url(image.attachment.url)})"
         end
       end
     end
