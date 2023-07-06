@@ -20,13 +20,13 @@
         <table class="table" ng-if="reservations.length > 0">
           <thead>
           <tr>
-            <th style="width:25%" translate>{{ 'app.admin.event_reservations.booked_by' }}</th>
-            <th style="width:25%" translate>{{ 'app.admin.event_reservations.reservations' }}</th>
-            <th style="width:25%" translate>{{ 'app.admin.event_reservations.date' }}</th>
-            <th style="width:25%" translate>{{ 'app.admin.event_reservations.reserved_tickets' }}</th>
-            <th ng-if="event.pre_registration" style="width:25%" translate>{{ 'app.admin.event_reservations.status' }}</th>
-            <th ng-if="event.pre_registration" style="width:25%" translate>{{ 'app.admin.event_reservations.gestion' }}</th>
-            <th style="width:5%"></th>
+            <th translate>{{ 'app.admin.event_reservations.booked_by' }}</th>
+            <th translate>{{ 'app.admin.event_reservations.reservations' }}</th>
+            <th translate>{{ 'app.admin.event_reservations.date' }}</th>
+            <th translate>{{ 'app.admin.event_reservations.reserved_tickets' }}</th>
+            <th ng-if="event.pre_registration" translate>{{ 'app.admin.event_reservations.status' }}</th>
+            <th ng-if="event.pre_registration" translate>{{ 'app.admin.event_reservations.validation' }}</th>
+            <th></th>
           </tr>
           </thead>
           <tbody>
@@ -52,12 +52,24 @@
               <span ng-if="isCancelled(reservation)" class="v-middle badge text-sm bg-event" translate="">{{ 'app.admin.event_reservations.event_status.canceled' }}</span>
             </td>
             <td ng-if="event.pre_registration">
-              <button class="btn btn-default" ng-click="validateReservation(reservation)" ng-if="!isValidated(reservation) && !isCancelled(reservation) && !reservation.is_paid" translate>
-                {{ 'app.admin.event_reservations.validate' }}
-              </button>
-              <button class="btn btn-default" ng-click="payReservation(reservation)" ng-if="isValidated(reservation) && !isCancelled(reservation) && !reservation.is_paid" translate>
-                {{ 'app.admin.event_reservations.pay' }}
-              </button>
+              <div>
+                <div ng-if="!isValidated(reservation) && !isCancelled(reservation) && !reservation.is_paid">
+                  <label class="m-r-sm">
+                    <span translate>{{ 'app.admin.event_reservations.negative' }}</span>
+                    <input type="radio" name="validate" value="no">
+                  </label>
+                  <label>
+                    <span translate>{{ 'app.admin.event_reservations.affirmative' }}</span>
+                    <input type="radio" name="validate" value="yes">
+                  </label>
+                </div>
+                <button class="btn btn-default" ng-click="validateReservation(reservation)" ng-if="!isValidated(reservation) && !isCancelled(reservation) && !reservation.is_paid" translate>
+                  {{ 'app.admin.event_reservations.validate' }}
+                </button>
+                <button class="btn btn-default" ng-click="payReservation(reservation)" ng-if="isValidated(reservation) && !isCancelled(reservation) && !reservation.is_paid" translate>
+                  {{ 'app.admin.event_reservations.pay' }}
+                </button>
+              </div>
             </td>
             <td>
               <div class="buttons">
