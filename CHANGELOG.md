@@ -1,6 +1,8 @@
 # Changelog Fab-manager
 
 - Fix a bug: unable to show project step image in markdown file
+- Fix a bug: unable to update Store Order sub type in statistics
+- [TODO DEPLOY] `rails fablab:maintenance:regenerate_statistics[2014,1]`
 
 ## v6.0.8 2023 July 03
 
