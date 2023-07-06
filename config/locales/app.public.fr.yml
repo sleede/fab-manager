@@ -185,8 +185,8 @@ fr:
         load_next_projects: "Charger les projets suivants"
         rough_draft: "Brouillon"
         filter_by_member: "Filtrer par membre"
-        created_from: Créé depuis
-        created_to: Créés le
+        created_from: Créés depuis le
+        created_to: Créés jusqu'au
         download_archive: Télécharger
       status_filter:
         all_statuses: "Tous les statuts"
