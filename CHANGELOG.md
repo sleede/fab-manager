@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+## v6.0.9 2023 July 07
+
 - Fix a bug: unable to show project step image in markdown file
 - Fix a bug: unable to update Store Order sub type in statistics
 - Fix a bug: unable to create plan with plan limitation
