@@ -415,8 +415,8 @@ fr:
         add_a_material: "Ajouter un matériau"
         themes: "Thématiques"
         add_a_new_theme: "Ajouter une nouvelle thématique"
-        project_categories: "Categories"
-        add_a_new_project_category: "Add a new category"
+        project_categories: "Catégories"
+        add_a_new_project_category: "Ajouter une nouvelle catégorie"
         licences: "Licences"
         statuses: "Statuts"
         description: "Description"
@@ -447,10 +447,10 @@ fr:
           open_lab_app_secret: "Secret"
           openlab_default_info_html: "Dans la galerie de projets, les visiteurs peuvent choisir entre deux vues : tous les projets de l'ensemble du réseau OpenLab, ou uniquement les projets documentés dans votre Fab Lab.<br/>Ici, vous pouvez choisir quelle vue est affichée par défaut."
           default_to_openlab: "Afficher OpenLab par défaut"
-          filters: Projects list filters
-          project_categories: Categories
+          filters: Affichage des filtres
+          project_categories: Personnalisation du filtre Catégories
       project_categories:
-        name: "Name"
+        name: "Nom"
       projects_setting:
         add: "Ajouter"
         actions_controls: "Actions"
@@ -1779,10 +1779,10 @@ fr:
         extended_prices_in_same_day: "Prix étendus le même jour"
         public_registrations: "Inscriptions publiques"
         show_username_in_admin_list: "Afficher le nom d'utilisateur dans la liste"
-        projects_list_member_filter_presence: "Presence of member filter on projects list"
-        projects_list_date_filters_presence: "Presence of date filters on projects list"
-        project_categories_filter_placeholder: "Placeholder for categories filter in project gallery"
-        project_categories_wording: "Wording used to replace \"Categories\" on public pages"
+        projects_list_member_filter_presence: "Permettre la recherche de projets par membre"
+        projects_list_date_filters_presence: "Permettre la recherche de projets par dates"
+        project_categories_filter_placeholder: "Dans la galerie de projets, renommer le filtre \"Toutes les catégories\""
+        project_categories_wording: "Dans la fiche projet, renommer l'intitulé de l'encart Catégories"
         overlapping_options:
           training_reservations: "Formations"
           machine_reservations: "Machines"

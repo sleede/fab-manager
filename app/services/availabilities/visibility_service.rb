@@ -22,7 +22,7 @@ class Availabilities::VisibilityService
   # @return [Array<ActiveSupport::TimeWithZone,Date,Time>] as: [start,end]
   def visibility(user, available_type, range_start, range_end)
     if user&.privileged?
-      window_start = [range_start, 1.month.ago].max
+      window_start = range_start
       window_end = range_end
     else
       end_at = @maximum_visibility[:other]

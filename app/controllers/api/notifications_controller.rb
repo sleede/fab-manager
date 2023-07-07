@@ -65,7 +65,8 @@ class API::NotificationsController < API::APIController
   end
 
   def update_all
-    current_user.notifications.where(is_read: false).find_each(&:mark_as_read)
+    current_user.notifications.where(is_read: false)
+                .update_all(is_read: true, updated_at: Time.current) # rubocop:disable Rails/SkipsModelValidations
     head :no_content
   end
 

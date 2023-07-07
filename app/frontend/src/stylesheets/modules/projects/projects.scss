@@ -16,6 +16,7 @@
       @include header();
       padding-top: 0;
     }
+    label { font-weight: 400; }
     .switch {
       display: flex;
       justify-content: space-between;

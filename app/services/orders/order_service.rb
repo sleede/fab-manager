@@ -45,7 +45,13 @@ class Orders::OrderService
 
       # update in elasticsearch (statistics)
       stat_order = Stats::Order.search(query: { term: { orderId: order.id } })
-      stat_order.map { |s| s.update(state: state) }
+      sub_type = if state.in?(%w[paid in_progress ready delivered])
+                   'paid-processed'
+                 elsif state.in?(%w[payment_failed refunded canceled])
+                   'aborted'
+                 end
+
+      stat_order.map { |s| s.update(subType: sub_type, state: state) } if sub_type.present?
 
       order
     end
