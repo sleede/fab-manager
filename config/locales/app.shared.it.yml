@@ -403,6 +403,7 @@ it:
         state_new: "Non ancora scaduto"
         state_pending_check: "In attesa di incasso dell'assegno"
         state_pending_transfer: "In attesa conferma del bonifico bancario"
+        state_pending_card: "Waiting for the card payment"
         state_requires_payment_method: "La carta di credito deve essere aggiornata"
         state_requires_action: "Azione richiesta"
         state_paid: "Pagato"
