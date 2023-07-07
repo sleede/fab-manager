@@ -2,6 +2,7 @@
 
 - Fix a bug: unable to show project step image in markdown file
 - Fix a bug: unable to update Store Order sub type in statistics
+- Fix a bug: unable to create plan with plan limitation
 - Ability to show all availabilities in calender for admin
 - [TODO DEPLOY] `rails fablab:maintenance:regenerate_statistics[2014,1]`
 
