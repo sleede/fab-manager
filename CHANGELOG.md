@@ -1,6 +1,8 @@
 # Changelog Fab-manager
 
 - Fix a bug: unable to confirm payment of store for admin
+- Fix a bug: unable to update payment schedule item
+
 
 ## v6.0.9 2023 July 07
 
