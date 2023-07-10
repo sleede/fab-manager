@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- Fix a bug: unable to confirm payment of store for admin
+
 ## v6.0.9 2023 July 07
 
 - Fix a bug: unable to show project step image in markdown file
