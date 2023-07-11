@@ -516,6 +516,9 @@ Application.Controllers.controller('ShowEventReservationsController', ['$scope',
       templateUrl: '/admin/events/pay_reservation_modal.html',
       size: 'sm',
       resolve: {
+        event () {
+          return $scope.event;
+        },
         reservation () {
           return reservation;
         },
@@ -529,8 +532,10 @@ Application.Controllers.controller('ShowEventReservationsController', ['$scope',
           return mkCartItems(reservation);
         }
       },
-      controller: ['$scope', '$uibModalInstance', 'reservation', 'price', 'wallet', 'cartItems', 'helpers', '$filter', '_t', 'Reservation',
-        function ($scope, $uibModalInstance, reservation, price, wallet, cartItems, helpers, $filter, _t, Reservation) {
+      controller: ['$scope', '$uibModalInstance', 'reservation', 'price', 'wallet', 'cartItems', 'helpers', '$filter', '_t', 'Reservation', 'event',
+        function ($scope, $uibModalInstance, reservation, price, wallet, cartItems, helpers, $filter, _t, Reservation, event) {
+          $scope.event = event;
+
           // User's wallet amount
           $scope.wallet = wallet;
 
@@ -614,7 +619,11 @@ Application.Controllers.controller('ShowEventReservationsController', ['$scope',
         if (r.id === reservation.id) {
           return reservation;
         }
-        growl.success(_t('app.admin.event_reservations.reservation_was_successfully_paid'));
+        if ($scope.event.amount === 0) {
+          growl.success(_t('app.admin.event_reservations.reservation_was_successfully_present'));
+        } else {
+          growl.success(_t('app.admin.event_reservations.reservation_was_successfully_paid'));
+        }
         return r;
       });
     }, function () {

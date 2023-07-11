@@ -63,8 +63,9 @@
                     <input type="radio" name="validate" ng-value="true" ng-click="validateReservation(reservation)" ng-model="reservation.slots_reservations_attributes[0].is_valid" >
                   </label>
                 </div>
-                <button class="btn btn-default" ng-click="payReservation(reservation)" ng-if="isValidated(reservation) && !isCancelled(reservation) && !reservation.is_paid" translate>
-                  {{ 'app.admin.event_reservations.pay' }}
+                <button class="btn btn-default" ng-click="payReservation(reservation)" ng-if="isValidated(reservation) && !isCancelled(reservation) && !reservation.is_paid">
+                  <span ng-if="event.amount !== 0" translate>{{ 'app.admin.event_reservations.pay' }}</span>
+                  <span ng-if="event.amount === 0" translate>{{ 'app.admin.event_reservations.present' }}</span>
                 </button>
               </div>
             </td>

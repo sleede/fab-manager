@@ -668,6 +668,10 @@ fr:
         offer_this_reservation: "J'offre cette réservation"
         i_have_received_the_payment:  "J'ai reçu le paiement"
         reservation_was_successfully_paid: "La réservation a bien été payée."
+        present: "Présenter"
+        confirm_present: "Confirmer la présence"
+        confirm_present_info: "Confirmer la présence de l'utilisateur à l'événement"
+        reservation_was_successfully_present: "La présence a bien été confirmée."
       events_settings:
         title: "Paramètres"
         generic_text_block: "Bloc de texte rédactionnel"
