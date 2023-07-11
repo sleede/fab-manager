@@ -672,6 +672,7 @@ en:
         confirm_present: "Confirm presence"
         confirm_present_info: "Confirm the presence of the user for this event"
         reservation_was_successfully_present: "The presence of the user was successfully confirmed."
+        age: "{NUMBER} years old"
       events_settings:
         title: "Settings"
         generic_text_block: "Editorial text block"

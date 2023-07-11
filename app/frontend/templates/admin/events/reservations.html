@@ -38,6 +38,7 @@
               <span ng-if="event.event_type === 'standard'">{{ reservation.user_full_name }} </span>
               <div ng-repeat="bu in reservation.booking_users_attributes">
                 <span>{{bu.name}}</span>
+                <span ng-if="bu.booked_type === 'Child'" class="m-l-sm">({{ 'app.admin.event_reservations.age' | translate:{NUMBER: bu.age} }})</span>
               </div>
             </td>
             <td>{{ reservation.created_at | amDateFormat:'LL LTS' }}</td>
