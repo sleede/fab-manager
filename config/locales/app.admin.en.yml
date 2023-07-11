@@ -653,6 +653,7 @@ en:
           to_pay: "To pay"
           paid: "Paid"
           canceled: "Canceled"
+          present: "Present"
         affirmative: "yes"
         negative: "no"
         validate: "Validate"
