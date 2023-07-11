@@ -47,6 +47,12 @@ class SlotsReservationsService
           reservable.update_nb_free_places
           reservable.save
         end
+        NotificationCenter.call type: 'notify_member_reservation_invalidated',
+                                receiver: slot_reservation.reservation.user,
+                                attached_object: slot_reservation.reservation
+        NotificationCenter.call type: 'notify_admin_reservation_invalidated',
+                                receiver: User.admins_and_managers,
+                                attached_object: slot_reservation.reservation
         return true
       end
       false

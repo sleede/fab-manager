@@ -467,7 +467,15 @@ en:
         reservation_validated_html: "<strong><em>%{RESERVABLE}</em></strong> was validated."
         your_reserved_slots: "Your reserved slots are:"
     notify_admin_reservation_validated:
-      subject: "Réservation a bien été validé"
+      subject: "Pre-registration was validated"
       body:
         reservation_validated_html: "<strong><em>%{RESERVABLE}</em></strong> of %{NAME} was validated."
         reserved_slots: "Reserved slots are:"
+    notify_member_reservation_invalidated:
+      subject: "Your pre-registration wasn't validated"
+      body:
+        reservation_invalidated_html: "<strong><em>%{RESERVABLE}</em></strong> wasn't validated."
+    notify_admin_reservation_invalidated:
+      subject: "Pre-registration wasn't validated"
+      body:
+        reservation_invalidated_html: "<strong><em>%{RESERVABLE}</em></strong> of %{NAME} wasn't validated."

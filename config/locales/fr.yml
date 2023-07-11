@@ -477,6 +477,10 @@ fr:
         your_reservation_RESERVABLE_was_validated_html: "Votre réservation de <strong><em>%{RESERVABLE}</em></strong> a été validée."
       notify_admin_reservation_validated:
         a_RESERVABLE_reservation_was_validated_html: "La réservation de <strong><em>%{RESERVABLE}</em></strong> de <strong><em>%{NAME}</em></strong> a été validée."
+      notify_member_reservation_invalidated:
+        your_reservation_RESERVABLE_was_invalidated_html: "Votre demande de pré-inscription de <strong><em>%{RESERVABLE}</em></strong> n'a pas été validée."
+      notify_admin_reservation_invalidated:
+        a_RESERVABLE_reservation_was_invalidated_html: "La réservation de <strong><em>%{RESERVABLE}</em></strong> de <strong><em>%{NAME}</em></strong> a été invalidée."
   #statistics tools for admins
   statistics:
     subscriptions: "Abonnements"

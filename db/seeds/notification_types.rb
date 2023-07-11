@@ -92,7 +92,9 @@ NOTIFICATIONS_TYPES = [
   { name: 'notify_member_reservation_validated', category: 'agenda', is_configurable: false },
   { name: 'notify_admin_reservation_validated', category: 'agenda', is_configurable: true },
   { name: 'notify_member_pre_booked_reservation', category: 'agenda', is_configurable: false },
-  { name: 'notify_admin_member_pre_booked_reservation', category: 'agenda', is_configurable: true }
+  { name: 'notify_admin_member_pre_booked_reservation', category: 'agenda', is_configurable: true },
+  { name: 'notify_member_reservation_invalidated', category: 'agenda', is_configurable: false },
+  { name: 'notify_admin_reservation_invalidated', category: 'agenda', is_configurable: true }
 ].freeze
 
 NOTIFICATIONS_TYPES.each do |notification_type|
