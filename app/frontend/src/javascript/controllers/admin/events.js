@@ -458,7 +458,7 @@ Application.Controllers.controller('ShowEventReservationsController', ['$scope',
    * @returns {boolean}
    */
   $scope.isValidated = function (reservation) {
-    return !!(reservation.slots_reservations_attributes[0].validated_at);
+    return reservation.slots_reservations_attributes[0].is_valid === true || reservation.slots_reservations_attributes[0].is_valid === 'true';
   };
 
   /**
@@ -466,25 +466,30 @@ Application.Controllers.controller('ShowEventReservationsController', ['$scope',
    * @param reservation {Reservation}
    */
   $scope.validateReservation = function (reservation) {
-    dialogs.confirm({
-      resolve: {
-        object: function () {
-          return {
-            title: _t('app.admin.event_reservations.validate_the_reservation'),
-            msg: _t('app.admin.event_reservations.do_you_really_want_to_validate_this_reservation_this_apply_to_all_booked_tickets')
-          };
-        }
-      }
-    }, function () { // validate confirmed
-      SlotsReservation.validate({
-        id: reservation.slots_reservations_attributes[0].id
-      }, () => { // successfully validated
-        growl.success(_t('app.admin.event_reservations.reservation_was_successfully_validated'));
-        const index = $scope.reservations.indexOf(reservation);
-        $scope.reservations[index].slots_reservations_attributes[0].validated_at = new Date();
-      }, () => {
-        growl.warning(_t('app.admin.event_reservations.validation_failed'));
-      });
+    SlotsReservation.validate({
+      id: reservation.slots_reservations_attributes[0].id
+    }, () => { // successfully validated
+      growl.success(_t('app.admin.event_reservations.reservation_was_successfully_validated'));
+      const index = $scope.reservations.indexOf(reservation);
+      $scope.reservations[index].slots_reservations_attributes[0].is_valid = true;
+    }, () => {
+      growl.warning(_t('app.admin.event_reservations.validation_failed'));
+    });
+  };
+
+  /**
+   * Callback to invalidate a reservation
+   * @param reservation {Reservation}
+   */
+  $scope.invalidateReservation = function (reservation) {
+    SlotsReservation.invalidate({
+      id: reservation.slots_reservations_attributes[0].id
+    }, () => { // successfully validated
+      growl.success(_t('app.admin.event_reservations.reservation_was_successfully_invalidated'));
+      const index = $scope.reservations.indexOf(reservation);
+      $scope.reservations[index].slots_reservations_attributes[0].is_valid = false;
+    }, () => {
+      growl.warning(_t('app.admin.event_reservations.invalidation_failed'));
     });
   };
 

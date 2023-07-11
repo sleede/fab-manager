@@ -44,9 +44,9 @@ export const EventReservationItem: React.FC<EventReservationItemProps> = ({ rese
    * Return the pre-registration status
    */
   const preRegistrationStatus = () => {
-    if (!reservation.validated_at && !reservation.canceled_at && !reservation.is_paid) {
+    if (!reservation.is_valid && !reservation.canceled_at && !reservation.is_paid) {
       return t('app.logged.event_reservation_item.in_the_process_of_validation');
-    } else if (reservation.validated_at && !reservation.canceled_at && !reservation.is_paid) {
+    } else if (reservation.is_valid && !reservation.canceled_at && !reservation.is_paid) {
       return t('app.logged.event_reservation_item.settle_your_payment');
     } else if (reservation.is_paid && !reservation.canceled_at) {
       return t('app.logged.event_reservation_item.paid');

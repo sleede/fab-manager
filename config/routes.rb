@@ -126,6 +126,7 @@ Rails.application.routes.draw do
     resources :slots_reservations, only: [:update] do
       put 'cancel', on: :member
       put 'validate', on: :member
+      put 'invalidate', on: :member
     end
 
     resources :events do

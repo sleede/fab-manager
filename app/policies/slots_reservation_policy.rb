@@ -19,4 +19,8 @@ class SlotsReservationPolicy < ApplicationPolicy
   def validate?
     user.admin? || user.manager?
   end
+
+  def invalidate?
+    user.admin? || user.manager?
+  end
 end

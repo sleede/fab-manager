@@ -70,7 +70,8 @@ export interface Reservation {
   event_type?: string,
   event_title?: string,
   event_pre_registration?: boolean
-  validated_at?: TDateISO,
+  canceled_at?: TDateISO,
+  is_valid?: boolean,
   is_paid?: boolean,
 }
 

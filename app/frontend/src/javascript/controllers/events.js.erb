@@ -644,7 +644,7 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
             if (!user.booked) {
               return false;
             }
-            if ($scope.enableChildValidationRequired && user.booked.type === 'Child' && !user.booked.validatedAt) {
+            if ($scope.enableChildValidationRequired && user.booked.type === 'Child' && !user.booked.is_valid) {
               return false;
             }
           }
@@ -748,7 +748,7 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
             name: child.first_name + ' ' + child.last_name,
             id: child.id,
             type: 'Child',
-            validatedAt: child.validated_at,
+            is_valid: child.is_valid,
             birthday: child.birthday
           });
         }
