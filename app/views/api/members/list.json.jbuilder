@@ -18,7 +18,7 @@ json.array!(@members) do |member|
     end
   end
   json.validated_at member.validated_at
-  json.children member.children.order(:created_at) do |child|
+  json.children member.children.where('birthday >= ?', 18.years.ago).order(:created_at) do |child|
     json.extract! child, :id, :first_name, :last_name, :email, :birthday, :phone, :user_id, :validated_at
     json.supporting_document_files_attributes child.supporting_document_files do |f|
       json.id f.id

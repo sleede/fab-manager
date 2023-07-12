@@ -11,7 +11,7 @@ class Child < ApplicationRecord
   validates :first_name, presence: true
   validates :last_name, presence: true
   # validates :email, presence: true, format: { with: Devise.email_regexp }
-  # validate :validate_age
+  validate :validate_age
 
   # birthday should less than 18 years ago
   def validate_age
