@@ -5,7 +5,7 @@
 # availability by Availability.slot_duration, or otherwise globally by Setting.get('slot_duration')
 class API::SlotsReservationsController < API::APIController
   before_action :authenticate_user!
-  before_action :set_slots_reservation, only: %i[update cancel validate]
+  before_action :set_slots_reservation, only: %i[update cancel validate invalidate]
   respond_to :json
 
   def update
@@ -26,6 +26,11 @@ class API::SlotsReservationsController < API::APIController
   def validate
     authorize @slot_reservation
     SlotsReservationsService.validate(@slot_reservation)
+  end
+
+  def invalidate
+    authorize @slot_reservation
+    SlotsReservationsService.invalidate(@slot_reservation)
   end
 
   private

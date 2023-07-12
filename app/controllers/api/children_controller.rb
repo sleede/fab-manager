@@ -10,7 +10,7 @@ class API::ChildrenController < API::APIController
     authorize Child
     user_id = current_user.id
     user_id = params[:user_id] if current_user.privileged? && params[:user_id]
-    @children = Child.where(user_id: user_id).includes(:supporting_document_files).order(:created_at)
+    @children = Child.where(user_id: user_id).where('birthday >= ?', 18.years.ago).includes(:supporting_document_files).order(:created_at)
   end
 
   def show

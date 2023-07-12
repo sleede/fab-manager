@@ -1,0 +1,6 @@
+<%= render 'notifications_mailer/shared/hello', recipient: @recipient %>
+
+<%= t('.body.child_age_will_be_18_years_ago', **{
+  NAME: @attached_object.full_name,
+  DATE: I18n.l(@attached_object.birthday, format: :default),
+}) %>

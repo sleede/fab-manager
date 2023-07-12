@@ -142,7 +142,7 @@
                               class="form-control">
                         <option value=""></option>
                       </select>
-                      <uib-alert type="danger" ng-if="enableChildValidationRequired && user.booked && user.booked.type === 'Child' && !user.booked.validatedAt" style="margin-bottom: 0.8rem;">
+                      <uib-alert type="danger" ng-if="enableChildValidationRequired && user.booked && user.booked.type === 'Child' && !user.booked.validated_at" style="margin-bottom: 0.8rem;">
                         <span class="text-sm">
                           <i class="fa fa-warning"></i>
                           <span translate>{{ 'app.shared.cart.child_validation_required_alert' }}</span>
@@ -180,7 +180,7 @@
                               class="form-control">
                         <option value=""></option>
                       </select>
-                      <uib-alert type="danger" ng-if="enableChildValidationRequired && user.booked && user.booked.type === 'Child' && !user.booked.validatedAt">
+                      <uib-alert type="danger" ng-if="enableChildValidationRequired && user.booked && user.booked.type === 'Child' && !user.booked.is_valid">
                         <p class="text-sm">
                           <i class="fa fa-warning"></i>
                           <span translate>{{ 'app.shared.cart.child_validation_required_alert' }}</span>

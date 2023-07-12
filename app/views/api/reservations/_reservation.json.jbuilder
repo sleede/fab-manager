@@ -7,7 +7,7 @@ json.message reservation.message
 json.slots_reservations_attributes reservation.slots_reservations do |sr|
   json.id sr.id
   json.canceled_at sr.canceled_at&.iso8601
-  json.validated_at sr.validated_at&.iso8601
+  json.is_valid sr.is_valid
   json.slot_id sr.slot_id
   json.slot_attributes do
     json.id sr.slot_id
@@ -40,5 +40,7 @@ json.booking_users_attributes reservation.booking_users.order(booked_type: :desc
   json.event_price_category_id bu.event_price_category_id
   json.booked_id bu.booked_id
   json.booked_type bu.booked_type
+  json.age ((Time.zone.now - bu.booked.birthday.to_time) / 1.year.seconds).floor if bu.booked_type == 'Child'
 end
+json.is_valid reservation.slots_reservations[0].is_valid
 json.is_paid reservation.invoice_items.count.positive?

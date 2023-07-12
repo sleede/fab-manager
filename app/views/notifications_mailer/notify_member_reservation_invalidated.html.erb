@@ -1,0 +1,3 @@
+<%= render 'notifications_mailer/shared/hello', recipient: @recipient %>
+
+<p><%= t('.body.reservation_invalidated_html', RESERVATION: @attached_object.reservable.name) %></p>

@@ -477,6 +477,12 @@ fr:
         your_reservation_RESERVABLE_was_validated_html: "Votre réservation de <strong><em>%{RESERVABLE}</em></strong> a été validée."
       notify_admin_reservation_validated:
         a_RESERVABLE_reservation_was_validated_html: "La réservation de <strong><em>%{RESERVABLE}</em></strong> de <strong><em>%{NAME}</em></strong> a été validée."
+      notify_member_reservation_invalidated:
+        your_reservation_RESERVABLE_was_invalidated_html: "Votre demande de pré-inscription de <strong><em>%{RESERVABLE}</em></strong> n'a pas été validée."
+      notify_admin_reservation_invalidated:
+        a_RESERVABLE_reservation_was_invalidated_html: "La réservation de <strong><em>%{RESERVABLE}</em></strong> de <strong><em>%{NAME}</em></strong> a été invalidée."
+      notify_user_when_child_age_will_be_18:
+        child_age_will_be_18_years_ago: "Votre enfant %{NAME} va avoir 18ans, le %{DATE}, date à laquelle il sera automatiquement détaché de votre compte Famille. Il devra se créer son propre compte pour effectuer ses réservations."
   #statistics tools for admins
   statistics:
     subscriptions: "Abonnements"

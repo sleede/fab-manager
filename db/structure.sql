@@ -10,6 +10,13 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
+-- Name: public; Type: SCHEMA; Schema: -; Owner: -
+--
+
+-- *not* creating schema, since initdb creates it
+
+
+--
 -- Name: fuzzystrmatch; Type: EXTENSION; Schema: -; Owner: -
 --
 
@@ -3273,7 +3280,7 @@ CREATE TABLE public.slots_reservations (
     ex_end_at timestamp without time zone,
     canceled_at timestamp without time zone,
     offered boolean DEFAULT false,
-    validated_at timestamp(6) without time zone
+    is_valid boolean
 );
 
 
@@ -9064,9 +9071,10 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230524083558'),
 ('20230524110215'),
 ('20230525101006'),
-('20230612123250');
-('20230626103314');
+('20230612123250'),
+('20230626103314'),
 ('20230626122844'),
-('20230626122947');
+('20230626122947'),
+('20230710072403');
 
 
