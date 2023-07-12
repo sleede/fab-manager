@@ -479,3 +479,7 @@ fr:
       subject: "Demande of pré-inscription n'a pas été validée"
       body:
         reservation_invalidated_html: "<strong><em>%{RESERVABLE}</em></strong> du membre %{NAME} n'a pas été validée."
+    notify_user_when_child_age_will_be_18:
+      subject: "Votre enfant va avoir 18ans"
+      body:
+        child_age_will_be_18_years_ago: "Votre enfant %{NAME} va avoir 18ans, le %{DATE}, date à laquelle il sera automatiquement détaché de votre compte Famille. Il devra se créer son propre compte pour effectuer ses réservations."

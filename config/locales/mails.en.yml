@@ -479,3 +479,7 @@ en:
       subject: "Pre-registration wasn't validated"
       body:
         reservation_invalidated_html: "<strong><em>%{RESERVABLE}</em></strong> of %{NAME} wasn't validated."
+    notify_user_when_child_age_will_be_18:
+      subject: "Your child will be 18 years old"
+      body:
+        child_age_will_be_18_years_ago: "Your child %{NAME} will turn 18 on %{DATE}, at which point they will be automatically detached from your Family account. They will need to create their own account in order to make reservations."
