@@ -720,10 +720,10 @@ fr:
     trainings_authorization_validity_duration: "Durée de la période de validité des formations"
     trainings_invalidation_rule: "Invalidation automatique des formations"
     trainings_invalidation_rule_period: "Période de grâce avant d'invalider une formation"
-    projects_list_member_filter_presence: "Présence de filtre des membres dans la liste des projets"
+    projects_list_member_filter_presence: "Permettre la recherche de projets par membre"
     projects_list_date_filters_presence: "Filtre de présence de dates sur la liste des projets"
-    project_categories_filter_placeholder: "Placeholder pour le filtre des catégories dans la galerie de projet"
-    project_categories_wording: "Mots utilisés pour remplacer les \"catégories\" sur les pages publiques"
+    project_categories_filter_placeholder: "Dans la galerie de projets, renommer le filtre \"Toutes les catégories\""
+    project_categories_wording: "Dans la fiche projet, renommer l'intitulé de l'encart Catégories"
   #statuses of projects
   statuses:
     new: "Nouveau"

@@ -8,7 +8,7 @@ class PlanLimitation < ApplicationRecord
   belongs_to :machine, foreign_key: 'limitable_id', inverse_of: :plan_limitations
   belongs_to :machine_category, foreign_key: 'limitable_id', inverse_of: :plan_limitations
 
-  validates :limitable_id, :limitable_type, :limit, :plan_id, presence: true
+  validates :limitable_id, :limitable_type, :limit, presence: true
   validates :limitable_id, uniqueness: { scope: %i[limitable_type plan_id] }
 
   # @return [Array<Machine,Event,Space,Training>]

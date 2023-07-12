@@ -29,9 +29,7 @@ class Checkout::PaymentService
     end
   end
 
-  def confirm_payment(order, operator, coupon_code, payment_id = '')
-    return unless operator.member?
-
+  def confirm_payment(order, coupon_code, payment_id = '')
     if Stripe::Helper.enabled?
       Payments::StripeService.new.confirm_payment(order, coupon_code, payment_id)
     elsif PayZen::Helper.enabled?

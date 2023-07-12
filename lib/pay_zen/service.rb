@@ -24,7 +24,7 @@ class PayZen::Service < Payment::Service
       rrule: rrule(payment_schedule),
       order_id: order_id
     }
-    unless first_item.details['adjustment']&.zero? && first_item.details['other_items']&.zero?
+    if first_item.details['adjustment']&.zero? && first_item.details['other_items']&.zero?
       initial_amount = first_item.amount
       initial_amount -= payment_schedule.wallet_amount if payment_schedule.wallet_amount
       if initial_amount.zero?
@@ -140,7 +140,7 @@ class PayZen::Service < Payment::Service
     transaction_date = Time.zone.parse(transaction['creationDate']).to_date
 
     amount = payment_schedule_item.amount
-    if !payment_schedule_item.details['adjustment']&.zero? && payment_schedule_item.payment_schedule.wallet_amount
+    if payment_schedule_item.details['adjustment']&.zero? && payment_schedule_item.payment_schedule.wallet_amount
       amount -= payment_schedule_item.payment_schedule.wallet_amount
     end
 

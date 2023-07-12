@@ -1,6 +1,17 @@
 # Changelog Fab-manager
 
+- Fix a bug: unable to confirm payment of store for admin
+- Fix a bug: unable to update payment schedule item
+
+
+## v6.0.9 2023 July 07
+
 - Fix a bug: unable to show project step image in markdown file
+- Fix a bug: unable to update Store Order sub type in statistics
+- Fix a bug: unable to create plan with plan limitation
+- Ability to show all availabilities in calender for admin
+- Improved performance when marking all notifications as read
+- [TODO DEPLOY] `rails fablab:maintenance:regenerate_statistics[2014,1]`
 
 ## v6.0.8 2023 July 03
 

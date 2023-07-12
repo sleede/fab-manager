@@ -403,6 +403,7 @@ zu:
         state_new: "crwdns29422:0crwdne29422:0"
         state_pending_check: "crwdns29424:0crwdne29424:0"
         state_pending_transfer: "crwdns29426:0crwdne29426:0"
+        state_pending_card: "crwdns37663:0crwdne37663:0"
         state_requires_payment_method: "crwdns29428:0crwdne29428:0"
         state_requires_action: "crwdns29430:0crwdne29430:0"
         state_paid: "crwdns29432:0crwdne29432:0"

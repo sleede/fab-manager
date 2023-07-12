@@ -403,6 +403,7 @@ pt:
         state_new: "Ainda não vencido"
         state_pending_check: "Esperando a validação manual"
         state_pending_transfer: "Aguardando a confirmação da transferência"
+        state_pending_card: "Waiting for the card payment"
         state_requires_payment_method: "O cartão de crédito deve ser atualizado"
         state_requires_action: "Ação necessária"
         state_paid: "Pago"
