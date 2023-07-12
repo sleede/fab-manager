@@ -17,6 +17,10 @@ class Slot < ApplicationRecord
   # @param reservable [Machine,Space,Training,Event,NilClass]
   # @return [Integer] the total number of reserved places
   def reserved_places(reservable = nil)
+    p '-----------'
+    p id
+    p places
+    p reservable
     if reservable.nil?
       places.pluck('reserved_places').reduce(:+)
     else
