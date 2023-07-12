@@ -51,29 +51,6 @@
         <user-validation-setting on-success="onSuccess" on-error="onError" />
       </div>
     </div>
-    <div class="row">
-      <h3 class="m-l" translate>{{ 'app.admin.settings.family_account' }}</h3>
-      <p class="alert alert-warning m-h-md" ng-bind-html="'app.admin.settings.family_account_info_html' | translate"></p>
-      <div class="col-md-10 col-md-offset-1">
-        <boolean-setting name="'family_account'"
-                         settings="allSettings"
-                         label="'app.admin.settings.enable_family_account' | translate"
-                         on-success="onSuccess"
-                         on-error="onError">
-      </div>
-      <div class="col-md-10 col-md-offset-1">
-        <boolean-setting name="'child_validation_required'"
-                         settings="allSettings"
-                         label="'app.admin.settings.child_validation_required_label' | translate"
-                         on-success="onSuccess"
-                         on-error="onError">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <supporting-documents-types-list on-success="onSuccess" on-error="onError" document-type="'Child'" />
-      </div>
-    </div>
 
     <div class="row">
       <h3 class="m-l" translate>{{ 'app.admin.settings.captcha' }}</h3>
@@ -97,6 +74,37 @@
     </div>
   </div>
 </div>
+
+<div class="panel panel-default m-t-md">
+  <div class="panel-heading">
+    <span class="font-sbold" translate>{{ 'app.admin.settings.family_account' }}</span>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <p class="alert alert-warning m-h-md" ng-bind-html="'app.admin.settings.family_account_info_html' | translate"></p>
+      <div class="col-md-10 col-md-offset-1">
+        <boolean-setting name="'family_account'"
+                         settings="allSettings"
+                         label="'app.admin.settings.enable_family_account' | translate"
+                         on-success="onSuccess"
+                         on-error="onError">
+      </div>
+      <div class="col-md-10 col-md-offset-1">
+        <boolean-setting name="'child_validation_required'"
+                         settings="allSettings"
+                         label="'app.admin.settings.child_validation_required_label' | translate"
+                         on-success="onSuccess"
+                         on-error="onError">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <supporting-documents-types-list on-success="onSuccess" on-error="onError" document-type="'Child'" />
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="panel panel-default m-t-md">
   <div class="panel-heading">
     <span class="font-sbold" translate>{{ 'app.admin.settings.accounts_management' }}</span>
