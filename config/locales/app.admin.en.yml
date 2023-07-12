@@ -654,6 +654,7 @@ en:
           paid: "Paid"
           canceled: "Canceled"
           present: "Present"
+          registered: "Registered"
         affirmative: "yes"
         negative: "no"
         validate: "Validate"
