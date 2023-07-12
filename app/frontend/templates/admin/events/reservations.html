@@ -59,11 +59,11 @@
                 <div ng-if="!isCancelled(reservation) && !reservation.is_paid">
                   <label class="m-r-sm">
                     <span translate>{{ 'app.admin.event_reservations.negative' }}</span>
-                    <input type="radio" name="validate" ng-value="false" ng-click="invalidateReservation(reservation)" ng-model="reservation.slots_reservations_attributes[0].is_valid" >
+                    <input type="radio" name="invalidate-{{reservation.id}}" ng-value="false" ng-click="invalidateReservation(reservation)" ng-model="reservation.slots_reservations_attributes[0].is_valid" ng-disabled="reservation.total_booked_seats > event.nb_free_places && !reservation.slots_reservations_attributes[0].is_valid">
                   </label>
                   <label>
                     <span translate>{{ 'app.admin.event_reservations.affirmative' }}</span>
-                    <input type="radio" name="validate" ng-value="true" ng-click="validateReservation(reservation)" ng-model="reservation.slots_reservations_attributes[0].is_valid" >
+                    <input type="radio" name="validate-{{reservation.id}}" ng-value="true" ng-click="validateReservation(reservation)" ng-model="reservation.slots_reservations_attributes[0].is_valid" ng-disabled="reservation.total_booked_seats > event.nb_free_places && !reservation.slots_reservations_attributes[0].is_valid" >
                   </label>
                 </div>
                 <button class="btn btn-default" ng-click="payReservation(reservation)" ng-if="isValidated(reservation) && !isCancelled(reservation) && !reservation.is_paid">

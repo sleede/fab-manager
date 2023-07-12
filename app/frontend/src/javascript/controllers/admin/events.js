@@ -436,7 +436,7 @@ Application.Controllers.controller('AdminEventsController', ['$scope', '$state',
 /**
  * Controller used in the reservations listing page for a specific event
  */
-Application.Controllers.controller('ShowEventReservationsController', ['$scope', 'eventPromise', 'reservationsPromise', 'dialogs', 'SlotsReservation', 'growl', '_t', 'Price', 'Wallet', '$uibModal', function ($scope, eventPromise, reservationsPromise, dialogs, SlotsReservation, growl, _t, Price, Wallet, $uibModal) {
+Application.Controllers.controller('ShowEventReservationsController', ['$scope', 'eventPromise', 'reservationsPromise', 'dialogs', 'SlotsReservation', 'growl', '_t', 'Price', 'Wallet', '$uibModal', 'Event', function ($scope, eventPromise, reservationsPromise, dialogs, SlotsReservation, growl, _t, Price, Wallet, $uibModal, Event) {
   // retrieve the event from the ID provided in the current URL
   $scope.event = eventPromise;
 
@@ -472,6 +472,9 @@ Application.Controllers.controller('ShowEventReservationsController', ['$scope',
       growl.success(_t('app.admin.event_reservations.reservation_was_successfully_validated'));
       const index = $scope.reservations.indexOf(reservation);
       $scope.reservations[index].slots_reservations_attributes[0].is_valid = true;
+      Event.get({ id: $scope.event.id }).$promise.then(function (event) {
+        $scope.event = event;
+      });
     }, () => {
       growl.warning(_t('app.admin.event_reservations.validation_failed'));
     });
@@ -488,6 +491,9 @@ Application.Controllers.controller('ShowEventReservationsController', ['$scope',
       growl.success(_t('app.admin.event_reservations.reservation_was_successfully_invalidated'));
       const index = $scope.reservations.indexOf(reservation);
       $scope.reservations[index].slots_reservations_attributes[0].is_valid = false;
+      Event.get({ id: $scope.event.id }).$promise.then(function (event) {
+        $scope.event = event;
+      });
     }, () => {
       growl.warning(_t('app.admin.event_reservations.invalidation_failed'));
     });
