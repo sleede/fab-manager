@@ -29,6 +29,7 @@ class SlotsReservationsService
           reservable.update_nb_free_places
           reservable.save
         end
+        Slots::PlacesCacheService.refresh(slot_reservation.slot)
         NotificationCenter.call type: 'notify_member_reservation_validated',
                                 receiver: slot_reservation.reservation.user,
                                 attached_object: slot_reservation.reservation
@@ -47,6 +48,7 @@ class SlotsReservationsService
           reservable.update_nb_free_places
           reservable.save
         end
+        Slots::PlacesCacheService.refresh(slot_reservation.slot)
         NotificationCenter.call type: 'notify_member_reservation_invalidated',
                                 receiver: slot_reservation.reservation.user,
                                 attached_object: slot_reservation.reservation

@@ -360,9 +360,10 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
       if ($scope.ctrl.member) {
         Member.get({ id: $scope.ctrl.member.id }, function (member) {
           $scope.ctrl.member = member;
-          getReservations($scope.event.id, 'Event', $scope.ctrl.member.id);
-          getChildren($scope.ctrl.member.id).then(() => {
-            updateNbReservePlaces();
+          getReservations($scope.event.id, 'Event', $scope.ctrl.member.id).then(function (reservations) {
+            getChildren($scope.currentUser.id).then(function (children) {
+              updateNbReservePlaces();
+            });
           });
         });
       }
@@ -441,8 +442,10 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
           let index;
           growl.success(_t('app.public.events_show.reservation_was_successfully_cancelled'));
           index = $scope.reservations.indexOf(reservation);
-          $scope.event.nb_free_places = $scope.event.nb_free_places + reservation.total_booked_seats;
           $scope.reservations[index].slots_reservations_attributes[0].canceled_at = new Date();
+          Event.get({ id: $scope.event.id }).$promise.then(function (event) {
+            $scope.event = event;
+          });
         }, function(error) {
           growl.warning(_t('app.public.events_show.cancellation_failed'));
         });
@@ -985,13 +988,14 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
      * @param invoice {Object} the invoice for the booked reservation
      */
     const afterPayment = function (invoice) {
-      Reservation.get({ id: invoice.main_object.id }, function (reservation) {
-        $scope.event.nb_free_places = $scope.event.nb_free_places - reservation.total_booked_seats;
-        $scope.reservations.push(reservation);
+      Event.get({ id: $scope.event.id }).$promise.then(function (event) {
+        $scope.event = event;
+        getReservations($scope.event.id, 'Event', $scope.ctrl.member.id).then(function (reservations) {
+          updateNbReservePlaces();
+          $scope.reserveSuccess = true;
+          $scope.coupon.applied = null;
+        });
         resetEventReserve();
-        updateNbReservePlaces();
-        $scope.reserveSuccess = true;
-        $scope.coupon.applied = null;
       });
       if ($scope.currentUser.role === 'admin') {
         return $scope.ctrl.member = null;
