@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+## v6.0.10 2023 July 13
+
 - Fix a bug: unable to confirm payment of store for admin
 - Fix a bug: unable to update payment schedule item
 - Fix a bug: event reserved places compute error
