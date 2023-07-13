@@ -1,5 +1,12 @@
 # Changelog Fab-manager
 
+## v6.0.10 2023 July 13
+
+- Fix a bug: unable to confirm payment of store for admin
+- Fix a bug: unable to update payment schedule item
+- Fix a bug: event reserved places compute error
+- [TODO DEPLOY] `rails fablab:setup:build_places_cache`
+
 ## v6.0.9 2023 July 07
 
 - Fix a bug: unable to show project step image in markdown file

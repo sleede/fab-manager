@@ -30,10 +30,14 @@ class Slots::PlacesCacheService
         reservations = Slots::ReservationsService.reservations(slot.slots_reservations, [reservable])
         pending = Slots::ReservationsService.pending_reservations(slot.cart_item_reservation_slots.map(&:id), [reservable])
 
+        reserved_places = (reservations[:reservations].count || 0) + (pending[:reservations].count || 0)
+        if slot.availability.available_type == 'event'
+          reserved_places = slot.availability.event.nb_total_places - slot.availability.event.nb_free_places
+        end
         places.push({
                       reservable_type: reservable.class.name,
                       reservable_id: reservable.try(&:id),
-                      reserved_places: (reservations[:reservations].count || 0) + (pending[:reservations].count || 0),
+                      reserved_places: reserved_places,
                       user_ids: reservations[:user_ids] + pending[:user_ids]
                     })
       end

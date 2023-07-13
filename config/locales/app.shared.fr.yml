@@ -403,6 +403,7 @@ fr:
         state_new: "Pas encore à l'échéance"
         state_pending_check: "En attente de l'encaissement du chèque"
         state_pending_transfer: "En attente de la confirmation du prélèvement"
+        state_pending_card: "En attente du paiement par carte"
         state_requires_payment_method: "La carte bancaire doit être mise à jour"
         state_requires_action: "Action requise"
         state_paid: "Payée"

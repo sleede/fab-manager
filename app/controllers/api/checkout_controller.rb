@@ -31,7 +31,7 @@ class API::CheckoutController < API::APIController
 
   def confirm_payment
     authorize @current_order, policy_class: CheckoutPolicy
-    res = Checkout::PaymentService.new.confirm_payment(@current_order, current_user, params[:coupon_code], params[:payment_id])
+    res = Checkout::PaymentService.new.confirm_payment(@current_order, params[:coupon_code], params[:payment_id])
     render json: res
   rescue StandardError => e
     render json: e, status: :unprocessable_entity

@@ -35,12 +35,12 @@ class Availabilities::AvailabilitiesServiceTest < ActiveSupport::TestCase
     assert_empty slots
   end
 
-  test 'admin cannot see past availabilities further than 1 month' do
+  test 'admin can see past availabilities further than 1 month' do
     service = Availabilities::AvailabilitiesService.new(@admin)
     slots = service.machines([Machine.find(2)], @no_subscription,
                              { start: Time.zone.parse('2015-06-15').beginning_of_day, end: Time.zone.parse('2015-06-15').end_of_day })
 
-    assert_empty slots
+    assert_not_empty slots
   end
 
   test 'admin can see past availabilities in 1 month ago' do

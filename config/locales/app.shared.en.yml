@@ -403,6 +403,7 @@ en:
         state_new: "Not yet due"
         state_pending_check: "Waiting for the cashing of the check"
         state_pending_transfer: "Waiting for the tranfer confirmation"
+        state_pending_card: "Waiting for the card payment"
         state_requires_payment_method: "The credit card must be updated"
         state_requires_action: "Action required"
         state_paid: "Paid"
