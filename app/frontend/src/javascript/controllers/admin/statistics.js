@@ -502,8 +502,8 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
         scroll: ES_SCROLL_TIME + 'm',
         'stat-type': type,
         'custom-query': custom ? JSON.stringify(Object.assign({ exclude: custom.exclude }, buildElasticCustomCriterion(custom))) : '',
-        'start-date': moment($scope.datePickerStart.selected).format(),
-        'end-date': moment($scope.datePickerEnd.selected).format(),
+        'start-date': moment($scope.datePickerStart.selected).format('YYYY-MM-DD'),
+        'end-date': moment($scope.datePickerEnd.selected).format('YYYY-MM-DD'),
         body: buildElasticDataQuery(type, custom, $scope.agePicker.start, $scope.agePicker.end, moment($scope.datePickerStart.selected), moment($scope.datePickerEnd.selected), $scope.sorting)
       }
       , function (error, response) {
@@ -537,8 +537,8 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
               {
                 range: {
                   date: {
-                    gte: intervalBegin.format(),
-                    lte: intervalEnd.format()
+                    gte: intervalBegin.format('YYYY-MM-DD'),
+                    lte: intervalEnd.format('YYYY-MM-DD')
                   }
                 }
               }
@@ -767,8 +767,8 @@ Application.Controllers.controller('ExportStatisticsController', ['$scope', '$ui
                 {
                   range: {
                     date: {
-                      gte: moment($scope.dates.start).format(),
-                      lte: moment($scope.dates.end).format()
+                      gte: moment($scope.dates.start).format('YYYY-MM-DD'),
+                      lte: moment($scope.dates.end).format('YYYY-MM-DD')
                     }
                   }
                 }
