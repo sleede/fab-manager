@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- Fix a bug: incorrect date range in statistics
+
 ## v6.0.10 2023 July 13
 
 - Fix a bug: unable to confirm payment of store for admin
