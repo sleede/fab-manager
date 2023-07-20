@@ -36,7 +36,8 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
         reservableId: '@',
         reservableType: '@',
         reservableName: '@',
-        limitToOneSlot: '@'
+        limitToOneSlot: '@',
+        reservationContexts: '='
       },
       templateUrl: '/shared/_cart.html',
       link ($scope, element, attributes) {
@@ -87,6 +88,11 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
 
         // currently logged-in user
         $scope.currentUser = $rootScope.currentUser;
+
+        $scope.reservationContextsData = {
+          options: $scope.reservationContexts || [],
+          selected: null
+        };
 
         /**
          * Add the provided slot to the shopping cart (state transition from free to 'about to be reserved')
@@ -162,7 +168,10 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
          * Validates the shopping chart and redirect the user to the payment step
          */
         $scope.payCart = function () {
-        // first, we check that a user was selected
+          if ($scope.reservationContextsData.options.length && angular.isUndefinedOrNull($scope.reservationContextsData.selected)) {
+            return growl.error(_t('app.shared.cart.please_select_a_reservation_context'));
+          }
+          // first, we check that a user was selected
           if (Object.keys($scope.user).length > 0) {
             // check selected user has a subscription, if any slot is restricted for subscriptions
             const slotValidations = [];
@@ -725,6 +734,9 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
             reservable_type: $scope.reservableType,
             slots_reservations_attributes: []
           };
+          if (!angular.isUndefinedOrNull($scope.reservationContextsData.selected)) {
+            reservation.reservation_context_id = $scope.reservationContextsData.selected.id;
+          }
           angular.forEach(slots, function (slot) {
             reservation.slots_reservations_attributes.push({
               offered: slot.offered || false,

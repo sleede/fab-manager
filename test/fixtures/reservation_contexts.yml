@@ -1,0 +1,14 @@
+
+reservation_context_1:
+  id: 1
+  name: Pédagogique
+  applicable_on: [machine, training, space]
+  created_at: 2023-07-20 15:39:08.259759000 Z
+  updated_at: 2023-07-20 15:39:08.259759000 Z
+
+reservation_context_2:
+  id: 2
+  name: Recherche
+  applicable_on: [machine, training, space]
+  created_at: 2023-07-20 15:39:08.265840000 Z
+  updated_at: 2023-07-20 15:39:08.265840000 Z

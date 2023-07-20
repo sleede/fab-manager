@@ -15,8 +15,8 @@
  */
 'use strict';
 
-Application.Controllers.controller('StatisticsController', ['$scope', '$state', '$transitions', '$rootScope', '$uibModal', 'es', 'Member', '_t', 'membersPromise', 'statisticsPromise', 'uiTourService', 'settingsPromise',
-  function ($scope, $state, $transitions, $rootScope, $uibModal, es, Member, _t, membersPromise, statisticsPromise, uiTourService, settingsPromise) {
+Application.Controllers.controller('StatisticsController', ['$scope', '$state', '$transitions', '$rootScope', '$uibModal', 'es', 'Member', '_t', 'membersPromise', 'statisticsPromise', 'uiTourService', 'settingsPromise', 'reservationContextsPromise', 'reservationContextApplicableOnValuesPromise',
+  function ($scope, $state, $transitions, $rootScope, $uibModal, es, Member, _t, membersPromise, statisticsPromise, uiTourService, settingsPromise, reservationContextsPromise, reservationContextApplicableOnValuesPromise) {
   /* PRIVATE STATIC CONSTANTS */
 
     // search window size
@@ -133,6 +133,18 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
       }
     };
 
+    $scope.reservationContextFeatureEnabled = settingsPromise.reservation_context_feature === 'true';
+
+    $scope.reservationContexts = reservationContextsPromise;
+
+    $scope.reservationContexts = reservationContextsPromise.filter(rc => rc.applicable_on.length > 0);
+
+    $scope.reservationContextApplicableOnValues = reservationContextApplicableOnValuesPromise;
+
+    $scope.reservationContextIsApplicable = function (esTypeKey) {
+      return $scope.reservationContextApplicableOnValues.includes(esTypeKey);
+    };
+
     /**
      * Return a localized name for the given field
      */
@@ -220,17 +232,9 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
      */
     $scope.formatDate = function (date) { return moment(date).format('LL'); };
 
-    /**
-     * Parse the sex and return a user-friendly string
-     * @param sex {string} 'male' | 'female'
-     */
-    $scope.formatSex = function (sex) {
-      if (sex === 'male') {
-        return _t('app.admin.statistics.man');
-      }
-      if (sex === 'female') {
-        return _t('app.admin.statistics.woman');
-      }
+    $scope.formatReservationContext = function (id) {
+      if (id === null || id === undefined) { return; }
+      return $scope.reservationContexts.find(rc => rc.id === id).name;
     };
 
     /**
@@ -644,6 +648,15 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
         { key: 'age', label: _t('app.admin.statistics.age'), values: ['input_number'] },
         { key: 'ca', label: _t('app.admin.statistics.revenue'), values: ['input_number'] }
       ];
+
+      if ($scope.reservationContextFeatureEnabled && $scope.reservationContextIsApplicable($scope.selectedIndex.es_type_key)) {
+        const reservationContextValues = $scope.reservationContexts.map((rc) => {
+          return { key: rc.id, label: rc.name };
+        });
+        $scope.filters.push({
+          key: 'reservationContextId', label: _t('app.admin.statistics.reservation_context'), values: reservationContextValues
+        });
+      }
 
       // if no plans were created, there's no types for statisticIndex=subscriptions
       if ($scope.type.active) {

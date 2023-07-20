@@ -98,8 +98,8 @@ Application.Controllers.controller('ShowTrainingController', ['$scope', '$state'
  * training can be reserved during the reservation process (the shopping cart may contain only one training and a subscription).
  */
 
-Application.Controllers.controller('ReserveTrainingController', ['$scope', '$transition$', 'Auth', 'AuthService', '$timeout', 'Availability', 'Member', 'plansPromise', 'groupsPromise', 'settingsPromise', 'trainingPromise', '_t', 'uiCalendarConfig', 'CalendarConfig', 'Reservation', 'helpers',
-  function ($scope, $transition$, Auth, AuthService, $timeout, Availability, Member, plansPromise, groupsPromise, settingsPromise, trainingPromise, _t, uiCalendarConfig, CalendarConfig, Reservation, helpers) {
+Application.Controllers.controller('ReserveTrainingController', ['$scope', '$transition$', 'Auth', 'AuthService', '$timeout', 'Availability', 'Member', 'plansPromise', 'groupsPromise', 'settingsPromise', 'trainingPromise', 'reservationContextsPromise', '_t', 'uiCalendarConfig', 'CalendarConfig', 'Reservation', 'helpers',
+  function ($scope, $transition$, Auth, AuthService, $timeout, Availability, Member, plansPromise, groupsPromise, settingsPromise, trainingPromise, reservationContextsPromise, _t, uiCalendarConfig, CalendarConfig, Reservation, helpers) {
   /* PRIVATE STATIC CONSTANTS */
 
     // Color of the selected event backgound
@@ -179,6 +179,13 @@ Application.Controllers.controller('ReserveTrainingController', ['$scope', '$tra
 
     // Global config: is the user validation required ?
     $scope.enableUserValidationRequired = settingsPromise.user_validation_required === 'true';
+
+    // reservation contexts stuff
+    if (settingsPromise.reservation_context_feature === 'true') {
+      $scope.reservationContexts = reservationContextsPromise;
+    } else {
+      $scope.reservationContexts = [];
+    }
 
     /**
      * Change the last selected slot's appearance to looks like 'added to cart'

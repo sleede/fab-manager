@@ -83,6 +83,7 @@ class CartItem::Reservation < CartItem::BaseItem
     ::Reservation.new(
       reservable_id: reservable_id,
       reservable_type: reservable_type,
+      reservation_context_id: reservation_context_id,
       slots_reservations_attributes: slots_params,
       statistic_profile_id: StatisticProfile.find_by(user: customer).id
     )

@@ -1068,7 +1068,7 @@ en:
             currency_error: "The inputted value is not a valid currency"
             error_while_saving: "An error occurred while saving the currency: "
             currency_updated: "The PayZen currency was successfully updated to {CURRENCY}."
-          # select a payment gateway
+          #select a payment gateway
           select_gateway_modal:
             select_gateway_title: "Select a payment gateway"
             gateway_info: "To securely collect and process payments online, Fab-manager needs to use an third-party service authorized by the financial institutions, called a payment gateway."
@@ -1316,7 +1316,7 @@ en:
         invalidate_member_error: "An error occurred: impossible to invalidate from this member."
         supporting_documents: "Supporting documents"
         change_role: "Change role"
-      # extend a subscription for free
+      #extend a subscription for free
       free_extend_modal:
         extend_subscription: "Extend the subscription"
         offer_free_days_infos: "You are about to extend the user's subscription by offering him free additional days."
@@ -1534,6 +1534,7 @@ en:
         create_plans_to_start: "Start by creating new subscription plans."
         click_here: "Click here to create your first one."
         average_cart: "Average cart:"
+        reservation_context: Reservation context
       #statistics graphs
       stats_graphs:
         statistics: "Statistics"
@@ -1783,6 +1784,15 @@ en:
         projects_list_date_filters_presence: "Presence of date filters on projects list"
         project_categories_filter_placeholder: "Placeholder for categories filter in project gallery"
         project_categories_wording: "Wording used to replace \"Categories\" on public pages"
+        reservation_context_feature_title: Reservation context
+        reservation_context_feature_info: "If you enable this feature, members will have to enter the context of their reservation when reserving."
+        reservation_context_feature: "Enable the feature \"Reservation context\""
+        reservation_context_options: Reservation context options
+        add_a_reservation_context: Add a new context
+        confirmation_required: Confirmation required
+        do_you_really_want_to_delete_this_reservation_context: "Do you really want to delete this context?"
+        unable_to_delete_reservation_context_already_related_to_reservations: "Unable to delete this context because it is already associated to a reservation"
+        unable_to_delete_reservation_context_an_error_occured: "Unable to delete: an error occurred"
         overlapping_options:
           training_reservations: "Trainings"
           machine_reservations: "Machines"
@@ -2457,3 +2467,9 @@ en:
         cta_switch: "Display a button"
         cta_label: "Button label"
         cta_url: "Button link"
+      reservation_contexts:
+        name: "Name"
+        applicable_on: "Applicable on"
+        machine: Machine
+        training: Training
+        space: Space

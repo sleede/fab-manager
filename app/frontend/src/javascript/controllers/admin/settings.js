@@ -12,8 +12,8 @@
  */
 'use strict';
 
-Application.Controllers.controller('SettingsController', ['$scope', '$rootScope', '$filter', '$uibModal', 'dialogs', 'Setting', 'growl', 'settingsPromise', 'privacyDraftsPromise', 'cgvFile', 'cguFile', 'logoFile', 'logoBlackFile', 'faviconFile', 'profileImageFile', 'CSRF', '_t', 'Member', 'uiTourService',
-  function ($scope, $rootScope, $filter, $uibModal, dialogs, Setting, growl, settingsPromise, privacyDraftsPromise, cgvFile, cguFile, logoFile, logoBlackFile, faviconFile, profileImageFile, CSRF, _t, Member, uiTourService) {
+Application.Controllers.controller('SettingsController', ['$scope', '$rootScope', '$filter', '$uibModal', 'dialogs', 'Setting', 'growl', 'settingsPromise', 'privacyDraftsPromise', 'cgvFile', 'cguFile', 'logoFile', 'logoBlackFile', 'faviconFile', 'profileImageFile', 'reservationContextsPromise', 'reservationContextApplicableOnValuesPromise', 'CSRF', '_t', 'Member', 'uiTourService', 'ReservationContext',
+  function ($scope, $rootScope, $filter, $uibModal, dialogs, Setting, growl, settingsPromise, privacyDraftsPromise, cgvFile, cguFile, logoFile, logoBlackFile, faviconFile, profileImageFile, reservationContextsPromise, reservationContextApplicableOnValuesPromise, CSRF, _t, Member, uiTourService, ReservationContext) {
     /* PUBLIC SCOPE */
 
     // timepickers steps configuration
@@ -76,12 +76,18 @@ Application.Controllers.controller('SettingsController', ['$scope', '$rootScope'
     $scope.mainColorSetting = { name: 'main_color', value: settingsPromise.main_color };
     $scope.secondColorSetting = { name: 'secondary_color', value: settingsPromise.secondary_color };
     $scope.nameGenre = { name: 'name_genre', value: settingsPromise.name_genre };
+    $scope.reservationContextFeature = { name: 'reservation_context_feature', value: settingsPromise.reservation_context_feature };
     $scope.cguFile = cguFile.custom_asset;
     $scope.cgvFile = cgvFile.custom_asset;
     $scope.customLogo = logoFile.custom_asset;
     $scope.customLogoBlack = logoBlackFile.custom_asset;
     $scope.customFavicon = faviconFile.custom_asset;
     $scope.profileImage = profileImageFile.custom_asset;
+
+    // necessary initialisation for reservation context
+    $scope.reservationContexts = reservationContextsPromise;
+    $scope.reservationContextApplicableOnValues = reservationContextApplicableOnValuesPromise;
+    $scope.newReservationContext = null;
 
     // By default, we display the currently published privacy policy
     $scope.privacyPolicy = {
@@ -315,21 +321,6 @@ Application.Controllers.controller('SettingsController', ['$scope', '$rootScope'
     };
 
     /**
-     * Shows a success message forwarded from a child react component
-     */
-    $scope.onSuccess = function (message) {
-      growl.success(message);
-    };
-
-    /**
-     * Callback triggered by react components
-     */
-    $scope.onError = function (message) {
-      console.error(message);
-      growl.error(message);
-    };
-
-    /**
      * Options for allow/prevent book overlapping slots: which kind of slots are used in the overlapping computation
      */
     $scope.availableOverlappingOptions = [
@@ -474,6 +465,63 @@ Application.Controllers.controller('SettingsController', ['$scope', '$rootScope'
     $scope.onError = function (message) {
       console.error(message);
       growl.error(message);
+    };
+
+    // Functions for reservation context feature
+
+    $scope.onReservationContextFeatureChange = function (value) {
+      $scope.reservationContextFeature.value = value;
+    };
+
+    $scope.saveReservationContext = function (data, id) {
+      if (id != null) {
+        return ReservationContext.update({ id }, data);
+      } else {
+        return ReservationContext.save(data, function (resp) { $scope.reservationContexts[$scope.reservationContexts.length - 1].id = resp.id; });
+      }
+    };
+
+    $scope.removeReservationContext = function (index) {
+      if ($scope.reservationContexts[index].related_to > 0) {
+        growl.error(_t('app.admin.settings.unable_to_delete_reservation_context_already_related_to_reservations'));
+        return false;
+      }
+      return dialogs.confirm({
+        resolve: {
+          object () {
+            return {
+              title: _t('app.admin.settings.confirmation_required'),
+              msg: _t('app.admin.settings.do_you_really_want_to_delete_this_reservation_context')
+            };
+          }
+        }
+      }
+      , function () { // delete confirmed
+        ReservationContext.delete($scope.reservationContexts[index], null, function () { $scope.reservationContexts.splice(index, 1); }
+          , function () { growl.error(_t('app.admin.settings.unable_to_delete_reservation_context_an_error_occured')); });
+      });
+    };
+
+    $scope.addReservationContext = function () {
+      $scope.newReservationContext = {
+        name: '',
+        related_to: 0
+      };
+      return $scope.reservationContexts.push($scope.newReservationContext);
+    };
+
+    $scope.cancelReservationContext = function (rowform, index) {
+      if ($scope.reservationContexts[index].id != null) {
+        return rowform.$cancel();
+      } else {
+        return $scope.reservationContexts.splice(index, 1);
+      }
+    };
+
+    $scope.translateApplicableOnValue = function (value) {
+      if (!value) { return; }
+      if (angular.isArray(value)) { return value.map(v => _t(`app.admin.reservation_contexts.${v}`)).join(', '); }
+      return _t(`app.admin.reservation_contexts.${value}`);
     };
 
     /* PRIVATE SCOPE */

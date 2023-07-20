@@ -386,7 +386,7 @@ fr:
         deleted_user: "Utilisateur supprimé"
         select_type: "Veuillez sélectionner un type pour continuer"
         no_modules_available: "Aucun module réservable n'est disponible. Veuillez activer au moins un module (machines, espaces ou formations) dans la section Personnalisation."
-      #import external iCal calendar
+      # import external iCal calendar
       icalendar:
         icalendar_import: "Import iCalendar"
         intro: "Fab-manager vous permet d'importer automatiquement des événements de calendrier, au format iCalendar RFC 5545, depuis des URL externes. Ces URL seront synchronisée toutes les heures et les événements seront affichés dans le calendrier publique. Vous pouvez aussi déclencher une synchronisation en cliquant sur le bouton correspondant, en face de chaque import."
@@ -1534,6 +1534,7 @@ fr:
         create_plans_to_start: "Pour commencer, créez de nouvelles formules d'abonnement."
         click_here: "Cliquez ici pour créer votre première formule."
         average_cart: "Panier moyen :"
+        reservation_context: Nature de la réservation
       #statistics graphs
       stats_graphs:
         statistics: "Statistiques"
@@ -1783,6 +1784,15 @@ fr:
         projects_list_date_filters_presence: "Permettre la recherche de projets par dates"
         project_categories_filter_placeholder: "Dans la galerie de projets, renommer le filtre \"Toutes les catégories\""
         project_categories_wording: "Dans la fiche projet, renommer l'intitulé de l'encart Catégories"
+        reservation_context_feature_title: Natures des réservations
+        reservation_context_feature_info: "Si vous activez cette fonctionnalité, le membre devra obligatoirement saisir la nature de sa réservation au moment de réserver."
+        reservation_context_feature: Activer la saisie obligatoire de la nature des réservations
+        reservation_context_options: Natures des réservations possibles
+        add_a_reservation_context: Ajouter une nouvelle nature
+        confirmation_required: Confirmation requise
+        do_you_really_want_to_delete_this_reservation_context: "Êtes-vous sûr de vouloir supprimer cette nature de réservation ?"
+        unable_to_delete_reservation_context_already_related_to_reservations: "Impossible de supprimer cette nature de réservation car elle est actuellement associée à des réservations."
+        unable_to_delete_reservation_context_an_error_occured: "Impossible de supprimer : une erreur est survenue."
         overlapping_options:
           training_reservations: "Formations"
           machine_reservations: "Machines"
@@ -2457,3 +2467,9 @@ fr:
         cta_switch: "Afficher un bouton"
         cta_label: "Libellé du bouton"
         cta_url: "Lien du bouton"
+      reservation_contexts:
+        name: "Nom"
+        applicable_on: "Applicable à"
+        machine: Machine
+        training: Formation
+        space: Espace

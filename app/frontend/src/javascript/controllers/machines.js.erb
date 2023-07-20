@@ -390,8 +390,8 @@ Application.Controllers.controller('ShowMachineController', ['$scope', '$state',
  * This controller workflow is pretty similar to the trainings reservation controller.
  */
 
-Application.Controllers.controller('ReserveMachineController', ['$scope', '$transition$', '_t', 'moment', 'Auth', '$timeout', 'Member', 'Availability', 'plansPromise', 'groupsPromise', 'machinePromise', 'settingsPromise', 'uiCalendarConfig', 'CalendarConfig', 'Reservation', 'growl', 'helpers', 'AuthService',
-  function ($scope, $transition$, _t, moment, Auth, $timeout, Member, Availability, plansPromise, groupsPromise, machinePromise, settingsPromise, uiCalendarConfig, CalendarConfig, Reservation, growl, helpers, AuthService) {
+Application.Controllers.controller('ReserveMachineController', ['$scope', '$transition$', '_t', 'moment', 'Auth', '$timeout', 'Member', 'Availability', 'plansPromise', 'groupsPromise', 'machinePromise', 'settingsPromise', 'reservationContextsPromise', 'uiCalendarConfig', 'CalendarConfig', 'Reservation', 'growl', 'helpers', 'AuthService',
+  function ($scope, $transition$, _t, moment, Auth, $timeout, Member, Availability, plansPromise, groupsPromise, machinePromise, settingsPromise, reservationContextsPromise, uiCalendarConfig, CalendarConfig, Reservation, growl, helpers, AuthService) {
   /* PRIVATE STATIC CONSTANTS */
 
     // Slot free to be booked
@@ -444,6 +444,13 @@ Application.Controllers.controller('ReserveMachineController', ['$scope', '$tran
 
     // will be set to a Promise and resolved after the payment is sone
     $scope.afterPaymentPromise = null;
+
+    // reservation contexts stuff
+    if (settingsPromise.reservation_context_feature === 'true') {
+      $scope.reservationContexts = reservationContextsPromise;
+    } else {
+      $scope.reservationContexts = [];
+    }
 
     // fullCalendar (v2) configuration
     $scope.calendarConfig = CalendarConfig({

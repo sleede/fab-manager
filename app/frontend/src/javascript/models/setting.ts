@@ -88,7 +88,8 @@ export const bookingSettings = [
   'display_name_enable',
   'book_overlapping_slots',
   'slot_duration',
-  'overlapping_categories'
+  'overlapping_categories',
+  'reservation_context_feature'
 ] as const;
 
 export const themeSettings = [
