@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+## v6.0.11 2023 July 21
+
 - Fix a bug: incorrect date range in statistics
 - Fix a bug: hide project categories filter if there is no project categories
 - Improvement : dialog confirm to remove a project category
