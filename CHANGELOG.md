@@ -1,6 +1,7 @@
 # Changelog Fab-manager
 
 - adds reservation context feature (for machine, training, space)
+- [TODO DEPLOY] `rails db:seed`
 - [TODO DEPLOY] `rails fablab:es:build_stats`
 - [TODO DEPLOY] `rails fablab:maintenance:regenerate_statistics[2014,1]`
 
