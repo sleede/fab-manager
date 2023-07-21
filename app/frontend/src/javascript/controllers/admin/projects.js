@@ -12,8 +12,8 @@
  */
 'use strict';
 
-Application.Controllers.controller('AdminProjectsController', ['$scope', '$state', 'Component', 'Licence', 'Theme', 'ProjectCategory', 'componentsPromise', 'licencesPromise', 'themesPromise', 'projectCategoriesPromise', '_t', 'Member', 'uiTourService', 'settingsPromise', 'growl',
-  function ($scope, $state, Component, Licence, Theme, ProjectCategory, componentsPromise, licencesPromise, themesPromise, projectCategoriesPromise, _t, Member, uiTourService, settingsPromise, growl) {
+Application.Controllers.controller('AdminProjectsController', ['$scope', '$state', 'Component', 'Licence', 'Theme', 'ProjectCategory', 'componentsPromise', 'licencesPromise', 'themesPromise', 'projectCategoriesPromise', '_t', 'Member', 'uiTourService', 'settingsPromise', 'growl', 'dialogs',
+  function ($scope, $state, Component, Licence, Theme, ProjectCategory, componentsPromise, licencesPromise, themesPromise, projectCategoriesPromise, _t, Member, uiTourService, settingsPromise, growl, dialogs) {
     // Materials list (plastic, wood ...)
     $scope.components = componentsPromise;
 
@@ -136,8 +136,20 @@ Application.Controllers.controller('AdminProjectsController', ['$scope', '$state
      * @param index {number} project category index in the $scope.projectCategories array
      */
     $scope.removeProjectCategory = function (index) {
-      ProjectCategory.delete($scope.projectCategories[index]);
-      return $scope.projectCategories.splice(index, 1);
+      return dialogs.confirm({
+        resolve: {
+          object () {
+            return {
+              title: _t('app.admin.project_categories.delete_dialog_title'),
+              msg: _t('app.admin.project_categories.delete_dialog_info')
+            };
+          }
+        }
+      }
+      , function () { // cancel confirmed
+        ProjectCategory.delete($scope.projectCategories[index]);
+        $scope.projectCategories.splice(index, 1);
+      });
     };
 
     /**
