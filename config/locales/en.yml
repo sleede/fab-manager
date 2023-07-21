@@ -534,6 +534,7 @@ en:
     male: "Man"
     female: "Woman"
     deleted_user: "Deleted user"
+    reservation_context: "Reservation context"
   #initial price's category for events, created to replace the old "reduced amount" property
   price_category:
     reduced_fare: "Reduced fare"
@@ -731,6 +732,7 @@ en:
     project_categories_filter_placeholder: "Placeholder for categories filter in project gallery"
     project_categories_wording: "Wording used to replace \"Categories\" on public pages"
     family_account: "Family account"
+    reservation_context_feature: "Force member to select the nature of his reservation when reserving"
   #statuses of projects
   statuses:
     new: "New"

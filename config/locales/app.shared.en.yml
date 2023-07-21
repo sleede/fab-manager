@@ -375,12 +375,15 @@ en:
         user_validation_required_alert: "Your administrator must validate your account. Then, you'll then be able to access all the booking features."
         child_validation_required_alert: "Your administrator must validate your child account. Then, you'll then be able to book the event."
         child_birthday_must_be_under_18_years_ago_alert: "Your child must be under 18. Then, you'll then be able to book the event."
-      # feature-tour modal
+        user_validation_required_alert: "Warning!<br>Your administrator must validate your account. Then, you'll then be able to access all the booking features."
+        select_the_reservation_context: "Select the context of the reservation"
+        please_select_a_reservation_context: "Please select the context of the reservation first"
+      #feature-tour modal
       tour:
         previous: "Previous"
         next: "Next"
         end: "End the tour"
-      # help modal
+      #help modal
       help:
         title: "Help"
         what_to_do: "What do you want to do?"
@@ -389,7 +392,7 @@ en:
       stripe_confirm_modal:
         resolve_action: "Resolve the action"
         ok_button: "OK"
-      # 2nd factor authentication for card payments
+      #2nd factor authentication for card payments
       stripe_confirm:
         pending: "Pending for action..."
         success: "Thank you, your card setup is complete. The payment will be proceeded shortly."

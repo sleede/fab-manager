@@ -429,9 +429,11 @@ angular.module('application.router', ['ui.router'])
             return Setting.query({
               names: "['machine_explications_alert', 'booking_window_start',  'booking_window_end',  'booking_move_enable', " +
                      "'booking_move_delay', 'booking_cancel_enable',  'booking_cancel_delay', 'subscription_explications_alert', " +
-                     "'online_payment_module', 'payment_gateway', 'overlapping_categories', 'user_validation_required', 'user_validation_required_list']"
+                     "'online_payment_module', 'payment_gateway', 'overlapping_categories', 'user_validation_required', 'user_validation_required_list', " +
+                     "'reservation_context_feature']"
             }).$promise;
-          }]
+          }],
+          reservationContextsPromise: ['ReservationContext', function (ReservationContext) { return ReservationContext.query({ applicable_on: 'machine' }).$promise; }]
         }
       })
       .state('app.admin.machines_edit', {
@@ -518,9 +520,10 @@ angular.module('application.router', ['ui.router'])
               names: "['booking_window_start', 'booking_window_end', 'booking_move_enable',  'booking_move_delay', " +
                      "'booking_cancel_enable', 'booking_cancel_delay', 'subscription_explications_alert',  " +
                      "'space_explications_alert', 'online_payment_module', 'payment_gateway', 'overlapping_categories', " +
-                     "'user_validation_required', 'user_validation_required_list']"
+                     "'user_validation_required', 'user_validation_required_list', 'reservation_context_feature']"
             }).$promise;
-          }]
+          }],
+          reservationContextsPromise: ['ReservationContext', function (ReservationContext) { return ReservationContext.query({ applicable_on: 'space' }).$promise; }]
         }
       })
 
@@ -572,9 +575,11 @@ angular.module('application.router', ['ui.router'])
               names: "['booking_window_start', 'booking_window_end', 'booking_move_enable', 'booking_move_delay', " +
                      "'booking_cancel_enable', 'booking_cancel_delay', 'subscription_explications_alert', " +
                      "'training_explications_alert', 'training_information_message', 'online_payment_module', " +
-                     "'payment_gateway', 'overlapping_categories', 'user_validation_required', 'user_validation_required_list']"
+                     "'payment_gateway', 'overlapping_categories', 'user_validation_required', 'user_validation_required_list', " +
+                     "'reservation_context_feature']"
             }).$promise;
-          }]
+          }],
+          reservationContextsPromise: ['ReservationContext', function (ReservationContext) { return ReservationContext.query({ applicable_on: 'training' }).$promise; }]
         }
       })
       // notifications
@@ -1152,7 +1157,9 @@ angular.module('application.router', ['ui.router'])
         resolve: {
           membersPromise: ['Member', function (Member) { return Member.mapping().$promise; }],
           statisticsPromise: ['Statistics', function (Statistics) { return Statistics.query().$promise; }],
-          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['feature_tour_display']" }).$promise; }]
+          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['feature_tour_display', 'reservation_context_feature']" }).$promise; }],
+          reservationContextsPromise: ['ReservationContext', function (ReservationContext) { return ReservationContext.query().$promise; }],
+          reservationContextApplicableOnValuesPromise: ['ReservationContext', function (ReservationContext) { return ReservationContext.applicableOnValues().$promise; }]
         }
       })
       .state('app.admin.stats_graphs', {
@@ -1193,14 +1200,16 @@ angular.module('application.router', ['ui.router'])
                      "'extended_prices_in_same_day', 'recaptcha_site_key', 'recaptcha_secret_key', 'user_validation_required', " +
                      "'user_validation_required_list', 'machines_module', 'user_change_group', 'show_username_in_admin_list', " +
                      "'store_module', 'machine_reservation_deadline', 'training_reservation_deadline', 'event_reservation_deadline', " +
-                     "'space_reservation_deadline']"
+                     "'space_reservation_deadline', 'reservation_context_feature']"
             }).$promise;
           }],
           privacyDraftsPromise: ['Setting', function (Setting) { return Setting.get({ name: 'privacy_draft', history: true }).$promise; }],
           cguFile: ['CustomAsset', function (CustomAsset) { return CustomAsset.get({ name: 'cgu-file' }).$promise; }],
           cgvFile: ['CustomAsset', function (CustomAsset) { return CustomAsset.get({ name: 'cgv-file' }).$promise; }],
           faviconFile: ['CustomAsset', function (CustomAsset) { return CustomAsset.get({ name: 'favicon-file' }).$promise; }],
-          profileImageFile: ['CustomAsset', function (CustomAsset) { return CustomAsset.get({ name: 'profile-image-file' }).$promise; }]
+          profileImageFile: ['CustomAsset', function (CustomAsset) { return CustomAsset.get({ name: 'profile-image-file' }).$promise; }],
+          reservationContextsPromise: ['ReservationContext', function (ReservationContext) { return ReservationContext.query().$promise; }],
+          reservationContextApplicableOnValuesPromise: ['ReservationContext', function (ReservationContext) { return ReservationContext.applicableOnValues().$promise; }]
         }
       })
 

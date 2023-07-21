@@ -157,14 +157,16 @@ class CartService
                                        reservable: reservable,
                                        cart_item_reservation_slots_attributes: cart_item[:slots_reservations_attributes],
                                        plan: plan_info[:plan],
-                                       new_subscription: plan_info[:new_subscription])
+                                       new_subscription: plan_info[:new_subscription],
+                                       reservation_context_id: cart_item[:reservation_context_id])
     when Training
       CartItem::TrainingReservation.new(customer_profile: @customer.invoicing_profile,
                                         operator_profile: @operator.invoicing_profile,
                                         reservable: reservable,
                                         cart_item_reservation_slots_attributes: cart_item[:slots_reservations_attributes],
                                         plan: plan_info[:plan],
-                                        new_subscription: plan_info[:new_subscription])
+                                        new_subscription: plan_info[:new_subscription],
+                                        reservation_context_id: cart_item[:reservation_context_id])
     when Event
       CartItem::EventReservation.new(customer_profile: @customer.invoicing_profile,
                                      operator_profile: @operator.invoicing_profile,
@@ -179,7 +181,8 @@ class CartService
                                      reservable: reservable,
                                      cart_item_reservation_slots_attributes: cart_item[:slots_reservations_attributes],
                                      plan: plan_info[:plan],
-                                     new_subscription: plan_info[:new_subscription])
+                                     new_subscription: plan_info[:new_subscription],
+                                     reservation_context_id: cart_item[:reservation_context_id])
     else
       Rails.logger.warn "the reservable #{reservable} is not implemented"
       raise NotImplementedError

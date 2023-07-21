@@ -18,6 +18,10 @@
   </div>
 
   <div class="widget-content no-bg auto wrapper" ng-if="events.reserved.length > 0">
+    <div ng-if="reservationContextsData.options.length > 0" class="m-b">
+      <div class="font-sbold m-b-sm " translate>{{ 'app.shared.cart.select_the_reservation_context' }}</div>
+      <select ng-model="reservationContextsData.selected" class="form-control m-t-sm" ng-options="o.name for o in reservationContextsData.options"></select>
+    </div>
 
     <div class="font-sbold m-b-sm " translate>{{ 'app.shared.cart.you_ve_just_selected_the_slot' }}</div>
 

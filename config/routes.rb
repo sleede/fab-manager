@@ -225,6 +225,9 @@ Rails.application.routes.draw do
     end
     # export accounting data to csv or equivalent
     post 'accounting/export' => 'accounting_exports#export'
+    resources :reservation_contexts do
+      get :applicable_on_values, on: :collection
+    end
 
     # i18n
     # regex allows using dots in URL for 'state'

@@ -13,6 +13,8 @@ class CartItem::MachineReservation < CartItem::Reservation
 
   belongs_to :plan
 
+  belongs_to :reservation_context
+
   def type
     'machine'
   end

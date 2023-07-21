@@ -1,8 +1,15 @@
 # Changelog Fab-manager
 
+- adds reservation context feature (for machine, training, space)
+- [TODO DEPLOY] `rails fablab:es:build_stats`
+- [TODO DEPLOY] `rails fablab:maintenance:regenerate_statistics[2014,1]`
+
+## v6.0.10 2023 July 13
+
 - Fix a bug: unable to confirm payment of store for admin
 - Fix a bug: unable to update payment schedule item
-
+- Fix a bug: event reserved places compute error
+- [TODO DEPLOY] `rails fablab:setup:build_places_cache`
 
 ## v6.0.9 2023 July 07
 

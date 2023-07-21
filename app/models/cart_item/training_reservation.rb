@@ -13,6 +13,8 @@ class CartItem::TrainingReservation < CartItem::Reservation
 
   belongs_to :plan
 
+  belongs_to :reservation_context
+
   def price
     base_amount = reservable&.amount_by_group(customer.group_id)&.amount
     is_privileged = operator.admin? || (operator.manager? && operator.id != customer.id)

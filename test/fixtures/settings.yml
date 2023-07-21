@@ -622,3 +622,9 @@ setting_105:
   name: child_validation_required
   created_at: 2023-03-31 14:38:40.000421500 Z
   updated_at: 2023-03-31 14:38:40.000421500 Z
+
+setting_106:
+  id: 106
+  name: reservation_context_feature
+  created_at: 2023-04-05 09:16:08.000511500 Z
+  updated_at: 2023-04-05 09:16:08.000511500 Z

@@ -839,7 +839,8 @@ CREATE TABLE public.cart_item_reservations (
     operator_profile_id bigint,
     type character varying,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    reservation_context_id bigint
 );
 
 
@@ -3127,6 +3128,38 @@ ALTER SEQUENCE public.projects_themes_id_seq OWNED BY public.projects_themes.id;
 
 
 --
+-- Name: reservation_contexts; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.reservation_contexts (
+    id bigint NOT NULL,
+    name character varying,
+    applicable_on character varying[] DEFAULT '{}'::character varying[],
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: reservation_contexts_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.reservation_contexts_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: reservation_contexts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.reservation_contexts_id_seq OWNED BY public.reservation_contexts.id;
+
+
+--
 -- Name: reservations; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -3138,7 +3171,8 @@ CREATE TABLE public.reservations (
     reservable_type character varying,
     reservable_id integer,
     nb_reserve_places integer,
-    statistic_profile_id integer
+    statistic_profile_id integer,
+    reservation_context_id bigint
 );
 
 
@@ -5008,6 +5042,13 @@ ALTER TABLE ONLY public.projects_themes ALTER COLUMN id SET DEFAULT nextval('pub
 
 
 --
+-- Name: reservation_contexts id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.reservation_contexts ALTER COLUMN id SET DEFAULT nextval('public.reservation_contexts_id_seq'::regclass);
+
+
+--
 -- Name: reservations id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -5955,6 +5996,14 @@ ALTER TABLE ONLY public.projects_themes
 
 
 --
+-- Name: reservation_contexts reservation_contexts_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.reservation_contexts
+    ADD CONSTRAINT reservation_contexts_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: reservations reservations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6501,6 +6550,13 @@ CREATE INDEX index_cart_item_reservations_on_plan_id ON public.cart_item_reserva
 --
 
 CREATE INDEX index_cart_item_reservations_on_reservable ON public.cart_item_reservations USING btree (reservable_type, reservable_id);
+
+
+--
+-- Name: index_cart_item_reservations_on_reservation_context_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_cart_item_reservations_on_reservation_context_id ON public.cart_item_reservations USING btree (reservation_context_id);
 
 
 --
@@ -7257,6 +7313,13 @@ CREATE INDEX index_projects_themes_on_theme_id ON public.projects_themes USING b
 --
 
 CREATE INDEX index_reservations_on_reservable_type_and_reservable_id ON public.reservations USING btree (reservable_type, reservable_id);
+
+
+--
+-- Name: index_reservations_on_reservation_context_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_reservations_on_reservation_context_id ON public.reservations USING btree (reservation_context_id);
 
 
 --
@@ -8501,6 +8564,14 @@ ALTER TABLE ONLY public.accounting_periods
 
 
 --
+-- Name: reservations fk_rails_cfaaf202e7; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.reservations
+    ADD CONSTRAINT fk_rails_cfaaf202e7 FOREIGN KEY (reservation_context_id) REFERENCES public.reservation_contexts(id);
+
+
+--
 -- Name: wallet_transactions fk_rails_d07bc24ce3; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8546,6 +8617,14 @@ ALTER TABLE ONLY public.slots_reservations
 
 ALTER TABLE ONLY public.payment_schedule_items
     ADD CONSTRAINT fk_rails_d6030dd0e7 FOREIGN KEY (payment_schedule_id) REFERENCES public.payment_schedules(id);
+
+
+--
+-- Name: cart_item_reservations fk_rails_daa5b1b8b9; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.cart_item_reservations
+    ADD CONSTRAINT fk_rails_daa5b1b8b9 FOREIGN KEY (reservation_context_id) REFERENCES public.reservation_contexts(id);
 
 
 --
@@ -9076,5 +9155,6 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230626122844'),
 ('20230626122947'),
 ('20230710072403');
-
-
+('20230718133636'),
+('20230718134350'),
+('20230720085857');
