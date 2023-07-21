@@ -93,7 +93,7 @@
         phone_number_is_required: "Telefonnummer er påkrevd."
         address: "Adresse"
         address_is_required: "Adresse er påkrevd"
-        i_authorize_Fablab_users_registered_on_the_site_to_contact_me: "I authorize users, registered on the site, to contact me"
+        i_authorize_Fablab_users_registered_on_the_site_to_contact_me: "I agree to share my email address with registered users of the site"
         i_accept_to_receive_information_from_the_fablab: "Jeg aksepterer å motta informasjon"
         i_ve_read_and_i_accept_: "Jeg har lest og aksepterer"
         _the_fablab_policy: "the terms of use"

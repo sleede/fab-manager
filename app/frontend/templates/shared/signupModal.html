@@ -23,7 +23,11 @@
                      ng-model="user.statistic_profile_attributes.gender"
                      value="false"/> {{ 'app.public.common.woman' | translate }}
             </label>
-            <span class="exponent m-l-xs help-cursor" title="{{ 'app.public.common.used_for_statistics' | translate }}"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
+            <div class="fab-tooltip">
+              <span class="trigger"><i class="fa fa-question-circle"></i></span>
+              <div class="content" translate="">{{ 'app.public.common.used_for_statistics' }}</div>
+            </div>
+            <span class="exponent m-l-xs"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
             <span class="help-block" ng-show="signupForm.gender.$dirty && signupForm.gender.$error.required" translate>{{ 'app.public.common.gender_is_required'}}</span>
           </div>
         </div>
@@ -37,7 +41,7 @@
                    class="form-control"
                    placeholder="{{ 'app.public.common.your_first_name' | translate }}"
                    required>
-            <span class="exponent m-l-xs help-cursor" title="{{ 'app.public.common.used_for_invoicing' | translate }}"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
+            <span class="exponent m-l-xs"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
             <span class="help-block" ng-show="signupForm.first_name.$dirty && signupForm.first_name.$error.required" translate>{{ 'app.public.common.first_name_is_required' }}</span>
           </div>
           <div class="m-b visible-xs"></div>
@@ -48,7 +52,7 @@
                    class="form-control"
                    placeholder="{{ 'app.public.common.your_surname' | translate }}"
                    required>
-            <span class="exponent m-l-xs help-cursor" title="{{ 'app.public.common.used_for_invoicing' | translate }}"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
+            <span class="exponent m-l-xs"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
             <span class="help-block" ng-show="signupForm.last_name.$dirty && signupForm.last_name.$error.required" translate>{{ 'app.public.common.surname_is_required' }}</span>
           </div>
         </div>
@@ -64,7 +68,7 @@
                      placeholder="{{ 'app.public.common.your_pseudonym' | translate }}"
                      required>
             </div>
-            <span class="exponent help-cursor" title="{{ 'app.public.common.used_for_profile' | translate }}"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
+            <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
             <span class="help-block" ng-show="signupForm.username.$dirty && signupForm.username.$error.required" translate>{{ 'app.public.common.pseudonym_is_required' }}</span>
           </div>
         </div>
@@ -81,7 +85,7 @@
                      placeholder="{{ 'app.public.common.your_email_address' | translate }}"
                      required>
             </div>
-            <span class="exponent help-cursor" title="{{ 'app.public.common.used_for_invoicing' | translate }}"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
+            <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
             <span class="help-block" ng-show="signupForm.email.$dirty && signupForm.email.$error.required" translate>{{ 'app.public.common.email_is_required' }}</span>
           </div>
         </div>
@@ -130,6 +134,10 @@
                    ng-model="user.organization"
                    value="false"/>
             <label for="organization" translate>{{ 'app.public.common.i_am_an_organization' }}</label>
+            <div class="fab-tooltip m-l-xs">
+              <span class="trigger"><i class="fa fa-question-circle"></i></span>
+              <div class="content" translate="">{{ 'app.shared.user_profile_form.declare_organization_help' }}</div>
+            </div>
           </div>
         </div>
 
@@ -144,7 +152,7 @@
                      placeholder="{{ 'app.public.common.name_of_your_organization' | translate }}"
                      ng-required="user.organization">
             </div>
-            <span class="exponent help-cursor" title="{{ 'app.public.common.used_for_invoicing' | translate }}"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
+            <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
             <span class="help-block" ng-show="signupForm.organization_name.$dirty && signupForm.organization_name.$error.required" translate>{{ 'app.public.common.organization_name_is_required' }}</span>
           </div>
         </div>
@@ -160,7 +168,7 @@
                      placeholder="{{ 'app.public.common.address_of_your_organization' | translate }}"
                      ng-required="user.organization">
             </div>
-            <span class="exponent help-cursor" title="{{ 'app.public.common.used_for_invoicing' | translate }}"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
+            <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
             <span class="help-block" ng-show="signupForm.organization_address.$dirty && signupForm.organization_address.$error.required" translate>{{ 'app.public.common.organization_address_is_required' }}</span>
           </div>
         </div>
@@ -177,7 +185,7 @@
                        placeholder="{{profileCustomField.label}}"
                        ng-required="profileCustomField.required">
               </div>
-              <span ng-show="profileCustomField.required" class="exponent help-cursor" title="{{ 'app.public.common.used_for_invoicing' | translate }}"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
+              <span ng-show="profileCustomField.required" class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
               <span class="help-block" ng-show="signupForm.user_profile_custom_fields{{i}}.$dirty && signupForm.user_profile_custom_fields{{i}}.$error.required" translate translate-values="{FEILD: profileCustomField.label}">{{ 'app.public.common.profile_custom_field_is_required' }}</span>
             </div>
           </div>
@@ -189,7 +197,7 @@
               <select ng-model="user.group_id" class="form-control" name="group_id" ng-options="g.id as g.name for g in enabledGroups" required>
                 <option value="" translate>{{ 'app.public.common.your_user_s_profile' }}</option>
               </select>
-              <span class="exponent exponent-select help-cursor" title="{{ 'app.public.common.used_for_invoicing' | translate }}"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
+              <span class="exponent exponent-select"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
             </div>
             <span class="help-block" ng-show="signupForm.group_id.$dirty && signupForm.group_id.$error.required" translate>{{ 'app.public.common.user_s_profile_is_required' }}</span>
           </div>
@@ -216,7 +224,7 @@
                      ng-click="openDatePicker($event)"
                      required/>
             </div>
-            <span class="exponent help-cursor" title="{{ 'app.public.common.used_for_statistics' | translate }}"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
+            <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
             <span class="help-block" ng-show="signupForm.birthday.$dirty && signupForm.birthday.$error.required" translate>{{ 'app.public.common.birth_date_is_required' }}</span>
           </div>
         </div>
@@ -263,8 +271,12 @@
                    name="is_allow_contact"
                    id="is_allow_contact"
                    ng-model="user.is_allow_contact"
-                   value="true"/>
-            <label for="is_allow_contact" class="help-cursor" title="{{ 'app.public.common.public_profile' | translate }}" translate>{{ 'app.public.common.i_authorize_Fablab_users_registered_on_the_site_to_contact_me' }}</label>
+                   value="false"/>
+            <label for="is_allow_contact" translate>{{ 'app.public.common.i_authorize_Fablab_users_registered_on_the_site_to_contact_me' }}</label>
+            <div class="fab-tooltip">
+              <span class="trigger"><i class="fa fa-question-circle"></i></span>
+              <div class="content" translate="">{{ 'app.public.common.public_profile' }}</div>
+            </div>
           </div>
         </div>
 
@@ -274,7 +286,7 @@
                    name="is_allow_newsletter"
                    id="is_allow_newsletter"
                    ng-model="user.is_allow_newsletter"
-                   value="true"/>
+                   value="false"/>
             <label for="is_allow_newsletter" translate>{{ 'app.public.common.i_accept_to_receive_information_from_the_fablab' }}</label>
           </div>
         </div>
@@ -285,7 +297,7 @@
                    name="cgu"
                    id="cgu"
                    ng-model="user.cgu"
-                   value="true"
+                   value="false"
                    ng-required="cgu != null"/>
             <label for="cgu">
               <span translate>{{ 'app.public.common.i_ve_read_and_i_accept_' }}</span>

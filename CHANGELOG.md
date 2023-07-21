@@ -1,5 +1,11 @@
 # Changelog Fab-manager
 
+## v6.0.11 2023 July 21
+
+- Fix a bug: incorrect date range in statistics
+- Fix a bug: hide project categories filter if there is no project categories
+- Improvement : dialog confirm to remove a project category
+
 ## v6.0.10 2023 July 13
 
 - Fix a bug: unable to confirm payment of store for admin

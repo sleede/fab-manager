@@ -10,12 +10,11 @@
   <tbody>
   <tr ng-repeat="projectCategory in projectCategories">
     <td>
-                  <span editable-text="projectCategory.name" e-name="name" e-form="rowform" e-required>
-                    {{ projectCategory.name }}
-                  </span>
+      <span editable-text="projectCategory.name" e-name="name" e-form="rowform" e-required>
+        {{ projectCategory.name }}
+      </span>
     </td>
     <td>
-      <!-- form -->
       <form editable-form name="rowform" onbeforesave="saveProjectCategory($data, projectCategory.id)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == projectCategory">
         <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-warning">
           <i class="fa fa-check"></i>

@@ -451,6 +451,8 @@ zu:
           project_categories: crwdns37623:0crwdne37623:0
       project_categories:
         name: "crwdns37625:0crwdne37625:0"
+        delete_dialog_title: "crwdns37665:0crwdne37665:0"
+        delete_dialog_info: "crwdns37667:0crwdne37667:0"
       projects_setting:
         add: "crwdns36895:0crwdne36895:0"
         actions_controls: "crwdns36897:0crwdne36897:0"

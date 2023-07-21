@@ -1,6 +1,8 @@
 .fab-tooltip {
   position: relative;
+  display: inline-block;
   cursor: help;
+  z-index: 10;
 
   .trigger i { display: block; }
   .content {
