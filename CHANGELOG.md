@@ -1,5 +1,8 @@
 # Changelog Fab-manager
 
+- Fix a bug: event reserved places compute error
+- [TODO DEPLOY] `rails fablab:setup:build_places_cache`
+
 ## v6.0.11 2023 July 21
 
 - Fix a bug: incorrect date range in statistics
