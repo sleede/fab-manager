@@ -19,7 +19,9 @@ class Slots::ReservationsService
                                        .where('reservations.reservable_type': reservable_types)
                                        .where('reservations.reservable_id': reservables.map { |r| r.try(:id) })
                                        .where('slots_reservations.canceled_at': nil)
-      reservations = reservations.where('slots_reservations.is_valid': true) if reservables.first&.pre_registration?
+      if reservables.first.is_a?(Event) && reservables.first&.pre_registration?
+        reservations = reservations.where('slots_reservations.is_valid': true)
+      end
 
       user_ids = reservations.includes(reservation: :statistic_profile)
                              .map(&:reservation)
