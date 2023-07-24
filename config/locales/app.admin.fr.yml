@@ -459,6 +459,8 @@ fr:
           project_categories: Personnalisation du filtre Catégories
       project_categories:
         name: "Nom"
+        delete_dialog_title: "Confirmation requise"
+        delete_dialog_info: "Les associations entre cette catégorie et les projets seront supprimées."
       projects_setting:
         add: "Ajouter"
         actions_controls: "Actions"

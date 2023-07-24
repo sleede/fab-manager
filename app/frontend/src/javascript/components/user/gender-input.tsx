@@ -7,13 +7,14 @@ import { useTranslation } from 'react-i18next';
 interface GenderInputProps<TFieldValues> {
   register: UseFormRegister<TFieldValues>,
   disabled?: boolean|((id: string) => boolean),
-  required?: boolean
+  required?: boolean,
+  tooltip?: string
 }
 
 /**
  * Input component to set the gender for the user
  */
-export const GenderInput = <TFieldValues extends FieldValues>({ register, disabled = false, required }: GenderInputProps<TFieldValues>) => {
+export const GenderInput = <TFieldValues extends FieldValues>({ register, disabled = false, required, tooltip }: GenderInputProps<TFieldValues>) => {
   const { t } = useTranslation('shared');
 
   const [isDisabled, setIsDisabled] = useState<boolean>(false);
@@ -46,6 +47,10 @@ export const GenderInput = <TFieldValues extends FieldValues>({ register, disabl
                disabled={isDisabled}
                {...register('statistic_profile_attributes.gender' as FieldPath<TFieldValues>)} />
       </label>
+      {tooltip && <div className="fab-tooltip">
+        <span className="trigger"><i className="fa fa-question-circle" /></span>
+        <div className="content">{tooltip}</div>
+      </div>}
     </fieldset>
   );
 };

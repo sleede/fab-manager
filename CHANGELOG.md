@@ -1,8 +1,16 @@
 # Changelog Fab-manager
 
 - adds reservation context feature (for machine, training, space)
+- Fix a bug: event reserved places compute error
 - [TODO DEPLOY] `rails fablab:es:build_stats`
 - [TODO DEPLOY] `rails fablab:maintenance:regenerate_statistics[2014,1]`
+- [TODO DEPLOY] `rails fablab:setup:build_places_cache`
+
+## v6.0.11 2023 July 21
+
+- Fix a bug: incorrect date range in statistics
+- Fix a bug: hide project categories filter if there is no project categories
+- Improvement : dialog confirm to remove a project category
 
 ## v6.0.10 2023 July 13
 

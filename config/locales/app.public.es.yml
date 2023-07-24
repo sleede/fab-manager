@@ -93,7 +93,7 @@ es:
         phone_number_is_required: "El número de telefono es obligatorio."
         address: "Dirección"
         address_is_required: "Address is required"
-        i_authorize_Fablab_users_registered_on_the_site_to_contact_me: "Autorizo a los usuarios registrados en el sitio, a contactarme"
+        i_authorize_Fablab_users_registered_on_the_site_to_contact_me: "I agree to share my email address with registered users of the site"
         i_accept_to_receive_information_from_the_fablab: "Acepto recibir información del FabLab"
         i_ve_read_and_i_accept_: "He leido y acepto"
         _the_fablab_policy: "the terms of use"

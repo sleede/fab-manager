@@ -128,7 +128,7 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
 
             // default user's parameters
             $scope.user = {
-              is_allow_contact: true,
+              is_allow_contact: false,
               is_allow_newsletter: false,
               // reCaptcha response, received from Google (through AJAX) and sent to server for validation
               recaptcha: undefined,

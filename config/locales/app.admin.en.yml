@@ -459,6 +459,8 @@ en:
           project_categories: Categories
       project_categories:
         name: "Name"
+        delete_dialog_title: "Confirmation required"
+        delete_dialog_info: "The associations between this category and the projects will me deleted."
       projects_setting:
         add: "Add"
         actions_controls: "Actions"
