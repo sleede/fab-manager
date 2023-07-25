@@ -49,6 +49,9 @@ fr:
         settle_your_payment: "Venez régler à l'accueil"
         paid: "Payé"
         canceled: "Annulé"
+        registered: "Inscrit"
+        not_validated: "Non validé"
+        present: "Présent"
       dashboard:
         #dashboard: public profile
         profile:

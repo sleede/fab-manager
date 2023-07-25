@@ -49,6 +49,9 @@ en:
         settle_your_payment: "Come to the reception desk to settle"
         paid: "Paid"
         canceled: "Canceled"
+        registered: "Registered"
+        not_validated: "Not validated"
+        present: "Present"
       dashboard:
         #dashboard: public profile
         profile:
