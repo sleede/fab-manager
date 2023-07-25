@@ -27,7 +27,8 @@ export interface Reservation {
   slots_reservations_attributes: Array<SlotsReservation>,
   reservable?: {
     id: number,
-    name: string
+    name: string,
+    amount?: number
   },
   nb_reserve_places?: number,
   tickets_attributes?: Array<{

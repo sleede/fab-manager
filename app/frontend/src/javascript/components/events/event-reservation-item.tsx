@@ -1,6 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { react2angular } from 'react2angular';
+import _ from 'lodash';
 import { Reservation } from '../../models/reservation';
 import FormatLib from '../../lib/format';
 import { IApplication } from '../../models/application';
@@ -44,14 +45,20 @@ export const EventReservationItem: React.FC<EventReservationItemProps> = ({ rese
    * Return the pre-registration status
    */
   const preRegistrationStatus = () => {
-    if (!reservation.is_valid && !reservation.canceled_at && !reservation.is_paid) {
+    if (!_.isBoolean(reservation.is_valid) && !reservation.canceled_at && !reservation.is_paid) {
       return t('app.logged.event_reservation_item.in_the_process_of_validation');
-    } else if (reservation.is_valid && !reservation.canceled_at && !reservation.is_paid) {
+    } else if (reservation.is_valid && !reservation.canceled_at && !reservation.is_paid && reservation.reservable.amount !== 0) {
       return t('app.logged.event_reservation_item.settle_your_payment');
-    } else if (reservation.is_paid && !reservation.canceled_at) {
+    } else if (reservation.is_valid && !reservation.canceled_at && !reservation.is_paid && reservation.reservable.amount === 0) {
+      return t('app.logged.event_reservation_item.registered');
+    } else if (!reservation.is_valid && !reservation.canceled_at) {
+      return t('app.logged.event_reservation_item.not_validated');
+    } else if (reservation.is_paid && !reservation.canceled_at && reservation.reservable.amount !== 0) {
       return t('app.logged.event_reservation_item.paid');
+    } else if (reservation.is_paid && !reservation.canceled_at && reservation.reservable.amount === 0) {
+      return t('app.logged.event_reservation_item.present');
     } else if (reservation.canceled_at) {
-      return t('app.logged.event_reservation_item.paid');
+      return t('app.logged.event_reservation_item.canceled');
     }
   };
 
