@@ -1,6 +1,7 @@
 # Changelog Fab-manager
 
 - Fix a bug: event reserved places compute error
+- Fix a bug: event canceled places error
 - [TODO DEPLOY] `rails fablab:setup:build_places_cache`
 
 ## v6.0.11 2023 July 21
