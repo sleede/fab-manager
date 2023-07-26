@@ -655,6 +655,7 @@ en:
           canceled: "Canceled"
           present: "Present"
           registered: "Registered"
+          not_validated: "Not validated"
         affirmative: "yes"
         negative: "no"
         validate: "Validate"

@@ -655,6 +655,7 @@ fr:
           canceled: "Annulée"
           present: "Présent"
           registered: "Inscrit"
+          not_validated: "Non validée"
         affirmative: "Oui"
         negative: "Non"
         validate: "Valider"

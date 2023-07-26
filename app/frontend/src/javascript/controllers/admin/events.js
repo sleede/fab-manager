@@ -460,6 +460,9 @@ Application.Controllers.controller('ShowEventReservationsController', ['$scope',
   $scope.isValidated = function (reservation) {
     return reservation.slots_reservations_attributes[0].is_valid === true || reservation.slots_reservations_attributes[0].is_valid === 'true';
   };
+  $scope.isInvalidated = function (reservation) {
+    return reservation.slots_reservations_attributes[0].is_valid === false || reservation.slots_reservations_attributes[0].is_valid === 'false';
+  };
 
   /**
    * Callback to validate a reservation
