@@ -180,7 +180,7 @@
                               class="form-control">
                         <option value=""></option>
                       </select>
-                      <uib-alert type="danger" ng-if="enableChildValidationRequired && user.booked && user.booked.type === 'Child' && !user.booked.is_valid">
+                      <uib-alert type="danger" ng-if="enableChildValidationRequired && user.booked && user.booked.type === 'Child' && !user.booked.validated_at">
                         <p class="text-sm">
                           <i class="fa fa-warning"></i>
                           <span translate>{{ 'app.shared.cart.child_validation_required_alert' }}</span>
