@@ -108,7 +108,7 @@ export const ChildForm: React.FC<ChildFormProps> = ({ child, onSubmit, supportin
           label={t('app.public.child_form.email')}
         />
 
-        {!isPrivileged() && <>
+        {!isPrivileged() && supportingDocumentsTypes?.length > 0 && <>
           <h3 className="missing-file">{t('app.public.child_form.supporting_documents')}</h3>
           {output.supporting_document_files_attributes.map((sf, index) => {
             return (
@@ -132,7 +132,7 @@ export const ChildForm: React.FC<ChildFormProps> = ({ child, onSubmit, supportin
           </FabButton>
         </div>
 
-        {isPrivileged() && <>
+        {isPrivileged() && supportingDocumentsTypes?.length > 0 && <>
           <h3 className="missing-file">{t('app.public.child_form.supporting_documents')}</h3>
           <div className="document-list">
             {output.supporting_document_files_attributes.map((sf, index) => {
@@ -158,7 +158,7 @@ export const ChildForm: React.FC<ChildFormProps> = ({ child, onSubmit, supportin
           </div>
         </>}
 
-        {isPrivileged() && <>
+        {isPrivileged() && supportingDocumentsTypes?.length > 0 && <>
           <FabAlert level='info'>
             <p>{t('app.public.child_form.refuse_documents_info')}</p>
           </FabAlert>
