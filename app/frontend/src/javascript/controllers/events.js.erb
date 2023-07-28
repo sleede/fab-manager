@@ -236,8 +236,19 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
      * Callback to call when the number of tickets to book changes in the current booking
      */
     $scope.changeNbPlaces = function (priceType) {
+      let reservedPlaces = 0;
+      if ($scope.event.event_type === 'family') {
+        reservedPlaces = $scope.reservations.reduce((sum, reservation) => {
+          return sum + reservation.booking_users_attributes.length;
+        }, 0);
+      }
+      let nb_free_places = $scope.event.nb_free_places;
+      if ($scope.event.event_type === 'family') {
+        const maxPlaces = $scope.children.length + 1 - reservedPlaces;
+        nb_free_places = Math.min(maxPlaces, $scope.event.nb_free_places);
+      }
       // compute the total remaining places
-      let remain = ($scope.event.event_type === 'family' ? ($scope.children.length + 1) : $scope.event.nb_free_places) - $scope.reserve.nbReservePlaces;
+      let remain = nb_free_places - $scope.reserve.nbReservePlaces;
       for (let ticket in $scope.reserve.tickets) {
         remain -= $scope.reserve.tickets[ticket];
       }
@@ -360,8 +371,8 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
       if ($scope.ctrl.member) {
         Member.get({ id: $scope.ctrl.member.id }, function (member) {
           $scope.ctrl.member = member;
-          getReservations($scope.event.id, 'Event', $scope.ctrl.member.id).then(function (reservations) {
-            getChildren($scope.currentUser.id).then(function (children) {
+          getReservations($scope.event.id, 'Event', $scope.ctrl.member.id).then(function () {
+            getChildren($scope.ctrl.member.id).then(function (children) {
               updateNbReservePlaces();
             });
           });
@@ -678,7 +689,7 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
 
       // get the current user's reservations into $scope.reservations
       if ($scope.currentUser) {
-        getReservations($scope.event.id, 'Event', $scope.currentUser.id).then(function (reservations) {
+        getReservations($scope.event.id, 'Event', $scope.currentUser.id).then(function () {
           getChildren($scope.currentUser.id).then(function (children) {
             updateNbReservePlaces();
           });
@@ -772,7 +783,7 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
      * update number of places available for each price category for the family event
      */
     const updateNbReservePlaces = function () {
-      if ($scope.event.event_type === 'family') {
+      if ($scope.event.event_type === 'family' && $scope.ctrl.member.id) {
         const reservedPlaces = $scope.reservations.reduce((sum, reservation) => {
           return sum + reservation.booking_users_attributes.length;
         }, 0);
@@ -990,7 +1001,7 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
     const afterPayment = function (invoice) {
       Event.get({ id: $scope.event.id }).$promise.then(function (event) {
         $scope.event = event;
-        getReservations($scope.event.id, 'Event', $scope.ctrl.member.id).then(function (reservations) {
+        getReservations($scope.event.id, 'Event', $scope.ctrl.member.id).then(function () {
           updateNbReservePlaces();
           $scope.reserveSuccess = true;
           $scope.coupon.applied = null;
