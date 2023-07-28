@@ -44,6 +44,8 @@ class Machine < ApplicationRecord
 
   has_many :plan_limitations, dependent: :destroy, inverse_of: :machine, foreign_type: 'limitable_type', as: :limitable
 
+  belongs_to :space
+
   after_create :create_statistic_subtype
   after_create :create_machine_prices
   after_create :update_gateway_product

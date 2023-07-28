@@ -14,3 +14,7 @@ if space.advanced_accounting
     json.partial! 'api/advanced_accounting/advanced_accounting', advanced_accounting: space.advanced_accounting
   end
 end
+
+json.machines space.machines do |machine|
+  json.name machine.name
+end

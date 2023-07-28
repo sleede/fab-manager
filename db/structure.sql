@@ -1618,7 +1618,8 @@ CREATE TABLE public.machines (
     disabled boolean,
     deleted_at timestamp without time zone,
     machine_category_id bigint,
-    reservable boolean DEFAULT true
+    reservable boolean DEFAULT true,
+    space_id bigint
 );
 
 
@@ -3199,7 +3200,9 @@ CREATE TABLE public.spaces (
     updated_at timestamp without time zone NOT NULL,
     characteristics text,
     disabled boolean,
-    deleted_at timestamp without time zone
+    deleted_at timestamp without time zone,
+    ancestry character varying NOT NULL COLLATE pg_catalog."C",
+    ancestry_depth integer DEFAULT 0
 );
 
 
@@ -6575,6 +6578,13 @@ CREATE UNIQUE INDEX index_machines_on_slug ON public.machines USING btree (slug)
 
 
 --
+-- Name: index_machines_on_space_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_machines_on_space_id ON public.machines USING btree (space_id);
+
+
+--
 -- Name: index_notification_preferences_on_notification_type_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -7104,6 +7114,13 @@ CREATE INDEX index_spaces_availabilities_on_availability_id ON public.spaces_ava
 --
 
 CREATE INDEX index_spaces_availabilities_on_space_id ON public.spaces_availabilities USING btree (space_id);
+
+
+--
+-- Name: index_spaces_on_ancestry; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_spaces_on_ancestry ON public.spaces USING btree (ancestry);
 
 
 --
@@ -8149,6 +8166,14 @@ ALTER TABLE ONLY public.statistic_profile_prepaid_packs
 
 
 --
+-- Name: machines fk_rails_b2e37688bb; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.machines
+    ADD CONSTRAINT fk_rails_b2e37688bb FOREIGN KEY (space_id) REFERENCES public.spaces(id);
+
+
+--
 -- Name: orders fk_rails_b33ed6c672; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8818,6 +8843,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230328094808'),
 ('20230328094809'),
 ('20230626122844'),
-('20230626122947');
+('20230626122947'),
+('20230728072726'),
+('20230728090257');
 
 

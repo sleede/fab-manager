@@ -65,6 +65,7 @@ fr:
     not_available: "Non disponible"
     reserving: "Je réserve"
     i_ve_reserved: "J'ai réservé"
+    blocked: "Bloquée"
     length_must_be_slot_multiple: "doit être au moins %{MIN} minutes après la date de début"
     must_be_associated_with_at_least_1_machine: "doit être associé avec au moins 1 machine"
     deleted_user: "Utilisateur supprimé"
@@ -532,6 +533,7 @@ fr:
     space: "Cet espace est désactivé"
     machine: "Cette machine est désactivée"
     reservable: "Cette machine n'est pas réservable"
+    blocked_by_another_reservation: "Ce créneau est bloqué par une autre réservation"
   cart_validation:
     select_user: "Veuillez sélectionner un utilisateur avant de continuer"
   settings:

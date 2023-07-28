@@ -151,3 +151,5 @@ gem 'sentry-rails'
 gem 'sentry-ruby'
 
 gem "reverse_markdown"
+
+gem "ancestry"

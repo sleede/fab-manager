@@ -6,6 +6,7 @@
 class Space < ApplicationRecord
   extend FriendlyId
   friendly_id :name, use: :slugged
+  has_ancestry cache_depth: true
 
   validates :name, :default_places, presence: true
 
@@ -33,6 +34,8 @@ class Space < ApplicationRecord
 
   has_many :cart_item_space_reservations, class_name: 'CartItem::SpaceReservation', dependent: :destroy, inverse_of: :reservable,
                                           foreign_type: 'reservable_type', as: :reservable
+
+  has_many :machines, dependent: :nullify
 
   after_create :create_statistic_subtype
   after_create :create_space_prices

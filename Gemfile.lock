@@ -76,6 +76,8 @@ GEM
       public_suffix (>= 2.0.2, < 6.0)
     aes_key_wrap (1.1.0)
     afm (0.2.2)
+    ancestry (4.3.3)
+      activerecord (>= 5.2.6)
     ansi (1.5.0)
     api-pagination (4.8.2)
     apipie-rails (0.5.17)
@@ -536,6 +538,7 @@ DEPENDENCIES
   aasm
   active_record_query_trace
   acts_as_list
+  ancestry
   api-pagination
   apipie-rails
   awesome_print

@@ -14,6 +14,8 @@ class Slot < ApplicationRecord
 
   after_create_commit :create_places_cache
 
+  attr_accessor :is_blocked
+
   # @param reservable [Machine,Space,Training,Event,NilClass]
   # @return [Integer] the total number of reserved places
   def reserved_places(reservable = nil)
