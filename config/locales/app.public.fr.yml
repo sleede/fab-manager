@@ -319,7 +319,7 @@ fr:
         downloadable_documents: "Documents à télécharger"
         information_and_booking: "Informations et réservation"
         event_type:
-          family: "Evénement famille"
+          family: "Evénement réservé aux membres"
           nominative: "Evénement nominatif"
         dates: "Dates"
         beginning: "Début :"

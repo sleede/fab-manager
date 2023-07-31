@@ -39,7 +39,7 @@ en:
           sync_profile: "Sync my profile"
       event_reservation_item:
         event: "Event"
-        family: "Family"
+        family: "Reserved for members"
         nominative: "Nominative"
         pre_registration: "Pre-registration"
         NUMBER_normal_places_reserved: "{NUMBER} {NUMBER, plural, =0{} =1{normal place reserved} other{normal places reserved}}"

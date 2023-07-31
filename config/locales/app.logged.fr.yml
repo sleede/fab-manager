@@ -39,7 +39,7 @@ fr:
           sync_profile: "Synchroniser mon profil"
       event_reservation_item:
         event: 'Événement'
-        family: 'Famille'
+        family: 'Réservé aux membres'
         nominative: 'Nominatif'
         pre_registration: 'Pré-inscription'
         NUMBER_normal_places_reserved: "{NUMBER} {NUMBER, plural, =0{} =1{place normale réservée} other{places normales réservées}}"

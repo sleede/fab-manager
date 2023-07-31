@@ -56,6 +56,7 @@ export const EventForm: React.FC<EventFormProps> = ({ action, event, onError, on
   const [isActiveAccounting, setIsActiveAccounting] = useState<boolean>(false);
   const [isActiveFamilyAccount, setIsActiveFamilyAccount] = useState<boolean>(false);
   const [isAcitvePreRegistration, setIsActivePreRegistration] = useState<boolean>(event?.pre_registration);
+  const [submitting, setSubmitting] = useState<boolean>(false);
 
   useEffect(() => {
     EventCategoryAPI.index()
@@ -100,6 +101,8 @@ export const EventForm: React.FC<EventFormProps> = ({ action, event, onError, on
    * Callback triggered when the user validates the machine form: handle create or update
    */
   const onSubmit: SubmitHandler<Event> = (data: Event) => {
+    setSubmitting(true);
+    if (submitting) return;
     if (data.pre_registration_end_date?.toString() === 'Invalid Date') {
       data.pre_registration_end_date = null;
     }
@@ -114,7 +117,7 @@ export const EventForm: React.FC<EventFormProps> = ({ action, event, onError, on
       EventAPI.create(data).then(res => {
         onSuccess(t(`app.admin.event_form.${action}_success`));
         window.location.href = `/#!/events/${res.id}`;
-      }).catch(onError);
+      }).catch(onError).finally(() => setSubmitting(false));
     }
   };
 
@@ -192,7 +195,7 @@ export const EventForm: React.FC<EventFormProps> = ({ action, event, onError, on
     <div className="event-form">
       <header>
         <h2>{t('app.admin.event_form.ACTION_title', { ACTION: action })}</h2>
-        <FabButton onClick={handleSubmit(onSubmit)} className="fab-button save-btn is-main">
+        <FabButton onClick={handleSubmit(onSubmit)} disabled={submitting} className="fab-button save-btn is-main">
           {t('app.admin.event_form.save')}
         </FabButton>
       </header>

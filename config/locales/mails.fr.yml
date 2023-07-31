@@ -79,9 +79,9 @@ fr:
         reservation_saved_html: "Votre réservation <strong><em>%{RESERVATION}</em></strong> a bien été enregistrée."
         your_reserved_slots: "Les créneaux que vous avez réservés sont :"
     notify_member_pre_booked_reservation:
-      subject: "Votre pré-inscription a bien été pris en compte"
+      subject: "Votre pré-inscription a bien été prise en compte"
       body:
-        reservation_saved_html: "Votre réservation <strong><em>%{RESERVATION}</em></strong> a bien été pris en compte."
+        reservation_saved_html: "Votre réservation <strong><em>%{RESERVATION}</em></strong> a bien été prise en compte."
         your_reserved_slots: "Les créneaux que vous avez pré-inscrit sont :"
     notify_member_subscribed_plan_is_changed:
       subject: "Votre abonnement a été mis à jour"
