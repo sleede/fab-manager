@@ -70,10 +70,11 @@ export interface Reservation {
   end_at: TDateISO,
   event_type?: string,
   event_title?: string,
-  event_pre_registration?: boolean
+  event_pre_registration?: boolean,
   canceled_at?: TDateISO,
   is_valid?: boolean,
   is_paid?: boolean,
+  amount?: number
 }
 
 export interface ReservationIndexFilter extends ApiFilter {

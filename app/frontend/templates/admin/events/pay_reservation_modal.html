@@ -1,10 +1,10 @@
 <div class="modal-header">
   <img ng-src="{{logoBlack.custom_asset_file_attributes.attachment_url}}" alt="{{logo.custom_asset_file_attributes.attachment}}" class="modal-logo"/>
-  <h1 translate ng-show="reservation && event.amount !== 0">{{ 'app.admin.event_reservations.confirm_payment' }}</h1>
-  <h1 translate ng-show="reservation && event.amount === 0">{{ 'app.admin.event_reservations.confirm_present' }}</h1>
+  <h1 translate ng-show="reservation && amount !== 0">{{ 'app.admin.event_reservations.confirm_payment' }}</h1>
+  <h1 translate ng-show="reservation && amount === 0">{{ 'app.admin.event_reservations.confirm_present' }}</h1>
 </div>
 <div class="modal-body">
-  <div ng-show="event.amount !== 0">
+  <div ng-show="amount !== 0">
     <div class="row" ng-show="!offered">
       <wallet-info current-user="currentUser"
                    cart="cartItems"
@@ -41,12 +41,12 @@
     </div>
   </div>
 
-  <div ng-if="event.amount === 0">
+  <div ng-if="amount === 0">
     <p translate>{{ 'app.admin.event_reservations.confirm_present_info' }}</p>
   </div>
 </div>
 <div class="modal-footer">
-  <button class="btn btn-info" ng-if="event.amount !== 0" ng-click="ok()" ng-disabled="attempting || !payment" ng-bind-html="validButtonName"></button>
-  <button class="btn btn-info" ng-if="event.amount === 0" ng-click="ok()" ng-disabled="attempting" ng-bind-html="validButtonName"></button>
+  <button class="btn btn-info" ng-if="amount !== 0" ng-click="ok()" ng-disabled="attempting || !payment" ng-bind-html="validButtonName"></button>
+  <button class="btn btn-info" ng-if="amount === 0" ng-click="ok()" ng-disabled="attempting" ng-bind-html="validButtonName"></button>
   <button class="btn btn-default" ng-click="cancel()" translate>{{ 'app.shared.buttons.cancel' }}</button>
 </div>

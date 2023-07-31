@@ -460,8 +460,33 @@ Application.Controllers.controller('ShowEventReservationsController', ['$scope',
   $scope.isValidated = function (reservation) {
     return reservation.slots_reservations_attributes[0].is_valid === true || reservation.slots_reservations_attributes[0].is_valid === 'true';
   };
+
+  /**
+   * Test if the provided reservation has been invalidated
+   * @param reservation {Reservation}
+   * @returns {boolean}
+   */
   $scope.isInvalidated = function (reservation) {
     return reservation.slots_reservations_attributes[0].is_valid === false || reservation.slots_reservations_attributes[0].is_valid === 'false';
+  };
+
+  /**
+    * Get the price of a reservation
+    * @param reservation {Reservation}
+    */
+  $scope.reservationAmount = function (reservation) {
+    let amount = 0;
+    for (const user of reservation.booking_users_attributes) {
+      if (user.event_price_category_id) {
+        const price_category = _.find($scope.event.event_price_categories_attributes, { id: user.event_price_category_id });
+        if (price_category) {
+          amount += price_category.amount;
+        }
+      } else {
+        amount += $scope.event.amount;
+      }
+    }
+    return amount;
   };
 
   /**
@@ -628,7 +653,7 @@ Application.Controllers.controller('ShowEventReservationsController', ['$scope',
         if (r.id === reservation.id) {
           return reservation;
         }
-        if ($scope.event.amount === 0) {
+        if ($scope.reservationAmount(reservation) === 0) {
           growl.success(_t('app.admin.event_reservations.reservation_was_successfully_present'));
         } else {
           growl.success(_t('app.admin.event_reservations.reservation_was_successfully_paid'));
