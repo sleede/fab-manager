@@ -28,7 +28,9 @@ class ChildService
       all_files_are_upload = true
       SupportingDocumentType.where(document_type: 'Child').each do |sdt|
         file = sdt.supporting_document_files.find_by(supportable: child)
-        all_files_are_upload = false if file.nil? || file.attachment_identifier.nil?
+        if file.nil? || file.attachment_identifier.nil? || child_params['supporting_document_files_attributes']['0']['attachment'].blank?
+          all_files_are_upload = false
+        end
       end
       if all_files_are_upload
         NotificationCenter.call type: 'notify_admin_user_child_supporting_document_files_updated',

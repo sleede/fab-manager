@@ -30,7 +30,7 @@ class API::ChildrenController < API::APIController
   def update
     authorize @child
 
-    if @child.update(child_params)
+    if ChildService.update(@child, child_params)
       render status: :ok
     else
       render json: @child.errors.full_messages, status: :unprocessable_entity
