@@ -155,7 +155,7 @@ en:
         event_types:
           standard: "Event standard"
           nominative: "Event nominative"
-          family: "Event family"
+          family: "Event reserved for members"
         pre_registration: "Pre-registration"
         pre_registration_help: "If this option is checked, administrators and managers must validate registrations before they become final."
         pre_registration_end_date: "Deadline for pre-registration"
@@ -604,7 +604,7 @@ en:
         types: "Types"
         event_type:
           standard: "Standard"
-          family: "Family"
+          family: "Reserved for members"
           nominative: "Nominative"
         pre_registration: "Pre-registration"
         NUMBER_pre_registered: " {NUMBER} pre-registered"

@@ -155,7 +155,7 @@ fr:
         event_types:
           standard: "Evénement standard"
           nominative: "Evénement nominatif"
-          family: "Evénement famille"
+          family: "Evénement réservé aux membres"
         pre_registration: "Pré-inscription"
         pre_registration_help: "Si cette option est cochée, les administrateurs et les gestionnaires devent valider les inscriptions avant qu'elles ne soient définitives."
         pre_registration_end_date: "Date limite de pré-inscription"
@@ -604,7 +604,7 @@ fr:
         types: 'Types'
         event_type:
           standard: 'Standard'
-          family: "Famille"
+          family: "Réservé aux membres"
           nominative: "Nominatif"
         pre_registration: "Pré-inscription"
         NUMBER_pre_registered: " {NUMBER} pré-inscrit"
