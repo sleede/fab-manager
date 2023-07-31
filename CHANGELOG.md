@@ -2,6 +2,7 @@
 
 - adds reservation context feature (for machine, training, space)
 - Fix a bug: event reserved places compute error
+- Fix a bug: event canceled places error
 - [TODO DEPLOY] `rails fablab:es:build_stats`
 - [TODO DEPLOY] `rails fablab:maintenance:regenerate_statistics[2014,1]`
 - [TODO DEPLOY] `rails fablab:setup:build_places_cache`

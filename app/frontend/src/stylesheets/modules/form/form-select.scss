@@ -1,4 +1,5 @@
 .form-select {
+  .rs__menu { z-index: 20; }
   .rs__menu .rs__menu-list {
     .rs__option {
       &--is-disabled {
