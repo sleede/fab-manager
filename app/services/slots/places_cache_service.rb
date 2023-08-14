@@ -32,7 +32,11 @@ class Slots::PlacesCacheService
 
         reserved_places = (reservations[:reservations].count || 0) + (pending[:reservations].count || 0)
         if slot.availability.available_type == 'event'
-          reserved_places = slot.availability.event.nb_total_places - slot.availability.event.nb_free_places
+          reserved_places = if slot.availability.event.nb_total_places.nil?
+                              0
+                            else
+                              slot.availability.event.nb_total_places - slot.availability.event.nb_free_places
+                            end
         end
         places.push({
                       reservable_type: reservable.class.name,

@@ -1,5 +1,13 @@
 # Changelog Fab-manager
 
+## v6.0.12 2023 August 14
+
+- Fix a bug: event reserved places compute error
+- Fix a bug: event canceled places error
+- Fix a bug: 403 error when manager edit an event
+- Fix a bug: unable to show projects next page button
+- [TODO DEPLOY] `rails fablab:setup:build_places_cache`
+
 ## v6.0.11 2023 July 21
 
 - Fix a bug: incorrect date range in statistics
