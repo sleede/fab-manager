@@ -7,7 +7,7 @@ gem 'rails', '~> 7.0'
 # Used by rails 5.2 to reduce the app boot time by over 50%
 gem 'bootsnap'
 # Use Puma as web server
-gem 'puma', '6.1.0'
+gem 'puma', '6.3.1'
 gem 'shakapacker', '6.6.0'
 
 # rails 6 compatibility with ruby 3 (may not be required after upgrade to rails 7)
