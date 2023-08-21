@@ -15,6 +15,12 @@ class API::SubscriptionsController < API::APIController
 
   def cancel
     authorize @subscription
+    payment_schedule = @subscription.original_payment_schedule
+    if payment_schedule
+      PaymentScheduleService.cancel(payment_schedule)
+      render :show, status: :ok, location: @subscription and return
+    end
+
     if @subscription.expire
       render :show, status: :ok, location: @subscription
     else

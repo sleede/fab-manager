@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- Fix a bug: unable to cancel a payment schedule
+
 ## v6.0.12 2023 August 14
 
 - Fix a bug: event reserved places compute error
