@@ -1,10 +1,16 @@
 # Changelog Fab-manager
 
+- Fix a bug: unable to cancel a payment schedule
 - adds reservation context feature (for machine, training, space)
-- Fix a bug: event reserved places compute error
-- Fix a bug: event canceled places error
 - [TODO DEPLOY] `rails fablab:es:build_stats`
 - [TODO DEPLOY] `rails fablab:maintenance:regenerate_statistics[2014,1]`
+
+## v6.0.12 2023 August 14
+
+- Fix a bug: event reserved places compute error
+- Fix a bug: event canceled places error
+- Fix a bug: 403 error when manager edit an event
+- Fix a bug: unable to show projects next page button
 - [TODO DEPLOY] `rails fablab:setup:build_places_cache`
 
 ## v6.0.11 2023 July 21
