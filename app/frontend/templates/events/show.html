@@ -219,7 +219,7 @@
           </div>
 
           <div ng-if="reserveSuccess && !event.pre_registration" class="alert alert-success">{{ 'app.public.events_show.thank_you_your_payment_has_been_successfully_registered' | translate }}<br>
-            {{ 'app.public.events_show.you_can_find_your_reservation_s_details_on_your_' | translate }} <a ui-sref="app.logged.dashboard.invoices" translate>{{ 'app.public.events_show.dashboard' }}</a>
+            {{ 'app.public.events_show.you_can_find_your_reservation_s_details_on_your_' | translate }} <a ui-sref="app.logged.dashboard.events" translate>{{ 'app.public.events_show.dashboard' }}</a>
           </div>
           <div ng-if="reserveSuccess && event.pre_registration" class="alert alert-success">{{ 'app.public.events_show.thank_you_your_pre_registration_has_been_successfully_saved' | translate }}<br>
             {{ 'app.public.events_show.informed_by_email_your_pre_registration' | translate }}
