@@ -371,8 +371,8 @@ fr:
         user_tags: "Étiquettes de l'utilisateur"
         no_tags: "Aucune étiquette"
         user_validation_required_alert: "Attention !<br>Votre administrateur doit valider votre compte. Vous pourrez alors accéder à l'ensemble des fonctionnalités de réservation."
-        select_the_reservation_context: Sélectionnez la nature de la réservation
-        please_select_a_reservation_context: "Veuillez tout d'abord sélectionner la nature de la réservation"
+        select_the_reservation_context: "Select the context of the reservation"
+        please_select_a_reservation_context: "Please select the context of the reservation first"
       #feature-tour modal
       tour:
         previous: "Précédent"

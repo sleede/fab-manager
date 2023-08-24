@@ -158,17 +158,17 @@ es:
       event_card:
         on_the_date: "El {DATE}"
         from_date_to_date: "Desde {START} hasta {END}"
-        from_time_to_time: "From {START} to {END}"
+        from_time_to_time: "De {START} a {END}"
         all_day: "Todo el día"
         still_available: "Asiento(s) disponible(s): "
         event_full: "Evento lleno"
         without_reservation: "Sin reserva"
         free_admission: "Entrada gratuita"
-        full_price: "Full price: "
+        full_price: "Precio completo: "
       #projects gallery
       projects_list:
-        filter: Filter
-        the_fablab_projects: "The projects"
+        filter: Filtro
+        the_fablab_projects: "Los proyectos"
         add_a_project: "Añadir un proyecto"
         network_search: "Fab-manager network"
         tooltip_openlab_projects_switch: "La busqueda en toda la red le permite buscar los proyectos de todos los FabLab que usan esta característica"
@@ -184,13 +184,13 @@ es:
         all_materials: "Todo el material"
         load_next_projects: "Cargar más proyectos"
         rough_draft: "Borrador"
-        filter_by_member: "Filter by member"
-        created_from: Created from
-        created_to: Created to
-        download_archive: Download
+        filter_by_member: "Filtrar por miembro"
+        created_from: Creado a partir de
+        created_to: Creado para
+        download_archive: Descarga
       status_filter:
-        all_statuses: "All statuses"
-        select_status: "Select a status"
+        all_statuses: "Todos los estados"
+        select_status: "Seleccione un estado"
       #details of a projet
       projects_show:
         rough_draft: "Borrador"

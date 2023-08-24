@@ -1536,6 +1536,7 @@ zu:
         create_plans_to_start: "crwdns26300:0crwdne26300:0"
         click_here: "crwdns26302:0crwdne26302:0"
         average_cart: "crwdns31248:0crwdne31248:0"
+        reservation_context: crwdns37675:0crwdne37675:0
       #statistics graphs
       stats_graphs:
         statistics: "crwdns26304:0crwdne26304:0"
@@ -1642,7 +1643,7 @@ zu:
         secondary_color: "crwdns26488:0crwdne26488:0"
         customize_home_page: "crwdns26490:0crwdne26490:0"
         reset_home_page: "crwdns26492:0crwdne26492:0"
-        confirmation_required: "crwdns26494:0crwdne26494:0"
+        confirmation_required: crwdns26494:0crwdne26494:0
         confirm_reset_home_page: "crwdns26496:0crwdne26496:0"
         home_items: "crwdns26498:0crwdne26498:0"
         item_news: "crwdns26500:0crwdne26500:0"
@@ -1785,6 +1786,14 @@ zu:
         projects_list_date_filters_presence: "crwdns37629:0crwdne37629:0"
         project_categories_filter_placeholder: "crwdns37631:0crwdne37631:0"
         project_categories_wording: "crwdns37633:0crwdne37633:0"
+        reservation_context_feature_title: crwdns37677:0crwdne37677:0
+        reservation_context_feature_info: "crwdns37679:0crwdne37679:0"
+        reservation_context_feature: "crwdns37681:0crwdne37681:0"
+        reservation_context_options: crwdns37683:0crwdne37683:0
+        add_a_reservation_context: crwdns37685:0crwdne37685:0
+        do_you_really_want_to_delete_this_reservation_context: "crwdns37687:0crwdne37687:0"
+        unable_to_delete_reservation_context_already_related_to_reservations: "crwdns37689:0crwdne37689:0"
+        unable_to_delete_reservation_context_an_error_occured: "crwdns37691:0crwdne37691:0"
         overlapping_options:
           training_reservations: "crwdns26758:0crwdne26758:0"
           machine_reservations: "crwdns26760:0crwdne26760:0"
@@ -2459,3 +2468,9 @@ zu:
         cta_switch: "crwdns37019:0crwdne37019:0"
         cta_label: "crwdns37021:0crwdne37021:0"
         cta_url: "crwdns37023:0crwdne37023:0"
+      reservation_contexts:
+        name: "crwdns37693:0crwdne37693:0"
+        applicable_on: "crwdns37695:0crwdne37695:0"
+        machine: crwdns37697:0crwdne37697:0
+        training: crwdns37699:0crwdne37699:0
+        space: crwdns37701:0crwdne37701:0
