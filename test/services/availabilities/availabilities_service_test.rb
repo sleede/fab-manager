@@ -66,6 +66,50 @@ class Availabilities::AvailabilitiesServiceTest < ActiveSupport::TestCase
     assert_equal availability.end_at, slots.max_by(&:end_at).end_at
   end
 
+  test '[member] machines availabilities with blocked slots' do
+    space = Space.find(1)
+    machine = Machine.find(1).tap { |m| m.update!(space: space) }
+    reservation = Reservation.create!(reservable: space, statistic_profile: statistic_profiles(:jdupont))
+    machine_availability = Availability.create!(availabilities(:availability_7).slice(:start_at, :end_at, :slot_duration)
+                                                                                .merge(available_type: 'machines', machine_ids: [machine.id]))
+
+    machine_slot = availabilities(:availability_7).slots.first
+    slot = Slot.create!(availability: machine_availability, start_at: machine_slot.start_at, end_at: machine_slot.end_at)
+
+    opts = { start: 2.days.from_now.beginning_of_day, end: 4.days.from_now.end_of_day }
+    service = Availabilities::AvailabilitiesService.new(@no_subscription)
+    slots = service.machines([machine], @no_subscription, opts)
+    assert_equal 7, slots.count
+
+    SlotsReservation.create!(reservation: reservation, slot: slot)
+
+    slots = service.machines([machine], @no_subscription, opts)
+    assert_equal 5, slots.count
+  end
+
+  test '[admin] machines availabilities with blocked slots' do
+    space = Space.find(1)
+    machine = Machine.find(1).tap { |m| m.update!(space: space) }
+    reservation = Reservation.create!(reservable: space, statistic_profile: statistic_profiles(:jdupont))
+    machine_availability = Availability.create!(availabilities(:availability_7).slice(:start_at, :end_at, :slot_duration)
+                                                                                .merge(available_type: 'machines', machine_ids: [machine.id]))
+
+    machine_slot = availabilities(:availability_7).slots.first
+    slot = Slot.create!(availability: machine_availability, start_at: machine_slot.start_at, end_at: machine_slot.end_at)
+
+    opts = { start: 2.days.from_now.beginning_of_day, end: 4.days.from_now.end_of_day }
+    service = Availabilities::AvailabilitiesService.new(@admin)
+    slots = service.machines([machine], @admin, opts)
+    assert_equal 7, slots.count
+
+    SlotsReservation.create!(reservation: reservation, slot: slot)
+
+    slots = service.machines([machine], @admin, opts)
+    assert_equal 7, slots.count
+
+    assert_equal 2, slots.count(&:is_blocked)
+  end
+
   test 'spaces availabilities' do
     service = Availabilities::AvailabilitiesService.new(@no_subscription)
     slots = service.spaces([Space.find(1)], @no_subscription, { start: 2.days.from_now.beginning_of_day, end: 4.days.from_now.end_of_day })
@@ -75,6 +119,50 @@ class Availabilities::AvailabilitiesServiceTest < ActiveSupport::TestCase
     assert_equal availability.slots.count, slots.count
     assert_equal availability.start_at, slots.min_by(&:start_at).start_at
     assert_equal availability.end_at, slots.max_by(&:end_at).end_at
+  end
+
+  test '[member] spaces availabilities with blocked slots' do
+    space = Space.find(1)
+    machine = machines(:machine_1).tap { |m| m.update!(space: space) }
+    reservation = Reservation.create!(reservable: machine, statistic_profile: statistic_profiles(:jdupont))
+    machine_availability = Availability.create!(availabilities(:availability_18).slice(:start_at, :end_at, :slot_duration)
+                                                                                .merge(available_type: 'machines', machine_ids: [machine.id]))
+
+    space_slot = availabilities(:availability_18).slots.first
+    slot = Slot.create!(availability: machine_availability, start_at: space_slot.start_at, end_at: space_slot.end_at)
+
+    opts = { start: 2.days.from_now.beginning_of_day, end: 4.days.from_now.end_of_day }
+    service = Availabilities::AvailabilitiesService.new(@no_subscription)
+    slots = service.spaces([space], @no_subscription, opts)
+    assert_equal 4, slots.count
+
+    SlotsReservation.create!(reservation: reservation, slot: slot)
+
+    slots = service.spaces([space], @no_subscription, opts)
+    assert_equal 3, slots.count
+  end
+
+  test '[admin] spaces availabilities with blocked slots' do
+    space = Space.find(1)
+    machine = machines(:machine_1).tap { |m| m.update!(space: space) }
+    reservation = Reservation.create!(reservable: machine, statistic_profile: statistic_profiles(:jdupont))
+    machine_availability = Availability.create!(availabilities(:availability_18).slice(:start_at, :end_at, :slot_duration)
+                                                                                .merge(available_type: 'machines', machine_ids: [machine.id]))
+
+    space_slot = availabilities(:availability_18).slots.first
+    slot = Slot.create!(availability: machine_availability, start_at: space_slot.start_at, end_at: space_slot.end_at)
+
+    opts = { start: 2.days.from_now.beginning_of_day, end: 4.days.from_now.end_of_day }
+    service = Availabilities::AvailabilitiesService.new(@admin)
+    slots = service.spaces([space], @admin, opts)
+    assert_equal 4, slots.count
+
+    SlotsReservation.create!(reservation: reservation, slot: slot)
+
+    slots = service.spaces([space], @admin, opts)
+    assert_equal 4, slots.count
+
+    assert_equal 1, slots.count(&:is_blocked)
   end
 
   test 'trainings availabilities' do

@@ -48,6 +48,7 @@
     <div class="spaces-grid">
       <div ng-class="{'disabled-reservable' : space.disabled && spaceFiltering === 'all'}" ng-repeat="space in spaces | filterDisabled:spaceFiltering">
         <div class="widget panel panel-default">
+          <fab-badge ng-if="isAuthorized('admin') && (space.parent || space.children.length)" icon="'pin-map'" icon-width="'3rem'"></fab-badge>
           <div class="panel-heading picture" ng-if="!space.space_image_attributes" ng-click="showSpace(space)">
             <img src="data:image/png;base64," data-src="holder.js/100%x100%/text:&#xf03e;/font:'Font Awesome 5 Free'/icon" bs-holder class="img-responsive">
           </div>

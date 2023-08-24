@@ -8,6 +8,7 @@ export interface Slot {
   end: TDateISO,
   is_reserved: boolean,
   is_completed: boolean,
+  is_blocked?: boolean,
   backgroundColor: 'white',
 
   availability_id: number,

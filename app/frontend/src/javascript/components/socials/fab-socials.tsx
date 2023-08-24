@@ -8,7 +8,7 @@ import { IApplication } from '../../models/application';
 import { Loader } from '../base/loader';
 import { react2angular } from 'react2angular';
 import { SettingName } from '../../models/setting';
-import Icons from '../../../../images/social-icons.svg';
+import Icons from '../../../../images/icons.svg';
 import { Trash } from 'phosphor-react';
 import { useTranslation } from 'react-i18next';
 import { FabButton } from '../base/fab-button';

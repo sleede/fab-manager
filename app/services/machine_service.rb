@@ -9,9 +9,9 @@ class MachineService
     def list(filters)
       sort_by = Setting.get('machines_sort_by') || 'default'
       machines = if sort_by == 'default'
-                   Machine.includes(:machine_image, :plans)
+                   Machine.includes(:machine_image, :plans, :space)
                  else
-                   Machine.includes(:machine_image, :plans).order(sort_by)
+                   Machine.includes(:machine_image, :plans, :space).order(sort_by)
                  end
       # do not include soft destroyed
       machines = machines.where(deleted_at: nil)

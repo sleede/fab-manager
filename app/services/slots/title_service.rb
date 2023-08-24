@@ -15,12 +15,16 @@ class Slots::TitleService
     is_reserved_by_user = slot.reserved_by?(@user&.id, reservables)
 
     name = reservables.map(&:name).join(', ')
-    if !is_reserved && !is_reserved_by_user
-      name
-    elsif is_reserved && !is_reserved_by_user
-      "#{name} #{@show_name ? "- #{slot_users_names(slot, reservables)}" : ''}"
+    if !slot.is_blocked
+      if !is_reserved && !is_reserved_by_user
+        name
+      elsif is_reserved && !is_reserved_by_user
+        "#{name} #{@show_name ? "- #{slot_users_names(slot, reservables)}" : ''}"
+      else
+        "#{name} - #{I18n.t('availabilities.i_ve_reserved')}"
+      end
     else
-      "#{name} - #{I18n.t('availabilities.i_ve_reserved')}"
+      "#{name} - #{I18n.t('availabilities.blocked')}"
     end
   end
 

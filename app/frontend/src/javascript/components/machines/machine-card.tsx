@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { Loader } from '../base/loader';
 import { ReserveButton } from './reserve-button';
 import { User } from '../../models/user';
+import { FabBadge } from '../base/fab-badge';
 
 interface MachineCardProps {
   user?: User,
@@ -57,6 +58,7 @@ const MachineCard: React.FC<MachineCardProps> = ({ user, machine, onShowMachine,
   return (
     <div className={`machine-card ${loading ? 'loading' : ''} ${machine.disabled ? 'disabled' : ''} ${!machine.reservable ? 'unreservable' : ''}`}>
       {machinePicture()}
+      {machine.space && user.role === 'admin' && <FabBadge icon='pin-map' iconWidth='3rem' /> }
       <div className="machine-name">
         {machine.name}
       </div>

@@ -39,7 +39,10 @@ class Availabilities::AvailabilitiesService
     availabilities = availabilities(ma_availabilities, 'machines', user, window[:start], window[:end])
 
     if @level == 'slot'
-      availabilities.map(&:slots).flatten
+      slots = availabilities.map(&:slots).flatten
+
+      blocked_slots = Slots::InterblockingService.new.blocked_slots_for_machines(machines, slots)
+      flag_or_remove_blocked_slots(slots, blocked_slots, @current_user)
     else
       availabilities
     end
@@ -57,7 +60,10 @@ class Availabilities::AvailabilitiesService
     availabilities = availabilities(sp_availabilities, 'space', user, window[:start], window[:end])
 
     if @level == 'slot'
-      availabilities.map(&:slots).flatten
+      slots = availabilities.map(&:slots).flatten
+
+      blocked_slots = Slots::InterblockingService.new.blocked_slots_for_spaces(spaces, slots)
+      flag_or_remove_blocked_slots(slots, blocked_slots, @current_user)
     else
       availabilities
     end
@@ -132,5 +138,16 @@ class Availabilities::AvailabilitiesService
     end
 
     qry
+  end
+
+  def flag_or_remove_blocked_slots(slots, blocked_slots, user)
+    if user.admin? || user.manager?
+      blocked_slots.each do |slot|
+        slot.is_blocked = true
+      end
+    else
+      slots -= blocked_slots
+    end
+    slots
   end
 end

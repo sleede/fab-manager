@@ -1,0 +1,15 @@
+.fab-badge {
+  position: absolute;
+  top: 0;
+  right: 1.5rem;
+  padding: 0.8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--secondary);
+  color: var(--secondary-text-color);
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+  z-index: 1;
+  pointer-events: none;
+}
