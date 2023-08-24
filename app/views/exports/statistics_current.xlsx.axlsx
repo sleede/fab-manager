@@ -28,6 +28,7 @@ wb.add_worksheet(name: ExcelService.name_safe(index.label)) do |sheet|
   end
   columns.push t('export.reservation_context') if index.concerned_by_reservation_context?
   columns.push t('export.revenue') if index.ca
+  columns.push t('export.coupon') if index.show_coupon?
 
   sheet.add_row columns, style: header
 
@@ -41,6 +42,7 @@ wb.add_worksheet(name: ExcelService.name_safe(index.label)) do |sheet|
     end
     add_hardcoded_cells(index, hit, data, styles, types)
     add_ca_cell(index, hit, data, styles, types)
+    add_coupon_cell(index, hit, data, styles, types)
 
     sheet.add_row data, style: styles, types: types
   end

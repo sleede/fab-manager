@@ -506,6 +506,7 @@ en:
     female: "Woman"
     deleted_user: "Deleted user"
     reservation_context: "Reservation context"
+    coupon: "Coupon"
   #initial price's category for events, created to replace the old "reduced amount" property
   price_category:
     reduced_fare: "Reduced fare"

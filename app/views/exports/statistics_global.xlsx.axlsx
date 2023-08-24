@@ -20,6 +20,7 @@ indices.each do |index|
       end
       columns.push t('export.reservation_context') if index.concerned_by_reservation_context?
       columns.push t('export.revenue') if index.ca
+      columns.push t('export.coupon') if index.show_coupon?
       sheet.add_row columns, style: header
 
       # data rows
@@ -39,6 +40,7 @@ indices.each do |index|
         add_hardcoded_cells(index, hit, data, styles, types)
         # proceed the 'ca' field if requested
         add_ca_cell(index, hit, data, styles, types)
+        add_coupon_cell(index, hit, data, styles, types)
 
         # finally, add the data row to the workbook's sheet
         sheet.add_row data, style: styles, types: types

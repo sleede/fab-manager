@@ -9,5 +9,6 @@ module StatReservationConcern
     attribute :reservationContextId, Integer
     attribute :ca, Float
     attribute :name, String
+    attribute :coupon, String
   end
 end

@@ -9,4 +9,8 @@ class StatisticIndex < ApplicationRecord
 
     true
   end
+
+  def show_coupon?
+    es_type_key.in? %w[subscription machine training event space order]
+  end
 end

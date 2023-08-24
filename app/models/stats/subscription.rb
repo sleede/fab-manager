@@ -10,4 +10,5 @@ class Stats::Subscription
   attribute :subscriptionId, Integer
   attribute :invoiceItemId, Integer
   attribute :groupName, String
+  attribute :coupon, String
 end
