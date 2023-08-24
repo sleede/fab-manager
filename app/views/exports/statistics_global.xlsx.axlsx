@@ -18,6 +18,7 @@ indices.each do |index|
       index.statistic_fields.each do |f|
         columns.push f.label
       end
+      columns.push t('export.reservation_context') if index.concerned_by_reservation_context?
       columns.push t('export.revenue') if index.ca
       sheet.add_row columns, style: header
 
