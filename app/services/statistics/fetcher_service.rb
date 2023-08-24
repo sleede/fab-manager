@@ -46,7 +46,7 @@ class Statistics::FetcherService
       Reservation
         .where("reservable_type = 'Machine' AND slots_reservations.canceled_at IS NULL AND " \
                'reservations.created_at >= :start_date AND reservations.created_at <= :end_date', options)
-        .eager_load(:slots, :slots_reservations, :invoice_items, statistic_profile: [:group])
+        .eager_load(:slots, :slots_reservations, :invoice_items, :reservation_context, statistic_profile: [:group])
         .find_each do |r|
         next unless r.reservable
 
@@ -58,7 +58,9 @@ class Statistics::FetcherService
                    machine_name: r.reservable.name,
                    slot_dates: r.slots.map(&:start_at).map(&:to_date),
                    nb_hours: (r.slots.map(&:duration).map(&:to_i).reduce(:+) / 3600.0).to_f,
-                   ca: calcul_ca(r.original_invoice) }.merge(user_info(profile))
+                   ca: calcul_ca(r.original_invoice),
+                   reservation_context_id: r.reservation_context_id
+                  }.merge(user_info(profile))
         yield result
       end
     end
@@ -70,7 +72,7 @@ class Statistics::FetcherService
       Reservation
         .where("reservable_type = 'Space' AND slots_reservations.canceled_at IS NULL AND " \
                'reservations.created_at >= :start_date AND reservations.created_at <= :end_date', options)
-        .eager_load(:slots, :slots_reservations, :invoice_items, statistic_profile: [:group])
+        .eager_load(:slots, :slots_reservations, :invoice_items, :reservation_context, statistic_profile: [:group])
         .find_each do |r|
         next unless r.reservable
 
@@ -82,7 +84,9 @@ class Statistics::FetcherService
                    space_type: r.reservable.slug,
                    slot_dates: r.slots.map(&:start_at).map(&:to_date),
                    nb_hours: (r.slots.map(&:duration).map(&:to_i).reduce(:+) / 3600.0).to_f,
-                   ca: calcul_ca(r.original_invoice) }.merge(user_info(profile))
+                   ca: calcul_ca(r.original_invoice),
+                   reservation_context_id: r.reservation_context_id
+                  }.merge(user_info(profile))
         yield result
       end
     end
@@ -94,7 +98,7 @@ class Statistics::FetcherService
       Reservation
         .where("reservable_type = 'Training' AND slots_reservations.canceled_at IS NULL AND " \
                'reservations.created_at >= :start_date AND reservations.created_at <= :end_date', options)
-        .eager_load(:slots, :slots_reservations, :invoice_items, statistic_profile: [:group])
+        .eager_load(:slots, :slots_reservations, :invoice_items, :reservation_context, statistic_profile: [:group])
         .find_each do |r|
         next unless r.reservable
 
@@ -107,7 +111,9 @@ class Statistics::FetcherService
                    training_name: r.reservable.name,
                    training_date: slot.start_at.to_date,
                    nb_hours: difference_in_hours(slot.start_at, slot.end_at),
-                   ca: calcul_ca(r.original_invoice) }.merge(user_info(profile))
+                   ca: calcul_ca(r.original_invoice),
+                   reservation_context_id: r.reservation_context_id
+                 }.merge(user_info(profile))
         yield result
       end
     end

@@ -328,8 +328,8 @@ Application.Controllers.controller('ShowSpaceController', ['$scope', '$state', '
  * per slots.
  */
 
-Application.Controllers.controller('ReserveSpaceController', ['$scope', '$transition$', 'Auth', '$timeout', 'Availability', 'Member', 'plansPromise', 'groupsPromise', 'settingsPromise', 'spacePromise', '_t', 'uiCalendarConfig', 'CalendarConfig', 'Reservation', 'helpers', 'AuthService',
-  function ($scope, $transition$, Auth, $timeout, Availability, Member, plansPromise, groupsPromise, settingsPromise, spacePromise, _t, uiCalendarConfig, CalendarConfig, Reservation, helpers, AuthService) {
+Application.Controllers.controller('ReserveSpaceController', ['$scope', '$transition$', 'Auth', '$timeout', 'Availability', 'Member', 'plansPromise', 'groupsPromise', 'settingsPromise', 'spacePromise', 'reservationContextsPromise', '_t', 'uiCalendarConfig', 'CalendarConfig', 'Reservation', 'helpers', 'AuthService',
+  function ($scope, $transition$, Auth, $timeout, Availability, Member, plansPromise, groupsPromise, settingsPromise, spacePromise, reservationContextsPromise, _t, uiCalendarConfig, CalendarConfig, Reservation, helpers, AuthService) {
     /* PRIVATE STATIC CONSTANTS */
 
     // Color of the selected event backgound
@@ -406,6 +406,13 @@ Application.Controllers.controller('ReserveSpaceController', ['$scope', '$transi
 
     // Global config: is the user validation required ?
     $scope.enableUserValidationRequired = settingsPromise.user_validation_required === 'true';
+
+    // reservation contexts stuff
+    if (settingsPromise.reservation_context_feature === 'true') {
+      $scope.reservationContexts = reservationContextsPromise;
+    } else {
+      $scope.reservationContexts = [];
+    }
 
     /**
      * Change the last selected slot's appearance to looks like 'added to cart'

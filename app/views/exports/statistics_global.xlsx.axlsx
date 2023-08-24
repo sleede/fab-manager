@@ -35,6 +35,7 @@ indices.each do |index|
         index.statistic_fields.each do |f|
           format_xlsx_cell(hit['_source'][f.key], data, styles, types, source_data_type: f.data_type, date_format: date)
         end
+        add_hardcoded_cells(index, hit, data, styles, types)
         # proceed the 'ca' field if requested
         add_ca_cell(index, hit, data, styles, types)
 

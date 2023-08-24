@@ -1,6 +1,10 @@
 # Changelog Fab-manager
 
 - Fix a bug: unable to cancel a payment schedule
+- adds reservation context feature (for machine, training, space)
+- [TODO DEPLOY] `rails db:seed`
+- [TODO DEPLOY] `rails fablab:es:build_stats`
+- [TODO DEPLOY] `rails fablab:maintenance:regenerate_statistics[2014,1]`
 
 ## v6.0.12 2023 August 14
 

@@ -257,7 +257,9 @@
                 <th ng-if="['booking', 'hour'].includes(type.active.key)" translate>{{ 'app.admin.statistics.reservation_date' }}</th>
                 <th ng-if="!['booking', 'hour'].includes(type.active.key)" translate>{{ 'app.admin.statistics.date' }}</th>
                 <th translate>{{ 'app.admin.statistics.user' }}</th>
-                <th translate>{{ 'app.admin.statistics.gender' }}</th>
+                <th ng-if="reservationContextFeatureEnabled && reservationContextIsApplicable(selectedIndex.es_type_key)">
+                  {{ 'app.admin.statistics.reservation_context' | translate }}
+                </th>
                 <th translate>{{ 'app.admin.statistics.age' }}</th>
                 <th translate>{{ 'app.admin.statistics.type' }}</th>
                 <th ng-if="!type.active.simple">{{type.active.label}}</th>
@@ -280,7 +282,9 @@
                   <a ng-show="datum._source.userId" ui-sref="app.admin.members_edit({id:datum._source.userId})">{{getUserNameFromId(datum._source.userId)}}</a>
                   <span class="text-gray text-italic" ng-hide="datum._source.userId" translate>{{ 'app.admin.statistics.deleted_user' }}</span>
                 </td>
-                <td>{{formatSex(datum._source.gender)}}</td>
+                <td ng-if="reservationContextFeatureEnabled && reservationContextIsApplicable(selectedIndex.es_type_key)">
+                  {{ formatReservationContext(datum._source.reservationContextId) }}
+                </td>
                 <td>
                   <span ng-if="datum._source.age">{{datum._source.age}} {{ 'app.admin.statistics.years_old' | translate }}</span>
                   <span ng-if="!datum._source.age" translate>{{ 'app.admin.statistics.unknown' }}</span>

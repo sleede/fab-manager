@@ -6,6 +6,7 @@ module StatReservationConcern
 
   included do
     attribute :reservationId, Integer
+    attribute :reservationContextId, Integer
     attribute :ca, Float
     attribute :name, String
   end

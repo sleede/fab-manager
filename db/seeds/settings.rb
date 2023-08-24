@@ -733,3 +733,5 @@ Setting.set('projects_list_member_filter_presence', false) unless Setting.find_b
 Setting.set('projects_list_date_filters_presence', false) unless Setting.find_by(name: 'projects_list_date_filters_presence')
 Setting.set('project_categories_filter_placeholder', 'Toutes les catégories') unless Setting.find_by(name: 'project_categories_filter_placeholder').try(:value)
 Setting.set('project_categories_wording', 'Catégories') unless Setting.find_by(name: 'project_categories_wording').try(:value)
+
+Setting.set('reservation_context_feature', false) unless Setting.find_by(name: 'reservation_context_feature')

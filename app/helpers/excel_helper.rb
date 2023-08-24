@@ -47,6 +47,20 @@ module ExcelHelper
     [data, styles, types]
   end
 
+  def add_hardcoded_cells(index, hit, data, styles, types)
+    if index.concerned_by_reservation_context?
+      add_reservation_context_cell(hit, data, styles, types)
+    end
+  end
+
+  def add_reservation_context_cell(hit, data, styles, types)
+    reservation_contexts = ReservationContext.pluck(:id, :name).to_h
+
+    data.push reservation_contexts[hit['_source']['reservationContextId']]
+    styles.push nil
+    types.push :text
+  end
+
   # append a cell containing the CA amount
   def add_ca_cell(index, hit, data, styles, types)
     return unless index.ca
