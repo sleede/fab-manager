@@ -415,8 +415,8 @@ it:
         add_a_material: "Aggiungi un materiale"
         themes: "Temi"
         add_a_new_theme: "Aggiungi un nuovo tema"
-        project_categories: "Categories"
-        add_a_new_project_category: "Add a new category"
+        project_categories: "Categorie"
+        add_a_new_project_category: "Aggiungere una nuova categoria"
         licences: "Licenze"
         statuses: "Status"
         description: "Descrizione"
@@ -447,11 +447,11 @@ it:
           open_lab_app_secret: "Segreto"
           openlab_default_info_html: "Nella galleria di progetti, i visitatori possono scegliere tra due viste: tutti i progetti condivisi da tutta la rete di OpenLab, o solo i progetti documentati nel tuo Fab Lab.<br/>Qui, puoi scegliere quale vista è mostrata per impostazione predefinita."
           default_to_openlab: "Visualizza OpenLab per impostazione predefinita"
-          filters: Projects list filters
-          project_categories: Categories
+          filters: Filtri per l'elenco dei progetti
+          project_categories: Categorie
       project_categories:
-        name: "Name"
-        delete_dialog_title: "Confirmation required"
+        name: "Nome"
+        delete_dialog_title: "Conferma richiesta"
         delete_dialog_info: "The associations between this category and the projects will me deleted."
       projects_setting:
         add: "Aggiungi"
@@ -1536,6 +1536,7 @@ it:
         create_plans_to_start: "Inizia creando nuovi piani di abbonamento."
         click_here: "Clicca qui per creare il tuo primo."
         average_cart: "Media carrello:"
+        reservation_context: Reservation context
       #statistics graphs
       stats_graphs:
         statistics: "Statistiche"
@@ -1642,7 +1643,7 @@ it:
         secondary_color: "colore secondario"
         customize_home_page: "Personalizza la home page"
         reset_home_page: "Reimposta la home page al suo stato iniziale"
-        confirmation_required: "Conferma richiesta"
+        confirmation_required: Conferma richiesta
         confirm_reset_home_page: "Vuoi davvero ripristinare la home page al suo stato iniziale?"
         home_items: "Elementi della home page"
         item_news: "News"
@@ -1785,6 +1786,14 @@ it:
         projects_list_date_filters_presence: "Presence of date filters on projects list"
         project_categories_filter_placeholder: "Placeholder for categories filter in project gallery"
         project_categories_wording: "Wording used to replace \"Categories\" on public pages"
+        reservation_context_feature_title: Reservation context
+        reservation_context_feature_info: "If you enable this feature, members will have to enter the context of their reservation when reserving."
+        reservation_context_feature: "Enable the feature \"Reservation context\""
+        reservation_context_options: Reservation context options
+        add_a_reservation_context: Add a new context
+        do_you_really_want_to_delete_this_reservation_context: "Do you really want to delete this context?"
+        unable_to_delete_reservation_context_already_related_to_reservations: "Unable to delete this context because it is already associated to a reservation"
+        unable_to_delete_reservation_context_an_error_occured: "Unable to delete: an error occurred"
         overlapping_options:
           training_reservations: "Abilitazioni"
           machine_reservations: "Macchine"
@@ -2459,3 +2468,9 @@ it:
         cta_switch: "Mostra un pulsante"
         cta_label: "Etichetta pulsante"
         cta_url: "Pulsante link"
+      reservation_contexts:
+        name: "Name"
+        applicable_on: "Applicable on"
+        machine: Machine
+        training: Training
+        space: Space

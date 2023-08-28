@@ -1,0 +1,1 @@
+json.extract! @reservation_context, :id, :name, :applicable_on

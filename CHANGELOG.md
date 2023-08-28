@@ -1,5 +1,14 @@
 # Changelog Fab-manager
 
+## v6.0.13 2023 August 28
+
+- Fix a bug: unable to cancel a payment schedule
+- adds reservation context feature (for machine, training, space)
+- adds coupon in statistic export (for subscription, machine, training, space, event, order)
+- [TODO DEPLOY] `rails db:seed`
+- [TODO DEPLOY] `rails fablab:es:build_stats`
+- [TODO DEPLOY] `rails fablab:maintenance:regenerate_statistics[2014,1]`
+
 ## v6.0.12 2023 August 14
 
 - Fix a bug: event reserved places compute error

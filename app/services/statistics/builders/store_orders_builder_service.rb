@@ -22,6 +22,7 @@ class Statistics::Builders::StoreOrdersBuilderService
                                 categories: o[:order_categories],
                                 orderId: o[:order_id],
                                 state: o[:order_state],
+                                coupon: o[:coupon],
                                 stat: 1 }.merge(user_info_stat(o)))
         end
       end

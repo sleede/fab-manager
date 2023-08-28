@@ -130,7 +130,7 @@ it:
         illustration: "Illustrazione"
         add_an_illustration: "Aggiungi un'illustrazione"
         CAD_file: "File CAD"
-        CAD_files: "CAD files"
+        CAD_files: "File CAD"
         allowed_extensions: "Estensioni consentite:"
         add_a_new_file: "Aggiungi nuovo file"
         description: "Descrizione"
@@ -138,7 +138,7 @@ it:
         steps: "Passaggi"
         step_N: "Passaggio {INDEX}"
         step_title: "Titolo del passaggio"
-        step_image: "Image"
+        step_image: "Immagine"
         add_a_picture: "Aggiungi un'immagine"
         change_the_picture: "Cambia immagine"
         delete_the_step: "Elimina il passaggio"
@@ -150,9 +150,9 @@ it:
         employed_materials: "Materiali impiegati"
         employed_machines: "Macchine impiegate"
         collaborators: "Collaboratori"
-        author: Author
+        author: Autore
         creative_commons_licences: "Licenze Creative Commons"
-        licence: "Licence"
+        licence: "Licenza"
         themes: "Temi"
         tags: "Etichette"
         save_as_draft: "Salva come bozza"
@@ -371,6 +371,8 @@ it:
         user_tags: "Etichette utente"
         no_tags: "Nessuna etichetta"
         user_validation_required_alert: "Attenzione!<br>Il tuo amministratore deve convalidare il tuo account. Poi, potrai accedere a tutte le funzionalità di prenotazione."
+        select_the_reservation_context: "Select the context of the reservation"
+        please_select_a_reservation_context: "Please select the context of the reservation first"
       #feature-tour modal
       tour:
         previous: "Precedente"
@@ -402,7 +404,7 @@ it:
         state_new: "Non ancora scaduto"
         state_pending_check: "In attesa di incasso dell'assegno"
         state_pending_transfer: "In attesa conferma del bonifico bancario"
-        state_pending_card: "Waiting for the card payment"
+        state_pending_card: "In attesa del pagamento con carta"
         state_requires_payment_method: "La carta di credito deve essere aggiornata"
         state_requires_action: "Azione richiesta"
         state_paid: "Pagato"

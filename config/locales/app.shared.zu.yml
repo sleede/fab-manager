@@ -371,6 +371,8 @@ zu:
         user_tags: "crwdns29378:0crwdne29378:0"
         no_tags: "crwdns29380:0crwdne29380:0"
         user_validation_required_alert: "crwdns29382:0crwdne29382:0"
+        select_the_reservation_context: "crwdns37703:0crwdne37703:0"
+        please_select_a_reservation_context: "crwdns37705:0crwdne37705:0"
       #feature-tour modal
       tour:
         previous: "crwdns29384:0crwdne29384:0"

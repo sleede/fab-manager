@@ -4,6 +4,7 @@
 class API::ProjectCategoriesController < ApplicationController
   before_action :set_project_category, only: %i[update destroy]
   before_action :authenticate_user!, only: %i[create update destroy]
+
   def index
     @project_categories = ProjectCategory.all
   end

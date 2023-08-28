@@ -24,14 +24,14 @@ es:
       subject: "Tu has cambiado grupo"
       body:
         warning: "Has cambiado de grupo. Se pueden realizar inspecciones en el laboratorio para verificar la legitimidad de este cambio.."
-        user_invalidated: "Your account was invalidated, please upload your new supporting documents to validate your account."
+        user_invalidated: "Su cuenta ha sido invalidada, por favor cargue sus nuevos justificantes para validar su cuenta."
     notify_admin_user_group_changed:
       subject: "Un miembro ha cambiado de grupo."
       body:
         user_changed_group_html: "El usuario <em><strong>%{NAME}</strong></em> ha cambiado de grupo."
         previous_group: "Grupo anterior:"
         new_group: "Nuevo grupo:"
-        user_invalidated: "The user's account was invalidated."
+        user_invalidated: "La cuenta del usuario fue invalidada."
     notify_admin_subscription_extended:
       subject: "Una suscripción ha sido extendida"
       body:
@@ -111,7 +111,7 @@ es:
     notify_member_invoice_ready:
       subject: "La factura de su FabLab"
       body:
-        please_find_attached_html: "Please find as attached file your invoice from {DATE}, with an amount of {AMOUNT} concerning your {TYPE, select, Reservation{reservation} OrderItem{order} other{subscription}}." #messageFormat interpolation
+        please_find_attached_html: "Adjuntamos su facturación de {DATE}, por importe de {AMOUNT} relativa a su {TYPE, select, Reservation{reserva} OrderItem{pedido} other{suscripción}}." #messageFormat interpolation
         invoice_in_your_dashboard_html: "Puede acceder a su factura en %{DASHBOARD} en la web del FabLab."
         your_dashboard: "Su Panel"
     notify_member_reservation_reminder:
@@ -132,18 +132,18 @@ es:
         expires_in_7_days: "expirará en 7 dias."
         to_renew_your_plan_follow_the_link: "Por favor, haga clic en el siguiente enlace para renovar su suscripción"
     notify_member_training_authorization_expired:
-      subject: "Your authorization was revoked"
+      subject: "Su autorización ha sido revocada"
       body:
-        training_expired_html: "<p>You took the %{TRAINING} training, on %{DATE}.</p><p>Your authorization for this training, valid for %{PERIOD} months, has expired.</p><p>Please validate it again in order to be able to reserve the %{MACHINES}</p>."
+        training_expired_html: "<p>Has realizado la formación %{TRAINING}, el %{DATE}.</p><p>Su autorización para esta formación, válida durante %{PERIOD} meses, ha caducado.</p><p>Por favor, valídela de nuevo para poder reservar la %{MACHINES}</p>."
     notify_member_training_auto_cancelled:
-      subject: "Your training session was cancelled"
+      subject: "Su sesión de formación ha sido cancelada"
       body:
-        cancelled_training: "The %{TRAINING} training session scheduled for %{DATE}, from %{START} to %{END} has been canceled due to an insufficient number of participants."
-        auto_refund: "You were refunded on your wallet and a credit note should be available."
+        cancelled_training: "La sesión de formación %{TRAINING} programada para %{DATE}, de %{START} a %{END} ha sido cancelada debido a un número insuficiente de participantes."
+        auto_refund: "Se le reembolsó en su cartera y una nota de crédito debe estar disponible."
     notify_member_training_invalidated:
-      subject: "Your authorization was invalidated"
+      subject: "Su autorización ha sido invalidada"
       body:
-        training_invalidated_html: "<p>You took the %{TRAINING} training, on %{DATE} giving you access to the %{MACHINES}.</p><p>Due to the lack of reservations for one of these machines during the last %{PERIOD} months, your authorization has been invalidated.</p><p>Please validate the training again in order to continue reserving these machines.</p>."
+        training_invalidated_html: "<p>Realizaste la formación %{TRAINING}, el día %{DATE} que te da acceso a las %{MACHINES}.</p><p>Debido a la falta de reservas de una de estas máquinas durante los últimos %{PERIOD} meses, tu autorización ha sido invalidada.</p><p>Por favor, valida de nuevo la formación para poder seguir reservando estas máquinas.</p>"
     notify_member_subscription_is_expired:
       subject: "Su suscripción ha expirado"
       body:
@@ -156,11 +156,11 @@ es:
       body:
         subscription_will_expire_html: "El plan de suscripción de %{NAME} <strong><em>%{PLAN}</em></strong> expirará en 7 días."
     notify_admin_training_auto_cancelled:
-      subject: "A training was automatically cancelled"
+      subject: "Se ha cancelado automáticamente una formación"
       body:
-        cancelled_training: "The %{TRAINING} training session scheduled for %{DATE}, from %{START} to %{END} has been automatically canceled due to an insufficient number of participants."
-        auto_refund: "The members who have booked this training session were automatically refunded on their wallet and credit notes was generated."
-        manual_refund: "Please manually refund all members who have booked this training session and generate the credit notes."
+        cancelled_training: "La sesión de formación %{TRAINING} programada para %{DATE}, de %{START} a %{END} se ha cancelado automáticamente debido a un número insuficiente de participantes."
+        auto_refund: "Los miembros que han reservado esta sesión de formación fueron reembolsados automáticamente en su cartera y se generaron notas de crédito."
+        manual_refund: "Por favor, reembolsa manualmente a todos los miembros que han reservado esta sesión de formación y genera las notas de crédito."
     notify_admin_subscription_is_expired:
       subject: "La suscripción de un miembro ha expirado"
       body:
@@ -266,11 +266,11 @@ es:
         category_members: "de los miembros"
         click_to_view_results: "Haga clic aquí para ver los resultados"
     notify_admin_low_stock_threshold:
-      subject: "Low stock alert"
+      subject: "Alerta de stock bajo"
       body:
-        low_stock: "A new stock movement of %{PRODUCT} has exceeded the low stock threshold."
-        stocks_state_html: "Current stock status: <ul><li>internal: %{INTERNAL}</li><li>external: %{EXTERNAL}</li></ul>"
-        manage_stock: "Manage stocks for this product"
+        low_stock: "Un nuevo movimiento de stock de %{PRODUCT} ha superado el umbral de stock bajo."
+        stocks_state_html: "Estado actual de existencias: <ul><li>interno: %{INTERNAL}</li><li>externo: %{EXTERNAL}</li></ul>"
+        manage_stock: "Administrar existencias para este producto"
     notify_member_about_coupon:
       subject: "Cupón"
       body:
@@ -306,117 +306,117 @@ es:
     notify_admins_role_update:
       subject: "El rol de un usuario ha cambiado"
       body:
-        user_role_changed_html: "The role of the user <em><strong>%{NAME}</strong></em> has changed."
-        previous_role: "Previous role:"
-        new_role: "New role:"
+        user_role_changed_html: "El rol del usuario <em><strong>%{NAME}</strong></em> ha cambiado."
+        previous_role: "Rol anterior:"
+        new_role: "Nuevo rol:"
     notify_user_role_update:
-      subject: "Your role has changed"
+      subject: "Su rol ha cambiado"
       body:
-        role_changed_html: "Your role at {GENDER, select, male{the} female{the} neutral{} other{the}} {NAME} has changed. You are now <strong>{ROLE}</strong>.<br/>With great power comes great responsibility, use your new privileges fairly and respectfully."
+        role_changed_html: "Su rol en {GENDER, select, male{el} female{la} neutral{} other{el}} {NAME} ha cambiado. Ahora eres <strong>{ROLE}</strong>.<br/>Un gran poder conlleva una gran responsabilidad. Utiliza tus nuevos privilegios de forma justa y respetuosa."
     notify_admin_objects_stripe_sync:
-      subject: "Stripe synchronization"
+      subject: "Sincronización de Stripe"
       body:
-        objects_sync: "All members, coupons, machines, trainings, spaces and plans were successfully synchronized on Stripe."
+        objects_sync: "Todos los miembros, cupones, máquinas, formaciones, espacios y planes se sincronizaron correctamente en Stripe."
     notify_admin_order_is_paid:
-      subject: "New order"
+      subject: "Nuevo pedido"
       body:
-        order_placed: "A new order (%{REFERENCE}) has been placed and paid by %{USER}."
+        order_placed: "Un nuevo pedido (%{REFERENCE}) ha sido realizado y pagado por %{USER}."
         view_details: ""
     notify_member_payment_schedule_ready:
-      subject: "Your payment schedule"
+      subject: "Su calendario de pagos"
       body:
-        please_find_attached_html: "Please find attached your payment schedule, issued on {DATE}, with an amount of {AMOUNT} concerning your {TYPE, select, Reservation{reservation} other{subscription}}." #messageFormat interpolation
-        schedule_in_your_dashboard_html: "You can find this payment schedule at any time from %{DASHBOARD} on the Fab Lab's website."
-        your_dashboard: "your dashboard"
+        please_find_attached_html: "Adjuntamos su calendario de pagos, emitido el {DATE}, con un importe de {AMOUNT} relativo a su {TYPE, select, Reservation{reserva} other{suscripción}}." #messageFormat interpolation
+        schedule_in_your_dashboard_html: "Puedes encontrar este calendario de pagos en cualquier momento desde %{DASHBOARD} en la página web del Fab Lab."
+        your_dashboard: "su panel de control"
     notify_admin_payment_schedule_error:
-      subject: "[URGENT] Card debit error"
+      subject: "[URGENTE] Error de débito de tarjeta"
       body:
-        remember: "In accordance with the %{REFERENCE} payment schedule, a debit by card of %{AMOUNT} was scheduled on %{DATE}."
-        error: "Unfortunately, an error occurred and this card debit was unable to complete successfully."
-        action: "Please then consult the %{GATEWAY} dashboard and contact the member as soon as possible to resolve the problem."
+        remember: "De acuerdo con el calendario de pagos %{REFERENCE}, se ha programado un cargo por tarjeta de %{AMOUNT} el %{DATE}."
+        error: "Desafortunadamente, se ha producido un error y el cargo en la tarjeta no se ha podido completar correctamente."
+        action: "A continuación, consulte el panel de control %{GATEWAY} y póngase en contacto con el miembro lo antes posible para resolver el problema."
     notify_member_payment_schedule_error:
-      subject: "[URGENT] Card debit error"
+      subject: "[URGENTE] Error de débito de tarjeta"
       body:
-        remember: "In accordance with your %{REFERENCE} payment schedule, a debit by card of %{AMOUNT} was scheduled on %{DATE}."
-        error: "Unfortunately, an error occurred and this card debit was unable to complete successfully."
-        action: "Please contact a manager as soon as possible to resolve the problem."
+        remember: "De acuerdo con su calendario de pagos %{REFERENCE}, se ha programado un cargo por tarjeta de %{AMOUNT} el %{DATE}."
+        error: "Desafortunadamente, se ha producido un error y el cargo en la tarjeta no se ha podido completar correctamente."
+        action: "Póngase en contacto con un gestor lo antes posible para resolver el problema."
     notify_admin_payment_schedule_failed:
-      subject: "[URGENT] Card debit failure"
+      subject: "[URGENT] Fallo en el débito de la tarjeta"
       body:
-        remember: "In accordance with the %{REFERENCE} payment schedule, a debit by card of %{AMOUNT} was scheduled on %{DATE}."
-        error: "Unfortunately, this card debit was unable to complete successfully."
-        action: "Please contact the member as soon as possible, then go to the payment schedule management interface to resolve the problem. After a certain period of time, the card subscription could be cancelled."
+        remember: "De acuerdo con el calendario de pagos %{REFERENCE}, se ha programado un cargo por tarjeta de %{AMOUNT} el %{DATE}."
+        error: "Desafortunadamente, el débito de esta tarjeta no se pudo completar correctamente."
+        action: "Póngase en contacto con el miembro lo antes posible y, a continuación, vaya a la interfaz de administración del calendario de pagos para resolver el problema. Transcurrido cierto tiempo, la suscripción de la tarjeta podría cancelarse."
     notify_member_payment_schedule_failed:
-      subject: "[URGENT] Card debit failure"
+      subject: "[URGENT] Fallo en el débito de la tarjeta"
       body:
-        remember: "In accordance with your %{REFERENCE} payment schedule, a debit by card of %{AMOUNT} was scheduled on %{DATE}."
-        error: "Unfortunately, this card debit was unable to complete successfully."
-        action_html: "Please check %{DASHBOARD} or contact a manager quickly, otherwise your subscription may be interrupted."
-        your_dashboard: "your dashboard"
+        remember: "De acuerdo con su calendario de pagos %{REFERENCE}, se ha programado un cargo por tarjeta de %{AMOUNT} el %{DATE}."
+        error: "Desafortunadamente, el débito de esta tarjeta no se pudo completar correctamente."
+        action_html: "Por favor, compruebe %{DASHBOARD} o póngase en contacto con un gestor rápidamente, de lo contrario su suscripción podría verse interrumpida."
+        your_dashboard: "su panel de control"
     notify_admin_payment_schedule_gateway_canceled:
-      subject: "[URGENT] Payment schedule canceled by the payment gateway"
+      subject: "[URGENTE] Calendario de pagos cancelado por la pasarela de pago"
       body:
-        error: "The payment schedule %{REFERENCE} was canceled by the payment gateway (%{GATEWAY}). No further debits will be made on this payment mean."
-        action: "Please consult the payment schedule management interface and contact the member as soon as possible to resolve the problem."
+        error: "El programa de pago %{REFERENCE} ha sido cancelado por la pasarela de pago (%{GATEWAY}). No se realizarán más cargos en este medio de pago."
+        action: "Consulte la interfaz de administración del calendario de pagos y póngase en contacto con el miembro lo antes posible para resolver el problema."
     notify_member_payment_schedule_gateway_canceled:
-      subject: "[URGENT] Payment schedule canceled by the payment gateway"
+      subject: "[URGENTE] Calendario de pagos cancelado por la pasarela de pago"
       body:
-        error: "Your payment schedule %{REFERENCE} was canceled by the payment gateway. No further debits will be made on this payment mean."
-        action: "Please contact a manager as soon as possible to resolve the problem."
+        error: "Su programa de pago %{REFERENCE} ha sido cancelado por la pasarela de pago. No se realizarán más cargos en este medio de pago."
+        action: "Póngase en contacto con un gestor lo antes posible para resolver el problema."
     notify_admin_payment_schedule_check_deadline:
-      subject: "Payment deadline"
+      subject: "Fecha límite de pago"
       body:
-        remember: "In accordance with the %{REFERENCE} payment schedule, %{AMOUNT} was due to be debited on %{DATE}."
-        date: "This is a reminder to cash the scheduled check as soon as possible."
-        confirm: "Do not forget to confirm the receipt in your payment schedule management interface, so that the corresponding invoice will be generated."
+        remember: "De acuerdo con el calendario de pagos de %{REFERENCE}, %{AMOUNT} debía cargarse el %{DATE}."
+        date: "Se trata de un recordatorio para que cobre el cheque programado lo antes posible."
+        confirm: "No olvide confirmar el recibo en la interfaz de gestión de su calendario de pago, para que se genere la factura correspondiente."
     notify_member_payment_schedule_transfer_deadline:
-      subject: "Payment deadline"
+      subject: "Fecha límite de pago"
       body:
-        remember: "In accordance with your %{REFERENCE} payment schedule, %{AMOUNT} was due to be debited on %{DATE}."
-        date: "This is a reminder to verify that the direct bank debit was successfull."
-        confirm: "Please confirm the receipt of funds in your payment schedule management interface, so that the corresponding invoice will be generated."
+        remember: "De acuerdo con su calendario de pagos de %{REFERENCE}, %{AMOUNT} debía cargarse el %{DATE}."
+        date: "Se trata de un recordatorio para verificar que la domiciliación bancaria se ha realizado correctamente."
+        confirm: "Por favor, confirme la recepción de fondos en su interfaz de gestión del calendario de pagos, para que se genere la factura correspondiente."
     notify_member_reservation_limit_reached:
-      subject: "Daily reservation limit reached"
+      subject: "Límite diario de reservas alcanzado"
       body:
-        limit_reached: "For %{DATE}, you have reached your daily limit of %{HOURS} hours of %{ITEM} reservation."
+        limit_reached: "Para %{DATE}, has alcanzado su límite diario de %{HOURS} horas de reserva %{ITEM}."
     notify_admin_user_supporting_document_files_created:
-      subject: "Supporting documents uploaded by a member"
+      subject: "Documentos justificativos subidos por un miembro"
       body:
-        supporting_document_files_uploaded_below: "Member %{NAME} has uploaded the following supporting documents:"
-        validate_user: "Please validate this account"
+        supporting_document_files_uploaded_below: "El miembro %{NAME} ha subido los siguientes documentos de soporte:"
+        validate_user: "Por favor, valida esta cuenta"
     notify_admin_user_supporting_document_files_updated:
-      subject: "Member's supporting documents have changed"
+      subject: "Los justificantes de los miembros han cambiado"
       body:
-        user_update_supporting_document_file: "Member %{NAME} has modified the supporting documents below:"
-        validate_user: "Please validate this account"
+        user_update_supporting_document_file: "El miembro %{NAME} ha modificado los siguientes documentos justificativos:"
+        validate_user: "Por favor, valida esta cuenta"
     notify_user_is_validated:
-      subject: "Account validated"
+      subject: "Cuenta validada"
       body:
-        account_validated: "Your account was validated. Now, you have access to booking features."
+        account_validated: "Su cuenta ha sido validada. Ahora tiene acceso a las funciones de reserva."
     notify_user_is_invalidated:
-      subject: "Account invalidated"
+      subject: "Cuenta invalidada"
       body:
-        account_invalidated: "Your account was invalidated. You won't be able to book anymore, until your account is validated again."
+        account_invalidated: "Su cuenta ha sido invalidada. No podrás seguir reservando hasta que tu cuenta sea validada de nuevo."
     notify_user_supporting_document_refusal:
-      subject: "Your supporting documents were refused"
+      subject: "Sus justificantes han sido rechazados"
       body:
-        user_supporting_document_files_refusal: "Your supporting documents were refused:"
-        action: "Please re-upload some new supporting documents."
+        user_supporting_document_files_refusal: "Sus justificantes han sido rechazados:"
+        action: "Por favor, vuelva a subir nuevos documentos justificativos."
     notify_admin_user_supporting_document_refusal:
-      subject: "A member's supporting documents were refused"
+      subject: "Los justificantes del afiliado de un miembro han sido rechazados"
       body:
-        user_supporting_document_files_refusal: "Member %{NAME}'s supporting documents were rejected by %{OPERATOR}:"
+        user_supporting_document_files_refusal: "Los justificantes del miembro %{NAME} han sido rechazados por %{OPERATOR}:"
     shared:
       hello: "¡Hola %{user_name}!"
     notify_user_order_is_ready:
-      subject: "Your command is ready"
+      subject: "Su comando está listo"
       body:
-        notify_user_order_is_ready: "Your command %{REFERENCE} is ready:"
+        notify_user_order_is_ready: "Su comando %{REFERENCE} está listo:"
     notify_user_order_is_canceled:
-      subject: "Your command was canceled"
+      subject: "Su comando fue cancelado"
       body:
-        notify_user_order_is_canceled: "Your command %{REFERENCE} was canceled."
+        notify_user_order_is_canceled: "Su comando %{REFERENCE} ha sido cancelado."
     notify_user_order_is_refunded:
-      subject: "Your command was refunded"
+      subject: "Su comando fue reembolsado"
       body:
-        notify_user_order_is_refunded: "Your command %{REFERENCE} was refunded."
+        notify_user_order_is_refunded: "Su comando %{REFERENCE} fue reembolsado."

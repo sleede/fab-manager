@@ -250,3 +250,74 @@
       </div>
     </div>
 </div>
+
+<div class="panel panel-default m-t-lg">
+    <div class="panel-heading">
+        <span class="font-sbold" translate>{{ 'app.admin.settings.reservation_context_feature_title' }}</span>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <p class="alert alert-warning m-h-md" ng-bind-html="'app.admin.settings.reservation_context_feature_info' | translate"></p>
+            <boolean-setting name="'reservation_context_feature'"
+                             label="'app.admin.settings.reservation_context_feature' | translate"
+                             class-name="'m-l'"
+                             on-success="onSuccess"
+                             on-error="onError"
+                             on-change="onReservationContextFeatureChange">
+            </boolean-setting>
+        </div>
+        <div class="row p-l p-r" ng-if="reservationContextFeature.value === 'true'">
+            <h3 class="" translate>{{ 'app.admin.settings.reservation_context_options' }}</h3>
+
+            <button type="button" class="btn btn-warning m-b m-t" ng-click="addReservationContext()" translate>{{ 'app.admin.settings.add_a_reservation_context' }}</button>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th style="width:40%" translate>{{ 'app.admin.reservation_contexts.name' }}</th>
+                    <th style="width:40%" translate>{{ 'app.admin.reservation_contexts.applicable_on' }}</th>
+                    <th style="width:20%"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="reservationContext in reservationContexts">
+                    <td>
+                        <span editable-text="reservationContext.name" e-cols="100" e-name="name" e-form="rowform" e-required>
+                        {{ reservationContext.name }}
+                        </span>
+                    </td>
+                    <td>
+                        <div editable-ui-select="reservationContext.applicable_on" e-multiple e-form="rowform" e-name="applicable_on" e-ng-model="reservationContext.applicable_on" e-style="min-width: 200px">
+                            {{ translateApplicableOnValue(reservationContext.applicable_on) }}
+                            <editable-ui-select-match placeholder="">
+                                {{ translateApplicableOnValue($item) }}
+                            </editable-ui-select-match>
+                            <editable-ui-select-choices repeat="ao in reservationContextApplicableOnValues | filter: $select.search track by $index">
+                                {{ translateApplicableOnValue(ao) }}
+                            </editable-ui-select-choices>
+                        </div>
+                    </td>
+                    <td>
+                    <!-- form -->
+                    <form editable-form name="rowform" onbeforesave="saveReservationContext($data, reservationContext.id)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="newReservationContext == reservationContext">
+                        <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-warning">
+                        <i class="fa fa-check"></i>
+                        </button>
+                        <button type="button" ng-disabled="rowform.$waiting" ng-click="cancelReservationContext(rowform, $index)" class="btn btn-default">
+                        <i class="fa fa-times"></i>
+                        </button>
+                    </form>
+                    <div class="buttons" ng-show="!rowform.$visible">
+                        <button class="btn btn-default" ng-click="rowform.$show()">
+                        <i class="fa fa-edit"></i> <span class="hidden-xs hidden-sm" translate>{{ 'app.shared.buttons.edit' }}</span>
+                        </button>
+                        <button class="btn btn-danger" ng-click="removeReservationContext($index)">
+                        <i class="fa fa-trash-o"></i>
+                        </button>
+                    </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

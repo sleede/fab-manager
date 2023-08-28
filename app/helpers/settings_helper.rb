@@ -200,6 +200,7 @@ module SettingsHelper
     projects_list_date_filters_presence
     project_categories_filter_placeholder
     project_categories_wording
+    reservation_context_feature
   ].freeze
 end
 # rubocop:enable Metrics/ModuleLength

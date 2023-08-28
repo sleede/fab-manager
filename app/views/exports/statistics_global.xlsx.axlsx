@@ -18,7 +18,9 @@ indices.each do |index|
       index.statistic_fields.each do |f|
         columns.push f.label
       end
+      columns.push t('export.reservation_context') if index.concerned_by_reservation_context?
       columns.push t('export.revenue') if index.ca
+      columns.push t('export.coupon') if index.show_coupon?
       sheet.add_row columns, style: header
 
       # data rows
@@ -35,8 +37,10 @@ indices.each do |index|
         index.statistic_fields.each do |f|
           format_xlsx_cell(hit['_source'][f.key], data, styles, types, source_data_type: f.data_type, date_format: date)
         end
+        add_hardcoded_cells(index, hit, data, styles, types)
         # proceed the 'ca' field if requested
         add_ca_cell(index, hit, data, styles, types)
+        add_coupon_cell(index, hit, data, styles, types)
 
         # finally, add the data row to the workbook's sheet
         sheet.add_row data, style: styles, types: types

@@ -505,6 +505,8 @@ zu:
     male: "crwdns3761:0crwdne3761:0"
     female: "crwdns3763:0crwdne3763:0"
     deleted_user: "crwdns31747:0crwdne31747:0"
+    reservation_context: "crwdns37707:0crwdne37707:0"
+    coupon: "crwdns37709:0crwdne37709:0"
   #initial price's category for events, created to replace the old "reduced amount" property
   price_category:
     reduced_fare: "crwdns3765:0crwdne3765:0"
@@ -701,6 +703,7 @@ zu:
     projects_list_date_filters_presence: "crwdns37657:0crwdne37657:0"
     project_categories_filter_placeholder: "crwdns37659:0crwdne37659:0"
     project_categories_wording: "crwdns37661:0crwdne37661:0"
+    reservation_context_feature: "crwdns37711:0crwdne37711:0"
   #statuses of projects
   statuses:
     new: "crwdns37111:0crwdne37111:0"

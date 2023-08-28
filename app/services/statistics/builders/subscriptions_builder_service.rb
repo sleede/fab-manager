@@ -16,6 +16,7 @@ class Statistics::Builders::SubscriptionsBuilderService
                                      planId: s[:plan_id],
                                      subscriptionId: s[:subscription_id],
                                      invoiceItemId: s[:invoice_item_id],
+                                     coupon: s[:coupon],
                                      groupName: s[:plan_group_name] }.merge(user_info_stat(s)))
       end
     end

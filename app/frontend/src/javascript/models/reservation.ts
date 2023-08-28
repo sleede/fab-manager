@@ -52,3 +52,9 @@ export interface ReservationIndexFilter extends ApiFilter {
   reservable_type?: ReservableType | Array<ReservableType>,
   user_id?: number
 }
+
+export interface ReservationContext {
+  id?: number,
+  name: string,
+  related_to?: number
+}
