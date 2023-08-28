@@ -6,7 +6,9 @@ class API::NotificationTypesController < API::APIController
 
   def index
     @notification_types = if params[:is_configurable] == 'true'
-                            NotificationType.where(is_configurable: true)
+                            role = 'admin' if current_user.admin?
+                            role ||= 'manager' if current_user.manager?
+                            NotificationType.where(is_configurable: true).for_role(role)
                           else
                             NotificationType.all
                           end
