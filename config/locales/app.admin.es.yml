@@ -1536,7 +1536,7 @@ es:
         create_plans_to_start: "Empiece por crear nuevos planes de suscripción."
         click_here: "Haga clic aquí para crear su primero."
         average_cart: "Carrito medio:"
-        reservation_context: Reservation context
+        reservation_context: Contexto de la reserva
       #statistics graphs
       stats_graphs:
         statistics: "Estadísticas"
@@ -1786,14 +1786,14 @@ es:
         projects_list_date_filters_presence: "Presencia de filtros de fecha en la lista de proyectos"
         project_categories_filter_placeholder: "Marcador para el filtro de categorías en la galería de proyectos"
         project_categories_wording: "Texto utilizado para sustituir \"Categorías\" en las páginas públicas"
-        reservation_context_feature_title: Reservation context
-        reservation_context_feature_info: "If you enable this feature, members will have to enter the context of their reservation when reserving."
-        reservation_context_feature: "Enable the feature \"Reservation context\""
-        reservation_context_options: Reservation context options
-        add_a_reservation_context: Add a new context
-        do_you_really_want_to_delete_this_reservation_context: "Do you really want to delete this context?"
-        unable_to_delete_reservation_context_already_related_to_reservations: "Unable to delete this context because it is already associated to a reservation"
-        unable_to_delete_reservation_context_an_error_occured: "Unable to delete: an error occurred"
+        reservation_context_feature_title: Contexto de la reserva
+        reservation_context_feature_info: "Si activa esta función, los miembros tendrán que ingresar el contexto de su reserva al reservar."
+        reservation_context_feature: "Activar la función \"Contexto de reserva\""
+        reservation_context_options: Opciones de contexto de reserva
+        add_a_reservation_context: Añadir un nuevo contexto
+        do_you_really_want_to_delete_this_reservation_context: "¿Realmente desea eliminar este contexto?"
+        unable_to_delete_reservation_context_already_related_to_reservations: "No se puede eliminar este contexto porque ya está asociado a una reserva"
+        unable_to_delete_reservation_context_an_error_occured: "No se puede eliminar: se ha producido un error"
         overlapping_options:
           training_reservations: "Formaciones"
           machine_reservations: "Máquinas"
@@ -2469,8 +2469,8 @@ es:
         cta_label: "Etiqueta del botón"
         cta_url: "Botón de enlace"
       reservation_contexts:
-        name: "Name"
-        applicable_on: "Applicable on"
-        machine: Machine
-        training: Training
-        space: Space
+        name: "Nombre"
+        applicable_on: "Aplicable en"
+        machine: Máquina
+        training: Formación
+        space: Espacio

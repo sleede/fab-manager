@@ -505,8 +505,8 @@ es:
     male: "Hombre"
     female: "Mujer"
     deleted_user: "Usuario suprimido"
-    reservation_context: "Reservation context"
-    coupon: "Coupon"
+    reservation_context: "Contexto de la reserva"
+    coupon: "Cupón"
   #initial price's category for events, created to replace the old "reduced amount" property
   price_category:
     reduced_fare: "Tarifa reducida"
@@ -703,7 +703,7 @@ es:
     projects_list_date_filters_presence: "Presencia del filtro de fechas en la lista de proyectos"
     project_categories_filter_placeholder: "Marcador para el filtro de categorías en la galería de proyectos"
     project_categories_wording: "Texto utilizado para sustituir \"Categorías\" en las páginas públicas"
-    reservation_context_feature: "Force member to select the nature of his reservation when reserving"
+    reservation_context_feature: "Forzar al miembro a seleccionar la naturaleza de su reserva al reservar"
   #statuses of projects
   statuses:
     new: "Nuevo"

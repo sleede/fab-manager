@@ -14,16 +14,16 @@ es:
       not_found_in_database: "mail o contraseña inválidos."
       timeout: "Su sesión ha expirado. Por favor, inicie sesión de nuevo."
       unauthenticated: "Necesita iniciar sesión o registrarse antes de contiunar."
-      unconfirmed: "You have to confirm your account before continuing. Please click on the link below the form."
+      unconfirmed: "Tiene que confirmar su cuenta antes de continuar. Por favor, haga clic en el enlace debajo del formulario."
     mailer:
       confirmation_instructions:
-        action: "Confirm my email address"
-        instruction: "You can finalize your registration by confirming your email address. Please click on the following link:"
+        action: "Confirmar mi dirección de email"
+        instruction: "Puede finalizar su inscripción confirmando su dirección de email. Haga clic en el siguiente enlace:"
         subject: "Instrucciones de confirmación"
       reset_password_instructions:
-        action: "Change my password"
-        instruction: "Someone asked for a link to change your password. You can do it through the link below."
-        ignore_otherwise: "If you have not made this request, please ignore this message."
+        action: "Cambiar mi contraseña"
+        instruction: "Alguien ha pedido un enlace para cambiar su contraseña. Puede hacerlo a través del siguiente enlace."
+        ignore_otherwise: "Si no ha realizado esta solicitud, ignore este mensaje."
         subject: "Instrucciones para restablecer contraseña"
       unlock_instructions:
         subject: "Desbloquear instrucciones"
@@ -53,10 +53,10 @@ es:
       unlocked: "Tu cuenta se ha desbloqueado con éxito. Por favor inicie sesión para continuar."
   errors:
     messages:
-      already_confirmed: "This email was already confirmed, please try signing in."
+      already_confirmed: "Este email ya ha sido confirmado, por favor intente acceder."
       confirmation_period_expired: "Necesita ser confirmado dentro de %{period}, por favor, solicite uno nuevo"
       expired: "ha expirado, por favor, solicite uno nuevo"
-      not_found: "This email was not found"
+      not_found: "No se ha encontrado este email"
       not_locked: "no estaba bloqueado"
       not_saved:
         one: "un error prohibió que %{resource} fuese guardado:"
