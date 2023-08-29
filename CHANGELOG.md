@@ -1,5 +1,9 @@
 # Changelog Fab-manager
 
+## next deploy
+
+- Fix a bug: for project categories, if there is no category : do not show categories panel in show view, do not show categories input field in edit view
+
 ## v6.0.13 2023 August 28
 
 - Fix a bug: unable to cancel a payment schedule
