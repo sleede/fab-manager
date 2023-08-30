@@ -4,6 +4,8 @@
 
 - Fix a bug: for project categories, if there is no category : do not show categories panel in show view, do not show categories input field in edit view
 - Fix a bug: unable to update status to paid for latest payment schedule item
+- Fix a bug: unable to generate statistic
+- [TODO DEPLOY] `rails fablab:maintenance:regenerate_statistics[2014,1]`
 
 ## v6.0.13 2023 August 28
 
