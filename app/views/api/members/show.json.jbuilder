@@ -88,7 +88,7 @@ json.events_reservations @member.reservations.where(reservable_type: 'Event').jo
   json.event_title sr.reservation.reservable.title
   json.event_pre_registration sr.reservation.reservable.pre_registration
   json.is_valid sr.is_valid
-  json.is_paid sr.reservation.invoice_items.count.positive?
+  json.is_paid sr.is_confirm
   json.amount sr.reservation.invoice_items.sum(:amount)
   json.canceled_at sr.canceled_at
   json.booking_users_attributes sr.reservation.booking_users.order(booked_type: :desc) do |bu|

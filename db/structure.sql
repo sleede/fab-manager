@@ -839,7 +839,8 @@ CREATE TABLE public.cart_item_reservations (
     operator_profile_id bigint,
     type character varying,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    reservation_context_id bigint
 );
 
 
@@ -1735,7 +1736,8 @@ CREATE TABLE public.machines (
     disabled boolean,
     deleted_at timestamp without time zone,
     machine_category_id bigint,
-    reservable boolean DEFAULT true
+    reservable boolean DEFAULT true,
+    space_id bigint
 );
 
 
@@ -2236,6 +2238,41 @@ CREATE SEQUENCE public.payment_gateway_objects_id_seq
 --
 
 ALTER SEQUENCE public.payment_gateway_objects_id_seq OWNED BY public.payment_gateway_objects.id;
+
+
+--
+-- Name: payment_infos; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.payment_infos (
+    id bigint NOT NULL,
+    data jsonb,
+    state character varying,
+    payment_for character varying,
+    service character varying,
+    statistic_profile_id bigint,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: payment_infos_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.payment_infos_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: payment_infos_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.payment_infos_id_seq OWNED BY public.payment_infos.id;
 
 
 --
@@ -3127,6 +3164,38 @@ ALTER SEQUENCE public.projects_themes_id_seq OWNED BY public.projects_themes.id;
 
 
 --
+-- Name: reservation_contexts; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.reservation_contexts (
+    id bigint NOT NULL,
+    name character varying,
+    applicable_on character varying[] DEFAULT '{}'::character varying[],
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: reservation_contexts_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.reservation_contexts_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: reservation_contexts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.reservation_contexts_id_seq OWNED BY public.reservation_contexts.id;
+
+
+--
 -- Name: reservations; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -3138,7 +3207,8 @@ CREATE TABLE public.reservations (
     reservable_type character varying,
     reservable_id integer,
     nb_reserve_places integer,
-    statistic_profile_id integer
+    statistic_profile_id integer,
+    reservation_context_id bigint
 );
 
 
@@ -3280,7 +3350,8 @@ CREATE TABLE public.slots_reservations (
     ex_end_at timestamp without time zone,
     canceled_at timestamp without time zone,
     offered boolean DEFAULT false,
-    is_valid boolean
+    is_valid boolean,
+    is_confirm boolean
 );
 
 
@@ -3317,7 +3388,9 @@ CREATE TABLE public.spaces (
     updated_at timestamp without time zone NOT NULL,
     characteristics text,
     disabled boolean,
-    deleted_at timestamp without time zone
+    deleted_at timestamp without time zone,
+    ancestry character varying NOT NULL COLLATE pg_catalog."C",
+    ancestry_depth integer DEFAULT 0
 );
 
 
@@ -4833,6 +4906,13 @@ ALTER TABLE ONLY public.payment_gateway_objects ALTER COLUMN id SET DEFAULT next
 
 
 --
+-- Name: payment_infos id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.payment_infos ALTER COLUMN id SET DEFAULT nextval('public.payment_infos_id_seq'::regclass);
+
+
+--
 -- Name: payment_schedule_items id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -5005,6 +5085,13 @@ ALTER TABLE ONLY public.projects_spaces ALTER COLUMN id SET DEFAULT nextval('pub
 --
 
 ALTER TABLE ONLY public.projects_themes ALTER COLUMN id SET DEFAULT nextval('public.projects_themes_id_seq'::regclass);
+
+
+--
+-- Name: reservation_contexts id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.reservation_contexts ALTER COLUMN id SET DEFAULT nextval('public.reservation_contexts_id_seq'::regclass);
 
 
 --
@@ -5755,6 +5842,14 @@ ALTER TABLE ONLY public.payment_gateway_objects
 
 
 --
+-- Name: payment_infos payment_infos_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.payment_infos
+    ADD CONSTRAINT payment_infos_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: payment_schedule_items payment_schedule_items_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5952,6 +6047,14 @@ ALTER TABLE ONLY public.projects_spaces
 
 ALTER TABLE ONLY public.projects_themes
     ADD CONSTRAINT projects_themes_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: reservation_contexts reservation_contexts_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.reservation_contexts
+    ADD CONSTRAINT reservation_contexts_pkey PRIMARY KEY (id);
 
 
 --
@@ -6504,6 +6607,13 @@ CREATE INDEX index_cart_item_reservations_on_reservable ON public.cart_item_rese
 
 
 --
+-- Name: index_cart_item_reservations_on_reservation_context_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_cart_item_reservations_on_reservation_context_id ON public.cart_item_reservations USING btree (reservation_context_id);
+
+
+--
 -- Name: index_cart_item_slots_on_cart_item; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -6798,6 +6908,13 @@ CREATE UNIQUE INDEX index_machines_on_slug ON public.machines USING btree (slug)
 
 
 --
+-- Name: index_machines_on_space_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_machines_on_space_id ON public.machines USING btree (space_id);
+
+
+--
 -- Name: index_notification_preferences_on_notification_type_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -6928,6 +7045,13 @@ CREATE INDEX index_payment_gateway_objects_on_item_type_and_item_id ON public.pa
 --
 
 CREATE INDEX index_payment_gateway_objects_on_payment_gateway_object_id ON public.payment_gateway_objects USING btree (payment_gateway_object_id);
+
+
+--
+-- Name: index_payment_infos_on_statistic_profile_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_payment_infos_on_statistic_profile_id ON public.payment_infos USING btree (statistic_profile_id);
 
 
 --
@@ -7260,6 +7384,13 @@ CREATE INDEX index_reservations_on_reservable_type_and_reservable_id ON public.r
 
 
 --
+-- Name: index_reservations_on_reservation_context_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_reservations_on_reservation_context_id ON public.reservations USING btree (reservation_context_id);
+
+
+--
 -- Name: index_reservations_on_statistic_profile_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -7327,6 +7458,13 @@ CREATE INDEX index_spaces_availabilities_on_availability_id ON public.spaces_ava
 --
 
 CREATE INDEX index_spaces_availabilities_on_space_id ON public.spaces_availabilities USING btree (space_id);
+
+
+--
+-- Name: index_spaces_on_ancestry; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_spaces_on_ancestry ON public.spaces USING btree (ancestry);
 
 
 --
@@ -7738,6 +7876,14 @@ CREATE TRIGGER projects_search_content_trigger BEFORE INSERT OR UPDATE ON public
 
 ALTER TABLE ONLY public.payment_schedules
     ADD CONSTRAINT fk_rails_00308dc223 FOREIGN KEY (wallet_transaction_id) REFERENCES public.wallet_transactions(id);
+
+
+--
+-- Name: payment_infos fk_rails_0308366a58; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.payment_infos
+    ADD CONSTRAINT fk_rails_0308366a58 FOREIGN KEY (statistic_profile_id) REFERENCES public.statistic_profiles(id);
 
 
 --
@@ -8389,6 +8535,14 @@ ALTER TABLE ONLY public.statistic_profile_prepaid_packs
 
 
 --
+-- Name: machines fk_rails_b2e37688bb; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.machines
+    ADD CONSTRAINT fk_rails_b2e37688bb FOREIGN KEY (space_id) REFERENCES public.spaces(id);
+
+
+--
 -- Name: orders fk_rails_b33ed6c672; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8501,6 +8655,14 @@ ALTER TABLE ONLY public.accounting_periods
 
 
 --
+-- Name: reservations fk_rails_cfaaf202e7; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.reservations
+    ADD CONSTRAINT fk_rails_cfaaf202e7 FOREIGN KEY (reservation_context_id) REFERENCES public.reservation_contexts(id);
+
+
+--
 -- Name: wallet_transactions fk_rails_d07bc24ce3; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8546,6 +8708,14 @@ ALTER TABLE ONLY public.slots_reservations
 
 ALTER TABLE ONLY public.payment_schedule_items
     ADD CONSTRAINT fk_rails_d6030dd0e7 FOREIGN KEY (payment_schedule_id) REFERENCES public.payment_schedules(id);
+
+
+--
+-- Name: cart_item_reservations fk_rails_daa5b1b8b9; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.cart_item_reservations
+    ADD CONSTRAINT fk_rails_daa5b1b8b9 FOREIGN KEY (reservation_context_id) REFERENCES public.reservation_contexts(id);
 
 
 --
@@ -9075,6 +9245,13 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230626103314'),
 ('20230626122844'),
 ('20230626122947'),
-('20230710072403');
+('20230710072403'),
+('20230718133636'),
+('20230718134350'),
+('20230720085857'),
+('20230728072726'),
+('20230728090257'),
+('20230825101952'),
+('20230831103208');
 
 
