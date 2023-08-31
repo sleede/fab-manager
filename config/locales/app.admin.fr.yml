@@ -398,7 +398,7 @@ fr:
         deleted_user: "Utilisateur supprimé"
         select_type: "Veuillez sélectionner un type pour continuer"
         no_modules_available: "Aucun module réservable n'est disponible. Veuillez activer au moins un module (machines, espaces ou formations) dans la section Personnalisation."
-      # import external iCal calendar
+      #import external iCal calendar
       icalendar:
         icalendar_import: "Import iCalendar"
         intro: "Fab-manager vous permet d'importer automatiquement des événements de calendrier, au format iCalendar RFC 5545, depuis des URL externes. Ces URL seront synchronisée toutes les heures et les événements seront affichés dans le calendrier publique. Vous pouvez aussi déclencher une synchronisation en cliquant sur le bouton correspondant, en face de chaque import."
@@ -1702,7 +1702,7 @@ fr:
         secondary_color: "la couleur secondaire"
         customize_home_page: "Personnaliser la page d'accueil"
         reset_home_page: "Remettre la page d'accueil dans son état initial"
-        confirmation_required: "Confirmation requise"
+        confirmation_required: Confirmation requise
         confirm_reset_home_page: "Voulez-vous vraiment remettre la page d'accueil à sa valeur d'usine ?"
         home_items: "Éléments de la page d'accueil"
         item_news: "Brève"
@@ -1850,15 +1850,14 @@ fr:
         enable_family_account: "Activer l'option Compte Famille"
         child_validation_required: "l'option de validation des comptes enfants"
         child_validation_required_label: "Activer l'option de validation des comptes enfants"
-        reservation_context_feature_title: Natures des réservations
-        reservation_context_feature_info: "Si vous activez cette fonctionnalité, le membre devra obligatoirement saisir la nature de sa réservation au moment de réserver."
-        reservation_context_feature: Activer la saisie obligatoire de la nature des réservations
-        reservation_context_options: Natures des réservations possibles
+        reservation_context_feature_title: Nature de la réservation
+        reservation_context_feature_info: "Si vous activez cette fonctionnalité, les membres devront entrer la nature de leur réservation lors de la réservation."
+        reservation_context_feature: "Activer la fonctionnalité \"Nature de réservation\""
+        reservation_context_options: Options de nature de réservation
         add_a_reservation_context: Ajouter une nouvelle nature
-        confirmation_required: Confirmation requise
-        do_you_really_want_to_delete_this_reservation_context: "Êtes-vous sûr de vouloir supprimer cette nature de réservation ?"
-        unable_to_delete_reservation_context_already_related_to_reservations: "Impossible de supprimer cette nature de réservation car elle est actuellement associée à des réservations."
-        unable_to_delete_reservation_context_an_error_occured: "Impossible de supprimer : une erreur est survenue."
+        do_you_really_want_to_delete_this_reservation_context: "Êtes-vous sûr de vouloir supprimer cette nature ?"
+        unable_to_delete_reservation_context_already_related_to_reservations: "Impossible de supprimer ce contexte car il est déjà associé à une réservation"
+        unable_to_delete_reservation_context_an_error_occured: "Impossible de supprimer : une erreur est survenue"
         overlapping_options:
           training_reservations: "Formations"
           machine_reservations: "Machines"

@@ -70,6 +70,14 @@ module ExcelHelper
     types.push :float
   end
 
+  def add_coupon_cell(index, hit, data, styles, types)
+    return unless index.show_coupon?
+
+    data.push hit['_source']['coupon']
+    styles.push nil
+    types.push :text
+  end
+
   ##
   # Retrieve an item in the given array of items
   # by default, the "id" is expected to match the given parameter but

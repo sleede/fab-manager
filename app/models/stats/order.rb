@@ -10,4 +10,5 @@ class Stats::Order
   attribute :products, Array
   attribute :categories, Array
   attribute :ca, Float
+  attribute :coupon, String
 end

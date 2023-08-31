@@ -18,7 +18,8 @@ class Statistics::Builders::ReservationsBuilderService
                           ca: r[:ca],
                           name: r["#{category}_name".to_sym],
                           reservationId: r[:reservation_id],
-                          reservationContextId: r[:reservation_context_id]
+                          reservationContextId: r[:reservation_context_id],
+                          coupon: r[:coupon]
                         }.merge(user_info_stat(r)))
             stat[:stat] = (type == 'booking' ? 1 : r[:nb_hours])
             stat["#{category}Id".to_sym] = r["#{category}_id".to_sym]

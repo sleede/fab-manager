@@ -1536,6 +1536,7 @@ pt:
         create_plans_to_start: "Comece criando novos planos de assinatura."
         click_here: "Clique aqui para criar o seu primeiro."
         average_cart: "Average cart:"
+        reservation_context: Reservation context
       #statistics graphs
       stats_graphs:
         statistics: "Estatísticas"
@@ -1642,7 +1643,7 @@ pt:
         secondary_color: "Cor secundária"
         customize_home_page: "Personalizar página inicial"
         reset_home_page: "Redefinir a página inicial para seu estado inicial"
-        confirmation_required: "Confirmação obrigatória"
+        confirmation_required: Confirmação obrigatória
         confirm_reset_home_page: "Você realmente quer redefinir a página inicial para o seu valor de fábrica?"
         home_items: "Itens da página inicial"
         item_news: "Notícias"
@@ -1785,6 +1786,14 @@ pt:
         projects_list_date_filters_presence: "Presence of date filters on projects list"
         project_categories_filter_placeholder: "Placeholder for categories filter in project gallery"
         project_categories_wording: "Wording used to replace \"Categories\" on public pages"
+        reservation_context_feature_title: Reservation context
+        reservation_context_feature_info: "If you enable this feature, members will have to enter the context of their reservation when reserving."
+        reservation_context_feature: "Enable the feature \"Reservation context\""
+        reservation_context_options: Reservation context options
+        add_a_reservation_context: Add a new context
+        do_you_really_want_to_delete_this_reservation_context: "Do you really want to delete this context?"
+        unable_to_delete_reservation_context_already_related_to_reservations: "Unable to delete this context because it is already associated to a reservation"
+        unable_to_delete_reservation_context_an_error_occured: "Unable to delete: an error occurred"
         overlapping_options:
           training_reservations: "Treinamentos"
           machine_reservations: "Máquinas"
@@ -2459,3 +2468,9 @@ pt:
         cta_switch: "Display a button"
         cta_label: "Button label"
         cta_url: "Button link"
+      reservation_contexts:
+        name: "Name"
+        applicable_on: "Applicable on"
+        machine: Machine
+        training: Training
+        space: Space

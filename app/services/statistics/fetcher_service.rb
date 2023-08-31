@@ -34,6 +34,7 @@ class Statistics::FetcherService
                       duration: p.find_statistic_type.key,
                       subscription_id: sub.id,
                       invoice_item_id: i.id,
+                      coupon: i.invoice.coupon&.code,
                       ca: ca }.merge(user_info(profile)))
       end
       result
@@ -49,6 +50,8 @@ class Statistics::FetcherService
         .eager_load(:slots, :slots_reservations, :invoice_items, :reservation_context, statistic_profile: [:group])
         .find_each do |r|
         next unless r.reservable
+        next unless r.original_invoice
+        next if r.slots.empty?
 
         profile = r.statistic_profile
         result = { date: r.created_at.to_date,
@@ -59,8 +62,8 @@ class Statistics::FetcherService
                    slot_dates: r.slots.map(&:start_at).map(&:to_date),
                    nb_hours: (r.slots.map(&:duration).map(&:to_i).reduce(:+) / 3600.0).to_f,
                    ca: calcul_ca(r.original_invoice),
-                   reservation_context_id: r.reservation_context_id
-                  }.merge(user_info(profile))
+                   reservation_context_id: r.reservation_context_id,
+                   coupon: r.original_invoice.coupon&.code }.merge(user_info(profile))
         yield result
       end
     end
@@ -75,6 +78,8 @@ class Statistics::FetcherService
         .eager_load(:slots, :slots_reservations, :invoice_items, :reservation_context, statistic_profile: [:group])
         .find_each do |r|
         next unless r.reservable
+        next unless r.original_invoice
+        next if r.slots.empty?
 
         profile = r.statistic_profile
         result = { date: r.created_at.to_date,
@@ -85,8 +90,8 @@ class Statistics::FetcherService
                    slot_dates: r.slots.map(&:start_at).map(&:to_date),
                    nb_hours: (r.slots.map(&:duration).map(&:to_i).reduce(:+) / 3600.0).to_f,
                    ca: calcul_ca(r.original_invoice),
-                   reservation_context_id: r.reservation_context_id
-                  }.merge(user_info(profile))
+                   reservation_context_id: r.reservation_context_id,
+                   coupon: r.original_invoice.coupon&.code }.merge(user_info(profile))
         yield result
       end
     end
@@ -101,6 +106,7 @@ class Statistics::FetcherService
         .eager_load(:slots, :slots_reservations, :invoice_items, :reservation_context, statistic_profile: [:group])
         .find_each do |r|
         next unless r.reservable
+        next unless r.original_invoice
 
         profile = r.statistic_profile
         slot = r.slots.first
@@ -112,8 +118,8 @@ class Statistics::FetcherService
                    training_date: slot.start_at.to_date,
                    nb_hours: difference_in_hours(slot.start_at, slot.end_at),
                    ca: calcul_ca(r.original_invoice),
-                   reservation_context_id: r.reservation_context_id
-                 }.merge(user_info(profile))
+                   reservation_context_id: r.reservation_context_id,
+                   coupon: r.original_invoice&.coupon&.code }.merge(user_info(profile))
         yield result
       end
     end
@@ -128,6 +134,7 @@ class Statistics::FetcherService
         .eager_load(:slots, :slots_reservations, :invoice_items, statistic_profile: [:group])
         .find_each do |r|
         next unless r.reservable
+        next unless r.original_invoice
 
         profile = r.statistic_profile
         slot = r.slots.first
@@ -141,6 +148,7 @@ class Statistics::FetcherService
                    age_range: (r.reservable.age_range_id ? r.reservable.age_range.name : ''),
                    nb_places: r.total_booked_seats,
                    nb_hours: difference_in_hours(slot.start_at, slot.end_at),
+                   coupon: r.original_invoice.coupon&.code,
                    ca: calcul_ca(r.original_invoice) }.merge(user_info(profile))
         yield result
       end
@@ -155,6 +163,7 @@ class Statistics::FetcherService
                  .eager_load(:slots, :invoice_items, statistic_profile: [:group])
                  .find_each do |r|
         next unless r.reservable
+        next unless r.statistic_profile
 
         reservations_ca_list.push(
           { date: r.created_at.to_date, ca: calcul_ca(r.original_invoice) || 0 }.merge(user_info(r.statistic_profile))
@@ -165,6 +174,8 @@ class Statistics::FetcherService
            .find_each do |i|
         # the following line is a workaround for issue #196
         profile = i.statistic_profile || i.main_item.object&.wallet&.user&.statistic_profile
+        next unless profile
+
         avoirs_ca_list.push({ date: i.created_at.to_date, ca: calcul_avoir_ca(i) || 0 }.merge(user_info(profile)))
       end
       reservations_ca_list.concat(subscriptions_ca_list).concat(avoirs_ca_list).each do |e|
@@ -215,7 +226,9 @@ class Statistics::FetcherService
            .where('order_activities.created_at >= :start_date AND order_activities.created_at <= :end_date', options)
            .group('orders.id')
            .find_each do |o|
-        result = { date: o.created_at.to_date, ca: calcul_ca(o.invoice) }
+        next unless o.invoice
+
+        result = { date: o.created_at.to_date, ca: calcul_ca(o.invoice), coupon: o.invoice.coupon&.code }
                  .merge(user_info(o.statistic_profile))
                  .merge(store_order_info(o))
         yield result

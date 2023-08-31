@@ -536,6 +536,7 @@ fr:
     female: "Femme"
     deleted_user: "Utilisateur supprimé"
     reservation_context: "Nature de la réservation"
+    coupon: "Code promo"
   #initial price's category for events, created to replace the old "reduced amount" property
   price_category:
     reduced_fare: "Tarif réduit"
@@ -733,7 +734,7 @@ fr:
     projects_list_date_filters_presence: "Filtre de présence de dates sur la liste des projets"
     project_categories_filter_placeholder: "Dans la galerie de projets, renommer le filtre \"Toutes les catégories\""
     project_categories_wording: "Dans la fiche projet, renommer l'intitulé de l'encart Catégories"
-    reservation_context_feature: "Obligation pour le membre de saisir la nature de sa réservation au moment de réserver"
+    reservation_context_feature: "Forcer le membre à sélectionner la nature de sa réservation lors de la réservation"
   #statuses of projects
   statuses:
     new: "Nouveau"

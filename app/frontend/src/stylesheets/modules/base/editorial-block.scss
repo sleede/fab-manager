@@ -7,17 +7,20 @@
   border: 1px solid var(--gray-soft-dark);
   border-radius: var(--border-radius);
   @include editor;
-  button { white-space: normal; }
+  .cta {
+    white-space: normal;
+    text-decoration: none;
+  }
 
   @media (min-width: 540px) {
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-end;
-    button { white-space: nowrap; }
+    .cta { white-space: nowrap; }
     &.long-cta {
       flex-direction: column;
       align-items: flex-start;
-      button { margin-left: auto; }
+      .cta { margin-left: auto; }
     }
   }
   @media (min-width: 1200px) {

@@ -17,7 +17,7 @@ class Statistics::BuilderService
     private
 
     def default_options
-      yesterday = 1.day.ago
+      yesterday = Time.current
       {
         start_date: yesterday.beginning_of_day,
         end_date: yesterday.end_of_day
