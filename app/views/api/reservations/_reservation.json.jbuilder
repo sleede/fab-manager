@@ -43,4 +43,4 @@ json.booking_users_attributes reservation.booking_users.order(booked_type: :desc
   json.age ((Time.zone.now - bu.booked.birthday.to_time) / 1.year.seconds).floor if bu.booked_type == 'Child'
 end
 json.is_valid reservation.slots_reservations[0].is_valid
-json.is_paid reservation.invoice_items.count.positive?
+json.is_paid reservation.slots_reservations[0].is_confirm

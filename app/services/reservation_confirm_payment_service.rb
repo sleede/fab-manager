@@ -69,13 +69,17 @@ class ReservationConfirmPaymentService
       [@reservation],
       @reservation.user
     )
-    return invoice if Setting.get('prevent_invoices_zero') && price[:total].zero?
+    if Setting.get('prevent_invoices_zero') && price[:total].zero?
+      @reservation.slots_reservations.first.update(is_confirm: true)
+      return invoice
+    end
 
     ActiveRecord::Base.transaction do
       WalletService.debit_user_wallet(invoice, @reservation.user)
 
       invoice.save
       invoice.post_save
+      @reservation.slots_reservations.first.update(is_confirm: true)
     end
     invoice
   end
