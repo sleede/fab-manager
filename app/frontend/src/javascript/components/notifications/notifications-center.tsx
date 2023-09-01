@@ -30,7 +30,7 @@ export const NotificationsCenter: React.FC<NotificationsCenterProps> = ({ onErro
 
   return (
     <>
-      {role === 'admin' && <FabTabs defaultTab='notifications-list' tabs={[
+      {(role === 'admin' || role === 'manager') && <FabTabs defaultTab='notifications-list' tabs={[
         {
           id: 'notifications_settings',
           title: t('app.logged.notifications_center.notifications_settings'),
@@ -42,7 +42,7 @@ export const NotificationsCenter: React.FC<NotificationsCenterProps> = ({ onErro
           content: <NotificationsList onError={onError}/>
         }
       ]} />}
-      {role !== 'admin' && <NotificationsList onError={onError}/>}
+      {role === 'member' && <NotificationsList onError={onError}/>}
     </>
   );
 };
