@@ -489,6 +489,9 @@ zu:
     store: "crwdns31715:0crwdne31715:0"
     paid-processed: "crwdns31717:0crwdne31717:0"
     aborted: "crwdns31719:0crwdne31719:0"
+    project_status: crwdns37717:0crwdne37717:0
+    project_name: crwdns37719:0crwdne37719:0
+    project_user_names: crwdns37721:0crwdne37721:0
   #statistics exports to the Excel file format
   export:
     entries: "crwdns3739:0crwdne3739:0"
@@ -507,6 +510,7 @@ zu:
     deleted_user: "crwdns31747:0crwdne31747:0"
     reservation_context: "crwdns37707:0crwdne37707:0"
     coupon: "crwdns37709:0crwdne37709:0"
+    project_author: crwdns37723:0crwdne37723:0
   #initial price's category for events, created to replace the old "reduced amount" property
   price_category:
     reduced_fare: "crwdns3765:0crwdne3765:0"
