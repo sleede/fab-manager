@@ -1245,6 +1245,7 @@ en:
           member_filter_all: "All"
           member_filter_not_confirmed: "Unconfirmed"
           member_filter_inactive_for_3_years: "Inactive for 3 years"
+          member_filter_not_validated: "Not validated"
       members_list_item:
         item_type: "member"
         surname: "Surname"
@@ -1604,6 +1605,7 @@ en:
         click_here: "Click here to create your first one."
         average_cart: "Average cart:"
         reservation_context: Reservation context
+        project_author: Author
       #statistics graphs
       stats_graphs:
         statistics: "Statistics"

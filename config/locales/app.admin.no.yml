@@ -1192,6 +1192,7 @@
           member_filter_all: "Alle"
           member_filter_not_confirmed: "Ubekreftet"
           member_filter_inactive_for_3_years: "Inaktiv i 3 år"
+          member_filter_not_validated: "Not validated"
       #add a member
       members_new:
         add_a_member: "Legg til medlem"
@@ -1537,6 +1538,7 @@
         click_here: "Klikk her for å opprette din første."
         average_cart: "Average cart:"
         reservation_context: Reservation context
+        project_author: Author
       #statistics graphs
       stats_graphs:
         statistics: "Statistikk"

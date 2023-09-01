@@ -1245,6 +1245,7 @@ fr:
           member_filter_all: "Tous"
           member_filter_not_confirmed: "Non confirmés"
           member_filter_inactive_for_3_years: "Inactifs depuis 3 ans"
+          member_filter_not_validated: "Non validés"
       #add a member
       members_new:
         add_a_member: "Ajouter un membre"
@@ -1596,6 +1597,7 @@ fr:
         click_here: "Cliquez ici pour créer votre première formule."
         average_cart: "Panier moyen :"
         reservation_context: Nature de la réservation
+        project_author: Auteur
       #statistics graphs
       stats_graphs:
         statistics: "Statistiques"

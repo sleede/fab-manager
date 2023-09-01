@@ -489,6 +489,9 @@ de:
     store: "Shop"
     paid-processed: "Bezahlt und/oder bearbeitet"
     aborted: "Abgebrochen"
+    project_status: Status
+    project_name: Name
+    project_user_names: Collaborators
   #statistics exports to the Excel file format
   export:
     entries: "Einträge"
@@ -507,6 +510,7 @@ de:
     deleted_user: "Gelöschte Benutzer"
     reservation_context: "Reservation context"
     coupon: "Coupon"
+    project_author: Author
   #initial price's category for events, created to replace the old "reduced amount" property
   price_category:
     reduced_fare: "Ermäßigter Tarif"

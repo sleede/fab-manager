@@ -92,6 +92,7 @@ class User < ApplicationRecord
   scope :with_subscription, -> { joins(statistic_profile: [:subscriptions]) }
   scope :not_confirmed, -> { where(confirmed_at: nil) }
   scope :inactive_for_3_years, -> { where('users.last_sign_in_at < ?', 3.years.ago) }
+  scope :not_validated, -> { where(validated_at: nil) }
 
   def to_json(*)
     ApplicationController.new.view_context.render(

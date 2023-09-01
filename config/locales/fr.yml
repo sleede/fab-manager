@@ -519,6 +519,9 @@ fr:
     store: "Boutique"
     paid-processed: "Payée et/ou traitée"
     aborted: "Interrompue"
+    project_status: Statut
+    project_name: Nom
+    project_user_names: Collaborateurs
   #statistics exports to the Excel file format
   export:
     entries: "Entrées"
@@ -537,6 +540,7 @@ fr:
     deleted_user: "Utilisateur supprimé"
     reservation_context: "Nature de la réservation"
     coupon: "Code promo"
+    project_author: Auteur
   #initial price's category for events, created to replace the old "reduced amount" property
   price_category:
     reduced_fare: "Tarif réduit"

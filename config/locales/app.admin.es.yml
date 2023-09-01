@@ -1192,6 +1192,7 @@ es:
           member_filter_all: "Todos"
           member_filter_not_confirmed: "No confirmado"
           member_filter_inactive_for_3_years: "Inactivo por 3 años"
+          member_filter_not_validated: "Not validated"
       #add a member
       members_new:
         add_a_member: "Agregar un miembro"
@@ -1537,6 +1538,7 @@ es:
         click_here: "Haga clic aquí para crear su primero."
         average_cart: "Carrito medio:"
         reservation_context: Contexto de la reserva
+        project_author: Author
       #statistics graphs
       stats_graphs:
         statistics: "Estadísticas"

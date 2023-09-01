@@ -163,6 +163,8 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
     // is user validation required
     $scope.enableUserValidationRequired = (settingsPromise.user_validation_required === 'true');
 
+    if ($scope.enableUserValidationRequired) { $scope.member.memberFilters.push('not_validated'); }
+
     // should we display the username in the list?
     $scope.displayUsername = (settingsPromise.show_username_in_admin_list === 'true');
 

@@ -489,6 +489,9 @@ es:
     store: "Tienda"
     paid-processed: "Pagado y/o procesado"
     aborted: "Abortado"
+    project_status: Status
+    project_name: Name
+    project_user_names: Collaborators
   #statistics exports to the Excel file format
   export:
     entries: "Entradas"
@@ -507,6 +510,7 @@ es:
     deleted_user: "Usuario suprimido"
     reservation_context: "Contexto de la reserva"
     coupon: "Cupón"
+    project_author: Author
   #initial price's category for events, created to replace the old "reduced amount" property
   price_category:
     reduced_fare: "Tarifa reducida"
