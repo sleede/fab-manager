@@ -12,4 +12,6 @@ class Stats::Project
   attribute :components, Array
   attribute :machines, Array
   attribute :users, Integer
+  attribute :status, String
+  attribute :projectUserNames, Array
 end

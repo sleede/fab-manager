@@ -31,6 +31,12 @@ module Statistics::Concerns::ProjectsConcern
       sum
     end
 
+    def get_project_user_names(project)
+      project.project_users.map do |project_user|
+        { id: project_user.user.id, name: project_user.user.profile.full_name }
+      end
+    end
+
     def project_info(project)
       {
         project_id: project.id,
@@ -41,7 +47,9 @@ module Statistics::Concerns::ProjectsConcern
         project_themes: get_project_themes(project),
         project_components: get_projects_components(project),
         project_machines: get_projects_machines(project),
-        project_users: get_project_users(project)
+        project_users: get_project_users(project),
+        project_status: project.status&.name,
+        project_user_names: get_project_user_names(project),
       }
     end
 
@@ -53,7 +61,9 @@ module Statistics::Concerns::ProjectsConcern
         themes: project[:project_themes],
         components: project[:project_components],
         machines: project[:project_machines],
-        users: project[:project_users]
+        users: project[:project_users],
+        status: project[:project_status],
+        projectUserNames: project[:project_user_names],
       }
     end
   end

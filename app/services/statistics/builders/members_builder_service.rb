@@ -11,7 +11,8 @@ class Statistics::Builders::MembersBuilderService
         Stats::Account.create({ date: format_date(m[:date]),
                                 type: 'member',
                                 subType: 'created',
-                                stat: 1 }.merge(user_info_stat(m)))
+                                stat: 1,
+                                groupName: m[:groupName] }.merge(user_info_stat(m)))
       end
 
       # member ca list
@@ -19,7 +20,8 @@ class Statistics::Builders::MembersBuilderService
         Stats::User.create({ date: format_date(m[:date]),
                              type: 'revenue',
                              subType: m[:group],
-                             stat: m[:ca] }.merge(user_info_stat(m)))
+                             stat: m[:ca],
+                             groupName: m[:groupName] }.merge(user_info_stat(m)))
       end
     end
   end

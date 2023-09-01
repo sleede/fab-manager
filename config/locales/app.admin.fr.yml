@@ -1538,6 +1538,7 @@ fr:
         click_here: "Cliquez ici pour créer votre première formule."
         average_cart: "Panier moyen :"
         reservation_context: Nature de la réservation
+        project_author: Auteur
       #statistics graphs
       stats_graphs:
         statistics: "Statistiques"
@@ -1792,6 +1793,7 @@ fr:
         reservation_context_feature: "Activer la fonctionnalité \"Nature de réservation\""
         reservation_context_options: Options de nature de réservation
         add_a_reservation_context: Ajouter une nouvelle nature
+        confirmation_required: Confirmation requise
         do_you_really_want_to_delete_this_reservation_context: "Êtes-vous sûr de vouloir supprimer cette nature ?"
         unable_to_delete_reservation_context_already_related_to_reservations: "Impossible de supprimer ce contexte car il est déjà associé à une réservation"
         unable_to_delete_reservation_context_an_error_occured: "Impossible de supprimer : une erreur est survenue"

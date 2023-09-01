@@ -256,12 +256,11 @@
               <tr>
                 <th ng-if="['booking', 'hour'].includes(type.active.key)" translate>{{ 'app.admin.statistics.reservation_date' }}</th>
                 <th ng-if="!['booking', 'hour'].includes(type.active.key)" translate>{{ 'app.admin.statistics.date' }}</th>
-                <th translate>{{ 'app.admin.statistics.user' }}</th>
+                <th ng-if="['project'].includes(type.active.key)" translate>{{ 'app.admin.statistics.project_author' }}</th>
+                <th ng-if="!['project'].includes(type.active.key)" translate>{{ 'app.admin.statistics.user' }}</th>
                 <th ng-if="reservationContextFeatureEnabled && reservationContextIsApplicable(selectedIndex.es_type_key)">
                   {{ 'app.admin.statistics.reservation_context' | translate }}
                 </th>
-                <th translate>{{ 'app.admin.statistics.age' }}</th>
-                <th translate>{{ 'app.admin.statistics.type' }}</th>
                 <th ng-if="!type.active.simple">{{type.active.label}}</th>
                 <th ng-repeat="field in selectedIndex.additional_fields">{{field.label}}</th>
                 <th ng-if="selectedIndex.ca">{{ 'app.admin.statistics.revenue' | translate }}
@@ -285,11 +284,6 @@
                 <td ng-if="reservationContextFeatureEnabled && reservationContextIsApplicable(selectedIndex.es_type_key)">
                   {{ formatReservationContext(datum._source.reservationContextId) }}
                 </td>
-                <td>
-                  <span ng-if="datum._source.age">{{datum._source.age}} {{ 'app.admin.statistics.years_old' | translate }}</span>
-                  <span ng-if="!datum._source.age" translate>{{ 'app.admin.statistics.unknown' }}</span>
-                </td>
-                <td>{{formatSubtype(datum._source.subType)}}</td>
                 <td ng-if="!type.active.simple">{{datum._source.stat}}</td>
                 <td ng-repeat="field in selectedIndex.additional_fields">
                   <ng-switch on="field.data_type">
