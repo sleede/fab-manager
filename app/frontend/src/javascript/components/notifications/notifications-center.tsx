@@ -42,7 +42,7 @@ export const NotificationsCenter: React.FC<NotificationsCenterProps> = ({ onErro
           content: <NotificationsList onError={onError}/>
         }
       ]} />}
-      {role !== 'admin' && <NotificationsList onError={onError}/>}
+      {role === 'member' && <NotificationsList onError={onError}/>}
     </>
   );
 };
