@@ -13,6 +13,7 @@ module StatConcern
     attribute :gender, String
     attribute :age, Integer
     attribute :group, String
+    attribute :groupName, String
 
     # has include Elasticsearch::Persistence::Model
     index_name 'stats'

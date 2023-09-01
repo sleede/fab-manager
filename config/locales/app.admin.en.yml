@@ -1538,6 +1538,7 @@ en:
         click_here: "Click here to create your first one."
         average_cart: "Average cart:"
         reservation_context: Reservation context
+        project_author: Author
       #statistics graphs
       stats_graphs:
         statistics: "Statistics"

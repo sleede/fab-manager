@@ -1538,6 +1538,7 @@ fr:
         click_here: "Cliquez ici pour créer votre première formule."
         average_cart: "Panier moyen :"
         reservation_context: Nature de la réservation
+        project_author: Auteur
       #statistics graphs
       stats_graphs:
         statistics: "Statistiques"

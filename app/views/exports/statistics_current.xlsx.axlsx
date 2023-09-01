@@ -20,7 +20,8 @@ wb.add_worksheet(name: ExcelService.name_safe(index.label)) do |sheet|
 
   ## data table
   # heading labels
-  columns = [t('export.date'), t('export.user'), t('export.email'), t('export.phone'), t('export.gender'), t('export.age'),
+  user_heading_text = index.es_type_key == "project" ? t('export.project_author') : t('export.user')
+  columns = [t('export.date'), user_heading_text, t('export.email'), t('export.phone'), t('export.gender'), t('export.age'),
              t('export.type')]
   columns.push type.label unless type.simple
   fields.each do |f|

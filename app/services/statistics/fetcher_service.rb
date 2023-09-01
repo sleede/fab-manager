@@ -207,7 +207,7 @@ class Statistics::FetcherService
     # @yieldparam [Hash]
     def each_project(options = default_options)
       Project.where('projects.published_at >= :start_date AND projects.published_at <= :end_date', options)
-             .eager_load(:licence, :themes, :components, :machines, :project_users, author: [:group])
+             .eager_load(:licence, :themes, :components, :machines, :status, project_users: [{ user: :profile }], author: [:group])
              .find_each do |p|
         result = { date: p.created_at.to_date }.merge(user_info(p.author)).merge(project_info(p))
         yield result
@@ -261,7 +261,8 @@ class Statistics::FetcherService
         user_id: statistic_profile.user_id,
         gender: statistic_profile.str_gender,
         age: statistic_profile.age,
-        group: statistic_profile.group ? statistic_profile.group.slug : nil
+        group: statistic_profile.group ? statistic_profile.group.slug : nil,
+        groupName: statistic_profile.group ? statistic_profile.group.name : nil,
       }
     end
   end
