@@ -1192,6 +1192,7 @@ en:
           member_filter_all: "All"
           member_filter_not_confirmed: "Unconfirmed"
           member_filter_inactive_for_3_years: "Inactive for 3 years"
+          member_filter_not_validated: "Not validated"
       #add a member
       members_new:
         add_a_member: "Add a member"
