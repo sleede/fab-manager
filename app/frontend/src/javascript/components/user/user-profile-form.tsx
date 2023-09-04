@@ -136,6 +136,7 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
     }
 
     return handleSubmit((data: User) => {
+      ['events_reservations', 'space_reservations', 'training_reservations', 'machine_reservations', 'all_projects', 'invoices', 'subscribed_plan', 'subscription'].forEach(key => delete data[key]);
       MemberAPI[action](data)
         .then(res => {
           reset(res);

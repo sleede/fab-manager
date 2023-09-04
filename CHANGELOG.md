@@ -5,6 +5,7 @@
 - Fix a bug: for project categories, if there is no category : do not show categories panel in show view, do not show categories input field in edit view
 - Fix a bug: unable to update status to paid for latest payment schedule item
 - Fix a bug: unable to generate statistic
+- Fix a bug: unable to update user profile by admin
 - Feature: add a filter in members list (admin) to show only "not validated" members
 - Concerning statistics:
 - removes age and type column from all statistics tabs (only in web, not in xlsx export file)
