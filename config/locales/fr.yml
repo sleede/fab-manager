@@ -446,6 +446,8 @@ fr:
         account_invalidated: "Votre compte est invalide."
       notify_user_supporting_document_refusal:
         refusal: "Vos pièces justificatives ont été refusées"
+      notify_user_supporting_document_reminder:
+        reminder_message: "Ceci est un message de rappel pour vous inviter à uploader vos pièces justificatives."
       notify_admin_user_supporting_document_refusal:
         refusal: "Le justificatif du membre <strong><em>%{NAME}</strong></em> a été refusé."
       notify_user_order_is_ready:

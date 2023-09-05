@@ -446,6 +446,8 @@ en:
         account_invalidated: "Your account is invalid."
       notify_user_supporting_document_refusal:
         refusal: "Your supporting documents were refused"
+      notify_user_supporting_document_reminder:
+        reminder_message: "This is a reminder for you to upload your supporting documents."
       notify_admin_user_supporting_document_refusal:
         refusal: "Member's supporting document <strong><em>%{NAME}</strong></em> was refused."
       notify_user_order_is_ready:

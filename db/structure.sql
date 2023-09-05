@@ -1726,7 +1726,8 @@ CREATE TABLE public.notification_types (
     category character varying NOT NULL,
     is_configurable boolean NOT NULL,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    roles character varying[] DEFAULT '{}'::character varying[]
 );
 
 
@@ -4193,7 +4194,8 @@ CREATE TABLE public.users (
     current_sign_in_ip inet,
     last_sign_in_ip inet,
     mapped_from_sso character varying,
-    validated_at timestamp without time zone
+    validated_at timestamp without time zone,
+    supporting_documents_reminder_sent_at timestamp(6) without time zone
 );
 
 
@@ -6652,6 +6654,13 @@ CREATE UNIQUE INDEX index_notification_types_on_name ON public.notification_type
 
 
 --
+-- Name: index_notification_types_on_roles; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_notification_types_on_roles ON public.notification_types USING btree (roles);
+
+
+--
 -- Name: index_notifications_on_notification_type_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -8900,6 +8909,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230626122947'),
 ('20230718133636'),
 ('20230718134350'),
-('20230720085857');
+('20230720085857'),
+('20230828073428'),
+('20230901090637');
 
 

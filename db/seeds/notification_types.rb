@@ -69,6 +69,7 @@ NOTIFICATIONS_TYPES = [
   { name: 'notify_user_is_validated', category: 'users_accounts', is_configurable: false },
   { name: 'notify_user_is_invalidated', category: 'users_accounts', is_configurable: false },
   { name: 'notify_user_supporting_document_refusal', category: 'supporting_documents', is_configurable: false },
+  { name: 'notify_user_supporting_document_reminder', category: 'supporting_documents', is_configurable: false },
   { name: 'notify_admin_user_supporting_document_refusal', category: 'supporting_documents', is_configurable: true },
   { name: 'notify_user_order_is_ready', category: 'shop', is_configurable: false },
   { name: 'notify_user_order_is_canceled', category: 'shop', is_configurable: false },

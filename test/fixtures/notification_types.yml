@@ -573,3 +573,11 @@ notification_type_72:
   is_configurable: true
   created_at: 2023-02-16 10:42:39.143888000 Z
   updated_at: 2023-02-16 10:42:39.143888000 Z
+
+notification_type_73:
+  id: 73
+  name: notify_user_supporting_document_reminder
+  category: supporting_documents
+  is_configurable: false
+  created_at: 2023-02-02 08:25:33.439078000 Z
+  updated_at: 2023-02-02 08:25:33.439078000 Z
