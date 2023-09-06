@@ -2,6 +2,8 @@
 
 ## next deploy
 
+## v6.0.14 2023 September 6
+
 - Fix a bug: for project categories, if there is no category : do not show categories panel in show view, do not show categories input field in edit view
 - Fix a bug: unable to update status to paid for latest payment schedule item
 - Fix a bug: unable to generate statistic
