@@ -1,5 +1,24 @@
 # Changelog Fab-manager
 
+## next deploy
+
+## v6.0.14 2023 September 6
+
+- Fix a bug: for project categories, if there is no category : do not show categories panel in show view, do not show categories input field in edit view
+- Fix a bug: unable to update status to paid for latest payment schedule item
+- Fix a bug: unable to generate statistic
+- Fix a bug: unable to update user profile by admin
+- Feature: add a filter in members list (admin) to show only "not validated" members
+- Concerning statistics:
+- removes age and type column from all statistics tabs (only in web, not in xlsx export file)
+- index:
+  - renames user column header for projects tab and projects xlsx export
+  - adds group name of user for every tab except projects tab
+  - adds status and project users names for projects tab
+- [TODO DEPLOY] `rails db:seed`
+- [TODO DEPLOY] `rails fablab:es:build_stats`
+- [TODO DEPLOY] `rails fablab:maintenance:regenerate_statistics[2014,1]`
+
 ## v6.0.13 2023 August 28
 
 - Fix a bug: unable to cancel a payment schedule

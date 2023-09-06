@@ -30,48 +30,75 @@ statistic_index_space = StatisticIndex.find_by(es_type_key: 'space')
 statistic_index_order = StatisticIndex.find_by(es_type_key: 'order')
 
 # statistic_fields
-unless StatisticField.find_by(key: 'spaceDates')
+unless StatisticField.find_by(key: 'spaceDates', statistic_index_id: statistic_index_space.id)
   StatisticField.create!({ key: 'spaceDates', label: I18n.t('statistics.space_dates'),
                            statistic_index_id: statistic_index_space.id, data_type: 'list' })
 end
-unless StatisticField.find_by(key: 'machineDates')
+unless StatisticField.find_by(key: 'groupName', statistic_index_id: statistic_index_space.id)
+  StatisticField.create!({ key: 'groupName', label: I18n.t('statistics.group'), statistic_index_id: statistic_index_space.id, data_type: 'text' })
+end
+unless StatisticField.find_by(key: 'machineDates', statistic_index_id: 2)
   StatisticField.create!({ key: 'machineDates', label: I18n.t('statistics.machine_dates'), statistic_index_id: 2, data_type: 'list' })
 end
-unless StatisticField.find_by(key: 'trainingId')
+unless StatisticField.find_by(key: 'groupName', statistic_index_id: 2)
+  StatisticField.create!({ key: 'groupName', label: I18n.t('statistics.group'), statistic_index_id: 2, data_type: 'text' })
+end
+unless StatisticField.find_by(key: 'trainingId', statistic_index_id: 3)
   StatisticField.create!({ key: 'trainingId', label: I18n.t('statistics.training_id'), statistic_index_id: 3, data_type: 'index' })
 end
-unless StatisticField.find_by(key: 'trainingDate')
+unless StatisticField.find_by(key: 'trainingDate', statistic_index_id: 3)
   StatisticField.create!({ key: 'trainingDate', label: I18n.t('statistics.training_date'), statistic_index_id: 3, data_type: 'date' })
 end
-unless StatisticField.find_by(key: 'eventId')
+unless StatisticField.find_by(key: 'groupName', statistic_index_id: 3)
+  StatisticField.create!({ key: 'groupName', label: I18n.t('statistics.group'), statistic_index_id: 3, data_type: 'text' })
+end
+unless StatisticField.find_by(key: 'eventId', statistic_index_id: 4)
   StatisticField.create!({ key: 'eventId', label: I18n.t('statistics.event_id'), statistic_index_id: 4, data_type: 'index' })
 end
-unless StatisticField.find_by(key: 'eventDate')
+unless StatisticField.find_by(key: 'eventDate', statistic_index_id: 4)
   StatisticField.create!({ key: 'eventDate', label: I18n.t('statistics.event_date'), statistic_index_id: 4, data_type: 'date' })
 end
-unless StatisticField.find_by(key: 'themes')
+unless StatisticField.find_by(key: 'groupName', statistic_index_id: 4)
+  StatisticField.create!({ key: 'groupName', label: I18n.t('statistics.group'), statistic_index_id: 4, data_type: 'text' })
+end
+unless StatisticField.find_by(key: 'groupName', statistic_index_id: 5)
+  StatisticField.create!({ key: 'groupName', label: I18n.t('statistics.group'), statistic_index_id: 5, data_type: 'text' })
+end
+unless StatisticField.find_by(key: 'themes', statistic_index_id: 6)
   StatisticField.create!({ key: 'themes', label: I18n.t('statistics.themes'), statistic_index_id: 6, data_type: 'list' })
 end
-unless StatisticField.find_by(key: 'components')
+unless StatisticField.find_by(key: 'components', statistic_index_id: 6)
   StatisticField.create!({ key: 'components', label: I18n.t('statistics.components'), statistic_index_id: 6, data_type: 'list' })
 end
-unless StatisticField.find_by(key: 'machines')
+unless StatisticField.find_by(key: 'machines', statistic_index_id: 6)
   StatisticField.create!({ key: 'machines', label: I18n.t('statistics.machines'), statistic_index_id: 6, data_type: 'list' })
 end
-unless StatisticField.find_by(key: 'name')
+unless StatisticField.find_by(key: 'status', statistic_index_id: 6)
+  StatisticField.create!({ key: 'status', label: I18n.t('statistics.project_status'), statistic_index_id: 6, data_type: 'text' })
+end
+unless StatisticField.find_by(key: 'name', statistic_index_id: 6)
+  StatisticField.create!({ key: 'name', label: I18n.t('statistics.project_name'), statistic_index_id: 6, data_type: 'text' })
+end
+unless StatisticField.find_by(key: 'projectUserNames', statistic_index_id: 6)
+  StatisticField.create!({ key: 'projectUserNames', label: I18n.t('statistics.project_user_names'), statistic_index_id: 6, data_type: 'list' })
+end
+unless StatisticField.find_by(key: 'name', statistic_index_id: 4)
   StatisticField.create!({ key: 'name', label: I18n.t('statistics.event_name'), statistic_index_id: 4, data_type: 'text' })
 end
-unless StatisticField.find_by(key: 'userId')
+unless StatisticField.find_by(key: 'userId', statistic_index_id: 7)
   StatisticField.create!({ key: 'userId', label: I18n.t('statistics.user_id'), statistic_index_id: 7, data_type: 'index' })
 end
-unless StatisticField.find_by(key: 'eventTheme')
+unless StatisticField.find_by(key: 'eventTheme', statistic_index_id: 4)
   StatisticField.create!({ key: 'eventTheme', label: I18n.t('statistics.event_theme'), statistic_index_id: 4, data_type: 'text' })
 end
-unless StatisticField.find_by(key: 'ageRange')
+unless StatisticField.find_by(key: 'ageRange', statistic_index_id: 4)
   StatisticField.create!({ key: 'ageRange', label: I18n.t('statistics.age_range'), statistic_index_id: 4, data_type: 'text' })
 end
-unless StatisticField.find_by(key: 'groupName')
+unless StatisticField.find_by(key: 'groupName', statistic_index_id: 1)
   StatisticField.create!({ key: 'groupName', label: I18n.t('statistics.group'), statistic_index_id: 1, data_type: 'text' })
+end
+unless StatisticField.find_by(key: 'groupName', statistic_index_id: statistic_index_order.id)
+  StatisticField.create!({ key: 'groupName', label: I18n.t('statistics.group'), statistic_index_id: statistic_index_order.id, data_type: 'text' })
 end
 
 # statistic_types

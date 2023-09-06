@@ -18,4 +18,14 @@ class NotificationType < ApplicationRecord
   validates :category, presence: true, inclusion: { in: %w[subscriptions user projects deprecated exports agenda trainings accountings
                                                            app_management wallet payments users_accounts supporting_documents shop] }
   validates :is_configurable, inclusion: { in: [true, false] }
+
+  validate :validate_roles
+
+  scope :for_role, ->(role) { where("roles @> ?", "{#{role}}") }
+
+  private
+
+  def validate_roles
+    errors.add(:roles, :invalid) if roles.any? { |r| !r.in?(%w(admin manager)) }
+  end
 end

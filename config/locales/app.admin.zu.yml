@@ -1192,6 +1192,7 @@ zu:
           member_filter_all: "crwdns25726:0crwdne25726:0"
           member_filter_not_confirmed: "crwdns25728:0crwdne25728:0"
           member_filter_inactive_for_3_years: "crwdns25730:0crwdne25730:0"
+          member_filter_not_validated: "crwdns37713:0crwdne37713:0"
       #add a member
       members_new:
         add_a_member: "crwdns25732:0crwdne25732:0"
@@ -1537,6 +1538,7 @@ zu:
         click_here: "crwdns26302:0crwdne26302:0"
         average_cart: "crwdns31248:0crwdne31248:0"
         reservation_context: crwdns37675:0crwdne37675:0
+        project_author: crwdns37715:0crwdne37715:0
       #statistics graphs
       stats_graphs:
         statistics: "crwdns26304:0crwdne26304:0"
