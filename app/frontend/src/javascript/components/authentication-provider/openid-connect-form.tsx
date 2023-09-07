@@ -34,6 +34,15 @@ export const OpenidConnectForm = <TFieldValues extends FieldValues, TContext ext
   // this is a workaround for https://github.com/JedWatson/react-select/issues/1879
   const [selectKey, setSelectKey] = useState<number>(0);
 
+  useEffect(() => {
+    if (!currentFormValues?.extra_authorize_params) {
+      setValue(
+        'providable_attributes.extra_authorize_params' as Path<TFieldValues>,
+        '{}' as UnpackNestedValue<FieldPathValue<TFieldValues, Path<TFieldValues>>>
+      );
+    }
+  }, []);
+
   // when we have detected a discovery endpoint, we mark it as available
   useEffect(() => {
     setValue(
@@ -159,6 +168,12 @@ export const OpenidConnectForm = <TFieldValues extends FieldValues, TContext ext
                  label={t('app.admin.authentication.openid_connect_form.profile_edition_url')}
                  tooltip={t('app.admin.authentication.openid_connect_form.profile_edition_url_help')}
                  rules={{ required: false, pattern: ValidationLib.urlRegex }}
+                 formState={formState} />
+      <FormInput id="providable_attributes.extra_authorize_params"
+                 register={register}
+                 label={t('app.admin.authentication.openid_connect_form.extra_authorize_params')}
+                 tooltip={t('app.admin.authentication.openid_connect_form.extra_authorize_params_help')}
+                 rules={{ required: false }}
                  formState={formState} />
       <h4>{t('app.admin.authentication.openid_connect_form.client_options')}</h4>
       <FormInput id="providable_attributes.client__identifier"

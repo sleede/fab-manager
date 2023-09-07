@@ -1477,6 +1477,8 @@ zu:
           client__jwks_uri: "crwdns26198:0crwdne26198:0"
           client__end_session_endpoint: "crwdns26200:0crwdne26200:0"
           client__end_session_endpoint_help: "crwdns26202:0crwdne26202:0"
+          extra_authorize_params: "crwdns37725:0crwdne37725:0"
+          extra_authorize_params_help: "crwdns37727:0crwdne37727:0"
         provider_form:
           name: "crwdns26204:0crwdne26204:0"
           authentication_type: "crwdns26206:0crwdne26206:0"

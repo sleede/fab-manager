@@ -1477,6 +1477,8 @@ it:
           client__jwks_uri: "JWKS URI"
           client__end_session_endpoint: "Endpoint di fine sessione"
           client__end_session_endpoint_help: "L'url da chiamare per effettuare il log out dell'utente al server di autorizzazione."
+          extra_authorize_params: "Extra authorize parameters"
+          extra_authorize_params_help: "A hash of extra fixed parameters that will be merged to the authorization request"
         provider_form:
           name: "Nome"
           authentication_type: "Tipo di autenticazione"

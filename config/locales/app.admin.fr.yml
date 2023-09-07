@@ -1477,6 +1477,8 @@ fr:
           client__jwks_uri: "URI JWKS"
           client__end_session_endpoint: "Point d'accès pour terminer la session"
           client__end_session_endpoint_help: "L'url à appeler pour déconnecter l'utilisateur sur le serveur d'autorisation."
+          extra_authorize_params: "Paramètres d'autorisation supplémentaires"
+          extra_authorize_params_help: "Un hachage de paramètres supplémentaires fixes qui seront fusionnés à la demande d'autorisation"
         provider_form:
           name: "Nom"
           authentication_type: "Type d'authentification"

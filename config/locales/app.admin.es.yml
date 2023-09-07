@@ -1477,6 +1477,8 @@ es:
           client__jwks_uri: "JWKS URI"
           client__end_session_endpoint: "Endpoint de fin de sesión"
           client__end_session_endpoint_help: "La URL a llamar para cerrar la sesión del usuario en el servidor de autorización."
+          extra_authorize_params: "Extra authorize parameters"
+          extra_authorize_params_help: "A hash of extra fixed parameters that will be merged to the authorization request"
         provider_form:
           name: "Nombre"
           authentication_type: "Tipo de autenticación"

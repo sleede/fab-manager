@@ -10,6 +10,13 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
+-- Name: public; Type: SCHEMA; Schema: -; Owner: -
+--
+
+-- *not* creating schema, since initdb creates it
+
+
+--
 -- Name: fuzzystrmatch; Type: EXTENSION; Schema: -; Owner: -
 --
 
@@ -108,8 +115,8 @@ SET default_tablespace = '';
 
 CREATE TABLE public.abuses (
     id integer NOT NULL,
-    signaled_id integer,
     signaled_type character varying,
+    signaled_id integer,
     first_name character varying,
     last_name character varying,
     email character varying,
@@ -229,8 +236,8 @@ CREATE TABLE public.addresses (
     locality character varying,
     country character varying,
     postal_code character varying,
-    placeable_id integer,
     placeable_type character varying,
+    placeable_id integer,
     created_at timestamp without time zone,
     updated_at timestamp without time zone
 );
@@ -339,8 +346,8 @@ CREATE TABLE public.ar_internal_metadata (
 
 CREATE TABLE public.assets (
     id integer NOT NULL,
-    viewable_id integer,
     viewable_type character varying,
+    viewable_id integer,
     attachment character varying,
     type character varying,
     created_at timestamp without time zone,
@@ -514,6 +521,41 @@ ALTER SEQUENCE public.availability_tags_id_seq OWNED BY public.availability_tags
 
 
 --
+-- Name: booking_users; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.booking_users (
+    id bigint NOT NULL,
+    name character varying,
+    reservation_id bigint,
+    booked_type character varying,
+    booked_id bigint,
+    event_price_category_id bigint,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: booking_users_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.booking_users_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: booking_users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.booking_users_id_seq OWNED BY public.booking_users.id;
+
+
+--
 -- Name: cart_item_coupons; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -544,6 +586,41 @@ CREATE SEQUENCE public.cart_item_coupons_id_seq
 --
 
 ALTER SEQUENCE public.cart_item_coupons_id_seq OWNED BY public.cart_item_coupons.id;
+
+
+--
+-- Name: cart_item_event_reservation_booking_users; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.cart_item_event_reservation_booking_users (
+    id bigint NOT NULL,
+    name character varying,
+    cart_item_event_reservation_id bigint,
+    event_price_category_id bigint,
+    booked_type character varying,
+    booked_id bigint,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: cart_item_event_reservation_booking_users_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.cart_item_event_reservation_booking_users_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: cart_item_event_reservation_booking_users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.cart_item_event_reservation_booking_users_id_seq OWNED BY public.cart_item_event_reservation_booking_users.id;
 
 
 --
@@ -887,6 +964,43 @@ ALTER SEQUENCE public.chained_elements_id_seq OWNED BY public.chained_elements.i
 
 
 --
+-- Name: children; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.children (
+    id bigint NOT NULL,
+    user_id bigint,
+    first_name character varying,
+    last_name character varying,
+    birthday date,
+    phone character varying,
+    email character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    validated_at timestamp(6) without time zone
+);
+
+
+--
+-- Name: children_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.children_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: children_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.children_id_seq OWNED BY public.children.id;
+
+
+--
 -- Name: components; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -959,8 +1073,8 @@ ALTER SEQUENCE public.coupons_id_seq OWNED BY public.coupons.id;
 
 CREATE TABLE public.credits (
     id integer NOT NULL,
-    creditable_id integer,
     creditable_type character varying,
+    creditable_id integer,
     plan_id integer,
     hours integer,
     created_at timestamp without time zone,
@@ -1130,7 +1244,10 @@ CREATE TABLE public.events (
     recurrence_id integer,
     age_range_id integer,
     category_id integer,
-    deleted_at timestamp without time zone
+    deleted_at timestamp without time zone,
+    event_type character varying DEFAULT 'standard'::character varying,
+    pre_registration boolean DEFAULT false,
+    pre_registration_end_date timestamp(6) without time zone
 );
 
 
@@ -1619,7 +1736,8 @@ CREATE TABLE public.machines (
     disabled boolean,
     deleted_at timestamp without time zone,
     machine_category_id bigint,
-    reservable boolean DEFAULT true
+    reservable boolean DEFAULT true,
+    space_id bigint
 );
 
 
@@ -1757,15 +1875,15 @@ ALTER SEQUENCE public.notification_types_id_seq OWNED BY public.notification_typ
 CREATE TABLE public.notifications (
     id integer NOT NULL,
     receiver_id integer,
-    attached_object_id integer,
     attached_object_type character varying,
+    attached_object_id integer,
     notification_type_id integer,
     is_read boolean DEFAULT false,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     receiver_type character varying,
     is_send boolean DEFAULT false,
-    meta_data jsonb DEFAULT '{}'::jsonb
+    meta_data jsonb DEFAULT '"{}"'::jsonb
 );
 
 
@@ -1921,7 +2039,8 @@ CREATE TABLE public.open_id_connect_providers (
     client__end_session_endpoint character varying,
     profile_url character varying,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    extra_authorize_params jsonb DEFAULT '{}'::jsonb
 );
 
 
@@ -2121,6 +2240,41 @@ CREATE SEQUENCE public.payment_gateway_objects_id_seq
 --
 
 ALTER SEQUENCE public.payment_gateway_objects_id_seq OWNED BY public.payment_gateway_objects.id;
+
+
+--
+-- Name: payment_infos; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.payment_infos (
+    id bigint NOT NULL,
+    data jsonb,
+    state character varying,
+    payment_for character varying,
+    service character varying,
+    statistic_profile_id bigint,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: payment_infos_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.payment_infos_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: payment_infos_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.payment_infos_id_seq OWNED BY public.payment_infos.id;
 
 
 --
@@ -2493,8 +2647,8 @@ CREATE TABLE public.prices (
     id integer NOT NULL,
     group_id integer,
     plan_id integer,
-    priceable_id integer,
     priceable_type character varying,
+    priceable_id integer,
     amount integer,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
@@ -3052,8 +3206,8 @@ CREATE TABLE public.reservations (
     message text,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    reservable_id integer,
     reservable_type character varying,
+    reservable_id integer,
     nb_reserve_places integer,
     statistic_profile_id integer,
     reservation_context_id bigint
@@ -3086,8 +3240,8 @@ ALTER SEQUENCE public.reservations_id_seq OWNED BY public.reservations.id;
 CREATE TABLE public.roles (
     id integer NOT NULL,
     name character varying,
-    resource_id integer,
     resource_type character varying,
+    resource_id integer,
     created_at timestamp without time zone,
     updated_at timestamp without time zone
 );
@@ -3197,7 +3351,9 @@ CREATE TABLE public.slots_reservations (
     ex_start_at timestamp without time zone,
     ex_end_at timestamp without time zone,
     canceled_at timestamp without time zone,
-    offered boolean DEFAULT false
+    offered boolean DEFAULT false,
+    is_valid boolean,
+    is_confirm boolean
 );
 
 
@@ -3234,7 +3390,9 @@ CREATE TABLE public.spaces (
     updated_at timestamp without time zone NOT NULL,
     characteristics text,
     disabled boolean,
-    deleted_at timestamp without time zone
+    deleted_at timestamp without time zone,
+    ancestry character varying NOT NULL COLLATE pg_catalog."C",
+    ancestry_depth integer DEFAULT 0
 );
 
 
@@ -3730,10 +3888,11 @@ ALTER SEQUENCE public.subscriptions_id_seq OWNED BY public.subscriptions.id;
 CREATE TABLE public.supporting_document_files (
     id bigint NOT NULL,
     supporting_document_type_id bigint,
-    user_id bigint,
+    supportable_id bigint,
     attachment character varying,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    supportable_type character varying DEFAULT 'User'::character varying
 );
 
 
@@ -3762,11 +3921,12 @@ ALTER SEQUENCE public.supporting_document_files_id_seq OWNED BY public.supportin
 
 CREATE TABLE public.supporting_document_refusals (
     id bigint NOT NULL,
-    user_id bigint,
+    supportable_id bigint,
     operator_id integer,
     message text,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    supportable_type character varying DEFAULT 'User'::character varying
 );
 
 
@@ -3807,7 +3967,8 @@ CREATE TABLE public.supporting_document_types (
     id bigint NOT NULL,
     name character varying,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    document_type character varying DEFAULT 'User'::character varying
 );
 
 
@@ -4193,8 +4354,8 @@ CREATE TABLE public.users (
     is_allow_newsletter boolean,
     current_sign_in_ip inet,
     last_sign_in_ip inet,
-    mapped_from_sso character varying,
-    validated_at timestamp without time zone
+    validated_at timestamp without time zone,
+    mapped_from_sso character varying
 );
 
 
@@ -4404,10 +4565,24 @@ ALTER TABLE ONLY public.availability_tags ALTER COLUMN id SET DEFAULT nextval('p
 
 
 --
+-- Name: booking_users id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.booking_users ALTER COLUMN id SET DEFAULT nextval('public.booking_users_id_seq'::regclass);
+
+
+--
 -- Name: cart_item_coupons id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.cart_item_coupons ALTER COLUMN id SET DEFAULT nextval('public.cart_item_coupons_id_seq'::regclass);
+
+
+--
+-- Name: cart_item_event_reservation_booking_users id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.cart_item_event_reservation_booking_users ALTER COLUMN id SET DEFAULT nextval('public.cart_item_event_reservation_booking_users_id_seq'::regclass);
 
 
 --
@@ -4478,6 +4653,13 @@ ALTER TABLE ONLY public.categories ALTER COLUMN id SET DEFAULT nextval('public.c
 --
 
 ALTER TABLE ONLY public.chained_elements ALTER COLUMN id SET DEFAULT nextval('public.chained_elements_id_seq'::regclass);
+
+
+--
+-- Name: children id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.children ALTER COLUMN id SET DEFAULT nextval('public.children_id_seq'::regclass);
 
 
 --
@@ -4723,6 +4905,13 @@ ALTER TABLE ONLY public.organizations ALTER COLUMN id SET DEFAULT nextval('publi
 --
 
 ALTER TABLE ONLY public.payment_gateway_objects ALTER COLUMN id SET DEFAULT nextval('public.payment_gateway_objects_id_seq'::regclass);
+
+
+--
+-- Name: payment_infos id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.payment_infos ALTER COLUMN id SET DEFAULT nextval('public.payment_infos_id_seq'::regclass);
 
 
 --
@@ -5263,11 +5452,27 @@ ALTER TABLE ONLY public.availability_tags
 
 
 --
+-- Name: booking_users booking_users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.booking_users
+    ADD CONSTRAINT booking_users_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: cart_item_coupons cart_item_coupons_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.cart_item_coupons
     ADD CONSTRAINT cart_item_coupons_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: cart_item_event_reservation_booking_users cart_item_event_reservation_booking_users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.cart_item_event_reservation_booking_users
+    ADD CONSTRAINT cart_item_event_reservation_booking_users_pkey PRIMARY KEY (id);
 
 
 --
@@ -5348,6 +5553,14 @@ ALTER TABLE ONLY public.categories
 
 ALTER TABLE ONLY public.chained_elements
     ADD CONSTRAINT chained_elements_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: children children_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.children
+    ADD CONSTRAINT children_pkey PRIMARY KEY (id);
 
 
 --
@@ -5631,6 +5844,14 @@ ALTER TABLE ONLY public.payment_gateway_objects
 
 
 --
+-- Name: payment_infos payment_infos_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.payment_infos
+    ADD CONSTRAINT payment_infos_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: payment_schedule_items payment_schedule_items_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5852,6 +6073,14 @@ ALTER TABLE ONLY public.reservations
 
 ALTER TABLE ONLY public.roles
     ADD CONSTRAINT roles_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: schema_migrations schema_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.schema_migrations
+    ADD CONSTRAINT schema_migrations_pkey PRIMARY KEY (version);
 
 
 --
@@ -6205,6 +6434,41 @@ CREATE INDEX index_availability_tags_on_tag_id ON public.availability_tags USING
 
 
 --
+-- Name: index_booking_users_on_booked; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_booking_users_on_booked ON public.booking_users USING btree (booked_type, booked_id);
+
+
+--
+-- Name: index_booking_users_on_event_price_category_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_booking_users_on_event_price_category_id ON public.booking_users USING btree (event_price_category_id);
+
+
+--
+-- Name: index_booking_users_on_reservation_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_booking_users_on_reservation_id ON public.booking_users USING btree (reservation_id);
+
+
+--
+-- Name: index_cart_item_booking_users_on_cart_item_event_reservation; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_cart_item_booking_users_on_cart_item_event_reservation ON public.cart_item_event_reservation_booking_users USING btree (cart_item_event_reservation_id);
+
+
+--
+-- Name: index_cart_item_booking_users_on_event_price_category; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_cart_item_booking_users_on_event_price_category ON public.cart_item_event_reservation_booking_users USING btree (event_price_category_id);
+
+
+--
 -- Name: index_cart_item_coupons_on_coupon_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -6223,6 +6487,13 @@ CREATE INDEX index_cart_item_coupons_on_customer_profile_id ON public.cart_item_
 --
 
 CREATE INDEX index_cart_item_coupons_on_operator_profile_id ON public.cart_item_coupons USING btree (operator_profile_id);
+
+
+--
+-- Name: index_cart_item_event_reservation_booking_users_on_booked; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_cart_item_event_reservation_booking_users_on_booked ON public.cart_item_event_reservation_booking_users USING btree (booked_type, booked_id);
 
 
 --
@@ -6391,6 +6662,13 @@ CREATE UNIQUE INDEX index_categories_on_slug ON public.categories USING btree (s
 --
 
 CREATE INDEX index_chained_elements_on_element ON public.chained_elements USING btree (element_type, element_id);
+
+
+--
+-- Name: index_children_on_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_children_on_user_id ON public.children USING btree (user_id);
 
 
 --
@@ -6632,6 +6910,13 @@ CREATE UNIQUE INDEX index_machines_on_slug ON public.machines USING btree (slug)
 
 
 --
+-- Name: index_machines_on_space_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_machines_on_space_id ON public.machines USING btree (space_id);
+
+
+--
 -- Name: index_notification_preferences_on_notification_type_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -6769,6 +7054,13 @@ CREATE INDEX index_payment_gateway_objects_on_item_type_and_item_id ON public.pa
 --
 
 CREATE INDEX index_payment_gateway_objects_on_payment_gateway_object_id ON public.payment_gateway_objects USING btree (payment_gateway_object_id);
+
+
+--
+-- Name: index_payment_infos_on_statistic_profile_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_payment_infos_on_statistic_profile_id ON public.payment_infos USING btree (statistic_profile_id);
 
 
 --
@@ -7178,6 +7470,13 @@ CREATE INDEX index_spaces_availabilities_on_space_id ON public.spaces_availabili
 
 
 --
+-- Name: index_spaces_on_ancestry; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_spaces_on_ancestry ON public.spaces USING btree (ancestry);
+
+
+--
 -- Name: index_spaces_on_deleted_at; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -7290,6 +7589,13 @@ CREATE INDEX index_subscriptions_on_statistic_profile_id ON public.subscriptions
 
 
 --
+-- Name: index_supporting_document_files_on_supportable_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_supporting_document_files_on_supportable_id ON public.supporting_document_files USING btree (supportable_id);
+
+
+--
 -- Name: index_supporting_document_files_on_supporting_document_type_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -7297,17 +7603,10 @@ CREATE INDEX index_supporting_document_files_on_supporting_document_type_id ON p
 
 
 --
--- Name: index_supporting_document_files_on_user_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_supporting_document_refusals_on_supportable_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_supporting_document_files_on_user_id ON public.supporting_document_files USING btree (user_id);
-
-
---
--- Name: index_supporting_document_refusals_on_user_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_supporting_document_refusals_on_user_id ON public.supporting_document_refusals USING btree (user_id);
+CREATE INDEX index_supporting_document_refusals_on_supportable_id ON public.supporting_document_refusals USING btree (supportable_id);
 
 
 --
@@ -7556,21 +7855,6 @@ CREATE UNIQUE INDEX unique_not_null_external_id ON public.invoicing_profiles USI
 
 
 --
--- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE UNIQUE INDEX unique_schema_migrations ON public.schema_migrations USING btree (version);
-
-
---
--- Name: accounting_periods accounting_periods_del_protect; Type: RULE; Schema: public; Owner: -
---
-
-CREATE RULE accounting_periods_del_protect AS
-    ON DELETE TO public.accounting_periods DO INSTEAD NOTHING;
-
-
---
 -- Name: accounting_periods accounting_periods_upd_protect; Type: RULE; Schema: public; Owner: -
 --
 
@@ -7601,6 +7885,22 @@ CREATE TRIGGER projects_search_content_trigger BEFORE INSERT OR UPDATE ON public
 
 ALTER TABLE ONLY public.payment_schedules
     ADD CONSTRAINT fk_rails_00308dc223 FOREIGN KEY (wallet_transaction_id) REFERENCES public.wallet_transactions(id);
+
+
+--
+-- Name: payment_infos fk_rails_0308366a58; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.payment_infos
+    ADD CONSTRAINT fk_rails_0308366a58 FOREIGN KEY (statistic_profile_id) REFERENCES public.statistic_profiles(id);
+
+
+--
+-- Name: cart_item_event_reservation_booking_users fk_rails_0964335a37; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.cart_item_event_reservation_booking_users
+    ADD CONSTRAINT fk_rails_0964335a37 FOREIGN KEY (event_price_category_id) REFERENCES public.event_price_categories(id);
 
 
 --
@@ -7804,6 +8104,14 @@ ALTER TABLE ONLY public.subscriptions
 
 
 --
+-- Name: booking_users fk_rails_38ad1ae7e8; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.booking_users
+    ADD CONSTRAINT fk_rails_38ad1ae7e8 FOREIGN KEY (reservation_id) REFERENCES public.reservations(id);
+
+
+--
 -- Name: invoices fk_rails_40d78f8cf6; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -7865,6 +8173,14 @@ ALTER TABLE ONLY public.payment_schedule_items
 
 ALTER TABLE ONLY public.chained_elements
     ADD CONSTRAINT fk_rails_4fad806cca FOREIGN KEY (previous_id) REFERENCES public.chained_elements(id);
+
+
+--
+-- Name: cart_item_event_reservation_booking_users fk_rails_5206c6ca4a; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.cart_item_event_reservation_booking_users
+    ADD CONSTRAINT fk_rails_5206c6ca4a FOREIGN KEY (cart_item_event_reservation_id) REFERENCES public.cart_item_event_reservations(id);
 
 
 --
@@ -8104,7 +8420,7 @@ ALTER TABLE ONLY public.orders
 --
 
 ALTER TABLE ONLY public.supporting_document_refusals
-    ADD CONSTRAINT fk_rails_91d424352e FOREIGN KEY (user_id) REFERENCES public.users(id);
+    ADD CONSTRAINT fk_rails_91d424352e FOREIGN KEY (supportable_id) REFERENCES public.users(id);
 
 
 --
@@ -8204,6 +8520,14 @@ ALTER TABLE ONLY public.cart_item_coupons
 
 
 --
+-- Name: children fk_rails_a51d7cfb22; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.children
+    ADD CONSTRAINT fk_rails_a51d7cfb22 FOREIGN KEY (user_id) REFERENCES public.users(id);
+
+
+--
 -- Name: projects_themes fk_rails_b021a22658; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8217,6 +8541,14 @@ ALTER TABLE ONLY public.projects_themes
 
 ALTER TABLE ONLY public.statistic_profile_prepaid_packs
     ADD CONSTRAINT fk_rails_b0251cdfcf FOREIGN KEY (prepaid_pack_id) REFERENCES public.prepaid_packs(id);
+
+
+--
+-- Name: machines fk_rails_b2e37688bb; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.machines
+    ADD CONSTRAINT fk_rails_b2e37688bb FOREIGN KEY (space_id) REFERENCES public.spaces(id);
 
 
 --
@@ -8468,6 +8800,14 @@ ALTER TABLE ONLY public.projects
 
 
 --
+-- Name: booking_users fk_rails_e88263229e; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.booking_users
+    ADD CONSTRAINT fk_rails_e88263229e FOREIGN KEY (event_price_category_id) REFERENCES public.event_price_categories(id);
+
+
+--
 -- Name: user_tags fk_rails_ea0382482a; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8578,7 +8918,6 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20140605125131'),
 ('20140605142133'),
 ('20140605151442'),
-('20140606133116'),
 ('20140609092700'),
 ('20140609092827'),
 ('20140610153123'),
@@ -8647,14 +8986,12 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20150507075620'),
 ('20150512123546'),
 ('20150520132030'),
-('20150520133409'),
 ('20150526130729'),
 ('20150527153312'),
 ('20150529113555'),
 ('20150601125944'),
 ('20150603104502'),
 ('20150603104658'),
-('20150603133050'),
 ('20150604081757'),
 ('20150604131525'),
 ('20150608142234'),
@@ -8736,7 +9073,6 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20160905142700'),
 ('20160906094739'),
 ('20160906094847'),
-('20160906145713'),
 ('20160915105234'),
 ('20161123104604'),
 ('20170109085345'),
@@ -8904,11 +9240,29 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230328094807'),
 ('20230328094808'),
 ('20230328094809'),
+('20230331132506'),
+('20230509121907'),
+('20230509161557'),
+('20230510141305'),
+('20230511080650'),
+('20230511081018'),
+('20230524080448'),
+('20230524083558'),
+('20230524110215'),
+('20230525101006'),
+('20230612123250'),
+('20230626103314'),
 ('20230626122844'),
 ('20230626122947'),
+('20230710072403'),
 ('20230718133636'),
 ('20230718134350'),
 ('20230720085857'),
-('20230828073428');
+('20230728072726'),
+('20230728090257'),
+('20230825101952'),
+('20230828073428'),
+('20230831103208'),
+('20230907124230');
 
 
