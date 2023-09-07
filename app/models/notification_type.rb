@@ -2,7 +2,7 @@
 
 # NotificationType defines the different types of Notification.
 # To add a new notification type in db, you must add it in:
-# - db/seeds/notification_types.rb
+# - config/initializers/notification_types.rb
 # - app/views/api/notifications/_XXXXXX.json.jbuilder
 # - app/views/notifications_mailer/XXXXXX.html.erb
 # - app/frontend/src/javascript/models/notification-type.ts

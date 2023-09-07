@@ -15,6 +15,7 @@ class API::NotificationsController < API::APIController
   def index
     loop do
       @notifications = current_user.notifications
+                                   .with_valid_notification_type
                                    .delivered_in_system(current_user)
                                    .includes(:attached_object)
                                    .page(params[:page])
@@ -24,8 +25,8 @@ class API::NotificationsController < API::APIController
       break unless delete_obsoletes(@notifications)
     end
     @totals = {
-      total: current_user.notifications.delivered_in_system(current_user).count,
-      unread: current_user.notifications.delivered_in_system(current_user).where(is_read: false).count
+      total: current_user.notifications.with_valid_notification_type.delivered_in_system(current_user).count,
+      unread: current_user.notifications.with_valid_notification_type.delivered_in_system(current_user).where(is_read: false).count
     }
     render :index
   end
@@ -33,6 +34,7 @@ class API::NotificationsController < API::APIController
   def last_unread
     loop do
       @notifications = current_user.notifications
+                                   .with_valid_notification_type
                                    .delivered_in_system(current_user)
                                    .includes(:attached_object)
                                    .where(is_read: false)
@@ -42,19 +44,20 @@ class API::NotificationsController < API::APIController
       break unless delete_obsoletes(@notifications)
     end
     @totals = {
-      total: current_user.notifications.delivered_in_system(current_user).count,
-      unread: current_user.notifications.delivered_in_system(current_user).where(is_read: false).count
+      total: current_user.notifications.with_valid_notification_type.delivered_in_system(current_user).count,
+      unread: current_user.notifications.with_valid_notification_type.delivered_in_system(current_user).where(is_read: false).count
     }
     render :index
   end
 
   def polling
     @notifications = current_user.notifications
+                                 .with_valid_notification_type
                                  .where('is_read = false AND created_at >= :date', date: params[:last_poll])
                                  .order('created_at DESC')
     @totals = {
-      total: current_user.notifications.delivered_in_system(current_user).count,
-      unread: current_user.notifications.delivered_in_system(current_user).where(is_read: false).count
+      total: current_user.notifications.with_valid_notification_type.delivered_in_system(current_user).count,
+      unread: current_user.notifications.with_valid_notification_type.delivered_in_system(current_user).where(is_read: false).count
     }
     render :index
   end

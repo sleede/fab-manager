@@ -2,6 +2,8 @@
 
 ## next deploy
 
+- improves api/notification controller to avoid failing when there is a notification with wrong notification_type in db
+
 ## v6.0.14 2023 September 6
 
 - Fix a bug: for project categories, if there is no category : do not show categories panel in show view, do not show categories input field in edit view
