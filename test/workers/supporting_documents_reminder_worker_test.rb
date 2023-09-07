@@ -7,8 +7,6 @@ require 'minitest/autorun'
 class SupportingDocumentsReminderWorkerTest < ActiveSupport::TestCase
   include ActionMailer::TestHelper
   setup do
- #   Sidekiq::Testing.inline!
-
     @worker = SupportingDocumentsReminderWorker.new
 
     group = groups(:group_1)
@@ -17,8 +15,20 @@ class SupportingDocumentsReminderWorkerTest < ActiveSupport::TestCase
     @supporting_document_type_2 = SupportingDocumentType.create!(name: "doc2", groups: [group])
   end
 
-  teardown do
-  #  Sidekiq::Testing.fake!
+  test 'do nothing if it concerns another group' do
+    group = Group.create!(name: 'test', slug: 'test')
+    SupportingDocumentType.destroy_all
+    supporting_document_type = SupportingDocumentType.create!(name: "doc3", groups: [group])
+
+    @users.each do |user|
+      assert_nil user.supporting_documents_reminder_sent_at
+    end
+    assert_enqueued_emails 0 do
+      @worker.perform
+    end
+    @users.reload.each do |user|
+      assert_nil user.supporting_documents_reminder_sent_at
+    end
   end
 
   test 'notify every users who did not upload supporting document files' do
