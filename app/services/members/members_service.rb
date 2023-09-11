@@ -27,6 +27,7 @@ class Members::MembersService
       if @member.validated_at? && !(new_types - current_types).empty?
         validated_at_changed = true
         @member.validated_at = nil
+        @member.supporting_documents_reminder_sent_at = nil
       end
     end
 

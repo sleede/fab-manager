@@ -4355,7 +4355,8 @@ CREATE TABLE public.users (
     current_sign_in_ip inet,
     last_sign_in_ip inet,
     validated_at timestamp without time zone,
-    mapped_from_sso character varying
+    mapped_from_sso character varying,
+    supporting_documents_reminder_sent_at timestamp(6) without time zone
 );
 
 
@@ -9263,6 +9264,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230825101952'),
 ('20230828073428'),
 ('20230831103208'),
+('20230901090637'),
 ('20230907124230');
 
 

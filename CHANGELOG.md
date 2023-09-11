@@ -4,6 +4,7 @@
 
 - improves api/notification controller to avoid failing when there is a notification with wrong notification_type in db
 - Add extra_authorize_params to OpenIdConnect config
+- Improvement : add a notification to remind users to upload their supporting documents
 
 ## v6.0.14 2023 September 6
 

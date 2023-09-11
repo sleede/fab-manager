@@ -76,5 +76,6 @@ NOTIFICATIONS_TYPES = [
   { name: 'notify_user_order_is_refunded', category: 'shop', is_configurable: false },
   { name: 'notify_admin_low_stock_threshold', category: 'shop', is_configurable: true, roles: ['admin', 'manager'] },
   { name: 'notify_admin_training_auto_cancelled', category: 'trainings', is_configurable: true, roles: ['admin', 'manager'] },
-  { name: 'notify_member_training_auto_cancelled', category: 'trainings', is_configurable: false }
+  { name: 'notify_member_training_auto_cancelled', category: 'trainings', is_configurable: false },
+  { name: 'notify_user_supporting_document_reminder', category: 'supporting_documents', is_configurable: false }
 ].freeze
