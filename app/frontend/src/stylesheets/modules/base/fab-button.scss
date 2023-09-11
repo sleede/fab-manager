@@ -67,12 +67,12 @@
     @include colorVariant(var(--information), var(--gray-soft-lightest));
   }
   &.is-secondary {
-    @include colorVariant(var(--secondary), var(--gray-hard-darkest));
+    @include colorVariant(var(--secondary), var(--secondary-text-color));
   }
   &.is-black {
     @include colorVariant(var(--gray-hard-darkest), var(--gray-soft-lightest));
   }
   &.is-main {
-    @include colorVariant(var(--main), var(--gray-soft-lightest));
+    @include colorVariant(var(--main), var(--main-text-color));
   }
 }

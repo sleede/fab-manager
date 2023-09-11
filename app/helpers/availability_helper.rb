@@ -8,6 +8,7 @@ module AvailabilityHelper
   EVENT_COLOR = '#dd7e6b'
   IS_RESERVED_BY_CURRENT_USER = '#b2e774'
   IS_FULL = '#eeeeee'
+  IS_BLOCKED = '#b2e774' # same color as IS_RESERVED_BY_CURRENT_USER for simplicity
 
   def availability_border_color(availability)
     case availability.available_type
@@ -38,6 +39,8 @@ module AvailabilityHelper
       IS_RESERVED_BY_CURRENT_USER
     elsif slot.full?
       IS_FULL
+    elsif slot.is_blocked
+      IS_BLOCKED
     else
       SPACE_COLOR
     end

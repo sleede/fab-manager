@@ -3,7 +3,7 @@ import { FormState, UseFormRegister, UseFormSetValue } from 'react-hook-form';
 import { FieldValues } from 'react-hook-form/dist/types/fields';
 import { User } from '../../models/user';
 import { SocialNetwork } from '../../models/social-network';
-import Icons from '../../../../images/social-icons.svg';
+import Icons from '../../../../images/icons.svg';
 import { FormInput } from '../form/form-input';
 import { Trash } from 'phosphor-react';
 import { useTranslation } from 'react-i18next';

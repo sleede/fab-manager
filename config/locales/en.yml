@@ -65,6 +65,7 @@ en:
     not_available: "Not available"
     reserving: "I'm reserving"
     i_ve_reserved: "I've reserved"
+    blocked: "Blocked"
     length_must_be_slot_multiple: "must be at least %{MIN} minutes after the start date"
     must_be_associated_with_at_least_1_machine: "must be associated with at least 1 machine"
     deleted_user: "Deleted user"
@@ -538,6 +539,7 @@ en:
     space: "This space is disabled"
     machine: "This machine is disabled"
     reservable: "This machine is not reservable"
+    blocked_by_another_reservation: "This slot is blocked by another reservation"
   cart_validation:
     select_user: "Please select a user before continuing"
   settings:
