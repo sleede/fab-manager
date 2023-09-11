@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Asynchronously export the accounting data (AccountingLines) to an external accounting software
+# Send a notification to users who did not upload their supporting document files yet
 class SupportingDocumentsReminderWorker
   include Sidekiq::Worker
 
