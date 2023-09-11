@@ -371,13 +371,12 @@ en:
         slot_tags: "Slot tags"
         user_tags: "User tags"
         no_tags: "No tags"
-        user_validation_required_alert: "Your administrator must validate your account. Then, you'll then be able to access all the booking features."
-        child_validation_required_alert: "Your administrator must validate your child account. Then, you'll then be able to book the event."
-        child_birthday_must_be_under_18_years_ago_alert: "Your child must be under 18. Then, you'll then be able to book the event."
         user_validation_required_alert: "Warning!<br>Your administrator must validate your account. Then, you'll then be able to access all the booking features."
         select_the_reservation_context: "Select the context of the reservation"
         please_select_a_reservation_context: "Please select the context of the reservation first"
-      #feature-tour modal
+        child_validation_required_alert: "Your administrator must validate your child account. Then, you'll then be able to book the event."
+        child_birthday_must_be_under_18_years_ago_alert: "Your child must be under 18. Then, you'll then be able to book the event."
+      # feature-tour modal
       tour:
         previous: "Previous"
         next: "Next"

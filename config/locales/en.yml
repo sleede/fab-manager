@@ -740,8 +740,8 @@ en:
     projects_list_date_filters_presence: "Presence of dates filter on projects list"
     project_categories_filter_placeholder: "Placeholder for categories filter in project gallery"
     project_categories_wording: "Wording used to replace \"Categories\" on public pages"
-    family_account: "Family account"
     reservation_context_feature: "Force member to select the nature of his reservation when reserving"
+    family_account: "Family account"
   #statuses of projects
   statuses:
     new: "New"

@@ -1857,11 +1857,6 @@ en:
         projects_list_date_filters_presence: "Presence of date filters on projects list"
         project_categories_filter_placeholder: "Placeholder for categories filter in project gallery"
         project_categories_wording: "Wording used to replace \"Categories\" on public pages"
-        family_account: "family account"
-        family_account_info_html: "The Family account allows your members to add their children under 18 years old to their own account and directly register them for Family events. You can also request supporting documents for each child and validate their account."
-        enable_family_account: "Enable the Family Account option"
-        child_validation_required: "the account validation option for children"
-        child_validation_required_label: "Activate the account validation option for children"
         reservation_context_feature_title: Reservation context
         reservation_context_feature_info: "If you enable this feature, members will have to enter the context of their reservation when reserving."
         reservation_context_feature: "Enable the feature \"Reservation context\""
@@ -1871,6 +1866,11 @@ en:
         do_you_really_want_to_delete_this_reservation_context: "Do you really want to delete this context?"
         unable_to_delete_reservation_context_already_related_to_reservations: "Unable to delete this context because it is already associated to a reservation"
         unable_to_delete_reservation_context_an_error_occured: "Unable to delete: an error occurred"
+        family_account: "family account"
+        family_account_info_html: "The Family account allows your members to add their children under 18 years old to their own account and directly register them for Family events. You can also request supporting documents for each child and validate their account."
+        enable_family_account: "Enable the Family Account option"
+        child_validation_required: "the account validation option for children"
+        child_validation_required_label: "Activate the account validation option for children"
         overlapping_options:
           training_reservations: "Trainings"
           machine_reservations: "Machines"

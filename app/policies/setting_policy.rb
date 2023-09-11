@@ -47,7 +47,7 @@ class SettingPolicy < ApplicationPolicy
        machines_banner_cta_url trainings_banner_active trainings_banner_text trainings_banner_cta_active trainings_banner_cta_label
        trainings_banner_cta_url events_banner_active events_banner_text events_banner_cta_active events_banner_cta_label
        events_banner_cta_url projects_list_member_filter_presence projects_list_date_filters_presence advanced_accounting
-       project_categories_filter_placeholder project_categories_wording family_account child_validation_required reservation_context_feature]
+       project_categories_filter_placeholder project_categories_wording reservation_context_feature family_account child_validation_required]
   end
 
   ##
