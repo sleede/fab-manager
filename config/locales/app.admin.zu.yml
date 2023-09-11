@@ -111,6 +111,10 @@ zu:
         save: "crwdns36885:0crwdne36885:0"
         create_success: "crwdns31813:0crwdne31813:0"
         update_success: "crwdns31815:0crwdne31815:0"
+        associated_machines: "crwdns37729:0crwdne37729:0"
+        children_spaces: "crwdns37731:0crwdne37731:0"
+        associated_objects: "crwdns37733:0crwdne37733:0"
+        associated_objects_warning: "crwdns37735:0crwdne37735:0"
       event_form:
         ACTION_title: "crwdns36887:0ACTION={ACTION}crwdne36887:0"
         title: "crwdns31817:0crwdne31817:0"
@@ -1477,6 +1481,8 @@ zu:
           client__jwks_uri: "crwdns26198:0crwdne26198:0"
           client__end_session_endpoint: "crwdns26200:0crwdne26200:0"
           client__end_session_endpoint_help: "crwdns26202:0crwdne26202:0"
+          extra_authorize_params: "crwdns37725:0crwdne37725:0"
+          extra_authorize_params_help: "crwdns37727:0crwdne37727:0"
         provider_form:
           name: "crwdns26204:0crwdne26204:0"
           authentication_type: "crwdns26206:0crwdne26206:0"

@@ -50,7 +50,6 @@ class Statistics::FetcherService
         .eager_load(:slots, :slots_reservations, :invoice_items, :reservation_context, statistic_profile: [:group])
         .find_each do |r|
         next unless r.reservable
-        next unless r.original_invoice
         next if r.slots.empty?
 
         profile = r.statistic_profile
@@ -63,7 +62,7 @@ class Statistics::FetcherService
                    nb_hours: (r.slots.map(&:duration).map(&:to_i).reduce(:+) / 3600.0).to_f,
                    ca: calcul_ca(r.original_invoice),
                    reservation_context_id: r.reservation_context_id,
-                   coupon: r.original_invoice.coupon&.code }.merge(user_info(profile))
+                   coupon: r&.original_invoice&.coupon&.code }.merge(user_info(profile))
         yield result
       end
     end
@@ -78,7 +77,6 @@ class Statistics::FetcherService
         .eager_load(:slots, :slots_reservations, :invoice_items, :reservation_context, statistic_profile: [:group])
         .find_each do |r|
         next unless r.reservable
-        next unless r.original_invoice
         next if r.slots.empty?
 
         profile = r.statistic_profile
@@ -91,7 +89,7 @@ class Statistics::FetcherService
                    nb_hours: (r.slots.map(&:duration).map(&:to_i).reduce(:+) / 3600.0).to_f,
                    ca: calcul_ca(r.original_invoice),
                    reservation_context_id: r.reservation_context_id,
-                   coupon: r.original_invoice.coupon&.code }.merge(user_info(profile))
+                   coupon: r&.original_invoice&.coupon&.code }.merge(user_info(profile))
         yield result
       end
     end
@@ -106,7 +104,7 @@ class Statistics::FetcherService
         .eager_load(:slots, :slots_reservations, :invoice_items, :reservation_context, statistic_profile: [:group])
         .find_each do |r|
         next unless r.reservable
-        next unless r.original_invoice
+        next if r.slots.empty?
 
         profile = r.statistic_profile
         slot = r.slots.first
@@ -119,7 +117,7 @@ class Statistics::FetcherService
                    nb_hours: difference_in_hours(slot.start_at, slot.end_at),
                    ca: calcul_ca(r.original_invoice),
                    reservation_context_id: r.reservation_context_id,
-                   coupon: r.original_invoice&.coupon&.code }.merge(user_info(profile))
+                   coupon: r&.original_invoice&.coupon&.code }.merge(user_info(profile))
         yield result
       end
     end
@@ -134,7 +132,7 @@ class Statistics::FetcherService
         .eager_load(:slots, :slots_reservations, :invoice_items, statistic_profile: [:group])
         .find_each do |r|
         next unless r.reservable
-        next unless r.original_invoice
+        next if r.slots.empty?
 
         profile = r.statistic_profile
         slot = r.slots.first
@@ -148,7 +146,7 @@ class Statistics::FetcherService
                    age_range: (r.reservable.age_range_id ? r.reservable.age_range.name : ''),
                    nb_places: r.total_booked_seats,
                    nb_hours: difference_in_hours(slot.start_at, slot.end_at),
-                   coupon: r.original_invoice.coupon&.code,
+                   coupon: r&.original_invoice&.coupon&.code,
                    ca: calcul_ca(r.original_invoice) }.merge(user_info(profile))
         yield result
       end

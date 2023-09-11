@@ -66,7 +66,7 @@ fr:
     not_available: "Non disponible"
     reserving: "Je réserve"
     i_ve_reserved: "J'ai réservé"
-    blocked: "Bloquée"
+    blocked: "Bloqué"
     length_must_be_slot_multiple: "doit être au moins %{MIN} minutes après la date de début"
     must_be_associated_with_at_least_1_machine: "doit être associé avec au moins 1 machine"
     deleted_user: "Utilisateur supprimé"
@@ -462,6 +462,8 @@ fr:
         child_invalidated: "Votre compte enfant est invalide."
       notify_user_supporting_document_refusal:
         refusal: "Vos pièces justificatives ont été refusées"
+      notify_user_supporting_document_reminder:
+        reminder_message: "Ceci est un rappel pour vous demander de télécharger vos documents justificatifs."
       notify_admin_user_supporting_document_refusal:
         refusal: "Le justificatif du membre <strong><em>%{NAME}</strong></em> a été refusé."
       notify_user_child_supporting_document_refusal:

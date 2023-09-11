@@ -99,7 +99,7 @@ class API::AuthProvidersController < API::APIController
                     providable_attributes: [:id, :issuer, :discovery, :client_auth_method, :prompt, :send_scope_to_token_endpoint,
                                             :client__identifier, :client__secret, :client__authorization_endpoint, :client__token_endpoint,
                                             :client__userinfo_endpoint, :client__jwks_uri, :client__end_session_endpoint, :profile_url,
-                                            { scope: [] }],
+                                            :extra_authorize_params, { scope: [] }],
                     auth_provider_mappings_attributes: [:id, :local_model, :local_field, :api_field, :api_endpoint, :api_data_type,
                                                         :_destroy, { transformation: [:type, :format, :true_value, :false_value,
                                                                                       { mapping: %i[from to] }] }])

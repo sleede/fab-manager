@@ -111,6 +111,10 @@ pt:
         save: "Save"
         create_success: "The space was created successfully"
         update_success: "The space was updated successfully"
+        associated_machines: "Included machines"
+        children_spaces: "Included spaces"
+        associated_objects: "Associated objects"
+        associated_objects_warning: "Only use these fields if you want interblocking reservation between spaces, child spaces and machines. If you want machine and space reservations to remain independent, please leave the following fields blank."
       event_form:
         ACTION_title: "{ACTION, select, create{New} other{Update the}} event"
         title: "Title"
@@ -1477,6 +1481,8 @@ pt:
           client__jwks_uri: "JWKS URI"
           client__end_session_endpoint: "Endpoint de término de sessão"
           client__end_session_endpoint_help: "O Url para efetuar uma chamada para desconectar o usuário no servidor de autorização."
+          extra_authorize_params: "Extra authorize parameters"
+          extra_authorize_params_help: "A hash of extra fixed parameters that will be merged to the authorization request"
         provider_form:
           name: "Nome"
           authentication_type: "Tipo de autenticação"

@@ -65,6 +65,7 @@ zu:
     not_available: "crwdns3267:0crwdne3267:0"
     reserving: "crwdns37199:0crwdne37199:0"
     i_ve_reserved: "crwdns3269:0crwdne3269:0"
+    blocked: "crwdns37737:0crwdne37737:0"
     length_must_be_slot_multiple: "crwdns3271:0%{MIN}crwdne3271:0"
     must_be_associated_with_at_least_1_machine: "crwdns3273:0crwdne3273:0"
     deleted_user: "crwdns22460:0crwdne22460:0"
@@ -446,6 +447,8 @@ zu:
         account_invalidated: "crwdns23006:0crwdne23006:0"
       notify_user_supporting_document_refusal:
         refusal: "crwdns37345:0crwdne37345:0"
+      notify_user_supporting_document_reminder:
+        reminder_message: "crwdns37739:0crwdne37739:0"
       notify_admin_user_supporting_document_refusal:
         refusal: "crwdns37347:0%{NAME}crwdne37347:0"
       notify_user_order_is_ready:
@@ -538,6 +541,7 @@ zu:
     space: "crwdns36283:0crwdne36283:0"
     machine: "crwdns36285:0crwdne36285:0"
     reservable: "crwdns36287:0crwdne36287:0"
+    blocked_by_another_reservation: "crwdns37741:0crwdne37741:0"
   cart_validation:
     select_user: "crwdns37211:0crwdne37211:0"
   settings:

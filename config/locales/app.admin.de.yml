@@ -111,6 +111,10 @@ de:
         save: "Speichern"
         create_success: "Der Raum wurde erfolgreich erstellt"
         update_success: "Der Raum wurde erfolgreich aktualisiert"
+        associated_machines: "Included machines"
+        children_spaces: "Included spaces"
+        associated_objects: "Associated objects"
+        associated_objects_warning: "Only use these fields if you want interblocking reservation between spaces, child spaces and machines. If you want machine and space reservations to remain independent, please leave the following fields blank."
       event_form:
         ACTION_title: "{ACTION, select, create{Neue} other{Aktualisiere die}} Veranstaltung"
         title: "Titel"
@@ -1477,6 +1481,8 @@ de:
           client__jwks_uri: "JWKS URI"
           client__end_session_endpoint: "End session endpoint"
           client__end_session_endpoint_help: "The url to call to log the user out at the authorization server."
+          extra_authorize_params: "Extra authorize parameters"
+          extra_authorize_params_help: "A hash of extra fixed parameters that will be merged to the authorization request"
         provider_form:
           name: "Name"
           authentication_type: "Authentifizierungsart"

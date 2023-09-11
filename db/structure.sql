@@ -2039,7 +2039,8 @@ CREATE TABLE public.open_id_connect_providers (
     client__end_session_endpoint character varying,
     profile_url character varying,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    extra_authorize_params jsonb DEFAULT '{}'::jsonb
 );
 
 
@@ -4354,7 +4355,8 @@ CREATE TABLE public.users (
     current_sign_in_ip inet,
     last_sign_in_ip inet,
     validated_at timestamp without time zone,
-    mapped_from_sso character varying
+    mapped_from_sso character varying,
+    supporting_documents_reminder_sent_at timestamp(6) without time zone
 );
 
 
@@ -9261,6 +9263,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230728090257'),
 ('20230825101952'),
 ('20230828073428'),
-('20230831103208');
+('20230831103208'),
+('20230901090637'),
+('20230907124230');
 
 

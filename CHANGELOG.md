@@ -2,9 +2,16 @@
 
 ## next deploy
 
+- improves api/notification controller to avoid failing when there is a notification with wrong notification_type in db
+- Add extra_authorize_params to OpenIdConnect config
+- Improvement : add a notification to remind users to upload their supporting documents
+
+## v6.0.14 2023 September 6
+
 - Fix a bug: for project categories, if there is no category : do not show categories panel in show view, do not show categories input field in edit view
 - Fix a bug: unable to update status to paid for latest payment schedule item
 - Fix a bug: unable to generate statistic
+- Fix a bug: unable to update user profile by admin
 - Feature: add a filter in members list (admin) to show only "not validated" members
 - Concerning statistics:
 - removes age and type column from all statistics tabs (only in web, not in xlsx export file)

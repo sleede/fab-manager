@@ -462,6 +462,8 @@ en:
         child_invalidated: "Your account child is invalid."
       notify_user_supporting_document_refusal:
         refusal: "Your supporting documents were refused"
+      notify_user_supporting_document_reminder:
+        reminder_message: "This is a reminder for you to upload your supporting documents."
       notify_admin_user_supporting_document_refusal:
         refusal: "Member's supporting document <strong><em>%{NAME}</strong></em> was refused."
       notify_user_child_supporting_document_refusal:

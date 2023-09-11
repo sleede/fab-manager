@@ -65,6 +65,7 @@ it:
     not_available: "Non disponibile"
     reserving: "Sto prenotando"
     i_ve_reserved: "Ho prenotato"
+    blocked: "Blocked"
     length_must_be_slot_multiple: "deve essere almeno %{MIN} minuti dopo la data di inizio"
     must_be_associated_with_at_least_1_machine: "deve essere associata ad almeno 1 macchina"
     deleted_user: "Utente eliminato"
@@ -446,6 +447,8 @@ it:
         account_invalidated: "Il tuo account non è valido."
       notify_user_supporting_document_refusal:
         refusal: "I tuoi documenti aggiuntivi sono stati rifiutati"
+      notify_user_supporting_document_reminder:
+        reminder_message: "This is a reminder for you to upload your supporting documents."
       notify_admin_user_supporting_document_refusal:
         refusal: "Il documento aggiuntivo del membro <strong><em>%{NAME}</strong></em> è stato rifiutato."
       notify_user_order_is_ready:
@@ -538,6 +541,7 @@ it:
     space: "Questo spazio è disabilitato"
     machine: "Questa macchina è disabilitata"
     reservable: "Questa macchina non è prenotabile"
+    blocked_by_another_reservation: "This slot is blocked by another reservation"
   cart_validation:
     select_user: "Seleziona un utente prima di continuare"
   settings:

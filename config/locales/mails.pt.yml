@@ -402,6 +402,10 @@ pt:
       body:
         user_supporting_document_files_refusal: "Os seus documentos de apoio foram recusados:"
         action: "Por favor, recarregue novos documentos de apoio."
+    notify_user_supporting_document_reminder:
+      subject: "Reminder to upload your supporting documents"
+      body:
+        user_supporting_document_reminder: "This is a reminder for you to upload your supporting documents."
     notify_admin_user_supporting_document_refusal:
       subject: "Documentos de apoio de um membro foram recusados"
       body:

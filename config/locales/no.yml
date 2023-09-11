@@ -65,6 +65,7 @@
     not_available: "Ikke tilgjengelig"
     reserving: "I'm reserving"
     i_ve_reserved: "Jeg har reservert"
+    blocked: "Blocked"
     length_must_be_slot_multiple: "må være minst %{MIN} minutter etter startdatoen"
     must_be_associated_with_at_least_1_machine: "må være tilknyttet minst 1 maskin"
     deleted_user: "Deleted user"
@@ -446,6 +447,8 @@
         account_invalidated: "Your account is invalid."
       notify_user_supporting_document_refusal:
         refusal: "Your supporting documents were refused"
+      notify_user_supporting_document_reminder:
+        reminder_message: "This is a reminder for you to upload your supporting documents."
       notify_admin_user_supporting_document_refusal:
         refusal: "Member's supporting document <strong><em>%{NAME}</strong></em> was refused."
       notify_user_order_is_ready:
@@ -538,6 +541,7 @@
     space: "This space is disabled"
     machine: "This machine is disabled"
     reservable: "This machine is not reservable"
+    blocked_by_another_reservation: "This slot is blocked by another reservation"
   cart_validation:
     select_user: "Please select a user before continuing"
   settings:
