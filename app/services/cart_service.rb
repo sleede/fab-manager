@@ -173,7 +173,8 @@ class CartService
                                      event: reservable,
                                      cart_item_reservation_slots_attributes: cart_item[:slots_reservations_attributes],
                                      normal_tickets: cart_item[:nb_reserve_places],
-                                     cart_item_event_reservation_tickets_attributes: cart_item[:tickets_attributes] || {})
+                                     cart_item_event_reservation_tickets_attributes: cart_item[:tickets_attributes] || {},
+                                     cart_item_event_reservation_booking_users_attributes: cart_item[:booking_users_attributes] || {})
     when Space
       CartItem::SpaceReservation.new(customer_profile: @customer.invoicing_profile,
                                      operator_profile: @operator.invoicing_profile,

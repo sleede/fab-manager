@@ -1,0 +1,60 @@
+.event-reservation {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+
+  &-item {
+    padding: 1.6rem 1.6rem 0;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--gray-soft-lightest);
+    border-radius: var(--border-radius);
+
+    label {
+      margin: 0;
+      @include text-xs;
+      color: var(--gray-hard-light);
+    }
+    p {
+      margin: 0;
+      @include text-base(600);
+    }
+    .date { @include text-sm; }
+
+    &__event {
+      padding-bottom: 1.2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.6rem;
+      border-bottom: 1px solid var(--gray-soft-dark);
+    }
+
+    &__reservation {
+      display: flex;
+
+      & > div {
+        padding: 1.2rem 1.6rem 1.2rem 0;
+        flex: 1;
+      }
+      .list {
+        display: flex;
+        flex-direction: column;
+        row-gap: 0.5rem;
+        label:not(:first-of-type) {
+          margin-top: 1rem;
+        }
+      }
+      .name { @include text-sm(500); }
+
+      .status {
+        padding-left: 1.6rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        border-left: 1px solid var(--gray-soft-dark);
+      }
+    }
+
+  }
+}

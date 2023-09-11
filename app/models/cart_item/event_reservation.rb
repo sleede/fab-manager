@@ -13,6 +13,11 @@ class CartItem::EventReservation < CartItem::Reservation
                                          foreign_type: 'cart_item_type', as: :cart_item
   accepts_nested_attributes_for :cart_item_reservation_slots
 
+  has_many :cart_item_event_reservation_booking_users, class_name: 'CartItem::EventReservationBookingUser', dependent: :destroy,
+                                                       inverse_of: :cart_item_event_reservation,
+                                                       foreign_key: 'cart_item_event_reservation_id'
+  accepts_nested_attributes_for :cart_item_event_reservation_booking_users
+
   belongs_to :operator_profile, class_name: 'InvoicingProfile'
   belongs_to :customer_profile, class_name: 'InvoicingProfile'
 
@@ -61,6 +66,14 @@ class CartItem::EventReservation < CartItem::Reservation
         {
           event_price_category_id: t.event_price_category_id,
           booked: t.booked
+        }
+      end,
+      booking_users_attributes: cart_item_event_reservation_booking_users.map do |b|
+        {
+          event_price_category_id: b.event_price_category_id,
+          booked_type: b.booked_type,
+          booked_id: b.booked_id,
+          name: b.name
         }
       end,
       nb_reserve_places: normal_tickets,

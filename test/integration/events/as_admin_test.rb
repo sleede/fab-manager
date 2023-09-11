@@ -22,6 +22,7 @@ class Events::AsAdminTest < ActionDispatch::IntegrationTest
              end_date: 1.week.from_now.utc,
              end_time: 1.week.from_now.utc.change(hour: 20),
              category_id: Category.first.id,
+             event_type: 'standard',
              amount: 0
            }
          }.to_json,

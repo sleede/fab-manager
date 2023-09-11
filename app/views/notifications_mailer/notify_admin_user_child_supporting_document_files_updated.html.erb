@@ -1,0 +1,19 @@
+<%= render 'notifications_mailer/shared/hello', recipient: @recipient %>
+
+<p>
+  <%= t('.body.child_update_supporting_document_file',
+        NAME: @attached_object&.full_name || t('api.notifications.deleted_user')) %>
+</p>
+<ul>
+<% if @attached_object %>
+  <% SupportingDocumentType.where(document_type: 'Child').each do |type| %>
+    <li><%= type.name %></li>
+  <% end %>
+<% end %>
+</ul>
+</ul>
+<% if Setting.get('child_validation_required') %>
+<p>
+  <%= t('.body.validate_child') %>
+</p>
+<% end %>

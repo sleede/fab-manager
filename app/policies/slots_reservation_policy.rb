@@ -15,4 +15,12 @@ class SlotsReservationPolicy < ApplicationPolicy
   def cancel?
     user.admin? || user.manager? || record.reservation.user == user
   end
+
+  def validate?
+    user.admin? || user.manager?
+  end
+
+  def invalidate?
+    user.admin? || user.manager?
+  end
 end

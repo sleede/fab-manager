@@ -2,3 +2,108 @@
   width: 16px;
   height: 21px;
 }
+
+.members-list {
+  width: 100%;
+  margin: 2.4rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+
+  &-item {
+    width: 100%;
+    padding: 1.6rem;
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    gap: 0 2.4rem;
+    border: 1px solid var(--gray-soft-dark);
+    border-radius: var(--border-radius);
+    background-color: var(--gray-soft-lightest);
+    &.is-validated .left-col .status svg { color: var(--success-dark); }
+    &.is-incomplet .left-col .status svg { color: var(--alert); }
+
+    .left-col {
+      grid-row: span 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      .status {
+        display: flex;
+        align-items: center;
+      }
+
+      .toggle {
+        height: fit-content;
+        background-color: var(--gray-soft);
+        border: none;
+        svg { transition: transform 0.5s ease-in-out; }
+        &.open svg { transform: rotate(-180deg); }
+      }
+    }
+
+    .member {
+      display: flex;
+      flex-direction: column;
+      gap: 2.4rem;
+      &-infos {
+        flex: 1;
+        display: grid;
+        gap: 1.6rem;
+
+        & > div:not(.actions) {
+          display: flex;
+          flex-direction: column;
+          span {
+            @include text-xs;
+            color: var(--gray-hard-light);
+          }
+        }
+        p {
+          margin: 0;
+          @include text-base(600);
+          line-height: 1.5;
+        }
+
+      }
+      &-actions {
+        align-self: flex-end;
+      }
+    }
+
+    .member-children {
+      max-height: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1.6rem;
+      overflow-y: hidden;
+      transition: max-height 0.5s ease-in-out;
+      &.open {
+        max-height: 17rem;
+        overflow-y: auto;
+      }
+
+      hr { margin: 1.6rem 0 0; }
+      .child-item:last-of-type { padding-bottom: 0; }
+    }
+
+    @media (min-width: 768px) {
+      .member-infos {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (min-width: 1024px) {
+      .member {
+        flex-direction: row;
+        &-actions {
+          align-self: center;
+        }
+      }
+    }
+    @media (min-width: 1220px) {
+      .member-infos {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+  }
+}

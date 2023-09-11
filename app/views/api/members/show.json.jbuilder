@@ -77,13 +77,27 @@ json.events_reservations @member.reservations.where(reservable_type: 'Event').jo
   json.nb_reserve_places sr.reservation.nb_reserve_places
   json.tickets sr.reservation.tickets do |t|
     json.booked t.booked
+    json.event_price_category_id t.event_price_category_id
     json.price_category do
       json.name t.event_price_category.price_category.name
     end
   end
   json.reservable sr.reservation.reservable
   json.reservable_type 'Event'
+  json.event_type sr.reservation.reservable.event_type
+  json.event_title sr.reservation.reservable.title
+  json.event_pre_registration sr.reservation.reservable.pre_registration
+  json.is_valid sr.is_valid
+  json.is_paid sr.is_confirm
+  json.amount sr.reservation.invoice_items.sum(:amount)
   json.canceled_at sr.canceled_at
+  json.booking_users_attributes sr.reservation.booking_users.order(booked_type: :desc) do |bu|
+    json.id bu.id
+    json.name bu.name
+    json.event_price_category_id bu.event_price_category_id
+    json.booked_id bu.booked_id
+    json.booked_type bu.booked_type
+  end
 end
 json.invoices @member.invoices.order('reference DESC') do |i|
   json.id i.id

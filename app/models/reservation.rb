@@ -24,6 +24,8 @@ class Reservation < ApplicationRecord
   has_many :prepaid_pack_reservations, dependent: :destroy
 
   belongs_to :reservation_context
+  has_many :booking_users, dependent: :destroy
+  accepts_nested_attributes_for :booking_users, allow_destroy: true
 
   validates :reservable_id, :reservable_type, presence: true
   validate :machine_not_already_reserved, if: -> { reservable.is_a?(Machine) }
@@ -130,15 +132,27 @@ class Reservation < ApplicationRecord
   end
 
   def notify_member_create_reservation
-    NotificationCenter.call type: 'notify_member_create_reservation',
-                            receiver: user,
-                            attached_object: self
+    if reservable_type == 'Event' && reservable.pre_registration?
+      NotificationCenter.call type: 'notify_member_pre_booked_reservation',
+                              receiver: user,
+                              attached_object: self
+    else
+      NotificationCenter.call type: 'notify_member_create_reservation',
+                              receiver: user,
+                              attached_object: self
+    end
   end
 
   def notify_admin_member_create_reservation
-    NotificationCenter.call type: 'notify_admin_member_create_reservation',
-                            receiver: User.admins_and_managers,
-                            attached_object: self
+    if reservable_type == 'Event' && reservable.pre_registration?
+      NotificationCenter.call type: 'notify_admin_member_pre_booked_reservation',
+                              receiver: User.admins_and_managers,
+                              attached_object: self
+    else
+      NotificationCenter.call type: 'notify_admin_member_create_reservation',
+                              receiver: User.admins_and_managers,
+                              attached_object: self
+    end
   end
 
   def notify_member_limitation_reached
