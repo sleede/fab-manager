@@ -989,6 +989,11 @@ p, .widget p {
   cursor: pointer;
 }
 
+.list-none {
+  list-style-type: none;
+  padding-inline-start: 0;
+}
+
 @media screen and (min-width: $screen-lg-min) {
   .b-r-lg {
     border-right: 1px solid $border-color;
