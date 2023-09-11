@@ -65,6 +65,7 @@ es:
     not_available: "No disponible"
     reserving: "Me reservo"
     i_ve_reserved: "He reservado"
+    blocked: "Blocked"
     length_must_be_slot_multiple: "Debe ser al menos %{MIN} minutos después de la fecha de inicio"
     must_be_associated_with_at_least_1_machine: "debe estar asociado con al menos 1 máquina"
     deleted_user: "Usuario eliminado"
@@ -446,6 +447,8 @@ es:
         account_invalidated: "Su cuenta no es válida."
       notify_user_supporting_document_refusal:
         refusal: "Sus justificantes han sido rechazados"
+      notify_user_supporting_document_reminder:
+        reminder_message: "This is a reminder for you to upload your supporting documents."
       notify_admin_user_supporting_document_refusal:
         refusal: "El justificante del afiliado <strong><em>%{NAME}</em></strong> ha sido rechazado."
       notify_user_order_is_ready:
@@ -538,6 +541,7 @@ es:
     space: "Este espacio está desactivado"
     machine: "Esta máquina está desactivada"
     reservable: "Esta máquina no se puede reservar"
+    blocked_by_another_reservation: "This slot is blocked by another reservation"
   cart_validation:
     select_user: "Por favor, seleccione un usuario antes de continuar"
   settings:

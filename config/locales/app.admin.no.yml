@@ -111,6 +111,10 @@
         save: "Save"
         create_success: "The space was created successfully"
         update_success: "The space was updated successfully"
+        associated_machines: "Included machines"
+        children_spaces: "Included spaces"
+        associated_objects: "Associated objects"
+        associated_objects_warning: "Only use these fields if you want interblocking reservation between spaces, child spaces and machines. If you want machine and space reservations to remain independent, please leave the following fields blank."
       event_form:
         ACTION_title: "{ACTION, select, create{New} other{Update the}} event"
         title: "Title"

@@ -402,6 +402,10 @@ es:
       body:
         user_supporting_document_files_refusal: "Sus justificantes han sido rechazados:"
         action: "Por favor, vuelva a subir nuevos documentos justificativos."
+    notify_user_supporting_document_reminder:
+      subject: "Reminder to upload your supporting documents"
+      body:
+        user_supporting_document_reminder: "This is a reminder for you to upload your supporting documents."
     notify_admin_user_supporting_document_refusal:
       subject: "Los justificantes del afiliado de un miembro han sido rechazados"
       body:

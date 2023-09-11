@@ -402,6 +402,10 @@ it:
       body:
         user_supporting_document_files_refusal: "I tuoi documenti aggiuntivi sono stati rifiutati:"
         action: "Si prega di ricaricare nuovi documenti di supporto."
+    notify_user_supporting_document_reminder:
+      subject: "Reminder to upload your supporting documents"
+      body:
+        user_supporting_document_reminder: "This is a reminder for you to upload your supporting documents."
     notify_admin_user_supporting_document_refusal:
       subject: "I documenti aggiuntivi di un membro sono stati rifiutati"
       body:

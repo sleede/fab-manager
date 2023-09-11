@@ -402,6 +402,10 @@ fr:
       body:
         user_supporting_document_files_refusal: "Vos pièces justificatives ont été refusées :"
         action: "Veuillez téléverser de nouvelles pièces justificatives."
+    notify_user_supporting_document_reminder:
+      subject: "Rappel de télécharger vos documents justificatifs"
+      body:
+        user_supporting_document_reminder: "Ceci est un rappel pour vous demander de télécharger vos documents justificatifs."
     notify_admin_user_supporting_document_refusal:
       subject: "Les justificatifs d'un membre ont été refusés"
       body:

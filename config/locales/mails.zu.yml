@@ -402,6 +402,10 @@ zu:
       body:
         user_supporting_document_files_refusal: "crwdns37363:0crwdne37363:0"
         action: "crwdns37365:0crwdne37365:0"
+    notify_user_supporting_document_reminder:
+      subject: "crwdns37743:0crwdne37743:0"
+      body:
+        user_supporting_document_reminder: "crwdns37745:0crwdne37745:0"
     notify_admin_user_supporting_document_refusal:
       subject: "crwdns37367:0crwdne37367:0"
       body:
