@@ -459,6 +459,12 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
           $scope.reservations[index].slots_reservations_attributes[0].canceled_at = new Date();
           Event.get({ id: $scope.event.id }).$promise.then(function (event) {
             $scope.event = event;
+            getReservations($scope.event.id, 'Event', $scope.ctrl.member.id).then(function () {
+              updateNbReservePlaces();
+              $scope.reserveSuccess = true;
+              $scope.coupon.applied = null;
+            });
+            resetEventReserve();
           });
         }, function(error) {
           growl.warning(_t('app.public.events_show.cancellation_failed'));
