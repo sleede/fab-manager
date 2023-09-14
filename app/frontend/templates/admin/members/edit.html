@@ -62,6 +62,10 @@
 
         </uib-tab>
 
+        <uib-tab heading="{{ 'app.admin.members_edit.reservations' | translate }}">
+          <reservations-dashboard user="user" current-user="currentUser" on-error="onError" />
+        </uib-tab>
+
         <uib-tab heading="{{ 'app.admin.members_edit.supporting_documents' | translate }}" ng-show="hasProofOfIdentityTypes">
           <supporting-documents-validation
             operator="currentUser"

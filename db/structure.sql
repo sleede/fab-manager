@@ -3390,9 +3390,7 @@ CREATE TABLE public.spaces (
     updated_at timestamp without time zone NOT NULL,
     characteristics text,
     disabled boolean,
-    deleted_at timestamp without time zone,
-    ancestry character varying NOT NULL COLLATE pg_catalog."C",
-    ancestry_depth integer DEFAULT 0
+    deleted_at timestamp without time zone
 );
 
 
@@ -7471,13 +7469,6 @@ CREATE INDEX index_spaces_availabilities_on_space_id ON public.spaces_availabili
 
 
 --
--- Name: index_spaces_on_ancestry; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_spaces_on_ancestry ON public.spaces USING btree (ancestry);
-
-
---
 -- Name: index_spaces_on_deleted_at; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9266,5 +9257,3 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230831103208'),
 ('20230901090637'),
 ('20230907124230');
-
-

@@ -21,13 +21,14 @@ import { HtmlTranslate } from '../../base/html-translate';
 
 interface PrepaidPacksPanelProps {
   user: User,
+  currentUser?: User,
   onError: (message: string) => void
 }
 
 /**
  * List all available prepaid packs for the given user
  */
-const PrepaidPacksPanel: React.FC<PrepaidPacksPanelProps> = ({ user, onError }) => {
+const PrepaidPacksPanel: React.FC<PrepaidPacksPanelProps> = ({ user, currentUser = null, onError }) => {
   const { t } = useTranslation('logged');
 
   const [machines, setMachines] = useState<Array<Machine>>([]);
@@ -102,6 +103,20 @@ const PrepaidPacksPanel: React.FC<PrepaidPacksPanelProps> = ({ user, onError }) 
   };
 
   /**
+ * returns true if there is a currentUser and current user is manager or admin
+ */
+  const currentUserIsAdminOrManager = (currentUser: User): boolean => {
+    return currentUser && (currentUser.role === 'admin' || currentUser.role === 'manager');
+  };
+
+  /**
+ * returns translation key prefix
+ */
+  const translationKeyPrefix = (currentUser: User): string => {
+    return currentUserIsAdminOrManager(currentUser) ? 'prepaid_packs_panel_as_admin' : 'prepaid_packs_panel';
+  };
+
+  /**
    * Callback triggered when a prepaid pack was successfully bought: refresh the list of packs for the user
    */
   const onPackBoughtSuccess = () => {
@@ -113,7 +128,7 @@ const PrepaidPacksPanel: React.FC<PrepaidPacksPanelProps> = ({ user, onError }) 
 
   return (
     <FabPanel className='prepaid-packs-panel'>
-      <p className="title">{t('app.logged.dashboard.reservations_dashboard.prepaid_packs_panel.title')}</p>
+      <p className="title">{t(`app.logged.dashboard.reservations_dashboard.${translationKeyPrefix(currentUser)}.title`) /* eslint-disable-line fabmanager/scoped-translation */}</p>
 
       {userPacks.map(pack => (
         <div className={`prepaid-packs ${isLow(pack) ? 'is-low' : ''}`} key={pack.id}>
@@ -124,7 +139,7 @@ const PrepaidPacksPanel: React.FC<PrepaidPacksPanelProps> = ({ user, onError }) 
 
             <div className='prepaid-packs-list-item'>
               <p className='name'>{pack.prepaid_pack.priceable.name}</p>
-              {FormatLib.date(pack.expires_at) && <p className="end">{FormatLib.date(pack.expires_at)}</p>}
+              {pack.expires_at && FormatLib.date(pack.expires_at) && <p className="end">{FormatLib.date(pack.expires_at)}</p>}
               <p className="countdown"><span>{(pack.prepaid_pack.minutes - pack.minutes_used) / 60}H</span> / {pack.prepaid_pack.minutes / 60}H</p>
             </div>
           </div>
@@ -143,7 +158,7 @@ const PrepaidPacksPanel: React.FC<PrepaidPacksPanelProps> = ({ user, onError }) 
         </div>
       ))}
 
-      {canBuyPacks() && <div className='prepaid-packs-cta'>
+      {canBuyPacks() && !currentUserIsAdminOrManager(currentUser) && <div className='prepaid-packs-cta'>
         <p>{t('app.logged.dashboard.reservations_dashboard.prepaid_packs_panel.cta_info')}</p>
         <form onSubmit={handleSubmit(onBuyPack)}>
           <FormSelect options={buildMachinesOptions(machines)} control={control} id="machine_id" rules={{ required: true }} formState={formState} label={t('app.logged.dashboard.reservations_dashboard.prepaid_packs_panel.select_machine')} />
@@ -163,7 +178,7 @@ const PrepaidPacksPanel: React.FC<PrepaidPacksPanelProps> = ({ user, onError }) 
                              onSuccess={onPackBoughtSuccess} />}
       </div>}
       {packs.length === 0 && <p>{t('app.logged.dashboard.reservations_dashboard.prepaid_packs_panel.no_packs')}</p>}
-      {(packsForSubscribers && user.subscribed_plan == null && packs.length > 0) &&
+      {(packsForSubscribers && user.subscribed_plan == null && packs.length > 0 && !currentUserIsAdminOrManager(currentUser)) &&
         <HtmlTranslate trKey={'app.logged.dashboard.reservations_dashboard.prepaid_packs_panel.reserved_for_subscribers_html'} options={{ LINK: '#!/plans' }} />
       }
     </FabPanel>
