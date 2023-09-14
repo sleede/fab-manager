@@ -139,7 +139,7 @@ const PrepaidPacksPanel: React.FC<PrepaidPacksPanelProps> = ({ user, currentUser
 
             <div className='prepaid-packs-list-item'>
               <p className='name'>{pack.prepaid_pack.priceable.name}</p>
-              {FormatLib.date(pack.expires_at) && <p className="end">{FormatLib.date(pack.expires_at)}</p>}
+              {pack.expires_at && FormatLib.date(pack.expires_at) && <p className="end">{FormatLib.date(pack.expires_at)}</p>}
               <p className="countdown"><span>{(pack.prepaid_pack.minutes - pack.minutes_used) / 60}H</span> / {pack.prepaid_pack.minutes / 60}H</p>
             </div>
           </div>
