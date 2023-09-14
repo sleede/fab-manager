@@ -1273,6 +1273,7 @@ es:
       #edit a member
       members_edit:
         subscription: "Suscripción"
+        reservations: "Reservations"
         duration: "Duración:"
         expires_at: "Caduca en:"
         price_: "Precio:"

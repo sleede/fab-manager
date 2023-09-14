@@ -1273,6 +1273,7 @@ it:
       #edit a member
       members_edit:
         subscription: "Abbonamento"
+        reservations: "Reservations"
         duration: "Durata:"
         expires_at: "Scadenza:"
         price_: "Prezzo:"

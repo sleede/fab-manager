@@ -9,9 +9,11 @@ import { Loader } from '../../base/loader';
 import FormatLib from '../../../lib/format';
 import _ from 'lodash';
 import { FabButton } from '../../base/fab-button';
+import { User } from '../../../models/user';
 
 interface SpaceReservationsProps {
   userId: number,
+  currentUser?: User,
   onError: (message: string) => void,
   reservableType: 'Machine' | 'Space'
 }
@@ -19,7 +21,7 @@ interface SpaceReservationsProps {
 /**
  * List all reservations for the given user and the given type
  */
-const ReservationsPanel: React.FC<SpaceReservationsProps> = ({ userId, onError, reservableType }) => {
+const ReservationsPanel: React.FC<SpaceReservationsProps> = ({ userId, currentUser = null, onError, reservableType }) => {
   const { t } = useTranslation('logged');
 
   const [reservations, setReservations] = useState<Array<Reservation>>([]);
@@ -72,6 +74,20 @@ const ReservationsPanel: React.FC<SpaceReservationsProps> = ({ userId, onError, 
   };
 
   /**
+ * returns true if there is a currentUser and current user is manager or admin
+ */
+  const currentUserIsAdminOrManager = (currentUser: User): boolean => {
+    return currentUser && (currentUser.role === 'admin' || currentUser.role === 'manager');
+  };
+
+  /**
+   * returns translation key prefix
+   */
+  const translationKeyPrefix = (currentUser: User): string => {
+    return currentUserIsAdminOrManager(currentUser) ? 'reservations_panel_as_admin' : 'reservations_panel';
+  };
+
+  /**
    * Render the reservation in a user-friendly way
    */
   const renderReservation = (reservation: Reservation, state: 'past' | 'futur'): ReactNode => {
@@ -95,7 +111,7 @@ const ReservationsPanel: React.FC<SpaceReservationsProps> = ({ userId, onError, 
 
   return (
     <FabPanel className="reservations-panel">
-      <p className="title">{t('app.logged.dashboard.reservations_dashboard.reservations_panel.title')}</p>
+      <p className="title">{t(`app.logged.dashboard.reservations_dashboard.${translationKeyPrefix(currentUser)}.title`) /* eslint-disable-line fabmanager/scoped-translation */}</p>
       <div className="reservations">
         {futur.length === 0
           ? noReservations()

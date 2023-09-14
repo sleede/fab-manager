@@ -1328,6 +1328,7 @@ fr:
       #edit a member
       members_edit:
         subscription: "Abonnement"
+        reservations: "Réservations"
         duration: "Durée :"
         expires_at: "Expire le :"
         price_: "Prix :"

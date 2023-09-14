@@ -169,12 +169,19 @@ en:
             no_reservation: "No reservation"
             show_more: "Show more"
             cancelled_slot: "Cancelled"
+          reservations_panel_as_admin:
+            title: "Reservations"
           credits_panel:
             title: "My credits"
             info: "Your subscription comes with free credits you can use when reserving"
             remaining_credits_html: "You can book {REMAINING} {REMAINING, plural, one{slot} other{slots}} for free."
             used_credits_html: "You have already used <strong> {USED} {USED, plural, =0{credit} one{credit} other{credits}}</strong>."
             no_credits: "You don't have any credits yet. Some subscriptions may allow you to book some slots for free."
+          credits_panel_as_admin:
+            title: "Credits"
+            remaining_credits_html: "{REMAINING} {REMAINING, plural, one{slot} other{slots}} can be booked for free."
+            used_credits_html: "<strong> {USED} {USED, plural, =0{credit} one{credit} other{credits}}</strong> already used."
+            no_credits: "No credits yet."
           prepaid_packs_panel:
             title: "My prepaid packs"
             name: "Prepaid pack name"
@@ -187,6 +194,8 @@ en:
             cta_button: "Buy a pack"
             no_packs: "No prepaid packs available for sale"
             reserved_for_subscribers_html: 'The purchase of prepaid packs is reserved for subscribers. <a href="{LINK}">Subscribe now</a> to benefit.'
+          prepaid_packs_panel_as_admin:
+            title: "Prepaid packs"
       #public profil of a member
       members_show:
         members_list: "Members list"
