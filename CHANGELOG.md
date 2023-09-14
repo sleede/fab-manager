@@ -6,6 +6,7 @@
 - Add extra_authorize_params to OpenIdConnect config
 - Improvement : add a notification to remind users to upload their supporting documents
 - Cancel payment schedule subscription after update the payment mean
+- admin can see reservations of a member
 
 ## v6.0.14 2023 September 6
 
