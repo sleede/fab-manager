@@ -154,12 +154,19 @@ zu:
             no_reservation: "crwdns37037:0crwdne37037:0"
             show_more: "crwdns37039:0crwdne37039:0"
             cancelled_slot: "crwdns37041:0crwdne37041:0"
+          reservations_panel_as_admin:
+            title: "crwdns37749:0crwdne37749:0"
           credits_panel:
             title: "crwdns37043:0crwdne37043:0"
             info: "crwdns37045:0crwdne37045:0"
             remaining_credits_html: "crwdns37047:0REMAINING={REMAINING}crwdnd37047:0REMAINING={REMAINING}crwdne37047:0"
             used_credits_html: "crwdns37049:0USED={USED}crwdnd37049:0USED={USED}crwdne37049:0"
             no_credits: "crwdns37051:0crwdne37051:0"
+          credits_panel_as_admin:
+            title: "crwdns37751:0crwdne37751:0"
+            remaining_credits_html: "crwdns37753:0REMAINING={REMAINING}crwdnd37753:0REMAINING={REMAINING}crwdne37753:0"
+            used_credits_html: "crwdns37755:0USED={USED}crwdnd37755:0USED={USED}crwdne37755:0"
+            no_credits: "crwdns37757:0crwdne37757:0"
           prepaid_packs_panel:
             title: "crwdns37053:0crwdne37053:0"
             name: "crwdns37055:0crwdne37055:0"
@@ -172,6 +179,8 @@ zu:
             cta_button: "crwdns37069:0crwdne37069:0"
             no_packs: "crwdns37389:0crwdne37389:0"
             reserved_for_subscribers_html: 'crwdns37391:0{LINK}crwdne37391:0'
+          prepaid_packs_panel_as_admin:
+            title: "crwdns37759:0crwdne37759:0"
       #public profil of a member
       members_show:
         members_list: "crwdns27656:0crwdne27656:0"

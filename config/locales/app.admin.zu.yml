@@ -1273,6 +1273,7 @@ zu:
       #edit a member
       members_edit:
         subscription: "crwdns25848:0crwdne25848:0"
+        reservations: "crwdns37747:0crwdne37747:0"
         duration: "crwdns25850:0crwdne25850:0"
         expires_at: "crwdns25852:0crwdne25852:0"
         price_: "crwdns25854:0crwdne25854:0"

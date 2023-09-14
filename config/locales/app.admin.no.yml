@@ -1273,6 +1273,7 @@
       #edit a member
       members_edit:
         subscription: "Medlemskap"
+        reservations: "Reservations"
         duration: "Varighet:"
         expires_at: "Utløper:"
         price_: "Pris:"

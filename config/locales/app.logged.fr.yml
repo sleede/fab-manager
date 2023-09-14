@@ -164,9 +164,9 @@ fr:
             no_credits: "Vous n'avez pas encore de crédits. Certains abonnements peuvent vous permettre de réserver des créneaux gratuitement."
           credits_panel_as_admin:
             title: "Crédits"
-            remaining_credits_html: "{REMAINING} {REMAINING, plural, one{créneau} other{créneaux}} peuvent être réservés gratuitement."
-            used_credits_html: "<strong> {USED} {USED, plural, =0{crédit} one{crédit} other{crédits}}</strong> déjà utilisés."
-            no_credits: "Pas de crédits."
+            remaining_credits_html: "{REMAINING} {REMAINING, plural, one{slot} other{slots}} peut être réservé gratuitement."
+            used_credits_html: "<strong> {USED} {USED, plural, =0{crédit} one{crédit} other{crédits}}</strong> déjà utilisé."
+            no_credits: "Pas encore de crédits."
           prepaid_packs_panel:
             title: "Mes packs d'heures prépayées"
             name: "Nom du pack d'heures prépayées"
