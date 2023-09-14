@@ -154,12 +154,19 @@ fr:
             no_reservation: "Aucune réservation"
             show_more: "Afficher plus"
             cancelled_slot: "Annulé"
+          reservations_panel_as_admin:
+            title: "Réservations"
           credits_panel:
             title: "Mes crédits"
             info: "Avec votre abonnement, vous bénéficiez de crédits gratuits que vous pouvez utiliser lors de vos réservations"
             remaining_credits_html: "Vous pouvez réserver {REMAINING} {REMAINING, plural, one{créneau} other{créneaux}} gratuitement."
             used_credits_html: "Vous avez déjà utilisé <strong> {USED} {USED, plural, =0{crédit} one{crédit} other{crédits}}</strong>."
             no_credits: "Vous n'avez pas encore de crédits. Certains abonnements peuvent vous permettre de réserver des créneaux gratuitement."
+          credits_panel_as_admin:
+            title: "Crédits"
+            remaining_credits_html: "{REMAINING} {REMAINING, plural, one{créneau} other{créneaux}} peuvent être réservés gratuitement."
+            used_credits_html: "<strong> {USED} {USED, plural, =0{crédit} one{crédit} other{crédits}}</strong> déjà utilisés."
+            no_credits: "Pas de crédits."
           prepaid_packs_panel:
             title: "Mes packs d'heures prépayées"
             name: "Nom du pack d'heures prépayées"
@@ -172,6 +179,8 @@ fr:
             cta_button: "Acheter un pack"
             no_packs: "Aucun pack prépayé disponible à la vente"
             reserved_for_subscribers_html: 'L''achat de packs prépayés est réservé aux abonnés. <a href="{LINK}">Abonnez-vous maintenant</a> pour en bénéficier.'
+          prepaid_packs_panel_as_admin:
+            title: "Packs d'heures prépayées"
       #public profil of a member
       members_show:
         members_list: "Liste des membres"

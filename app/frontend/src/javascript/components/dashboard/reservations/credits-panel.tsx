@@ -6,9 +6,11 @@ import { useTranslation } from 'react-i18next';
 import { Credit, CreditableType } from '../../../models/credit';
 import CreditAPI from '../../../api/credit';
 import { HtmlTranslate } from '../../base/html-translate';
+import { User } from '../../../models/user';
 
 interface CreditsPanelProps {
   userId: number,
+  currentUser?: User,
   onError: (message: string) => void,
   reservableType: CreditableType
 }
@@ -16,7 +18,7 @@ interface CreditsPanelProps {
 /**
  * List all available credits for the given user and the given resource
  */
-const CreditsPanel: React.FC<CreditsPanelProps> = ({ userId, onError, reservableType }) => {
+const CreditsPanel: React.FC<CreditsPanelProps> = ({ userId, currentUser = null, onError, reservableType }) => {
   const { t } = useTranslation('logged');
 
   const [credits, setCredits] = useState<Array<Credit>>([]);
@@ -37,16 +39,30 @@ const CreditsPanel: React.FC<CreditsPanelProps> = ({ userId, onError, reservable
   /**
    * Display a placeholder when there's no credits to display
    */
-  const noCredits = (): ReactNode => {
+  const noCredits = (currentUser: User): ReactNode => {
     return (
-      <div className="fab-alert fab-alert--warning">{t('app.logged.dashboard.reservations_dashboard.credits_panel.no_credits')}</div>
+      <div className="fab-alert fab-alert--warning">{t(`app.logged.dashboard.reservations_dashboard.${translationKeyPrefix(currentUser)}.no_credits`) /* eslint-disable-line fabmanager/scoped-translation */ }</div>
     );
+  };
+
+  /**
+   * returns true if there is a currentUser and current user is manager or admin
+   */
+  const currentUserIsAdminOrManager = (currentUser: User): boolean => {
+    return currentUser && (currentUser.role === 'admin' || currentUser.role === 'manager');
+  };
+
+  /**
+   * returns translation key prefix
+   */
+  const translationKeyPrefix = (currentUser: User): string => {
+    return currentUserIsAdminOrManager(currentUser) ? 'credits_panel_as_admin' : 'credits_panel';
   };
 
   return (
     <FabPanel className="credits-panel">
-      <p className="title">{t('app.logged.dashboard.reservations_dashboard.credits_panel.title')}</p>
-      {credits.length !== 0 &&
+      <p className="title">{t(`app.logged.dashboard.reservations_dashboard.${translationKeyPrefix(currentUser)}.title`) /* eslint-disable-line fabmanager/scoped-translation */}</p>
+      {credits.length !== 0 && !currentUserIsAdminOrManager(currentUser) &&
         <div className="fab-alert fab-alert--warning">
           {t('app.logged.dashboard.reservations_dashboard.credits_panel.info')}
         </div>
@@ -56,14 +72,14 @@ const CreditsPanel: React.FC<CreditsPanelProps> = ({ userId, onError, reservable
         {credits.map(c => <div key={c.id} className="credits-list-item">
           <p className="title">{c.creditable.name}</p>
           <p>
-            <HtmlTranslate trKey="app.logged.dashboard.reservations_dashboard.credits_panel.remaining_credits_html" options={{ REMAINING: remainingHours(c) }} /><br />
+            <HtmlTranslate trKey={`app.logged.dashboard.reservations_dashboard.${translationKeyPrefix(currentUser)}.remaining_credits_html` /* eslint-disable-line fabmanager/scoped-translation */} options={{ REMAINING: remainingHours(c) }} /><br />
             {(c.hours_used && c.hours_used > 0) &&
-              <HtmlTranslate trKey="app.logged.dashboard.reservations_dashboard.credits_panel.used_credits_html" options={{ USED: c.hours_used }} />
+              <HtmlTranslate trKey={`app.logged.dashboard.reservations_dashboard.${translationKeyPrefix(currentUser)}.used_credits_html` /* eslint-disable-line fabmanager/scoped-translation */} options={{ USED: c.hours_used }} />
             }
           </p>
         </div>)}
       </div>
-      {credits.length === 0 && noCredits()}
+      {credits.length === 0 && noCredits(currentUser)}
     </FabPanel>
   );
 };
