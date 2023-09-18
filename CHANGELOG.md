@@ -7,6 +7,7 @@
 - Improvement : add a notification to remind users to upload their supporting documents
 - Cancel payment schedule subscription after update the payment mean
 - admin can see reservations of a member
+- Fix a bug: unable to update card for payment schedule
 
 ## v6.0.14 2023 September 6
 
