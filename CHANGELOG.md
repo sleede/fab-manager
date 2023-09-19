@@ -8,6 +8,7 @@
 - Cancel payment schedule subscription after update the payment mean
 - admin can see reservations of a member
 - Fix a bug: unable to update card for payment schedule
+- Fix a bug: user is_allow_contact is actived by default
 
 ## v6.0.14 2023 September 6
 

@@ -1027,6 +1027,7 @@ Application.Controllers.controller('NewMemberController', ['$scope', '$state', '
     // Default member's profile parameters
     $scope.user = {
       plan_interval: '',
+      is_allow_contact: false,
       invoicing_profile_attributes: {},
       statistic_profile_attributes: {}
     };
