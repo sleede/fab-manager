@@ -9,6 +9,7 @@
 - admin can see reservations of a member
 - Fix a bug: unable to update card for payment schedule
 - Fix a bug: user is_allow_contact is actived by default
+- Fix a bug: unbale to export projects
 
 ## v6.0.14 2023 September 6
 

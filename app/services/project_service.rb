@@ -46,7 +46,8 @@ class ProjectService
 
     records = records.includes(:users, :project_image)
     records = records.page(params[:page]) if paginate
+    total = paginate ? records.total_count : records.count
 
-    { total: records.total_count, projects: records }
+    { total: total, projects: records }
   end
 end
