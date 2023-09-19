@@ -424,11 +424,11 @@ fr:
     notify_user_child_is_validated:
       subject: "Compte enfant validé"
       body:
-        account_validated: "Votre compte enfant a été validé. Vous avez maintenant accès aux fonctionnalités de réservation de l'événement."
+        child_validated: "Votre compte enfant a été validé. Vous avez maintenant accès aux fonctionnalités de réservation de l'événement."
     notify_user_child_is_invalidated:
       subject: "Compte enfant invalidé"
       body:
-        account_invalidated: "Votre compte enfant a été invalidé. Vous ne pourrez plus réserver l'événement, jusqu'à ce que votre compte enfant soit à nouveau validé."
+        child_invalidated: "Votre compte enfant a été invalidé. Vous ne pourrez plus réserver l'événement, jusqu'à ce que votre compte enfant soit à nouveau validé."
     notify_user_supporting_document_refusal:
       subject: "Vos pièces justificatives ont été refusées"
       body:
