@@ -103,7 +103,7 @@ export const EventForm: React.FC<EventFormProps> = ({ action, event, onError, on
   const onSubmit: SubmitHandler<Event> = (data: Event) => {
     setSubmitting(true);
     if (submitting) return;
-    if (data.pre_registration_end_date?.toString() === 'Invalid Date') {
+    if (data.pre_registration_end_date?.toString() === 'Invalid Date' || !data.pre_registration) {
       data.pre_registration_end_date = null;
     }
     if (action === 'update') {
