@@ -1715,7 +1715,7 @@ zu:
         secondary_color: "crwdns26488:0crwdne26488:0"
         customize_home_page: "crwdns26490:0crwdne26490:0"
         reset_home_page: "crwdns26492:0crwdne26492:0"
-        confirmation_required: crwdns26494:0crwdne26494:0
+        confirmation_required: "crwdns26494:0crwdne26494:0"
         confirm_reset_home_page: "crwdns26496:0crwdne26496:0"
         home_items: "crwdns26498:0crwdne26498:0"
         item_news: "crwdns26500:0crwdne26500:0"

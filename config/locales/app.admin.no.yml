@@ -1715,7 +1715,7 @@
         secondary_color: "sekundær farge"
         customize_home_page: "Tilpass hjemmeside"
         reset_home_page: "Tilbakestill hjemmesiden til opprinnelig status"
-        confirmation_required: Bekreftelse påkrevd
+        confirmation_required: "Bekreftelse påkrevd"
         confirm_reset_home_page: "Vil du virkelig tilbakestille startsiden til standardverdien?"
         home_items: "Hjemmeside-elementer"
         item_news: "Nyheter"

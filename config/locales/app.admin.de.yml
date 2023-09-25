@@ -1715,7 +1715,7 @@ de:
         secondary_color: "Sekundärfarbe"
         customize_home_page: "Startseite anpassen"
         reset_home_page: "Die Startseite auf den ursprünglichen Zustand zurücksetzen"
-        confirmation_required: Bestätigung erforderlich
+        confirmation_required: "Bestätigung erforderlich"
         confirm_reset_home_page: "Möchten Sie die Startseite wirklich auf ihren Anfangszustand zurücksetzen?"
         home_items: "Homepage-Elemente"
         item_news: "Neuigkeiten"

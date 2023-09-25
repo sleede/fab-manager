@@ -1715,7 +1715,7 @@ it:
         secondary_color: "colore secondario"
         customize_home_page: "Personalizza la home page"
         reset_home_page: "Reimposta la home page al suo stato iniziale"
-        confirmation_required: Conferma richiesta
+        confirmation_required: "Conferma richiesta"
         confirm_reset_home_page: "Vuoi davvero ripristinare la home page al suo stato iniziale?"
         home_items: "Elementi della home page"
         item_news: "News"

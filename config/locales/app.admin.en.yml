@@ -1863,7 +1863,6 @@ en:
         reservation_context_feature: "Enable the feature \"Reservation context\""
         reservation_context_options: Reservation context options
         add_a_reservation_context: Add a new context
-        confirmation_required: Confirmation required
         do_you_really_want_to_delete_this_reservation_context: "Do you really want to delete this context?"
         unable_to_delete_reservation_context_already_related_to_reservations: "Unable to delete this context because it is already associated to a reservation"
         unable_to_delete_reservation_context_an_error_occured: "Unable to delete: an error occurred"

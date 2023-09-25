@@ -35,7 +35,7 @@ es:
           confirm_instructions_html: "Una vez que haya terminado, haga clic en <strong>Guardar</strong> para confirmar su cuenta y empezar a utilizar la aplicación."
           duplicate_email_html: "Parece que tu email <strong>({EMAIL})</strong> ya está asociado a otra cuenta. Si esta cuenta no es la suya, haga clic en el siguiente botón para cambiar el email asociado a su cuenta de {PROVIDER}."
           edit_profile: "Cambiar mis datos"
-          after_edition_info_html: "Una vez que tus datos estén actualizados, haz <strong>clic en el botón de sincronización que aparece a continuación</strong>, o <strong>desconéctate y vuelve a conectarte</strong> para que los cambios surtan efecto."
+          after_edition_info_html: "Una vez que tus datos estén actualizados, haz <strong>clic en el botón de sincronización que aparece a continuación</strong>, o <strong>desconéctate y vuelve a conectarte</strong> para que los cambios hagan efecto."
           sync_profile: "Sincronizar mi perfil"
       event_reservation_item:
         event: "Event"
@@ -61,7 +61,7 @@ es:
           last_activity_on_: "Última vez activo {DATE}"
           i_want_to_change_group: "Quiero cambiar de grupo"
           your_subscription_expires_on_: "su suscripción acaba el"
-          no_subscriptions: "Sin suscripciones"
+          no_subscriptions: "Ninguna suscripcion"
           i_want_to_subscribe: "Quiero suscribirme"
           to_come: "por venir"
           approved: "aprobado"
@@ -92,8 +92,8 @@ es:
           used_for_profile: "Estos datos sólo se mostrarán en tu perfil"
           used_for_pricing_stats: "Estos datos se utilizarán para determinar los precios a los que tiene derecho, y con fines estadísticos"
           public_profile: "Tendrás un perfil público y otros usuarios podrán asociarte en sus proyectos"
-          trainings: "Cursos"
-          no_trainings: "Sin cursos"
+          trainings: "Formaciones"
+          no_trainings: "Ninguna formación"
           subscription: "Suscripción"
           group: "Grupo"
           or: "ó"
@@ -119,10 +119,10 @@ es:
           collaborators: "Colaboradores"
         #dashboard: my trainings
         trainings:
-          your_next_trainings: "Sus próximos cursos"
-          your_previous_trainings: "Sus cursos anteriores"
-          your_approved_trainings: "Sus cursos aprobados"
-          no_trainings: "Sin cursos"
+          your_next_trainings: "Sus próximas formaciones"
+          your_previous_trainings: "Sus formaciones anteriores"
+          your_approved_trainings: "Sus formaciones aprobadas"
+          no_trainings: "Ninguna formación"
           your_training_credits: "Tus créditos de entrenamiento"
           subscribe_for_credits: "Suscríbete para beneficiarte de entrenamientos gratuitos"
           register_for_free: "Regístrate gratis en los siguientes entrenamientos:"
@@ -156,7 +156,7 @@ es:
           upload_limits_alert_html: "Atención:<br>Puede enviar sus documentos en formato PDF o imágenes (JPEG, PNG). Tamaño máximo permitido: {SIZE} Mb"
           file_size_error: "El tamaño del archivo supera el límite ({SIZE} MB)"
           save: "Guardar"
-          browse: "Navegar"
+          browse: "Buscar"
           edit: "Editar"
         reservations_dashboard:
           machine_section_title: "Reservas de maquinas"
@@ -262,9 +262,9 @@ es:
         unable_to_use_pack_for_subsription_is_expired: "Debe tener una suscripción válida para utilizar sus horas restantes."
       #book a training
       trainings_reserve:
-        trainings_planning: "Plan de curso"
+        trainings_planning: "Plan de la formación"
         planning_of: "Plan de " #eg. Planning of 3d printer training
-        all_trainings: "Todos los cursos"
+        all_trainings: "Todas las formaciones"
         cancel_my_selection: "Cancelar mi selección"
         i_change: "Cambio"
         i_shift: "Cambio"

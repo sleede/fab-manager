@@ -1715,7 +1715,7 @@ fr:
         secondary_color: "la couleur secondaire"
         customize_home_page: "Personnaliser la page d'accueil"
         reset_home_page: "Remettre la page d'accueil dans son état initial"
-        confirmation_required: Confirmation requise
+        confirmation_required: "Confirmation requise"
         confirm_reset_home_page: "Voulez-vous vraiment remettre la page d'accueil à sa valeur d'usine ?"
         home_items: "Éléments de la page d'accueil"
         item_news: "Brève"

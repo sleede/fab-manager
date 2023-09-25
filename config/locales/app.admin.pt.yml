@@ -1715,7 +1715,7 @@ pt:
         secondary_color: "Cor secundária"
         customize_home_page: "Personalizar página inicial"
         reset_home_page: "Redefinir a página inicial para seu estado inicial"
-        confirmation_required: Confirmação obrigatória
+        confirmation_required: "Confirmação obrigatória"
         confirm_reset_home_page: "Você realmente quer redefinir a página inicial para o seu valor de fábrica?"
         home_items: "Itens da página inicial"
         item_news: "Notícias"

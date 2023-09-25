@@ -18,7 +18,7 @@ es:
         my_settings: "Mis ajustes"
         my_supporting_documents_files: "Mis documentos justificativos"
         my_projects: "Mis proyectos"
-        my_trainings: "Mis cursos"
+        my_trainings: "Mis formaciones"
         my_reservations: "Mis reservas"
         my_events: "Mis eventos"
         my_invoices: "Mis facturas"
@@ -39,7 +39,7 @@ es:
         #left menu (public)
         home: "Menú principal"
         reserve_a_machine: "Reservar una máquina"
-        trainings_registrations: "Registro de cursos"
+        trainings_registrations: "Registro de formaciones"
         events_registrations: "Registro de eventos"
         reserve_a_space: "Reservar un espacio"
         projects_gallery: "Galería de proyectos"
@@ -47,7 +47,7 @@ es:
         public_calendar: "Agenda"
         fablab_store: "Tienda"
         #left menu (admin)
-        trainings_monitoring: "Cursos"
+        trainings_monitoring: "Formaciones"
         manage_the_calendar: "Agenda"
         manage_the_users: "Usuarios"
         manage_the_invoices: "Facturas"
@@ -259,14 +259,14 @@ es:
       #list of trainings
       trainings_list:
         book: "Reservar"
-        the_trainings: "Lista de cursos"
+        the_trainings: "Lista de formaciones"
       #details of a training
       training_show:
-        book_this_training: "reservar plaza en este curso"
-        do_you_really_want_to_delete_this_training: "Está seguro de querer eliminar este curso?"
+        book_this_training: "Reservar la formación"
+        do_you_really_want_to_delete_this_training: "¿Está seguro de querer eliminar esta formación?"
         unauthorized_operation: "Operación no autorizada"
         confirmation_required: "Confirmación requerida"
-        the_training_cant_be_deleted_because_it_is_already_reserved_by_some_users: "El curso no puede borrarse porque ya ha sido reservado por algún usuario."
+        the_training_cant_be_deleted_because_it_is_already_reserved_by_some_users: "La formación no puede borrarse porque ya ha sido reservada por algún usuario."
       plan_card:
         AMOUNT_per_month: "{AMOUNT} / mes"
         i_subscribe_online: "Me suscribo en línea"
@@ -378,7 +378,7 @@ es:
         calendar: "Calendario"
         show_unavailables: "Mostrar campos inválidos"
         filter_calendar: "Filtrar calendario"
-        trainings: "Cursos"
+        trainings: "Formaciones"
         machines: "Máquinas"
         spaces: "Espacios"
         events: "Eventos"

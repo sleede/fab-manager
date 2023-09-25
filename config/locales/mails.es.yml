@@ -15,7 +15,7 @@ es:
         account_name: "Nombre de usuario:"
         password: "Contraseña:"
         temporary_password: "Esta es una contraseña temporal, puede modificarla en la pantalla <<Mi cuenta>>."
-        keep_advantages: "Con esta cuenta, guarda todas las ventajas relacionadas con su perfil de usuario de Fab Lab (cursos, planes de suscripción)."
+        keep_advantages: "Con esta cuenta, guarda todas las ventajas relacionadas con su perfil de usuario de Fab Lab (formaciones, planes de suscripción)."
         to_use_platform: "Para usar el sitio web, por favor"
         logon_or_login: "crea una nueva cuenta o inicia sesión haciendo clic aquí."
         token_if_link_problem: "Si experimenta problemas con el enlace, puede introducir el siguiente código en el primer intento de conexión:"
@@ -63,9 +63,9 @@ es:
         the_member: "El usuario"
         accepted_your_invitation_to_take_part_in_the_project: "ha aceptado unirse a tu proyecto:"
     notify_user_training_valid:
-      subject: "Su curso ha sido validado"
+      subject: "Su formación ha sido validada"
       body:
-        your_training: "Su curso"
+        your_training: "Su formación"
         has_been_validated: "Ha sido validado"
     notify_member_subscribed_plan:
       subject: "Su suscripción ha sido correctamente comprada"
