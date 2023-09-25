@@ -38,10 +38,10 @@ fr:
           after_edition_info_html: "Une fois que vos données sont à jour, <strong>cliquez sur le bouton de synchronisation ci-dessous</strong>, ou <strong>déconnectez-vous puis reconnectez-vous</strong> pour que vos changements prennent effet."
           sync_profile: "Synchroniser mon profil"
       event_reservation_item:
-        event: 'Événement'
-        family: 'Réservé aux membres'
-        nominative: 'Nominatif'
-        pre_registration: 'Pré-inscription'
+        event: "Événement"
+        family: "Réservé aux membres"
+        nominative: "Nominatif"
+        pre_registration: "Pré-inscription"
         NUMBER_normal_places_reserved: "{NUMBER} {NUMBER, plural, =0{} =1{place normale réservée} other{places normales réservées}}"
         NUMBER_of_NAME_places_reserved: "{NUMBER} {NUMBER, plural, =0{} =1{place {NAME} réservée} other{places {NAME} réservées}}"
         tracking_your_reservation: "Suivi de votre réservation"

@@ -93,10 +93,10 @@ fr:
         member_reserved_html: "Le membre %{NAME} a réservé <strong><em>%{RESERVABLE}</em></strong>."
         reserved_slots: "Les créneaux réservés sont :"
     notify_admin_member_pre_booked_reservation:
-      subject: "Nouvelle pre-inscription"
+      subject: "Nouvelle pré-inscription"
       body:
-        member_reserved_html: "Le membre %{NAME} a pre-inscrit <strong><em>%{RESERVABLE}</em></strong>."
-        reserved_slots: "Les créneaux pre-inscrit sont :"
+        member_reserved_html: "Le membre %{NAME} a pré-inscrit <strong><em>%{RESERVABLE}</em></strong>."
+        reserved_slots: "Les créneaux réservés sont :"
     notify_member_slot_is_modified:
       subject: "Votre créneau de réservation a bien été modifié"
       body:
@@ -468,7 +468,7 @@ fr:
     notify_member_reservation_validated:
       subject: "Votre réservation a bien été validé"
       body:
-        reservation_validated_html: "Votre réservation <strong><em>%{RESERVATION}</em></strong> a bien été validé."
+        reservation_validated_html: "Votre réservation <strong><em>%{RESERVABLE}</em></strong> a bien été validé."
         your_reserved_slots: "Les créneaux que vous avez réservés sont :"
     notify_admin_reservation_validated:
       subject: "Réservation a bien été validé"
@@ -478,7 +478,7 @@ fr:
     notify_member_reservation_invalidated:
       subject: "Votre demande de pré-inscription n'a pas été validée"
       body:
-        reservation_invalidated_html: "Votre réservation <strong><em>%{RESERVATION}</em></strong> n'a pas été validée."
+        reservation_invalidated_html: "Votre réservation <strong><em>%{RESERVABLE}</em></strong> n'a pas été validée."
     notify_admin_reservation_invalidated:
       subject: "Demande de pré-inscription n'a pas été validée"
       body:

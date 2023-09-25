@@ -14,6 +14,7 @@ it:
         #dashboard sections
         dashboard: "Scrivania"
         my_profile: "Il mio profilo"
+        my_children: "My Children"
         my_settings: "Le mie impostazioni"
         my_supporting_documents_files: "I miei documenti"
         my_projects: "I miei progetti"
@@ -317,6 +318,9 @@ it:
         event_description: "Descrizione dell'evento"
         downloadable_documents: "Documenti scaricabili"
         information_and_booking: "Informazioni e prenotazioni"
+        event_type:
+          family: "Event reserved for members"
+          nominative: "Nominative event"
         dates: "Date"
         beginning: "Inizio:"
         ending: "Fine:"
@@ -332,9 +336,12 @@ it:
         ticket: "{NUMBER, plural, one{biglietto} other{biglietti}}"
         make_a_gift_of_this_reservation: "Regala questa prenotazione"
         thank_you_your_payment_has_been_successfully_registered: "Grazie. Il tuo pagamento è stato registrato con successo!"
+        thank_you_your_pre_registration_has_been_successfully_saved: "Thank you. Your pre-registration has been successfully saved!"
         you_can_find_your_reservation_s_details_on_your_: "Puoi trovare i dettagli della tua prenotazione nella tua"
+        informed_by_email_your_pre_registration: "You will be kept informed by email of the progress made regarding your pre-registration."
         dashboard: "scrivania"
         you_booked_DATE: "Hai prenotato ({DATE}):"
+        you_pre_booked_DATE: "Your pre-registration ({DATE}):"
         canceled_reservation_SEATS: "Prenotazione annullata ({SEATS} posti)"
         book: "Prenota"
         confirm_and_pay: "Conferma e paga"
@@ -362,6 +369,10 @@ it:
         view_event_list: "Visualizza gli eventi in programma"
         share_on_facebook: "Condividi su Facebook"
         share_on_twitter: "Condividi su Twitter"
+        last_name_and_first_name: "Last name and first name"
+        pre_book: "Pre-book"
+        pre_registration_end_date: "Deadline for pre-registration"
+        pre_registration: "Pre-registration"
       #public calendar
       calendar:
         calendar: "Calendario"
@@ -481,6 +492,35 @@ it:
       member_select:
         select_a_member: "Seleziona un membro"
         start_typing: "Iniziare a digitare..."
+      children_dashboard:
+        heading: "Children"
+        member_heading: "My Children"
+        add_child: "Add a child"
+      child_modal:
+        edit_child: "Edit child"
+        new_child: "New child"
+      child_form:
+        child_form_info: "Only children under 18 years old can be added to your Family account. Supporting documents may be requested to validate your child's account and allow you to register them for events."
+        first_name: "First name"
+        last_name: "Last name"
+        birthday: "Birthday"
+        email: "Email"
+        phone: "Phone"
+        save: "Save"
+        supporting_documents: "Supporting documents"
+        to_complete: "To complete"
+        refuse_documents_info: "You can refuse a selection of documents by clicking on the following button."
+        refuse_documents: "Refuse documents"
+      child_item:
+        first_name: "Child first name"
+        last_name: "Child last name"
+        birthday: "Birthday"
+        deleted: "The child has been deleted."
+        unable_to_delete: "Unable to delete the child."
+      delete_child_modal:
+        confirmation_required: "Confirmation required"
+        confirm: "Confirm"
+        confirm_delete_child: "Do you really want to remove this child?"
       tour:
         conclusion:
           title: "Grazie per la vostra attenzione"

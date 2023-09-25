@@ -607,9 +607,9 @@ fr:
         do_you_really_want_to_delete_this_price_category: "Êtes vous sur de vouloir supprimer cette catégorie tarifaire ?"
         price_category_successfully_deleted: "Catégorie tarifaire supprimée avec succès."
         price_category_deletion_failed: "Échec de la suppression de la catégorie tarifaire."
-        types: 'Types'
+        types: "Types"
         event_type:
-          standard: 'Standard'
+          standard: "Standard"
           family: "Réservé aux membres"
           nominative: "Nominatif"
         pre_registration: "Pré-inscription"
@@ -675,7 +675,7 @@ fr:
         confirm_payment: "Confirmer le paiement"
         confirm_payment_of_html: "{ROLE, select, admin{Encaisser} other{Payer}} : {AMOUNT}" #(contexte : validate a payment of $20,00)
         offer_this_reservation: "J'offre cette réservation"
-        i_have_received_the_payment:  "J'ai reçu le paiement"
+        i_have_received_the_payment: "J'ai reçu le paiement"
         reservation_was_successfully_paid: "La réservation a bien été payée."
         present: "Présenter"
         confirm_present: "Confirmer la présence"
@@ -1246,6 +1246,14 @@ fr:
           member_filter_not_confirmed: "Non confirmés"
           member_filter_inactive_for_3_years: "Inactifs depuis 3 ans"
           member_filter_not_validated: "Non validés"
+      members_list_item:
+        item_type: "membre"
+        surname: "Nom de famille"
+        first_name: "Prénom"
+        phone: "Téléphone"
+        email: "Courriel"
+        group: "Groupe"
+        subscription: "Abonnement"
       #add a member
       members_new:
         add_a_member: "Ajouter un membre"
@@ -1858,10 +1866,6 @@ fr:
         do_you_really_want_to_delete_this_reservation_context: "Êtes-vous sûr de vouloir supprimer cette nature ?"
         unable_to_delete_reservation_context_already_related_to_reservations: "Impossible de supprimer ce contexte car il est déjà associé à une réservation"
         unable_to_delete_reservation_context_an_error_occured: "Impossible de supprimer : une erreur est survenue"
-        projects_list_member_filter_presence: "Presence of member filter on projects list"
-        projects_list_date_filters_presence: "Presence of date filters on projects list"
-        project_categories_filter_placeholder: "Placeholder for categories filter in project gallery"
-        project_categories_wording: "Wording used to replace \"Categories\" on public pages"
         family_account: "Compte famille"
         family_account_info_html: "Le compte Famille permet à vos membres d'ajouter leurs enfants de moins de 18 ans sur leur propre compte et de les inscrire directement aux évènements de type Famille. Vous pouvez aussi demander des justificatifs pour chaque enfant et valider leur compte."
         enable_family_account: "Activer l'option Compte Famille"

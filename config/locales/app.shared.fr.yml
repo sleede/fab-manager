@@ -449,6 +449,7 @@ fr:
         select_all: "Tout sélectionner"
         unselect_all: "Tout déselectionner"
       form_file_upload:
+        placeholder: "Ajouter un fichier"
         browse: "Parcourir"
         edit: "Modifier"
       form_image_upload:

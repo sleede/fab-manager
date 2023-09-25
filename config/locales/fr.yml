@@ -49,7 +49,7 @@ fr:
       gateway_amount_too_large: "Les paiements supérieurs à %{AMOUNT} ne sont pas pris en charge. Merci de passer commande directement à l'accueil."
       product_in_use: "Ce produit a déjà été commandé"
       slug_already_used: "est déjà utilisée"
-      birthday_less_than_18_years_ago: "l'age devez avoir au moins 18 ans."
+      birthday_less_than_18_years_ago: "l'age devez avoir au moins 18 ans"
   coupon:
     code_format_error: "seules les majuscules, chiffres et tirets sont autorisés"
   apipie:
@@ -288,7 +288,7 @@ fr:
       notify_admin_member_create_reservation:
         a_RESERVABLE_reservation_was_made_by_USER_html: "Une réservation <strong><em>%{RESERVABLE}</em></strong> a été effectuée par <strong><em>%{USER}</em></strong>."
       notify_admin_member_pre_booked_reservation:
-        a_RESERVABLE_reservation_was_made_by_USER_html: "Une pre-inscription <strong><em>%{RESERVABLE}</em></strong> a été effectuée par <strong><em>%{USER}</em></strong>."
+        a_RESERVABLE_reservation_was_made_by_USER_html: "Une pré-inscription <strong><em>%{RESERVABLE}</em></strong> a été effectuée par <strong><em>%{USER}</em></strong>."
       notify_admin_profile_complete:
         account_imported_from_PROVIDER_UID_has_completed_its_information_html: "Le compte importé depuis <strong><em>%{PROVIDER}</strong> (%{UID})</em> a complété ses informations."
       notify_admin_slot_is_canceled:
@@ -324,7 +324,7 @@ fr:
       notify_member_create_reservation:
         your_reservation_RESERVABLE_was_successfully_saved_html: "Votre réservation <strong><em>%{RESERVABLE}</em></strong> a bien été enregistrée."
       notify_member_pre_booked_reservation:
-        your_reservation_RESERVABLE_was_successfully_saved_html: "Votre pré-inscription <strong><em>%{RESERVABLE}</em></strong> a bien été prise en compte."
+        your_reservation_RESERVABLE_was_successfully_saved_html: "Votre réservation <strong><em>%{RESERVABLE}</em></strong> a bien été enregistrée."
       notify_member_reservation_reminder:
         reminder_you_have_a_reservation_RESERVABLE_to_be_held_on_DATE_html: "Rappel : Vous avez une réservation <strong>%{RESERVABLE}</strong> qui aura lieu le <em>%{DATE}</em>"
       notify_member_slot_is_canceled:
@@ -449,9 +449,9 @@ fr:
       notify_admin_user_supporting_document_files_updated:
         supporting_document_files_uploaded: "Le membre <strong><em>%{NAME}</strong></em> a modifié un justificatif."
       notify_admin_user_child_supporting_document_files_created:
-        supporting_document_files_uploaded: "L'enfant <strong><em>%{NAME}</strong></em> a téléversé un nouveau justificatif."
+        supporting_document_files_uploaded: "Le membre <strong><em>%{NAME}</strong></em> a téléversé un nouveau justificatif."
       notify_admin_user_child_supporting_document_files_updated:
-        supporting_document_files_uploaded: "L'enfant <strong><em>%{NAME}</strong></em> a modifié un justificatif."
+        supporting_document_files_uploaded: "Le membre <strong><em>%{NAME}</strong></em> a modifié un justificatif."
       notify_user_is_validated:
         account_validated: "Votre compte est valide."
       notify_user_is_invalidated:
@@ -485,7 +485,7 @@ fr:
       notify_admin_reservation_invalidated:
         a_RESERVABLE_reservation_was_invalidated_html: "La réservation de <strong><em>%{RESERVABLE}</em></strong> de <strong><em>%{NAME}</em></strong> a été invalidée."
       notify_user_when_child_age_will_be_18:
-        child_age_will_be_18_years_ago: "Votre enfant %{NAME} va avoir 18ans, le %{DATE}, date à laquelle il sera automatiquement détaché de votre compte Famille. Il devra se créer son propre compte pour effectuer ses réservations."
+        child_age_will_be_18_years_ago: "Votre enfant %{NAME} va avoir 18 ans, le %{DATE}, date à laquelle il sera automatiquement détaché de votre compte Famille. Il devra se créer son propre compte pour effectuer ses réservations."
   #statistics tools for admins
   statistics:
     subscriptions: "Abonnements"
@@ -741,6 +741,7 @@ fr:
     project_categories_filter_placeholder: "Dans la galerie de projets, renommer le filtre \"Toutes les catégories\""
     project_categories_wording: "Dans la fiche projet, renommer l'intitulé de l'encart Catégories"
     reservation_context_feature: "Forcer le membre à sélectionner la nature de sa réservation lors de la réservation"
+    family_account: "Compte de famille"
   #statuses of projects
   statuses:
     new: "Nouveau"
