@@ -15,7 +15,7 @@ es:
         account_name: "Nombre de usuario:"
         password: "Contraseña:"
         temporary_password: "Esta es una contraseña temporal, puede modificarla en la pantalla <<Mi cuenta>>."
-        keep_advantages: "Con esta cuenta, guarda todas las ventajas relacionadas con su perfil de usuario de Fab Lab (cursos, planes de suscripción)."
+        keep_advantages: "Con esta cuenta, guarda todas las ventajas relacionadas con su perfil de usuario de Fab Lab (formaciones, planes de suscripción)."
         to_use_platform: "Para usar el sitio web, por favor"
         logon_or_login: "crea una nueva cuenta o inicia sesión haciendo clic aquí."
         token_if_link_problem: "Si experimenta problemas con el enlace, puede introducir el siguiente código en el primer intento de conexión:"
@@ -63,9 +63,9 @@ es:
         the_member: "El usuario"
         accepted_your_invitation_to_take_part_in_the_project: "ha aceptado unirse a tu proyecto:"
     notify_user_training_valid:
-      subject: "Su curso ha sido validado"
+      subject: "Su formación ha sido validada"
       body:
-        your_training: "Su curso"
+        your_training: "Su formación"
         has_been_validated: "Ha sido validado"
     notify_member_subscribed_plan:
       subject: "Su suscripción ha sido correctamente comprada"
@@ -78,6 +78,11 @@ es:
       body:
         reservation_saved_html: "Su reserva <strong><em>%{RESERVATION}</em></strong> se ha registrado correctamente"
         your_reserved_slots: "Sus espacios reservados son:"
+    notify_member_pre_booked_reservation:
+      subject: "Your pre-registration has been successfully saved"
+      body:
+        reservation_saved_html: "You pre-registration <strong><em>%{RESERVATION}</em></strong> has been successfully saved"
+        your_reserved_slots: "Your pre-booked slots are:"
     notify_member_subscribed_plan_is_changed:
       subject: "Su suscripción ha sido actualizada"
       body:
@@ -87,6 +92,11 @@ es:
       body:
         member_reserved_html: "El usuario %{NAME} ha reservado <strong><em>%{RESERVABLE}</em></strong>."
         reserved_slots: "Los espacios de reserva están aquí:"
+    notify_admin_member_pre_booked_reservation:
+      subject: "New pre-registration"
+      body:
+        member_reserved_html: "User %{NAME} has pre-reserved <strong><em>%{RESERVABLE}</em></strong>."
+        reserved_slots: "Pre-reserved slots are:"
     notify_member_slot_is_modified:
       subject: "Su espacio de reserva ha sido cambiado correctamente"
       body:
@@ -104,6 +114,10 @@ es:
         new_account_created: "Se ha creado un nuevo usuario en la web:"
         user_of_group_html: "El usuario se ha registrado en el grupo <strong>%{GROUP}</strong>"
         account_for_organization: "Esta cuenta gestiona una organización :"
+    notify_admin_child_created:
+      subject: "A user's child has been created"
+      body:
+        new_child_created: "A new user's child has been created on the website"
     notify_admin_subscribed_plan:
       subject: "Se ha adquirido un plan de suscripción"
       body:
@@ -389,6 +403,16 @@ es:
       body:
         user_update_supporting_document_file: "El miembro %{NAME} ha modificado los siguientes documentos justificativos:"
         validate_user: "Por favor, valida esta cuenta"
+    notify_admin_user_child_supporting_document_files_created:
+      subject: "Supporting documents of child uploaded by a member"
+      body:
+        supporting_document_files_uploaded_below: "Child %{NAME} has uploaded the following supporting documents:"
+        validate_child: "Please validate this child account"
+    notify_admin_user_child_supporting_document_files_updated:
+      subject: "Child's supporting documents have changed"
+      body:
+        child_update_supporting_document_file: "Child %{NAME} has modified the supporting documents below:"
+        validate_child: "Please validate this child account"
     notify_user_is_validated:
       subject: "Cuenta validada"
       body:
@@ -397,15 +421,36 @@ es:
       subject: "Cuenta invalidada"
       body:
         account_invalidated: "Su cuenta ha sido invalidada. No podrás seguir reservando hasta que tu cuenta sea validada de nuevo."
+    notify_user_child_is_validated:
+      subject: "Child account validated"
+      body:
+        child_validated: "Your child account was validated. Now, you have access to event booking features."
+    notify_user_child_is_invalidated:
+      subject: "Child account invalidated"
+      body:
+        child_invalidated: "Your child account was invalidated. You won't be able to book event, until your child account is validated again."
     notify_user_supporting_document_refusal:
       subject: "Sus justificantes han sido rechazados"
       body:
         user_supporting_document_files_refusal: "Sus justificantes han sido rechazados:"
         action: "Por favor, vuelva a subir nuevos documentos justificativos."
+    notify_user_supporting_document_reminder:
+      subject: "Reminder to upload your supporting documents"
+      body:
+        user_supporting_document_reminder: "This is a reminder for you to upload your supporting documents."
     notify_admin_user_supporting_document_refusal:
       subject: "Los justificantes del afiliado de un miembro han sido rechazados"
       body:
         user_supporting_document_files_refusal: "Los justificantes del miembro %{NAME} han sido rechazados por %{OPERATOR}:"
+    notify_user_child_supporting_document_refusal:
+      subject: "Your child's supporting documents were refused"
+      body:
+        user_child_supporting_document_files_refusal: "Your supporting documents were refused:"
+        action: "Please re-upload some new supporting documents."
+    notify_admin_user_child_supporting_document_refusal:
+      subject: "A child's supporting documents were refused"
+      body:
+        user_child_supporting_document_files_refusal: "Child %{NAME}'s supporting documents were rejected by %{OPERATOR}:"
     shared:
       hello: "¡Hola %{user_name}!"
     notify_user_order_is_ready:
@@ -420,3 +465,25 @@ es:
       subject: "Su comando fue reembolsado"
       body:
         notify_user_order_is_refunded: "Su comando %{REFERENCE} fue reembolsado."
+    notify_member_reservation_validated:
+      subject: "Your reservation was validated"
+      body:
+        reservation_validated_html: "<strong><em>%{RESERVABLE}</em></strong> was validated."
+        your_reserved_slots: "Your reserved slots are:"
+    notify_admin_reservation_validated:
+      subject: "Pre-registration was validated"
+      body:
+        reservation_validated_html: "<strong><em>%{RESERVABLE}</em></strong> of %{NAME} was validated."
+        reserved_slots: "Reserved slots are:"
+    notify_member_reservation_invalidated:
+      subject: "Your pre-registration wasn't validated"
+      body:
+        reservation_invalidated_html: "<strong><em>%{RESERVABLE}</em></strong> wasn't validated."
+    notify_admin_reservation_invalidated:
+      subject: "Pre-registration wasn't validated"
+      body:
+        reservation_invalidated_html: "<strong><em>%{RESERVABLE}</em></strong> of %{NAME} wasn't validated."
+    notify_user_when_child_age_will_be_18:
+      subject: "Your child will be 18 years old"
+      body:
+        child_age_will_be_18_years_ago: "Your child %{NAME} will turn 18 on %{DATE}, at which point they will be automatically detached from your Family account. They will need to create their own account in order to make reservations."

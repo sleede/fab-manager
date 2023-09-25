@@ -47,11 +47,14 @@ class User < ApplicationRecord
 
   has_many :accounting_periods, foreign_key: 'closed_by', dependent: :nullify, inverse_of: :user
 
-  has_many :supporting_document_files, dependent: :destroy
-  has_many :supporting_document_refusals, dependent: :destroy
+  has_many :supporting_document_files, as: :supportable, dependent: :destroy
+  has_many :supporting_document_refusals, as: :supportable, dependent: :destroy
 
   has_many :notifications, as: :receiver, dependent: :destroy
   has_many :notification_preferences, dependent: :destroy
+
+  has_many :children, dependent: :destroy
+  accepts_nested_attributes_for :children, allow_destroy: true
 
   # fix for create admin user
   before_save do
@@ -90,6 +93,7 @@ class User < ApplicationRecord
   scope :not_confirmed, -> { where(confirmed_at: nil) }
   scope :inactive_for_3_years, -> { where('users.last_sign_in_at < ?', 3.years.ago) }
   scope :not_validated, -> { where(validated_at: nil) }
+  scope :supporting_documents_reminder_not_sent, -> { where(supporting_documents_reminder_sent_at: nil) }
 
   def to_json(*)
     ApplicationController.new.view_context.render(

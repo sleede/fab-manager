@@ -27,6 +27,7 @@
 @import "modules/base/edit-destroy-buttons";
 @import "modules/base/editorial-block";
 @import "modules/base/fab-alert";
+@import "modules/base/fab-badge";
 @import "modules/base/fab-button";
 @import "modules/base/fab-input";
 @import "modules/base/fab-modal";
@@ -47,11 +48,16 @@
 @import "modules/dashboard/reservations/prepaid-packs-panel";
 @import "modules/dashboard/reservations/reservations-dashboard";
 @import "modules/dashboard/reservations/reservations-panel";
-@import "modules/events/event";
-@import "modules/events/events";
 @import "modules/events/event-form";
+@import "modules/events/event-reservation";
+@import "modules/events/event";
+@import "modules/events/events-dashboard";
+@import "modules/events/events-settings";
+@import "modules/events/events";
 @import "modules/events/update-recurrent-modal";
-@import "modules/events/events-settings.scss";
+@import "modules/family-account/child-form";
+@import "modules/family-account/child-item";
+@import "modules/family-account/children-dashboard";
 @import "modules/form/abstract-form-item";
 @import "modules/form/form-input";
 @import "modules/form/form-multi-file-upload";

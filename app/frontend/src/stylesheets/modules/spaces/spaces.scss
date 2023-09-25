@@ -11,6 +11,94 @@
     grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
     gap: 3.2rem;
 
-    .panel { margin-bottom: 0; }
+    .panel {
+      position: relative;
+      margin-bottom: 0;
+    }
+  }
+
+  &-relations {
+    padding: 1.6rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    row-gap: 1.6rem;
+    background-color: var(--gray-soft-light);
+    border-radius: var(--border-radius);
+
+    .space-parent {
+      @include text-lg(500);
+      color: var(--gray-hard-light);
+      margin: 0;
+    }
+
+    .space-current {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+
+      &.has-parent::before {
+        content: "";
+        display: block;
+        width: 1rem;
+        height: 1rem;
+        border-bottom: 1px solid var(--gray-hard-lightest);
+        border-left: 1px solid var(--gray-hard-lightest);
+      }
+
+      &-name {
+        padding: 0.8rem;
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        @include text-lg(600);
+        color: var(--main);
+        background-color: var(--gray-soft-lightest);
+        border-radius: var(--border-radius-sm);
+        svg { color: var(--gray-hard-darkest); }
+      }
+    }
+
+    .related-machines,
+    .related-spaces {
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      list-style-type: none;
+    }
+    .related-spaces {
+      position: relative;
+      padding-inline-start: 2.6rem;
+      @include text-lg(500);
+      color: var(--gray-hard-light);
+
+      &::before {
+        position: absolute;
+        top: 0.5rem;
+        left: 0.8rem;
+        content: "";
+        display: block;
+        width: 1rem;
+        height: 1rem;
+        border-bottom: 1px solid var(--gray-hard-lightest);
+        border-left: 1px solid var(--gray-hard-lightest);
+      }
+    }
+    .related-machines {
+      position: relative;
+
+      &::before {
+        position: absolute;
+        top: 0.4rem;
+        left: 1.6rem;
+        content: "";
+        display: block;
+        width: 0.6rem;
+        height: 0.6rem;
+        border-bottom: 1px solid var(--gray-hard-lightest);
+        border-left: 1px solid var(--gray-hard-lightest);
+      }
+    }
   }
 }

@@ -19,6 +19,8 @@ class Notification < ApplicationRecord
       SQL
   }
 
+  scope :with_valid_notification_type, -> { joins(:notification_type).where(notification_types: { name: NOTIFICATIONS_TYPES.map { |nt| nt[:name] } }) }
+
   validates :receiver_id,
             :receiver_type,
             :attached_object_id,

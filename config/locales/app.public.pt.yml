@@ -14,6 +14,7 @@ pt:
         #dashboard sections
         dashboard: "Painel de controle"
         my_profile: "Meu Perfil"
+        my_children: "My Children"
         my_settings: "Minhas Configurações"
         my_supporting_documents_files: "Meus documentos"
         my_projects: "Meus Projetos"
@@ -317,6 +318,9 @@ pt:
         event_description: "Descrição do evento"
         downloadable_documents: "Documentos para download"
         information_and_booking: "Informações e reservas"
+        event_type:
+          family: "Event reserved for members"
+          nominative: "Nominative event"
         dates: "Datas"
         beginning: "Início:"
         ending: "Término:"
@@ -332,9 +336,12 @@ pt:
         ticket: "{NUMBER, plural, one{ingresso} other{ingressos}}"
         make_a_gift_of_this_reservation: "Doe esta reserva"
         thank_you_your_payment_has_been_successfully_registered: "Thank you. Your payment has been successfully registered!"
+        thank_you_your_pre_registration_has_been_successfully_saved: "Thank you. Your pre-registration has been successfully saved!"
         you_can_find_your_reservation_s_details_on_your_: "Você pode encontrar detalhes da sua reserva em seu"
+        informed_by_email_your_pre_registration: "You will be kept informed by email of the progress made regarding your pre-registration."
         dashboard: "painel de controle"
         you_booked_DATE: "Sua reserva ({DATE}):"
+        you_pre_booked_DATE: "Your pre-registration ({DATE}):"
         canceled_reservation_SEATS: "Reserva cancelada ({SEATS} lugares)"
         book: "Reservar"
         confirm_and_pay: "Confirmar e pagar"
@@ -362,6 +369,10 @@ pt:
         view_event_list: "Visualizar próximos eventos"
         share_on_facebook: "Compartilhar no Facebook"
         share_on_twitter: "Compartilhar no Twitter"
+        last_name_and_first_name: "Last name and first name"
+        pre_book: "Pre-book"
+        pre_registration_end_date: "Deadline for pre-registration"
+        pre_registration: "Pre-registration"
       #public calendar
       calendar:
         calendar: "Calendário"
@@ -481,6 +492,35 @@ pt:
       member_select:
         select_a_member: "Selecionar um membro"
         start_typing: "Comece a digitar..."
+      children_dashboard:
+        heading: "Children"
+        member_heading: "My Children"
+        add_child: "Add a child"
+      child_modal:
+        edit_child: "Edit child"
+        new_child: "New child"
+      child_form:
+        child_form_info: "Only children under 18 years old can be added to your Family account. Supporting documents may be requested to validate your child's account and allow you to register them for events."
+        first_name: "First name"
+        last_name: "Last name"
+        birthday: "Birthday"
+        email: "Email"
+        phone: "Phone"
+        save: "Save"
+        supporting_documents: "Supporting documents"
+        to_complete: "To complete"
+        refuse_documents_info: "You can refuse a selection of documents by clicking on the following button."
+        refuse_documents: "Refuse documents"
+      child_item:
+        first_name: "Child first name"
+        last_name: "Child last name"
+        birthday: "Birthday"
+        deleted: "The child has been deleted."
+        unable_to_delete: "Unable to delete the child."
+      delete_child_modal:
+        confirmation_required: "Confirmation required"
+        confirm: "Confirm"
+        confirm_delete_child: "Do you really want to remove this child?"
       tour:
         conclusion:
           title: "Obrigado pela sua atenção"

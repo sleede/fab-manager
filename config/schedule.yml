@@ -62,4 +62,13 @@ auto_cancel_authorizations:
   class: TrainingAuthorizationWorker
   queue: default
 
+supporting_documents_reminder_worker:
+  cron: "0 8 * * *" # every day, at 8
+  class: SupportingDocumentsReminderWorker
+
+child_age_will_be_18:
+  cron: "0 0 0 * * *" # every day, at midnight
+  class: ChildAgeWorker
+  queue: default
+
 <%= PluginRegistry.insert_code('yml.schedule') %>

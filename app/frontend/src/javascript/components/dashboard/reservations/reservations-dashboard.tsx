@@ -14,13 +14,14 @@ declare const Application: IApplication;
 
 interface ReservationsDashboardProps {
   onError: (message: string) => void,
-  user: User
+  user: User,
+  currentUser?: User
 }
 
 /**
  * User dashboard showing everything about his spaces/machine reservations and also remaining credits
  */
-const ReservationsDashboard: React.FC<ReservationsDashboardProps> = ({ onError, user }) => {
+const ReservationsDashboard: React.FC<ReservationsDashboardProps> = ({ onError, user, currentUser = null }) => {
   const { t } = useTranslation('logged');
   const [modules, setModules] = useState<Map<SettingName, string>>();
 
@@ -34,17 +35,17 @@ const ReservationsDashboard: React.FC<ReservationsDashboardProps> = ({ onError, 
     <div className="reservations-dashboard">
       {modules?.get('machines_module') !== 'false' && <div className="section">
         <p className="section-title">{t('app.logged.dashboard.reservations_dashboard.machine_section_title')}</p>
-        <CreditsPanel userId={user.id} onError={onError} reservableType="Machine" />
-        <PrepaidPacksPanel user={user} onError={onError} />
-        <ReservationsPanel userId={user.id} onError={onError} reservableType="Machine" />
+        <CreditsPanel userId={user.id} currentUser={currentUser} onError={onError} reservableType="Machine" />
+        <PrepaidPacksPanel user={user} currentUser={currentUser} onError={onError} />
+        <ReservationsPanel userId={user.id} currentUser={currentUser} onError={onError} reservableType="Machine" />
       </div>}
       {modules?.get('spaces_module') !== 'false' && <div className="section">
         <p className="section-title">{t('app.logged.dashboard.reservations_dashboard.space_section_title')}</p>
-        <CreditsPanel userId={user.id} onError={onError} reservableType="Space" />
-        <ReservationsPanel userId={user.id} onError={onError} reservableType="Space" />
+        <CreditsPanel userId={user.id} currentUser={currentUser} onError={onError} reservableType="Space" />
+        <ReservationsPanel userId={user.id} currentUser={currentUser} onError={onError} reservableType="Space" />
       </div>}
     </div>
   );
 };
 
-Application.Components.component('reservationsDashboard', react2angular(ReservationsDashboard, ['onError', 'user']));
+Application.Components.component('reservationsDashboard', react2angular(ReservationsDashboard, ['onError', 'user', 'currentUser']));

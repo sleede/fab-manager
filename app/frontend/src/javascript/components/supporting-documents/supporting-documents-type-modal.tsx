@@ -14,18 +14,19 @@ interface SupportingDocumentsTypeModalProps {
   onError: (message: string) => void,
   groups: Array<Group>,
   proofOfIdentityType?: SupportingDocumentType,
+  documentType: 'User' | 'Child',
 }
 
 /**
  * Modal dialog to create/edit a supporting documents type
  */
-export const SupportingDocumentsTypeModal: React.FC<SupportingDocumentsTypeModalProps> = ({ isOpen, toggleModal, onSuccess, onError, proofOfIdentityType, groups }) => {
+export const SupportingDocumentsTypeModal: React.FC<SupportingDocumentsTypeModalProps> = ({ isOpen, toggleModal, onSuccess, onError, proofOfIdentityType, groups, documentType }) => {
   const { t } = useTranslation('admin');
 
-  const [data, setData] = useState<SupportingDocumentType>({ id: proofOfIdentityType?.id, group_ids: proofOfIdentityType?.group_ids || [], name: proofOfIdentityType?.name || '' });
+  const [data, setData] = useState<SupportingDocumentType>({ id: proofOfIdentityType?.id, group_ids: proofOfIdentityType?.group_ids || [], name: proofOfIdentityType?.name || '', document_type: documentType });
 
   useEffect(() => {
-    setData({ id: proofOfIdentityType?.id, group_ids: proofOfIdentityType?.group_ids || [], name: proofOfIdentityType?.name || '' });
+    setData({ id: proofOfIdentityType?.id, group_ids: proofOfIdentityType?.group_ids || [], name: proofOfIdentityType?.name || '', document_type: documentType });
   }, [proofOfIdentityType]);
 
   /**
@@ -63,7 +64,7 @@ export const SupportingDocumentsTypeModal: React.FC<SupportingDocumentsTypeModal
    * Check if the form is valid (not empty)
    */
   const isPreventedSaveType = (): boolean => {
-    return !data.name || data.group_ids.length === 0;
+    return !data.name || (documentType === 'User' && data.group_ids.length === 0);
   };
 
   return (

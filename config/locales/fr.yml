@@ -49,6 +49,7 @@ fr:
       gateway_amount_too_large: "Les paiements supérieurs à %{AMOUNT} ne sont pas pris en charge. Merci de passer commande directement à l'accueil."
       product_in_use: "Ce produit a déjà été commandé"
       slug_already_used: "est déjà utilisée"
+      birthday_less_than_18_years_ago: "l'age devez avoir au moins 18 ans"
   coupon:
     code_format_error: "seules les majuscules, chiffres et tirets sont autorisés"
   apipie:
@@ -65,6 +66,7 @@ fr:
     not_available: "Non disponible"
     reserving: "Je réserve"
     i_ve_reserved: "J'ai réservé"
+    blocked: "Bloqué"
     length_must_be_slot_multiple: "doit être au moins %{MIN} minutes après la date de début"
     must_be_associated_with_at_least_1_machine: "doit être associé avec au moins 1 machine"
     deleted_user: "Utilisateur supprimé"
@@ -285,6 +287,8 @@ fr:
         an_abuse_was_reported_on_TYPE_ID_NAME_html: "Un abus a été signalé sur <strong>%{TYPE} %{ID} : <em>%{NAME}</em></strong>."
       notify_admin_member_create_reservation:
         a_RESERVABLE_reservation_was_made_by_USER_html: "Une réservation <strong><em>%{RESERVABLE}</em></strong> a été effectuée par <strong><em>%{USER}</em></strong>."
+      notify_admin_member_pre_booked_reservation:
+        a_RESERVABLE_reservation_was_made_by_USER_html: "Une pré-inscription <strong><em>%{RESERVABLE}</em></strong> a été effectuée par <strong><em>%{USER}</em></strong>."
       notify_admin_profile_complete:
         account_imported_from_PROVIDER_UID_has_completed_its_information_html: "Le compte importé depuis <strong><em>%{PROVIDER}</strong> (%{UID})</em> a complété ses informations."
       notify_admin_slot_is_canceled:
@@ -313,9 +317,13 @@ fr:
         project_NAME_has_been_published_html: "Le projet <a href='/#!/projects/%{ID}'><strong><em>%{NAME}<em></strong></a> vient d'être publié."
       notify_admin_when_user_is_created:
         a_new_user_account_has_been_created_NAME_EMAIL_html: "Un nouveau compte utilisateur vient d'être créé : <strong><em>%{NAME} &lt;%{EMAIL}&gt;</strong></em>."
+      notify_admin_child_created:
+        a_new_child_has_been_created_NAME_html: "Un nouvel enfant vient d'être créé : <strong><em>%{NAME}</em></strong>."
       notify_admin_when_user_is_imported:
         a_new_user_account_has_been_imported_from_PROVIDER_UID_html: "Un nouveau compte utilisateur vient d'être importé depuis : <strong><em>%{PROVIDER}</strong> (%{UID})</em>."
       notify_member_create_reservation:
+        your_reservation_RESERVABLE_was_successfully_saved_html: "Votre réservation <strong><em>%{RESERVABLE}</em></strong> a bien été enregistrée."
+      notify_member_pre_booked_reservation:
         your_reservation_RESERVABLE_was_successfully_saved_html: "Votre réservation <strong><em>%{RESERVABLE}</em></strong> a bien été enregistrée."
       notify_member_reservation_reminder:
         reminder_you_have_a_reservation_RESERVABLE_to_be_held_on_DATE_html: "Rappel : Vous avez une réservation <strong>%{RESERVABLE}</strong> qui aura lieu le <em>%{DATE}</em>"
@@ -440,20 +448,44 @@ fr:
         supporting_document_files_uploaded: "Le membre <strong><em>%{NAME}</strong></em> a téléversé un nouveau justificatif."
       notify_admin_user_supporting_document_files_updated:
         supporting_document_files_uploaded: "Le membre <strong><em>%{NAME}</strong></em> a modifié un justificatif."
+      notify_admin_user_child_supporting_document_files_created:
+        supporting_document_files_uploaded: "Le membre <strong><em>%{NAME}</strong></em> a téléversé un nouveau justificatif."
+      notify_admin_user_child_supporting_document_files_updated:
+        supporting_document_files_uploaded: "Le membre <strong><em>%{NAME}</strong></em> a modifié un justificatif."
       notify_user_is_validated:
         account_validated: "Votre compte est valide."
       notify_user_is_invalidated:
         account_invalidated: "Votre compte est invalide."
+      notify_user_child_is_validated:
+        child_validated: "Votre compte enfant est valide."
+      notify_user_child_is_invalidated:
+        child_invalidated: "Votre compte enfant est invalide."
       notify_user_supporting_document_refusal:
         refusal: "Vos pièces justificatives ont été refusées"
+      notify_user_supporting_document_reminder:
+        reminder_message: "Ceci est un rappel pour vous demander de télécharger vos documents justificatifs."
       notify_admin_user_supporting_document_refusal:
         refusal: "Le justificatif du membre <strong><em>%{NAME}</strong></em> a été refusé."
+      notify_user_child_supporting_document_refusal:
+        refusal: "Vos pièces justificatives de l'enfant ont été refusées"
+      notify_admin_user_child_supporting_document_refusal:
+        refusal: "Le justificatif de l'enfant <strong><em>%{NAME}</strong></em> a été refusé."
       notify_user_order_is_ready:
         order_ready: "Votre commande %{REFERENCE} est prête"
       notify_user_order_is_canceled:
         order_canceled: "Votre commande %{REFERENCE} est annulée"
       notify_user_order_is_refunded:
         order_refunded: "Votre commande %{REFERENCE} est remboursée"
+      notify_member_reservation_validated:
+        your_reservation_RESERVABLE_was_validated_html: "Votre réservation de <strong><em>%{RESERVABLE}</em></strong> a été validée."
+      notify_admin_reservation_validated:
+        a_RESERVABLE_reservation_was_validated_html: "La réservation de <strong><em>%{RESERVABLE}</em></strong> de <strong><em>%{NAME}</em></strong> a été validée."
+      notify_member_reservation_invalidated:
+        your_reservation_RESERVABLE_was_invalidated_html: "Votre demande de pré-inscription de <strong><em>%{RESERVABLE}</em></strong> n'a pas été validée."
+      notify_admin_reservation_invalidated:
+        a_RESERVABLE_reservation_was_invalidated_html: "La réservation de <strong><em>%{RESERVABLE}</em></strong> de <strong><em>%{NAME}</em></strong> a été invalidée."
+      notify_user_when_child_age_will_be_18:
+        child_age_will_be_18_years_ago: "Votre enfant %{NAME} va avoir 18 ans, le %{DATE}, date à laquelle il sera automatiquement détaché de votre compte Famille. Il devra se créer son propre compte pour effectuer ses réservations."
   #statistics tools for admins
   statistics:
     subscriptions: "Abonnements"
@@ -538,6 +570,7 @@ fr:
     space: "Cet espace est désactivé"
     machine: "Cette machine est désactivée"
     reservable: "Cette machine n'est pas réservable"
+    blocked_by_another_reservation: "Ce créneau est bloqué par une autre réservation"
   cart_validation:
     select_user: "Veuillez sélectionner un utilisateur avant de continuer"
   settings:
@@ -708,6 +741,7 @@ fr:
     project_categories_filter_placeholder: "Dans la galerie de projets, renommer le filtre \"Toutes les catégories\""
     project_categories_wording: "Dans la fiche projet, renommer l'intitulé de l'encart Catégories"
     reservation_context_feature: "Forcer le membre à sélectionner la nature de sa réservation lors de la réservation"
+    family_account: "Compte de famille"
   #statuses of projects
   statuses:
     new: "Nouveau"

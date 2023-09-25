@@ -1,6 +1,19 @@
 # Changelog Fab-manager
 
-## next deploy
+## v6.1.0 2023 September 25
+
+- improves api/notification controller to avoid failing when there is a notification with wrong notification_type in db
+- Add extra_authorize_params to OpenIdConnect config
+- Improvement : add a notification to remind users to upload their supporting documents
+- Cancel payment schedule subscription after update the payment mean
+- admin can see reservations of a member
+- Fix a bug: unable to update card for payment schedule
+- Fix a bug: user is_allow_contact is actived by default
+- Fix a bug: unbale to export projects
+- Fix a bug: unbale to update card bank of payment schedule
+- Feature: family compte for event
+- Feature: pre-registration event
+- [TODO DEPLOY] `rails db:seed`
 
 ## v6.0.14 2023 September 6
 

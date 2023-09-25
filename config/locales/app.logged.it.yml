@@ -37,6 +37,21 @@ it:
           edit_profile: "Modifica i miei dati"
           after_edition_info_html: "Una volta che i tuoi dati sono aggiornati, <strong>clicca sul pulsante di sincronizzazione sotto</strong>, o <strong>disconnetti poi riconnetterti</strong> affinché le tue modifiche abbiano effetto."
           sync_profile: "Sincronizza il mio profilo"
+      event_reservation_item:
+        event: "Event"
+        family: "Reserved for members"
+        nominative: "Nominative"
+        pre_registration: "Pre-registration"
+        NUMBER_normal_places_reserved: "{NUMBER} {NUMBER, plural, =0{} =1{normal place reserved} other{normal places reserved}}"
+        NUMBER_of_NAME_places_reserved: "{NUMBER} {NUMBER, plural, =0{} =1{of {NAME} place reserved} other{of {NAME} places reserved}}"
+        tracking_your_reservation: "Tracking your reservation"
+        in_the_process_of_validation: "In the process of validation"
+        settle_your_payment: "Come to the reception desk to settle"
+        paid: "Paid"
+        canceled: "Canceled"
+        registered: "Registered"
+        not_validated: "Not validated"
+        present: "Present"
       dashboard:
         #dashboard: public profile
         profile:
@@ -154,12 +169,19 @@ it:
             no_reservation: "Nessuna prenotazione"
             show_more: "Mostra altro"
             cancelled_slot: "Annullato"
+          reservations_panel_as_admin:
+            title: "Reservations"
           credits_panel:
             title: "I miei crediti"
             info: "Il tuo abbonamento viene fornito con crediti gratuiti che puoi utilizzare durante le prenotazioni"
             remaining_credits_html: "Puoi prenotare {REMAINING} {REMAINING, plural, one{slot} other{slot}} gratis."
             used_credits_html: "Hai già usato <strong> {USED} {USED, plural, =0{credito} one{credito} other{crediti}}</strong>."
             no_credits: "Non hai ancora alcun credito. Alcuni abbonamenti potrebbero permetterti di prenotare alcuni slot gratis."
+          credits_panel_as_admin:
+            title: "Credits"
+            remaining_credits_html: "{REMAINING} {REMAINING, plural, one{slot} other{slots}} can be booked for free."
+            used_credits_html: "<strong> {USED} {USED, plural, =0{credit} one{credit} other{credits}}</strong> already used."
+            no_credits: "No credits yet."
           prepaid_packs_panel:
             title: "I miei pacchetti prepagati"
             name: "Nome pacchetto prepagato"
@@ -172,6 +194,8 @@ it:
             cta_button: "Acquista un pacchetto"
             no_packs: "Nessun pacchetto prepagato disponibile per la vendita"
             reserved_for_subscribers_html: 'L''acquisto di pacchetti prepagati è riservato agli abbonati. <a href="{LINK}">Iscriviti ora</a> per ottenerne.'
+          prepaid_packs_panel_as_admin:
+            title: "Prepaid packs"
       #public profil of a member
       members_show:
         members_list: "Lista dei membri"
@@ -284,6 +308,7 @@ it:
         app_management: "Riguardo le notifiche di gestione delle app"
       notification_form:
         notify_admin_when_user_is_created: "Un account utente è stato creato"
+        notify_admin_child_created: "A child has been created"
         notify_admin_when_user_is_imported: "Un account utente è stato importato"
         notify_admin_profile_complete: "Un account importato ha completato il suo profilo"
         notify_admin_user_merged: "Un account importato è stato unito con un account esistente"
@@ -291,8 +316,11 @@ it:
         notify_admin_import_complete: "Un'importazione è stata eseguita"
         notify_admin_user_group_changed: "Un utente ha cambiato il suo gruppo"
         notify_admin_user_supporting_document_refusal: "Un documento aggiuntivo è stato respinto"
+        notify_admin_user_child_supporting_document_refusal: "A supporting document of child has been rejected"
         notify_admin_user_supporting_document_files_created: "Un utente ha caricato un documento aggiuntivo"
         notify_admin_user_supporting_document_files_updated: "Un utente ha aggiornato un documento aggiuntivo"
+        notify_admin_user_child_supporting_document_files_created: "A child has uploaded a supporting document"
+        notify_admin_user_child_supporting_document_files_updated: "A child has updated a supporting document"
         notify_admin_member_create_reservation: "Un membro ha prenotato"
         notify_admin_slot_is_modified: "Uno slot di prenotazione è stato modificato"
         notify_admin_slot_is_canceled: "Una prenotazione è stata annullata"

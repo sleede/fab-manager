@@ -49,6 +49,7 @@ zu:
       gateway_amount_too_large: "crwdns31693:0%{AMOUNT}crwdne31693:0"
       product_in_use: "crwdns31695:0crwdne31695:0"
       slug_already_used: "crwdns31697:0crwdne31697:0"
+      birthday_less_than_18_years_ago: "crwdns38003:0crwdne38003:0"
   coupon:
     code_format_error: "crwdns37201:0crwdne37201:0"
   apipie:
@@ -65,6 +66,7 @@ zu:
     not_available: "crwdns3267:0crwdne3267:0"
     reserving: "crwdns37199:0crwdne37199:0"
     i_ve_reserved: "crwdns3269:0crwdne3269:0"
+    blocked: "crwdns37737:0crwdne37737:0"
     length_must_be_slot_multiple: "crwdns3271:0%{MIN}crwdne3271:0"
     must_be_associated_with_at_least_1_machine: "crwdns3273:0crwdne3273:0"
     deleted_user: "crwdns22460:0crwdne22460:0"
@@ -285,6 +287,8 @@ zu:
         an_abuse_was_reported_on_TYPE_ID_NAME_html: "crwdns3559:0%{TYPE}crwdnd3559:0%{ID}crwdnd3559:0%{NAME}crwdne3559:0"
       notify_admin_member_create_reservation:
         a_RESERVABLE_reservation_was_made_by_USER_html: "crwdns3561:0%{RESERVABLE}crwdnd3561:0%{USER}crwdne3561:0"
+      notify_admin_member_pre_booked_reservation:
+        a_RESERVABLE_reservation_was_made_by_USER_html: "crwdns38005:0%{RESERVABLE}crwdnd38005:0%{USER}crwdne38005:0"
       notify_admin_profile_complete:
         account_imported_from_PROVIDER_UID_has_completed_its_information_html: "crwdns20158:0%{PROVIDER}crwdnd20158:0%{UID}crwdne20158:0"
       notify_admin_slot_is_canceled:
@@ -313,10 +317,14 @@ zu:
         project_NAME_has_been_published_html: "crwdns3583:0%{ID}crwdnd3583:0%{NAME}crwdne3583:0"
       notify_admin_when_user_is_created:
         a_new_user_account_has_been_created_NAME_EMAIL_html: "crwdns3585:0%{NAME}crwdnd3585:0%{EMAIL}crwdne3585:0"
+      notify_admin_child_created:
+        a_new_child_has_been_created_NAME_html: "crwdns38007:0%{NAME}crwdne38007:0"
       notify_admin_when_user_is_imported:
         a_new_user_account_has_been_imported_from_PROVIDER_UID_html: "crwdns3587:0%{PROVIDER}crwdnd3587:0%{UID}crwdne3587:0"
       notify_member_create_reservation:
         your_reservation_RESERVABLE_was_successfully_saved_html: "crwdns3589:0%{RESERVABLE}crwdne3589:0"
+      notify_member_pre_booked_reservation:
+        your_reservation_RESERVABLE_was_successfully_saved_html: "crwdns38009:0%{RESERVABLE}crwdne38009:0"
       notify_member_reservation_reminder:
         reminder_you_have_a_reservation_RESERVABLE_to_be_held_on_DATE_html: "crwdns3591:0%{RESERVABLE}crwdnd3591:0%{DATE}crwdne3591:0"
       notify_member_slot_is_canceled:
@@ -440,20 +448,44 @@ zu:
         supporting_document_files_uploaded: "crwdns37341:0%{NAME}crwdne37341:0"
       notify_admin_user_supporting_document_files_updated:
         supporting_document_files_uploaded: "crwdns37343:0%{NAME}crwdne37343:0"
+      notify_admin_user_child_supporting_document_files_created:
+        supporting_document_files_uploaded: "crwdns38011:0%{NAME}crwdne38011:0"
+      notify_admin_user_child_supporting_document_files_updated:
+        supporting_document_files_uploaded: "crwdns38013:0%{NAME}crwdne38013:0"
       notify_user_is_validated:
         account_validated: "crwdns23004:0crwdne23004:0"
       notify_user_is_invalidated:
         account_invalidated: "crwdns23006:0crwdne23006:0"
+      notify_user_child_is_validated:
+        child_validated: "crwdns38015:0crwdne38015:0"
+      notify_user_child_is_invalidated:
+        child_invalidated: "crwdns38017:0crwdne38017:0"
       notify_user_supporting_document_refusal:
         refusal: "crwdns37345:0crwdne37345:0"
+      notify_user_supporting_document_reminder:
+        reminder_message: "crwdns37739:0crwdne37739:0"
       notify_admin_user_supporting_document_refusal:
         refusal: "crwdns37347:0%{NAME}crwdne37347:0"
+      notify_user_child_supporting_document_refusal:
+        refusal: "crwdns38019:0crwdne38019:0"
+      notify_admin_user_child_supporting_document_refusal:
+        refusal: "crwdns38021:0%{NAME}crwdne38021:0"
       notify_user_order_is_ready:
         order_ready: "crwdns31707:0%{REFERENCE}crwdne31707:0"
       notify_user_order_is_canceled:
         order_canceled: "crwdns31709:0%{REFERENCE}crwdne31709:0"
       notify_user_order_is_refunded:
         order_refunded: "crwdns31711:0%{REFERENCE}crwdne31711:0"
+      notify_member_reservation_validated:
+        your_reservation_RESERVABLE_was_validated_html: "crwdns38023:0%{RESERVABLE}crwdne38023:0"
+      notify_admin_reservation_validated:
+        a_RESERVABLE_reservation_was_validated_html: "crwdns38105:0%{RESERVABLE}crwdnd38105:0%{NAME}crwdne38105:0"
+      notify_member_reservation_invalidated:
+        your_reservation_RESERVABLE_was_invalidated_html: "crwdns38027:0%{RESERVABLE}crwdne38027:0"
+      notify_admin_reservation_invalidated:
+        a_RESERVABLE_reservation_was_invalidated_html: "crwdns38107:0%{RESERVABLE}crwdnd38107:0%{NAME}crwdne38107:0"
+      notify_user_when_child_age_will_be_18:
+        child_age_will_be_18_years_ago: "crwdns38031:0%{NAME}crwdnd38031:0%{DATE}crwdne38031:0"
   #statistics tools for admins
   statistics:
     subscriptions: "crwdns3689:0crwdne3689:0"
@@ -538,6 +570,7 @@ zu:
     space: "crwdns36283:0crwdne36283:0"
     machine: "crwdns36285:0crwdne36285:0"
     reservable: "crwdns36287:0crwdne36287:0"
+    blocked_by_another_reservation: "crwdns37741:0crwdne37741:0"
   cart_validation:
     select_user: "crwdns37211:0crwdne37211:0"
   settings:
@@ -708,6 +741,7 @@ zu:
     project_categories_filter_placeholder: "crwdns37659:0crwdne37659:0"
     project_categories_wording: "crwdns37661:0crwdne37661:0"
     reservation_context_feature: "crwdns37711:0crwdne37711:0"
+    family_account: "crwdns38033:0crwdne38033:0"
   #statuses of projects
   statuses:
     new: "crwdns37111:0crwdne37111:0"

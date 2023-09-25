@@ -14,6 +14,7 @@ zu:
         #dashboard sections
         dashboard: "crwdns27800:0crwdne27800:0"
         my_profile: "crwdns27802:0crwdne27802:0"
+        my_children: "crwdns37925:0crwdne37925:0"
         my_settings: "crwdns27804:0crwdne27804:0"
         my_supporting_documents_files: "crwdns27806:0crwdne27806:0"
         my_projects: "crwdns27808:0crwdne27808:0"
@@ -317,6 +318,9 @@ zu:
         event_description: "crwdns28282:0crwdne28282:0"
         downloadable_documents: "crwdns28284:0crwdne28284:0"
         information_and_booking: "crwdns28286:0crwdne28286:0"
+        event_type:
+          family: "crwdns37927:0crwdne37927:0"
+          nominative: "crwdns37929:0crwdne37929:0"
         dates: "crwdns28288:0crwdne28288:0"
         beginning: "crwdns28290:0crwdne28290:0"
         ending: "crwdns28292:0crwdne28292:0"
@@ -332,9 +336,12 @@ zu:
         ticket: "crwdns28312:0NUMBER={NUMBER}crwdne28312:0"
         make_a_gift_of_this_reservation: "crwdns28314:0crwdne28314:0"
         thank_you_your_payment_has_been_successfully_registered: "crwdns37605:0crwdne37605:0"
+        thank_you_your_pre_registration_has_been_successfully_saved: "crwdns37931:0crwdne37931:0"
         you_can_find_your_reservation_s_details_on_your_: "crwdns28318:0crwdne28318:0"
+        informed_by_email_your_pre_registration: "crwdns37933:0crwdne37933:0"
         dashboard: "crwdns28320:0crwdne28320:0"
         you_booked_DATE: "crwdns28322:0{DATE}crwdne28322:0"
+        you_pre_booked_DATE: "crwdns37935:0{DATE}crwdne37935:0"
         canceled_reservation_SEATS: "crwdns28324:0{SEATS}crwdne28324:0"
         book: "crwdns28326:0crwdne28326:0"
         confirm_and_pay: "crwdns28328:0crwdne28328:0"
@@ -362,6 +369,10 @@ zu:
         view_event_list: "crwdns28372:0crwdne28372:0"
         share_on_facebook: "crwdns28374:0crwdne28374:0"
         share_on_twitter: "crwdns28376:0crwdne28376:0"
+        last_name_and_first_name: "crwdns37937:0crwdne37937:0"
+        pre_book: "crwdns37939:0crwdne37939:0"
+        pre_registration_end_date: "crwdns37941:0crwdne37941:0"
+        pre_registration: "crwdns37943:0crwdne37943:0"
       #public calendar
       calendar:
         calendar: "crwdns28378:0crwdne28378:0"
@@ -481,6 +492,35 @@ zu:
       member_select:
         select_a_member: "crwdns30412:0crwdne30412:0"
         start_typing: "crwdns30414:0crwdne30414:0"
+      children_dashboard:
+        heading: "crwdns37945:0crwdne37945:0"
+        member_heading: "crwdns37947:0crwdne37947:0"
+        add_child: "crwdns37949:0crwdne37949:0"
+      child_modal:
+        edit_child: "crwdns37951:0crwdne37951:0"
+        new_child: "crwdns37953:0crwdne37953:0"
+      child_form:
+        child_form_info: "crwdns37955:0crwdne37955:0"
+        first_name: "crwdns37957:0crwdne37957:0"
+        last_name: "crwdns37959:0crwdne37959:0"
+        birthday: "crwdns37961:0crwdne37961:0"
+        email: "crwdns37963:0crwdne37963:0"
+        phone: "crwdns37965:0crwdne37965:0"
+        save: "crwdns37967:0crwdne37967:0"
+        supporting_documents: "crwdns37969:0crwdne37969:0"
+        to_complete: "crwdns37971:0crwdne37971:0"
+        refuse_documents_info: "crwdns37973:0crwdne37973:0"
+        refuse_documents: "crwdns37975:0crwdne37975:0"
+      child_item:
+        first_name: "crwdns37977:0crwdne37977:0"
+        last_name: "crwdns37979:0crwdne37979:0"
+        birthday: "crwdns37981:0crwdne37981:0"
+        deleted: "crwdns37983:0crwdne37983:0"
+        unable_to_delete: "crwdns37985:0crwdne37985:0"
+      delete_child_modal:
+        confirmation_required: "crwdns37987:0crwdne37987:0"
+        confirm: "crwdns37989:0crwdne37989:0"
+        confirm_delete_child: "crwdns37991:0crwdne37991:0"
       tour:
         conclusion:
           title: "crwdns28424:0crwdne28424:0"

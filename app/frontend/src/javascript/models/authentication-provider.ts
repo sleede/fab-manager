@@ -61,7 +61,8 @@ export interface OpenIdConnectProvider {
   client__userinfo_endpoint?: string,
   client__jwks_uri?: string,
   client__end_session_endpoint?: string,
-  profile_url?: string
+  profile_url?: string,
+  extra_authorize_parameters?: string,
 }
 
 export interface MappingFields {

@@ -78,6 +78,11 @@ zu:
       body:
         reservation_saved_html: "crwdns29586:0%{RESERVATION}crwdne29586:0"
         your_reserved_slots: "crwdns29588:0crwdne29588:0"
+    notify_member_pre_booked_reservation:
+      subject: "crwdns38035:0crwdne38035:0"
+      body:
+        reservation_saved_html: "crwdns38037:0%{RESERVATION}crwdne38037:0"
+        your_reserved_slots: "crwdns38039:0crwdne38039:0"
     notify_member_subscribed_plan_is_changed:
       subject: "crwdns29590:0crwdne29590:0"
       body:
@@ -87,6 +92,11 @@ zu:
       body:
         member_reserved_html: "crwdns29596:0%{NAME}crwdnd29596:0%{RESERVABLE}crwdne29596:0"
         reserved_slots: "crwdns29598:0crwdne29598:0"
+    notify_admin_member_pre_booked_reservation:
+      subject: "crwdns38041:0crwdne38041:0"
+      body:
+        member_reserved_html: "crwdns38043:0%{NAME}crwdnd38043:0%{RESERVABLE}crwdne38043:0"
+        reserved_slots: "crwdns38045:0crwdne38045:0"
     notify_member_slot_is_modified:
       subject: "crwdns29600:0crwdne29600:0"
       body:
@@ -104,6 +114,10 @@ zu:
         new_account_created: "crwdns29616:0crwdne29616:0"
         user_of_group_html: "crwdns29618:0%{GROUP}crwdne29618:0"
         account_for_organization: "crwdns29620:0crwdne29620:0"
+    notify_admin_child_created:
+      subject: "crwdns38047:0crwdne38047:0"
+      body:
+        new_child_created: "crwdns38049:0crwdne38049:0"
     notify_admin_subscribed_plan:
       subject: "crwdns29622:0crwdne29622:0"
       body:
@@ -389,6 +403,16 @@ zu:
       body:
         user_update_supporting_document_file: "crwdns37357:0%{NAME}crwdne37357:0"
         validate_user: "crwdns37359:0crwdne37359:0"
+    notify_admin_user_child_supporting_document_files_created:
+      subject: "crwdns38051:0crwdne38051:0"
+      body:
+        supporting_document_files_uploaded_below: "crwdns38053:0%{NAME}crwdne38053:0"
+        validate_child: "crwdns38055:0crwdne38055:0"
+    notify_admin_user_child_supporting_document_files_updated:
+      subject: "crwdns38057:0crwdne38057:0"
+      body:
+        child_update_supporting_document_file: "crwdns38059:0%{NAME}crwdne38059:0"
+        validate_child: "crwdns38061:0crwdne38061:0"
     notify_user_is_validated:
       subject: "crwdns29956:0crwdne29956:0"
       body:
@@ -397,15 +421,36 @@ zu:
       subject: "crwdns29960:0crwdne29960:0"
       body:
         account_invalidated: "crwdns29962:0crwdne29962:0"
+    notify_user_child_is_validated:
+      subject: "crwdns38063:0crwdne38063:0"
+      body:
+        child_validated: "crwdns38065:0crwdne38065:0"
+    notify_user_child_is_invalidated:
+      subject: "crwdns38067:0crwdne38067:0"
+      body:
+        child_invalidated: "crwdns38069:0crwdne38069:0"
     notify_user_supporting_document_refusal:
       subject: "crwdns37361:0crwdne37361:0"
       body:
         user_supporting_document_files_refusal: "crwdns37363:0crwdne37363:0"
         action: "crwdns37365:0crwdne37365:0"
+    notify_user_supporting_document_reminder:
+      subject: "crwdns37743:0crwdne37743:0"
+      body:
+        user_supporting_document_reminder: "crwdns37745:0crwdne37745:0"
     notify_admin_user_supporting_document_refusal:
       subject: "crwdns37367:0crwdne37367:0"
       body:
         user_supporting_document_files_refusal: "crwdns37369:0%{NAME}crwdnd37369:0%{OPERATOR}crwdne37369:0"
+    notify_user_child_supporting_document_refusal:
+      subject: "crwdns38071:0crwdne38071:0"
+      body:
+        user_child_supporting_document_files_refusal: "crwdns38073:0crwdne38073:0"
+        action: "crwdns38075:0crwdne38075:0"
+    notify_admin_user_child_supporting_document_refusal:
+      subject: "crwdns38077:0crwdne38077:0"
+      body:
+        user_child_supporting_document_files_refusal: "crwdns38079:0%{NAME}crwdnd38079:0%{OPERATOR}crwdne38079:0"
     shared:
       hello: "crwdns29974:0%{user_name}crwdne29974:0"
     notify_user_order_is_ready:
@@ -420,3 +465,25 @@ zu:
       subject: "crwdns30584:0crwdne30584:0"
       body:
         notify_user_order_is_refunded: "crwdns30586:0%{REFERENCE}crwdne30586:0"
+    notify_member_reservation_validated:
+      subject: "crwdns38081:0crwdne38081:0"
+      body:
+        reservation_validated_html: "crwdns38083:0%{RESERVABLE}crwdne38083:0"
+        your_reserved_slots: "crwdns38085:0crwdne38085:0"
+    notify_admin_reservation_validated:
+      subject: "crwdns38087:0crwdne38087:0"
+      body:
+        reservation_validated_html: "crwdns38089:0%{RESERVABLE}crwdnd38089:0%{NAME}crwdne38089:0"
+        reserved_slots: "crwdns38091:0crwdne38091:0"
+    notify_member_reservation_invalidated:
+      subject: "crwdns38093:0crwdne38093:0"
+      body:
+        reservation_invalidated_html: "crwdns38095:0%{RESERVABLE}crwdne38095:0"
+    notify_admin_reservation_invalidated:
+      subject: "crwdns38097:0crwdne38097:0"
+      body:
+        reservation_invalidated_html: "crwdns38099:0%{RESERVABLE}crwdnd38099:0%{NAME}crwdne38099:0"
+    notify_user_when_child_age_will_be_18:
+      subject: "crwdns38101:0crwdne38101:0"
+      body:
+        child_age_will_be_18_years_ago: "crwdns38103:0%{NAME}crwdnd38103:0%{DATE}crwdne38103:0"

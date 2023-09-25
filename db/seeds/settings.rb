@@ -735,3 +735,6 @@ Setting.set('project_categories_filter_placeholder', 'Toutes les catégories') u
 Setting.set('project_categories_wording', 'Catégories') unless Setting.find_by(name: 'project_categories_wording').try(:value)
 
 Setting.set('reservation_context_feature', false) unless Setting.find_by(name: 'reservation_context_feature')
+
+Setting.set('family_account', false) unless Setting.find_by(name: 'family_account').try(:value)
+Setting.set('child_validation_required', false) unless Setting.find_by(name: 'child_validation_required').try(:value)

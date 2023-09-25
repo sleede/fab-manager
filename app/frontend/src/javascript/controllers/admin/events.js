@@ -436,7 +436,7 @@ Application.Controllers.controller('AdminEventsController', ['$scope', '$state',
 /**
  * Controller used in the reservations listing page for a specific event
  */
-Application.Controllers.controller('ShowEventReservationsController', ['$scope', 'eventPromise', 'reservationsPromise', function ($scope, eventPromise, reservationsPromise) {
+Application.Controllers.controller('ShowEventReservationsController', ['$scope', 'eventPromise', 'reservationsPromise', 'dialogs', 'SlotsReservation', 'growl', '_t', 'Price', 'Wallet', '$uibModal', 'Event', function ($scope, eventPromise, reservationsPromise, dialogs, SlotsReservation, growl, _t, Price, Wallet, $uibModal, Event) {
   // retrieve the event from the ID provided in the current URL
   $scope.event = eventPromise;
 
@@ -450,6 +450,219 @@ Application.Controllers.controller('ShowEventReservationsController', ['$scope',
    */
   $scope.isCancelled = function (reservation) {
     return !!(reservation.slots_reservations_attributes[0].canceled_at);
+  };
+
+  /**
+   * Test if the provided reservation has been validated
+   * @param reservation {Reservation}
+   * @returns {boolean}
+   */
+  $scope.isValidated = function (reservation) {
+    return reservation.slots_reservations_attributes[0].is_valid === true || reservation.slots_reservations_attributes[0].is_valid === 'true';
+  };
+
+  /**
+   * Test if the provided reservation has been invalidated
+   * @param reservation {Reservation}
+   * @returns {boolean}
+   */
+  $scope.isInvalidated = function (reservation) {
+    return reservation.slots_reservations_attributes[0].is_valid === false || reservation.slots_reservations_attributes[0].is_valid === 'false';
+  };
+
+  /**
+    * Get the price of a reservation
+    * @param reservation {Reservation}
+    */
+  $scope.reservationAmount = function (reservation) {
+    let amount = 0;
+    for (const user of reservation.booking_users_attributes) {
+      if (user.event_price_category_id) {
+        const price_category = _.find($scope.event.event_price_categories_attributes, { id: user.event_price_category_id });
+        if (price_category) {
+          amount += price_category.amount;
+        }
+      } else {
+        amount += $scope.event.amount;
+      }
+    }
+    return amount;
+  };
+
+  /**
+   * Callback to validate a reservation
+   * @param reservation {Reservation}
+   */
+  $scope.validateReservation = function (reservation) {
+    SlotsReservation.validate({
+      id: reservation.slots_reservations_attributes[0].id
+    }, () => { // successfully validated
+      growl.success(_t('app.admin.event_reservations.reservation_was_successfully_validated'));
+      const index = $scope.reservations.indexOf(reservation);
+      $scope.reservations[index].slots_reservations_attributes[0].is_valid = true;
+      Event.get({ id: $scope.event.id }).$promise.then(function (event) {
+        $scope.event = event;
+      });
+    }, () => {
+      growl.warning(_t('app.admin.event_reservations.validation_failed'));
+    });
+  };
+
+  /**
+   * Callback to invalidate a reservation
+   * @param reservation {Reservation}
+   */
+  $scope.invalidateReservation = function (reservation) {
+    SlotsReservation.invalidate({
+      id: reservation.slots_reservations_attributes[0].id
+    }, () => { // successfully validated
+      growl.success(_t('app.admin.event_reservations.reservation_was_successfully_invalidated'));
+      const index = $scope.reservations.indexOf(reservation);
+      $scope.reservations[index].slots_reservations_attributes[0].is_valid = false;
+      Event.get({ id: $scope.event.id }).$promise.then(function (event) {
+        $scope.event = event;
+      });
+    }, () => {
+      growl.warning(_t('app.admin.event_reservations.invalidation_failed'));
+    });
+  };
+
+  const mkCartItems = function (reservation, coupon) {
+    return {
+      customer_id: reservation.user_id,
+      items: [{
+        reservation: {
+          ...reservation,
+          slots_reservations_attributes: reservation.slots_reservations_attributes.map(sr => ({ slot_id: sr.slot_id })),
+          tickets_attributes: reservation.tickets_attributes.map(t => ({ booked: t.booked, event_price_category_id: t.event_price_category.id })),
+          booking_users_attributes: reservation.booking_users_attributes.map(bu => (
+            { name: bu.name, event_price_category_id: bu.event_price_category_id, booked_id: bu.booked_id, booked_type: bu.booked_type }
+          ))
+        }
+      }],
+      coupon_code: ((coupon ? coupon.code : undefined)),
+      payment_method: ''
+    };
+  };
+
+  $scope.payReservation = function (reservation) {
+    const modalInstance = $uibModal.open({
+      templateUrl: '/admin/events/pay_reservation_modal.html',
+      size: 'sm',
+      resolve: {
+        event () {
+          return $scope.event;
+        },
+        reservation () {
+          return reservation;
+        },
+        price () {
+          return Price.compute(mkCartItems(reservation)).$promise;
+        },
+        wallet () {
+          return Wallet.getWalletByUser({ user_id: reservation.user_id }).$promise;
+        },
+        cartItems () {
+          return mkCartItems(reservation);
+        }
+      },
+      controller: ['$scope', '$uibModalInstance', 'reservation', 'price', 'wallet', 'cartItems', 'helpers', '$filter', '_t', 'Reservation', 'event',
+        function ($scope, $uibModalInstance, reservation, price, wallet, cartItems, helpers, $filter, _t, Reservation, event) {
+          $scope.event = event;
+
+          // User's wallet amount
+          $scope.wallet = wallet;
+
+          // Price
+          $scope.price = price;
+
+          // Cart items
+          $scope.cartItems = cartItems;
+
+          // price to pay
+          $scope.amount = helpers.getAmountToPay(price.price, wallet.amount);
+
+          // Reservation
+          $scope.reservation = reservation;
+
+          $scope.coupon = { applied: null };
+
+          $scope.offered = false;
+
+          $scope.payment = false;
+
+          // Button label
+          $scope.setValidButtonName = function () {
+            if ($scope.amount > 0 && !$scope.offered) {
+              $scope.validButtonName = _t('app.admin.event_reservations.confirm_payment_of_html', { ROLE: $scope.currentUser.role, AMOUNT: $filter('currency')($scope.amount) });
+            } else {
+              $scope.validButtonName = _t('app.shared.buttons.confirm');
+            }
+          };
+
+          /**
+           * Compute the total amount for the current reservation according to the previously set parameters
+           */
+          $scope.computeEventAmount = function () {
+            Price.compute(mkCartItems(reservation, $scope.coupon.applied), function (res) {
+              $scope.price = res;
+              $scope.amount = helpers.getAmountToPay($scope.price.price, wallet.amount);
+              $scope.setValidButtonName();
+            });
+          };
+
+          // Callback to validate the payment
+          $scope.ok = function () {
+            $scope.attempting = true;
+            return Reservation.confirm_payment({
+              id: reservation.id,
+              coupon_code: $scope.coupon.applied ? $scope.coupon.applied.code : null,
+              offered: $scope.offered
+            }, function (res) {
+              $uibModalInstance.close(res);
+              return $scope.attempting = true;
+            }
+            , function (response) {
+              $scope.alerts = [];
+              angular.forEach(response, function (v, k) {
+                angular.forEach(v, function (err) {
+                  $scope.alerts.push({
+                    msg: k + ': ' + err,
+                    type: 'danger'
+                  });
+                });
+              });
+              return $scope.attempting = false;
+            });
+          };
+
+          // Callback to cancel the payment
+          $scope.cancel = function () { $uibModalInstance.dismiss('cancel'); };
+
+          $scope.$watch('coupon.applied', function (newValue, oldValue) {
+            if ((newValue !== null) || (oldValue !== null)) {
+              return $scope.computeEventAmount();
+            }
+          });
+
+          $scope.setValidButtonName();
+        }]
+    });
+    modalInstance.result.then(function (reservation) {
+      $scope.reservations = $scope.reservations.map((r) => {
+        if (r.id === reservation.id) {
+          return reservation;
+        }
+        if ($scope.reservationAmount(reservation) === 0) {
+          growl.success(_t('app.admin.event_reservations.reservation_was_successfully_present'));
+        } else {
+          growl.success(_t('app.admin.event_reservations.reservation_was_successfully_paid'));
+        }
+        return r;
+      });
+    }, function () {
+      console.log('Pay reservation modal dismissed at: ' + new Date());
+    });
   };
 }]);
 

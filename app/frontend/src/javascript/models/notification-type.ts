@@ -74,6 +74,7 @@ export const notificationTypeNames = [
   'notify_user_is_validated',
   'notify_user_is_invalidated',
   'notify_user_supporting_document_refusal',
+  'notify_user_supporting_document_reminder',
   'notify_admin_user_supporting_document_refusal',
   'notify_user_order_is_ready',
   'notify_user_order_is_canceled',

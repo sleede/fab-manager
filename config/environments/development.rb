@@ -80,6 +80,7 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   config.log_level = Rails.application.secrets.log_level || :debug
+  config.log_tags = [:request_id]
 
   config.action_controller.default_url_options = {
     host: Rails.application.secrets.default_host,

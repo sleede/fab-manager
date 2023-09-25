@@ -37,6 +37,21 @@ de:
           edit_profile: "Meine Daten ändern"
           after_edition_info_html: "Once your data are up to date, <strong>click on the synchronization button below</strong>, or <strong>disconnect then reconnect</strong> for your changes to take effect."
           sync_profile: "Mein Profil synchronisieren"
+      event_reservation_item:
+        event: "Event"
+        family: "Reserved for members"
+        nominative: "Nominative"
+        pre_registration: "Pre-registration"
+        NUMBER_normal_places_reserved: "{NUMBER} {NUMBER, plural, =0{} =1{normal place reserved} other{normal places reserved}}"
+        NUMBER_of_NAME_places_reserved: "{NUMBER} {NUMBER, plural, =0{} =1{of {NAME} place reserved} other{of {NAME} places reserved}}"
+        tracking_your_reservation: "Tracking your reservation"
+        in_the_process_of_validation: "In the process of validation"
+        settle_your_payment: "Come to the reception desk to settle"
+        paid: "Paid"
+        canceled: "Canceled"
+        registered: "Registered"
+        not_validated: "Not validated"
+        present: "Present"
       dashboard:
         #dashboard: public profile
         profile:
@@ -154,12 +169,19 @@ de:
             no_reservation: "No reservation"
             show_more: "Show more"
             cancelled_slot: "Cancelled"
+          reservations_panel_as_admin:
+            title: "Reservations"
           credits_panel:
             title: "My credits"
             info: "Your subscription comes with free credits you can use when reserving"
             remaining_credits_html: "You can book {REMAINING} {REMAINING, plural, one{slot} other{slots}} for free."
             used_credits_html: "You have already used <strong> {USED} {USED, plural, =0{credit} one{credit} other{credits}}</strong>."
             no_credits: "You don't have any credits yet. Some subscriptions may allow you to book some slots for free."
+          credits_panel_as_admin:
+            title: "Credits"
+            remaining_credits_html: "{REMAINING} {REMAINING, plural, one{slot} other{slots}} can be booked for free."
+            used_credits_html: "<strong> {USED} {USED, plural, =0{credit} one{credit} other{credits}}</strong> already used."
+            no_credits: "No credits yet."
           prepaid_packs_panel:
             title: "My prepaid packs"
             name: "Prepaid pack name"
@@ -172,6 +194,8 @@ de:
             cta_button: "Buy a pack"
             no_packs: "No prepaid packs available for sale"
             reserved_for_subscribers_html: 'The purchase of prepaid packs is reserved for subscribers. <a href="{LINK}">Subscribe now</a> to benefit.'
+          prepaid_packs_panel_as_admin:
+            title: "Prepaid packs"
       #public profil of a member
       members_show:
         members_list: "Mitgliederliste"
@@ -284,6 +308,7 @@ de:
         app_management: "Concerning app management notifications"
       notification_form:
         notify_admin_when_user_is_created: "A user account has been created"
+        notify_admin_child_created: "A child has been created"
         notify_admin_when_user_is_imported: "A user account has been imported"
         notify_admin_profile_complete: "An imported account has completed its profile"
         notify_admin_user_merged: "An imported account has been merged with an existing account"
@@ -291,8 +316,11 @@ de:
         notify_admin_import_complete: "An import is done"
         notify_admin_user_group_changed: "A user has changed his group"
         notify_admin_user_supporting_document_refusal: "A supporting document has been rejected"
+        notify_admin_user_child_supporting_document_refusal: "A supporting document of child has been rejected"
         notify_admin_user_supporting_document_files_created: "A user has uploaded a supporting document"
         notify_admin_user_supporting_document_files_updated: "A user has updated a supporting document"
+        notify_admin_user_child_supporting_document_files_created: "A child has uploaded a supporting document"
+        notify_admin_user_child_supporting_document_files_updated: "A child has updated a supporting document"
         notify_admin_member_create_reservation: "A member books a reservation"
         notify_admin_slot_is_modified: "A reservation slot has been modified"
         notify_admin_slot_is_canceled: "A reservation has been cancelled"

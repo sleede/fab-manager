@@ -15,6 +15,7 @@ describe('EventForm', () => {
     expect(screen.getByLabelText(/app.admin.event_form.title/)).toBeInTheDocument();
     expect(screen.getByLabelText(/app.admin.event_form.matching_visual/)).toBeInTheDocument();
     expect(screen.getByLabelText(/app.admin.event_form.description/)).toBeInTheDocument();
+    expect(screen.getByLabelText(/app.admin.event_form.event_type/)).toBeInTheDocument();
     expect(screen.getByLabelText(/app.admin.event_form.event_category/)).toBeInTheDocument();
     expect(screen.getByLabelText(/app.admin.event_form.event_themes/)).toBeInTheDocument();
     expect(screen.getByLabelText(/app.admin.event_form.age_range/)).toBeInTheDocument();

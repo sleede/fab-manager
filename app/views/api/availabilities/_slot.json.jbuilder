@@ -7,6 +7,7 @@ json.start slot.start_at.iso8601
 json.end slot.end_at.iso8601
 json.is_reserved slot.reserved?(reservable)
 json.is_completed slot.full?(reservable)
+json.is_blocked slot.is_blocked
 json.backgroundColor 'white'
 
 json.availability_id slot.availability_id

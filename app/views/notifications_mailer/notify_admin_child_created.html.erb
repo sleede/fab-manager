@@ -1,0 +1,6 @@
+<%= render 'notifications_mailer/shared/hello', recipient: @recipient %>
+
+<p>
+  <%= t('.body.new_child_created') %>
+  "<%= @attached_object&.full_name || t('api.notifications.deleted_user') %> &lt;<%= @attached_object.email%>&gt;"
+</p>

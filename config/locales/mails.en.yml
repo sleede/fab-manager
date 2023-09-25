@@ -78,6 +78,11 @@ en:
       body:
         reservation_saved_html: "You reservation <strong><em>%{RESERVATION}</em></strong> has been successfully saved"
         your_reserved_slots: "Your reserved slots are:"
+    notify_member_pre_booked_reservation:
+      subject: "Your pre-registration has been successfully saved"
+      body:
+        reservation_saved_html: "You pre-registration <strong><em>%{RESERVATION}</em></strong> has been successfully saved"
+        your_reserved_slots: "Your pre-booked slots are:"
     notify_member_subscribed_plan_is_changed:
       subject: "Your subscription has been updated"
       body:
@@ -87,6 +92,11 @@ en:
       body:
         member_reserved_html: "User %{NAME} has reserved <strong><em>%{RESERVABLE}</em></strong>."
         reserved_slots: "Reserved slots are:"
+    notify_admin_member_pre_booked_reservation:
+      subject: "New pre-registration"
+      body:
+        member_reserved_html: "User %{NAME} has pre-reserved <strong><em>%{RESERVABLE}</em></strong>."
+        reserved_slots: "Pre-reserved slots are:"
     notify_member_slot_is_modified:
       subject: "Your reservation slot has been successfully changed"
       body:
@@ -104,6 +114,10 @@ en:
         new_account_created: "A new user account has been created on the website:"
         user_of_group_html: "The user has registered in the group <strong>%{GROUP}</strong>"
         account_for_organization: "This account manage an organization:"
+    notify_admin_child_created:
+      subject: "A user's child has been created"
+      body:
+        new_child_created: "A new user's child has been created on the website"
     notify_admin_subscribed_plan:
       subject: "A subscription has been purchased"
       body:
@@ -389,6 +403,16 @@ en:
       body:
         user_update_supporting_document_file: "Member %{NAME} has modified the supporting documents below:"
         validate_user: "Please validate this account"
+    notify_admin_user_child_supporting_document_files_created:
+      subject: "Supporting documents of child uploaded by a member"
+      body:
+        supporting_document_files_uploaded_below: "Child %{NAME} has uploaded the following supporting documents:"
+        validate_child: "Please validate this child account"
+    notify_admin_user_child_supporting_document_files_updated:
+      subject: "Child's supporting documents have changed"
+      body:
+        child_update_supporting_document_file: "Child %{NAME} has modified the supporting documents below:"
+        validate_child: "Please validate this child account"
     notify_user_is_validated:
       subject: "Account validated"
       body:
@@ -397,15 +421,36 @@ en:
       subject: "Account invalidated"
       body:
         account_invalidated: "Your account was invalidated. You won't be able to book anymore, until your account is validated again."
+    notify_user_child_is_validated:
+      subject: "Child account validated"
+      body:
+        child_validated: "Your child account was validated. Now, you have access to event booking features."
+    notify_user_child_is_invalidated:
+      subject: "Child account invalidated"
+      body:
+        child_invalidated: "Your child account was invalidated. You won't be able to book event, until your child account is validated again."
     notify_user_supporting_document_refusal:
       subject: "Your supporting documents were refused"
       body:
         user_supporting_document_files_refusal: "Your supporting documents were refused:"
         action: "Please re-upload some new supporting documents."
+    notify_user_supporting_document_reminder:
+      subject: "Reminder to upload your supporting documents"
+      body:
+        user_supporting_document_reminder: "This is a reminder for you to upload your supporting documents."
     notify_admin_user_supporting_document_refusal:
       subject: "A member's supporting documents were refused"
       body:
         user_supporting_document_files_refusal: "Member %{NAME}'s supporting documents were rejected by %{OPERATOR}:"
+    notify_user_child_supporting_document_refusal:
+      subject: "Your child's supporting documents were refused"
+      body:
+        user_child_supporting_document_files_refusal: "Your supporting documents were refused:"
+        action: "Please re-upload some new supporting documents."
+    notify_admin_user_child_supporting_document_refusal:
+      subject: "A child's supporting documents were refused"
+      body:
+        user_child_supporting_document_files_refusal: "Child %{NAME}'s supporting documents were rejected by %{OPERATOR}:"
     shared:
       hello: "Hello %{user_name}"
     notify_user_order_is_ready:
@@ -420,3 +465,25 @@ en:
       subject: "Your command was refunded"
       body:
         notify_user_order_is_refunded: "Your command %{REFERENCE} was refunded."
+    notify_member_reservation_validated:
+      subject: "Your reservation was validated"
+      body:
+        reservation_validated_html: "<strong><em>%{RESERVABLE}</em></strong> was validated."
+        your_reserved_slots: "Your reserved slots are:"
+    notify_admin_reservation_validated:
+      subject: "Pre-registration was validated"
+      body:
+        reservation_validated_html: "<strong><em>%{RESERVABLE}</em></strong> of %{NAME} was validated."
+        reserved_slots: "Reserved slots are:"
+    notify_member_reservation_invalidated:
+      subject: "Your pre-registration wasn't validated"
+      body:
+        reservation_invalidated_html: "<strong><em>%{RESERVABLE}</em></strong> wasn't validated."
+    notify_admin_reservation_invalidated:
+      subject: "Pre-registration wasn't validated"
+      body:
+        reservation_invalidated_html: "<strong><em>%{RESERVABLE}</em></strong> of %{NAME} wasn't validated."
+    notify_user_when_child_age_will_be_18:
+      subject: "Your child will be 18 years old"
+      body:
+        child_age_will_be_18_years_ago: "Your child %{NAME} will turn 18 on %{DATE}, at which point they will be automatically detached from your Family account. They will need to create their own account in order to make reservations."

@@ -14,9 +14,13 @@ import { FormSwitch } from '../form/form-switch';
 import { FormMultiFileUpload } from '../form/form-multi-file-upload';
 import { FabButton } from '../base/fab-button';
 import { Space } from '../../models/space';
+import { Machine } from '../../models/machine';
 import { AdvancedAccountingForm } from '../accounting/advanced-accounting-form';
 import SettingAPI from '../../api/setting';
 import { FabAlert } from '../base/fab-alert';
+import MachineAPI from '../../api/machine';
+import { FormMultiSelect } from '../form/form-multi-select';
+import { SelectOption } from '../../models/select';
 
 declare const Application: IApplication;
 
@@ -40,6 +44,41 @@ export const SpaceForm: React.FC<SpaceFormProps> = ({ action, space, onError, on
   useEffect(() => {
     SettingAPI.get('advanced_accounting').then(res => setIsActiveAccounting(res.value === 'true')).catch(onError);
   }, []);
+
+  /**
+   * Asynchronously load the full list of machines to display in the drop-down select field
+   */
+  const loadMachines = (inputValue: string, callback: (options: Array<SelectOption<number>>) => void): void => {
+    MachineAPI.index().then(data => {
+      callback(data.map(m => machineToOption(m)));
+    }).catch(error => onError(error));
+  };
+
+  /**
+   * Convert a machine to an option usable by react-select
+   */
+  const machineToOption = (machine: Machine): SelectOption<number> => {
+    return { value: machine.id, label: machine.name };
+  };
+
+  /**
+ * Asynchronously load the full list of spaces to display in the drop-down select field
+ */
+  const loadSpaces = (inputValue: string, callback: (options: Array<SelectOption<number>>) => void): void => {
+    SpaceAPI.index().then(data => {
+      if (space) {
+        data = data.filter((d) => d.id !== space.id);
+      }
+      callback(data.map(m => spaceToOption(m)));
+    }).catch(error => onError(error));
+  };
+
+  /**
+   * Convert a space to an option usable by react-select
+   */
+  const spaceToOption = (space: Space): SelectOption<number> => {
+    return { value: space.id, label: space.name };
+  };
 
   /**
    * Callback triggered when the user validates the machine form: handle create or update
@@ -103,6 +142,29 @@ export const SpaceForm: React.FC<SpaceFormProps> = ({ action, space, onError, on
                           label={t('app.admin.space_form.characteristics')}
                           limit={null}
                           heading bulletList link />
+          </div>
+        </section>
+
+        <section>
+          <header>
+            <p className="title">
+              {t('app.admin.space_form.associated_objects')}
+            </p>
+            <p className="description">
+              {t('app.admin.space_form.associated_objects_warning')}
+            </p>
+          </header>
+          <div className="content">
+            <FormMultiSelect control={control}
+                             id="child_ids"
+                             formState={formState}
+                             label={t('app.admin.space_form.children_spaces')}
+                             loadOptions={loadSpaces} />
+            <FormMultiSelect control={control}
+                             id="machine_ids"
+                             formState={formState}
+                             label={t('app.admin.space_form.associated_machines')}
+                             loadOptions={loadMachines} />
           </div>
         </section>
 

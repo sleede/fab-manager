@@ -198,6 +198,7 @@ fr:
         group_is_required: "Le groupe est requis."
         trainings: "Formations"
         tags: "Étiquettes"
+        children: "Enfants"
       #machine/training slot modification modal
       confirm_modify_slot_modal:
         change_the_slot: "Modifier le créneau"
@@ -373,6 +374,8 @@ fr:
         user_validation_required_alert: "Attention !<br>Votre administrateur doit valider votre compte. Vous pourrez alors accéder à l'ensemble des fonctionnalités de réservation."
         select_the_reservation_context: "Sélectionnez la nature de la réservation"
         please_select_a_reservation_context: "Veuillez d'abord sélectionner la nature de la réservation"
+        child_validation_required_alert: "Attention !<br>Votre administrateur doit valider votre compte enfant. Vous pourrez alors réserver l'événement."
+        child_birthday_must_be_under_18_years_ago_alert: "Attention !<br>La date de naissance de l'enfant doit être inférieure à 18 ans. Vous pourrez alors réserver l'événement."
       #feature-tour modal
       tour:
         previous: "Précédent"
@@ -446,6 +449,7 @@ fr:
         select_all: "Tout sélectionner"
         unselect_all: "Tout déselectionner"
       form_file_upload:
+        placeholder: "Ajouter un fichier"
         browse: "Parcourir"
         edit: "Modifier"
       form_image_upload:

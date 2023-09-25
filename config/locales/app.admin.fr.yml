@@ -111,6 +111,10 @@ fr:
         save: "Enregistrer"
         create_success: "L'espace a bien été créé"
         update_success: "L'espace a bien été mis à jour"
+        associated_machines: "Machines incluses"
+        children_spaces: "Espaces inclus"
+        associated_objects: "Objet associé"
+        associated_objects_warning: "Utilisez uniquement ces champs si vous souhaitez une réservation d'interblocage entre les espaces, les sous-espaces et les machines. Si vous voulez que les réservations de machines et d'espaces restent indépendantes, veuillez laisser les champs suivants vides."
       event_form:
         ACTION_title: "{ACTION, select, create{Nouvel } other{Mettre à jour l''}}événement"
         title: "Titre"
@@ -151,6 +155,14 @@ fr:
           every_week: "Chaque semaine"
           every_month: "Chaque mois"
           every_year: "Chaque année"
+        event_type: "Type d'événement"
+        event_types:
+          standard: "Evénement standard"
+          nominative: "Evénement nominatif"
+          family: "Evénement réservé aux membres"
+        pre_registration: "Pré-inscription"
+        pre_registration_help: "Si cette option est cochée, les administrateurs et les gestionnaires devent valider les inscriptions avant qu'elles ne soient définitives."
+        pre_registration_end_date: "Date limite de pré-inscription"
       plan_form:
         ACTION_title: "{ACTION, select, create{Nouvelle} other{Mettre à jour la}} formule d'abonnement"
         tab_settings: "Paramètres"
@@ -595,6 +607,13 @@ fr:
         do_you_really_want_to_delete_this_price_category: "Êtes vous sur de vouloir supprimer cette catégorie tarifaire ?"
         price_category_successfully_deleted: "Catégorie tarifaire supprimée avec succès."
         price_category_deletion_failed: "Échec de la suppression de la catégorie tarifaire."
+        types: "Types"
+        event_type:
+          standard: "Standard"
+          family: "Réservé aux membres"
+          nominative: "Nominatif"
+        pre_registration: "Pré-inscription"
+        NUMBER_pre_registered: " {NUMBER} pré-inscrit"
       #add a new event
       events_new:
         add_an_event: "Ajouter un événement"
@@ -629,6 +648,40 @@ fr:
         no_reservations_for_now: "Aucune réservation pour le moment."
         back_to_monitoring: "Retour au suivi"
         canceled: "Annulée"
+        date: "Date"
+        booked_by: "Réservé par"
+        reservations: "Réservations"
+        status: "Statut"
+        gestion: "Gestion"
+        validation: "Validation"
+        event_status:
+          pre_registered: "Pré-inscrit"
+          to_pay: "À payer"
+          paid: "Payé"
+          canceled: "Annulée"
+          present: "Présent"
+          registered: "Inscrit"
+          not_validated: "Non validée"
+        affirmative: "Oui"
+        negative: "Non"
+        validate: "Valider"
+        pay: "Payer"
+        validate_the_reservation: "Valider la réservation"
+        do_you_really_want_to_validate_this_reservation_this_apply_to_all_booked_tickets: "Êtes vous sur de vouloir valider cette réservation? Ceci s'applique à TOUTES les places réservées."
+        reservation_was_successfully_validated: "La réservation a bien été validé."
+        validation_failed: "La validation a échoué."
+        reservation_was_successfully_invalidated: "La réservation a bien été invalidée."
+        invalidation_failed: "L'invalidation a échoué."
+        confirm_payment: "Confirmer le paiement"
+        confirm_payment_of_html: "{ROLE, select, admin{Encaisser} other{Payer}} : {AMOUNT}" #(contexte : validate a payment of $20,00)
+        offer_this_reservation: "J'offre cette réservation"
+        i_have_received_the_payment: "J'ai reçu le paiement"
+        reservation_was_successfully_paid: "La réservation a bien été payée."
+        present: "Présenter"
+        confirm_present: "Confirmer la présence"
+        confirm_present_info: "Confirmer la présence de l'utilisateur à l'événement"
+        reservation_was_successfully_present: "La présence a bien été confirmée."
+        age: "{NUMBER} ans"
       events_settings:
         title: "Paramètres"
         generic_text_block: "Bloc de texte rédactionnel"
@@ -1193,6 +1246,14 @@ fr:
           member_filter_not_confirmed: "Non confirmés"
           member_filter_inactive_for_3_years: "Inactifs depuis 3 ans"
           member_filter_not_validated: "Non validés"
+      members_list_item:
+        item_type: "membre"
+        surname: "Nom de famille"
+        first_name: "Prénom"
+        phone: "Téléphone"
+        email: "Courriel"
+        group: "Groupe"
+        subscription: "Abonnement"
       #add a member
       members_new:
         add_a_member: "Ajouter un membre"
@@ -1240,6 +1301,12 @@ fr:
         validate_member_error: "Une erreur inattendue est survenue. Impossible de valider ce compte membre."
         invalidate_member_error: "Une erreur inattendue est survenue. Impossible d'invalider ce compte membre."
         validate_account: "Valider le compte"
+      child_validation:
+        validate_child_success: "Le compte enfant a bien été validé"
+        invalidate_child_success: "Le compte enfant a bien été invalidé"
+        validate_child_error: "Une erreur inattendue est survenue. Impossible de valider ce compte enfant."
+        invalidate_child_error: "Une erreur inattendue est survenue. Impossible d'invalider ce compte enfant."
+        validate_child: "Valider le compte enfant"
       supporting_documents_refusal_form:
         refusal_comment: "Commentaire"
         comment_placeholder: "Veuillez saisir un commentaire ici"
@@ -1269,6 +1336,7 @@ fr:
       #edit a member
       members_edit:
         subscription: "Abonnement"
+        reservations: "Réservations"
         duration: "Durée :"
         expires_at: "Expire le :"
         price_: "Prix :"
@@ -1477,6 +1545,8 @@ fr:
           client__jwks_uri: "URI JWKS"
           client__end_session_endpoint: "Point d'accès pour terminer la session"
           client__end_session_endpoint_help: "L'url à appeler pour déconnecter l'utilisateur sur le serveur d'autorisation."
+          extra_authorize_params: "Paramètres d'autorisation supplémentaires"
+          extra_authorize_params_help: "Un hachage de paramètres supplémentaires fixes qui seront fusionnés à la demande d'autorisation"
         provider_form:
           name: "Nom"
           authentication_type: "Type d'authentification"
@@ -1645,7 +1715,7 @@ fr:
         secondary_color: "la couleur secondaire"
         customize_home_page: "Personnaliser la page d'accueil"
         reset_home_page: "Remettre la page d'accueil dans son état initial"
-        confirmation_required: Confirmation requise
+        confirmation_required: "Confirmation requise"
         confirm_reset_home_page: "Voulez-vous vraiment remettre la page d'accueil à sa valeur d'usine ?"
         home_items: "Éléments de la page d'accueil"
         item_news: "Brève"
@@ -1796,6 +1866,11 @@ fr:
         do_you_really_want_to_delete_this_reservation_context: "Êtes-vous sûr de vouloir supprimer cette nature ?"
         unable_to_delete_reservation_context_already_related_to_reservations: "Impossible de supprimer ce contexte car il est déjà associé à une réservation"
         unable_to_delete_reservation_context_an_error_occured: "Impossible de supprimer : une erreur est survenue"
+        family_account: "Compte famille"
+        family_account_info_html: "Le compte Famille permet à vos membres d'ajouter leurs enfants de moins de 18 ans sur leur propre compte et de les inscrire directement aux évènements de type Famille. Vous pouvez aussi demander des justificatifs pour chaque enfant et valider leur compte."
+        enable_family_account: "Activer l'option Compte Famille"
+        child_validation_required: "l'option de validation des comptes enfants"
+        child_validation_required_label: "Activer l'option de validation des comptes enfants"
         overlapping_options:
           training_reservations: "Formations"
           machine_reservations: "Machines"

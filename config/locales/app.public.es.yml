@@ -14,10 +14,11 @@ es:
         #dashboard sections
         dashboard: "Panel"
         my_profile: "My Perfil"
+        my_children: "My Children"
         my_settings: "Mis ajustes"
         my_supporting_documents_files: "Mis documentos justificativos"
         my_projects: "Mis proyectos"
-        my_trainings: "Mis cursos"
+        my_trainings: "Mis formaciones"
         my_reservations: "Mis reservas"
         my_events: "Mis eventos"
         my_invoices: "Mis facturas"
@@ -38,7 +39,7 @@ es:
         #left menu (public)
         home: "Menú principal"
         reserve_a_machine: "Reservar una máquina"
-        trainings_registrations: "Registro de cursos"
+        trainings_registrations: "Registro de formaciones"
         events_registrations: "Registro de eventos"
         reserve_a_space: "Reservar un espacio"
         projects_gallery: "Galería de proyectos"
@@ -46,7 +47,7 @@ es:
         public_calendar: "Agenda"
         fablab_store: "Tienda"
         #left menu (admin)
-        trainings_monitoring: "Cursos"
+        trainings_monitoring: "Formaciones"
         manage_the_calendar: "Agenda"
         manage_the_users: "Usuarios"
         manage_the_invoices: "Facturas"
@@ -258,14 +259,14 @@ es:
       #list of trainings
       trainings_list:
         book: "Reservar"
-        the_trainings: "Lista de cursos"
+        the_trainings: "Lista de formaciones"
       #details of a training
       training_show:
-        book_this_training: "reservar plaza en este curso"
-        do_you_really_want_to_delete_this_training: "Está seguro de querer eliminar este curso?"
+        book_this_training: "Reservar la formación"
+        do_you_really_want_to_delete_this_training: "¿Está seguro de querer eliminar esta formación?"
         unauthorized_operation: "Operación no autorizada"
         confirmation_required: "Confirmación requerida"
-        the_training_cant_be_deleted_because_it_is_already_reserved_by_some_users: "El curso no puede borrarse porque ya ha sido reservado por algún usuario."
+        the_training_cant_be_deleted_because_it_is_already_reserved_by_some_users: "La formación no puede borrarse porque ya ha sido reservada por algún usuario."
       plan_card:
         AMOUNT_per_month: "{AMOUNT} / mes"
         i_subscribe_online: "Me suscribo en línea"
@@ -317,6 +318,9 @@ es:
         event_description: "Descripción del evento"
         downloadable_documents: "Archivos descargables"
         information_and_booking: "Información y reservas"
+        event_type:
+          family: "Event reserved for members"
+          nominative: "Nominative event"
         dates: "Fechas"
         beginning: "Empieza:"
         ending: "Termina:"
@@ -332,9 +336,12 @@ es:
         ticket: "{NUMBER, plural, one{billete} other{billetes}}"
         make_a_gift_of_this_reservation: "Regalar esta reserva"
         thank_you_your_payment_has_been_successfully_registered: "Gracias. Su pago se ha registrado correctamente."
+        thank_you_your_pre_registration_has_been_successfully_saved: "Thank you. Your pre-registration has been successfully saved!"
         you_can_find_your_reservation_s_details_on_your_: "Puede encontrar los detalles de su reserva en"
+        informed_by_email_your_pre_registration: "You will be kept informed by email of the progress made regarding your pre-registration."
         dashboard: "panel"
         you_booked_DATE: "Has reservado ({DATE}):"
+        you_pre_booked_DATE: "Your pre-registration ({DATE}):"
         canceled_reservation_SEATS: "Reservación cancelada ({SEATS} plazas)"
         book: "Reservar"
         confirm_and_pay: "Confirmar y pagar"
@@ -362,12 +369,16 @@ es:
         view_event_list: "Ver próximos eventos"
         share_on_facebook: "Compartir en Facebook"
         share_on_twitter: "Compartir en Twitter"
+        last_name_and_first_name: "Last name and first name"
+        pre_book: "Pre-book"
+        pre_registration_end_date: "Deadline for pre-registration"
+        pre_registration: "Pre-registration"
       #public calendar
       calendar:
         calendar: "Calendario"
         show_unavailables: "Mostrar campos inválidos"
         filter_calendar: "Filtrar calendario"
-        trainings: "Cursos"
+        trainings: "Formaciones"
         machines: "Máquinas"
         spaces: "Espacios"
         events: "Eventos"
@@ -481,6 +492,35 @@ es:
       member_select:
         select_a_member: "Selecciona un miembro"
         start_typing: "Empezar a escribir..."
+      children_dashboard:
+        heading: "Children"
+        member_heading: "My Children"
+        add_child: "Add a child"
+      child_modal:
+        edit_child: "Edit child"
+        new_child: "New child"
+      child_form:
+        child_form_info: "Only children under 18 years old can be added to your Family account. Supporting documents may be requested to validate your child's account and allow you to register them for events."
+        first_name: "First name"
+        last_name: "Last name"
+        birthday: "Birthday"
+        email: "Email"
+        phone: "Phone"
+        save: "Save"
+        supporting_documents: "Supporting documents"
+        to_complete: "To complete"
+        refuse_documents_info: "You can refuse a selection of documents by clicking on the following button."
+        refuse_documents: "Refuse documents"
+      child_item:
+        first_name: "Child first name"
+        last_name: "Child last name"
+        birthday: "Birthday"
+        deleted: "The child has been deleted."
+        unable_to_delete: "Unable to delete the child."
+      delete_child_modal:
+        confirmation_required: "Confirmation required"
+        confirm: "Confirm"
+        confirm_delete_child: "Do you really want to remove this child?"
       tour:
         conclusion:
           title: "Gracias por su atención"

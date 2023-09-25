@@ -41,6 +41,23 @@
         </div>
 
         <div class="col-sm-12 col-md-12 col-lg-4">
+            <div class="spaces-relations m" ng-show="space.parent || space.children.length || space.machines.length">
+              <p ng-show="space.parent" class="space-parent">{{ space.parent.name }}</p>
+              <div class="space-current" ng-class="{'has-parent': space.parent}">
+                <span class="space-current-name">
+                  <svg viewBox="0 0 24 24" width="3rem">
+                    <use href="../../images/icons.svg#pin-map"/>
+                  </svg>
+                  {{ space.name }}
+                </span>
+              </div>
+              <ul ng-show="space.machines.length" class="related-machines">
+                <li ng-repeat="machine in space.machines" class="">{{ machine.name }}</li>
+              </ul>
+              <ul ng-show="space.children.length" class="related-spaces">
+                <li ng-repeat="child_space in space.children" class="">{{ child_space.name }}</li>
+              </ul>
+            </div>
 
             <div class="widget panel b-a m m-t-lg" ng-show="space.characteristics">
                 <div class="panel-heading b-b small">

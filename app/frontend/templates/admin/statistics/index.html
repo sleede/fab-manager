@@ -288,7 +288,7 @@
                 <td ng-repeat="field in selectedIndex.additional_fields">
                   <ng-switch on="field.data_type">
                     <span ng-switch-when="date">{{formatDate(datum._source[field.key])}}</span>
-                    <ul ng-switch-when="list">
+                    <ul ng-switch-when="list" class="list-none">
                       <li ng-repeat="elem in uniq(datum._source[field.key])">{{elem.name}}</li>
                     </ul>
                     <span ng-switch-default>{{datum._source[field.key]}}</span>

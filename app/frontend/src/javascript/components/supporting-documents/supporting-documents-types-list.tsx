@@ -15,18 +15,20 @@ import SupportingDocumentTypeAPI from '../../api/supporting-document-type';
 import { FabPanel } from '../base/fab-panel';
 import { FabAlert } from '../base/fab-alert';
 import { FabButton } from '../base/fab-button';
+import { PencilSimple, Trash } from 'phosphor-react';
 
 declare const Application: IApplication;
 
 interface SupportingDocumentsTypesListProps {
   onSuccess: (message: string) => void,
   onError: (message: string) => void,
+  documentType: 'User' | 'Child',
 }
 
 /**
  * This component shows a list of all types of supporting documents (e.g. student ID, Kbis extract, etc.)
  */
-const SupportingDocumentsTypesList: React.FC<SupportingDocumentsTypesListProps> = ({ onSuccess, onError }) => {
+const SupportingDocumentsTypesList: React.FC<SupportingDocumentsTypesListProps> = ({ onSuccess, onError, documentType }) => {
   const { t } = useTranslation('admin');
 
   // list of displayed supporting documents type
@@ -48,7 +50,7 @@ const SupportingDocumentsTypesList: React.FC<SupportingDocumentsTypesListProps> 
   useEffect(() => {
     GroupAPI.index({ disabled: false }).then(data => {
       setGroups(data);
-      SupportingDocumentTypeAPI.index().then(pData => {
+      SupportingDocumentTypeAPI.index({ document_type: documentType }).then(pData => {
         setSupportingDocumentsTypes(pData);
       });
     });
@@ -91,7 +93,7 @@ const SupportingDocumentsTypesList: React.FC<SupportingDocumentsTypesListProps> 
    */
   const onSaveTypeSuccess = (message: string): void => {
     setModalIsOpen(false);
-    SupportingDocumentTypeAPI.index().then(pData => {
+    SupportingDocumentTypeAPI.index({ document_type: documentType }).then(pData => {
       setSupportingDocumentsTypes(orderTypes(pData, supportingDocumentsTypeOrder));
       onSuccess(message);
     }).catch((error) => {
@@ -121,7 +123,7 @@ const SupportingDocumentsTypesList: React.FC<SupportingDocumentsTypesListProps> 
    */
   const onDestroySuccess = (message: string): void => {
     setDestroyModalIsOpen(false);
-    SupportingDocumentTypeAPI.index().then(pData => {
+    SupportingDocumentTypeAPI.index({ document_type: documentType }).then(pData => {
       setSupportingDocumentsTypes(pData);
       setSupportingDocumentsTypes(orderTypes(pData, supportingDocumentsTypeOrder));
       onSuccess(message);
@@ -190,83 +192,138 @@ const SupportingDocumentsTypesList: React.FC<SupportingDocumentsTypesListProps> 
     window.location.href = '/#!/admin/members?tabs=1';
   };
 
-  return (
-    <FabPanel className="supporting-documents-types-list" header={<div>
-      <span>{t('app.admin.settings.account.supporting_documents_types_list.add_supporting_documents_types')}</span>
-    </div>}>
-      <div className="types-list">
-        <div className="groups">
-          <p>{t('app.admin.settings.account.supporting_documents_types_list.supporting_documents_type_info')}</p>
-          <FabAlert level="warning">
-            <HtmlTranslate trKey="app.admin.settings.account.supporting_documents_types_list.no_groups_info" />
-            <FabButton onClick={addGroup}>{t('app.admin.settings.account.supporting_documents_types_list.create_groups')}</FabButton>
-          </FabAlert>
+  if (documentType === 'User') {
+    return (
+      <FabPanel className="supporting-documents-types-list" header={<div>
+        <span>{t('app.admin.settings.account.supporting_documents_types_list.add_supporting_documents_types')}</span>
+      </div>}>
+        <div className="types-list">
+          <div className="groups">
+            <p>{t('app.admin.settings.account.supporting_documents_types_list.supporting_documents_type_info')}</p>
+            <FabAlert level="warning">
+              <HtmlTranslate trKey="app.admin.settings.account.supporting_documents_types_list.no_groups_info" />
+              <FabButton onClick={addGroup}>{t('app.admin.settings.account.supporting_documents_types_list.create_groups')}</FabButton>
+            </FabAlert>
+          </div>
+
+          <div className="title">
+            <h3>{t('app.admin.settings.account.supporting_documents_types_list.supporting_documents_type_title')}</h3>
+            <FabButton onClick={addType}>{t('app.admin.settings.account.supporting_documents_types_list.add_type')}</FabButton>
+          </div>
+
+          <SupportingDocumentsTypeModal isOpen={modalIsOpen}
+                                        groups={groups}
+                                        proofOfIdentityType={supportingDocumentsType}
+                                        documentType={documentType}
+                                        toggleModal={toggleCreateAndEditModal}
+                                        onSuccess={onSaveTypeSuccess}
+                                        onError={onError} />
+          <DeleteSupportingDocumentsTypeModal isOpen={destroyModalIsOpen}
+                                              proofOfIdentityTypeId={supportingDocumentsTypeId}
+                                              toggleModal={toggleDestroyModal}
+                                              onSuccess={onDestroySuccess}
+                                              onError={onError}/>
+
+          <table>
+            <thead>
+              <tr>
+                <th className="group-name">
+                  <a onClick={setTypeOrder('group_name')}>
+                    {t('app.admin.settings.account.supporting_documents_types_list.group_name')}
+                    <i className={orderClassName('group_name')} />
+                  </a>
+                </th>
+                <th className="name">
+                  <a onClick={setTypeOrder('name')}>
+                    {t('app.admin.settings.account.supporting_documents_types_list.name')}
+                    <i className={orderClassName('name')} />
+                  </a>
+                </th>
+                <th className="actions"></th>
+              </tr>
+            </thead>
+            <tbody>
+              {supportingDocumentsTypes.map(poit => {
+                return (
+                  <tr key={poit.id}>
+                    <td>{getGroupsNames(poit.group_ids)}</td>
+                    <td>{poit.name}</td>
+                    <td>
+                      <div className="edit-destroy-buttons">
+                        <FabButton className="edit-btn" onClick={editType(poit)}>
+                          <PencilSimple size={20} weight="fill" />
+                        </FabButton>
+                        <FabButton className="delete-btn" onClick={destroyType(poit.id)}>
+                          <Trash size={20} weight="fill" />
+                        </FabButton>
+                      </div>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+          {!hasTypes() && (
+            <p className="no-types-info">
+              <HtmlTranslate trKey="app.admin.settings.account.supporting_documents_types_list.no_types" />
+            </p>
+          )}
         </div>
+      </FabPanel>
+    );
+  } else if (documentType === 'Child') {
+    return (
+      <div className="supporting-documents-types-list">
+        <div className="types-list">
+          <div className="title">
+            <h3>{t('app.admin.settings.account.supporting_documents_types_list.supporting_documents_type_title')}</h3>
+            <FabButton onClick={addType}>{t('app.admin.settings.account.supporting_documents_types_list.add_type')}</FabButton>
+          </div>
 
-        <div className="title">
-          <h3>{t('app.admin.settings.account.supporting_documents_types_list.supporting_documents_type_title')}</h3>
-          <FabButton onClick={addType}>{t('app.admin.settings.account.supporting_documents_types_list.add_type')}</FabButton>
+          <SupportingDocumentsTypeModal isOpen={modalIsOpen}
+                                        groups={groups}
+                                        proofOfIdentityType={supportingDocumentsType}
+                                        documentType={documentType}
+                                        toggleModal={toggleCreateAndEditModal}
+                                        onSuccess={onSaveTypeSuccess}
+                                        onError={onError} />
+          <DeleteSupportingDocumentsTypeModal isOpen={destroyModalIsOpen}
+                                              proofOfIdentityTypeId={supportingDocumentsTypeId}
+                                              toggleModal={toggleDestroyModal}
+                                              onSuccess={onDestroySuccess}
+                                              onError={onError}/>
+
+          <div className="document-list">
+          {supportingDocumentsTypes.map(poit => {
+            return (
+              <div key={poit.id} className="document-list-item">
+                <div className='file'>
+                  <p>{poit.name}</p>
+                  <div className="edit-destroy-buttons">
+                    <FabButton className="edit-btn" onClick={editType(poit)}>
+                      <PencilSimple size={20} weight="fill" />
+                    </FabButton>
+                    <FabButton className="delete-btn" onClick={destroyType(poit.id)}>
+                      <Trash size={20} weight="fill" />
+                    </FabButton>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+          </div>
+
+          {!hasTypes() && (
+            <p className="no-types-info">
+              <HtmlTranslate trKey="app.admin.settings.account.supporting_documents_types_list.no_types" />
+            </p>
+          )}
         </div>
-
-        <SupportingDocumentsTypeModal isOpen={modalIsOpen}
-                                      groups={groups}
-                                      proofOfIdentityType={supportingDocumentsType}
-                                      toggleModal={toggleCreateAndEditModal}
-                                      onSuccess={onSaveTypeSuccess}
-                                      onError={onError} />
-        <DeleteSupportingDocumentsTypeModal isOpen={destroyModalIsOpen}
-                                            proofOfIdentityTypeId={supportingDocumentsTypeId}
-                                            toggleModal={toggleDestroyModal}
-                                            onSuccess={onDestroySuccess}
-                                            onError={onError}/>
-
-        <table>
-          <thead>
-            <tr>
-              <th className="group-name">
-                <a onClick={setTypeOrder('group_name')}>
-                  {t('app.admin.settings.account.supporting_documents_types_list.group_name')}
-                  <i className={orderClassName('group_name')} />
-                </a>
-              </th>
-              <th className="name">
-                <a onClick={setTypeOrder('name')}>
-                  {t('app.admin.settings.account.supporting_documents_types_list.name')}
-                  <i className={orderClassName('name')} />
-                </a>
-              </th>
-              <th className="actions"></th>
-            </tr>
-          </thead>
-          <tbody>
-            {supportingDocumentsTypes.map(poit => {
-              return (
-                <tr key={poit.id}>
-                  <td>{getGroupsNames(poit.group_ids)}</td>
-                  <td>{poit.name}</td>
-                  <td>
-                    <div className="buttons">
-                      <FabButton className="edit-btn" onClick={editType(poit)}>
-                        <i className="fa fa-edit" />
-                      </FabButton>
-                      <FabButton className="delete-btn" onClick={destroyType(poit.id)}>
-                        <i className="fa fa-trash" />
-                      </FabButton>
-                    </div>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-        {!hasTypes() && (
-          <p className="no-types-info">
-            <HtmlTranslate trKey="app.admin.settings.account.supporting_documents_types_list.no_types" />
-          </p>
-        )}
       </div>
-    </FabPanel>
-  );
+    );
+  } else {
+    return null;
+  }
 };
 
 const SupportingDocumentsTypesListWrapper: React.FC<SupportingDocumentsTypesListProps> = (props) => {
@@ -277,4 +334,4 @@ const SupportingDocumentsTypesListWrapper: React.FC<SupportingDocumentsTypesList
   );
 };
 
-Application.Components.component('supportingDocumentsTypesList', react2angular(SupportingDocumentsTypesListWrapper, ['onSuccess', 'onError']));
+Application.Components.component('supportingDocumentsTypesList', react2angular(SupportingDocumentsTypesListWrapper, ['onSuccess', 'onError', 'documentType']));

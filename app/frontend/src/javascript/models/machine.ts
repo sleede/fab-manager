@@ -33,5 +33,8 @@ export interface Machine {
     slug: string,
   }>,
   advanced_accounting_attributes?: AdvancedAccounting,
-  machine_category_id?: number
+  machine_category_id?: number,
+  space: {
+    name: string
+  }
 }

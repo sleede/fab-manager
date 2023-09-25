@@ -39,6 +39,21 @@ class NotificationsTest < ActionDispatch::IntegrationTest
     assert_equal (Notification.where(receiver_id: @admin.id).count - 1), notifications_total
   end
 
+  test 'polling endpoint' do
+    @admin = User.find_by(username: 'admin')
+    login_as(@admin, scope: :user)
+
+    get '/api/notifications/polling', params: { last_poll: Notification.order(:created_at).pick(:created_at) }
+
+    # Check response format & status
+    assert_equal 200, response.status, response.body
+    assert_match Mime[:json].to_s, response.content_type
+
+    # Check the list items are ok
+    notifications_total = json_response(response.body)[:totals][:total]
+    assert_not_equal notifications.count, 0
+  end
+
   test 'Last unread returns last 3 unread notifications' do
     @member = User.find(4)
     login_as(@member, scope: :user)
