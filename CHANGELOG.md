@@ -1,6 +1,6 @@
 # Changelog Fab-manager
 
-## next deploy
+## v6.1.0 2023 September 25
 
 - improves api/notification controller to avoid failing when there is a notification with wrong notification_type in db
 - Add extra_authorize_params to OpenIdConnect config
