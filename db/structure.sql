@@ -10,13 +10,6 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- Name: public; Type: SCHEMA; Schema: -; Owner: -
---
-
--- *not* creating schema, since initdb creates it
-
-
---
 -- Name: fuzzystrmatch; Type: EXTENSION; Schema: -; Owner: -
 --
 
@@ -115,8 +108,8 @@ SET default_tablespace = '';
 
 CREATE TABLE public.abuses (
     id integer NOT NULL,
-    signaled_type character varying,
     signaled_id integer,
+    signaled_type character varying,
     first_name character varying,
     last_name character varying,
     email character varying,
@@ -236,8 +229,8 @@ CREATE TABLE public.addresses (
     locality character varying,
     country character varying,
     postal_code character varying,
-    placeable_type character varying,
     placeable_id integer,
+    placeable_type character varying,
     created_at timestamp without time zone,
     updated_at timestamp without time zone
 );
@@ -346,8 +339,8 @@ CREATE TABLE public.ar_internal_metadata (
 
 CREATE TABLE public.assets (
     id integer NOT NULL,
-    viewable_type character varying,
     viewable_id integer,
+    viewable_type character varying,
     attachment character varying,
     type character varying,
     created_at timestamp without time zone,
@@ -1073,8 +1066,8 @@ ALTER SEQUENCE public.coupons_id_seq OWNED BY public.coupons.id;
 
 CREATE TABLE public.credits (
     id integer NOT NULL,
-    creditable_type character varying,
     creditable_id integer,
+    creditable_type character varying,
     plan_id integer,
     hours integer,
     created_at timestamp without time zone,
@@ -1875,15 +1868,15 @@ ALTER SEQUENCE public.notification_types_id_seq OWNED BY public.notification_typ
 CREATE TABLE public.notifications (
     id integer NOT NULL,
     receiver_id integer,
-    attached_object_type character varying,
     attached_object_id integer,
+    attached_object_type character varying,
     notification_type_id integer,
     is_read boolean DEFAULT false,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     receiver_type character varying,
     is_send boolean DEFAULT false,
-    meta_data jsonb DEFAULT '"{}"'::jsonb
+    meta_data jsonb DEFAULT '{}'::jsonb
 );
 
 
@@ -2240,41 +2233,6 @@ CREATE SEQUENCE public.payment_gateway_objects_id_seq
 --
 
 ALTER SEQUENCE public.payment_gateway_objects_id_seq OWNED BY public.payment_gateway_objects.id;
-
-
---
--- Name: payment_infos; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.payment_infos (
-    id bigint NOT NULL,
-    data jsonb,
-    state character varying,
-    payment_for character varying,
-    service character varying,
-    statistic_profile_id bigint,
-    created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL
-);
-
-
---
--- Name: payment_infos_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE public.payment_infos_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: payment_infos_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE public.payment_infos_id_seq OWNED BY public.payment_infos.id;
 
 
 --
@@ -2647,8 +2605,8 @@ CREATE TABLE public.prices (
     id integer NOT NULL,
     group_id integer,
     plan_id integer,
-    priceable_type character varying,
     priceable_id integer,
+    priceable_type character varying,
     amount integer,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
@@ -3206,8 +3164,8 @@ CREATE TABLE public.reservations (
     message text,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    reservable_type character varying,
     reservable_id integer,
+    reservable_type character varying,
     nb_reserve_places integer,
     statistic_profile_id integer,
     reservation_context_id bigint
@@ -3240,8 +3198,8 @@ ALTER SEQUENCE public.reservations_id_seq OWNED BY public.reservations.id;
 CREATE TABLE public.roles (
     id integer NOT NULL,
     name character varying,
-    resource_type character varying,
     resource_id integer,
+    resource_type character varying,
     created_at timestamp without time zone,
     updated_at timestamp without time zone
 );
@@ -3390,7 +3348,9 @@ CREATE TABLE public.spaces (
     updated_at timestamp without time zone NOT NULL,
     characteristics text,
     disabled boolean,
-    deleted_at timestamp without time zone
+    deleted_at timestamp without time zone,
+    ancestry character varying NOT NULL COLLATE pg_catalog."C",
+    ancestry_depth integer DEFAULT 0
 );
 
 
@@ -4352,8 +4312,8 @@ CREATE TABLE public.users (
     is_allow_newsletter boolean,
     current_sign_in_ip inet,
     last_sign_in_ip inet,
-    validated_at timestamp without time zone,
     mapped_from_sso character varying,
+    validated_at timestamp without time zone,
     supporting_documents_reminder_sent_at timestamp(6) without time zone
 );
 
@@ -4904,13 +4864,6 @@ ALTER TABLE ONLY public.organizations ALTER COLUMN id SET DEFAULT nextval('publi
 --
 
 ALTER TABLE ONLY public.payment_gateway_objects ALTER COLUMN id SET DEFAULT nextval('public.payment_gateway_objects_id_seq'::regclass);
-
-
---
--- Name: payment_infos id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.payment_infos ALTER COLUMN id SET DEFAULT nextval('public.payment_infos_id_seq'::regclass);
 
 
 --
@@ -5843,14 +5796,6 @@ ALTER TABLE ONLY public.payment_gateway_objects
 
 
 --
--- Name: payment_infos payment_infos_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.payment_infos
-    ADD CONSTRAINT payment_infos_pkey PRIMARY KEY (id);
-
-
---
 -- Name: payment_schedule_items payment_schedule_items_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6072,14 +6017,6 @@ ALTER TABLE ONLY public.reservations
 
 ALTER TABLE ONLY public.roles
     ADD CONSTRAINT roles_pkey PRIMARY KEY (id);
-
-
---
--- Name: schema_migrations schema_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.schema_migrations
-    ADD CONSTRAINT schema_migrations_pkey PRIMARY KEY (version);
 
 
 --
@@ -7056,13 +6993,6 @@ CREATE INDEX index_payment_gateway_objects_on_payment_gateway_object_id ON publi
 
 
 --
--- Name: index_payment_infos_on_statistic_profile_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_payment_infos_on_statistic_profile_id ON public.payment_infos USING btree (statistic_profile_id);
-
-
---
 -- Name: index_payment_schedule_items_on_invoice_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -7469,6 +7399,13 @@ CREATE INDEX index_spaces_availabilities_on_space_id ON public.spaces_availabili
 
 
 --
+-- Name: index_spaces_on_ancestry; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_spaces_on_ancestry ON public.spaces USING btree (ancestry);
+
+
+--
 -- Name: index_spaces_on_deleted_at; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -7847,6 +7784,21 @@ CREATE UNIQUE INDEX unique_not_null_external_id ON public.invoicing_profiles USI
 
 
 --
+-- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX unique_schema_migrations ON public.schema_migrations USING btree (version);
+
+
+--
+-- Name: accounting_periods accounting_periods_del_protect; Type: RULE; Schema: public; Owner: -
+--
+
+CREATE RULE accounting_periods_del_protect AS
+    ON DELETE TO public.accounting_periods DO INSTEAD NOTHING;
+
+
+--
 -- Name: accounting_periods accounting_periods_upd_protect; Type: RULE; Schema: public; Owner: -
 --
 
@@ -7877,14 +7829,6 @@ CREATE TRIGGER projects_search_content_trigger BEFORE INSERT OR UPDATE ON public
 
 ALTER TABLE ONLY public.payment_schedules
     ADD CONSTRAINT fk_rails_00308dc223 FOREIGN KEY (wallet_transaction_id) REFERENCES public.wallet_transactions(id);
-
-
---
--- Name: payment_infos fk_rails_0308366a58; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.payment_infos
-    ADD CONSTRAINT fk_rails_0308366a58 FOREIGN KEY (statistic_profile_id) REFERENCES public.statistic_profiles(id);
 
 
 --
@@ -8910,6 +8854,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20140605125131'),
 ('20140605142133'),
 ('20140605151442'),
+('20140606133116'),
 ('20140609092700'),
 ('20140609092827'),
 ('20140610153123'),
@@ -8978,12 +8923,14 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20150507075620'),
 ('20150512123546'),
 ('20150520132030'),
+('20150520133409'),
 ('20150526130729'),
 ('20150527153312'),
 ('20150529113555'),
 ('20150601125944'),
 ('20150603104502'),
 ('20150603104658'),
+('20150603133050'),
 ('20150604081757'),
 ('20150604131525'),
 ('20150608142234'),
@@ -9065,6 +9012,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20160905142700'),
 ('20160906094739'),
 ('20160906094847'),
+('20160906145713'),
 ('20160915105234'),
 ('20161123104604'),
 ('20170109085345'),
@@ -9233,10 +9181,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230328094808'),
 ('20230328094809'),
 ('20230331132506'),
-('20230509121907'),
 ('20230509161557'),
 ('20230510141305'),
-('20230511080650'),
 ('20230511081018'),
 ('20230524080448'),
 ('20230524083558'),
@@ -9252,8 +9198,9 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230720085857'),
 ('20230728072726'),
 ('20230728090257'),
-('20230825101952'),
 ('20230828073428'),
 ('20230831103208'),
 ('20230901090637'),
 ('20230907124230');
+
+
