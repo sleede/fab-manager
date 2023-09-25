@@ -179,7 +179,8 @@ export const accountSettings = [
   'external_id',
   'user_change_group',
   'user_validation_required',
-  'user_validation_required_list'
+  'user_validation_required_list',
+  'family_account'
 ] as const;
 
 export const analyticsSettings = [

@@ -27,6 +27,7 @@ class API::SupportingDocumentRefusalsController < API::APIController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def supporting_document_refusal_params
-    params.required(:supporting_document_refusal).permit(:message, :operator_id, :user_id, supporting_document_type_ids: [])
+    params.required(:supporting_document_refusal).permit(:message, :operator_id, :supportable_id, :supportable_type,
+                                                         supporting_document_type_ids: [])
   end
 end

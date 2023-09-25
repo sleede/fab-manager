@@ -49,7 +49,7 @@ export const SupportingDocumentsFiles: React.FC<SupportingDocumentsFilesProps> =
     SupportingDocumentTypeAPI.index({ group_id: currentUser.group_id }).then(tData => {
       setSupportingDocumentsTypes(tData);
     });
-    SupportingDocumentFileAPI.index({ user_id: currentUser.id }).then(fData => {
+    SupportingDocumentFileAPI.index({ supportable_id: currentUser.id, supportable_type: 'User' }).then(fData => {
       setSupportingDocumentsFiles(fData);
     });
   }, []);
@@ -106,7 +106,8 @@ export const SupportingDocumentsFiles: React.FC<SupportingDocumentsFilesProps> =
       for (const proofOfIdentityTypeId of Object.keys(files)) {
         const formData = new FormData();
 
-        formData.append('supporting_document_file[user_id]', currentUser.id.toString());
+        formData.append('supporting_document_file[supportable_id]', currentUser.id.toString());
+        formData.append('supporting_document_file[supportable_type]', 'User');
         formData.append('supporting_document_file[supporting_document_type_id]', proofOfIdentityTypeId);
         formData.append('supporting_document_file[attachment]', files[proofOfIdentityTypeId]);
         const proofOfIdentityFile = getSupportingDocumentsFileByType(parseInt(proofOfIdentityTypeId, 10));
@@ -117,7 +118,7 @@ export const SupportingDocumentsFiles: React.FC<SupportingDocumentsFilesProps> =
         }
       }
       if (Object.keys(files).length > 0) {
-        SupportingDocumentFileAPI.index({ user_id: currentUser.id }).then(fData => {
+        SupportingDocumentFileAPI.index({ supportable_id: currentUser.id, supportable_type: 'User' }).then(fData => {
           setSupportingDocumentsFiles(fData);
           setFiles({});
           onSuccess(t('app.logged.dashboard.supporting_documents_files.file_successfully_uploaded'));

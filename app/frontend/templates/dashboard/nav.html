@@ -11,6 +11,7 @@
         <h4 class="m-l text-sm" translate>{{ 'app.public.common.dashboard' }}</h4>
         <ul class="nav-page nav nav-pills text-u-c text-sm">
           <li ui-sref-active="active"><a class="text-black" ui-sref="app.logged.dashboard.profile" translate>{{ 'app.public.common.my_profile' }}</a></li>
+          <li ng-show="$root.settings.familyAccount" ui-sref-active="active"><a class="text-black" ui-sref="app.logged.dashboard.children" translate>{{ 'app.public.common.my_children' }}</a></li>
           <li ui-sref-active="active"><a class="text-black" ui-sref="app.logged.dashboard.settings" translate>{{ 'app.public.common.my_settings' }}</a></li>
           <li ng-if="!isAuthorized(['admin', 'manager']) && hasProofOfIdentityTypes" ui-sref-active="active"><a class="text-black" ui-sref="app.logged.dashboard.supporting_document_files" translate>{{ 'app.public.common.my_supporting_documents_files' }}</a></li>
           <li ui-sref-active="active"><a class="text-black" ui-sref="app.logged.dashboard.projects" translate>{{ 'app.public.common.my_projects' }}</a></li>

@@ -66,10 +66,15 @@
           <reservations-dashboard user="user" current-user="currentUser" on-error="onError" />
         </uib-tab>
 
+        <uib-tab heading="{{ 'app.shared.user_admin.children' | translate }}" ng-if="$root.settings.familyAccount">
+          <children-dashboard user="user" operator="currentUser" admin-panel="true" on-success="onSuccess" on-error="onError" />
+        </uib-tab>
+
         <uib-tab heading="{{ 'app.admin.members_edit.supporting_documents' | translate }}" ng-show="hasProofOfIdentityTypes">
           <supporting-documents-validation
             operator="currentUser"
             member="user"
+            document-type="User"
             on-error="onError"
             on-success="onSuccess" />
         </uib-tab>
@@ -206,19 +211,11 @@
                 <h4 class="text-u-c"><i class="fa fa-tag m-r-xs"></i> {{ 'app.admin.members_edit.next_events' | translate }}</h4>
               </div>
               <div class="widget-content bg-light wrapper r-b">
-                <ul class="list-unstyled" ng-if="user.events_reservations.length > 0">
-                  <li ng-repeat="r in user.events_reservations | eventsReservationsFilter:'future'" class="m-b">
-                    <a class="font-sbold" ui-sref="app.public.events_show({id: r.reservable.id})">{{r.reservable.title}}</a> - <span class="label label-warning wrapper-sm">{{ r.start_at | amDateFormat:'LLL' }} - {{ r.end_at | amDateFormat:'LT' }}</span>
-                    <span ng-if="r.nb_reserve_places > 0">
-                      <br/>
-                      <span translate translate-values="{ NUMBER: r.nb_reserve_places }">{{ 'app.admin.members_edit.NUMBER_full_price_tickets_reserved' }}</span>
-                    </span>
-                    <span ng-repeat="ticket in r.tickets">
-                      <br/>
-                      <span translate translate-values="{ NUMBER: ticket.booked, NAME: ticket.price_category.name }">{{ 'app.admin.members_edit.NUMBER_NAME_tickets_reserved' }}</span>
-                    </span>
-                  </li>
-                </ul>
+                <div class="list-unstyled" ng-if="user.events_reservations.length > 0">
+                  <div ng-repeat="r in user.events_reservations | eventsReservationsFilter:'future'" class="m-b">
+                    <event-reservation-item reservation="r"></event-reservation-item>
+                  </div>
+                </div>
                 <div ng-if="(user.events_reservations | eventsReservationsFilter:'future').length == 0" translate>{{ 'app.admin.members_edit.no_upcoming_events' }}</div>
               </div>
             </div>
@@ -229,11 +226,11 @@
                 <h4 class="text-u-c"><i class="fa fa-tag m-r-xs"></i> {{ 'app.admin.members_edit.passed_events' | translate }}</h4>
               </div>
               <div class="widget-content bg-light auto wrapper r-b">
-                <ul class="list-unstyled" ng-if="user.events_reservations.length > 0">
-                  <li ng-repeat="r in user.events_reservations | eventsReservationsFilter:'passed'" class="m-b">
-                    <span class="font-sbold">{{r.reservable.title}}</span> - <span class="label label-info text-white wrapper-sm">{{ r.start_at | amDateFormat:'LLL' }} - {{ r.end_at | amDateFormat:'LT' }}</span>
-                  </li>
-                </ul>
+                <div class="list-unstyled" ng-if="user.events_reservations.length > 0">
+                  <div ng-repeat="r in user.events_reservations | eventsReservationsFilter:'passed'" class="m-b">
+                    <event-reservation-item reservation="r"></event-reservation-item>
+                  </div>
+                </div>
                 <div ng-if="(user.events_reservations | eventsReservationsFilter:'passed').length == 0" translate>{{ 'app.admin.members_edit.no_passed_events' }}</div>
               </div>
             </div>

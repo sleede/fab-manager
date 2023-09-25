@@ -37,6 +37,21 @@ fr:
           edit_profile: "Modifier mes données"
           after_edition_info_html: "Une fois que vos données sont à jour, <strong>cliquez sur le bouton de synchronisation ci-dessous</strong>, ou <strong>déconnectez-vous puis reconnectez-vous</strong> pour que vos changements prennent effet."
           sync_profile: "Synchroniser mon profil"
+      event_reservation_item:
+        event: 'Événement'
+        family: 'Réservé aux membres'
+        nominative: 'Nominatif'
+        pre_registration: 'Pré-inscription'
+        NUMBER_normal_places_reserved: "{NUMBER} {NUMBER, plural, =0{} =1{place normale réservée} other{places normales réservées}}"
+        NUMBER_of_NAME_places_reserved: "{NUMBER} {NUMBER, plural, =0{} =1{place {NAME} réservée} other{places {NAME} réservées}}"
+        tracking_your_reservation: "Suivi de votre réservation"
+        in_the_process_of_validation: "En cours de validation"
+        settle_your_payment: "Venez régler à l'accueil"
+        paid: "Payé"
+        canceled: "Annulé"
+        registered: "Inscrit"
+        not_validated: "Non validé"
+        present: "Présent"
       dashboard:
         #dashboard: public profile
         profile:
@@ -293,6 +308,7 @@ fr:
         app_management: "Au sujet de la gestion de l'application"
       notification_form:
         notify_admin_when_user_is_created: "Un compte utilisateur a été créé"
+        notify_admin_child_created: "Un compte enfant a été créé"
         notify_admin_when_user_is_imported: "Un compte utilisateur a été importé"
         notify_admin_profile_complete: "Un compte importé a complété ses informations"
         notify_admin_user_merged: "Un compte importé a été fusionné avec un compte existant"
@@ -300,8 +316,11 @@ fr:
         notify_admin_import_complete: "Un import est terminé"
         notify_admin_user_group_changed: "Un utilisateur a changé de groupe"
         notify_admin_user_supporting_document_refusal: "Un justificatif a été refusé"
+        notify_admin_user_child_supporting_document_refusal: "Un justificatif de l'enfant a été refusé"
         notify_admin_user_supporting_document_files_created: "Un utilisateur a téléversé un justificatif"
         notify_admin_user_supporting_document_files_updated: "Un utilisateur a mis à jour un justificatif"
+        notify_admin_user_child_supporting_document_files_created: "Un enfant a téléversé un justificatif"
+        notify_admin_user_child_supporting_document_files_updated: "Un enfant a mis à jour un justificatif"
         notify_admin_member_create_reservation: "Un membre fait une réservation"
         notify_admin_slot_is_modified: "Un créneau de réservation a été modifié"
         notify_admin_slot_is_canceled: "Une réservation a été annulée"

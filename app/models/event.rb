@@ -33,6 +33,8 @@ class Event < ApplicationRecord
 
   has_many :cart_item_event_reservations, class_name: 'CartItem::EventReservation', dependent: :destroy
 
+  validates :event_type, inclusion: { in: %w[standard nominative family] }, presence: true
+
   attr_accessor :recurrence, :recurrence_end_at
 
   before_save :update_nb_free_places
@@ -85,12 +87,19 @@ class Event < ApplicationRecord
     if nb_total_places.nil?
       self.nb_free_places = nil
     else
-      reserved_places = reservations.joins(:slots_reservations)
-                                    .where('slots_reservations.canceled_at': nil)
-                                    .map(&:total_booked_seats)
-                                    .inject(0) { |sum, t| sum + t }
+      reserved = reservations.joins(:slots_reservations).where('slots_reservations.canceled_at': nil)
+      reserved = reserved.where('slots_reservations.is_valid': true) if pre_registration?
+      reserved_places = reserved.map(&:total_booked_seats).inject(0) { |sum, t| sum + t }
       self.nb_free_places = (nb_total_places - reserved_places)
     end
+  end
+
+  def nb_places_for_pre_registration
+    reservations.joins(:slots_reservations)
+                .where('slots_reservations.canceled_at': nil)
+                .where('slots_reservations.is_valid': nil)
+                .map(&:total_booked_seats)
+                .inject(0) { |sum, t| sum + t }
   end
 
   def all_day?

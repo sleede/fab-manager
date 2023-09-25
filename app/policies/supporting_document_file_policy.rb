@@ -6,15 +6,11 @@ class SupportingDocumentFilePolicy < ApplicationPolicy
     user.privileged?
   end
 
-  def create?
-    user.privileged? or record.user_id == user.id
-  end
-
-  def update?
-    user.privileged? or record.user_id == user.id
-  end
-
-  def download?
-    user.privileged? or record.user_id == user.id
+  %w[create update download].each do |action|
+    define_method "#{action}?" do
+      user.privileged? ||
+        (record.supportable_type == 'User' && record.supportable_id.to_i == user.id) ||
+        (record.supportable_type == 'Child' && user.children.exists?(id: record.supportable_id.to_i))
+    end
   end
 end

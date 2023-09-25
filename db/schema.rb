@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[6.1].define(version: 2023_03_15_095054) do
+ActiveRecord::Schema[6.1].define(version: 2023_03_31_132506) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
@@ -261,6 +261,18 @@ ActiveRecord::Schema[6.1].define(version: 2023_03_15_095054) do
     t.datetime "updated_at"
     t.string "slug"
     t.index ["slug"], name: "index_categories_on_slug", unique: true
+  end
+
+  create_table "children", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "first_name"
+    t.string "last_name"
+    t.date "birthday"
+    t.string "phone"
+    t.string "email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_children_on_user_id"
   end
 
   create_table "components", id: :serial, force: :cascade do |t|
@@ -1332,8 +1344,8 @@ ActiveRecord::Schema[6.1].define(version: 2023_03_15_095054) do
     t.boolean "is_allow_newsletter"
     t.inet "current_sign_in_ip"
     t.inet "last_sign_in_ip"
-    t.string "mapped_from_sso"
     t.datetime "validated_at"
+    t.string "mapped_from_sso"
     t.index ["auth_token"], name: "index_users_on_auth_token"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
@@ -1409,6 +1421,7 @@ ActiveRecord::Schema[6.1].define(version: 2023_03_15_095054) do
   add_foreign_key "cart_item_reservations", "plans"
   add_foreign_key "cart_item_subscriptions", "invoicing_profiles", column: "customer_profile_id"
   add_foreign_key "cart_item_subscriptions", "plans"
+  add_foreign_key "children", "users"
   add_foreign_key "event_price_categories", "events"
   add_foreign_key "event_price_categories", "price_categories"
   add_foreign_key "events", "categories"

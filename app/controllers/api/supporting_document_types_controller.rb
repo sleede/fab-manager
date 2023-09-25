@@ -45,6 +45,6 @@ class API::SupportingDocumentTypesController < API::APIController
   end
 
   def supporting_document_type_params
-    params.require(:supporting_document_type).permit(:name, group_ids: [])
+    params.require(:supporting_document_type).permit(:name, :document_type, group_ids: [])
   end
 end

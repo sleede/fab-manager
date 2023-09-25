@@ -35,6 +35,9 @@ export default class ApiLib {
           if (file?.is_main) {
             data.set(`${name}[${attr}][${i}][is_main]`, file.is_main.toString());
           }
+          if (file?.supporting_document_type_id) {
+            data.set(`${name}[${attr}][${i}][supporting_document_type_id]`, file.supporting_document_type_id.toString());
+          }
         });
       } else {
         if (object[attr]?.attachment_files && object[attr]?.attachment_files[0]) {

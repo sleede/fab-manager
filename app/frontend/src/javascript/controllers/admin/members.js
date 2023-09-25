@@ -293,7 +293,7 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
           Member.delete(
             { id: memberId },
             function () {
-              $scope.members.splice(findItemIdxById($scope.members, memberId), 1);
+              $scope.members = _.filter($scope.members, function (m) { return m.id !== memberId; });
               return growl.success(_t('app.admin.members.member_successfully_deleted'));
             },
             function (error) {
@@ -303,6 +303,31 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
           );
         }
       );
+    };
+
+    $scope.onDeletedChild = function (memberId, childId) {
+      $scope.members = $scope.members.map(function (member) {
+        if (member.id === memberId) {
+          member.children = _.filter(member.children, function (c) { return c.id !== childId; });
+          return member;
+        }
+        return member;
+      });
+    };
+
+    $scope.onUpdatedChild = function (memberId, child) {
+      $scope.members = $scope.members.map(function (member) {
+        if (member.id === memberId) {
+          member.children = member.children.map(function (c) {
+            if (c.id === child.id) {
+              return child;
+            }
+            return c;
+          });
+          return member;
+        }
+        return member;
+      });
     };
 
     /**
@@ -588,6 +613,20 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
       if (settingsPromise.feature_tour_display !== 'manual' && $scope.currentUser.profile_attributes.tours.indexOf('members') < 0) {
         uitour.start();
       }
+    };
+
+    /**
+     * Callback triggered in case of error
+     */
+    $scope.onError = (message) => {
+      growl.error(message);
+    };
+
+    /**
+     * Callback triggered in case of success
+     */
+    $scope.onSuccess = (message) => {
+      growl.success(message);
     };
 
     /* PRIVATE SCOPE */

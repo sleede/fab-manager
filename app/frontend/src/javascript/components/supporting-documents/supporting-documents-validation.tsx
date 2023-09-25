@@ -19,6 +19,7 @@ declare const Application: IApplication;
 interface SupportingDocumentsValidationProps {
   operator: User,
   member: User
+  documentType: 'User' | 'Child',
   onSuccess: (message: string) => void,
   onError: (message: string) => void,
 }
@@ -26,7 +27,7 @@ interface SupportingDocumentsValidationProps {
 /**
  * This component shows a list of supporting documents file of member, admin can download and valid
  **/
-const SupportingDocumentsValidation: React.FC<SupportingDocumentsValidationProps> = ({ operator, member, onSuccess, onError }) => {
+const SupportingDocumentsValidation: React.FC<SupportingDocumentsValidationProps> = ({ operator, member, onSuccess, onError, documentType }) => {
   const { t } = useTranslation('admin');
 
   // list of supporting documents type
@@ -39,7 +40,7 @@ const SupportingDocumentsValidation: React.FC<SupportingDocumentsValidationProps
     SupportingDocumentTypeAPI.index({ group_id: member.group_id }).then(tData => {
       setDocumentsTypes(tData);
     });
-    SupportingDocumentFileAPI.index({ user_id: member.id }).then(fData => {
+    SupportingDocumentFileAPI.index({ supportable_id: member.id, supportable_type: 'User' }).then(fData => {
       setDocumentsFiles(fData);
     });
   }, []);
@@ -112,7 +113,8 @@ const SupportingDocumentsValidation: React.FC<SupportingDocumentsValidationProps
             proofOfIdentityTypes={documentsTypes}
             toggleModal={toggleModal}
             operator={operator}
-            member={member}
+            supportable={member}
+            documentType={documentType}
             onError={onError}
             onSuccess={onSaveRefusalSuccess}/>
         </FabPanel>
@@ -131,4 +133,4 @@ const SupportingDocumentsValidationWrapper: React.FC<SupportingDocumentsValidati
 
 export { SupportingDocumentsValidationWrapper as SupportingDocumentsValidation };
 
-Application.Components.component('supportingDocumentsValidation', react2angular(SupportingDocumentsValidationWrapper, ['operator', 'member', 'onSuccess', 'onError']));
+Application.Components.component('supportingDocumentsValidation', react2angular(SupportingDocumentsValidationWrapper, ['operator', 'member', 'onSuccess', 'onError', 'documentType']));
