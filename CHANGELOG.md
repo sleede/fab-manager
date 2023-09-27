@@ -1,5 +1,12 @@
 # Changelog Fab-manager
 
+## next release
+
+- Fix a bug: unable to sync projects with openprojects
+
+- [TODO DEPLOY] `rails fablab:openlab:bulk_export`
+- [TODO DEPLOY] `rails fablab:openlab:bulk_update`
+
 ## v6.1.0 2023 September 25
 
 - improves api/notification controller to avoid failing when there is a notification with wrong notification_type in db
