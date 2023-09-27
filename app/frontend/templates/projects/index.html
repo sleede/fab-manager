@@ -126,8 +126,7 @@
           <p class="name">{{project.name}}</p>
           <span class="openlab" ng-if="openlab.searchOverWholeNetwork"><i class="fa fa-tag"></i> {{ project.app_name }}</span>
         </div>
-
     </div>
-    <a class="btn btn-warning" ng-click="loadMore()" ng-if="projectsPagination.hasNextPage()" translate>{{ 'app.public.projects_list.load_next_projects' }}</a>
+    <a class="fab-button is-secondary" ng-click="loadMore()" ng-if="projectsPagination.hasNextPage()" translate>{{ 'app.public.projects_list.load_next_projects' }}</a>
   </div>
 </section>
