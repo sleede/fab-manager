@@ -1,5 +1,9 @@
 # Changelog Fab-manager
 
+- Fix a bug: unable to generate statistic
+- [TODO DEPLOY] `rails fablab:es:build_stats`
+- [TODO DEPLOY] `rails fablab:maintenance:regenerate_statistics[2023,6]`
+
 ## v6.1.0 2023 September 25
 
 - improves api/notification controller to avoid failing when there is a notification with wrong notification_type in db
