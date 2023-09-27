@@ -141,7 +141,7 @@ class Availabilities::AvailabilitiesService
   end
 
   def flag_or_remove_blocked_slots(slots, blocked_slots, user)
-    if user.admin? || user.manager?
+    if user && (user.admin? || user.manager?)
       blocked_slots.each do |slot|
         slot.is_blocked = true
       end

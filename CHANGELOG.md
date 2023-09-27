@@ -3,6 +3,7 @@
 ## next release
 
 - Fix a bug: unable to sync projects with openprojects
+- Fix a bug: public availabilities (no user) was buggy (server error)
 
 - [TODO DEPLOY] `rails fablab:openlab:bulk_export`
 - [TODO DEPLOY] `rails fablab:openlab:bulk_update`
