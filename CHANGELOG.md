@@ -1,6 +1,6 @@
 # Changelog Fab-manager
 
-## next release
+## v6.1.1 2023 September 28
 
 - Fix a bug: unable to sync projects with openprojects
 - Fix a bug: public availabilities (no user) was buggy (server error)
