@@ -16,8 +16,10 @@ class API::ReservationsController < API::APIController
       where_clause[:reservable_id] = params[:reservable_id] if params[:reservable_id]
 
       @reservations = Reservation.where(where_clause)
+                                 .preload(:reservable, :booking_users, :tickets, { statistic_profile: { user: :profile }, slots_reservations: :slot })
     elsif params[:reservable_id] && params[:reservable_type] && (current_user.admin? || current_user.manager?)
       @reservations = Reservation.where(params.permit(:reservable_id, :reservable_type))
+                                 .preload(:reservable, :booking_users, :tickets, { statistic_profile: { user: :profile }, slots_reservations: :slot })
     else
       @reservations = []
     end

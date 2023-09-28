@@ -6,6 +6,7 @@
 - Fix a bug: public availabilities (no user) was buggy (server error)
 - Fix a bug: unable to generate statistic
 - Fix a bug: rss/projects was failing with project without image
+- improvement : performance of members#show and reservations#index
 
 - [TODO DEPLOY] `rails fablab:openlab:bulk_export`
 - [TODO DEPLOY] `rails fablab:openlab:bulk_update`
