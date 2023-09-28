@@ -40,7 +40,6 @@ class Availabilities::AvailabilitiesService
 
     if @level == 'slot'
       slots = availabilities.map(&:slots).flatten
-
       blocked_slots = Slots::InterblockingService.new.blocked_slots_for_machines(machines, slots)
       flag_or_remove_blocked_slots(slots, blocked_slots, @current_user)
     else
