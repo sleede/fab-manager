@@ -10,7 +10,8 @@ json.trainings @member.trainings do |t|
   json.id t.id
   json.name t.name
 end
-json.training_reservations @member.reservations.where(reservable_type: 'Training').map(&:slots_reservations).flatten do |sr|
+reservations = @member.reservations.where(reservable_type: 'Training').preload(slots_reservations: [:slot, reservation: :reservable])
+json.training_reservations reservations.select { |r| r.reservable_type == "Training" }.map(&:slots_reservations).flatten do |sr|
   json.id sr.id
   json.start_at sr.slot.start_at
   json.end_at sr.slot.end_at
@@ -19,7 +20,7 @@ json.training_reservations @member.reservations.where(reservable_type: 'Training
   json.is_valid @member.statistic_profile.training_ids.include?(sr.reservation.reservable_id)
   json.canceled_at sr.canceled_at
 end
-json.machine_reservations @member.reservations.where(reservable_type: 'Machine').map(&:slots_reservations).flatten do |sr|
+json.machine_reservations reservations.select { |r| r.reservable_type == "Machine" }.map(&:slots_reservations).flatten do |sr|
   json.id sr.id
   json.start_at sr.slot.start_at
   json.end_at sr.slot.end_at
@@ -27,7 +28,7 @@ json.machine_reservations @member.reservations.where(reservable_type: 'Machine')
   json.reservable_type 'Machine'
   json.canceled_at sr.canceled_at
 end
-json.space_reservations @member.reservations.where(reservable_type: 'Space').map(&:slots_reservations).flatten do |sr|
+json.space_reservations reservations.select { |r| r.reservable_type == "Space" }.map(&:slots_reservations).flatten do |sr|
   json.id sr.id
   json.start_at sr.slot.start_at
   json.end_at sr.slot.end_at

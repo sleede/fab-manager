@@ -1,5 +1,18 @@
 # Changelog Fab-manager
 
+## v6.1.1 2023 September 28
+
+- Fix a bug: unable to sync projects with openprojects
+- Fix a bug: public availabilities (no user) was buggy (server error)
+- Fix a bug: unable to generate statistic
+- Fix a bug: rss/projects was failing with project without image
+- improvement : performance of members#show and reservations#index
+
+- [TODO DEPLOY] `rails fablab:openlab:bulk_export`
+- [TODO DEPLOY] `rails fablab:openlab:bulk_update`
+- [TODO DEPLOY] `rails fablab:es:build_stats`
+- [TODO DEPLOY] `rails fablab:maintenance:regenerate_statistics[2023,6]`
+
 ## v6.1.0 2023 September 25
 
 - improves api/notification controller to avoid failing when there is a notification with wrong notification_type in db
