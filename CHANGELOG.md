@@ -5,6 +5,7 @@
 - Fix a bug: unable to sync projects with openprojects
 - Fix a bug: public availabilities (no user) was buggy (server error)
 - Fix a bug: unable to generate statistic
+- Fix a bug: rss/projects was failing with project without image
 
 - [TODO DEPLOY] `rails fablab:openlab:bulk_export`
 - [TODO DEPLOY] `rails fablab:openlab:bulk_update`
