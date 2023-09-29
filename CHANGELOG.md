@@ -1,5 +1,9 @@
 # Changelog Fab-manager
 
+## next release
+
+- Fix a bug: minor pb when bot hit api/projects#search without beeing authenticated
+
 ## v6.1.1 2023 September 28
 
 - Fix a bug: unable to sync projects with openprojects

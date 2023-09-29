@@ -71,7 +71,7 @@ class API::ProjectsController < API::APIController
         render :index
       end
       format.zip do
-        head :forbidden unless current_user.admin? || current_user.manager?
+        head :forbidden unless current_user && (current_user.admin? || current_user.manager?)
 
         send_data ProjectsArchive.new(res[:projects]).call, filename: "projets.zip", disposition: 'attachment', type: 'application/zip'
       end
