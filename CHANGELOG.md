@@ -10,7 +10,7 @@
 
 - [TODO DEPLOY] `rails fablab:openlab:bulk_export`
 - [TODO DEPLOY] `rails fablab:openlab:bulk_update`
-- [TODO DEPLOY] `rails fablab:maintenance:regenerate_statistics[2023,6]`
+- [TODO DEPLOY] `rails fablab:maintenance:regenerate_statistics[2023,9]`
 
 ## v6.1.0 2023 September 25
 
