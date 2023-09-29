@@ -2,7 +2,8 @@
 
 ## next release
 
-- Fix a bug: minor pb when bot hit api/projects#search without beeing authenticated
+- Fix a bug: minor pb (exception raised) when bot hit api/projects#search without beeing authenticated
+- Fix a bug: minor pb (exception raised) when a bot or unauthenticated user hit api/auth_providers actions
 
 ## v6.1.1 2023 September 28
 
