@@ -12,7 +12,7 @@ class Avoir < Invoice
 
   attr_accessor :invoice_items_ids
 
-  delegate :order_number, to: :invoice
+  delegate :order_number, to: :invoice, allow_nil: true
 
   def expire_subscription
     user.subscription.expire

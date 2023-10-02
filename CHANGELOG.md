@@ -1,5 +1,13 @@
 # Changelog Fab-manager
 
+## v6.1.2 2023 October 2
+
+- Fix a bug: minor pb (exception raised) when bot hit api/projects#search without beeing authenticated
+- Fix a bug: minor pb (exception raised) when a bot or unauthenticated user hit api/auth_providers actions
+- Fix a bug: when calling .to_json on an "avoir", there was a bug because order_number delegates on invoice which can be nil, it was causing errors in notifications rendering
+- Fix a bug: when getting status of users/subscriptions export
+- improvement : adds/edit spanish translations
+
 ## v6.1.1 2023 September 28
 
 - Fix a bug: unable to sync projects with openprojects
@@ -10,8 +18,7 @@
 
 - [TODO DEPLOY] `rails fablab:openlab:bulk_export`
 - [TODO DEPLOY] `rails fablab:openlab:bulk_update`
-- [TODO DEPLOY] `rails fablab:es:build_stats`
-- [TODO DEPLOY] `rails fablab:maintenance:regenerate_statistics[2023,6]`
+- [TODO DEPLOY] `rails fablab:maintenance:regenerate_statistics[2023,9]`
 
 ## v6.1.0 2023 September 25
 

@@ -168,7 +168,7 @@ es:
       member_select:
         select_a_member: "Selecciona un miembro"
         start_typing: "Empezar a escribir..."
-        member_not_validated: "This member has not yet been validated."
+        member_not_validated: "Este miembro todavia no ha sido validado."
       #payment modal
       abstract_payment_modal:
         online_payment: "Pago en línea"
@@ -198,10 +198,10 @@ es:
         group_is_required: "Se requiere un grupo."
         trainings: "Formaciones"
         tags: "Etiquetas"
-        children: "Children"
+        children: "Hijos"
       #machine/training slot modification modal
       confirm_modify_slot_modal:
-        change_the_slot: "Cambiar la ranura"
+        change_the_slot: "Cambiar la franja horaria"
         do_you_want_to_change_your_booking_slot_initially_planned_at: "Desea cambiar su reserva efectuada inicialmente el:"
         do_you_want_to_change_NAME_s_booking_slot_initially_planned_at: "Desea cambiar la reserva de {NAME} , efectuada inicialmente el:"
         cancel_this_reservation: "Cancelar reserva"
@@ -374,8 +374,8 @@ es:
         user_validation_required_alert: "¡Atención!<br>Su administrador debe validar su cuenta. Luego, podrá acceder a todas las funciones de reserva."
         select_the_reservation_context: "Seleccione el contexto de la reserva"
         please_select_a_reservation_context: "Seleccione primero el contexto de la reserva"
-        child_validation_required_alert: "Your administrator must validate your child account. Then, you'll then be able to book the event."
-        child_birthday_must_be_under_18_years_ago_alert: "Your child must be under 18. Then, you'll then be able to book the event."
+        child_validation_required_alert: "Su administrador debe validar su cuenta de hijo. Luego, podrá reservar el evento."
+        child_birthday_must_be_under_18_years_ago_alert: "Su hijo debe tener menos de 18 años. Luego, usted podrá reservar el evento."
       #feature-tour modal
       tour:
         previous: "Anterior"
@@ -449,7 +449,7 @@ es:
         select_all: "Seleccionar todo"
         unselect_all: "Deseleccionar todo"
       form_file_upload:
-        placeholder: "Add a file"
+        placeholder: "Añadir un archivo"
         browse: "Buscar"
         edit: "Editar"
       form_image_upload:
