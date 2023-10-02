@@ -10,7 +10,7 @@ class ExportService
         last_export_members(query, key, extension)
       when 'users/reservations'
         last_export_reservations(query, key, extension)
-      when 'users/subscription'
+      when 'users/subscriptions'
         last_export_subscriptions(query, key, extension)
       when 'availabilities/index'
         last_export_availabilities(query, key, extension)
@@ -19,7 +19,7 @@ class ExportService
       when %r{statistics/.*}
         last_export_statistics(type, query, key, extension)
       else
-        raise TypeError "unknown export type: #{type}"
+        raise TypeError.new("unknown export type: #{type}")
       end
     end
 
