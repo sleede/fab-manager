@@ -11,10 +11,10 @@ es:
       body:
         hello: "Hola %{NAME},"
         intro: "El equipo FabLab acaba de crear una cuenta para ti, en la web {GENDER, select, male{del} female{de la} neutral{de} other{de las}} {FABLAB}" #messageFormat interpolation
-        connection_parameters: "Estos son los datos asociados a tu cuenta:"
+        connection_parameters: "Estos son los datos de tu cuenta:"
         account_name: "Nombre de usuario:"
         password: "Contraseña:"
-        temporary_password: "Esta es una contraseña temporal, puede modificarla en la pantalla <<Mi cuenta>>."
+        temporary_password: "Esta es una contraseña temporal, puede modificarla en la pagina «Mi cuenta»."
         keep_advantages: "Con esta cuenta, guarda todas las ventajas relacionadas con su perfil de usuario de Fab Lab (formaciones, planes de suscripción)."
         to_use_platform: "Para usar el sitio web, por favor"
         logon_or_login: "crea una nueva cuenta o inicia sesión haciendo clic aquí."
@@ -61,12 +61,12 @@ es:
       subject: "Nuevo colaborador en tu proyecto"
       body:
         the_member: "El usuario"
-        accepted_your_invitation_to_take_part_in_the_project: "ha aceptado unirse a tu proyecto:"
+        accepted_your_invitation_to_take_part_in_the_project: "ha aceptado colaborar en tu proyecto:"
     notify_user_training_valid:
       subject: "Su formación ha sido validada"
       body:
         your_training: "Su formación"
-        has_been_validated: "Ha sido validado"
+        has_been_validated: "ha sido validado"
     notify_member_subscribed_plan:
       subject: "Su suscripción ha sido correctamente comprada"
       body:
@@ -79,10 +79,10 @@ es:
         reservation_saved_html: "Su reserva <strong><em>%{RESERVATION}</em></strong> se ha registrado correctamente"
         your_reserved_slots: "Sus espacios reservados son:"
     notify_member_pre_booked_reservation:
-      subject: "Your pre-registration has been successfully saved"
+      subject: "Su preinscripción se ha guardado correctamente"
       body:
-        reservation_saved_html: "You pre-registration <strong><em>%{RESERVATION}</em></strong> has been successfully saved"
-        your_reserved_slots: "Your pre-booked slots are:"
+        reservation_saved_html: "Su preinscripción de <strong><em>%{RESERVATION}</em></strong> se ha guardado correctamente"
+        your_reserved_slots: "Sus franjas horarias preinscritas son:"
     notify_member_subscribed_plan_is_changed:
       subject: "Su suscripción ha sido actualizada"
       body:
@@ -93,10 +93,10 @@ es:
         member_reserved_html: "El usuario %{NAME} ha reservado <strong><em>%{RESERVABLE}</em></strong>."
         reserved_slots: "Los espacios de reserva están aquí:"
     notify_admin_member_pre_booked_reservation:
-      subject: "New pre-registration"
+      subject: "Nueva pre-inscripción"
       body:
-        member_reserved_html: "User %{NAME} has pre-reserved <strong><em>%{RESERVABLE}</em></strong>."
-        reserved_slots: "Pre-reserved slots are:"
+        member_reserved_html: "El usuario %{NAME} ha hecho una preinscripción de <strong><em>%{RESERVABLE}</em></strong>."
+        reserved_slots: "Las franjas horarias preinscritas son:"
     notify_member_slot_is_modified:
       subject: "Su espacio de reserva ha sido cambiado correctamente"
       body:
@@ -115,9 +115,9 @@ es:
         user_of_group_html: "El usuario se ha registrado en el grupo <strong>%{GROUP}</strong>"
         account_for_organization: "Esta cuenta gestiona una organización :"
     notify_admin_child_created:
-      subject: "A user's child has been created"
+      subject: "Se ha creado un niño"
       body:
-        new_child_created: "A new user's child has been created on the website"
+        new_child_created: "Un nuevo hijo de usuario ha sido creado"
     notify_admin_subscribed_plan:
       subject: "Se ha adquirido un plan de suscripción"
       body:
@@ -404,15 +404,15 @@ es:
         user_update_supporting_document_file: "El miembro %{NAME} ha modificado los siguientes documentos justificativos:"
         validate_user: "Por favor, valida esta cuenta"
     notify_admin_user_child_supporting_document_files_created:
-      subject: "Supporting documents of child uploaded by a member"
+      subject: "Documentos justificativos subidos por un miembro"
       body:
-        supporting_document_files_uploaded_below: "Child %{NAME} has uploaded the following supporting documents:"
-        validate_child: "Please validate this child account"
+        supporting_document_files_uploaded_below: "El hijo %{NAME} ha subido los siguientes documentos de justificativos:"
+        validate_child: "Por favor, valida esta cuenta de hijo"
     notify_admin_user_child_supporting_document_files_updated:
-      subject: "Child's supporting documents have changed"
+      subject: "Los documentos justificativos de un hijo han cambiado"
       body:
-        child_update_supporting_document_file: "Child %{NAME} has modified the supporting documents below:"
-        validate_child: "Please validate this child account"
+        child_update_supporting_document_file: "El hijo %{NAME} ha modificado los siguientes documentos justificativos:"
+        validate_child: "Por favor, valida esta cuenta de hijo"
     notify_user_is_validated:
       subject: "Cuenta validada"
       body:
@@ -422,35 +422,35 @@ es:
       body:
         account_invalidated: "Su cuenta ha sido invalidada. No podrás seguir reservando hasta que tu cuenta sea validada de nuevo."
     notify_user_child_is_validated:
-      subject: "Child account validated"
+      subject: "Cuenta de hijo validada"
       body:
-        child_validated: "Your child account was validated. Now, you have access to event booking features."
+        child_validated: "Su cuenta de hijo ha sido validada. Ahora tiene acceso a funciones de reserva de eventos."
     notify_user_child_is_invalidated:
-      subject: "Child account invalidated"
+      subject: "Cuenta de hijo invalidada"
       body:
-        child_invalidated: "Your child account was invalidated. You won't be able to book event, until your child account is validated again."
+        child_invalidated: "Su cuenta de hijo ha sido invalidada. No podrás reservar eventos hasta que tu cuenta sea validada de nuevo."
     notify_user_supporting_document_refusal:
       subject: "Sus justificantes han sido rechazados"
       body:
         user_supporting_document_files_refusal: "Sus justificantes han sido rechazados:"
         action: "Por favor, vuelva a subir nuevos documentos justificativos."
     notify_user_supporting_document_reminder:
-      subject: "Reminder to upload your supporting documents"
+      subject: "Recordatorio para subir tus documentos justificativos"
       body:
-        user_supporting_document_reminder: "This is a reminder for you to upload your supporting documents."
+        user_supporting_document_reminder: "Este es un recordatorio para que subas tus documentos justificativos."
     notify_admin_user_supporting_document_refusal:
       subject: "Los justificantes del afiliado de un miembro han sido rechazados"
       body:
         user_supporting_document_files_refusal: "Los justificantes del miembro %{NAME} han sido rechazados por %{OPERATOR}:"
     notify_user_child_supporting_document_refusal:
-      subject: "Your child's supporting documents were refused"
+      subject: "Los documentos justificativos de su hijo fueron rechazados"
       body:
-        user_child_supporting_document_files_refusal: "Your supporting documents were refused:"
-        action: "Please re-upload some new supporting documents."
+        user_child_supporting_document_files_refusal: "Sus documentos justificativos fueron rechazados:"
+        action: "Por favor, vuelva a subir nuevos documentos justificativos."
     notify_admin_user_child_supporting_document_refusal:
-      subject: "A child's supporting documents were refused"
+      subject: "El documento justificativo de un hijo fue rechazado"
       body:
-        user_child_supporting_document_files_refusal: "Child %{NAME}'s supporting documents were rejected by %{OPERATOR}:"
+        user_child_supporting_document_files_refusal: "Los documentos justificativos del hijo %{NAME} han sido rechazados por %{OPERATOR}:"
     shared:
       hello: "¡Hola %{user_name}!"
     notify_user_order_is_ready:
@@ -466,24 +466,24 @@ es:
       body:
         notify_user_order_is_refunded: "Su comando %{REFERENCE} fue reembolsado."
     notify_member_reservation_validated:
-      subject: "Your reservation was validated"
+      subject: "Su reserva fue validada"
       body:
-        reservation_validated_html: "<strong><em>%{RESERVABLE}</em></strong> was validated."
-        your_reserved_slots: "Your reserved slots are:"
+        reservation_validated_html: "<strong><em>%{RESERVABLE}</em></strong> fue validado."
+        your_reserved_slots: "Las franjas horarias reservadas son:"
     notify_admin_reservation_validated:
-      subject: "Pre-registration was validated"
+      subject: "Reserva validada"
       body:
-        reservation_validated_html: "<strong><em>%{RESERVABLE}</em></strong> of %{NAME} was validated."
-        reserved_slots: "Reserved slots are:"
+        reservation_validated_html: "<strong><em>%{RESERVABLE}</em></strong> de %{NAME} fue validado."
+        reserved_slots: "Las franjas horarias reservadas son:"
     notify_member_reservation_invalidated:
-      subject: "Your pre-registration wasn't validated"
+      subject: "Tu reserva no fue validada"
       body:
-        reservation_invalidated_html: "<strong><em>%{RESERVABLE}</em></strong> wasn't validated."
+        reservation_invalidated_html: "<strong><em>%{RESERVABLE}</em></strong> no fue validado."
     notify_admin_reservation_invalidated:
-      subject: "Pre-registration wasn't validated"
+      subject: "Reserva no fue validada"
       body:
-        reservation_invalidated_html: "<strong><em>%{RESERVABLE}</em></strong> of %{NAME} wasn't validated."
+        reservation_invalidated_html: "<strong><em>%{RESERVABLE}</em></strong> de %{NAME} no fue validado."
     notify_user_when_child_age_will_be_18:
-      subject: "Your child will be 18 years old"
+      subject: "Su hijo tendrá 18 años de edad"
       body:
-        child_age_will_be_18_years_ago: "Your child %{NAME} will turn 18 on %{DATE}, at which point they will be automatically detached from your Family account. They will need to create their own account in order to make reservations."
+        child_age_will_be_18_years_ago: "Tu hijo(a) %{NAME} cumplirá 18 años en %{DATE}, momento en el que será separado automáticamente de tu cuenta familiar. Tendrá que crear su propia cuenta para hacer reservas."
