@@ -17,6 +17,7 @@ class ReservationReminderWorker
 
     Reservation.joins(slots_reservations: :slot)
                .where('slots.start_at >= ? AND slots.start_at <= ? AND slots_reservations.canceled_at IS NULL', starting, ending)
+               .includes(:reservable, :slots_reservations)
                .each do |r|
       already_sent = Notification.where(
         attached_object_type: Reservation.name,
@@ -24,6 +25,7 @@ class ReservationReminderWorker
         notification_type_id: NotificationType.find_by(name: 'notify_member_reservation_reminder')
       ).count
       next if already_sent.positive?
+      next if r.reservable.is_a?(Event) && r.reservable.pre_registration? && !r.slots_reservations.all?(&:is_valid?)
 
       NotificationCenter.call type: 'notify_member_reservation_reminder',
                               receiver: r.user,

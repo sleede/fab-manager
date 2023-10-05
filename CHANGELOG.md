@@ -1,5 +1,9 @@
 # Changelog Fab-manager
 
+## next release
+
+- Fix a bug: fix ReservationReminderWorker, was sending reservation reminder to users with a event reservation not validated by admin + adds tests for all scenarios
+
 ## v6.1.2 2023 October 2
 
 - Fix a bug: minor pb (exception raised) when bot hit api/projects#search without beeing authenticated
