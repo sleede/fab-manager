@@ -57,13 +57,20 @@ export const SupportingDocumentsTypeForm: React.FC<SupportingDocumentsTypeFormPr
     onChange('name', value);
   };
 
+  /**
+   * to know if select input for groups is display or not
+   */
+  const displayGroupsSelect = (): boolean => {
+    return (supportingDocumentType == null || supportingDocumentType?.document_type === 'User') && (groups.length > 0);
+  };
+
   return (
     <div className="supporting-documents-type-form">
       <div className="info-area">
         {t('app.admin.settings.account.supporting_documents_type_form.type_form_info')}
       </div>
       <form name="supportingDocumentTypeForm">
-        {supportingDocumentType?.document_type === 'User' &&
+        {displayGroupsSelect() &&
           <div className="field">
             <Select defaultValue={groupsValues()}
               placeholder={t('app.admin.settings.account.supporting_documents_type_form.select_group')}
