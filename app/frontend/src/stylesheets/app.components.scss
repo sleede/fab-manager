@@ -191,7 +191,6 @@
     overflow: hidden;
 
     img {
-      aspect-ratio: 16/9;
       object-fit: cover;
       object-position: center;
     }
@@ -200,7 +199,7 @@
   img {
     display: block;
     max-width: 100%;
-    height: auto;
+    max-height: 700px;
   }
 }
 
