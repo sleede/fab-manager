@@ -4,6 +4,7 @@
 
 - Fix a bug: fix ReservationReminderWorker, was sending reservation reminder to users with a event reservation not validated by admin + adds tests for all scenarios
 - Fix a bug: admin could not create new SupportingDocumentType (problem was on js side)
+- Fix a bug: fix back button on space edit page
 
 ## v6.1.2 2023 October 2
 
