@@ -16,6 +16,6 @@ if @provider.providable_type == OpenIdConnectProvider.name
                   :prompt, :send_scope_to_token_endpoint, :client__identifier, :client__secret, :client__authorization_endpoint,
                   :client__token_endpoint, :client__userinfo_endpoint, :client__jwks_uri, :client__end_session_endpoint, :profile_url
     json.scope @provider.providable[:scope]
-    json.extra_authorize_params @provider.providable[:extra_authorize_params]
+    json.extra_authorize_params @provider.providable[:extra_authorize_params].to_json
   end
 end
