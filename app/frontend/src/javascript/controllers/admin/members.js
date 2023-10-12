@@ -511,7 +511,7 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
       });
       if ($scope.members.length > 0) {
         uitour.createStep({
-          selector: '.members-management .members-list .buttons',
+          selector: '.members-management .members-list .member-actions',
           stepId: 'actions',
           order: 4,
           title: _t('app.admin.tour.members.actions.title'),
