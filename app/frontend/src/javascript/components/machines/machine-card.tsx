@@ -58,7 +58,7 @@ const MachineCard: React.FC<MachineCardProps> = ({ user, machine, onShowMachine,
   return (
     <div className={`machine-card ${loading ? 'loading' : ''} ${machine.disabled ? 'disabled' : ''} ${!machine.reservable ? 'unreservable' : ''}`}>
       {machinePicture()}
-      {machine.space && user.role === 'admin' && <FabBadge icon='pin-map' iconWidth='3rem' /> }
+      {machine.space && user && user.role === 'admin' && <FabBadge icon='pin-map' iconWidth='3rem' /> }
       <div className="machine-name">
         {machine.name}
       </div>

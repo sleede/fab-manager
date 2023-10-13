@@ -7,6 +7,7 @@
 - Fix a bug: fix back button on space edit page
 - Fix a bug: fix members tour (help), a selector was not valid anymore
 - Fix a bug: unable to save OpenID extra_authorize_params as json
+- Fix machine list bug : when there is no user logged in and access machines list with at least one machine associated to a space
 
 ## v6.1.2 2023 October 2
 
