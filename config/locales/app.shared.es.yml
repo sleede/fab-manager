@@ -128,6 +128,7 @@ es:
         name: "Nombre"
         name_is_required: "Se requiere un nombre."
         illustration: "Ilustración"
+        illustration_recommendation: "Maximum display size: 932 * 700 px (unconstrained ratio)."
         add_an_illustration: "Añadir una ilustración"
         CAD_file: "Fichero CAD"
         CAD_files: "Archivos CAD"

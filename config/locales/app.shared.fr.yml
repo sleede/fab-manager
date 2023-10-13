@@ -128,6 +128,7 @@ fr:
         name: "Nom"
         name_is_required: "Le nom est requis."
         illustration: "Illustration"
+        illustration_recommendation: "Taille maximale d'affichage : 932 * 700 px (ratio non contraint)."
         add_an_illustration: "Ajouter un visuel"
         CAD_file: "Fichier CAO"
         CAD_files: "Fichiers CAD"

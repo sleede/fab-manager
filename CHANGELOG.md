@@ -6,6 +6,7 @@
 - Fix a bug: admin could not create new SupportingDocumentType (problem was on js side)
 - Fix a bug: fix back button on space edit page
 - Fix a bug: fix members tour (help), a selector was not valid anymore
+- Fix a bug: unable to save OpenID extra_authorize_params as json
 
 ## v6.1.2 2023 October 2
 
