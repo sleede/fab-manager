@@ -49,7 +49,9 @@ const SupportingDocumentsTypesList: React.FC<SupportingDocumentsTypesListProps> 
   // get groups
   useEffect(() => {
     GroupAPI.index({ disabled: false }).then(data => {
-      setGroups(data);
+      if (documentType === 'User') {
+        setGroups(data);
+      }
       SupportingDocumentTypeAPI.index({ document_type: documentType }).then(pData => {
         setSupportingDocumentsTypes(pData);
       });

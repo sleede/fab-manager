@@ -28,7 +28,7 @@ type FormImageUploadProps<TFieldValues, TContext extends object> = FormComponent
 /**
  * This component allows to upload image, in forms managed by react-hook-form.
  */
-export const FormImageUpload = <TFieldValues extends FieldValues, TContext extends object>({ id, label, register, control, defaultImage, className, rules, disabled, error, warning, formState, onFileChange, onFileRemove, accept, setValue, size, onFileIsMain, mainOption = false }: FormImageUploadProps<TFieldValues, TContext>) => {
+export const FormImageUpload = <TFieldValues extends FieldValues, TContext extends object>({ id, label, register, control, defaultImage, className, rules, disabled, error, warning, formState, onFileChange, onFileRemove, accept, setValue, size, onFileIsMain, mainOption = false, tooltip }: FormImageUploadProps<TFieldValues, TContext>) => {
   const { t } = useTranslation('shared');
 
   const [file, setFile] = useState<ImageType>(defaultImage);
@@ -125,7 +125,8 @@ export const FormImageUpload = <TFieldValues extends FieldValues, TContext exten
                    warning={warning}
                    id={`${id}.attachment_files`}
                    onChange={onFileSelected}
-                   placeholder={placeholder()}/>
+                   placeholder={placeholder()}
+                   tooltip={tooltip} />
         {hasImage() && <FabButton onClick={onRemoveFile} icon={<Trash size={20} weight="fill" />} className="is-main" />}
       </div>
     </div>
