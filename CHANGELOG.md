@@ -1,6 +1,6 @@
 # Changelog Fab-manager
 
-## next release
+## v6.2.0 2023 October 13
 
 - Fix a bug: fix ReservationReminderWorker, was sending reservation reminder to users with a event reservation not validated by admin + adds tests for all scenarios
 - Fix a bug: admin could not create new SupportingDocumentType (problem was on js side)
