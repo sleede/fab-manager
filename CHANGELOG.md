@@ -3,6 +3,7 @@
 ## next release
 
 - Fix a bug: fix all failing tasks of rake task file chain.rake
+- Fix a bug: file_size_validator.rb was broken since ruby v3, see https://github.com/rails/rails/issues/41270
 
 ## v6.2.0 2023 October 13
 
