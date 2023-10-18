@@ -1,5 +1,9 @@
 # Changelog Fab-manager
 
+## next release
+
+- Fix a bug: fix all failing tasks of rake task file chain.rake
+
 ## v6.2.0 2023 October 13
 
 - Fix a bug: fix ReservationReminderWorker, was sending reservation reminder to users with a event reservation not validated by admin + adds tests for all scenarios
