@@ -153,3 +153,4 @@ gem 'sentry-ruby'
 gem "reverse_markdown"
 
 gem "ancestry"
+gem 'silencer', require: false
