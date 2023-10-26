@@ -4,6 +4,7 @@
 
 - Fix a bug: fix all failing tasks of rake task file chain.rake
 - Fix a bug: file_size_validator.rb was broken since ruby v3, see https://github.com/rails/rails/issues/41270
+- improvement: pre-registration event reservations ilimit places
 - decreases sidekiq concurrency from 25 to 5, 25 is too much and consumes memory for nothing
 - do not log Notifications#polling action anymore, by default, can be enable via env variable ENABLE_NOTIFICATIONS_POLLING_LOGGING=true
 
