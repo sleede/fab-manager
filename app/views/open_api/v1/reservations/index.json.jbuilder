@@ -7,7 +7,7 @@ json.reservations @reservations do |reservation|
     json.user_id reservation.statistic_profile.user_id
     unless reservation.statistic_profile.user.nil?
       json.user do
-        json.partial! 'open_api/v1/users/user', user: reservation.statistic_profile.user
+        json.partial! 'open_api/v1/users/user', user: reservation.statistic_profile.user.invoicing_profile
       end
     end
   end
