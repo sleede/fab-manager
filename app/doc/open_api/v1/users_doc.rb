@@ -18,6 +18,7 @@ class OpenAPI::V1::UsersDoc < OpenAPI::V1::BaseDoc
     param :email, [String, Array], optional: true, desc: 'Filter users by *email* using strict matching.'
     param :user_id, [Integer, Array], optional: true, desc: 'Filter users by *id* using strict matching.'
     param :created_after, DateTime, optional: true, desc: 'Filter users to accounts created after the given date.'
+    param :deleted_user, [true, false], optional: true, desc: 'Filter users to accounts deleted or not.'
     example <<-USERS
       # /open_api/v1/users?page=1&per_page=4
       {

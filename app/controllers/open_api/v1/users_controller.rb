@@ -7,7 +7,9 @@ class OpenAPI::V1::UsersController < OpenAPI::V1::BaseController
   expose_doc
 
   def index
-    @users = User.order(created_at: :desc).includes(:group, :profile, :invoicing_profile)
+    @users = InvoicingProfile.order(created_at: :desc).includes(user: %i[group profile statistic_profile])
+
+    @users = @users.where.not(user_id: nil) if params[:deleted_user].blank?
 
     if params[:email].present?
       email_param = params[:email].is_a?(String) ? params[:email].downcase : params[:email].map(&:downcase)
