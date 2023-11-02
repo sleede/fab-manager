@@ -14,6 +14,15 @@ namespace :fablab do
       puts '-> Done'
     end
 
+    desc 'Regenerate the invoices (invoices & avoirs) PDF by ids'
+    # example: rails fablab:maintenance:regenerate_invoices_by_ids[1,2,3,4]
+    task regenerate_invoices_by_ids: :environment do |_task, args|
+      puts "-> Start regenerate the invoices PDF"
+      invoices = Invoice.where(id: args.extras)
+      invoices.each(&:regenerate_invoice_pdf)
+      puts '-> Done'
+    end
+
     task :regenerate_schedules, %i[year month end] => :environment do |_task, args|
       start_date, end_date = dates_from_args(args)
       puts "-> Start regenerate the payment schedules PDF between #{I18n.l start_date, format: :long} and " \

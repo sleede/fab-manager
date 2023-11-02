@@ -9,6 +9,7 @@
 - decreases sidekiq concurrency from 25 to 5, 25 is too much and consumes memory for nothing
 - do not log Notifications#polling action anymore, by default, can be enable via env variable ENABLE_NOTIFICATIONS_POLLING_LOGGING=true
 - Fix a bug: api/products/index bug when sorting by amount
+- adds a rake task to regenerate invoices by ids (see maintenance.rake)
 
 ## v6.2.0 2023 October 13
 
