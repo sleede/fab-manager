@@ -10,6 +10,7 @@
 - do not log Notifications#polling action anymore, by default, can be enable via env variable ENABLE_NOTIFICATIONS_POLLING_LOGGING=true
 - Fix a bug: api/products/index bug when sorting by amount
 - adds a rake task to regenerate invoices by ids (see maintenance.rake)
+- Fix a bug: replaces custom ServerLocale middleware with sidekiq i18n middleware
 
 ## v6.2.0 2023 October 13
 
