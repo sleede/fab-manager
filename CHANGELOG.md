@@ -12,6 +12,7 @@
 - adds a rake task to regenerate invoices by ids (see maintenance.rake)
 - Fix a bug: replaces custom ServerLocale middleware with sidekiq i18n middleware
 - adds a rake task to erase all reservations and invoices (fablab:maintenance:delete_all_reservations_and_invoices)
+- improvement: dynamic label (i18n) for stats structure tables
 
 ## v6.2.0 2023 October 13
 
