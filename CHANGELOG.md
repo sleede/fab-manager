@@ -1,5 +1,19 @@
 # Changelog Fab-manager
 
+## v6.3.0 2023 November 3
+
+- Fix a bug: fix all failing tasks of rake task file chain.rake
+- Fix a bug: file_size_validator.rb was broken since ruby v3, see https://github.com/rails/rails/issues/41270
+- improvement: pre-registration event reservations ilimit places
+- improvement: add including_deleted_users param for open api users
+- decreases sidekiq concurrency from 25 to 5, 25 is too much and consumes memory for nothing
+- do not log Notifications#polling action anymore, by default, can be enable via env variable ENABLE_NOTIFICATIONS_POLLING_LOGGING=true
+- Fix a bug: api/products/index bug when sorting by amount
+- adds a rake task to regenerate invoices by ids (see maintenance.rake)
+- Fix a bug: replaces custom ServerLocale middleware with sidekiq i18n middleware
+- adds a rake task to erase all reservations and invoices (fablab:maintenance:delete_all_reservations_and_invoices)
+- improvement: dynamic label (i18n) for stats structure tables
+
 ## v6.2.0 2023 October 13
 
 - Fix a bug: fix ReservationReminderWorker, was sending reservation reminder to users with a event reservation not validated by admin + adds tests for all scenarios

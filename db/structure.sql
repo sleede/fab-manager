@@ -108,8 +108,8 @@ SET default_tablespace = '';
 
 CREATE TABLE public.abuses (
     id integer NOT NULL,
-    signaled_id integer,
     signaled_type character varying,
+    signaled_id integer,
     first_name character varying,
     last_name character varying,
     email character varying,
@@ -229,8 +229,8 @@ CREATE TABLE public.addresses (
     locality character varying,
     country character varying,
     postal_code character varying,
-    placeable_id integer,
     placeable_type character varying,
+    placeable_id integer,
     created_at timestamp without time zone,
     updated_at timestamp without time zone
 );
@@ -339,8 +339,8 @@ CREATE TABLE public.ar_internal_metadata (
 
 CREATE TABLE public.assets (
     id integer NOT NULL,
-    viewable_id integer,
     viewable_type character varying,
+    viewable_id integer,
     attachment character varying,
     type character varying,
     created_at timestamp without time zone,
@@ -1066,8 +1066,8 @@ ALTER SEQUENCE public.coupons_id_seq OWNED BY public.coupons.id;
 
 CREATE TABLE public.credits (
     id integer NOT NULL,
-    creditable_id integer,
     creditable_type character varying,
+    creditable_id integer,
     plan_id integer,
     hours integer,
     created_at timestamp without time zone,
@@ -1868,15 +1868,15 @@ ALTER SEQUENCE public.notification_types_id_seq OWNED BY public.notification_typ
 CREATE TABLE public.notifications (
     id integer NOT NULL,
     receiver_id integer,
-    attached_object_id integer,
     attached_object_type character varying,
+    attached_object_id integer,
     notification_type_id integer,
     is_read boolean DEFAULT false,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     receiver_type character varying,
     is_send boolean DEFAULT false,
-    meta_data jsonb DEFAULT '{}'::jsonb
+    meta_data jsonb DEFAULT '"{}"'::jsonb
 );
 
 
@@ -2605,8 +2605,8 @@ CREATE TABLE public.prices (
     id integer NOT NULL,
     group_id integer,
     plan_id integer,
-    priceable_id integer,
     priceable_type character varying,
+    priceable_id integer,
     amount integer,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
@@ -3164,8 +3164,8 @@ CREATE TABLE public.reservations (
     message text,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    reservable_id integer,
     reservable_type character varying,
+    reservable_id integer,
     nb_reserve_places integer,
     statistic_profile_id integer,
     reservation_context_id bigint
@@ -3198,8 +3198,8 @@ ALTER SEQUENCE public.reservations_id_seq OWNED BY public.reservations.id;
 CREATE TABLE public.roles (
     id integer NOT NULL,
     name character varying,
-    resource_id integer,
     resource_type character varying,
+    resource_id integer,
     created_at timestamp without time zone,
     updated_at timestamp without time zone
 );
@@ -3451,7 +3451,8 @@ CREATE TABLE public.statistic_fields (
     label character varying,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    data_type character varying
+    data_type character varying,
+    label_i18n_path character varying
 );
 
 
@@ -3518,7 +3519,8 @@ CREATE TABLE public.statistic_indices (
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     "table" boolean DEFAULT true,
-    ca boolean DEFAULT true
+    ca boolean DEFAULT true,
+    label_i18n_path character varying
 );
 
 
@@ -3651,7 +3653,8 @@ CREATE TABLE public.statistic_sub_types (
     key character varying,
     label character varying,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    label_i18n_path character varying
 );
 
 
@@ -3718,7 +3721,8 @@ CREATE TABLE public.statistic_types (
     graph boolean,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    simple boolean
+    simple boolean,
+    label_i18n_path character varying
 );
 
 
@@ -6020,6 +6024,14 @@ ALTER TABLE ONLY public.roles
 
 
 --
+-- Name: schema_migrations schema_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.schema_migrations
+    ADD CONSTRAINT schema_migrations_pkey PRIMARY KEY (version);
+
+
+--
 -- Name: settings settings_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -7784,13 +7796,6 @@ CREATE UNIQUE INDEX unique_not_null_external_id ON public.invoicing_profiles USI
 
 
 --
--- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE UNIQUE INDEX unique_schema_migrations ON public.schema_migrations USING btree (version);
-
-
---
 -- Name: accounting_periods accounting_periods_del_protect; Type: RULE; Schema: public; Owner: -
 --
 
@@ -8854,7 +8859,6 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20140605125131'),
 ('20140605142133'),
 ('20140605151442'),
-('20140606133116'),
 ('20140609092700'),
 ('20140609092827'),
 ('20140610153123'),
@@ -8923,14 +8927,12 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20150507075620'),
 ('20150512123546'),
 ('20150520132030'),
-('20150520133409'),
 ('20150526130729'),
 ('20150527153312'),
 ('20150529113555'),
 ('20150601125944'),
 ('20150603104502'),
 ('20150603104658'),
-('20150603133050'),
 ('20150604081757'),
 ('20150604131525'),
 ('20150608142234'),
@@ -9012,7 +9014,6 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20160905142700'),
 ('20160906094739'),
 ('20160906094847'),
-('20160906145713'),
 ('20160915105234'),
 ('20161123104604'),
 ('20170109085345'),
@@ -9201,6 +9202,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230828073428'),
 ('20230831103208'),
 ('20230901090637'),
-('20230907124230');
+('20230907124230'),
+('20231103093436');
 
 

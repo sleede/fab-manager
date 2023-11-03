@@ -4,141 +4,141 @@ require_relative '../../lib/database/sequence'
 
 # statistic_indices
 unless StatisticIndex.find_by(es_type_key: 'subscription')
-  StatisticIndex.create!({ id: 1, es_type_key: 'subscription', label: I18n.t('statistics.subscriptions') })
+  StatisticIndex.create!({ id: 1, es_type_key: 'subscription', label_i18n_path: 'statistics.subscriptions' })
 end
 unless StatisticIndex.find_by(es_type_key: 'machine')
-  StatisticIndex.create!({ id: 2, es_type_key: 'machine', label: I18n.t('statistics.machines_hours') })
+  StatisticIndex.create!({ id: 2, es_type_key: 'machine', label_i18n_path: 'statistics.machines_hours' })
 end
 unless StatisticIndex.find_by(es_type_key: 'training')
-  StatisticIndex.create!({ id: 3, es_type_key: 'training', label: I18n.t('statistics.trainings') })
+  StatisticIndex.create!({ id: 3, es_type_key: 'training', label_i18n_path: 'statistics.trainings' })
 end
-StatisticIndex.create!({ id: 4, es_type_key: 'event', label: I18n.t('statistics.events') }) unless StatisticIndex.find_by(es_type_key: 'event')
+StatisticIndex.create!({ id: 4, es_type_key: 'event', label_i18n_path: 'statistics.events' }) unless StatisticIndex.find_by(es_type_key: 'event')
 unless StatisticIndex.find_by(es_type_key: 'account')
-  StatisticIndex.create!({ id: 5, es_type_key: 'account', label: I18n.t('statistics.registrations'), ca: false })
+  StatisticIndex.create!({ id: 5, es_type_key: 'account', label_i18n_path: 'statistics.registrations', ca: false })
 end
 unless StatisticIndex.find_by(es_type_key: 'project')
-  StatisticIndex.create!({ id: 6, es_type_key: 'project', label: I18n.t('statistics.projects'), ca: false })
+  StatisticIndex.create!({ id: 6, es_type_key: 'project', label_i18n_path: 'statistics.projects', ca: false })
 end
 unless StatisticIndex.find_by(es_type_key: 'user')
-  StatisticIndex.create!({ id: 7, es_type_key: 'user', label: I18n.t('statistics.users'), table: false, ca: false })
+  StatisticIndex.create!({ id: 7, es_type_key: 'user', label_i18n_path: 'statistics.users', table: false, ca: false })
 end
 Database::Sequence.update_id_seq(StatisticIndex.table_name)
-StatisticIndex.create!({ es_type_key: 'space', label: I18n.t('statistics.spaces') }) unless StatisticIndex.find_by(es_type_key: 'space')
-StatisticIndex.create!({ es_type_key: 'order', label: I18n.t('statistics.orders') }) unless StatisticIndex.find_by(es_type_key: 'order')
+StatisticIndex.create!({ es_type_key: 'space', label_i18n_path: 'statistics.spaces' }) unless StatisticIndex.find_by(es_type_key: 'space')
+StatisticIndex.create!({ es_type_key: 'order', label_i18n_path: 'statistics.orders' }) unless StatisticIndex.find_by(es_type_key: 'order')
 
 statistic_index_space = StatisticIndex.find_by(es_type_key: 'space')
 statistic_index_order = StatisticIndex.find_by(es_type_key: 'order')
 
 # statistic_fields
 unless StatisticField.find_by(key: 'spaceDates', statistic_index_id: statistic_index_space.id)
-  StatisticField.create!({ key: 'spaceDates', label: I18n.t('statistics.space_dates'),
+  StatisticField.create!({ key: 'spaceDates', label_i18n_path: 'statistics.space_dates',
                            statistic_index_id: statistic_index_space.id, data_type: 'list' })
 end
 unless StatisticField.find_by(key: 'groupName', statistic_index_id: statistic_index_space.id)
-  StatisticField.create!({ key: 'groupName', label: I18n.t('statistics.group'), statistic_index_id: statistic_index_space.id, data_type: 'text' })
+  StatisticField.create!({ key: 'groupName', label_i18n_path: 'statistics.group', statistic_index_id: statistic_index_space.id, data_type: 'text' })
 end
 unless StatisticField.find_by(key: 'machineDates', statistic_index_id: 2)
-  StatisticField.create!({ key: 'machineDates', label: I18n.t('statistics.machine_dates'), statistic_index_id: 2, data_type: 'list' })
+  StatisticField.create!({ key: 'machineDates', label_i18n_path: 'statistics.machine_dates', statistic_index_id: 2, data_type: 'list' })
 end
 unless StatisticField.find_by(key: 'groupName', statistic_index_id: 2)
-  StatisticField.create!({ key: 'groupName', label: I18n.t('statistics.group'), statistic_index_id: 2, data_type: 'text' })
+  StatisticField.create!({ key: 'groupName', label_i18n_path: 'statistics.group', statistic_index_id: 2, data_type: 'text' })
 end
 unless StatisticField.find_by(key: 'trainingId', statistic_index_id: 3)
-  StatisticField.create!({ key: 'trainingId', label: I18n.t('statistics.training_id'), statistic_index_id: 3, data_type: 'index' })
+  StatisticField.create!({ key: 'trainingId', label_i18n_path: 'statistics.training_id', statistic_index_id: 3, data_type: 'index' })
 end
 unless StatisticField.find_by(key: 'trainingDate', statistic_index_id: 3)
-  StatisticField.create!({ key: 'trainingDate', label: I18n.t('statistics.training_date'), statistic_index_id: 3, data_type: 'date' })
+  StatisticField.create!({ key: 'trainingDate', label_i18n_path: 'statistics.training_date', statistic_index_id: 3, data_type: 'date' })
 end
 unless StatisticField.find_by(key: 'groupName', statistic_index_id: 3)
-  StatisticField.create!({ key: 'groupName', label: I18n.t('statistics.group'), statistic_index_id: 3, data_type: 'text' })
+  StatisticField.create!({ key: 'groupName', label_i18n_path: 'statistics.group', statistic_index_id: 3, data_type: 'text' })
 end
 unless StatisticField.find_by(key: 'eventId', statistic_index_id: 4)
-  StatisticField.create!({ key: 'eventId', label: I18n.t('statistics.event_id'), statistic_index_id: 4, data_type: 'index' })
+  StatisticField.create!({ key: 'eventId', label_i18n_path: 'statistics.event_id', statistic_index_id: 4, data_type: 'index' })
 end
 unless StatisticField.find_by(key: 'eventDate', statistic_index_id: 4)
-  StatisticField.create!({ key: 'eventDate', label: I18n.t('statistics.event_date'), statistic_index_id: 4, data_type: 'date' })
+  StatisticField.create!({ key: 'eventDate', label_i18n_path: 'statistics.event_date', statistic_index_id: 4, data_type: 'date' })
 end
 unless StatisticField.find_by(key: 'groupName', statistic_index_id: 4)
-  StatisticField.create!({ key: 'groupName', label: I18n.t('statistics.group'), statistic_index_id: 4, data_type: 'text' })
+  StatisticField.create!({ key: 'groupName', label_i18n_path: 'statistics.group', statistic_index_id: 4, data_type: 'text' })
 end
 unless StatisticField.find_by(key: 'groupName', statistic_index_id: 5)
-  StatisticField.create!({ key: 'groupName', label: I18n.t('statistics.group'), statistic_index_id: 5, data_type: 'text' })
+  StatisticField.create!({ key: 'groupName', label_i18n_path: 'statistics.group', statistic_index_id: 5, data_type: 'text' })
 end
 unless StatisticField.find_by(key: 'themes', statistic_index_id: 6)
-  StatisticField.create!({ key: 'themes', label: I18n.t('statistics.themes'), statistic_index_id: 6, data_type: 'list' })
+  StatisticField.create!({ key: 'themes', label_i18n_path: 'statistics.themes', statistic_index_id: 6, data_type: 'list' })
 end
 unless StatisticField.find_by(key: 'components', statistic_index_id: 6)
-  StatisticField.create!({ key: 'components', label: I18n.t('statistics.components'), statistic_index_id: 6, data_type: 'list' })
+  StatisticField.create!({ key: 'components', label_i18n_path: 'statistics.components', statistic_index_id: 6, data_type: 'list' })
 end
 unless StatisticField.find_by(key: 'machines', statistic_index_id: 6)
-  StatisticField.create!({ key: 'machines', label: I18n.t('statistics.machines'), statistic_index_id: 6, data_type: 'list' })
+  StatisticField.create!({ key: 'machines', label_i18n_path: 'statistics.machines', statistic_index_id: 6, data_type: 'list' })
 end
 unless StatisticField.find_by(key: 'status', statistic_index_id: 6)
-  StatisticField.create!({ key: 'status', label: I18n.t('statistics.project_status'), statistic_index_id: 6, data_type: 'text' })
+  StatisticField.create!({ key: 'status', label_i18n_path: 'statistics.project_status', statistic_index_id: 6, data_type: 'text' })
 end
 unless StatisticField.find_by(key: 'name', statistic_index_id: 6)
-  StatisticField.create!({ key: 'name', label: I18n.t('statistics.project_name'), statistic_index_id: 6, data_type: 'text' })
+  StatisticField.create!({ key: 'name', label_i18n_path: 'statistics.project_name', statistic_index_id: 6, data_type: 'text' })
 end
 unless StatisticField.find_by(key: 'projectUserNames', statistic_index_id: 6)
-  StatisticField.create!({ key: 'projectUserNames', label: I18n.t('statistics.project_user_names'), statistic_index_id: 6, data_type: 'list' })
+  StatisticField.create!({ key: 'projectUserNames', label_i18n_path: 'statistics.project_user_names', statistic_index_id: 6, data_type: 'list' })
 end
 unless StatisticField.find_by(key: 'name', statistic_index_id: 4)
-  StatisticField.create!({ key: 'name', label: I18n.t('statistics.event_name'), statistic_index_id: 4, data_type: 'text' })
+  StatisticField.create!({ key: 'name', label_i18n_path: 'statistics.event_name', statistic_index_id: 4, data_type: 'text' })
 end
 unless StatisticField.find_by(key: 'userId', statistic_index_id: 7)
-  StatisticField.create!({ key: 'userId', label: I18n.t('statistics.user_id'), statistic_index_id: 7, data_type: 'index' })
+  StatisticField.create!({ key: 'userId', label_i18n_path: 'statistics.user_id', statistic_index_id: 7, data_type: 'index' })
 end
 unless StatisticField.find_by(key: 'eventTheme', statistic_index_id: 4)
-  StatisticField.create!({ key: 'eventTheme', label: I18n.t('statistics.event_theme'), statistic_index_id: 4, data_type: 'text' })
+  StatisticField.create!({ key: 'eventTheme', label_i18n_path: 'statistics.event_theme', statistic_index_id: 4, data_type: 'text' })
 end
 unless StatisticField.find_by(key: 'ageRange', statistic_index_id: 4)
-  StatisticField.create!({ key: 'ageRange', label: I18n.t('statistics.age_range'), statistic_index_id: 4, data_type: 'text' })
+  StatisticField.create!({ key: 'ageRange', label_i18n_path: 'statistics.age_range', statistic_index_id: 4, data_type: 'text' })
 end
 unless StatisticField.find_by(key: 'groupName', statistic_index_id: 1)
-  StatisticField.create!({ key: 'groupName', label: I18n.t('statistics.group'), statistic_index_id: 1, data_type: 'text' })
+  StatisticField.create!({ key: 'groupName', label_i18n_path: 'statistics.group', statistic_index_id: 1, data_type: 'text' })
 end
 unless StatisticField.find_by(key: 'groupName', statistic_index_id: statistic_index_order.id)
-  StatisticField.create!({ key: 'groupName', label: I18n.t('statistics.group'), statistic_index_id: statistic_index_order.id, data_type: 'text' })
+  StatisticField.create!({ key: 'groupName', label_i18n_path: 'statistics.group', statistic_index_id: statistic_index_order.id, data_type: 'text' })
 end
 
 # statistic_types
 unless StatisticType.find_by(key: 'booking', statistic_index_id: 2)
-  StatisticType.create!({ statistic_index_id: 2, key: 'booking', label: I18n.t('statistics.bookings'), graph: true, simple: true })
+  StatisticType.create!({ statistic_index_id: 2, key: 'booking', label_i18n_path: 'statistics.bookings', graph: true, simple: true })
 end
 unless StatisticType.find_by(key: 'hour', statistic_index_id: 2)
-  StatisticType.create!({ statistic_index_id: 2, key: 'hour', label: I18n.t('statistics.hours_number'), graph: true, simple: false })
+  StatisticType.create!({ statistic_index_id: 2, key: 'hour', label_i18n_path: 'statistics.hours_number', graph: true, simple: false })
 end
 unless StatisticType.find_by(key: 'booking', statistic_index_id: 3)
-  StatisticType.create!({ statistic_index_id: 3, key: 'booking', label: I18n.t('statistics.bookings'), graph: false, simple: true })
+  StatisticType.create!({ statistic_index_id: 3, key: 'booking', label_i18n_path: 'statistics.bookings', graph: false, simple: true })
 end
 unless StatisticType.find_by(key: 'hour', statistic_index_id: 3)
-  StatisticType.create!({ statistic_index_id: 3, key: 'hour', label: I18n.t('statistics.hours_number'), graph: false, simple: false })
+  StatisticType.create!({ statistic_index_id: 3, key: 'hour', label_i18n_path: 'statistics.hours_number', graph: false, simple: false })
 end
 unless StatisticType.find_by(key: 'booking', statistic_index_id: 4)
-  StatisticType.create!({ statistic_index_id: 4, key: 'booking', label: I18n.t('statistics.tickets_number'), graph: false, simple: false })
+  StatisticType.create!({ statistic_index_id: 4, key: 'booking', label_i18n_path: 'statistics.tickets_number', graph: false, simple: false })
 end
 unless StatisticType.find_by(key: 'hour', statistic_index_id: 4)
-  StatisticType.create!({ statistic_index_id: 4, key: 'hour', label: I18n.t('statistics.hours_number'), graph: false, simple: false })
+  StatisticType.create!({ statistic_index_id: 4, key: 'hour', label_i18n_path: 'statistics.hours_number', graph: false, simple: false })
 end
 unless StatisticType.find_by(key: 'member', statistic_index_id: 5)
-  StatisticType.create!({ statistic_index_id: 5, key: 'member', label: I18n.t('statistics.users'), graph: true, simple: true })
+  StatisticType.create!({ statistic_index_id: 5, key: 'member', label_i18n_path: 'statistics.users', graph: true, simple: true })
 end
 unless StatisticType.find_by(key: 'project', statistic_index_id: 6)
-  StatisticType.create!({ statistic_index_id: 6, key: 'project', label: I18n.t('statistics.projects'), graph: false, simple: true })
+  StatisticType.create!({ statistic_index_id: 6, key: 'project', label_i18n_path: 'statistics.projects', graph: false, simple: true })
 end
 unless StatisticType.find_by(key: 'revenue', statistic_index_id: 7)
-  StatisticType.create!({ statistic_index_id: 7, key: 'revenue', label: I18n.t('statistics.revenue'), graph: false, simple: false })
+  StatisticType.create!({ statistic_index_id: 7, key: 'revenue', label_i18n_path: 'statistics.revenue', graph: false, simple: false })
 end
 unless StatisticType.find_by(key: 'booking', statistic_index_id: statistic_index_space.id)
-  StatisticType.create!({ statistic_index_id: statistic_index_space.id, key: 'booking', label: I18n.t('statistics.bookings'),
+  StatisticType.create!({ statistic_index_id: statistic_index_space.id, key: 'booking', label_i18n_path: 'statistics.bookings',
                           graph: true, simple: true })
 end
 unless StatisticType.find_by(key: 'hour', statistic_index_id: statistic_index_space.id)
-  StatisticType.create!({ statistic_index_id: statistic_index_space.id, key: 'hour', label: I18n.t('statistics.hours_number'),
+  StatisticType.create!({ statistic_index_id: statistic_index_space.id, key: 'hour', label_i18n_path: 'statistics.hours_number',
                           graph: true, simple: false })
 end
 unless StatisticType.find_by(key: 'store', statistic_index_id: statistic_index_order.id)
-  StatisticType.create!({ statistic_index_id: statistic_index_order.id, key: 'store', label: I18n.t('statistics.store'),
+  StatisticType.create!({ statistic_index_id: statistic_index_order.id, key: 'store', label_i18n_path: 'statistics.store',
                           graph: true, simple: true })
 end
 Plan.find_each do |plan|
@@ -155,19 +155,19 @@ end
 
 # statistic_sub_types
 unless StatisticSubType.find_by(key: 'created')
-  StatisticSubType.create!({ key: 'created', label: I18n.t('statistics.account_creation'),
+  StatisticSubType.create!({ key: 'created', label_i18n_path: 'statistics.account_creation',
                              statistic_types: StatisticIndex.find_by(es_type_key: 'account').statistic_types })
 end
 unless StatisticSubType.find_by(key: 'published')
-  StatisticSubType.create!({ key: 'published', label: I18n.t('statistics.project_publication'),
+  StatisticSubType.create!({ key: 'published', label_i18n_path: 'statistics.project_publication',
                              statistic_types: StatisticIndex.find_by(es_type_key: 'project').statistic_types })
 end
 unless StatisticSubType.find_by(key: 'paid-processed')
-  StatisticSubType.create!({ key: 'paid-processed', label: I18n.t('statistics.paid-processed'),
+  StatisticSubType.create!({ key: 'paid-processed', label_i18n_path: 'statistics.paid-rocessed',
                              statistic_types: statistic_index_order.statistic_types })
 end
 unless StatisticSubType.find_by(key: 'aborted')
-  StatisticSubType.create!({ key: 'aborted', label: I18n.t('statistics.aborted'), statistic_types: statistic_index_order.statistic_types })
+  StatisticSubType.create!({ key: 'aborted', label_i18n_path: 'statistics.aborted', statistic_types: statistic_index_order.statistic_types })
 end
 Plan.find_each do |plan|
   type = plan.find_statistic_type

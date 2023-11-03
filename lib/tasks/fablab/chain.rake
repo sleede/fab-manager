@@ -19,11 +19,9 @@ namespace :fablab do
 
     desc 'assign all footprints to existing Invoice records'
     task invoices: :environment do
-      if Invoice.where.not(footprint: nil).count.positive?
-        print 'WARNING: Footprints were already generated. Regenerate? (y/n) '
-        confirm = $stdin.gets.chomp
-        next unless confirm == 'y'
-      end
+      print 'Are you sure you want to regenerate footprints? (y/n) '
+      confirm = $stdin.gets.chomp
+      next unless confirm == 'y'
       chain_invoices
     end
 
@@ -40,11 +38,9 @@ namespace :fablab do
 
     desc 'assign all footprints to existing InvoiceItem records'
     task invoices_items: :environment do
-      if InvoiceItem.where.not(footprint: nil).count.positive?
-        print 'WARNING: Footprints were already generated. Regenerate? (y/n) '
-        confirm = $stdin.gets.chomp
-        next unless confirm == 'y'
-      end
+      print 'Are you sure you want to regenerate footprints? (y/n) '
+      confirm = $stdin.gets.chomp
+      next unless confirm == 'y'
       chain_invoice_items
     end
 
@@ -61,11 +57,9 @@ namespace :fablab do
 
     desc 'assign all footprints to existing HistoryValue records'
     task history_values: :environment do
-      if HistoryValue.where.not(footprint: nil).count.positive?
-        print 'WARNING: Footprints were already generated. Regenerate? (y/n) '
-        confirm = $stdin.gets.chomp
-        next unless confirm == 'y'
-      end
+      print 'Are you sure you want to regenerate footprints? (y/n) '
+      confirm = $stdin.gets.chomp
+      next unless confirm == 'y'
       chain_history_values
     end
 
@@ -75,11 +69,9 @@ namespace :fablab do
 
     desc 'assign all footprints to existing PaymentSchedule records'
     task payment_schedule: :environment do
-      if PaymentSchedule.where.not(footprint: nil).count.positive?
-        print 'WARNING: Footprints were already generated. Regenerate? (y/n) '
-        confirm = $stdin.gets.chomp
-        next unless confirm == 'y'
-      end
+      print 'Are you sure you want to regenerate footprints? (y/n) '
+      confirm = $stdin.gets.chomp
+      next unless confirm == 'y'
       chain_payment_schedules
     end
 
@@ -96,11 +88,9 @@ namespace :fablab do
 
     desc 'assign all footprints to existing PaymentScheduleItem records'
     task payment_schedule_item: :environment do
-      if PaymentScheduleItem.where.not(footprint: nil).count.positive?
-        print 'WARNING: Footprints were already generated. Regenerate? (y/n) '
-        confirm = $stdin.gets.chomp
-        next unless confirm == 'y'
-      end
+      print 'Are you sure you want to regenerate footprints? (y/n) '
+      confirm = $stdin.gets.chomp
+      next unless confirm == 'y'
       chain_payment_schedules_items
     end
 
@@ -117,11 +107,9 @@ namespace :fablab do
 
     desc 'assign all footprints to existing PaymentScheduleObject records'
     task payment_schedule_object: :environment do
-      if PaymentScheduleObject.where.not(footprint: nil).count.positive?
-        print 'WARNING: Footprints were already generated. Regenerate? (y/n) '
-        confirm = $stdin.gets.chomp
-        next unless confirm == 'y'
-      end
+      print 'Are you sure you want to regenerate footprints? (y/n) '
+      confirm = $stdin.gets.chomp
+      next unless confirm == 'y'
       chain_payment_schedules_objects
     end
 

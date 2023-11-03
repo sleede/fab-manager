@@ -1,7 +1,7 @@
 # configuration file for Sidekiq
 :verbose: true
 :logfile: ./log/sidekiq.log
-:concurrency:  25
+:concurrency: 5
 :queues:
   - [stripe, 7]
   - [default, 5]

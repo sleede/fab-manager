@@ -52,9 +52,9 @@ class API::NotificationsController < API::APIController
 
   def polling
     @notifications = current_user.notifications
-                                 .with_valid_notification_type
-                                 .where('notifications.is_read = false AND notifications.created_at >= :date', date: params[:last_poll])
-                                 .order('notifications.created_at DESC')
+                                .with_valid_notification_type
+                                .where('notifications.is_read = false AND notifications.created_at >= :date', date: params[:last_poll])
+                                .order('notifications.created_at DESC')
     @totals = {
       total: current_user.notifications.with_valid_notification_type.delivered_in_system(current_user).count,
       unread: current_user.notifications.with_valid_notification_type.delivered_in_system(current_user).where(is_read: false).count
