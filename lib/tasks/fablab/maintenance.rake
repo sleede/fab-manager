@@ -171,5 +171,22 @@ namespace :fablab do
         abuse.destroy if abuse.signaled.nil?
       end
     end
+
+    desc "Removes all reservations, invoice, invoice_items, chained_elements (of invoices)"
+    task delete_all_reservations_and_invoices: :environment do
+      print 'Are you sure you want to erase all reservations and invoices ? (y/n) '
+      confirm = $stdin.gets.chomp
+      next unless confirm == 'y'
+
+      ChainedElement.where(element_type: %w[Invoice InvoiceItem PaymentSchedule PaymentScheduleItem PaymentScheduleObject]).delete_all
+      Order.destroy_all
+      PaymentSchedule.destroy_all
+      PaymentScheduleItem.destroy_all
+      PaymentScheduleObject.destroy_all
+      Invoice.destroy_all
+      Reservation.destroy_all
+
+      FileUtils.rm_rf Dir.glob(Rails.root.join("invoices/*"))
+    end
   end
 end
