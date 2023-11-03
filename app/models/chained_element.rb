@@ -7,7 +7,6 @@ require 'json'
 class ChainedElement < ApplicationRecord
   belongs_to :element, polymorphic: true
   belongs_to :previous, class_name: 'ChainedElement'
-  has_one :next, class_name: 'ChainedElement', inverse_of: :previous, dependent: :restrict_with_exception
 
   before_create :set_content, :chain_record
 
