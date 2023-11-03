@@ -1,6 +1,6 @@
 # Changelog Fab-manager
 
-## next release
+## v6.3.0 2023 November 3
 
 - Fix a bug: fix all failing tasks of rake task file chain.rake
 - Fix a bug: file_size_validator.rb was broken since ruby v3, see https://github.com/rails/rails/issues/41270
