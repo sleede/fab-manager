@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- Fix a bug: unable to show wallet payment mean for avoir
+
 ## v6.3.0 2023 November 3
 
 - Fix a bug: fix all failing tasks of rake task file chain.rake
