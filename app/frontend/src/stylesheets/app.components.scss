@@ -77,6 +77,21 @@
   }
 }
 
+.modal-footer.btn-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  &::after,
+  &::before {
+    content: none;
+  }
+
+  & > * {
+    margin: 0 !important;
+  }
+}
+
 .modal-backdrop {
   height: 100%;
 }

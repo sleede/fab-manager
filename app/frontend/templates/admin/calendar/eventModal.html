@@ -82,18 +82,18 @@
     <p class="text-center font-sbold" translate>{{ 'app.admin.calendar.divide_this_availability' }}</p>
     <div class="row">
       <div class="col-md-5">
-        <div class="input-group">
-          <input type="number" class="form-control" ng-model="slots_nb" step="1" min="1" required="true" />
-          <span class="input-group-addon" translate>{{ 'app.admin.calendar.slots' }}</span>
+        <div class="form-group">
+          <input id="slots_nb" type="number" class="form-control" ng-model="slots_nb" step="1" min="1" required="true" />
+          <label for="slots_nb" translate>{{ 'app.admin.calendar.slots' }}</label>
         </div>
-        </div>
+      </div>
       <p class="col-md-2 middle-of-inputs" translate>
         {{ 'app.admin.calendar.slots_of' }}
       </p>
       <div class="col-md-5">
-        <div class="input-group">
-          <input type="number" class="form-control" ng-model="availability.slot_duration" min="1" required="true" />
-          <span class="input-group-addon" translate>{{ 'app.admin.calendar.minutes' }}</span>
+        <div class="form-group">
+          <input id="slot_duration" type="number" class="form-control" ng-model="availability.slot_duration" min="1" required="true" />
+          <label for="slot_duration" translate>{{ 'app.admin.calendar.minutes' }}</label>
         </div>
       </div>
     </div>
@@ -223,7 +223,7 @@
     <p class="text-center font-sbold" translate>{{ 'app.admin.calendar.summary' }}</p>
     <div class="row">
       <span>{{ 'app.admin.calendar.about_to_create' | translate:{NUMBER:occurrences.length,TYPE:availability.available_type} }}</span>
-      <ul>
+      <ul style="max-height: 25vh; overflow: auto;">
         <li ng-repeat="slot in occurrences">{{slot.start_at | amDateFormat:'L LT'}} - {{slot.end_at | amDateFormat:'LT'}}</li>
       </ul>
       <div class="alert alert-info text-xs" ng-show="availability.slot_duration">
