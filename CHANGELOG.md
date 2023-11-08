@@ -2,7 +2,8 @@
 
 ## next deploy
 
-- Fix a bug: statistic_subtype.label of plan was nil
+- Fix a bug: statistic_sub_type.label of plan was nil
+- adds a migrations to fix all statistic_sub_types of plans having label = nil
 
 ## v6.3.0 2023 November 3
 
