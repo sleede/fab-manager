@@ -19,6 +19,7 @@
 - Fix a bug: replaces custom ServerLocale middleware with sidekiq i18n middleware
 - adds a rake task to erase all reservations and invoices (fablab:maintenance:delete_all_reservations_and_invoices)
 - improvement: dynamic label (i18n) for stats structure tables
+- [TODO DEPLOY] upgrade to v6.2.0 BEFORE upgrading to v6.3.0 !!!
 
 ## v6.2.0 2023 October 13
 
@@ -28,6 +29,7 @@
 - Fix a bug: fix members tour (help), a selector was not valid anymore
 - Fix a bug: unable to save OpenID extra_authorize_params as json
 - Fix machine list bug : when there is no user logged in and access machines list with at least one machine associated to a space
+- [TODO DEPLOY] `rails db:seed`
 
 ## v6.1.2 2023 October 2
 
