@@ -119,9 +119,9 @@ es:
           collaborators: "Colaboradores"
         #dashboard: my trainings
         trainings:
-          your_next_trainings: "Sus próximas formaciones"
-          your_previous_trainings: "Sus formaciones anteriores"
-          your_approved_trainings: "Sus formaciones aprobadas"
+          your_next_trainings: "Sus próximas capacitaciones"
+          your_previous_trainings: "Sus capacitaciones anteriores"
+          your_approved_trainings: "Sus capacitaciones aprobadas"
           no_trainings: "Ninguna formación"
           your_training_credits: "Tus créditos de entrenamiento"
           subscribe_for_credits: "Suscríbete para beneficiarte de entrenamientos gratuitos"
@@ -264,7 +264,7 @@ es:
       trainings_reserve:
         trainings_planning: "Plan de la formación"
         planning_of: "Plan de " #eg. Planning of 3d printer training
-        all_trainings: "Todas las formaciones"
+        all_trainings: "Todas las capacitaciones"
         cancel_my_selection: "Cancelar mi selección"
         i_change: "Cambio"
         i_shift: "Cambio"

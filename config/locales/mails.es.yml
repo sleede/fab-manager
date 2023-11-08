@@ -15,7 +15,7 @@ es:
         account_name: "Nombre de usuario:"
         password: "Contraseña:"
         temporary_password: "Esta es una contraseña temporal, puede modificarla en la pagina «Mi cuenta»."
-        keep_advantages: "Con esta cuenta, guarda todas las ventajas relacionadas con su perfil de usuario de Fab Lab (formaciones, planes de suscripción)."
+        keep_advantages: "Con esta cuenta, guarda todas las ventajas relacionadas con su perfil de usuario de Fab Lab (capacitaciones, planes de suscripción)."
         to_use_platform: "Para usar el sitio web, por favor"
         logon_or_login: "crea una nueva cuenta o inicia sesión haciendo clic aquí."
         token_if_link_problem: "Si experimenta problemas con el enlace, puede introducir el siguiente código en el primer intento de conexión:"
@@ -330,7 +330,7 @@ es:
     notify_admin_objects_stripe_sync:
       subject: "Sincronización de Stripe"
       body:
-        objects_sync: "Todos los miembros, cupones, máquinas, formaciones, espacios y planes se sincronizaron correctamente en Stripe."
+        objects_sync: "Todos los miembros, cupones, máquinas, capacitaciones, espacios y planes se sincronizaron correctamente en Stripe."
     notify_admin_order_is_paid:
       subject: "Nuevo pedido"
       body:
