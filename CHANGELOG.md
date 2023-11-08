@@ -6,6 +6,8 @@
 - adds a migrations to fix all statistic_sub_types of plans having label = nil
 - Fix a bug: unable to show wallet payment mean for avoir
 - updates spanish translations
+- Fix a bug: unable to see value for input group with long label on eventModal
+
 
 ## v6.3.0 2023 November 3
 
