@@ -35,8 +35,8 @@ class Plan < ApplicationRecord
 
   after_create :create_machines_prices
   after_create :create_spaces_prices
-  after_create :create_statistic_type
   after_create :set_name
+  after_create :create_statistic_type
   after_create :update_gateway_product
   after_update :update_gateway_product, if: :saved_change_to_base_name?
 

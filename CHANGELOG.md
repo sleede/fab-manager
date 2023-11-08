@@ -1,5 +1,9 @@
 # Changelog Fab-manager
 
+## next deploy
+
+- Fix a bug: statistic_subtype.label of plan was nil
+
 ## v6.3.0 2023 November 3
 
 - Fix a bug: fix all failing tasks of rake task file chain.rake
