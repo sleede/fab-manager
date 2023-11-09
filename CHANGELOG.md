@@ -7,6 +7,7 @@
 - Fix a bug: unable to show wallet payment mean for avoir
 - updates spanish translations
 - Fix a bug: avoids crash due to oidc config with scope = nil
+- Fix a bug: unable to see value for input group with long label on eventModal
 
 ## v6.3.0 2023 November 3
 
