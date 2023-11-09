@@ -6,6 +6,7 @@
 - adds a migrations to fix all statistic_sub_types of plans having label = nil
 - Fix a bug: unable to show wallet payment mean for avoir
 - updates spanish translations
+- Fix a bug: avoids crash due to oidc config with scope = nil
 
 ## v6.3.0 2023 November 3
 
