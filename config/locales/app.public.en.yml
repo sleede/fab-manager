@@ -352,6 +352,7 @@ en:
         you_can_shift_this_reservation_on_the_following_slots: "You can shift this reservation on the following slots:"
         confirmation_required: "Confirmation required"
         do_you_really_want_to_delete_this_event:  "Do you really want to delete this event?"
+        all_reservations_for_this_event_will_be_canceled: All reservations for this event will be canceled.
         delete_recurring_event: "You're about to delete a periodic event. What do you want to do?"
         delete_this_event: "Only this event"
         delete_this_and_next: "This event and the following"
