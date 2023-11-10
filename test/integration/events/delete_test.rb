@@ -5,6 +5,8 @@ require 'test_helper'
 module Events; end
 
 class Events::DeleteTest < ActionDispatch::IntegrationTest
+  include ActionMailer::TestHelper
+
   setup do
     admin = User.with_role(:admin).first
     login_as(admin, scope: :user)
@@ -55,7 +57,10 @@ class Events::DeleteTest < ActionDispatch::IntegrationTest
     assert_equal 201, response.status, response.body
 
     assert_not event.destroyable?
-    delete "/api/events/#{event.id}?mode=single", headers: default_headers
+    assert_enqueued_emails 2 do
+      delete "/api/events/#{event.id}?mode=single", headers: default_headers
+    end
+    assert event.availability.slots_reservations.all? { |sr| sr.canceled_at }
     assert_response :success
     res = json_response(response.body)
     assert_equal 1, res[:deleted]

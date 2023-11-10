@@ -352,6 +352,7 @@ de:
         you_can_shift_this_reservation_on_the_following_slots: "Sie können diese Reservierung auf die folgenden Slots verschieben:"
         confirmation_required: "Bestätigung erforderlich"
         do_you_really_want_to_delete_this_event: "Möchten Sie diese Veranstaltung wirklich löschen?"
+        all_reservations_for_this_event_will_be_canceled: All reservations for this event will be canceled.
         delete_recurring_event: "Sie sind dabei, eine wiederkehrende Veranstaltung zu löschen. Was möchten Sie tun?"
         delete_this_event: "Nur diese Veranstaltung"
         delete_this_and_next: "Diese Veranstaltung sowie die folgenden"

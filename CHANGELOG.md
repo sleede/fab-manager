@@ -1,5 +1,16 @@
 # Changelog Fab-manager
 
+## v6.3.1 2023 November 10
+
+- Fix a bug: statistic_sub_type.label of plan was nil
+- adds a migrations to fix all statistic_sub_types of plans having label = nil
+- Fix a bug: unable to show wallet payment mean for avoir
+- updates spanish translations and adds translations
+- Fix a bug: avoids crash due to oidc config with scope = nil
+- Fix a bug: unable to see value for input group with long label on eventModal
+- Improvement: when deleting an event, all reservations are canceled
+- Improvement: replace original image by large generated version (event, machine, space, training)
+
 ## v6.3.0 2023 November 3
 
 - Fix a bug: fix all failing tasks of rake task file chain.rake
@@ -13,6 +24,7 @@
 - Fix a bug: replaces custom ServerLocale middleware with sidekiq i18n middleware
 - adds a rake task to erase all reservations and invoices (fablab:maintenance:delete_all_reservations_and_invoices)
 - improvement: dynamic label (i18n) for stats structure tables
+- [TODO DEPLOY] upgrade to v6.2.0 BEFORE upgrading to v6.3.0 !!!
 
 ## v6.2.0 2023 October 13
 
@@ -22,6 +34,7 @@
 - Fix a bug: fix members tour (help), a selector was not valid anymore
 - Fix a bug: unable to save OpenID extra_authorize_params as json
 - Fix machine list bug : when there is no user logged in and access machines list with at least one machine associated to a space
+- [TODO DEPLOY] `rails db:seed`
 
 ## v6.1.2 2023 October 2
 

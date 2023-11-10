@@ -75,10 +75,10 @@ es:
         associated_machines: "Máquinas asociadas"
         associated_machines_help: "Si asocia una máquina a esta formación, los miembros deberán superar con éxito esta formación antes de poder reservar la máquina."
         default_seats: "Número predeterminado de asientos"
-        public_page: "Mostrar en la lista de formaciones"
-        public_help: "Si esta opción no está seleccionada, la formación no aparecerá en la lista de formaciones."
+        public_page: "Mostrar en la lista de capacitaciones"
+        public_help: "Si esta opción no está seleccionada, la capacitación no aparecerá en la lista de capacitaciones."
         disable_training: "Desactivar la formación"
-        disabled_help: "Si está desactivada, la formación no se podrá reservar y no aparecerá por defecto en la lista de formaciones."
+        disabled_help: "Si está desactivada, la capacitación no se podrá reservar y no aparecerá por defecto en la lista de capacitaciones."
         automatic_cancellation: "Cancelación automática"
         automatic_cancellation_info: "Si edita condiciones específicas aquí, las condiciones generales de cancelación dejarán de tenerse en cuenta. Se le notificará si se cancela una sesión. Los abonos y reembolsos serán automáticos si el monedero está activado. En caso contrario, tendrás que hacerlo manualmente."
         automatic_cancellation_switch: "Activar la cancelación automática para esta formación"
@@ -337,7 +337,7 @@ es:
         select_none: "No"
         manage_machines: "Haga clic aquí para añadir o eliminar máquinas."
         manage_spaces: "Haga clic aquí para añadir o eliminar espacios."
-        manage_trainings: "Haga clic aquí para añadir o eliminar formaciones."
+        manage_trainings: "Haga clic aquí para añadir o eliminar capacitaciones."
         number_of_tickets: "Número de tickets: "
         adjust_the_opening_hours: "Ajustar el horario de apertura"
         to_time: "a" #e.g. from 18:00 to 21:00
@@ -372,7 +372,7 @@ es:
         min_slot_duration: "Debe especificar una duración válida para las franjas horarias."
         export_is_running_you_ll_be_notified_when_its_ready: "La exportación se está ejecutando. Se le notificará cuando esté listo."
         actions: "Acciones"
-        block_reservations: "Reservas de bloques"
+        block_reservations: "Bloquear las reservas"
         do_you_really_want_to_block_this_slot: "¿Realmente desea bloquear nuevas reservas en esta franja horaria? Se volverá invisible para los usuarios."
         locking_success: "Franja horaria correctamente bloqueada, ya no aparecerá en el calendario del usuario"
         locking_failed: "Ocurrió un error. El bloqueo de la franja horaria ha fallado"
@@ -401,7 +401,7 @@ es:
         minutes: "minutos"
         deleted_user: "Usuario suprimido"
         select_type: "Seleccione un tipo para continuar"
-        no_modules_available: "No hay ningún módulo reservable disponible. Habilite al menos un módulo (máquinas, espacios o formaciones) en la sección Personalización."
+        no_modules_available: "No hay ningún módulo reservable disponible. Habilite al menos un módulo (máquinas, espacios o capacitaciones) en la sección Personalización."
       #import external iCal calendar
       icalendar:
         icalendar_import: "Importar iCalendar"
@@ -489,7 +489,7 @@ es:
       #track and monitor the trainings
       trainings:
         trainings_monitoring: "Seguimiento de la formación"
-        all_trainings: "Todas las formaciones"
+        all_trainings: "Todas las capacitaciones"
         add_a_new_training: "Añadir una nueva formación"
         name: "Nombre"
         associated_machines: "Máquinas asociadas"
@@ -533,9 +533,9 @@ es:
         add_a_new_training: "Añadir una nueva formación"
       trainings_settings:
         title: "Configuración"
-        automatic_cancellation: "Cancelación automática de formaciones"
+        automatic_cancellation: "Cancelación automática de capacitaciones"
         automatic_cancellation_info: "Se requiere un número mínimo de participantes para mantener una sesión. Se le notificará si se cancela una sesión. Los abonos y reembolsos serán automáticos si el monedero está habilitado. De lo contrario, tendrá que hacerlo manualmente."
-        automatic_cancellation_switch: "Activar la cancelación automática de todos las formaciones"
+        automatic_cancellation_switch: "Activar la cancelación automática de todos las capacitaciones"
         automatic_cancellation_threshold: "Número mínimo de inscripciones para mantener una sesión"
         must_be_positive: "Debe especificar un número superior o igual a 0"
         automatic_cancellation_deadline: "Fecha límite, en horas antes de la cancelación automática"
@@ -549,7 +549,7 @@ es:
         validation_rule_switch: "Activar la regla de validación"
         validation_rule_period: "Límite de tiempo en meses"
         generic_text_block: "Bloque de texto editorial"
-        generic_text_block_info: "Muestra un bloque editorial encima de la lista de formaciones visibles para los miembros."
+        generic_text_block_info: "Muestra un bloque editorial encima de la lista de capacitaciones visibles para los miembros."
         generic_text_block_switch: "Mostrar bloque editorial"
         cta_switch: "Mostrar un botón"
         cta_label: "Etiqueta del botón"
@@ -1266,7 +1266,7 @@ es:
       #members bulk import
       members_import:
         import_members: "Importar miembros"
-        info: "Puede cargar un archivo CSV para crear nuevos miembros o actualizar los existentes. Su archivo debe utilizar los identificadores siguientes para especificar el grupo, las formaciones y las etiquetas de los miembros."
+        info: "Puede cargar un archivo CSV para crear nuevos miembros o actualizar los existentes. Su archivo debe utilizar los identificadores siguientes para especificar el grupo, las capacitaciones y las etiquetas de los miembros."
         required_fields: "Su fichero debe contener, al menos, los siguientes datos para cada usuario a crear: email, nombre, apellidos y grupo. Si la contraseña está vacía, se generará. En las actualizaciones, los campos vacíos se mantendrán tal cual."
         about_example_html: "Consulte el archivo de ejemplo proporcionado para generar un archivo CSV correcto.<br>Este ejemplo:<ol><li>creará un nuevo miembro (Jean Dupont) con una contraseña generada</li><li>actualizará la contraseña de un miembro existente (ID 43) con la nueva contraseña generada.</li></ol><br>Tenga cuidado de utilizar la codificación <strong>Unicode UTF-8</strong>."
         groups: "Grupos"
@@ -1645,8 +1645,8 @@ es:
         customize_information_messages: "Personalizar mensajes de información"
         message_of_the_machine_booking_page: "Mensaje de la página de reserva de la máquina:"
         type_the_message_content: "Escriba el contenido del mensaje"
-        warning_message_of_the_training_booking_page: "Mensaje de advertencia de la pagina de reservación de las formaciones:"
-        information_message_of_the_training_reservation_page: "Mensaje de información en la página de reservación de las formaciones:"
+        warning_message_of_the_training_booking_page: "Mensaje de advertencia de la pagina de reservación de las capacitaciones:"
+        information_message_of_the_training_reservation_page: "Mensaje de información en la página de reservación de las capacitaciones:"
         message_of_the_subscriptions_page: "Mensaje de advertencia de la página de reserva de formación:"
         message_of_the_events_page: "Mensaje de la página de eventos:"
         message_of_the_spaces_page: "Mensaje de la página de espacios:"
@@ -1797,7 +1797,7 @@ es:
         enable_plans: "Activar los planes"
         plans_module: "módulo de planes"
         trainings: "Formaciones"
-        trainings_info_html: "<p>Las formaciones están totalmente integradas en la agenda del gestor de Fab. Si la activas, tus miembros podrán reservar y pagar formaciones.</p><p>Las formaciones permiten evitar que los miembros reserven algunas máquinas si no han realizado el curso previo.</p>"
+        trainings_info_html: "<p>Las capacitaciones están totalmente integradas en la agenda del gestor de Fab. Si la activas, tus miembros podrán reservar y pagar capacitaciones.</p><p>Las capacitaciones permiten evitar que los miembros reserven algunas máquinas si no han realizado el curso previo.</p>"
         enable_trainings: "Activar la formación"
         trainings_module: "módulo de formación"
         store: "Tienda"
@@ -1828,7 +1828,7 @@ es:
         recaptcha_site_key: "Clave del sitio reCAPTCHA"
         recaptcha_secret_key: "Clave secreta de reCAPTCHA"
         feature_tour_display: "activar la visita guiada"
-        email_from: "dirección del expedidor"
+        email_from: "dirección del remitente"
         disqus_shortname: "Nombre corto de Disqus"
         COUNT_items_removed: "{COUNT, plural, one {}=1{Un elemento eliminado} other{{COUNT} elementos eliminados}}"
         item_added: "Un elemento añadido"
@@ -1916,7 +1916,7 @@ es:
           notifications: "Notificaciones"
           email: "Email"
           email_info: "La dirección de email desde la que se enviarán las notificaciones. Puede utilizar una dirección inexistente (como noreply@...) o una dirección existente si desea permitir a sus miembros responder a las notificaciones que reciban."
-          email_from: "Dirección del expedidor"
+          email_from: "Dirección del remitente"
           wallet: "Cartera"
           wallet_info_html: "<p>La cartera virtual permite asignar una suma de dinero a los usuarios. Luego, pueden gastar este dinero como deseen, en Fab-manager.</p><p>los miembros no pueden acreditar su cartera a sí mismos, es un privilegio de los gestores y administradores.</p>"
           enable_wallet: "Activar cartera"
@@ -2099,12 +2099,12 @@ es:
         trainings:
           welcome:
             title: "Formaciones"
-            content: "Aquí puede crear, modificar y eliminar formaciones. También es el lugar donde puede validar los cursos de formación seguidos por sus miembros."
+            content: "Aquí puede crear, modificar y eliminar capacitaciones. También es el lugar donde puede validar los cursos de capacitación seguidos por sus miembros."
           welcome_manager:
             title: "Formaciones"
-            content: "Este es el lugar donde puedes ver las formaciones y sus asociaciones con las máquinas. También es el lugar donde puede validar las formaciones seguidas por sus miembros."
+            content: "Este es el lugar donde puedes ver las capacitaciones y sus asociaciones con las máquinas. También es el lugar donde puede validar las capacitaciones seguidas por sus miembros."
           trainings:
-            title: "Administrar formaciones"
+            title: "Administrar capacitaciones"
             content: "<p>A cada formación se le asocia un número de plazas por defecto. Sin embargo, el número de plazas reales puede modificarse para cada sesión.</p><p>Las sesiones de formación se programan desde la pestaña del administrador \"Calendario\".</p><p>Además, una formación puede asociarse a una o varias máquinas. Además, una formación puede estar asociada a una o varias máquinas.</p>"
           filter:
             title: "Filtro"

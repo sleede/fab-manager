@@ -352,6 +352,7 @@ zu:
         you_can_shift_this_reservation_on_the_following_slots: "crwdns28338:0crwdne28338:0"
         confirmation_required: "crwdns28340:0crwdne28340:0"
         do_you_really_want_to_delete_this_event: "crwdns28342:0crwdne28342:0"
+        all_reservations_for_this_event_will_be_canceled: crwdns38132:0crwdne38132:0
         delete_recurring_event: "crwdns28344:0crwdne28344:0"
         delete_this_event: "crwdns28346:0crwdne28346:0"
         delete_this_and_next: "crwdns28348:0crwdne28348:0"

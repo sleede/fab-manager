@@ -13,12 +13,12 @@ es:
           decline: "Rechazar"
         #dashboard sections
         dashboard: "Panel"
-        my_profile: "My Perfil"
+        my_profile: "Mi Perfil"
         my_children: "Mis hijos"
         my_settings: "Mis ajustes"
         my_supporting_documents_files: "Mis documentos justificativos"
         my_projects: "Mis proyectos"
-        my_trainings: "Mis formaciones"
+        my_trainings: "Mis capacitaciones"
         my_reservations: "Mis reservas"
         my_events: "Mis eventos"
         my_invoices: "Mis facturas"
@@ -39,7 +39,7 @@ es:
         #left menu (public)
         home: "Menú principal"
         reserve_a_machine: "Reservar una máquina"
-        trainings_registrations: "Registro de formaciones"
+        trainings_registrations: "Registro de capacitaciones"
         events_registrations: "Registro de eventos"
         reserve_a_space: "Reservar un espacio"
         projects_gallery: "Galería de proyectos"
@@ -259,7 +259,7 @@ es:
       #list of trainings
       trainings_list:
         book: "Reservar"
-        the_trainings: "Lista de formaciones"
+        the_trainings: "Lista de capacitaciones"
       #details of a training
       training_show:
         book_this_training: "Reservar la formación"
@@ -352,6 +352,7 @@ es:
         you_can_shift_this_reservation_on_the_following_slots: "Puede cambiar la reserva en los siguientes campos:"
         confirmation_required: "Confirmación requerida"
         do_you_really_want_to_delete_this_event: "¿Realmente desea eliminar este evento?"
+        all_reservations_for_this_event_will_be_canceled: Todas las reservas de este evento serán canceladas.
         delete_recurring_event: "Estás a punto de eliminar un evento periódico. ¿Qué quieres hacer?"
         delete_this_event: "Solo este evento"
         delete_this_and_next: "Este evento y lo siguiente"
@@ -376,7 +377,7 @@ es:
       #public calendar
       calendar:
         calendar: "Calendario"
-        show_unavailables: "Mostrar campos inválidos"
+        show_unavailables: "Mostrar las franjas horarias indisponibles"
         filter_calendar: "Filtrar calendario"
         trainings: "Formaciones"
         machines: "Máquinas"
@@ -537,7 +538,7 @@ es:
             content: "<p>Esta página le permitirá consultar la lista de todas las máquinas y reservar una franja horaria en nombre de un miembro.</p><p>Una máquina puede ser, por ejemplo, una impresora 3D.</p><p>Los miembros también pueden acceder a esta página y reservar ellos mismos una máquina, si está habilitado el pago con tarjeta de crédito o si algunos precios son iguales a 0.</p>"
           trainings:
             title: "Formaciones"
-            content: "<p>Esta página le permitirá consultar la lista de todas las sesiones de formación e inscribir a un miembro en una sesión de formación.</p><p>Las formaciones pueden establecerse como requisitos previos antes de permitir la reserva de determinadas máquinas.</p><p>Los miembros también pueden acceder a esta página e inscribirse ellos mismos en una sesión de formación, si está habilitado el pago con tarjeta de crédito o si algunos precios son iguales a 0.</p>"
+            content: "<p>Esta página le permitirá consultar la lista de todas las sesiones de capacitación e inscribir a un miembro en una sesión de capacitación.</p><p>Las capacitaciones pueden establecerse como requisitos previos antes de permitir la reserva de determinadas máquinas.</p><p>Los miembros también pueden acceder a esta página e inscribirse ellos mismos en una sesión de capacitación, si está habilitado el pago con tarjeta de crédito o si algunos precios son iguales a 0.</p>"
           spaces:
             title: "Espacios"
             content: "<p>Esta página le permitirá consultar la lista de todos los espacios disponibles y reservar una plaza en una franja horaria, en nombre de un miembro.</p><p>Un espacio puede ser, por ejemplo, un taller de carpintería o una sala de reuniones.</p><p>Su particularidad es que pueden ser reservados por varias personas al mismo tiempo.</p><p>Los miembros también pueden acceder a esta página y reservar ellos mismos una máquina, si está habilitado el pago con tarjeta de crédito o si algunos precios son iguales a 0.</p>"

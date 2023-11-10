@@ -5,6 +5,7 @@
 <div class="modal-body">
   <p ng-hide="isRecurrent" translate>{{ 'app.public.events_show.do_you_really_want_to_delete_this_event' }}</p>
   <p ng-show="isRecurrent" translate>{{ 'app.public.events_show.delete_recurring_event' }}</p>
+  <p translate>{{ 'app.public.events_show.all_reservations_for_this_event_will_be_canceled' }}</p>
   <div ng-show="isRecurrent" class="form-group">
     <label class="checkbox">
       <input type="radio" name="delete_mode" ng-model="deleteMode" value="single" required/>

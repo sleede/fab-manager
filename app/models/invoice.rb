@@ -160,7 +160,9 @@ class Invoice < PaymentDocument
   # return a summary of the payment means used
   def payment_means
     res = []
-    res.push(means: :wallet, amount: wallet_amount) if paid_by_wallet?
+    res.push(means: :wallet, amount: wallet_amount || total) if paid_by_wallet?
+    return res if is_a?(Avoir)
+
     if paid_by_card?
       res.push(means: :card, amount: amount_paid)
     else
@@ -195,7 +197,7 @@ class Invoice < PaymentDocument
   end
 
   def paid_by_wallet?
-    wallet_transaction && wallet_amount.positive?
+    (wallet_transaction && wallet_amount.positive?) || payment_method == 'wallet'
   end
 
   def render_resource

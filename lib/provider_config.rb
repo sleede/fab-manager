@@ -20,7 +20,7 @@ class ProviderConfig
 
     (@config[:providable_attributes].keys.filter { |n| !n.start_with?('client__') && n != 'profile_url' }.map do |n|
       val = @config[:providable_attributes][n]
-      val.join(' ') if n == 'scope'
+      val&.join(' ') if n == 'scope'
       [n, val]
     end).push(
       ['client_options', @config[:providable_attributes].keys.filter { |n| n.start_with?('client__') }.to_h do |n|

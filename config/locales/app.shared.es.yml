@@ -540,7 +540,7 @@ es:
         stock_external: "Stock público"
       calendar:
         calendar: "Agenda"
-        show_unavailables: "Mostrar todas las franjas horarias"
+        show_unavailables: "Mostrar las franjas horarias llenas"
         filter_calendar: "Filtrar calendario"
         trainings: "Formaciones"
         machines: "Máquinas"

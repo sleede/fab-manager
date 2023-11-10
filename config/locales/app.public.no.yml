@@ -352,6 +352,7 @@
         you_can_shift_this_reservation_on_the_following_slots: "Du kan flytte denne reservasjonen til følgende tidsluke:"
         confirmation_required: "Bekreftelse påkrevd"
         do_you_really_want_to_delete_this_event: "Vil du virkelig slette denne hendelsen?"
+        all_reservations_for_this_event_will_be_canceled: All reservations for this event will be canceled.
         delete_recurring_event: "Du er ferd med å oppdatere en gjentakende hendelse. Hva vil du gjøre?"
         delete_this_event: "Bare denne hendelsen"
         delete_this_and_next: "Denne hendelsen og de følgende"
