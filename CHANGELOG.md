@@ -9,6 +9,7 @@
 - Fix a bug: avoids crash due to oidc config with scope = nil
 - Fix a bug: unable to see value for input group with long label on eventModal
 - Improvement: when deleting an event, all reservations are canceled
+- Improvement: replace original image by large generated version (event, machine, space, training)
 
 ## v6.3.0 2023 November 3
 
