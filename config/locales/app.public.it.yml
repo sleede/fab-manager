@@ -352,6 +352,7 @@ it:
         you_can_shift_this_reservation_on_the_following_slots: "È possibile spostare questa prenotazione sui seguenti slot:"
         confirmation_required: "Conferma richiesta"
         do_you_really_want_to_delete_this_event: "Volete davvero cancellare questo evento?"
+        all_reservations_for_this_event_will_be_canceled: All reservations for this event will be canceled.
         delete_recurring_event: "Stai per eliminare un evento multiplo. Cosa vuoi fare?"
         delete_this_event: "Solo questo evento"
         delete_this_and_next: "Questo evento e il successivo"

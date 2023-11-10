@@ -13,7 +13,7 @@ es:
           decline: "Rechazar"
         #dashboard sections
         dashboard: "Panel"
-        my_profile: "My Perfil"
+        my_profile: "Mi Perfil"
         my_children: "Mis hijos"
         my_settings: "Mis ajustes"
         my_supporting_documents_files: "Mis documentos justificativos"
@@ -352,6 +352,7 @@ es:
         you_can_shift_this_reservation_on_the_following_slots: "Puede cambiar la reserva en los siguientes campos:"
         confirmation_required: "Confirmación requerida"
         do_you_really_want_to_delete_this_event: "¿Realmente desea eliminar este evento?"
+        all_reservations_for_this_event_will_be_canceled: Todas las reservas de este evento serán canceladas.
         delete_recurring_event: "Estás a punto de eliminar un evento periódico. ¿Qué quieres hacer?"
         delete_this_event: "Solo este evento"
         delete_this_and_next: "Este evento y lo siguiente"

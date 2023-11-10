@@ -5,7 +5,7 @@
 - Fix a bug: statistic_sub_type.label of plan was nil
 - adds a migrations to fix all statistic_sub_types of plans having label = nil
 - Fix a bug: unable to show wallet payment mean for avoir
-- updates spanish translations
+- updates spanish translations and adds translations
 - Fix a bug: avoids crash due to oidc config with scope = nil
 - Fix a bug: unable to see value for input group with long label on eventModal
 - Improvement: when deleting an event, all reservations are canceled
