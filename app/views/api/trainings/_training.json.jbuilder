@@ -7,7 +7,7 @@ if training.training_image
   json.training_image_attributes do
     json.id training.training_image.id
     json.attachment_name training.training_image.attachment_identifier
-    json.attachment_url training.training_image.attachment.url
+    json.attachment_url training.training_image.attachment.large.url
   end
 end
 
