@@ -1,6 +1,6 @@
 # Changelog Fab-manager
 
-## next deploy
+## v6.3.1 2023 November 10
 
 - Fix a bug: statistic_sub_type.label of plan was nil
 - adds a migrations to fix all statistic_sub_types of plans having label = nil
