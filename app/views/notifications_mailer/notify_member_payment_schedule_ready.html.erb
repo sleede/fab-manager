@@ -4,7 +4,7 @@
   <%= _t('.body.please_find_attached_html',
          {
            DATE: I18n.l(@attached_object.created_at.to_date),
-           AMOUNT: number_to_currency(@attached_object.total / 100.0),
+           AMOUNT: number_to_currency(@attached_object.total / 100.0, locale: CURRENCY_LOCALE),
            TYPE: @attached_object.main_object.object_type
          })
       # messageFormat

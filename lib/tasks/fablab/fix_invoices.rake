@@ -22,7 +22,7 @@ namespace :fablab do
         ii = invoice.invoice_items.where(subscription_id: nil).first
         puts '=============================================='
         puts "Invoice #{invoice.id} (# #{invoice.reference})"
-        puts "Total: #{number_to_currency(invoice.total / 100.0)}"
+        puts "Total: #{number_to_currency(invoice.total / 100.0, locale: CURRENCY_LOCALE)}"
         puts "Subject: #{ii.description}."
         puts "Customer: #{invoice.invoicing_profile.full_name} (#{invoice.invoicing_profile.email})"
         puts "Operator: #{invoice.operator_profile&.user&.profile&.full_name} (#{invoice.operator_profile&.user&.email})"
