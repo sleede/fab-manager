@@ -2,7 +2,7 @@
 <%= render 'notifications_mailer/shared/hello', recipient: @recipient %>
 <p>
   <%= t('.body.wallet_credit_html',
-        AMOUNT: number_to_currency(@attached_object.amount),
+        AMOUNT: number_to_currency(@attached_object.amount, locale: CURRENCY_LOCALE),
         USER: @attached_object.wallet.user&.profile&.full_name || t('api.notifications.deleted_user'),
         ADMIN: @attached_object.user&.profile&.full_name || t('api.notifications.deleted_user'))
   %>

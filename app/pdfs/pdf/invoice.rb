@@ -75,7 +75,7 @@ class Pdf::Invoice < Prawn::Document
       invoice.invoice_items.each do |item|
         price = item.amount.to_i / 100.00
 
-        data += [[Invoices::ItemLabelService.build(invoice, item), number_to_currency(price)]]
+        data += [[Invoices::ItemLabelService.build(invoice, item), number_to_currency(price, locale: CURRENCY_LOCALE)]]
         total_calc += price
         total_ht += item.net_amount
         total_vat += item.vat
@@ -92,13 +92,13 @@ class Pdf::Invoice < Prawn::Document
 
         # discount textual description
         literal_discount = cp.percent_off
-        literal_discount = number_to_currency(cp.amount_off / 100.00) if cp.type == 'amount_off'
+        literal_discount = number_to_currency(cp.amount_off / 100.00, locale: CURRENCY_LOCALE) if cp.type == 'amount_off'
 
         # add a row for the coupon
         data += [[_t('invoices.coupon_CODE_discount_of_DISCOUNT',
                      CODE: cp.code,
                      DISCOUNT: literal_discount,
-                     TYPE: cp.type), number_to_currency(-discount)]]
+                     TYPE: cp.type), number_to_currency(-discount, locale: CURRENCY_LOCALE)]]
       end
 
       # total verification
@@ -109,18 +109,18 @@ class Pdf::Invoice < Prawn::Document
       vat_service = VatHistoryService.new
       vat_rate_group = vat_service.invoice_vat(invoice)
       if total_vat.zero?
-        data += [[I18n.t('invoices.total_amount'), number_to_currency(total)]]
+        data += [[I18n.t('invoices.total_amount'), number_to_currency(total, locale: CURRENCY_LOCALE)]]
       else
-        data += [[I18n.t('invoices.total_including_all_taxes'), number_to_currency(total)]]
+        data += [[I18n.t('invoices.total_including_all_taxes'), number_to_currency(total, locale: CURRENCY_LOCALE)]]
         vat_rate_group.each do |_type, rate|
           data += [[I18n.t('invoices.including_VAT_RATE',
                            **{ RATE: rate[:vat_rate],
-                               AMOUNT: number_to_currency(rate[:amount] / 100.00),
+                               AMOUNT: number_to_currency(rate[:amount] / 100.00, locale: CURRENCY_LOCALE),
                                NAME: Setting.get('invoice_VAT-name') }),
-                    number_to_currency(rate[:total_vat] / 100.00)]]
+                    number_to_currency(rate[:total_vat] / 100.00, locale: CURRENCY_LOCALE)]]
         end
-        data += [[I18n.t('invoices.including_total_excluding_taxes'), number_to_currency(total_ht / 100.00)]]
-        data += [[I18n.t('invoices.including_amount_payed_on_ordering'), number_to_currency(total)]]
+        data += [[I18n.t('invoices.including_total_excluding_taxes'), number_to_currency(total_ht / 100.00, locale: CURRENCY_LOCALE)]]
+        data += [[I18n.t('invoices.including_amount_payed_on_ordering'), number_to_currency(total, locale: CURRENCY_LOCALE)]]
 
         # checking the round number
         rounded = (sprintf('%.2f', total_vat / 100.00).to_f + sprintf('%.2f', total_ht / 100.00).to_f).to_s

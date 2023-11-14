@@ -27,14 +27,14 @@ class Invoices::PaymentDetailsService
                                       **{ DATE: I18n.l(invoice.created_at.to_date),
                                           TIME: I18n.l(invoice.created_at, format: :hour_minute) })}"
         if total.positive? || wallet_amount.nil?
-          payment_verbose += " #{I18n.t('invoices.for_an_amount_of_AMOUNT', **{ AMOUNT: number_to_currency(total) })}"
+          payment_verbose += " #{I18n.t('invoices.for_an_amount_of_AMOUNT', **{ AMOUNT: number_to_currency(total, locale: CURRENCY_LOCALE) })}"
         end
         if invoice.wallet_amount
           payment_verbose += if total.positive?
                                " #{I18n.t('invoices.and')} #{I18n.t('invoices.by_wallet')} " \
-                                 "#{I18n.t('invoices.for_an_amount_of_AMOUNT', **{ AMOUNT: number_to_currency(wallet_amount) })}"
+                                 "#{I18n.t('invoices.for_an_amount_of_AMOUNT', **{ AMOUNT: number_to_currency(wallet_amount, locale: CURRENCY_LOCALE) })}"
                              else
-                               " #{I18n.t('invoices.for_an_amount_of_AMOUNT', **{ AMOUNT: number_to_currency(wallet_amount) })}"
+                               " #{I18n.t('invoices.for_an_amount_of_AMOUNT', **{ AMOUNT: number_to_currency(wallet_amount, locale: CURRENCY_LOCALE) })}"
                              end
         end
         payment_verbose
@@ -88,7 +88,7 @@ class Invoices::PaymentDetailsService
       else
         Rails.logger.error "specified refunding method (#{details}) is unknown"
       end
-      "#{details} #{I18n.t('invoices.for_an_amount_of_AMOUNT', **{ AMOUNT: number_to_currency(total) })}"
+      "#{details} #{I18n.t('invoices.for_an_amount_of_AMOUNT', **{ AMOUNT: number_to_currency(total, locale: CURRENCY_LOCALE) })}"
     end
   end
 end

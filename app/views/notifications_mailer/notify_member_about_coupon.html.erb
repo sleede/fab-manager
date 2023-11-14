@@ -8,7 +8,7 @@
   </p>
 <% else %>
   <p><%= t('.body.enjoy_a_discount_of_AMOUNT_with_code_CODE',
-           AMOUNT:  number_to_currency(@attached_object.amount_off / 100.00),
+           AMOUNT:  number_to_currency(@attached_object.amount_off / 100.00, locale: CURRENCY_LOCALE),
            CODE: @attached_object.code
          ) %>
   </p>

@@ -9,7 +9,7 @@ json.invoices do
         json.type invoice[:invoice].payment_gateway_object.gateway_object_type
       end
     end
-    json.total number_to_currency(invoice[:invoice].total / 100.0)
+    json.total number_to_currency(invoice[:invoice].total / 100.0, locale: CURRENCY_LOCALE)
     json.user do
       json.extract! invoice[:invoice].invoicing_profile, :user_id, :email, :first_name, :last_name
       json.address invoice[:invoice].invoicing_profile&.address&.address
@@ -46,7 +46,7 @@ json.payment_schedules do
       json.id object.gateway_object_id
       json.type object.gateway_object_type
     end
-    json.total number_to_currency(schedule.total / 100.0)
+    json.total number_to_currency(schedule.total / 100.0, locale: CURRENCY_LOCALE)
     json.user do
       json.extract! schedule.invoicing_profile, :user_id, :email, :first_name, :last_name
       json.address schedule.invoicing_profile&.address&.address
@@ -60,7 +60,7 @@ json.payment_schedules do
     end
     json.deadlines schedule.payment_schedule_items do |item|
       json.extract! item, :id, :due_date, :state, :details, :invoice_id, :footprint, :created_at
-      json.amount number_to_currency(item.amount / 100.0)
+      json.amount number_to_currency(item.amount / 100.0, locale: CURRENCY_LOCALE)
     end
     json.objects schedule.payment_schedule_objects do |object|
       json.type object.object_type
@@ -71,8 +71,8 @@ json.payment_schedules do
 end
 
 json.totals do
-  json.period_total number_to_currency(period_total / 100.0)
-  json.perpetual_total number_to_currency(perpetual_total / 100.0)
+  json.period_total number_to_currency(period_total / 100.0, locale: CURRENCY_LOCALE)
+  json.perpetual_total number_to_currency(perpetual_total / 100.0, locale: CURRENCY_LOCALE)
 end
 
 json.software do

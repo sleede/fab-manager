@@ -1,5 +1,10 @@
 # Changelog Fab-manager
 
+## Next release
+
+- updates sidekiq and sidekiq-scheduler
+- fix a bug: wrong locale was causing wrong currency in cron jobs, now we manually set the currency locale in number_to_currency
+
 ## v6.3.1 2023 November 10
 
 - Fix a bug: statistic_sub_type.label of plan was nil
