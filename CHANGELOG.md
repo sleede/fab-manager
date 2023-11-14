@@ -1,6 +1,6 @@
 # Changelog Fab-manager
 
-## Next release
+## v6.3.2 2023 November 14
 
 - updates sidekiq and sidekiq-scheduler
 - fix a bug: wrong locale was causing wrong currency in cron jobs, now we manually set the currency locale in number_to_currency
