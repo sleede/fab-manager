@@ -1,5 +1,9 @@
 # Changelog Fab-manager
 
+## v6.3.3 2023 November 14
+
+- fix a bug: wrong currency unit for locale fr-CH
+
 ## v6.3.2 2023 November 14
 
 - updates sidekiq and sidekiq-scheduler
