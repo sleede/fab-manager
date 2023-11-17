@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- fix a bug: wrong amount when pay a reservation with payment schedule
+
 ## v6.3.3 2023 November 14
 
 - fix a bug: wrong currency unit for locale fr-CH
