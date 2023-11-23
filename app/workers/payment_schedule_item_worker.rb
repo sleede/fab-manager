@@ -6,15 +6,14 @@ class PaymentScheduleItemWorker
   include Sidekiq::Worker
 
   def perform(record_id = nil)
-    p "WORKER CURRENCY_LOCALE=#{CURRENCY_LOCALE}"
-    # if record_id
-    #   psi = PaymentScheduleItem.find(record_id)
-    #   check_item(psi)
-    # else
-    #   PaymentScheduleItem.where.not(state: 'paid').where('due_date < ?', Time.current).each do |item|
-    #     check_item(item)
-    #   end
-    # end
+    if record_id
+      psi = PaymentScheduleItem.find(record_id)
+      check_item(psi)
+    else
+      PaymentScheduleItem.where.not(state: 'paid').where('due_date < ?', Time.current).each do |item|
+        check_item(item)
+      end
+    end
   end
 
   # @param psi [PaymentScheduleItem]
