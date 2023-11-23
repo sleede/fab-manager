@@ -1,5 +1,9 @@
 # Changelog Fab-manager
 
+## next release
+
+- fix a bug: user was not able to reserve at the same time of an event with pre-registration invalidated
+
 ## v6.3.4 2023 November 23
 
 - fix a bug: wrong amount when pay a reservation with payment schedule
