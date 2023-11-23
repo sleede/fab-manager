@@ -1,6 +1,6 @@
 # Changelog Fab-manager
 
-## next release
+## v6.3.4 2023 November 23
 
 - fix a bug: wrong amount when pay a reservation with payment schedule
 - fix regresion on PaymentScheduleItemWorker from v6.3.2
