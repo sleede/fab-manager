@@ -8,7 +8,8 @@
 ## v6.3.4 2023 November 23
 
 - fix a bug: wrong amount when pay a reservation with payment schedule
-- fix regresion on PaymentScheduleItemWorker from v6.3.2
+- fix a bug: regresion on PaymentScheduleItemWorker from v6.3.2
+- fix a bug: event.pre_registration_end_date (was set to beginning_of_day instead of end_of_day)
 
 ## v6.3.3 2023 November 14
 

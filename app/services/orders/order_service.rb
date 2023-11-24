@@ -127,7 +127,7 @@ class Orders::OrderService
     def filter_by_period(orders, filters)
       return orders unless filters[:period_from].present? && filters[:period_to].present?
 
-      orders.where(created_at: Time.zone.parse(filters[:period_from])..Time.zone.parse(filters[:period_to]).end_of_day)
+      orders.where(created_at: Date.parse(filters[:period_from]).in_time_zone..Date.parse(filters[:period_to]).in_time_zone.end_of_day)
     end
 
     def orders_ordering(orders, filters)
