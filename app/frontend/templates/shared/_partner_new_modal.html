@@ -1,31 +1,31 @@
 <div class="modal-header">
-    <h3 class="modal-title" translate>{{ 'app.shared.plan.new_partner' }}</h3>
+    <h3 class="modal-title" translate>{{ 'app.admin.partner_modal.title' }}</h3>
 </div>
 <div class="modal-body m-lg">
     <form name="partnerForm">
         <div class="form-group" ng-class="{'has-error': partnerForm['partner[first_name]'].$dirty && partnerForm['partner[first_name]'].$invalid}">
-            <label for="partner[first_name]" translate>{{ 'app.shared.plan.first_name' }}</label>
+            <label for="partner[first_name]" translate>{{ 'app.admin.partner_modal.first_name' }}</label>
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
                 <input type="text" class="form-control" required="true" ng-model="partner.first_name" id="partner[first_name]" name="partner[first_name]" />
             </div>
-            <span class="help-block" ng-show="partnerForm['partner[first_name]'].$dirty && partnerForm['partner[first_name]'].$error.required" translate>{{ 'app.shared.plan.first_name_is_required' }}</span>
+            <span class="help-block" ng-show="partnerForm['partner[first_name]'].$dirty && partnerForm['partner[first_name]'].$error.required" translate>{{ 'app.admin.partner_modal.field_is_required' }}</span>
         </div>
         <div class="form-group" ng-class="{'has-error': partnerForm['partner[last_name]'].$dirty && partnerForm['partner[last_name]'].$invalid}">
-            <label for="partner[last_name]" translate>{{ 'app.shared.plan.surname' }}</label>
+            <label for="partner[last_name]" translate>{{ 'app.admin.partner_modal.surname' }}</label>
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
                 <input type="text" class="form-control" required="true" ng-model="partner.last_name" id="partner[last_name]" name="partner[last_name]" />
             </div>
-            <span class="help-block" ng-show="partnerForm['partner[last_name]'].$dirty && partnerForm['partner[last_name]'].$error.required" translate>{{ 'app.shared.plan.surname_is_required' }}</span>
+            <span class="help-block" ng-show="partnerForm['partner[last_name]'].$dirty && partnerForm['partner[last_name]'].$error.required" translate>{{ 'app.admin.partner_modal.field_is_required' }}</span>
         </div>
         <div class="form-group" ng-class="{'has-error': partnerForm['partner[email]'].$dirty && partnerForm['partner[email]'].$invalid}">
-            <label for="partner[email]" translate>{{ 'app.shared.plan.email_address' }}</label>
+            <label for="partner[email]" translate>{{ 'app.admin.partner_modal.email' }}</label>
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
                 <input type="email" class="form-control" required="true" ng-model="partner.email" id="partner[email]" name="partner[email]" />
             </div>
-            <span class="help-block" ng-show="partnerForm['partner[email]'].$dirty && partnerForm['partner[email]'].$error.required" translate>{{ 'app.shared.plan.email_address_is_required' }}</span>
+            <span class="help-block" ng-show="partnerForm['partner[email]'].$dirty && partnerForm['partner[email]'].$error.required" translate>{{ 'app.admin.partner_modal.field_is_required' }}</span>
         </div>
     </form>
 </div>
