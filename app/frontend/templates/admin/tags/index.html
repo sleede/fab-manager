@@ -1,4 +1,4 @@
-<button type="button" class="btn btn-warning m-b m-t-lg" ng-click="addTag()" translate>{{ 'app.admin.members.tag_form.add_a_tag'}}</button>
+<button type="button" class="fab-button is-secondary m-b m-t-lg" ng-click="addTag()" translate>{{ 'app.admin.members.tag_form.add_a_tag'}}</button>
 <table class="table">
     <thead>
     <tr>
@@ -16,18 +16,18 @@
         <td>
             <!-- form -->
             <form editable-form name="rowform" onbeforesave="saveTag($data, tag.id)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == tag">
-                <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-warning">
+                <button type="submit" ng-disabled="rowform.$waiting" class="fab-button is-secondary">
                     <i class="fa fa-check"></i>
                 </button>
-                <button type="button" ng-disabled="rowform.$waiting" ng-click="cancelTag(rowform, $index)" class="btn btn-default">
+                <button type="button" ng-disabled="rowform.$waiting" ng-click="cancelTag(rowform, $index)" class="fab-button">
                     <i class="fa fa-times"></i>
                 </button>
             </form>
             <div class="buttons" ng-show="!rowform.$visible">
-                <button class="btn btn-default" ng-click="rowform.$show()">
+                <button class="fab-button" ng-click="rowform.$show()">
                     <i class="fa fa-edit"></i> <span class="hidden-xs hidden-sm" translate>{{ 'app.shared.buttons.edit' }}</span>
                 </button>
-                <button class="btn btn-danger" ng-click="removeTag($index)">
+                <button class="fab-button is-alert" ng-click="removeTag($index)">
                     <i class="fa fa-trash-o"></i>
                 </button>
             </div>

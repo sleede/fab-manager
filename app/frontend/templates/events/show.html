@@ -17,8 +17,8 @@
     <div class="col-xs-12 col-sm-12 col-md-3 b-t hide-b-md" ng-if="isAuthorized(['admin', 'manager'])">
       <section class="heading-actions wrapper">
 
-          <a ui-sref="app.admin.events_edit({id: event.id})" class="btn btn-lg btn-warning bg-white b-2x rounded m-t-xs text-u-c text-sm"><i class="fa fa-edit"></i> {{ 'app.shared.buttons.edit' | translate }}</a>
-          <a ng-click="deleteEvent(event)" class="btn btn-lg btn-danger b-2x rounded no-b m-t-xs"><i class="fa fa-trash-o"></i></a>
+          <a ui-sref="app.admin.events_edit({id: event.id})" class="fab-button is-secondary m-t-xs"><i class="fa fa-edit"></i> {{ 'app.shared.buttons.edit' | translate }}</a>
+          <a ng-click="deleteEvent(event)" class="fab-button is-alert no-b m-t-xs"><i class="fa fa-trash-o"></i></a>
 
       </section>
     </div>
@@ -250,7 +250,7 @@
             <span ng-show="reservations.length > 0" translate>{{ 'app.public.events_show.thanks_for_coming' }}</span>
             <a ui-sref="app.public.events_list" translate>{{ 'app.public.events_show.view_event_list' }}</a>
           </div>
-          <button class="btn btn-warning-full rounded btn-block text-sm" ng-click="reserveEvent()" ng-show="isShowReserveEventButton()">
+          <button class="fab-button is-secondary" ng-click="reserveEvent()" ng-show="isShowReserveEventButton()">
             <span ng-if="event.pre_registration">{{ 'app.public.events_show.pre_book' | translate }}</span>
             <span ng-if="!event.pre_registration">{{ 'app.public.events_show.book' | translate }}</span>
           </button>
@@ -266,11 +266,11 @@
       </div>
 
       <div class="panel-footer no-padder ng-scope" ng-if="!event.pre_registration && event.amount && reservationIsValid()">
-        <button class="btn btn-valid btn-info btn-block p-l btn-lg text-u-c r-b text-base" ng-click="payEvent()" ng-if="reserve.totalSeats > 0">{{ 'app.public.events_show.confirm_and_pay' | translate }} {{reserve.amountTotal | currency}}</button>
+        <button class="fab-button is-info button-full" ng-click="payEvent()" ng-if="reserve.totalSeats > 0">{{ 'app.public.events_show.confirm_and_pay' | translate }} {{reserve.amountTotal | currency}}</button>
       </div>
 
       <div class="panel-footer no-padder ng-scope" ng-if="(event.pre_registration || event.amount == 0) && reservationIsValid()">
-        <button class="btn btn-valid btn-info btn-block p-l btn-lg text-u-c r-b text-base" ng-click="validReserveEvent()" ng-if="reserve.totalSeats > 0" ng-disabled="attempting">{{ 'app.shared.buttons.confirm' | translate }}</button>
+        <button class="fab-button is-info button-full" ng-click="validReserveEvent()" ng-if="reserve.totalSeats > 0" ng-disabled="attempting">{{ 'app.shared.buttons.confirm' | translate }}</button>
       </div>
 
     </section>

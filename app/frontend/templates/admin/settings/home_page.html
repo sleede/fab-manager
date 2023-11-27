@@ -3,12 +3,12 @@
         <div class="row">
             <div class="col-md-12 home-page-content">
               <h4 translate>{{ 'app.admin.settings.customize_home_page' }}</h4>
-              <button class="btn btn-default pull-right m-t-n-xl reset-button" ng-click="resetHomePage()" title="{{ 'app.admin.settings.reset_home_page' | translate }}"><i class="fa fa-undo"></i></button>
+              <button class="fab-button pull-right m-t-n-xl reset-button" ng-click="resetHomePage()" title="{{ 'app.admin.settings.reset_home_page' | translate }}"><i class="fa fa-undo"></i></button>
               <summernote ng-model="homeContent.value"
                           id="home_content"
                           config="summernoteOptsHomePage">
               </summernote>
-              <button name="button" class="btn btn-warning" ng-click="save(homeContent)" translate>{{ 'app.shared.buttons.save' }}</button>
+              <button name="button" class="fab-button is-secondary" ng-click="save(homeContent)" translate>{{ 'app.shared.buttons.save' }}</button>
             </div>
         </div>
         <div class="row m-t-lg">
@@ -24,7 +24,7 @@
                      }'>
                 </div>
                 <span class="help-block text-info text-xs"><i class="fa fa-lightbulb-o"></i> {{ 'app.admin.settings.leave_it_empty_to_not_bring_up_any_news_on_the_home_page' | translate }}</span>
-                <button name="button" class="btn btn-warning" ng-click="save(homeBlogpostSetting)" translate>{{ 'app.shared.buttons.save' }}</button>
+                <button name="button" class="fab-button is-secondary" ng-click="save(homeBlogpostSetting)" translate>{{ 'app.shared.buttons.save' }}</button>
             </div>
             <div class="col-md-6">
                 <text-setting name="twitter_name"
@@ -64,7 +64,7 @@
                     <span translate>{{ 'app.admin.settings.home_css_notice_html' }}</span>
                   </p>
                 </uib-alert>
-                <button name="button" class="btn btn-warning" ng-click="save(homeCss)" translate>{{ 'app.shared.buttons.save' }}</button>
+                <button name="button" class="fab-button is-secondary" ng-click="save(homeCss)" translate>{{ 'app.shared.buttons.save' }}</button>
               </div>
             </uib-accordion-group>
           </uib-accordion>

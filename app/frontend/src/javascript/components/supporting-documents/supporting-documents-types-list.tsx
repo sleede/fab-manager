@@ -204,13 +204,13 @@ const SupportingDocumentsTypesList: React.FC<SupportingDocumentsTypesListProps> 
             <p>{t('app.admin.settings.account.supporting_documents_types_list.supporting_documents_type_info')}</p>
             <FabAlert level="warning">
               <HtmlTranslate trKey="app.admin.settings.account.supporting_documents_types_list.no_groups_info" />
-              <FabButton onClick={addGroup}>{t('app.admin.settings.account.supporting_documents_types_list.create_groups')}</FabButton>
+              <FabButton onClick={addGroup} className="is-secondary">{t('app.admin.settings.account.supporting_documents_types_list.create_groups')}</FabButton>
             </FabAlert>
           </div>
 
           <div className="title">
             <h3>{t('app.admin.settings.account.supporting_documents_types_list.supporting_documents_type_title')}</h3>
-            <FabButton onClick={addType}>{t('app.admin.settings.account.supporting_documents_types_list.add_type')}</FabButton>
+            <FabButton onClick={addType} className="is-secondary">{t('app.admin.settings.account.supporting_documents_types_list.add_type')}</FabButton>
           </div>
 
           <SupportingDocumentsTypeModal isOpen={modalIsOpen}
@@ -279,7 +279,7 @@ const SupportingDocumentsTypesList: React.FC<SupportingDocumentsTypesListProps> 
         <div className="types-list">
           <div className="title">
             <h3>{t('app.admin.settings.account.supporting_documents_types_list.supporting_documents_type_title')}</h3>
-            <FabButton onClick={addType}>{t('app.admin.settings.account.supporting_documents_types_list.add_type')}</FabButton>
+            <FabButton onClick={addType} className='is-secondary'>{t('app.admin.settings.account.supporting_documents_types_list.add_type')}</FabButton>
           </div>
 
           <SupportingDocumentsTypeModal isOpen={modalIsOpen}
