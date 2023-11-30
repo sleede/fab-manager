@@ -5,6 +5,7 @@
 - fix a bug: user was not able to reserve at the same time of an event with pre-registration invalidated
 - fix a bug: avoids crash if invoicing_profile has no address associated to it
 - improvement: better text contrast on customizable colors. Good for accessibility.
+- Improvement: set the number of new attempts available in case the payment is rejected to 1 for PayZen
 
 ## v6.3.4 2023 November 23
 
