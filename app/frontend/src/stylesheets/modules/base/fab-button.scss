@@ -1,9 +1,9 @@
 .fab-button {
   min-height: 38px;
-  margin-bottom: 0;
   padding: 6px 12px;
   display: inline-flex;
   align-items: center;
+  gap: 0 4px;
   border: 1px solid #c9c9c9;
   border-radius: 4px;
   background-color: #fbfbfb;
@@ -35,12 +35,11 @@
   }
 
 
-  &[disabled] {
-    color: #3a3a3a;
-  }
-
+  &[disabled],
   &[disabled]:hover {
-    color: #3a3a3a;
+    color: inherit;
+    opacity: 0.65;
+    cursor: not-allowed;
   }
 
   &--icon {
@@ -60,11 +59,14 @@
       border-color: $color;
       background-color: $color;
       color: $textColor;
-      opacity: 0.75;
+      opacity: 0.65;
     }
   }
   &.is-info {
     @include colorVariant(var(--information), var(--gray-soft-lightest));
+  }
+  &.is-alert {
+    @include colorVariant(var(--alert), var(--gray-soft-lightest));
   }
   &.is-secondary {
     @include colorVariant(var(--secondary), var(--secondary-text-color));
@@ -75,4 +77,25 @@
   &.is-main {
     @include colorVariant(var(--main), var(--main-text-color));
   }
+
+  // sizes
+  &.button-full {
+    width: 100%;
+    justify-content: center;
+  }
+
+  &.button-xs {
+    min-height: auto;
+    padding: 2px 4px;
+    font-size: 12px;
+  }
+  &.button-s {
+    min-height: auto;
+    padding: 4px 8px;
+    font-size: 14px;
+  }
+}
+
+label.fab-button {
+  margin-bottom: 0;
 }

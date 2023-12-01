@@ -18,10 +18,10 @@
 
   </div>
   <div class="m-t-sm m-b-sm text-center" ng-if="!isAuthenticated()" ng-show="publicRegistrations">
-    <button ng-click="signup($event)" class="btn btn-warning-full width-70 font-sbold rounded text-sm" translate>{{ 'app.public.home.create_an_account' }}</button>
+    <button ng-click="signup($event)" class="fab-button is-secondary" translate>{{ 'app.public.home.create_an_account' }}</button>
   </div>
 
   <div class="m-t-sm m-b-sm text-center" ng-if="isAuthenticated()">
-    <button ui-sref="app.logged.members" class="btn btn-warning-full width-70 font-sbold rounded text-sm" translate>{{ 'app.public.home.discover_members' }}</button>
+    <button ui-sref="app.logged.members" class="fab-button is-secondary" translate>{{ 'app.public.home.discover_members' }}</button>
   </div>
 </section>

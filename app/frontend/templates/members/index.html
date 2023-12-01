@@ -40,7 +40,7 @@
             <td>{{ member.email }}</td>
             <td>
               <div class="buttons">
-                <button class="btn btn-default" ui-sref="app.logged.members_show({id: member.slug})">
+                <button class="fab-button" ui-sref="app.logged.members_show({id: member.slug})">
                   <i class="fa fa-eye"></i> {{ 'app.shared.buttons.consult' | translate }}
                 </button>
               </div>
@@ -49,7 +49,7 @@
         </tbody>
       </table>
       <div class="text-center">
-        <button class="btn btn-warning" ng-click="showNextMembers()" ng-hide="noMoreResults"><i class="fa fa-search-plus" aria-hidden="true"></i> {{ 'app.logged.members.display_more_members' | translate }}</button>
+        <button class="fab-button is-secondary" ng-click="showNextMembers()" ng-hide="noMoreResults"><i class="fa fa-search-plus" aria-hidden="true"></i> {{ 'app.logged.members.display_more_members' | translate }}</button>
       </div>
       <p ng-if="members.length == 0" translate>{{ 'app.logged.members.no_members_for_now' }}</p>
     </div>

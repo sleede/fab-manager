@@ -1,4 +1,4 @@
-<button type="button" class="btn btn-warning m-t m-b" ng-click="addProjectCategory()" translate>{{ 'app.admin.projects.add_a_new_project_category' }}</button>
+<button type="button" class="fab-button is-secondary m-t m-b" ng-click="addProjectCategory()" translate>{{ 'app.admin.projects.add_a_new_project_category' }}</button>
 
 <table class="table">
   <thead>
@@ -16,18 +16,18 @@
     </td>
     <td>
       <form editable-form name="rowform" onbeforesave="saveProjectCategory($data, projectCategory.id)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == projectCategory">
-        <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-warning">
+        <button type="submit" ng-disabled="rowform.$waiting" class="fab-button is-secondary">
           <i class="fa fa-check"></i>
         </button>
-        <button type="button" ng-disabled="rowform.$waiting" ng-click="cancelProjectCategory(rowform, $index)" class="btn btn-default">
+        <button type="button" ng-disabled="rowform.$waiting" ng-click="cancelProjectCategory(rowform, $index)" class="fab-button">
           <i class="fa fa-times"></i>
         </button>
       </form>
       <div class="buttons" ng-show="!rowform.$visible">
-        <button class="btn btn-default" ng-click="rowform.$show()">
+        <button class="fab-button" ng-click="rowform.$show()">
           <i class="fa fa-edit"></i> <span class="hidden-xs hidden-sm" translate>{{ 'app.shared.buttons.edit' }}</span>
         </button>
-        <button class="btn btn-danger" ng-click="removeProjectCategory($index)">
+        <button class="fab-button is-alert" ng-click="removeProjectCategory($index)">
           <i class="fa fa-trash-o"></i>
         </button>
       </div>

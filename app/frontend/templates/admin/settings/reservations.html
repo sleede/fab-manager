@@ -11,14 +11,14 @@
                     <uib-timepicker ng-model="windowStart.value" hour-step="timepicker.hstep" minute-step="timepicker.mstep" show-meridian="false"></uib-timepicker>
                 </div>
                 <div class="col-md-4 m-t">
-                    <button name="button" class="btn btn-warning m-l" ng-click="save(windowStart)" translate>{{ 'app.shared.buttons.save' }}</button>
+                    <button name="button" class="fab-button is-secondary m-l" ng-click="save(windowStart)" translate>{{ 'app.shared.buttons.save' }}</button>
                 </div>
                 <div class="col-md-2">
                     <h4 translate>{{ 'app.admin.settings.closing_time' }}</h4>
                     <uib-timepicker ng-model="windowEnd.value" hour-step="timepicker.hstep" minute-step="timepicker.mstep" show-meridian="false"></uib-timepicker>
                 </div>
                 <div class="col-md-4 m-t">
-                    <button name="button" class="btn btn-warning m-l" ng-click="save(windowEnd)" translate>{{ 'app.shared.buttons.save' }}</button>
+                    <button name="button" class="fab-button is-secondary m-l" ng-click="save(windowEnd)" translate>{{ 'app.shared.buttons.save' }}</button>
                 </div>
             </div>
             <div class="section-separator"></div>
@@ -269,7 +269,7 @@
         <div class="row p-l p-r" ng-if="reservationContextFeature.value === 'true'">
             <h3 class="" translate>{{ 'app.admin.settings.reservation_context_options' }}</h3>
 
-            <button type="button" class="btn btn-warning m-b m-t" ng-click="addReservationContext()" translate>{{ 'app.admin.settings.add_a_reservation_context' }}</button>
+            <button type="button" class="fab-button is-secondary m-b m-t" ng-click="addReservationContext()" translate>{{ 'app.admin.settings.add_a_reservation_context' }}</button>
             <table class="table">
                 <thead>
                 <tr>
@@ -299,18 +299,18 @@
                     <td>
                     <!-- form -->
                     <form editable-form name="rowform" onbeforesave="saveReservationContext($data, reservationContext.id)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="newReservationContext == reservationContext">
-                        <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-warning">
+                        <button type="submit" ng-disabled="rowform.$waiting" class="fab-button is-secondary">
                         <i class="fa fa-check"></i>
                         </button>
-                        <button type="button" ng-disabled="rowform.$waiting" ng-click="cancelReservationContext(rowform, $index)" class="btn btn-default">
+                        <button type="button" ng-disabled="rowform.$waiting" ng-click="cancelReservationContext(rowform, $index)" class="fab-button">
                         <i class="fa fa-times"></i>
                         </button>
                     </form>
                     <div class="buttons" ng-show="!rowform.$visible">
-                        <button class="btn btn-default" ng-click="rowform.$show()">
+                        <button class="fab-button" ng-click="rowform.$show()">
                         <i class="fa fa-edit"></i> <span class="hidden-xs hidden-sm" translate>{{ 'app.shared.buttons.edit' }}</span>
                         </button>
-                        <button class="btn btn-danger" ng-click="removeReservationContext($index)">
+                        <button class="fab-button is-alert" ng-click="removeReservationContext($index)">
                         <i class="fa fa-trash-o"></i>
                         </button>
                     </div>
