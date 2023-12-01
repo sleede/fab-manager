@@ -21,14 +21,15 @@ class PayZen::Service < Payment::Service
       amount: payzen_amount(first_item.details['recurring'].to_i),
       effect_date: first_item.due_date.iso8601,
       payment_method_token: token_id,
-      rrule: rrule(payment_schedule),
+      rrule: rrule(payment_schedule, first_item.due_date),
       order_id: order_id
     }
     initial_amount = first_item.amount
     initial_amount -= payment_schedule.wallet_amount if payment_schedule.wallet_amount
     if initial_amount.zero?
-      params[:effect_date] = (first_item.due_date + 1.month).iso8601
-      params[:rrule] = rrule(payment_schedule, -1)
+      effect_date = first_item.due_date + 1.month
+      params[:effect_date] = effect_date.iso8601
+      params[:rrule] = rrule(payment_schedule, effect_date, -1)
     else
       params[:initial_amount] = payzen_amount(initial_amount)
       params[:initial_amount_number] = 1
@@ -92,8 +93,8 @@ class PayZen::Service < Payment::Service
       return
     end
     pz_order = payment_schedule_item.payment_schedule.gateway_order.retrieve
-    transaction = pz_order['answer']['transactions'].last
-    return unless transaction_matches?(transaction, payment_schedule_item)
+    transaction = find_transaction_by_payment_schedule_item(pz_order['answer']['transactions'], payment_schedule_item)
+    return unless transaction
 
     case transaction['status']
     when 'PAID'
@@ -127,27 +128,34 @@ class PayZen::Service < Payment::Service
     amount
   end
 
-  private
+  def rrule(payment_schedule, first_date, offset = 0)
+    count = payment_schedule.payment_schedule_items.count + offset
 
-  def rrule(payment_schedule, offset = 0)
-    count = payment_schedule.payment_schedule_items.count
-    "RRULE:FREQ=MONTHLY;COUNT=#{count + offset}"
-  end
-
-  # check if the given transaction matches the given PaymentScheduleItem
-  def transaction_matches?(transaction, payment_schedule_item)
-    transaction_date = Time.zone.parse(transaction['creationDate']).to_date
-
-    amount = payment_schedule_item.amount
-    if payment_schedule_item == payment_schedule_item.payment_schedule.ordered_items.first &&
-       payment_schedule_item.payment_schedule.wallet_amount
-      amount -= payment_schedule_item.payment_schedule.wallet_amount
+    by_month_day_part = case first_date.day
+    when 31
+      "BYMONTHDAY=28,29,30,31;BYSETPOS=-1"
+    when 30
+      "BYMONTHDAY=28,29,30;BYSETPOS=-1"
+    when 29
+      "BYMONTHDAY=28,29;BYSETPOS=-1"
+    else
+      "BYMONTHDAY=#{first_date.day}"
     end
 
-    transaction['amount'] == amount &&
-      transaction_date >= payment_schedule_item.due_date.to_date &&
-      transaction_date <= payment_schedule_item.due_date.to_date + 7.days
+    "RRULE:FREQ=MONTHLY;#{by_month_day_part};COUNT=#{count}"
   end
+
+  def find_transaction_by_payment_schedule_item(transactions, payment_schedule_item)
+    due_date = payment_schedule_item.due_date.to_date
+
+    transactions.find do |tr|
+      expected_capture_date = Time.zone.parse(tr["transactionDetails"]["paymentMethodDetails"]["expectedCaptureDate"]).to_date
+
+      (tr["operationType"] == "DEBIT") && (expected_capture_date.between?(due_date - 1.day, due_date + 1.day))
+    end
+  end
+
+  private
 
   # @see https://payzen.io/en-EN/payment-file/ips/list-of-supported-currencies.html
   def zero_decimal_currencies
