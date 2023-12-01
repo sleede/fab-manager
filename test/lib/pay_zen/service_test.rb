@@ -74,5 +74,9 @@ class PayZen::ServiceTest < ActiveSupport::TestCase
     transactions = [format_transaction(operation_type: "CREDIT", expected_capture_date: expected_capture_date)]
 
     assert_nil @service.find_transaction_by_payment_schedule_item(transactions, payment_schedule_item)
+
+    transactions = [format_transaction(operation_type: "VERIFICATION", expected_capture_date: nil)]
+
+    assert_nil @service.find_transaction_by_payment_schedule_item(transactions, payment_schedule_item)
   end
 end

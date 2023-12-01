@@ -149,9 +149,10 @@ class PayZen::Service < Payment::Service
     due_date = payment_schedule_item.due_date.to_date
 
     transactions.find do |tr|
-      expected_capture_date = Time.zone.parse(tr["transactionDetails"]["paymentMethodDetails"]["expectedCaptureDate"]).to_date
+      next unless tr["operationType"] == "DEBIT"
 
-      (tr["operationType"] == "DEBIT") && (expected_capture_date.between?(due_date - 1.day, due_date + 1.day))
+      expected_capture_date = Time.zone.parse(tr["transactionDetails"]["paymentMethodDetails"]["expectedCaptureDate"]).to_date
+      expected_capture_date.between?(due_date - 1.day, due_date + 1.day)
     end
   end
 
