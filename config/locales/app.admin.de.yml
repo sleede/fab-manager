@@ -247,6 +247,7 @@ de:
         first_name: "Vorname"
         surname: "Nachname"
         email: "Email address"
+        field_is_required: "This field is required"
       plan_pricing_form:
         prices: "Preise"
         about_prices: "The prices defined here will apply to members subscribing to this plan, for machines and spaces. All prices are per hour."
