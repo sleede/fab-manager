@@ -13,7 +13,7 @@ describe('EventForm', () => {
     render(<EventForm action="create" onError={onError} onSuccess={onSuccess} />);
     await waitFor(() => screen.getByRole('combobox', { name: /app.admin.event_form.event_category/ }));
     expect(screen.getByLabelText(/app.admin.event_form.title/)).toBeInTheDocument();
-    expect(screen.getByLabelText(/app.admin.event_form.matching_visual/)).toBeInTheDocument();
+    expect(screen.getByLabelText(/app.admin.event_form.illustration/)).toBeInTheDocument();
     expect(screen.getByLabelText(/app.admin.event_form.description/)).toBeInTheDocument();
     expect(screen.getByLabelText(/app.admin.event_form.event_type/)).toBeInTheDocument();
     expect(screen.getByLabelText(/app.admin.event_form.event_category/)).toBeInTheDocument();
