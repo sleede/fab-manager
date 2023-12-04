@@ -30,11 +30,11 @@
             </div>
             <span class="help-block text-sm" translate>{{ 'app.shared.project.illustration_recommendation' }}</span>
             <div>
-              <span class="btn btn-default btn-file"><span class="fileinput-new">{{ 'app.shared.project.add_an_illustration' | translate }} <i class="fa fa-upload fa-fw"></i></span><span class="fileinput-exists" translate>{{ 'app.shared.buttons.change' }}</span>
+              <span class="fab-button btn-file"><span class="fileinput-new">{{ 'app.shared.project.add_an_illustration' | translate }} <i class="fa fa-upload fa-fw"></i></span><span class="fileinput-exists" translate>{{ 'app.shared.buttons.change' }}</span>
                 <input type="file"
                        name="project[project_image_attributes][attachment]"
                        accept="image/jpeg,image/gif,image/png"></span>
-              <a class="btn btn-danger fileinput-exists" data-dismiss="fileinput" translate>{{ 'app.shared.buttons.delete' }}</a>
+              <a class="fab-button is-alert fileinput-exists" data-dismiss="fileinput" translate>{{ 'app.shared.buttons.delete' }}</a>
             </div>
           </div>
         </div>
@@ -64,7 +64,7 @@
               <i class="fa fa-info-circle" aria-hidden="true" uib-tooltip="{{ 'app.shared.project.allowed_extensions' | translate }} {{allowedExtensions.join(', ')}}" tooltip-placement="bottom" tooltip-class="media-lg"></i>
             </div>
           </div>
-          <a class="btn btn-default" ng-click="addFile()" role="button">{{ 'app.shared.project.add_a_new_file' | translate }} <i class="fa fa-file-o fa-fw"></i></a>
+          <a class="fab-button" ng-click="addFile()" role="button">{{ 'app.shared.project.add_a_new_file' | translate }} <i class="fa fa-file-o fa-fw"></i></a>
         </div>
       </div>
 
@@ -84,7 +84,7 @@
           <div ng-repeat="step in project.project_steps_attributes | orderBy:'step_nb'" ng-hide="step._destroy">
             <div class="m-t-xs m-b-lg">
               <div class="btn-group" uib-dropdown is-open="status.isopen">
-                <button id="single-button" type="button" class="btn btn-warning" uib-dropdown-toggle>
+                <button id="single-button" type="button" class="fab-button is-secondary" uib-dropdown-toggle>
                   {{ 'app.shared.project.step_N' | translate:{ INDEX:step.step_nb } }}/{{totalSteps}} <i class="fa fa-caret-down" aria-hidden="true"></i>
                 </button>
                 <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
@@ -119,26 +119,26 @@
                       <img ng-src="{{ image.attachment_url }}" alt="{{image.attachment}}" />
                     </div>
                     <div>
-                      <span class="btn btn-default btn-file"><span class="fileinput-new">{{ 'app.shared.buttons.browse' | translate }} <i class="fa fa-upload fa-fw"></i></span><span class="fileinput-exists" translate>{{ 'app.shared.buttons.change' }}</span>
+                      <span class="fab-button btn-file"><span class="fileinput-new">{{ 'app.shared.buttons.browse' | translate }} <i class="fa fa-upload fa-fw"></i></span><span class="fileinput-exists" translate>{{ 'app.shared.buttons.change' }}</span>
                         <input type="file"
                                name="project[project_steps_attributes][][project_step_images_attributes][][attachment]"
                                accept="image/jpeg,image/gif,image/png">
                       </span>
-                      <a class="btn btn-danger fileinput-exists" data-dismiss="fileinput" ng-click="deleteProjectStepImage(step, image)" translate>{{ 'app.shared.buttons.delete' }}</a>
+                      <a class="fab-button is-alert fileinput-exists" data-dismiss="fileinput" ng-click="deleteProjectStepImage(step, image)" translate>{{ 'app.shared.buttons.delete' }}</a>
                     </div>
                   </div>
                 </div>
               </div>
               <div>
-                <a class="btn btn-default" ng-click="addProjectStepImage(step)" role="button">{{ 'app.shared.project.add_a_picture' | translate }} <i class="fa fa-file-o fa-fw"></i></a>
+                <a class="fab-button" ng-click="addProjectStepImage(step)" role="button">{{ 'app.shared.project.add_a_picture' | translate }} <i class="fa fa-file-o fa-fw"></i></a>
               </div>
 
               <div class="m-t">
-                <a class="btn btn-sm btn-danger" ng-click="deleteStep(step)" role="button"><i class="fa fa-trash-o m-r-xs"></i> {{ 'app.shared.project.delete_the_step' | translate }}</a>
+                <a class="fab-button is-alert" ng-click="deleteStep(step)" role="button"><i class="fa fa-trash-o m-r-xs"></i> {{ 'app.shared.project.delete_the_step' | translate }}</a>
               </div>
             </div>
           </div>
-          <a class="btn btn-default m-b" ng-click="addStep()" role="button">
+          <a class="fab-button m-b" ng-click="addStep()" role="button">
             <i class="fa fa-plus m-r-sm" aria-hidden="true"></i>
             <span translate>{{ 'app.shared.project.add_a_new_step' }}</span></a>
         </div>
@@ -149,12 +149,12 @@
     </div>   <!-- ./panel-body  -->
     <div class="panel-footer no-padder">
       <div ng-show="project.state != 'published'">
-        <div class="btn btn-lg btn-block btn-valid btn-success text-u-c r-n" publish-project ng-disabled="projectForm.$invalid" translate>{{ 'app.shared.project.publish_your_project' }}</div>
+        <div class="fab-button is-info button-full" publish-project ng-disabled="projectForm.$invalid" translate>{{ 'app.shared.project.publish_your_project' }}</div>
         <div class="text-center font-bold text-u-c" translate>{{ 'app.shared.project.or' }}</div>
       </div>
       <input type="submit"
              ng-value="saveButtonValue()"
-             class="r-b btn-valid btn btn-warning btn-block p-lg btn-lg text-u-c"
+             class="fab-button is-secondary button-full"
              ng-disabled="projectForm.$invalid"/>
     </div>
     </section>

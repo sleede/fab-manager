@@ -30,7 +30,10 @@ class PayZen::Charge < PayZen::Client
          orderId: order_id,
          formAction: form_action,
          contrib: contrib,
-         customer: customer)
+         customer: customer,
+         transactionOptions: {
+           cardOptions: { retry: 0 }
+         })
   end
 
   ##

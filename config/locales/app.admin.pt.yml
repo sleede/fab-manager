@@ -247,6 +247,7 @@ pt:
         first_name: "Primeiro nome"
         surname: "Último Nome"
         email: "Endereço de e-mail"
+        field_is_required: "This field is required"
       plan_pricing_form:
         prices: "Preços"
         about_prices: "The prices defined here will apply to members subscribing to this plan, for machines and spaces. All prices are per hour."

@@ -1,7 +1,6 @@
 <div class="m-t-lg m-b">
-  <button type="button" class="btn btn-warning" ng-click="addGroup()">
-    <i class="fa fa-plus m-r"></i>
-    <span translate>{{ 'app.admin.members.group_form.add_a_group' }}</span>
+  <button type="button" class="fab-button is-secondary" ng-click="addGroup()" translate>
+    {{ 'app.admin.members.group_form.add_a_group' }}
   </button>
   <div class="form-group pull-right">
     <div class="input-group">
@@ -30,10 +29,10 @@
         <td>
             <!-- form -->
             <form editable-form name="rowform" onbeforesave="saveGroup($data, group.id)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == group">
-                <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-warning">
+                <button type="submit" ng-disabled="rowform.$waiting" class="fab-button is-secondary">
                     <i class="fa fa-check"></i>
                 </button>
-                <button type="button" ng-disabled="rowform.$waiting" ng-click="cancelGroup(rowform, $index)" class="btn btn-default">
+                <button type="button" ng-disabled="rowform.$waiting" ng-click="cancelGroup(rowform, $index)" class="fab-button">
                     <i class="fa fa-times"></i>
                 </button>
             </form>

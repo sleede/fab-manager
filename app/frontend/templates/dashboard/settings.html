@@ -31,7 +31,7 @@
               </uib-alert>
 
             </div>
-            <div ng-show="!user.subscribed_plan.name">{{ 'app.logged.dashboard.settings.no_subscriptions' | translate }} <br><a class="btn text-black btn-warning-full btn-sm m-t-xs" ui-sref="app.public.plans" translate>{{ 'app.logged.dashboard.settings.i_want_to_subscribe' }}</a></div>
+            <div ng-show="!user.subscribed_plan.name">{{ 'app.logged.dashboard.settings.no_subscriptions' | translate }} <br><a class="fab-button is-secondary button-s m-t-xs" ui-sref="app.public.plans" translate>{{ 'app.logged.dashboard.settings.i_want_to_subscribe' }}</a></div>
           </div>
 
           <div class="m-t">
@@ -70,10 +70,10 @@
           <div ng-show="cookiesStatus === 'accept'" translate>{{ 'app.logged.dashboard.settings.cookies_accepted' }}</div>
           <div ng-show="cookiesStatus === 'decline'" translate>{{ 'app.logged.dashboard.settings.cookies_declined' }}</div>
           <div ng-hide="cookiesStatus" translate>{{ 'app.logged.dashboard.settings.cookies_unset' }}</div>
-          <button ng-click="resetCookies()" ng-show="cookiesStatus" class="btn text-black btn-warning-full btn-sm m-t-xs" translate>{{ 'app.logged.dashboard.settings.reset_cookies' }}</button>
+          <button ng-click="resetCookies()" ng-show="cookiesStatus" class="fab-button is-secondary button-s m-t-xs" translate>{{ 'app.logged.dashboard.settings.reset_cookies' }}</button>
         </div>
         <div class="widget-content no-bg text-center auto wrapper" ng-hide="isAdminSys">
-          <button class="btn text-white btn-danger btn-sm" ng-click="deleteUser(user)"><i class="fa fa-warning m-r-xs"></i> {{ 'app.logged.dashboard.settings.delete_my_account' | translate }}</button>
+          <button class="fab-button is-alert button-s" ng-click="deleteUser(user)"><i class="fa fa-warning m-r-xs"></i> {{ 'app.logged.dashboard.settings.delete_my_account' | translate }}</button>
         </div>
       </div>
 
@@ -94,13 +94,13 @@
                   </div>
                   <div class="panel-body row">
                       <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                          <a class="btn btn-default" ng-href="{{activeProvider.link_to_sso_profile}}" target="_blank">
+                          <a class="fab-button" ng-href="{{activeProvider.link_to_sso_profile}}" target="_blank">
                               <i class="fa fa-edit"></i> {{ 'app.logged.dashboard.settings.change_my_data' | translate }}
                           </a>
                           <p>{{ 'app.logged.dashboard.settings.once_your_data_are_up_to_date_' | translate }} <strong translate>{{ 'app.logged.dashboard.settings._click_on_the_synchronization_button_opposite_' }}</strong>  {{ 'app.logged.dashboard.settings.or' | translate}} <strong translate>{{ 'app.logged.dashboard.settings._disconnect_then_reconnect_' }}</strong> {{ 'app.logged.dashboard.settings._for_your_changes_to_take_effect' | translate }}</p>
                       </div>
                       <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                          <a class="btn btn-default" ng-click="syncProfile()">
+                          <a class="fab-button" ng-click="syncProfile()">
                               <i class="fa fa-refresh"></i> {{ 'app.logged.dashboard.settings.sync_my_profile' | translate }}
                           </a>
                       </div>

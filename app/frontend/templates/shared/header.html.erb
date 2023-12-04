@@ -15,11 +15,11 @@
   <ul class="nav navbar-nav hidden-xs">
     <li class="about-page-link">
       <a href class="about-link font-sbold text-sm" ui-sref="app.public.about" ng-show="!aboutPage">
-        <span class="label label-theme rounded text-lg text-white m-r-sm font-ebold">?</span>
+        <span class="label label-theme label-icon rounded text-lg m-r-sm font-ebold">?</span>
           {{ linkName }}
       </a>
       <a href class="about-link font-sbold text-sm" ui-sref="app.public.home" ng-show="aboutPage">
-        <span class="label label-theme label-icon rounded text-lg text-white m-r-sm font-ebold"><i class="fa fa-caret-up" ng-show="aboutPage"></i></span>
+        <span class="label label-theme label-icon rounded text-lg m-r-sm font-ebold"><i class="fa fa-caret-up" ng-show="aboutPage"></i></span>
           {{ 'app.public.common.return' | translate }}
       </a>
     </li>

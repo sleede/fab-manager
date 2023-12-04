@@ -57,7 +57,7 @@
         </div>
       </div>
       <div ng-hide="slot.plan_ids.length > 0 && slot.plansGrouped.length === 0">
-        <button class="btn btn-valid btn-warning btn-block text-u-c r-b" ng-click="validateSlot(slot)" ng-if="!slot.isValid" translate>{{ 'app.shared.cart.confirm_this_slot' }}</button>
+        <button class="fab-button is-secondary button-full upper" ng-click="validateSlot(slot)" ng-if="!slot.isValid" translate>{{ 'app.shared.cart.confirm_this_slot' }}</button>
       </div>
 
       <div class="clear"><a class="pull-right m-b-sm text-u-l ng-scope m-r-sm pointer" ng-click="removeSlot(slot, $index, $event)" ng-if="slot.isValid" translate>{{ 'app.shared.cart.remove_this_slot' }}</a></div>
@@ -68,7 +68,7 @@
     <div ng-show="$root.modules.plans && isUserValidatedByType('subscription')">
       <div ng-if="isSlotsValid() && !user.subscribed_plan" ng-show="!modePlans">
         <p class="font-sbold text-base l-h-2x" translate>{{ 'app.shared.cart.to_benefit_from_attractive_prices' }}</p>
-        <div><button class="btn btn-warning-full rounded btn-block text-xs" ng-click="showPlans()" translate>{{ 'app.shared.cart.view_our_subscriptions' }}</button></div>
+        <div><button class="fab-button is-secondary button-full button-s" ng-click="showPlans()" translate>{{ 'app.shared.cart.view_our_subscriptions' }}</button></div>
         <p class="font-bold text-base text-u-c text-center m-b-xs" translate>{{ 'app.shared.cart.or' }}</p>
       </div>
 
@@ -103,7 +103,7 @@
   </div>
 
   <div class="widget-footer no-padder" ng-if="events.reserved.length > 0 || (selectedPlan && !events.reserved)">
-    <button class="btn btn-valid btn-info btn-block p-l btn-lg text-u-c r-b text-base" ng-click="payCart()" ng-if="isSlotsValid() && (!modePlans || selectedPlan)">{{ 'app.shared.cart.confirm_and_pay' | translate }} {{amountTotal | currency}}</button>
+    <button class="fab-button is-info button-full upper" ng-click="payCart()" ng-if="isSlotsValid() && (!modePlans || selectedPlan)">{{ 'app.shared.cart.confirm_and_pay' | translate }} {{amountTotal | currency}}</button>
   </div>
 
   <div class="widget-content no-bg auto wrapper" ng-show="events.paid && events.paid.length > 0">
