@@ -247,6 +247,7 @@ es:
         first_name: "Nombre"
         surname: "Apellido"
         email: "Dirección de email"
+        field_is_required: "Este campo es requerido"
       plan_pricing_form:
         prices: "Precios"
         about_prices: "Los precios aquí definidos se aplicarán a los miembros suscritos a este plan, para máquinas y espacios. Todos los precios son por hora."

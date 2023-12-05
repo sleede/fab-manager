@@ -247,6 +247,7 @@ fr:
         first_name: "Prénom"
         surname: "Nom"
         email: "Adresse électronique"
+        field_is_required: "Ce champ est obligatoire"
       plan_pricing_form:
         prices: "Tarifs"
         about_prices: "Les prix définis ici s'appliqueront aux membres qui s'abonneront à cette formule d'abonnement, pour les machines et les espaces."

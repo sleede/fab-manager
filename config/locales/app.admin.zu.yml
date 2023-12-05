@@ -247,6 +247,7 @@ zu:
         first_name: "crwdns31965:0crwdne31965:0"
         surname: "crwdns31967:0crwdne31967:0"
         email: "crwdns31969:0crwdne31969:0"
+        field_is_required: "crwdns38134:0crwdne38134:0"
       plan_pricing_form:
         prices: "crwdns31971:0crwdne31971:0"
         about_prices: "crwdns37465:0crwdne37465:0"
