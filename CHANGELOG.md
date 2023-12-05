@@ -2,6 +2,9 @@
 
 ## next release
 
+
+## v6.3.5 2023 December 4
+
 - fix a bug: user was not able to reserve at the same time of an event with pre-registration invalidated
 - fix a bug: avoids crash if invoicing_profile has no address associated to it
 - improvement: improves how pay_zen transactions are matched with payment_schedule_items
