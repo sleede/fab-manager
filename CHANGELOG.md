@@ -2,6 +2,7 @@
 
 ## next release
 
+- fix a bug: fix event service
 
 ## v6.3.5 2023 December 4
 
