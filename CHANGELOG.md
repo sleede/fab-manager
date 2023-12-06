@@ -1,7 +1,9 @@
 # Changelog Fab-manager
 
-## next release
+## v6.3.6 2023 December 6
 
+- fix a bug: fix event service
+- updates translations
 
 ## v6.3.5 2023 December 4
 
