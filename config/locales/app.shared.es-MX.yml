@@ -66,7 +66,7 @@ es-MX:
         profile_data: "Perfil"
         preferences_data: "Preferencias"
         declare_organization: "Declaro ser una organización"
-        declare_organization_help: "Si declara ser una organización, sus facturas se emitirán a nombre de la organización."
+        declare_organization_help: "Si declara ser una organización, sus recibos se emitirán a nombre de la organización."
         pseudonym: "Apodo"
         external_id: "Identificador externo"
         first_name: "Nombre"
@@ -238,9 +238,9 @@ es-MX:
         credit_title: 'Crédito de la cartera'
         credit_label: 'Selecciona la cantidad a creditar'
         confirm_credit_label: 'Confirma la cantidad a creditar'
-        generate_a_refund_invoice: "Generar informe de devolución"
+        generate_a_refund_invoice: "Generar recibo de reembolso"
         description_optional: "Descripción (opcional):"
-        will_appear_on_the_refund_invoice: "Aparecerá en el informe de devolución."
+        will_appear_on_the_refund_invoice: "Aparecerá en el recibo de reembolso."
         to_credit: 'Credito'
         wallet_credit_successfully: "La cartera del usuario ha sido acreditada con éxito."
         a_problem_occurred_for_wallet_credit: "Ocurrió un problema mientras se acreditaba la cartera."
@@ -335,7 +335,7 @@ es-MX:
         you_have_settled_a_: "Ha establecido una"
         total_: "TOTAL:"
         thank_you_your_payment_has_been_successfully_registered: "Gracias. Su pago se ha registrado con éxito."
-        your_invoice_will_be_available_soon_from_your_: "Su factura pronto estará disponible"
+        your_invoice_will_be_available_soon_from_your_: "Su recibo pronto estará disponible"
         dashboard: "Panel"
         i_want_to_change_the_following_reservation: "Deseo cambiar la siguiente reserva:"
         cancel_my_modification: "Cancelar modificación"
@@ -429,9 +429,9 @@ es-MX:
         please_ask_reception: "Para cualquier duda, póngase en contacto con la recepción."
         confirm_button: "Confirmar"
         confirm_check_cashing: "Confirmar el cobro del cheque"
-        confirm_check_cashing_body: "Debe cobrar un cheque de {AMOUNT} para la fecha límite de {DATE}. Al confirmar el cobro del cheque, se generará una factura para este vencimiento."
+        confirm_check_cashing_body: "Debe cobrar un cheque de {AMOUNT} para la fecha límite de {DATE}. Al confirmar el cobro del cheque, se generará un recibo para este vencimiento."
         confirm_bank_transfer: "Confirmar la transferencia bancaria"
-        confirm_bank_transfer_body: "Debe confirmar la recepción de {AMOUNT} para la fecha límite de {DATE}. Al confirmar la transferencia bancaria, se generará una factura para esta fecha límite."
+        confirm_bank_transfer_body: "Debe confirmar la recepción de {AMOUNT} para la fecha límite de {DATE}. Al confirmar la transferencia bancaria, se generará un recibo para esta fecha límite."
         confirm_cancel_subscription: "Está a punto de cancelar este plan de pagos y la suscripción relacionada. ¿Está seguro?"
       card_payment_modal:
         online_payment_disabled: "El pago en línea no está disponible. Póngase en contacto directamente con la recepción de FabLab."
@@ -474,7 +474,7 @@ es-MX:
             delivered: "Entregado"
         show_order:
           back_to_list: "Volver a la lista"
-          see_invoice: "Ver factura"
+          see_invoice: "Ver recibo"
           tracking: "Seguimiento de pedidos"
           client: "Cliente"
           created_at: "Fecha de creación"
@@ -528,7 +528,7 @@ es-MX:
           order_delivered_success: "Pedido entregado"
           confirm_order_canceled_html: "<strong>¿Realmente desea cancelar este pedido?</strong><p>Si esto afecta al stock, por favor refleje el cambio en <em>editar producto &gt; gestión de stock</em>. Esto no será automático.</p>"
           order_canceled_success: "Pedido cancelado"
-          confirm_order_refunded_html: "<strong>¿Realmente desea reembolsar este pedido?</strong><p>Si es así, reembolse al cliente y genere la nota de crédito desde la pestaña <em>facturas</em>.</p><p>Si esto afecta a las existencias, edite su producto y refleje el cambio en la pestaña de <em>gestión de existencias</em>.</p><p>Estas acciones no serán automáticas.</p>"
+          confirm_order_refunded_html: "<strong>¿Realmente desea reembolsar este pedido?</strong><p>Si es así, reembolse al cliente y genere la nota de crédito desde la pestaña <em>recibos</em>.</p><p>Si esto afecta a las existencias, edite su producto y refleje el cambio en la pestaña de <em>gestión de existencias</em>.</p><p>Estas acciones no serán automáticas.</p>"
           order_refunded_success: "Pedido reembolsado"
       unsaved_form_alert:
         modal_title: "Tienes algunos cambios sin guardar"
