@@ -123,10 +123,10 @@ es-MX:
       body:
         plan_subscribed_html: "Un plan de suscripción <strong><em>%{PLAN}</em></strong> ha sido adquirido por el usuario <strong><em>%{NAME}</strong></em>."
     notify_member_invoice_ready:
-      subject: "La factura de su FabLab"
+      subject: "El recibo de su FabLab"
       body:
-        please_find_attached_html: "Adjuntamos su facturación de {DATE}, por importe de {AMOUNT} relativa a su {TYPE, select, Reservation{reserva} OrderItem{pedido} other{suscripción}}." #messageFormat interpolation
-        invoice_in_your_dashboard_html: "Puede acceder a su factura en %{DASHBOARD} en la web del FabLab."
+        please_find_attached_html: "Adjuntamos su recibo de {DATE}, por importe de {AMOUNT} relativa a su {TYPE, select, Reservation{reserva} OrderItem{pedido} other{suscripción}}." #messageFormat interpolation
+        invoice_in_your_dashboard_html: "Puede acceder a su recibo en %{DASHBOARD} en la web del FabLab."
         your_dashboard: "Su Panel"
     notify_member_reservation_reminder:
       subject: "Recordatorio de reserva"
@@ -134,10 +134,10 @@ es-MX:
         this_is_a_reminder_about_your_reservation_RESERVABLE_to_be_held_on_DATE_html: "Este es un recordatorio sobre su reserva <strong>%{RESERVABLE}</strong> a realizarse en <em>%{DATE}</em>"
         this_reservation_concerns_the_following_slots: "Esta reserva involucra los siguientes espacios:"
     notify_member_avoir_ready:
-      subject: "Su factura de reembolso de FabLab"
+      subject: "Su recibo de reembolso de FabLab"
       body:
-        please_find_attached_html: "Por favor, encuentre como archivo adjunto su factura de reembolso de {DATE}, con una cantidad de {AMOUNT} referente a su {TYPE, select, Reservation{reservation} WalletTransaction{wallet credit} other{subscription}}." #messageFormat interpolation
-        invoice_in_your_dashboard_html: "Puede acceder a su factura en %{DASHBOARD} en la web del FabLab."
+        please_find_attached_html: "Por favor, encuentre como archivo adjunto su recibo de reembolso de {DATE}, con una cantidad de {AMOUNT} referente a su {TYPE, select, Reservation{reservation} WalletTransaction{wallet credit} other{subscription}}." #messageFormat interpolation
+        invoice_in_your_dashboard_html: "Puede acceder a su recibo en %{DASHBOARD} en la web del FabLab."
         your_dashboard: "Su panel"
     notify_member_subscription_will_expire_in_7_days:
       subject: "Su suscripción expira en 7 dias"
@@ -314,9 +314,9 @@ es-MX:
     notify_admin_refund_created:
       subject: "Se ha generado un reembolso"
       body:
-        refund_created: "Se ha generado un reembolso de %{AMOUNT} en la factura %{INVOICE} del usuario %{USER}"
+        refund_created: "Se ha generado un reembolso de %{AMOUNT} en el recibo %{INVOICE} del usuario %{USER}"
         wallet_refund_created: "Se ha generado un reembolso de %{AMOUNT} en el monedero del usuario %{USER}"
-        download: "Haga clic aquí para descargar la factura de reembolso"
+        download: "Haga clic aquí para descargar el recibo de reembolso"
     notify_admins_role_update:
       subject: "El rol de un usuario ha cambiado"
       body:
@@ -382,13 +382,13 @@ es-MX:
       body:
         remember: "De acuerdo con el calendario de pagos de %{REFERENCE}, %{AMOUNT} debía cargarse el %{DATE}."
         date: "Se trata de un recordatorio para que cobre el cheque programado lo antes posible."
-        confirm: "No olvide confirmar el recibo en la interfaz de gestión de su calendario de pago, para que se genere la factura correspondiente."
+        confirm: "No olvide confirmar el cobro en la interfaz de gestión de su calendario de pago, para que se genere el recibo correspondiente."
     notify_member_payment_schedule_transfer_deadline:
       subject: "Fecha límite de pago"
       body:
         remember: "De acuerdo con su calendario de pagos de %{REFERENCE}, %{AMOUNT} debía cargarse el %{DATE}."
         date: "Se trata de un recordatorio para verificar que la domiciliación bancaria se ha realizado correctamente."
-        confirm: "Por favor, confirme la recepción de fondos en su interfaz de gestión del calendario de pagos, para que se genere la factura correspondiente."
+        confirm: "Por favor, confirme el cobro en su interfaz de gestión del calendario de pagos, para que se genere el recibo correspondiente."
     notify_member_reservation_limit_reached:
       subject: "Límite diario de reservas alcanzado"
       body:
