@@ -1,5 +1,8 @@
 # Changelog Fab-manager
 
+- Fix a bug: unable to show wallet payment mean for invoice
+- [TODO DEPLOY] `rails fablab:setup:build_accounting_lines`
+
 ## v6.3.6 2023 December 6
 
 - fix a bug: fix event service
