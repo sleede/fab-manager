@@ -2,6 +2,7 @@
 
 - Fix a bug: unable to show wallet payment mean for invoice
 - improvement: remove show_username_in_admin_list setting
+- improvement: show invoice payment method in accounting line
 - [TODO DEPLOY] `rails fablab:setup:build_accounting_lines`
 
 ## v6.3.6 2023 December 6
