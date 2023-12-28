@@ -16,9 +16,11 @@ class PayZen::Service < Payment::Service
     order = PayZen::Order.new.get(order_id, operation_type: 'VERIFICATION')
     client = PayZen::Charge.new
     token_id = order['answer']['transactions'].first['paymentMethodToken']
+    coupon = payment_schedule.coupon
+    amount = coupon && coupon.validity_per_user == 'forever' ? first_item.amount : first_item.details['recurring'].to_i
 
     params = {
-      amount: payzen_amount(first_item.details['recurring'].to_i),
+      amount: payzen_amount(amount),
       effect_date: first_item.due_date.iso8601,
       payment_method_token: token_id,
       rrule: rrule(payment_schedule, first_item.due_date),
