@@ -396,8 +396,13 @@
     vertical-align: bottom;
 
     &.label-icon {
+      width: 2.8rem;
+      height: 2.8rem;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
       font-size: rem-calc(22);
-      padding: 4px 9px 1px 10px;
+      color: var(--main-text-color);
     }
   }
 }
@@ -701,4 +706,8 @@ input[type=date].form-control {
   p {
     margin-bottom: 0;
   }
+}
+
+.medium-editor-anchor-preview a:hover {
+  color: #ffffff;
 }

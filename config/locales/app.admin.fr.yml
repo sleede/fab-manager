@@ -247,6 +247,7 @@ fr:
         first_name: "Prénom"
         surname: "Nom"
         email: "Adresse électronique"
+        field_is_required: "Ce champ est obligatoire"
       plan_pricing_form:
         prices: "Tarifs"
         about_prices: "Les prix définis ici s'appliqueront aux membres qui s'abonneront à cette formule d'abonnement, pour les machines et les espaces."
@@ -1858,7 +1859,6 @@ fr:
         extended_prices_info_html: "Les espaces peuvent avoir des prix différents selon la durée cumulée de la réservation. Vous pouvez choisir si cela s'applique à toutes les réservations ou seulement à celles qui commencent dans la même journée."
         extended_prices_in_same_day: "Prix étendus le même jour"
         public_registrations: "Inscriptions publiques"
-        show_username_in_admin_list: "Afficher le nom d'utilisateur dans la liste"
         projects_list_member_filter_presence: "Permettre la recherche de projets par membre"
         projects_list_date_filters_presence: "Permettre la recherche de projets par dates"
         project_categories_filter_placeholder: "Dans la galerie de projets, renommer le filtre \"Toutes les catégories\""

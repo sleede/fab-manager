@@ -22,7 +22,7 @@ class CouponTest < ActiveSupport::TestCase
   end
 
   test 'two coupons cannot have the same code' do
-    c = Coupon.new({ name: 'Summer deals', code: 'SUNNYFABLAB', percent_off: 15, validity_per_user: 'always' })
+    c = Coupon.new({ name: 'Summer deals', code: 'SUNNYFABLAB', percent_off: 15, validity_per_user: 'forever' })
     assert c.invalid?
   end
 

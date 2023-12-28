@@ -165,9 +165,6 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
 
     if ($scope.enableUserValidationRequired) { $scope.member.memberFilters.push('not_validated'); }
 
-    // should we display the username in the list?
-    $scope.displayUsername = (settingsPromise.show_username_in_admin_list === 'true');
-
     // Admins ordering/sorting. Default: not sorted
     $scope.orderAdmin = null;
 

@@ -146,10 +146,9 @@ class PaymentScheduleService
       )
     end
     unless filters[:date].nil?
-      ps = ps.where(
-        "date_trunc('day', payment_schedules.created_at) = :search OR date_trunc('day', payment_schedule_items.due_date) = :search",
-        search: "%#{Time.zone.iso8601(filters[:date]).to_date}%"
-      )
+      start_at = Date.parse(filters[:date]).in_time_zone
+      end_at = start_at.end_of_day
+      ps = ps.where("(payment_schedules.created_at BETWEEN :start_at AND :end_at) OR (payment_schedule_items.due_date BETWEEN :start_at AND :end_at)", start_at: start_at, end_at: end_at).references(:payment_schedule_items)
     end
 
     ps

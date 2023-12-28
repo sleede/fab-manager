@@ -247,6 +247,7 @@ pt:
         first_name: "Primeiro nome"
         surname: "Último Nome"
         email: "Endereço de e-mail"
+        field_is_required: "This field is required"
       plan_pricing_form:
         prices: "Preços"
         about_prices: "The prices defined here will apply to members subscribing to this plan, for machines and spaces. All prices are per hour."
@@ -1858,7 +1859,6 @@ pt:
         extended_prices_info_html: "Os espaços podem ter preços diferentes dependendo da duração acumulada da reserva. Você pode escolher se isso se aplica a todas as reservas ou apenas àqueles que iniciam no mesmo dia."
         extended_prices_in_same_day: "Preços estendidos no mesmo dia"
         public_registrations: "Inscrições públicas"
-        show_username_in_admin_list: "Mostrar o nome de usuário na lista"
         projects_list_member_filter_presence: "Presence of member filter on projects list"
         projects_list_date_filters_presence: "Presence of date filters on projects list"
         project_categories_filter_placeholder: "Placeholder for categories filter in project gallery"

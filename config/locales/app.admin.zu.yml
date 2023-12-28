@@ -247,6 +247,7 @@ zu:
         first_name: "crwdns31965:0crwdne31965:0"
         surname: "crwdns31967:0crwdne31967:0"
         email: "crwdns31969:0crwdne31969:0"
+        field_is_required: "crwdns38134:0crwdne38134:0"
       plan_pricing_form:
         prices: "crwdns31971:0crwdne31971:0"
         about_prices: "crwdns37465:0crwdne37465:0"
@@ -956,13 +957,13 @@ zu:
         n_digits_annual_amount_of_orders: "crwdns25076:0crwdne25076:0"
         add_a_notice_regarding_the_online_sales_only_if_the_invoice_is_concerned: "crwdns25078:0crwdne25078:0"
         this_will_never_be_added_when_a_refund_notice_is_present: "crwdns25080:0crwdne25080:0"
-        eg_XVL_will_add_VL_to_the_invoices_settled_by_card: 'crwdns25082:0[/VL]crwdne25082:0'
+        eg_XVL_will_add_VL_to_the_invoices_settled_by_card: 'crwdns25082:0crwdne25082:0'
         add_a_notice_regarding_refunds_only_if_the_invoice_is_concerned: "crwdns25084:0crwdne25084:0"
         this_will_never_be_added_when_an_online_sales_notice_is_present: "crwdns25086:0crwdne25086:0"
-        eg_RA_will_add_A_to_the_refund_invoices: 'crwdns25088:0[/A]crwdne25088:0'
+        eg_RA_will_add_A_to_the_refund_invoices: 'crwdns25088:0crwdne25088:0'
         add_a_notice_regarding_payment_schedule: "crwdns25090:0crwdne25090:0"
         this_will_never_be_added_with_other_notices: "crwdns25092:0crwdne25092:0"
-        eg_SE_to_schedules: 'crwdns25094:0[/E]crwdne25094:0'
+        eg_SE_to_schedules: 'crwdns25094:0crwdne25094:0'
         code: "crwdns25096:0crwdne25096:0"
         enable_the_code: "crwdns25098:0crwdne25098:0"
         enabled: "crwdns25100:0crwdne25100:0"
@@ -1858,7 +1859,6 @@ zu:
         extended_prices_info_html: "crwdns26750:0crwdne26750:0"
         extended_prices_in_same_day: "crwdns26752:0crwdne26752:0"
         public_registrations: "crwdns26754:0crwdne26754:0"
-        show_username_in_admin_list: "crwdns26756:0crwdne26756:0"
         projects_list_member_filter_presence: "crwdns37627:0crwdne37627:0"
         projects_list_date_filters_presence: "crwdns37629:0crwdne37629:0"
         project_categories_filter_placeholder: "crwdns37631:0crwdne37631:0"

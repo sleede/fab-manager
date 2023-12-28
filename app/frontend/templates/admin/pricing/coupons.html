@@ -1,7 +1,7 @@
 <h2 translate>{{ 'app.admin.pricing.list_of_the_coupons' }}</h2>
 
 <div class="m-t-lg m-b">
-  <button type="button" class="btn btn-warning" ui-sref="app.admin.coupons_new">
+  <button type="button" class="fab-button is-secondary" ui-sref="app.admin.coupons_new">
     <i class="fa fa-plus m-r"></i>
     <span translate>{{ 'app.admin.pricing.add_a_new_coupon' }}</span>
   </button>
@@ -44,5 +44,5 @@
 </table>
 
 <div class="text-center">
-  <button class="btn btn-warning" ng-click="loadMore()" ng-hide="coupons.length === 0 || coupons.length >= coupons[0].total"><i class="fa fa-search-plus" aria-hidden="true"></i> {{ 'app.admin.pricing.display_more_coupons' | translate }}</button>
+  <button class="fab-button is-secondary" ng-click="loadMore()" ng-hide="coupons.length === 0 || coupons.length >= coupons[0].total"><i class="fa fa-search-plus" aria-hidden="true"></i> {{ 'app.admin.pricing.display_more_coupons' | translate }}</button>
 </div>

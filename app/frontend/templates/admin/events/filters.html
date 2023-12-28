@@ -1,7 +1,7 @@
 <div class="m-t">
   <h3 class="events-categories" translate>{{ 'app.admin.events.categories' }}</h3>
   <p translate>{{ 'app.admin.events.at_least_one_category_is_required' }}</p>
-  <button type="button" class="btn btn-warning m-b m-t" ng-click="addElement('category')" translate>{{ 'app.admin.events.add_a_category' }}</button>
+  <button type="button" class="fab-button is-secondary m-b m-t" ng-click="addElement('category')" translate>{{ 'app.admin.events.add_a_category' }}</button>
   <table class="table">
     <thead>
       <tr>
@@ -19,10 +19,10 @@
         <td>
           <!-- form -->
           <form editable-form name="rowform" onbeforesave="saveElement('category', $data, category.id)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted.category == category">
-            <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-warning">
+            <button type="submit" ng-disabled="rowform.$waiting" class="fab-button is-secondary">
               <i class="fa fa-check"></i>
             </button>
-            <button type="button" ng-disabled="rowform.$waiting" ng-click="cancelElement('category', rowform, $index)" class="btn btn-default">
+            <button type="button" ng-disabled="rowform.$waiting" ng-click="cancelElement('category', rowform, $index)" class="fab-button">
               <i class="fa fa-times"></i>
             </button>
           </form>
@@ -40,7 +40,7 @@
   </table>
 
   <h3 class="events-themes" translate>{{ 'app.admin.events.themes' }}</h3>
-  <button type="button" class="btn btn-warning m-b m-t" ng-click="addElement('theme')" translate>{{ 'app.admin.events.add_a_theme' }}</button>
+  <button type="button" class="fab-button is-secondary m-b m-t" ng-click="addElement('theme')" translate>{{ 'app.admin.events.add_a_theme' }}</button>
   <table class="table">
     <thead>
     <tr>
@@ -58,10 +58,10 @@
       <td>
         <!-- form -->
         <form editable-form name="rowform" onbeforesave="saveElement('theme', $data, theme.id)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted.theme == theme">
-          <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-warning">
+          <button type="submit" ng-disabled="rowform.$waiting" class="fab-button is-secondary">
             <i class="fa fa-check"></i>
           </button>
-          <button type="button" ng-disabled="rowform.$waiting" ng-click="cancelElement('theme', rowform, $index)" class="btn btn-default">
+          <button type="button" ng-disabled="rowform.$waiting" ng-click="cancelElement('theme', rowform, $index)" class="fab-button">
             <i class="fa fa-times"></i>
           </button>
         </form>
@@ -79,7 +79,7 @@
   </table>
 
   <h3 class="events-age-ranges" translate>{{ 'app.admin.events.age_ranges' }}</h3>
-  <button type="button" class="btn btn-warning m-b m-t" ng-click="addElement('age_range')" translate>{{ 'app.admin.events.add_a_range' }}</button>
+  <button type="button" class="fab-button is-secondary m-b m-t" ng-click="addElement('age_range')" translate>{{ 'app.admin.events.add_a_range' }}</button>
   <table class="table">
     <thead>
     <tr>
@@ -97,10 +97,10 @@
       <td>
         <!-- form -->
         <form editable-form name="rowform" onbeforesave="saveElement('age_range', $data, range.id)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted.age_range == range">
-          <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-warning">
+          <button type="submit" ng-disabled="rowform.$waiting" class="fab-button is-secondary">
             <i class="fa fa-check"></i>
           </button>
-          <button type="button" ng-disabled="rowform.$waiting" ng-click="cancelElement('age_range', rowform, $index)" class="btn btn-default">
+          <button type="button" ng-disabled="rowform.$waiting" ng-click="cancelElement('age_range', rowform, $index)" class="fab-button">
             <i class="fa fa-times"></i>
           </button>
         </form>

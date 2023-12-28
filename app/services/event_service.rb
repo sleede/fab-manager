@@ -28,6 +28,7 @@ class EventService
           price_cat[:amount] = to_centimes(price_cat[:amount])
         end
       end
+      params[:pre_registration_end_date] = Date.parse(params[:pre_registration_end_date]).end_of_day if params[:pre_registration_end_date].present?
       # return the resulting params object
       params
     end

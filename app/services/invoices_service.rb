@@ -29,10 +29,9 @@ class InvoicesService
       )
     end
     unless filters[:date].nil?
-      invoices = invoices.where(
-        "date_trunc('day', invoices.created_at) = :search",
-        search: "%#{Time.iso8601(filters[:date]).in_time_zone.to_date}%"
-      )
+      start_at = Date.parse(filters[:date]).in_time_zone
+      end_at = start_at.end_of_day
+      invoices = invoices.where(created_at: (start_at..end_at))
     end
 
     invoices

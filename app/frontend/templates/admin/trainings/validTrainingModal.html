@@ -16,6 +16,6 @@
   <p ng-if="availability.reservation_users.length == 0" translate>{{ 'app.admin.trainings.no_reservation' }}</p>
 </div>
 <div class="modal-footer">
-  <button class="btn btn-warning" ng-click="ok()" ng-disabled="usersToValid.length == 0" translate>{{ 'app.admin.trainings.validate_the_trainings' }}</button>
-  <button class="btn btn-default" ng-click="cancel()" translate>{{ 'app.shared.buttons.cancel' }}</button>
+  <button class="fab-button is-secondary" ng-click="ok()" ng-disabled="usersToValid.length == 0" translate>{{ 'app.admin.trainings.validate_the_trainings' }}</button>
+  <button class="fab-button" ng-click="cancel()" translate>{{ 'app.shared.buttons.cancel' }}</button>
 </div>

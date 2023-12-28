@@ -219,8 +219,7 @@ export const registrationSettings = [
 ] as const;
 
 export const adminSettings = [
-  'feature_tour_display',
-  'show_username_in_admin_list'
+  'feature_tour_display'
 ] as const;
 
 export const pricingSettings = [

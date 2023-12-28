@@ -721,7 +721,6 @@ it:
     flickr: "flickr"
     machines_module: "Modulo macchine"
     user_change_group: "Consenti all'utente di cambiare il loro gruppo"
-    show_username_in_admin_list: "Mostra il nome utente nell'elenco dei membri dell'amministratore"
     store_module: "Modulo del negozio"
     store_withdrawal_instructions: "Istruzioni per il ritiro"
     store_hidden: "Negozio nascosto al pubblico"
