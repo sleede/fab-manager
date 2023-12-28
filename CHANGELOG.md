@@ -6,6 +6,7 @@
 - improvement: remove show_username_in_admin_list setting
 - improvement: show invoice payment method in accounting line
 - [TODO DEPLOY] `rails fablab:setup:build_accounting_lines`
+- [TODO DEPLOY] `rails fablab:fix:stripe_coupon_duration`
 
 ## v6.3.6 2023 December 6
 
