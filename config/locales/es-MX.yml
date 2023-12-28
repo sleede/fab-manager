@@ -721,7 +721,6 @@ es-MX:
     flickr: "flickr"
     machines_module: "Módulo de máquinas"
     user_change_group: "Permitir a los usuarios cambiar su grupo"
-    show_username_in_admin_list: "Mostrar el nombre de usuario en la lista de miembros del administrador"
     store_module: "Módulo de tienda"
     store_withdrawal_instructions: "Instrucciones de retirada"
     store_hidden: "Tienda oculta al público"

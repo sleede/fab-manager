@@ -721,7 +721,6 @@ pt:
     flickr: "flickr"
     machines_module: "Módulo de Máquinas"
     user_change_group: "Permitir que os usuários mudem de grupo"
-    show_username_in_admin_list: "Mostrar o nome de usuário na lista de membros do administrador"
     store_module: "Store module"
     store_withdrawal_instructions: "Withdrawal instructions"
     store_hidden: "Store hidden to the public"
