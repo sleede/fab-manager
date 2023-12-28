@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+## v6.3.7 2023 December 28
+
 - Fix a bug: unable to show wallet payment mean for invoice
 - Fix a bug: PayZen amount of subscription compute error for Coupon validity per user = forever
 - Fix a bug: unable to create Stripe coupon with duration = forever
