@@ -66,7 +66,7 @@ class Stripe::Service < Payment::Service
       stp_coupon[:currency] = Setting.get('stripe_currency')
     end
 
-    stp_coupon[:duration] = coupon.validity_per_user == 'always' ? 'forever' : 'once'
+    stp_coupon[:duration] = coupon.validity_per_user
     stp_coupon[:redeem_by] = coupon.valid_until.to_i unless coupon.valid_until.nil?
     stp_coupon[:max_redemptions] = coupon.max_usages unless coupon.max_usages.nil?
 

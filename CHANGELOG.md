@@ -2,6 +2,7 @@
 
 - Fix a bug: unable to show wallet payment mean for invoice
 - Fix a bug: PayZen amount of subscription compute error for Coupon validity per user = forever
+- Fix a bug: unable to create Stripe coupon with duration = forever
 - improvement: remove show_username_in_admin_list setting
 - improvement: show invoice payment method in accounting line
 - [TODO DEPLOY] `rails fablab:setup:build_accounting_lines`
