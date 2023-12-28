@@ -1859,7 +1859,6 @@
         extended_prices_info_html: "Spaces can have different prices depending on the cumulated duration of the booking. You can choose if this apply to all bookings or only to those starting within the same day."
         extended_prices_in_same_day: "Extended prices in the same day"
         public_registrations: "Public registrations"
-        show_username_in_admin_list: "Show the username in the list"
         projects_list_member_filter_presence: "Presence of member filter on projects list"
         projects_list_date_filters_presence: "Presence of date filters on projects list"
         project_categories_filter_placeholder: "Placeholder for categories filter in project gallery"
