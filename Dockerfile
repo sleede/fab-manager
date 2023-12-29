@@ -26,7 +26,8 @@ RUN apk update && apk upgrade && \
       libsass-dev \
       libsass \
       libc6-compat \
-      libidn-dev && \
+      libidn-dev \
+      shared-mime-info && \
 # Install buildtime apk dependencies
     apk add --update --no-cache --virtual .build-deps \
       alpine-sdk \

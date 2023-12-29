@@ -1,5 +1,9 @@
 # Changelog Fab-manager
 
+## v6.3.8 2023 December 29
+
+- Fix a bug: unable to build docker image
+
 ## v6.3.7 2023 December 28
 
 - Fix a bug: unable to show wallet payment mean for invoice
