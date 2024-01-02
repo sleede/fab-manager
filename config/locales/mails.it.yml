@@ -83,6 +83,7 @@ it:
       body:
         reservation_saved_html: "You pre-registration <strong><em>%{RESERVATION}</em></strong> has been successfully saved"
         your_reserved_slots: "Your pre-booked slots are:"
+        reservation_warning: "<strong><em>This email does not count as registration to %{RESERVATION}.</em></strong><br/>You will receive another email to confirm or deny your request."
     notify_member_subscribed_plan_is_changed:
       subject: "Il tuo abbonamento è stato aggiornato"
       body:
