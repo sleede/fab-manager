@@ -1,39 +1,20 @@
-FROM ruby:3.2.2-alpine
-MAINTAINER contact@fab-manager.com
+FROM ruby:3.2.2
+MAINTAINER contact@sleede.com
 
-# Install upgrade system packages
-RUN apk update && apk upgrade && \
-# Install runtime apk dependencies
-    apk add --update \
-      bash \
-      curl \
-      nodejs \
-      yarn \
-      git \
-      openssh \
-      imagemagick \
-      supervisor \
-      tzdata \
-      libc-dev \
-      ruby-dev \
-      zlib-dev \
-      xz \
-      xz-dev \
-      postgresql-dev \
-      postgresql-client \
-      libxml2-dev \
-      libxslt-dev \
-      libsass-dev \
-      libsass \
-      libc6-compat \
-      libidn-dev \
-      shared-mime-info && \
-# Install buildtime apk dependencies
-    apk add --update --no-cache --virtual .build-deps \
-      alpine-sdk \
-      build-base \
-      linux-headers \
-      patch
+# First we need to be able to fetch from https repositories
+RUN apt-get update && \
+    apt-get install -y apt-transport-https \
+      ca-certificates apt-utils supervisor locales
+
+RUN locale-gen C.UTF-8
+
+RUN curl -sL https://deb.nodesource.com/setup_18.x | bash -\
+  && apt-get update -qq && apt-get install -qq --no-install-recommends \
+    nodejs \
+  && apt-get upgrade -qq \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/*\
+  && npm install -g yarn@1
 
 # Fix bug: LoadError: Could not open library '/usr/local/bundle/gems/sassc-2.1.0-x86_64-linux/lib/sassc/libsass.so': Error loading shared library ld-linux-x86-64.so.2: No such file or directory (needed by /usr/local/bundle/gems/sassc-2.1.0-x86_64-linux/lib/sassc/libsass.so)
 # add libsass-dev libsass libc6-compat and env below
@@ -46,19 +27,9 @@ RUN bundle config --global frozen 1
 
 # Install gems in a cache efficient way
 WORKDIR /tmp
-COPY Gemfile* /tmp/
-RUN bundle config set --local without 'development test doc' && bundle install && bundle binstubs --all
-
-# Prepare the application directories
-RUN mkdir -p /var/log/supervisor && \
-    mkdir -p /usr/src/app/tmp/sockets && \
-    mkdir -p /usr/src/app/tmp/pids && \
-    mkdir -p /usr/src/app/tmp/cache && \
-    mkdir -p /usr/src/app/log && \
-    mkdir -p /usr/src/app/node_modules && \
-    mkdir -p /usr/src/app/public/api && \
-    chmod -R a+w /usr/src/app && \
-    chmod -R a+w /var/run
+COPY Gemfile /tmp/
+COPY Gemfile.lock /tmp/
+RUN bundle install --binstubs --without development test doc
 
 # Install Javascript packages
 WORKDIR /usr/src/app
@@ -66,16 +37,21 @@ COPY package.json /usr/src/app/package.json
 COPY yarn.lock /usr/src/app/yarn.lock
 RUN yarn install
 
-# Clean up build deps, cached packages and temp files
-RUN apk del .build-deps && \
-    yarn cache clean && \
-    rm -rf /tmp/* \
-           /var/tmp/* \
-           /var/cache/apk/* \
-           /usr/lib/ruby/gems/*/cache/* && \
-    chmod -R a+w /usr/src/app/node_modules
+# Web app
+RUN mkdir -p /usr/src/app && \
+    mkdir -p /usr/src/app/config && \
+    mkdir -p /usr/src/app/invoices && \
+    mkdir -p /usr/src/app/payment_schedules && \
+    mkdir -p /usr/src/app/exports && \
+    mkdir -p /usr/src/app/imports && \
+    mkdir -p /usr/src/app/log && \
+    mkdir -p /usr/src/app/public/uploads && \
+    mkdir -p /usr/src/app/public/packs && \
+    mkdir -p /usr/src/app/accounting && \
+    mkdir -p /usr/src/app/supporting_document_files && \
+    mkdir -p /usr/src/app/tmp/sockets && \
+    mkdir -p /usr/src/app/tmp/pids
 
-# Copy source files
 COPY docker/database.yml /usr/src/app/config/database.yml
 COPY . /usr/src/app
 
