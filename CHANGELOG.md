@@ -1,5 +1,8 @@
 # Changelog Fab-manager
 
+## Next release
+- translation files added for Swedish
+
 ## v6.3.8 2023 December 29
 
 - Fix a bug: unable to build docker image
