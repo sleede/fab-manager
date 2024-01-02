@@ -38,7 +38,7 @@ class Invoices::VATTest < ActionDispatch::IntegrationTest
     assert_invoice_pdf invoice do |lines|
       vat_line = I18n.t('invoices.including_VAT_RATE',
                         **{ RATE: Setting.get('invoice_VAT-rate'),
-                            AMOUNT: number_to_currency(invoice.total / 100.00),
+                            AMOUNT: number_to_currency(invoice.total / 100.00, locale: CURRENCY_LOCALE),
                             NAME: 'TVQ+TPS' })
       assert(lines.any? { |l| /#{Regexp.escape(vat_line)}/.match(l) })
     end

@@ -62,12 +62,12 @@
 
         </uib-tab>
 
-        <uib-tab heading="{{ 'app.shared.user_admin.children' | translate }}" ng-if="$root.settings.familyAccount">
-          <children-dashboard user="user" operator="currentUser" admin-panel="true" on-success="onSuccess" on-error="onError" />
-        </uib-tab>
-
         <uib-tab heading="{{ 'app.admin.members_edit.reservations' | translate }}">
           <reservations-dashboard user="user" current-user="currentUser" on-error="onError" />
+        </uib-tab>
+
+        <uib-tab heading="{{ 'app.shared.user_admin.children' | translate }}" ng-if="$root.settings.familyAccount">
+          <children-dashboard user="user" operator="currentUser" admin-panel="true" on-success="onSuccess" on-error="onError" />
         </uib-tab>
 
         <uib-tab heading="{{ 'app.admin.members_edit.supporting_documents' | translate }}" ng-show="hasProofOfIdentityTypes">
@@ -280,7 +280,7 @@
 
             <div class="clearfix"></div>
             <div class="col-sm-4 text-center" ng-hide="user.id === currentUser.id">
-              <button type="button" class="btn btn-warning m-t m-b" ng-click="createWalletCreditModal(user, wallet)" translate>{{ 'app.admin.members_edit.to_credit' }}</button>
+              <button type="button" class="fab-button is-secondary m-t m-b" ng-click="createWalletCreditModal(user, wallet)" translate>{{ 'app.admin.members_edit.to_credit' }}</button>
             </div>
             <p class="col-sm-4 alert alert-info" ng-show="user.id === currentUser.id" translate>
               {{ 'app.admin.members_edit.cannot_credit_own_wallet' }}

@@ -32,8 +32,8 @@ class ProjectService
       end
     end
 
-    created_from = Time.zone.parse(query_params['from_date']).beginning_of_day if query_params['from_date'].present?
-    created_to = Time.zone.parse(query_params['to_date']).end_of_day if query_params['to_date'].present?
+    created_from = Date.parse(query_params['from_date']).in_time_zone.beginning_of_day if query_params['from_date'].present?
+    created_to = Date.parse(query_params['to_date']).in_time_zone.end_of_day if query_params['to_date'].present?
     if created_from || created_to
       records = records.where(created_at: created_from..created_to)
     end
@@ -46,7 +46,8 @@ class ProjectService
 
     records = records.includes(:users, :project_image)
     records = records.page(params[:page]) if paginate
+    total = paginate ? records.total_count : records.count
 
-    { total: records.total_count, projects: records }
+    { total: total, projects: records }
   end
 end

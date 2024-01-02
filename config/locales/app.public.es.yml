@@ -13,11 +13,12 @@ es:
           decline: "Rechazar"
         #dashboard sections
         dashboard: "Panel"
-        my_profile: "My Perfil"
+        my_profile: "Mi Perfil"
+        my_children: "Mis hijos"
         my_settings: "Mis ajustes"
         my_supporting_documents_files: "Mis documentos justificativos"
         my_projects: "Mis proyectos"
-        my_trainings: "Mis cursos"
+        my_trainings: "Mis capacitaciones"
         my_reservations: "Mis reservas"
         my_events: "Mis eventos"
         my_invoices: "Mis facturas"
@@ -38,7 +39,7 @@ es:
         #left menu (public)
         home: "Menú principal"
         reserve_a_machine: "Reservar una máquina"
-        trainings_registrations: "Registro de cursos"
+        trainings_registrations: "Registro de capacitaciones"
         events_registrations: "Registro de eventos"
         reserve_a_space: "Reservar un espacio"
         projects_gallery: "Galería de proyectos"
@@ -46,7 +47,7 @@ es:
         public_calendar: "Agenda"
         fablab_store: "Tienda"
         #left menu (admin)
-        trainings_monitoring: "Cursos"
+        trainings_monitoring: "Formaciones"
         manage_the_calendar: "Agenda"
         manage_the_users: "Usuarios"
         manage_the_invoices: "Facturas"
@@ -258,14 +259,14 @@ es:
       #list of trainings
       trainings_list:
         book: "Reservar"
-        the_trainings: "Lista de cursos"
+        the_trainings: "Lista de capacitaciones"
       #details of a training
       training_show:
-        book_this_training: "reservar plaza en este curso"
-        do_you_really_want_to_delete_this_training: "Está seguro de querer eliminar este curso?"
+        book_this_training: "Reservar la formación"
+        do_you_really_want_to_delete_this_training: "¿Está seguro de querer eliminar esta formación?"
         unauthorized_operation: "Operación no autorizada"
         confirmation_required: "Confirmación requerida"
-        the_training_cant_be_deleted_because_it_is_already_reserved_by_some_users: "El curso no puede borrarse porque ya ha sido reservado por algún usuario."
+        the_training_cant_be_deleted_because_it_is_already_reserved_by_some_users: "La formación no puede borrarse porque ya ha sido reservada por algún usuario."
       plan_card:
         AMOUNT_per_month: "{AMOUNT} / mes"
         i_subscribe_online: "Me suscribo en línea"
@@ -317,6 +318,9 @@ es:
         event_description: "Descripción del evento"
         downloadable_documents: "Archivos descargables"
         information_and_booking: "Información y reservas"
+        event_type:
+          family: "Evento reservado para miembros"
+          nominative: "Evento nominativo"
         dates: "Fechas"
         beginning: "Empieza:"
         ending: "Termina:"
@@ -332,9 +336,12 @@ es:
         ticket: "{NUMBER, plural, one{billete} other{billetes}}"
         make_a_gift_of_this_reservation: "Regalar esta reserva"
         thank_you_your_payment_has_been_successfully_registered: "Gracias. Su pago se ha registrado correctamente."
+        thank_you_your_pre_registration_has_been_successfully_saved: "Gracias. ¡Su preinscripción se ha guardado correctamente!"
         you_can_find_your_reservation_s_details_on_your_: "Puede encontrar los detalles de su reserva en"
+        informed_by_email_your_pre_registration: "Se le mantendrá informado por correo electrónico del progreso realizado con respecto a su preinscripción."
         dashboard: "panel"
         you_booked_DATE: "Has reservado ({DATE}):"
+        you_pre_booked_DATE: "Tu preinscripción ({DATE}):"
         canceled_reservation_SEATS: "Reservación cancelada ({SEATS} plazas)"
         book: "Reservar"
         confirm_and_pay: "Confirmar y pagar"
@@ -345,6 +352,7 @@ es:
         you_can_shift_this_reservation_on_the_following_slots: "Puede cambiar la reserva en los siguientes campos:"
         confirmation_required: "Confirmación requerida"
         do_you_really_want_to_delete_this_event: "¿Realmente desea eliminar este evento?"
+        all_reservations_for_this_event_will_be_canceled: Todas las reservas de este evento serán canceladas.
         delete_recurring_event: "Estás a punto de eliminar un evento periódico. ¿Qué quieres hacer?"
         delete_this_event: "Solo este evento"
         delete_this_and_next: "Este evento y lo siguiente"
@@ -362,12 +370,16 @@ es:
         view_event_list: "Ver próximos eventos"
         share_on_facebook: "Compartir en Facebook"
         share_on_twitter: "Compartir en Twitter"
+        last_name_and_first_name: "Apellido y nombre"
+        pre_book: "Preinscribir"
+        pre_registration_end_date: "Fecha límite para preinscripción"
+        pre_registration: "Preinscripción"
       #public calendar
       calendar:
         calendar: "Calendario"
-        show_unavailables: "Mostrar campos inválidos"
+        show_unavailables: "Mostrar las franjas horarias indisponibles"
         filter_calendar: "Filtrar calendario"
-        trainings: "Cursos"
+        trainings: "Formaciones"
         machines: "Máquinas"
         spaces: "Espacios"
         events: "Eventos"
@@ -481,6 +493,35 @@ es:
       member_select:
         select_a_member: "Selecciona un miembro"
         start_typing: "Empezar a escribir..."
+      children_dashboard:
+        heading: "Niños"
+        member_heading: "Mis hijos"
+        add_child: "Añadir un hijo"
+      child_modal:
+        edit_child: "Modificar un hijo"
+        new_child: "Añadir un hijo"
+      child_form:
+        child_form_info: "Sólo los niños menores de 18 años pueden ser agregados a su cuenta Familiar. Los documentos de apoyo pueden ser solicitados para validar la cuenta de su hijo y permitirle registrarlos para eventos."
+        first_name: "Nombre"
+        last_name: "Apellido"
+        birthday: "Fecha de nacimiento"
+        email: "Correo electrónico"
+        phone: "Teléfono"
+        save: "Guardar"
+        supporting_documents: "Documentos justificativos"
+        to_complete: "Para completar"
+        refuse_documents_info: "Puede rechazar una selección de documentos haciendo clic en el siguiente botón."
+        refuse_documents: "Rechazar los documentos"
+      child_item:
+        first_name: "Nombre del hijo/a"
+        last_name: "Nombre del hijo/a"
+        birthday: "Fecha de nacimiento"
+        deleted: "El hijo ha sido eliminado."
+        unable_to_delete: "No se pudo eliminar el hijo."
+      delete_child_modal:
+        confirmation_required: "Confirmación requerida"
+        confirm: "Confirmar"
+        confirm_delete_child: "¿Realmente desea eliminar a este hijo?"
       tour:
         conclusion:
           title: "Gracias por su atención"
@@ -497,7 +538,7 @@ es:
             content: "<p>Esta página le permitirá consultar la lista de todas las máquinas y reservar una franja horaria en nombre de un miembro.</p><p>Una máquina puede ser, por ejemplo, una impresora 3D.</p><p>Los miembros también pueden acceder a esta página y reservar ellos mismos una máquina, si está habilitado el pago con tarjeta de crédito o si algunos precios son iguales a 0.</p>"
           trainings:
             title: "Formaciones"
-            content: "<p>Esta página le permitirá consultar la lista de todas las sesiones de formación e inscribir a un miembro en una sesión de formación.</p><p>Las formaciones pueden establecerse como requisitos previos antes de permitir la reserva de determinadas máquinas.</p><p>Los miembros también pueden acceder a esta página e inscribirse ellos mismos en una sesión de formación, si está habilitado el pago con tarjeta de crédito o si algunos precios son iguales a 0.</p>"
+            content: "<p>Esta página le permitirá consultar la lista de todas las sesiones de capacitación e inscribir a un miembro en una sesión de capacitación.</p><p>Las capacitaciones pueden establecerse como requisitos previos antes de permitir la reserva de determinadas máquinas.</p><p>Los miembros también pueden acceder a esta página e inscribirse ellos mismos en una sesión de capacitación, si está habilitado el pago con tarjeta de crédito o si algunos precios son iguales a 0.</p>"
           spaces:
             title: "Espacios"
             content: "<p>Esta página le permitirá consultar la lista de todos los espacios disponibles y reservar una plaza en una franja horaria, en nombre de un miembro.</p><p>Un espacio puede ser, por ejemplo, un taller de carpintería o una sala de reuniones.</p><p>Su particularidad es que pueden ser reservados por varias personas al mismo tiempo.</p><p>Los miembros también pueden acceder a esta página y reservar ellos mismos una máquina, si está habilitado el pago con tarjeta de crédito o si algunos precios son iguales a 0.</p>"

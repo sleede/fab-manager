@@ -103,7 +103,7 @@ export const EventForm: React.FC<EventFormProps> = ({ action, event, onError, on
   const onSubmit: SubmitHandler<Event> = (data: Event) => {
     setSubmitting(true);
     if (submitting) return;
-    if (data.pre_registration_end_date?.toString() === 'Invalid Date') {
+    if (data.pre_registration_end_date?.toString() === 'Invalid Date' || !data.pre_registration) {
       data.pre_registration_end_date = null;
     }
     if (action === 'update') {
@@ -218,7 +218,8 @@ export const EventForm: React.FC<EventFormProps> = ({ action, event, onError, on
                              id="event_image_attributes"
                              accept="image/*"
                              defaultImage={output.event_image_attributes}
-                             label={t('app.admin.event_form.matching_visual')} />
+                             label={t('app.admin.event_form.illustration')}
+                             tooltip={t('app.admin.event_form.illustration_recommendation')} />
             <FormRichText control={control}
                           id="description"
                           rules={{ required: true }}

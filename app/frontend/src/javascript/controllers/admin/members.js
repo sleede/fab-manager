@@ -165,9 +165,6 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
 
     if ($scope.enableUserValidationRequired) { $scope.member.memberFilters.push('not_validated'); }
 
-    // should we display the username in the list?
-    $scope.displayUsername = (settingsPromise.show_username_in_admin_list === 'true');
-
     // Admins ordering/sorting. Default: not sorted
     $scope.orderAdmin = null;
 
@@ -511,7 +508,7 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
       });
       if ($scope.members.length > 0) {
         uitour.createStep({
-          selector: '.members-management .members-list .buttons',
+          selector: '.members-management .members-list .member-actions',
           stepId: 'actions',
           order: 4,
           title: _t('app.admin.tour.members.actions.title'),
@@ -1066,6 +1063,7 @@ Application.Controllers.controller('NewMemberController', ['$scope', '$state', '
     // Default member's profile parameters
     $scope.user = {
       plan_interval: '',
+      is_allow_contact: false,
       invoicing_profile_attributes: {},
       statistic_profile_attributes: {}
     };

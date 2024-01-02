@@ -24,7 +24,7 @@ wb.add_worksheet(name: ExcelService.name_safe(t('export_subscriptions.subscripti
       t("duration.#{sub.plan.interval}", count: sub.plan.interval_count),
       sub.created_at.to_date,
       sub.expired_at.to_date,
-      number_to_currency(sub.plan.amount / 100.00)
+      number_to_currency(sub.plan.amount / 100.00, locale: CURRENCY_LOCALE)
     ]
     styles = [nil, nil, nil, nil, nil, date, date, nil, nil]
     types = %i[integer string string string string date date string string]

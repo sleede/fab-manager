@@ -49,6 +49,7 @@ de:
       gateway_amount_too_large: "Payments above %{AMOUNT} are not supported. Please order directly at the reception."
       product_in_use: "This product have already been ordered"
       slug_already_used: "wird bereits verwendet"
+      birthday_less_than_18_years_ago: "Birthday must be under 18 years ago"
   coupon:
     code_format_error: "nur Großbuchstaben, Zahlen und Bindestriche sind erlaubt"
   apipie:
@@ -286,6 +287,8 @@ de:
         an_abuse_was_reported_on_TYPE_ID_NAME_html: "Ein Missbrauchsmeldung auf <strong>%{TYPE} %{ID} ist eingegangen: <em>%{NAME}</em></strong>."
       notify_admin_member_create_reservation:
         a_RESERVABLE_reservation_was_made_by_USER_html: "Eine <strong><em>%{RESERVABLE}</em></strong> Reservierung wurde von <strong><em>%{USER}</em></strong> vorgenommen."
+      notify_admin_member_pre_booked_reservation:
+        a_RESERVABLE_reservation_was_made_by_USER_html: "A <strong><em>%{RESERVABLE}</em></strong> pre-registration was made by <strong><em>%{USER}</em></strong>."
       notify_admin_profile_complete:
         account_imported_from_PROVIDER_UID_has_completed_its_information_html: "Konto importiert von <strong><em>%{PROVIDER}</strong> (%{UID})</em> hat seine Informationen vervollständigt."
       notify_admin_slot_is_canceled:
@@ -314,10 +317,14 @@ de:
         project_NAME_has_been_published_html: "Projekt <a href='/#!/projects/%{ID}'><strong><em>%{NAME}<em></strong></a> wurde veröffentlicht."
       notify_admin_when_user_is_created:
         a_new_user_account_has_been_created_NAME_EMAIL_html: "Ein neues Benutzerkonto wurde erstellt: <strong><em>%{NAME} &lt;%{EMAIL}&gt;</strong></em>."
+      notify_admin_child_created:
+        a_new_child_has_been_created_NAME_html: "A new child has been created: <strong><em>%{NAME}</em></strong>."
       notify_admin_when_user_is_imported:
         a_new_user_account_has_been_imported_from_PROVIDER_UID_html: "Ein neues Benutzerkonto wurde von <strong><em>%{PROVIDER}</strong> (%{UID})</em> importiert."
       notify_member_create_reservation:
         your_reservation_RESERVABLE_was_successfully_saved_html: "Ihre Reservierung <strong><em>%{RESERVABLE}</em></strong> wurde erfolgreich gespeichert."
+      notify_member_pre_booked_reservation:
+        your_reservation_RESERVABLE_was_successfully_saved_html: "Your pre-registration <strong><em>%{RESERVABLE}</em></strong> was successfully saved."
       notify_member_reservation_reminder:
         reminder_you_have_a_reservation_RESERVABLE_to_be_held_on_DATE_html: "Erinnerung: Sie haben eine Reservierung <strong>%{RESERVABLE}</strong> für <em>%{DATE}</em>"
       notify_member_slot_is_canceled:
@@ -441,22 +448,44 @@ de:
         supporting_document_files_uploaded: "Supporting document uploaded by member <strong><em>%{NAME}</strong></em>."
       notify_admin_user_supporting_document_files_updated:
         supporting_document_files_uploaded: "Supporting document changed by member <strong><em>%{NAME}</strong></em>."
+      notify_admin_user_child_supporting_document_files_created:
+        supporting_document_files_uploaded: "Child's <strong><em>%{NAME}</strong></em> supporting document uploaded."
+      notify_admin_user_child_supporting_document_files_updated:
+        supporting_document_files_uploaded: "Supporting document changed by child <strong><em>%{NAME}</strong></em>."
       notify_user_is_validated:
         account_validated: "Dein Account ist gültig."
       notify_user_is_invalidated:
         account_invalidated: "Dein Account ist ungültig."
+      notify_user_child_is_validated:
+        child_validated: "Your account child is valid."
+      notify_user_child_is_invalidated:
+        child_invalidated: "Your account child is invalid."
       notify_user_supporting_document_refusal:
         refusal: "Your supporting documents were refused"
       notify_user_supporting_document_reminder:
         reminder_message: "This is a reminder for you to upload your supporting documents."
       notify_admin_user_supporting_document_refusal:
         refusal: "Member's supporting document <strong><em>%{NAME}</strong></em> was refused."
+      notify_user_child_supporting_document_refusal:
+        refusal: "Your child's supporting documents were refused"
+      notify_admin_user_child_supporting_document_refusal:
+        refusal: "Child's supporting document <strong><em>%{NAME}</strong></em> was refused."
       notify_user_order_is_ready:
         order_ready: "Your command %{REFERENCE} is ready"
       notify_user_order_is_canceled:
         order_canceled: "Your command %{REFERENCE} is canceled"
       notify_user_order_is_refunded:
         order_refunded: "Your command %{REFERENCE} is refunded"
+      notify_member_reservation_validated:
+        your_reservation_RESERVABLE_was_validated_html: "Your reservation <strong><em>%{RESERVABLE}</em></strong> was successfully validated."
+      notify_admin_reservation_validated:
+        a_RESERVABLE_reservation_was_validated_html: "A <strong><em>%{RESERVABLE}</em></strong> reservation of <strong><em>%{NAME}</em></strong> was validated."
+      notify_member_reservation_invalidated:
+        your_reservation_RESERVABLE_was_invalidated_html: "Your pre-registration of <strong><em>%{RESERVABLE}</em></strong> wasn't validated."
+      notify_admin_reservation_invalidated:
+        a_RESERVABLE_reservation_was_invalidated_html: "A <strong><em>%{RESERVABLE}</em></strong> pre-registration of <strong><em>%{NAME}</em></strong> was invalidated."
+      notify_user_when_child_age_will_be_18:
+        child_age_will_be_18_years_ago: "Your child %{NAME} will turn 18 on %{DATE}, at which point they will be automatically detached from your Family account. They will need to create their own account in order to make reservations."
   #statistics tools for admins
   statistics:
     subscriptions: "Abonnements"
@@ -692,7 +721,6 @@ de:
     flickr: "Flickr"
     machines_module: "Maschinenmodul"
     user_change_group: "Allow users to change their group"
-    show_username_in_admin_list: "Show the username in the admin's members list"
     store_module: "Store module"
     store_withdrawal_instructions: "Withdrawal instructions"
     store_hidden: "Store hidden to the public"
@@ -712,6 +740,7 @@ de:
     project_categories_filter_placeholder: "Placeholder for categories filter in project gallery"
     project_categories_wording: "Wording used to replace \"Categories\" on public pages"
     reservation_context_feature: "Force member to select the nature of his reservation when reserving"
+    family_account: "Family account"
   #statuses of projects
   statuses:
     new: "Neu"

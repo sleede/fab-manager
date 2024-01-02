@@ -1,6 +1,6 @@
   <div class="" id="loginModal">
     <div class="modal-header">
-      <img ng-src="{{logoBlack.custom_asset_file_attributes.attachment_url}}" alt="{{logo.custom_asset_file_attributes.attachment}}" class="modal-logo"/>
+      <img ng-src="{{logoBlack.custom_asset_file_attributes.attachment_url}}" alt="" class="modal-logo"/>
       <i class="fa fa-times close-modal-button" ng-click="dismiss()"></i>
       <h1 translate translate-default="Login">
         {{ 'app.public.common.connection' }}
@@ -57,7 +57,7 @@
 
         </div>
         <div class="panel-footer no-padder">
-          <button class="btn btn-valid btn-warning btn-block p-l btn-lg text-u-c r-b" ng-click="login()" ng-disabled="loginForm.$invalid" translate translate-default="OK">{{ 'app.shared.buttons.confirm' }}</button>
+          <button class="fab-button is-secondary button-full" ng-click="login()" ng-disabled="loginForm.$invalid" translate translate-default="OK">{{ 'app.shared.buttons.confirm' }}</button>
         </div>
       </div>
       <p class="text-center font-sbold" ng-show="publicRegistrations">

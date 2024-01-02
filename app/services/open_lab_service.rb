@@ -3,8 +3,6 @@
 # Provides methods to sync projects on OpenLab
 class OpenLabService
   class << self
-    include ActionView::Helpers::SanitizeHelper
-
     def to_hash(project)
       {
         id: project.id,
@@ -20,9 +18,9 @@ class OpenLabService
         steps_body: steps_body(project),
         image_path: project.project_image&.attachment&.medium&.url,
         project_path: "/#!/projects/#{project.slug}",
-        updated_at: project.updated_at.to_s(:iso8601),
-        created_at: project.created_at.to_s(:iso8601),
-        published_at: project.published_at.to_s(:iso8601)
+        updated_at: project.updated_at.to_fs(:iso8601),
+        created_at: project.created_at.to_fs(:iso8601),
+        published_at: project.published_at.to_fs(:iso8601)
       }
     end
 
@@ -32,7 +30,7 @@ class OpenLabService
                                   .gsub("\r\n", ' ').gsub("\n\r", ' ')
                                   .gsub("\n", ' ').gsub("\r", ' ').gsub("\t", ' ')
 
-      strip_tags(concatenated_steps).strip
+      ActionController::Base.helpers.strip_tags(concatenated_steps).strip
     end
   end
 end

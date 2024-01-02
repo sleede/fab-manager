@@ -1,6 +1,6 @@
 <%= render 'notifications_mailer/shared/hello', recipient: @recipient %>
 
-<p><%= t('.body.reservation_validated_html', RESERVATION: @attached_object.reservable.name) %></p>
+<p><%= t('.body.reservation_validated_html', RESERVABLE: @attached_object.reservable.name) %></p>
 
 <p><%= t('.body.your_reserved_slots') %> </p>
 <ul>

@@ -128,6 +128,7 @@ zu:
         name: "crwdns28724:0crwdne28724:0"
         name_is_required: "crwdns28726:0crwdne28726:0"
         illustration: "crwdns28728:0crwdne28728:0"
+        illustration_recommendation: "crwdns38130:0crwdne38130:0"
         add_an_illustration: "crwdns28730:0crwdne28730:0"
         CAD_file: "crwdns28732:0crwdne28732:0"
         CAD_files: "crwdns37647:0crwdne37647:0"
@@ -168,7 +169,7 @@ zu:
       member_select:
         select_a_member: "crwdns28810:0crwdne28810:0"
         start_typing: "crwdns28812:0crwdne28812:0"
-        member_not_validated: "crwdns28814:0crwdne28814:0"
+        member_not_validated: "crwdns37993:0crwdne37993:0"
       #payment modal
       abstract_payment_modal:
         online_payment: "crwdns28816:0crwdne28816:0"
@@ -198,6 +199,7 @@ zu:
         group_is_required: "crwdns29030:0crwdne29030:0"
         trainings: "crwdns29032:0crwdne29032:0"
         tags: "crwdns29034:0crwdne29034:0"
+        children: "crwdns37995:0crwdne37995:0"
       #machine/training slot modification modal
       confirm_modify_slot_modal:
         change_the_slot: "crwdns29036:0crwdne29036:0"
@@ -373,6 +375,8 @@ zu:
         user_validation_required_alert: "crwdns29382:0crwdne29382:0"
         select_the_reservation_context: "crwdns37703:0crwdne37703:0"
         please_select_a_reservation_context: "crwdns37705:0crwdne37705:0"
+        child_validation_required_alert: "crwdns37997:0crwdne37997:0"
+        child_birthday_must_be_under_18_years_ago_alert: "crwdns37999:0crwdne37999:0"
       #feature-tour modal
       tour:
         previous: "crwdns29384:0crwdne29384:0"
@@ -446,6 +450,7 @@ zu:
         select_all: "crwdns30416:0crwdne30416:0"
         unselect_all: "crwdns30418:0crwdne30418:0"
       form_file_upload:
+        placeholder: "crwdns38001:0crwdne38001:0"
         browse: "crwdns30420:0crwdne30420:0"
         edit: "crwdns30422:0crwdne30422:0"
       form_image_upload:

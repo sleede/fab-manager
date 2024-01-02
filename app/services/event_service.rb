@@ -28,6 +28,7 @@ class EventService
           price_cat[:amount] = to_centimes(price_cat[:amount])
         end
       end
+      params[:pre_registration_end_date] = Date.parse(params[:pre_registration_end_date]).end_of_day if params[:pre_registration_end_date].present?
       # return the resulting params object
       params
     end
@@ -71,7 +72,16 @@ class EventService
       events.each do |e|
         method = e.destroyable? ? :destroy : :soft_destroy!
         # we use double negation because destroy can return either a boolean (false) or an Event (in case of delete success)
-        results.push status: !!e.send(method), event: e # rubocop:disable Style/DoubleNegation
+
+        ActiveRecord::Base.transaction do
+          status = !!e.send(method)
+          if status
+            e.reservations.preload(:slots_reservations).map(&:slots_reservations).flatten.map do |slots_reservation|
+              SlotsReservationsService.cancel(slots_reservation)
+            end
+          end
+          results.push status: status, event: e # rubocop:disable Style/DoubleNegation
+        end
       end
       results
     end

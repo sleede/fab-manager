@@ -509,12 +509,6 @@ export const settings: Array<Setting> = [
     localized: 'Adresse requise'
   },
   {
-    name: 'show_username_in_admin_list',
-    value: 'false',
-    last_update: '2022-11-21T15:20:03+0100',
-    localized: "Afficher le nom d'utilisateur dans la liste des membres de l'administrateur"
-  },
-  {
     name: 'store_module',
     value: 'true',
     last_update: '2022-11-21T15:28:45+0100',

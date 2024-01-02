@@ -7,7 +7,7 @@ json.user_trainings @user_trainings do |user_training|
     json.user_id user_training.statistic_profile.user_id
     unless user_training.statistic_profile.user.nil?
       json.user do
-        json.partial! 'open_api/v1/users/user', user: user_training.statistic_profile.user
+        json.partial! 'open_api/v1/users/user', user: user_training.statistic_profile.user.invoicing_profile
       end
     end
   end

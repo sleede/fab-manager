@@ -19,7 +19,7 @@
 </div>
 
 <div class="col-md-12">
-  <button type="button" class="btn btn-warning m-b" ui-sref="app.admin.members_new" translate>
+  <button type="button" class="fab-button is-secondary m-b" ui-sref="app.admin.members_new" translate>
     {{ 'app.admin.members.add_a_new_member' }}
   </button>
   <div class="pull-right exports-buttons m-b" ng-show="isAuthorized('admin')">
@@ -40,6 +40,6 @@
   </div>
 
   <div class="text-center">
-    <button class="btn btn-warning show-more" ng-click="showNextMembers()" ng-hide="member.noMore"><i class="fa fa-search-plus" aria-hidden="true"></i> {{ 'app.admin.members.display_more_users' | translate }}</button>
+    <button class="fab-button is-secondary show-more" ng-click="showNextMembers()" ng-hide="member.noMore"><i class="fa fa-search-plus" aria-hidden="true"></i> {{ 'app.admin.members.display_more_users' | translate }}</button>
   </div>
 </div>

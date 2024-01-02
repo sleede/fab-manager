@@ -31,7 +31,7 @@
                           {{ 'app.admin.settings.general.neutral' | translate }} <span style="font-weight: normal">{{ 'app.admin.settings.general.eg' | translate }} <cite>{{ 'app.admin.settings.general.the_team' | translate }} <strong translate>{{ 'app.admin.settings.general.neutral_preposition' }}</strong> {{allSettings.fablab_name}}</cite></span>
                         </label>
                     </div>
-                    <button name="button" class="btn btn-warning" ng-click="save(nameGenre)" translate>{{ 'app.shared.buttons.save' }}</button>
+                    <button name="button" class="fab-button is-secondary" ng-click="save(nameGenre)" translate>{{ 'app.shared.buttons.save' }}</button>
                 </form>
             </div>
         </div>
@@ -57,7 +57,7 @@
                      }'>
 
                 </div>
-                <button name="button" class="btn btn-warning" ng-click="save(machineExplicationsAlert)" translate>{{ 'app.shared.buttons.save' }}</button>
+                <button name="button" class="fab-button is-secondary" ng-click="save(machineExplicationsAlert)" translate>{{ 'app.shared.buttons.save' }}</button>
             </div>
             <div class="col-md-3" ng-show="$root.modules.trainings">
                 <h4 translate>{{ 'app.admin.settings.warning_message_of_the_training_booking_page'}}</h4>
@@ -70,7 +70,7 @@
                      }'>
 
                 </div>
-                <button name="button" class="btn btn-warning" ng-click="save(trainingExplicationsAlert)" translate>{{ 'app.shared.buttons.save' }}</button>
+                <button name="button" class="fab-button is-secondary" ng-click="save(trainingExplicationsAlert)" translate>{{ 'app.shared.buttons.save' }}</button>
             </div>
             <div class="col-md-3" ng-show="$root.modules.trainings">
                 <h4 translate>{{ 'app.admin.settings.information_message_of_the_training_reservation_page'}}</h4>
@@ -83,7 +83,7 @@
                      }'>
 
                 </div>
-                <button name="button" class="btn btn-warning" ng-click="save(trainingInformationMessage)" translate>{{ 'app.shared.buttons.save' }}</button>
+                <button name="button" class="fab-button is-secondary" ng-click="save(trainingInformationMessage)" translate>{{ 'app.shared.buttons.save' }}</button>
             </div>
             <div class="col-md-3" ng-show="$root.modules.plans">
                 <h4 translate>{{ 'app.admin.settings.message_of_the_subscriptions_page' }}</h4>
@@ -95,7 +95,7 @@
                        "targetBlank": true
                      }'>
                 </div>
-                <button name="button" class="btn btn-warning" ng-click="save(subscriptionExplicationsAlert)" translate>{{ 'app.shared.buttons.save' }}</button>
+                <button name="button" class="fab-button is-secondary" ng-click="save(subscriptionExplicationsAlert)" translate>{{ 'app.shared.buttons.save' }}</button>
             </div>
             <div class="col-md-3">
                 <h4 translate>{{ 'app.admin.settings.message_of_the_events_page' }}</h4>
@@ -107,7 +107,7 @@
                        "targetBlank": true
                      }'>
                 </div>
-                <button name="button" class="btn btn-warning" ng-click="save(eventExplicationsAlert)" translate>{{ 'app.shared.buttons.save' }}</button>
+                <button name="button" class="fab-button is-secondary" ng-click="save(eventExplicationsAlert)" translate>{{ 'app.shared.buttons.save' }}</button>
             </div>
             <div class="col-md-3" ng-show="$root.modules.spaces" ng-show="$root.modules.spaces">
                 <h4 translate>{{ 'app.admin.settings.message_of_the_spaces_page' }}</h4>
@@ -119,7 +119,7 @@
                        "targetBlank": true
                      }'>
                 </div>
-                <button name="button" class="btn btn-warning" ng-click="save(spaceExplicationsAlert)" translate>{{ 'app.shared.buttons.save' }}</button>
+                <button name="button" class="fab-button is-secondary" ng-click="save(spaceExplicationsAlert)" translate>{{ 'app.shared.buttons.save' }}</button>
             </div>
         </div>
     </div>
@@ -154,7 +154,7 @@
                                       </span>
                     </div>
                 </div>
-                <button name="button" type="submit" ng-class="{'btn-loading':loader.cgv}" ng-disabled="cgvForm.$invalid" class="btn btn-warning" translate>{{ 'app.shared.buttons.save' }}</button>
+                <button name="button" type="submit" ng-class="{'btn-loading':loader.cgv}" ng-disabled="cgvForm.$invalid" class="fab-button is-secondary" translate>{{ 'app.shared.buttons.save' }}</button>
             </form>
         </div>
         <div class="row m-t-xl">
@@ -178,7 +178,7 @@
                                       </span>
                     </div>
                 </div>
-                <button name="button" type="submit" ng-class="{'btn-loading':loader.cgu}" ng-disabled="cguForm.$invalid" class="btn btn-warning" translate>{{ 'app.shared.buttons.save' }}</button>
+                <button name="button" type="submit" ng-class="{'btn-loading':loader.cgu}" ng-disabled="cguForm.$invalid" class="fab-button is-secondary" translate>{{ 'app.shared.buttons.save' }}</button>
             </form>
         </div>
     </div>
@@ -219,7 +219,7 @@
                             </div>
                         </div>
                     </div>
-                    <button name="button" type="submit" class="btn btn-warning m-t m-l" ng-disabled="logoForm.$invalid" translate>{{ 'app.shared.buttons.save' }}</button>
+                    <button name="button" type="submit" class="fab-button is-secondary m-t m-l" ng-disabled="logoForm.$invalid" translate>{{ 'app.shared.buttons.save' }}</button>
                 </form>
             </div>
             <div class="col-md-4">
@@ -245,7 +245,7 @@
                             </div>
                         </div>
                     </div>
-                    <button name="button" type="submit" class="btn btn-warning m-t m-l" ng-disabled="logoBlackForm.$invalid" translate>{{ 'app.shared.buttons.save' }}</button>
+                    <button name="button" type="submit" class="fab-button is-secondary m-t m-l" ng-disabled="logoBlackForm.$invalid" translate>{{ 'app.shared.buttons.save' }}</button>
                 </form>
             </div>
             <div class="col-md-4">
@@ -271,7 +271,7 @@
                             </div>
                         </div>
                     </div>
-                    <button name="button" type="submit" class="btn btn-warning m-t m-l" ng-disabled="faviconForm.$invalid" translate>{{ 'app.shared.buttons.save' }}</button>
+                    <button name="button" type="submit" class="fab-button is-secondary m-t m-l" ng-disabled="faviconForm.$invalid" translate>{{ 'app.shared.buttons.save' }}</button>
                 </form>
             </div>
         </div>
@@ -288,7 +288,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <button name="button" class="btn btn-warning" ng-click="save(mainColorSetting)" translate>{{ 'app.shared.buttons.save' }}</button>
+                        <button name="button" class="fab-button is-secondary" ng-click="save(mainColorSetting)" translate>{{ 'app.shared.buttons.save' }}</button>
                     </div>
                 </form>
             </div>
@@ -304,7 +304,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <button name="button" class="btn btn-warning" ng-click="save(secondColorSetting)" translate>{{ 'app.shared.buttons.save' }}</button>
+                        <button name="button" class="fab-button is-secondary" ng-click="save(secondColorSetting)" translate>{{ 'app.shared.buttons.save' }}</button>
                     </div>
                 </form>
             </div>
@@ -332,8 +332,9 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <button name="button" type="submit" class="btn btn-warning m-t m-l" ng-disabled="profileImageForm.$invalid" translate>{{ 'app.shared.buttons.save' }}</button>
+                      </div>
+                    <span class="block m-t-xs m-l text-gray text-sm" translate>{{ 'app.admin.settings.background_picture_recommendation' }}</span>
+                    <button name="button" type="submit" class="fab-button is-secondary m-t m-l" ng-disabled="profileImageForm.$invalid" translate>{{ 'app.shared.buttons.save' }}</button>
                 </form>
             </div>
         </div>

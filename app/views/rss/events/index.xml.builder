@@ -22,7 +22,9 @@ xml.rss version: '2.0', 'xmlns:xCal' => 'urn:ietf:params:xml:ns:xcal' do
         xml.xCal :dtend do
           xml.text! event.availability.end_at.strftime('%FT%T%:z')
         end
-        xml.enclosure url: root_url + event.event_image.attachment.large.url, length: event.event_image.attachment.large.size, type: event.event_image.attachment.content_type if event.event_image
+        if event.event_image&.attachment?
+          xml.enclosure url: root_url + event.event_image.attachment.large.url, length: event.event_image.attachment.large.size, type: event.event_image.attachment.content_type
+        end
         xml.category event.category.name
       end
     end

@@ -7,8 +7,8 @@
   <p ng-show="object.user && currentUser.id !== object.user.id" translate translate-values="{NAME: object.user.name}">{{ 'app.shared.confirm_modify_slot_modal.do_you_want_to_change_NAME_s_booking_slot_initially_planned_at' }}</p>
   <p><strong>{{object.start | amDateFormat: 'LL'}} : {{object.start | amDateFormat:'LT'}} - {{object.end | amDateFormat:'LT'}}</strong></p>
 </div>
-<div class="modal-footer">
-  <button class="btn btn-warning" ng-class="{'m-b':object.cancelable&&object.movable}" ng-click="ok('cancel')" ng-show="object.cancelable" translate>{{ 'app.shared.confirm_modify_slot_modal.cancel_this_reservation' }}</button>
-  <button class="btn btn-info" ng-click="ok('move')" ng-show="object.movable" translate>{{ 'app.shared.confirm_modify_slot_modal.i_want_to_change_date' }}</button>
-  <button class="btn btn-default" ng-click="cancel()" translate>{{ 'app.shared.buttons.cancel' }}</button>
+<div class="modal-footer btn-stack">
+  <button class="fab-button is-secondary button-full" ng-class="{'m-b':object.cancelable&&object.movable}" ng-click="ok('cancel')" ng-show="object.cancelable" translate>{{ 'app.shared.confirm_modify_slot_modal.cancel_this_reservation' }}</button>
+  <button class="fab-button is-info button-full" ng-click="ok('move')" ng-show="object.movable" translate>{{ 'app.shared.confirm_modify_slot_modal.i_want_to_change_date' }}</button>
+  <button class="fab-button button-full" ng-click="cancel()" translate>{{ 'app.shared.buttons.cancel' }}</button>
 </div>

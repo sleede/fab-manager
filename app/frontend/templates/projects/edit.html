@@ -18,9 +18,9 @@
 
       <div class="col-xs-12 col-sm-12 col-md-4 b-t hide-b-md">
         <section class="heading-actions wrapper">
-         <input type="submit" ng-value="saveButtonValue()" class="btn btn-lg btn-warning m-t-xs text-u-c"
+         <input type="submit" ng-value="saveButtonValue()" class="fab-button is-secondary m-t-xs"
                 ng-disabled="projectForm.$invalid"/>
-         <div class="btn btn-lg btn-valid btn-success m-t-xs text-u-c" publish-project ng-if="project.state == 'draft'" ng-disabled="projectForm.$invalid" translate>{{ 'app.logged.projects_edit.publish' }}</div>
+         <div class="fab-button is-info m-t-xs" publish-project ng-if="project.state == 'draft'" ng-disabled="projectForm.$invalid" translate>{{ 'app.logged.projects_edit.publish' }}</div>
 
         </section>
       </div>

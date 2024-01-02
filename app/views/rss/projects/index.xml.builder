@@ -17,7 +17,9 @@ xml.rss version: '2.0' do
         xml.link root_url + '#!/projects/' + project.slug
         xml.author project.author&.user&.profile&.full_name
         xml.description project.description
-        xml.enclosure url: root_url + project.project_image.attachment.large.url, length: project.project_image.attachment.large.size, type: project.project_image.attachment.content_type if project.project_image
+        if project.project_image&.attachment?
+          xml.enclosure url: root_url + project.project_image.attachment.large.url, length: project.project_image.attachment.large.size, type: project.project_image.attachment.content_type
+        end
       end
     end
   end

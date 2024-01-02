@@ -1023,9 +1023,6 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
         });
         resetEventReserve();
       });
-      if ($scope.currentUser.role === 'admin') {
-        return $scope.ctrl.member = null;
-      }
     };
 
     /**

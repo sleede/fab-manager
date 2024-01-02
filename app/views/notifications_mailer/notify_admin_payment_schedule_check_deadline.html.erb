@@ -3,7 +3,7 @@
 <p>
   <%= t('.body.remember',
         REFERENCE: @attached_object.payment_schedule.reference,
-        AMOUNT: number_to_currency(@attached_object.amount / 100.00),
+        AMOUNT: number_to_currency(@attached_object.amount / 100.00, locale: CURRENCY_LOCALE),
         DATE: I18n.l(@attached_object.due_date, format: :long)) %>
   <%= t('.body.date') %>
 </p>

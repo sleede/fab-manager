@@ -2,8 +2,8 @@
   background-color: $brand-light;
 }
 
-//.bg-red { background-color: $red; color: white; }
-//.bg-red-dark { background-color: $red-dark; }
+.bg-red { background-color: var(--main); color: var(--main-text-color); }
+.bg-red-dark { background-color: var(--main-dark); color: var(--main-text-color); }
 //.bg-yellow { background-color: $yellow !important; }
 .bg-token {
   background-color: rgba(230, 208, 137, 0.49);

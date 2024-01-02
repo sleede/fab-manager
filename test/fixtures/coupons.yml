@@ -16,7 +16,7 @@ two:
   valid_until: <%= 1.month.from_now.utc.strftime('%Y-%m-%d %H:%M:%S.%9N %Z') %>
   max_usages: 10
   active: true
-  validity_per_user: always
+  validity_per_user: forever
 
 cash:
   name: Cash Code

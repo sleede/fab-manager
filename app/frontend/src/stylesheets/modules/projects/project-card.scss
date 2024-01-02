@@ -11,7 +11,7 @@
   }
 
   .project-image {
-    @include imageRatio(50%);
+    @include imageRatio(56%);
     background-size: cover;
     background-position: center;
     border-bottom: 1px solid var(--gray-soft-dark);

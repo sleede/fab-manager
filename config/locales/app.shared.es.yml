@@ -128,6 +128,7 @@ es:
         name: "Nombre"
         name_is_required: "Se requiere un nombre."
         illustration: "Ilustración"
+        illustration_recommendation: "Tamaño máximo: 932 * 700 px (ratio sin restricciones)."
         add_an_illustration: "Añadir una ilustración"
         CAD_file: "Fichero CAD"
         CAD_files: "Archivos CAD"
@@ -168,7 +169,7 @@ es:
       member_select:
         select_a_member: "Selecciona un miembro"
         start_typing: "Empezar a escribir..."
-        member_not_validated: "Advertencia:<br>El miembro no ha sido validado."
+        member_not_validated: "Este miembro todavia no ha sido validado."
       #payment modal
       abstract_payment_modal:
         online_payment: "Pago en línea"
@@ -196,11 +197,12 @@ es:
         warning_incomplete_user_profile_probably_imported_from_sso: "Advertencia: Este perfil de usuario está incompleto. Como el método de autenticación SSO está activo, puede que la cuenta sea importada pero no fusionada. No la modifique a no ser que sepa lo que hace."
         group: "Grupo"
         group_is_required: "Se requiere un grupo."
-        trainings: "Cursos"
+        trainings: "Formaciones"
         tags: "Etiquetas"
+        children: "Hijos"
       #machine/training slot modification modal
       confirm_modify_slot_modal:
-        change_the_slot: "Cambiar la ranura"
+        change_the_slot: "Cambiar la franja horaria"
         do_you_want_to_change_your_booking_slot_initially_planned_at: "Desea cambiar su reserva efectuada inicialmente el:"
         do_you_want_to_change_NAME_s_booking_slot_initially_planned_at: "Desea cambiar la reserva de {NAME} , efectuada inicialmente el:"
         cancel_this_reservation: "Cancelar reserva"
@@ -373,6 +375,8 @@ es:
         user_validation_required_alert: "¡Atención!<br>Su administrador debe validar su cuenta. Luego, podrá acceder a todas las funciones de reserva."
         select_the_reservation_context: "Seleccione el contexto de la reserva"
         please_select_a_reservation_context: "Seleccione primero el contexto de la reserva"
+        child_validation_required_alert: "Su administrador debe validar su cuenta de hijo. Luego, podrá reservar el evento."
+        child_birthday_must_be_under_18_years_ago_alert: "Su hijo debe tener menos de 18 años. Luego, usted podrá reservar el evento."
       #feature-tour modal
       tour:
         previous: "Anterior"
@@ -446,10 +450,11 @@ es:
         select_all: "Seleccionar todo"
         unselect_all: "Deseleccionar todo"
       form_file_upload:
-        browse: "Navegar"
+        placeholder: "Añadir un archivo"
+        browse: "Buscar"
         edit: "Editar"
       form_image_upload:
-        browse: "Navegar"
+        browse: "Buscar"
         edit: "Editar"
         main_image: "Vista principal"
       store:
@@ -535,7 +540,7 @@ es:
         stock_external: "Stock público"
       calendar:
         calendar: "Agenda"
-        show_unavailables: "Mostrar todas las franjas horarias"
+        show_unavailables: "Mostrar las franjas horarias llenas"
         filter_calendar: "Filtrar calendario"
         trainings: "Formaciones"
         machines: "Máquinas"

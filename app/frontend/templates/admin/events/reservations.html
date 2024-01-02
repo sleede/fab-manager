@@ -60,7 +60,7 @@
                 <div ng-if="!isCancelled(reservation) && !reservation.is_paid">
                   <label class="m-r-sm">
                     <span translate>{{ 'app.admin.event_reservations.negative' }}</span>
-                    <input type="radio" name="invalidate-{{reservation.id}}" ng-value="false" ng-click="invalidateReservation(reservation)" ng-model="reservation.slots_reservations_attributes[0].is_valid" ng-disabled="reservation.total_booked_seats > event.nb_free_places && !reservation.slots_reservations_attributes[0].is_valid">
+                    <input type="radio" name="invalidate-{{reservation.id}}" ng-value="false" ng-click="invalidateReservation(reservation)" ng-model="reservation.slots_reservations_attributes[0].is_valid" ng-disabled="reservation.slots_reservations_attributes[0].is_valid === 'false'">
                   </label>
                   <label>
                     <span translate>{{ 'app.admin.event_reservations.affirmative' }}</span>
@@ -85,7 +85,7 @@
         </table>
         <p ng-if="reservations.length == 0" translate>{{ 'app.admin.event_reservations.no_reservations_for_now' }}</p>
 
-        <button type="button" class="btn btn-warning m-t m-b" ui-sref="app.admin.events" translate>{{ 'app.admin.event_reservations.back_to_monitoring' }}</button>
+        <button type="button" class="fab-button is-secondary m-t m-b" ui-sref="app.admin.events" translate>{{ 'app.admin.event_reservations.back_to_monitoring' }}</button>
       </div>
     </div>
   </section>

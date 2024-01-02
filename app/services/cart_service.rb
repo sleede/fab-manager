@@ -191,33 +191,36 @@ class CartService
 
   def reservable_from_payment_schedule_object(object, plan)
     reservable = object.reservation.reservable
+    cart_item_reservation_slots = object.reservation.slots_reservations.map do |s|
+      { slot_id: s.slot_id, slots_reservation_id: s.id, offered: s.offered }
+    end
     case reservable
     when Machine
       CartItem::MachineReservation.new(customer_profile: @customer.invoicing_profile,
                                        operator_profile: @operator.invoicing_profile,
                                        reservable: reservable,
-                                       cart_item_reservation_slots_attributes: object.reservation.slots_reservations,
+                                       cart_item_reservation_slots_attributes: cart_item_reservation_slots,
                                        plan: plan,
                                        new_subscription: true)
     when Training
       CartItem::TrainingReservation.new(customer_profile: @customer.invoicing_profile,
                                         operator_profile: @operator.invoicing_profile,
                                         reservable: reservable,
-                                        cart_item_reservation_slots_attributes: object.reservation.slots_reservations,
+                                        cart_item_reservation_slots_attributes: cart_item_reservation_slots,
                                         plan: plan,
                                         new_subscription: true)
     when Event
       CartItem::EventReservation.new(customer_profile: @customer.invoicing_profile,
                                      operator_profile: @operator.invoicing_profile,
                                      event: reservable,
-                                     cart_item_reservation_slots_attributes: object.reservation.slots_reservation,
+                                     cart_item_reservation_slots_attributes: cart_item_reservation_slots,
                                      normal_tickets: object.reservation.nb_reserve_places,
                                      cart_item_event_reservation_tickets_attributes: object.reservation.tickets)
     when Space
       CartItem::SpaceReservation.new(customer_profile: @customer.invoicing_profile,
                                      operator_profile: @operator.invoicing_profile,
                                      reservable: reservable,
-                                     cart_item_reservation_slots_attributes: object.reservation.slots_reservations,
+                                     cart_item_reservation_slots_attributes: cart_item_reservation_slots,
                                      plan: plan,
                                      new_subscription: true)
     else

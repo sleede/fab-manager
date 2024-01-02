@@ -14,6 +14,7 @@
         #dashboard sections
         dashboard: "Kontrollpanel"
         my_profile: "Min profil"
+        my_children: "My Children"
         my_settings: "Mine innstillinger"
         my_supporting_documents_files: "My supporting documents"
         my_projects: "Mine prosjekter"
@@ -317,6 +318,9 @@
         event_description: "Arrangementsbeskrivelse"
         downloadable_documents: "Nedlastbare dokumenter"
         information_and_booking: "Informasjon og bestilling"
+        event_type:
+          family: "Event reserved for members"
+          nominative: "Nominative event"
         dates: "Datoer"
         beginning: "Start:"
         ending: "Slutt:"
@@ -332,9 +336,12 @@
         ticket: "{NUMBER, plural, one{Billett} other{Billetter}}"
         make_a_gift_of_this_reservation: "Gi denne reservasjonen som gave"
         thank_you_your_payment_has_been_successfully_registered: "Thank you. Your payment has been successfully registered!"
+        thank_you_your_pre_registration_has_been_successfully_saved: "Thank you. Your pre-registration has been successfully saved!"
         you_can_find_your_reservation_s_details_on_your_: "Du kan finne reservasjonens detaljer på din"
+        informed_by_email_your_pre_registration: "You will be kept informed by email of the progress made regarding your pre-registration."
         dashboard: "kontrollpanel"
         you_booked_DATE: "Du booket ({DATE}):"
+        you_pre_booked_DATE: "Your pre-registration ({DATE}):"
         canceled_reservation_SEATS: "Reservasjon avbestilt ({SEATS} plasser)"
         book: "Meld på"
         confirm_and_pay: "Bekreft og betal"
@@ -345,6 +352,7 @@
         you_can_shift_this_reservation_on_the_following_slots: "Du kan flytte denne reservasjonen til følgende tidsluke:"
         confirmation_required: "Bekreftelse påkrevd"
         do_you_really_want_to_delete_this_event: "Vil du virkelig slette denne hendelsen?"
+        all_reservations_for_this_event_will_be_canceled: All reservations for this event will be canceled.
         delete_recurring_event: "Du er ferd med å oppdatere en gjentakende hendelse. Hva vil du gjøre?"
         delete_this_event: "Bare denne hendelsen"
         delete_this_and_next: "Denne hendelsen og de følgende"
@@ -362,6 +370,10 @@
         view_event_list: "Vis hendelser som kommer"
         share_on_facebook: "Del på Facebook"
         share_on_twitter: "Del på Twitter"
+        last_name_and_first_name: "Last name and first name"
+        pre_book: "Pre-book"
+        pre_registration_end_date: "Deadline for pre-registration"
+        pre_registration: "Pre-registration"
       #public calendar
       calendar:
         calendar: "Kalender"
@@ -481,6 +493,35 @@
       member_select:
         select_a_member: "Select a member"
         start_typing: "Start typing..."
+      children_dashboard:
+        heading: "Children"
+        member_heading: "My Children"
+        add_child: "Add a child"
+      child_modal:
+        edit_child: "Edit child"
+        new_child: "New child"
+      child_form:
+        child_form_info: "Only children under 18 years old can be added to your Family account. Supporting documents may be requested to validate your child's account and allow you to register them for events."
+        first_name: "First name"
+        last_name: "Last name"
+        birthday: "Birthday"
+        email: "Email"
+        phone: "Phone"
+        save: "Save"
+        supporting_documents: "Supporting documents"
+        to_complete: "To complete"
+        refuse_documents_info: "You can refuse a selection of documents by clicking on the following button."
+        refuse_documents: "Refuse documents"
+      child_item:
+        first_name: "Child first name"
+        last_name: "Child last name"
+        birthday: "Birthday"
+        deleted: "The child has been deleted."
+        unable_to_delete: "Unable to delete the child."
+      delete_child_modal:
+        confirmation_required: "Confirmation required"
+        confirm: "Confirm"
+        confirm_delete_child: "Do you really want to remove this child?"
       tour:
         conclusion:
           title: "Takk for din oppmerksomhet"

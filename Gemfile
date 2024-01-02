@@ -91,9 +91,9 @@ gem 'friendly_id', '~> 5.1.0'
 gem 'aasm'
 
 # Background job processing
-gem 'sidekiq', '>= 6.0.7'
+gem 'sidekiq', '6.5.12'
 # Recurring jobs for Sidekiq
-gem 'sidekiq-scheduler'
+gem 'sidekiq-scheduler', '5.0.3'
 gem 'sidekiq-unique-jobs', '~> 7.1.23'
 
 gem 'stripe', '5.29.0'
@@ -153,3 +153,4 @@ gem 'sentry-ruby'
 gem "reverse_markdown"
 
 gem "ancestry"
+gem 'silencer', require: false

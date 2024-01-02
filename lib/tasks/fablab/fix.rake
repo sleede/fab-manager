@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require 'stripe/service'
 
 # Correctives for bugs or upgrades migrations tasks
 namespace :fablab do
@@ -345,6 +346,19 @@ namespace :fablab do
             PrepaidPackReservation.find_or_create_by!(statistic_profile_prepaid_pack: pack, reservation: reservation, consumed_minutes: consumed)
           end
           pack.update(minutes_used: pack.prepaid_pack.minutes - available_minutes)
+        end
+      end
+    end
+
+    desc '[release 6.3.6] fix stripe coupon duration'
+    task stripe_coupon_duration: :environment do |_task, _args|
+      if Setting.get('payment_gateway') == 'stripe'
+        Coupon.where(validity_per_user: 'forever').each do |c|
+          cpn = Stripe::Coupon.retrieve(c.code, api_key: Setting.get('stripe_secret_key'))
+          cpn.delete
+          Stripe::Service.new.create_coupon(c.id)
+        rescue Stripe::InvalidRequestError => e
+          puts  "Unable to create coupon #{c.code} on stripe: #{e}"
         end
       end
     end

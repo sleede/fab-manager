@@ -77,6 +77,21 @@
   }
 }
 
+.modal-footer.btn-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  &::after,
+  &::before {
+    content: none;
+  }
+
+  & > * {
+    margin: 0 !important;
+  }
+}
+
 .modal-backdrop {
   height: 100%;
 }
@@ -191,7 +206,6 @@
     overflow: hidden;
 
     img {
-      aspect-ratio: 16/9;
       object-fit: cover;
       object-position: center;
     }
@@ -200,7 +214,7 @@
   img {
     display: block;
     max-width: 100%;
-    height: auto;
+    max-height: 700px;
   }
 }
 
@@ -382,8 +396,13 @@
     vertical-align: bottom;
 
     &.label-icon {
+      width: 2.8rem;
+      height: 2.8rem;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
       font-size: rem-calc(22);
-      padding: 4px 9px 1px 10px;
+      color: var(--main-text-color);
     }
   }
 }
@@ -687,4 +706,8 @@ input[type=date].form-control {
   p {
     margin-bottom: 0;
   }
+}
+
+.medium-editor-anchor-preview a:hover {
+  color: #ffffff;
 }

@@ -4,10 +4,6 @@
 # a picture for the background of the user's profile.
 # There's only one stylesheet record in the database, which is updated on each colour change.
 class Stylesheet < ApplicationRecord
-  # brightness limits to change the font color to black or white
-  BRIGHTNESS_HIGH_LIMIT = 160
-  BRIGHTNESS_LOW_LIMIT = 40
-
   validates :contents, presence: true
 
   ## ===== COMMON =====
@@ -81,15 +77,15 @@ class Stylesheet < ApplicationRecord
   end
 
   def self.primary_text_color
-    Stylesheet.primary.paint.brightness >= BRIGHTNESS_HIGH_LIMIT ? 'black' : 'white'
+    Stylesheet.primary.paint.brightness > 100 ? 'black' : 'white'
   end
 
   def self.primary_decoration_color
-    Stylesheet.primary.paint.brightness <= BRIGHTNESS_LOW_LIMIT ? 'white' : 'black'
+    Stylesheet.primary.paint.brightness > 100 ? 'black' : 'white'
   end
 
   def self.secondary_text_color
-    Stylesheet.secondary.paint.brightness <= BRIGHTNESS_LOW_LIMIT ? 'white' : 'black'
+    Stylesheet.secondary.paint.brightness > 100 ? 'black' : 'white'
   end
 
   def self.theme_css

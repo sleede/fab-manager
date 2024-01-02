@@ -166,7 +166,6 @@ module SettingsHelper
     user_change_group
     user_validation_required
     user_validation_required_list
-    show_username_in_admin_list
     family_account
     child_validation_required
     store_module

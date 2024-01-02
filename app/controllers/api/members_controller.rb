@@ -67,7 +67,7 @@ class API::MembersController < API::APIController
   def export_subscriptions
     authorize :export
 
-    export = ExportService.last_export('users/subscription')
+    export = ExportService.last_export('users/subscriptions')
     if export.nil? || !FileTest.exist?(export.file)
       @export = Export.new(category: 'users', export_type: 'subscriptions', user: current_user)
       if @export.save

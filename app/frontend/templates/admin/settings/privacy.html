@@ -15,7 +15,7 @@
 
                 </div>
                 <span class="help-block text-info text-xs"><i class="fa fa-lightbulb-o"></i> {{ 'app.admin.settings.drag_and_drop_to_insert_images' | translate }}</span>
-                <button name="button" class="btn btn-warning" ng-click="savePrivacyPolicy()" translate>{{ 'app.shared.buttons.save' }}</button>
+                <button name="button" class="fab-button is-secondary" ng-click="savePrivacyPolicy()" translate>{{ 'app.shared.buttons.save' }}</button>
             </div>
             <div class="col-md-3">
                 <div ng-model="privacyDpoSetting.value" medium-editor options='{"placeholder": "{{ "app.admin.settings.privacy.input_the_dpo" | translate }}",
@@ -24,7 +24,7 @@
 
                 </div>
                 <span class="help-block text-info text-xs"><i class="fa fa-lightbulb-o"></i> {{ 'app.admin.settings.shift_enter_to_force_carriage_return' | translate }}</span>
-                <button name="button" class="btn btn-warning" ng-click="save(privacyDpoSetting)" translate>{{ 'app.shared.buttons.save' }}</button>
+                <button name="button" class="fab-button is-secondary" ng-click="save(privacyDpoSetting)" translate>{{ 'app.shared.buttons.save' }}</button>
             </div>
 
         </div>

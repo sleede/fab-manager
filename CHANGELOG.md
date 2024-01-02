@@ -1,12 +1,118 @@
 # Changelog Fab-manager
 
-## next deploy
+## v6.3.8 2023 December 29
+
+- Fix a bug: unable to build docker image
+
+## v6.3.7 2023 December 28
+
+- Fix a bug: unable to show wallet payment mean for invoice
+- Fix a bug: PayZen amount of subscription compute error for Coupon validity per user = forever
+- Fix a bug: unable to create Stripe coupon with duration = forever
+- improvement: remove show_username_in_admin_list setting
+- improvement: show invoice payment method in accounting line
+- [TODO DEPLOY] `rails fablab:setup:build_accounting_lines`
+- [TODO DEPLOY] `rails fablab:fix:stripe_coupon_duration`
+
+## v6.3.6 2023 December 6
+
+- fix a bug: fix event service
+- updates translations
+
+## v6.3.5 2023 December 4
+
+- fix a bug: user was not able to reserve at the same time of an event with pre-registration invalidated
+- fix a bug: avoids crash if invoicing_profile has no address associated to it
+- improvement: improves how pay_zen transactions are matched with payment_schedule_items
+- improvement: improves rrule of pay_zen subscriptions
+- improvement: better text contrast on customizable colors. Good for accessibility.
+- Improvement: set the number of new attempts available in case the payment is rejected to 1 for PayZen
+
+## v6.3.4 2023 November 23
+
+- fix a bug: wrong amount when pay a reservation with payment schedule
+- fix a bug: regression on PaymentScheduleItemWorker from v6.3.2
+- fix a bug: event.pre_registration_end_date (was set to beginning_of_day instead of end_of_day)
+
+## v6.3.3 2023 November 14
+
+- fix a bug: wrong currency unit for locale fr-CH
+
+## v6.3.2 2023 November 14
+
+- updates sidekiq and sidekiq-scheduler
+- fix a bug: wrong locale was causing wrong currency in cron jobs, now we manually set the currency locale in number_to_currency
+
+## v6.3.1 2023 November 10
+
+- Fix a bug: statistic_sub_type.label of plan was nil
+- adds a migrations to fix all statistic_sub_types of plans having label = nil
+- Fix a bug: unable to show wallet payment mean for avoir
+- updates spanish translations and adds translations
+- Fix a bug: avoids crash due to oidc config with scope = nil
+- Fix a bug: unable to see value for input group with long label on eventModal
+- Improvement: when deleting an event, all reservations are canceled
+- Improvement: replace original image by large generated version (event, machine, space, training)
+
+## v6.3.0 2023 November 3
+
+- Fix a bug: fix all failing tasks of rake task file chain.rake
+- Fix a bug: file_size_validator.rb was broken since ruby v3, see https://github.com/rails/rails/issues/41270
+- improvement: pre-registration event reservations limit places
+- improvement: add including_deleted_users param for open api users
+- decreases sidekiq concurrency from 25 to 5, 25 is too much and consumes memory for nothing
+- do not log Notifications#polling action anymore, by default, can be enable via env variable ENABLE_NOTIFICATIONS_POLLING_LOGGING=true
+- Fix a bug: api/products/index bug when sorting by amount
+- adds a rake task to regenerate invoices by ids (see maintenance.rake)
+- Fix a bug: replaces custom ServerLocale middleware with sidekiq i18n middleware
+- adds a rake task to erase all reservations and invoices (fablab:maintenance:delete_all_reservations_and_invoices)
+- improvement: dynamic label (i18n) for stats structure tables
+- [TODO DEPLOY] upgrade to v6.2.0 BEFORE upgrading to v6.3.0 !!!
+
+## v6.2.0 2023 October 13
+
+- Fix a bug: fix ReservationReminderWorker, was sending reservation reminder to users with a event reservation not validated by admin + adds tests for all scenarios
+- Fix a bug: admin could not create new SupportingDocumentType (problem was on js side)
+- Fix a bug: fix back button on space edit page
+- Fix a bug: fix members tour (help), a selector was not valid anymore
+- Fix a bug: unable to save OpenID extra_authorize_params as json
+- Fix machine list bug : when there is no user logged in and access machines list with at least one machine associated to a space
+- [TODO DEPLOY] `rails db:seed`
+
+## v6.1.2 2023 October 2
+
+- Fix a bug: minor pb (exception raised) when bot hit api/projects#search without being authenticated
+- Fix a bug: minor pb (exception raised) when a bot or unauthenticated user hit api/auth_providers actions
+- Fix a bug: when calling .to_json on an "avoir", there was a bug because order_number delegates on invoice which can be nil, it was causing errors in notifications rendering
+- Fix a bug: when getting status of users/subscriptions export
+- improvement : adds/edit spanish translations
+
+## v6.1.1 2023 September 28
+
+- Fix a bug: unable to sync projects with openprojects
+- Fix a bug: public availabilities (no user) was buggy (server error)
+- Fix a bug: unable to generate statistic
+- Fix a bug: rss/projects was failing with project without image
+- improvement : performance of members#show and reservations#index
+
+- [TODO DEPLOY] `rails fablab:openlab:bulk_export`
+- [TODO DEPLOY] `rails fablab:openlab:bulk_update`
+- [TODO DEPLOY] `rails fablab:maintenance:regenerate_statistics[2023,9]`
+
+## v6.1.0 2023 September 25
 
 - improves api/notification controller to avoid failing when there is a notification with wrong notification_type in db
 - Add extra_authorize_params to OpenIdConnect config
 - Improvement : add a notification to remind users to upload their supporting documents
 - Cancel payment schedule subscription after update the payment mean
 - admin can see reservations of a member
+- Fix a bug: unable to update card for payment schedule
+- Fix a bug: user is_allow_contact is active by default
+- Fix a bug: unable to export projects
+- Fix a bug: unable to update card bank of payment schedule
+- Feature: family compte for event
+- Feature: pre-registration event
+- [TODO DEPLOY] `rails db:seed`
 
 ## v6.0.14 2023 September 6
 
@@ -68,7 +174,7 @@
 
 - Improved projects list filter
 - Fix a bug: unable to refresh machine/space/training calender after pay an reservation
-- Fix a bug: Accouning Line in duplicate
+- Fix a bug: Accounting Line in duplicate
 - Fix a bug: displays "my orders" link only if store module is active
 - [TODO DEPLOY] `rails fablab:setup:build_accounting_lines`
 
@@ -77,7 +183,7 @@
 - Fix a bug: OpenAPI accounting gateway_object_id missing error
 - Fix a bug: unable to modify the price of prepaid pack
 - Fix a bug: notification type missing
-- Fix critical bug: Incorrect amount calculation when paying monthly subcription with a wallet for PayZen
+- Fix critical bug: Incorrect amount calculation when paying monthly subscription with a wallet for PayZen
 
 ## v6.0.6 2023 May 4
 
@@ -168,7 +274,7 @@
 - Ability to restrict machine availabilities per plan
 - Ability to configure a prior period for each reservation type to prevent booking (#440)
 - Admins cannot select the date when creating a refund invoice anymore
-- Fix a bug: JS date is initalialized 1 day before in negative timezones (#445)
+- Fix a bug: JS date is initialized 1 day before in negative timezones (#445)
 - Fix a bug: user's profile field gender is now marked as required
 - Fix a bug: logical sequence of invoices references is broken, when using the store module or the payments schedules
 - Fix a bug: refund invoices may generate duplicates in invoices references
@@ -204,11 +310,11 @@
 - OpenAPI reservation endpoint will return details for the reserved slots
 - Display info messages if the user cannot buy prepaid packs
 - Fix a bug: some OpenAPI endpoints struggle and expire with timeout
-- Fix a bug: OpenAPI events endpoint documentation does not refect the returned data
+- Fix a bug: OpenAPI events endpoint documentation does not reflect the returned data
 - Fix a bug: members can't change/cancel their reservations
 - Fix a bug: admin events view should default to the list tab
 - Fix a bug: event creation form should not allow setting multiple times the same price category
-- Fix a bug: MAX_SIZE env varibles should not be quoted (#438)
+- Fix a bug: MAX_SIZE env variables should not be quoted (#438)
 - Fix a bug: unable to add OIDC scopes without discovery
 - [BREAKING CHANGE] GET `open_api/v1/events` will necessarily be paginated
 - [BREAKING CHANGE] GET `open_api/v1/invoices` will necessarily be paginated
@@ -247,7 +353,7 @@
 - Automatically cancel trainings with insufficient attendees
 - Check SCSS syntax before saving home page style
 - Use Time instead of DateTime objects
-- Fix a bug: missing statististics subtypes
+- Fix a bug: missing statistics subtypes
 - Fix a bug: wrong times in admin/event monitoring
 - Fix a bug: daylight saving time is ignored and result in wrong dates and/or times when dealing around the DST day
 - Fix a bug: date shift in event creation/update
@@ -282,7 +388,7 @@
 - Fix a bug: invalid duration for machine/spaces reservations in statistics, when using slots of not 1 hour
 - Fix a bug: invalid month in date format
 - Fix a bug: do not show theme and age-range fields in event form if no options were set
-- Fix a bug: do not show catgory select in plan form if no options were set
+- Fix a bug: do not show category select in plan form if no options were set
 - Fix a bug: new setups doesn't log
 - [TODO DEPLOY] `rails db:seed`
 - [TODO DEPLOY] `rails fablab:es:build_stats` THEN `rails fablab:maintenance:regenerate_statistics[2014,1]`
@@ -321,7 +427,7 @@
 ## v5.6.3 2023 January 9
 
 - Fix a bug: unable to build the docker image (yarn error extracting tar content of undefined failed)
-- Fix a security issue: logged users but non-admins can access to analytics data throught the API
+- Fix a security issue: logged users but non-admins can access to analytics data through the API
 
 ## v5.6.2 2023 January 9
 
@@ -363,7 +469,7 @@
 - OpenAPI endpoint to fetch accounting data
 - Add reservation deadline parameter (#414)
 - Verify current password at server side when changing password
-- Password strengh indicator
+- Password strength indicator
 - Updated OpenAPI documentation
 - Updated OpenID Connect documentation
 - OpenAPI users endpoint offer ability to filter by created_after
@@ -371,7 +477,7 @@
 - Default accounting codes and labels if not set
 - Active serving static files from the `/public` folder by default from rails
 - Display custom error message if the PDF invoice is not found
-- Report subsription mismatch with user's group
+- Report subscription mismatch with user's group
 - Added sentry for error reporting
 - Report details of the due for invoices related to a payment schedule
 - Migrated plan/machine/space/event forms to react

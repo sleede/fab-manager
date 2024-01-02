@@ -16,4 +16,16 @@ class OpenIdConnectProvider < ApplicationRecord
   validates :display, inclusion: { in: %w[page popup touch wap], allow_nil: true }
   validates :prompt, inclusion: { in: %w[none login consent select_account], allow_nil: true }
   validates :client_auth_method, inclusion: { in: %w[basic jwks] }
+  store_accessor :extra_authorize_params
+
+  def extra_authorize_params=(val)
+    return unless val.is_a?(String)
+
+    begin
+      super JSON.parse(val)
+    rescue JSON::ParserError
+      errors[:extra_authorize_params].add('is not valid JSON')
+      super
+    end
+  end
 end

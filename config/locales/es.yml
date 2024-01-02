@@ -49,6 +49,7 @@ es:
       gateway_amount_too_large: "No se admiten pagos superiores a %{AMOUNT}. Haga su pedido directamente en recepción."
       product_in_use: "Este producto ya ha sido pedido"
       slug_already_used: "ya está en uso"
+      birthday_less_than_18_years_ago: "El cumpleaños debe ser menor de 18 años"
   coupon:
     code_format_error: "sólo se permiten letras de mayúsculas, números y guiones"
   apipie:
@@ -65,7 +66,7 @@ es:
     not_available: "No disponible"
     reserving: "Me reservo"
     i_ve_reserved: "He reservado"
-    blocked: "Blocked"
+    blocked: "Bloqueado"
     length_must_be_slot_multiple: "Debe ser al menos %{MIN} minutos después de la fecha de inicio"
     must_be_associated_with_at_least_1_machine: "debe estar asociado con al menos 1 máquina"
     deleted_user: "Usuario eliminado"
@@ -100,7 +101,7 @@ es:
     subscription_NAME_from_START_to_END: "Suscripción %{NAME} - desde %{START} hasta %{END}"
     machine_reservation_DESCRIPTION: "Reserva de máquina - %{DESCRIPTION}"
     space_reservation_DESCRIPTION: "Reserva de espacio - %{DESCRIPTION}"
-    training_reservation_DESCRIPTION: "Reserva de curso - %{DESCRIPTION}"
+    training_reservation_DESCRIPTION: "Reserva de formación - %{DESCRIPTION}"
     event_reservation_DESCRIPTION: "Reserva de evento - %{DESCRIPTION}"
     from_payment_schedule: "Vencimiento %{NUMBER} dé %{TOTAL}, a partir dé %{DATE}. Calendario dé amortización %{SCHEDULE}"
     null_invoice: "Facturación a cero, salto de facturación tras un mal funcionamiento del programa informático Fab Manager"
@@ -212,7 +213,7 @@ es:
     group: "Grupo"
     subscription: "Suscripción"
     subscription_end_date: "Fecha de fin de suscripción"
-    validated_trainings: "Cursos validados"
+    validated_trainings: "Formaciones validadas"
     tags: "Etiquetas"
     number_of_invoices: "Numero de facturas"
     projects: "Proyectos"
@@ -286,6 +287,8 @@ es:
         an_abuse_was_reported_on_TYPE_ID_NAME_html: "Un abuso ha sido reportado <strong>%{TYPE} %{ID}: <em>%{NAME}</em></strong>."
       notify_admin_member_create_reservation:
         a_RESERVABLE_reservation_was_made_by_USER_html: "Una reserva de <strong><em>%{RESERVABLE}</em></strong> fue hecha por <strong><em>%{USER}</em></strong>."
+      notify_admin_member_pre_booked_reservation:
+        a_RESERVABLE_reservation_was_made_by_USER_html: "Una preinscripción de <strong><em>%{RESERVABLE}</em></strong> fue realisada por <strong><em>%{USER}</em></strong>."
       notify_admin_profile_complete:
         account_imported_from_PROVIDER_UID_has_completed_its_information_html: "Cuenta importada desde <strong><em>%{PROVIDER}</strong> (%{UID})</em> ha completado su información."
       notify_admin_slot_is_canceled:
@@ -314,10 +317,14 @@ es:
         project_NAME_has_been_published_html: "Proyecto <a href='/#!/projects/%{ID}'><strong><em>%{NAME}<em></strong></a> ha sido publicado."
       notify_admin_when_user_is_created:
         a_new_user_account_has_been_created_NAME_EMAIL_html: "Se ha creado una nueva cuenta: <strong><em>%{NAME} &lt;%{EMAIL}&gt;</strong></em>."
+      notify_admin_child_created:
+        a_new_child_has_been_created_NAME_html: "Se ha creado un nuevo hijo: <strong><em>%{NAME}</em></strong>."
       notify_admin_when_user_is_imported:
         a_new_user_account_has_been_imported_from_PROVIDER_UID_html: "Se ha importado una nueva cuenta: <strong><em>%{PROVIDER}</strong> (%{UID})</em>."
       notify_member_create_reservation:
         your_reservation_RESERVABLE_was_successfully_saved_html: "Su reserva <strong><em>%{RESERVABLE}</em></strong> se ha guardado correctamente."
+      notify_member_pre_booked_reservation:
+        your_reservation_RESERVABLE_was_successfully_saved_html: "Su preinscripción <strong><em>%{RESERVABLE}</em></strong> se ha guardado correctamente."
       notify_member_reservation_reminder:
         reminder_you_have_a_reservation_RESERVABLE_to_be_held_on_DATE_html: "Recuerda: Su reserva <strong>%{RESERVABLE}</strong> tendrá lugar el <em>%{DATE}</em>"
       notify_member_slot_is_canceled:
@@ -354,7 +361,7 @@ es:
       notify_user_profile_complete:
         your_profile_was_completed: "Su perfil se completó con éxito, ahora tiene acceso a toda la plataforma."
       notify_user_training_valid:
-        your_TRAINING_was_validated_html: "Su curso <strong><em>%{TRAINING}</em></strong> ha sido validado con éxito."
+        your_TRAINING_was_validated_html: "Su formación <strong><em>%{TRAINING}</em></strong> ha sido validada con éxito."
       notify_user_user_group_changed:
         your_group_has_changed: "Su grupo ha sido cambiado."
       notify_user_when_avoir_ready:
@@ -376,7 +383,7 @@ es:
         statistics_machine: "de estadísticas sobre slots de máquina"
         statistics_project: "de estadísticas sobre proyectos"
         statistics_subscription: "de estadísticas de suscripción"
-        statistics_training: "de estadísticas de cursos"
+        statistics_training: "de estadísticas de capacitaciones"
         statistics_space: "de estadísticas sobre espacios"
         statistics_order: "de estadísticas sobre los pedidos de la tienda"
         users_members: "de la lista de miembros"
@@ -441,22 +448,44 @@ es:
         supporting_document_files_uploaded: "Documento justificativo subido por el miembro <strong><em>%{NAME}</em></strong>."
       notify_admin_user_supporting_document_files_updated:
         supporting_document_files_uploaded: "Documento justificativo modificado por el miembro <strong><em>%{NAME}</em></strong>."
+      notify_admin_user_child_supporting_document_files_created:
+        supporting_document_files_uploaded: "El hijo <strong><em>%{NAME}</strong></em> ha subido un nuevo documento justificativo."
+      notify_admin_user_child_supporting_document_files_updated:
+        supporting_document_files_uploaded: "Documento justificativo modificado por el hijo <strong><em>%{NAME}</em></strong>."
       notify_user_is_validated:
         account_validated: "Su cuenta es válida."
       notify_user_is_invalidated:
         account_invalidated: "Su cuenta no es válida."
+      notify_user_child_is_validated:
+        child_validated: "Su cuenta de hijo es válida."
+      notify_user_child_is_invalidated:
+        child_invalidated: "Su cuenta de hijo no es válida."
       notify_user_supporting_document_refusal:
         refusal: "Sus justificantes han sido rechazados"
       notify_user_supporting_document_reminder:
-        reminder_message: "This is a reminder for you to upload your supporting documents."
+        reminder_message: "Este es un recordatorio para que subas tus documentos justificativos."
       notify_admin_user_supporting_document_refusal:
         refusal: "El justificante del afiliado <strong><em>%{NAME}</em></strong> ha sido rechazado."
+      notify_user_child_supporting_document_refusal:
+        refusal: "Los documentos justificativos de su hijo fueron rechazados"
+      notify_admin_user_child_supporting_document_refusal:
+        refusal: "El documento justificativo <strong><em>%{NAME}</strong></em> fue rechazado."
       notify_user_order_is_ready:
         order_ready: "Su comando %{REFERENCE} está listo"
       notify_user_order_is_canceled:
         order_canceled: "Su comando %{REFERENCE} ha sido cancelado"
       notify_user_order_is_refunded:
         order_refunded: "Su comando %{REFERENCE} es reembolsado"
+      notify_member_reservation_validated:
+        your_reservation_RESERVABLE_was_validated_html: "Su reserva <strong><em>%{RESERVABLE}</em></strong> ha sido validada con éxito."
+      notify_admin_reservation_validated:
+        a_RESERVABLE_reservation_was_validated_html: "Una reserva de <strong><em>%{RESERVABLE}</em></strong> hecha por <strong><em>%{NAME}</em></strong> fue validada."
+      notify_member_reservation_invalidated:
+        your_reservation_RESERVABLE_was_invalidated_html: "Su preinscripción <strong><em>%{RESERVABLE}</em></strong> no fue validada."
+      notify_admin_reservation_invalidated:
+        a_RESERVABLE_reservation_was_invalidated_html: "Una preinscripción de <strong><em>%{RESERVABLE}</em></strong> hecha por <strong><em>%{NAME}</em></strong> no fue validada."
+      notify_user_when_child_age_will_be_18:
+        child_age_will_be_18_years_ago: "Tu hijo(a) %{NAME} cumplirá 18 años en %{DATE}, momento en el que será separado automáticamente de tu cuenta familiar. Tendrá que crear su propia cuenta para hacer reservas."
   #statistics tools for admins
   statistics:
     subscriptions: "Suscripciones"
@@ -465,13 +494,13 @@ es:
     space_dates: "Fechas de franjas horarias"
     spaces: "Espacios"
     orders: "Pedidos"
-    trainings: "Cursos"
+    trainings: "Formaciones"
     events: "Eventos"
     registrations: "Registros"
     projects: "Proyectos"
     users: "Usuarios"
-    training_id: "ID de curso"
-    training_date: "Fecha de curso"
+    training_id: "ID de la formación"
+    training_date: "Fecha de la formación"
     event_id: "ID de evento"
     event_date: "Fecha de evento"
     event_name: "Nombre de event "
@@ -492,9 +521,9 @@ es:
     store: "Tienda"
     paid-processed: "Pagado y/o procesado"
     aborted: "Abortado"
-    project_status: Status
-    project_name: Name
-    project_user_names: Collaborators
+    project_status: Estatus
+    project_name: Nombre
+    project_user_names: Colaboradores
   #statistics exports to the Excel file format
   export:
     entries: "Entradas"
@@ -513,7 +542,7 @@ es:
     deleted_user: "Usuario suprimido"
     reservation_context: "Contexto de la reserva"
     coupon: "Cupón"
-    project_author: Author
+    project_author: Autor
   #initial price's category for events, created to replace the old "reduced amount" property
   price_category:
     reduced_fare: "Tarifa reducida"
@@ -541,7 +570,7 @@ es:
     space: "Este espacio está desactivado"
     machine: "Esta máquina está desactivada"
     reservable: "Esta máquina no se puede reservar"
-    blocked_by_another_reservation: "This slot is blocked by another reservation"
+    blocked_by_another_reservation: "Esta franja horaria está bloqueada por otra reserva"
   cart_validation:
     select_user: "Por favor, seleccione un usuario antes de continuar"
   settings:
@@ -643,7 +672,7 @@ es:
     recaptcha_site_key: "clave del sitio reCAPTCHA"
     recaptcha_secret_key: "clave secreta de reCAPTCHA"
     feature_tour_display: "Modo de visualización de la visita guiada"
-    email_from: "Dirección del expedidor"
+    email_from: "Dirección del remitente"
     disqus_shortname: "Nombre corto de Disqus"
     allowed_cad_extensions: "Extensiones de archivos CAD permitidas"
     allowed_cad_mime_types: "Archivos CAD permitidos tipos MIME"
@@ -692,7 +721,6 @@ es:
     flickr: "flickr"
     machines_module: "Módulo de máquinas"
     user_change_group: "Permitir a los usuarios cambiar su grupo"
-    show_username_in_admin_list: "Mostrar el nombre de usuario en la lista de miembros del administrador"
     store_module: "Módulo de tienda"
     store_withdrawal_instructions: "Instrucciones de retirada"
     store_hidden: "Tienda oculta al público"
@@ -700,11 +728,11 @@ es:
     external_id: "identificador externo"
     prevent_invoices_zero: "impedir la creación de facturas a 0"
     invoice_VAT-name: "Nombre IVA"
-    trainings_auto_cancel: "Cancelación automática de formaciones"
+    trainings_auto_cancel: "Cancelación automática de capacitaciones"
     trainings_auto_cancel_threshold: "Mínimo de participantes para la cancelación automática"
     trainings_auto_cancel_deadline: "Plazo de cancelación automática"
-    trainings_authorization_validity: "Período de validez de las formaciones"
-    trainings_authorization_validity_duration: "Duración del periodo de validez de las formaciones"
+    trainings_authorization_validity: "Período de validez de las capacitaciones"
+    trainings_authorization_validity_duration: "Duración del periodo de validez de las capacitaciones"
     trainings_invalidation_rule: "Formaciones invalidación automática"
     trainings_invalidation_rule_period: "Periodo de gracia antes de invalidar una formación"
     projects_list_member_filter_presence: "Presencia del filtro de miembros en la lista de proyectos"
@@ -712,6 +740,7 @@ es:
     project_categories_filter_placeholder: "Marcador para el filtro de categorías en la galería de proyectos"
     project_categories_wording: "Texto utilizado para sustituir \"Categorías\" en las páginas públicas"
     reservation_context_feature: "Forzar al miembro a seleccionar la naturaleza de su reserva al reservar"
+    family_account: "Cuenta familiar"
   #statuses of projects
   statuses:
     new: "Nuevo"

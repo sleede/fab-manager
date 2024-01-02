@@ -128,6 +128,7 @@ pt:
         name: "Nome"
         name_is_required: "Nome é obrigatório."
         illustration: "Foto"
+        illustration_recommendation: "Maximum display size: 932 * 700 px (unconstrained ratio)."
         add_an_illustration: "Adicionar foto"
         CAD_file: "Arquivo CAD"
         CAD_files: "CAD files"
@@ -168,7 +169,7 @@ pt:
       member_select:
         select_a_member: "Selecionar um membro"
         start_typing: "Escrevendo..."
-        member_not_validated: "Aviso:<br> O membro não foi validado."
+        member_not_validated: "This member has not yet been validated."
       #payment modal
       abstract_payment_modal:
         online_payment: "Pagamento Online"
@@ -198,6 +199,7 @@ pt:
         group_is_required: "Grupo é obrigatório."
         trainings: "Treinamentos"
         tags: "Tags"
+        children: "Children"
       #machine/training slot modification modal
       confirm_modify_slot_modal:
         change_the_slot: "Alterar o slot"
@@ -373,6 +375,8 @@ pt:
         user_validation_required_alert: "Aviso!<br>O seu administrador deve validar sua conta. Só após você poderá acessar todos os recursos de reserva."
         select_the_reservation_context: "Select the context of the reservation"
         please_select_a_reservation_context: "Please select the context of the reservation first"
+        child_validation_required_alert: "Your administrator must validate your child account. Then, you'll then be able to book the event."
+        child_birthday_must_be_under_18_years_ago_alert: "Your child must be under 18. Then, you'll then be able to book the event."
       #feature-tour modal
       tour:
         previous: "Anterior"
@@ -446,6 +450,7 @@ pt:
         select_all: "Selecionar todos"
         unselect_all: "Remover seleção"
       form_file_upload:
+        placeholder: "Add a file"
         browse: "Browse"
         edit: "Editar"
       form_image_upload:

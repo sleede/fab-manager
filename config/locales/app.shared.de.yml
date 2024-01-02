@@ -128,6 +128,7 @@ de:
         name: "Name"
         name_is_required: "Name ist erforderlich."
         illustration: "Ansicht"
+        illustration_recommendation: "Maximum display size: 932 * 700 px (unconstrained ratio)."
         add_an_illustration: "Illustration hinzufügen"
         CAD_file: "CAD-Datei"
         CAD_files: "CAD files"
@@ -168,7 +169,7 @@ de:
       member_select:
         select_a_member: "Ein Mitglied auswählen"
         start_typing: "Tippe ein..."
-        member_not_validated: "Warning:<br> The member was not validated."
+        member_not_validated: "This member has not yet been validated."
       #payment modal
       abstract_payment_modal:
         online_payment: "Online payment"
@@ -198,6 +199,7 @@ de:
         group_is_required: "Gruppe ist erforderlich."
         trainings: "Schulungen"
         tags: "Stichwörter"
+        children: "Children"
       #machine/training slot modification modal
       confirm_modify_slot_modal:
         change_the_slot: "Slot ändern"
@@ -373,6 +375,8 @@ de:
         user_validation_required_alert: "Warning!<br>Your administrator must validate your account. Then, you'll then be able to access all the booking features."
         select_the_reservation_context: "Select the context of the reservation"
         please_select_a_reservation_context: "Please select the context of the reservation first"
+        child_validation_required_alert: "Your administrator must validate your child account. Then, you'll then be able to book the event."
+        child_birthday_must_be_under_18_years_ago_alert: "Your child must be under 18. Then, you'll then be able to book the event."
       #feature-tour modal
       tour:
         previous: "Vorherige"
@@ -446,6 +450,7 @@ de:
         select_all: "Select all"
         unselect_all: "Unselect all"
       form_file_upload:
+        placeholder: "Add a file"
         browse: "Durchsuchen"
         edit: "Bearbeiten"
       form_image_upload:

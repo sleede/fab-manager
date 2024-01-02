@@ -173,7 +173,7 @@ class ProductService
       order ||= 'desc'
 
       if key == 'amount'
-        products.order("COALESCE(amount, 0) #{order.upcase}")
+        products.order(Arel.sql("COALESCE(amount, 0) #{order.upcase}"))
       else
         products.order(key => order)
       end

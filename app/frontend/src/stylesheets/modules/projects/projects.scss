@@ -39,6 +39,10 @@
     grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
     gap: 3.2rem;
     & > span { grid-column: 1/-1;}
+    & > a {
+      grid-column: 1/-1;
+      justify-self: center;
+    }
   }
 
   @media (min-width: 1200px) {

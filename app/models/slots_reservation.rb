@@ -69,7 +69,7 @@ class SlotsReservation < ApplicationRecord
       Slots::PlacesCacheService.change_places(target_slot,
                                               reservation.reservable_type,
                                               reservation.reservable_id,
-                                              reservation.total_booked_seats,
+                                              reservation.reservable.pre_registration ? 0 : reservation.total_booked_seats,
                                               operation)
     else
       Slots::PlacesCacheService.change_places(target_slot, reservation.reservable_type, reservation.reservable_id, 1, operation)
