@@ -83,6 +83,7 @@ zu:
       body:
         reservation_saved_html: "crwdns38037:0%{RESERVATION}crwdne38037:0"
         your_reserved_slots: "crwdns38039:0crwdne38039:0"
+        reservation_warning: "crwdns38136:0%{RESERVATION}crwdne38136:0"
     notify_member_subscribed_plan_is_changed:
       subject: "crwdns29590:0crwdne29590:0"
       body:
@@ -343,37 +344,37 @@ zu:
         schedule_in_your_dashboard_html: "crwdns29878:0%{DASHBOARD}crwdne29878:0"
         your_dashboard: "crwdns29880:0crwdne29880:0"
     notify_admin_payment_schedule_error:
-      subject: "crwdns29882:0[URGENT]crwdne29882:0"
+      subject: "crwdns29882:0crwdne29882:0"
       body:
         remember: "crwdns29884:0%{REFERENCE}crwdnd29884:0%{AMOUNT}crwdnd29884:0%{DATE}crwdne29884:0"
         error: "crwdns29886:0crwdne29886:0"
         action: "crwdns29888:0%{GATEWAY}crwdne29888:0"
     notify_member_payment_schedule_error:
-      subject: "crwdns29890:0[URGENT]crwdne29890:0"
+      subject: "crwdns29890:0crwdne29890:0"
       body:
         remember: "crwdns29892:0%{REFERENCE}crwdnd29892:0%{AMOUNT}crwdnd29892:0%{DATE}crwdne29892:0"
         error: "crwdns29894:0crwdne29894:0"
         action: "crwdns29896:0crwdne29896:0"
     notify_admin_payment_schedule_failed:
-      subject: "crwdns29898:0[URGENT]crwdne29898:0"
+      subject: "crwdns29898:0crwdne29898:0"
       body:
         remember: "crwdns29900:0%{REFERENCE}crwdnd29900:0%{AMOUNT}crwdnd29900:0%{DATE}crwdne29900:0"
         error: "crwdns29902:0crwdne29902:0"
         action: "crwdns29904:0crwdne29904:0"
     notify_member_payment_schedule_failed:
-      subject: "crwdns29906:0[URGENT]crwdne29906:0"
+      subject: "crwdns29906:0crwdne29906:0"
       body:
         remember: "crwdns29908:0%{REFERENCE}crwdnd29908:0%{AMOUNT}crwdnd29908:0%{DATE}crwdne29908:0"
         error: "crwdns29910:0crwdne29910:0"
         action_html: "crwdns29912:0%{DASHBOARD}crwdne29912:0"
         your_dashboard: "crwdns29914:0crwdne29914:0"
     notify_admin_payment_schedule_gateway_canceled:
-      subject: "crwdns29916:0[URGENT]crwdne29916:0"
+      subject: "crwdns29916:0crwdne29916:0"
       body:
         error: "crwdns29918:0%{REFERENCE}crwdnd29918:0%{GATEWAY}crwdne29918:0"
         action: "crwdns29920:0crwdne29920:0"
     notify_member_payment_schedule_gateway_canceled:
-      subject: "crwdns29922:0[URGENT]crwdne29922:0"
+      subject: "crwdns29922:0crwdne29922:0"
       body:
         error: "crwdns29924:0%{REFERENCE}crwdne29924:0"
         action: "crwdns29926:0crwdne29926:0"

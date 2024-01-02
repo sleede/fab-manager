@@ -2,7 +2,7 @@
 
 <p><%= t('.body.reservation_saved_html', RESERVATION: @attached_object.reservable.name) %></p>
 
-<p><%= t('.body.your_reserved_slots') %> </p>
+<p><%= t('.body.your_reserved_slots') %></p>
 <ul>
 <% @attached_object.slots.each do |slot| %>
   <% if @attached_object.reservable_type == 'Event' %>
@@ -14,3 +14,4 @@
   <% end %>
 <% end %>
 </ul>
+<p><%= t('.body.reservation_warning', RESERVATION: @attached_object.reservable.name) %></p>

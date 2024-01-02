@@ -83,6 +83,7 @@ es-MX:
       body:
         reservation_saved_html: "Su preinscripción de <strong><em>%{RESERVATION}</em></strong> se ha guardado correctamente"
         your_reserved_slots: "Sus franjas horarias preinscritas son:"
+        reservation_warning: "<strong><em>Este email no es una confirmación de su inscripción a %{RESERVATION}</em></strong><br/>. Recibirá otro email para confirmar o rechazar su solicitud."
     notify_member_subscribed_plan_is_changed:
       subject: "Su suscripción ha sido actualizada"
       body:
