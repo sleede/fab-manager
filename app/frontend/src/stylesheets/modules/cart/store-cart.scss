@@ -207,11 +207,11 @@
         padding: 1.6rem 0.8rem;
         background-color: var(--main);
         border: none;
-        color: var(--gray-soft-lightest);
+        color: var(--main-text-color);
         justify-content: center;
         text-transform: uppercase;
         &:hover {
-          color: var(--gray-soft-lightest);
+          color: var(--main-text-color);
           opacity: 0.75;
           cursor: pointer;
         }

@@ -17,11 +17,11 @@
 
 .main-action-btn {
   background-color: var(--main);
-  color: var(--gray-soft-lightest);
+  color: var(--main-text-color);
   border: none;
   &:hover {
     background-color: var(--main);
-    color: var(--gray-soft-lightest);
+    color: var(--main-text-color);
     opacity: 0.75;
   }
 }

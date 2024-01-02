@@ -9,7 +9,7 @@
     border-radius: 0;
     color: var(--gray-soft-lightest);
     &.edit-btn {background: var(--gray-hard-darkest) }
-    &.delete-btn {background: var(--main) }
+    &.delete-btn {background: var(--alert) }
     &:hover,
     &:focus {
       opacity: 0.75;
