@@ -1,4 +1,4 @@
-import { ReactNode, useState } from 'react';
+import { ReactNode, useState, useEffect } from 'react';
 import * as React from 'react';
 import { Price } from '../../../models/price';
 import { useTranslation } from 'react-i18next';
@@ -27,6 +27,10 @@ export const ConfigureExtendedPricesButton: React.FC<ConfigureExtendedPricesButt
 
   const [extendedPrices, setExtendedPrices] = useState<Array<Price>>(prices);
   const [showList, setShowList] = useState<boolean>(false);
+
+  useEffect(() => {
+    setExtendedPrices(prices);
+  }, [prices]);
 
   /**
    * Return the number of hours, user-friendly formatted

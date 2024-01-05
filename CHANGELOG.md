@@ -2,6 +2,7 @@
 
 ## Next release
 - translation files added for Swedish
+- Fix a bug: unable to show extended prices of space
 
 ## v6.3.8 2023 December 29
 
