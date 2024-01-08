@@ -5,21 +5,6 @@ namespace :fablab do
   namespace :auth do
     desc 'switch the active authentication provider'
     task :switch_provider, [:provider] => :environment do |_task, args|
-      providers = AuthProvider.all.inject('') { |str, item| "#{str}#{item[:name]}, " }
-      unless args.provider
-        puts "\e[0;31mERROR\e[0m: You must pass a provider name to activate. Available providers are: #{providers[0..-3]}"
-        next
-      end
-
-      if AuthProvider.find_by(name: args.provider).nil?
-        puts "\e[0;31mERROR\e[0m: the provider '#{args.provider}' does not exists. Available providers are: #{providers[0..-3]}"
-        next
-      end
-
-      if AuthProvider.active.name == args.provider
-        puts "\e[0;31mERROR\e[0m: the provider '#{args.provider}' is already enabled"
-        next
-      end
 
       # disable previous provider
       prev_prev = AuthProvider.previous
@@ -28,7 +13,7 @@ namespace :fablab do
       AuthProvider.active.update(status: 'previous') unless AuthProvider.active.name == 'DatabaseProvider::SimpleAuthProvider'
 
       # enable given provider
-      AuthProvider.find_by(name: args.provider).update(status: 'active')
+      AuthProvider.find_by(name: 'FabManager').update(status: 'active')
 
       # migrate the current users.
       if AuthProvider.active.providable_type == DatabaseProvider.name
