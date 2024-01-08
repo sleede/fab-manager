@@ -127,7 +127,7 @@ export const FormImageUpload = <TFieldValues extends FieldValues, TContext exten
                    onChange={onFileSelected}
                    placeholder={placeholder()}
                    tooltip={tooltip} />
-        {hasImage() && <FabButton onClick={onRemoveFile} icon={<Trash size={20} weight="fill" />} className="is-main" />}
+        {hasImage() && <FabButton onClick={onRemoveFile} icon={<Trash size={20} weight="fill" />} className="is-alert" />}
       </div>
     </div>
   );

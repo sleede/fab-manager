@@ -103,7 +103,7 @@ export const FormFileUpload = <TFieldValues extends FieldValues>({ id, label, re
                    onChange={onFileSelected}
                    placeholder={placeholder()}/>
         {showRemoveButton && hasFile() &&
-          <FabButton onClick={onRemoveFile} icon={<Trash size={20} weight="fill" />} className="is-main" />
+          <FabButton onClick={onRemoveFile} icon={<Trash size={20} weight="fill" />} className="is-alert" />
         }
       </div>
     </div>

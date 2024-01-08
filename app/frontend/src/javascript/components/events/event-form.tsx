@@ -361,7 +361,7 @@ export const EventForm: React.FC<EventFormProps> = ({ action, event, onError, on
                              formState={formState}
                              label={t('app.admin.event_form.price')}
                              addOn={FormatLib.currencySymbol()} />
-                  <FabButton className="remove-price is-main" onClick={() => handlePriceRemove(price, index)} icon={<Trash size={20} />} />
+                  <FabButton className="remove-price is-alert" onClick={() => handlePriceRemove(price, index)} icon={<Trash size={20} />} />
                 </div>
               ))}
               <FabButton className="add-price is-secondary" onClick={() => append({})}>

@@ -35,7 +35,7 @@ fr:
     notify_admin_subscription_extended:
       subject: "Un abonnement a été prolongé"
       body:
-        subscription_extended_html: "L'abonnement <strong><em>{PLAN}</em></strong> du membre <strong><em>{NAME}</strong></em> a été prolongé {FREE, select, true{gratuitment} other{}} jusqu'au {DATE}." #messageFormat interpolation
+        subscription_extended_html: "L'abonnement <strong><em>{PLAN}</em></strong> du membre <strong><em>{NAME}</strong></em> a été prolongé {FREE, select, true{gratuitement} other{}} jusqu'au {DATE}." #messageFormat interpolation
     notify_member_subscription_extended:
       subject: "Votre abonnement a été prolongé"
       body:
@@ -79,10 +79,11 @@ fr:
         reservation_saved_html: "Votre réservation <strong><em>%{RESERVATION}</em></strong> a bien été enregistrée."
         your_reserved_slots: "Les créneaux que vous avez réservés sont :"
     notify_member_pre_booked_reservation:
-      subject: "Votre pré-inscription a bien été prise en compte"
+      subject: "Votre demande de pré-inscription a bien été prise en compte"
       body:
-        reservation_saved_html: "Votre réservation <strong><em>%{RESERVATION}</em></strong> a bien été prise en compte."
-        your_reserved_slots: "Les créneaux que vous avez pré-inscrit sont :"
+        reservation_saved_html: "Votre demande de pré-inscription à <strong><em>%{RESERVATION}</em></strong> a bien été prise en compte."
+        your_reserved_slots: "Les créneaux sur lesquels vous êtes pré-inscrits sont :"
+        reservation_warning: "<strong><em>Ce mail ne vaut pas inscription à %{RESERVATION}.</em></strong><br/>Un mail vous sera envoyé pour valider ou non votre demande."
     notify_member_subscribed_plan_is_changed:
       subject: "Votre abonnement a été mis à jour"
       body:
@@ -157,7 +158,7 @@ fr:
     notify_member_training_invalidated:
       subject: "Votre autorisation a été invalidée"
       body:
-        training_invalidated_html: "<p>Vous avez suivi la formation %{TRAINING}, le %{DATE} vous donnant accès aux %{MACHINES}.</p><p>En raison de l'abscence de réservation pour l'une de ces machines au cours des %{PERIOD} derniers mois, votre autorisation a été invalidée.</p><p>Veuillez valider la formation à nouveau afin de continuer à réserver ces machines.</p>."
+        training_invalidated_html: "<p>Vous avez suivi la formation %{TRAINING}, le %{DATE} vous donnant accès aux %{MACHINES}.</p><p>En raison de l'absence de réservation pour l'une de ces machines au cours des %{PERIOD} derniers mois, votre autorisation a été invalidée.</p><p>Veuillez valider la formation à nouveau afin de continuer à réserver ces machines.</p>."
     notify_member_subscription_is_expired:
       subject: "Votre abonnement est arrivé à expiration"
       body:
@@ -346,13 +347,13 @@ fr:
       subject: "[URGENT] Erreur lors du prélèvement par carte"
       body:
         remember: "Conformément à l'échéancier de paiement %{REFERENCE}, un prélèvement par carte de %{AMOUNT} était prévu le %{DATE}."
-        error: "Malheureusement, une erreur s'est prouite et ce prélèvement n'a pas pu être effectué correctement."
+        error: "Malheureusement, une erreur s'est produite et ce prélèvement n'a pas pu être effectué correctement."
         action: "Veuillez ensuite consulter le tableau de bord de %{GATEWAY} et contacter le membre dès que possible pour résoudre le problème."
     notify_member_payment_schedule_error:
       subject: "[URGENT] Erreur lors du prélèvement par carte"
       body:
         remember: "Conformément à votre échéancier de paiement %{REFERENCE}, un prélèvement par carte de %{AMOUNT} était prévu le %{DATE}."
-        error: "Malheureusement, une erreur s'est prouite et ce prélèvement n'a pas pu être effectué correctement."
+        error: "Malheureusement, une erreur s'est produite et ce prélèvement n'a pas pu être effectué correctement."
         action: "Veuillez contacter un responsable dès que possible pour résoudre le problème."
     notify_admin_payment_schedule_failed:
       subject: "[URGENT] Échec du prélèvement par carte"

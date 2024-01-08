@@ -1,5 +1,14 @@
 # Changelog Fab-manager
 
+## Next release
+
+## v6.3.9 2024 January 8
+
+- translation files added for Swedish
+- Fix a bug: unable to show extended prices of space
+- Fix a bug: event number places error in statistic
+- [TODO DEPLOY] `rails fablab:maintenance:regenerate_statistics[2014,1]`
+
 ## v6.3.8 2023 December 29
 
 - Fix a bug: unable to build docker image
