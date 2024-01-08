@@ -1,6 +1,9 @@
 # Changelog Fab-manager
 
 ## Next release
+
+## v6.3.9 2024 January 8
+
 - translation files added for Swedish
 - Fix a bug: unable to show extended prices of space
 - Fix a bug: event number places error in statistic
