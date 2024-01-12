@@ -2,6 +2,8 @@
 
 ## Next release
 
+- Fix a bug: unable to update event recurrence
+
 ## v6.3.9 2024 January 8
 
 - translation files added for Swedish
