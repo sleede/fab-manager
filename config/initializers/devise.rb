@@ -244,6 +244,13 @@ Devise.setup do |config|
                       active_provider.oidc_config.merge(
                         strategy_class: OmniAuth::Strategies::SsoOpenidConnectProvider
                       )
+
+    when 'SamlProvider'
+      require_relative '../../lib/omni_auth/saml'
+      config.omniauth active_provider.strategy_name.to_sym,
+                      active_provider.providable.sp_entity_id,
+                      active_provider.providable.idp_sso_service_url,
+                      strategy_class: OmniAuth::Strategies::SsoSamlProvider
     end
   end
 
