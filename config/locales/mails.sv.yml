@@ -1,143 +1,143 @@
 sv:
   layouts:
     notifications_mailer:
-      see_you_later: "See you soon on {GENDER, select, neutral{} other{the}}" #messageFormat interpolation
-      sincerely: "Sincerely,"
-      signature: "The Fab Lab team."
-      do_not_reply: "Please do not reply to this email."
+      see_you_later: "Vi ses snart {GENDER, select, neutral{} other{}}" #messageFormat interpolation
+      sincerely: "Vänliga hälsningar,"
+      signature: "Fab Lab teamet."
+      do_not_reply: "Vänligen svara inte på detta meddelande."
   users_mailer:
     notify_user_account_created:
-      subject: "Your FabLab account has been successfully created"
+      subject: "Ditt FabLab-konto har skapats"
       body:
-        hello: "Hello %{NAME},"
-        intro: "The FabLab team has just created an account for you, on {GENDER, select, neutral{} other{the}} {FABLAB} website:" #messageFormat interpolation
-        connection_parameters: "Here are your connection parameters:"
-        account_name: "Account name:"
-        password: "Password:"
-        temporary_password: "This is a temporary password, you can modify it in your «My account» screen."
-        keep_advantages: "With this account, you keep all the advantages linked to your Fab Lab user profile (trainings, subscriptions plans)."
-        to_use_platform: "To use the website, please"
-        logon_or_login: "create a new account or log in by clicking here."
-        token_if_link_problem: "If you experience issues with the link, you can enter the following code at your first connection attempt:"
+        hello: "Hej %{NAME},"
+        intro: "FabLab-teamet har just skapat ett konto åt dig, på sidan {GENDER, select, neutral{} other{}} {FABLAB} :" #messageFormat interpolation
+        connection_parameters: "Här är dina inloggningsuppgifter:"
+        account_name: "Kontonamn:"
+        password: "Lösenord:"
+        temporary_password: "Detta är ett tillfälligt lösenord, du kan ändra det på sidan «Mitt konto»."
+        keep_advantages: "Med detta konto behåller du alla fördelar som är kopplade till din Fab Lab-användarprofil (utbildningar, prenumerationsplaner)."
+        to_use_platform: "För att använda webbplatsen, vänligen"
+        logon_or_login: "skapa ett nytt konto eller logga in genom att klicka här."
+        token_if_link_problem: "Om du upplever problem med länken kan du ange följande kod vid ditt första inloggningsförsök:"
   notifications_mailer:
     notify_user_user_group_changed:
-      subject: "You have changed group"
+      subject: "Du har bytt grupp"
       body:
-        warning: "You have changed group. Inspections can be conducted at the lab to verify the legitimacy of this change."
-        user_invalidated: "Your account was invalidated, please upload your new supporting documents to validate your account."
+        warning: "Du har bytt grupp. Kontroller kan utföras i lokalen för att kontrollera legitimiteten i denna ändring."
+        user_invalidated: "Ditt konto har blivit ogiltigförklarat, ladda upp dina nya underlag för att validera ditt konto."
     notify_admin_user_group_changed:
-      subject: "A member has changed group"
+      subject: "En användare har ändrat sin grupp"
       body:
-        user_changed_group_html: "User <em><strong>%{NAME}</strong></em> has changed group."
-        previous_group: "Previous group:"
-        new_group: "New group:"
-        user_invalidated: "The user's account was invalidated."
+        user_changed_group_html: "Användare <em><strong>%{NAME}</strong></em> ändrade grupp."
+        previous_group: "Föregående grupp:"
+        new_group: "Ny grupp:"
+        user_invalidated: "Användarens konto har ogiltigförklarats."
     notify_admin_subscription_extended:
-      subject: "A subscription has been extended"
+      subject: "En prenumeration har förlängts"
       body:
-        subscription_extended_html: "Subscription <strong><em>{PLAN}</em></strong> for user <strong><em>{NAME}</strong></em> has been extended {FREE, select, true{for free} other{}} until {DATE}." #messageFormat interpolation
+        subscription_extended_html: "Prenumeration <strong><em>{PLAN}</em></strong> av medlemmen <strong><em>{NAME}</strong></em> har förlängts {FREE, select, true{gratis} other{}} tills {DATE}." #messageFormat interpolation
     notify_member_subscription_extended:
-      subject: "Your subscription plan has been extended"
+      subject: "Din prenumerationsplan har förlängts"
       body:
-        your_plan: "Your subscription plan"
-        has_been_extended: "has been extended"
-        free: "for free"
-        until: "until"
+        your_plan: "Din prenumerationsplan"
+        has_been_extended: "har utökats"
+        free: "gratis"
+        until: "till och med"
     notify_partner_subscribed_plan:
-      subject: "A subscription plan has been purchased"
+      subject: "En prenumeration har köpts"
       body:
-        a_plan: "A subscription plan"
-        was_purchased_by_member: "has been purchased by user"
+        a_plan: "En prenumerationsplan"
+        was_purchased_by_member: "har köpts av användaren"
     notify_admin_when_project_published:
-      subject: "A project has been published"
+      subject: "Ett projekt har publicerats"
       body:
-        new_project_published: "A new project has been published:"
+        new_project_published: "Ett nytt projekt har publicerat:"
     notify_project_collaborator_to_valid:
-      subject: "Invitation to collaborate on a project"
+      subject: "Inbjudan att delta i ett projekt"
       body:
-        your_are_invited_to_take_part_in_a_project: "You are invited to join this project:"
-        to_accept_the_invitation_click_on_following_link: "To accept this invitation, please click on the following link:"
+        your_are_invited_to_take_part_in_a_project: "Du är inbjuden att delta i detta projekt:"
+        to_accept_the_invitation_click_on_following_link: "För att tacka ja till denna inbjudan, klicka på följande länk:"
     notify_project_author_when_collaborator_valid:
-      subject: "New collaborator in your project"
+      subject: "Ny medarbetare i ditt projekt"
       body:
-        the_member: "the user"
-        accepted_your_invitation_to_take_part_in_the_project: "has accepted your invitation to join your project:"
+        the_member: "användaren"
+        accepted_your_invitation_to_take_part_in_the_project: "har accepterat din inbjudan att gå med i ditt projekt:"
     notify_user_training_valid:
-      subject: "Your training has been validated"
+      subject: "Din utbildning har validerats"
       body:
-        your_training: "Your training"
-        has_been_validated: "has been validated"
+        your_training: "Din utbildning"
+        has_been_validated: "har validerats"
     notify_member_subscribed_plan:
-      subject: "Your subscription has been successfully purchased"
+      subject: "Din prenumeration har köpts"
       body:
-        plan_subscribed_html: "You have subscribed the plan: <strong><em>%{PLAN}</em></strong>."
-        rolling_subscription_stops_on: "Your subscription will end %{DURATION} after your first training. Otherwise, it will stop on %{DATE}."
-        subscription_stops_on: "Your subscription will end on %{DATE}."
+        plan_subscribed_html: "Du har prenumererat på planen: <strong><em>%{PLAN}</em></strong>."
+        rolling_subscription_stops_on: "Din prenumeration avslutas %{DURATION} efter din första utbildning. Annars kommer den att sluta på %{DATE}."
+        subscription_stops_on: "Din prenumeration avslutas den %{DATE}."
     notify_member_create_reservation:
-      subject: "Your reservation has been successfully saved"
+      subject: "Din bokning har sparats"
       body:
-        reservation_saved_html: "You reservation <strong><em>%{RESERVATION}</em></strong> has been successfully saved"
-        your_reserved_slots: "Your reserved slots are:"
+        reservation_saved_html: "Din bokning <strong><em>%{RESERVATION}</em></strong> har sparats"
+        your_reserved_slots: "Dina bokade platser är:"
     notify_member_pre_booked_reservation:
-      subject: "Your pre-registration has been successfully saved"
+      subject: "Din föranmälan har sparats"
       body:
-        reservation_saved_html: "You pre-registration <strong><em>%{RESERVATION}</em></strong> has been successfully saved"
-        your_reserved_slots: "Your pre-booked slots are:"
-        reservation_warning: "<strong><em>This email does not count as registration to %{RESERVATION}.</em></strong><br/>You will receive another email to confirm or deny your request."
+        reservation_saved_html: "Din föranmälan <strong><em>%{RESERVATION}</em></strong> har sparats"
+        your_reserved_slots: "Dina förbokade platser är:"
+        reservation_warning: "<strong><em>Detta mail räknas inte som registrering till %{RESERVATION}.</em></strong><br/>Du kommer att få ett annat e-postmeddelande för att bekräfta eller neka din begäran."
     notify_member_subscribed_plan_is_changed:
-      subject: "Your subscription has been updated"
+      subject: "Din prenumeration har uppdaterats"
       body:
-        new_plan_html: "You have changed your plan to <strong><em>%{PLAN}</em></strong>."
+        new_plan_html: "Du har ändrat din plan till <strong><em>%{PLAN}</em></strong>."
     notify_admin_member_create_reservation:
-      subject: "New reservation"
+      subject: "Ny Bokning"
       body:
-        member_reserved_html: "User %{NAME} has reserved <strong><em>%{RESERVABLE}</em></strong>."
-        reserved_slots: "Reserved slots are:"
+        member_reserved_html: "Användare %{NAME} har bokat <strong><em>%{RESERVABLE}</em></strong>."
+        reserved_slots: "Bokade platser är:"
     notify_admin_member_pre_booked_reservation:
-      subject: "New pre-registration"
+      subject: "Ny föranmälan"
       body:
-        member_reserved_html: "User %{NAME} has pre-reserved <strong><em>%{RESERVABLE}</em></strong>."
-        reserved_slots: "Pre-reserved slots are:"
+        member_reserved_html: "Användare %{NAME} har förbokat <strong><em>%{RESERVABLE}</em></strong>."
+        reserved_slots: "Förbokade platser är:"
     notify_member_slot_is_modified:
-      subject: "Your reservation slot has been successfully changed"
+      subject: "Din bokning har sparats"
       body:
-        reservation_changed_to: "Your reservation slot has been changed to:"
-        previous_date: "Previous date:"
+        reservation_changed_to: "Din bokning har ändrats till:"
+        previous_date: "Tidigare datum:"
     notify_admin_slot_is_modified:
-      subject: "A reservation slot has been modified"
+      subject: "En plats har ändrats"
       body:
-        slot_modified: "User %{NAME} had modified his reservation slot"
-        new_date: "New slot"
-        old_date: "Previous slot"
+        slot_modified: "Användare %{NAME} hade ändrat sin plats"
+        new_date: "Ny plats"
+        old_date: "Föregående plats"
     notify_admin_when_user_is_created:
-      subject: "A user account has been created"
+      subject: "Användarkonto har skapats"
       body:
-        new_account_created: "A new user account has been created on the website:"
-        user_of_group_html: "The user has registered in the group <strong>%{GROUP}</strong>"
-        account_for_organization: "This account manage an organization:"
+        new_account_created: "Ett nytt användarkonto har skapats på webbplatsen:"
+        user_of_group_html: "Användaren har registrerat sig i gruppen <strong>%{GROUP}</strong>"
+        account_for_organization: "Detta konto företräder en organisation:"
     notify_admin_child_created:
-      subject: "A user's child has been created"
+      subject: "En användares barn har lagts till"
       body:
-        new_child_created: "A new user's child has been created on the website"
+        new_child_created: "Ett nytt barn har lagts till på webbplatsen"
     notify_admin_subscribed_plan:
-      subject: "A subscription has been purchased"
+      subject: "En prenumeration har köpts"
       body:
-        plan_subscribed_html: "A plan <strong><em>%{PLAN}</em></strong> has been subscribed by user <strong><em>%{NAME}</strong></em>."
+        plan_subscribed_html: "En plan <strong><em>%{PLAN}</em></strong> har prenumererats på av användaren <strong><em>%{NAME}</strong></em>."
     notify_member_invoice_ready:
-      subject: "Your FabLab's invoice"
+      subject: "Din FabLabfaktura"
       body:
-        please_find_attached_html: "Please find as attached file your invoice from {DATE}, with an amount of {AMOUNT} concerning your {TYPE, select, Reservation{reservation} OrderItem{order} other{subscription}}." #messageFormat interpolation
-        invoice_in_your_dashboard_html: "You can access your invoice in %{DASHBOARD} on the Fab Lab website."
-        your_dashboard: "your dashboard"
+        please_find_attached_html: "Som bifogad fil hittar du din faktura från {DATE}med ett belopp på {AMOUNT} för din {TYPE, select, Reservation{reservation} OrderItem{order} other{prenumeration}}." #messageFormat interpolation
+        invoice_in_your_dashboard_html: "Du kan komma åt din faktura i %{DASHBOARD} på Fab Labs webbplats."
+        your_dashboard: "din kontrollpanel"
     notify_member_reservation_reminder:
-      subject: "Reservation reminder"
+      subject: "Bokningspåminnelse"
       body:
-        this_is_a_reminder_about_your_reservation_RESERVABLE_to_be_held_on_DATE_html: "This is a reminder about your reservation <strong>%{RESERVABLE}</strong> to be held on <em>%{DATE}</em>"
-        this_reservation_concerns_the_following_slots: "This reservation concerns the following slots:"
+        this_is_a_reminder_about_your_reservation_RESERVABLE_to_be_held_on_DATE_html: "Detta är en påminnelse om din bokning <strong>%{RESERVABLE}</strong> som hålls på <em>%{DATE}</em>"
+        this_reservation_concerns_the_following_slots: "Denna bokning gäller följande platser:"
     notify_member_avoir_ready:
-      subject: "Your FabLab's refund invoice"
+      subject: "Din FabLabkreditnota"
       body:
-        please_find_attached_html: "Please find as attached file your refund invoice from {DATE}, with an amount of {AMOUNT} concerning your {TYPE, select, Reservation{reservation} WalletTransaction{wallet credit} other{subscription}}." #messageFormat interpolation
+        please_find_attached_html: "Som bifogad fil hittar du din faktura från {DATE}med ett belopp på {AMOUNT} för din {TYPE, select, Reservation{reservation}  WalletTransaction{wallet credit} other{subscription}}." #messageFormat interpolation
         invoice_in_your_dashboard_html: "You can access your refund invoice in %{DASHBOARD} on the Fab Lab website."
         your_dashboard: "your dashboard"
     notify_member_subscription_will_expire_in_7_days:
