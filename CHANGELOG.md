@@ -2,6 +2,11 @@
 
 ## Next release
 
+## v6.3.10 2024 January 19
+
+- Fix a bug: unable to update event recurrence
+- updates translations
+
 ## v6.3.9 2024 January 8
 
 - translation files added for Swedish
