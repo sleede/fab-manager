@@ -248,8 +248,10 @@ Devise.setup do |config|
     when 'SamlProvider'
       require_relative '../../lib/omni_auth/saml'
       config.omniauth active_provider.strategy_name.to_sym,
-                      active_provider.providable.sp_entity_id,
-                      active_provider.providable.idp_sso_service_url,
+                      sp_entity_id: active_provider.providable.sp_entity_id,
+                      idp_sso_service_url: active_provider.providable.idp_sso_service_url,
+                      idp_cert: active_provider.providable.idp_cert,
+                      idp_cert_fingerprint: active_provider.providable.idp_cert_fingerprint,
                       strategy_class: OmniAuth::Strategies::SsoSamlProvider
     end
   end

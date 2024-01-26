@@ -1,3 +1,3 @@
 # frozen_string_literal: true
 
-require_relative 'strategies/saml_provider'
+require_relative 'strategies/sso_saml_provider'

@@ -19,7 +19,8 @@
 const METHODS = {
   DatabaseProvider: 'local_database',
   OAuth2Provider: 'o_auth2',
-  OpenIdConnectProvider: 'openid_connect'
+  OpenIdConnectProvider: 'openid_connect',
+  SamlProvider: 'saml'
 };
 
 /**
