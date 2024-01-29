@@ -1,4 +1,4 @@
-export type ProvidableType = 'DatabaseProvider' | 'OAuth2Provider' | 'OpenIdConnectProvider';
+export type ProvidableType = 'DatabaseProvider' | 'OAuth2Provider' | 'OpenIdConnectProvider' | 'SamlProvider';
 
 export interface AuthenticationProvider {
   id?: number,
@@ -7,7 +7,7 @@ export interface AuthenticationProvider {
   providable_type: ProvidableType,
   strategy_name: string
   auth_provider_mappings_attributes: Array<AuthenticationProviderMapping>,
-  providable_attributes?: OAuth2Provider | OpenIdConnectProvider
+  providable_attributes?: OAuth2Provider | OpenIdConnectProvider | SamlProvider
 }
 
 export type mappingType = 'string' | 'text' | 'date' | 'integer' | 'boolean';
@@ -63,6 +63,15 @@ export interface OpenIdConnectProvider {
   client__end_session_endpoint?: string,
   profile_url?: string,
   extra_authorize_parameters?: string,
+}
+
+export interface SamlProvider {
+  id?: string,
+  sp_entity_id: string,
+  idp_sso_service_url: string
+  idp_cert_fingerprint: string,
+  idp_cert: string,
+  profile_url: string,
 }
 
 export interface MappingFields {

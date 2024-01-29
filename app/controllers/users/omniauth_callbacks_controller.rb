@@ -2,6 +2,7 @@
 
 # Handle authentication actions via OmniAuth (used by SSO providers)
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
+  skip_before_action :verify_authenticity_token
   require 'sso_logger'
   logger = SsoLogger.new
 
