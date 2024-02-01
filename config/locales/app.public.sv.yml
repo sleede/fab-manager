@@ -1,0 +1,615 @@
+sv:
+  app:
+    public:
+      #header and "about" page
+      common:
+        about_the_fablab: "Om {GENDER, select, male{den} female{den} neutral{} other{den}} {NAME}"
+        return: "Tillbaka"
+        #cookies
+        cookies:
+          about_cookies: "Denna webbplats använder cookies för målgruppsmätning."
+          learn_more: "Läs mer"
+          accept: "Acceptera cookies"
+          decline: "Neka"
+        #dashboard sections
+        dashboard: "Översikt"
+        my_profile: "Min profil"
+        my_children: "Mina barn"
+        my_settings: "Mina inställningar"
+        my_supporting_documents_files: "Mina hjälpdokument"
+        my_projects: "Mina projekt"
+        my_trainings: "Mina utbildningar"
+        my_reservations: "Mina bokningar"
+        my_events: "Mina evenemang"
+        my_invoices: "Mina fakturor"
+        my_payment_schedules: "Mina återkommande betalningar"
+        my_orders: "Mina beställningar"
+        my_wallet: "Min plånbok"
+        #contextual help
+        help: "Hjälp"
+        #login/logout
+        sign_out: "Logga ut"
+        sign_up: "Skapa konto"
+        sign_in: "Logga in"
+        #left menu
+        notifications: "Aviseringar"
+        admin: "Admin"
+        manager: "Ansvarig"
+        reduce_panel: "Minska panelen"
+        #left menu (public)
+        home: "Startsida"
+        reserve_a_machine: "Boka en maskin"
+        trainings_registrations: "Registrera utbildning"
+        events_registrations: "Registrera evenemang"
+        reserve_a_space: "Boka lokal"
+        projects_gallery: "Projektgalleri"
+        subscriptions: "Prenumerationer"
+        public_calendar: "Kalender"
+        fablab_store: "Butik"
+        #left menu (admin)
+        trainings_monitoring: "Utbildningar"
+        manage_the_calendar: "Kalender"
+        manage_the_users: "Användare"
+        manage_the_invoices: "Fakturor"
+        subscriptions_and_prices: "Prenumerationer och priser"
+        manage_the_events: "Evenemang"
+        manage_the_machines: "Utrustning"
+        manage_the_store: "Butik"
+        manage_the_spaces: "Lokaler"
+        projects: "Projekt"
+        statistics: "Statistik"
+        customization: "Anpassning"
+        open_api_clients: "OpenAPI-klienter"
+        #account creation modal
+        create_your_account: "Skapa konto"
+        man: "Man"
+        woman: "Kvinna"
+        gender_is_required: "Kön krävs."
+        your_first_name: "Ditt förnamn"
+        first_name_is_required: "Förnamn måste fyllas i."
+        your_surname: "Ditt efternamn"
+        surname_is_required: "Efternamn måste fyllas i."
+        your_pseudonym: "Din pseudonym"
+        pseudonym_is_required: "Pseudonym krävs."
+        your_email_address: "Din e-postadress"
+        email_is_required: "E-postadress måste anges."
+        your_password: "Lösenord"
+        password_is_required: "Lösenord krävs."
+        password_is_too_short: "Lösenordet är för kort (minst 12 tecken)"
+        password_is_too_weak: "Lösenordet är för svagt:"
+        password_is_too_weak_explanations: "minst 12 tecken, minst en stor bokstav, en liten bokstav, ett nummer och ett specialtecken"
+        type_your_password_again: "Ange ditt lösenord igen"
+        password_confirmation_is_required: "Ange lösenord igen."
+        password_does_not_match_with_confirmation: "Lösenorden stämmer inte överens."
+        i_am_an_organization: "Jag företräder en organisation"
+        name_of_your_organization: "Namnet på din organisation"
+        organization_name_is_required: "Organisationsnamn måste fyllas i."
+        address_of_your_organization: "Adress till din organisation"
+        organization_address_is_required: "Organisationsadress måste fyllas i."
+        your_user_s_profile: "Din användares profil"
+        user_s_profile_is_required: "Användarprofil måste fyllas i."
+        birth_date: "Födelsedatum"
+        birth_date_is_required: "Födelsedatum måste fyllas i."
+        phone_number: "Telefonnummer"
+        phone_number_is_required: "Telefonnummer måste fyllas i."
+        address: "Adress"
+        address_is_required: "Adress måste fyllas i"
+        i_authorize_Fablab_users_registered_on_the_site_to_contact_me: "Jag samtycker till att dela min e-postadress med registrerade medlemmar på denna sida"
+        i_accept_to_receive_information_from_the_fablab: "Jag accepterar att få information från FabLab"
+        i_ve_read_and_i_accept_: "Jag har läst och accepterat"
+        _the_fablab_policy: "användarvillkoren"
+        field_required: "Obligatoriskt fält"
+        profile_custom_field_is_required: "{FEILD} krävs"
+        user_supporting_documents_required: "Varning!<br>Du har förklarat att du är \"{GROUP}\", underlag kan komma att begäras in."
+        unexpected_error_occurred: "Ett oväntat fel inträffade. Var god försök senare."
+        used_for_statistics: "Dessa uppgifter kommer att användas för statistiska ändamål"
+        used_for_invoicing: "Dessa uppgifter kommer att användas för faktureringsändamål"
+        used_for_reservation: "Dessa uppgifter kommer att användas i händelse av ändring av dina bokningar"
+        used_for_profile: "Denna data kommer endast att visas på din profil"
+        public_profile: "Du kommer att ha en publik profil och andra användare kommer att kunna knyta dig till sina projekt"
+        you_will_receive_confirmation_instructions_by_email_detailed: "Om din e-postadress finns i vår databas får du inom ett par minuter ett e-postmeddelande med instruktioner för hur du bekräftar ditt konto."
+        #password modification modal
+        change_your_password: "Byt lösenord"
+        your_new_password: "Ditt nya lösenord"
+        your_password_was_successfully_changed: "Ditt lösenord har nu ändrats."
+        #connection modal
+        connection: "Kontakter"
+        password_forgotten: "Glömt lösenordet?"
+        confirm_my_account: "Bekräfta e-postadress"
+        not_registered_to_the_fablab: "Ännu inte registrerad?"
+        create_an_account: "Skapa ett konto"
+        wrong_email_or_password: "Fel användarnamn eller lösenord."
+        caps_lock_is_on: "Caps lock är på."
+        #confirmation modal
+        you_will_receive_confirmation_instructions_by_email: "Du kommer att få bekräftelse med instruktioner via e-post."
+        #forgotten password modal
+        you_will_receive_in_a_moment_an_email_with_instructions_to_reset_your_password: "Om din e-postadress är giltig kommer du strax att få ett e-postmeddelande med instruktioner för att återställa ditt lösenord."
+        #Fab-manager's version
+        version: "Version:"
+        upgrade_fabmanager: "Uppgradera Fab-manager"
+        current_version: "Du använder för närvarande version {VERSION} av Fab-manager."
+        upgrade_to: "En ny utgåva är tillgänglig. Du kan uppgradera till version {VERSION}."
+        read_more: "Visa detaljerna i denna utgåva"
+        security_version_html: "<strong>Din nuvarande version är sårbar!</strong><br> En senare version finns tillgänglig som inkluderar säkerhetsuppdateringar. Uppgradera så snart som möjligt!"
+        how_to: "Hur man uppgraderar?"
+        #Notifications
+        and_NUMBER_other_notifications: "och {NUMBER, plural, one {}=0{inga andra notifieringar} =1{ytterligare en notifiering} other{{NUMBER} andra notifieringar}}..."
+      #about page
+      about:
+        read_the_fablab_policy: "Användarvillkor"
+        read_the_fablab_s_general_terms_and_conditions: "Läs de allmänna villkoren"
+        your_fablab_s_contacts: "Kontakta oss"
+        privacy_policy: "Integritetspolicy"
+      #'privacy policy' page
+      privacy:
+        title: "Integritetspolicy"
+        dpo: "Dataskyddsombud"
+        last_update: "Senast uppdaterad"
+      #home page
+      home:
+        latest_documented_projects: "De senaste dokumenterade projekten"
+        follow_us: "Följ oss"
+        latest_tweets: "De senaste tweetarna"
+        latest_registered_members: "Senast registrerade medlemmar"
+        create_an_account: "Skapa ett konto"
+        discover_members: "Upptäck medlemmar"
+        #next events summary on the home page
+        fablab_s_next_events: "Nästa evenemang"
+        every_events: "Alla evenemang"
+      event_card:
+        on_the_date: "Den {DATE}"
+        from_date_to_date: "Från {START} till {END}"
+        from_time_to_time: "Från {START} till {END}"
+        all_day: "Hela dagen"
+        still_available: "Tillgängliga lokaler: "
+        event_full: "Evenemanget fullbokat"
+        without_reservation: "Utan bokning"
+        free_admission: "Fri entré"
+        full_price: "Ordinarie pris: "
+      #projects gallery
+      projects_list:
+        filter: Filtrera
+        the_fablab_projects: "Projekten"
+        add_a_project: "Lägg till projekt"
+        network_search: "Fab-manager nätverk"
+        tooltip_openlab_projects_switch: "Med en sökning i hela nätverket kan du söka över projekt i varje Fab-manager med denna funktion!"
+        openlab_search_not_available_at_the_moment: "Sökningar över hela nätverket är inte tillgängligt just nu. Du kan fortfarande söka över projekten i denna plattform."
+        project_search_result_is_empty: "Tyvärr hittade vi inga resultat som matchar dina sökkriterier."
+        reset_all_filters: "Radera Allt"
+        keywords: "Sökord"
+        all_projects: "Alla projekt"
+        my_projects: "Mina projekt"
+        projects_to_whom_i_take_part_in: "Projekt som jag deltar i"
+        all_machines: "All utrustning"
+        all_themes: "Alla teman"
+        all_materials: "Allt material"
+        load_next_projects: "Ladda nästa projekt"
+        rough_draft: "Grovt utkast"
+        filter_by_member: "Filtrera efter medlem"
+        created_from: Skapad fr. o. m
+        created_to: Skapad t. o. m
+        download_archive: Ladda ner
+      status_filter:
+        all_statuses: "Alla statusar"
+        select_status: "Välj status"
+      #details of a projet
+      projects_show:
+        rough_draft: "Utkast"
+        project_description: "Projektbeskrivning"
+        by_name: "Av {NAME}"
+        step_N: "Steg {INDEX}"
+        share_on_facebook: "Dela på Facebook"
+        share_on_twitter: "Dela på Twitter"
+        deleted_user: "Ta bort användare"
+        posted_on_: "Postat den"
+        CAD_file_to_download: "{COUNT, plural, one {}=0{Inga CAD-filer} =1{CAD-fil att ladda ner} other{CAD-filer att ladda ner}}"
+        machines_and_materials: "Utrustning och material"
+        collaborators: "Medverkande"
+        licence: "Licens"
+        confirmation_required: "Verifiering krävs"
+        report_an_abuse: "Anmäl missbruk"
+        unauthorized_operation: "Obehörig åtgärd"
+        your_report_was_successful_thanks: "Er anmälan lyckades, tack."
+        an_error_occured_while_sending_your_report: "Ett fel inträffade när din anmälan skulle skickas."
+        your_first_name: "Ditt förnamn"
+        your_first_name_is_required: "Förnamn måste fyllas i."
+        your_surname: "Ditt efternamn"
+        your_surname_is_required: "Efternamn måste fyllas i."
+        your_email_address: "Din e-postadress"
+        your_email_address_is_required: "E-postadress måste anges."
+        tell_us_why_this_looks_abusive: "Berätta varför detta ser kränkande ut"
+        message_is_required: "Ett meddelande krävs."
+        report: "Anmäl"
+        do_you_really_want_to_delete_this_project: "Vill du verkligen ta bort detta projekt?"
+        status: "Status"
+        markdown_file: "Markdown-fil"
+      #list of machines
+      machines_list:
+        the_fablab_s_machines: "Utrustningen"
+        add_a_machine: "Lägg till utrustning"
+        new_availability: "Öppna bokningar"
+        book: "Boka"
+        _or_the_: " eller "
+        store_ad:
+          title: "Upptäck vår butik"
+          buy: "Se produkter från medlemmarnas verksamheter samt förbrukningsmateriel relaterade till utrustning och verktyg i våra lokaler."
+          sell: "Om du också vill sälja dina produkter, vänligen meddela oss."
+          link: "Till butiken"
+      machines_filters:
+        show_machines: "Visa utrustning:"
+        status_enabled: "Aktiverad"
+        status_disabled: "Inaktiverad"
+        status_all: "Allt"
+        filter_by_machine_category: "Filtrera efter kategori:"
+        all_machines: "All utrustning"
+      machine_card:
+        book: "Boka"
+        consult: "Fråga"
+      #details of a machine
+      machines_show:
+        book_this_machine: "Boka utrustning"
+        technical_specifications: "Tekniska specifikationer"
+        files_to_download: "Filer att ladda ner"
+        projects_using_the_machine: "Projekt som använder utrustningen"
+        _or_the_: " eller "
+        confirmation_required: "Verifiering krävs"
+        do_you_really_want_to_delete_this_machine: "Vill du verkligen ta bort den här utrustningen?"
+        unauthorized_operation: "Obehörig åtgärd"
+        the_machine_cant_be_deleted_because_it_is_already_reserved_by_some_users: "Utrustningen kan inte tas bort eftersom den redan är reserverad av andra användare."
+      #list of trainings
+      trainings_list:
+        book: "Boka"
+        the_trainings: "Utbildningarna"
+      #details of a training
+      training_show:
+        book_this_training: "Boka utbildningen"
+        do_you_really_want_to_delete_this_training: "Vill du verkligen ta bort den här utbildningen?"
+        unauthorized_operation: "Obehörig åtgärd"
+        confirmation_required: "Verifiering krävs"
+        the_training_cant_be_deleted_because_it_is_already_reserved_by_some_users: "Utbildningen kan inte tas bort eftersom den redan är reserverad av andra användare."
+      plan_card:
+        AMOUNT_per_month: "{AMOUNT} / månad"
+        i_subscribe_online: "Jag prenumererar online"
+        more_information: "Mer information"
+        i_choose_that_plan: "Jag väljer betalningsplanen"
+        i_already_subscribed: "Redan prenumerant"
+      #summary of the subscriptions
+      plans:
+        subscriptions: "Prenumerationer"
+        your_subscription_expires_on_the_DATE: "Ditt abonnemang löper ut den {DATE}"
+        no_plans: "Inga betalningsplaner finns tillgängliga för din grupp"
+        my_group: "Min grupp"
+        his_group: "Användargrupp"
+        he_wants_to_change_group: "Ändra grupp"
+        change_my_group: "Validera gruppändring"
+        summary: "Sammanfattning"
+        your_subscription_has_expired_on_the_DATE: "Ditt abonnemang löper ut den {DATE}"
+        subscription_price: "Prenumerationspris"
+        you_ve_just_payed_the_subscription_html: "Du har betalat <strong>prenumerationen</strong>:"
+        thank_you_your_subscription_is_successful: "Tack. Din prenumeration är genomförd!"
+        your_invoice_will_be_available_soon_from_your_dashboard: "Din faktura kommer att finnas tillgänglig från din översiktsvy inom kort"
+        your_group_was_successfully_changed: "Din grupp har ändrats."
+        the_user_s_group_was_successfully_changed: "Användarens grupp har ändrats."
+        an_error_prevented_your_group_from_being_changed: "Ett fel förhindrade att din grupp ändrades."
+        an_error_prevented_to_change_the_user_s_group: "Ett fel förhindrade att ändra användarens grupp."
+      plans_filter:
+        i_am: "Jag är"
+        select_group: "välj en grupp"
+        i_want_duration: "Jag vill prenumerera på"
+        all_durations: "Alla perioder"
+        select_duration: "välj period"
+      #Fablab's events list
+      events_list:
+        the_fablab_s_events: "Evenemangen"
+        all_categories: "Alla kategorier"
+        for_all: "För alla"
+        sold_out: "Slutsåld"
+        cancelled: "Inställt"
+        free_admission: "Fri entré"
+        still_available: "tillgängliga lokaler"
+        without_reservation: "Utan bokning"
+        add_an_event: "Lägg till ett evenemang"
+        load_the_next_events: "Ladda nästa evenemang..."
+        full_price_: "Ordinarie pris:"
+        to_date: "till" #e.g. from 01/01 to 01/05
+        all_themes: "Alla teman"
+      #details and booking of an event
+      events_show:
+        event_description: "Evenmangsbeskrivning"
+        downloadable_documents: "Nedladdningsbara dokument"
+        information_and_booking: "Information och bokning"
+        event_type:
+          family: "Evenemang reserverat för medlemmar"
+          nominative: "Personligt evenemang"
+        dates: "Datum"
+        beginning: "Början:"
+        ending: "Slutar:"
+        opening_hours: "Öppettider:"
+        all_day: "Heldag"
+        from_time: "Från" #e.g. from 18:00 to 21:00
+        to_time: "till" #e.g. from 18:00 to 21:00
+        full_price_: "Ordinarie pris:"
+        tickets_still_availables: "Biljetter finns kvar:"
+        sold_out: "Slutsåld."
+        without_reservation: "Utan bokning"
+        cancelled: "Inställt"
+        ticket: "{NUMBER, plural, one{biljett} other{biljetter}}"
+        make_a_gift_of_this_reservation: "Ge bort denna bokning som gåva"
+        thank_you_your_payment_has_been_successfully_registered: "Tack. Din betalning har registrerats!"
+        thank_you_your_pre_registration_has_been_successfully_saved: "Tack. Din föranmälan har sparats!"
+        you_can_find_your_reservation_s_details_on_your_: "Du kan hitta dina bokningsuppgifter på din"
+        informed_by_email_your_pre_registration: "Du kommer att hållas informerad via e-post om de händelser som gäller din föranmälan."
+        dashboard: "översikt"
+        you_booked_DATE: "Du bokade ({DATE}):"
+        you_pre_booked_DATE: "Din föranmälan ({DATE}):"
+        canceled_reservation_SEATS: "Bokning avbokad ({SEATS} platser)"
+        book: "Boka"
+        confirm_and_pay: "Bekräfta och betala"
+        confirm_payment_of_html: "{ROLE, select, admin{Kontant} other{Betala}}: {AMOUNT}" #(contexte : validate a payment of $20,00)
+        online_payment_disabled: "Betalning med kreditkort är inte tillgänglig. Vänligen kontakta oss direkt."
+        please_select_a_member_first: "Välj en medlem först"
+        change_the_reservation: "Avbryt bokningen"
+        you_can_shift_this_reservation_on_the_following_slots: "Du kan flytta denna bokning till följande tillfällen:"
+        confirmation_required: "Verifiering krävs"
+        do_you_really_want_to_delete_this_event: "Vill du radera detta evenemang?"
+        all_reservations_for_this_event_will_be_canceled: Alla bokningar av detta evenemang kommer att raderas.
+        delete_recurring_event: "Du håller på att ta bort en återkommande händelse. Vad vill du göra?"
+        delete_this_event: "Bara detta evenemang"
+        delete_this_and_next: "Detta evenemang samt framtida"
+        delete_all: "Alla evenemang"
+        event_successfully_deleted: "Evenemanget är raderat."
+        events_deleted: "Evenemanget och {COUNT, plural, one {}=1{ett annat} other{{COUNT} alla andra}}har tagits bort"
+        unable_to_delete_the_event: "Det går inte att ta bort händelsen, den kan ha bokats av en medlem"
+        events_not_deleted: "Av {TOTAL} evenemang {COUNT, plural, one {}=1{togs ett inte bort} other{togs {COUNT} inte bort}}. Vissa reservationer kan finnas på {COUNT, plural, one {}=1{det} other{dem}}."
+        cancel_the_reservation: "Avbryt bokningen"
+        do_you_really_want_to_cancel_this_reservation_this_apply_to_all_booked_tickets: "Vill du verkligen avboka denna bokning? Detta gäller för ALLA bokade biljetter."
+        reservation_was_successfully_cancelled: "Reservationen har avbrutits."
+        cancellation_failed: "Avbokning misslyckades."
+        event_is_over: "Evenemanget är över."
+        thanks_for_coming: "Tack för ditt besök!"
+        view_event_list: "Visa kommande evenemang"
+        share_on_facebook: "Dela på Facebook"
+        share_on_twitter: "Dela på Twitter"
+        last_name_and_first_name: "För- och efternamn"
+        pre_book: "Förboka"
+        pre_registration_end_date: "Deadline för förbokning"
+        pre_registration: "Föranmälan"
+      #public calendar
+      calendar:
+        calendar: "Kalender"
+        show_unavailables: "Visa obokbara platser"
+        filter_calendar: "Filtrera kalender"
+        trainings: "Utbildningar"
+        machines: "Utrustning"
+        spaces: "Lokaler"
+        events: "Evenemang"
+        externals: "Andra kalendrar"
+        choose_a_machine: "Välj utrustning"
+        cancel: "Avbryt"
+      #list of spaces
+      spaces_list:
+        the_spaces: "Lokalerna"
+        new_availability: "Öppna bokningar"
+        add_a_space: "Lägg till lokal"
+        status_enabled: "Aktiverad"
+        status_disabled: "Inaktiverad"
+        status_all: "Alla"
+        book: "Boka"
+      #display the details of a space
+      space_show:
+        book_this_space: "Boka utrustning"
+        unauthorized_operation: "Obehörig åtgärd"
+        confirmation_required: "Verifiering krävs"
+        do_you_really_want_to_delete_this_space: "Vill du verkligen ta bort denna lokal?"
+        the_space_cant_be_deleted_because_it_is_already_reserved_by_some_users: "Det går inte att ta bort denna lokal, eftersom den redan är reserverad av en användare."
+        characteristics: "Egenskaper"
+        files_to_download: "Filer att ladda ner"
+        projects_using_the_space: "Projekt som använder lokalen"
+      #public store
+      store:
+        fablab_store: "Butik"
+        unexpected_error_occurred: "Ett oväntat fel inträffade. Var god försök senare."
+        add_to_cart_success: "Produkten har lagts till i varukorgen."
+        products:
+          all_products: "Alla produkter"
+          filter: "Filtrera"
+          filter_clear: "Rensa allt"
+          filter_apply: "Verkställ"
+          filter_categories: "Kategorier"
+          filter_machines: "Utrustningen"
+          filter_keywords_reference: "Med sökord eller referens"
+          in_stock_only: "Endast tillgängliga produkter"
+          sort:
+            name_az: "A-Ö"
+            name_za: "Ö-A"
+            price_low: "Pris: lågt till högt"
+            price_high: "Högt till lågt"
+      store_product:
+        ref: "ref: {REF}"
+        add_to_cart_success: "Produkten har lagts till i varukorgen."
+        unexpected_error_occurred: "Ett oväntat fel inträffade. Var god försök senare."
+        show_more: "Visa mer"
+        show_less: "Visa mindre"
+        documentation: "Dokumentation"
+        minimum_purchase: "Minsta köp: "
+        add_to_cart: "Lägg till I varukorgen"
+        stock_limit: "Du har nått den aktuella lagergränsen"
+      stock_status:
+        available: "Tillgänglig"
+        limited_stock: "Begränsat lager"
+        out_of_stock: "Tillfälligt slut"
+      store_product_item:
+        minimum_purchase: "Minsta köp: "
+        add: "Lägg till"
+        add_to_cart: "Lägg till i varukorgen"
+        stock_limit: "Du har nått den aktuella lagergränsen"
+      product_price:
+        per_unit: "/ enhet"
+        free: "Gratis"
+      cart:
+        my_cart: "Min varukorg"
+      cart_button:
+        my_cart: "Min varukorg"
+      store_cart:
+        checkout: "Kassa"
+        cart_is_empty: "Din varukorg är tom"
+        pickup: "Hämta dina produkter"
+        checkout_header: "Totalt belopp för din varukorg"
+        checkout_products_COUNT: "Din varukorg innehåller {COUNT} {COUNT, plural, one {}=1{produkt} other{produkter}}"
+        checkout_products_total: "Produkter totalt"
+        checkout_gift_total: "Rabatt totalt"
+        checkout_coupon: "Rabattkupong"
+        checkout_total: "Totalt kundvagn"
+        checkout_error: "Oväntat fel uppstod. Vänligen kontakta systemadministratören."
+        checkout_success: "Köp bekräftat. Tack!"
+        select_user: "Välj en användare innan du fortsätter."
+      abstract_item:
+        offer_product: "Erbjud produkten"
+        total: "Totalt"
+        errors:
+          unauthorized_offering_product: "Du kan inte erbjuda något till dig själv"
+      cart_order_product:
+        reference_short: "ref:"
+        minimum_purchase: "Minsta köp: "
+        stock_limit: "Du har nått den aktuella lagergränsen"
+        unit: "Enhet"
+        update_item: "Uppdatera"
+        errors:
+          product_not_found: "Denna produkt är inte längre tillgänglig, vänligen ta bort den från din varukorg."
+          out_of_stock: "Denna produkt är slut i lager, vänligen ta bort den från din varukorg."
+          stock_limit_QUANTITY: "Endast {QUANTITY} {QUANTITY, plural, one {}=1{enhet} other{enheter}} kvar i lager, vänligen justera antalet objekt."
+          quantity_min_QUANTITY: "Minsta antal av produkten ändrades till {QUANTITY}, vänligen justera antalet objekt."
+          price_changed_PRICE: "Produktens pris har ändrats till {PRICE}"
+      cart_order_reservation:
+        reservation: "Bokning"
+        offer_reservation: "Erbjud bokningen"
+        slot: "{DATE}: {START} - {END}"
+        offered: "erbjuds"
+      orders_dashboard:
+        heading: "Mina beställningar"
+        sort:
+          newest: "Senaste först"
+          oldest: "Äldsta först"
+      member_select:
+        select_a_member: "Välj en medlem"
+        start_typing: "Börja skriva..."
+      children_dashboard:
+        heading: "Barn"
+        member_heading: "Mina barn"
+        add_child: "Lägg till barn"
+      child_modal:
+        edit_child: "Redigera barn"
+        new_child: "Nytt barn"
+      child_form:
+        child_form_info: "Endast barn under 18 år kan läggas till i ditt familjekonto. Underlag kan begäras för att validera ditt barns konto och tillåta dig att registrera dem för evenemang."
+        first_name: "Förnamn"
+        last_name: "Efternamn"
+        birthday: "Födelsedatum"
+        email: "E-post"
+        phone: "Telefon"
+        save: "Spara"
+        supporting_documents: "Underlag"
+        to_complete: "Att slutföra"
+        refuse_documents_info: "Du kan avböja ett urval av dokument genom att klicka på följande knapp."
+        refuse_documents: "Avböj dokument"
+      child_item:
+        first_name: "Barns förnamn"
+        last_name: "Barns efternamn"
+        birthday: "Födelsedatum"
+        deleted: "Barnet har tagits bort."
+        unable_to_delete: "Det går inte att ta bort barnet."
+      delete_child_modal:
+        confirmation_required: "Verifiering krävs"
+        confirm: "Bekräfta"
+        confirm_delete_child: "Vill du verkligen ta bort detta barn?"
+      tour:
+        conclusion:
+          title: "Tack för er uppmärksamhet"
+          content: "<p>Om du vill starta om denna kontextuella hjälp, tryck på <strong>F1</strong> när som helst eller klicka på « ? Hjälp » från användarens meny.</p><p>Om du behöver ytterligare hjälp kan du kolla i <a href='http://guide-fr.fab.mn' target='_blank'>användarhandboken</a> (endast på franska just nu).</p><p>Fab-managers team ger även personlig support (hjälp med att komma igång, hjälp med installation, anpassning etc. , <a href='mailto:contact@fab-manager.com'>Kontakta oss</a> för mer information.</p>"
+        welcome:
+          welcome:
+            title: "Välkommen till Fab-manager"
+            content: "För att hjälpa dig komma igång med systemet, kommer vi att ta en snabb rundtur bland funktionerna."
+          home:
+            title: "Startsida"
+            content: "Klicka här kommer att ta dig tillbaka till sidan där du är för närvarande."
+          machines:
+            title: "Utrustning"
+            content: "<p>Den här sidan låter dig konsultera listan över all utrustning och reservera en lokal åt en medlem.</p><p>Utrustning kan till exempel vara en TV.</p><p>Medlemmar kan också komma åt denna sida och reservera utrustning själva, om kreditkortsbetalning är aktiverad, eller om vissa priser är lika med 0.</p>"
+          trainings:
+            title: "Utbildningar"
+            content: "<p>Den här sidan låter dig konsultera listan över all utrustning och reservera en lokal åt en medlem.</p><p>Utrustning kan till exempel vara en Tv.</p><p>Medlemmar kan också komma åt denna sida och reservera utrustning själva, om kreditkortsbetalning är aktiverad, eller om vissa priser är lika med 0.</p>"
+          spaces:
+            title: "Lokaler"
+            content: "<p>Den här sidan låter dig konsultera listan över all utrustning och reservera en lokal åt en medlem.</p><p>Utrustning kan till exempel vara en TV.</p><p>Medlemmar kan också komma åt denna sida och reservera utrustning själva, om kreditkortsbetalning är aktiverad, eller om vissa priser är lika med 0.</p>"
+          events:
+            title: "Evenemang"
+            content: "<p>Öppet hus eller föreningsmöt? Kolla här!</p><p>Evenemang kan vara gratis eller med betalning, med eller utan bokning.</p><p>Medlemmar kan komma åt denna sida och boka plats för gratis evenemang, eller betalda evenemang om kreditkortsbetalning är aktiverad.</p>"
+          calendar:
+            title: "Agenda"
+            content: "Presentera i korthet allt som är planerat till de kommande veckorna (evenemang, kurser, tillgänglig utrustning m. m.)."
+          projects:
+            title: "Projekt"
+            content: "<p>Dokumentera och dela alla dina projekt med föreningen.</p><p>Om du använder OpenLab, kommer du också att kunna besöka projekten i hela Fab-Manager-nätverket. <a href='mailto:contact@fab-manager.com'>Contact-us</a> för att få din tillgång, det är gratis!</p>"
+          plans:
+            title: "Prenumerationer"
+            content: "Prenumerationer ger ett sätt att segmentera dina priser och ge fördelar för medlemmar."
+          admin:
+            title: "{ROLE} sektion"
+            content: "<p>Alla element nedan är endast tillgängliga för administratörer. De tillåter dig att hantera och konfigurera Fab-manager.</p><p>I slutet av detta besök, klicka på ett av dem för att ta reda på mer.</p>"
+          about:
+            title: "Om"
+            content: "En sida som du kan anpassa helt och hållet, för att presentera din verksamhet och din struktur."
+          notifications:
+            title: "Notifieringscenter"
+            content: "<p>Varje gång något viktigt händer (reservationer, skapande av konton, aktivitet från dina medlemmar, etc)., du kommer att meddelas här.</p><p>Dina medlemmar får också meddelanden där.</p>"
+          profile:
+            title: "Användarens meny"
+            content: "<p>Hitta din personliga information här samt all din aktivitet på Fab-manager.</p><p>Detta utrymme är också tillgängligt för alla dina medlemmar.</p>"
+          news:
+            title: "Nyheter"
+            content: "<p>Detta utrymme låter dig visa de senaste nyheterna från din verksamhet.</p><p>Du kan enkelt ändra dess innehåll från « Anpassning », « Hemsida ».</p>"
+          last_projects:
+            title: "Senaste projekten"
+            content: "<p>Detta bildspel rullar igenom de senaste projekten som dokumenterats av dina medlemmar.</p>"
+          last_tweet:
+            title: "Senaste tweet"
+            content: "<p>Den sista tweeten i ditt Twitter-flöde kan visas här.</p><p>Konfigurera det från « Anpassning », « Startsida ».</p>"
+          last_members:
+            title: "Senaste medlemmar"
+            content: "De senast registrerade medlemmar som har bekräftat sin adress och godkänt att bli kontaktade kommer att visas här."
+          next_events:
+            title: "Kommande evenemang"
+            content: "De kommande tre schemalagda evenemangen visas i detta utrymme."
+          customize:
+            title: "Anpassa startsidan"
+            content: "<p>Denna sida kan vara helt personlig.</p><p>Du kan <a href='mailto:contact@fab-manager.com'>kontakta oss</a> för att göra en skräddarsydd anpassning av startsidan.</p>"
+          version:
+            title: "Programversion"
+            content: "Håll muspekaren över denna ikon för att ta reda på versionen av Fab-manager. Om du inte är uppdaterad, kommer detta att rapporteras här och du kommer att kunna få information genom att klicka på den."
+        machines:
+          welcome:
+            title: "Utrustning"
+            content: "<p>Utrustning är de maskiner och verktyg som finns tillgängliga för dina användare. Här måste du skapa utrustning som sedan kan reserveras av medlemmarna.</p><p>Du kan också skapa poster för icke-bokningsbar eller gratis tillgänglig utrustning, då du behöver bara inte associera bokningsbakara tider med dem.</p>"
+          welcome_manager:
+            title: "Utrustning"
+            content: "Utrustning är de maskiner och verktyg som finns tillgängliga för användarna att reservera."
+          view:
+            title: "Visa"
+            content: "För att ändra eller ta bort utrustning, klicka här först. Du kommer inte att kunna ta bort utrustning som redan har förknippats med bokningsbara tider, men du kan inaktivera den."
+          reserve:
+            title: "Reservera"
+            content: "Klicka här för att se en kalender som visar bokningsbara tider. Detta låter dig boka denna utrustning och hantera befintliga bokningar."
+        spaces:
+          welcome:
+            title: "Lokaler"
+            content: "<p>Lokaler är tillgängliga för dina användare. Till exempel ett mötesrum eller ett kök. Här kan du skapa de lokaler som sedan kan reserveras av medlemmar.</p><p>Lokalerna kan reserveras av flera användare samtidigt.</p>"
+          welcome_manager:
+            title: "Lokaler"
+            content: "<p>Lokaler är tillgängliga för dina användare. Till exempel ett mötesrum eller ett kök. Här kan du skapa de lokaler som sedan kan reserveras av medlemmar.</p><p>Lokalerna kan reserveras av flera användare samtidigt.</p>"
+          view:
+            title: "Visa"
+            content: "För att ändra eller ta bort en lokal, klicka här först. Du kommer inte att kunna ta bort en lokal som redan har förknippats med bokningsbara tider, men du kan inaktivera den."
+          reserve:
+            title: "Reservera"
+            content: "Klicka här för att se en kalender som visar bokningsbara tider. Detta låter dig boka denna lokal och hantera befintliga bokningar."

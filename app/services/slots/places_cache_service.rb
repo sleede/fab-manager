@@ -78,7 +78,7 @@ class Slots::PlacesCacheService
     # @param reservable_id [Number]
     # @param user_ids [Array<Number>]
     def remove_users(slot, reservable_type, reservable_id, user_ids)
-      return if slot.nil?
+      return if slot.nil? || user_ids.compact.empty?
 
       ActiveRecord::Base.connection.execute <<-SQL.squish
         with users as (

@@ -76,7 +76,7 @@ export const AbstractItem: React.FC<AbstractItemProps> = ({ item, errors, cart, 
           <span>{t('app.public.abstract_item.total')}</span>
           <p>{FormatLib.price(OrderLib.itemAmount(item))}</p>
         </div>
-        <FabButton className="main-action-btn" onClick={handleRemoveItem(item)}>
+        <FabButton className="is-alert" onClick={handleRemoveItem(item)}>
           <i className="fa fa-trash" />
         </FabButton>
       </div>

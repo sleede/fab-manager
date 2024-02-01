@@ -1,0 +1,63 @@
+#Additional translations at https://github.com/plataformatec/devise/wiki/I18n
+sv:
+  devise:
+    confirmations:
+      confirmed: "Ditt konto har uppdaterats."
+      send_instructions: "Inom några minuter får du ett e-postmeddelande med instruktioner för hur du bekräftar ditt konto."
+      send_paranoid_instructions: "Om din e-postadress finns i vår databas får du inom några minuter ett e-postmeddelande med instruktioner för hur du bekräftar ditt konto."
+    failure:
+      already_authenticated: "Du har redan loggat in."
+      inactive: "Ditt konto har inte aktiverats ännu."
+      invalid: "Ogiltig e-postadress eller lösenord."
+      locked: "Ditt konto är låst."
+      last_attempt: "Du har ett försök kvar innan vi låser kontot."
+      not_found_in_database: "Ogiltig e-postadress eller lösenord."
+      timeout: "Din session har upphört att gälla. Vänligen logga in igen om du vill fortsätta."
+      unauthenticated: "Du måste logga in eller skapa ett konto innan du kan fortsätta."
+      unconfirmed: "Du måste bekräfta ditt konto innan du fortsätter. Klicka på länken nedanför formuläret."
+    mailer:
+      confirmation_instructions:
+        action: "Bekräfta e-postadress"
+        instruction: "Du kan slutföra din registrering genom att bekräfta din e-postadress. Klicka på följande länk:"
+        subject: "Bekräftelseinstruktioner"
+      reset_password_instructions:
+        action: "Byt lösenord"
+        instruction: "Någon har begärt att ändra ditt lösenordet. Du kan göra det genom länken nedan."
+        ignore_otherwise: "Om du inte har gjort denna begäran, vänligen ignorera detta meddelande."
+        subject: "Instruktioner för återställning av lösenord"
+      unlock_instructions:
+        subject: "Instruktioner för upplåsning"
+    omniauth_callbacks:
+      failure: "Kunde inte autentisera dig med %{kind} på grund av \"%{reason}\"."
+      success: "Autentiserat med %{kind}-konto."
+    passwords:
+      no_token: "Tillgång till den här sidan kräver att du fått ett mejl som sätter tillbaka ditt lösenord. Om du kom hit från ett sådant mejl, säkerställ att du har använt hela URL: en."
+      send_instructions: "Du kommer få ett mejl med instruktioner för hur du kan återställa ditt lösenord inom några minuter."
+      send_paranoid_instructions: "Om din e-postadress finns i vår databas kommer du att få en länk för lösenordsåterställning via e-post inom några minuter."
+      updated: "Ditt lösenord har ändrats. Du är nu inloggad."
+      updated_not_active: "Ditt lösenord har ändrats."
+    registrations:
+      destroyed: "Hej då! Ditt konto har nu avslutats. Vi hoppas att vi snart ses igen."
+      signed_up: "Välkommen! Du har registrerat dig."
+      signed_up_but_inactive: "Din registrering är klar. Men vi kunde inte logga in dig eftersom ditt konto ännu inte är aktiverat."
+      signed_up_but_locked: "Din registrering är klar. Men vi kunde inte logga in dig eftersom ditt konto är låst."
+      signed_up_but_unconfirmed: "Ett meddelande med en bekräftelselänk har skickats till din e-postadress. Aktivera ditt konto genom att klicka på den länken."
+      update_needs_confirmation: "Du uppdaterade ditt konto, men vi måste verifiera din nya e-postadress. Kontrollera din e-post och klicka på bekräftelselänken för att slutföra bekräftandet av din nya e-postadress."
+      updated: "Ditt konto har uppdaterats."
+    sessions:
+      signed_in: "Inloggningen lyckades."
+      signed_out: "Du har loggats ut."
+    unlocks:
+      send_instructions: "Inom några minuter får du ett e-postmeddelande med instruktioner för hur du låser upp ditt konto."
+      send_paranoid_instructions: "Om ditt konto finns får du inom några minuter ett e-postmeddelande med instruktioner för hur du låser upp det."
+      unlocked: "Ditt konto har blivit upplåst. Logga in för att fortsätta."
+  errors:
+    messages:
+      already_confirmed: "Detta e-postmeddelande har redan bekräftats, försök logga in."
+      confirmation_period_expired: "måste bekräftas inom %{period}, vänligen begär ett nytt"
+      expired: "har gått ut, vänligen begär ett nytt"
+      not_found: "Meddelandet hittades inte"
+      not_locked: ""
+      not_saved:
+        one: "1 fel gjorde att denna %{resource} inte kunde sparas:"
+        other: "%{count} fel gjorde att denna %{resource} inte kunde sparas:"

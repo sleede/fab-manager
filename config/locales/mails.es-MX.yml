@@ -289,9 +289,9 @@ es-MX:
     notify_member_about_coupon:
       subject: "Cupón"
       body:
-        enjoy_a_discount_of_PERCENT_with_code_CODE: "Disfruta de un descuento del %{PERCENT}% en toda la web con el código %{CODE}."
-        enjoy_a_discount_of_AMOUNT_with_code_CODE: "Disfruta de un descuento de %{AMOUNT} en toda la web con el código %{CODE}."
-        this_coupon_is_valid_USAGE_times_until_DATE_for_all_your_purchases: "Este cupón es válido {USAGE, plural, =1{just once} other{many times}}: para todas tus compras {TYPE, select, amount_off{at least equal to the amount of the coupon} other{}}, desde ahora {DATE, select, NO-DATE{and without time limit} other{and until {DATE}}}."
+        enjoy_a_discount_of_PERCENT_with_code_CODE: "Disfruta de un descuento del %{PERCENT}% en todo el sitio con el código %{CODE}."
+        enjoy_a_discount_of_AMOUNT_with_code_CODE: "Disfruta de un descuento de %{AMOUNT} en todo el sitio con el código %{CODE}."
+        this_coupon_is_valid_USAGE_times_until_DATE_for_all_your_purchases: "Este cupón es válido {USAGE, plural, =1{une vez} other{varias veces}}: para todas tus compras {TYPE, select, amount_off{al menos igual al valor del cupón} other{}}, desde ahora {DATE, select, NO-DATE{y sin limite de tiempo} other{y hasta {DATE}}}."
     notify_admin_free_disk_space:
       subject: "Poco espacio libre en disco"
       body: "Advertencia: el espacio disponible en el servidor que aloja Fab-manager es inferior a %{THRESHOLD} MiB. Esto puede afectar a su funcionamiento y evitar que se guarden algunos datos. Actualmente, hay %{AVAILABLE} MiB de espacio libre en el disco del punto de montaje."

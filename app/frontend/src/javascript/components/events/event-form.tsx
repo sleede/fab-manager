@@ -132,8 +132,7 @@ export const EventForm: React.FC<EventFormProps> = ({ action, event, onError, on
    * Check if any dates have changed
    */
   const datesHaveChanged = (): boolean => {
-    return ((event?.start_date !== (updatingEvent?.start_date as Date)?.toISOString()?.substring(0, 10)) ||
-            (event?.end_date !== (updatingEvent?.end_date as Date)?.toISOString()?.substring(0, 10)));
+    return (event?.start_date !== updatingEvent?.start_date) || (event?.end_date !== updatingEvent?.end_date);
   };
 
   /**
@@ -361,7 +360,7 @@ export const EventForm: React.FC<EventFormProps> = ({ action, event, onError, on
                              formState={formState}
                              label={t('app.admin.event_form.price')}
                              addOn={FormatLib.currencySymbol()} />
-                  <FabButton className="remove-price is-main" onClick={() => handlePriceRemove(price, index)} icon={<Trash size={20} />} />
+                  <FabButton className="remove-price is-alert" onClick={() => handlePriceRemove(price, index)} icon={<Trash size={20} />} />
                 </div>
               ))}
               <FabButton className="add-price is-secondary" onClick={() => append({})}>

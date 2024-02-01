@@ -1,0 +1,749 @@
+sv:
+  #subscription plan duration
+  duration:
+    year:
+      one: 'ett år'
+      other: '%{count} år'
+    month:
+      one: 'en månad'
+      other: '%{count} månader'
+    week:
+      one: 'en vecka'
+      other: '%{count} veckor'
+  activerecord:
+    attributes:
+      product:
+        amount: "Priset"
+        slug: "URL"
+  errors:
+    #CarrierWave
+    messages:
+      carrierwave_processing_error: "misslyckades att bearbetas"
+      carrierwave_integrity_error: "är inte av en tillåten filtyp"
+      carrierwave_download_error: "kunde inte laddas ner"
+      extension_whitelist_error: "Du kan inte ladda upp %{extension} filer, tillåtna typer: %{allowed_types}"
+      extension_blacklist_error: "Du kan inte ladda upp %{extension} filer, förbjudna typer: %{prohibited_types}"
+      content_type_whitelist_error: "Du kan inte ladda upp %{content_type} filer, tillåtna typer: %{allowed_types}"
+      rmagick_processing_error: "Misslyckades att redigera med rmagick, kanske är det inte en bild?"
+      mime_types_processing_error: "Det gick inte att bearbeta filen med MIME::Types, kanske inte giltig innehållstyp?"
+      mini_magick_processing_error: "Misslyckades att redigera filen, kanske är det inte en bild?"
+      wrong_size: "är fel storlek (ska vara %{file_size})"
+      size_too_small: "är för liten (bör vara minst %{file_size})"
+      size_too_big: "är för stor (bör vara som mest %{file_size})"
+      export_not_found: "Begärd export hittades inte. Det har förmodligen tagits bort, vänligen generera en ny export."
+      percentage_out_of_range: "Procent måste anges mellan 0 och 100"
+      cannot_be_blank_at_same_time: "kan inte vara tomt när %{field} är tomt också"
+      cannot_be_in_the_past: "kan inte vara i det förflutna"
+      cannot_be_before_previous_value: "kan inte vara innan föregående värde"
+      cannot_overlap: "kan inte överlappa en befintlig redovisningsperiod"
+      cannot_encompass: "kan inte omfatta en befintlig redovisningsperiod"
+      in_closed_period: "kan inte vara inom en stängd redovisningsperiod"
+      invalid_footprint: "fakturans kontrollsumma är ogiltig"
+      end_before_start: "Slutdatumet kan inte vara före startdatumet. Välj ett datum efter %{START}"
+      invalid_duration: "Den tillåtna perioden måste vara mellan 1 dag och 1 år. Din period är %{DAYS} dagar lång."
+      must_be_in_the_past: "Perioden måste vara strikt innan dagens datum."
+      registration_disabled: "Registrering inaktiverad"
+      undefined_in_store: "måste definieras för att göra produkten tillgänglig i butiken"
+      gateway_error: "Fel hos betalningsleverantör: %{MESSAGE}"
+      gateway_amount_too_small: "Betalningar under %{AMOUNT} stöds inte. Vänligen beställ direkt i receptionen."
+      gateway_amount_too_large: "Betalningar över %{AMOUNT} stöds inte. Vänligen beställ direkt i receptionen."
+      product_in_use: "Denna produkt har redan beställts"
+      slug_already_used: "används redan"
+      birthday_less_than_18_years_ago: "Födelsedag måste vara mindre än 18 år sedan"
+  coupon:
+    code_format_error: "bara stora bokstäver, siffror och bindestreck är tillåtna"
+  apipie:
+    api_documentation: "API-dokumentation"
+    code: "HTTP-kod"
+  #error messages when importing an account from an SSO
+  omniauth:
+    email_already_linked_to_another_account_please_input_your_authentication_code: "E-postadress \"%{OLD_MAIL}\" är redan länkad till ett annat konto, vänligen ange din autentiseringskod."
+    your_username_is_already_linked_to_another_account_unable_to_update_it: "Ditt användarnamn (%{USERNAME}) är redan kopplat till ett annat konto, det gick inte att uppdatera det."
+    your_email_address_is_already_linked_to_another_account_unable_to_update_it: "Din e-postadress (%{EMAIL}) är redan kopplad till ett annat konto, det gick inte att uppdatera det."
+    this_account_is_already_linked_to_an_user_of_the_platform: "Detta %{NAME} konto är redan länkat till en användare av plattformen."
+  #availability slots in the calendar
+  availabilities:
+    not_available: "Inte tillgänglig"
+    reserving: "Jag bokar"
+    i_ve_reserved: "Jag har bokat"
+    blocked: "Blockerad"
+    length_must_be_slot_multiple: "måste vara minst %{MIN} minuter efter startdatum"
+    must_be_associated_with_at_least_1_machine: "måste vara associerad med minst 1 maskin"
+    deleted_user: "Raderad användare"
+  #members management
+  members:
+    unable_to_change_the_group_while_a_subscription_is_running: "Det går inte att ändra gruppen medan en prenumeration är aktiv"
+    please_input_the_authentication_code_sent_to_the_address: "Ange autentiseringskoden som skickats till e-postadressen %{EMAIL}"
+    your_authentication_code_is_not_valid: "Ogiltig aktiveringskod."
+    current_authentication_method_no_code: "Den aktuella autentiseringsmetoden kräver ingen migreringskod"
+    requested_account_does_not_exists: "Det begärda kontot finns inte"
+  #SSO external authentication
+  authentication_providers:
+    local_database_provider_already_exists: 'En "lokal databas-leverantör" finns redan. Kan inte skapa en till.'
+    matching_between_User_uid_and_API_required: "Matchningen mellan User.uid och API behöver ställas in för att lägga till denna leverantör."
+  #PDF invoices generation
+  invoices:
+    refund_invoice_reference: "Kreditnotereferens: %{REF}"
+    invoice_reference: "Fakturareferens: %{REF}"
+    code: "Kod: %{CODE}"
+    order_number: "Beställnings#: %{NUMBER}"
+    invoice_issued_on_DATE: "Faktura utfärdad den%{DATE}"
+    refund_invoice_issued_on_DATE: "Kreditnota utfärdad den %{DATE}"
+    wallet_credit: "Plånbokens krediter"
+    cancellation_of_invoice_REF: "Avbokning av faktura %{REF}"
+    reservation_of_USER_on_DATE_at_TIME: "Bokning av %{USER} på %{DATE} på %{TIME}"
+    cancellation: "Avbokning"
+    object: "Objekt:"
+    order_summary: "Beställningsöversikt:"
+    details: "Detaljer"
+    amount: "Belopp"
+    subscription_extended_for_free_from_START_to_END: "Prenumerationen förlängs kostnadsfritt - Från %{START} till %{END}"
+    subscription_NAME_from_START_to_END: "Prenumeration %{NAME} - Från %{START} till %{END}"
+    machine_reservation_DESCRIPTION: "Utrustningsbokning - %{DESCRIPTION}"
+    space_reservation_DESCRIPTION: "Lokalbokning - %{DESCRIPTION}"
+    training_reservation_DESCRIPTION: "Kursbokning - %{DESCRIPTION}"
+    event_reservation_DESCRIPTION: "Evenemangsbokning - %{DESCRIPTION}"
+    from_payment_schedule: "Att betala %{NUMBER} av %{TOTAL}, från %{DATE}. Återbetalningsschema %{SCHEDULE}"
+    null_invoice: "Faktura på noll, fakturering hoppades över efter ett fel i Fab Manager programvaran"
+    full_price_ticket:
+      one: "En fullprisbiljett"
+      other: "%{count} biljetter till fullt priset"
+    other_rate_ticket:
+      one: "En %{NAME} biljett"
+      other: "%{count} %{NAME} biljetter"
+    coupon_CODE_discount_of_DISCOUNT: "Kupong {CODE}: rabatt på {DISCOUNT}{TYPE, select, percent_off{%} other{}}" #messageFormat interpolation
+    total_including_all_taxes: "Totalt inkl. moms"
+    VAT: "Moms"
+    including_VAT_RATE: "Inklusive %{NAME} %{RATE}% av %{AMOUNT}"
+    including_total_excluding_taxes: "Totalt exkl. moms"
+    including_amount_payed_on_ordering: "Inklusive belopp som betalades vid beställning"
+    total_amount: "Totalt belopp"
+    refund_on_DATE: "Återbetalning den %{DATE}"
+    by_card_online_payment: "med kort (onlinebetalning)"
+    by_cheque: "med check"
+    by_transfer: "med överföring"
+    by_cash: "med kontanter"
+    by_wallet: "med plånbok"
+    no_refund: "Ingen återbetalning"
+    settlement_by_debit_card: "Betalning med betalkort"
+    settlement_done_at_the_reception: "Betalning görs i receptionen"
+    settlement_by_wallet: "Betalning med plånbok"
+    on_DATE_at_TIME: "den %{DATE} kl %{TIME},"
+    for_an_amount_of_AMOUNT: "för ett belopp på %{AMOUNT}"
+    on_DATE_from_START_to_END: "Den %{DATE} från %{START} till %{END}" #eg: on feb. 7 from 7AM to 9AM
+    from_STARTDATE_to_ENDDATE_from_STARTTIME_to_ENDTIME: "Från %{STARTDATE} till %{ENDDATE}, från %{STARTTIME} till %{ENDTIME}" #eg: from feb. 7 to feb. 10, from 6PM to 10PM
+    subscription_of_NAME_for_DURATION_starting_from_DATE: "Prenumeration på %{NAME} för %{DURATION} med start från %{DATE}"
+    subscription_of_NAME_extended_starting_from_STARTDATE_until_ENDDATE: "Prenumeration på %{NAME} förlängd (fria dagar) från %{STARTDATE} till %{ENDDATE}"
+    and: 'och'
+    invoice_text_example: "Vår förening är inte momspliktig"
+    error_invoice: "Felaktig faktura. Objekt nedan är inte bokade. Kontakta oss för återbetalning."
+    prepaid_pack: "Förbetalda timmar"
+    pack_item: "Paketet %{COUNT} timmar för %{ITEM}"
+    order: "Din beställning i butiken"
+    unable_to_find_pdf: "Vi kan inte hitta din faktura. Om du beställde den senaste tiden kanske den inte har genererats ännu. Försök igen strax."
+  #PDF payment schedule generation
+  payment_schedules:
+    schedule_reference: "Referens till betalningsschema: %{REF}"
+    schedule_issued_on_DATE: "Schemat utfärdat på %{DATE}"
+    object: "Objekt: Betalningsschema för %{ITEM}"
+    subscription_of_NAME_for_DURATION_starting_from_DATE: "prenumeration på %{NAME} för %{DURATION} med start från %{DATE}"
+    deadlines: "Lista över dina deadlines"
+    deadline_date: "Betalningsdatum"
+    deadline_amount: "Belopp inklusive moms"
+    total_amount: "Totalt belopp"
+    settlement_by_METHOD: "Debitering kommer att göras från {METHOD, select, card{kort} transfer{banköverföring} other{kontant}} för varje deadline."
+    settlement_by_wallet: "%{AMOUNT} kommer att debiteras från din plånbok för att reglera den första deadlinen."
+  #CVS accounting export (columns headers)
+  accounting_export:
+    journal_code: "Journalkod"
+    date: "Transaktionsdatum"
+    account_code: "Kontokod"
+    account_label: "Kontonamn"
+    piece: "Dokument"
+    line_label: "Postens etikett"
+    debit_origin: "Ursprungsdebitering"
+    credit_origin: "Ursprungskredititering"
+    debit_euro: "Euro debitering"
+    credit_euro: "Euro kreditering"
+    lettering: "Textning"
+    VAT: 'Moms'
+  accounting_summary:
+    subscription_abbreviation: "pren."
+    Machine_reservation_abbreviation: "maskin reserv."
+    Training_reservation_abbreviation: "utbildning reserv."
+    Event_reservation_abbreviation: "evenemang reserv."
+    Space_reservation_abbreviation: "lokal reserv."
+    wallet_abbreviation: "plånbok"
+    shop_order_abbreviation: "butiksbeställning"
+  vat_export:
+    start_date: "Startdatum"
+    end_date: "Slutdatum"
+    vat_rate: "%{NAME} procentsats"
+    amount: "Totalt belopp"
+  #training availabilities
+  trainings:
+    i_ve_reserved: "Jag har bokat"
+    completed: "Full"
+    refund_for_auto_cancel: "Utbildningen avbröts på grund av otillräckligt antal deltagare."
+  #error messages when updating an event
+  events:
+    error_deleting_reserved_price: "Det går inte att ta bort det begärda priset eftersom det är associerat med vissa bokningar"
+    other_error: "Ett oväntat fel inträffade när evenemanget uppdaterades"
+    #event duration
+    from_STARTDATE_to_ENDDATE: "Från %{STARTDATE} till %{ENDDATE},"
+    from_STARTTIME_to_ENDTIME: "från %{STARTTIME} till %{ENDTIME}"
+  #members list export to EXCEL format
+  export_members:
+    members: "Medlemmar"
+    id: "ID"
+    external_id: "Externt ID"
+    surname: "Efternamn"
+    first_name: "Förnamn"
+    email: "E-postadress"
+    newsletter: "Nyhetsbrev"
+    last_login: "Senaste inloggning"
+    gender: "Kön"
+    age: "Ålder"
+    address: "Adress"
+    phone: "Telefon"
+    website: "Webbsida"
+    job: "Jobb"
+    interests: "Intressen"
+    cad_software_mastered: "Färdigheter"
+    group: "Grupp"
+    subscription: "Prenumeration"
+    subscription_end_date: "Slutdatum för prenumeration"
+    validated_trainings: "Validerade utbildningar"
+    tags: "Taggar"
+    number_of_invoices: "Antal fakturor"
+    projects: "Projekt"
+    facebook: "Facebook"
+    twitter: "Twitter"
+    echo_sciences: "Naturvetenskap"
+    organization: "Organisation"
+    organization_address: "Organisationsadress"
+    note: "Anteckning"
+    man: "Man"
+    woman: "Kvinna"
+    without_subscriptions: "Utan prenumerationer"
+  #machines/trainings/events reservations list to EXCEL format
+  export_reservations:
+    reservations: "Bokningar"
+    customer_id: "Kund-ID"
+    customer: "Kund"
+    email: "E-postadress"
+    reservation_date: "Bokningsdatum"
+    reservation_type: "Typ av bokning"
+    reservation_object: "Bokningsobjekt"
+    slots_number_hours_tickets: "Antal platser (timmar/biljetter)"
+    payment_method: "Betalningsmetod"
+    local_payment: "Betalning i receptionen"
+    online_payment: "Onlinebetalning"
+    deleted_user: "Raderad användare"
+    coupon: "Kupong använd"
+  #subscriptions list export to EXCEL format
+  export_subscriptions:
+    subscriptions: "Prenumerationer"
+    id: "ID"
+    customer: "Kund"
+    email: "E-postadress"
+    subscription: "Prenumeration"
+    period: "Period"
+    start_date: "Startdatum"
+    expiration_date: "Utgångsdatum"
+    amount: "Belopp"
+    local_payment: "Betalning i receptionen"
+    online_payment: "Onlinebetalning"
+    deleted_user: "Raderad användare"
+  #reservation slots export, by type, to EXCEL format
+  export_availabilities:
+    machines: "Utrustning"
+    trainings: "Utbildningar"
+    spaces: "Lokaler"
+    events: "Evenemang"
+    day_of_week: "Veckodag"
+    date: "Datum"
+    slot: "Lucka"
+    machine: "Utrustning"
+    training: "Utbildning"
+    space: "Lokal"
+    event: "Evenemang"
+    reservations: "Bokningar"
+    available_seats: "Lediga platser"
+  reservation_ics:
+    description_slot: "Du har bokat %{COUNT} platser i %{ITEM}"
+    description_training: "Du har bokat en %{TYPE} utbildning"
+    description_event: "Du har bokat %{NUMBER} biljetter till detta evenemang"
+    alarm_summary: "Påminnelse om din bokning"
+  roles:
+    member: "Medlem"
+    manager: "Ansvarig"
+    admin: "Administratör"
+  api:
+    #internal app notifications
+    notifications:
+      deleted_user: "Raderad användare"
+      notify_admin_abuse_reported:
+        an_abuse_was_reported_on_TYPE_ID_NAME_html: "Felaktig användning rapporterades på <strong>%{TYPE} %{ID}: <em>%{NAME}</em></strong>."
+      notify_admin_member_create_reservation:
+        a_RESERVABLE_reservation_was_made_by_USER_html: "En <strong><em>%{RESERVABLE}</em></strong> bokning gjordes av <strong><em>%{USER}</em></strong>."
+      notify_admin_member_pre_booked_reservation:
+        a_RESERVABLE_reservation_was_made_by_USER_html: "En <strong><em>%{RESERVABLE}</em></strong> föranmälan gjordes av <strong><em>%{USER}</em></strong>."
+      notify_admin_profile_complete:
+        account_imported_from_PROVIDER_UID_has_completed_its_information_html: "Konto importerat från <strong><em>%{PROVIDER}</strong> (%{UID})</em> har överfört sin information."
+      notify_admin_slot_is_canceled:
+        USER_s_reservation_on_the_DATE_was_cancelled_remember_to_generate_a_refund_invoice_if_applicable_html: "<strong><em>%{USER}</em></strong>s bokning, den %{DATE}, avbröts. Kom ihåg att generera en återbetalningsfaktura om det behövs."
+      notify_admin_slot_is_modified:
+        a_booking_slot_was_modified: "En bokningsplats ändrades."
+      notify_admin_subscribed_plan:
+        subscription_PLAN_has_been_subscribed_by_USER_html: "Prenumerationen <strong><em>%{PLAN}</em></strong> har tecknats av <strong><em>%{USER}</strong></em>."
+      notify_admin_subscription_canceled:
+        USER_s_subscription_has_been_cancelled: "%{USER} s prenumeration har avbrutits."
+      notify_admin_subscription_extended:
+        subscription_PLAN_of_the_member_USER_has_been_extended_FREE_until_DATE_html: "Prenumeration <strong><em>{PLAN}</em></strong> av medlemmen <strong><em>{USER}</strong></em> har förlängts {FREE, select, true{gratis} other{}} tills {DATE}." #messageFormat interpolation
+      notify_admin_subscription_is_expired:
+        USER_s_subscription_has_expired: "%{USER} s prenumeration har löpt ut."
+      notify_admin_subscription_will_expire_in_7_days:
+        USER_s_subscription_will_expire_in_7_days: "%{USER} s prenumeration löper ut om 7 dagar."
+      notify_admin_training_auto_cancelled:
+        auto_cancelled_training: "Utbildningen %{TRAINING} som är schemalagd för %{DATE}, har avbrutits automatiskt på grund av otillräckligt antal deltagare."
+        auto_refund: "Medlemmarna har återbetalats automatiskt till sin plånbok."
+        manual_refund: "Vänligen återbetala varje medlem."
+      notify_admin_user_group_changed:
+        user_NAME_changed_his_group_html: "Användare <strong><em>{NAME}</strong></em> ändrade grupp." #messageFormat interpolation
+      notify_admin_user_merged:
+        user_NAME_has_merged_his_account_with_the_one_imported_from_PROVIDER_UID_html: "<strong><em>{NAME}</strong></em>s konto slogs samman med det importerade från <strong><em>{PROVIDER} </strong> ({%UID})</em>." #messageFormat interpolation
+      notify_admin_when_project_published:
+        project_NAME_has_been_published_html: "Projekt <a href='/#!/projects/%{ID}'><strong><em>%{NAME}<em></strong></a> har publicerats."
+      notify_admin_when_user_is_created:
+        a_new_user_account_has_been_created_NAME_EMAIL_html: "Ett nytt användarkonto har skapats: <strong><em>%{NAME} &lt;%{EMAIL}&gt;</strong></em>."
+      notify_admin_child_created:
+        a_new_child_has_been_created_NAME_html: "Ett nytt barn har skapats: <strong><em>%{NAME}</em></strong>."
+      notify_admin_when_user_is_imported:
+        a_new_user_account_has_been_imported_from_PROVIDER_UID_html: "Ett nytt användarkonto har importerats från: <strong><em>%{PROVIDER}</strong> (%{UID})</em>."
+      notify_member_create_reservation:
+        your_reservation_RESERVABLE_was_successfully_saved_html: "Din bokning <strong><em>%{RESERVABLE}</em></strong> har sparats."
+      notify_member_pre_booked_reservation:
+        your_reservation_RESERVABLE_was_successfully_saved_html: "Din föranmälan <strong><em>%{RESERVABLE}</em></strong> har sparats."
+      notify_member_reservation_reminder:
+        reminder_you_have_a_reservation_RESERVABLE_to_be_held_on_DATE_html: "Påminnelse: Du har en bokning <strong>%{RESERVABLE}</strong> som hålls den <em>%{DATE}</em>"
+      notify_member_slot_is_canceled:
+        your_reservation_RESERVABLE_of_DATE_was_successfully_cancelled: "Din bokning %{RESERVABLE} den %{DATE} har avbrutits."
+      notify_member_slot_is_modified:
+        your_reservation_slot_was_successfully_changed: "Din bokning har sparats."
+      notify_member_subscribed_plan:
+        you_have_subscribed_to_PLAN_html: "Du har prenumererat på <strong><em>%{PLAN}</em></strong>."
+      notify_member_subscribed_plan_is_changed:
+        you_have_changed_your_subscription_to_PLAN_html: "Du har ändrat din prenumeration till <strong><em>%{PLAN}</em></strong>."
+      notify_member_subscription_canceled:
+        your_subscription_PLAN_was_successfully_cancelled_html: "Ditt prenumeration <strong><em>%{PLAN}</em></strong> har avbrutits."
+      notify_member_subscription_extended:
+        your_subscription_PLAN_has_been_extended_FREE_until_DATE_html: "Din prenumeration <strong><em>{PLAN}</em></strong> har förlängts {FREE, select, true{kostnadsfritt} other{}} tills {DATE}." #messageFormat interpolation
+      notify_member_subscription_is_expired:
+        your_subscription_has_expired: "Din prenumeration har löpt ut."
+      notify_member_subscription_will_expire_in_7_days:
+        your_subscription_will_expire_in_7_days: "Din prenumeration upphör om 7 dagar."
+      notify_member_training_authorization_expired:
+        training_authorization_revoked: "Ditt tillstånd att använda %{MACHINES} har återkallats eftersom det har löpt ut."
+      notify_member_training_auto_cancelled:
+        auto_cancelled_training: "Utbildningen %{TRAINING} som är schemalagd för %{DATE}, har avbrutits automatiskt på grund av otillräckligt antal deltagare."
+        auto_refund: "Du har återbetalats till din plånbok."
+      notify_member_training_invalidated:
+        invalidated: "Ditt tillstånd att använda %{MACHINES} har ogiltigförklarats på grund av brist på reservationer."
+      notify_partner_subscribed_plan:
+        subscription_partner_PLAN_has_been_subscribed_by_USER_html: "Partnerprenumeration <strong><em>%{PLAN}</em></strong> har prenumererats av <strong><em>%{USER}</strong></em>."
+      notify_project_author_when_collaborator_valid:
+        USER_became_collaborator_of_your_project: "%{USER} blev samarbetspartner för ditt projekt:"
+      notify_project_collaborator_to_valid:
+        you_are_invited_to_collaborate_on_the_project: "Du är inbjuden att delta i projektet:"
+      notify_user_auth_migration:
+        your_account_was_migrated: "Ditt konto har migrerats till det nya autentiseringssystemet."
+      notify_user_profile_complete:
+        your_profile_was_completed: "Din profil har färdigställts, du har nu tillgång till hela plattformen."
+      notify_user_training_valid:
+        your_TRAINING_was_validated_html: "Din utbildning <strong><em>%{TRAINING}</em></strong> har validerats."
+      notify_user_user_group_changed:
+        your_group_has_changed: "Din grupp har ändrats."
+      notify_user_when_avoir_ready:
+        your_avoir_is_ready_html: "Din kreditnota #%{REFERENCE}, av %{AMOUNT}, är klar. <a href='api/invoices/%{INVOICE_ID}/download' target='_blank'>Klicka här för att ladda ner</a>."
+      notify_user_when_invoice_ready:
+        your_invoice_is_ready_html: "Din faktura #%{REFERENCE}, av %{AMOUNT} är klar. <a href='api/invoices/%{INVOICE_ID}/download' target='_blank'>Klicka här för att ladda ner</a>."
+      undefined_notification:
+        unknown_notification: "Okänd avisering"
+        notification_ID_wrong_type_TYPE_unknown: "Notifiering %{ID} fel (typ %{TYPE} okänd)"
+      notify_user_wallet_is_credited:
+        your_wallet_is_credited: "Din plånbok har krediterats av administratören"
+      notify_admin_user_wallet_is_credited:
+        wallet_is_credited: "Plånboken för medlemmen %{USER} har krediterats %{AMOUNT}"
+      notify_admin_export_complete:
+        export: "Exporten"
+        statistics_global: "av all statistik"
+        statistics_account: "av bokningsstatistiken"
+        statistics_event: "statistik om evenemang"
+        statistics_machine: "statistik om utrustningsbokningar"
+        statistics_project: "statistik om projekt"
+        statistics_subscription: "av prenumerationsstatistik"
+        statistics_training: "statistik om projekt"
+        statistics_space: "statistik om lokaler"
+        statistics_order: "statistik över butiksbeställningar"
+        users_members: "av medlemmarnas lista"
+        users_subscriptions: "av listan över prenumerationer"
+        users_reservations: "av bokningslistan"
+        availabilities_index: "av bokningens tillgänglighet"
+        accounting_acd: "av bokföringsdata till ACD"
+        accounting_vat: "av den ingående momsen"
+        is_over: "är färdig."
+        download_here: "Ladda ner här"
+      notify_admin_import_complete:
+        import_over: "%{CATEGORY} importen är färdig. "
+        members: "Medlemmar"
+        view_results: "Visa resultat."
+      notify_admin_low_stock_threshold:
+        low_stock: "Lågt lager för %{PRODUCT}. "
+        view_product: "Visa produkten."
+      notify_member_about_coupon:
+        enjoy_a_discount_of_PERCENT_with_code_CODE: "Ta del av en rabatt på %{PERCENT}% med koden %{CODE}"
+        enjoy_a_discount_of_AMOUNT_with_code_CODE: "Ta del av en rabatt på %{AMOUNT}% med koden %{CODE}"
+      notify_admin_free_disk_space:
+        warning_free_disk_space: "Varning: serverns tillgängliga diskutrymme är nu %{AVAILABLE} MB"
+      notify_admin_close_period_reminder:
+        warning_last_closed_period_over_1_year: "Vänligen kom ihåg att regelbundet stänga dina redovisningsperioder. Senast stängd period avslutades på %{LAST_END}"
+        warning_no_closed_periods: "Vänligen kom ihåg att regelbundet stänga dina redovisningsperioder. Senaste stängd period avslutades på %{FIRST_DATE}"
+      notify_admin_archive_complete:
+        archive_complete: "Dataarkivering från %{START} till %{END} är klart. <a href='api/accounting_periods/%{ID}/archive' target='_blank'>klicka här för att ladda ner</a>. Kom ihåg att spara den på ett säkert, externt medium."
+      notify_privacy_policy_changed:
+        policy_updated: "Integritetspolicy uppdaterad."
+        click_to_show: "Klicka här för att fråga"
+      notify_admin_refund_created:
+        refund_created: "En återbetalning av %{AMOUNT} har skapats för användaren %{USER}"
+      notify_user_role_update:
+        your_role_is_ROLE: "Din roll har ändrats till %{ROLE}."
+      notify_admins_role_update:
+        user_NAME_changed_ROLE_html: "Användare <strong><em>%{NAME}</strong></em> är nu %{ROLE}."
+      notify_admin_objects_stripe_sync:
+        all_objects_sync: "Alla data har synkroniserats till Stripe."
+      notify_admin_order_is_paid:
+        order_paid_html: "En ny order har lagts till. <a href='/#!/admin/store/orders/%{ID}'>Visa detaljer</a>."
+      notify_user_when_payment_schedule_ready:
+        your_schedule_is_ready_html: "Ditt betalningsschema #%{REFERENCE}, %{AMOUNT}, är klart. <a href='api/payment_schedules/%{SCHEDULE_ID}/download' target='_blank'>Klicka här för att ladda ner</a>."
+      notify_admin_payment_schedule_error:
+        schedule_error: "Ett fel uppstod för kortdebitering som löpte ut den %{DATE} för schemat %{REFERENCE}"
+      notify_member_payment_schedule_error:
+        schedule_error: "Ett fel uppstod för kortdebitering som löpte ut %{DATE}, för ditt schema %{REFERENCE}"
+      notify_admin_payment_schedule_failed:
+        schedule_failed: "Ett fel uppstod för kortdebitering som löpte ut den %{DATE} för schemat %{REFERENCE}"
+      notify_member_payment_schedule_failed:
+        schedule_failed: "Ett fel uppstod för kortdebitering som löpte ut %{DATE}, för ditt schema %{REFERENCE}"
+      notify_admin_payment_schedule_gateway_canceled:
+        schedule_canceled: "Betalningsschemat %{REFERENCE} avbröts av betalningsleverantören. En åtgärd krävs."
+      notify_member_payment_schedule_gateway_canceled:
+        schedule_canceled: "Ditt betalningsschema %{REFERENCE} avbröts av betalningsleverantören."
+      notify_admin_payment_schedule_check_deadline:
+        schedule_deadline: "Du måste betala in checken inom tidsfristen, %{DATE} för schemat %{REFERENCE}"
+      notify_admin_payment_schedule_transfer_deadline:
+        schedule_deadline: "Du måste bekräfta autogiro inom tidsfristen %{DATE}, för schema %{REFERENCE}"
+      notify_member_reservation_limit_reached:
+        limit_reached: "För %{DATE} har du nått din dagliga gräns för %{HOURS} timmars bokning av %{ITEM}."
+      notify_admin_user_supporting_document_files_created:
+        supporting_document_files_uploaded: "Underlag uppladdat av medlemmen <strong><em>%{NAME}</strong></em>."
+      notify_admin_user_supporting_document_files_updated:
+        supporting_document_files_uploaded: "Underlag ändrat av medlemmen <strong><em>%{NAME}</strong></em>."
+      notify_admin_user_child_supporting_document_files_created:
+        supporting_document_files_uploaded: "Barnet <strong><em>%{NAME} s</strong></em> underlag uppladdat."
+      notify_admin_user_child_supporting_document_files_updated:
+        supporting_document_files_uploaded: "Underlag ändrat av barnet <strong><em>%{NAME}</strong></em>."
+      notify_user_is_validated:
+        account_validated: "Ditt konto är giltigt."
+      notify_user_is_invalidated:
+        account_invalidated: "Ditt konto är ogiltigt."
+      notify_user_child_is_validated:
+        child_validated: "Ditt barns konto är giltigt."
+      notify_user_child_is_invalidated:
+        child_invalidated: "Ditt barns konto är ogiltigt."
+      notify_user_supporting_document_refusal:
+        refusal: "Dina underlag avvisades"
+      notify_user_supporting_document_reminder:
+        reminder_message: "Detta är en påminnelse för dig att ladda upp dina underlag."
+      notify_admin_user_supporting_document_refusal:
+        refusal: "Medlemmens underlag <strong><em>%{NAME}</strong></em> avvisades."
+      notify_user_child_supporting_document_refusal:
+        refusal: "Ditt barns underlag avvisades"
+      notify_admin_user_child_supporting_document_refusal:
+        refusal: "Barnets underlag <strong><em>%{NAME}</strong></em> avvisades."
+      notify_user_order_is_ready:
+        order_ready: "Din beställning %{REFERENCE} är redo"
+      notify_user_order_is_canceled:
+        order_canceled: "Din beställning %{REFERENCE} är avbruten"
+      notify_user_order_is_refunded:
+        order_refunded: "Din beställning %{REFERENCE} har återbetalats"
+      notify_member_reservation_validated:
+        your_reservation_RESERVABLE_was_validated_html: "Din bokning <strong><em>%{RESERVABLE}</em></strong> har validerats."
+      notify_admin_reservation_validated:
+        a_RESERVABLE_reservation_was_validated_html: "En <strong><em>%{RESERVABLE}</em></strong> bokning av <strong><em>%{NAME}</em></strong> validerades."
+      notify_member_reservation_invalidated:
+        your_reservation_RESERVABLE_was_invalidated_html: "Din föranmälan av <strong><em>%{RESERVABLE}</em></strong> validerades inte."
+      notify_admin_reservation_invalidated:
+        a_RESERVABLE_reservation_was_invalidated_html: "En <strong><em>%{RESERVABLE}</em></strong> föranmälan av <strong><em>%{NAME}</em></strong> ogiltigförklarades."
+      notify_user_when_child_age_will_be_18:
+        child_age_will_be_18_years_ago: "Ditt barn %{NAME} kommer att fylla 18 den %{DATE}, och det kommer automatiskt att kopplas bort från ditt familjekonto. Det måste skapa ett eget konto för att kunna göra reservationer."
+  #statistics tools for admins
+  statistics:
+    subscriptions: "Prenumerationer"
+    machines_hours: "Utrustning bokningsplatser"
+    machine_dates: "Datum för bokningsplatser"
+    space_dates: "Datum för bokningsplatser"
+    spaces: "Lokaler"
+    orders: "Beställningar"
+    trainings: "Utbildningar"
+    events: "Evenemang"
+    registrations: "Bokningar"
+    projects: "Projekt"
+    users: "Användare"
+    training_id: "Utbildnings-ID"
+    training_date: "Utbildningsdatum"
+    event_id: "Evenemangs-ID"
+    event_date: "Evenemangsdatum"
+    event_name: "Evenemangsnamn"
+    event_theme: "Tema"
+    age_range: "Åldersintervall"
+    themes: "Teman"
+    components: "Komponenter"
+    machines: "Utrustning"
+    user_id: "Användar-ID"
+    group: "Grupp"
+    bookings: "Bokningar"
+    hours_number: "Antal timmar"
+    tickets_number: "Biljettnummer"
+    revenue: "Intäkter"
+    account_creation: "Skapa konto"
+    project_publication: "Projektpublikation"
+    duration: "Varaktighet"
+    store: "Butik"
+    paid-processed: "Betalad och/eller bearbetad"
+    aborted: "Avbruten"
+    project_status: Status
+    project_name: Namn
+    project_user_names: Medverkande
+  #statistics exports to the Excel file format
+  export:
+    entries: "Inlägg"
+    revenue: "Intäkter"
+    average_age: "Medelålder"
+    total: "Totalt"
+    date: "Datum"
+    user: "Användare"
+    email: "E-post"
+    phone: "Telefon"
+    gender: "Kön"
+    age: "Ålder"
+    type: "Typ"
+    male: "Man"
+    female: "Kvinna"
+    deleted_user: "Raderad användare"
+    reservation_context: "Kontext för bokning"
+    coupon: "Rabattkupong"
+    project_author: Skapare
+  #initial price's category for events, created to replace the old "reduced amount" property
+  price_category:
+    reduced_fare: "Reducerat pris"
+    reduced_fare_if_you_are_under_25_student_or_unemployed: "Reducerat pris om du är under 25, student eller arbetslös."
+  cart_items:
+    free_extension: "Gratis förlängning av en prenumeration tills %{DATE}"
+    must_be_after_expiration: "Det nya förfallodatumet måste anges efter det aktuella förfallodatumet"
+    group_subscription_mismatch: "Din grupp stämmer inte med din prenumeration. Vänligen rapportera detta fel."
+  statistic_profile:
+    birthday_in_past: "Födelsedatum måste vara i det förflutna"
+  order:
+    please_contact_FABLAB: "Vänligen kontakta oss för återkallningsinstruktioner."
+  cart_item_validation:
+    slot: "Platsen finns inte"
+    availability: "Tillgängligheten finns inte"
+    full: "Platsen är redan fullt bokad"
+    deadline: "Du kan inte reservera en plats %{MINUTES} minuter innan dess start"
+    limit_reached: "Du har nått bokningsgränsen för %{HOURS}H per dag för %{RESERVABLE}, för ditt nuvarande abonnemang. Vänligen justera din bokning."
+    restricted: "Denna tillgänglighet är begränsad till prenumeranter"
+    plan: "Prenumerationsplanen är inaktiverad"
+    plan_group: "Denna prenumerationsplan är reserverad för medlemmar i gruppen %{GROUP}"
+    reserved: "Denna plats är redan reserverad"
+    pack: "Detta förbetalda paket är inaktiverat"
+    pack_group: "Detta förbetalda paket är reserverat för medlemmar i gruppen %{GROUP}"
+    space: "Denna lokal är inaktiverad"
+    machine: "Denna utrustning är inaktiverad"
+    reservable: "Denna utrustning är inte bokningsbar"
+    blocked_by_another_reservation: "Denna plats är blockerad av en annan bokning"
+  cart_validation:
+    select_user: "Välj en användare innan du fortsätter"
+  settings:
+    locked_setting: "inställningen är låst."
+    about_title: "\"Om\" sidan titel"
+    about_body: "\"Om\" sidan innehåll"
+    about_contacts: "\"Om\" sidan kontakter"
+    privacy_draft: "Utkast till integritetspolicy"
+    privacy_body: "Integritetspolicy"
+    privacy_dpo: "Adress till dataskyddsombud"
+    twitter_name: "Namn på Twitter-flöde"
+    home_blogpost: "Startsidans sammanfattning"
+    machine_explications_alert: "Förklaringsmeddelande på sidan för bokning av utrustning"
+    training_explications_alert: "Förklaringsmeddelande på bokningssidan för utbildningar"
+    training_information_message: "Informationsmeddelande på sidan för bokning av utrustning"
+    subscription_explications_alert: "Förklaringsmeddelande på prenumerationssidan"
+    invoice_logo: "Fakturalogotyp"
+    invoice_reference: "Fakturareferens"
+    invoice_code-active: "Aktivering av fakturakod"
+    invoice_code-value: "Fakturakod"
+    invoice_order-nb: "Fakturans ordernummer"
+    invoice_VAT-active: "Aktivering av moms"
+    invoice_VAT-rate: "Momssats"
+    invoice_VAT-rate_Product: "Momssats för butikens produktförsäljning"
+    invoice_VAT-rate_Event: "Momssats för bokning av evenemang"
+    invoice_VAT-rate_Machine: "Momssats för bokning av utrustning"
+    invoice_VAT-rate_Subscription: "Momssats för prenumerationer"
+    invoice_VAT-rate_Space: "Momssats för bokning av lokaler"
+    invoice_VAT-rate_Training: "Momssats för bokning av utbildning"
+    invoice_text: "Fakturatext"
+    invoice_legals: "Fakturas juridiska information"
+    booking_window_start: "Öppningstid"
+    booking_window_end: "Stängningstid"
+    booking_move_enable: "Aktivering av bokningar flyttar"
+    booking_move_delay: "Förebyggande dröjsmål innan bokning flyttas"
+    booking_cancel_enable: "Aktivera avbokning"
+    booking_cancel_delay: "Förebyggande dröjsmål innan bokning flyttas"
+    main_color: "Primär färg"
+    secondary_color: "Sekundär färg"
+    fablab_name: "Fablabs namn"
+    name_genre: "Titels överensstämmelse"
+    reminder_enable: "Aktivera bokningspåminnelser"
+    reminder_delay: "Fördröjning innan påminnelse skickas"
+    event_explications_alert: "Förklaringsmeddelande på sidan för bokning av händelser"
+    space_explications_alert: "Förklaringsmeddelande på sidan för lokalreservation"
+    visibility_yearly: "Maximal synlighet för årliga prenumeranter"
+    visibility_others: "Maximal synlighet för andra medlemmar"
+    reservation_deadline: "Förhindra bokning innan den börjar"
+    display_name_enable: "Visa namn i kalendern"
+    machines_sort_by: "Utrustnings visningsordning"
+    accounting_sales_journal_code: "Försäljning journalkod"
+    accounting_payment_card_code: "Kortets betalningskod"
+    accounting_payment_card_label: "Etikett för kortbetalningar"
+    accounting_payment_card_journal_code: "Kortets klientjournalkod"
+    accounting_payment_wallet_code: "Betalningskod för plånboken"
+    accounting_payment_wallet_label: "Etikett för plånboksbetalningar"
+    accounting_payment_wallet_journal_code: "Betalningskod för plånboken"
+    accounting_payment_other_code: "Kod för annan betalning"
+    accounting_payment_other_label: "Etikett för annan betalning"
+    accounting_payment_other_journal_code: "Kod för annan betalning"
+    accounting_wallet_code: "Plånbokens kreditkod"
+    accounting_wallet_label: "Plånbokskredit etikett"
+    accounting_wallet_journal_code: "Betalningskod för plånboken"
+    accounting_VAT_code: "Momsregistreringsnummer"
+    accounting_VAT_label: "Momsetikett"
+    accounting_VAT_journal_code: "Momsjornalkod"
+    accounting_subscription_code: "Prenumerationskod"
+    accounting_subscription_label: "Etikett för prenumerationer"
+    accounting_Machine_code: "Utrustningens kod"
+    accounting_Machine_label: "Etikett för utrustning"
+    accounting_Training_code: "Utbildnings kod"
+    accounting_Training_label: "Etikett för utbildningar"
+    accounting_Event_code: "Kod för evenemang"
+    accounting_Event_label: "Etikett för evenemang"
+    accounting_Space_code: "Kod för lokaler"
+    accounting_Space_label: "Etikett för lokaler"
+    accounting_Pack_code: "Förbetalda tim-paketskod"
+    accounting_Pack_label: "Förbetalda tim-paketsetikett"
+    accounting_Product_code: "Produkters kod"
+    accounting_Product_label: "Etikett för produkter"
+    hub_last_version: "Senaste Fab-managerns version"
+    hub_public_key: "Instansens publika nyckel"
+    fab_analytics: "Fab Analys"
+    link_name: "Länk titeln till sidan \"Om\""
+    home_content: "Startsidan"
+    home_css: "Stilmall för startsidan"
+    origin: "Instansens URL"
+    uuid: "Instans ID"
+    phone_required: "Telefon krävs?"
+    tracking_id: "Spårnings-ID"
+    book_overlapping_slots: "Boka överlappande platser"
+    slot_duration: "Standardlängd för bokning av platser"
+    events_in_calendar: "Visa evenemang i kalendern"
+    spaces_module: "Modulen Lokaler"
+    plans_module: "Modulen Planer"
+    invoicing_module: "Faktureringsmodul"
+    facebook_app_id: "ID för Facebook-app"
+    twitter_analytics: "Twitter-analyskonto"
+    recaptcha_site_key: "reCAPTCHA webbplatsnyckel"
+    recaptcha_secret_key: "reCAPTCHA hemlig nyckel"
+    feature_tour_display: "Visningsläge för guidad tur"
+    email_from: "Utförarens adress"
+    disqus_shortname: "Disqus kortnamn"
+    allowed_cad_extensions: "Tillåtna CAD-filnamn"
+    allowed_cad_mime_types: "Tillåtna CAD-filer MIME-typer"
+    openlab_app_id: "OpenLab ID"
+    openlab_app_secret: "OpenLab hemlighet"
+    openlab_default: "Förvald projektgallerivy"
+    online_payment_module: "Onlinebetalningsmodul"
+    stripe_public_key: "Stripe publik nyckel"
+    stripe_secret_key: "Stripe hemlig nyckel"
+    stripe_currency: "Stripe valuta"
+    invoice_prefix: "Fakturor filnamnsprefix"
+    confirmation_required: "Verifiering krävs"
+    wallet_module: "Plånboksmodul"
+    statistics_module: "Statistikmodul"
+    upcoming_events_shown: "Visa gräns för kommande evenemang"
+    payment_schedule_prefix: "Prefix för betalningsschemats filer"
+    trainings_module: "Utbildningsmodul"
+    address_required: "Adress krävs"
+    accounting_Error_code: "Felkod"
+    accounting_Error_label: "Felbeskrivning"
+    payment_gateway: "Betallösning"
+    payzen_username: "PayZen användarnamn"
+    payzen_password: "PayZen lösenord"
+    payzen_endpoint: "PayZen API endpoint"
+    payzen_public_key: "PayZen klient publik nyckel"
+    payzen_hmac: "PayZen HMAC-SHA-256 key"
+    payzen_currency: "PayZen valuta"
+    public_agenda_module: "Modul för publikt kalendarium"
+    renew_pack_threshold: "Tröskelvärde för förnyelse av paket"
+    pack_only_for_subscription: "Begränsa paket för prenumeranter"
+    overlapping_categories: "Kategorier för att förebygga överlappande bokning"
+    extended_prices_in_same_day: "Utökade priser samma dag"
+    public_registrations: "Öppna registreringar"
+    facebook: "Facebook"
+    twitter: "Twitter"
+    viadeo: "viadeo"
+    linkedin: "linkedin"
+    instagram: "Instagram"
+    youtube: "YouTube"
+    vimeo: "Vimeo"
+    dailymotion: "Dailymotion"
+    github: "GitHub"
+    echosciences: "echosciences"
+    pinterest: "Pinterest"
+    lastfm: "Last.fm"
+    flickr: "Flickr"
+    machines_module: "Utrustningsmodul"
+    user_change_group: "Tillåt användare att ändra sin grupp"
+    store_module: "Butiksmodul"
+    store_withdrawal_instructions: "Uttagsinstruktioner"
+    store_hidden: "Butiken är dold för allmänheten"
+    advanced_accounting: "Avancerad redovisning"
+    external_id: "extern identifierare"
+    prevent_invoices_zero: "förhindra att fakturor på 0 skapas"
+    invoice_VAT-name: "Momsbeteckning"
+    trainings_auto_cancel: "Utbildning automatisk avbokning"
+    trainings_auto_cancel_threshold: "Minsta antal deltagare för automatisk avbokning"
+    trainings_auto_cancel_deadline: "Tidsfristen för automatisk avbokning"
+    trainings_authorization_validity: "Utbildningens giltighetstid"
+    trainings_authorization_validity_duration: "Utbildningens giltighetstid varaktighet"
+    trainings_invalidation_rule: "Utbildning automatisk ogiltigförklaring"
+    trainings_invalidation_rule_period: "Frist innan en träning ogiltigförklaras"
+    projects_list_member_filter_presence: "Filtrera på närvaro i projektlistan"
+    projects_list_date_filters_presence: "Filtrera på datum i projektlistan"
+    project_categories_filter_placeholder: "Platshållare för kategorifilter i projektgalleriet"
+    project_categories_wording: "Ord som används för att ersätta \"Kategorier\" på publika sidor"
+    reservation_context_feature: "Tvinga medlem att välja typ av bokning "
+    family_account: "Familjekonto"
+  #statuses of projects
+  statuses:
+    new: "Ny"
+    pending: "Väntar"
+    done: "Klar"
+    abandoned: "Övergiven"

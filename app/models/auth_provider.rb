@@ -17,7 +17,7 @@ class AuthProvider < ApplicationRecord
     end
   end
 
-  PROVIDABLE_TYPES = %w[DatabaseProvider OAuth2Provider OpenIdConnectProvider].freeze
+  PROVIDABLE_TYPES = %w[DatabaseProvider OAuth2Provider OpenIdConnectProvider SamlProvider].freeze
 
   belongs_to :providable, polymorphic: true, dependent: :destroy
   accepts_nested_attributes_for :providable
@@ -27,7 +27,7 @@ class AuthProvider < ApplicationRecord
 
   validates :providable_type, inclusion: { in: PROVIDABLE_TYPES }
   validates :name, presence: true, uniqueness: true
-  validates_with UserUidMappedValidator, if: -> { %w[OAuth2Provider OpenIdConnectProvider].include?(providable_type) }
+  validates_with UserUidMappedValidator, if: -> { %w[OAuth2Provider OpenIdConnectProvider SamlProvider].include?(providable_type) }
 
   before_create :set_initial_state
   after_update :write_reload_config

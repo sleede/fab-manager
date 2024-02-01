@@ -1,5 +1,22 @@
 # Changelog Fab-manager
 
+## Next release
+
+- Fix a bug: if there is a reservation with a deleted user, it is not possible to delete the event
+- Support for SAML in Single-Sign-On authentication providers
+
+## v6.3.10 2024 January 19
+
+- Fix a bug: unable to update event recurrence
+- updates translations
+
+## v6.3.9 2024 January 8
+
+- translation files added for Swedish
+- Fix a bug: unable to show extended prices of space
+- Fix a bug: event number places error in statistic
+- [TODO DEPLOY] `rails fablab:maintenance:regenerate_statistics[2014,1]`
+
 ## v6.3.8 2023 December 29
 
 - Fix a bug: unable to build docker image

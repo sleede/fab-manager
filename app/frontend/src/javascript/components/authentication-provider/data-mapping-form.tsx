@@ -12,6 +12,7 @@ import { TypeMappingModal } from './type-mapping-modal';
 import { useImmer } from 'use-immer';
 import { Oauth2DataMappingForm } from './oauth2-data-mapping-form';
 import { OpenidConnectDataMappingForm } from './openid-connect-data-mapping-form';
+import { SamlDataMappingForm } from './saml-data-mapping-form';
 
 export interface DataMappingFormProps<TFieldValues, TContext extends object> {
   register: UseFormRegister<TFieldValues>,
@@ -164,6 +165,11 @@ export const DataMappingForm = <TFieldValues extends FieldValues, TContext exten
                                                                                          setValue={setValue}
                                                                                          formState={formState}
                                                                                          currentFormValues={currentFormValues} />}
+              {providerType === 'SamlProvider' && <SamlDataMappingForm register={register}
+                                                                       index={index}
+                                                                       setValue={setValue}
+                                                                       formState={formState}
+                                                                       currentFormValues={currentFormValues} />}
             </div>
           </div>
           <div className="actions">
