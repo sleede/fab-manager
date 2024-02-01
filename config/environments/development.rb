@@ -91,8 +91,6 @@ Rails.application.configure do
   config.web_console.permissions = %w[192.168.0.0/16 192.168.99.0/16 10.0.2.2]
 
   config.hosts << ENV.fetch('DEFAULT_HOST', 'localhost')
-  config.hosts << "37abab1a904d96b727afdf86f2eb4830.serveo.net"
-  config.action_controller.forgery_protection_origin_check = false
 
   # https://github.com/flyerhzm/bullet
   # In development, Bullet will find and report N+1 DB requests
