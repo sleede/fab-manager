@@ -292,6 +292,9 @@ GEM
     omniauth-rails_csrf_protection (1.0.1)
       actionpack (>= 4.2)
       omniauth (~> 2.0)
+    omniauth-saml (2.1.0)
+      omniauth (~> 2.0)
+      ruby-saml (~> 1.12)
     omniauth_openid_connect (0.6.1)
       omniauth (>= 1.9, < 3)
       openid_connect (~> 1.1)
@@ -422,6 +425,9 @@ GEM
       rubocop (>= 1.7.0, < 2.0)
     ruby-progressbar (1.10.1)
     ruby-rc4 (0.1.5)
+    ruby-saml (1.16.0)
+      nokogiri (>= 1.13.10)
+      rexml
     ruby-vips (2.1.4)
       ffi (~> 1.12)
     rubyXL (3.4.25)
@@ -579,6 +585,7 @@ DEPENDENCIES
   omniauth (~> 2.1)
   omniauth-oauth2
   omniauth-rails_csrf_protection (~> 1.0)
+  omniauth-saml
   omniauth_openid_connect
   openlab_ruby
   overcommit

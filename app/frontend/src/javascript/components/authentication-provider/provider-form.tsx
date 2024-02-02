@@ -20,6 +20,7 @@ import { FabButton } from '../base/fab-button';
 import AuthProviderAPI from '../../api/auth-provider';
 import { OpenidConnectForm } from './openid-connect-form';
 import { DatabaseForm } from './database-form';
+import { SamlForm } from './saml-form';
 
 declare const Application: IApplication;
 
@@ -27,7 +28,8 @@ declare const Application: IApplication;
 const METHODS = {
   DatabaseProvider: 'local_database',
   OAuth2Provider: 'oauth2',
-  OpenIdConnectProvider: 'openid_connect'
+  OpenIdConnectProvider: 'openid_connect',
+  SamlProvider: 'saml'
 };
 
 interface ProviderFormProps {
@@ -116,6 +118,7 @@ export const ProviderForm: React.FC<ProviderFormProps> = ({ action, provider, on
                                                                         currentFormValues={output.providable_attributes as OpenIdConnectProvider}
                                                                         formState={formState}
                                                                         setValue={setValue} />}
+      {providableType === 'SamlProvider' && <SamlForm register={register} strategyName={strategyName} formState={formState} />}
       {providableType && providableType !== 'DatabaseProvider' && <DataMappingForm register={register}
                                                                                    control={control}
                                                                                    formState={formState}

@@ -72,6 +72,7 @@ gem 'devise', '>= 4.9'
 gem 'omniauth', '~> 2.1'
 gem 'omniauth-oauth2'
 gem 'omniauth_openid_connect'
+gem 'omniauth-saml'
 gem 'omniauth-rails_csrf_protection', '~> 1.0'
 
 gem 'rolify'

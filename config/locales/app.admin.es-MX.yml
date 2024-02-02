@@ -1230,6 +1230,7 @@ es-MX:
           local_database: "Base de datos local"
           o_auth2: "OAuth 2.0"
           openid_connect: "OpenID Connect"
+          saml: "SAML"
         group_form:
           add_a_group: "Añadir un grupo"
           group_name: "Nombre del grupo"
@@ -1496,6 +1497,10 @@ es-MX:
           api_field: "Reclamo de Userinfo"
           api_field_help_html: 'Establece el campo que proporciona los datos correspondientes a través del <a href="https://openid.net/specs/openid-connect-core-1_0.html#Claims" target="_blank">userinfo endpoint</a>.<br> Se admite la sintaxis <a href="https://jsonpath.com/" target="_blank">JsonPath</a>. Si se seleccionan muchos campos, se utilizará el primero.<br> <b>Ejemplo</b>: $.data[*].name'
           openid_standard_configuration: "Usar la configuración estándar de OpenID"
+        saml_data_mapping_form:
+          api_field: "Userinfo field"
+          api_field_help_html: "Set the field providing the corresponding data through the SAML assertion.<br> If many fields are selected, the first one will be used.<br> <b>Example</b>: $.data[*].name"
+          openid_standard_configuration: "Use the SAML standard configuration"
         type_mapping_modal:
           data_mapping: "Mapeo de datos"
           TYPE_expected: "{TYPE} esperado"
@@ -1552,6 +1557,16 @@ es-MX:
           client__end_session_endpoint_help: "La URL a llamar para cerrar la sesión del usuario en el servidor de autorización."
           extra_authorize_params: "Parámetros de autorización extra"
           extra_authorize_params_help: "Un hash de parámetros extra que se fusionarán con la \"authorization request\""
+        saml_form:
+          authorization_callback_url: "Authorization callback URL"
+          sp_entity_id: "Service provider entity ID"
+          sp_entity_id_help: "The name of your application. Some identity providers might need this to establish the identity of the service provider requesting the login."
+          idp_sso_service_url: "Identity provider SSO service URL"
+          idp_sso_service_url_help: "The URL to which the authentication request should be sent. This would be on the identity provider."
+          idp_cert_fingerprint: "Identity provider certificate fingerprint"
+          idp_cert: "Identity provider certificate"
+          profile_edition_url: "Profil edition URL"
+          profile_edition_url_help: "The URL of the page where the user can edit his profile."
         provider_form:
           name: "Nombre"
           authentication_type: "Tipo de autenticación"
@@ -1562,6 +1577,7 @@ es-MX:
             local_database: "Base de datos local"
             oauth2: "OAuth 2.0"
             openid_connect: "OpenID Connect"
+            saml: "SAML"
       #create a new authentication provider (SSO)
       authentication_new:
         add_a_new_authentication_provider: "Agregar un nuevo proveedor de autenticación"

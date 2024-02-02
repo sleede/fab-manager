@@ -138,353 +138,353 @@ sv:
       subject: "Din FabLabkreditnota"
       body:
         please_find_attached_html: "Som bifogad fil hittar du din faktura från {DATE}med ett belopp på {AMOUNT} för din {TYPE, select, Reservation{reservation}  WalletTransaction{wallet credit} other{subscription}}." #messageFormat interpolation
-        invoice_in_your_dashboard_html: "You can access your refund invoice in %{DASHBOARD} on the Fab Lab website."
-        your_dashboard: "your dashboard"
+        invoice_in_your_dashboard_html: "Du får tillgång till din kreditnota i %{DASHBOARD} på webbplatsen."
+        your_dashboard: "din kontrollpanel"
     notify_member_subscription_will_expire_in_7_days:
-      subject: "Your subscription expires in 7 days"
+      subject: "Din prenumeration upphör om 7 dagar"
       body:
-        your_plan: "you plan"
-        expires_in_7_days: "will expire in 7 days."
-        to_renew_your_plan_follow_the_link: "Please, follow this link to renew your plan"
+        your_plan: "din plan"
+        expires_in_7_days: "kommer att löpa ut om 7 dagar."
+        to_renew_your_plan_follow_the_link: "Följ denna länk för att förnya din plan"
     notify_member_training_authorization_expired:
-      subject: "Your authorization was revoked"
+      subject: "Din auktorisation har återkallats"
       body:
-        training_expired_html: "<p>You took the %{TRAINING} training, on %{DATE}.</p><p>Your authorization for this training, valid for %{PERIOD} months, has expired.</p><p>Please validate it again in order to be able to reserve the %{MACHINES}</p>."
+        training_expired_html: "<p>Du gick %{TRAINING} utbildning, på %{DATE}.</p><p>Din auktorisering för denna utbildning, giltig för %{PERIOD} månader, har löpt ut.</p><p>Vänligen validera den igen för att kunna reservera %{MACHINES}</p>."
     notify_member_training_auto_cancelled:
-      subject: "Your training session was cancelled"
+      subject: "Din utbildning avbröts"
       body:
-        cancelled_training: "The %{TRAINING} training session scheduled for %{DATE}, from %{START} to %{END} has been canceled due to an insufficient number of participants."
-        auto_refund: "You were refunded on your wallet and a credit note should be available."
+        cancelled_training: "Utbildningen %{TRAINING} är planerad den %{DATE}, från %{START} till %{END} har avbrutits på grund av otillräckligt antal deltagare."
+        auto_refund: "Du har återbetalats till din plånbok och en kreditfaktura är tillgänglig."
     notify_member_training_invalidated:
-      subject: "Your authorization was invalidated"
+      subject: "Din auktorisation har återkallats"
       body:
-        training_invalidated_html: "<p>You took the %{TRAINING} training, on %{DATE} giving you access to the %{MACHINES}.</p><p>Due to the lack of reservations for one of these machines during the last %{PERIOD} months, your authorization has been invalidated.</p><p>Please validate the training again in order to continue reserving these machines.</p>."
+        training_invalidated_html: "<p>Du gick %{TRAINING} -utbildningen, på %{DATE} vilket ger dig tillgång till %{MACHINES}.</p><p>På grund av bristen på reservationer för utrustningen under de senaste %{PERIOD} månaderna, din auktorisering har ogiltigförklarats.</p><p>Vänligen bekräfta utbildningen igen för att fortsätta reservera denna utrustning.</p>."
     notify_member_subscription_is_expired:
-      subject: "Your subscription has expired"
+      subject: "Din prenumeration har löpt ut"
       body:
-        your_plan: "You plan"
-        has_expired: "has expired."
-        you_can_go_to: "Please go to"
-        to_renew_your_plan: "to renew you plan"
+        your_plan: "Din plan"
+        has_expired: "har gått ut."
+        you_can_go_to: "Gå till"
+        to_renew_your_plan: "för att förnya din plan"
     notify_admin_subscription_will_expire_in_7_days:
-      subject: "A member subscription expires in 7 days"
+      subject: "Ett medlemsabonnemang löper ut om 7 dagar"
       body:
-        subscription_will_expire_html: "Subscription plan for user %{NAME} <strong><em>%{PLAN}</em></strong> will expire in 7 days."
+        subscription_will_expire_html: "Prenumerationsplan för användaren %{NAME} <strong><em>%{PLAN}</em></strong> löper ut om 7 dagar."
     notify_admin_training_auto_cancelled:
-      subject: "A training was automatically cancelled"
+      subject: "En utbildning avbröts automatiskt"
       body:
-        cancelled_training: "The %{TRAINING} training session scheduled for %{DATE}, from %{START} to %{END} has been automatically canceled due to an insufficient number of participants."
-        auto_refund: "The members who have booked this training session were automatically refunded on their wallet and credit notes was generated."
-        manual_refund: "Please manually refund all members who have booked this training session and generate the credit notes."
+        cancelled_training: "Utbildningen %{TRAINING} är planerad den %{DATE}, från %{START} till %{END} har avbrutits på grund av otillräckligt antal deltagare."
+        auto_refund: "Medlemmarna som har bokat detta träningspass återbetalades automatiskt till sin plånbok och kreditnotor genererades."
+        manual_refund: "Vänligen återbetala alla medlemmar som har bokat denna utbildning manuellt och generera kreditfakturor."
     notify_admin_subscription_is_expired:
-      subject: "A member subscription has expired"
+      subject: "En medlemsprenumeration har avbrutits"
       body:
-        subscription_expired_html: "Subscription plan for user %{NAME} <strong><em>%{PLAN}</em></strong> is now expired."
+        subscription_expired_html: "Prenumerationsplan för användaren %{NAME} <strong><em>%{PLAN}</em></strong> har nu löpt ut."
     notify_admin_subscription_canceled:
-      subject: "A member subscription has been cancelled"
+      subject: "En medlemsprenumeration har avbrutits"
       body:
-        subscription_canceled_html: "Subscription <strong><em>%{PLAN}</em></strong> for user %{NAME} has been cancelled."
+        subscription_canceled_html: "Prenumeration <strong><em>%{PLAN}</em></strong> för användaren %{NAME} har avbrutits."
     notify_member_subscription_canceled:
-      subject: "Your subscription has been cancelled"
+      subject: "Din prenumeration har avbrutits"
       body:
-        your_plan_was_canceled: "Your subscription plan has been cancelled."
-        your_plan: "your subscription plan"
-        end_at: "ends on"
+        your_plan_was_canceled: "Din prenumeration har avbrutits."
+        your_plan: "din prenumerationsplan"
+        end_at: "slutar den"
     notify_member_slot_is_canceled:
-      subject: "Your reservation has been canceled"
+      subject: "Din bokning har avbrutits"
       body:
-        reservation_canceled: "Your reservation for %{RESERVABLE} has been canceled"
+        reservation_canceled: "Din bokning av %{RESERVABLE} har avbrutits"
     notify_admin_slot_is_canceled:
-      subject: "A reservation has been cancelled"
+      subject: "En bokning har avbokats"
       body:
-        member_cancelled: "User %{NAME} has cancelled his reservation"
-        item_details: "%{START} - %{END}, concerning %{RESERVABLE}"
-        generate_refund: "Do not forget to generate a credit note or a refund for this cancellation."
+        member_cancelled: "Användare %{NAME} har avbokat sin bokning"
+        item_details: "%{START} - %{END}, om %{RESERVABLE}"
+        generate_refund: "Glöm inte att generera en kreditfaktura eller en återbetalning för denna avbokning."
     notify_admin_when_user_is_imported:
-      subject: "A user account has been imported from the SSO"
+      subject: "Ett användarkonto har importerats via SSO"
       body:
-        new_account_imported: "A new user account (ID: %{ID}) has been imported to the website via %{PROVIDER}."
-        provider_uid: "its provider ID is: "
-        known_information: "Here is what we know about this provider:"
-        address_already_used: "This address is already associated with another user"
-        no_more_info_available: "No other info about this user can be provided before he completes his profile."
+        new_account_imported: "Ett nytt användarkonto (ID: %{ID}) har importerats till webbplatsen via %{PROVIDER}."
+        provider_uid: "dess leverantörs-ID är: "
+        known_information: "Här är vad vi vet om denna leverantör:"
+        address_already_used: "E-posten är redan kopplad till en annan användare"
+        no_more_info_available: "Ingen annan information om denna användare kan lämnas innan den slutför sin profil."
     notify_user_profile_complete:
-      subject: "You now have access to the whole website"
+      subject: "Du har nu tillgång till hela webbplatsen"
       body:
-        message: "Your account informations has been correctly updated, you now have access to the whole website."
+        message: "Dina kontoinformation har uppdaterats korrekt, du har nu tillgång till hela webbplatsen."
     notify_user_auth_migration:
-      subject: "Important change to your FabLab account"
+      subject: "Viktiga ändringar i ditt konto"
       body:
-        the_platform: "the website"
-        is_changing_its_auth_system_and_will_now_use: "is actually changing its user identification system and will use"
-        instead_of: "instead of"
-        consequence_of_the_modification: "Because of this change you won't be able to login to the website with your actual usernames"
-        to_use_the_platform_thanks_for: "To keep on using the website, please"
-        create_an_account_on: "create an account on"
-        or_use_an_existing_account_clicking_here: "or use an existing account by clicking here"
-        in_case_of_problem_enter_the_following_code: "In case of problem with this link, you can enter the following code at your first connection attempt in order to migrate your actual account into the new authentification system:"
+        the_platform: "webbplatsen"
+        is_changing_its_auth_system_and_will_now_use: "faktiskt ändra sitt användar-identifieringssystem och kommer att använda"
+        instead_of: "istället för"
+        consequence_of_the_modification: "På grund av denna förändring kommer du inte att kunna logga in på webbplatsen med dina faktiska användarnamn"
+        to_use_the_platform_thanks_for: "För att fortsätta använda webbplatsen, vänligen"
+        create_an_account_on: "skapa ett konto"
+        or_use_an_existing_account_clicking_here: "eller använd ett befintligt konto genom att klicka här"
+        in_case_of_problem_enter_the_following_code: "Vid problem med denna länk, kan du ange följande kod vid ditt första anslutningsförsök för att migrera ditt faktiska konto till det nya autentiseringssystemet:"
     notify_admin_user_merged:
-      subject: "An imported account has been merged with an existing account"
+      subject: "Ett importerat konto har slagits samman med ett befintligt konto"
       body:
-        imported_account_merged: "A previously imported user account via %{PROVIDER) has been merged with the existing account %{NAME}"
-        provider_uid: "its provider ID is:"
+        imported_account_merged: "Ett tidigare importerat användarkonto via %{PROVIDER) har slagits samman med det befintliga kontot %{NAME}"
+        provider_uid: "dess leverantörs-ID är:"
     notify_admin_profile_complete:
-      subject: "An imported account has completed its profile"
+      subject: "Ett importerat konto har gjort klar sin profil"
       body:
-        account_completed: "An user account has completed its profile:"
-        imported_account_completed: "An user account, previously imported through %{PROVIDER}, has completed its profile:"
-        provider_id: "its provider ID is:"
+        account_completed: "Ett användarkonto har gjort klart sin profil:"
+        imported_account_completed: "Ett användarkonto, som tidigare importerats via %{PROVIDER}, har gjort klart sin profil:"
+        provider_id: "dess leverantörs-ID är:"
     notify_admin_abuse_reported:
-      subject: "An abusive content has been reported"
+      subject: "Kränkande innehåll har rapporterats"
       body:
-        intro: "A user has flagged a content as abusive"
-        signaled_content: "flagged content:"
-        signaled_by: "flagged by:"
-        signaled_on: "flagged on:"
-        message: "Message:"
-        visit_management_interface: "Refer to the Reporting Management Interface for more information."
+        intro: "En användare har flaggat ett innehåll som kränkande"
+        signaled_content: "flaggat innehåll:"
+        signaled_by: "flaggad av:"
+        signaled_on: "flaggad den:"
+        message: "Meddelande:"
+        visit_management_interface: "Se rapporteringsgränssnittet för mer information."
     notify_user_wallet_is_credited:
-      subject: "Your wallet has been credited"
+      subject: "Din plånbok har krediterats"
       body:
-        wallet_credit_html: "Your wallet has been credited %{AMOUNT} by administrator."
+        wallet_credit_html: "Din plånbok har krediterats %{AMOUNT} av administratör."
     notify_admin_user_wallet_is_credited:
-      subject: "The wallet of an user has been credited"
+      subject: "En användares plånbok har krediterats"
       body:
-        wallet_credit_html: "The wallet of member %{USER} has been credited %{AMOUNT} by administrator %{ADMIN}."
+        wallet_credit_html: "Plånboken för medlemmen %{USER} har krediterats %{AMOUNT} av administratören %{ADMIN}."
     notify_admin_export_complete:
-      subject: "Export completed"
+      subject: "Exporten är klar"
       body:
-        you_asked_for_an_export: "You asked for an export"
-        statistics_global: "of all the statistics"
-        statistics_account: "of the registration statistics"
-        statistics_event: "of statistics about events"
-        statistics_machine: "of statistics about machine slots"
-        statistics_project: "of statistics about projects"
-        statistics_subscription: "of subscription statistics"
-        statistics_training: "of statistics about trainings"
-        statistics_space: "of statistics about spaces"
-        users_members: "of the members' list"
-        users_subscriptions: "of the subscriptions' list"
-        users_reservations: "of the reservations' list"
-        availabilities_index: "of the reservations availabilities"
-        accounting_acd: "of the accounting data to ACD"
-        accounting_vat: "of the collected VAT data"
-        click_to_download: "Excel file generated successfully. To download it, click"
-        here: "here"
+        you_asked_for_an_export: "Du bad om en export"
+        statistics_global: "av all statistik"
+        statistics_account: "av bokningsstatistiken"
+        statistics_event: "av statistik om evenemang"
+        statistics_machine: "av statistik om utrustningsbokningar"
+        statistics_project: "av statistik om projekt"
+        statistics_subscription: "av prenumerationsstatistik"
+        statistics_training: "av statistik om utbildningar"
+        statistics_space: "statistik om lokaler"
+        users_members: "av medlemslistan"
+        users_subscriptions: "av listan över prenumerationer"
+        users_reservations: "av bokningslistan"
+        availabilities_index: "av bokningens tillgänglighet"
+        accounting_acd: "av bokföringsdata till ACD"
+        accounting_vat: "av den ingående momsen"
+        click_to_download: "Excel-fil genererades framgångsrikt. För att ladda ner den, klicka"
+        here: "här"
         file_type:
           xlsx: "Excel"
           csv: "CSV"
     notify_admin_import_complete:
-      subject: "Import completed"
+      subject: "Import slutförd"
       body:
-        you_made_an_import: "You have initiated an import %{CATEGORY}"
-        category_members: "of the members"
-        click_to_view_results: "Click here to view results"
+        you_made_an_import: "Du har initierat en import %{CATEGORY}"
+        category_members: "av medlemmarna"
+        click_to_view_results: "Klicka här för att se resultat"
     notify_admin_low_stock_threshold:
-      subject: "Low stock alert"
+      subject: "Varning vid lågt lagersaldo"
       body:
-        low_stock: "A new stock movement of %{PRODUCT} has exceeded the low stock threshold."
-        stocks_state_html: "Current stock status: <ul><li>internal: %{INTERNAL}</li><li>external: %{EXTERNAL}</li></ul>"
-        manage_stock: "Manage stocks for this product"
+        low_stock: "En ny lagerförflyttning av %{PRODUCT} har överskridit gränsen för lågt lager."
+        stocks_state_html: "Nuvarande lagerstatus: <ul><li>internt: %{INTERNAL}</li><li>externt: %{EXTERNAL}</li></ul>"
+        manage_stock: "Hantera lager för denna produkt"
     notify_member_about_coupon:
-      subject: "Coupon"
+      subject: "Rabattkupong"
       body:
-        enjoy_a_discount_of_PERCENT_with_code_CODE: "Enjoy a discount of %{PERCENT}% on the whole site with the code %{CODE}."
-        enjoy_a_discount_of_AMOUNT_with_code_CODE: "Enjoy a discount of %{AMOUNT} on the whole site with the code %{CODE}."
-        this_coupon_is_valid_USAGE_times_until_DATE_for_all_your_purchases: "This coupon is valid {USAGE, plural, =1{just once} other{many times}}: for all your purchases {TYPE, select, amount_off{at least equal to the amount of the coupon} other{}}, from now {DATE, select, NO-DATE{and without time limit} other{and until {DATE}}}."
+        enjoy_a_discount_of_PERCENT_with_code_CODE: "Erhåll %{PERCENT}% rabatt på webbplatsen med koden %{CODE}."
+        enjoy_a_discount_of_AMOUNT_with_code_CODE: "Erhåll %{AMOUNT}% rabatt på webbplatsen med koden %{CODE}."
+        this_coupon_is_valid_USAGE_times_until_DATE_for_all_your_purchases: "Denna kupong är giltig {USAGE, plural, =1{en gång} other{flera gånger}}: vid samtliga köp {TYPE, select, amount_off{som minst uppgår till kupongens värde} other{}}, fr. o. m. nu {DATE, select, NO-DATE{och utan bortre tidsgräns} other{t. o. m. {DATE}}}."
     notify_admin_free_disk_space:
-      subject: "Low disk space"
-      body: "Warning: available disk space on the server hosting Fab-manager is less than %{THRESHOLD} MiB. This can affect its operation and prevent saving some data. Currently, %{AVAILABLE} MiB of free disk space remains available on the mount point."
+      subject: "Lågt diskutrymme"
+      body: "Varning: tillgängligt diskutrymme på serverns webbhotell är mindre än %{THRESHOLD} MiB. Detta kan påverka dess funktion och förhindra att vissa data sparas. För närvarande finns %{AVAILABLE} MiB ledigt diskutrymme kvar på monteringspunkten."
     notify_admin_close_period_reminder:
-      subject: "Remind to close your accounting periods"
+      subject: "Påminnelse om att stänga dina bokföringsperioder"
       body:
-        warning_last_closed_period_over_1_year: "Please remind to periodically close your accounting periods. Last closed period ended at %{LAST_END}."
-        warning_no_closed_periods: "Please remind to periodically close your accounting periods. You have to close periods from %{FIRST_DATE}."
+        warning_last_closed_period_over_1_year: "Vänligen kom ihåg att regelbundet stänga dina redovisningsperioder. Senast stängd period avslutades på %{LAST_END}."
+        warning_no_closed_periods: "Vänligen påminn om att regelbundet stänga dina bokföringsperioder. Du måste stänga perioder från %{FIRST_DATE}."
     notify_admin_archive_complete:
-      subject: "Archiving completed"
+      subject: "Arkivering slutförd"
       body:
-        archive_complete: "You have closed the accounting period from %{START} to %{END}. Archiving of data is now complete."
-        click_to_download: "To download the ZIP archive, click"
-        here: "here."
-        save_on_secured: "Remember that you must save this archive on a secured external support, which may be requested by the tax authorities during a check."
+        archive_complete: "Du har stängt redovisningsperioden från %{START} till %{END}. Arkivering av data är nu klar."
+        click_to_download: "För att ladda ner ZIP-arkivet, klicka"
+        here: "här."
+        save_on_secured: "Kom ihåg att du måste spara detta arkiv på en säker extern plats som skattemyndigheterna kan begära ut dem från vid en kontroll."
     notify_privacy_policy_changed:
-      subject: "Privacy policy updated"
+      subject: "Integritetspolicy uppdaterad"
       body:
-        content_html: "<p>We wish to inform you that we have just updated our privacy policy.</p><p>We may change our privacy policy regularly. In accordance with the regulations, you will receive a notification for each update.</p><p>By accessing or using our services after the privacy policy update, we will consider that you agree its terms, updates included.</p>"
-        link_to_policy: "Click here to view the privacy policy."
+        content_html: "<p>Vi vill informera dig om att vi just har uppdaterat vår sekretesspolicy.</p><p>Vi kan komma att ändra vår sekretesspolicy regelbundet. I enlighet med reglerna får du en avisering för varje uppdatering.</p><p>Genom att få tillgång till eller använda våra tjänster efter integritetspolicyuppdateringen, kommer vi att överväga att du godkänner dess villkor, inklusive uppdateringar.</p>"
+        link_to_policy: "Klicka här för att se sekretesspolicyn."
     notify_admin_refund_created:
-      subject: "A refund has been generated"
+      subject: "En återbetalning har skapats"
       body:
-        refund_created: "A refund of %{AMOUNT} has been generated on invoice %{INVOICE} of user %{USER}"
-        wallet_refund_created: "A refund of %{AMOUNT} has been generated for the credit of the wallet of user %{USER}"
-        download: "Click here to download this refund invoice"
+        refund_created: "Återbetalning av %{AMOUNT} har genererats på faktura %{INVOICE} för användaren %{USER}"
+        wallet_refund_created: "En återbetalning av %{AMOUNT} har skapats för användarens plånbok %{USER}"
+        download: "Klicka här för att ladda ner denna kreditnota"
     notify_admins_role_update:
-      subject: "The role of a user has changed"
+      subject: "Rollen för en användare har ändrats"
       body:
-        user_role_changed_html: "The role of the user <em><strong>%{NAME}</strong></em> has changed."
-        previous_role: "Previous role:"
-        new_role: "New role:"
+        user_role_changed_html: "Rollen för användaren <em><strong>%{NAME}</strong></em> har ändrats."
+        previous_role: "Föregående roll:"
+        new_role: "Ny roll:"
     notify_user_role_update:
-      subject: "Your role has changed"
+      subject: "Din roll har ändrats"
       body:
-        role_changed_html: "Your role at {GENDER, select, male{the} female{the} neutral{} other{the}} {NAME} has changed. You are now <strong>{ROLE}</strong>.<br/>With great power comes great responsibility, use your new privileges fairly and respectfully."
+        role_changed_html: "Din roll på {GENDER, select, male{} female{} neutral{} other{}} {NAME} har ändrats. Du är nu <strong>{ROLE}</strong>.<br/>Med stor kraft kommer stort ansvar, använd dina nya privilegier rättvist och respektfullt."
     notify_admin_objects_stripe_sync:
-      subject: "Stripe synchronization"
+      subject: "Stripe-synkronisering"
       body:
-        objects_sync: "All members, coupons, machines, trainings, spaces and plans were successfully synchronized on Stripe."
+        objects_sync: "Alla medlemmar, kuponger, utrustning, utbildningar, lokaler och planer synkroniserades framgångsrikt på Stripe."
     notify_admin_order_is_paid:
-      subject: "New order"
+      subject: "Ny beställning"
       body:
-        order_placed: "A new order (%{REFERENCE}) has been placed and paid by %{USER}."
+        order_placed: "En ny beställning (%{REFERENCE}) har lagts och betalats av %{USER}."
         view_details: ""
     notify_member_payment_schedule_ready:
-      subject: "Your payment schedule"
+      subject: "Ditt betalningsschema"
       body:
-        please_find_attached_html: "Please find attached your payment schedule, issued on {DATE}, with an amount of {AMOUNT} concerning your {TYPE, select, Reservation{reservation} other{subscription}}." #messageFormat interpolation
-        schedule_in_your_dashboard_html: "You can find this payment schedule at any time from %{DASHBOARD} on the Fab Lab's website."
-        your_dashboard: "your dashboard"
+        please_find_attached_html: "är ser du ditt bifogade betalningsschema, utfärdat på {DATE}, med ett belopp av {AMOUNT} om din {TYPE, select, Reservation{bokning} other{prenumeration}}." #messageFormat interpolation
+        schedule_in_your_dashboard_html: "Du hittar detta betalningsschema när som helst i %{DASHBOARD} på webbplatsen."
+        your_dashboard: "din kontrollpanel"
     notify_admin_payment_schedule_error:
-      subject: "[URGENT] Card debit error"
+      subject: "[URGENT] Kortdebitering misslyckades"
       body:
-        remember: "In accordance with the %{REFERENCE} payment schedule, a debit by card of %{AMOUNT} was scheduled on %{DATE}."
-        error: "Unfortunately, an error occurred and this card debit was unable to complete successfully."
-        action: "Please then consult the %{GATEWAY} dashboard and contact the member as soon as possible to resolve the problem."
+        remember: "I enlighet med ditt %{REFERENCE} betalningsschema planerades ett kortköp på %{AMOUNT} den %{DATE}."
+        error: "Tyvärr inträffade ett fel och denna kortdebitering kunde inte slutföras."
+        action: "Vänligen konsultera sedan %{GATEWAY} kontrollpanelen och kontakta medlemmen så snart som möjligt för att lösa problemet."
     notify_member_payment_schedule_error:
-      subject: "[URGENT] Card debit error"
+      subject: "[URGENT] Kortdebitering misslyckades"
       body:
-        remember: "In accordance with your %{REFERENCE} payment schedule, a debit by card of %{AMOUNT} was scheduled on %{DATE}."
-        error: "Unfortunately, an error occurred and this card debit was unable to complete successfully."
-        action: "Please contact a manager as soon as possible to resolve the problem."
+        remember: "I enlighet med ditt %{REFERENCE} betalningsschema planerades ett kortköp på %{AMOUNT} den %{DATE}."
+        error: "Tyvärr inträffade ett fel och denna kortdebitering kunde inte slutföras."
+        action: "Kontakta en ansvarig så snart som möjligt för att lösa problemet."
     notify_admin_payment_schedule_failed:
-      subject: "[URGENT] Card debit failure"
+      subject: "[URGENT] Kortdebitering misslyckades"
       body:
-        remember: "In accordance with the %{REFERENCE} payment schedule, a debit by card of %{AMOUNT} was scheduled on %{DATE}."
-        error: "Unfortunately, this card debit was unable to complete successfully."
-        action: "Please contact the member as soon as possible, then go to the payment schedule management interface to resolve the problem. After a certain period of time, the card subscription could be cancelled."
+        remember: "I enlighet med ditt %{REFERENCE} betalningsschema planerades ett kortköp på %{AMOUNT} den %{DATE}."
+        error: "Tyvärr inträffade ett fel och denna kortdebitering kunde inte slutföras."
+        action: "Vänligen kontakta medlemmen så snart som möjligt, gå sedan till betalningsschemats hanteringsgränssnitt för att lösa problemet. Efter en viss tidsperiod kan kortprenumerationen avbrytas."
     notify_member_payment_schedule_failed:
-      subject: "[URGENT] Card debit failure"
+      subject: "[URGENT] Kortdebitering misslyckades"
       body:
-        remember: "In accordance with your %{REFERENCE} payment schedule, a debit by card of %{AMOUNT} was scheduled on %{DATE}."
-        error: "Unfortunately, this card debit was unable to complete successfully."
-        action_html: "Please check %{DASHBOARD} or contact a manager quickly, otherwise your subscription may be interrupted."
-        your_dashboard: "your dashboard"
+        remember: "I enlighet med ditt %{REFERENCE} betalningsschema planerades ett kortköp på %{AMOUNT} den %{DATE}."
+        error: "Tyvärr kunde inte kortdebiteringen slutföras."
+        action_html: "Vänligen kontrollera %{DASHBOARD} eller kontakta en ansvarig snabbt, annars kan ditt abonnemang avbrytas."
+        your_dashboard: "din kontrollpanel"
     notify_admin_payment_schedule_gateway_canceled:
-      subject: "[URGENT] Payment schedule canceled by the payment gateway"
+      subject: "[URGENT] Betalningsschema avbruten av betalningsleverantör"
       body:
-        error: "The payment schedule %{REFERENCE} was canceled by the payment gateway (%{GATEWAY}). No further debits will be made on this payment mean."
-        action: "Please consult the payment schedule management interface and contact the member as soon as possible to resolve the problem."
+        error: "Betalningsschemat %{REFERENCE} avbröts av betalningsleverantören (%{GATEWAY}). Inga ytterligare debiteringar kommer att göras på denna betalning."
+        action: "Vänligen konsultera betalningsschemats administrationsgränssnitt och kontakta medlemmen så snart som möjligt för att lösa problemet."
     notify_member_payment_schedule_gateway_canceled:
-      subject: "[URGENT] Payment schedule canceled by the payment gateway"
+      subject: "[URGENT] Betalningsschema avbruten av betalningsleverantör"
       body:
-        error: "Your payment schedule %{REFERENCE} was canceled by the payment gateway. No further debits will be made on this payment mean."
-        action: "Please contact a manager as soon as possible to resolve the problem."
+        error: "Ditt betalningsschema %{REFERENCE} avbröts av betalningsleverantören. Inga ytterligare debiteringar kommer att göras på denna betalning."
+        action: "Kontakta en ansvarig så snart som möjligt för att lösa problemet."
     notify_admin_payment_schedule_check_deadline:
-      subject: "Payment deadline"
+      subject: "Betalningsfrist"
       body:
-        remember: "In accordance with the %{REFERENCE} payment schedule, %{AMOUNT} was due to be debited on %{DATE}."
-        date: "This is a reminder to cash the scheduled check as soon as possible."
-        confirm: "Do not forget to confirm the receipt in your payment schedule management interface, so that the corresponding invoice will be generated."
+        remember: "I enlighet med %{REFERENCE} betalningsschemat skulle %{AMOUNT} debiteras den %{DATE}."
+        date: "Detta är en påminnelse om att betala så snart som möjligt."
+        confirm: "Glöm inte att bekräfta kvittot i ditt schemas hanteringsgränssnitt, så att motsvarande faktura kommer att genereras."
     notify_member_payment_schedule_transfer_deadline:
-      subject: "Payment deadline"
+      subject: "Betalningsfrist"
       body:
-        remember: "In accordance with your %{REFERENCE} payment schedule, %{AMOUNT} was due to be debited on %{DATE}."
-        date: "This is a reminder to verify that the direct bank debit was successfull."
-        confirm: "Please confirm the receipt of funds in your payment schedule management interface, so that the corresponding invoice will be generated."
+        remember: "I enlighet med ditt %{REFERENCE} betalningsschema skulle %{AMOUNT} debiteras på %{DATE}."
+        date: "Detta är en påminnelse om att kontrollera att banköverföringen var framgångsrik."
+        confirm: "Vänligen bekräfta mottagandet av pengar i ditt schemahanteringsgränssnitt, så att motsvarande faktura kommer att genereras."
     notify_member_reservation_limit_reached:
-      subject: "Daily reservation limit reached"
+      subject: "Den dagliga bokningsgränsen har uppnåtts"
       body:
-        limit_reached: "For %{DATE}, you have reached your daily limit of %{HOURS} hours of %{ITEM} reservation."
+        limit_reached: "För %{DATE} har du nått din dagliga gräns för %{HOURS} timmar av %{ITEM} bokningar."
     notify_admin_user_supporting_document_files_created:
-      subject: "Supporting documents uploaded by a member"
+      subject: "Underlag uppladdat av medlemmen"
       body:
-        supporting_document_files_uploaded_below: "Member %{NAME} has uploaded the following supporting documents:"
-        validate_user: "Please validate this account"
+        supporting_document_files_uploaded_below: "Medlem %{NAME} har laddat upp följande underlag:"
+        validate_user: "Vänligen bekräfta detta konto"
     notify_admin_user_supporting_document_files_updated:
-      subject: "Member's supporting documents have changed"
+      subject: "Medlemmens underlag har ändrats"
       body:
-        user_update_supporting_document_file: "Member %{NAME} has modified the supporting documents below:"
-        validate_user: "Please validate this account"
+        user_update_supporting_document_file: "Medlem %{NAME} har ändrat dokumenten nedan:"
+        validate_user: "Vänligen bekräfta detta konto"
     notify_admin_user_child_supporting_document_files_created:
-      subject: "Supporting documents of child uploaded by a member"
+      subject: "Underlag för barn uppladdat av medlemmen"
       body:
-        supporting_document_files_uploaded_below: "Child %{NAME} has uploaded the following supporting documents:"
-        validate_child: "Please validate this child account"
+        supporting_document_files_uploaded_below: "Child %{NAME} har laddat upp följande underlag:"
+        validate_child: "Vänligen bekräfta detta barnkonto"
     notify_admin_user_child_supporting_document_files_updated:
-      subject: "Child's supporting documents have changed"
+      subject: "Barnets underlag har ändrats"
       body:
-        child_update_supporting_document_file: "Child %{NAME} has modified the supporting documents below:"
-        validate_child: "Please validate this child account"
+        child_update_supporting_document_file: "Child %{NAME} har ändrat underlagen nedan:"
+        validate_child: "Vänligen bekräfta detta barnkonto"
     notify_user_is_validated:
-      subject: "Account validated"
+      subject: "Konto bekräftat"
       body:
-        account_validated: "Your account was validated. Now, you have access to booking features."
+        account_validated: "Ditt konto har bekräftats. Nu har du tillgång till bokningsfunktioner."
     notify_user_is_invalidated:
-      subject: "Account invalidated"
+      subject: "Kontot ogiltigförklarat"
       body:
-        account_invalidated: "Your account was invalidated. You won't be able to book anymore, until your account is validated again."
+        account_invalidated: "Ditt konto har ogiltigförklarats. Du kommer inte att kunna boka igen förrän ditt konto har validerats."
     notify_user_child_is_validated:
-      subject: "Child account validated"
+      subject: "Barnkonto validerat"
       body:
-        child_validated: "Your child account was validated. Now, you have access to event booking features."
+        child_validated: "Ditt barnkonto har validerats. Nu har du tillgång till bokningsfunktioner för evenemang."
     notify_user_child_is_invalidated:
-      subject: "Child account invalidated"
+      subject: "Barnkonto ogiltigförklarat"
       body:
-        child_invalidated: "Your child account was invalidated. You won't be able to book event, until your child account is validated again."
+        child_invalidated: "Ditt barnkonto har ogiltigförklarats. Du kommer inte att kunna boka evenemang, förrän ditt barnkonto har validerats igen."
     notify_user_supporting_document_refusal:
-      subject: "Your supporting documents were refused"
+      subject: "Dina underlag avvisades"
       body:
-        user_supporting_document_files_refusal: "Your supporting documents were refused:"
-        action: "Please re-upload some new supporting documents."
+        user_supporting_document_files_refusal: "Dina underlag avvisades:"
+        action: "Vänligen ladda upp några nya underlag."
     notify_user_supporting_document_reminder:
-      subject: "Reminder to upload your supporting documents"
+      subject: "Påminnelse om att ladda upp dina underlag"
       body:
-        user_supporting_document_reminder: "This is a reminder for you to upload your supporting documents."
+        user_supporting_document_reminder: "Detta är en påminnelse för dig att ladda upp dina underlag."
     notify_admin_user_supporting_document_refusal:
-      subject: "A member's supporting documents were refused"
+      subject: "Medlemmens underlag avvisades"
       body:
-        user_supporting_document_files_refusal: "Member %{NAME}'s supporting documents were rejected by %{OPERATOR}:"
+        user_supporting_document_files_refusal: "Medlem %{NAME} s underlag avvisades av %{OPERATOR}:"
     notify_user_child_supporting_document_refusal:
-      subject: "Your child's supporting documents were refused"
+      subject: "Ditt barns underlag avvisades"
       body:
-        user_child_supporting_document_files_refusal: "Your supporting documents were refused:"
-        action: "Please re-upload some new supporting documents."
+        user_child_supporting_document_files_refusal: "Dina underlag avvisades:"
+        action: "Vänligen ladda upp några nya underlag."
     notify_admin_user_child_supporting_document_refusal:
-      subject: "A child's supporting documents were refused"
+      subject: "Ditt barns underlag avvisades"
       body:
-        user_child_supporting_document_files_refusal: "Child %{NAME}'s supporting documents were rejected by %{OPERATOR}:"
+        user_child_supporting_document_files_refusal: "Barnet %{NAME} s underlag avvisades av %{OPERATOR}:"
     shared:
-      hello: "Hello %{user_name}"
+      hello: "Hej %{user_name}"
     notify_user_order_is_ready:
-      subject: "Your command is ready"
+      subject: "Din beställning är redo"
       body:
-        notify_user_order_is_ready: "Your command %{REFERENCE} is ready:"
+        notify_user_order_is_ready: "Din beställning %{REFERENCE} är redo:"
     notify_user_order_is_canceled:
-      subject: "Your command was canceled"
+      subject: "Din beställning är avbruten"
       body:
-        notify_user_order_is_canceled: "Your command %{REFERENCE} was canceled."
+        notify_user_order_is_canceled: "Din beställning %{REFERENCE} är avbruten."
     notify_user_order_is_refunded:
-      subject: "Your command was refunded"
+      subject: "Din beställning har återbetalats"
       body:
-        notify_user_order_is_refunded: "Your command %{REFERENCE} was refunded."
+        notify_user_order_is_refunded: "Din beställning %{REFERENCE} har återbetalats."
     notify_member_reservation_validated:
-      subject: "Your reservation was validated"
+      subject: "Din bokning har godkänts"
       body:
-        reservation_validated_html: "<strong><em>%{RESERVABLE}</em></strong> was validated."
-        your_reserved_slots: "Your reserved slots are:"
+        reservation_validated_html: "<strong><em>%{RESERVABLE}</em></strong> godkändes."
+        your_reserved_slots: "Dina bokade platser är:"
     notify_admin_reservation_validated:
-      subject: "Pre-registration was validated"
+      subject: "Din förbokning har godkänts"
       body:
-        reservation_validated_html: "<strong><em>%{RESERVABLE}</em></strong> of %{NAME} was validated."
-        reserved_slots: "Reserved slots are:"
+        reservation_validated_html: "<strong><em>%{RESERVABLE}</em></strong> godkändes."
+        reserved_slots: "Bokade platser är:"
     notify_member_reservation_invalidated:
-      subject: "Your pre-registration wasn't validated"
+      subject: "Din förbokning har avslagits"
       body:
-        reservation_invalidated_html: "<strong><em>%{RESERVABLE}</em></strong> wasn't validated."
+        reservation_invalidated_html: "<strong><em>%{RESERVABLE}</em></strong> avslogs."
     notify_admin_reservation_invalidated:
-      subject: "Pre-registration wasn't validated"
+      subject: "Din förbokning har avslagits"
       body:
-        reservation_invalidated_html: "<strong><em>%{RESERVABLE}</em></strong> of %{NAME} wasn't validated."
+        reservation_invalidated_html: "<strong><em>%{RESERVABLE}</em></strong> i %{NAME} avslogs."
     notify_user_when_child_age_will_be_18:
-      subject: "Your child will be 18 years old"
+      subject: "Ditt barn kommer att vara 18 år"
       body:
-        child_age_will_be_18_years_ago: "Your child %{NAME} will turn 18 on %{DATE}, at which point they will be automatically detached from your Family account. They will need to create their own account in order to make reservations."
+        child_age_will_be_18_years_ago: "Ditt barn %{NAME} kommer att fylla 18 den %{DATE}, och det kommer automatiskt att kopplas bort från ditt familjekonto. Det måste skapa ett eget konto för att kunna göra reservationer."

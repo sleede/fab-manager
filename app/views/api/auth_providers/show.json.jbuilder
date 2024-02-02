@@ -19,3 +19,9 @@ if @provider.providable_type == OpenIdConnectProvider.name
     json.extra_authorize_params @provider.providable[:extra_authorize_params].to_json
   end
 end
+
+if @provider.providable_type == SamlProvider.name
+  json.providable_attributes do
+    json.extract! @provider.providable, :id, :sp_entity_id, :idp_sso_service_url, :profile_url, :idp_cert_fingerprint, :idp_cert
+  end
+end
