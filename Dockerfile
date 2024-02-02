@@ -4,6 +4,7 @@ MAINTAINER contact@sleede.com
 # First we need to be able to fetch from https repositories
 RUN apt-get update && \
     apt-get install -y apt-transport-https \
+      postgresql-client \
       ca-certificates apt-utils supervisor locales
 
 RUN locale-gen C.UTF-8

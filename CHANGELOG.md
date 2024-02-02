@@ -3,7 +3,9 @@
 ## Next release
 
 - Fix a bug: if there is a reservation with a deleted user, it is not possible to delete the event
+- Fix a bug: postgres client isnt added docker image
 - Support for SAML in Single-Sign-On authentication providers
+- updates translations
 
 ## v6.3.10 2024 January 19
 
