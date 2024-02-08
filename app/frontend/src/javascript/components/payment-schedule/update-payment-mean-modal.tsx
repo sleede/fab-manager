@@ -12,12 +12,13 @@ interface UpdatePaymentMeanModalProps {
   onError: (message: string) => void,
   afterSuccess: () => void,
   paymentSchedule: PaymentSchedule
+  paymentScheduleItemId: number,
 }
 
 /**
  * Component to allow the member to change his payment mean for the given payment schedule (e.g. from card to transfer)
  */
-export const UpdatePaymentMeanModal: React.FC<UpdatePaymentMeanModalProps> = ({ isOpen, toggleModal, onError, afterSuccess, paymentSchedule }) => {
+export const UpdatePaymentMeanModal: React.FC<UpdatePaymentMeanModalProps> = ({ isOpen, toggleModal, onError, afterSuccess, paymentSchedule, paymentScheduleItemId }) => {
   const { t } = useTranslation('admin');
 
   const [paymentMean, setPaymentMean] = React.useState<PaymentMethod>();
@@ -42,10 +43,11 @@ export const UpdatePaymentMeanModal: React.FC<UpdatePaymentMeanModalProps> = ({ 
    * When the user clicks on the update button, update the default payment mean for the given payment schedule
    */
   const handlePaymentMeanUpdate = (): void => {
-    PaymentScheduleAPI.update({
-      id: paymentSchedule.id,
-      payment_method: paymentMean
-    }).then(() => {
+    PaymentScheduleAPI.update(
+      paymentSchedule.id,
+      paymentScheduleItemId,
+      paymentMean
+    ).then(() => {
       afterSuccess();
     }).catch(error => {
       onError(error.message);

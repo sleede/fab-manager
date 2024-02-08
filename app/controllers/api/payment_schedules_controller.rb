@@ -89,10 +89,11 @@ class API::PaymentSchedulesController < API::APIController
   def update
     authorize PaymentSchedule
 
-    if PaymentScheduleService.new.update_payment_mean(@payment_schedule, update_params)
+    payment_schedule_item = PaymentScheduleItem.find(update_params[:payment_schedule_item_id])
+    if PaymentScheduleService.new.update_payment_mean(payment_schedule_item, update_params[:payment_method])
       render :show, status: :ok, location: @payment_schedule
     else
-      render json: @payment_schedule.errors, status: :unprocessable_entity
+      render json: payment_schedule_item.errors, status: :unprocessable_entity
     end
   end
 
@@ -107,6 +108,6 @@ class API::PaymentSchedulesController < API::APIController
   end
 
   def update_params
-    params.require(:payment_schedule).permit(:payment_method)
+    params.permit(:payment_method, :payment_schedule_item_id)
   end
 end

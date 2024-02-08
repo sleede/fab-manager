@@ -2,6 +2,8 @@
 
 ## Next release
 
+- improvement: Allow the admin to update payment method only the overdue subscription item without cancel PayZen subscription
+
 ## v6.3.11 2024 February 2
 
 - Fix a bug: if there is a reservation with a deleted user, it is not possible to delete the event

@@ -1147,7 +1147,7 @@ en:
           date: "Date"
       update_payment_mean_modal:
         title: "Update the payment mean"
-        update_info: "Please specify below the new payment mean for this payment schedule to continue."
+        update_info: "Please specify below the payment method to update this payment schedule."
         select_payment_mean: "Select a new payment mean"
         method_Transfer: "By bank transfer"
         method_Check: "By check"
