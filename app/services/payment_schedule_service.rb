@@ -177,9 +177,8 @@ class PaymentScheduleService
   ##
   # Update the payment mean associated with the given PaymentSchedule and reset the erroneous items
   ##
-  def update_payment_mean(payment_schedule, payment_mean)
-    PaymentGatewayService.new.cancel_subscription(payment_schedule)
-    payment_schedule.update(payment_mean) && reset_erroneous_payment_schedule_items(payment_schedule)
+  def update_payment_mean(payment_schedule_item, payment_method)
+    payment_schedule_item.update(payment_method: payment_method, state: payment_schedule_item.due_date < Time.current ? 'pending' : 'new')
   end
 
   private

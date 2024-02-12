@@ -276,6 +276,8 @@ zu:
         card: "crwdns32011:0crwdne32011:0"
         wallet_debit: "crwdns32013:0crwdne32013:0"
         other: "crwdns32015:0crwdne32015:0"
+        transfer: "crwdns38166:0crwdne38166:0"
+        check: "crwdns38168:0crwdne38168:0"
         wallet_credit: "crwdns32017:0crwdne32017:0"
         VAT: "crwdns32019:0crwdne32019:0"
         sales: "crwdns32021:0crwdne32021:0"
@@ -1147,7 +1149,7 @@ zu:
           date: "crwdns25532:0crwdne25532:0"
       update_payment_mean_modal:
         title: "crwdns25534:0crwdne25534:0"
-        update_info: "crwdns25536:0crwdne25536:0"
+        update_info: "crwdns38170:0crwdne38170:0"
         select_payment_mean: "crwdns25538:0crwdne25538:0"
         method_Transfer: "crwdns25540:0crwdne25540:0"
         method_Check: "crwdns25542:0crwdne25542:0"

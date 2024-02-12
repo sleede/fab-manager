@@ -74,6 +74,12 @@ module SettingsHelper
     accounting_payment_other_code
     accounting_payment_other_label
     accounting_payment_other_journal_code
+    accounting_payment_transfer_code
+    accounting_payment_transfer_label
+    accounting_payment_transfer_journal_code
+    accounting_payment_check_code
+    accounting_payment_check_label
+    accounting_payment_check_journal_code
     accounting_wallet_code
     accounting_wallet_label
     accounting_wallet_journal_code

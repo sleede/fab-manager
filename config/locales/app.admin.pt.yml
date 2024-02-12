@@ -276,6 +276,8 @@ pt:
         card: "Card payments"
         wallet_debit: "Virtual wallet payments"
         other: "Other payment means"
+        transfer: "Transfer"
+        check: "Check"
         wallet_credit: "Virtual wallet credit"
         VAT: "VAT"
         sales: "Sales"
@@ -1147,7 +1149,7 @@ pt:
           date: "Data"
       update_payment_mean_modal:
         title: "Atualizar o método de pagamento"
-        update_info: "Por favor especifique abaixo o novo método de pagamento para este calendário de pagamentos continuar."
+        update_info: "Please specify below the payment method to update this payment schedule."
         select_payment_mean: "Selecione um novo método de pagamento"
         method_Transfer: "Por transferência bancária"
         method_Check: "Por cheque"

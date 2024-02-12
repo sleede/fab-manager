@@ -276,6 +276,8 @@ it:
         card: "Pagamenti con carta"
         wallet_debit: "Pagamenti del portafoglio virtuale"
         other: "Altri mezzi di pagamento"
+        transfer: "Transfer"
+        check: "Check"
         wallet_credit: "Credito portafoglio virtuale"
         VAT: "IVA"
         sales: "Vendite"
@@ -1147,7 +1149,7 @@ it:
           date: "Data"
       update_payment_mean_modal:
         title: "Aggiorna il metodo di pagamento"
-        update_info: "Si prega di specificare di seguito il nuovo mezzo di pagamento per questo programma di pagamenti per continuare."
+        update_info: "Please specify below the payment method to update this payment schedule."
         select_payment_mean: "Selezionare un nuovo metodo di pagamento"
         method_Transfer: "Con bonifico bancario"
         method_Check: "Con assegno"

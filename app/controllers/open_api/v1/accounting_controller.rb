@@ -13,6 +13,8 @@ class OpenAPI::V1::AccountingController < OpenAPI::V1::BaseController
     @codes = {
       card: Setting.get('accounting_payment_card_code'),
       wallet: Setting.get('accounting_payment_wallet_code'),
+      transfer: Setting.get('accounting_payment_transfer_code'),
+      check: Setting.get('accounting_payment_check_code'),
       other: Setting.get('accounting_payment_other_code')
     }
 

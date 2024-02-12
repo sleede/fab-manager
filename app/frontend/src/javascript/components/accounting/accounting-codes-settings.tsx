@@ -69,6 +69,18 @@ export const AccountingCodesSettings: React.FC<AccountingCodesSettingsProps> = (
           <FormInput register={register} id="accounting_payment_wallet_code" label={t('app.admin.accounting_codes_settings.code')} />
           <FormInput register={register} id="accounting_payment_wallet_label" label={t('app.admin.accounting_codes_settings.label')} />
         </div>
+        <h5>{t('app.admin.accounting_codes_settings.transfer')}</h5>
+        <div className="others">
+          <FormInput register={register} id="accounting_payment_transfer_journal_code" label={t('app.admin.accounting_codes_settings.journal_code')} />
+          <FormInput register={register} id="accounting_payment_transfer_code" label={t('app.admin.accounting_codes_settings.code')} />
+          <FormInput register={register} id="accounting_payment_transfer_label" label={t('app.admin.accounting_codes_settings.label')} />
+        </div>
+        <h5>{t('app.admin.accounting_codes_settings.check')}</h5>
+        <div className="others">
+          <FormInput register={register} id="accounting_payment_check_journal_code" label={t('app.admin.accounting_codes_settings.journal_code')} />
+          <FormInput register={register} id="accounting_payment_check_code" label={t('app.admin.accounting_codes_settings.code')} />
+          <FormInput register={register} id="accounting_payment_check_label" label={t('app.admin.accounting_codes_settings.label')} />
+        </div>
         <h5>{t('app.admin.accounting_codes_settings.other')}</h5>
         <div className="others">
           <FormInput register={register} id="accounting_payment_other_journal_code" label={t('app.admin.accounting_codes_settings.journal_code')} />

@@ -276,6 +276,8 @@ es-MX:
         card: "Pagos con tarjeta"
         wallet_debit: "Pagos con cartera virtual"
         other: "Otros medios de pago"
+        transfer: "Transfer"
+        check: "Check"
         wallet_credit: "Crédito de cartera virtual"
         VAT: "IVA"
         sales: "Ventas"
@@ -1147,7 +1149,7 @@ es-MX:
           date: "Fecha"
       update_payment_mean_modal:
         title: "Actualizar el medio de pago"
-        update_info: "Por favor, especifique a continuación el nuevo medio de pago para que este calendario de pagos continúe."
+        update_info: "Please specify below the payment method to update this payment schedule."
         select_payment_mean: "Seleccione un nuevo medio de pago"
         method_Transfer: "Por transferencia bancaria"
         method_Check: "Por cheque"
