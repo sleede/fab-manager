@@ -276,6 +276,8 @@ en:
         card: "Card payments"
         wallet_debit: "Virtual wallet payments"
         other: "Other payment means"
+        transfer: "Transfer"
+        check: "Check"
         wallet_credit: "Virtual wallet credit"
         VAT: "VAT"
         sales: "Sales"
