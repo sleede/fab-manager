@@ -4,6 +4,7 @@
 
 - improvement: Allow the admin to update payment method only the overdue subscription item without cancel PayZen subscription
 - improvement: add payment transfer/check to accounting settings
+- updates translations
 
 ## v6.3.11 2024 February 2
 

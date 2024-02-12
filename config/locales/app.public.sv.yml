@@ -3,7 +3,7 @@ sv:
     public:
       #header and "about" page
       common:
-        about_the_fablab: "Om {GENDER, select, male{den} female{den} neutral{} other{den}} {NAME}"
+        about_the_fablab: "Om {GENDER, select, male{} female{} neutral{} other{}} {NAME}"
         return: "Tillbaka"
         #cookies
         cookies:
