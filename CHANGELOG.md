@@ -2,6 +2,8 @@
 
 ## Next release
 
+- improvement: add settlement by transfer/check to invoice paiement info
+
 ## v6.3.12 2024 February 12
 
 - improvement: Allow the admin to update payment method only the overdue subscription item without cancel PayZen subscription
