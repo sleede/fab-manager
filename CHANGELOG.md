@@ -2,6 +2,7 @@
 
 ## Next release
 
+- Fix a bug: missing payment transfer journal code in accouting line
 - improvement: add settlement by transfer/check to invoice paiement info
 
 ## v6.3.12 2024 February 12

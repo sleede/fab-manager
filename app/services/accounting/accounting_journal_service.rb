@@ -13,6 +13,8 @@ class Accounting::AccountingJournalService
       payment: {
         card: Setting.get('accounting_payment_card_journal_code') || '',
         wallet: Setting.get('accounting_payment_wallet_journal_code') || '',
+        transfer: Setting.get('accounting_payment_transfer_journal_code') || '',
+        check: Setting.get('accounting_payment_check_journal_code') || '',
         other: Setting.get('accounting_payment_other_journal_code') || ''
       }
     }
