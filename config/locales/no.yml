@@ -126,6 +126,8 @@
     by_wallet: "til lommebok"
     no_refund: "Ingen refusjon"
     settlement_by_debit_card: "Oppgjør med betalingskort"
+    settlement_by_transfer: "Settlement by transfer"
+    settlement_by_check: "Settlement by check"
     settlement_done_at_the_reception: "Oppgjør i resepsjonen"
     settlement_by_wallet: "Oppgjør via lommebok"
     on_DATE_at_TIME: "på %{DATE} kl. %{TIME},"
