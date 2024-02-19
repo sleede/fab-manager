@@ -126,6 +126,8 @@ fr:
     by_wallet: "par porte-monnaie"
     no_refund: "Pas de remboursement"
     settlement_by_debit_card: "Règlement effectué par carte bancaire"
+    settlement_by_transfer: "Règlement effectué par virement"
+    settlement_by_check: "Règlement effectué par chèque"
     settlement_done_at_the_reception: "Règlement effectué à l'accueil"
     settlement_by_wallet: "Règlement effectué par porte-monnaie"
     on_DATE_at_TIME: "le %{DATE} à %{TIME},"

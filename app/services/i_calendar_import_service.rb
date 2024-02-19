@@ -18,7 +18,7 @@ class ICalendarImportService
       cal.events.each do |evt|
         uids.push(evt.uid.to_s)
         ICalendarEvent.update_or_create_by(
-          { uid: evt.uid.to_s },
+          { uid: evt.uid.to_s, i_calendar_id: i_calendar_id},
           {
             dtstart: evt.dtstart,
             dtend: evt.dtend,

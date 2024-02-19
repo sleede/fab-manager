@@ -4,7 +4,7 @@ sv:
       #translations of common buttons
       buttons:
         confirm_changes: "Bekräfta ändringar"
-        consult: "Fråga"
+        consult: "Detaljer"
         edit: "Redigera"
         change: "Ändra"
         delete: "Ta bort"
@@ -127,7 +127,7 @@ sv:
       project:
         name: "Namn"
         name_is_required: "Namn måste fyllas i."
-        illustration: "Visuellt"
+        illustration: "Bild"
         illustration_recommendation: "Maximal skärmstorlek: 932 * 700 px (obegränsad förhållande)."
         add_an_illustration: "Lägg till en illustration"
         CAD_file: "CAD-fil"
