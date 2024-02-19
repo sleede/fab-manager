@@ -5,6 +5,7 @@
 - Fix a bug: missing payment transfer journal code in accouting line
 - Fix a bug: unable to sync iCalendar correctly
 - improvement: add settlement by transfer/check to invoice paiement info
+- improvement: hide machines/themes/components filter in project list if machines module is disable or themes/components is empty
 
 ## v6.3.12 2024 February 12
 
