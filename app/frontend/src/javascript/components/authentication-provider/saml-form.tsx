@@ -58,6 +58,13 @@ export const SamlForm = <TFieldValues extends FieldValues>({ register, strategyN
                  tooltip={t('app.admin.authentication.saml_form.profile_edition_url_help')}
                  rules={{ required: true, pattern: ValidationLib.urlRegex }}
                  formState={formState} />
+      <FormInput id="providable_attributes.idp_slo_service_url"
+                 register={register}
+                 placeholder="https://sso.exemple.net..."
+                 label={t('app.admin.authentication.saml_form.idp_slo_service_url')}
+                 tooltip={t('app.admin.authentication.saml_form.idp_slo_service_url_help')}
+                 rules={{ pattern: ValidationLib.urlRegex }}
+                 formState={formState} />
     </div>
   );
 };

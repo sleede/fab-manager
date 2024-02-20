@@ -2,6 +2,8 @@
 
 ## Next release
 
+- improvement: add idp_slo_service_url(logout requests url) to saml provider
+
 ## v6.3.13 2024 February 19
 
 - Fix a bug: missing payment transfer journal code in accouting line
