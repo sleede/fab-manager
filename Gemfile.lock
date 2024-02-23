@@ -270,7 +270,7 @@ GEM
       timeout
     net-smtp (0.3.3)
       net-protocol
-    nio4r (2.5.8)
+    nio4r (2.7.0)
     nokogiri (1.14.3-x86_64-darwin)
       racc (~> 1.4)
     nokogiri (1.14.3-x86_64-linux)
@@ -339,7 +339,7 @@ GEM
       coderay (~> 1.1)
       method_source (~> 1.0)
     public_suffix (5.0.1)
-    puma (6.1.0)
+    puma (6.4.2)
       nio4r (~> 2.0)
     pundit (2.1.0)
       activesupport (>= 3.0.0)
@@ -596,7 +596,7 @@ DEPENDENCIES
   prawn
   prawn-table
   pry
-  puma (= 6.1.0)
+  puma (= 6.4.2)
   pundit
   railroady
   rails (~> 7.0)
