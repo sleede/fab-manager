@@ -66,10 +66,13 @@ class SlotsReservation < ApplicationRecord
   # @param target_slot [Slot]
   def update_places_cache(operation, target_slot = slot)
     if reservation.reservable_type == 'Event'
+      total_booked_seats = reservation.nb_reserve_places
+      total_booked_seats += reservation.tickets.map(&:booked).map(&:to_i).reduce(:+) if reservation.tickets.count.positive?
+      total_booked_seats = 0 if reservation.reservable.pre_registration
       Slots::PlacesCacheService.change_places(target_slot,
                                               reservation.reservable_type,
                                               reservation.reservable_id,
-                                              reservation.reservable.pre_registration ? 0 : reservation.total_booked_seats,
+                                              total_booked_seats,
                                               operation)
     else
       Slots::PlacesCacheService.change_places(target_slot, reservation.reservable_type, reservation.reservable_id, 1, operation)

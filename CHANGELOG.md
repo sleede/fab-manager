@@ -3,6 +3,8 @@
 ## Next release
 
 - improvement: add idp_slo_service_url(logout requests url) to saml provider
+- Fix a bug: event canceled places error
+- [TODO DEPLOY] `rails fablab:setup:build_places_cache`
 
 ## v6.3.13 2024 February 19
 
