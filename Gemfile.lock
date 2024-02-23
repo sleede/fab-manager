@@ -271,9 +271,9 @@ GEM
     net-smtp (0.3.3)
       net-protocol
     nio4r (2.5.8)
-    nokogiri (1.14.3-x86_64-darwin)
+    nokogiri (1.16.2-x86_64-darwin)
       racc (~> 1.4)
-    nokogiri (1.14.3-x86_64-linux)
+    nokogiri (1.16.2-x86_64-linux)
       racc (~> 1.4)
     oauth2 (1.4.4)
       faraday (>= 0.8, < 2.0)
@@ -344,7 +344,7 @@ GEM
     pundit (2.1.0)
       activesupport (>= 3.0.0)
     raabro (1.4.0)
-    racc (1.6.2)
+    racc (1.7.3)
     rack (2.2.8.1)
     rack-oauth2 (1.21.3)
       activesupport
