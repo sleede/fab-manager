@@ -1569,6 +1569,8 @@ sv:
           idp_cert: "Identitetsleverantörens certifikat"
           profile_edition_url: "URL för Profilutgåva"
           profile_edition_url_help: "URL till sidan där användaren kan redigera sin profil."
+          idp_slo_service_url: "Single logout request URL"
+          idp_slo_service_url_help: "The URL to which the single logout request and response should be sent. This would be on the identity provider."
         provider_form:
           name: "Namn"
           authentication_type: "Autentiseringstyp"

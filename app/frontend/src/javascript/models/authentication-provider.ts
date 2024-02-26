@@ -72,6 +72,7 @@ export interface SamlProvider {
   idp_cert_fingerprint: string,
   idp_cert: string,
   profile_url: string,
+  idp_slo_service_url: string,
 }
 
 export interface MappingFields {

@@ -2,6 +2,15 @@
 
 ## Next release
 
+## v6.3.14 2024 February 26
+
+- improvement: add idp_slo_service_url(logout requests url) to saml provider
+- Fix a bug: event canceled places error
+- Updated puma to 6.4.2
+- Updated carrierwave to 3.0.4
+- Updated sidekiq-unique-jobs to 7.1.33
+- [TODO DEPLOY] `rails fablab:setup:build_places_cache`
+
 ## v6.3.13 2024 February 19
 
 - Fix a bug: missing payment transfer journal code in accouting line

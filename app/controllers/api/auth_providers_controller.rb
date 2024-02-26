@@ -108,7 +108,7 @@ class API::AuthProvidersController < API::APIController
     elsif params['auth_provider']['providable_type'] == SamlProvider.name
       params.require(:auth_provider)
             .permit(:id, :name, :providable_type,
-                    providable_attributes: [:id, :sp_entity_id, :idp_sso_service_url, :profile_url, :idp_cert_fingerprint, :idp_cert],
+                    providable_attributes: [:id, :sp_entity_id, :idp_sso_service_url, :profile_url, :idp_cert_fingerprint, :idp_cert, :idp_slo_service_url],
                     auth_provider_mappings_attributes: [:id, :local_model, :local_field, :api_field, :api_endpoint, :api_data_type,
                                                         :_destroy, { transformation: [:type, :format, :true_value, :false_value,
                                                                                       { mapping: %i[from to] }] }])

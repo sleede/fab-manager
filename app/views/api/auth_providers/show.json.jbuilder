@@ -22,6 +22,6 @@ end
 
 if @provider.providable_type == SamlProvider.name
   json.providable_attributes do
-    json.extract! @provider.providable, :id, :sp_entity_id, :idp_sso_service_url, :profile_url, :idp_cert_fingerprint, :idp_cert
+    json.extract! @provider.providable, :id, :sp_entity_id, :idp_sso_service_url, :profile_url, :idp_cert_fingerprint, :idp_cert, :idp_slo_service_url
   end
 end
