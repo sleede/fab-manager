@@ -1569,6 +1569,8 @@ fr:
           idp_cert: "Certificat de fournisseur d'identité"
           profile_edition_url: "URL d'édition du profil"
           profile_edition_url_help: "L'URL de la page où l'utilisateur peut modifier son profil."
+          idp_slo_service_url: "URL de demande de déconnexion"
+          idp_slo_service_url_help: "L'URL à laquelle la requête d'authentification doit être envoyée. Cela serait sur le fournisseur d'identité."
         provider_form:
           name: "Nom"
           authentication_type: "Type d'authentification"

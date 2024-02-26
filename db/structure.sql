@@ -3278,7 +3278,8 @@ CREATE TABLE public.saml_providers (
     updated_at timestamp(6) without time zone NOT NULL,
     profile_url character varying,
     idp_cert character varying,
-    idp_cert_fingerprint character varying
+    idp_cert_fingerprint character varying,
+    idp_slo_service_url character varying
 );
 
 
@@ -9324,6 +9325,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20231108094433'),
 ('20240116163703'),
 ('20240126145351'),
-('20240126192110');
+('20240126192110'),
+('20240220140225');
 
 

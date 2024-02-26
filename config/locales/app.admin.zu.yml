@@ -1569,6 +1569,8 @@ zu:
           idp_cert: "crwdns38158:0crwdne38158:0"
           profile_edition_url: "crwdns38160:0crwdne38160:0"
           profile_edition_url_help: "crwdns38162:0crwdne38162:0"
+          idp_slo_service_url: "crwdns38176:0crwdne38176:0"
+          idp_slo_service_url_help: "crwdns38178:0crwdne38178:0"
         provider_form:
           name: "crwdns26204:0crwdne26204:0"
           authentication_type: "crwdns26206:0crwdne26206:0"
