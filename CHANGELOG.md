@@ -2,6 +2,8 @@
 
 ## Next release
 
+## v6.3.15 2024 February 29
+
 - Fix a bug: unable to generate invoice for payment by check/transfer
 
 ## v6.3.14 2024 February 26
