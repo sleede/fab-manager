@@ -2,6 +2,8 @@
 
 ## Next release
 
+- Fix a bug: unable to generate invoice for payment by check/transfer
+
 ## v6.3.14 2024 February 26
 
 - improvement: add idp_slo_service_url(logout requests url) to saml provider
