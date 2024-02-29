@@ -62,9 +62,9 @@ class Invoices::PaymentDetailsService
       # else
       if invoice.paid_by_card?
         I18n.t('invoices.settlement_by_debit_card')
-      elsif paid_by_transfer?
+      elsif invoice.paid_by_transfer?
         I18n.t('invoices.settlement_by_transfer')
-      elsif paid_by_check?
+      elsif invoice.paid_by_check?
         I18n.t('invoices.settlement_by_check')
       else
         I18n.t('invoices.settlement_done_at_the_reception')
