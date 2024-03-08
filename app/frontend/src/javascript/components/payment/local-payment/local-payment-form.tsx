@@ -13,7 +13,7 @@ import CheckoutAPI from '../../../api/checkout';
 import { SelectOption } from '../../../models/select';
 import { PaymentMethod } from '../../../models/payment';
 
-const ALL_SCHEDULE_METHODS = ['card', 'check', 'transfer'] as const;
+const ALL_SCHEDULE_METHODS = ['card', 'check', 'transfer', 'cash'] as const;
 type scheduleMethod = typeof ALL_SCHEDULE_METHODS[number];
 
 /**
@@ -24,13 +24,13 @@ type scheduleMethod = typeof ALL_SCHEDULE_METHODS[number];
 export const LocalPaymentForm: React.FC<GatewayFormProps> = ({ onSubmit, onSuccess, onError, children, className, paymentSchedule, cart, updateCart, customer, operator, formId, order }) => {
   const { t } = useTranslation('admin');
 
-  const [method, setMethod] = useState<scheduleMethod>('check');
+  const [method, setMethod] = useState<scheduleMethod>('cash');
   const [onlinePaymentModal, setOnlinePaymentModal] = useState<boolean>(false);
 
   useEffect(() => {
-    setMethod(cart.payment_method || 'check');
+    setMethod(cart.payment_method || 'cash');
     if (cart.payment_method === '') {
-      cart.payment_method = PaymentMethod.Check;
+      cart.payment_method = PaymentMethod.Cash;
     }
   }, [cart]);
 

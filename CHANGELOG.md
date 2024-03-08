@@ -2,6 +2,8 @@
 
 ## Next release
 
+- Fix a bug: set settlement by cash by default for local payment mean
+
 ## v6.3.15 2024 February 29
 
 - Fix a bug: unable to generate invoice for payment by check/transfer

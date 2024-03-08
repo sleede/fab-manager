@@ -19,6 +19,7 @@ export enum PaymentMethod {
   Card = 'card',
   Check = 'check',
   Transfer = 'transfer',
+  Cash = 'cash',
   Other = ''
 }
 
