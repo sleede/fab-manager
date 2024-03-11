@@ -165,8 +165,6 @@ class Invoice < PaymentDocument
 
     if paid_by_card?
       res.push(means: :card, amount: amount_paid)
-    elsif paid_by_wallet?
-      res.push(means: :wallet, amount: amount_paid)
     elsif paid_by_transfer?
       res.push(means: :transfer, amount: amount_paid)
     elsif paid_by_check?
