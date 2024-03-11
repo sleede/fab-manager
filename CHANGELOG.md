@@ -3,6 +3,7 @@
 ## Next release
 
 - Fix a bug: set settlement by cash by default for local payment mean
+- [TODO DEPLOY] `rails fablab:setup:build_accounting_lines`
 
 ## v6.3.15 2024 February 29
 
