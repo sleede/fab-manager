@@ -2,6 +2,8 @@
 
 ## Next release
 
+## v6.3.16 2024 March 11
+
 - Fix a bug: set settlement by cash by default for local payment mean
 - updates translations
 - #content_type_whitelist is instead by #content_type_allowlist
