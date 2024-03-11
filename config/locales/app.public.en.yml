@@ -155,7 +155,7 @@ en:
         discover_members: "Discover members"
         #next events summary on the home page
         fablab_s_next_events: "Next events"
-        every_events: "Every events"
+        every_events: "All events"
       event_card:
         on_the_date: "On the {DATE}"
         from_date_to_date: "From {START} to {END}"

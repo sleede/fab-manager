@@ -2,6 +2,14 @@
 
 ## Next release
 
+## v6.3.16 2024 March 11
+
+- Fix a bug: set settlement by cash by default for local payment mean
+- updates translations
+- #content_type_whitelist is instead by #content_type_allowlist
+- #extension_whitelist is instead by #extension_allowlist
+- [TODO DEPLOY] `rails fablab:setup:build_accounting_lines`
+
 ## v6.3.15 2024 February 29
 
 - Fix a bug: unable to generate invoice for payment by check/transfer

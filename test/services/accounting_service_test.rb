@@ -30,6 +30,7 @@ class AccountingServiceTest < ActionDispatch::IntegrationTest
     post '/api/local_payment/confirm_payment', params: {
       customer_id: @vlonchamp.id,
       coupon_code: 'GIME3EUR',
+      payment_method: 'cash',
       items: [
         {
           reservation: {
