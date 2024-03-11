@@ -127,7 +127,7 @@ es:
     no_refund: "Sin devolución"
     settlement_by_debit_card: "Liquidación por tarjeta de débito"
     settlement_by_transfer: "Settlement by transfer"
-    settlement_by_check: "Settlement by check"
+    settlement_by_check: "Settlement done at the reception"
     settlement_done_at_the_reception: "Liquidación realizada en la recepción"
     settlement_by_wallet: "Liquidación con cartera"
     on_DATE_at_TIME: "el %{DATE} a las %{TIME},"

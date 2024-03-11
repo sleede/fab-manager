@@ -127,7 +127,7 @@ it:
     no_refund: "Nessun rimborso"
     settlement_by_debit_card: "Pagamento con carta di debito"
     settlement_by_transfer: "Settlement by transfer"
-    settlement_by_check: "Settlement by check"
+    settlement_by_check: "Settlement done at the reception"
     settlement_done_at_the_reception: "Pagamento effettuato al banco"
     settlement_by_wallet: "Pagamento effettuato tramite il portafoglio"
     on_DATE_at_TIME: "il %{DATE} alle %{TIME},"

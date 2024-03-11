@@ -127,7 +127,7 @@ zu:
     no_refund: "crwdns3355:0crwdne3355:0"
     settlement_by_debit_card: "crwdns3357:0crwdne3357:0"
     settlement_by_transfer: "crwdns38172:0crwdne38172:0"
-    settlement_by_check: "crwdns38174:0crwdne38174:0"
+    settlement_by_check: "crwdns38180:0crwdne38180:0"
     settlement_done_at_the_reception: "crwdns3359:0crwdne3359:0"
     settlement_by_wallet: "crwdns3361:0crwdne3361:0"
     on_DATE_at_TIME: "crwdns3363:0%{DATE}crwdnd3363:0%{TIME}crwdne3363:0"
