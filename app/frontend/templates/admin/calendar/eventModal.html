@@ -252,6 +252,6 @@
 </div>
 <div class="modal-footer" ng-show="step === 6">
   <button class="fab-button is-info" ng-click="previous()" translate>{{ 'app.admin.calendar.previous' }}</button>
-  <button class="fab-button is-secondary" ng-click="ok()" translate>{{ 'app.shared.buttons.confirm' }}</button>
+  <button class="fab-button is-secondary" ng-class="{'btn-loading': saving}" ng-disabled="saving" ng-click="ok()" translate>{{ 'app.shared.buttons.confirm' }}</button>
   <button class="fab-button" ng-click="cancel()" translate>{{ 'app.shared.buttons.cancel' }}</button>
 </div>
