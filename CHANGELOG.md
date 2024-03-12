@@ -2,6 +2,8 @@
 
 ## Next release
 
+- improvement: add loader for create/delete availability slot
+
 ## v6.3.16 2024 March 11
 
 - Fix a bug: set settlement by cash by default for local payment mean
