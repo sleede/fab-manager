@@ -3,6 +3,7 @@
 ## Next release
 
 - improvement: add loader for create/delete availability slot
+- Fix a bug: unable to update a space with a deleted machine
 
 ## v6.3.16 2024 March 11
 
