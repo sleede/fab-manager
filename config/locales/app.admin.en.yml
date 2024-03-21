@@ -1787,6 +1787,8 @@ en:
         fab_analytics: "Fab Analytics"
         phone_required: "phone required"
         address_required: "address required"
+        gender_required: "gender required"
+        birthday_required: "date of birth required"
         tracking_id: "tracking ID"
         facebook_app_id: "Facebook App ID"
         twitter_analytics: "Twitter analytics account"
