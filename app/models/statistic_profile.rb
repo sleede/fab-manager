@@ -31,6 +31,8 @@ class StatisticProfile < ApplicationRecord
   validate :check_birthday_in_past
 
   def str_gender
+    return '' if gender.blank?
+
     gender ? 'male' : 'female'
   end
 

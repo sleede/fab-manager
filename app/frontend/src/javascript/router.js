@@ -127,7 +127,7 @@ angular.module('application.router', ['ui.router'])
           }
         },
         resolve: {
-          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['fablab_name', 'name_genre', 'phone_required', 'address_required']" }).$promise; }],
+          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['fablab_name', 'name_genre', 'phone_required', 'address_required', 'gender_required', 'birthday_required']" }).$promise; }],
           activeProviderPromise: ['AuthProvider', function (AuthProvider) { return AuthProvider.active().$promise; }],
           groupsPromise: ['Group', function (Group) { return Group.query().$promise; }],
           cguFile: ['CustomAsset', function (CustomAsset) { return CustomAsset.get({ name: 'cgu-file' }).$promise; }],
@@ -174,7 +174,7 @@ angular.module('application.router', ['ui.router'])
         resolve: {
           groups: ['Group', function (Group) { return Group.query().$promise; }],
           activeProviderPromise: ['AuthProvider', function (AuthProvider) { return AuthProvider.active().$promise; }],
-          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['phone_required', 'address_required']" }).$promise; }]
+          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['phone_required', 'address_required', 'gender_required', 'birthday_required']" }).$promise; }]
         }
       })
       .state('app.logged.dashboard.supporting_document_files', {
@@ -1049,7 +1049,7 @@ angular.module('application.router', ['ui.router'])
           }
         },
         resolve: {
-          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['phone_required', 'address_required']" }).$promise; }]
+          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['phone_required', 'address_required', 'gender_required', 'birthday_required']" }).$promise; }]
         }
       })
       .state('app.admin.members_import', {
@@ -1090,7 +1090,7 @@ angular.module('application.router', ['ui.router'])
           walletPromise: ['Wallet', '$transition$', function (Wallet, $transition$) { return Wallet.getWalletByUser({ user_id: $transition$.params().id }).$promise; }],
           transactionsPromise: ['Wallet', 'walletPromise', function (Wallet, walletPromise) { return Wallet.transactions({ id: walletPromise.id }).$promise; }],
           tagsPromise: ['Tag', function (Tag) { return Tag.query().$promise; }],
-          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['phone_required', 'address_required', 'user_validation_required']" }).$promise; }]
+          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['phone_required', 'address_required', 'gender_required', 'birthday_required', 'user_validation_required']" }).$promise; }]
         }
       })
       .state('app.admin.admins_new', {
@@ -1102,7 +1102,7 @@ angular.module('application.router', ['ui.router'])
           }
         },
         resolve: {
-          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['phone_required', 'address_required']" }).$promise; }],
+          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['phone_required', 'address_required', 'gender_required', 'birthday_required']" }).$promise; }],
           groupsPromise: ['Group', function (Group) { return Group.query({ disabled: false }).$promise; }]
         }
       })
@@ -1117,7 +1117,7 @@ angular.module('application.router', ['ui.router'])
         resolve: {
           groupsPromise: ['Group', function (Group) { return Group.query().$promise; }],
           tagsPromise: ['Tag', function (Tag) { return Tag.query().$promise; }],
-          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['phone_required', 'address_required']" }).$promise; }]
+          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['phone_required', 'address_required', 'gender_required', 'birthday_required']" }).$promise; }]
         }
       })
 
@@ -1200,7 +1200,7 @@ angular.module('application.router', ['ui.router'])
                      "'extended_prices_in_same_day', 'recaptcha_site_key', 'recaptcha_secret_key', 'user_validation_required', " +
                      "'user_validation_required_list', 'machines_module', 'user_change_group', " +
                      "'store_module', 'machine_reservation_deadline', 'training_reservation_deadline', 'event_reservation_deadline', " +
-                     "'space_reservation_deadline', 'reservation_context_feature']"
+                     "'space_reservation_deadline', 'reservation_context_feature', 'gender_required', 'birthday_required']"
             }).$promise;
           }],
           privacyDraftsPromise: ['Setting', function (Setting) { return Setting.get({ name: 'privacy_draft', history: true }).$promise; }],

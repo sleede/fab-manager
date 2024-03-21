@@ -15,7 +15,7 @@
                      name="gender"
                      ng-model="user.statistic_profile_attributes.gender"
                      value="true"
-                     required/> {{ 'app.public.common.man' | translate }}
+                     ng-required="genderRequired"/> {{ 'app.public.common.man' | translate }}
             </label>
             <label class="checkbox-inline">
               <input type="radio"
@@ -27,7 +27,7 @@
               <span class="trigger"><i class="fa fa-question-circle"></i></span>
               <div class="content" translate="">{{ 'app.public.common.used_for_statistics' }}</div>
             </div>
-            <span class="exponent m-l-xs"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
+            <span ng-show="genderRequired" class="exponent m-l-xs"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
             <span class="help-block" ng-show="signupForm.gender.$dirty && signupForm.gender.$error.required" translate>{{ 'app.public.common.gender_is_required'}}</span>
           </div>
         </div>
@@ -222,9 +222,9 @@
                      is-open="datePicker.opened"
                      placeholder="{{ 'app.public.common.birth_date' | translate }}"
                      ng-click="openDatePicker($event)"
-                     required/>
+                     ng-required="birthdayRequired"/>
             </div>
-            <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
+            <span ng-show="birthdayRequired" class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
             <span class="help-block" ng-show="signupForm.birthday.$dirty && signupForm.birthday.$error.required" translate>{{ 'app.public.common.birth_date_is_required' }}</span>
           </div>
         </div>

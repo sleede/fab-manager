@@ -742,3 +742,8 @@ Setting.set('reservation_context_feature', false) unless Setting.find_by(name: '
 
 Setting.set('family_account', false) unless Setting.find_by(name: 'family_account').try(:value)
 Setting.set('child_validation_required', false) unless Setting.find_by(name: 'child_validation_required').try(:value)
+
+Setting.set('phone_required', false) unless Setting.find_by(name: 'phone_required').try(:value)
+Setting.set('address_required', false) unless Setting.find_by(name: 'address_required').try(:value)
+Setting.set('gender_required', true) unless Setting.find_by(name: 'gender_required').try(:value)
+Setting.set('birthday_required', true) unless Setting.find_by(name: 'birthday_required').try(:value)

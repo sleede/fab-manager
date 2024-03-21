@@ -720,6 +720,12 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
     // is the address required in _member_form?
     $scope.addressRequired = (settingsPromise.address_required === 'true');
 
+    // is the gender number required in _member_form?
+    $scope.genderRequired = (settingsPromise.gender_required === 'true');
+
+    // is the birthday required in _member_form?
+    $scope.birthdayRequired = (settingsPromise.birthday_required === 'true');
+
     // is user validation required
     $scope.enableUserValidationRequired = (settingsPromise.user_validation_required === 'true');
 
@@ -1060,6 +1066,12 @@ Application.Controllers.controller('NewMemberController', ['$scope', '$state', '
     // is the address required to sign-up?
     $scope.addressRequired = (settingsPromise.address_required === 'true');
 
+    // is the gender number required in _member_form?
+    $scope.genderRequired = (settingsPromise.gender_required === 'true');
+
+    // is the birthday required in _member_form?
+    $scope.birthdayRequired = (settingsPromise.birthday_required === 'true');
+
     // Default member's profile parameters
     $scope.user = {
       plan_interval: '',
@@ -1205,6 +1217,12 @@ Application.Controllers.controller('NewAdminController', ['$state', '$scope', 'A
     // is the address required in _admin_form?
     $scope.addressRequired = (settingsPromise.address_required === 'true');
 
+    // is the gender number required in _admin_form?
+    $scope.genderRequired = (settingsPromise.gender_required === 'true');
+
+    // is the birthday required in _admin_form?
+    $scope.birthdayRequired = (settingsPromise.birthday_required === 'true');
+
     // all available groups
     $scope.groups = groupsPromise;
 
@@ -1275,6 +1293,12 @@ Application.Controllers.controller('NewManagerController', ['$state', '$scope', 
 
     // is the address required in _admin_form?
     $scope.addressRequired = (settingsPromise.address_required === 'true');
+
+    // is the gender number required in _admin_form?
+    $scope.genderRequired = (settingsPromise.gender_required === 'true');
+
+    // is the birthday required in _admin_form?
+    $scope.birthdayRequired = (settingsPromise.birthday_required === 'true');
 
     // list of all groups
     $scope.groups = groupsPromise.filter(function (g) { return !g.disabled; });

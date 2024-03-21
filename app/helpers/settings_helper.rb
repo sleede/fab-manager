@@ -208,6 +208,8 @@ module SettingsHelper
     project_categories_filter_placeholder
     project_categories_wording
     reservation_context_feature
+    gender_required
+    birthday_required
   ].freeze
 end
 # rubocop:enable Metrics/ModuleLength
