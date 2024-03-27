@@ -3279,7 +3279,11 @@ CREATE TABLE public.saml_providers (
     profile_url character varying,
     idp_cert character varying,
     idp_cert_fingerprint character varying,
-    idp_slo_service_url character varying
+    idp_slo_service_url character varying,
+    sp_certificate character varying,
+    sp_private_key character varying,
+    authn_requests_signed boolean DEFAULT false,
+    want_assertions_signed boolean DEFAULT false
 );
 
 
@@ -9326,6 +9330,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20240116163703'),
 ('20240126145351'),
 ('20240126192110'),
-('20240220140225');
+('20240220140225'),
+('20240327095614');
 
 

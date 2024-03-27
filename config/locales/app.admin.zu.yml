@@ -1571,6 +1571,10 @@ zu:
           profile_edition_url_help: "crwdns38162:0crwdne38162:0"
           idp_slo_service_url: "crwdns38176:0crwdne38176:0"
           idp_slo_service_url_help: "crwdns38178:0crwdne38178:0"
+          authn_requests_signed: "crwdns38200:0crwdne38200:0"
+          want_assertions_signed: "crwdns38202:0crwdne38202:0"
+          sp_certificate: "crwdns38204:0crwdne38204:0"
+          sp_private_key: "crwdns38206:0crwdne38206:0"
         provider_form:
           name: "crwdns26204:0crwdne26204:0"
           authentication_type: "crwdns26206:0crwdne26206:0"

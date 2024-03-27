@@ -1571,6 +1571,10 @@ fr:
           profile_edition_url_help: "L'URL de la page où l'utilisateur peut modifier son profil."
           idp_slo_service_url: "URL de demande de déconnexion"
           idp_slo_service_url_help: "L'URL à laquelle la requête d'authentification doit être envoyée. Cela serait sur le fournisseur d'identité."
+          authn_requests_signed: "Demandes d'authentification signées"
+          want_assertions_signed: "Exiger des Assertions signées"
+          sp_certificate: "Certificat du SP"
+          sp_private_key: "Clé privée du SP"
         provider_form:
           name: "Nom"
           authentication_type: "Type d'authentification"

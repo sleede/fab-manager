@@ -6,7 +6,8 @@ json.partial! 'api/auth_providers/auth_provider', auth_provider: @provider
 
 if @provider.providable_type == OAuth2Provider.name
   json.providable_attributes do
-    json.extract! @provider.providable, :id, :base_url, :token_endpoint, :authorization_endpoint, :profile_url, :client_id, :client_secret, :scopes
+    json.extract! @provider.providable, :id, :base_url, :token_endpoint, :authorization_endpoint, :profile_url, :client_id, :client_secret,
+                  :scopes
   end
 end
 
@@ -22,6 +23,7 @@ end
 
 if @provider.providable_type == SamlProvider.name
   json.providable_attributes do
-    json.extract! @provider.providable, :id, :sp_entity_id, :idp_sso_service_url, :profile_url, :idp_cert_fingerprint, :idp_cert, :idp_slo_service_url
+    json.extract! @provider.providable, :id, :sp_entity_id, :idp_sso_service_url, :profile_url, :idp_cert_fingerprint, :idp_cert, :idp_slo_service_url,
+                  :authn_requests_signed, :want_assertions_signed, :sp_certificate, :sp_private_key
   end
 end

@@ -73,6 +73,10 @@ export interface SamlProvider {
   idp_cert: string,
   profile_url: string,
   idp_slo_service_url: string,
+  sp_certificate: string,
+  sp_private_key: string,
+  authn_requests_signed: boolean,
+  want_assertions_signed: boolean
 }
 
 export interface MappingFields {
