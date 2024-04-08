@@ -6,7 +6,7 @@
                name="admin[statistic_profile_attributes][gender]"
                ng-model="admin.statistic_profile_attributes.gender"
                ng-value="true"
-               required/>
+               ng-required="genderRequired"/>
           <i class="fa fa-male m-l-sm"></i> {{ 'app.admin.admins_new.man' | translate }}
       </label>
       <label class="checkbox-inline btn btn-default">
@@ -16,7 +16,7 @@
                ng-value="false"/>
           <i class="fa fa-female m-l-sm"></i> {{ 'app.admin.admins_new.woman' | translate }}
       </label>
-      <span class="exponent m-l-xs help-cursor"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
+      <span ng-show="genderRequired" class="exponent m-l-xs help-cursor"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
     </div>
 
     <div class="form-group" ng-class="{'has-error': adminForm['admin[username]'].$dirty && adminForm['admin[username]'].$invalid}">
@@ -76,7 +76,9 @@
 
     <div class="form-group" ng-class="{'has-error': adminForm['admin[statistic_profile_attributes][birthday]'].$dirty && adminForm['admin[statistic_profile_attributes][birthday]'].$invalid}">
       <div class="input-group">
-        <span class="input-group-addon"><i class="fa fa-calendar-o"></i> </span>
+        <span class="input-group-addon"><i class="fa fa-calendar-o"></i>
+          <span ng-show="birthdayRequired" class="exponent m-l-xs help-cursor"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
+        </span>
         <input type="text"
                id="user_birthday"
                class="form-control"
@@ -86,6 +88,7 @@
                is-open="datePicker.opened"
                placeholder="{{ 'app.admin.admins_new.birth_date' | translate }}"
                ng-click="openDatePicker($event)"
+               ng-required="birthdayRequired"
                />
         <input type="hidden"
                name="admin[statistic_profile_attributes][birthday]"

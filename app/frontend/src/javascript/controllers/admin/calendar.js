@@ -789,6 +789,8 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
     // number of slots for this availability
     $scope.slots_nb = slots;
 
+    $scope.saving = false;
+
     /**
      * Adds or removes the provided machine from the current slot
      * @param machine {Object}
@@ -867,9 +869,14 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
       if ($scope.isOnlySubscriptions && $scope.selectedPlans.length > 0) {
         $scope.availability.plan_ids = $scope.selectedPlans.map(function (p) { return p.id; });
       }
+      $scope.saving = true;
       return Availability.save(
         { availability: $scope.availability },
-        function (availability) { $uibModalInstance.close(availability); }
+        function (availability) { $uibModalInstance.close(availability); },
+        function (error) {
+          console.error(error);
+          $scope.saving = false;
+        }
       );
     };
 
@@ -1158,15 +1165,19 @@ Application.Controllers.controller('DeleteRecurrentAvailabilityController', ['$s
     // with recurrent slots: how many slots should we delete?
     $scope.deleteMode = 'single';
 
+    $scope.deleting = false;
+
     /**
      * Confirmation callback
      */
     $scope.ok = function () {
       const { id, start_at, end_at } = availabilityPromise;
+      $scope.deleting = true;
       // the admin has confirmed, delete the slot
       Availability.delete(
         { id, mode: $scope.deleteMode },
         function (res) {
+          $scope.deleting = false;
           // delete success
           if (res.deleted > 1) {
             growl.success(_t(
@@ -1185,6 +1196,7 @@ Application.Controllers.controller('DeleteRecurrentAvailabilityController', ['$s
           });
         },
         function (res) {
+          $scope.deleting = false;
           // not everything was deleted
           const { data } = res;
           if (data.total > 1) {

@@ -118,7 +118,7 @@ export const ProviderForm: React.FC<ProviderFormProps> = ({ action, provider, on
                                                                         currentFormValues={output.providable_attributes as OpenIdConnectProvider}
                                                                         formState={formState}
                                                                         setValue={setValue} />}
-      {providableType === 'SamlProvider' && <SamlForm register={register} strategyName={strategyName} formState={formState} />}
+      {providableType === 'SamlProvider' && <SamlForm register={register} control={control} strategyName={strategyName} formState={formState} />}
       {providableType && providableType !== 'DatabaseProvider' && <DataMappingForm register={register}
                                                                                    control={control}
                                                                                    formState={formState}

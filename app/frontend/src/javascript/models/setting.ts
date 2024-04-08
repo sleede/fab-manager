@@ -186,7 +186,9 @@ export const accountSettings = [
   'user_change_group',
   'user_validation_required',
   'user_validation_required_list',
-  'family_account'
+  'family_account',
+  'gender_required',
+  'birthday_required'
 ] as const;
 
 export const analyticsSettings = [

@@ -253,6 +253,12 @@ Devise.setup do |config|
                       idp_slo_service_url: active_provider.providable.idp_slo_service_url,
                       idp_cert: active_provider.providable.idp_cert,
                       idp_cert_fingerprint: active_provider.providable.idp_cert_fingerprint,
+                      certificate: active_provider.providable.sp_certificate,
+                      private_key: active_provider.providable.sp_private_key,
+                      security: OneLogin::RubySaml::Settings::DEFAULTS[:security].merge({
+                        authn_requests_signed: active_provider.providable.authn_requests_signed,
+                        want_assertions_signed: active_provider.providable.want_assertions_signed
+                      }),
                       strategy_class: OmniAuth::Strategies::SsoSamlProvider
     end
   end

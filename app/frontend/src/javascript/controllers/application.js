@@ -103,6 +103,12 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
             // is the address required to sign-up?
             $scope.addressRequired = (settingsPromise.address_required === 'true');
 
+            // is the gender required to sign-up?
+            $scope.genderRequired = (settingsPromise.gender_required === 'true');
+
+            // is the birthday required to sign-up?
+            $scope.birthdayRequired = (settingsPromise.birthday_required === 'true');
+
             // reCaptcha v2 site key (or undefined)
             $scope.recaptchaSiteKey = settingsPromise.recaptcha_site_key;
 

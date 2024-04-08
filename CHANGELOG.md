@@ -2,6 +2,16 @@
 
 ## Next release
 
+## v6.3.17 2024 Avril 8
+
+- improvement: add loader for create/delete availability slot
+- improvement: allow admin configure memeber's profile gender/birthday as required
+- improvement: add sp certificate for saml provider
+- Fix a bug: unable to update a space with a deleted machine
+- Fix a bug: unable to get invoice payment details if the account code is same for card/transfer payment method
+- Fix a bug: unable to show machine/training picture
+- updates translations
+
 ## v6.3.16 2024 March 11
 
 - Fix a bug: set settlement by cash by default for local payment mean

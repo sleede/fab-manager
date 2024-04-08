@@ -49,9 +49,10 @@ const MachineCard: React.FC<MachineCardProps> = ({ user, machine, onShowMachine,
     if (!machine.machine_image_attributes?.attachment_url) {
       return <div className="machine-picture no-picture" />;
     }
+    console.log(machine.machine_image_attributes.attachment_url);
 
     return (
-      <div className="machine-picture" style={{ backgroundImage: `url(${machine.machine_image_attributes.attachment_url}), url('/default-image.png')` }} onClick={handleShowMachine} />
+      <div className="machine-picture" style={{ backgroundImage: `url("${machine.machine_image_attributes.attachment_url}"), url('/default-image.png')` }} onClick={handleShowMachine} />
     );
   };
 
