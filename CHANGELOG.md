@@ -2,6 +2,8 @@
 
 ## Next release
 
+## v6.3.17 2024 Avril 8
+
 - improvement: add loader for create/delete availability slot
 - improvement: allow admin configure memeber's profile gender/birthday as required
 - improvement: add sp certificate for saml provider
