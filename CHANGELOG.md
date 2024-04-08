@@ -2,6 +2,10 @@
 
 ## Next release
 
+## v6.3.18 2024 Avril 8
+
+- improvement: hide gender in signup form if not required
+
 ## v6.3.17 2024 Avril 8
 
 - improvement: add loader for create/delete availability slot
