@@ -81,7 +81,7 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
           size: 'md',
           resolve: {
             settingsPromise: ['Setting', function (Setting) {
-              return Setting.query({ names: "['phone_required', 'recaptcha_site_key', 'confirmation_required', 'address_required']" }).$promise;
+              return Setting.query({ names: "['phone_required', 'recaptcha_site_key', 'confirmation_required', 'address_required', 'gender_required', 'birthday_required']" }).$promise;
             }],
             profileCustomFieldsPromise: ['ProfileCustomField', function (ProfileCustomField) { return ProfileCustomField.query({}).$promise; }],
             proofOfIdentityTypesPromise: ['SupportingDocumentType', function (SupportingDocumentType) { return SupportingDocumentType.query({}).$promise; }]

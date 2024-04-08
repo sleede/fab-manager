@@ -8,7 +8,7 @@
 
     <div class="well m-b-n">
       <form role="form" name="signupForm" class="form-horizontal signup-form" novalidate autocomplete="off" ng-keydown="signupForm.$valid && $event.which == 13 && ok()">
-        <div class="form-group" ng-class="{'has-error': signupForm.gender.$dirty && signupForm.gender.$invalid}">
+        <div ng-if="genderRequired" class="form-group" ng-class="{'has-error': signupForm.gender.$dirty && signupForm.gender.$invalid}">
           <div class="col-sm-12">
             <label class="checkbox-inline">
               <input type="radio"
