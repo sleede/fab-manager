@@ -2,6 +2,8 @@
 
 ## Next release
 
+- Fix a bug: unable to update member's profile
+
 ## v6.3.19 2024 Avril 9
 - Fix a bug: user is blocked in complete profile page after login
 
