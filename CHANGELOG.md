@@ -1,6 +1,7 @@
 # Changelog Fab-manager
 
 ## Next release
+- Fix a bug: user is blocked in complete profile page after login
 
 ## v6.3.18 2024 Avril 8
 
