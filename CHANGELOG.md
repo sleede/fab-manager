@@ -2,6 +2,7 @@
 
 ## Next release
 
+- improvement: hide gender in member create/edit form if not required
 - Fix a bug: unable to update member's profile
 
 ## v6.3.19 2024 Avril 9
