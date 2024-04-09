@@ -4,6 +4,7 @@
 
 - improvement: hide gender in member create/edit form if not required
 - Fix a bug: unable to update member's profile
+- updates translations
 
 ## v6.3.19 2024 Avril 9
 - Fix a bug: user is blocked in complete profile page after login
