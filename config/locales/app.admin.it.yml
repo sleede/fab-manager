@@ -1189,6 +1189,7 @@ it:
         delete_this_partner: "Vuoi davvero eliminare questo partner? Questo non può essere annullato."
         partner_successfully_deleted: "Partner eliminato con successo."
         unable_to_delete_the_partner: "Impossibile eliminare il partner."
+        unable_to_save_this_user_check_that_there_isnt_an_already_a_user_with_the_same_name: "Unable to save this partner. Please check that there isn't already a user with the same email."
         associated_plan: "Piano associato"
         groups: "Gruppi"
         tags: "Etichette"

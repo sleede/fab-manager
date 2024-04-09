@@ -1189,6 +1189,7 @@ es:
         delete_this_partner: "¿Realmente desea eliminar este socio? Esto no se puede deshacer."
         partner_successfully_deleted: "Socio eliminado correctamente."
         unable_to_delete_the_partner: "No se puede eliminar el socio."
+        unable_to_save_this_user_check_that_there_isnt_an_already_a_user_with_the_same_name: "Unable to save this partner. Please check that there isn't already a user with the same email."
         associated_plan: "Plan asociado"
         groups: "Grupos"
         tags: "Etiquetas"

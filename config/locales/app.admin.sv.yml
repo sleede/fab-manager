@@ -1189,6 +1189,7 @@ sv:
         delete_this_partner: "Vill du verkligen ta bort denna partner? Detta kan inte ångras."
         partner_successfully_deleted: "Samarbetspartnern har tagits bort."
         unable_to_delete_the_partner: "Det går inte att ta bort samarbetspartnern."
+        unable_to_save_this_user_check_that_there_isnt_an_already_a_user_with_the_same_name: "Unable to save this partner. Please check that there isn't already a user with the same email."
         associated_plan: "Associerad plan"
         groups: "Grupper"
         tags: "Taggar"

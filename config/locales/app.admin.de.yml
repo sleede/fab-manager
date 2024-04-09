@@ -1189,6 +1189,7 @@ de:
         delete_this_partner: "Möchten Sie diesen Partner wirklich löschen? Dies kann nicht rückgängig gemacht werden."
         partner_successfully_deleted: "Partner erfolgreich gelöscht."
         unable_to_delete_the_partner: "Partner konnte nicht gelöscht werden."
+        unable_to_save_this_user_check_that_there_isnt_an_already_a_user_with_the_same_name: "Unable to save this partner. Please check that there isn't already a user with the same email."
         associated_plan: "Zugehöriger Plan"
         groups: "Gruppen"
         tags: "Stichworte"

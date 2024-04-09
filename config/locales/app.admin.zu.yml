@@ -1189,6 +1189,7 @@ zu:
         delete_this_partner: "crwdns25606:0crwdne25606:0"
         partner_successfully_deleted: "crwdns25608:0crwdne25608:0"
         unable_to_delete_the_partner: "crwdns25610:0crwdne25610:0"
+        unable_to_save_this_user_check_that_there_isnt_an_already_a_user_with_the_same_name: "crwdns38212:0crwdne38212:0"
         associated_plan: "crwdns25612:0crwdne25612:0"
         groups: "crwdns25614:0crwdne25614:0"
         tags: "crwdns25616:0crwdne25616:0"

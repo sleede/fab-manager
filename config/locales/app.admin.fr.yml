@@ -1189,6 +1189,7 @@ fr:
         delete_this_partner: "Voulez-vous vraiment supprimer ce partenaire ? Cette opération est irréversible."
         partner_successfully_deleted: "Le partenaire a bien été supprimé."
         unable_to_delete_the_partner: "Impossible de supprimer le partenaire."
+        unable_to_save_this_user_check_that_there_isnt_an_already_a_user_with_the_same_name: "Impossible d'enregistrer ce partenaire. Veuillez vérifier qu'il n'y a pas déjà un utilisateur avec le même email."
         associated_plan: "Abonnement associé"
         groups: "Groupes"
         tags: "Étiquettes"

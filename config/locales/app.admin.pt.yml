@@ -1189,6 +1189,7 @@ pt:
         delete_this_partner: "Você realmente deseja excluir este parceiro? Isso não pode ser desfeito."
         partner_successfully_deleted: "Parceiro excluído com sucesso."
         unable_to_delete_the_partner: "Não é possível excluir o parceiro."
+        unable_to_save_this_user_check_that_there_isnt_an_already_a_user_with_the_same_name: "Unable to save this partner. Please check that there isn't already a user with the same email."
         associated_plan: "Plano associado"
         groups: "Grupos"
         tags: "Tags"

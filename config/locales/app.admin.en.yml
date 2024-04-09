@@ -1189,6 +1189,7 @@ en:
         delete_this_partner: "Do you really want to delete this partner? This cannot be undone."
         partner_successfully_deleted: "Partner successfully deleted."
         unable_to_delete_the_partner: "Unable to delete the partner."
+        unable_to_save_this_user_check_that_there_isnt_an_already_a_user_with_the_same_name: "Unable to save this partner. Please check that there isn't already a user with the same email."
         associated_plan: "Associated plan"
         groups: "Groups"
         tags: "Tags"
