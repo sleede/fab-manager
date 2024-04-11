@@ -117,7 +117,7 @@
   <div class="projects-list">
     <span ng-show="projects && (projects.length == 0)"> {{ 'app.public.projects_list.project_search_result_is_empty' | translate }} </span>
     <div class="project-card" ng-repeat="project in projects" ng-click="showProject(project)">
-        <div class="project-image" style="background-image: url({{project.project_image}});">
+        <div class="project-image" style="background-image: url('{{project.project_image | encodeURI}}');">
           <img src="data:image/png;base64," data-src="holder.js/100%x100%/text:&#xf03e;/font:'Font Awesome 5 Free'/icon" bs-holder ng-if="!project.project_image">
         </div>
 
