@@ -2,7 +2,15 @@
 
 ## Next release
 
+## v6.3.20 2024 Avril 15
+
+- improvement: hide gender in member create/edit form if not required
+- Fix a bug: unable to update member's profile
+- Fix a bug: unable to show machine/training picture
+- updates translations
+
 ## v6.3.19 2024 Avril 9
+
 - Fix a bug: user is blocked in complete profile page after login
 
 ## v6.3.18 2024 Avril 8

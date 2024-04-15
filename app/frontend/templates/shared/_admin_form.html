@@ -1,6 +1,6 @@
 <div class="row m-t">
   <div class="col-sm-offset-3 col-sm-6">
-    <div class="form-group" ng-class="{'has-error': adminForm['admin[statistic_profile_attributes][gender]'].$dirty && adminForm['admin[statistic_profile_attributes][gender]'].$invalid}">
+    <div ng-if="genderRequired" class="form-group" ng-class="{'has-error': adminForm['admin[statistic_profile_attributes][gender]'].$dirty && adminForm['admin[statistic_profile_attributes][gender]'].$invalid}">
       <label class="checkbox-inline btn btn-default">
         <input type="radio"
                name="admin[statistic_profile_attributes][gender]"

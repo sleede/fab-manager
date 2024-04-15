@@ -129,6 +129,7 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
    * Callback triggered when the form is submitted: process with the user creation or update.
    */
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    setIsSuccessfullySubmitted(false);
     if (showTermsAndConditionsInput) {
       // When the form is submitted, we consider that the user should have accepted the terms and conditions,
       // so we mark the field as dirty, even if he doesn't touch it. Like that, the error message is displayed.
@@ -137,6 +138,9 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
 
     return handleSubmit((data: User) => {
       ['events_reservations', 'space_reservations', 'training_reservations', 'machine_reservations', 'all_projects', 'invoices', 'subscribed_plan', 'subscription'].forEach(key => delete data[key]);
+      if (!data.password) {
+        ['current_password', 'password', 'password_confirmation'].forEach(key => delete data[key]);
+      }
       MemberAPI[action](data)
         .then(res => {
           reset(res);
@@ -185,7 +189,9 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
       <div className="fields-group">
         <div className="personnal-data">
           <h4>{t('app.shared.user_profile_form.personal_data')}</h4>
-          <GenderInput register={register} disabled={isDisabled} required={fieldsSettings.get('gender_required') === 'true'} tooltip={t('app.shared.user_profile_form.used_for_statistics')} />
+          {fieldsSettings.get('gender_required') === 'true' &&
+            <GenderInput register={register} disabled={isDisabled} required={fieldsSettings.get('gender_required') === 'true'} tooltip={t('app.shared.user_profile_form.used_for_statistics')} />
+          }
           <div className="names">
             <FormInput id="profile_attributes.last_name"
                        register={register}
