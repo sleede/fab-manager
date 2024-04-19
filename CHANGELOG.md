@@ -2,6 +2,8 @@
 
 ## Next release
 
+- Fix a bug: unable to show Fabmanager network project picture
+
 ## v6.3.20 2024 Avril 15
 
 - improvement: hide gender in member create/edit form if not required
