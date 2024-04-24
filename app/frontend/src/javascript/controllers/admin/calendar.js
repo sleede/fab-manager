@@ -715,6 +715,9 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
     // $uibModal parameter
     $scope.end = end;
 
+    $scope.startTime = moment(start).format('YYYY-MM-DD HH:mm:ss');
+    $scope.endTime = moment(end).format('YYYY-MM-DD HH:mm:ss');
+
     // machines list
     $scope.machines = machinesPromise.filter(function (m) { return !m.disabled && m.reservable; });
 
@@ -959,6 +962,7 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
         const startSlot = moment($scope.start);
         startSlot.add(newValue * $scope.slots_nb, 'minutes');
         $scope.end = startSlot.toDate();
+        $scope.endTime = moment($scope.end).format('YYYY-MM-DD HH:mm:ss');
       });
 
       // When the number of slot changes, we increment the availability to match the value
@@ -966,6 +970,7 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
         const startSlot = moment($scope.start);
         startSlot.add($scope.availability.slot_duration * newValue, 'minutes');
         $scope.end = startSlot.toDate();
+        $scope.endTime = moment($scope.end).format('YYYY-MM-DD HH:mm:ss');
       });
 
       // When we configure a machine/space availability, do not let the user change the end time, as the total
@@ -981,6 +986,7 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
             const upperSlots = Math.ceil(slotsCurrentRange);
             const upper = upperSlots * $scope.availability.slot_duration;
             $scope.end = moment($scope.start).add(upper, 'minutes').toDate();
+            $scope.endTime = moment($scope.end).format('YYYY-MM-DD HH:mm:ss');
             $scope.slots_nb = upperSlots;
           } else {
             $scope.slots_nb = slotsCurrentRange;
@@ -1013,6 +1019,17 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
           // update availability object
           $scope.availability.end_at = $scope.end;
         }
+      });
+
+      $scope.$watch('startTime', function (newValue, oldValue, scope) {
+        // adjust the start/endTime
+        const start = moment($scope.start);
+        const endTime = moment($scope.endTime);
+        const diff = moment.tz(newValue, moment.tz.guess()).diff(moment.tz(oldValue, moment.tz.guess()));
+        start.add(diff, 'milliseconds');
+        endTime.add(diff, 'milliseconds');
+        $scope.start = start.toDate();
+        $scope.endTime = endTime.toDate();
       });
     };
 

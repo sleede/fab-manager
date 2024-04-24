@@ -102,11 +102,11 @@
       <p class="text-center font-sbold" translate>{{ 'app.admin.calendar.adjust_the_opening_hours' }}</p>
       <div class="row">
           <div class="col-md-3 col-md-offset-2">
-              <uib-timepicker ng-model="start" hour-step="timepickers.start.hstep" readonly-input="true" minute-step="timepickers.start.mstep" show-meridian="false"></uib-timepicker>
+              <uib-timepicker ng-model="startTime" hour-step="timepickers.start.hstep" readonly-input="true" minute-step="timepickers.start.mstep" show-meridian="false"></uib-timepicker>
           </div>
           <span class="col-md-1 m-t-xl m-l" translate>{{ 'app.admin.calendar.to_time' }}</span>
           <fieldset ng-disabled="endDateReadOnly" class="col-md-5">
-              <uib-timepicker ng-model="end" hour-step="timepickers.end.hstep" readonly-input="true" minute-step="timepickers.end.mstep" show-meridian="false"></uib-timepicker>
+              <uib-timepicker ng-model="endTime" hour-step="timepickers.end.hstep" readonly-input="true" minute-step="timepickers.end.mstep" show-meridian="false"></uib-timepicker>
           </fieldset>
       </div>
   </div>

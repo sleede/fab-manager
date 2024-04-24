@@ -3,6 +3,7 @@
 ## Next release
 
 - Fix a bug: unable to show Fabmanager network project picture
+- Fix a bug: availability slot date error in calendar when user pc timezone is different from server timezone
 
 ## v6.3.20 2024 Avril 15
 
