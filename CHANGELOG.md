@@ -6,6 +6,7 @@
 - Fix a bug: availability slot date error in calendar when user pc timezone is different from server timezone
 - Fix a bug: expiration_date of a subscription is not correct in the OpenAPI
 - Fix a bug: unable to filter by date in the Subscription OpenAPI
+- Fix a bug: unable to hide the slot of event deleted in agenda
 
 ## v6.3.20 2024 Avril 15
 

@@ -19,7 +19,7 @@ class Availabilities::AvailabilitiesService
     spaces_availabilities = Setting.get('spaces_module') ? spaces(Space.where(id: ids[:spaces]), @current_user, window) : []
     trainings_availabilities = Setting.get('trainings_module') ? trainings(Training.where(id: ids[:trainings]), @current_user, window) : []
     events_availabilities = if events && Setting.get('events_in_calendar')
-                              events(Event.all, @current_user, window)
+                              events(Event.where(deleted_at: nil), @current_user, window)
                             else
                               []
                             end
