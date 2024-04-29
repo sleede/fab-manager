@@ -10,7 +10,7 @@ module OpenAPI::V1::Concerns::SubscriptionsFiltersConcern
     def filter_by_after(subscriptions, filters)
       return subscriptions if filters[:after].blank?
 
-      subscriptions.where('created_at >= ?', Time.zone.parse(filters[:after]))
+      subscriptions.where('subscriptions.created_at >= ?', Time.zone.parse(filters[:after]))
     end
 
     # @param subscriptions [ActiveRecord::Relation<Subscription>]
@@ -18,7 +18,7 @@ module OpenAPI::V1::Concerns::SubscriptionsFiltersConcern
     def filter_by_before(subscriptions, filters)
       return subscriptions if filters[:before].blank?
 
-      subscriptions.where('created_at <= ?', Time.zone.parse(filters[:before]))
+      subscriptions.where('subscriptions.created_at <= ?', Time.zone.parse(filters[:before]))
     end
 
     # @param subscriptions [ActiveRecord::Relation<Subscription>]
