@@ -24,14 +24,14 @@ de:
       subject: "Ihre Gruppe wurde geändert"
       body:
         warning: "Sie haben die Gruppe gewechselt. Im FabLab kann geprüft werden, ob diese Änderung zulässig ist."
-        user_invalidated: "Your account was invalidated, please upload your new supporting documents to validate your account."
+        user_invalidated: "Ihr Konto wurde für ungültig erklärt. Bitte laden Sie Ihre neuen Belege hoch, um Ihr Konto zu bestätigen."
     notify_admin_user_group_changed:
       subject: "Ein Mitglied hat die Gruppe geändert"
       body:
         user_changed_group_html: "Benutzer <em><strong>%{NAME}</strong></em> hat die Gruppe geändert."
         previous_group: "Vorherige Gruppe:"
         new_group: "Neue Gruppe:"
-        user_invalidated: "The user's account was invalidated."
+        user_invalidated: "Das Benutzerkonto wurde ungültig."
     notify_admin_subscription_extended:
       subject: "Ein Abonnement wurde verlängert"
       body:
@@ -79,11 +79,11 @@ de:
         reservation_saved_html: "Ihre Reservierung <strong><em>%{RESERVATION}</em></strong> wurde erfolgreich gespeichert"
         your_reserved_slots: "Ihre reservierten Slots sind:"
     notify_member_pre_booked_reservation:
-      subject: "Your pre-registration has been successfully saved"
+      subject: "Ihre Voranmeldung wurde erfolgreich gespeichert"
       body:
-        reservation_saved_html: "You pre-registration <strong><em>%{RESERVATION}</em></strong> has been successfully saved"
-        your_reserved_slots: "Your pre-booked slots are:"
-        reservation_warning: "<strong><em>This email does not count as registration to %{RESERVATION}.</em></strong><br/>You will receive another email to confirm or deny your request."
+        reservation_saved_html: "Ihre Vorregistrierung <strong><em>%{RESERVATION}</em></strong> wurde erfolgreich gespeichert"
+        your_reserved_slots: "Ihre vorbestellten Slots sind:"
+        reservation_warning: "<strong><em>Diese E-Mail gilt nicht als Registrierung für %{RESERVATION}.</em></strong><br/>Sie werden eine weitere E-Mail erhalten, um Ihre Anfrage zu bestätigen oder abzulehnen."
     notify_member_subscribed_plan_is_changed:
       subject: "Ihr Abonnement wurde aktualisiert"
       body:
@@ -94,10 +94,10 @@ de:
         member_reserved_html: "Nutzer %{NAME} hat <strong><em>%{RESERVABLE}</em></strong> reserviert."
         reserved_slots: "Reservierte Slots sind:"
     notify_admin_member_pre_booked_reservation:
-      subject: "New pre-registration"
+      subject: "Neue Vorregistrierung"
       body:
-        member_reserved_html: "User %{NAME} has pre-reserved <strong><em>%{RESERVABLE}</em></strong>."
-        reserved_slots: "Pre-reserved slots are:"
+        member_reserved_html: "Benutzer %{NAME} hat vorreserviert <strong><em>%{RESERVABLE}</em></strong>."
+        reserved_slots: "Vorreservierte Plätze sind:"
     notify_member_slot_is_modified:
       subject: "Ihr Reservierungsslot wurde erfolgreich geändert"
       body:
@@ -116,9 +116,9 @@ de:
         user_of_group_html: "Der Benutzer hat sich in der Gruppe <strong>%{GROUP}</strong> registriert"
         account_for_organization: "Dieses Konto verwaltet eine Organisation:"
     notify_admin_child_created:
-      subject: "A user's child has been created"
+      subject: "Ein Kind eines Benutzers wurde erstellt"
       body:
-        new_child_created: "A new user's child has been created on the website"
+        new_child_created: "Ein neues Kind eines Benutzers wurde auf der Webseite erstellt"
     notify_admin_subscribed_plan:
       subject: "Ein Abonnement wurde gekauft"
       body:
@@ -126,7 +126,7 @@ de:
     notify_member_invoice_ready:
       subject: "Rechnung Ihres FabLabs"
       body:
-        please_find_attached_html: "Please find as attached file your invoice from {DATE}, with an amount of {AMOUNT} concerning your {TYPE, select, Reservation{reservation} OrderItem{order} other{subscription}}." #messageFormat interpolation
+        please_find_attached_html: "Bitte finden Sie als angehängte Datei Ihre Rechnung von {DATE}, mit einem Betrag von {AMOUNT} bezüglich Ihrer {TYPE, select, Reservation{Reservierung} OrderItem{Bestellung} other{Abonnement}}" #messageFormat interpolation
         invoice_in_your_dashboard_html: "Sie können auf Ihre Rechnung in %{DASHBOARD} auf der FabLab-Website zugreifen."
         your_dashboard: "Ihr Dashboard"
     notify_member_reservation_reminder:
@@ -147,18 +147,18 @@ de:
         expires_in_7_days: "läuft in 7 Tagen ab."
         to_renew_your_plan_follow_the_link: "Bitte folgen Sie diesem Link, um Ihren Plan zu erneuern"
     notify_member_training_authorization_expired:
-      subject: "Your authorization was revoked"
+      subject: "Ihre Genehmigung wurde widerrufen"
       body:
-        training_expired_html: "<p>You took the %{TRAINING} training, on %{DATE}.</p><p>Your authorization for this training, valid for %{PERIOD} months, has expired.</p><p>Please validate it again in order to be able to reserve the %{MACHINES}</p>."
+        training_expired_html: "<p>Du hast das %{TRAINING} Training auf %{DATE}absolviert.</p><p>Ihre Berechtigung für diese Ausbildung, gültig für %{PERIOD} Monate, ist abgelaufen.</p><p>Bitte bestätigen Sie es erneut, um den %{MACHINES}</p> reservieren zu können."
     notify_member_training_auto_cancelled:
-      subject: "Your training session was cancelled"
+      subject: "Deine Trainingssitzung wurde storniert"
       body:
-        cancelled_training: "The %{TRAINING} training session scheduled for %{DATE}, from %{START} to %{END} has been canceled due to an insufficient number of participants."
-        auto_refund: "You were refunded on your wallet and a credit note should be available."
+        cancelled_training: "Die %{TRAINING} Schulung, die für %{DATE}geplant ist, von %{START} bis %{END} wurde wegen unzureichender Teilnehmerzahl abgesagt."
+        auto_refund: "Sie haben eine Rückerstattung auf Ihr Wallet erhalten und eine Gutschrift sollte vorhanden sein."
     notify_member_training_invalidated:
-      subject: "Your authorization was invalidated"
+      subject: "Ihre Genehmigung wurde widerrufen"
       body:
-        training_invalidated_html: "<p>You took the %{TRAINING} training, on %{DATE} giving you access to the %{MACHINES}.</p><p>Due to the lack of reservations for one of these machines during the last %{PERIOD} months, your authorization has been invalidated.</p><p>Please validate the training again in order to continue reserving these machines.</p>."
+        training_invalidated_html: "<p>Du hast das %{TRAINING} Training auf %{DATE} absolviert und dir wurde Zugang zum %{MACHINES}gewährt.</p><p>Aufgrund fehlender Reservierungen für eines dieser Maschinen während der letzten %{PERIOD} Monate Ihre Autorisierung wurde ungültig.</p><p>Bitte bestätigen Sie die Schulung erneut, um diese Maschinen zu reservieren.</p>."
     notify_member_subscription_is_expired:
       subject: "Ihr Abonnement ist abgelaufen"
       body:
@@ -171,11 +171,11 @@ de:
       body:
         subscription_will_expire_html: "Abonnement für Benutzer %{NAME} <strong><em>%{PLAN}</em></strong> läuft in 7 Tagen ab."
     notify_admin_training_auto_cancelled:
-      subject: "A training was automatically cancelled"
+      subject: "Ein Training wurde automatisch abgesagt"
       body:
-        cancelled_training: "The %{TRAINING} training session scheduled for %{DATE}, from %{START} to %{END} has been automatically canceled due to an insufficient number of participants."
-        auto_refund: "The members who have booked this training session were automatically refunded on their wallet and credit notes was generated."
-        manual_refund: "Please manually refund all members who have booked this training session and generate the credit notes."
+        cancelled_training: "Die %{TRAINING} Schulung, die für %{DATE}geplant ist, von %{START} bis %{END} wurde wegen unzureichender Teilnehmerzahl abgesagt."
+        auto_refund: "Die Mitglieder, die diese Schulung gebucht haben, wurden automatisch auf ihr Wallet zurückerstattet und Gutscheine generiert."
+        manual_refund: "Bitte erstatten Sie alle Mitglieder, die diese Schulung gebucht haben, manuell zurück und generieren Sie die Gutschriften."
     notify_admin_subscription_is_expired:
       subject: "Ein Mitgliedsabonnement ist abgelaufen"
       body:
@@ -283,9 +283,9 @@ de:
     notify_admin_low_stock_threshold:
       subject: "Warnung niedriger Bestand"
       body:
-        low_stock: "A new stock movement of %{PRODUCT} has exceeded the low stock threshold."
-        stocks_state_html: "Current stock status: <ul><li>internal: %{INTERNAL}</li><li>external: %{EXTERNAL}</li></ul>"
-        manage_stock: "Manage stocks for this product"
+        low_stock: "Eine neue Lagerbewegung von %{PRODUCT} hat den niedrigen Lagerschwellen überschritten."
+        stocks_state_html: "Aktueller Lagerstatus: <ul><li>intern: %{INTERNAL}</li><li>Extern: %{EXTERNAL}</li></ul>"
+        manage_stock: "Lagerbestand für dieses Produkt verwalten"
     notify_member_about_coupon:
       subject: "Gutschein"
       body:
@@ -335,7 +335,7 @@ de:
     notify_admin_order_is_paid:
       subject: "Neue Bestellung"
       body:
-        order_placed: "A new order (%{REFERENCE}) has been placed and paid by %{USER}."
+        order_placed: "Eine neue Bestellung (%{REFERENCE}) wurde von %{USER} aufgegeben und bezahlt."
         view_details: ""
     notify_member_payment_schedule_ready:
       subject: "Ihr Zahlungsplan"
@@ -360,13 +360,13 @@ de:
       body:
         remember: "Gemäß dem Zahlungsplan von %{REFERENCE} wurde für %{DATE} eine Belastung der Karte in Höhe von %{AMOUNT} geplant."
         error: "Leider konnte die Abbuchung über die Karte nicht erfolgreich abgeschlossen werden."
-        action: "Please contact the member as soon as possible, then go to the payment schedule management interface to resolve the problem. After a certain period of time, the card subscription could be cancelled."
+        action: "Bitte kontaktieren Sie das Mitglied so bald wie möglich und gehen Sie dann zur Zahlungszeitenverwaltung, um das Problem zu lösen. Nach einer bestimmten Zeit kann das Kartenabonnement gekündigt werden."
     notify_member_payment_schedule_failed:
       subject: "[URGENT] Kartenbelastungsfehler"
       body:
         remember: "Gemäß Ihrem Zahlungsplan von %{REFERENCE} wurde für %{DATE} eine Belastung der Karte in Höhe von %{AMOUNT} geplant."
         error: "Leider konnte die Abbuchung über die Karte nicht erfolgreich abgeschlossen werden."
-        action_html: "Please check %{DASHBOARD} or contact a manager quickly, otherwise your subscription may be interrupted."
+        action_html: "Bitte überprüfen Sie %{DASHBOARD} oder kontaktieren Sie schnell einen Manager, sonst kann Ihr Abonnement unterbrochen werden."
         your_dashboard: "Ihr Dashboard"
     notify_admin_payment_schedule_gateway_canceled:
       subject: "[URGENT] Zahlungsplan vom Zahlungs-Gateway abgebrochen"
@@ -393,41 +393,41 @@ de:
     notify_member_reservation_limit_reached:
       subject: "Tägliches Reservierungslimit erreicht"
       body:
-        limit_reached: "For %{DATE}, you have reached your daily limit of %{HOURS} hours of %{ITEM} reservation."
+        limit_reached: "Für %{DATE}haben Sie Ihr tägliches Limit von %{HOURS} Stunden %{ITEM} Reservierung erreicht."
     notify_admin_user_supporting_document_files_created:
-      subject: "Supporting documents uploaded by a member"
+      subject: "Dokumente wurden von einem Mitglied hochgeladen"
       body:
-        supporting_document_files_uploaded_below: "Member %{NAME} has uploaded the following supporting documents:"
+        supporting_document_files_uploaded_below: "Member %{NAME} hat folgende Unterstützungsdokumente hochgeladen:"
         validate_user: "Bitte validieren Sie dieses Konto"
     notify_admin_user_supporting_document_files_updated:
-      subject: "Member's supporting documents have changed"
+      subject: "Unterstützte Dokumente des Mitglieds haben sich geändert"
       body:
-        user_update_supporting_document_file: "Member %{NAME} has modified the supporting documents below:"
-        validate_user: "Please validate this account"
+        user_update_supporting_document_file: "Mitglied %{NAME} hat die folgenden unterstützenden Dokumente geändert:"
+        validate_user: "Bitte validieren Sie dieses Konto"
     notify_admin_user_child_supporting_document_files_created:
-      subject: "Supporting documents of child uploaded by a member"
+      subject: "Dokumente wurden von einem Mitglied über ein Kind hochgeladen"
       body:
-        supporting_document_files_uploaded_below: "Child %{NAME} has uploaded the following supporting documents:"
-        validate_child: "Please validate this child account"
+        supporting_document_files_uploaded_below: "Kind- %{NAME} hat folgende unterstützende Dokumente hochgeladen:"
+        validate_child: "Bitte validieren Sie dieses Konto eines Kindes"
     notify_admin_user_child_supporting_document_files_updated:
-      subject: "Child's supporting documents have changed"
+      subject: "Die Begleitdokumente des Kindes haben sich geändert"
       body:
-        child_update_supporting_document_file: "Child %{NAME} has modified the supporting documents below:"
-        validate_child: "Please validate this child account"
+        child_update_supporting_document_file: "Kind %{NAME} hat die folgenden unterstützenden Dokumente geändert:"
+        validate_child: "Bitte validieren Sie dieses Konto eines Kindes"
     notify_user_is_validated:
       subject: "Konto validiert"
       body:
-        account_validated: "Your account was validated. Now, you have access to booking features."
+        account_validated: "Ihr Konto wurde validiert. Jetzt haben Sie Zugriff auf die Buchungsfunktionen."
     notify_user_is_invalidated:
       subject: "Konto ungültig"
       body:
-        account_invalidated: "Your account was invalidated. You won't be able to book anymore, until your account is validated again."
+        account_invalidated: "Ihr Konto wurde ungültig. Sie können nicht mehr buchen, bis Ihr Konto erneut bestätigt wurde."
     notify_user_child_is_validated:
-      subject: "Child account validated"
+      subject: "Kind Konto bestätigt"
       body:
-        child_validated: "Your child account was validated. Now, you have access to event booking features."
+        child_validated: "Ihr Kind-Konto wurde validiert. Jetzt haben Sie Zugriff auf die Buchungsfunktionen."
     notify_user_child_is_invalidated:
-      subject: "Child account invalidated"
+      subject: "Kind-Konto ungültig"
       body:
         child_invalidated: "Your child account was invalidated. You won't be able to book event, until your child account is validated again."
     notify_user_supporting_document_refusal:

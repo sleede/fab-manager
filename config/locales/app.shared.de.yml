@@ -541,7 +541,7 @@ de:
       calendar:
         calendar: "Calendar"
         show_unavailables: "Show complete slots"
-        filter_calendar: "Filter calendar"
+        filter_calendar: "Kalender filtern"
         trainings: "Trainings"
         machines: "Machines"
         spaces: "Spaces"
