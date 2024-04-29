@@ -2,6 +2,21 @@
 
 ## Next release
 
+## v6.3.22 2024 Avril 29
+
+- Fix a security issue: updated rails to 7.0.8.1 to fix [CVE-2024-26143](https://github.com/rails/rails/security/advisories/GHSA-9822-6m93-xqf4)
+- Fix a security issue: updated webpack-dev-middleware to 5.3.4 to fix [CVE-2024-29180](https://security.snyk.io/vuln/SNYK-JS-WEBPACKDEVMIDDLEWARE-6476555)
+- Fix a security issue: updated @babel/traverse to 7.23.9 to fix [CVE-2023-45133](https://security.snyk.io/vuln/SNYK-JS-BABELTRAVERSE-5962462)
+- Fix a security issue: updated express to 4.19.2 to fix [CVE-2024-29041](https://security.snyk.io/vuln/SNYK-JS-EXPRESS-6474509)
+- Fix a security issue: updated carrierwave from 3.0.7 to fix [CVE-2024-29034](https://github.com/carrierwaveuploader/carrierwave/security/advisories/GHSA-vfmv-jfc5-pjjw)
+- Fix a security issue: updated follow-redirects to 1.15.6 to fix [CVE-2024-28849](https://security.snyk.io/vuln/SNYK-JS-FOLLOWREDIRECTS-6444610)
+- Fix a security issue: updated json-jwt to 1.15.3.1 to fix [CVE-2023-51774](https://security.snyk.io/vuln/SNYK-RUBY-JSONJWT-6139943)
+- Fix a security issue: updated @adobe/css-tools to 4.3.2 to fix [CVE-2023-48631](https://security.snyk.io/vuln/SNYK-JS-ADOBECSSTOOLS-6096077)
+- Fix a security issue: updated graphql to 16.8.1 to fix [CVE-2023-26144](https://security.snyk.io/vuln/SNYK-JS-GRAPHQL-5905181)
+- Fix a security issue: updated word-wrap to 1.2.4 to fix [CVE-2023-26115](https://security.snyk.io/vuln/SNYK-JS-WORDWRAP-3149973)
+- Fix a security issue: updated semver to 7.5.2 to fix [CVE-2022-25883](https://security.snyk.io/vuln/SNYK-JS-SEMVER-3247795)
+- Fix a security issue: updated tough-cookie to 4.1.3 to fix [CVE-2023-26136](https://security.snyk.io/vuln/SNYK-JS-TOUGHCOOKIE-5672873)
+
 ## v6.3.21 2024 Avril 29
 
 - Fix a bug: unable to show Fabmanager network project picture
