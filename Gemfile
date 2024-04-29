@@ -42,7 +42,7 @@ group :development do
   gem 'foreman'
   gem 'web-console', '>= 4.2.0'
   # Preview mail in the browser
-  gem 'listen', '~> 3.0.5'
+  gem 'listen', "~> 3.5"
   gem 'overcommit'
   gem 'rb-readline'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
