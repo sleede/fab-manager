@@ -21,7 +21,7 @@ class Availabilities::PublicAvailabilitiesService
                       else
                         []
                       end
-    events_slots = events ? service.events(Event.all, @current_user, window) : []
+    events_slots = events ? service.events(Event.where(deleted_at: nil), @current_user, window) : []
 
     [].concat(trainings_slots).concat(events_slots).concat(machines_slots).concat(spaces_slots)
   end
