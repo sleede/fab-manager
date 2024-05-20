@@ -1008,14 +1008,9 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
         // update availability object
         $scope.availability.start_at = $scope.start;
       });
-
       // Maintain consistency between the end time and the date object in the availability object
       $scope.$watch('end', function (newValue, oldValue, scope) {
         if (newValue.valueOf() !== oldValue.valueOf()) {
-          // we prevent the admin from setting the end of the availability before its beginning
-          if (moment($scope.start).add($scope.availability.slot_duration, 'minutes').isAfter(newValue)) {
-            $scope.end = oldValue;
-          }
           // update availability object
           $scope.availability.end_at = $scope.end;
         }
@@ -1031,6 +1026,10 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
         $scope.start = start.toDate();
         $scope.endTime = endTime.toDate();
       });
+
+      $scope.endTimeChanged = function () {
+        $scope.end = moment.tz($scope.endTime, moment.tz.guess()).toDate();
+      };
     };
 
     /*

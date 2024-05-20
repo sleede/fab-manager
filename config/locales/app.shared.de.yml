@@ -23,8 +23,8 @@ de:
         you_will_lose_any_unsaved_modification_if_you_reload_this_page: "Ungespeicherte Änderungen gehen verloren, wenn Sie die Seite neu laden"
         payment_card_declined: "Deine Kreditkarte wurde abgelehnt."
       change_group:
-        title: "{OPERATOR, select, self{My group} other{User's group}}"
-        change: "Change {OPERATOR, select, self{my} other{his}} group"
+        title: "{OPERATOR, select, self{Meine Gruppe} other{Benutzergruppe}}"
+        change: "Ändere {OPERATOR, select, self{mein} other{Seine}} Gruppe"
         cancel: "Cancel"
         validate: "Validate group change"
         success: "Group successfully changed"

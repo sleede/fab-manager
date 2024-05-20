@@ -2,6 +2,11 @@
 
 ## Next release
 
+## v6.3.23 2024 May 20
+
+- Fix a bug: unable to update availability slot end time for training
+- updates translations
+
 ## v6.3.22 2024 Avril 29
 
 - Fix a security issue: updated rails to 7.0.8.1 to fix [CVE-2024-26143](https://github.com/rails/rails/security/advisories/GHSA-9822-6m93-xqf4)
