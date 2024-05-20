@@ -2,7 +2,10 @@
 
 ## Next release
 
+## v6.3.23 2024 May 20
+
 - Fix a bug: unable to update availability slot end time for training
+- updates translations
 
 ## v6.3.22 2024 Avril 29
 
