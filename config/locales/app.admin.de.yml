@@ -929,7 +929,7 @@ de:
         settlement_by_debit_card_on_DATE_at_TIME_for_an_amount_of_AMOUNT: "Begleichung mit Debitkarte am {DATE} um {TIME}, über den Betrag von {AMOUNT}"
         important_notes: "Wichtige Hinweise"
         address_and_legal_information: "Adresse und rechtliche Informationen"
-        invoice_reference: "Rechnungsbezug"
+        invoice_reference: "Rechnungsnummer"
         invoice_reference_is_required: "Invoice reference is required."
         text: "Text"
         year: "Jahr"
