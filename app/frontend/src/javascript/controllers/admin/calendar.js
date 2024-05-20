@@ -1008,6 +1008,13 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
         // update availability object
         $scope.availability.start_at = $scope.start;
       });
+      // Maintain consistency between the end time and the date object in the availability object
+      $scope.$watch('end', function (newValue, oldValue, scope) {
+        if (newValue.valueOf() !== oldValue.valueOf()) {
+          // update availability object
+          $scope.availability.end_at = $scope.end;
+        }
+      });
 
       $scope.$watch('startTime', function (newValue, oldValue, scope) {
         // adjust the start/endTime
@@ -1020,14 +1027,9 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
         $scope.endTime = endTime.toDate();
       });
 
-      $scope.$watch('endTime', function (newValue, oldValue, scope) {
-        // adjust the start/endTime
-        const end = moment($scope.end);
-        const diff = moment.tz(newValue, moment.tz.guess()).diff(moment.tz(oldValue, moment.tz.guess()));
-        end.add(diff, 'milliseconds');
-        $scope.end = end.toDate();
-        $scope.availability.end_at = $scope.end;
-      });
+      $scope.endTimeChanged = function () {
+        $scope.end = moment.tz($scope.endTime, moment.tz.guess()).toDate();
+      };
     };
 
     /*
