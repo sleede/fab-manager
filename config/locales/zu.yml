@@ -228,6 +228,7 @@ zu:
     man: "crwdns3479:0crwdne3479:0"
     woman: "crwdns3481:0crwdne3481:0"
     without_subscriptions: "crwdns3483:0crwdne3483:0"
+    wallet_amount: "crwdns38214:0crwdne38214:0"
   #machines/trainings/events reservations list to EXCEL format
   export_reservations:
     reservations: "crwdns3485:0crwdne3485:0"

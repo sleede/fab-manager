@@ -228,6 +228,7 @@
     man: "Mann"
     woman: "Kvinne"
     without_subscriptions: "Uten abonnementer"
+    wallet_amount: "Wallet"
   #machines/trainings/events reservations list to EXCEL format
   export_reservations:
     reservations: "Reservasjoner"
