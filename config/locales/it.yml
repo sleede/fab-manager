@@ -228,6 +228,7 @@ it:
     man: "Uomo"
     woman: "Donna"
     without_subscriptions: "Senza abbonamenti"
+    wallet_amount: "Wallet"
   #machines/trainings/events reservations list to EXCEL format
   export_reservations:
     reservations: "Le tue prenotazioni"

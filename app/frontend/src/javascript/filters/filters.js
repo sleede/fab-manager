@@ -370,6 +370,7 @@ Application.Filters.filter('currency', [function ($locale) {
 
 Application.Filters.filter('encodeURI', [function () {
   return function (str) {
+    if (!str) return '';
     return str.replace(/[!'()*]/g, function (c) {
       return '%' + c.charCodeAt(0).toString(16);
     });
