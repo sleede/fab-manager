@@ -3,6 +3,7 @@
 ## Next release
 
 - Fix a bug: unable to show member children for admin
+- improvement: add wallet amount to members Excel export
 
 ## v6.3.23 2024 May 20
 

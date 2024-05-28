@@ -35,7 +35,9 @@ wb.add_worksheet(name: ExcelService.name_safe(t('export_members.members'))) do |
              t('export_members.echo_sciences'),
              t('export_members.organization'),
              t('export_members.organization_address'),
-             t('export_members.note')]
+             t('export_members.note'),
+             t('export_members.wallet_amount'),
+             ]
   sheet.add_row columns, style: header
 
   # data rows
@@ -69,7 +71,8 @@ wb.add_worksheet(name: ExcelService.name_safe(t('export_members.members'))) do |
       member.profile.echosciences || '',
       member.invoicing_profile&.organization&.name || '',
       member.invoicing_profile&.organization&.address&.address || '',
-      ActionController::Base.helpers.sanitize(member.profile.note, tags: []) || ''
+      ActionController::Base.helpers.sanitize(member.profile.note, tags: []) || '',
+      member.wallet&.amount ? ActionController::Base.helpers.number_to_currency(member.wallet&.amount / 100.0, locale: CURRENCY_LOCALE) : ''
     ]
     styles = [nil, nil, nil, nil, nil, nil, date, nil, nil, nil, nil, nil, nil, nil,
               nil, nil, nil, date, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil]
