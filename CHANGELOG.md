@@ -2,6 +2,10 @@
 
 ## Next release
 
+## v6.3.25 2024 May 28
+
+- Fix a bug: member wallet amount calculation error in the excel export
+
 ## v6.3.24 2024 May 28
 
 - Fix a bug: unable to show member children for admin

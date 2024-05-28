@@ -72,7 +72,7 @@ wb.add_worksheet(name: ExcelService.name_safe(t('export_members.members'))) do |
       member.invoicing_profile&.organization&.name || '',
       member.invoicing_profile&.organization&.address&.address || '',
       ActionController::Base.helpers.sanitize(member.profile.note, tags: []) || '',
-      member.wallet&.amount ? ActionController::Base.helpers.number_to_currency(member.wallet&.amount / 100.0, locale: CURRENCY_LOCALE) : ''
+      ActionController::Base.helpers.number_to_currency(member.wallet&.amount, locale: CURRENCY_LOCALE) || ''
     ]
     styles = [nil, nil, nil, nil, nil, nil, date, nil, nil, nil, nil, nil, nil, nil,
               nil, nil, nil, date, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil]
