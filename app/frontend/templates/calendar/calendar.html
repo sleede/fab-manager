@@ -1,20 +1,26 @@
 <section class="heading b-b">
   <div class="row no-gutter">
-    <div class="col-xs-2 col-sm-2 col-md-1">
+    <div class="col-xs-2 col-sm-2 col-md-1" id="calendar-back-button">
       <section class="heading-btn">
         <a ng-click="backPrevLocation($event)"><i class="fas fa-long-arrow-alt-left "></i></a>
       </section>
     </div>
-    <div class="col-xs-10 col-sm-10 col-md-8 b-l b-r-md hide-b-r-lg">
+    <div class="col-xs-10 col-sm-10 col-md-6 b-l b-r-md hide-b-r-lg">
       <section class="heading-title">
         <h1 translate>{{ 'app.public.calendar.calendar' }}</h1>
       </section>
     </div>
 
-    <div class="col-xs-12 col-sm-12 col-md-3 b-t hide-b-md">
+    <div class="col-xs-12 col-sm-12 col-md-5 b-t hide-b-md">
       <div class="heading-actions wrapper">
         <button type="button" class="btn btn-default m-t m-b" ng-click="openFilterAside()">
           <span class="fa fa-filter"></span> {{ 'app.shared.calendar.filter_calendar' | translate }}
+        </button>
+        <button type="button" class="btn btn-default m-t m-b" ng-click="triggerAutoRefresh()">
+          <span class="fa fa-refresh"></span> {{ 'app.shared.calendar.auto_refresh' | translate }}
+        </button>
+        <button type="button" class="btn btn-default m-t m-b" ng-click="triggerOnlyCalendarViewMode()">
+          <span class="fa fa-calendar"></span> {{ 'app.shared.calendar.calendar_view' | translate }}
         </button>
       </div>
     </div>

@@ -548,6 +548,8 @@ fr:
         events: "Événements"
         externals: "Autres calendriers"
         show_reserved_uniq: "Afficher uniquement les créneaux avec réservation"
+        auto_refresh: "Rafraîchissement automatique"
+        calendar_view: "Agenda"
       machine:
         machine_uncategorized: "Machines non classés"
       form_unsaved_list:
