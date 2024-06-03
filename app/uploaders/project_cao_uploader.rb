@@ -23,11 +23,11 @@ class ProjectCaoUploader < CarrierWave::Uploader::Base
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
-  def extension_whitelist
+  def extension_allowlist
     Setting.get('allowed_cad_extensions').split(' ')
   end
 
-  def content_type_whitelist
+  def content_type_allowlist
     Setting.get('allowed_cad_mime_types').split(' ')
   end
 end

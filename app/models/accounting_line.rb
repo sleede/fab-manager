@@ -13,6 +13,10 @@ class AccountingLine < ApplicationRecord
     # else
     if invoice.paid_by_card?
       'card'
+    elsif invoice.paid_by_transfer?
+      'transfer'
+    elsif invoice.paid_by_check?
+      'check'
     else
       'other'
     end

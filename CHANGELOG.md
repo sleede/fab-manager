@@ -2,6 +2,106 @@
 
 ## Next release
 
+## v6.3.25 2024 May 28
+
+- Fix a bug: member wallet amount calculation error in the excel export
+
+## v6.3.24 2024 May 28
+
+- Fix a bug: unable to show member children for admin
+- improvement: add wallet amount to members Excel export
+- updates translations
+
+## v6.3.23 2024 May 20
+
+- Fix a bug: unable to update availability slot end time for training
+- updates translations
+
+## v6.3.22 2024 Avril 29
+
+- Fix a security issue: updated rails to 7.0.8.1 to fix [CVE-2024-26143](https://github.com/rails/rails/security/advisories/GHSA-9822-6m93-xqf4)
+- Fix a security issue: updated webpack-dev-middleware to 5.3.4 to fix [CVE-2024-29180](https://security.snyk.io/vuln/SNYK-JS-WEBPACKDEVMIDDLEWARE-6476555)
+- Fix a security issue: updated @babel/traverse to 7.23.9 to fix [CVE-2023-45133](https://security.snyk.io/vuln/SNYK-JS-BABELTRAVERSE-5962462)
+- Fix a security issue: updated express to 4.19.2 to fix [CVE-2024-29041](https://security.snyk.io/vuln/SNYK-JS-EXPRESS-6474509)
+- Fix a security issue: updated carrierwave from 3.0.7 to fix [CVE-2024-29034](https://github.com/carrierwaveuploader/carrierwave/security/advisories/GHSA-vfmv-jfc5-pjjw)
+- Fix a security issue: updated follow-redirects to 1.15.6 to fix [CVE-2024-28849](https://security.snyk.io/vuln/SNYK-JS-FOLLOWREDIRECTS-6444610)
+- Fix a security issue: updated json-jwt to 1.15.3.1 to fix [CVE-2023-51774](https://security.snyk.io/vuln/SNYK-RUBY-JSONJWT-6139943)
+- Fix a security issue: updated @adobe/css-tools to 4.3.2 to fix [CVE-2023-48631](https://security.snyk.io/vuln/SNYK-JS-ADOBECSSTOOLS-6096077)
+- Fix a security issue: updated graphql to 16.8.1 to fix [CVE-2023-26144](https://security.snyk.io/vuln/SNYK-JS-GRAPHQL-5905181)
+- Fix a security issue: updated word-wrap to 1.2.4 to fix [CVE-2023-26115](https://security.snyk.io/vuln/SNYK-JS-WORDWRAP-3149973)
+- Fix a security issue: updated semver to 7.5.2 to fix [CVE-2022-25883](https://security.snyk.io/vuln/SNYK-JS-SEMVER-3247795)
+- Fix a security issue: updated tough-cookie to 4.1.3 to fix [CVE-2023-26136](https://security.snyk.io/vuln/SNYK-JS-TOUGHCOOKIE-5672873)
+
+## v6.3.21 2024 Avril 29
+
+- Fix a bug: unable to show Fabmanager network project picture
+- Fix a bug: availability slot date error in calendar when user pc timezone is different from server timezone
+- Fix a bug: expiration_date of a subscription is not correct in the OpenAPI
+- Fix a bug: unable to filter by date in the Subscription OpenAPI
+- Fix a bug: unable to hide the slot of event deleted in agenda
+- updates translations
+
+## v6.3.20 2024 Avril 15
+
+- improvement: hide gender in member create/edit form if not required
+- Fix a bug: unable to update member's profile
+- Fix a bug: unable to show machine/training picture
+- updates translations
+
+## v6.3.19 2024 Avril 9
+
+- Fix a bug: user is blocked in complete profile page after login
+
+## v6.3.18 2024 Avril 8
+
+- improvement: hide gender in signup form if not required
+
+## v6.3.17 2024 Avril 8
+
+- improvement: add loader for create/delete availability slot
+- improvement: allow admin configure memeber's profile gender/birthday as required
+- improvement: add sp certificate for saml provider
+- Fix a bug: unable to update a space with a deleted machine
+- Fix a bug: unable to get invoice payment details if the account code is same for card/transfer payment method
+- Fix a bug: unable to show machine/training picture
+- updates translations
+
+## v6.3.16 2024 March 11
+
+- Fix a bug: set settlement by cash by default for local payment mean
+- updates translations
+- #content_type_whitelist is instead by #content_type_allowlist
+- #extension_whitelist is instead by #extension_allowlist
+- [TODO DEPLOY] `rails fablab:setup:build_accounting_lines`
+
+## v6.3.15 2024 February 29
+
+- Fix a bug: unable to generate invoice for payment by check/transfer
+
+## v6.3.14 2024 February 26
+
+- improvement: add idp_slo_service_url(logout requests url) to saml provider
+- Fix a bug: event canceled places error
+- Updated puma to 6.4.2
+- Updated carrierwave to 3.0.4
+- Updated sidekiq-unique-jobs to 7.1.33
+- [TODO DEPLOY] `rails fablab:setup:build_places_cache`
+
+## v6.3.13 2024 February 19
+
+- Fix a bug: missing payment transfer journal code in accouting line
+- Fix a bug: unable to sync iCalendar correctly
+- improvement: add settlement by transfer/check to invoice paiement info
+- improvement: hide machines/themes/components filter in project list if machines module is disable or themes/components is empty
+- updates translations
+- [TODO DEPLOY] `rails fablab:setup:build_accounting_lines`
+
+## v6.3.12 2024 February 12
+
+- improvement: Allow the admin to update payment method only the overdue subscription item without cancel PayZen subscription
+- improvement: add payment transfer/check to accounting settings
+- updates translations
+
 ## v6.3.11 2024 February 2
 
 - Fix a bug: if there is a reservation with a deleted user, it is not possible to delete the event

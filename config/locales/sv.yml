@@ -126,6 +126,8 @@ sv:
     by_wallet: "med plånbok"
     no_refund: "Ingen återbetalning"
     settlement_by_debit_card: "Betalning med betalkort"
+    settlement_by_transfer: "Settlement by transfer"
+    settlement_by_check: "Settlement done at the reception"
     settlement_done_at_the_reception: "Betalning görs i receptionen"
     settlement_by_wallet: "Betalning med plånbok"
     on_DATE_at_TIME: "den %{DATE} kl %{TIME},"
@@ -226,6 +228,7 @@ sv:
     man: "Man"
     woman: "Kvinna"
     without_subscriptions: "Utan prenumerationer"
+    wallet_amount: "Wallet"
   #machines/trainings/events reservations list to EXCEL format
   export_reservations:
     reservations: "Bokningar"

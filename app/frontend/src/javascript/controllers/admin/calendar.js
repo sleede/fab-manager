@@ -715,6 +715,9 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
     // $uibModal parameter
     $scope.end = end;
 
+    $scope.startTime = moment(start).format('YYYY-MM-DD HH:mm:ss');
+    $scope.endTime = moment(end).format('YYYY-MM-DD HH:mm:ss');
+
     // machines list
     $scope.machines = machinesPromise.filter(function (m) { return !m.disabled && m.reservable; });
 
@@ -788,6 +791,8 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
 
     // number of slots for this availability
     $scope.slots_nb = slots;
+
+    $scope.saving = false;
 
     /**
      * Adds or removes the provided machine from the current slot
@@ -867,9 +872,14 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
       if ($scope.isOnlySubscriptions && $scope.selectedPlans.length > 0) {
         $scope.availability.plan_ids = $scope.selectedPlans.map(function (p) { return p.id; });
       }
+      $scope.saving = true;
       return Availability.save(
         { availability: $scope.availability },
-        function (availability) { $uibModalInstance.close(availability); }
+        function (availability) { $uibModalInstance.close(availability); },
+        function (error) {
+          console.error(error);
+          $scope.saving = false;
+        }
       );
     };
 
@@ -952,6 +962,7 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
         const startSlot = moment($scope.start);
         startSlot.add(newValue * $scope.slots_nb, 'minutes');
         $scope.end = startSlot.toDate();
+        $scope.endTime = moment($scope.end).format('YYYY-MM-DD HH:mm:ss');
       });
 
       // When the number of slot changes, we increment the availability to match the value
@@ -959,6 +970,7 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
         const startSlot = moment($scope.start);
         startSlot.add($scope.availability.slot_duration * newValue, 'minutes');
         $scope.end = startSlot.toDate();
+        $scope.endTime = moment($scope.end).format('YYYY-MM-DD HH:mm:ss');
       });
 
       // When we configure a machine/space availability, do not let the user change the end time, as the total
@@ -974,6 +986,7 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
             const upperSlots = Math.ceil(slotsCurrentRange);
             const upper = upperSlots * $scope.availability.slot_duration;
             $scope.end = moment($scope.start).add(upper, 'minutes').toDate();
+            $scope.endTime = moment($scope.end).format('YYYY-MM-DD HH:mm:ss');
             $scope.slots_nb = upperSlots;
           } else {
             $scope.slots_nb = slotsCurrentRange;
@@ -995,18 +1008,28 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
         // update availability object
         $scope.availability.start_at = $scope.start;
       });
-
       // Maintain consistency between the end time and the date object in the availability object
       $scope.$watch('end', function (newValue, oldValue, scope) {
         if (newValue.valueOf() !== oldValue.valueOf()) {
-          // we prevent the admin from setting the end of the availability before its beginning
-          if (moment($scope.start).add($scope.availability.slot_duration, 'minutes').isAfter(newValue)) {
-            $scope.end = oldValue;
-          }
           // update availability object
           $scope.availability.end_at = $scope.end;
         }
       });
+
+      $scope.$watch('startTime', function (newValue, oldValue, scope) {
+        // adjust the start/endTime
+        const start = moment($scope.start);
+        const endTime = moment($scope.endTime);
+        const diff = moment.tz(newValue, moment.tz.guess()).diff(moment.tz(oldValue, moment.tz.guess()));
+        start.add(diff, 'milliseconds');
+        endTime.add(diff, 'milliseconds');
+        $scope.start = start.toDate();
+        $scope.endTime = endTime.toDate();
+      });
+
+      $scope.endTimeChanged = function () {
+        $scope.end = moment.tz($scope.endTime, moment.tz.guess()).toDate();
+      };
     };
 
     /*
@@ -1158,15 +1181,19 @@ Application.Controllers.controller('DeleteRecurrentAvailabilityController', ['$s
     // with recurrent slots: how many slots should we delete?
     $scope.deleteMode = 'single';
 
+    $scope.deleting = false;
+
     /**
      * Confirmation callback
      */
     $scope.ok = function () {
       const { id, start_at, end_at } = availabilityPromise;
+      $scope.deleting = true;
       // the admin has confirmed, delete the slot
       Availability.delete(
         { id, mode: $scope.deleteMode },
         function (res) {
+          $scope.deleting = false;
           // delete success
           if (res.deleted > 1) {
             growl.success(_t(
@@ -1185,6 +1212,7 @@ Application.Controllers.controller('DeleteRecurrentAvailabilityController', ['$s
           });
         },
         function (res) {
+          $scope.deleting = false;
           // not everything was deleted
           const { data } = res;
           if (data.total > 1) {

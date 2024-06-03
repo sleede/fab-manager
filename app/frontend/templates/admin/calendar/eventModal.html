@@ -102,11 +102,11 @@
       <p class="text-center font-sbold" translate>{{ 'app.admin.calendar.adjust_the_opening_hours' }}</p>
       <div class="row">
           <div class="col-md-3 col-md-offset-2">
-              <uib-timepicker ng-model="start" hour-step="timepickers.start.hstep" readonly-input="true" minute-step="timepickers.start.mstep" show-meridian="false"></uib-timepicker>
+              <uib-timepicker ng-model="startTime" hour-step="timepickers.start.hstep" readonly-input="true" minute-step="timepickers.start.mstep" show-meridian="false"></uib-timepicker>
           </div>
           <span class="col-md-1 m-t-xl m-l" translate>{{ 'app.admin.calendar.to_time' }}</span>
           <fieldset ng-disabled="endDateReadOnly" class="col-md-5">
-              <uib-timepicker ng-model="end" hour-step="timepickers.end.hstep" readonly-input="true" minute-step="timepickers.end.mstep" show-meridian="false"></uib-timepicker>
+            <uib-timepicker ng-model="endTime" hour-step="timepickers.end.hstep" readonly-input="true" minute-step="timepickers.end.mstep" show-meridian="false" ng-change="endTimeChanged()"></uib-timepicker>
           </fieldset>
       </div>
   </div>
@@ -252,6 +252,6 @@
 </div>
 <div class="modal-footer" ng-show="step === 6">
   <button class="fab-button is-info" ng-click="previous()" translate>{{ 'app.admin.calendar.previous' }}</button>
-  <button class="fab-button is-secondary" ng-click="ok()" translate>{{ 'app.shared.buttons.confirm' }}</button>
+  <button class="fab-button is-secondary" ng-class="{'btn-loading': saving}" ng-disabled="saving" ng-click="ok()" translate>{{ 'app.shared.buttons.confirm' }}</button>
   <button class="fab-button" ng-click="cancel()" translate>{{ 'app.shared.buttons.cancel' }}</button>
 </div>

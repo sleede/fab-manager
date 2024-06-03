@@ -702,6 +702,12 @@ Setting.set('accounting_payment_wallet_journal_code', 'WA01') unless Setting.fin
 Setting.set('accounting_payment_other_code', '5803') unless Setting.find_by(name: 'accounting_payment_other_code').try(:value)
 Setting.set('accounting_payment_other_label', 'Payments on site') unless Setting.find_by(name: 'accounting_payment_other_label').try(:value)
 Setting.set('accounting_payment_other_journal_code', 'SI01') unless Setting.find_by(name: 'accounting_payment_other_journal_code').try(:value)
+Setting.set('accounting_payment_transfer_code', '5804') unless Setting.find_by(name: 'accounting_payment_transfer_code').try(:value)
+Setting.set('accounting_payment_transfer_label', 'Transfer Payments ') unless Setting.find_by(name: 'accounting_payment_transfer_label').try(:value)
+Setting.set('accounting_payment_transfer_journal_code', 'TR01') unless Setting.find_by(name: 'accounting_payment_transfer_journal_code').try(:value)
+Setting.set('accounting_payment_check_code', '5805') unless Setting.find_by(name: 'accounting_payment_check_code').try(:value)
+Setting.set('accounting_payment_check_label', 'Payments by check') unless Setting.find_by(name: 'accounting_payment_check_label').try(:value)
+Setting.set('accounting_payment_check_journal_code', 'CH01') unless Setting.find_by(name: 'accounting_payment_check_journal_code').try(:value)
 Setting.set('accounting_wallet_code', '4191') unless Setting.find_by(name: 'accounting_wallet_code').try(:value)
 Setting.set('accounting_wallet_label', 'Wallet credit') unless Setting.find_by(name: 'accounting_wallet_label').try(:value)
 Setting.set('accounting_wallet_journal_code', 'WC01') unless Setting.find_by(name: 'accounting_wallet_journal_code').try(:value)
@@ -736,3 +742,8 @@ Setting.set('reservation_context_feature', false) unless Setting.find_by(name: '
 
 Setting.set('family_account', false) unless Setting.find_by(name: 'family_account').try(:value)
 Setting.set('child_validation_required', false) unless Setting.find_by(name: 'child_validation_required').try(:value)
+
+Setting.set('phone_required', false) unless Setting.find_by(name: 'phone_required').try(:value)
+Setting.set('address_required', false) unless Setting.find_by(name: 'address_required').try(:value)
+Setting.set('gender_required', true) unless Setting.find_by(name: 'gender_required').try(:value)
+Setting.set('birthday_required', true) unless Setting.find_by(name: 'birthday_required').try(:value)

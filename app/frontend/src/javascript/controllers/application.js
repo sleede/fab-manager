@@ -81,7 +81,7 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
           size: 'md',
           resolve: {
             settingsPromise: ['Setting', function (Setting) {
-              return Setting.query({ names: "['phone_required', 'recaptcha_site_key', 'confirmation_required', 'address_required']" }).$promise;
+              return Setting.query({ names: "['phone_required', 'recaptcha_site_key', 'confirmation_required', 'address_required', 'gender_required', 'birthday_required']" }).$promise;
             }],
             profileCustomFieldsPromise: ['ProfileCustomField', function (ProfileCustomField) { return ProfileCustomField.query({}).$promise; }],
             proofOfIdentityTypesPromise: ['SupportingDocumentType', function (SupportingDocumentType) { return SupportingDocumentType.query({}).$promise; }]
@@ -102,6 +102,12 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
 
             // is the address required to sign-up?
             $scope.addressRequired = (settingsPromise.address_required === 'true');
+
+            // is the gender required to sign-up?
+            $scope.genderRequired = (settingsPromise.gender_required === 'true');
+
+            // is the birthday required to sign-up?
+            $scope.birthdayRequired = (settingsPromise.birthday_required === 'true');
 
             // reCaptcha v2 site key (or undefined)
             $scope.recaptchaSiteKey = settingsPromise.recaptcha_site_key;

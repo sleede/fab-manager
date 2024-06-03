@@ -14,7 +14,7 @@ pt:
         #dashboard sections
         dashboard: "Painel de controle"
         my_profile: "Meu Perfil"
-        my_children: "My Children"
+        my_children: "Meus filhos"
         my_settings: "Minhas Configurações"
         my_supporting_documents_files: "Meus documentos"
         my_projects: "Meus Projetos"
@@ -94,7 +94,7 @@ pt:
         phone_number_is_required: "Número de telefone é obrigatório."
         address: "Endereço"
         address_is_required: "O endereço é necessário"
-        i_authorize_Fablab_users_registered_on_the_site_to_contact_me: "I agree to share my email address with registered users of the site"
+        i_authorize_Fablab_users_registered_on_the_site_to_contact_me: "Concordo em compartilhar meu endereço de e-mail com os usuários registrados no site"
         i_accept_to_receive_information_from_the_fablab: "Eu aceito receber informações do FabLab"
         i_ve_read_and_i_accept_: "Eu li e aceito"
         _the_fablab_policy: "os termos de uso"
@@ -155,7 +155,7 @@ pt:
         discover_members: "Ver membros"
         #next events summary on the home page
         fablab_s_next_events: "Próximos eventos"
-        every_events: "Todos Eventos"
+        every_events: "Todos os eventos"
       event_card:
         on_the_date: "Em {DATE}"
         from_date_to_date: "De {START} até {END}"
@@ -168,7 +168,7 @@ pt:
         full_price: "Valor inteira: "
       #projects gallery
       projects_list:
-        filter: Filter
+        filter: Filtro
         the_fablab_projects: "Os projetos"
         add_a_project: "Adicionar projeto"
         network_search: "Rede Fab-manager"
@@ -185,10 +185,10 @@ pt:
         all_materials: "Todos os materiais"
         load_next_projects: "Carregar próximos projetos"
         rough_draft: "Rascunho"
-        filter_by_member: "Filter by member"
-        created_from: Created from
-        created_to: Created to
-        download_archive: Download
+        filter_by_member: "Filtrar por membro"
+        created_from: Criado por
+        created_to: Criado para
+        download_archive: Baixar
       status_filter:
         all_statuses: "Todos os status"
         select_status: "Selecione um status"
@@ -222,7 +222,7 @@ pt:
         report: "Enviar"
         do_you_really_want_to_delete_this_project: "Você quer realmente deletar esse projeto?"
         status: "Status"
-        markdown_file: "Markdown file"
+        markdown_file: "Arquivo Markdown"
       #list of machines
       machines_list:
         the_fablab_s_machines: "As máquinas"
@@ -319,8 +319,8 @@ pt:
         downloadable_documents: "Documentos para download"
         information_and_booking: "Informações e reservas"
         event_type:
-          family: "Event reserved for members"
-          nominative: "Nominative event"
+          family: "Evento reservado para membros"
+          nominative: "Evento Nominativo"
         dates: "Datas"
         beginning: "Início:"
         ending: "Término:"
@@ -335,13 +335,13 @@ pt:
         cancelled: "Cancelado"
         ticket: "{NUMBER, plural, one{ingresso} other{ingressos}}"
         make_a_gift_of_this_reservation: "Doe esta reserva"
-        thank_you_your_payment_has_been_successfully_registered: "Thank you. Your payment has been successfully registered!"
-        thank_you_your_pre_registration_has_been_successfully_saved: "Thank you. Your pre-registration has been successfully saved!"
+        thank_you_your_payment_has_been_successfully_registered: "Obrigado. Seu pagamento foi registrado com sucesso!"
+        thank_you_your_pre_registration_has_been_successfully_saved: "Obrigado. Seu pré-cadastro foi salvo com sucesso!"
         you_can_find_your_reservation_s_details_on_your_: "Você pode encontrar detalhes da sua reserva em seu"
-        informed_by_email_your_pre_registration: "You will be kept informed by email of the progress made regarding your pre-registration."
+        informed_by_email_your_pre_registration: "Você será mantido informado por email sobre o progresso feito em relação ao seu pré-registo."
         dashboard: "painel de controle"
         you_booked_DATE: "Sua reserva ({DATE}):"
-        you_pre_booked_DATE: "Your pre-registration ({DATE}):"
+        you_pre_booked_DATE: "Seu pré-cadastro ({DATE}):"
         canceled_reservation_SEATS: "Reserva cancelada ({SEATS} lugares)"
         book: "Reservar"
         confirm_and_pay: "Confirmar e pagar"
@@ -352,7 +352,7 @@ pt:
         you_can_shift_this_reservation_on_the_following_slots: "Você pode alterar essa reserva nos campos a seguir:"
         confirmation_required: "Confirmação obrigatória"
         do_you_really_want_to_delete_this_event: "Vocêrealmente deseja remover este evento?"
-        all_reservations_for_this_event_will_be_canceled: All reservations for this event will be canceled.
+        all_reservations_for_this_event_will_be_canceled: Todas as reservas para este evento serão canceladas.
         delete_recurring_event: "Você está prestes a excluir um evento periódico. O que você deseja fazer?"
         delete_this_event: "Apenas este evento"
         delete_this_and_next: "Este evento e os seguintes"
@@ -370,10 +370,10 @@ pt:
         view_event_list: "Visualizar próximos eventos"
         share_on_facebook: "Compartilhar no Facebook"
         share_on_twitter: "Compartilhar no Twitter"
-        last_name_and_first_name: "Last name and first name"
-        pre_book: "Pre-book"
-        pre_registration_end_date: "Deadline for pre-registration"
-        pre_registration: "Pre-registration"
+        last_name_and_first_name: "Último nome e primeiro nome"
+        pre_book: "Pré-agendamento"
+        pre_registration_end_date: "Prazo final para o pré-inscrição"
+        pre_registration: "Pré-inscrição"
       #public calendar
       calendar:
         calendar: "Calendário"
@@ -494,34 +494,34 @@ pt:
         select_a_member: "Selecionar um membro"
         start_typing: "Comece a digitar..."
       children_dashboard:
-        heading: "Children"
-        member_heading: "My Children"
-        add_child: "Add a child"
+        heading: "Filhos"
+        member_heading: "Meus filhos"
+        add_child: "Adicionar um filho"
       child_modal:
-        edit_child: "Edit child"
-        new_child: "New child"
+        edit_child: "Editar filho"
+        new_child: "Novo filho"
       child_form:
-        child_form_info: "Only children under 18 years old can be added to your Family account. Supporting documents may be requested to validate your child's account and allow you to register them for events."
-        first_name: "First name"
-        last_name: "Last name"
-        birthday: "Birthday"
+        child_form_info: "Apenas filhos menores de 18 anos podem ser adicionados à sua conta de família. Documentos podem ser solicitados para validar a conta do seu filho e permitir que você os registre para eventos."
+        first_name: "Primeiro nome"
+        last_name: "Último nome"
+        birthday: "Data de nascimento"
         email: "Email"
-        phone: "Phone"
-        save: "Save"
-        supporting_documents: "Supporting documents"
-        to_complete: "To complete"
-        refuse_documents_info: "You can refuse a selection of documents by clicking on the following button."
-        refuse_documents: "Refuse documents"
+        phone: "Telefone"
+        save: "Salvar"
+        supporting_documents: "Documentos"
+        to_complete: "Para completar"
+        refuse_documents_info: "Você pode recusar uma seleção de documentos clicando no seguinte botão."
+        refuse_documents: "Recusar documentos"
       child_item:
-        first_name: "Child first name"
-        last_name: "Child last name"
-        birthday: "Birthday"
-        deleted: "The child has been deleted."
-        unable_to_delete: "Unable to delete the child."
+        first_name: "Primeiro nome do filho"
+        last_name: "Ultimo nome do filho"
+        birthday: "Data de nascimento"
+        deleted: "O filho foi excluído."
+        unable_to_delete: "Não foi possível excluir o filho."
       delete_child_modal:
-        confirmation_required: "Confirmation required"
-        confirm: "Confirm"
-        confirm_delete_child: "Do you really want to remove this child?"
+        confirmation_required: "Confirmação necessária"
+        confirm: "Confirmar"
+        confirm_delete_child: "Tem a certeza que quer remover este filho?"
       tour:
         conclusion:
           title: "Obrigado pela sua atenção"

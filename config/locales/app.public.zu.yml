@@ -155,7 +155,7 @@ zu:
         discover_members: "crwdns28036:0crwdne28036:0"
         #next events summary on the home page
         fablab_s_next_events: "crwdns36235:0crwdne36235:0"
-        every_events: "crwdns28040:0crwdne28040:0"
+        every_events: "crwdns38182:0crwdne38182:0"
       event_card:
         on_the_date: "crwdns28042:0{DATE}crwdne28042:0"
         from_date_to_date: "crwdns28044:0{START}crwdnd28044:0{END}crwdne28044:0"

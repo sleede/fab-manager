@@ -165,8 +165,10 @@ class Invoice < PaymentDocument
 
     if paid_by_card?
       res.push(means: :card, amount: amount_paid)
-    elsif paid_by_wallet?
-      res.push(means: :wallet, amount: amount_paid)
+    elsif paid_by_transfer?
+      res.push(means: :transfer, amount: amount_paid)
+    elsif paid_by_check?
+      res.push(means: :check, amount: amount_paid)
     else
       res.push(means: :other, amount: amount_paid)
     end
@@ -200,6 +202,14 @@ class Invoice < PaymentDocument
 
   def paid_by_wallet?
     (wallet_transaction && wallet_amount.positive?) || payment_method == 'wallet'
+  end
+
+  def paid_by_transfer?
+    payment_method == 'transfer'
+  end
+
+  def paid_by_check?
+    payment_method == 'check'
   end
 
   def render_resource

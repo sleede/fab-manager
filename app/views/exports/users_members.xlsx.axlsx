@@ -35,7 +35,9 @@ wb.add_worksheet(name: ExcelService.name_safe(t('export_members.members'))) do |
              t('export_members.echo_sciences'),
              t('export_members.organization'),
              t('export_members.organization_address'),
-             t('export_members.note')]
+             t('export_members.note'),
+             t('export_members.wallet_amount'),
+             ]
   sheet.add_row columns, style: header
 
   # data rows
@@ -49,7 +51,7 @@ wb.add_worksheet(name: ExcelService.name_safe(t('export_members.members'))) do |
       member.email,
       member.is_allow_newsletter,
       member.last_sign_in_at&.to_date,
-      member.statistic_profile.gender ? t('export_members.man') : t('export_members.woman'),
+      member.statistic_profile.gender.present? ? (member.statistic_profile.gender ? t('export_members.man') : t('export_members.woman')) : '',
       member.statistic_profile.age,
       member.invoicing_profile&.address&.address || '',
       member.profile.phone,
@@ -69,7 +71,8 @@ wb.add_worksheet(name: ExcelService.name_safe(t('export_members.members'))) do |
       member.profile.echosciences || '',
       member.invoicing_profile&.organization&.name || '',
       member.invoicing_profile&.organization&.address&.address || '',
-      ActionController::Base.helpers.sanitize(member.profile.note, tags: []) || ''
+      ActionController::Base.helpers.sanitize(member.profile.note, tags: []) || '',
+      ActionController::Base.helpers.number_to_currency(member.wallet&.amount, locale: CURRENCY_LOCALE) || ''
     ]
     styles = [nil, nil, nil, nil, nil, nil, date, nil, nil, nil, nil, nil, nil, nil,
               nil, nil, nil, date, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil]

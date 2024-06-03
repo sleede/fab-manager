@@ -367,3 +367,12 @@ Application.Filters.filter('currency', [function ($locale) {
       : new Intl.NumberFormat(Fablab.intl_locale, { style: 'currency', currency: Fablab.intl_currency }).format(amount);
   };
 }]);
+
+Application.Filters.filter('encodeURI', [function () {
+  return function (str) {
+    if (!str) return '';
+    return str.replace(/[!'()*]/g, function (c) {
+      return '%' + c.charCodeAt(0).toString(16);
+    });
+  };
+}]);

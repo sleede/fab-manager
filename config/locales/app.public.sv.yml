@@ -3,7 +3,7 @@ sv:
     public:
       #header and "about" page
       common:
-        about_the_fablab: "Om {GENDER, select, male{den} female{den} neutral{} other{den}} {NAME}"
+        about_the_fablab: "Om {GENDER, select, male{} female{} neutral{} other{}} {NAME}"
         return: "Tillbaka"
         #cookies
         cookies:
@@ -38,10 +38,10 @@ sv:
         reduce_panel: "Minska panelen"
         #left menu (public)
         home: "Startsida"
-        reserve_a_machine: "Boka en maskin"
-        trainings_registrations: "Registrera utbildning"
-        events_registrations: "Registrera evenemang"
-        reserve_a_space: "Boka lokal"
+        reserve_a_machine: "Boka utrustning"
+        trainings_registrations: "Utbildningar"
+        events_registrations: "Evenemang"
+        reserve_a_space: "Lokaler"
         projects_gallery: "Projektgalleri"
         subscriptions: "Prenumerationer"
         public_calendar: "Kalender"
@@ -95,7 +95,7 @@ sv:
         address: "Adress"
         address_is_required: "Adress måste fyllas i"
         i_authorize_Fablab_users_registered_on_the_site_to_contact_me: "Jag samtycker till att dela min e-postadress med registrerade medlemmar på denna sida"
-        i_accept_to_receive_information_from_the_fablab: "Jag accepterar att få information från FabLab"
+        i_accept_to_receive_information_from_the_fablab: "Jag accepterar att få information"
         i_ve_read_and_i_accept_: "Jag har läst och accepterat"
         _the_fablab_policy: "användarvillkoren"
         field_required: "Obligatoriskt fält"
@@ -155,7 +155,7 @@ sv:
         discover_members: "Upptäck medlemmar"
         #next events summary on the home page
         fablab_s_next_events: "Nästa evenemang"
-        every_events: "Alla evenemang"
+        every_events: "All events"
       event_card:
         on_the_date: "Den {DATE}"
         from_date_to_date: "Från {START} till {END}"
@@ -244,7 +244,7 @@ sv:
         all_machines: "All utrustning"
       machine_card:
         book: "Boka"
-        consult: "Fråga"
+        consult: "Detaljer"
       #details of a machine
       machines_show:
         book_this_machine: "Boka utrustning"

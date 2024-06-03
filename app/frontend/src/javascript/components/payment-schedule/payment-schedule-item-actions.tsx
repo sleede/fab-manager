@@ -169,10 +169,10 @@ export const PaymentScheduleItemActions: React.FC<PaymentScheduleItemActionsProp
    */
   const pendingActions = (): ReactElement => {
     if (isPrivileged()) {
-      if (paymentSchedule.payment_method === PaymentMethod.Transfer) {
+      if (paymentSchedule.payment_method === PaymentMethod.Transfer || paymentScheduleItem.payment_method === PaymentMethod.Transfer) {
         return confirmTransferButton();
       }
-      if (paymentSchedule.payment_method === PaymentMethod.Check) {
+      if (paymentSchedule.payment_method === PaymentMethod.Check || paymentScheduleItem.payment_method === PaymentMethod.Check) {
         return confirmCheckButton();
       }
     } else {
@@ -202,7 +202,7 @@ export const PaymentScheduleItemActions: React.FC<PaymentScheduleItemActionsProp
    */
   const newActions = (): Array<ReactElement> => {
     const buttons = [];
-    if (paymentSchedule.payment_method === PaymentMethod.Card) {
+    if (paymentSchedule.payment_method === PaymentMethod.Card && !paymentScheduleItem.payment_method) {
       buttons.push(updateCardButton());
     }
     if (isPrivileged()) {
@@ -400,7 +400,9 @@ export const PaymentScheduleItemActions: React.FC<PaymentScheduleItemActionsProp
           toggleModal={toggleUpdatePaymentMeanModal}
           onError={onError}
           afterSuccess={onPaymentMeanUpdateSuccess}
-          paymentSchedule={paymentSchedule} />
+          paymentSchedule={paymentSchedule}
+          paymentScheduleItemId={paymentScheduleItem.id}
+          />
       </div>
     </span>
   );

@@ -11,7 +11,7 @@ json.lines @lines do |line|
       json.url download_open_api_v1_invoice_path(line.invoice)
       json.payment_method line.invoice_payment_method
       if @codes.values.include?(line.account_code) # if this is a 'payment' line
-        mean = @codes.select { |_key, value| value == line.account_code }
+        mean = @codes.select { |_key, value| value == line.account_code && _key == line.invoice_payment_method.to_sym }
         json.payment_details line.invoice.payment_details(mean.keys[0])
       end
     end

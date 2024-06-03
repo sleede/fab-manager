@@ -19,12 +19,12 @@ class PaymentScheduleItemWorker
   # @param psi [PaymentScheduleItem]
   def check_item(psi)
     # the following depends on the payment method (card/check)
-    if psi.payment_schedule.payment_method == 'card'
+    if psi.payment_schedule.payment_method == 'card' && psi.payment_method.nil?
       ### Cards
       PaymentGatewayService.new.process_payment_schedule_item(psi)
     elsif psi.state == 'new'
       ### Check/Bank transfer (only new deadlines, to prevent spamming)
-      NotificationCenter.call type: "notify_admin_payment_schedule_#{psi.payment_schedule.payment_method}_deadline",
+      NotificationCenter.call type: "notify_admin_payment_schedule_#{psi.payment_method || psi.payment_schedule.payment_method}_deadline",
                               receiver: User.admins_and_managers,
                               attached_object: psi
       psi.update(state: 'pending')

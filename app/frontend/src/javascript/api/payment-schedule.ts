@@ -48,8 +48,8 @@ export default class PaymentScheduleAPI {
     return res?.data;
   }
 
-  static async update (paymentSchedule: PaymentSchedule): Promise<PaymentSchedule> {
-    const res:AxiosResponse<PaymentSchedule> = await apiClient.patch(`/api/payment_schedules/${paymentSchedule.id}`, paymentSchedule);
+  static async update (paymentScheduleId: number, paymentScheduleItemId: number, paymentMethod: string): Promise<PaymentSchedule> {
+    const res:AxiosResponse<PaymentSchedule> = await apiClient.patch(`/api/payment_schedules/${paymentScheduleId}`, { payment_method: paymentMethod, payment_schedule_item_id: paymentScheduleItemId });
     return res?.data;
   }
 }

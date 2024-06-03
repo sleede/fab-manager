@@ -59,7 +59,8 @@ class Exports::StatisticsExportTest < ActionDispatch::IntegrationTest
     assert_equal reservation.user.profile.full_name, wb.sheet_data[5][1].value
     assert_equal reservation.user.email, wb.sheet_data[5][2].value
     assert_equal reservation.user.profile.phone, wb.sheet_data[5][3].value
-    assert_equal I18n.t("export.#{reservation.user.statistic_profile.str_gender}"), wb.sheet_data[5][4].value
+    assert_equal reservation.user.statistic_profile.str_gender.present? ? I18n.t("export.#{reservation.user.statistic_profile.str_gender}") : '',
+                 wb.sheet_data[5][4].value
     assert_equal reservation.user.statistic_profile.age.to_i, wb.sheet_data[5][5].value
     assert_equal reservation.reservable.name, wb.sheet_data[5][6].value
     assert_equal reservation.invoice_items.first.invoice.total / 100.0, wb.sheet_data[5][7].value

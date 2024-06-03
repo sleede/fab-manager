@@ -126,6 +126,8 @@
     by_wallet: "til lommebok"
     no_refund: "Ingen refusjon"
     settlement_by_debit_card: "Oppgjør med betalingskort"
+    settlement_by_transfer: "Settlement by transfer"
+    settlement_by_check: "Settlement done at the reception"
     settlement_done_at_the_reception: "Oppgjør i resepsjonen"
     settlement_by_wallet: "Oppgjør via lommebok"
     on_DATE_at_TIME: "på %{DATE} kl. %{TIME},"
@@ -226,6 +228,7 @@
     man: "Mann"
     woman: "Kvinne"
     without_subscriptions: "Uten abonnementer"
+    wallet_amount: "Wallet"
   #machines/trainings/events reservations list to EXCEL format
   export_reservations:
     reservations: "Reservasjoner"

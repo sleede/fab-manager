@@ -126,6 +126,8 @@ it:
     by_wallet: "mediante il portafoglio"
     no_refund: "Nessun rimborso"
     settlement_by_debit_card: "Pagamento con carta di debito"
+    settlement_by_transfer: "Settlement by transfer"
+    settlement_by_check: "Settlement done at the reception"
     settlement_done_at_the_reception: "Pagamento effettuato al banco"
     settlement_by_wallet: "Pagamento effettuato tramite il portafoglio"
     on_DATE_at_TIME: "il %{DATE} alle %{TIME},"
@@ -226,6 +228,7 @@ it:
     man: "Uomo"
     woman: "Donna"
     without_subscriptions: "Senza abbonamenti"
+    wallet_amount: "Wallet"
   #machines/trainings/events reservations list to EXCEL format
   export_reservations:
     reservations: "Le tue prenotazioni"

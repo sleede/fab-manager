@@ -12,18 +12,18 @@ de:
           accept: "Cookies akzeptieren"
           decline: "Ablehnen"
         #dashboard sections
-        dashboard: "Dashboard"
+        dashboard: ""
         my_profile: "Mein Profil"
-        my_children: "My Children"
+        my_children: "Meine Kinder"
         my_settings: "Persönliche Einstellungen"
         my_supporting_documents_files: "My supporting documents"
         my_projects: "Meine Projekte"
         my_trainings: "Meine Trainings"
-        my_reservations: "My reservations"
+        my_reservations: "Meine Reservierungen"
         my_events: "Meine Veranstaltungen"
         my_invoices: "Meine Rechnungen"
         my_payment_schedules: "Meine Zahlungspläne"
-        my_orders: "My orders"
+        my_orders: "Meine Bestellungen"
         my_wallet: "Mein Guthaben"
         #contextual help
         help: "Hilfe"
@@ -154,7 +154,7 @@ de:
         create_an_account: "Neues Konto einrichten"
         discover_members: "Mitglieder entdecken"
         #next events summary on the home page
-        fablab_s_next_events: "Next events"
+        fablab_s_next_events: "Nächste Veranstaltungen"
         every_events: "Alle Veranstaltungen"
       event_card:
         on_the_date: "Am {DATE}"
@@ -169,7 +169,7 @@ de:
       #projects gallery
       projects_list:
         filter: Filter
-        the_fablab_projects: "The projects"
+        the_fablab_projects: "Projekte"
         add_a_project: "Projekt hinzufügen"
         network_search: "Fab-manager network"
         tooltip_openlab_projects_switch: "Mit der Suche über das gesamte Netzwerk können Sie die Projekte aller Fab-Manager durchsuchen, die diese Funktion nutzen!"
@@ -190,7 +190,7 @@ de:
         created_to: Created to
         download_archive: Download
       status_filter:
-        all_statuses: "All statuses"
+        all_statuses: "Status"
         select_status: "Select a status"
       #details of a projet
       projects_show:
@@ -225,7 +225,7 @@ de:
         markdown_file: "Markdown file"
       #list of machines
       machines_list:
-        the_fablab_s_machines: "The machines"
+        the_fablab_s_machines: "Die Maschinen"
         add_a_machine: "Maschine hinzufügen"
         new_availability: "Verfügbare Reservierungen"
         book: "Buchen"
@@ -300,7 +300,7 @@ de:
         select_duration: "Wählen Sie eine Laufzeit"
       #Fablab's events list
       events_list:
-        the_fablab_s_events: "The events"
+        the_fablab_s_events: "Veranstaltungen"
         all_categories: "Alle Kategorien"
         for_all: "Für alle"
         sold_out: "Ausverkauft"
@@ -486,7 +486,7 @@ de:
         slot: "{DATE}: {START} - {END}"
         offered: "offered"
       orders_dashboard:
-        heading: "My orders"
+        heading: "Meine Bestellungen"
         sort:
           newest: "Newest first"
           oldest: "Oldest first"

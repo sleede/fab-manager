@@ -104,7 +104,8 @@ const PaymentSchedulesTable: React.FC<PaymentSchedulesTableProps> = ({ paymentSc
    * Return the human-readable string for the status of the provided deadline.
    */
   const formatState = (item: PaymentScheduleItem, schedule: PaymentSchedule): JSX.Element => {
-    let res = t(`app.shared.payment_schedules_table.state_${item.state}${item.state === 'pending' ? '_' + schedule.payment_method : ''}`);
+    const paymentMethod = item.payment_method || schedule.payment_method;
+    let res = t(`app.shared.payment_schedules_table.state_${item.state}${item.state === 'pending' ? '_' + paymentMethod : ''}`);
     if (item.state === 'paid') {
       const key = `app.shared.payment_schedules_table.method_${item.payment_method}`;
       res += ` (${t(key)})`;

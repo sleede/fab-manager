@@ -43,13 +43,13 @@ de:
       invalid_duration: "Der zulässige Zeitraum muss zwischen 1 Tag und 1 Jahr lang sein. Ihr Zeitraum ist %{DAYS} Tage lang."
       must_be_in_the_past: "Der Zeitraum darf ausschließlich vor dem heutigen Datum liegen."
       registration_disabled: "Registrierung ist deaktiviert"
-      undefined_in_store: "must be defined to make the product available in the store"
+      undefined_in_store: "muss definiert sein, um das Produkt im Shop verfügbar zu machen"
       gateway_error: "Fehler von Zahlungs-Gateway: %{MESSAGE}"
-      gateway_amount_too_small: "Payments under %{AMOUNT} are not supported. Please order directly at the reception."
-      gateway_amount_too_large: "Payments above %{AMOUNT} are not supported. Please order directly at the reception."
-      product_in_use: "This product have already been ordered"
+      gateway_amount_too_small: "Zahlungen unter %{AMOUNT} werden nicht unterstützt. Bitte bestellen Sie direkt an der Rezeption."
+      gateway_amount_too_large: "Zahlungen über %{AMOUNT} werden nicht unterstützt. Bitte bestellen Sie direkt an der Rezeption."
+      product_in_use: "Dieses Produkt wurde bereits bestellt"
       slug_already_used: "wird bereits verwendet"
-      birthday_less_than_18_years_ago: "Birthday must be under 18 years ago"
+      birthday_less_than_18_years_ago: "Geburtstag muss unter 18 Jahre zurückliegen"
   coupon:
     code_format_error: "nur Großbuchstaben, Zahlen und Bindestriche sind erlaubt"
   apipie:
@@ -66,7 +66,7 @@ de:
     not_available: "Nicht verfügbar"
     reserving: "Ich reserviere"
     i_ve_reserved: "Ich reservierte"
-    blocked: "Blocked"
+    blocked: "Gesperrt"
     length_must_be_slot_multiple: "muss mindestens %{MIN} Minuten nach dem Startdatum liegen"
     must_be_associated_with_at_least_1_machine: "muss mindestens einer Maschine zugeordnet sein"
     deleted_user: "Gelöschte Benutzer"
@@ -79,8 +79,8 @@ de:
     requested_account_does_not_exists: "Das gewünschte Konto ist nicht vorhanden"
   #SSO external authentication
   authentication_providers:
-    local_database_provider_already_exists: 'A "Local Database" provider already exists. Unable to create another.'
-    matching_between_User_uid_and_API_required: "It is required to set the matching between User.uid and the API to add this provider."
+    local_database_provider_already_exists: 'Ein "Lokale Datenbank" Provider existiert bereits. Kann keinen anderen erstellen.'
+    matching_between_User_uid_and_API_required: "Um diesen Provider hinzuzufügen, muss die Übereinstimmung zwischen User.uid und der API festgelegt werden."
   #PDF invoices generation
   invoices:
     refund_invoice_reference: "Beleg der Rechnungsrückerstattungung: %{REF}"
@@ -103,8 +103,8 @@ de:
     space_reservation_DESCRIPTION: "Raumreservierung - %{DESCRIPTION}"
     training_reservation_DESCRIPTION: "Trainingsreservierung - %{DESCRIPTION}"
     event_reservation_DESCRIPTION: "Veranstaltungs-Reservierung - %{DESCRIPTION}"
-    from_payment_schedule: "Due %{NUMBER} out of %{TOTAL}, from %{DATE}. Repayment schedule %{SCHEDULE}"
-    null_invoice: "Invoice at nil, billing jump following a malfunction of the Fab Manager software"
+    from_payment_schedule: "Fälliger %{NUMBER} von %{TOTAL}, von %{DATE}. Rückzahlungsplan %{SCHEDULE}"
+    null_invoice: "Rechnung bei Null, Rechnungssprung nach einer Fehlfunktion der Fab Manager-Software"
     full_price_ticket:
       one: "Ein Vollpreis-Ticket"
       other: "%{count} Vollpreis-Tickets"
@@ -126,6 +126,8 @@ de:
     by_wallet: "durch Guthaben"
     no_refund: "Keine Rückerstattung"
     settlement_by_debit_card: "Abrechnung per Debitkarte"
+    settlement_by_transfer: "Abrechnung per Überweisung"
+    settlement_by_check: "Abrechnung an der Rezeption durchgeführt"
     settlement_done_at_the_reception: "Abrechnung an der Rezeption durchgeführt"
     settlement_by_wallet: "Abrechnung per Guthaben"
     on_DATE_at_TIME: "am %{DATE} um %{TIME},"
@@ -168,13 +170,13 @@ de:
     lettering: "Beschriftung"
     VAT: 'Mwst.'
   accounting_summary:
-    subscription_abbreviation: "subscr."
-    Machine_reservation_abbreviation: "machine reserv."
-    Training_reservation_abbreviation: "training reserv."
-    Event_reservation_abbreviation: "event reserv."
-    Space_reservation_abbreviation: "space reserv."
-    wallet_abbreviation: "wallet"
-    shop_order_abbreviation: "shop order"
+    subscription_abbreviation: "Abo."
+    Machine_reservation_abbreviation: "Maschinenres."
+    Training_reservation_abbreviation: "Schulungsres."
+    Event_reservation_abbreviation: "Veranstaltungsres."
+    Space_reservation_abbreviation: "Raumres."
+    wallet_abbreviation: "Konto"
+    shop_order_abbreviation: "Bestellung"
   vat_export:
     start_date: "Anfangsdatum"
     end_date: "Enddatum"
@@ -184,7 +186,7 @@ de:
   trainings:
     i_ve_reserved: "Ich reservierte"
     completed: "Vollständig"
-    refund_for_auto_cancel: "This training session was cancelled due to an insufficient number of participants."
+    refund_for_auto_cancel: "Diese Schulung wurde wegen einer unzureichenden Teilnehmerzahl abgesagt."
   #error messages when updating an event
   events:
     error_deleting_reserved_price: "Der angeforderte Preis konnte nicht gelöscht werden, da er mit einigen Reservierungen verknüpft ist"
@@ -196,7 +198,7 @@ de:
   export_members:
     members: "Mitglieder"
     id: "ID"
-    external_id: "External ID"
+    external_id: "Externe ID"
     surname: "Nachname"
     first_name: "Vorname"
     email: "E-Mail"
@@ -226,6 +228,7 @@ de:
     man: "Mann"
     woman: "Frau"
     without_subscriptions: "Ohne Abonnement"
+    wallet_amount: "Wallet"
   #machines/trainings/events reservations list to EXCEL format
   export_reservations:
     reservations: "Reservierungen"
@@ -240,7 +243,7 @@ de:
     local_payment: "Zahlung an der Rezeption"
     online_payment: "Online-Zahlung"
     deleted_user: "Gelöschter Nutzer"
-    coupon: "Coupon used"
+    coupon: "Gutschein verwendet"
   #subscriptions list export to EXCEL format
   export_subscriptions:
     subscriptions: "Abonnements"
@@ -271,10 +274,10 @@ de:
     reservations: "Reservierungen"
     available_seats: "Verfügbare Plätze"
   reservation_ics:
-    description_slot: "You have booked %{COUNT} slots of %{ITEM}"
-    description_training: "You have booked a %{TYPE} training"
-    description_event: "You have booked %{NUMBER} tickets for this event"
-    alarm_summary: "Remind your reservation"
+    description_slot: "Sie haben %{COUNT} Slots von %{ITEM} gebucht"
+    description_training: "Du hast eine %{TYPE} Schulung gebucht"
+    description_event: "Sie haben %{NUMBER} Tickets für diese Veranstaltung gebucht"
+    alarm_summary: "Erinnerung an Ihre Reservierung"
   roles:
     member: "Mitglied"
     manager: "Manager"
@@ -288,7 +291,7 @@ de:
       notify_admin_member_create_reservation:
         a_RESERVABLE_reservation_was_made_by_USER_html: "Eine <strong><em>%{RESERVABLE}</em></strong> Reservierung wurde von <strong><em>%{USER}</em></strong> vorgenommen."
       notify_admin_member_pre_booked_reservation:
-        a_RESERVABLE_reservation_was_made_by_USER_html: "A <strong><em>%{RESERVABLE}</em></strong> pre-registration was made by <strong><em>%{USER}</em></strong>."
+        a_RESERVABLE_reservation_was_made_by_USER_html: "Eine <strong><em>%{RESERVABLE}</em></strong> Voranmeldung erfolgte von <strong><em>%{USER}</em></strong>."
       notify_admin_profile_complete:
         account_imported_from_PROVIDER_UID_has_completed_its_information_html: "Konto importiert von <strong><em>%{PROVIDER}</strong> (%{UID})</em> hat seine Informationen vervollständigt."
       notify_admin_slot_is_canceled:
@@ -306,25 +309,25 @@ de:
       notify_admin_subscription_will_expire_in_7_days:
         USER_s_subscription_will_expire_in_7_days: "Das Abonnement von %{USER} wird in 7 Tagen ablaufen."
       notify_admin_training_auto_cancelled:
-        auto_cancelled_training: "The %{TRAINING} training session scheduled for %{DATE}, has been automatically canceled due to an insufficient number of participants."
-        auto_refund: "The members were automatically refunded on their wallet."
-        manual_refund: "Please refund each members."
+        auto_cancelled_training: "Die %{TRAINING} Schulung, die für %{DATE} geplant war, wurde wegen unzureichender Teilnehmerzahl abgesagt."
+        auto_refund: "Die Mitglieder erhalten automatisch eine Rückerstattung auf ihr Konto."
+        manual_refund: "Bitte rückerstatten Sie alle Mitglieder."
       notify_admin_user_group_changed:
-        user_NAME_changed_his_group_html: "User <strong><em>{NAME}</strong></em> changed group." #messageFormat interpolation
+        user_NAME_changed_his_group_html: "Benutzer <strong><em>{NAME}</strong></em> hat die Gruppe geändert." #messageFormat interpolation
       notify_admin_user_merged:
-        user_NAME_has_merged_his_account_with_the_one_imported_from_PROVIDER_UID_html: "<strong><em>{NAME}</strong></em>'s account was merged with the one imported from <strong><em>{PROVIDER} </strong> ({%UID})</em>." #messageFormat interpolation
+        user_NAME_has_merged_his_account_with_the_one_imported_from_PROVIDER_UID_html: "<strong><em>{NAME}</strong></em>'s Konto wurde mit dem importierten <strong><em>{PROVIDER} </strong> ({%UID})</em> zusammengeführt." #messageFormat interpolation
       notify_admin_when_project_published:
         project_NAME_has_been_published_html: "Projekt <a href='/#!/projects/%{ID}'><strong><em>%{NAME}<em></strong></a> wurde veröffentlicht."
       notify_admin_when_user_is_created:
         a_new_user_account_has_been_created_NAME_EMAIL_html: "Ein neues Benutzerkonto wurde erstellt: <strong><em>%{NAME} &lt;%{EMAIL}&gt;</strong></em>."
       notify_admin_child_created:
-        a_new_child_has_been_created_NAME_html: "A new child has been created: <strong><em>%{NAME}</em></strong>."
+        a_new_child_has_been_created_NAME_html: "Ein neues Kind wurde erstellt: <strong><em>%{NAME}</em></strong>."
       notify_admin_when_user_is_imported:
         a_new_user_account_has_been_imported_from_PROVIDER_UID_html: "Ein neues Benutzerkonto wurde von <strong><em>%{PROVIDER}</strong> (%{UID})</em> importiert."
       notify_member_create_reservation:
         your_reservation_RESERVABLE_was_successfully_saved_html: "Ihre Reservierung <strong><em>%{RESERVABLE}</em></strong> wurde erfolgreich gespeichert."
       notify_member_pre_booked_reservation:
-        your_reservation_RESERVABLE_was_successfully_saved_html: "Your pre-registration <strong><em>%{RESERVABLE}</em></strong> was successfully saved."
+        your_reservation_RESERVABLE_was_successfully_saved_html: "Ihre Voranmeldung <strong><em>%{RESERVABLE}</em></strong> wurde erfolgreich gespeichert."
       notify_member_reservation_reminder:
         reminder_you_have_a_reservation_RESERVABLE_to_be_held_on_DATE_html: "Erinnerung: Sie haben eine Reservierung <strong>%{RESERVABLE}</strong> für <em>%{DATE}</em>"
       notify_member_slot_is_canceled:
@@ -344,12 +347,12 @@ de:
       notify_member_subscription_will_expire_in_7_days:
         your_subscription_will_expire_in_7_days: "Ihr Abonnement läuft in 7 Tagen ab."
       notify_member_training_authorization_expired:
-        training_authorization_revoked: "Your authorization to use %{MACHINES} has been revoked because it has expired."
+        training_authorization_revoked: "Ihre Berechtigung zur Nutzung von %{MACHINES} wurde widerrufen, da sie abgelaufen ist."
       notify_member_training_auto_cancelled:
-        auto_cancelled_training: "The %{TRAINING} training session scheduled for %{DATE}, has been canceled due to an insufficient number of participants."
-        auto_refund: "You were refunded on your wallet."
+        auto_cancelled_training: "Die %{TRAINING} Schulung, die für %{DATE} geplant war, wurde wegen unzureichender Teilnehmerzahl abgesagt."
+        auto_refund: "Sie wurden auf Ihrer Brieftasche zurückerstattet."
       notify_member_training_invalidated:
-        invalidated: "Your authorization to use %{MACHINES} has been invalidated due to a lack of reservations."
+        invalidated: "Ihre Berechtigung zur Nutzung von %{MACHINES} wurde aufgrund fehlender Reservierungen für ungültig erklärt."
       notify_partner_subscribed_plan:
         subscription_partner_PLAN_has_been_subscribed_by_USER_html: "Das Partnerabonnement <strong><em>%{PLAN}</em></strong> wurde von <strong><em>%{USER}</strong></em> abonniert."
       notify_project_author_when_collaborator_valid:
@@ -385,7 +388,7 @@ de:
         statistics_subscription: "der Abonnementstatistiken"
         statistics_training: "der Schulungsstatistiken"
         statistics_space: "der Raumstatistiken"
-        statistics_order: "of statistics about store orders"
+        statistics_order: "von Statistiken über Store-Bestellungen"
         users_members: "der Mitgliederliste"
         users_subscriptions: "der Abonnementliste"
         users_reservations: "der Reservierungsliste"
@@ -399,7 +402,7 @@ de:
         members: "Mitglieder"
         view_results: "Ergebnisse anzeigen."
       notify_admin_low_stock_threshold:
-        low_stock: "Low stock for %{PRODUCT}. "
+        low_stock: "Geringer Lagerbestand für %{PRODUCT}. "
         view_product: "Produkt anzeigen."
       notify_member_about_coupon:
         enjoy_a_discount_of_PERCENT_with_code_CODE: "Erhalten Sie %{PERCENT}% Rabatt mit dem Code %{CODE}"
@@ -423,7 +426,7 @@ de:
       notify_admin_objects_stripe_sync:
         all_objects_sync: "Alle daten wurden erfolgreich auf Stripe synchronisiert."
       notify_admin_order_is_paid:
-        order_paid_html: "A new order has been placed. <a href='/#!/admin/store/orders/%{ID}'>View details</a>."
+        order_paid_html: "Eine neue Bestellung wurde aufgegeben. <a href='/#!/admin/store/orders/%{ID}'>Details</a> anzeigen."
       notify_user_when_payment_schedule_ready:
         your_schedule_is_ready_html: "Ihr Zahlungsplan #%{REFERENCE}, über %{AMOUNT}, ist bereit. <a href='api/payment_schedules/%{SCHEDULE_ID}/download' target='_blank'>Zum Herunterladen klicken Sie hier</a>."
       notify_admin_payment_schedule_error:
@@ -443,55 +446,55 @@ de:
       notify_admin_payment_schedule_transfer_deadline:
         schedule_deadline: "Sie müssen das Lastschriftverfahren für die %{DATE} -Frist bestätigen, für Zeitplan %{REFERENCE}"
       notify_member_reservation_limit_reached:
-        limit_reached: "For %{DATE}, you have reached your daily limit of %{HOURS} hours of %{ITEM} reservation."
+        limit_reached: "Für den %{DATE} haben Sie Ihr tägliches Limit von %{HOURS} Stunden %{ITEM} Reservierung erreicht."
       notify_admin_user_supporting_document_files_created:
-        supporting_document_files_uploaded: "Supporting document uploaded by member <strong><em>%{NAME}</strong></em>."
+        supporting_document_files_uploaded: "Unterstütze Dokument hochgeladen von Mitglied <strong><em>%{NAME}</strong></em>."
       notify_admin_user_supporting_document_files_updated:
-        supporting_document_files_uploaded: "Supporting document changed by member <strong><em>%{NAME}</strong></em>."
+        supporting_document_files_uploaded: "Unterstützungsdokument geändert durch Mitglied <strong><em>%{NAME}</strong></em>."
       notify_admin_user_child_supporting_document_files_created:
-        supporting_document_files_uploaded: "Child's <strong><em>%{NAME}</strong></em> supporting document uploaded."
+        supporting_document_files_uploaded: "Childs <strong><em>%{NAME}</strong></em> unterstützendes Dokument hochgeladen."
       notify_admin_user_child_supporting_document_files_updated:
-        supporting_document_files_uploaded: "Supporting document changed by child <strong><em>%{NAME}</strong></em>."
+        supporting_document_files_uploaded: "Unterstützungsdokument geändert von Kind <strong><em>%{NAME}</strong></em>."
       notify_user_is_validated:
         account_validated: "Dein Account ist gültig."
       notify_user_is_invalidated:
         account_invalidated: "Dein Account ist ungültig."
       notify_user_child_is_validated:
-        child_validated: "Your account child is valid."
+        child_validated: "Dein Account ist gültig."
       notify_user_child_is_invalidated:
-        child_invalidated: "Your account child is invalid."
+        child_invalidated: "Dein Account ist ungültig."
       notify_user_supporting_document_refusal:
-        refusal: "Your supporting documents were refused"
+        refusal: "Ihre Unterstützungsdokumente wurden abgelehnt"
       notify_user_supporting_document_reminder:
-        reminder_message: "This is a reminder for you to upload your supporting documents."
+        reminder_message: "Dies ist eine Erinnerung daran, dass Sie Ihre Belege hochladen müssen."
       notify_admin_user_supporting_document_refusal:
-        refusal: "Member's supporting document <strong><em>%{NAME}</strong></em> was refused."
+        refusal: "Antrag des Mitglieds <strong><em>%{NAME}</strong></em> wurde abgelehnt."
       notify_user_child_supporting_document_refusal:
-        refusal: "Your child's supporting documents were refused"
+        refusal: "Die Begleitdokumente Ihres Kindes wurden abgelehnt"
       notify_admin_user_child_supporting_document_refusal:
-        refusal: "Child's supporting document <strong><em>%{NAME}</strong></em> was refused."
+        refusal: "Antrag des Mitglieds <strong><em>%{NAME}</strong></em> wurde abgelehnt."
       notify_user_order_is_ready:
-        order_ready: "Your command %{REFERENCE} is ready"
+        order_ready: "Ihr Befehl %{REFERENCE} ist bereit"
       notify_user_order_is_canceled:
-        order_canceled: "Your command %{REFERENCE} is canceled"
+        order_canceled: "Ihr Befehl %{REFERENCE} wurde abgebrochen"
       notify_user_order_is_refunded:
-        order_refunded: "Your command %{REFERENCE} is refunded"
+        order_refunded: "Ihr Befehl %{REFERENCE} wird zurückerstattet"
       notify_member_reservation_validated:
-        your_reservation_RESERVABLE_was_validated_html: "Your reservation <strong><em>%{RESERVABLE}</em></strong> was successfully validated."
+        your_reservation_RESERVABLE_was_validated_html: "Ihre Schulung <strong><em>%{RESERVABLE}</em></strong> wurde erfolgreich überprüft."
       notify_admin_reservation_validated:
-        a_RESERVABLE_reservation_was_validated_html: "A <strong><em>%{RESERVABLE}</em></strong> reservation of <strong><em>%{NAME}</em></strong> was validated."
+        a_RESERVABLE_reservation_was_validated_html: "<strong><em>%{RESERVABLE}</em></strong> Reservierung <strong><em>%{NAME}</em></strong> wurde validiert."
       notify_member_reservation_invalidated:
-        your_reservation_RESERVABLE_was_invalidated_html: "Your pre-registration of <strong><em>%{RESERVABLE}</em></strong> wasn't validated."
+        your_reservation_RESERVABLE_was_invalidated_html: "Ihre Vorregistrierung von <strong><em>%{RESERVABLE}</em></strong> wurde nicht bestätigt."
       notify_admin_reservation_invalidated:
-        a_RESERVABLE_reservation_was_invalidated_html: "A <strong><em>%{RESERVABLE}</em></strong> pre-registration of <strong><em>%{NAME}</em></strong> was invalidated."
+        a_RESERVABLE_reservation_was_invalidated_html: "A <strong><em>%{RESERVABLE}</em></strong> Vorregistrierung von <strong><em>%{NAME}</em></strong> wurde ungültig."
       notify_user_when_child_age_will_be_18:
-        child_age_will_be_18_years_ago: "Your child %{NAME} will turn 18 on %{DATE}, at which point they will be automatically detached from your Family account. They will need to create their own account in order to make reservations."
+        child_age_will_be_18_years_ago: "Ihr Kind %{NAME} wird 18 auf %{DATE}aktivieren, und an diesem Punkt werden sie automatisch von Ihrem Familienkonto getrennt. Sie müssen ihr eigenes Konto einrichten, um Reservierungen zu tätigen."
   #statistics tools for admins
   statistics:
     subscriptions: "Abonnements"
     machines_hours: "Maschinen-Slots"
-    machine_dates: "Slots dates"
-    space_dates: "Slots dates"
+    machine_dates: "Slots-Datum"
+    space_dates: "Slots-Datum"
     spaces: "Räume"
     orders: "Bestellungen"
     trainings: "Schulungen"
@@ -523,7 +526,7 @@ de:
     aborted: "Abgebrochen"
     project_status: Status
     project_name: Name
-    project_user_names: Collaborators
+    project_user_names: Mitwirkende
   #statistics exports to the Excel file format
   export:
     entries: "Einträge"
@@ -540,39 +543,39 @@ de:
     male: "Männlich"
     female: "Weiblich"
     deleted_user: "Gelöschte Benutzer"
-    reservation_context: "Reservation context"
+    reservation_context: "Grund der Reservierung"
     coupon: "Coupon"
-    project_author: Author
+    project_author: Autor
   #initial price's category for events, created to replace the old "reduced amount" property
   price_category:
     reduced_fare: "Ermäßigter Tarif"
     reduced_fare_if_you_are_under_25_student_or_unemployed: "Ermäßigter Tarif, wenn Sie unter 25, studierend oder arbeitslos sind."
   cart_items:
     free_extension: "Kostenlose Verlängerung eines Abonnements bis %{DATE}"
-    must_be_after_expiration: "The new expiration date must be set after the current expiration date"
-    group_subscription_mismatch: "Your group mismatch with your subscription. Please report this error."
+    must_be_after_expiration: "Das neue Ablaufdatum muss nach dem aktuellen Ablaufdatum festgelegt werden"
+    group_subscription_mismatch: "Deine Gruppe stimmt nicht mit deinem Abonnement überein. Bitte melde diesen Fehler."
   statistic_profile:
     birthday_in_past: "Geburtsdatum muss in der Vergangenheit liegen"
   order:
-    please_contact_FABLAB: "Please contact us for withdrawal instructions."
+    please_contact_FABLAB: "Bitte setzen Sie sich mit uns in Verbindung, um Anweisungen für den Widerruf zu erhalten."
   cart_item_validation:
-    slot: "The slot doesn't exist"
-    availability: "The availaility doesn't exist"
-    full: "The slot is already fully reserved"
-    deadline: "You can't reserve a slot %{MINUTES} minutes prior to its start"
-    limit_reached: "You have reached the booking limit of %{HOURS}H per day for the %{RESERVABLE}, for your current subscription. Please adjust your reservation."
-    restricted: "This availability is restricted for subscribers"
-    plan: "This subscription plan is disabled"
-    plan_group: "This subscription plan is reserved for members of group %{GROUP}"
-    reserved: "This slot is already reserved"
-    pack: "This prepaid pack is disabled"
-    pack_group: "This prepaid pack is reserved for members of group %{GROUP}"
+    slot: "Der Slot existiert nicht"
+    availability: "Die Verfügbarkeit existiert nicht"
+    full: "Der Slot ist bereits vollständig reserviert"
+    deadline: "Sie können keinen Slot %{MINUTES} Minuten vor dem Start reservieren"
+    limit_reached: "Sie haben das Buchungslimit von %{HOURS}H pro Tag für %{RESERVABLE}für Ihr aktuelles Abonnement erreicht. Bitte passen Sie Ihre Reservierung an."
+    restricted: "Diese Verfügbarkeit ist für Abonnenten beschränkt"
+    plan: "Dieses Abonnement ist deaktiviert"
+    plan_group: "Dieses Abonnement ist reserviert für Mitglieder der Gruppe %{GROUP}"
+    reserved: "Dieser Slot ist bereits reserviert"
+    pack: "Dieses Prepaid-Paket ist deaktiviert"
+    pack_group: "Dieses Prepaid-Paket ist reserviert für Mitglieder der Gruppe %{GROUP}"
     space: "Dieser Space ist deaktiviert"
     machine: "Diese Maschine ist deaktiviert"
     reservable: "Diese Maschine ist nicht reservierbar"
-    blocked_by_another_reservation: "This slot is blocked by another reservation"
+    blocked_by_another_reservation: "Dieser Slot ist durch eine andere Reservierung gesperrt"
   cart_validation:
-    select_user: "Please select a user before continuing"
+    select_user: "Bitte wählen Sie einen Benutzer aus, bevor Sie fortfahren"
   settings:
     locked_setting: "die Einstellung ist gesperrt."
     about_title: "Seitentitel \"Über\""
@@ -594,12 +597,12 @@ de:
     invoice_order-nb: "Bestellnummer der Rechnung"
     invoice_VAT-active: "Aktivierung der Mehrwertsteuer"
     invoice_VAT-rate: "MwSt.-Satz"
-    invoice_VAT-rate_Product: "VAT rate for shop's product sales"
-    invoice_VAT-rate_Event: "VAT rate for event reservations"
-    invoice_VAT-rate_Machine: "VAT rate for machine reservations"
-    invoice_VAT-rate_Subscription: "VAT rate for subscriptions"
-    invoice_VAT-rate_Space: "VAT rate for space reservations"
-    invoice_VAT-rate_Training: "VAT rate for training reservations"
+    invoice_VAT-rate_Product: "MwSt.-Satz für Produktverkäufe"
+    invoice_VAT-rate_Event: "MwSt.-Satz für Event-Reservierungen"
+    invoice_VAT-rate_Machine: "MwSt.-Satz für Maschinen-Reservierungen"
+    invoice_VAT-rate_Subscription: "MwSt.-Satz für Abonnements"
+    invoice_VAT-rate_Space: "MwSt.-Satz für Platzreservierungen"
+    invoice_VAT-rate_Training: "MwSt.-Satz für Schulungsreservierungen"
     invoice_text: "Rechnungstext"
     invoice_legals: "Rechtliche Informationen auf den Rechnungen"
     booking_window_start: "Öffnungszeit Beginn"
@@ -618,11 +621,11 @@ de:
     space_explications_alert: "Erklärungstext auf der Seite für die Raum-Reservierung"
     visibility_yearly: "Maximale Sichtbarkeit für jährliche Abonnenten"
     visibility_others: "Maximale Sichtbarkeit für andere Mitglieder"
-    reservation_deadline: "Prevent reservation before it starts"
+    reservation_deadline: "Reservierung vor dem Start verhindern"
     display_name_enable: "Namen im Kalender anzeigen"
     machines_sort_by: "Anzeigereihenfolge der Maschinen"
-    accounting_sales_journal_code: "Sales journal code"
-    accounting_payment_card_code: "Card payments code"
+    accounting_sales_journal_code: "Code des Verkaufsberichts"
+    accounting_payment_card_code: "Kartenzahlungscode"
     accounting_payment_card_label: "Card payments label"
     accounting_payment_card_journal_code: "Card clients journal code"
     accounting_payment_wallet_code: "Wallet payments code"
@@ -721,11 +724,11 @@ de:
     flickr: "Flickr"
     machines_module: "Maschinenmodul"
     user_change_group: "Allow users to change their group"
-    store_module: "Store module"
-    store_withdrawal_instructions: "Withdrawal instructions"
-    store_hidden: "Store hidden to the public"
-    advanced_accounting: "Advanced accounting"
-    external_id: "external identifier"
+    store_module: "Modul speichern"
+    store_withdrawal_instructions: "Widerrufsbelehrung"
+    store_hidden: "Shop für die Öffentlichkeit versteckt"
+    advanced_accounting: "Erweiterte Buchhaltung"
+    external_id: "externe Id"
     prevent_invoices_zero: "prevent building invoices at 0"
     invoice_VAT-name: "VAT name"
     trainings_auto_cancel: "Trainings automatic cancellation"

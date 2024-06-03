@@ -1096,15 +1096,19 @@ Application.Controllers.controller('DeleteRecurrentEventController', ['$scope', 
     // with recurrent slots: how many slots should we delete?
     $scope.deleteMode = 'single';
 
+    $scope.deleting = false;
+
     /**
      * Confirmation callback
      */
     $scope.ok = function () {
+      $scope.deleting = true;
       const { id, start_at, end_at } = eventPromise;
       // the admin has confirmed, delete the slot
       Event.delete(
         { id, mode: $scope.deleteMode },
         function (res) {
+          $scope.deleting = false;
           // delete success
           if (res.deleted > 1) {
             growl.success(_t(
@@ -1122,6 +1126,7 @@ Application.Controllers.controller('DeleteRecurrentEventController', ['$scope', 
           });
         },
         function (res) {
+          $scope.deleting = false;
           // not everything was deleted
           const { data } = res;
           if (data.total > 1) {

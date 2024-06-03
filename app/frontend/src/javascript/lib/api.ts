@@ -18,7 +18,7 @@ export default class ApiLib {
         ...object,
         ...attachmentAttributes.reduce((a, name) => { return { ...a, [name]: null }; }, {})
       }
-    }, { dateWithTimezone: true });
+    }, { dateWithTimezone: true, allowEmptyArrays: true });
     attachmentAttributes.forEach((attr) => {
       data.delete(`${name}[${attr}]`);
       if (Array.isArray(object[attr])) {
