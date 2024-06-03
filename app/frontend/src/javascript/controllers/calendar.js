@@ -16,8 +16,8 @@
  * Controller used in the public calendar global
  */
 
-Application.Controllers.controller('CalendarController', ['$scope', '$state', '$aside', '$uibModal', 'moment', 'Availability', 'Setting', 'growl', 'dialogs', 'bookingWindowStart', 'bookingWindowEnd', '_t', 'uiCalendarConfig', 'CalendarConfig', 'trainingsPromise', 'machinesPromise', 'spacesPromise', 'iCalendarPromise', 'machineCategoriesPromise',
-  function ($scope, $state, $aside, $uibModal, moment, Availability, Setting, growl, dialogs, bookingWindowStart, bookingWindowEnd, _t, uiCalendarConfig, CalendarConfig, trainingsPromise, machinesPromise, spacesPromise, iCalendarPromise, machineCategoriesPromise) {
+Application.Controllers.controller('CalendarController', ['$scope', '$state', '$aside', '$uibModal', 'moment', 'Availability', 'Setting', 'growl', 'dialogs', 'bookingWindowStart', 'bookingWindowEnd', '_t', 'uiCalendarConfig', 'CalendarConfig', 'trainingsPromise', 'machinesPromise', 'spacesPromise', 'iCalendarPromise', 'machineCategoriesPromise', '$interval',
+  function ($scope, $state, $aside, $uibModal, moment, Availability, Setting, growl, dialogs, bookingWindowStart, bookingWindowEnd, _t, uiCalendarConfig, CalendarConfig, trainingsPromise, machinesPromise, spacesPromise, iCalendarPromise, machineCategoriesPromise, $interval) {
   /* PRIVATE STATIC CONSTANTS */
     let currentMachineEvent = null;
     machinesPromise.forEach(m => m.checked = true);
@@ -26,6 +26,8 @@ Application.Controllers.controller('CalendarController', ['$scope', '$state', '$
 
     // check all formation/machine is select in filter
     const isSelectAll = (type, scope) => scope[type].length === scope[type].filter(t => t.checked).length;
+
+    let stopRedirectPage = false;
 
     /* PUBLIC SCOPE */
 
@@ -190,6 +192,45 @@ Application.Controllers.controller('CalendarController', ['$scope', '$state', '$
         }]
       });
 
+    $scope.triggerOnlyCalendarViewMode = function () {
+      const header = document.getElementById('top-header');
+      const nav = document.getElementById('nav');
+      const calendarBackButton = document.getElementById('calendar-back-button');
+      const mainContent = $('.vbox > header.header-md ~ section');
+      if (!header || !nav || !calendarBackButton || !mainContent) { return; }
+      if (header.style.display === 'none') {
+        header.style.display = '';
+        nav.style.display = '';
+        calendarBackButton.style.display = '';
+        mainContent.css('top', '');
+      } else {
+        header.style.display = 'none';
+        nav.style.display = 'none';
+        calendarBackButton.style.display = 'none';
+        mainContent.css('top', '0');
+      }
+    };
+
+    // refresh calendar every 5 minutes
+    $scope.triggerAutoRefresh = function () {
+      if ($scope.autoRefresh) {
+        $interval.cancel($scope.autoRefresh);
+        $scope.autoRefresh = undefined;
+        stopRedirectPage = false;
+      } else {
+        $scope.autoRefresh = $interval(refreshCalendar, 10000);
+        stopRedirectPage = true;
+      }
+    };
+
+    $scope.$on('$destroy', function () {
+      if ($scope.autoRefresh) {
+        $interval.cancel($scope.autoRefresh);
+        $scope.autoRefresh = undefined;
+        stopRedirectPage = false;
+      }
+    });
+
     /* PRIVATE SCOPE */
 
     /**
@@ -257,13 +298,13 @@ Application.Controllers.controller('CalendarController', ['$scope', '$state', '$
       } else if (event.available_type === 'space') {
         calendar.fullCalendar('changeView', 'agendaDay');
         calendar.fullCalendar('gotoDate', event.start);
-      } else if (event.available_type === 'event') {
+      } else if (event.available_type === 'event' && !stopRedirectPage) {
         $state.go('app.public.events_show', { id: event.event_id });
-      } else if (event.available_type === 'training') {
+      } else if (event.available_type === 'training' && !stopRedirectPage) {
         $state.go('app.public.training_show', { id: event.training_id });
       } else {
         if (event.machine_ids) {
-          if (event.machine_ids.length === 1) {
+          if (event.machine_ids.length === 1 && !stopRedirectPage) {
             $state.go('app.public.machines_show', { id: event.machine_ids[0] });
           } else {
             // open a modal to ask the user to select the machine to show
@@ -349,6 +390,12 @@ Application.Controllers.controller('CalendarController', ['$scope', '$state', '$
     };
 
     const availabilitySourceUrl = () => `/api/availabilities/public?${$.param(getFilter())}`;
+
+    const refreshCalendar = function () {
+      uiCalendarConfig.calendars.calendar.fullCalendar('changeView', 'agendaWeek');
+      uiCalendarConfig.calendars.calendar.fullCalendar('today');
+      uiCalendarConfig.calendars.calendar.fullCalendar('refetchEvents');
+    };
 
     // !!! MUST BE CALLED AT THE END of the controller
     return initialize();
