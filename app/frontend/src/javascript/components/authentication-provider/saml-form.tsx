@@ -65,6 +65,11 @@ export const SamlForm = <TFieldValues extends FieldValues, TContext extends obje
                  label={t('app.admin.authentication.saml_form.idp_slo_service_url')}
                  tooltip={t('app.admin.authentication.saml_form.idp_slo_service_url_help')}
                  formState={formState} />
+      <FormInput id="providable_attributes.uid_attribute"
+                 register={register}
+                 label={t('app.admin.authentication.saml_form.uid_attribute')}
+                 tooltip={t('app.admin.authentication.saml_form.uid_attribute_help')}
+                 formState={formState} />
       <FormSwitch id="providable_attributes.authn_requests_signed" control={control}
                   formState={formState}
                   label={t('app.admin.authentication.saml_form.authn_requests_signed')} />

@@ -83,8 +83,8 @@ de:
     matching_between_User_uid_and_API_required: "Um diesen Provider hinzuzufügen, muss die Übereinstimmung zwischen User.uid und der API festgelegt werden."
   #PDF invoices generation
   invoices:
-    refund_invoice_reference: "Beleg der Rechnungsrückerstattungung: %{REF}"
-    invoice_reference: "Rechnungsbezug: %{REF}"
+    refund_invoice_reference: "Beleg der Rechnungsrückerstattung: %{REF}"
+    invoice_reference: "Rechnungsnummer: %{REF}"
     code: "Code: %{CODE}"
     order_number: "Bestellnummer: %{NUMBER}"
     invoice_issued_on_DATE: "Rechnung ausgestellt am %{DATE}"
@@ -729,8 +729,8 @@ de:
     store_hidden: "Shop für die Öffentlichkeit versteckt"
     advanced_accounting: "Erweiterte Buchhaltung"
     external_id: "externe Id"
-    prevent_invoices_zero: "prevent building invoices at 0"
-    invoice_VAT-name: "VAT name"
+    prevent_invoices_zero: "Keine Rechnungserstellung bei 0€"
+    invoice_VAT-name: "Ust-Name"
     trainings_auto_cancel: "Trainings automatic cancellation"
     trainings_auto_cancel_threshold: "Minimum participants for automatic cancellation"
     trainings_auto_cancel_deadline: "Automatic cancellation deadline"

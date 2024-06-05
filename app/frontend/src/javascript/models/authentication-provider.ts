@@ -76,7 +76,8 @@ export interface SamlProvider {
   sp_certificate: string,
   sp_private_key: string,
   authn_requests_signed: boolean,
-  want_assertions_signed: boolean
+  want_assertions_signed: boolean,
+  uid_attribute: string,
 }
 
 export interface MappingFields {
