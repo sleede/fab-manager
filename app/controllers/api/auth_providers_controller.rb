@@ -109,7 +109,8 @@ class API::AuthProvidersController < API::APIController
       params.require(:auth_provider)
             .permit(:id, :name, :providable_type,
                     providable_attributes: %i[id sp_entity_id idp_sso_service_url profile_url idp_cert_fingerprint idp_cert
-                                              idp_slo_service_url authn_requests_signed want_assertions_signed sp_certificate sp_private_key],
+                                              idp_slo_service_url authn_requests_signed want_assertions_signed sp_certificate
+                                              sp_private_key uid_attribute],
                     auth_provider_mappings_attributes: [:id, :local_model, :local_field, :api_field, :api_endpoint, :api_data_type,
                                                         :_destroy, { transformation: [:type, :format, :true_value, :false_value,
                                                                                       { mapping: %i[from to] }] }])
