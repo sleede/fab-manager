@@ -2,6 +2,8 @@
 
 ## Next release
 
+- Fix a bug: unable to show gender wowan in member export
+
 ## v6.3.26 2024 June 5
 
 - improvement: add uid_attribute for saml provider
