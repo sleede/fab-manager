@@ -124,6 +124,11 @@
     height: 94px;
     text-align: center;
   }
+
+  .public-calendar-heading-actions {
+    display: flex;
+    justify-content: right;
+  }
 }
 
 body.container {
