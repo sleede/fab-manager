@@ -3,6 +3,7 @@
 ## Next release
 
 - Fix a bug: unable to show gender wowan in member export
+- Add a new feature: add a new button to automatically refresh the public calendar
 
 ## v6.3.26 2024 June 5
 

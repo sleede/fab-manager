@@ -218,7 +218,8 @@ Application.Controllers.controller('CalendarController', ['$scope', '$state', '$
         $scope.autoRefresh = undefined;
         stopRedirectPage = false;
       } else {
-        $scope.autoRefresh = $interval(refreshCalendar, 10000);
+        // refresh calendar every 1 minute
+        $scope.autoRefresh = $interval(refreshCalendar, 60000);
         stopRedirectPage = true;
       }
     };
