@@ -155,7 +155,7 @@ es:
         discover_members: "Descubrir miembros"
         #next events summary on the home page
         fablab_s_next_events: "Próximos eventos"
-        every_events: "All events"
+        every_events: "Todos los eventos"
       event_card:
         on_the_date: "El {DATE}"
         from_date_to_date: "Desde {START} hasta {END}"
@@ -199,7 +199,7 @@ es:
         by_name: "Por {NAME}"
         step_N: "Paso {INDEX}"
         share_on_facebook: "Compartir en Facebook"
-        share_on_twitter: "Compartir en Twitter"
+        share_on_twitter: "Compartir en X"
         deleted_user: "Usario eliminado"
         posted_on_: "Subido el"
         CAD_file_to_download: "{COUNT, plural, one {}=0{No hay archivos CAD} =1{Archivo CAD para descargar} other{Archivos CAD para descargar}}"
@@ -369,7 +369,7 @@ es:
         thanks_for_coming: "¡Gracias por venir!"
         view_event_list: "Ver próximos eventos"
         share_on_facebook: "Compartir en Facebook"
-        share_on_twitter: "Compartir en Twitter"
+        share_on_twitter: "Compartir en X"
         last_name_and_first_name: "Apellido y nombre"
         pre_book: "Preinscribir"
         pre_registration_end_date: "Fecha límite para preinscripción"
