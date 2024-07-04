@@ -244,7 +244,7 @@ it:
         all_machines: "Tutte le macchine"
       machine_card:
         book: "Prenota"
-        consult: "Vedi"
+        consult: "View"
       #details of a machine
       machines_show:
         book_this_machine: "Modifica questa macchina"

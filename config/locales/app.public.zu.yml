@@ -244,7 +244,7 @@ zu:
         all_machines: "crwdns36247:0crwdne36247:0"
       machine_card:
         book: "crwdns28166:0crwdne28166:0"
-        consult: "crwdns28168:0crwdne28168:0"
+        consult: "crwdns38224:0crwdne38224:0"
       #details of a machine
       machines_show:
         book_this_machine: "crwdns28170:0crwdne28170:0"

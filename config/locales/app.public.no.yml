@@ -244,7 +244,7 @@
         all_machines: "All machines"
       machine_card:
         book: "Reserver"
-        consult: "Se på"
+        consult: "View"
       #details of a machine
       machines_show:
         book_this_machine: "Reserver denne maskinen"

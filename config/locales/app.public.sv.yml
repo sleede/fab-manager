@@ -244,7 +244,7 @@ sv:
         all_machines: "All utrustning"
       machine_card:
         book: "Boka"
-        consult: "Detaljer"
+        consult: "View"
       #details of a machine
       machines_show:
         book_this_machine: "Boka utrustning"
