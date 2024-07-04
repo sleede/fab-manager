@@ -2,6 +2,8 @@
 
 ## Next release
 
+- Fix a bug: unable to show gender in global export
+
 ## v6.3.27 2024 June 12
 
 - Fix a bug: unable to show gender wowan in member export
