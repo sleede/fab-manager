@@ -2,6 +2,8 @@
 
 ## Next release
 
+## v6.3.28 2024 July 5
+
 - Fix a bug: unable to show gender in global export
 - updates translations
 - [TODO DEPLOY] `rails fablab:maintenance:regenerate_statistics[2014,1]`
