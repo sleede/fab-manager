@@ -59,7 +59,12 @@
 
       <div class="text-center" id="social-share">
         <a ng-href="{{shareOnFacebook()}}" target="_blank" class="btn btn-facebook btn-lg m-t"><i class="fa fa-facebook m-r"></i> {{ 'app.public.projects_show.share_on_facebook' | translate }}</a>
-        <a ng-href="{{shareOnTwitter()}}" target="_blank" class="btn btn-twitter btn-lg m-t"><i class="fa fa-twitter m-r"></i> {{ 'app.public.projects_show.share_on_twitter' | translate }}</a>
+        <a ng-href="{{shareOnTwitter()}}" target="_blank" class="btn btn-twitter btn-lg m-t">
+          <svg viewBox="0 0 24 24" width="20px">
+            <use href="../../images/icons.svg#twitter"/>
+          </svg>
+          {{ 'app.public.projects_show.share_on_twitter' | translate }}
+        </a>
       </div>
 
       <div class="wrapper-lg" ng-if="disqusShortname">

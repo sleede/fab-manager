@@ -199,7 +199,7 @@ it:
         by_name: "di {NAME}"
         step_N: "Fase {INDEX}"
         share_on_facebook: "Condividi su Facebook"
-        share_on_twitter: "Condividi su Twitter"
+        share_on_twitter: "Condividi su X"
         deleted_user: "Utente eliminato"
         posted_on_: "Pubblicato su"
         CAD_file_to_download: "{COUNT, plural, one {}=0{Nessun file CAD} =1{File CAD da scaricare} other{File CAD da scaricare}}"
@@ -244,7 +244,7 @@ it:
         all_machines: "Tutte le macchine"
       machine_card:
         book: "Prenota"
-        consult: "Vedi"
+        consult: "View"
       #details of a machine
       machines_show:
         book_this_machine: "Modifica questa macchina"
@@ -369,7 +369,7 @@ it:
         thanks_for_coming: "Grazie per aver partecipato!"
         view_event_list: "Visualizza gli eventi in programma"
         share_on_facebook: "Condividi su Facebook"
-        share_on_twitter: "Condividi su Twitter"
+        share_on_twitter: "Condividi su X"
         last_name_and_first_name: "Last name and first name"
         pre_book: "Pre-book"
         pre_registration_end_date: "Deadline for pre-registration"

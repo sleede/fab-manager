@@ -31,7 +31,7 @@ module ExcelHelper
       user&.profile&.full_name || t('export.deleted_user'),
       user&.email || '',
       user&.profile&.phone || '',
-      hit['_source']['gender'].nil? ? t("export.#{hit['_source']['gender']}") : '',
+      !hit['_source']['gender'].nil? ? t("export.#{hit['_source']['gender']}") : '',
       hit['_source']['age'],
       subtype.nil? ? '' : subtype.label
     ]
