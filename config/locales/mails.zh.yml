@@ -1,0 +1,490 @@
+zh-CN:
+  layouts:
+    notifications_mailer:
+      see_you_later: "再见 {GENDER, select, neutral{} other{the}}"  #messageFormat 插值
+      sincerely: "诚挚的,"
+      signature: "Fab Lab 团队."
+      do_not_reply: "请勿回复此邮件."
+  users_mailer:
+    notify_user_account_created:
+      subject: "您的 FabLab 账户已成功创建"
+      body:
+        hello: "您好 %{NAME},"
+        intro: "Fab Lab 团队刚刚为您在 {GENDER, select, neutral{} other{the}} {FABLAB} 网站创建了一个账户:"  #messageFormat 插值
+        connection_parameters: "以下是您的连接参数:"
+        account_name: "账户名:"
+        password: "密码:"
+        temporary_password: "这是一个临时密码，您可以在「我的账户」页面修改它。"
+        keep_advantages: "使用此账户，您可以保留与 Fab Lab 用户档案相关的所有优势（培训，订阅计划）。"
+        to_use_platform: "要使用该网站，请"
+        logon_or_login: "点击这里创建一个新账户或登录。"
+        token_if_link_problem: "如果链接有问题，您可以在第一次连接时输入以下代码:"
+  notifications_mailer:
+    notify_user_user_group_changed:
+      subject: "您已更改组"
+      body:
+        warning: "您已更改组。实验室可能会进行检查以验证此更改的合法性。"
+        user_invalidated: "您的账户已失效，请上传您的新支持文件以验证您的账户。"
+    notify_admin_user_group_changed:
+      subject: "一名成员已更改组"
+      body:
+        user_changed_group_html: "用户 <em><strong>%{NAME}</strong></em> 已更改组。"
+        previous_group: "之前的组:"
+        new_group: "新的组:"
+        user_invalidated: "用户的账户已失效。"
+    notify_admin_subscription_extended:
+      subject: "订阅已延长"
+      body:
+        subscription_extended_html: "用户 <strong><em>{NAME}</strong></em> 的订阅 <strong><em>{PLAN}</em></strong> 已延长 {FREE, select, true{免费} other{}} 直到 {DATE}。"   #messageFormat 插值
+    notify_member_subscription_extended:
+      subject: "您的订阅计划已延长"
+      body:
+        your_plan: "您的订阅计划"
+        has_been_extended: "已延长"
+        free: "免费"
+        until: "直到"
+    notify_partner_subscribed_plan:
+      subject: "订阅计划已被购买"
+      body:
+        a_plan: "订阅计划"
+        was_purchased_by_member: "已被用户购买"
+    notify_admin_when_project_published:
+      subject: "项目已发布"
+      body:
+        new_project_published: "已发布新项目:"
+    notify_project_collaborator_to_valid:
+      subject: "邀请合作项目"
+      body:
+        your_are_invited_to_take_part_in_a_project: "您被邀请加入此项目:"
+        to_accept_the_invitation_click_on_following_link: "要接受此邀请，请点击以下链接:"
+    notify_project_author_when_collaborator_valid:
+      subject: "您的项目有新合作伙伴"
+      body:
+        the_member: "用户"
+        accepted_your_invitation_to_take_part_in_the_project: "已接受您的邀请加入您的项目:"
+    notify_user_training_valid:
+      subject: "您的培训已验证"
+      body:
+        your_training: "您的培训"
+        has_been_validated: "已被验证"
+    notify_member_subscribed_plan:
+      subject: "您的订阅已成功购买"
+      body:
+        plan_subscribed_html: "您已订阅计划: <strong><em>%{PLAN}</em></strong>."
+        rolling_subscription_stops_on: "您的订阅将在首次培训后 %{DURATION} 结束。否则，它将在 %{DATE} 停止。"
+        subscription_stops_on: "您的订阅将在 %{DATE} 结束。"
+    notify_member_create_reservation:
+      subject: "您的预订已成功保存"
+      body:
+        reservation_saved_html: "您的预订 <strong><em>%{RESERVATION}</em></strong> 已成功保存"
+        your_reserved_slots: "您预订的时间段是:"
+    notify_member_pre_booked_reservation:
+      subject: "您的预注册已成功保存"
+      body:
+        reservation_saved_html: "您的预注册 <strong><em>%{RESERVATION}</em></strong> 已成功保存"
+        your_reserved_slots: "您预注册的时间段是:"
+        reservation_warning: "<strong><em>此邮件不算作对 %{RESERVATION} 的注册。</em></strong><br/>您将收到另一封邮件以确认或拒绝您的请求。"
+    notify_member_subscribed_plan_is_changed:
+      subject: "您的订阅已更新"
+      body:
+        new_plan_html: "您已更改您的订阅计划为 <strong><em>%{PLAN}</em></strong>."
+    notify_admin_member_create_reservation:
+      subject: "新预订"
+      body:
+        member_reserved_html: "用户 %{NAME} 已预订 <strong><em>%{RESERVABLE}</em></strong>."
+        reserved_slots: "预订的时间段是:"
+    notify_admin_member_pre_booked_reservation:
+      subject: "新预注册"
+      body:
+        member_reserved_html: "用户 %{NAME} 已预注册 <strong><em>%{RESERVABLE}</em></strong>."
+        reserved_slots: "预注册的时间段是:"
+    notify_member_slot_is_modified:
+      subject: "您的预订时间段已成功更改"
+      body:
+        reservation_changed_to: "您的预订时间段已更改为:"
+        previous_date: "之前的日期:"
+    notify_admin_slot_is_modified:
+      subject: "预订时间段已修改"
+      body:
+        slot_modified: "用户 %{NAME} 已修改他的预订时间段"
+        new_date: "新的时间段"
+        old_date: "之前的时间段"
+    notify_admin_when_user_is_created:
+      subject: "用户账户已创建"
+      body:
+        new_account_created: "在网站上创建了一个新用户账户:"
+        user_of_group_html: "用户已注册到组 <strong>%{GROUP}</strong>"
+        account_for_organization: "此账户管理一个组织:"
+    notify_admin_child_created:
+      subject: "用户的子账户已创建"
+      body:
+        new_child_created: "在网站上创建了一个新的用户子账户"
+    notify_admin_subscribed_plan:
+      subject: "订阅已被购买"
+      body:
+        plan_subscribed_html: "用户 <strong><em>%{NAME}</strong></em> 已订阅计划 <strong><em>%{PLAN}</em></strong>."
+    notify_member_invoice_ready:
+      subject: "您的 FabLab 发票"
+      body:
+        please_find_attached_html: "请查收附件中 %{DATE} 的发票，金额为 {AMOUNT}，与您的 {TYPE, select, Reservation{预订} OrderItem{订单} other{订阅}} 相关。"  #messageFormat 插值
+        invoice_in_your_dashboard_html:  "您可以在 Fab Lab 网站的 %{DASHBOARD} 上查看您的发票。"
+        your_dashboard: "您的控制面板"
+    notify_member_reservation_reminder:
+      subject: "预订提醒"
+      body:
+        this_is_a_reminder_about_your_reservation_RESERVABLE_to_be_held_on_DATE_html: "这是关于您预订的提醒 <strong>%{RESERVABLE}</strong>，将于 <em>%{DATE}</em> 举行"
+        this_reservation_concerns_the_following_slots: "此次预订涉及以下时间段:"
+    notify_member_avoir_ready:
+      subject: "您的 FabLab 退款发票"
+      body:
+        please_find_attached_html: "请查收附件中的退款发票，日期为 {DATE}，金额为 {AMOUNT}，与您的 {TYPE, select, Reservation{预订} WalletTransaction{钱包退款} other{订阅}} 相关。"  #messageFormat 插值
+        invoice_in_your_dashboard_html: "您可以在 Fab Lab 网站的 %{DASHBOARD} 上查看您的退款发票。"
+        your_dashboard: "您的控制面板"
+    notify_member_subscription_will_expire_in_7_days:
+      subject: "您的订阅将在7天内到期"
+      body:
+        your_plan: "您的计划"
+        expires_in_7_days: "将在7天内到期。"
+        to_renew_your_plan_follow_the_link: "请点击此链接续订您的计划"
+    notify_member_training_authorization_expired:
+      subject: "您的授权已被撤销"
+      body:
+        training_expired_html: "<p>您参加了 %{TRAINING} 培训，于 %{DATE}。</p><p>您的此培训授权，有效期为 %{PERIOD} 个月，已到期。</p><p>请重新验证，以便能够预订 %{MACHINES}</p>。"
+    notify_member_training_auto_cancelled:
+      subject: "您的培训课程已取消"
+      body:
+        cancelled_training: "由于参与人数不足，%{DATE} 安排的 %{TRAINING} 培训课程，从 %{START} 到 %{END} 已被取消。"
+        auto_refund: "您已退款至您的钱包，并生成了一个信用凭证。"
+    notify_member_training_invalidated:
+      subject: "您的授权已失效"
+      body:
+        training_invalidated_html: "<p>您参加了 %{DATE} 的 %{TRAINING} 培训，使您能够访问 %{MACHINES}。</p><p>由于在过去 %{PERIOD} 个月内未预约其中一台机器，您的授权已失效。</p><p>请重新验证培训以继续预约这些机器。</p>。"
+    notify_member_subscription_is_expired:
+      subject: "您的订阅已到期"
+      body:
+        your_plan: "您的计划"
+        has_expired: "已到期。"
+        you_can_go_to: "请前往"
+        to_renew_your_plan: "续订您的计划"
+    notify_admin_subscription_will_expire_in_7_days:
+      subject: "会员订阅将在7天内到期"
+      body:
+        subscription_will_expire_html: "用户 %{NAME} 的订阅计划 <strong><em>%{PLAN}</em></strong> 将在7天内到期。"
+    notify_admin_training_auto_cancelled:
+      subject: "培训已自动取消"
+      body:
+        cancelled_training: "由于参与人数不足，%{DATE} 安排的 %{TRAINING} 培训课程，从 %{START} 到 %{END} 已被自动取消。"
+        auto_refund: "已预订此培训课程的成员已自动退款至他们的钱包并生成了信用凭证。"
+        manual_refund: "请手动退款给所有预订此培训课程的成员，并生成信用凭证。"
+    notify_admin_subscription_is_expired:
+      subject: "会员订阅已到期"
+      body:
+        subscription_expired_html: "用户 %{NAME} 的订阅计划 <strong><em>%{PLAN}</em></strong> 现已到期。"
+    notify_admin_subscription_canceled:
+      subject: "会员订阅已取消"
+      body:
+        subscription_canceled_html: "用户 %{NAME} 的订阅 <strong><em>%{PLAN}</em></strong> 已被取消。"
+    notify_member_subscription_canceled:
+      subject: "您的订阅已取消"
+      body:
+        your_plan_was_canceled: "您的订阅计划已被取消。"
+        your_plan: "您的订阅计划"
+        end_at: "结束于"
+    notify_member_slot_is_canceled:
+      subject: "您的预订已取消"
+      body:
+        reservation_canceled: "您的 %{RESERVABLE} 预订已取消"
+    notify_admin_slot_is_canceled:
+      subject: "预订已取消"
+      body:
+        member_cancelled: "用户 %{NAME} 已取消其预订"
+        item_details: "%{START} - %{END}，涉及 %{RESERVABLE}"
+        generate_refund: "不要忘记生成信用凭证或退款。"
+    notify_admin_when_user_is_imported:
+      subject: "用户账户已从 SSO 导入"
+      body:
+        new_account_imported: "通过 %{PROVIDER} 导入了一个新用户账户 (ID: %{ID}) 至网站。"
+        provider_uid: "其提供商 ID 是:"
+        known_information: "以下是我们所知的提供商信息:"
+        address_already_used: "此地址已与另一个用户关联"
+        no_more_info_available: "在用户完善其个人资料之前，无法提供更多信息。"
+    notify_user_profile_complete:
+      subject: "您现在可以访问整个网站"
+      body:
+        message: "您的账户信息已成功更新，您现在可以访问整个网站。"
+    notify_user_auth_migration:
+      subject: "FabLab 账户重要变更"
+      body:
+        the_platform: "网站"
+        is_changing_its_auth_system_and_will_now_use: "正在更改其用户识别系统，并将使用"
+        instead_of: "而不是"
+        consequence_of_the_modification: "由于此更改，您将无法使用现有用户名登录网站"
+        to_use_the_platform_thanks_for: "要继续使用网站，请"
+        create_an_account_on: "在此创建一个新账户"
+        or_use_an_existing_account_clicking_here: "或点击此处使用现有账户"
+        in_case_of_problem_enter_the_following_code: "如果此链接有问题，您可以在首次连接时输入以下代码，以将您的当前账户迁移到新的身份验证系统中:"
+    notify_admin_user_merged:
+      subject: "导入的账户已与现有账户合并"
+      body:
+        imported_account_merged: "通过 %{PROVIDER} 导入的用户账户已与现有账户 %{NAME} 合并"
+        provider_uid: "其提供商 ID 是:"
+    notify_admin_profile_complete:
+      subject: "导入的账户已完成个人资料"
+      body:
+        account_completed: "用户账户已完成其个人资料:"
+        imported_account_completed: "通过 %{PROVIDER} 导入的用户账户已完成其个人资料:"
+        provider_id: "其提供商 ID 是:"
+    notify_admin_abuse_reported:
+      subject: "已报告滥用内容"
+      body:
+        intro: "用户标记了一个内容为滥用"
+        signaled_content: "标记内容:"
+        signaled_by: "标记者:"
+        signaled_on: "标记时间:"
+        message: "消息:"
+        visit_management_interface: "请参阅报告管理界面了解更多信息。"
+    notify_user_wallet_is_credited:
+      subject: "您的钱包已充值"
+      body:
+        wallet_credit_html: "您的钱包已由管理员充值 %{AMOUNT}。"
+    notify_admin_user_wallet_is_credited:
+      subject: "用户钱包已充值"
+      body:
+        wallet_credit_html: "管理员 %{ADMIN} 已为用户 %{USER} 的钱包充值 %{AMOUNT}。"
+    notify_admin_export_complete:
+      subject: "导出已完成"
+      body:
+        you_asked_for_an_export: "您请求导出"
+        statistics_global: "所有统计数据的"
+        statistics_account: "注册统计数据的"
+        statistics_event: "活动统计数据的"
+        statistics_machine: "机器时间段统计数据的"
+        statistics_project: "项目统计数据的"
+        statistics_subscription: "订阅统计数据的"
+        statistics_training: "培训统计数据的"
+        statistics_space: "空间统计数据的"
+        users_members: "会员列表的"
+        users_subscriptions: "订阅列表的"
+        users_reservations: "预订列表的"
+        availabilities_index: "预订可用性索引的"
+        accounting_acd: "ACD的会计数据的"
+        accounting_vat: "增值税数据的"
+        click_to_download: "Excel 文件生成成功。要下载，请点击"
+        here: "此处"
+        file_type:
+          xlsx: "Excel"
+          csv: "CSV"
+    notify_admin_import_complete:
+      subject: "导入完成"
+      body:
+        you_made_an_import: "您已发起 %{CATEGORY} 的导入"
+        category_members: "会员"
+        click_to_view_results: "点击这里查看结果"
+    notify_admin_low_stock_threshold:
+      subject: "库存警报"
+      body:
+        low_stock: "%{PRODUCT} 的新库存移动已超过低库存阈值。"
+        stocks_state_html: "当前库存状态：<ul><li>内部：%{INTERNAL}</li><li>外部：%{EXTERNAL}</li></ul>"
+        manage_stock: "管理该产品的库存"
+    notify_member_about_coupon:
+      subject: "优惠券"
+      body:
+        enjoy_a_discount_of_PERCENT_with_code_CODE: "使用代码 %{CODE} 享受全场 %{PERCENT}% 的折扣。"
+        enjoy_a_discount_of_AMOUNT_with_code_CODE: "使用代码 %{CODE} 享受全场 %{AMOUNT} 的折扣。"
+        this_coupon_is_valid_USAGE_times_until_DATE_for_all_your_purchases: "此优惠券有效期为 {USAGE, plural, =1{一次} other{多次}}，适用于所有购买 {TYPE, select, amount_off{金额至少等于优惠券金额} other{}}, 从现在起 {DATE, select, NO-DATE{且没有时间限制} other{到 {DATE}}}。"
+    notify_admin_free_disk_space:
+      subject: "磁盘空间不足"
+      body: "警告：托管 Fab-manager 的服务器可用磁盘空间少于 %{THRESHOLD} MiB。这可能会影响其运行并阻止某些数据的保存。目前，挂载点上剩余 %{AVAILABLE} MiB 的可用磁盘空间。"
+    notify_admin_close_period_reminder:
+      subject: "提醒关闭会计期间"
+      body:
+        warning_last_closed_period_over_1_year: "请记得定期关闭会计期间。上一个关闭的期间结束于 %{LAST_END}。"
+        warning_no_closed_periods: "请记得定期关闭会计期间。您需要关闭从 %{FIRST_DATE} 开始的期间。"
+    notify_admin_archive_complete:
+      subject: "归档完成"
+      body:
+        archive_complete: "您已关闭从 %{START} 到 %{END} 的会计期间。数据归档现已完成。"
+        click_to_download: "要下载 ZIP 归档文件，请点击"
+        here: "这里。"
+        save_on_secured: "请记住，您必须将此归档文件保存在安全的外部存储设备上，税务检查时可能会要求提供。"
+    notify_privacy_policy_changed:
+      subject: "隐私政策更新"
+      body:
+        content_html: "<p>我们通知您，我们刚刚更新了隐私政策。</p><p>我们可能会定期更改隐私政策。根据规定，您会在每次更新时收到通知。</p><p>在隐私政策更新后访问或使用我们的服务，即表示您同意其条款，包括更新内容。</p>"
+        link_to_policy: "点击这里查看隐私政策。"
+    notify_admin_refund_created:
+      subject: "已生成退款"
+      body:
+        refund_created: "已为用户 %{USER} 的发票 %{INVOICE} 生成 %{AMOUNT} 的退款"
+        wallet_refund_created: "已为用户 %{USER} 的钱包生成 %{AMOUNT} 的退款"
+        download: "点击这里下载此退款发票"
+    notify_admins_role_update:
+      subject: "用户角色已更改"
+      body:
+        user_role_changed_html: "用户 <em><strong>%{NAME}</strong></em> 的角色已更改。"
+        previous_role: "之前的角色："
+        new_role: "新的角色："
+    notify_user_role_update:
+      subject: "您的角色已更改"
+      body:
+        role_changed_html: "您的角色在 {GENDER, select, male{the} female{the} neutral{} other{the}} {NAME} 已更改。您现在是 <strong>{ROLE}</strong>。<br/>能力越大，责任越大，请公平和尊重地使用您的新权限。"
+    notify_admin_objects_stripe_sync:
+      subject: "Stripe 同步"
+      body:
+        objects_sync: "所有会员、优惠券、机器、培训、空间和计划已成功同步到 Stripe。"
+    notify_admin_order_is_paid:
+      subject: "新订单"
+      body:
+        order_placed: "用户 %{USER} 已下并支付新订单 (%{REFERENCE})。"
+        view_details: "查看详情"
+    notify_member_payment_schedule_ready:
+      subject: "您的付款计划"
+      body:
+        please_find_attached_html: "请查收附件中您在 {DATE} 开具的付款计划，金额为 {AMOUNT}，涉及您的 {TYPE, select, Reservation{预订} other{订阅}}。" #messageFormat interpolation
+        schedule_in_your_dashboard_html: "您可以随时在 Fab Lab 的网站 %{DASHBOARD} 上找到此付款计划。"
+        your_dashboard: "您的仪表盘"
+    notify_admin_payment_schedule_error:
+      subject: "[紧急] 卡扣款错误"
+      body:
+        remember: "根据 %{REFERENCE} 付款计划，原定于 %{DATE} 进行的 %{AMOUNT} 卡扣款。"
+        error: "不幸的是，发生了错误，此次卡扣款未能成功完成。"
+        action: "请查看 %{GATEWAY} 仪表盘并尽快联系会员以解决问题。"
+    notify_member_payment_schedule_error:
+      subject: "[紧急] 卡扣款错误"
+      body:
+        remember: "根据您的 %{REFERENCE} 付款计划，原定于 %{DATE} 进行的 %{AMOUNT} 卡扣款。"
+        error: "不幸的是，发生了错误，此次卡扣款未能成功完成。"
+        action: "请尽快联系管理员以解决问题。"
+    notify_admin_payment_schedule_failed:
+      subject: "[紧急] 卡扣款失败"
+      body:
+        remember: "根据 %{REFERENCE} 付款计划，原定于 %{DATE} 进行的 %{AMOUNT} 卡扣款。"
+        error: "不幸的是，此次卡扣款未能成功完成。"
+        action: "请尽快联系会员，然后进入付款计划管理界面解决问题。经过一段时间后，卡订阅可能会被取消。"
+    notify_member_payment_schedule_failed:
+      subject: "[紧急] 卡扣款失败"
+      body:
+        remember: "根据您的 %{REFERENCE} 付款计划，原定于 %{DATE} 进行的 %{AMOUNT} 卡扣款。"
+        error: "不幸的是，此次卡扣款未能成功完成。"
+        action_html: "请查看 %{DASHBOARD} 或尽快联系管理员，否则您的订阅可能会被中断。"
+        your_dashboard: "您的仪表盘"
+    notify_admin_payment_schedule_gateway_canceled:
+      subject: "[紧急] 支付网关取消了付款计划"
+      body:
+        error: "支付网关（%{GATEWAY}）取消了付款计划 %{REFERENCE}。此支付方式将不再进行进一步的扣款。"
+        action: "请查看付款计划管理界面，并尽快联系会员解决问题。"
+    notify_member_payment_schedule_gateway_canceled:
+      subject: "[紧急] 支付网关取消了付款计划"
+      body:
+        error: "支付网关取消了您的付款计划 %{REFERENCE}。此支付方式将不再进行进一步的扣款。"
+        action: "请尽快联系管理员解决问题。"
+    notify_admin_payment_schedule_check_deadline:
+      subject: "付款期限"
+      body:
+        remember: "根据 %{REFERENCE} 付款计划，于 %{DATE} 预定扣款 %{AMOUNT}。"
+        date: "这是一则尽快兑现预定支票的提醒。"
+        confirm: "请务必在付款计划管理界面确认收据，以便生成相应的发票。"
+    notify_member_payment_schedule_transfer_deadline:
+      subject: "付款期限"
+      body:
+        remember: "根据您的 %{REFERENCE} 付款计划，于 %{DATE} 预定扣款 %{AMOUNT}。"
+        date: "这是一则确认直接银行扣款是否成功的提醒。"
+        confirm: "请在付款计划管理界面确认收到款项，以便生成相应的发票。"
+    notify_member_reservation_limit_reached:
+      subject: "已达到每日预订限额"
+      body:
+        limit_reached: "截至 %{DATE}，您已达到 %{ITEM} 预订 %{HOURS} 小时的每日限额。"
+    notify_admin_user_supporting_document_files_created:
+      subject: "会员上传支持文件"
+      body:
+        supporting_document_files_uploaded_below: "会员 %{NAME} 已上传以下支持文件："
+        validate_user: "请验证此账户"
+    notify_admin_user_supporting_document_files_updated:
+      subject: "会员支持文件已更改"
+      body:
+        user_update_supporting_document_file: "会员 %{NAME} 已修改以下支持文件："
+        validate_user: "请验证此账户"
+    notify_admin_user_child_supporting_document_files_created:
+      subject: "会员上传儿童的支持文件"
+      body:
+        supporting_document_files_uploaded_below: "孩子 %{NAME} 已上传以下支持文件："
+        validate_child: "请验证此儿童账户"
+    notify_admin_user_child_supporting_document_files_updated:
+      subject: "孩子的支持文件已更改"
+      body:
+        child_update_supporting_document_file: "孩子 %{NAME} 已修改以下支持文件："
+        validate_child: "请验证此儿童账户"
+    notify_user_is_validated:
+      subject: "账户已验证"
+      body:
+        account_validated: "您的账户已验证。现在，您可以使用预订功能。"
+    notify_user_is_invalidated:
+      subject: "账户未验证"
+      body:
+        account_invalidated: "您的账户未验证。在重新验证您的账户之前，您将无法再进行预订。"
+    notify_user_child_is_validated:
+      subject: "儿童账户已验证"
+      body:
+        child_validated: "您的儿童账户已验证。现在，您可以使用事件预订功能。"
+    notify_user_child_is_invalidated:
+      subject: "儿童账户未验证"
+      body:
+        child_invalidated: "您的儿童账户未验证。在重新验证您的儿童账户之前，您将无法再进行事件预订。"
+    notify_user_supporting_document_refusal:
+      subject: "您的支持文件被拒绝"
+      body:
+        user_supporting_document_files_refusal: "您的支持文件已被拒绝："
+        action: "请重新上传新的支持文件。"
+    notify_user_supporting_document_reminder:
+      subject: "上传支持文件的提醒"
+      body:
+        user_supporting_document_reminder: "这是一则提醒您上传支持文件。"
+    notify_admin_user_supporting_document_refusal:
+      subject: "会员的支持文件被拒绝"
+      body:
+        user_supporting_document_files_refusal: "会员 %{NAME} 的支持文件被 %{OPERATOR} 拒绝："
+    notify_user_child_supporting_document_refusal:
+      subject: "您的孩子的支持文件被拒绝"
+      body:
+        user_child_supporting_document_files_refusal: "您的支持文件已被拒绝："
+        action: "请重新上传新的支持文件。"
+    notify_admin_user_child_supporting_document_refusal:
+      subject: "孩子的支持文件被拒绝"
+      body:
+        user_child_supporting_document_files_refusal: "孩子 %{NAME} 的支持文件被 %{OPERATOR} 拒绝："
+    shared:
+      hello: "您好 %{user_name}"
+    notify_user_order_is_ready:
+      subject: "您的订单已准备就绪"
+      body:
+        notify_user_order_is_ready: "您的订单 %{REFERENCE} 已准备就绪："
+    notify_user_order_is_canceled:
+      subject: "您的订单已取消"
+      body:
+        notify_user_order_is_canceled: "您的订单 %{REFERENCE} 已取消。"
+    notify_user_order_is_refunded:
+      subject: "您的订单已退款"
+      body:
+        notify_user_order_is_refunded: "您的订单 %{REFERENCE} 已退款。"
+    notify_member_reservation_validated:
+      subject: "您的预订已验证"
+      body:
+        reservation_validated_html: "<strong><em>%{RESERVABLE}</em></strong> 已验证。"
+        your_reserved_slots: "您的预留位置为："
+    notify_admin_reservation_validated:
+      subject: "预注册已验证"
+      body:
+        reservation_validated_html: "<strong><em>%{RESERVABLE}</em></strong> 由 %{NAME} 已验证。"
+        reserved_slots: "预留位置为："
+    notify_member_reservation_invalidated:
+      subject: "您的预注册未通过验证"
+      body:
+        reservation_invalidated_html: "<strong><em>%{RESERVABLE}</em></strong> 未通过验证。"
+    notify_admin_reservation_invalidated:
+      subject: "预注册未通过验证"
+      body:
+        reservation_invalidated_html: "<strong><em>%{RESERVABLE}</em></strong> 由 %{NAME} 未通过验证。"
+    notify_user_when_child_age_will_be_18:
+      subject: "您的孩子将满18岁"
+      body:
+        child_age_will_be_18_years_ago: "您的孩子 %{NAME} 将于 %{DATE} 满18岁，届时将自动从您的家庭账户中分离。他们需要创建自己的账户以进行预订。"
