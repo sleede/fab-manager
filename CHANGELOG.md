@@ -2,6 +2,8 @@
 
 ## Next release
 
+## v6.3.30 2024 July 19
+
 - Fix a bug: unable to change training reservation slot to another slot
 
 ## v6.3.29 2024 July 19
