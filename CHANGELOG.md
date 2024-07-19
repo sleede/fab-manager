@@ -2,6 +2,8 @@
 
 ## Next release
 
+## v6.3.29 2024 July 19
+
 - updates chinese translations and adds translations
 
 ## v6.3.28 2024 July 5
