@@ -2,6 +2,8 @@
 
 ## Next release
 
+- Fix a bug: unable to change training reservation slot to another slot
+
 ## v6.3.29 2024 July 19
 
 - updates chinese translations and adds translations

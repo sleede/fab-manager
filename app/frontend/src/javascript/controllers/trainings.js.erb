@@ -393,7 +393,7 @@ Application.Controllers.controller('ReserveTrainingController', ['$scope', '$tra
      */
     const refreshCalendar = function () {
       $scope.eventSources.splice(0, 1, {
-        url: `/api/availabilities/trainings/${$transition$.params().id}`,
+        url: `/api/availabilities/trainings/${$transition$.params().id}?member_id=${$scope.ctrl.member.id}`,
         textColor: 'black'
       });
     }
