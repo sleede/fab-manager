@@ -150,7 +150,7 @@ zh-CN:
         save: "保存"
         create_success: "活动创建成功"
         events_updated: "{COUNT, plural, =1{一个事件} other{{COUNT} 事件}} 更新成功"
-        events_not_updated: "{TOTAL, plural, =1{一个事件} other{在 {TOTAL} 事件中，{COUNT} 个事件}} 未更新。"
+        events_not_updated: "{TOTAL, plural, =1{事件} other{共有 {TOTAL} 个事件，其中 {COUNT, plural, =1{1个} other{{COUNT} 个}}}} 未更新"
         error_deleting_reserved_price: "由于与现有预订相关联，无法删除请求的价格。"
         other_error: "更新事件时发生了意外错误。"
         recurring:
@@ -275,7 +275,7 @@ zh-CN:
         financial: "财务"
         card: "银行卡支付"
         wallet_debit: "虚拟钱包支付"
-        other: "其他支付方式"
+        other: "其它付款方式"
         transfer: "转账"
         check: "支票"
         wallet_credit: "虚拟钱包充值"
@@ -343,7 +343,7 @@ zh-CN:
         manage_trainings: "点击此处添加或删除培训。"
         number_of_tickets: "票数："
         adjust_the_opening_hours: "调整开放时间"
-        to_time: "至"  #e.g. from 18:00 to 21:00
+        to_time: "至" #e.g. from 18:00 to 21:00
         restrict_options: "限制选项"
         restrict_with_labels: "使用标签限制此时间段"
         restrict_for_subscriptions: "仅对订阅用户开放此时间段"
@@ -368,7 +368,7 @@ zh-CN:
         slot_successfully_deleted: "时间段 {START} - {END} 已成功删除。"
         slots_deleted: "时间段 {START}，以及其他 {COUNT, plural, =1{one other} other{{COUNT} others}} 已删除。"
         unable_to_delete_the_slot: "无法删除时间段 {START} - {END}，可能因为该时间段已被会员预订。"
-        slots_not_deleted: "在 {TOTAL} 个时间段中，有 {COUNT, plural, =1{一个未删除} other{{COUNT} 未删除}}。某些预订可能仍存在。"
+        slots_not_deleted: "共 {TOTAL} 个栏位，其中 {COUNT, plural, =1{1个未被删除} other{{COUNT} 个未被删除}}. 可能在{COUNT, plural, =1{它} other{它们}}上有预约."
         you_should_select_at_least_a_machine: "您应该至少选择一个机器。"
         inconsistent_times: "错误：可用性的结束时间早于开始时间。"
         min_one_slot: "至少必须拆分一个时间段。"
@@ -405,7 +405,7 @@ zh-CN:
         deleted_user: "已删除的用户"
         select_type: "请选择一个类型以继续"
         no_modules_available: "没有可用的预订模块。请在自定义部分启用至少一个模块（机器、空间或培训）。"
-      # import external iCal calendar
+      #import external iCal calendar
       icalendar:
         icalendar_import: "iCalendar 导入"
         intro: "Fab-manager 允许从外部 URL 自动导入日历事件，格式为 RFC 5545 的 iCalendar。这些 URL 每小时同步一次，事件将显示在公共日历中。您也可以点击相应按钮触发同步。"
@@ -446,7 +446,7 @@ zh-CN:
           comments: "评论"
           disqus: "Disqus"
           disqus_info: "如果您想让会员和访客对项目进行评论，您可以通过设置以下参数启用 Disqus 论坛。访问<a href='https://help.disqus.com/customer/portal/articles/466208-what-s-a-shortname-' target='_blank'>Disqus 网站</a>获取更多信息。"
-          shortname: "Shortname"
+          shortname: "简称"
           cad_files: "CAD 文件"
           validation: "验证"
           validation_info: "用户可以上传其项目的 CAD（计算机辅助设计）文件及其文档。您可以指定允许的文件类型。使用下面的测试输入确定文件的 MIME 类型。"
@@ -466,8 +466,8 @@ zh-CN:
           open_lab_app_secret: "密钥"
           openlab_default_info_html: "在项目画廊中，访客可以在两种视图之间切换：整个 OpenLab 网络中的所有共享项目，或仅在您的 Fab Lab 中记录的项目。<br/>在此，您可以选择默认显示哪种视图。"
           default_to_openlab: "默认显示 OpenLab"
-          filters: "项目列表过滤器"
-          project_categories: "分类"
+          filters: 项目列表过滤器
+          project_categories: 分类
       project_categories:
         name: "名称"
         delete_dialog_title: "需要确认"
@@ -573,8 +573,8 @@ zh-CN:
         on_DATE: "于 {DATE}"
         from_DATE: "从 {DATE} 开始"
         from_TIME: "从 {TIME} 开始"
-        to_date: "到" #例如：从 01/01 到 01/05
-        to_time: "到"  #例如：从 18:00 到 21:00
+        to_date: "到" #e.g.: from 01/01 to 01/05
+        to_time: "到" #e.g. from 18:00 to 21:00
         title: "标题"
         dates: "日期"
         booking: "预订"
@@ -682,7 +682,7 @@ zh-CN:
         confirm_payment: "确认支付"
         confirm_payment_of_html: "{ROLE, select, admin{现金} other{支付}}：{AMOUNT}" #(contexte : validate a payment of $20,00)
         offer_this_reservation: "我提供此预订"
-        i_have_received_the_payment:  "我已收到付款"
+        i_have_received_the_payment: "我已收到付款"
         reservation_was_successfully_paid: "预订已成功支付。"
         present: "已到场"
         confirm_present: "确认到场"
@@ -725,7 +725,7 @@ zh-CN:
         hours: "时段（默认 {DURATION} 分钟）"
         related_subscriptions: "相关订阅"
         please_specify_a_number: "请指定一个数字。"
-        none: "无"  #与培训的语法一致。
+        none: "无" #grammar concordance with training.
         an_error_occurred_while_saving_the_number_of_credits: "保存积分数量时出现错误。"
         an_error_occurred_while_deleting_credit_with_the_TRAINING: "删除与 {TRAINING} 相关的积分时出现错误。"
         an_error_occurred_unable_to_find_the_credit_to_revoke: "撤销积分时出现错误：找不到要撤销的积分。"
@@ -959,13 +959,13 @@ zh-CN:
         n_digits_annual_amount_of_orders: "（n）位数字，每年订单金额计数（例如，yyyyyy => 000008：今年的第 8 个订单）"
         add_a_notice_regarding_the_online_sales_only_if_the_invoice_is_concerned: "只有在涉及发票时添加有关在线销售的通知。"
         this_will_never_be_added_when_a_refund_notice_is_present: "当存在退款通知时，此通知永远不会添加。"
-        eg_XVL_will_add_VL_to_the_invoices_settled_by_card: "(例如，X[/VL] 将在通过在线卡支付的发票上添加“/VL”)"
+        eg_XVL_will_add_VL_to_the_invoices_settled_by_card: '(例如，X[/VL] 将在通过在线卡支付的发票上添加“/VL”)'
         add_a_notice_regarding_refunds_only_if_the_invoice_is_concerned: "只有在涉及发票时添加有关退款的通知。"
         this_will_never_be_added_when_an_online_sales_notice_is_present: "当存在在线销售通知时，此通知永远不会添加。"
-        eg_RA_will_add_A_to_the_refund_invoices: "(例如，R[/A] 将在退款发票上添加“/A”)"
+        eg_RA_will_add_A_to_the_refund_invoices: '(例如，R[/A] 将在退款发票上添加“/A”)'
         add_a_notice_regarding_payment_schedule: "只有对相关文档添加有关付款计划的通知。"
         this_will_never_be_added_with_other_notices: "当存在其他通知时，此通知永远不会添加。"
-        eg_SE_to_schedules: "(例如，S[/E] 将在付款计划上添加“/E”)"
+        eg_SE_to_schedules: '(例如，S[/E] 将在付款计划上添加“/E”)'
         code: "代码"
         enable_the_code: "启用代码"
         enabled: "已启用"
@@ -997,7 +997,7 @@ zh-CN:
         description: "描述"
         description_optional: "描述（可选）："
         will_appear_on_the_refund_invoice: "将显示在退款发票上。"
-        none: "无"  # 与支付方式的语法一致
+        none: "无" #grammar concordance with payment mean
         by_cash: "现金支付"
         by_cheque: "支票支付"
         by_transfer: "银行转账"
@@ -1232,7 +1232,7 @@ zh-CN:
           an_error_occurred_unable_to_delete_the_specified_provider: "发生错误，无法删除指定的提供者。"
           local_database: "本地数据库"
           o_auth2: "OAuth 2.0"
-          openid_connect: "OpenID Connect"
+          openid_connect: "OpenID连接"
           saml: "SAML"
         group_form:
           add_a_group: "添加组"
@@ -1407,7 +1407,7 @@ zh-CN:
         number_of_free_days: "免费天数："
         extend: "延长"
         extend_success: "订阅已成功延长免费期限"
-      # renew a subscription
+      #renew a subscription
       renew_modal:
         renew_subscription: "续订订阅"
         renew_subscription_info: "您即将为用户的当前订阅重新收费续订。"
@@ -1419,14 +1419,14 @@ zh-CN:
         renew: "续订"
         renew_success: "订阅成功续订"
         DATE_TIME: "{DATE} {TIME}"
-      # take a new subscription
+      #take a new subscription
       subscribe_modal:
         subscribe_USER: "订阅 {USER}"
         subscribe: "订阅"
         select_plan: "请选择一个计划"
         pay_in_one_go: "一次性支付"
         subscription_success: "订阅成功订阅"
-      # cancel the current subscription
+      #cancel the current subscription
       cancel_subscription_modal:
         title: "需要确认"
         confirmation_html: "您即将取消此用户的订阅 <em>{NAME}</em>。从现在起，他将无法享受该订阅的所有优惠，并且所有未使用的积分将被清除。<strong>您确定要执行此操作吗？</strong>"
@@ -1587,7 +1587,7 @@ zh-CN:
           methods:
             local_database: "本地数据库"
             oauth2: "OAuth 2.0"
-            openid_connect: "OpenID Connect"
+            openid_connect: "OpenID连接"
             saml: "SAML"
       #create a new authentication provider (SSO)
       authentication_new:
@@ -1600,8 +1600,8 @@ zh-CN:
         statistics: "统计"
         evolution: "发展"
         age_filter: "年龄筛选"
-        from_age: "从"  #例如：从 8 到 40 岁
-        to_age: "到"  #例如：从 8 到 40 岁
+        from_age: "从" #e.g. from 8 to 40 years old
+        to_age: "到" #e.g. from 8 to 40 years old
         start: "开始："
         end: "结束："
         custom_filter: "自定义筛选"
@@ -1609,8 +1609,8 @@ zh-CN:
         criterion: "标准："
         value: "值："
         exclude: "排除"
-        from_date: "从"  #例如：从 01/01 到 01/05
-        to_date: "到"  #例如：从 01/01 到 01/05
+        from_date: "从" #eg: from 01/01 to 01/05
+        to_date: "到" #eg: from 01/01 to 01/05
         entries: "条目数："
         revenue_: "收入："
         average_age: "平均年龄："
@@ -1639,16 +1639,16 @@ zh-CN:
         create_plans_to_start: "开始创建新的订阅计划。"
         click_here: "点击这里创建您的第一个计划。"
         average_cart: "平均购物车："
-        reservation_context: "预订上下文"
-        project_author: "作者"
+        reservation_context: 预订上下文
+        project_author: 作者
       #statistics graphs
       stats_graphs:
         statistics: "统计"
         data: "数据"
         day: "日"
         week: "周"
-        from_date: "从"  #例如：从 01/01 到 01/05
-        to_date: "到"  #例如：从 01/01 到 01/05
+        from_date: "从" #eg: from 01/01 to 01/05
+        to_date: "到" #eg: from 01/01 to 01/05
         month: "月"
         start: "开始："
         end: "结束："
@@ -2043,7 +2043,7 @@ zh-CN:
           about_analytics: "我同意与开发团队分享匿名数据，以帮助改进Fab-manager。"
           read_more: "我们收集哪些数据？"
           statistics: "统计"
-          google_analytics: "Google Analytics"
+          google_analytics: "谷歌数据分析"
           facebook: "Facebook"
           facebook_info_html: "为了在Facebook社交网络上启用分享的统计跟踪，请在此处设置您的应用ID。参考<a href='https://developers.facebook.com/docs/apps#register' target='_blank'>此指南</a>获取一个。"
           app_id: "应用ID"
@@ -2588,6 +2588,6 @@ zh-CN:
       reservation_contexts:
         name: "名称"
         applicable_on: "适用于"
-        machine: "机器"
-        training: "培训"
-        space: "空间"
+        machine: 机器
+        training: 培训
+        space: 空间

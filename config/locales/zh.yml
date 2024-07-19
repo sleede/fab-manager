@@ -2,13 +2,10 @@ zh-CN:
   #subscription plan duration
   duration:
     year:
-      one: '一年'
       other: '%{count}年'
     month:
-      one: '一个月'
       other: '%{count}个月'
     week:
-      one: '一周'
       other: '%{count}周'
   activerecord:
     attributes:
@@ -106,12 +103,10 @@ zh-CN:
     from_payment_schedule: "第%{NUMBER}次，共%{TOTAL}次，从%{DATE}开始。还款计划%{SCHEDULE}"
     null_invoice: "零金额发票，由于Fab Manager软件故障导致的账单跳转"
     full_price_ticket:
-      one: "一张全价票"
       other: "%{count}张全价票"
     other_rate_ticket:
-      one: "一张%{NAME}票"
       other: "%{count}张%{NAME}票"
-    coupon_CODE_discount_of_DISCOUNT: "优惠券{CODE}：折扣{DISCOUNT}{TYPE, select, percent_off{%} other{}}"  #messageFormat插值
+    coupon_CODE_discount_of_DISCOUNT: "优惠券{CODE}：折扣{DISCOUNT}{TYPE, select, percent_off{%} other{}}" #messageFormat interpolation
     total_including_all_taxes: "总额（含所有税）"
     VAT: "增值税"
     including_VAT_RATE: "包括%{NAME} %{RATE}%的%{AMOUNT}"
@@ -132,8 +127,8 @@ zh-CN:
     settlement_by_wallet: "通过钱包结算"
     on_DATE_at_TIME: "于%{DATE}的%{TIME},"
     for_an_amount_of_AMOUNT: "金额为%{AMOUNT}"
-    on_DATE_from_START_to_END: "于%{DATE}从%{START}到%{END}" #例如：于2月7日从上午7点到上午9点
-    from_STARTDATE_to_ENDDATE_from_STARTTIME_to_ENDTIME: "从%{STARTDATE}到%{ENDDATE}，从%{STARTTIME}到%{ENDTIME}" #例如：从2月7日到2月10日，从下午6点到晚上10点
+    on_DATE_from_START_to_END: "于%{DATE}从%{START}到%{END}" #eg: on feb. 7 from 7AM to 9AM
+    from_STARTDATE_to_ENDDATE_from_STARTTIME_to_ENDTIME: "从%{STARTDATE}到%{ENDDATE}，从%{STARTTIME}到%{ENDTIME}" #eg: from feb. 7 to feb. 10, from 6PM to 10PM
     subscription_of_NAME_for_DURATION_starting_from_DATE: "订阅%{NAME}，持续时间为%{DURATION}，从%{DATE}开始"
     subscription_of_NAME_extended_starting_from_STARTDATE_until_ENDDATE: "订阅%{NAME}已延长（免费天数）从%{STARTDATE}到%{ENDDATE}"
     and: '和'
@@ -168,7 +163,7 @@ zh-CN:
     debit_euro: "欧元借方"
     credit_euro: "欧元贷方"
     lettering: "字母标记"
-    VAT: "增值税"
+    VAT: '增值税'
   accounting_summary:
     subscription_abbreviation: "订阅"
     Machine_reservation_abbreviation: "机器预订"
@@ -244,7 +239,7 @@ zh-CN:
     online_payment: "在线付款"
     deleted_user: "已删除用户"
     coupon: "使用的优惠券"
-  # 订阅列表导出为 EXCEL 格式
+  #subscriptions list export to EXCEL format
   export_subscriptions:
     subscriptions: "订阅"
     id: "ID"
@@ -258,7 +253,7 @@ zh-CN:
     local_payment: "现场支付"
     online_payment: "在线支付"
     deleted_user: "已删除用户"
-  # 预约时段按类型导出为 EXCEL 格式
+  #reservation slots export, by type, to EXCEL format
   export_availabilities:
     machines: "机器"
     trainings: "培训"
@@ -283,7 +278,7 @@ zh-CN:
     manager: "经理"
     admin: "管理员"
   api:
-    # 内部应用通知
+    #internal app notifications
     notifications:
       deleted_user: "已删除用户"
       notify_admin_abuse_reported:
@@ -303,7 +298,7 @@ zh-CN:
       notify_admin_subscription_canceled:
         USER_s_subscription_has_been_cancelled: "%{USER} 的订阅已被取消。"
       notify_admin_subscription_extended:
-        subscription_PLAN_of_the_member_USER_has_been_extended_FREE_until_DATE_html: "会员 <strong><em>{USER}</strong></em> 的订阅 <strong><em>{PLAN}</em></strong> 已延长至 {DATE} {FREE, select, true{免费} other{}}。"
+        subscription_PLAN_of_the_member_USER_has_been_extended_FREE_until_DATE_html: "会员 <strong><em>{USER}</strong></em> 的订阅 <strong><em>{PLAN}</em></strong> 已延长至 {DATE} {FREE, select, true{免费} other{}}。" #messageFormat interpolation
       notify_admin_subscription_is_expired:
         USER_s_subscription_has_expired: "%{USER} 的订阅已过期。"
       notify_admin_subscription_will_expire_in_7_days:
@@ -313,9 +308,9 @@ zh-CN:
         auto_refund: "会员已自动退还到他们的钱包中。"
         manual_refund: "请手动退还每位会员。"
       notify_admin_user_group_changed:
-        user_NAME_changed_his_group_html: "用户 <strong><em>{NAME}</strong></em> 更改了组别。"
+        user_NAME_changed_his_group_html: "用户 <strong><em>{NAME}</strong></em> 更改了组别。" #messageFormat interpolation
       notify_admin_user_merged:
-        user_NAME_has_merged_his_account_with_the_one_imported_from_PROVIDER_UID_html: "<strong><em>{NAME}</strong></em> 的帐户已与从 <strong><em>{PROVIDER}</strong> (%{UID})</em> 导入的帐户合并。"
+        user_NAME_has_merged_his_account_with_the_one_imported_from_PROVIDER_UID_html: "<strong><em>{NAME}</strong></em>的账号已经与<strong><em>{PROVIDER} </strong> ({%UID})</em> 中引入的账号进行了合并." #messageFormat interpolation
       notify_admin_when_project_published:
         project_NAME_has_been_published_html: "项目 <a href='/#!/projects/%{ID}'><strong><em>%{NAME}</em></strong></a> 已发布。"
       notify_admin_when_user_is_created:
@@ -341,7 +336,7 @@ zh-CN:
       notify_member_subscription_canceled:
         your_subscription_PLAN_was_successfully_cancelled_html: "您的订阅 <strong><em>%{PLAN}</em></strong> 已成功取消。"
       notify_member_subscription_extended:
-        your_subscription_PLAN_has_been_extended_FREE_until_DATE_html: "您的订阅 <strong><em>{PLAN}</em></strong> 已延长至 {DATE} {FREE, select, true{免费} other{}}。"
+        your_subscription_PLAN_has_been_extended_FREE_until_DATE_html: "您的订阅 <strong><em>{PLAN}</em></strong> 已延长至 {DATE} {FREE, select, true{免费} other{}}。" #messageFormat interpolation
       notify_member_subscription_is_expired:
         your_subscription_has_expired: "您的订阅已过期。"
       notify_member_subscription_will_expire_in_7_days:
@@ -524,9 +519,9 @@ zh-CN:
     store: "商店"
     paid-processed: "已支付和/或已处理"
     aborted: "已中止"
-    project_status: "项目状态"
-    project_name: "项目名称"
-    project_user_names: "合作者"
+    project_status: 项目状态
+    project_name: 项目名称
+    project_user_names: 合作者
   #statistics exports to the Excel file format
   export:
     entries: "条目"
@@ -545,7 +540,7 @@ zh-CN:
     deleted_user: "已删除用户"
     reservation_context: "预订背景"
     coupon: "优惠券"
-    project_author: "作者"
+    project_author: 作者
   #initial price's category for events, created to replace the old "reduced amount" property
   price_category:
     reduced_fare: "优惠票价"
@@ -656,7 +651,7 @@ zh-CN:
     accounting_Product_label: "商店产品标签"
     hub_last_version: "Fab-manager 的最新版本"
     hub_public_key: "实例公钥"
-    fab_analytics: "Fab Analytics"
+    fab_analytics: "Fab数据分析"
     link_name: "链接标题到\"关于\"页面"
     home_content: "首页内容"
     home_css: "首页样式表"
@@ -702,7 +697,7 @@ zh-CN:
     payzen_endpoint: "PayZen API 端点"
     payzen_public_key: "PayZen 客户端公钥"
     payzen_hmac: "PayZen HMAC-SHA-256 密钥"
-    payzen_currency:  "PayZen 货币"
+    payzen_currency: "PayZen 货币"
     public_agenda_module: "公共议程模块"
     renew_pack_threshold: "包更新阈值"
     pack_only_for_subscription: "仅限订阅者使用包"
@@ -744,7 +739,7 @@ zh-CN:
     project_categories_wording: "用于公共页面替换\"类别\"的措辞"
     reservation_context_feature: "预订时强制成员选择预订性质"
     family_account: "家庭账户"
-  #项目状态
+  #statuses of projects
   statuses:
     new: "新建"
     pending: "待处理"

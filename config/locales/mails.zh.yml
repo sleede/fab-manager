@@ -1,7 +1,7 @@
 zh-CN:
   layouts:
     notifications_mailer:
-      see_you_later: "再见 {GENDER, select, neutral{} other{the}}"  #messageFormat 插值
+      see_you_later: "再见 {GENDER, select, neutral{} other{the}}" #messageFormat interpolation
       sincerely: "诚挚的,"
       signature: "Fab Lab 团队."
       do_not_reply: "请勿回复此邮件."
@@ -10,7 +10,7 @@ zh-CN:
       subject: "您的 FabLab 账户已成功创建"
       body:
         hello: "您好 %{NAME},"
-        intro: "Fab Lab 团队刚刚为您在 {GENDER, select, neutral{} other{the}} {FABLAB} 网站创建了一个账户:"  #messageFormat 插值
+        intro: "Fab Lab 团队刚刚为您在 {GENDER, select, neutral{} other{the}} {FABLAB} 网站创建了一个账户:" #messageFormat interpolation
         connection_parameters: "以下是您的连接参数:"
         account_name: "账户名:"
         password: "密码:"
@@ -35,7 +35,7 @@ zh-CN:
     notify_admin_subscription_extended:
       subject: "订阅已延长"
       body:
-        subscription_extended_html: "用户 <strong><em>{NAME}</strong></em> 的订阅 <strong><em>{PLAN}</em></strong> 已延长 {FREE, select, true{免费} other{}} 直到 {DATE}。"   #messageFormat 插值
+        subscription_extended_html: "用户 <strong><em>{NAME}</strong></em> 的订阅 <strong><em>{PLAN}</em></strong> 已延长 {FREE, select, true{免费} other{}} 直到 {DATE}。" #messageFormat interpolation
     notify_member_subscription_extended:
       subject: "您的订阅计划已延长"
       body:
@@ -126,8 +126,8 @@ zh-CN:
     notify_member_invoice_ready:
       subject: "您的 FabLab 发票"
       body:
-        please_find_attached_html: "请查收附件中 %{DATE} 的发票，金额为 {AMOUNT}，与您的 {TYPE, select, Reservation{预订} OrderItem{订单} other{订阅}} 相关。"  #messageFormat 插值
-        invoice_in_your_dashboard_html:  "您可以在 Fab Lab 网站的 %{DASHBOARD} 上查看您的发票。"
+        please_find_attached_html: "请查看附件中于 {DATE} 开具的发票，金额为 {AMOUNT} ，与您的 {TYPE, select, Reservation{预约} OrderItem{订单} other{订阅}} 相关." #messageFormat interpolation
+        invoice_in_your_dashboard_html: "您可以在 Fab Lab 网站的 %{DASHBOARD} 上查看您的发票。"
         your_dashboard: "您的控制面板"
     notify_member_reservation_reminder:
       subject: "预订提醒"
@@ -137,7 +137,7 @@ zh-CN:
     notify_member_avoir_ready:
       subject: "您的 FabLab 退款发票"
       body:
-        please_find_attached_html: "请查收附件中的退款发票，日期为 {DATE}，金额为 {AMOUNT}，与您的 {TYPE, select, Reservation{预订} WalletTransaction{钱包退款} other{订阅}} 相关。"  #messageFormat 插值
+        please_find_attached_html: "请查收附件中的退款发票，日期为 {DATE}，金额为 {AMOUNT}，与您的 {TYPE, select, Reservation{预订} WalletTransaction{钱包退款} other{订阅}} 相关。" #messageFormat interpolation
         invoice_in_your_dashboard_html: "您可以在 Fab Lab 网站的 %{DASHBOARD} 上查看您的退款发票。"
         your_dashboard: "您的控制面板"
     notify_member_subscription_will_expire_in_7_days:
@@ -226,7 +226,7 @@ zh-CN:
     notify_admin_user_merged:
       subject: "导入的账户已与现有账户合并"
       body:
-        imported_account_merged: "通过 %{PROVIDER} 导入的用户账户已与现有账户 %{NAME} 合并"
+        imported_account_merged: "之前通过 %{PROVIDER) 导入的用户帐户已与现有帐户 %{NAME} 合并"
         provider_uid: "其提供商 ID 是:"
     notify_admin_profile_complete:
       subject: "导入的账户已完成个人资料"
@@ -336,7 +336,7 @@ zh-CN:
       subject: "新订单"
       body:
         order_placed: "用户 %{USER} 已下并支付新订单 (%{REFERENCE})。"
-        view_details: "查看详情"
+        view_details: ""
     notify_member_payment_schedule_ready:
       subject: "您的付款计划"
       body:

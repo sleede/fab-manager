@@ -25,7 +25,7 @@ zh-CN:
         your_profile_has_been_successfully_updated: "您的资料已成功更新。"
         completion_header_info:
           rules_changed: "请填写以下表单以更新您的个人资料并继续使用平台。"
-          sso_intro: "您刚刚通过 {NAME} 登录创建了新账户。"
+          sso_intro: "您刚刚在{GENDER, select, neutral{} other{the}} {NAME} 上创建了一个新帐户，通过登录"
           duplicate_email_info: "看起来您的电子邮件地址已经被另一个用户使用。请检查您的电子邮件地址并在下面输入您收到的代码。"
           details_needed_info: "为了完成您的账户，我们需要更多详细信息。"
         profile_form_option:

@@ -306,9 +306,9 @@ zh-CN:
         unable_to_apply_the_coupon_because_rejected: "此代码不存在。"
       payment_schedule_summary:
         your_payment_schedule: "您的付款计划"
-        NUMBER_monthly_payment_of_AMOUNT: "{NUMBER}个月付款，每月{AMOUNT}"
+        NUMBER_monthly_payment_of_AMOUNT: "{NUMBER} 个月费用{NUMBER, plural, =1{金额为} other{金额为}} {AMOUNT}"
         first_debit: "订单日首次扣款。"
-        monthly_payment_NUMBER: "第{NUMBER}个月付款："
+        monthly_payment_NUMBER: "第 {NUMBER}{NUMBER, plural, =1{} =2{} =3{} other{}} 个月的月付金额: "
         debit: "订单日扣款。"
         view_full_schedule: "查看完整的付款计划"
       select_schedule:
@@ -316,10 +316,10 @@ zh-CN:
       #shopping cart module for reservations
       cart:
         summary: "摘要"
-        select_one_or_more_slots_in_the_calendar: "在日历中选择一个或多个插槽"
+        select_one_or_more_slots_in_the_calendar: "在日历中选择一个 {SINGLE, select, true{栏位} other{或更多栏位}}"
         select_a_plan: "在这里选择一个计划"
         you_ve_just_selected_the_slot: "您刚刚选择了插槽："
-        datetime_to_time: "{START_DATETIME} 至 {END_TIME}" #例如：1986年9月4日星期四晚上8:30至10:00
+        datetime_to_time: "{START_DATETIME} 至 {END_TIME}" #eg: Thursday, September 4, 1986 8:30 PM to 10:00 PM
         cost_of_TYPE: "{TYPE, select, Machine{机器插槽} Training{培训} Space{空间插槽} other{项目}}的费用"
         offer_this_slot: "提供此插槽"
         confirm_this_slot: "确认此插槽"
@@ -345,7 +345,7 @@ zh-CN:
         tags_of_the_destination_slot: "目标插槽的标签："
         confirm_my_modification: "确认我的修改"
         your_booking_slot_was_successfully_moved_from_: "您的预订插槽已成功从"
-        to_date: "至" #例如：从1月1日至1月5日。
+        to_date: "至" #eg. from 01 to 05 january.
         please_select_a_member_first: "请先选择一个会员"
         unable_to_select_plan_if_slots_in_the_past: "如果所选插槽中有任何过去的插槽，则无法选择计划"
         unable_to_change_the_reservation: "无法更改预订"
@@ -377,7 +377,7 @@ zh-CN:
         please_select_a_reservation_context: "请先选择预订的上下文"
         child_validation_required_alert: "您的管理员必须验证您的子帐户。然后，您将能够预订活动。"
         child_birthday_must_be_under_18_years_ago_alert: "您的子帐户必须年满18岁。然后，您将能够预订活动。"
-      # feature-tour modal
+      #feature-tour modal
       tour:
         previous: "上一个"
         next: "下一个"
@@ -395,7 +395,7 @@ zh-CN:
       stripe_confirm:
         pending: "等待操作..."
         success: "谢谢，您的卡片设置已完成。付款将很快进行。"
-      # the summary table of all payment schedules
+      #the summary table of all payment schedules
       payment_schedules_table:
         schedule_num: "计划 #"
         date: "日期"
@@ -483,7 +483,7 @@ zh-CN:
           reference_short: "参考:"
           unit: "单位"
           item_total: "总计"
-          payment_informations : "付款信息"
+          payment_informations: "付款信息"
           amount: "金额"
           products_total: "产品总额"
           gift_total: "折扣总额"

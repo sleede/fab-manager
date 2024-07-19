@@ -2,6 +2,8 @@
 
 ## Next release
 
+- updates chinese translations and adds translations
+
 ## v6.3.28 2024 July 5
 
 - Fix a bug: unable to show gender in global export

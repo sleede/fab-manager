@@ -59,5 +59,4 @@ zh-CN:
       not_found: "未找到此电子邮件地址。"
       not_locked: "未锁定。"
       not_saved:
-        one: "保存 %{resource} 时发生了1个错误："
-        other: "保存 %{resource} 时发生了 %{count} 个错误："
+        other: "发生 %{count} 个错误，导致%{resource} 保存失败："

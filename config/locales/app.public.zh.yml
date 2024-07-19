@@ -168,7 +168,7 @@ zh-CN:
         full_price: "全价: "
       #projects gallery
       projects_list:
-        filter: "筛选"
+        filter: 筛选
         the_fablab_projects: "项目"
         add_a_project: "添加项目"
         network_search: "Fab-manager 网络"
@@ -186,13 +186,13 @@ zh-CN:
         load_next_projects: "加载下一个项目"
         rough_draft: "草稿"
         filter_by_member: "按成员筛选"
-        created_from: "创建于"
-        created_to: "创建至"
-        download_archive: "下载"
+        created_from: 创建于
+        created_to: 创建至
+        download_archive: 下载
       status_filter:
         all_statuses: "所有状态"
         select_status: "选择状态"
-      #details of a project
+      #details of a projet
       projects_show:
         rough_draft: "草稿"
         project_description: "项目描述"
@@ -327,7 +327,7 @@ zh-CN:
         opening_hours: "开放时间:"
         all_day: "全天"
         from_time: "从" #e.g. from 18:00 to 21:00
-        to_time: "至"  #e.g. from 18:00 to 21:00
+        to_time: "至" #e.g. from 18:00 to 21:00
         full_price_: "全价:"
         tickets_still_availables: "剩余票数:"
         sold_out: "售罄。"
@@ -352,7 +352,7 @@ zh-CN:
         you_can_shift_this_reservation_on_the_following_slots: "您可以将此预订移至以下时间段:"
         confirmation_required: "需要确认"
         do_you_really_want_to_delete_this_event: "您真的想删除这个活动吗？"
-        all_reservations_for_this_event_will_be_canceled: "此活动的所有预订都将被取消。"
+        all_reservations_for_this_event_will_be_canceled: 此活动的所有预订都将被取消。
         delete_recurring_event: "您即将删除一个周期性活动。您想做什么？"
         delete_this_event: "仅此活动"
         delete_this_and_next: "此活动及以下活动"
@@ -360,7 +360,7 @@ zh-CN:
         event_successfully_deleted: "活动已成功删除。"
         events_deleted: "活动已删除，和 {COUNT, plural, =1{一个其他} other{{COUNT} 其他}}"
         unable_to_delete_the_event: "无法删除该活动，可能已被某个成员预订"
-        events_not_deleted: "在 {TOTAL} 个活动中，{COUNT, plural, =1{一个未删除} other{{COUNT} 未删除}}。可能存在一些预订"
+        events_not_deleted: "共有 {TOTAL} 个事件，其中 {COUNT, plural, =1{1个未被删除} other{{COUNT} 个未被删除}}. 在{COUNT, plural, =1{它} other{它们}}上可能有预约."
         cancel_the_reservation: "取消预订"
         do_you_really_want_to_cancel_this_reservation_this_apply_to_all_booked_tickets: "您真的想取消此预订吗？这将适用于所有已预订的票。"
         reservation_was_successfully_cancelled: "预订已成功取消。"
