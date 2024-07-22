@@ -244,7 +244,7 @@ fr:
         all_machines: "Toutes les machines"
       machine_card:
         book: "Réserver"
-        consult: "View"
+        consult: "Consulter"
       #details of a machine
       machines_show:
         book_this_machine: "Réserver cette machine"
