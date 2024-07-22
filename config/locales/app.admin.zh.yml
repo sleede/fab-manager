@@ -360,7 +360,7 @@ zh-CN:
         select_period: "请选择重复周期"
         select_nb_period: "请选择重复周期数"
         select_end_date: "请选择最后一次发生的日期"
-        about_to_create: "您即将创建以下 {TYPE, select, machines{machine} training{training} space{space} other{other}} {NUMBER, plural, one{slot} other{slots}}："
+        about_to_create: "您即将创建以下{TYPE, select, machines{机器} training{培训} space{空间} other{其他}}{NUMBER, plural, =1{时段} other{时段}}："
         divided_in_slots: "{COUNT, plural, =1{此时间段} other{这些时间段}} 将以 {DURATION} 分钟的间隔开放供预订。"
         reservable: "可预订："
         labels: "标签："

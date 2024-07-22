@@ -2,10 +2,13 @@ zh-CN:
   #subscription plan duration
   duration:
     year:
+      one: '一年'
       other: '%{count}年'
     month:
+      one: '一个月'
       other: '%{count}个月'
     week:
+      one: '一周'
       other: '%{count}周'
   activerecord:
     attributes:
@@ -103,8 +106,10 @@ zh-CN:
     from_payment_schedule: "第%{NUMBER}次，共%{TOTAL}次，从%{DATE}开始。还款计划%{SCHEDULE}"
     null_invoice: "零金额发票，由于Fab Manager软件故障导致的账单跳转"
     full_price_ticket:
+      one: "一张全价票"
       other: "%{count}张全价票"
     other_rate_ticket:
+      one: "一张%{NAME}票"
       other: "%{count}张%{NAME}票"
     coupon_CODE_discount_of_DISCOUNT: "优惠券{CODE}：折扣{DISCOUNT}{TYPE, select, percent_off{%} other{}}" #messageFormat interpolation
     total_including_all_taxes: "总额（含所有税）"
