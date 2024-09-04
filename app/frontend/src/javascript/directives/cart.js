@@ -840,7 +840,7 @@ Application.Directives.directive('cart', ['$rootScope', '$uibModal', 'dialogs', 
           return Wallet.getWalletByUser({ user_id: $scope.user.id }, function (wallet) {
             const amountToPay = helpers.getAmountToPay($scope.amountTotal, wallet.amount);
             if ((AuthService.isAuthorized(['member']) && (amountToPay > 0 || (amountToPay === 0 && hasOtherDeadlines()))) ||
-              ($scope.user.id === $rootScope.currentUser.id && amountToPay > 0)) {
+              (AuthService.isAuthorized(['admin', 'manager']) && $scope.user.id === $rootScope.currentUser.id && (amountToPay > 0 || (amountToPay === 0 && hasOtherDeadlines())))) {
               return payOnline(items);
             } else {
               if ((AuthService.isAuthorized(['admin', 'manager']) && $scope.user.id !== $rootScope.currentUser.id) ||

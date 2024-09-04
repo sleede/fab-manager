@@ -2,6 +2,10 @@
 
 ## Next release
 
+## v6.3.32 2024 July 22
+
+- Fix a bug: manager cannot pay a subscription(payment schedule) with a wallet
+
 ## v6.3.31 2024 July 22
 
 - updates translations
