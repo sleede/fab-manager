@@ -2,6 +2,8 @@
 
 ## Next release
 
+- Fix a bug: unable to reset OpenApi token
+
 ## v6.3.32 2024 July 22
 
 - Fix a bug: manager cannot pay a subscription(payment schedule) with a wallet
