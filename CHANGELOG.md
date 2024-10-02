@@ -3,6 +3,9 @@
 ## Next release
 
 - Fix a bug: unable to reset OpenApi token
+- Fix a bug: unable to sync projects with openprojects
+- [TODO DEPLOY] `rails fablab:openlab:bulk_export`
+- [TODO DEPLOY] `rails fablab:openlab:bulk_update`
 
 ## v6.3.32 2024 July 22
 
