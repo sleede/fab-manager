@@ -5,18 +5,17 @@ module OpenlabSync
   extend ActiveSupport::Concern
 
   included do
-    after_create :openlab_create, if: :openlab_sync_active?
-    after_update :openlab_update, if: :openlab_sync_active?
+    after_save :openlab_create_or_update, if: :openlab_sync_active?
     after_destroy :openlab_destroy, if: :openlab_sync_active?
 
     def openlab_create
       OpenlabWorker.perform_in(2.seconds, :create, id) if published?
     end
 
-    def openlab_update
+    def openlab_create_or_update
       return unless published?
 
-      if state_was == 'draft'
+      if state_was == 'draft' || state_was.nil?
         OpenlabWorker.perform_async(:create, id)
       else
         OpenlabWorker.perform_async(:update, id)

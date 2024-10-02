@@ -2,6 +2,13 @@
 
 ## Next release
 
+## v6.3.33 2024 October 2
+
+- Fix a bug: unable to reset OpenApi token
+- Fix a bug: unable to sync projects with openprojects
+- [TODO DEPLOY] `rails fablab:openlab:bulk_export`
+- [TODO DEPLOY] `rails fablab:openlab:bulk_update`
+
 ## v6.3.32 2024 July 22
 
 - Fix a bug: manager cannot pay a subscription(payment schedule) with a wallet
