@@ -19,7 +19,7 @@ namespace :fablab do
     task bulk_update: :environment do
       if Setting.get('openlab_app_id').present? && Setting.get('openlab_app_secret').present?
         Project.find_each do |project|
-          project.openlab_update
+          project.openlab_create_or_update
           puts '-> Done'
         end
       else

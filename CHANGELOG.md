@@ -2,6 +2,8 @@
 
 ## Next release
 
+- Fix a bug: unable to run open project update task
+
 ## v6.3.33 2024 October 2
 
 - Fix a bug: unable to reset OpenApi token
