@@ -2,6 +2,8 @@
 
 ## Next release
 
+## v6.3.34 2024 October 21
+
 - Fix a bug: unable to run open project update task
 
 ## v6.3.33 2024 October 2
