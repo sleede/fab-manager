@@ -2,6 +2,8 @@
 
 ## Next release
 
+- Fix a bug: unable to run rails db:migrate if the database is empty
+
 ## v6.3.34 2024 October 21
 
 - Fix a bug: unable to run open project update task
