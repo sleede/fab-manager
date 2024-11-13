@@ -3,11 +3,11 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 7.0'
+gem 'rails', '7.0.8.6'
 # Used by rails 5.2 to reduce the app boot time by over 50%
 gem 'bootsnap'
 # Use Puma as web server
-gem 'puma', '6.4.2'
+gem 'puma', '6.4.3'
 gem 'shakapacker', '6.6.0'
 
 # rails 6 compatibility with ruby 3 (may not be required after upgrade to rails 7)
@@ -42,7 +42,7 @@ group :development do
   gem 'foreman'
   gem 'web-console', '>= 4.2.0'
   # Preview mail in the browser
-  gem 'listen', "~> 3.5"
+  gem 'listen', '~> 3.5'
   gem 'overcommit'
   gem 'rb-readline'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
@@ -72,8 +72,8 @@ gem 'devise', '>= 4.9'
 gem 'omniauth', '~> 2.1'
 gem 'omniauth-oauth2'
 gem 'omniauth_openid_connect'
-gem 'omniauth-saml'
 gem 'omniauth-rails_csrf_protection', '~> 1.0'
+gem 'omniauth-saml'
 
 gem 'rolify'
 
@@ -151,7 +151,7 @@ gem 'acts_as_list'
 gem 'sentry-rails'
 gem 'sentry-ruby'
 
-gem "reverse_markdown"
+gem 'reverse_markdown'
 
-gem "ancestry"
+gem 'ancestry'
 gem 'silencer', require: false

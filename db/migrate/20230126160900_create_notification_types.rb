@@ -96,18 +96,20 @@ class CreateNotificationTypes < ActiveRecord::Migration[5.2]
 
     add_index :notification_types, :name, unique: true
 
-    # Records previous notification types
-    NOTIFICATIONS_TYPES.each do |notification_type|
-      NotificationType.create!(
-        id: notification_type[:id],
-        name: notification_type[:name],
-        category: notification_type[:category],
-        is_configurable: notification_type[:is_configurable]
-      )
-    end
+    if NotificationType.count > 0
+      # Records previous notification types
+      NOTIFICATIONS_TYPES.each do |notification_type|
+        NotificationType.create!(
+          id: notification_type[:id],
+          name: notification_type[:name],
+          category: notification_type[:category],
+          is_configurable: notification_type[:is_configurable]
+        )
+      end
 
-    last_id = NotificationType.order(:id).last.id
-    execute "SELECT setval('public.notification_types_id_seq', #{last_id})"
+      last_id = NotificationType.order(:id).last.id
+      execute "SELECT setval('public.notification_types_id_seq', #{last_id})"
+    end
 
     add_foreign_key :notifications, :notification_types
   end

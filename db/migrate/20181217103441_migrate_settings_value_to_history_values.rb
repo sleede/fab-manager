@@ -3,6 +3,8 @@
 class MigrateSettingsValueToHistoryValues < ActiveRecord::Migration[4.2]
   def up
     user = User.admins.first
+    return unless user
+
     Setting.all.each do |setting|
       hv = HistoryValue.new(
         setting: setting,

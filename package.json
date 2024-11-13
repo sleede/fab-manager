@@ -1,6 +1,6 @@
 {
   "name": "fab-manager",
-  "version": "6.3.34",
+  "version": "6.3.35",
   "description": "Fab-manager is the FabLab management solution. It provides a comprehensive, web-based, open-source tool to simplify your administrative tasks and your marker's projects.",
   "keywords": [
     "fablab",
@@ -45,7 +45,7 @@
     "react-refresh": "^0.11.0",
     "react-select-event": "^5.5.1",
     "react-test-renderer": "^17.0.2",
-    "webpack-dev-server": "^4.9.0"
+    "webpack-dev-server": "^4.15.2"
   },
   "dependencies": {
     "@babel/core": "^7.20.2",
