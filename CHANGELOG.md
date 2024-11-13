@@ -2,7 +2,13 @@
 
 ## Next release
 
+## v6.3.35 2024 November 13
+
 - Fix a bug: unable to run rails db:migrate if the database is empty
+- Fix a bug: timeout error when search projects with openprojects
+- Fix a security issue: updated omniauth-saml to 2.2.1 to fix [CVE-2024-45409](https://github.com/advisories/GHSA-jw9c-mfg7-9rx2)
+- Fix a security issue: puma to 6.4.3 to fix [CVE-2024-45614](https://security.snyk.io/vuln/SNYK-RUBY-PUMA-8062124)
+- Fix a security issue: rails to 7.0.86 to fix [CVE-2024-47889](https://vulert.com/vuln-db/CVE-2024-47889)
 
 ## v6.3.34 2024 October 21
 
