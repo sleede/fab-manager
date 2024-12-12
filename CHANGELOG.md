@@ -2,6 +2,8 @@
 
 ## Next release
 
+## v6.3.36 2024 December 12
+
 - Improvement: default order for the spaces/trainings list is set to descending by created_at
 - Improvement: members cannot see training deactivated in the list
 
