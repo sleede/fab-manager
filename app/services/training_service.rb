@@ -5,7 +5,7 @@ class TrainingService
   class << self
     # @param filters [ActionController::Parameters]
     def list(filters)
-      trainings = Training.includes(:training_image, :plans, :machines)
+      trainings = Training.includes(:training_image, :plans, :machines).order(:created_at)
 
       trainings = filter_by_disabled(trainings, filters)
       trainings = filter_by_public_page(trainings, filters)

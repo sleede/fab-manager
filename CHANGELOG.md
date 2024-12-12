@@ -2,6 +2,11 @@
 
 ## Next release
 
+## v6.3.36 2024 December 12
+
+- Improvement: default order for the spaces/trainings list is set to descending by created_at
+- Improvement: members cannot see training deactivated in the list
+
 ## v6.3.35 2024 November 13
 
 - Fix a bug: unable to run rails db:migrate if the database is empty

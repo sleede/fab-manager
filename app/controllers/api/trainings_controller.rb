@@ -14,6 +14,7 @@ class API::TrainingsController < API::APIController
 
   def show
     @training = Training.friendly.find(params[:id])
+    authorize @training
   end
 
   def create
