@@ -41,7 +41,7 @@ class ProductService
     # @param stock_movements [{stock_type: string, reason: string, quantity: number|string, order_item_id: number|nil}]
     def update_stock(product, stock_movements = nil)
       remaining_stock = { internal: product.stock['internal'], external: product.stock['external'] }
-      product.product_stock_movements_attributes = stock_movements&.map do |movement|
+      product.product_stock_movements_attributes = stock_movements&.compact_blank&.map do |movement|
         quantity = ProductStockMovement::OUTGOING_REASONS.include?(movement[:reason]) ? -movement[:quantity].to_i : movement[:quantity].to_i
         remaining_stock[movement[:stock_type].to_sym] += quantity
         {

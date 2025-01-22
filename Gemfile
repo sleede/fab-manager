@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '7.0.8.6'
+gem 'rails', '7.0.8.7'
 # Used by rails 5.2 to reduce the app boot time by over 50%
 gem 'bootsnap'
 # Use Puma as web server
@@ -155,3 +155,6 @@ gem 'reverse_markdown'
 
 gem 'ancestry'
 gem 'silencer', require: false
+
+# temporary fix for the issue uninitialized constant ActiveSupport::LoggerThreadSafeLevel::Logger (NameError)
+gem 'concurrent-ruby', '1.3.4'
