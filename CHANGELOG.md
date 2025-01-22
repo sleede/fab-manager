@@ -5,6 +5,7 @@
 - updated rails to 7.0.8.7
 - updated tzinfo-data to 1.2025.1
 - Fix a bug: unable to update opening/closing time for the calendar
+- Fix a bug: unable to update product low stock alert
 
 ## v6.3.36 2024 December 12
 
