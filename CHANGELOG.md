@@ -2,6 +2,8 @@
 
 ## Next release
 
+## v6.3.37 2025 January 22
+
 - updated rails to 7.0.8.7
 - updated tzinfo-data to 1.2025.1
 - Fix a bug: unable to update opening/closing time for the calendar
