@@ -2,6 +2,10 @@
 
 ## Next release
 
+## v6.3.38 2025 January 27
+
+- Fix a bug: unable to update product low stock alert
+
 ## v6.3.37 2025 January 22
 
 - updated rails to 7.0.8.7
