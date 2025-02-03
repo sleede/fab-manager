@@ -2,6 +2,8 @@
 
 ## Next release
 
+- Fix a bug: unable to cancel a PayZen subscription
+
 ## v6.3.38 2025 January 27
 
 - Fix a bug: unable to update product low stock alert
