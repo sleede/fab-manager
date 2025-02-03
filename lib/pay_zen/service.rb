@@ -70,7 +70,8 @@ class PayZen::Service < Payment::Service
         raise "Cannot cancel transaction #{t['uuid']}" unless tr_res['answer']['detailedStatus'] == 'CANCELLED'
       end
     rescue PayzenError => e
-      raise e unless e.details['errorCode'] == 'PSP_010' # ignore if no order
+      # ignore if no order found and Subscription already canceled.
+      raise e unless e.details['errorCode'] == 'PSP_010' || e.details['errorCode'] == 'PSP_1099'
     end
 
     # then, we cancel the subscription
