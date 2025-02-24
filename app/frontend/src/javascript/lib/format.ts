@@ -62,7 +62,7 @@ export default class FormatLib {
    */
   private static parseISOtime = (date: TDateISO|TDateISOShortTime): Date => {
     const isoTimeMatch = (date as string)?.match(/(^|T)(\d\d:\d\d)/);
-    return new Date(`1970-01-01T${isoTimeMatch[2]}:00${Fablab.timezone_offset}`);
+    return new Date(`${moment().format('YYYY-MM-DD')}T${isoTimeMatch[2]}:00${Fablab.timezone_offset}`);
   };
 
   /**
@@ -77,10 +77,10 @@ export default class FormatLib {
    */
   static time = (date: Date|TDateISO|TDateISOShortTime): string => {
     let tempDate: Date;
-    if (FormatLib.isShortTimeISO(date as string) || FormatLib.isDateISO(date as string)) {
+    if (FormatLib.isShortTimeISO(date as string)) {
       tempDate = FormatLib.parseISOtime(date as TDateISOShortTime);
     } else {
-      tempDate = moment(date).toDate();
+      tempDate = moment.utc(date).toDate();
     }
     return Intl.DateTimeFormat(Fablab.intl_locale, { hour: 'numeric', minute: 'numeric', timeZone: Fablab.timezone }).format(tempDate);
   };
