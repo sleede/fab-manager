@@ -2,6 +2,8 @@
 
 ## Next release
 
+- Fix a bug: machine reservation time in my reservations is incorrect
+
 ## v6.3.39 2025 February 3
 
 - Fix a bug: unable to cancel a PayZen subscription
