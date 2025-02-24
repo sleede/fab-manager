@@ -2,6 +2,8 @@
 
 ## Next release
 
+## v6.3.40 2025 February 24
+
 - Fix a bug: machine reservation time in my reservations is incorrect
 
 ## v6.3.39 2025 February 3
