@@ -2,6 +2,12 @@
 
 ## Next release
 
+## v6.3.41 2025 February 26
+
+- Fix a bug: unable to sync projects with openprojects
+- [TODO DEPLOY] `rails fablab:openlab:bulk_export`
+- [TODO DEPLOY] `rails fablab:openlab:bulk_update`
+
 ## v6.3.40 2025 February 24
 
 - Fix a bug: machine reservation time in my reservations is incorrect
