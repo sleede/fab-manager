@@ -6,7 +6,8 @@ parseparams()
   SCRIPTS=()
   ENVIRONMENTS=()
   PREPROCESSING=()
-  while getopts "hyit:s:p:c:e:" opt; do
+  SKIP_ASSETS=false
+  while getopts "hyit:s:p:c:e:-:" opt; do
     case "${opt}" in
       i)
         IGNORE=true
@@ -29,6 +30,16 @@ parseparams()
         ;;
       e)
         ENVIRONMENTS+=("$OPTARG")
+        ;;
+      -)
+        case "${OPTARG}" in
+          no-compile-assets)
+            SKIP_ASSETS=true
+            ;;
+          *)
+            usage
+            ;;
+        esac
         ;;
       *)
         usage
@@ -216,6 +227,11 @@ clean_env_file()
 
 compile_assets()
 {
+  if [ "$SKIP_ASSETS" = "true" ]; then
+    printf "\e[93m[ ⚠ ] Skipping assets compilation as requested with --no-compile-assets option\e[39m\n"
+    return 0
+  fi
+
   IMAGE=$(yq eval '.services.*.image | select(. == "sleede/fab-manager*")' docker-compose.yml)
   mapfile -t COMPOSE_ENVS < <(yq eval ".services.$SERVICE.environment" docker-compose.yml)
   ENV_ARGS=$(for i in "${COMPOSE_ENVS[@]}"; do sed 's/: /=/g;s/^/-e /g' <<< "$i"; done)
@@ -339,6 +355,7 @@ Options:
   -c <string>        Provides additional upgrade command, run in the context of the app (TODO DEPLOY)
   -s <string>        Executes a remote script (TODO DEPOY)
   -e <string>        Adds the environment variable to config/env
+  --no-compile-assets Skip assets compilation step
 Return codes:
   0                  Upgrade terminated successfully
   1                  Configuration required
