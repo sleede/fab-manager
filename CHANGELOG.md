@@ -2,6 +2,8 @@
 
 ## Next release
 
+- update upgrade.sh script to allow skip compile assets
+
 ## v6.3.42 2025 February 28
 
 - Fix a bug: unable to bulk update projects to openlab in rake task
