@@ -2,6 +2,12 @@
 
 ## Next release
 
+## v6.3.42 2025 February 28
+
+- Fix a bug: unable to bulk update projects to openlab in rake task
+- [TODO DEPLOY] `rails fablab:openlab:bulk_export`
+- [TODO DEPLOY] `rails fablab:openlab:bulk_update`
+
 ## v6.3.41 2025 February 26
 
 - Fix a bug: unable to sync projects with openprojects
