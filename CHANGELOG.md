@@ -3,6 +3,7 @@
 ## Next release
 
 - update upgrade.sh script to allow skip compile assets
+- Fix a bug: event start/end date is not correct in the event list if the daylight saving time
 
 ## v6.3.42 2025 February 28
 
