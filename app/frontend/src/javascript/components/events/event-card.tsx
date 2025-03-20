@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { react2angular } from 'react2angular';
-import moment from 'moment';
 import { IApplication } from '../../models/application';
 import { Loader } from '../base/loader';
 import { Event } from '../../models/event';
@@ -56,7 +55,7 @@ export const EventCard: React.FC<EventCardProps> = ({ event, cardType }) => {
   const formatTime = (): string => {
     return event.all_day
       ? t('app.public.event_card.all_day')
-      : t('app.public.event_card.from_time_to_time', { START: FormatLib.time(moment(`${event.start_date}T${event.start_time}`).toDate()), END: FormatLib.time(moment(`${event.end_date}T${event.end_time}`).toDate()) });
+      : t('app.public.event_card.from_time_to_time', { START: event.start_time, END: event.end_time });
   };
 
   return (
