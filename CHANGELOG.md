@@ -2,6 +2,10 @@
 
 ## Next release
 
+## v6.3.46 2025 March 31
+
+- Fix a bug: unable to cancel stripe subscription canceled
+
 ## v6.3.45 2025 March 31
 
 - Fix a bug: unable to cancel stripe subscription canceled
