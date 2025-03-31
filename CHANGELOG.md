@@ -2,6 +2,8 @@
 
 ## Next release
 
+- Fix a bug: unable to cancel stripe subscription canceled
+
 ## v6.3.44 2025 March 20
 
 - Fix a bug: event start/end date is not correct in the event list if the daylight saving time
