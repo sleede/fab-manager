@@ -47,7 +47,9 @@ class Stripe::Service < Payment::Service
 
     stp_subscription = payment_schedule.gateway_subscription.retrieve
 
-    Stripe::Subscription.delete(stp_subscription.id, {}, api_key: stripe_key) if stp_subscription.status != 'canceled'
+    return true if stp_subscription.status == 'canceled'
+
+    res = Stripe::Subscription.delete(stp_subscription.id, {}, api_key: stripe_key)
     res.status == 'canceled'
   end
 
