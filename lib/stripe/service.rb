@@ -16,7 +16,7 @@ class Stripe::Service < Payment::Service
     first_item = price_details[:schedule][:items].min_by(&:due_date)
     subscription = shopping_cart.items.find { |item| item.instance_of?(CartItem::Subscription) }.to_object
     reservable_stp_id = shopping_cart.items.find { |item| item.is_a?(CartItem::Reservation) }&.to_object
-                          &.reservable&.payment_gateway_object&.gateway_object_id
+                                     &.reservable&.payment_gateway_object&.gateway_object_id
 
     WalletService.debit_user_wallet(payment_schedule, shopping_cart.customer, transaction: false)
     handle_wallet_transaction(payment_schedule)
@@ -47,7 +47,7 @@ class Stripe::Service < Payment::Service
 
     stp_subscription = payment_schedule.gateway_subscription.retrieve
 
-    res = Stripe::Subscription.delete(stp_subscription.id, {}, api_key: stripe_key)
+    Stripe::Subscription.delete(stp_subscription.id, {}, api_key: stripe_key) if stp_subscription.status != 'canceled'
     res.status == 'canceled'
   end
 
