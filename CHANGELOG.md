@@ -2,6 +2,10 @@
 
 ## Next release
 
+## v6.3.47 2025 Avril 1
+
+- Fix a bug: unable to hide machine/space deleted in price of plan
+
 ## v6.3.46 2025 March 31
 
 - Fix a bug: unable to cancel stripe subscription canceled
