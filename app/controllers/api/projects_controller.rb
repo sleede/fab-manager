@@ -11,7 +11,7 @@ class API::ProjectsController < API::APIController
   end
 
   def last_published
-    @projects = Project.includes(:project_image).published.order('created_at desc').limit(5)
+    @projects = Project.includes(:project_image).published.order('created_at desc').limit(10)
   end
 
   def show
