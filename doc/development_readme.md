@@ -125,6 +125,7 @@ This procedure is not easy to follow so if you don't need to write some code for
 
    ```bash
    # for dev
+   rails db:create
    rails db:schema:load
    ADMIN_EMAIL='youradminemail' ADMIN_PASSWORD='youradminpassword' rails db:seed
    rails fablab:es:build_stats
