@@ -2,6 +2,8 @@
 
 ## Next release
 
+## v6.4.0 2025 Avril 25
+
 - Fix a bug: unable to get coupon usages count if generation of invoice is disabled
 
 ## v6.3.47 2025 Avril 1
