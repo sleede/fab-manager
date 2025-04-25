@@ -9,6 +9,7 @@ class Order < PaymentDocument
   has_many :order_items, dependent: :destroy
   has_one :payment_gateway_object, as: :item, dependent: :destroy
   has_many :order_activities, dependent: :destroy
+  has_one :coupon_usage, as: :object, dependent: :destroy
 
   ALL_STATES = %w[cart paid payment_failed refunded in_progress ready canceled delivered].freeze
   enum state: ALL_STATES.zip(ALL_STATES).to_h

@@ -72,6 +72,7 @@ class ShoppingCart
       else
         update_credits(objects)
         update_packs(objects)
+        update_coupon_usages(objects)
 
         payment = create_payment_document(price, objects, payment_id, payment_type)
         WalletService.debit_user_wallet(payment, @customer)
@@ -184,5 +185,21 @@ class ShoppingCart
       return errors unless errors.empty?
     end
     false
+  end
+
+  # Update the coupon usages
+  def update_coupon_usages(objects)
+    return unless coupon.coupon
+
+    usages_count = coupon.coupon.usages + 1
+
+    objects.each do |object|
+      coupon_usage = CouponUsage.new(
+        coupon: coupon.coupon,
+        object: object,
+        count: usages_count
+      )
+      coupon_usage.save
+    end
   end
 end

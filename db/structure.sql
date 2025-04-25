@@ -1,6 +1,7 @@
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET idle_in_transaction_session_timeout = 0;
+SET transaction_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SELECT pg_catalog.set_config('search_path', '', false);
@@ -1027,6 +1028,40 @@ CREATE SEQUENCE public.components_id_seq
 --
 
 ALTER SEQUENCE public.components_id_seq OWNED BY public.components.id;
+
+
+--
+-- Name: coupon_usages; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.coupon_usages (
+    id bigint NOT NULL,
+    object_type character varying,
+    object_id bigint,
+    coupon_id bigint,
+    count integer DEFAULT 0,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: coupon_usages_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.coupon_usages_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: coupon_usages_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.coupon_usages_id_seq OWNED BY public.coupon_usages.id;
 
 
 --
@@ -4716,6 +4751,13 @@ ALTER TABLE ONLY public.components ALTER COLUMN id SET DEFAULT nextval('public.c
 
 
 --
+-- Name: coupon_usages id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.coupon_usages ALTER COLUMN id SET DEFAULT nextval('public.coupon_usages_id_seq'::regclass);
+
+
+--
 -- Name: coupons id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -5622,6 +5664,14 @@ ALTER TABLE ONLY public.children
 
 ALTER TABLE ONLY public.components
     ADD CONSTRAINT components_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: coupon_usages coupon_usages_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.coupon_usages
+    ADD CONSTRAINT coupon_usages_pkey PRIMARY KEY (id);
 
 
 --
@@ -6730,6 +6780,20 @@ CREATE INDEX index_chained_elements_on_element ON public.chained_elements USING 
 --
 
 CREATE INDEX index_children_on_user_id ON public.children USING btree (user_id);
+
+
+--
+-- Name: index_coupon_usages_on_coupon_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_coupon_usages_on_coupon_id ON public.coupon_usages USING btree (coupon_id);
+
+
+--
+-- Name: index_coupon_usages_on_object; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_coupon_usages_on_object ON public.coupon_usages USING btree (object_type, object_id);
 
 
 --
@@ -9333,6 +9397,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20240126192110'),
 ('20240220140225'),
 ('20240327095614'),
-('20240605085829');
+('20240605085829'),
+('20250424164457');
 
 

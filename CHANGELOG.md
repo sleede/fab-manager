@@ -2,6 +2,8 @@
 
 ## Next release
 
+- Fix a bug: unable to get coupon usages count if generation of invoice is disabled
+
 ## v6.3.47 2025 Avril 1
 
 - Fix a bug: unable to hide machine/space deleted in price of plan
