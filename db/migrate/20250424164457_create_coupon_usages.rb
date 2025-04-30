@@ -24,7 +24,9 @@ class CreateCouponUsages < ActiveRecord::Migration[7.0]
       coupon.invoices.order(:created_at).each do |invoice|
         count += 1
         invoice.invoice_items.each do |invoice_item|
-          CouponUsage.create(object: invoice_item.object, coupon: coupon, count: count) if invoice_item.object
+          if invoice_item.object_type != 'Error' && invoice_item.object
+            CouponUsage.create(object: invoice_item.object, coupon: coupon, count: count)
+          end
         end
       end
     end
