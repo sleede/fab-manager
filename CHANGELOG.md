@@ -2,6 +2,8 @@
 
 ## Next release
 
+## v6.4.1 2025 Avril 30
+
 - Fix a bug: unable to migrate coupon usages
 
 ## v6.4.0 2025 Avril 25
