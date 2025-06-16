@@ -18,6 +18,8 @@ json.reservations @reservations do |reservation|
       json.partial! 'open_api/v1/trainings/training', training: reservation.reservable
     when 'Machine'
       json.partial! 'open_api/v1/machines/machine', machine: reservation.reservable
+    when 'Space'
+      json.partial! 'open_api/v1/spaces/space', space: reservation.reservable
     when 'Event'
       json.partial! 'open_api/v1/events/event', event: reservation.reservable
     end
