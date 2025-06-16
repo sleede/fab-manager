@@ -4,6 +4,7 @@
 
 - Fix a bug: reservation of training has auto canceled/refunded two times
 - Fix a bug: missing reservation of space in open api json
+- Fix a bug: unable to run rails db:migrate
 
 ## v6.4.1 2025 Avril 30
 
