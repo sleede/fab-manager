@@ -2,6 +2,9 @@
 
 ## Next release
 
+- Fix a bug: reservation of training has auto canceled/refunded two times
+- Fix a bug: missing reservation of space in open api json
+
 ## v6.4.1 2025 Avril 30
 
 - Fix a bug: unable to migrate coupon usages
