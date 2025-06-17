@@ -2,6 +2,8 @@
 
 ## Next release
 
+## v6.4.3 2025 Jun 17
+
 - Fix a bug: unable to install fab-manager by setup.sh
 
 ## v6.4.2 2025 Jun 16
