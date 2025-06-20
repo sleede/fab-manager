@@ -2,6 +2,8 @@
 
 ## Next release
 
+- Fix a bug: unable to update coupon usages count for a product order
+
 ## v6.4.4 2025 Jun 20
 
 - update moment-timezone to 0.5.48
