@@ -2,6 +2,10 @@
 
 ## Next release
 
+## v6.4.4 2025 Jun 20
+
+- update moment-timezone to 0.5.48
+
 ## v6.4.3 2025 Jun 17
 
 - Fix a bug: unable to install fab-manager by setup.sh
