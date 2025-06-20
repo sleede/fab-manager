@@ -67,7 +67,7 @@ module Payments::PaymentConcern
 
   # Update the coupon usages
   def update_coupon_usages(coupon, items)
-    usages_count = coupon.coupon.usages + 1
+    usages_count = coupon.usages + 1
 
     items.each do |item|
       coupon_usage = CouponUsage.new(
