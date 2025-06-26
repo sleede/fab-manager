@@ -2,6 +2,8 @@
 
 ## Next release
 
+- Fix a bug: allways show cgu/cgv links in about page even if the files are not uploaded
+
 ## v6.4.5 2025 Jun 20
 
 - Fix a bug: unable to update coupon usages count for a product order
