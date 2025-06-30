@@ -20,7 +20,7 @@ interface BooleanSettingProps {
   hideSave?: boolean,
   onChange?: (value: string) => void,
   onBeforeSave?: (message: string) => void,
-  onSuccess: (message: string) => void,
+  onSuccess: (message: string, name: SettingName, value: string) => void,
   onError: (message: string) => void,
 }
 
@@ -51,7 +51,7 @@ export const BooleanSetting: React.FC<BooleanSettingProps> = ({ name, label, cla
     SettingAPI.update(name, value ? 'true' : 'false')
       .then(() => onSuccess(t('app.admin.boolean_setting.customization_of_SETTING_successfully_saved', {
         SETTING: t(`app.admin.settings.${name}`) // eslint-disable-line fabmanager/scoped-translation
-      })))
+      }), name, value ? 'true' : 'false'))
       .catch(err => {
         if (err.status === 304) return;
 

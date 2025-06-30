@@ -11,10 +11,10 @@
     <div ng-class="{'col-sm-10 col-md-6 col-lg-6':!aboutContacts.value, 'col-sm-7 col-md-5 col-lg-4':aboutContacts.value}"
          class="col-sm-offset-1 col-md-offset-3 col-sm-7 col-md-5 col-lg-4 m-b-lg">
       <span ng-bind-html="aboutBody.value"></span>
-      <p ng-show="cgu">
+      <p ng-show="cgu && cgu.custom_asset_file_attributes">
         <a href="{{cgu.custom_asset_file_attributes.attachment_url}}" target="_blank" translate>{{ 'app.public.about.read_the_fablab_policy' }}</a>
       </p>
-      <p ng-show="cgv">
+      <p ng-show="cgv && cgv.custom_asset_file_attributes">
         <a href="{{cgv.custom_asset_file_attributes.attachment_url}}" target="_blank" translate>{{ 'app.public.about.read_the_fablab_s_general_terms_and_conditions' }}</a>
       </p>
       <p ng-show="privacyPolicy.value">
