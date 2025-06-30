@@ -7,8 +7,14 @@
     margin-left: 1em;
   }
 
-  .save {
-    background-color: #999;
-    border-color: #999;
+  .save-btn {
+    margin-left: 15px;
+    background-color: var(--secondary);
+    border-color: var(--secondary);
+    color: var(--secondary-text-color);
+    &:hover {
+      background-color: var(--secondary-dark);
+      border-color: var(--secondary-dark);
+    }
   }
 }

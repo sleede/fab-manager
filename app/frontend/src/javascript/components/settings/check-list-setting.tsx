@@ -96,7 +96,7 @@ export const CheckListSetting: React.FC<CheckListSettingProps> = ({ name, label,
         <input id={`setting-${name}-${option[0]}`} type="checkbox" checked={isChecked(option[0])} onChange={toggleCheckbox(option[0])} />
         <label htmlFor={`setting-${name}-${option[0]}`}>{option[1]}</label>
       </div>)}
-      {!hideSave && <FabButton className="save" onClick={handleSave}>{t('app.admin.check_list_setting.save')}</FabButton>}
+      {!hideSave && <FabButton className="save-btn" onClick={handleSave}>{t('app.admin.check_list_setting.save')}</FabButton>}
     </div>
   );
 };

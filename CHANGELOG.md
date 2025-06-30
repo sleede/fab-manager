@@ -3,6 +3,7 @@
 ## Next release
 
 - Fix a bug: allways show cgu/cgv links in about page even if the files are not uploaded
+- Fix a bug: alllow / prevent the reservation of overlapping slots settings is not working
 
 ## v6.4.5 2025 Jun 20
 

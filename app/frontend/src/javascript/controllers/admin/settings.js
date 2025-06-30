@@ -458,8 +458,11 @@ Application.Controllers.controller('SettingsController', ['$scope', '$rootScope'
       }
     };
 
-    $scope.onSuccess = function (message) {
+    $scope.onSuccess = function (message, settingName, value) {
       growl.success(message);
+      if (settingName) {
+        $scope.allSettings[settingName] = value;
+      }
     };
 
     $scope.onError = function (message) {

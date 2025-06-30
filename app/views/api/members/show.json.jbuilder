@@ -10,7 +10,7 @@ json.trainings @member.trainings do |t|
   json.id t.id
   json.name t.name
 end
-reservations = @member.reservations.where(reservable_type: 'Training').preload(slots_reservations: [:slot, reservation: :reservable])
+reservations = @member.reservations.preload(slots_reservations: [:slot, reservation: :reservable])
 json.training_reservations reservations.select { |r| r.reservable_type == "Training" }.map(&:slots_reservations).flatten do |sr|
   json.id sr.id
   json.start_at sr.slot.start_at
