@@ -2,6 +2,8 @@
 
 ## Next release
 
+## v6.4.7 2025 July 1
+
 - Fix a bug: prepaid packs are credited when admin offer a slot of rerservation
 
 ## v6.4.6 2025 Jun 30
