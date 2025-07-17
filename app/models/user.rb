@@ -84,7 +84,7 @@ class User < ApplicationRecord
 
   validate :cgu_must_accept, if: :new_record?
 
-  validates :username, presence: true, uniqueness: true, length: { maximum: 30 }
+  validates :username, presence: true, uniqueness: true, length: { maximum: 50 }
   validate :password_complexity
 
   scope :active, -> { where(is_active: true) }

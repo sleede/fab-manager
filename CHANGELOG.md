@@ -2,6 +2,8 @@
 
 ## Next release
 
+- improvement: username length validation is now 50 characters instead of 30 characters
+
 ## v6.4.7 2025 July 1
 
 - Fix a bug: prepaid packs are credited when admin offer a slot of rerservation
