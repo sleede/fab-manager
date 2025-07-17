@@ -3,6 +3,7 @@
 ## Next release
 
 - improvement: username length validation is now 50 characters instead of 30 characters
+- Fix a bug: unable to resend auth code for SSO authentication providers
 
 ## v6.4.7 2025 July 1
 
