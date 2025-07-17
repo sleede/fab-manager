@@ -2,6 +2,8 @@
 
 ## Next release
 
+## v6.4.8 2025 July 17
+
 - improvement: username length validation is now 50 characters instead of 30 characters
 - Fix a bug: unable to resend auth code for SSO authentication providers
 - Fix a bug: confirmation email is sent two times when a user craated
