@@ -405,6 +405,16 @@ en:
         deleted_user: "Deleted user"
         select_type: "Please select a type to continue"
         no_modules_available: "No reservable module available. Please enable at least one module (machines, spaces or trainings) in the Customization section."
+        ical_links: "iCal links"
+        ical_description: "Use the following links to subscribe to reservation calendars in your calendar application."
+        copy_link: "Copy Link"
+        ical_usage_info: "Add these links to your calendar application (such as Google Calendar, Outlook, etc.) to automatically sync reservation information."
+        link_copied: "Link copied to clipboard"
+        copy_failed: "Copy failed, please copy the link manually"
+        machine_reservations: "Machine Reservations"
+        training_reservations: "Training Reservations"
+        event_reservations: "Event Reservations"
+        space_reservations: "Space Reservations"
       # import external iCal calendar
       icalendar:
         icalendar_import: "iCalendar import"

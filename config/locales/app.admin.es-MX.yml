@@ -405,6 +405,16 @@ es-MX:
         deleted_user: "Usuario suprimido"
         select_type: "Seleccione un tipo para continuar"
         no_modules_available: "No hay ningún módulo reservable disponible. Habilite al menos un módulo (máquinas, espacios o capacitaciones) en la sección Personalización."
+        ical_links: "Enlaces iCal"
+        ical_description: "Use estos enlaces para suscribirse a calendarios de reservas en su aplicación de calendario preferida."
+        copy_link: "Copiar enlace"
+        ical_usage_info: "Copie estos enlaces webcal:// en su aplicación de calendario para suscribirse a actualizaciones automáticas."
+        link_copied: "¡Enlace copiado al portapapeles!"
+        copy_failed: "Error al copiar el enlace"
+        machine_reservations: "Reservas de máquinas"
+        training_reservations: "Reservas de capacitaciones"
+        event_reservations: "Reservas de eventos"
+        space_reservations: "Reservas de espacios"
       #import external iCal calendar
       icalendar:
         icalendar_import: "Importar iCalendar"

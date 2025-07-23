@@ -405,6 +405,16 @@ zh-CN:
         deleted_user: "已删除的用户"
         select_type: "请选择一个类型以继续"
         no_modules_available: "没有可用的预订模块。请在自定义部分启用至少一个模块（机器、空间或培训）。"
+        ical_links: "iCal链接"
+        ical_description: "使用以下链接将预订日历订阅到您的日历应用程序中。"
+        copy_link: "复制链接"
+        ical_usage_info: "将这些链接添加到您的日历应用程序（如Google日历、Outlook等）中，以自动同步预订信息。"
+        link_copied: "链接已复制到剪贴板"
+        copy_failed: "复制失败，请手动复制链接"
+        machine_reservations: "机器预订"
+        training_reservations: "培训预订"
+        event_reservations: "活动预订"
+        space_reservations: "空间预订"
       #import external iCal calendar
       icalendar:
         icalendar_import: "iCalendar 导入"

@@ -1,9 +1,9 @@
 <div class="modal-header">
-  <h3 class="modal-title">{{ 'app.shared.calendar.ical_links' | translate }}</h3>
+  <h3 class="modal-title">{{ 'app.admin.calendar.ical_links' | translate }}</h3>
 </div>
 
 <div class="modal-body">
-  <p class="text-muted">{{ 'app.shared.calendar.ical_description' | translate }}</p>
+  <p class="text-muted">{{ 'app.admin.calendar.ical_description' | translate }}</p>
   
   <div class="list-group">
     <div class="list-group-item" ng-repeat="link in icalLinks">
@@ -17,7 +17,7 @@
         </div>
         <div class="col-md-4 text-right">
           <button type="button" class="btn btn-outline-primary btn-sm" ng-click="copyToClipboard(link.url)">
-            <i class="fas fa-copy"></i> {{ 'app.shared.calendar.copy_link' | translate }}
+            <i class="fas fa-copy"></i> {{ 'app.admin.calendar.copy_link' | translate }}
           </button>
         </div>
       </div>
@@ -26,7 +26,7 @@
   
   <div class="alert alert-info" role="alert">
     <i class="fas fa-info-circle"></i>
-    {{ 'app.shared.calendar.ical_usage_info' | translate }}
+    {{ 'app.admin.calendar.ical_usage_info' | translate }}
   </div>
 </div>
 
