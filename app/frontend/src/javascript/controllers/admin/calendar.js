@@ -306,6 +306,59 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
      * Setup the feature-tour for the admin/calendar page.
      * This is intended as a contextual help (when pressing F1)
      */
+    /**
+     * Open the iCal links modal
+     */
+    $scope.openICalLinksModal = function () {
+      const modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: '/calendar/ical_links.html',
+        size: 'md',
+        controller: ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
+          $scope.icalLinks = [];
+          if (Fablab.machinesModule) {
+            $scope.icalLinks.push({
+              type: 'Machine',
+              name: _t('app.admin.calendar.machine_reservations'),
+              url: `webcal://${window.location.host}/ical/reservations/machine`
+            });
+          }
+          if (Fablab.trainingsModule) {
+            $scope.icalLinks.push({
+              type: 'Training',
+              name: _t('app.admin.calendar.training_reservations'),
+              url: `webcal://${window.location.host}/ical/availabilities/training`
+            });
+          }
+          if (Fablab.spacesModule) {
+            $scope.icalLinks.push({
+              type: 'Space',
+              name: _t('app.admin.calendar.space_reservations'),
+              url: `webcal://${window.location.host}/ical/availabilities/space`
+            });
+          }
+          $scope.icalLinks.push({
+            type: 'Event',
+            name: _t('app.admin.calendar.event_reservations'),
+            url: `webcal://${window.location.host}/ical/reservations/event`
+          });
+
+          $scope.copyToClipboard = function (url) {
+            navigator.clipboard.writeText(url).then(function () {
+              growl.success(_t('app.admin.calendar.link_copied'));
+            }).catch(function () {
+              growl.error(_t('app.admin.calendar.copy_failed'));
+            });
+          };
+
+          $scope.close = function () {
+            $uibModalInstance.dismiss();
+          };
+        }]
+      });
+      return modalInstance;
+    };
+
     $scope.setupCalendarTour = function () {
       // get the tour defined by the ui-tour directive
       const uitour = uiTourService.getTourByName('calendar');

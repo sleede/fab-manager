@@ -550,16 +550,6 @@ pt:
         show_reserved_uniq: "Mostrar apenas slots com reservas"
         auto_refresh_on: "Atualização automática ativada"
         auto_refresh_off: "Atualização automática desativada"
-        ical_links: "Links iCal"
-        ical_description: "Use estes links para assinar calendários de reservas em seu aplicativo de calendário preferido."
-        copy_link: "Copiar link"
-        ical_usage_info: "Copie estes links webcal:// em seu aplicativo de calendário para assinar atualizações automáticas."
-        link_copied: "Link copiado para a área de transferência!"
-        copy_failed: "Falha ao copiar o link"
-        machine_reservations: "Reservas de máquinas"
-        training_reservations: "Reservas de treinamentos"
-        event_reservations: "Reservas de eventos"
-        space_reservations: "Reservas de espaços"
       machine:
         machine_uncategorized: "Máquinas sem categoria"
       form_unsaved_list:

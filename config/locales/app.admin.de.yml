@@ -405,6 +405,16 @@ de:
         deleted_user: "Gelöschter Nutzer"
         select_type: "Please select a type to continue"
         no_modules_available: "No reservable module available. Please enable at least one module (machines, spaces or trainings) in the Customization section."
+        ical_links: "iCal-Links"
+        ical_description: "Verwenden Sie diese Links, um Reservierungskalender in Ihrer bevorzugten Kalender-App zu abonnieren."
+        copy_link: "Link kopieren"
+        ical_usage_info: "Kopieren Sie diese webcal://-Links in Ihre Kalender-App, um automatische Updates zu abonnieren."
+        link_copied: "Link in die Zwischenablage kopiert!"
+        copy_failed: "Fehler beim Kopieren des Links"
+        machine_reservations: "Maschinenreservierungen"
+        training_reservations: "Schulungsreservierungen"
+        event_reservations: "Veranstaltungsreservierungen"
+        space_reservations: "Raumreservierungen"
       #import external iCal calendar
       icalendar:
         icalendar_import: "iCalendar Import"

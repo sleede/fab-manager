@@ -548,18 +548,6 @@ zu:
         events: "crwdns36193:0crwdne36193:0"
         externals: "crwdns36195:0crwdne36195:0"
         show_reserved_uniq: "crwdns36249:0crwdne36249:0"
-        auto_refresh_on: "crwdns36251:0crwdne36251:0"
-        auto_refresh_off: "crwdns36253:0crwdne36253:0"
-        ical_links: "crwdns36255:0crwdne36255:0"
-        ical_description: "crwdns36259:0crwdne36259:0"
-        copy_link: "crwdns36261:0crwdne36261:0"
-        ical_usage_info: "crwdns36263:0crwdne36263:0"
-        link_copied: "crwdns36265:0crwdne36265:0"
-        copy_failed: "crwdns36267:0crwdne36267:0"
-        machine_reservations: "crwdns36269:0crwdne36269:0"
-        training_reservations: "crwdns36271:0crwdne36271:0"
-        event_reservations: "crwdns36273:0crwdne36273:0"
-        space_reservations: "crwdns36275:0crwdne36275:0"
       machine:
         machine_uncategorized: "crwdns36219:0crwdne36219:0"
       form_unsaved_list:

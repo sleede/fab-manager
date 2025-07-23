@@ -405,6 +405,16 @@
         deleted_user: "Deleted user"
         select_type: "Please select a type to continue"
         no_modules_available: "No reservable module available. Please enable at least one module (machines, spaces or trainings) in the Customization section."
+        ical_links: "iCal-lenker"
+        ical_description: "Bruk disse lenkene for å abonnere på reservasjonskalendere i din foretrukne kalenderapp."
+        copy_link: "Kopier lenke"
+        ical_usage_info: "Kopier disse webcal://-lenkene til kalenderappen din for å abonnere på automatiske oppdateringer."
+        link_copied: "Lenke kopiert til utklippstavlen!"
+        copy_failed: "Feil ved kopiering av lenke"
+        machine_reservations: "Maskinreservasjoner"
+        training_reservations: "Treningsreservasjoner"
+        event_reservations: "Arrangementsreservasjoner"
+        space_reservations: "Romreservasjoner"
       #import external iCal calendar
       icalendar:
         icalendar_import: "iCalendar import"

@@ -405,6 +405,16 @@ it:
         deleted_user: "Utente eliminato"
         select_type: "Seleziona un tipo per continuare"
         no_modules_available: "Nessun modulo prenotabile disponibile. Si prega di abilitare almeno un modulo (macchine, spazi o abilitazioni) nella sezione Personalizzazione."
+        ical_links: "Collegamenti iCal"
+        ical_description: "Utilizza questi collegamenti per sottoscrivere i calendari delle prenotazioni nella tua app calendario preferita."
+        copy_link: "Copia collegamento"
+        ical_usage_info: "Copia questi collegamenti webcal:// nella tua app calendario per sottoscrivere gli aggiornamenti automatici."
+        link_copied: "Collegamento copiato negli appunti!"
+        copy_failed: "Errore nella copia del collegamento"
+        machine_reservations: "Prenotazioni macchine"
+        training_reservations: "Prenotazioni formazione"
+        event_reservations: "Prenotazioni eventi"
+        space_reservations: "Prenotazioni spazi"
       #import external iCal calendar
       icalendar:
         icalendar_import: "importazione iCalendar"

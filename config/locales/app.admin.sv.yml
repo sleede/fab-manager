@@ -405,6 +405,16 @@ sv:
         deleted_user: "Raderad användare"
         select_type: "Välj en typ att fortsätta"
         no_modules_available: "Ingen bokningsbar modul tillgänglig. Aktivera minst en modul (utrustning, lokaler eller utbildningar) i avsnittet Anpassning."
+        ical_links: "iCal-länkar"
+        ical_description: "Använd dessa länkar för att prenumerera på bokningskalendrar i din föredragna kalenderapp."
+        copy_link: "Kopiera länk"
+        ical_usage_info: "Kopiera dessa webcal://-länkar till din kalenderapp för att prenumerera på automatiska uppdateringar."
+        link_copied: "Länk kopierad till urklipp!"
+        copy_failed: "Fel vid kopiering av länk"
+        machine_reservations: "Maskinbokningar"
+        training_reservations: "Utbildningsbokningar"
+        event_reservations: "Evenemangsbokningar"
+        space_reservations: "Lokalbokningar"
       #import external iCal calendar
       icalendar:
         icalendar_import: "importera iCalendar"
