@@ -443,7 +443,7 @@ setup_assets_and_databases()
 
   # create the database
   docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --rm "$SERVICE" bundle exec rails db:create </dev/tty
-  docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --rm "$SERVICE" bundle exec rails db:schema:load </dev/tty
+  docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --rm "$SERVICE" bundle exec rails db:migrate </dev/tty
 
   # prompt default admin email/password
   printf "\n\nWe will now create the default administrator of Fab-manager.\n"

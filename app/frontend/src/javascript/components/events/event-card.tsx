@@ -55,7 +55,7 @@ export const EventCard: React.FC<EventCardProps> = ({ event, cardType }) => {
   const formatTime = (): string => {
     return event.all_day
       ? t('app.public.event_card.all_day')
-      : t('app.public.event_card.from_time_to_time', { START: FormatLib.time(event.start_time), END: FormatLib.time(event.end_time) });
+      : t('app.public.event_card.from_time_to_time', { START: event.start_time, END: event.end_time });
   };
 
   return (

@@ -40,6 +40,7 @@ module Payments::PaymentConcern
       end
       if order.save
         create_invoice(order, coupon, payment_id, payment_type)
+        update_coupon_usages(coupon, order.order_items) if coupon
         NotificationCenter.call type: 'notify_admin_order_is_paid',
                                 receiver: User.admins_and_managers,
                                 attached_object: activity
@@ -62,5 +63,19 @@ module Payments::PaymentConcern
     invoice.wallet_transaction_id = order.wallet_transaction_id
     invoice.order = order
     invoice.save unless Setting.get('prevent_invoices_zero') && order.total.zero?
+  end
+
+  # Update the coupon usages
+  def update_coupon_usages(coupon, items)
+    usages_count = coupon.usages + 1
+
+    items.each do |item|
+      coupon_usage = CouponUsage.new(
+        coupon: coupon,
+        object: item,
+        count: usages_count
+      )
+      coupon_usage.save
+    end
   end
 end

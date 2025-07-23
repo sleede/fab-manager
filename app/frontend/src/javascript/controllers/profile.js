@@ -173,7 +173,7 @@ Application.Controllers.controller('CompleteProfileController', ['$scope', '$roo
           templateUrl: '/profile/resend_code_modal.html',
           resolve: {
             object () {
-              return { email: memberPromise.email };
+              return { email: $scope.ssoEmail() };
             }
           }
         },

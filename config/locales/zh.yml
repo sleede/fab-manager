@@ -1,0 +1,752 @@
+zh-CN:
+  #subscription plan duration
+  duration:
+    year:
+      one: '一年'
+      other: '%{count}年'
+    month:
+      one: '一个月'
+      other: '%{count}个月'
+    week:
+      one: '一周'
+      other: '%{count}周'
+  activerecord:
+    attributes:
+      product:
+        amount: "价格"
+        slug: "URL"
+  errors:
+    #CarrierWave
+    messages:
+      carrierwave_processing_error: "处理失败"
+      carrierwave_integrity_error: "文件类型不被允许"
+      carrierwave_download_error: "下载失败"
+      extension_whitelist_error: "您不能上传%{extension}文件，允许的类型：%{allowed_types}"
+      extension_blacklist_error: "您不能上传%{extension}文件，禁止的类型：%{prohibited_types}"
+      content_type_whitelist_error: "您不能上传%{content_type}文件，允许的类型：%{allowed_types}"
+      rmagick_processing_error: "使用rmagick处理失败，可能不是图像？"
+      mime_types_processing_error: "使用MIME::Types处理文件失败，可能不是有效的内容类型？"
+      mini_magick_processing_error: "处理文件失败，可能不是图像？"
+      wrong_size: "尺寸错误（应为%{file_size}）"
+      size_too_small: "太小（至少应为%{file_size}）"
+      size_too_big: "太大（最多应为%{file_size}）"
+      export_not_found: "请求的导出未找到。可能已被删除，请生成新的导出。"
+      percentage_out_of_range: "百分比必须在0到100之间"
+      cannot_be_blank_at_same_time: "当%{field}为空时也不能为空"
+      cannot_be_in_the_past: "不能是过去的时间"
+      cannot_be_before_previous_value: "不能早于之前的值"
+      cannot_overlap: "不能与现有的会计期间重叠"
+      cannot_encompass: "不能包含现有的会计期间"
+      in_closed_period: "不能在关闭的会计期间内"
+      invalid_footprint: "发票的校验和无效"
+      end_before_start: "结束日期不能早于开始日期。请选择在%{START}之后的日期"
+      invalid_duration: "允许的持续时间必须在1天到1年之间。您的期间为%{DAYS}天。"
+      must_be_in_the_past: "期间必须严格在今天之前。"
+      registration_disabled: "注册已禁用"
+      undefined_in_store: "必须定义以使产品在商店中可用"
+      gateway_error: "支付网关错误：%{MESSAGE}"
+      gateway_amount_too_small: "不支持低于%{AMOUNT}的支付。请直接在接待处订购。"
+      gateway_amount_too_large: "不支持高于%{AMOUNT}的支付。请直接在接待处订购。"
+      product_in_use: "此产品已被订购"
+      slug_already_used: "已被使用"
+      birthday_less_than_18_years_ago: "生日必须在18年前"
+  coupon:
+    code_format_error: "只允许大写字母、数字和破折号"
+  apipie:
+    api_documentation: "API文档"
+    code: "HTTP代码"
+  #error messages when importing an account from an SSO
+  omniauth:
+    email_already_linked_to_another_account_please_input_your_authentication_code: "电子邮件地址 \"%{OLD_MAIL}\" 已链接到另一个账户，请输入您的认证码。"
+    your_username_is_already_linked_to_another_account_unable_to_update_it: "您的用户名 (%{USERNAME}) 已链接到另一个账户，无法更新。"
+    your_email_address_is_already_linked_to_another_account_unable_to_update_it: "您的电子邮件地址 (%{EMAIL}) 已链接到另一个账户，无法更新。"
+    this_account_is_already_linked_to_an_user_of_the_platform: "此%{NAME}账户已链接到平台的用户。"
+  #availability slots in the calendar
+  availabilities:
+    not_available: "不可用"
+    reserving: "我正在预订"
+    i_ve_reserved: "我已预订"
+    blocked: "已阻止"
+    length_must_be_slot_multiple: "必须至少在开始日期之后的%{MIN}分钟"
+    must_be_associated_with_at_least_1_machine: "必须至少与1台机器关联"
+    deleted_user: "已删除用户"
+  #members management
+  members:
+    unable_to_change_the_group_while_a_subscription_is_running: "订阅运行时无法更改组"
+    please_input_the_authentication_code_sent_to_the_address: "请输入发送到电子邮件地址%{EMAIL}的认证码"
+    your_authentication_code_is_not_valid: "您的认证码无效。"
+    current_authentication_method_no_code: "当前认证方法不需要任何迁移码"
+    requested_account_does_not_exists: "请求的账户不存在"
+  #SSO external authentication
+  authentication_providers:
+    local_database_provider_already_exists: '一个"本地数据库"提供者已存在。无法创建另一个。'
+    matching_between_User_uid_and_API_required: "需要在User.uid和API之间进行匹配才能添加此提供者。"
+  #PDF invoices generation
+  invoices:
+    refund_invoice_reference: "退款发票参考：%{REF}"
+    invoice_reference: "发票参考：%{REF}"
+    code: "代码：%{CODE}"
+    order_number: "订单号：%{NUMBER}"
+    invoice_issued_on_DATE: "发票开具于%{DATE}"
+    refund_invoice_issued_on_DATE: "退款发票开具于%{DATE}"
+    wallet_credit: "钱包余额"
+    cancellation_of_invoice_REF: "取消发票%{REF}"
+    reservation_of_USER_on_DATE_at_TIME: "用户%{USER}于%{DATE}的%{TIME}预订"
+    cancellation: "取消"
+    object: "对象："
+    order_summary: "订单摘要："
+    details: "详情"
+    amount: "金额"
+    subscription_extended_for_free_from_START_to_END: "订阅免费延长 - 从%{START}到%{END}"
+    subscription_NAME_from_START_to_END: "订阅%{NAME} - 从%{START}到%{END}"
+    machine_reservation_DESCRIPTION: "机器预订 - %{DESCRIPTION}"
+    space_reservation_DESCRIPTION: "空间预订 - %{DESCRIPTION}"
+    training_reservation_DESCRIPTION: "培训预订 - %{DESCRIPTION}"
+    event_reservation_DESCRIPTION: "活动预订 - %{DESCRIPTION}"
+    from_payment_schedule: "第%{NUMBER}次，共%{TOTAL}次，从%{DATE}开始。还款计划%{SCHEDULE}"
+    null_invoice: "零金额发票，由于Fab Manager软件故障导致的账单跳转"
+    full_price_ticket:
+      one: "一张全价票"
+      other: "%{count}张全价票"
+    other_rate_ticket:
+      one: "一张%{NAME}票"
+      other: "%{count}张%{NAME}票"
+    coupon_CODE_discount_of_DISCOUNT: "优惠券{CODE}：折扣{DISCOUNT}{TYPE, select, percent_off{%} other{}}" #messageFormat interpolation
+    total_including_all_taxes: "总额（含所有税）"
+    VAT: "增值税"
+    including_VAT_RATE: "包括%{NAME} %{RATE}%的%{AMOUNT}"
+    including_total_excluding_taxes: "包括总额（不含税）"
+    including_amount_payed_on_ordering: "包括订购时支付的金额"
+    total_amount: "总金额"
+    refund_on_DATE: "退款于%{DATE}"
+    by_card_online_payment: "通过卡片（在线支付）"
+    by_cheque: "通过支票"
+    by_transfer: "通过转账"
+    by_cash: "通过现金"
+    by_wallet: "通过钱包"
+    no_refund: "不退款"
+    settlement_by_debit_card: "通过借记卡结算"
+    settlement_by_transfer: "通过转账结算"
+    settlement_by_check: "在接待处结算"
+    settlement_done_at_the_reception: "在接待处结算"
+    settlement_by_wallet: "通过钱包结算"
+    on_DATE_at_TIME: "于%{DATE}的%{TIME},"
+    for_an_amount_of_AMOUNT: "金额为%{AMOUNT}"
+    on_DATE_from_START_to_END: "于%{DATE}从%{START}到%{END}" #eg: on feb. 7 from 7AM to 9AM
+    from_STARTDATE_to_ENDDATE_from_STARTTIME_to_ENDTIME: "从%{STARTDATE}到%{ENDDATE}，从%{STARTTIME}到%{ENDTIME}" #eg: from feb. 7 to feb. 10, from 6PM to 10PM
+    subscription_of_NAME_for_DURATION_starting_from_DATE: "订阅%{NAME}，持续时间为%{DURATION}，从%{DATE}开始"
+    subscription_of_NAME_extended_starting_from_STARTDATE_until_ENDDATE: "订阅%{NAME}已延长（免费天数）从%{STARTDATE}到%{ENDDATE}"
+    and: '和'
+    invoice_text_example: "我们的协会不受增值税影响"
+    error_invoice: "错误的发票。以下项目未预订。请联系FabLab退款。"
+    prepaid_pack: "预付时间包"
+    pack_item: "为%{ITEM}预付的%{COUNT}小时"
+    order: "您在商店的订单"
+    unable_to_find_pdf: "我们无法找到您的发票。如果您最近下了订单，可能还没有生成。请稍后再试。"
+  #PDF payment schedule generation
+  payment_schedules:
+    schedule_reference: "付款计划参考：%{REF}"
+    schedule_issued_on_DATE: "计划发布于%{DATE}"
+    object: "对象：%{ITEM}的付款计划"
+    subscription_of_NAME_for_DURATION_starting_from_DATE: "%{NAME}的订阅，持续时间为%{DURATION}，从%{DATE}开始"
+    deadlines: "您的截止日期表"
+    deadline_date: "付款日期"
+    deadline_amount: "含税金额"
+    total_amount: "总金额"
+    settlement_by_METHOD: "每次扣款将通过{METHOD, select, card{银行卡} transfer{银行转账} other{支票}}进行。"
+    settlement_by_wallet: "将从您的钱包中扣除%{AMOUNT}以结算第一个截止日期。"
+  #CVS accounting export (columns headers)
+  accounting_export:
+    journal_code: "日记账代码"
+    date: "入账日期"
+    account_code: "账户代码"
+    account_label: "账户标签"
+    piece: "文件"
+    line_label: "条目标签"
+    debit_origin: "借方来源"
+    credit_origin: "贷方来源"
+    debit_euro: "欧元借方"
+    credit_euro: "欧元贷方"
+    lettering: "字母标记"
+    VAT: '增值税'
+  accounting_summary:
+    subscription_abbreviation: "订阅"
+    Machine_reservation_abbreviation: "机器预订"
+    Training_reservation_abbreviation: "培训预订"
+    Event_reservation_abbreviation: "活动预订"
+    Space_reservation_abbreviation: "空间预订"
+    wallet_abbreviation: "钱包"
+    shop_order_abbreviation: "商店订单"
+  vat_export:
+    start_date: "开始日期"
+    end_date: "结束日期"
+    vat_rate: "%{NAME}税率"
+    amount: "总金额"
+  #training availabilities
+  trainings:
+    i_ve_reserved: "我已预订"
+    completed: "已满"
+    refund_for_auto_cancel: "由于参与者数量不足，此培训课程已取消。"
+  #error messages when updating an event
+  events:
+    error_deleting_reserved_price: "无法删除请求的价格，因为它与一些预订相关联"
+    other_error: "更新事件时发生意外错误"
+    #event duration
+    from_STARTDATE_to_ENDDATE: "从%{STARTDATE}到%{ENDDATE},"
+    from_STARTTIME_to_ENDTIME: "从%{STARTTIME}到%{ENDTIME}"
+  #members list export to EXCEL format
+  export_members:
+    members: "成员"
+    id: "ID"
+    external_id: "外部ID"
+    surname: "姓"
+    first_name: "名"
+    email: "电子邮件"
+    newsletter: "新闻简报"
+    last_login: "上次登录"
+    gender: "性别"
+    age: "年龄"
+    address: "地址"
+    phone: "电话"
+    website: "网站"
+    job: "工作"
+    interests: "兴趣"
+    cad_software_mastered: "掌握的CAD软件"
+    group: "组"
+    subscription: "订阅"
+    subscription_end_date: "订阅结束日期"
+    validated_trainings: "已验证的培训"
+    tags: "标签"
+    number_of_invoices: "发票数量"
+    projects: "项目"
+    facebook: "Facebook"
+    twitter: "Twitter"
+    echo_sciences: "Echosciences"
+    organization: "组织"
+    organization_address: "组织地址"
+    note: "备注"
+    man: "男"
+    woman: "女"
+    without_subscriptions: "无订阅"
+    wallet_amount: "钱包"
+  #machines/trainings/events reservations list to EXCEL format
+  export_reservations:
+    reservations: "预订"
+    customer_id: "客户ID"
+    customer: "客户"
+    email: "电子邮件"
+    reservation_date: "预订日期"
+    reservation_type: "预订类型"
+    reservation_object: "预订对象"
+    slots_number_hours_tickets: "时段数量（小时/票）"
+    payment_method: "付款方式"
+    local_payment: "在接待处付款"
+    online_payment: "在线付款"
+    deleted_user: "已删除用户"
+    coupon: "使用的优惠券"
+  #subscriptions list export to EXCEL format
+  export_subscriptions:
+    subscriptions: "订阅"
+    id: "ID"
+    customer: "客户"
+    email: "电子邮件"
+    subscription: "订阅"
+    period: "周期"
+    start_date: "开始日期"
+    expiration_date: "到期日期"
+    amount: "金额"
+    local_payment: "现场支付"
+    online_payment: "在线支付"
+    deleted_user: "已删除用户"
+  #reservation slots export, by type, to EXCEL format
+  export_availabilities:
+    machines: "机器"
+    trainings: "培训"
+    spaces: "空间"
+    events: "事件"
+    day_of_week: "星期几"
+    date: "日期"
+    slot: "时段"
+    machine: "机器"
+    training: "培训"
+    space: "空间"
+    event: "事件"
+    reservations: "预订"
+    available_seats: "可用座位"
+  reservation_ics:
+    description_slot: "您已预订 %{COUNT} 个 %{ITEM} 时段"
+    description_training: "您已预订 %{TYPE} 培训"
+    description_event: "您已预订此事件的 %{NUMBER} 张票"
+    alarm_summary: "提醒您的预订"
+  roles:
+    member: "会员"
+    manager: "经理"
+    admin: "管理员"
+  api:
+    #internal app notifications
+    notifications:
+      deleted_user: "已删除用户"
+      notify_admin_abuse_reported:
+        an_abuse_was_reported_on_TYPE_ID_NAME_html: "有一项滥用报告在 <strong>%{TYPE} %{ID}: <em>%{NAME}</em></strong> 上。"
+      notify_admin_member_create_reservation:
+        a_RESERVABLE_reservation_was_made_by_USER_html: "<strong><em>%{USER}</em></strong> 进行了 <strong><em>%{RESERVABLE}</em></strong> 预订。"
+      notify_admin_member_pre_booked_reservation:
+        a_RESERVABLE_reservation_was_made_by_USER_html: "<strong><em>%{USER}</em></strong> 进行了 <strong><em>%{RESERVABLE}</em></strong> 预注册。"
+      notify_admin_profile_complete:
+        account_imported_from_PROVIDER_UID_has_completed_its_information_html: "从 <strong><em>%{PROVIDER}</strong> (%{UID})</em> 导入的帐户已完成信息。"
+      notify_admin_slot_is_canceled:
+        USER_s_reservation_on_the_DATE_was_cancelled_remember_to_generate_a_refund_invoice_if_applicable_html: "<strong><em>%{USER}</em></strong> 在 %{DATE} 的预订已被取消。请记住生成退款发票（如适用）。"
+      notify_admin_slot_is_modified:
+        a_booking_slot_was_modified: "一个预订时段已被修改。"
+      notify_admin_subscribed_plan:
+        subscription_PLAN_has_been_subscribed_by_USER_html: "<strong><em>%{USER}</em></strong> 已订阅 <strong><em>%{PLAN}</em></strong>。"
+      notify_admin_subscription_canceled:
+        USER_s_subscription_has_been_cancelled: "%{USER} 的订阅已被取消。"
+      notify_admin_subscription_extended:
+        subscription_PLAN_of_the_member_USER_has_been_extended_FREE_until_DATE_html: "会员 <strong><em>{USER}</strong></em> 的订阅 <strong><em>{PLAN}</em></strong> 已延长至 {DATE} {FREE, select, true{免费} other{}}。" #messageFormat interpolation
+      notify_admin_subscription_is_expired:
+        USER_s_subscription_has_expired: "%{USER} 的订阅已过期。"
+      notify_admin_subscription_will_expire_in_7_days:
+        USER_s_subscription_will_expire_in_7_days: "%{USER} 的订阅将在 7 天后到期。"
+      notify_admin_training_auto_cancelled:
+        auto_cancelled_training: "由于参与人数不足，原定于 %{DATE} 的 %{TRAINING} 培训课程已自动取消。"
+        auto_refund: "会员已自动退还到他们的钱包中。"
+        manual_refund: "请手动退还每位会员。"
+      notify_admin_user_group_changed:
+        user_NAME_changed_his_group_html: "用户 <strong><em>{NAME}</strong></em> 更改了组别。" #messageFormat interpolation
+      notify_admin_user_merged:
+        user_NAME_has_merged_his_account_with_the_one_imported_from_PROVIDER_UID_html: "<strong><em>{NAME}</strong></em>的账号已经与<strong><em>{PROVIDER} </strong> ({%UID})</em> 中引入的账号进行了合并." #messageFormat interpolation
+      notify_admin_when_project_published:
+        project_NAME_has_been_published_html: "项目 <a href='/#!/projects/%{ID}'><strong><em>%{NAME}</em></strong></a> 已发布。"
+      notify_admin_when_user_is_created:
+        a_new_user_account_has_been_created_NAME_EMAIL_html: "一个新的用户帐户已创建：<strong><em>%{NAME} &lt;%{EMAIL}&gt;</strong></em>。"
+      notify_admin_child_created:
+        a_new_child_has_been_created_NAME_html: "一个新的儿童帐户已创建：<strong><em>%{NAME}</em></strong>。"
+      notify_admin_when_user_is_imported:
+        a_new_user_account_has_been_imported_from_PROVIDER_UID_html: "从 <strong><em>%{PROVIDER}</strong> (%{UID})</em> 导入了一个新的用户帐户。"
+      notify_member_create_reservation:
+        your_reservation_RESERVABLE_was_successfully_saved_html: "您的 <strong><em>%{RESERVABLE}</em></strong> 预订已成功保存。"
+      notify_member_pre_booked_reservation:
+        your_reservation_RESERVABLE_was_successfully_saved_html: "您的 <strong><em>%{RESERVABLE}</em></strong> 预注册已成功保存。"
+      notify_member_reservation_reminder:
+        reminder_you_have_a_reservation_RESERVABLE_to_be_held_on_DATE_html: "提醒：您有一个 <strong>%{RESERVABLE}</strong> 预订将于 <em>%{DATE}</em> 举行"
+      notify_member_slot_is_canceled:
+        your_reservation_RESERVABLE_of_DATE_was_successfully_cancelled: "您在 %{DATE} 的 %{RESERVABLE} 预订已成功取消。"
+      notify_member_slot_is_modified:
+        your_reservation_slot_was_successfully_changed: "您的预订时段已成功更改。"
+      notify_member_subscribed_plan:
+        you_have_subscribed_to_PLAN_html: "您已订阅 <strong><em>%{PLAN}</em></strong>。"
+      notify_member_subscribed_plan_is_changed:
+        you_have_changed_your_subscription_to_PLAN_html: "您已将订阅更改为 <strong><em>%{PLAN}</em></strong>。"
+      notify_member_subscription_canceled:
+        your_subscription_PLAN_was_successfully_cancelled_html: "您的订阅 <strong><em>%{PLAN}</em></strong> 已成功取消。"
+      notify_member_subscription_extended:
+        your_subscription_PLAN_has_been_extended_FREE_until_DATE_html: "您的订阅 <strong><em>{PLAN}</em></strong> 已延长至 {DATE} {FREE, select, true{免费} other{}}。" #messageFormat interpolation
+      notify_member_subscription_is_expired:
+        your_subscription_has_expired: "您的订阅已过期。"
+      notify_member_subscription_will_expire_in_7_days:
+        your_subscription_will_expire_in_7_days: "您的订阅将在 7 天后到期。"
+      notify_member_training_authorization_expired:
+        training_authorization_revoked: "由于已过期，您使用 %{MACHINES} 的授权已被撤销。"
+      notify_member_training_auto_cancelled:
+        auto_cancelled_training: "由于参与人数不足，原定于 %{DATE} 的 %{TRAINING} 培训课程已取消。"
+        auto_refund: "您已退还到您的钱包中。"
+      notify_member_training_invalidated:
+        invalidated: "由于缺乏预订，您使用 %{MACHINES} 的授权已失效。"
+      notify_partner_subscribed_plan:
+        subscription_partner_PLAN_has_been_subscribed_by_USER_html: "合作伙伴 <strong><em>%{USER}</em></strong> 已订阅 <strong><em>%{PLAN}</em></strong>。"
+      notify_project_author_when_collaborator_valid:
+        USER_became_collaborator_of_your_project: "%{USER} 成为您的项目的协作者："
+      notify_project_collaborator_to_valid:
+        you_are_invited_to_collaborate_on_the_project: "您被邀请参与该项目的协作："
+      notify_user_auth_migration:
+        your_account_was_migrated: "您的帐户已成功迁移到新的认证系统。"
+      notify_user_profile_complete:
+        your_profile_was_completed: "您的个人资料已成功完成，您现在可以访问整个平台。"
+      notify_user_training_valid:
+        your_TRAINING_was_validated_html: "您的培训 <strong><em>%{TRAINING}</em></strong> 已成功验证。"
+      notify_user_user_group_changed:
+        your_group_has_changed: "您的组别已更改。"
+      notify_user_when_avoir_ready:
+        your_avoir_is_ready_html: "您的退款发票 #%{REFERENCE}，金额 %{AMOUNT}，已准备好。<a href='api/invoices/%{INVOICE_ID}/download' target='_blank'>点击此处下载</a>。"
+      notify_user_when_invoice_ready:
+        your_invoice_is_ready_html: "您的发票 #%{REFERENCE}，金额 %{AMOUNT}，已准备好。<a href='api/invoices/%{INVOICE_ID}/download' target='_blank'>点击此处下载</a>。"
+      undefined_notification:
+        unknown_notification: "未知通知"
+        notification_ID_wrong_type_TYPE_unknown: "通知 %{ID} 错误（类型 %{TYPE} 未知）"
+      notify_user_wallet_is_credited:
+        your_wallet_is_credited: "您的钱包已由管理员充值"
+      notify_admin_user_wallet_is_credited:
+        wallet_is_credited: "会员 %{USER} 的钱包已充值 %{AMOUNT}"
+      notify_admin_export_complete:
+        export: "导出"
+        statistics_global: "所有统计数据"
+        statistics_account: "注册统计"
+        statistics_event: "事件统计"
+        statistics_machine: "机器时段统计"
+        statistics_project: "项目统计"
+        statistics_subscription: "订阅统计"
+        statistics_training: "培训统计"
+        statistics_space: "空间统计"
+        statistics_order: "商店订单统计"
+        users_members: "会员列表"
+        users_subscriptions: "订阅列表"
+        users_reservations: "预订列表"
+        availabilities_index: "预订可用性"
+        accounting_acd: "ACD 会计数据"
+        accounting_vat: "增值税数据"
+        is_over: "已完成。"
+        download_here: "点击此处下载"
+      notify_admin_import_complete:
+        import_over: "%{CATEGORY} 导入已完成。"
+        members: "会员"
+        view_results: "查看结果。"
+      notify_admin_low_stock_threshold:
+        low_stock: "%{PRODUCT} 库存不足。"
+        view_product: "查看产品。"
+      notify_member_about_coupon:
+        enjoy_a_discount_of_PERCENT_with_code_CODE: "享受 %{PERCENT}% 折扣，使用代码 %{CODE}"
+        enjoy_a_discount_of_AMOUNT_with_code_CODE: "享受 %{AMOUNT} 折扣，使用代码 %{CODE}"
+      notify_admin_free_disk_space:
+        warning_free_disk_space: "警告：服务器的可用磁盘空间现在为 %{AVAILABLE} MiB"
+      notify_admin_close_period_reminder:
+        warning_last_closed_period_over_1_year: "请定期关闭您的会计周期。上一个关闭周期结束于 %{LAST_END}"
+        warning_no_closed_periods: "请定期关闭您的会计周期。您需要从 %{FIRST_DATE} 开始关闭周期"
+      notify_admin_archive_complete:
+        archive_complete: "从 %{START} 到 %{END} 的数据归档已完成。<a href='api/accounting_periods/%{ID}/archive' target='_blank'>点击此处下载</a>。请记得将其保存到外部安全介质上。"
+      notify_privacy_policy_changed:
+        policy_updated: "隐私政策已更新。"
+        click_to_show: "点击此处查看"
+      notify_admin_refund_created:
+        refund_created: "已为用户 %{USER} 创建 %{AMOUNT} 的退款"
+      notify_user_role_update:
+        your_role_is_ROLE: "您的角色已更改为 %{ROLE}。"
+      notify_admins_role_update:
+        user_NAME_changed_ROLE_html: "用户 <strong><em>%{NAME}</strong></em> 现在是 %{ROLE}。"
+      notify_admin_objects_stripe_sync:
+        all_objects_sync: "所有数据已成功同步到 Stripe。"
+      notify_admin_order_is_paid:
+        order_paid_html: "已下新订单。<a href='/#!/admin/store/orders/%{ID}'>查看详情</a>。"
+      notify_user_when_payment_schedule_ready:
+        your_schedule_is_ready_html: "您的付款计划 #%{REFERENCE}，金额 %{AMOUNT}，已准备好。<a href='api/payment_schedules/%{SCHEDULE_ID}/download' target='_blank'>点击此处下载</a>。"
+      notify_admin_payment_schedule_error:
+        schedule_error: "发生错误，卡片在 %{DATE} 的 %{REFERENCE} 付款计划截止日期未能扣款"
+      notify_member_payment_schedule_error:
+        schedule_error: "发生错误，您的卡片在 %{DATE} 的 %{REFERENCE} 付款计划截止日期未能扣款"
+      notify_admin_payment_schedule_failed:
+        schedule_failed: "卡片在 %{DATE} 的 %{REFERENCE} 付款计划截止日期未能扣款"
+      notify_member_payment_schedule_failed:
+        schedule_failed: "您的卡片在 %{DATE} 的 %{REFERENCE} 付款计划截止日期未能扣款"
+      notify_admin_payment_schedule_gateway_canceled:
+        schedule_canceled: "付款计划 %{REFERENCE} 被支付网关取消。需要采取行动。"
+      notify_member_payment_schedule_gateway_canceled:
+        schedule_canceled: "您的付款计划 %{REFERENCE} 被支付网关取消。"
+      notify_admin_payment_schedule_check_deadline:
+        schedule_deadline: "您必须在 %{DATE} 的 %{REFERENCE} 付款计划截止日期兑现支票"
+      notify_admin_payment_schedule_transfer_deadline:
+        schedule_deadline: "您必须确认 %{DATE} 的 %{REFERENCE} 付款计划的银行直接借记"
+      notify_member_reservation_limit_reached:
+        limit_reached: "在 %{DATE}，您已达到每日 %{HOURS} 小时的 %{ITEM} 预订限制。"
+      notify_admin_user_supporting_document_files_created:
+        supporting_document_files_uploaded: "会员 <strong><em>%{NAME}</strong></em> 上传了支持文件。"
+      notify_admin_user_supporting_document_files_updated:
+        supporting_document_files_uploaded: "会员 <strong><em>%{NAME}</strong></em> 更改了支持文件。"
+      notify_admin_user_child_supporting_document_files_created:
+        supporting_document_files_uploaded: "儿童 <strong><em>%{NAME}</strong></em> 上传了支持文件。"
+      notify_admin_user_child_supporting_document_files_updated:
+        supporting_document_files_uploaded: "儿童 <strong><em>%{NAME}</strong></em> 更改了支持文件。"
+      notify_user_is_validated:
+        account_validated: "您的帐户已有效。"
+      notify_user_is_invalidated:
+        account_invalidated: "您的帐户无效。"
+      notify_user_child_is_validated:
+        child_validated: "您的孩子帐户已有效。"
+      notify_user_child_is_invalidated:
+        child_invalidated: "您的孩子帐户无效。"
+      notify_user_supporting_document_refusal:
+        refusal: "您的支持文件被拒绝"
+      notify_user_supporting_document_reminder:
+        reminder_message: "这是提醒您上传支持文件的消息。"
+      notify_admin_user_supporting_document_refusal:
+        refusal: "会员的支持文件 <strong><em>%{NAME}</strong></em> 被拒绝。"
+      notify_user_child_supporting_document_refusal:
+        refusal: "您的孩子的支持文件被拒绝"
+      notify_admin_user_child_supporting_document_refusal:
+        refusal: "儿童的支持文件 <strong><em>%{NAME}</strong></em> 被拒绝。"
+      notify_user_order_is_ready:
+        order_ready: "您的订单 %{REFERENCE} 已准备好"
+      notify_user_order_is_canceled:
+        order_canceled: "您的订单 %{REFERENCE} 已取消"
+      notify_user_order_is_refunded:
+        order_refunded: "您的订单 %{REFERENCE} 已退款"
+      notify_member_reservation_validated:
+        your_reservation_RESERVABLE_was_validated_html: "您的预订 <strong><em>%{RESERVABLE}</em></strong> 已成功验证。"
+      notify_admin_reservation_validated:
+        a_RESERVABLE_reservation_was_validated_html: "会员 <strong><em>%{NAME}</em></strong> 的 <strong><em>%{RESERVABLE}</em></strong> 预订已验证。"
+      notify_member_reservation_invalidated:
+        your_reservation_RESERVABLE_was_invalidated_html: "您的 <strong><em>%{RESERVABLE}</em></strong> 预注册未通过验证。"
+      notify_admin_reservation_invalidated:
+        a_RESERVABLE_reservation_was_invalidated_html: "会员 <strong><em>%{NAME}</em></strong> 的 <strong><em>%{RESERVABLE}</em></strong> 预注册未通过验证。"
+      notify_user_when_child_age_will_be_18:
+        child_age_will_be_18_years_ago: "您的孩子 %{NAME} 将于 %{DATE} 满 18 岁，届时将自动从您的家庭帐户中分离。他们需要创建自己的帐户以进行预订。"
+  #statistics tools for admins
+  statistics:
+    subscriptions: "订阅"
+    machines_hours: "机器时段"
+    machine_dates: "机器时段日期"
+    space_dates: "空间时段日期"
+    spaces: "空间"
+    orders: "订单"
+    trainings: "培训"
+    events: "事件"
+    registrations: "注册"
+    projects: "项目"
+    users: "用户"
+    training_id: "培训ID"
+    training_date: "培训日期"
+    event_id: "事件ID"
+    event_date: "事件日期"
+    event_name: "事件名称"
+    event_theme: "主题"
+    age_range: "年龄范围"
+    themes: "主题"
+    components: "组件"
+    machines: "机器"
+    user_id: "用户ID"
+    group: "组别"
+    bookings: "预订"
+    hours_number: "小时数"
+    tickets_number: "票数"
+    revenue: "收入"
+    account_creation: "帐户创建"
+    project_publication: "项目发布"
+    duration: "持续时间"
+    store: "商店"
+    paid-processed: "已支付和/或已处理"
+    aborted: "已中止"
+    project_status: 项目状态
+    project_name: 项目名称
+    project_user_names: 合作者
+  #statistics exports to the Excel file format
+  export:
+    entries: "条目"
+    revenue: "收入"
+    average_age: "平均年龄"
+    total: "总计"
+    date: "日期"
+    user: "用户"
+    email: "电子邮件"
+    phone: "电话"
+    gender: "性别"
+    age: "年龄"
+    type: "类型"
+    male: "男性"
+    female: "女性"
+    deleted_user: "已删除用户"
+    reservation_context: "预订背景"
+    coupon: "优惠券"
+    project_author: 作者
+  #initial price's category for events, created to replace the old "reduced amount" property
+  price_category:
+    reduced_fare: "优惠票价"
+    reduced_fare_if_you_are_under_25_student_or_unemployed: "如果您年龄低于25岁、是学生或失业，享受优惠票价。"
+  cart_items:
+    free_extension: "免费延期订阅，截止至 %{DATE}"
+    must_be_after_expiration: "新的到期日期必须晚于当前到期日期"
+    group_subscription_mismatch: "您的组别与您的订阅不匹配。请报告此错误。"
+  statistic_profile:
+    birthday_in_past: "出生日期必须是过去的日期"
+  order:
+    please_contact_FABLAB: "请联系我们获取退款说明。"
+  cart_item_validation:
+    slot: "该时段不存在"
+    availability: "该可用性不存在"
+    full: "该时段已被完全预订"
+    deadline: "不能在开始前 %{MINUTES} 分钟预订时段"
+    limit_reached: "您已达到每日 %{HOURS} 小时的 %{RESERVABLE} 预订限制，根据您当前的订阅，请调整您的预订。"
+    restricted: "此可用性仅限订阅者使用"
+    plan: "此订阅计划已禁用"
+    plan_group: "此订阅计划仅适用于 %{GROUP} 组的成员"
+    reserved: "该时段已被预订"
+    pack: "此预付包已禁用"
+    pack_group: "此预付包仅适用于 %{GROUP} 组的成员"
+    space: "此空间已禁用"
+    machine: "此机器已禁用"
+    reservable: "此机器不可预订"
+    blocked_by_another_reservation: "该时段被另一个预订阻塞"
+  cart_validation:
+    select_user: "请在继续之前选择用户"
+  settings:
+    locked_setting: "该设置已锁定。"
+    about_title: "\"关于\"页面标题"
+    about_body: "\"关于\"页面内容"
+    about_contacts: "\"关于\"页面联系方式"
+    privacy_draft: "隐私政策草案"
+    privacy_body: "隐私政策"
+    privacy_dpo: "数据保护官地址"
+    twitter_name: "Twitter Feed 名称"
+    home_blogpost: "首页简报"
+    machine_explications_alert: "机器预订页面的说明消息"
+    training_explications_alert: "培训预订页面的说明消息"
+    training_information_message: "机器预订页面的信息消息"
+    subscription_explications_alert: "订阅页面的说明消息"
+    invoice_logo: "发票标志"
+    invoice_reference: "发票参考"
+    invoice_code-active: "发票代码激活"
+    invoice_code-value: "发票代码"
+    invoice_order-nb: "发票订单号"
+    invoice_VAT-active: "VAT 激活"
+    invoice_VAT-rate: "VAT 税率"
+    invoice_VAT-rate_Product: "商店产品销售的 VAT 税率"
+    invoice_VAT-rate_Event: "事件预订的 VAT 税率"
+    invoice_VAT-rate_Machine: "机器预订的 VAT 税率"
+    invoice_VAT-rate_Subscription: "订阅的 VAT 税率"
+    invoice_VAT-rate_Space: "空间预订的 VAT 税率"
+    invoice_VAT-rate_Training: "培训预订的 VAT 税率"
+    invoice_text: "发票文本"
+    invoice_legals: "发票法律信息"
+    booking_window_start: "开放时间"
+    booking_window_end: "关闭时间"
+    booking_move_enable: "启用预订移动"
+    booking_move_delay: "任何预订移动前的预防性延迟"
+    booking_cancel_enable: "启用预订取消"
+    booking_cancel_delay: "任何预订取消前的预防性延迟"
+    main_color: "主色调"
+    secondary_color: "次要色调"
+    fablab_name: "Fablab 名称"
+    name_genre: "标题一致性"
+    reminder_enable: "启用预订提醒"
+    reminder_delay: "发送提醒前的延迟"
+    event_explications_alert: "事件预订页面的说明消息"
+    space_explications_alert: "空间预订页面的说明消息"
+    visibility_yearly: "年度订阅者的最大可见性"
+    visibility_others: "其他成员的最大可见性"
+    reservation_deadline: "预防预订在开始前"
+    display_name_enable: "在日历中显示名称"
+    machines_sort_by: "机器显示顺序"
+    accounting_sales_journal_code: "销售日记账代码"
+    accounting_payment_card_code: "卡支付代码"
+    accounting_payment_card_label: "卡支付标签"
+    accounting_payment_card_journal_code: "卡客户日记账代码"
+    accounting_payment_wallet_code: "钱包支付代码"
+    accounting_payment_wallet_label: "钱包支付标签"
+    accounting_payment_wallet_journal_code: "钱包支付日记账代码"
+    accounting_payment_other_code: "其他支付方式代码"
+    accounting_payment_other_label: "其他支付方式标签"
+    accounting_payment_other_journal_code: "其他支付方式日记账代码"
+    accounting_wallet_code: "钱包充值代码"
+    accounting_wallet_label: "钱包充值标签"
+    accounting_wallet_journal_code: "钱包充值日记账代码"
+    accounting_VAT_code: "VAT 代码"
+    accounting_VAT_label: "VAT 标签"
+    accounting_VAT_journal_code: "VAT 日记账代码"
+    accounting_subscription_code: "订阅代码"
+    accounting_subscription_label: "订阅标签"
+    accounting_Machine_code: "机器代码"
+    accounting_Machine_label: "机器标签"
+    accounting_Training_code: "培训代码"
+    accounting_Training_label: "培训标签"
+    accounting_Event_code: "事件代码"
+    accounting_Event_label: "事件标签"
+    accounting_Space_code: "空间代码"
+    accounting_Space_label: "空间标签"
+    accounting_Pack_code: "预付小时包代码"
+    accounting_Pack_label: "预付小时包标签"
+    accounting_Product_code: "商店产品代码"
+    accounting_Product_label: "商店产品标签"
+    hub_last_version: "Fab-manager 的最新版本"
+    hub_public_key: "实例公钥"
+    fab_analytics: "Fab数据分析"
+    link_name: "链接标题到\"关于\"页面"
+    home_content: "首页内容"
+    home_css: "首页样式表"
+    origin: "实例 URL"
+    uuid: "实例 ID"
+    phone_required: "需要电话？"
+    tracking_id: "跟踪 ID"
+    book_overlapping_slots: "预订重叠时段"
+    slot_duration: "预订时段的默认持续时间"
+    events_in_calendar: "在日历中显示事件"
+    spaces_module: "空间模块"
+    plans_module: "订阅模块"
+    invoicing_module: "发票模块"
+    facebook_app_id: "Facebook 应用 ID"
+    twitter_analytics: "Twitter 分析帐号"
+    recaptcha_site_key: "reCAPTCHA 网站密钥"
+    recaptcha_secret_key: "reCAPTCHA 秘密密钥"
+    feature_tour_display: "功能导览显示模式"
+    email_from: "发件人地址"
+    disqus_shortname: "Disqus 短名称"
+    allowed_cad_extensions: "允许的 CAD 文件扩展名"
+    allowed_cad_mime_types: "允许的 CAD 文件 MIME 类型"
+    openlab_app_id: "OpenLab ID"
+    openlab_app_secret: "OpenLab 密钥"
+    openlab_default: "默认项目画廊视图"
+    online_payment_module: "在线支付模块"
+    stripe_public_key: "Stripe 公钥"
+    stripe_secret_key: "Stripe 密钥"
+    stripe_currency: "Stripe 货币"
+    invoice_prefix: "发票文件前缀"
+    confirmation_required: "需要确认"
+    wallet_module: "钱包模块"
+    statistics_module: "统计模块"
+    upcoming_events_shown: "显示即将到来的事件限制"
+    payment_schedule_prefix: "付款计划文件前缀"
+    trainings_module: "培训模块"
+    address_required: "需要地址"
+    accounting_Error_code: "错误代码"
+    accounting_Error_label: "错误标签"
+    payment_gateway: "支付网关"
+    payzen_username: "PayZen 用户名"
+    payzen_password: "PayZen 密码"
+    payzen_endpoint: "PayZen API 端点"
+    payzen_public_key: "PayZen 客户端公钥"
+    payzen_hmac: "PayZen HMAC-SHA-256 密钥"
+    payzen_currency: "PayZen 货币"
+    public_agenda_module: "公共议程模块"
+    renew_pack_threshold: "包更新阈值"
+    pack_only_for_subscription: "仅限订阅者使用包"
+    overlapping_categories: "预防重叠预订的类别"
+    extended_prices_in_same_day: "同一天内的延伸价格"
+    public_registrations: "公共注册"
+    facebook: "Facebook"
+    twitter: "Twitter"
+    viadeo: "Viadeo"
+    linkedin: "LinkedIn"
+    instagram: "Instagram"
+    youtube: "YouTube"
+    vimeo: "Vimeo"
+    dailymotion: "Dailymotion"
+    github: "GitHub"
+    echosciences: "Echosciences"
+    pinterest: "Pinterest"
+    lastfm: "LastFM"
+    flickr: "Flickr"
+    machines_module: "机器模块"
+    user_change_group: "允许用户更改他们的组别"
+    store_module: "商店模块"
+    store_withdrawal_instructions: "退款说明"
+    store_hidden: "对公众隐藏商店"
+    advanced_accounting: "高级会计"
+    external_id: "外部标识符"
+    prevent_invoices_zero: "防止建立金额为 0 的发票"
+    invoice_VAT-name: "VAT 名称"
+    trainings_auto_cancel: "培训自动取消"
+    trainings_auto_cancel_threshold: "自动取消的最低参与者数"
+    trainings_auto_cancel_deadline: "自动取消截止日期"
+    trainings_authorization_validity: "培训有效期"
+    trainings_authorization_validity_duration: "培训有效期持续时间"
+    trainings_invalidation_rule: "培训自动作废规则"
+    trainings_invalidation_rule_period: "作废培训前的宽限期"
+    projects_list_member_filter_presence: "项目列表中成员过滤器的存在"
+    projects_list_date_filters_presence: "项目列表中日期过滤器的存在"
+    project_categories_filter_placeholder: "项目画廊中类别过滤器的占位符"
+    project_categories_wording: "用于公共页面替换\"类别\"的措辞"
+    reservation_context_feature: "预订时强制成员选择预订性质"
+    family_account: "家庭账户"
+  #statuses of projects
+  statuses:
+    new: "新建"
+    pending: "待处理"
+    done: "完成"
+    abandoned: "放弃"

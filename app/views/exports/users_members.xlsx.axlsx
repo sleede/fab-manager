@@ -51,7 +51,7 @@ wb.add_worksheet(name: ExcelService.name_safe(t('export_members.members'))) do |
       member.email,
       member.is_allow_newsletter,
       member.last_sign_in_at&.to_date,
-      member.statistic_profile.gender.present? ? (member.statistic_profile.gender ? t('export_members.man') : t('export_members.woman')) : '',
+      !member.statistic_profile.gender.nil? ? (member.statistic_profile.gender ? t('export_members.man') : t('export_members.woman')) : '',
       member.statistic_profile.age,
       member.invoicing_profile&.address&.address || '',
       member.profile.phone,

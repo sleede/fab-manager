@@ -7,7 +7,7 @@ class API::SpacesController < API::APIController
   respond_to :json
 
   def index
-    @spaces = Space.includes(:space_image, :machines).where(deleted_at: nil)
+    @spaces = Space.includes(:space_image, :machines).where(deleted_at: nil).order(:created_at)
     @spaces_indexed_with_parent = @spaces.index_with { |space| @spaces.find { |s| s.id == space.parent_id } }
     @spaces_grouped_by_parent_id = @spaces.group_by(&:parent_id)
   end

@@ -41,7 +41,7 @@ class ProductService
     # @param stock_movements [{stock_type: string, reason: string, quantity: number|string, order_item_id: number|nil}]
     def update_stock(product, stock_movements = nil)
       remaining_stock = { internal: product.stock['internal'], external: product.stock['external'] }
-      product.product_stock_movements_attributes = stock_movements&.map do |movement|
+      product.product_stock_movements_attributes = stock_movements&.compact_blank&.map do |movement|
         quantity = ProductStockMovement::OUTGOING_REASONS.include?(movement[:reason]) ? -movement[:quantity].to_i : movement[:quantity].to_i
         remaining_stock[movement[:stock_type].to_sym] += quantity
         {
@@ -195,7 +195,7 @@ class ProductService
       return product unless product.low_stock_alert
       return product unless product.low_stock_threshold
 
-      affected_stocks = stock_movements&.map { |m| m[:stock_type] }&.uniq
+      affected_stocks = stock_movements&.compact_blank&.map { |m| m[:stock_type] }&.uniq
       if (product.stock['internal'] <= product.low_stock_threshold && affected_stocks&.include?('internal')) ||
          (product.stock['external'] <= product.low_stock_threshold && affected_stocks&.include?('external'))
         NotificationCenter.call type: 'notify_admin_low_stock_threshold',

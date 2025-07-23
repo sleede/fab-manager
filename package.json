@@ -1,6 +1,6 @@
 {
   "name": "fab-manager",
-  "version": "6.3.25",
+  "version": "6.4.8",
   "description": "Fab-manager is the FabLab management solution. It provides a comprehensive, web-based, open-source tool to simplify your administrative tasks and your marker's projects.",
   "keywords": [
     "fablab",
@@ -45,7 +45,7 @@
     "react-refresh": "^0.11.0",
     "react-select-event": "^5.5.1",
     "react-test-renderer": "^17.0.2",
-    "webpack-dev-server": "^4.9.0"
+    "webpack-dev-server": "^4.15.2"
   },
   "dependencies": {
     "@babel/core": "^7.20.2",
@@ -145,7 +145,7 @@
     "medium-editor": "^5.23.3",
     "mini-css-extract-plugin": "^2.6.0",
     "moment": "2.29",
-    "moment-timezone": "0.5",
+    "moment-timezone": "0.5.48",
     "ng-caps-lock": "https://github.com/FabioMR/ng-caps-lock.git#1.0.3",
     "ng-fittext": "https://github.com/patrickmarabeas/ng-FitText.js.git#4.1.1",
     "ngUpload": "0.5",

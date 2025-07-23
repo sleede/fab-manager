@@ -1,0 +1,35 @@
+<div class="modal-header">
+  <h3 class="modal-title">{{ 'app.shared.calendar.ical_links' | translate }}</h3>
+</div>
+
+<div class="modal-body">
+  <p class="text-muted">{{ 'app.shared.calendar.ical_description' | translate }}</p>
+  
+  <div class="list-group">
+    <div class="list-group-item" ng-repeat="link in icalLinks">
+      <div class="row">
+        <div class="col-md-8">
+          <h5 class="list-group-item-heading m-b">
+            <i class="fas fa-calendar" ng-class="{'text-primary': link.type === 'Machine', 'text-success': link.type === 'Training', 'text-warning': link.type === 'Event', 'text-info': link.type === 'Space'}"></i>
+            {{ link.name }}
+          </h5>
+          <p class="list-group-item-text text-muted small">{{ link.url }}</p>
+        </div>
+        <div class="col-md-4 text-right">
+          <button type="button" class="btn btn-outline-primary btn-sm" ng-click="copyToClipboard(link.url)">
+            <i class="fas fa-copy"></i> {{ 'app.shared.calendar.copy_link' | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="alert alert-info" role="alert">
+    <i class="fas fa-info-circle"></i>
+    {{ 'app.shared.calendar.ical_usage_info' | translate }}
+  </div>
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn btn-default" ng-click="close()">{{ 'app.shared.buttons.close' | translate }}</button>
+</div>

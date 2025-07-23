@@ -49,7 +49,7 @@ class PrepaidPackService
       return if available_minutes.zero?
 
       # total number of minutes in the reservation's slots
-      slots_minutes = reservation.slots.map do |slot|
+      slots_minutes = reservation.slots.joins(:slots_reservations).where('slots_reservations.offered': false).map do |slot|
         (slot.end_at.to_time - slot.start_at.to_time) / 60.0
       end
       reservation_minutes = slots_minutes.reduce(:+) || 0

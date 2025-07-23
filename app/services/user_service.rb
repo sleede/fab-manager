@@ -41,7 +41,6 @@ class UserService
 
       saved = admin.save
       if saved
-        admin.send_confirmation_instructions
         admin.add_role(:admin)
         admin.remove_role(:member)
         UsersMailer.notify_user_account_created(admin, generated_password).deliver_later
@@ -56,7 +55,6 @@ class UserService
 
       saved = manager.save
       if saved
-        manager.send_confirmation_instructions
         manager.add_role(:manager)
         manager.remove_role(:member)
         UsersMailer.notify_user_account_created(manager, generated_password).deliver_later

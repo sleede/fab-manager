@@ -1576,6 +1576,8 @@ fr:
           want_assertions_signed: "Exiger des Assertions signées"
           sp_certificate: "Certificat du SP"
           sp_private_key: "Clé privée du SP"
+          uid_attribute: "Identifiant unique"
+          uid_attribute_help: "L'attribut de la réponse SAML qui contient l'identifiant unique de l'utilisateur. Si non défini, l'identifiant de nom retourné par l'IdP est utilisé."
         provider_form:
           name: "Nom"
           authentication_type: "Type d'authentification"

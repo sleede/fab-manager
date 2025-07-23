@@ -14,6 +14,8 @@ class Subscription < ApplicationRecord
 
   has_many :cart_item_free_extensions, class_name: 'CartItem::FreeExtension', dependent: :destroy
 
+  has_one :coupon_usage, as: :object, dependent: :destroy
+
   validates :plan_id, presence: true
   validates_with SubscriptionGroupValidator
 

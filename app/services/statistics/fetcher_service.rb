@@ -62,7 +62,7 @@ class Statistics::FetcherService
                    nb_hours: (r.slots.map(&:duration).map(&:to_i).reduce(:+) / 3600.0).to_f,
                    ca: calcul_ca(r.original_invoice),
                    reservation_context_id: r.reservation_context_id,
-                   coupon: r&.original_invoice&.coupon&.code }.merge(user_info(profile))
+                   coupon: r&.coupon_usage&.coupon&.code }.merge(user_info(profile))
         yield result
       end
     end
@@ -89,7 +89,7 @@ class Statistics::FetcherService
                    nb_hours: (r.slots.map(&:duration).map(&:to_i).reduce(:+) / 3600.0).to_f,
                    ca: calcul_ca(r.original_invoice),
                    reservation_context_id: r.reservation_context_id,
-                   coupon: r&.original_invoice&.coupon&.code }.merge(user_info(profile))
+                   coupon: r&.coupon_usage&.coupon&.code }.merge(user_info(profile))
         yield result
       end
     end
@@ -117,7 +117,7 @@ class Statistics::FetcherService
                    nb_hours: difference_in_hours(slot.start_at, slot.end_at),
                    ca: calcul_ca(r.original_invoice),
                    reservation_context_id: r.reservation_context_id,
-                   coupon: r&.original_invoice&.coupon&.code }.merge(user_info(profile))
+                   coupon: r&.coupon_usage&.coupon&.code }.merge(user_info(profile))
         yield result
       end
     end
@@ -146,7 +146,7 @@ class Statistics::FetcherService
                    age_range: (r.reservable.age_range_id ? r.reservable.age_range.name : ''),
                    nb_places: r.total_booked_seats,
                    nb_hours: difference_in_hours(slot.start_at, slot.end_at),
-                   coupon: r&.original_invoice&.coupon&.code,
+                   coupon: r&.coupon_usage&.coupon&.code,
                    ca: calcul_ca(r.original_invoice) }.merge(user_info(profile))
         yield result
       end
@@ -226,7 +226,7 @@ class Statistics::FetcherService
            .find_each do |o|
         next unless o.invoice
 
-        result = { date: o.created_at.to_date, ca: calcul_ca(o.invoice), coupon: o.invoice.coupon&.code }
+        result = { date: o.created_at.to_date, ca: calcul_ca(o.invoice), coupon: o.coupon&.code }
                  .merge(user_info(o.statistic_profile))
                  .merge(store_order_info(o))
         yield result

@@ -1576,6 +1576,8 @@ sv:
           want_assertions_signed: "Want assertions signed"
           sp_certificate: "Service provider certificate"
           sp_private_key: "Service provider private key"
+          uid_attribute: "Name ID attribute"
+          uid_attribute_help: "The attribute of the SAML response that contains the user's unique identifier. If unset, the name identifier returned by the IdP is used."
         provider_form:
           name: "Namn"
           authentication_type: "Autentiseringstyp"

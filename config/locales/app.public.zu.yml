@@ -199,7 +199,7 @@ zu:
         by_name: "crwdns28098:0{NAME}crwdne28098:0"
         step_N: "crwdns28100:0{INDEX}crwdne28100:0"
         share_on_facebook: "crwdns28102:0crwdne28102:0"
-        share_on_twitter: "crwdns28104:0crwdne28104:0"
+        share_on_twitter: "crwdns38220:0crwdne38220:0"
         deleted_user: "crwdns28106:0crwdne28106:0"
         posted_on_: "crwdns28108:0crwdne28108:0"
         CAD_file_to_download: "crwdns28110:0COUNT={COUNT}crwdne28110:0"
@@ -244,7 +244,7 @@ zu:
         all_machines: "crwdns36247:0crwdne36247:0"
       machine_card:
         book: "crwdns28166:0crwdne28166:0"
-        consult: "crwdns28168:0crwdne28168:0"
+        consult: "crwdns38224:0crwdne38224:0"
       #details of a machine
       machines_show:
         book_this_machine: "crwdns28170:0crwdne28170:0"
@@ -369,7 +369,7 @@ zu:
         thanks_for_coming: "crwdns28370:0crwdne28370:0"
         view_event_list: "crwdns28372:0crwdne28372:0"
         share_on_facebook: "crwdns28374:0crwdne28374:0"
-        share_on_twitter: "crwdns28376:0crwdne28376:0"
+        share_on_twitter: "crwdns38222:0crwdne38222:0"
         last_name_and_first_name: "crwdns37937:0crwdne37937:0"
         pre_book: "crwdns37939:0crwdne37939:0"
         pre_registration_end_date: "crwdns37941:0crwdne37941:0"

@@ -199,7 +199,7 @@ pt:
         by_name: "Por {NAME}"
         step_N: "Passo {INDEX}"
         share_on_facebook: "Compartilhar no Facebook"
-        share_on_twitter: "Compartilhar no Twitter"
+        share_on_twitter: "Compartilhar no X"
         deleted_user: "Usuário deletado"
         posted_on_: "Criado em"
         CAD_file_to_download: "{COUNT, plural, =0{Sem arquivos CAD} =1{Arquivo CAD para download} other{Arquivos CAD para download}}"
@@ -244,7 +244,7 @@ pt:
         all_machines: "Todas as máquinas"
       machine_card:
         book: "Reservar"
-        consult: "Consultar"
+        consult: "View"
       #details of a machine
       machines_show:
         book_this_machine: "Reservar essa máquina"
@@ -369,7 +369,7 @@ pt:
         thanks_for_coming: "Obrigado por ter vindo!"
         view_event_list: "Visualizar próximos eventos"
         share_on_facebook: "Compartilhar no Facebook"
-        share_on_twitter: "Compartilhar no Twitter"
+        share_on_twitter: "Compartilhar no X"
         last_name_and_first_name: "Último nome e primeiro nome"
         pre_book: "Pré-agendamento"
         pre_registration_end_date: "Prazo final para o pré-inscrição"

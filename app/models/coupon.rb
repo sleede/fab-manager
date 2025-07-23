@@ -7,6 +7,7 @@ class Coupon < ApplicationRecord
   has_many :orders, dependent: :restrict_with_error
 
   has_many :cart_item_coupons, class_name: 'CartItem::Coupon', dependent: :destroy
+  has_many :coupon_usages, dependent: :destroy
 
   after_create :create_gateway_coupon
   before_destroy :delete_gateway_coupon
@@ -43,7 +44,7 @@ class Coupon < ApplicationRecord
   end
 
   def usages
-    invoices.count
+    coupon_usages.maximum(:count) || 0
   end
 
   ##

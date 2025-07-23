@@ -1,0 +1,615 @@
+zh-CN:
+  app:
+    public:
+      #header and "about" page
+      common:
+        about_the_fablab: "关于 {GENDER, select, male{该} female{该} neutral{} other{该}} {NAME}"
+        return: "返回"
+        #cookies
+        cookies:
+          about_cookies: "本网站使用Cookie进行受众测量目的。"
+          learn_more: "了解更多"
+          accept: "接受Cookie"
+          decline: "拒绝"
+        #dashboard sections
+        dashboard: "仪表板"
+        my_profile: "我的资料"
+        my_children: "我的子账户"
+        my_settings: "我的设置"
+        my_supporting_documents_files: "我的支持文件"
+        my_projects: "我的项目"
+        my_trainings: "我的培训"
+        my_reservations: "我的预订"
+        my_events: "我的活动"
+        my_invoices: "我的发票"
+        my_payment_schedules: "我的付款计划"
+        my_orders: "我的订单"
+        my_wallet: "我的钱包"
+        #contextual help
+        help: "帮助"
+        #login/logout
+        sign_out: "退出"
+        sign_up: "注册"
+        sign_in: "登录"
+        #left menu
+        notifications: "通知"
+        admin: "管理员"
+        manager: "经理"
+        reduce_panel: "收起面板"
+        #left menu (public)
+        home: "主页"
+        reserve_a_machine: "预订机器"
+        trainings_registrations: "培训注册"
+        events_registrations: "活动注册"
+        reserve_a_space: "预订空间"
+        projects_gallery: "项目画廊"
+        subscriptions: "订阅"
+        public_calendar: "日历"
+        fablab_store: "商店"
+        #left menu (admin)
+        trainings_monitoring: "培训"
+        manage_the_calendar: "管理日历"
+        manage_the_users: "管理用户"
+        manage_the_invoices: "管理发票"
+        subscriptions_and_prices: "订阅和价格"
+        manage_the_events: "管理活动"
+        manage_the_machines: "管理机器"
+        manage_the_store: "管理商店"
+        manage_the_spaces: "管理空间"
+        projects: "项目"
+        statistics: "统计"
+        customization: "定制"
+        open_api_clients: "OpenAPI客户端"
+        #account creation modal
+        create_your_account: "创建您的账户"
+        man: "男性"
+        woman: "女性"
+        gender_is_required: "必须选择性别。"
+        your_first_name: "您的名字"
+        first_name_is_required: "必须填写名字。"
+        your_surname: "您的姓氏"
+        surname_is_required: "必须填写姓氏。"
+        your_pseudonym: "您的化名"
+        pseudonym_is_required: "必须填写化名。"
+        your_email_address: "您的电子邮件地址"
+        email_is_required: "必须填写电子邮件地址。"
+        your_password: "您的密码"
+        password_is_required: "必须填写密码。"
+        password_is_too_short: "密码太短（至少12个字符）"
+        password_is_too_weak: "密码过于简单："
+        password_is_too_weak_explanations: "至少12个字符，至少包含一个大写字母、一个小写字母、一个数字和一个特殊字符"
+        type_your_password_again: "再次输入您的密码"
+        password_confirmation_is_required: "必须确认密码。"
+        password_does_not_match_with_confirmation: "密码与确认密码不匹配。"
+        i_am_an_organization: "我是一个组织"
+        name_of_your_organization: "您的组织名称"
+        organization_name_is_required: "必须填写组织名称。"
+        address_of_your_organization: "您的组织地址"
+        organization_address_is_required: "必须填写组织地址。"
+        your_user_s_profile: "您的用户资料"
+        user_s_profile_is_required: "必须填写用户资料。"
+        birth_date: "出生日期"
+        birth_date_is_required: "必须填写出生日期。"
+        phone_number: "电话号码"
+        phone_number_is_required: "必须填写电话号码。"
+        address: "地址"
+        address_is_required: "必须填写地址。"
+        i_authorize_Fablab_users_registered_on_the_site_to_contact_me: "我同意与网站注册用户共享我的电子邮件地址"
+        i_accept_to_receive_information_from_the_fablab: "我同意接收来自FabLab的信息"
+        i_ve_read_and_i_accept_: "我已阅读并接受"
+        _the_fablab_policy: "使用条款"
+        field_required: "必填字段"
+        profile_custom_field_is_required: "{FEILD} 是必填项"
+        user_supporting_documents_required: "警告！<br>您声明为\"{GROUP}\"，可能需要提供支持文件。"
+        unexpected_error_occurred: "发生意外错误，请稍后再试。"
+        used_for_statistics: "此数据将用于统计目的"
+        used_for_invoicing: "此数据将用于开具发票"
+        used_for_reservation: "此数据将用于预订更改时"
+        used_for_profile: "此数据仅将显示在您的个人资料中"
+        public_profile: "您将拥有公共个人资料，并且其他用户可以将您与其项目关联"
+        you_will_receive_confirmation_instructions_by_email_detailed: "如果您的电子邮件地址有效，您将在几分钟内收到一封包含确认您账户操作指南的电子邮件。"
+        #password modification modal
+        change_your_password: "更改您的密码"
+        your_new_password: "您的新密码"
+        your_password_was_successfully_changed: "您的密码已成功更改。"
+        #connection modal
+        connection: "连接"
+        password_forgotten: "忘记密码？"
+        confirm_my_account: "确认我的电子邮件"
+        not_registered_to_the_fablab: "尚未注册？"
+        create_an_account: "创建一个账户"
+        wrong_email_or_password: "错误的电子邮件或密码。"
+        caps_lock_is_on: "大写锁定键已打开。"
+        #confirmation modal
+        you_will_receive_confirmation_instructions_by_email: "您将通过电子邮件收到确认说明。"
+        #forgotten password modal
+        you_will_receive_in_a_moment_an_email_with_instructions_to_reset_your_password: "如果您的电子邮件地址有效，您将很快收到一封包含重设密码操作指南的电子邮件。"
+        #Fab-manager's version
+        version: "版本："
+        upgrade_fabmanager: "升级Fab-manager"
+        current_version: "您当前使用的是 Fab-manager 的版本 {VERSION}。"
+        upgrade_to: "有新版本可用。您可以升级到版本 {VERSION}。"
+        read_more: "查看此版本的详细信息"
+        security_version_html: "<strong>当前版本存在安全漏洞！</strong><br>现有更高版本已修复了安全问题。请尽快升级！"
+        how_to: "如何升级？"
+        #Notifications
+        and_NUMBER_other_notifications: "还有 {NUMBER, plural, =0{没有其他通知} =1{1 条其他通知} other{{NUMBER} 条其他通知}}..."
+      #about page
+      about:
+        read_the_fablab_policy: "使用条款"
+        read_the_fablab_s_general_terms_and_conditions: "阅读一般条款和条件"
+        your_fablab_s_contacts: "联系我们"
+        privacy_policy: "隐私政策"
+      #'privacy policy' page
+      privacy:
+        title: "隐私政策"
+        dpo: "数据保护官"
+        last_update: "最后更新,"
+      #home page
+      home:
+        latest_documented_projects: "最新记录的项目"
+        follow_us: "关注我们"
+        latest_tweets: "最新推文"
+        latest_registered_members: "最新注册的成员"
+        create_an_account: "创建账户"
+        discover_members: "发现成员"
+        #next events summary on the home page
+        fablab_s_next_events: "下一个活动"
+        every_events: "所有活动"
+      event_card:
+        on_the_date: "日期 {DATE}"
+        from_date_to_date: "从 {START} 到 {END}"
+        from_time_to_time: "从 {START} 到 {END}"
+        all_day: "全天"
+        still_available: "可用位置: "
+        event_full: "活动已满"
+        without_reservation: "无需预订"
+        free_admission: "免费入场"
+        full_price: "全价: "
+      #projects gallery
+      projects_list:
+        filter: 筛选
+        the_fablab_projects: "项目"
+        add_a_project: "添加项目"
+        network_search: "Fab-manager 网络"
+        tooltip_openlab_projects_switch: "在整个网络上搜索可以让您搜索所有使用此功能的Fab-manager项目！"
+        openlab_search_not_available_at_the_moment: "目前无法在整个网络上搜索。您仍然可以在此平台上搜索项目。"
+        project_search_result_is_empty: "抱歉，我们没有找到符合您搜索条件的结果。"
+        reset_all_filters: "清除所有"
+        keywords: "关键词"
+        all_projects: "所有项目"
+        my_projects: "我的项目"
+        projects_to_whom_i_take_part_in: "我参与的项目"
+        all_machines: "所有机器"
+        all_themes: "所有主题"
+        all_materials: "所有材料"
+        load_next_projects: "加载下一个项目"
+        rough_draft: "草稿"
+        filter_by_member: "按成员筛选"
+        created_from: 创建于
+        created_to: 创建至
+        download_archive: 下载
+      status_filter:
+        all_statuses: "所有状态"
+        select_status: "选择状态"
+      #details of a projet
+      projects_show:
+        rough_draft: "草稿"
+        project_description: "项目描述"
+        by_name: "由 {NAME}"
+        step_N: "步骤 {INDEX}"
+        share_on_facebook: "分享到 Facebook"
+        share_on_twitter: "分享到 X"
+        deleted_user: "已删除用户"
+        posted_on_: "发布于"
+        CAD_file_to_download: "{COUNT, plural, =0{无CAD文件} =1{1个CAD文件可下载} other{多个CAD文件可下载}}"
+        machines_and_materials: "机器和材料"
+        collaborators: "合作者"
+        licence: "许可"
+        confirmation_required: "需要确认"
+        report_an_abuse: "举报滥用"
+        unauthorized_operation: "未经授权的操作"
+        your_report_was_successful_thanks: "您的举报成功。谢谢。"
+        an_error_occured_while_sending_your_report: "发送举报时发生错误。"
+        your_first_name: "您的名字"
+        your_first_name_is_required: "必须填写名字。"
+        your_surname: "您的姓氏"
+        your_surname_is_required: "必须填写姓氏。"
+        your_email_address: "您的电子邮件地址"
+        your_email_address_is_required: "必须填写电子邮件地址。"
+        tell_us_why_this_looks_abusive: "告诉我们为什么这看起来像滥用行为"
+        message_is_required: "必须填写消息。"
+        report: "举报"
+        do_you_really_want_to_delete_this_project: "您真的想删除这个项目吗？"
+        status: "状态"
+        markdown_file: "Markdown 文件"
+      #list of machines
+      machines_list:
+        the_fablab_s_machines: "机器"
+        add_a_machine: "添加机器"
+        new_availability: "开放预订"
+        book: "预订"
+        _or_the_: " 或者 "
+        store_ad:
+          title: "发现我们的商店"
+          buy: "查看会员项目的产品以及车间不同机器和工具的耗材。"
+          sell: "如果您也想出售您的作品，请告知我们。"
+          link: "前往商店"
+      machines_filters:
+        show_machines: "显示机器:"
+        status_enabled: "已启用"
+        status_disabled: "已禁用"
+        status_all: "全部"
+        filter_by_machine_category: "按类别筛选:"
+        all_machines: "所有机器"
+      machine_card:
+        book: "预订"
+        consult: "查看"
+      #details of a machine
+      machines_show:
+        book_this_machine: "预订这台机器"
+        technical_specifications: "技术规格"
+        files_to_download: "可下载文件"
+        projects_using_the_machine: "使用这台机器的项目"
+        _or_the_: " 或者 "
+        confirmation_required: "需要确认"
+        do_you_really_want_to_delete_this_machine: "您真的想删除这台机器吗？"
+        unauthorized_operation: "未经授权的操作"
+        the_machine_cant_be_deleted_because_it_is_already_reserved_by_some_users: "无法删除这台机器，因为已经有用户预订了。"
+      #list of trainings
+      trainings_list:
+        book: "预订"
+        the_trainings: "培训"
+      #details of a training
+      training_show:
+        book_this_training: "预订这次培训"
+        do_you_really_want_to_delete_this_training: "您真的想删除这次培训吗？"
+        unauthorized_operation: "未经授权的操作"
+        confirmation_required: "需要确认"
+        the_training_cant_be_deleted_because_it_is_already_reserved_by_some_users: "无法删除这次培训，因为已经有用户预订了。"
+      plan_card:
+        AMOUNT_per_month: "{AMOUNT} / 月"
+        i_subscribe_online: "我在线订阅"
+        more_information: "更多信息"
+        i_choose_that_plan: "我选择这个计划"
+        i_already_subscribed: "我已经订阅"
+      #summary of the subscriptions
+      plans:
+        subscriptions: "订阅"
+        your_subscription_expires_on_the_DATE: "您的订阅将于 {DATE} 到期"
+        no_plans: "您的组别没有可用的计划"
+        my_group: "我的组别"
+        his_group: "用户的组别"
+        he_wants_to_change_group: "更改组别"
+        change_my_group: "确认组别更改"
+        summary: "总结"
+        your_subscription_has_expired_on_the_DATE: "您的订阅已于 {DATE} 过期"
+        subscription_price: "订阅价格"
+        you_ve_just_payed_the_subscription_html: "您刚刚支付了 <strong>订阅</strong>:"
+        thank_you_your_subscription_is_successful: "谢谢。您的订阅成功！"
+        your_invoice_will_be_available_soon_from_your_dashboard: "您的发票将很快在您的仪表板上提供"
+        your_group_was_successfully_changed: "您的组别已成功更改。"
+        the_user_s_group_was_successfully_changed: "用户的组别已成功更改。"
+        an_error_prevented_your_group_from_being_changed: "一个错误阻止了您的组别更改。"
+        an_error_prevented_to_change_the_user_s_group: "一个错误阻止了用户组别更改。"
+      plans_filter:
+        i_am: "我是"
+        select_group: "选择组别"
+        i_want_duration: "我想订阅"
+        all_durations: "所有期限"
+        select_duration: "选择期限"
+      #Fablab's events list
+      events_list:
+        the_fablab_s_events: "活动"
+        all_categories: "所有类别"
+        for_all: "适合所有人"
+        sold_out: "售罄"
+        cancelled: "取消"
+        free_admission: "免费入场"
+        still_available: "可用位置"
+        without_reservation: "无需预订"
+        add_an_event: "添加活动"
+        load_the_next_events: "加载下一个活动..."
+        full_price_: "全价:"
+        to_date: "至" #e.g. from 01/01 to 01/05
+        all_themes: "所有主题"
+      #details and booking of an event
+      events_show:
+        event_description: "活动描述"
+        downloadable_documents: "可下载文件"
+        information_and_booking: "信息和预订"
+        event_type:
+          family: "为会员保留的活动"
+          nominative: "名义活动"
+        dates: "日期"
+        beginning: "开始:"
+        ending: "结束:"
+        opening_hours: "开放时间:"
+        all_day: "全天"
+        from_time: "从" #e.g. from 18:00 to 21:00
+        to_time: "至" #e.g. from 18:00 to 21:00
+        full_price_: "全价:"
+        tickets_still_availables: "剩余票数:"
+        sold_out: "售罄。"
+        without_reservation: "无需预订"
+        cancelled: "取消"
+        ticket: "{NUMBER, plural, one{票} other{票}}"
+        make_a_gift_of_this_reservation: "将此预订作为礼物"
+        thank_you_your_payment_has_been_successfully_registered: "谢谢。您的付款已成功登记！"
+        thank_you_your_pre_registration_has_been_successfully_saved: "谢谢。您的预注册已成功保存！"
+        you_can_find_your_reservation_s_details_on_your_: "您可以在您的"
+        informed_by_email_your_pre_registration: "您将通过电子邮件通知您预注册的进展情况。"
+        dashboard: "仪表板"
+        you_booked_DATE: "您已预订 ({DATE}):"
+        you_pre_booked_DATE: "您的预注册 ({DATE}):"
+        canceled_reservation_SEATS: "预订已取消 ({SEATS} 个座位)"
+        book: "预订"
+        confirm_and_pay: "确认并支付"
+        confirm_payment_of_html: "{ROLE, select, admin{现金} other{支付}}: {AMOUNT}" #(contexte : validate a payment of $20,00)
+        online_payment_disabled: "无法使用信用卡支付。请直接联系我们。"
+        please_select_a_member_first: "请先选择一名成员"
+        change_the_reservation: "更改预订"
+        you_can_shift_this_reservation_on_the_following_slots: "您可以将此预订移至以下时间段:"
+        confirmation_required: "需要确认"
+        do_you_really_want_to_delete_this_event: "您真的想删除这个活动吗？"
+        all_reservations_for_this_event_will_be_canceled: 此活动的所有预订都将被取消。
+        delete_recurring_event: "您即将删除一个周期性活动。您想做什么？"
+        delete_this_event: "仅此活动"
+        delete_this_and_next: "此活动及以下活动"
+        delete_all: "所有活动"
+        event_successfully_deleted: "活动已成功删除。"
+        events_deleted: "活动已删除，和 {COUNT, plural, =1{一个其他} other{{COUNT} 其他}}"
+        unable_to_delete_the_event: "无法删除该活动，可能已被某个成员预订"
+        events_not_deleted: "共有 {TOTAL} 个事件，其中 {COUNT, plural, =1{1个未被删除} other{{COUNT} 个未被删除}}. 在{COUNT, plural, =1{它} other{它们}}上可能有预约."
+        cancel_the_reservation: "取消预订"
+        do_you_really_want_to_cancel_this_reservation_this_apply_to_all_booked_tickets: "您真的想取消此预订吗？这将适用于所有已预订的票。"
+        reservation_was_successfully_cancelled: "预订已成功取消。"
+        cancellation_failed: "取消失败。"
+        event_is_over: "活动已结束。"
+        thanks_for_coming: "感谢您的光临！"
+        view_event_list: "查看即将到来的活动"
+        share_on_facebook: "分享到 Facebook"
+        share_on_twitter: "分享到 X"
+        last_name_and_first_name: "姓和名"
+        pre_book: "预注册"
+        pre_registration_end_date: "预注册截止日期"
+        pre_registration: "预注册"
+      #public calendar
+      calendar:
+        calendar: "日历"
+        show_unavailables: "显示不可用时间段"
+        filter_calendar: "筛选日历"
+        trainings: "培训"
+        machines: "机器"
+        spaces: "空间"
+        events: "活动"
+        externals: "其他日历"
+        choose_a_machine: "选择一台机器"
+        cancel: "取消"
+      #list of spaces
+      spaces_list:
+        the_spaces: "空间"
+        new_availability: "开放预订"
+        add_a_space: "添加空间"
+        status_enabled: "启用"
+        status_disabled: "禁用"
+        status_all: "全部"
+        book: "预订"
+      #display the details of a space
+      space_show:
+        book_this_space: "预订这个空间"
+        unauthorized_operation: "未经授权的操作"
+        confirmation_required: "需要确认"
+        do_you_really_want_to_delete_this_space: "您真的想删除这个空间吗？"
+        the_space_cant_be_deleted_because_it_is_already_reserved_by_some_users: "无法删除这个空间，因为已经有用户预订了。"
+        characteristics: "特点"
+        files_to_download: "可下载文件"
+        projects_using_the_space: "使用这个空间的项目"
+      #public store
+      store:
+        fablab_store: "商店"
+        unexpected_error_occurred: "发生意外错误。请稍后再试。"
+        add_to_cart_success: "产品已添加到购物车。"
+        products:
+          all_products: "所有产品"
+          filter: "筛选"
+          filter_clear: "清除所有"
+          filter_apply: "应用"
+          filter_categories: "类别"
+          filter_machines: "按机器"
+          filter_keywords_reference: "按关键词或参考"
+          in_stock_only: "仅显示有货产品"
+          sort:
+            name_az: "名称 A-Z"
+            name_za: "名称 Z-A"
+            price_low: "价格：从低到高"
+            price_high: "价格：从高到低"
+      store_product:
+        ref: "参考：{REF}"
+        add_to_cart_success: "产品已添加到购物车。"
+        unexpected_error_occurred: "发生意外错误。请稍后再试。"
+        show_more: "显示更多"
+        show_less: "显示更少"
+        documentation: "文档"
+        minimum_purchase: "最小购买量："
+        add_to_cart: "添加到购物车"
+        stock_limit: "您已达到当前库存限制"
+      stock_status:
+        available: "有货"
+        limited_stock: "库存有限"
+        out_of_stock: "无货"
+      store_product_item:
+        minimum_purchase: "最小购买量："
+        add: "添加"
+        add_to_cart: "添加到购物车"
+        stock_limit: "您已达到当前库存限制"
+      product_price:
+        per_unit: "/ 单位"
+        free: "免费"
+      cart:
+        my_cart: "我的购物车"
+      cart_button:
+        my_cart: "我的购物车"
+      store_cart:
+        checkout: "结账"
+        cart_is_empty: "您的购物车是空的"
+        pickup: "取货"
+        checkout_header: "您的购物车总金额"
+        checkout_products_COUNT: "您的购物车包含 {COUNT} {COUNT, plural, =1{产品} other{产品}}"
+        checkout_products_total: "产品总计"
+        checkout_gift_total: "折扣总计"
+        checkout_coupon: "优惠券"
+        checkout_total: "购物车总计"
+        checkout_error: "发生意外错误。请联系管理员。"
+        checkout_success: "购买确认。谢谢！"
+        select_user: "请先选择一个用户再继续。"
+      abstract_item:
+        offer_product: "赠送产品"
+        total: "总计"
+        errors:
+          unauthorized_offering_product: "您不能赠送任何东西给自己"
+      cart_order_product:
+        reference_short: "参考："
+        minimum_purchase: "最小购买量："
+        stock_limit: "您已达到当前库存限制"
+        unit: "单位"
+        update_item: "更新"
+        errors:
+          product_not_found: "此产品已不再可用，请将其从购物车中移除。"
+          out_of_stock: "此产品无货，请将其从购物车中移除。"
+          stock_limit_QUANTITY: "库存中仅剩 {QUANTITY} {QUANTITY, plural, =1{单位} other{单位}}，请调整商品数量。"
+          quantity_min_QUANTITY: "产品的最小数量已更改为 {QUANTITY}，请调整商品数量。"
+          price_changed_PRICE: "产品价格已修改为 {PRICE}"
+      cart_order_reservation:
+        reservation: "预订"
+        offer_reservation: "赠送预订"
+        slot: "{DATE}: {START} - {END}"
+        offered: "赠送"
+      orders_dashboard:
+        heading: "我的订单"
+        sort:
+          newest: "最新优先"
+          oldest: "最旧优先"
+      member_select:
+        select_a_member: "选择成员"
+        start_typing: "开始输入..."
+      children_dashboard:
+        heading: "儿童"
+        member_heading: "我的孩子"
+        add_child: "添加孩子"
+      child_modal:
+        edit_child: "编辑孩子"
+        new_child: "新孩子"
+      child_form:
+        child_form_info: "只有未满18岁的孩子才能添加到您的家庭账户中。可能需要提供支持文件以验证孩子的账户，并允许您为他们注册活动。"
+        first_name: "名"
+        last_name: "姓"
+        birthday: "生日"
+        email: "电子邮件"
+        phone: "电话"
+        save: "保存"
+        supporting_documents: "支持文件"
+        to_complete: "待完成"
+        refuse_documents_info: "您可以通过点击以下按钮拒绝选择的文件。"
+        refuse_documents: "拒绝文件"
+      child_item:
+        first_name: "孩子名"
+        last_name: "孩子姓"
+        birthday: "生日"
+        deleted: "孩子已被删除。"
+        unable_to_delete: "无法删除孩子。"
+      delete_child_modal:
+        confirmation_required: "需要确认"
+        confirm: "确认"
+        confirm_delete_child: "您真的想删除这个孩子吗？"
+      tour:
+        conclusion:
+          title: "感谢您的关注"
+          content: "<p>如果您想重新启动此上下文帮助，请随时按 <strong>F1</strong> 或点击用户菜单中的「? 帮助」。</p><p>如果您需要额外的帮助，可以 <a href='http://guide-fr.fab.mn' target='_blank'>查看用户指南</a>（目前仅提供法语版）。</p><p>Fab-manager 团队还提供个性化支持（入门帮助、安装帮助、定制等），<a href='mailto:contact@fab-manager.com'>联系我们</a> 以获取更多信息。</p>"
+        welcome:
+          welcome:
+            title: "欢迎来到 Fab-manager"
+            content: "为了帮助您快速上手应用程序，我们将带您快速浏览一下功能。"
+          home:
+            title: "主页"
+            content: "点击这里将带您回到当前所在的主页。"
+          machines:
+            title: "机器"
+            content: "<p>此页面将允许您查看所有机器的列表并代表成员预订时间段。</p><p>机器例如可以是3D打印机。</p><p>如果启用了信用卡支付或某些价格为0，成员也可以访问此页面并自行预订机器。</p>"
+          trainings:
+            title: "培训"
+            content: "<p>此页面将允许您查看所有培训课程的列表并为成员注册培训课程。</p><p>培训可以设置为预订某些机器的前提条件。</p><p>如果启用了信用卡支付或某些价格为0，成员也可以访问此页面并自行注册培训课程。</p>"
+          spaces:
+            title: "空间"
+            content: "<p>此页面将允许您查看所有可用空间的列表并代表成员预订时间段。</p><p>空间例如可以是木工坊或会议室。</p><p>其特点是可以同时被多个人预订。</p><p>如果启用了信用卡支付或某些价格为0，成员也可以访问此页面并自行预订空间。</p>"
+          events:
+            title: "活动"
+            content: "<p>开放参观之夜或制作台灯的实习课程？就在这里！</p><p>活动可以是免费的或收费的（不同价格），也可以选择是否需要预订。</p><p>同样，成员也可以访问此页面并为免费活动或收费活动（如果启用了信用卡支付）自行预订。</p>"
+          calendar:
+            title: "日程"
+            content: "一目了然地查看未来几周内安排的所有活动（活动、培训、可用机器等）。"
+          projects:
+            title: "项目"
+            content: "<p>记录并与社区分享您的所有创作。</p><p>如果您使用 OpenLab，您还可以查看整个 Fab-manager 网络的项目。<a href='mailto:contact@fab-manager.com'>联系我们</a> 以获取访问权限，这是免费的！</p>"
+          plans:
+            title: "订阅"
+            content: "订阅为定期用户提供了分段价格和优惠的方式。"
+          admin:
+            title: "{ROLE} 部分"
+            content: "<p>以下所有元素仅管理员和经理可以访问。它们允许您管理和配置 Fab-manager。</p><p>在此访问结束时，点击其中一个以了解更多信息。</p>"
+          about:
+            title: "关于"
+            content: "这是一个您可以完全自定义的页面，用来介绍您的活动和结构。"
+          notifications:
+            title: "通知中心"
+            content: "<p>每当有重要事件发生（预订、账户创建、成员活动等），您将在这里收到通知。</p><p>您的成员也会在这里收到通知。</p>"
+          profile:
+            title: "用户菜单"
+            content: "<p>在这里可以找到您的个人信息以及您在 Fab-manager 上的所有活动。</p><p>这个空间对所有成员也可用。</p>"
+          news:
+            title: "新闻"
+            content: "<p>此空间允许您显示结构的最新消息。</p><p>您可以轻松地从「自定义」-「主页」更改其内容。</p>"
+          last_projects:
+            title: "最新项目"
+            content: "<p>这个轮播显示了成员记录的最新项目。</p>"
+          last_tweet:
+            title: "最新推文"
+            content: "<p>您的推特动态中的最新推文可以显示在这里。</p><p>从「自定义」-「主页」中配置它。</p>"
+          last_members:
+            title: "最新成员"
+            content: "最近注册并验证地址且同意被联系的成员将显示在这里。"
+          next_events:
+            title: "即将到来的活动"
+            content: "接下来三个安排的活动将显示在此空间。"
+          customize:
+            title: "自定义主页"
+            content: "<p>此页面可以完全个性化。</p><p>您可以 <a href='mailto:contact@fab-manager.com'>联系我们</a> 以进行主页的定制。</p>"
+          version:
+            title: "应用版本"
+            content: "将光标悬停在此图标上以了解 Fab-manager 的版本。如果您未更新，将在此处显示，并可以通过点击获取详细信息。"
+        machines:
+          welcome:
+            title: "机器"
+            content: "<p>机器是为用户提供的工具。您必须在此处创建可以由成员预订的机器。</p><p>您也可以为不可预订或自由访问的机器创建条目，然后只需不与它们关联可用时间段。</p>"
+          welcome_manager:
+            title: "机器"
+            content: "机器是用户可以预订的工具。"
+          view:
+            title: "查看"
+            content: "要修改或删除机器，请先点击这里。无法删除已关联可用时间段的机器，但可以停用它。"
+          reserve:
+            title: "预订"
+            content: "点击这里可访问显示空闲时间段的日程表。这将让您为用户预订此机器并管理现有预订。"
+        spaces:
+          welcome:
+            title: "空间"
+            content: "<p>空间是为用户提供的场所。例如，会议室或木工坊。您必须在此处创建可以由成员预订的空间。</p><p>空间的特点是可以同时被多个人预订。</p>"
+          welcome_manager:
+            title: "空间"
+            content: "<p>空间是用户可以预订的场所。例如，会议室或木工坊。</p><p>空间的特点是可以同时被多个人预订。</p>"
+          view:
+            title: "查看"
+            content: "要修改或删除空间，请先点击这里。无法删除已关联可用时间段的空间，但可以停用它。"
+          reserve:
+            title: "预订"
+            content: "点击这里可访问显示空闲时间段的日程表。这将让您为用户预订此空间并管理现有预订。"

@@ -33,6 +33,9 @@
 }
 
 .btn-twitter {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
   border: 1px solid #ccd6dd;
   background-color: #55acee;
   color: white;

@@ -155,7 +155,7 @@ sv:
         discover_members: "Upptäck medlemmar"
         #next events summary on the home page
         fablab_s_next_events: "Nästa evenemang"
-        every_events: "All events"
+        every_events: "Alla evenemang"
       event_card:
         on_the_date: "Den {DATE}"
         from_date_to_date: "Från {START} till {END}"
@@ -199,7 +199,7 @@ sv:
         by_name: "Av {NAME}"
         step_N: "Steg {INDEX}"
         share_on_facebook: "Dela på Facebook"
-        share_on_twitter: "Dela på Twitter"
+        share_on_twitter: "Dela på X"
         deleted_user: "Ta bort användare"
         posted_on_: "Postat den"
         CAD_file_to_download: "{COUNT, plural, one {}=0{Inga CAD-filer} =1{CAD-fil att ladda ner} other{CAD-filer att ladda ner}}"
@@ -244,7 +244,7 @@ sv:
         all_machines: "All utrustning"
       machine_card:
         book: "Boka"
-        consult: "Detaljer"
+        consult: "View"
       #details of a machine
       machines_show:
         book_this_machine: "Boka utrustning"
@@ -369,7 +369,7 @@ sv:
         thanks_for_coming: "Tack för ditt besök!"
         view_event_list: "Visa kommande evenemang"
         share_on_facebook: "Dela på Facebook"
-        share_on_twitter: "Dela på Twitter"
+        share_on_twitter: "Dela på X"
         last_name_and_first_name: "För- och efternamn"
         pre_book: "Förboka"
         pre_registration_end_date: "Deadline för förbokning"

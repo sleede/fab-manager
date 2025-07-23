@@ -17,7 +17,7 @@ class Trainings::AutoCancelService
                      Time.current,
                      Time.current + training.auto_cancel_deadline.hours)
               .find_each do |availability|
-        next if availability.reservations.count >= training.auto_cancel_threshold
+        next if availability.slots_reservations.where(canceled_at: nil).count >= training.auto_cancel_threshold
 
         auto_refund = Setting.get('wallet_module')
 
@@ -27,14 +27,14 @@ class Trainings::AutoCancelService
                                 meta_data: { auto_refund: auto_refund }
 
         availability.update(lock: true)
-        availability.slots_reservations.find_each do |sr|
+        availability.slots_reservations.where(canceled_at: nil).find_each do |sr|
           NotificationCenter.call type: 'notify_member_training_auto_cancelled',
                                   receiver: sr.reservation.user,
                                   attached_object: sr,
-                                  meta_data: { auto_refund: auto_refund }
+                                  meta_data: { auto_refund: auto_refund && !sr.offered? }
 
-          sr.update(canceled_at: Time.current)
-          refund_after_cancel(sr.reservation) if auto_refund
+          SlotsReservationsService.cancel(sr)
+          refund_after_cancel(sr.reservation) if auto_refund && !sr.offered?
         end
       end
     end

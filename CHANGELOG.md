@@ -2,6 +2,154 @@
 
 ## Next release
 
+## v6.4.8 2025 July 17
+
+- improvement: username length validation is now 50 characters instead of 30 characters
+- Fix a bug: unable to resend auth code for SSO authentication providers
+- Fix a bug: confirmation email is sent two times when a user craated
+
+## v6.4.7 2025 July 1
+
+- Fix a bug: prepaid packs are credited when admin offer a slot of rerservation
+
+## v6.4.6 2025 Jun 30
+
+- Fix a bug: allways show cgu/cgv links in about page even if the files are not uploaded
+- Fix a bug: alllow / prevent the reservation of overlapping slots settings is not working
+
+## v6.4.5 2025 Jun 20
+
+- Fix a bug: unable to update coupon usages count for a product order
+
+## v6.4.4 2025 Jun 20
+
+- update moment-timezone to 0.5.48
+
+## v6.4.3 2025 Jun 17
+
+- Fix a bug: unable to install fab-manager by setup.sh
+
+## v6.4.2 2025 Jun 16
+
+- Fix a bug: reservation of training has auto canceled/refunded two times
+- Fix a bug: missing reservation of space in open api json
+- Fix a bug: unable to run rails db:migrate
+
+## v6.4.1 2025 Avril 30
+
+- Fix a bug: unable to migrate coupon usages
+
+## v6.4.0 2025 Avril 25
+
+- Fix a bug: unable to get coupon usages count if generation of invoice is disabled
+
+## v6.3.47 2025 Avril 1
+
+- Fix a bug: unable to hide machine/space deleted in price of plan
+
+## v6.3.46 2025 March 31
+
+- Fix a bug: unable to cancel stripe subscription canceled
+
+## v6.3.45 2025 March 31
+
+- Fix a bug: unable to cancel stripe subscription canceled
+
+## v6.3.44 2025 March 20
+
+- Fix a bug: event start/end date is not correct in the event list if the daylight saving time
+
+## v6.3.43 2025 March 19
+
+- update upgrade.sh script to allow skip compile assets
+- Fix a bug: event start/end date is not correct in the event list if the daylight saving time
+
+## v6.3.42 2025 February 28
+
+- Fix a bug: unable to bulk update projects to openlab in rake task
+- [TODO DEPLOY] `rails fablab:openlab:bulk_export`
+- [TODO DEPLOY] `rails fablab:openlab:bulk_update`
+
+## v6.3.41 2025 February 26
+
+- Fix a bug: unable to sync projects with openprojects
+- [TODO DEPLOY] `rails fablab:openlab:bulk_export`
+- [TODO DEPLOY] `rails fablab:openlab:bulk_update`
+
+## v6.3.40 2025 February 24
+
+- Fix a bug: machine reservation time in my reservations is incorrect
+
+## v6.3.39 2025 February 3
+
+- Fix a bug: unable to cancel a PayZen subscription
+
+## v6.3.38 2025 January 27
+
+- Fix a bug: unable to update product low stock alert
+
+## v6.3.37 2025 January 22
+
+- updated rails to 7.0.8.7
+- updated tzinfo-data to 1.2025.1
+- Fix a bug: unable to update opening/closing time for the calendar
+- Fix a bug: unable to update product low stock alert
+
+## v6.3.36 2024 December 12
+
+- Improvement: default order for the spaces/trainings list is set to descending by created_at
+- Improvement: members cannot see training deactivated in the list
+
+## v6.3.35 2024 November 13
+
+- Fix a bug: unable to run rails db:migrate if the database is empty
+- Fix a bug: timeout error when search projects with openprojects
+- Fix a security issue: updated omniauth-saml to 2.2.1 to fix [CVE-2024-45409](https://github.com/advisories/GHSA-jw9c-mfg7-9rx2)
+- Fix a security issue: puma to 6.4.3 to fix [CVE-2024-45614](https://security.snyk.io/vuln/SNYK-RUBY-PUMA-8062124)
+- Fix a security issue: rails to 7.0.86 to fix [CVE-2024-47889](https://vulert.com/vuln-db/CVE-2024-47889)
+
+## v6.3.34 2024 October 21
+
+- Fix a bug: unable to run open project update task
+
+## v6.3.33 2024 October 2
+
+- Fix a bug: unable to reset OpenApi token
+- Fix a bug: unable to sync projects with openprojects
+- [TODO DEPLOY] `rails fablab:openlab:bulk_export`
+- [TODO DEPLOY] `rails fablab:openlab:bulk_update`
+
+## v6.3.32 2024 July 22
+
+- Fix a bug: manager cannot pay a subscription(payment schedule) with a wallet
+
+## v6.3.31 2024 July 22
+
+- updates translations
+
+## v6.3.30 2024 July 19
+
+- Fix a bug: unable to change training reservation slot to another slot
+
+## v6.3.29 2024 July 19
+
+- updates chinese translations and adds translations
+
+## v6.3.28 2024 July 5
+
+- Fix a bug: unable to show gender in global export
+- updates translations
+- [TODO DEPLOY] `rails fablab:maintenance:regenerate_statistics[2014,1]`
+
+## v6.3.27 2024 June 12
+
+- Fix a bug: unable to show gender wowan in member export
+- Add a new feature: add a new button to automatically refresh the public calendar
+
+## v6.3.26 2024 June 5
+
+- improvement: add uid_attribute for saml provider
+
 ## v6.3.25 2024 May 28
 
 - Fix a bug: member wallet amount calculation error in the excel export

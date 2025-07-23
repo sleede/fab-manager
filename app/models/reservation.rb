@@ -27,6 +27,8 @@ class Reservation < ApplicationRecord
   has_many :booking_users, dependent: :destroy
   accepts_nested_attributes_for :booking_users, allow_destroy: true
 
+  has_one :coupon_usage, as: :object, dependent: :destroy
+
   validates :reservable_id, :reservable_type, presence: true
   validate :machine_not_already_reserved, if: -> { reservable.is_a?(Machine) }
   validate :training_not_fully_reserved, if: -> { reservable.is_a?(Training) }

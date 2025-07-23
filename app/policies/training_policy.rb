@@ -8,6 +8,10 @@ class TrainingPolicy < ApplicationPolicy
     end
   end
 
+  def show?
+    !record.disabled? || user.admin? || user.manager?
+  end
+
   def create?
     user.admin?
   end
