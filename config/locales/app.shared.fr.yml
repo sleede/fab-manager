@@ -550,7 +550,6 @@ fr:
         show_reserved_uniq: "Afficher uniquement les créneaux avec réservation"
         auto_refresh_on: "Actualisation auto activée"
         auto_refresh_off: "Actualisation auto désactivée"
-
       machine:
         machine_uncategorized: "Machines non classés"
       form_unsaved_list:
