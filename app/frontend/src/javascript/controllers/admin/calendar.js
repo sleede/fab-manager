@@ -327,14 +327,14 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
             $scope.icalLinks.push({
               type: 'Training',
               name: _t('app.admin.calendar.training_reservations'),
-              url: `webcal://${window.location.host}/ical/availabilities/training`
+              url: `webcal://${window.location.host}/ical/reservations/training`
             });
           }
           if (Fablab.spacesModule) {
             $scope.icalLinks.push({
               type: 'Space',
               name: _t('app.admin.calendar.space_reservations'),
-              url: `webcal://${window.location.host}/ical/availabilities/space`
+              url: `webcal://${window.location.host}/ical/reservations/space`
             });
           }
           $scope.icalLinks.push({
