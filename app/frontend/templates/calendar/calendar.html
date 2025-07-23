@@ -18,6 +18,11 @@
         </button>
         <button type="button" class="btn btn-default m-t m-b m-r-sm" ng-click="triggerAutoRefresh()">
           <span class="fas fa-redo"></span>
+          <span ng-if="autoRefresh">{{ 'app.shared.calendar.auto_refresh_on' | translate }}</span>
+          <span ng-if="!autoRefresh">{{ 'app.shared.calendar.auto_refresh_off' | translate }}</span>
+        </button>
+        <button type="button" class="btn btn-default m-t m-b m-r-sm" ng-click="openICalLinksModal()">
+          <span class="fas fa-calendar-alt"></span> {{ 'app.shared.calendar.ical_links' | translate }}
         </button>
         <button type="button" class="btn btn-default m-t m-b" ng-click="triggerOnlyCalendarViewMode()">
           <span class="fas fa-expand"></span>

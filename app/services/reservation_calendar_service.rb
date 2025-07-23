@@ -51,18 +51,31 @@ class ReservationCalendarService
     reservations = load_reservations
 
     reservations.find_each do |reservation|
-      reservation.grouped_slots.each do |_date, daily_groups|
-        daily_groups.each do |start_time, group_slots|
-          cal.event do |e|
-            e.dtstart     = start_time
-            e.dtend       = group_slots.last[:end_at]
-            e.summary     = reservation.reservable.name
-            e.description = user_name(reservation)
-            e.uid         = "#{reservable_type}-#{reservation.reservable.id}-#{start_time.to_i}@fabmanager"
-            e.status      = group_slots.first.slots_reservations.pluck(&:canceled_at).include?(nil) ? 'IN-PROCESS' : 'CANCELLED'
-          end
+      reservation.slots_reservations.each do |slots_reservation|
+        cal.event do |e|
+          e.dtstart     = slots_reservation.slot.start_at
+          e.dtend       = slots_reservation.slot.end_at
+          e.summary     = slots_reservation.reservation.reservable.name
+          e.description = user_name(slots_reservation.reservation)
+          e.uid         = "#{reservable_type}-#{slots_reservation.reservation.reservable.id}-#{slots_reservation.slot.start_at.to_i}@fabmanager"
+          e.status      = slots_reservation.canceled_at ? 'CANCELLED' : 'CONFIRMED'
         end
       end
+      # reservation.grouped_slots.each do |_date, daily_groups|
+      #   daily_groups.each do |start_time, group_slots|
+      #     slots_not_canceled = Slot.where(id: group_slots).includes(:slots_reservations)
+      #                              .where(slots_reservations: { canceled_at: nil }).order(:start_at)
+      #     start_at = slots_not_canceled.present? ? slots_not_canceled.first.start_at : start_time
+      #     cal.event do |e|
+      #       e.dtstart     = start_at
+      #       e.dtend       = slots_not_canceled.present? ? slots_not_canceled.last.end_at : group_slots.last[:end_at]
+      #       e.summary     = reservation.reservable.name
+      #       e.description = user_name(reservation)
+      #       e.uid         = "#{reservable_type}-#{reservation.reservable.id}-#{start_at.to_i}@fabmanager"
+      #       e.status      = slots_not_canceled.present? ? 'CONFIRMED' : 'CANCELLED'
+      #     end
+      #   end
+      # end
     end
   end
 
@@ -70,13 +83,15 @@ class ReservationCalendarService
     reservations_grouped = load_reservations.group_by(&:reservable_id)
     reservations_grouped.each_value do |reservations|
       reservation = reservations.first
+      reservations_not_canceled = Reservation.where(id: reservations).includes(:slots_reservations)
+                                             .where(slots_reservations: { canceled_at: nil })
       cal.event do |e|
         e.dtstart     = reservation.slots.first.start_at
         e.dtend       = reservation.slots.last.end_at
         e.summary     = reservation.reservable.name
-        e.description = reservations.map { |r| user_name(r) }.join('\n')
+        e.description = reservations_not_canceled.map { |r| user_name(r) }.join('\n')
         e.uid         = "#{reservable_type}-#{reservation.reservable_id}-#{reservation.slots.first.start_at.to_i}@fabmanager"
-        e.status      = reservation.slots_reservations.first.canceled_at ? 'CANCELLED' : 'IN-PROCESS'
+        e.status      = reservations_not_canceled.present? ? 'CONFIRMED' : 'CANCELLED'
       end
     end
   end
@@ -85,13 +100,15 @@ class ReservationCalendarService
     reservations_grouped = load_reservations.group_by(&:reservable_id)
     reservations_grouped.each_value do |reservations|
       reservation = reservations.first
+      reservations_not_canceled = Reservation.where(id: reservations).includes(:slots_reservations)
+                                             .where(slots_reservations: { canceled_at: nil })
       cal.event do |e|
         e.dtstart     = reservation.slots.first.start_at
         e.dtend       = reservation.slots.last.end_at
         e.summary     = reservation.reservable.title
-        e.description = build_event_description(reservations)
+        e.description = build_event_description(reservations_not_canceled)
         e.uid         = "#{reservable_type}-#{reservation.reservable_id}-#{reservation.slots.first.start_at.to_i}@fabmanager"
-        e.status      = reservation.slots_reservations.first.canceled_at ? 'CANCELLED' : 'IN-PROCESS'
+        e.status      = reservations_not_canceled.present? ? 'CONFIRMED' : 'CANCELLED'
       end
     end
   end

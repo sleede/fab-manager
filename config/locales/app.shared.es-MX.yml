@@ -548,6 +548,18 @@ es-MX:
         events: "Eventos"
         externals: "Otros calendarios"
         show_reserved_uniq: "Mostrar sólo franjas horarias con reserva"
+        auto_refresh_on: "Actualización automática activada"
+        auto_refresh_off: "Actualización automática desactivada"
+        ical_links: "Enlaces iCal"
+        ical_description: "Usa estos enlaces para suscribirte a calendarios de reservas en tu aplicación de calendario preferida."
+        copy_link: "Copiar enlace"
+        ical_usage_info: "Copia estos enlaces webcal:// a tu aplicación de calendario para suscribirte a actualizaciones automáticas."
+        link_copied: "¡Enlace copiado al portapapeles!"
+        copy_failed: "Error al copiar enlace"
+        machine_reservations: "Reservas de máquinas"
+        training_reservations: "Reservas de capacitaciones"
+        event_reservations: "Reservas de eventos"
+        space_reservations: "Reservas de espacios"
       machine:
         machine_uncategorized: "Máquinas sin categoría"
       form_unsaved_list:

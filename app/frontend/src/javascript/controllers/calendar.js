@@ -130,6 +130,56 @@ Application.Controllers.controller('CalendarController', ['$scope', '$state', '$
       $scope.filterAvailabilities(filter, $scope);
     };
 
+    $scope.openICalLinksModal = function () {
+      const modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: '/calendar/ical_links.html',
+        size: 'md',
+        controller: ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
+          $scope.icalLinks = [];
+          if (Fablab.machinesModule) {
+            $scope.icalLinks.push({
+              type: 'Machine',
+              name: _t('app.shared.calendar.machine_reservations'),
+              url: `webcal://${window.location.host}/ical/reservations/machine`
+            });
+          }
+          if (Fablab.trainingsModule) {
+            $scope.icalLinks.push({
+              type: 'Training',
+              name: _t('app.shared.calendar.training_reservations'),
+              url: `webcal://${window.location.host}/ical/availabilities/training`
+            });
+          }
+          if (Fablab.spacesModule) {
+            $scope.icalLinks.push({
+              type: 'Space',
+              name: _t('app.shared.calendar.space_reservations'),
+              url: `webcal://${window.location.host}/ical/availabilities/space`
+            });
+          }
+          $scope.icalLinks.push({
+            type: 'Event',
+            name: _t('app.shared.calendar.event_reservations'),
+            url: `webcal://${window.location.host}/ical/reservations/event`
+          });
+
+          $scope.copyToClipboard = function (url) {
+            navigator.clipboard.writeText(url).then(function () {
+              growl.success(_t('app.shared.calendar.link_copied'));
+            }).catch(function () {
+              growl.error(_t('app.shared.calendar.copy_failed'));
+            });
+          };
+
+          $scope.close = function () {
+            $uibModalInstance.dismiss();
+          };
+        }]
+      });
+      return modalInstance;
+    };
+
     $scope.openFilterAside = () =>
       $aside.open({
         templateUrl: '/calendar/filterAside.html',
