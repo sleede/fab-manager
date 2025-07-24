@@ -3,6 +3,7 @@
 ## Next release
 
 - Feature: add iCalendar links for machine, space and training reservations
+- improvement: username length validation is now 70 characters instead of 50 characters
 
 ## v6.4.8 2025 July 17
 
