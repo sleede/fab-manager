@@ -84,7 +84,7 @@ es-MX:
         i_am_an_organization: "Soy una organización"
         name_of_your_organization: "Nombre de su organización"
         organization_name_is_required: "El nombre de su organización es obligatorio."
-        address_of_your_organization: "Dirección de su organización"
+        address_of_your_organization: "Dirección completa de su organización"
         organization_address_is_required: "La dirección de su organización es obligatoria."
         your_user_s_profile: "Su perfil de usuario"
         user_s_profile_is_required: "El perfil de usuario es obligatorio."
@@ -92,7 +92,7 @@ es-MX:
         birth_date_is_required: "La fecha de nacimiento es obligatoria."
         phone_number: "Número de telefono"
         phone_number_is_required: "El número de telefono es obligatorio."
-        address: "Dirección"
+        address: "Dirección, ciudad, código postal"
         address_is_required: "Dirección requerida"
         i_authorize_Fablab_users_registered_on_the_site_to_contact_me: "Acepto compartir mi email con los usuarios registrados del sitio"
         i_accept_to_receive_information_from_the_fablab: "Acepto recibir información del FabLab"
@@ -244,7 +244,7 @@ es-MX:
         all_machines: "Todas las máquinas"
       machine_card:
         book: "Reservar"
-        consult: "View"
+        consult: "Vista"
       #details of a machine
       machines_show:
         book_this_machine: "Alquilar máquina"

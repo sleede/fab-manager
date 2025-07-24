@@ -405,6 +405,16 @@ zu:
         deleted_user: "crwdns24256:0crwdne24256:0"
         select_type: "crwdns24258:0crwdne24258:0"
         no_modules_available: "crwdns24260:0crwdne24260:0"
+        ical_links: "crwdns38228:0crwdne38228:0"
+        ical_description: "crwdns38230:0crwdne38230:0"
+        copy_link: "crwdns38232:0crwdne38232:0"
+        ical_usage_info: "crwdns38234:0crwdne38234:0"
+        link_copied: "crwdns38236:0crwdne38236:0"
+        copy_failed: "crwdns38238:0crwdne38238:0"
+        machine_reservations: "crwdns38240:0crwdne38240:0"
+        training_reservations: "crwdns38242:0crwdne38242:0"
+        event_reservations: "crwdns38244:0crwdne38244:0"
+        space_reservations: "crwdns38246:0crwdne38246:0"
       #import external iCal calendar
       icalendar:
         icalendar_import: "crwdns24262:0crwdne24262:0"
