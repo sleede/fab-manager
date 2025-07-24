@@ -2,6 +2,9 @@
 
 # Service class for generating iCalendar files for reservations by type
 class ReservationCalendarService
+  require 'icalendar'
+  require 'icalendar/tzinfo'
+
   ALLOWED_TYPES = %w[Machine Training Event Space].freeze
 
   def initialize(params)
@@ -51,14 +54,14 @@ class ReservationCalendarService
     reservations = load_reservations
 
     reservations.find_each do |reservation|
-      reservation.slots_reservations.each do |slots_reservation|
+      reservation.slots_reservations.where(canceled_at: nil).each do |slots_reservation|
         cal.event do |e|
           e.dtstart     = slots_reservation.slot.start_at
           e.dtend       = slots_reservation.slot.end_at
           e.summary     = slots_reservation.reservation.reservable.name
           e.description = user_name(slots_reservation.reservation)
           e.uid         = "#{reservable_type}-#{slots_reservation.reservation.reservable.id}-#{slots_reservation.slot.start_at.to_i}@fabmanager"
-          e.status      = slots_reservation.canceled_at ? 'CANCELLED' : 'CONFIRMED'
+          # e.status      = slots_reservation.canceled_at ? 'CANCELLED' : 'CONFIRMED'
         end
       end
       # reservation.grouped_slots.each do |_date, daily_groups|
