@@ -313,7 +313,7 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
       const modalInstance = $uibModal.open({
         animation: true,
         templateUrl: '/calendar/ical_links.html',
-        size: 'md',
+        size: 'lg',
         controller: ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
           $scope.icalLinks = [];
           if (Fablab.machinesModule) {
