@@ -548,8 +548,8 @@ pt:
         events: "Eventos"
         externals: "Outras agendas"
         show_reserved_uniq: "Mostrar apenas slots com reservas"
-        auto_refresh_on: "Atualização automática ativada"
-        auto_refresh_off: "Atualização automática desativada"
+        auto_refresh_on: "Auto refresh: ON"
+        auto_refresh_off: "Auto refresh: OFF"
       machine:
         machine_uncategorized: "Máquinas sem categoria"
       form_unsaved_list:

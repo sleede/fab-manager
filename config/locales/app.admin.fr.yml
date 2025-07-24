@@ -408,12 +408,12 @@ fr:
         ical_links: "Liens iCal"
         ical_description: "Utilisez ces liens pour vous abonner aux calendriers de réservation dans votre application de calendrier préférée."
         copy_link: "Copier le lien"
-        ical_usage_info: "Copiez ces liens webcal:// dans votre application de calendrier pour vous abonner aux mises à jour automatiques."
+        ical_usage_info: "Ajoutez ces liens à votre application de calendrier (comme Google Calendar, Outlook, etc.) pour synchroniser automatiquement les informations de réservation."
         link_copied: "Lien copié dans le presse-papiers !"
         copy_failed: "Échec de la copie du lien"
         machine_reservations: "Réservations de machines"
-        training_reservations: "Réservations de formations"
-        event_reservations: "Réservations d'événements"
+        training_reservations: "Réservation de formations"
+        event_reservations: "Réservation d'événements"
         space_reservations: "Réservations d'espaces"
       #import external iCal calendar
       icalendar:

@@ -126,8 +126,8 @@ es:
     by_wallet: "por cartera"
     no_refund: "Sin devolución"
     settlement_by_debit_card: "Liquidación por tarjeta de débito"
-    settlement_by_transfer: "Settlement by transfer"
-    settlement_by_check: "Settlement done at the reception"
+    settlement_by_transfer: "Liquidación con cartera"
+    settlement_by_check: "Liquidación realizada en la recepción"
     settlement_done_at_the_reception: "Liquidación realizada en la recepción"
     settlement_by_wallet: "Liquidación con cartera"
     on_DATE_at_TIME: "el %{DATE} a las %{TIME},"
@@ -228,7 +228,7 @@ es:
     man: "Hombre"
     woman: "Mujer"
     without_subscriptions: "Sin suscripciones"
-    wallet_amount: "Wallet"
+    wallet_amount: "Cartera"
   #machines/trainings/events reservations list to EXCEL format
   export_reservations:
     reservations: "Reservas"

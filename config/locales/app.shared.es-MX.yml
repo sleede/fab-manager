@@ -548,8 +548,8 @@ es-MX:
         events: "Eventos"
         externals: "Otros calendarios"
         show_reserved_uniq: "Mostrar sólo franjas horarias con reserva"
-        auto_refresh_on: "Actualización automática activada"
-        auto_refresh_off: "Actualización automática desactivada"
+        auto_refresh_on: "Actualización automática: APAGADO"
+        auto_refresh_off: "Actualización automática: APAGADO"
       machine:
         machine_uncategorized: "Máquinas sin categoría"
       form_unsaved_list:
