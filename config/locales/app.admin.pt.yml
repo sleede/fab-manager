@@ -415,6 +415,7 @@ pt:
         training_reservations: "Training Reservations"
         event_reservations: "Event Reservations"
         space_reservations: "Space Reservations"
+        cancelled: "Cancelled"
       #import external iCal calendar
       icalendar:
         icalendar_import: "importar iCalendar"

@@ -415,6 +415,7 @@ zu:
         training_reservations: "crwdns38242:0crwdne38242:0"
         event_reservations: "crwdns38244:0crwdne38244:0"
         space_reservations: "crwdns38246:0crwdne38246:0"
+        cancelled: "crwdns38252:0crwdne38252:0"
       #import external iCal calendar
       icalendar:
         icalendar_import: "crwdns24262:0crwdne24262:0"

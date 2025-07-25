@@ -415,6 +415,7 @@ zh-CN:
         training_reservations: "培训预订"
         event_reservations: "活动预订"
         space_reservations: "空间预订"
+        cancelled: "取消"
       #import external iCal calendar
       icalendar:
         icalendar_import: "iCalendar 导入"
