@@ -54,14 +54,18 @@ class ReservationCalendarService
     reservations = load_reservations
 
     reservations.find_each do |reservation|
-      reservation.slots_reservations.where(canceled_at: nil).each do |slots_reservation|
+      reservation.slots_reservations.each do |slots_reservation|
+        description = user_name(slots_reservation.reservation)
+        description += " (#{I18n.t('app.admin.calendar.cancelled')})" if slots_reservation.canceled_at
         cal.event do |e|
           e.dtstart     = slots_reservation.slot.start_at
           e.dtend       = slots_reservation.slot.end_at
           e.summary     = slots_reservation.reservation.reservable.name
-          e.description = user_name(slots_reservation.reservation)
+          e.description = description
           e.uid         = "#{reservable_type}-#{slots_reservation.reservation.reservable.id}-#{slots_reservation.slot.start_at.to_i}@fabmanager"
-          # e.status      = slots_reservation.canceled_at ? 'CANCELLED' : 'CONFIRMED'
+          e.status      = slots_reservation.canceled_at ? 'CANCELLED' : 'CONFIRMED'
+          e.sequence    = slots_reservation.reservation.updated_at.to_i
+          e.last_modified = slots_reservation.reservation.updated_at
         end
       end
       # reservation.grouped_slots.each do |_date, daily_groups|
@@ -95,6 +99,8 @@ class ReservationCalendarService
         e.description = reservations_not_canceled.map { |r| user_name(r) }.join('\n')
         e.uid         = "#{reservable_type}-#{reservation.reservable_id}-#{reservation.slots.first.start_at.to_i}@fabmanager"
         e.status      = reservations_not_canceled.present? ? 'CONFIRMED' : 'CANCELLED'
+        e.sequence    = reservations.size
+        e.last_modified = reservations.last.updated_at
       end
     end
   end
@@ -112,6 +118,8 @@ class ReservationCalendarService
         e.description = build_event_description(reservations_not_canceled)
         e.uid         = "#{reservable_type}-#{reservation.reservable_id}-#{reservation.slots.first.start_at.to_i}@fabmanager"
         e.status      = reservations_not_canceled.present? ? 'CONFIRMED' : 'CANCELLED'
+        e.sequence    = reservations.size
+        e.last_modified = reservations.last.updated_at
       end
     end
   end

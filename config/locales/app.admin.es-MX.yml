@@ -415,6 +415,7 @@ es-MX:
         training_reservations: "Reserva de formación"
         event_reservations: "Reserva de evento"
         space_reservations: "Reservas de espacios"
+        cancelled: "Cancelado"
       #import external iCal calendar
       icalendar:
         icalendar_import: "Importar iCalendar"
