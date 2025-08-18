@@ -548,8 +548,6 @@ it:
         events: "Eventi"
         externals: "Altri calendari"
         show_reserved_uniq: "Mostra solo slot con prenotazioni"
-        auto_refresh_on: "Auto refresh: ON"
-        auto_refresh_off: "Auto refresh: OFF"
       machine:
         machine_uncategorized: "Macchine senza categoria"
       form_unsaved_list:

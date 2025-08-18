@@ -548,8 +548,6 @@ de:
         events: "Events"
         externals: "Other calendars"
         show_reserved_uniq: "Show only slots with reservations"
-        auto_refresh_on: "Auto refresh: ON"
-        auto_refresh_off: "Auto refresh: OFF"
       machine:
         machine_uncategorized: "Uncategorized machines"
       form_unsaved_list:

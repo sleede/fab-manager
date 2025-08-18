@@ -548,8 +548,6 @@ zh-CN:
         events: "事件"
         externals: "其他日历"
         show_reserved_uniq: "仅显示已预订插槽"
-        auto_refresh_on: "自动刷新：开启"
-        auto_refresh_off: "自动刷新：关闭"
       machine:
         machine_uncategorized: "未分类机器"
       form_unsaved_list:

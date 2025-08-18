@@ -548,8 +548,6 @@ fr:
         events: "Événements"
         externals: "Autres calendriers"
         show_reserved_uniq: "Afficher uniquement les créneaux avec réservation"
-        auto_refresh_on: "Actualisation auto : ACTIVÉ"
-        auto_refresh_off: "Actualisation auto : DÉSACTIVÉ"
       machine:
         machine_uncategorized: "Machines non classés"
       form_unsaved_list:
