@@ -281,6 +281,8 @@ Rails.application.routes.draw do
     resources :events, only: [:index], as: 'rss_events'
   end
 
+  get '/ical/reservations/:reservable_type', to: 'public_reservation_ical#type_ics'
+
   # open_api
 
   namespace :open_api do

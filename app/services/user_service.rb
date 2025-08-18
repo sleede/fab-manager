@@ -50,8 +50,11 @@ class UserService
 
     def create_manager(params)
       generated_password = SecurePassword.generate
-      manager = User.new(params.merge(password: generated_password))
+      manager = User.new(params.merge(password: generated_password, validated_at: Time.current))
       manager.send :set_slug
+
+      # if the authentication is made through an SSO, generate a migration token
+      manager.generate_auth_migration_token unless AuthProvider.active.providable_type == DatabaseProvider.name
 
       saved = manager.save
       if saved
