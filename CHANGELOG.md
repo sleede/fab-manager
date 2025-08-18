@@ -2,6 +2,8 @@
 
 ## Next release
 
+## v6.4.9 2025 August 18
+
 - Feature: add iCalendar links for machine, space and training reservations
 - improvement: username length validation is now 70 characters instead of 50 characters
 - Fix a bug: unable to generate authentication code for manager
