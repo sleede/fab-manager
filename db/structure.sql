@@ -1198,6 +1198,38 @@ ALTER SEQUENCE public.database_providers_id_seq OWNED BY public.database_provide
 
 
 --
+-- Name: do_docs; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.do_docs (
+    id bigint NOT NULL,
+    name character varying,
+    url character varying,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: do_docs_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.do_docs_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: do_docs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.do_docs_id_seq OWNED BY public.do_docs.id;
+
+
+--
 -- Name: event_price_categories; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -4786,6 +4818,13 @@ ALTER TABLE ONLY public.database_providers ALTER COLUMN id SET DEFAULT nextval('
 
 
 --
+-- Name: do_docs id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.do_docs ALTER COLUMN id SET DEFAULT nextval('public.do_docs_id_seq'::regclass);
+
+
+--
 -- Name: event_price_categories id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -5704,6 +5743,14 @@ ALTER TABLE ONLY public.custom_assets
 
 ALTER TABLE ONLY public.database_providers
     ADD CONSTRAINT database_providers_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: do_docs do_docs_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.do_docs
+    ADD CONSTRAINT do_docs_pkey PRIMARY KEY (id);
 
 
 --
@@ -9398,6 +9445,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20240220140225'),
 ('20240327095614'),
 ('20240605085829'),
-('20250424164457');
+('20250424164457'),
+('20250819143916');
 
 

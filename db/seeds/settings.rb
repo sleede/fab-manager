@@ -747,3 +747,6 @@ Setting.set('phone_required', false) unless Setting.find_by(name: 'phone_require
 Setting.set('address_required', false) unless Setting.find_by(name: 'address_required').try(:value)
 Setting.set('gender_required', true) unless Setting.find_by(name: 'gender_required').try(:value)
 Setting.set('birthday_required', true) unless Setting.find_by(name: 'birthday_required').try(:value)
+
+Setting.set('dodoc_projects_module', false) unless Setting.find_by(name: 'dodoc_projects_module').try(:value)
+Setting.set('dodoc_title', 'DoDoc') unless Setting.find_by(name: 'dodoc_title').try(:value)

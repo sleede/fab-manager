@@ -313,7 +313,7 @@ angular.module('application.router', ['ui.router'])
           themesPromise: ['Theme', function (Theme) { return Theme.query().$promise; }],
           componentsPromise: ['Component', function (Component) { return Component.query().$promise; }],
           machinesPromise: ['Machine', function (Machine) { return Machine.query().$promise; }],
-          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['openlab_app_id', 'openlab_default', 'projects_list_member_filter_presence', 'projects_list_date_filters_presence', 'project_categories_filter_placeholder']" }).$promise; }],
+          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['openlab_app_id', 'openlab_default', 'projects_list_member_filter_presence', 'projects_list_date_filters_presence', 'project_categories_filter_placeholder', 'dodoc_projects_module', 'dodoc_title', 'fablab_name']" }).$promise; }],
           openLabActive: ['Setting', function (Setting) { return Setting.isPresent({ name: 'openlab_app_secret' }).$promise; }],
           projectCategoriesPromise: ['ProjectCategory', function (ProjectCategory) { return ProjectCategory.query().$promise; }]
         }
@@ -757,10 +757,12 @@ angular.module('application.router', ['ui.router'])
           licencesPromise: ['Licence', function (Licence) { return Licence.query().$promise; }],
           themesPromise: ['Theme', function (Theme) { return Theme.query().$promise; }],
           projectCategoriesPromise: ['ProjectCategory', function (ProjectCategory) { return ProjectCategory.query().$promise; }],
+          doDocsPromise: ['DoDoc', function (dodoc) { return dodoc.query().$promise; }],
           settingsPromise: ['Setting', function (Setting) {
             return Setting.query({
               names: "['feature_tour_display', 'disqus_shortname', 'allowed_cad_extensions', " +
-                     "'allowed_cad_mime_types', 'openlab_app_id', 'openlab_app_secret', 'openlab_default', 'project_categories_filter_placeholder', 'project_categories_wording']"
+                     "'allowed_cad_mime_types', 'openlab_app_id', 'openlab_app_secret', 'openlab_default', " +
+                     "'project_categories_filter_placeholder', 'project_categories_wording', 'dodoc_projects_module', 'dodoc_title', 'dodoc_api_key']"
             }).$promise;
           }]
         }

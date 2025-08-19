@@ -318,6 +318,15 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
       searchOverWholeNetwork: settingsPromise.openlab_default === 'true'
     };
 
+    $scope.fablabName = settingsPromise.fablab_name;
+    $scope.doDoc = {
+      active: settingsPromise.dodoc_projects_module === 'true',
+      title: settingsPromise.dodoc_title
+    };
+
+    // default tab: 0 = projects, 1 = doDoc
+    $scope.tabs = { active: 0 };
+
     if (!$scope.memberFilterPresence) {
       $location.$$search.member_id = '';
     }
