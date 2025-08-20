@@ -1,0 +1,26 @@
+<section class="projects">
+  <div class="projects-filters">
+    <form role="form" ng-submit="setUrlQueryParams(search) && triggerSearch()">
+      <div class="keywords">
+        <input type="search" class="form-control" placeholder="{{ 'app.public.projects_list.keywords' | translate }}" ng-model="search.q"/>
+        <button type="submit" class="fab-button fab-button--icon-only is-secondary"><i class="fas fa-search"></i></button>
+        <!--<button type="submit" class="fab-button is-secondary" translate>{{ 'app.public.projects_list.search' }}</button>-->
+      </div>
+    </form>
+  </div>
+  <div class="projects-list">
+    <span ng-show="doDocProjects && (doDocProjects.length == 0)"> {{ 'app.public.projects_list.project_search_result_is_empty' | translate }} </span>
+    <div class="project-card" ng-repeat="project in doDocProjects" ng-click="showProject(project)">
+        <div class="project-image" style="background-image: url('{{project.project_image | encodeURI}}');">
+          <img src="data:image/png;base64," data-src="holder.js/100%x100%/text:&#xf03e;/font:'Font Awesome 5 Free'/icon" bs-holder ng-if="!project.project_image">
+        </div>
+
+        <div class="project-info">
+          <span class="badge" ng-if="project.state == 'draft'" translate>{{ 'app.public.projects_list.rough_draft' }}</span>
+          <p class="name">{{project.title}}</p>
+          <span class="openlab"><i class="fa fa-tag"></i> {{ project.do_doc_name }}</span>
+        </div>
+    </div>
+    <a class="fab-button is-secondary" ng-click="loadMore()" ng-if="projectsPagination.hasNextPage()" translate>{{ 'app.public.projects_list.load_next_projects' }}</a>
+  </div>
+</section>

@@ -19,114 +19,15 @@
   </div>
 </section>
 
-<section class="projects">
-  <div class="projects-filters">
-    <header>
-      <h3 translate>{{ 'app.public.projects_list.filter' }}</h3>
-      <a href="javascript:void(0);" class="fab-button is-black" name="button" ng-click="resetFiltersAndTriggerSearch()" ng-show="!openlab.searchOverWholeNetwork">{{ 'app.public.projects_list.reset_all_filters' | translate }}</a>
-    </header>
-    <span class="switch" ng-if="openlab.projectsActive" uib-tooltip="{{ 'app.public.projects_list.tooltip_openlab_projects_switch' | translate }}" tooltip-trigger="mouseenter">
-      <label for="searchOverWholeNetwork" class="control-label text-sm" translate>{{ 'app.public.projects_list.network_search' }}</label>
-      <input bs-switch
-             ng-model="openlab.searchOverWholeNetwork"
-             type="checkbox"
-             class="form-control"
-             switch-on-text="{{ 'app.shared.buttons.yes' | translate }}"
-             switch-off-text="{{ 'app.shared.buttons.no' | translate }}"
-             switch-animate="true"
-             ng-change="searchOverWholeNetworkChanged()"
-             />
-    </span>
+<uib-tabset justified="true" active="tabs.active" ng-if="doDoc.active">
+  <uib-tab heading="{{ fablabName }}" index="0">
+    <ng-include src="'/projects/list.html'"></ng-include>
+  </uib-tab>
+  <uib-tab heading="{{ doDoc.title }}" index="1">
+    <ng-include src="'/projects/dodoc.html'"></ng-include>
+  </uib-tab>
+</uib-tabset>
 
-    <form role="form" ng-submit="setUrlQueryParams(search) && triggerSearch()">
-      <div class="keywords">
-        <input type="search" class="form-control" placeholder="{{ 'app.public.projects_list.keywords' | translate }}" ng-model="search.q"/>
-        <button type="submit" class="fab-button fab-button--icon-only is-secondary"><i class="fas fa-search"></i></button>
-        <!--<button type="submit" class="fab-button is-secondary" translate>{{ 'app.public.projects_list.search' }}</button>-->
-      </div>
-    </form>
-
-    <div class="grp" ng-if="!openlab.searchOverWholeNetwork">
-      <select ng-show="isAuthenticated()" ng-model="search.from" ng-change="setUrlQueryParams(search) && triggerSearch()" class="form-control">
-        <option value="" translate>{{ 'app.public.projects_list.all_projects' }}</option>
-        <option value="mine" translate>{{ 'app.public.projects_list.my_projects' }}</option>
-        <option value="collaboration" translate>{{ 'app.public.projects_list.projects_to_whom_i_take_part_in' }}</option>
-      </select>
-
-      <select ng-show="$root.modules.machines" ng-model="search.machine_id" ng-change="setUrlQueryParams(search) && triggerSearch()" class="form-control" ng-options="m.id as m.name for m in machines">
-        <option value="" translate>{{ 'app.public.projects_list.all_machines' }}</option>
-      </select>
-
-      <select ng-show="themes.length" ng-model="search.theme_id" ng-change="setUrlQueryParams(search) && triggerSearch()" class="form-control" ng-options="t.id as t.name for t in themes">
-        <option value="" translate>{{ 'app.public.projects_list.all_themes' }}</option>
-      </select>
-
-      <select ng-show="projectCategories.length" ng-model="search.project_category_id" ng-change="setUrlQueryParams(search) && triggerSearch()" class="form-control" ng-options="pc.id as pc.name for pc in projectCategories">
-        <option value="" translate>{{ projectCategoriesFilterPlaceholder }}</option>
-      </select>
-
-      <select ng-show="components.length" ng-model="search.component_id" ng-change="setUrlQueryParams(search) && triggerSearch()" class="form-control" ng-options="t.id as t.name for t in components">
-        <option value="" translate>{{ 'app.public.projects_list.all_materials' }}</option>
-      </select>
-
-      <ui-select ng-if="currentUser && memberFilterPresence" ng-model="searchMember" on-select="setSearchMemberId(searchMember) && setUrlQueryParams(search) && triggerSearch()">
-        <ui-select-match allow-clear="true" placeholder="{{ 'app.public.projects_list.filter_by_member' | translate }}">
-          <span ng-bind="$select.selected.name"></span>
-        </ui-select-match>
-        <ui-select-choices repeat="m in matchingMembers" refresh="autoCompleteMemberName($select.search)" refresh-delay="300">
-          <span ng-bind-html="m.name | highlight: $select.search"></span>
-        </ui-select-choices>
-      </ui-select>
-
-      <label class="form-group m-n" ng-if="dateFiltersPresence">
-        <div class="form-item-header">
-          <p translate>{{ 'app.public.projects_list.created_from' }}</p>
-        </div>
-        <input class="form-control"
-               ng-model="search.from_date"
-               ng-model-options='{ debounce: 1000 }'
-               ng-change="setUrlQueryParams(search) && triggerSearch()"
-               type="date"
-               min="2000-01-01"
-               max="2060-01-01"/>
-      </label>
-
-      <label class="form-group m-n" ng-if="dateFiltersPresence">
-        <div class="form-item-header">
-          <p translate>{{ 'app.public.projects_list.created_to' }}</p>
-        </div>
-        <input class="form-control"
-               ng-model="search.to_date"
-               ng-model-options='{ debounce: 1000 }'
-               ng-change="setUrlQueryParams(search) && triggerSearch()"
-               type="date"
-               min="2000-01-01"
-               max="2060-01-01"/>
-      </label>
-
-      <status-filter on-filter-change="onStatusChange" current-status-index="search.status_id"/>
-    </div>
-
-    <div class="text-center m m-b-lg" ng-if="!openlab.searchOverWholeNetwork && (projects.length != 0) && (isAuthorized('admin') || isAuthorized('manager'))">
-      <a class="fab-button" ng-href="{{ zipUrl }}" target="_blank">
-        <i class="fa fa-download"></i> {{ 'app.public.projects_list.download_archive' | translate }}
-      </a>
-    </div>
-  </div>
-
-  <div class="projects-list">
-    <span ng-show="projects && (projects.length == 0)"> {{ 'app.public.projects_list.project_search_result_is_empty' | translate }} </span>
-    <div class="project-card" ng-repeat="project in projects" ng-click="showProject(project)">
-        <div class="project-image" style="background-image: url('{{project.project_image | encodeURI}}');">
-          <img src="data:image/png;base64," data-src="holder.js/100%x100%/text:&#xf03e;/font:'Font Awesome 5 Free'/icon" bs-holder ng-if="!project.project_image">
-        </div>
-
-        <div class="project-info">
-          <span class="badge" ng-if="project.state == 'draft'" translate>{{ 'app.public.projects_list.rough_draft' }}</span>
-          <p class="name">{{project.name}}</p>
-          <span class="openlab" ng-if="openlab.searchOverWholeNetwork"><i class="fa fa-tag"></i> {{ project.app_name }}</span>
-        </div>
-    </div>
-    <a class="fab-button is-secondary" ng-click="loadMore()" ng-if="projectsPagination.hasNextPage()" translate>{{ 'app.public.projects_list.load_next_projects' }}</a>
-  </div>
-</section>
+<div ng-if="!doDoc.active">
+  <ng-include src="'/projects/list.html'"></ng-include>
+</div>
