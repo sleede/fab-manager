@@ -294,8 +294,8 @@ class ProjectsController {
 /**
  *  Controller used on projects listing page
  */
-Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'Project', 'machinesPromise', 'themesPromise', 'projectCategoriesPromise', 'componentsPromise', 'paginationService', 'OpenlabProject', '$window', 'growl', '_t', '$location', '$timeout', 'settingsPromise', 'openLabActive', 'Member', 'Diacritics',
-  function ($scope, $state, Project, machinesPromise, themesPromise, projectCategoriesPromise, componentsPromise, paginationService, OpenlabProject, $window, growl, _t, $location, $timeout, settingsPromise, openLabActive, Member, Diacritics) {
+Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'Project', 'machinesPromise', 'themesPromise', 'projectCategoriesPromise', 'componentsPromise', 'paginationService', 'OpenlabProject', '$window', 'growl', '_t', '$location', '$timeout', 'settingsPromise', 'openLabActive', 'Member', 'Diacritics', 'DoDocProject',
+  function ($scope, $state, Project, machinesPromise, themesPromise, projectCategoriesPromise, componentsPromise, paginationService, OpenlabProject, $window, growl, _t, $location, $timeout, settingsPromise, openLabActive, Member, Diacritics, DoDocProject) {
   /* PRIVATE STATIC CONSTANTS */
 
     // Number of projects added to the page when the user clicks on 'load more projects'
@@ -366,6 +366,7 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
 
     // list of projects to display
     $scope.projects = [];
+    $scope.doDocProjects = [];
 
     // list of machines / used for filtering
     $scope.machines = machinesPromise;
@@ -460,6 +461,18 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
           $scope.projects = projectsPromise.projects;
         });
       }
+      if ($scope.doDoc.active) {
+        $scope.projectsPagination = new paginationService.Instance(DoDocProject, currentPage, PROJECTS_PER_PAGE, null, { }, loadMoreDoDocCallback);
+        DoDocProject.query({ q: $scope.search.q, page: currentPage, per_page: PROJECTS_PER_PAGE }, function (projectsPromise) {
+          if (projectsPromise.errors) {
+            growl.error(_t('app.public.projects_list.openlab_search_not_available_at_the_moment'));
+            $scope.triggerSearch();
+          } else {
+            $scope.projectsPagination.totalCount = projectsPromise.meta.total;
+            $scope.doDocProjects = projectsPromise.projects;
+          }
+        });
+      }
     };
 
     /**
@@ -467,7 +480,7 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
      * @param project {{slug:string}} The project to display
      */
     $scope.showProject = function (project) {
-      if (($scope.openlab.searchOverWholeNetwork === true) && (project.app_id !== Fablab.openlabAppId)) {
+      if ((($scope.openlab.searchOverWholeNetwork === true) && (project.app_id !== Fablab.openlabAppId)) || $scope.doDoc.active) {
         $window.open(project.project_url, '_blank');
         return true;
       } else {
@@ -565,6 +578,15 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
      */
     const loadMoreOpenlabCallback = function (projectsPromise) {
       $scope.projects = $scope.projects.concat(normalizeProjectsAttrs(projectsPromise.projects));
+      updateUrlParam('page', $scope.projectsPagination.currentPage);
+    };
+
+    /**
+     * Callback triggered when the next projects were loaded from the result set (from DoDoc)
+     * @param projectsPromise {{doDocProjects: []}}
+     */
+    const loadMoreDoDocCallback = function (projectsPromise) {
+      $scope.doDocProjects = $scope.doDocProjects.concat(projectsPromise.projects);
       updateUrlParam('page', $scope.projectsPagination.currentPage);
     };
 
