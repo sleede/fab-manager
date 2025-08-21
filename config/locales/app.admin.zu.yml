@@ -482,10 +482,14 @@ zu:
         dodoc:
           title: "crwdns38254:0crwdne38254:0"
           dodoc_settings: "crwdns38256:0crwdne38256:0"
-          dodoc_info_html: "crwdns38258:0crwdne38258:0"
+          dodoc_info_html: "crwdns38276:0crwdne38276:0"
           enable_dodoc_projects: "crwdns38260:0crwdne38260:0"
           dodoc_api_key: "crwdns38262:0crwdne38262:0"
           dodoc_title: "crwdns38264:0crwdne38264:0"
+          dodoc_api: "crwdns38278:0crwdne38278:0"
+          add_a_new_dodoc: "crwdns38280:0crwdne38280:0"
+          dodoc_name: "crwdns38282:0crwdne38282:0"
+          dodoc_url: "crwdns38284:0crwdne38284:0"
       project_categories:
         name: "crwdns37625:0crwdne37625:0"
         delete_dialog_title: "crwdns37665:0crwdne37665:0"
