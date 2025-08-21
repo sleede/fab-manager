@@ -301,7 +301,7 @@ angular.module('application.router', ['ui.router'])
 
       // projects
       .state('app.public.projects_list', {
-        url: '/projects?q&page&theme_id&component_id&machine_id&from&whole_network&status_id',
+        url: '/projects?q&page&theme_id&component_id&machine_id&from&whole_network&dodoc_network&status_id',
         reloadOnSearch: false,
         views: {
           'main@': {

@@ -321,11 +321,9 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
     $scope.fablabName = settingsPromise.fablab_name;
     $scope.doDoc = {
       active: settingsPromise.dodoc_projects_module === 'true',
-      title: settingsPromise.dodoc_title
+      title: settingsPromise.dodoc_title,
+      searchOverDoDoc: false
     };
-
-    // default tab: 0 = projects, 1 = doDoc
-    $scope.tabs = { active: 0 };
 
     if (!$scope.memberFilterPresence) {
       $location.$$search.member_id = '';
@@ -396,6 +394,27 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
      * Callback triggered when the button "search from the whole network" is toggled
      */
     $scope.searchOverWholeNetworkChanged = function () {
+      if ($scope.openlab.searchOverWholeNetwork) {
+        $scope.doDoc.searchOverDoDoc = false;
+        updateUrlParam('dodoc_network', 'f');
+        updateUrlParam('whole_network', 't');
+      } else {
+        updateUrlParam('whole_network', 'f');
+      }
+      $scope.resetFiltersAndTriggerSearch();
+    };
+
+    /**
+     * Callback triggered when the button "search over DoDoc" is toggled
+     */
+    $scope.searchOverDoDocChanged = function () {
+      if ($scope.doDoc.searchOverDoDoc) {
+        $scope.openlab.searchOverWholeNetwork = false;
+        updateUrlParam('whole_network', 'f');
+        updateUrlParam('dodoc_network', 't');
+      } else {
+        updateUrlParam('dodoc_network', 'f');
+      }
       $scope.resetFiltersAndTriggerSearch();
     };
 
@@ -403,7 +422,7 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
      * Callback to load the next projects of the result set, for the current search
      */
     $scope.loadMore = function () {
-      if ($scope.openlab.searchOverWholeNetwork === true) {
+      if ($scope.openlab.searchOverWholeNetwork || $scope.doDoc.searchOverDoDoc) {
         return $scope.projectsPagination.loadMore({ q: $scope.search.q });
       } else {
         return $scope.projectsPagination.loadMore({ search: $scope.search });
@@ -439,6 +458,7 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
       const currentPage = parseInt($location.$$search.page) || 1;
       if ($scope.openlab.searchOverWholeNetwork === true) {
         updateUrlParam('whole_network', 't');
+        updateUrlParam('dodoc_network', 'f');
         $scope.projectsPagination = new paginationService.Instance(OpenlabProject, currentPage, PROJECTS_PER_PAGE, null, { }, loadMoreOpenlabCallback);
         OpenlabProject.query({ q: $scope.search.q, page: currentPage, per_page: PROJECTS_PER_PAGE }, function (projectsPromise) {
           if (projectsPromise.errors) {
@@ -450,8 +470,22 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
             $scope.projects = normalizeProjectsAttrs(projectsPromise.projects);
           }
         });
+      } else if ($scope.doDoc.searchOverDoDoc === true) {
+        updateUrlParam('dodoc_network', 't');
+        updateUrlParam('whole_network', 'f');
+        $scope.projectsPagination = new paginationService.Instance(DoDocProject, currentPage, PROJECTS_PER_PAGE, null, { }, loadMoreCallback);
+        DoDocProject.query({ q: $scope.search.q, page: currentPage, per_page: PROJECTS_PER_PAGE }, function (projectsPromise) {
+          if (projectsPromise.errors) {
+            growl.error(_t('app.public.projects_list.openlab_search_not_available_at_the_moment'));
+            $scope.triggerSearch();
+          } else {
+            $scope.projectsPagination.totalCount = projectsPromise.meta.total;
+            $scope.projects = projectsPromise.projects;
+          }
+        });
       } else {
         updateUrlParam('whole_network', 'f');
+        updateUrlParam('dodoc_network', 'f');
         $scope.projectsPagination = new paginationService.Instance(Project, currentPage, PROJECTS_PER_PAGE, null, { }, loadMoreCallback, 'search');
         const fromDate = $scope.search.from_date ? $scope.search.from_date.toLocaleDateString() : undefined;
         const toDate = $scope.search.to_date ? $scope.search.to_date.toLocaleDateString() : undefined;
@@ -461,18 +495,6 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
           $scope.projects = projectsPromise.projects;
         });
       }
-      if ($scope.doDoc.active) {
-        $scope.projectsPagination = new paginationService.Instance(DoDocProject, currentPage, PROJECTS_PER_PAGE, null, { }, loadMoreDoDocCallback);
-        DoDocProject.query({ q: $scope.search.q, page: currentPage, per_page: PROJECTS_PER_PAGE }, function (projectsPromise) {
-          if (projectsPromise.errors) {
-            growl.error(_t('app.public.projects_list.openlab_search_not_available_at_the_moment'));
-            $scope.triggerSearch();
-          } else {
-            $scope.projectsPagination.totalCount = projectsPromise.meta.total;
-            $scope.doDocProjects = projectsPromise.projects;
-          }
-        });
-      }
     };
 
     /**
@@ -480,7 +502,7 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
      * @param project {{slug:string}} The project to display
      */
     $scope.showProject = function (project) {
-      if ((($scope.openlab.searchOverWholeNetwork === true) && (project.app_id !== Fablab.openlabAppId)) || $scope.doDoc.active) {
+      if ((($scope.openlab.searchOverWholeNetwork === true) && (project.app_id !== Fablab.openlabAppId)) || $scope.doDoc.searchOverDoDoc) {
         $window.open(project.project_url, '_blank');
         return true;
       } else {
@@ -540,11 +562,23 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
     const initialize = function () {
       if ($location.$$search.whole_network === 'f') {
         $scope.openlab.searchOverWholeNetwork = false;
+      } else if ($location.$$search.whole_network === 't') {
+        $scope.openlab.searchOverWholeNetwork = true;
+        $scope.doDoc.searchOverDoDoc = false;
       } else if ($location.$$search.whole_network === undefined) {
         $scope.openlab.searchOverWholeNetwork = $scope.openlab.projectsActive && settingsPromise.openlab_default === 'true';
       } else {
         $scope.openlab.searchOverWholeNetwork = $scope.openlab.projectsActive;
       }
+
+      // Initialize doDoc search state from URL parameter
+      if ($location.$$search.dodoc_network === 't') {
+        $scope.doDoc.searchOverDoDoc = true;
+        $scope.openlab.searchOverWholeNetwork = false;
+      } else {
+        $scope.doDoc.searchOverDoDoc = false;
+      }
+
       if ($location.$$search.member_id && $scope.memberFilterPresence) {
         Member.get({ id: $location.$$search.member_id }, function (member) {
           $scope.searchMember = member;
@@ -578,15 +612,6 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
      */
     const loadMoreOpenlabCallback = function (projectsPromise) {
       $scope.projects = $scope.projects.concat(normalizeProjectsAttrs(projectsPromise.projects));
-      updateUrlParam('page', $scope.projectsPagination.currentPage);
-    };
-
-    /**
-     * Callback triggered when the next projects were loaded from the result set (from DoDoc)
-     * @param projectsPromise {{doDocProjects: []}}
-     */
-    const loadMoreDoDocCallback = function (projectsPromise) {
-      $scope.doDocProjects = $scope.doDocProjects.concat(projectsPromise.projects);
       updateUrlParam('page', $scope.projectsPagination.currentPage);
     };
 
