@@ -482,10 +482,14 @@ de:
         dodoc:
           title: "DoDoc"
           dodoc_settings: "DoDoc Settings"
-          dodoc_info_html: "<p>DoDoc is a documentation of project. It allows you to share your projects with the community.</p><p>To enable DoDoc, you need to create an account on <a href='https://dodoc.fr' target='_blank'>dodoc.io</a> and get your API key.</p>"
+          dodoc_info_html: "DoDoc is a project documentation service. It allows you to create, share, and print project sheets. You can enable DoDoc for your projects by setting the following parameter:"
           enable_dodoc_projects: "Enable DoDoc projects"
           dodoc_api_key: "DoDoc API Key"
           dodoc_title: "DoDoc title"
+          dodoc_api: "DoDoc API"
+          add_a_new_dodoc: "Add a new DoDoc API"
+          dodoc_name: "DoDoc API name"
+          dodoc_url: "DoDoc API url"
       project_categories:
         name: "Name"
         delete_dialog_title: "Confirmation required"

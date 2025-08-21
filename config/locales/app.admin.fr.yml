@@ -486,6 +486,10 @@ fr:
           enable_dodoc_projects: "Activer le module projets DoDoc"
           dodoc_api_key: "Clé API DoDoc"
           dodoc_title: "Titre de DoDoc"
+          dodoc_api: "DoDoc API"
+          add_a_new_dodoc: "Ajouter une nouvelle API DoDoc"
+          dodoc_name: "Nom de l'API DoDoc"
+          dodoc_url: "URL de l'API DoDoc"
       project_categories:
         name: "Nom"
         delete_dialog_title: "Confirmation requise"

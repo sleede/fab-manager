@@ -486,6 +486,10 @@ en:
           enable_dodoc_projects: "Enable DoDoc projects"
           dodoc_api_key: "DoDoc API Key"
           dodoc_title: "DoDoc title"
+          dodoc_api: "DoDoc API"
+          add_a_new_dodoc: "Add a new DoDoc API"
+          dodoc_name: "DoDoc API name"
+          dodoc_url: "DoDoc API url"
       project_categories:
         name: "Name"
         delete_dialog_title: "Confirmation required"
