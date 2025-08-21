@@ -479,6 +479,13 @@ zu:
           default_to_openlab: "crwdns24366:0crwdne24366:0"
           filters: crwdns37621:0crwdne37621:0
           project_categories: crwdns37623:0crwdne37623:0
+        dodoc:
+          title: "crwdns38254:0crwdne38254:0"
+          dodoc_settings: "crwdns38256:0crwdne38256:0"
+          dodoc_info_html: "crwdns38258:0crwdne38258:0"
+          enable_dodoc_projects: "crwdns38260:0crwdne38260:0"
+          dodoc_api_key: "crwdns38262:0crwdne38262:0"
+          dodoc_title: "crwdns38264:0crwdne38264:0"
       project_categories:
         name: "crwdns37625:0crwdne37625:0"
         delete_dialog_title: "crwdns37665:0crwdne37665:0"
@@ -1922,6 +1929,9 @@ zu:
         enable_family_account: "crwdns37881:0crwdne37881:0"
         child_validation_required: "crwdns37883:0crwdne37883:0"
         child_validation_required_label: "crwdns37885:0crwdne37885:0"
+        dodoc_projects_module: "crwdns38266:0crwdne38266:0"
+        dodoc_api_key: "crwdns38268:0crwdne38268:0"
+        dodoc_title: "crwdns38270:0crwdne38270:0"
         overlapping_options:
           training_reservations: "crwdns26758:0crwdne26758:0"
           machine_reservations: "crwdns26760:0crwdne26760:0"

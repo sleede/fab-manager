@@ -744,6 +744,8 @@ zh-CN:
     project_categories_wording: "用于公共页面替换\"类别\"的措辞"
     reservation_context_feature: "预订时强制成员选择预订性质"
     family_account: "家庭账户"
+    dodoc_projects_module: "DoDoc Projects"
+    dodoc_title: "DoDoc Projects title
   #statuses of projects
   statuses:
     new: "新建"

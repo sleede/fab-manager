@@ -744,6 +744,8 @@ es-MX:
     project_categories_wording: "Texto utilizado para sustituir \"Categorías\" en las páginas públicas"
     reservation_context_feature: "Forzar al miembro a seleccionar la naturaleza de su reserva al reservar"
     family_account: "Cuenta familiar"
+    dodoc_projects_module: "DoDoc Projects"
+    dodoc_title: "DoDoc Projects title"
   #statuses of projects
   statuses:
     new: "Nuevo"

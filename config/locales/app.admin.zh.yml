@@ -405,17 +405,17 @@ zh-CN:
         deleted_user: "已删除的用户"
         select_type: "请选择一个类型以继续"
         no_modules_available: "没有可用的预订模块。请在自定义部分启用至少一个模块（机器、空间或培训）。"
-        ical_links: "iCal链接"
-        ical_description: "使用以下链接将预订日历订阅到您的日历应用程序中。"
-        copy_link: "复制链接"
-        ical_usage_info: "将这些链接添加到您的日历应用程序（如Google日历、Outlook等）中，以自动同步预订信息。"
-        link_copied: "链接已复制到剪贴板"
-        copy_failed: "复制失败，请手动复制链接"
-        machine_reservations: "机器预订"
-        training_reservations: "培训预订"
-        event_reservations: "活动预订"
-        space_reservations: "空间预订"
-        cancelled: "取消"
+        ical_links: "iCal links"
+        ical_description: "Use the following links to subscribe to reservation calendars in your calendar application."
+        copy_link: "Copy Link"
+        ical_usage_info: "Add these links to your calendar application (such as Google Calendar, Outlook, etc.) to automatically sync reservation information."
+        link_copied: "Link copied to clipboard"
+        copy_failed: "Copy failed, please copy the link manually"
+        machine_reservations: "Machine Reservations"
+        training_reservations: "Training Reservations"
+        event_reservations: "Event Reservations"
+        space_reservations: "Space Reservations"
+        cancelled: "Cancelled"
       #import external iCal calendar
       icalendar:
         icalendar_import: "iCalendar 导入"
@@ -479,6 +479,13 @@ zh-CN:
           default_to_openlab: "默认显示 OpenLab"
           filters: 项目列表过滤器
           project_categories: 分类
+        dodoc:
+          title: "DoDoc"
+          dodoc_settings: "DoDoc Settings"
+          dodoc_info_html: "<p>DoDoc is a documentation of project. It allows you to share your projects with the community.</p><p>To enable DoDoc, you need to create an account on <a href='https://dodoc.fr' target='_blank'>dodoc.io</a> and get your API key.</p>"
+          enable_dodoc_projects: "Enable DoDoc projects"
+          dodoc_api_key: "DoDoc API Key"
+          dodoc_title: "DoDoc title"
       project_categories:
         name: "名称"
         delete_dialog_title: "需要确认"
@@ -1922,6 +1929,9 @@ zh-CN:
         enable_family_account: "启用家庭账户选项"
         child_validation_required: "子账户的验证选项"
         child_validation_required_label: "激活子账户的验证选项"
+        dodoc_projects_module: "Enable DoDoc projects module"
+        dodoc_api_key: "DoDoc API key"
+        dodoc_title: "DoDoc title"
         overlapping_options:
           training_reservations: "培训"
           machine_reservations: "机器"
