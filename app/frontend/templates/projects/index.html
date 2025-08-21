@@ -23,7 +23,7 @@
   <div class="projects-filters">
     <header>
       <h3 translate>{{ 'app.public.projects_list.filter' }}</h3>
-      <a href="javascript:void(0);" class="fab-button is-black" name="button" ng-click="resetFiltersAndTriggerSearch()" ng-show="!openlab.searchOverWholeNetwork">{{ 'app.public.projects_list.reset_all_filters' | translate }}</a>
+      <a href="javascript:void(0);" class="fab-button is-black" name="button" ng-click="resetFiltersAndTriggerSearch()" ng-show="!openlab.searchOverWholeNetwork && !doDoc.searchOverDoDoc">{{ 'app.public.projects_list.reset_all_filters' | translate }}</a>
     </header>
     <span class="switch" ng-if="openlab.projectsActive" uib-tooltip="{{ 'app.public.projects_list.tooltip_openlab_projects_switch' | translate }}" tooltip-trigger="mouseenter">
       <label for="searchOverWholeNetwork" class="control-label text-sm" translate>{{ 'app.public.projects_list.network_search' }}</label>
@@ -38,6 +38,19 @@
              />
     </span>
 
+    <span class="switch" ng-if="doDoc.active">
+      <label for="searchOverDoDoc" class="control-label text-sm">{{ doDoc.title }}</label>
+      <input bs-switch
+             ng-model="doDoc.searchOverDoDoc"
+             type="checkbox"
+             class="form-control"
+             switch-on-text="{{ 'app.shared.buttons.yes' | translate }}"
+             switch-off-text="{{ 'app.shared.buttons.no' | translate }}"
+             switch-animate="true"
+             ng-change="searchOverDoDocChanged()"
+             />
+    </span>
+
     <form role="form" ng-submit="setUrlQueryParams(search) && triggerSearch()">
       <div class="keywords">
         <input type="search" class="form-control" placeholder="{{ 'app.public.projects_list.keywords' | translate }}" ng-model="search.q"/>
@@ -46,7 +59,7 @@
       </div>
     </form>
 
-    <div class="grp" ng-if="!openlab.searchOverWholeNetwork">
+    <div class="grp" ng-if="!openlab.searchOverWholeNetwork && !doDoc.searchOverDoDoc">
       <select ng-show="isAuthenticated()" ng-model="search.from" ng-change="setUrlQueryParams(search) && triggerSearch()" class="form-control">
         <option value="" translate>{{ 'app.public.projects_list.all_projects' }}</option>
         <option value="mine" translate>{{ 'app.public.projects_list.my_projects' }}</option>
@@ -107,7 +120,7 @@
       <status-filter on-filter-change="onStatusChange" current-status-index="search.status_id"/>
     </div>
 
-    <div class="text-center m m-b-lg" ng-if="!openlab.searchOverWholeNetwork && (projects.length != 0) && (isAuthorized('admin') || isAuthorized('manager'))">
+    <div class="text-center m m-b-lg" ng-if="!openlab.searchOverWholeNetwork && !doDoc.searchOverDoDoc && (projects.length != 0) && (isAuthorized('admin') || isAuthorized('manager'))">
       <a class="fab-button" ng-href="{{ zipUrl }}" target="_blank">
         <i class="fa fa-download"></i> {{ 'app.public.projects_list.download_archive' | translate }}
       </a>
@@ -123,8 +136,9 @@
 
         <div class="project-info">
           <span class="badge" ng-if="project.state == 'draft'" translate>{{ 'app.public.projects_list.rough_draft' }}</span>
-          <p class="name">{{project.name}}</p>
+          <p class="name">{{project.name || project.title}}</p>
           <span class="openlab" ng-if="openlab.searchOverWholeNetwork"><i class="fa fa-tag"></i> {{ project.app_name }}</span>
+          <span class="openlab" ng-if="doDoc.searchOverDoDoc"><i class="fa fa-tag"></i> {{ project.do_doc_name }}</span>
         </div>
     </div>
     <a class="fab-button is-secondary" ng-click="loadMore()" ng-if="projectsPagination.hasNextPage()" translate>{{ 'app.public.projects_list.load_next_projects' }}</a>

@@ -12,8 +12,8 @@
  */
 'use strict';
 
-Application.Controllers.controller('AdminProjectsController', ['$scope', '$state', 'Component', 'Licence', 'Theme', 'ProjectCategory', 'componentsPromise', 'licencesPromise', 'themesPromise', 'projectCategoriesPromise', '_t', 'Member', 'uiTourService', 'settingsPromise', 'growl', 'dialogs',
-  function ($scope, $state, Component, Licence, Theme, ProjectCategory, componentsPromise, licencesPromise, themesPromise, projectCategoriesPromise, _t, Member, uiTourService, settingsPromise, growl, dialogs) {
+Application.Controllers.controller('AdminProjectsController', ['$scope', '$state', 'Component', 'Licence', 'Theme', 'ProjectCategory', 'componentsPromise', 'licencesPromise', 'themesPromise', 'projectCategoriesPromise', '_t', 'Member', 'uiTourService', 'settingsPromise', 'growl', 'dialogs', 'DoDoc', 'doDocsPromise',
+  function ($scope, $state, Component, Licence, Theme, ProjectCategory, componentsPromise, licencesPromise, themesPromise, projectCategoriesPromise, _t, Member, uiTourService, settingsPromise, growl, dialogs, DoDoc, doDocsPromise) {
     // Materials list (plastic, wood ...)
     $scope.components = componentsPromise;
 
@@ -25,6 +25,9 @@ Application.Controllers.controller('AdminProjectsController', ['$scope', '$state
 
     // Project categories list (generic categorization)
     $scope.projectCategories = projectCategoriesPromise;
+
+    // DoDocs api list
+    $scope.doDocs = doDocsPromise;
 
     // Application settings
     $scope.allSettings = settingsPromise;
@@ -220,6 +223,52 @@ Application.Controllers.controller('AdminProjectsController', ['$scope', '$state
     };
 
     /**
+     * Saves a new do_doc / Update an existing do_doc to the server (form validation callback)
+     * @param data {Object} do_doc name and description
+     * @param [id] {number} do_doc id, in case of update
+     */
+    $scope.saveDoDoc = function (data, id) {
+      if (id != null) {
+        return DoDoc.update({ id }, data);
+      } else {
+        return DoDoc.save(data, resp => $scope.doDocs[$scope.doDocs.length - 1].id = resp.id);
+      }
+    };
+
+    /**
+     * Deletes the do_doc at the specified index
+     * @param index {number} do_doc index in the $scope.doDocs array
+     */
+    $scope.removeDoDoc = function (index) {
+      DoDoc.delete($scope.doDocs[index]);
+      return $scope.doDocs.splice(index, 1);
+    };
+
+    /**
+     * Creates a new empty entry in the $scope.doDocs array
+     */
+    $scope.addDoDoc = function () {
+      $scope.inserted = {
+        name: '',
+        description: ''
+      };
+      return $scope.doDocs.push($scope.inserted);
+    };
+
+    /**
+     * Removes the newly inserted but not saved do_doc / Cancel the current do_doc modification
+     * @param rowform {Object} see http://vitalets.github.io/angular-xeditable/
+     * @param index {number} do_doc index in the $scope.doDocs array
+     */
+    $scope.cancelDoDoc = function (rowform, index) {
+      if ($scope.doDocs[index].id != null) {
+        return rowform.$cancel();
+      } else {
+        return $scope.doDocs.splice(index, 1);
+      }
+    };
+
+    /**
      * When a file is sent to the server to test it against its MIME type,
      * handle the result of the test.
      */
@@ -326,8 +375,11 @@ Application.Controllers.controller('AdminProjectsController', ['$scope', '$state
     /**
      * Shows a success message forwarded from a child react component
      */
-    $scope.onSuccess = function (message) {
+    $scope.onSuccess = function (message, settingName, value) {
       growl.success(message);
+      if (settingName) {
+        $scope.allSettings[settingName] = value;
+      }
     };
 
     /**

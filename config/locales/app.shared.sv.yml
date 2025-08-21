@@ -548,8 +548,6 @@ sv:
         events: "Evenemang"
         externals: "Andra kalendrar"
         show_reserved_uniq: "Visa endast tider med bokningar"
-        auto_refresh_on: "Auto refresh: ON"
-        auto_refresh_off: "Auto refresh: OFF"
       machine:
         machine_uncategorized: "Okategoriserad utrustning"
       form_unsaved_list:

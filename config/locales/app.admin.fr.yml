@@ -479,6 +479,13 @@ fr:
           default_to_openlab: "Afficher OpenLab par défaut"
           filters: Affichage des filtres
           project_categories: Personnalisation du filtre Catégories
+        dodoc:
+          title: "DoDoc"
+          dodoc_settings: "Paramètres DoDoc"
+          dodoc_info_html: "DoDoc est un service de documentation de projets. Il permet de créer des fiches projets, de les partager et de les imprimer. Vous pouvez activer DoDoc pour vos projets en définissant le paramètre suivant"
+          enable_dodoc_projects: "Activer le module projets DoDoc"
+          dodoc_api_key: "Clé API DoDoc"
+          dodoc_title: "Titre de DoDoc"
       project_categories:
         name: "Nom"
         delete_dialog_title: "Confirmation requise"
@@ -1922,6 +1929,9 @@ fr:
         enable_family_account: "Activer l'option Compte Famille"
         child_validation_required: "l'option de validation des comptes enfants"
         child_validation_required_label: "Activer l'option de validation des comptes enfants"
+        dodoc_projects_module: "Activer le module projets DoDoc"
+        dodoc_api_key: "Clé API DoDoc"
+        dodoc_title: "Titre de DoDoc"
         overlapping_options:
           training_reservations: "Formations"
           machine_reservations: "Machines"

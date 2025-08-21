@@ -281,6 +281,12 @@ export const eventsSettings = [
   'events_banner_cta_url'
 ] as const;
 
+export const dodocSettings = [
+  'dodoc_projects_module',
+  'dodoc_title',
+  'dodoc_api_key'
+] as const;
+
 export const allSettings = [
   ...homePageSettings,
   ...privacyPolicySettings,
@@ -309,7 +315,8 @@ export const allSettings = [
   ...storeSettings,
   ...trainingsSettings,
   ...machinesSettings,
-  ...eventsSettings
+  ...eventsSettings,
+  ...dodocSettings
 ] as const;
 
 export type SettingName = typeof allSettings[number];
