@@ -5,6 +5,9 @@ require 'json'
 
 # Service to fetch and merge projects from multiple DoDoc APIs
 class DoDocProjectsService
+  CACHE_EXPIRY = 1.hour
+  CACHE_KEY_ALL_PROJECTS = 'dodoc_projects:all'
+  
   def initialize
     @api_key = Setting.get('dodoc_api_key')
   end
@@ -15,9 +18,14 @@ class DoDocProjectsService
   # @param per_page [Integer] items per page
   # @return [Hash] paginated results with projects
   def search(query = nil, page: 1, per_page: 20)
-    all_projects = fetch_all_projects
+    all_projects = fetch_all_projects_with_cache
     filtered_projects = filter_projects(all_projects, query)
     paginate_results(filtered_projects, page, per_page)
+  end
+  
+  # Invalidate all cache
+  def self.invalidate_cache
+    Rails.cache.delete(CACHE_KEY_ALL_PROJECTS)
   end
 
   # build project data to the required format
@@ -69,7 +77,15 @@ class DoDocProjectsService
     end
   end
 
-  # Fetch projects from all DoDoc API URLs
+  # Fetch projects from all DoDoc API URLs with caching
+  # @return [Array] array of all projects from all APIs
+  def fetch_all_projects_with_cache
+    Rails.cache.fetch(CACHE_KEY_ALL_PROJECTS, expires_in: CACHE_EXPIRY) do
+      fetch_all_projects
+    end
+  end
+  
+  # Fetch projects from all DoDoc API URLs (direct API call, no cache)
   # @return [Array] array of all projects from all APIs
   def fetch_all_projects
     all_projects = []
