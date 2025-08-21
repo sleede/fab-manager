@@ -155,10 +155,10 @@ class DoDocProjectsService
     {
       projects: paginated_projects,
       meta: {
-        current_page: page,
+        page: page,
         per_page: per_page,
         total_pages: total_pages,
-        total_count: total_count
+        total: total_count
       }
     }
   end
