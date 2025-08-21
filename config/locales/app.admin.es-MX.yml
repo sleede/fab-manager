@@ -479,6 +479,13 @@ es-MX:
           default_to_openlab: "Mostrar OpenLab por defecto"
           filters: Lista de filtros de proyectos
           project_categories: Categorías
+        dodoc:
+          title: "DoDoc"
+          dodoc_settings: "DoDoc Settings"
+          dodoc_info_html: "<p>DoDoc is a documentation of project. It allows you to share your projects with the community.</p><p>To enable DoDoc, you need to create an account on <a href='https://dodoc.fr' target='_blank'>dodoc.io</a> and get your API key.</p>"
+          enable_dodoc_projects: "Enable DoDoc projects"
+          dodoc_api_key: "DoDoc API Key"
+          dodoc_title: "DoDoc title"
       project_categories:
         name: "Nombre"
         delete_dialog_title: "Confirmación requerida"
@@ -1922,6 +1929,9 @@ es-MX:
         enable_family_account: "Activar la opción Cuenta Familiar"
         child_validation_required: "opción de validación de la cuenta para hijos"
         child_validation_required_label: "Activar la opción de validación de la cuenta para hijos"
+        dodoc_projects_module: "Enable DoDoc projects module"
+        dodoc_api_key: "DoDoc API key"
+        dodoc_title: "DoDoc title"
         overlapping_options:
           training_reservations: "Formaciones"
           machine_reservations: "Máquinas"

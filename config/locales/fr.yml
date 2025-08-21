@@ -744,8 +744,8 @@ fr:
     project_categories_wording: "Dans la fiche projet, renommer l'intitulé de l'encart Catégories"
     reservation_context_feature: "Forcer le membre à sélectionner la nature de sa réservation lors de la réservation"
     family_account: "Compte de famille"
-    dodoc_projects_module: "DoDoc Projets"
-    dodoc_title: "Titre de la page DoDoc"
+    dodoc_projects_module: "Projets DoDoc"
+    dodoc_title: "Projets DoDoc"
   #statuses of projects
   statuses:
     new: "Nouveau"

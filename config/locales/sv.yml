@@ -744,6 +744,8 @@ sv:
     project_categories_wording: "Ord som används för att ersätta \"Kategorier\" på publika sidor"
     reservation_context_feature: "Tvinga medlem att välja typ av bokning "
     family_account: "Familjekonto"
+    dodoc_projects_module: "DoDoc Projects"
+    dodoc_title: "DoDoc Projects title"
   #statuses of projects
   statuses:
     new: "Ny"
