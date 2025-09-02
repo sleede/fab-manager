@@ -744,14 +744,21 @@ Application.Controllers.controller('ShowProjectController', ['$scope', '$state',
         templateUrl: '/shared/signalAbuseModal.html',
         size: 'md',
         resolve: {
+          settingsPromise: ['Setting', function (Setting) {
+            return Setting.query({ names: "['recaptcha_site_key']" }).$promise;
+          }],
           project () { return $scope.project; }
         },
-        controller: ['$scope', '$uibModalInstance', '_t', 'growl', 'Abuse', 'project', function ($scope, $uibModalInstance, _t, growl, Abuse, project) {
+        controller: ['$scope', '$uibModalInstance', '_t', 'growl', 'Abuse', 'project', 'settingsPromise', function ($scope, $uibModalInstance, _t, growl, Abuse, project, settingsPromise) {
         // signaler's profile & signalement infos
           $scope.signaler = {
             signaled_type: 'Project',
-            signaled_id: project.id
+            signaled_id: project.id,
+            email: $scope.currentUser ? $scope.currentUser.email : ''
           };
+
+          // reCaptcha v2 site key (or undefined)
+          $scope.recaptchaSiteKey = settingsPromise.recaptcha_site_key;
 
           // callback for signaling cancellation
           $scope.cancel = function () { $uibModalInstance.dismiss('cancel'); };

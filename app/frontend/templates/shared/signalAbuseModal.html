@@ -33,6 +33,13 @@
                 <span class="help-block" ng-show="signalForm.message.$dirty && signalForm.message.$error.required" translate>{{ 'app.public.projects_show.message_is_required' }}</span>
             </div>
         </div>
+
+        <div vc-recaptcha
+             key="recaptchaSiteKey"
+             class="flex-center"
+             ng-model="signaler.recaptcha"
+             ng-if="recaptchaSiteKey">
+        </div>
     </form>
 </div>
 <div class="modal-footer">

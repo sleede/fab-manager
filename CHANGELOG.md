@@ -2,6 +2,8 @@
 
 ## Next release
 
+- improvement: only member can report an abuse and add Recaptcha to the report abuse form
+
 ## v6.4.9 2025 August 18
 
 - Feature: add iCalendar links for machine, space and training reservations
