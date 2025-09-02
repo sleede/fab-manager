@@ -3,7 +3,7 @@
 # API Controller for resources of type Abuse.
 # Typical action is an user reporting an abuse on a project
 class API::AbusesController < API::APIController
-  before_action :authenticate_user!, except: :create
+  before_action :authenticate_user!
   before_action :set_abuse, only: %i[destroy]
 
   def index
@@ -12,6 +12,9 @@ class API::AbusesController < API::APIController
   end
 
   def create
+    check = RecaptchaService.verify(params[:abuse][:recaptcha])
+    render json: check['error-codes'], status: :unprocessable_entity and return unless check['success']
+
     @abuse = Abuse.new(abuse_params)
     if @abuse.save
       render status: :created
