@@ -5,6 +5,7 @@
 ## v6.4.10 2025 September 2
 
 - improvement: only member can report an abuse and add Recaptcha to the report abuse form
+- improvement: user is_allow_contact is disabled by default
 
 ## v6.4.9 2025 August 18
 
