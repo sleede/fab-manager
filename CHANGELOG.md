@@ -2,6 +2,8 @@
 
 ## Next release
 
+- Fix a bug: unable to add image for a project step and description
+
 ## v6.4.10 2025 September 2
 
 - improvement: only member can report an abuse and add Recaptcha to the report abuse form
