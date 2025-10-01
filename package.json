@@ -1,6 +1,6 @@
 {
   "name": "fab-manager",
-  "version": "6.4.10",
+  "version": "6.4.11",
   "description": "Fab-manager is the FabLab management solution. It provides a comprehensive, web-based, open-source tool to simplify your administrative tasks and your marker's projects.",
   "keywords": [
     "fablab",
@@ -191,5 +191,6 @@
   },
   "browserslist": [
     "defaults"
-  ]
+  ],
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }

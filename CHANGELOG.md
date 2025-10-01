@@ -2,6 +2,8 @@
 
 ## Next release
 
+## v6.4.11 2025 October 1
+
 - Fix a bug: unable to add image for a project step and description
 
 ## v6.4.10 2025 September 2
