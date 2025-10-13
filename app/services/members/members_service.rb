@@ -46,8 +46,8 @@ class Members::MembersService
   def create(current_user, params)
     @member.password = password(params)
 
-    # if the user is created by an admin and the authentication is made through an SSO, generate a migration token
-    @member.generate_auth_migration_token if current_user.admin? && AuthProvider.active.providable_type != DatabaseProvider.name
+    # if the authentication is made through an SSO, generate a migration token
+    @member.generate_auth_migration_token if AuthProvider.active.providable_type != DatabaseProvider.name
 
     # setup the attached profiles (invoicing & statistics)
     @member.invoicing_profile.email = params[:email]
