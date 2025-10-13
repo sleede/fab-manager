@@ -2,6 +2,8 @@
 
 ## Next release
 
+## v6.4.12 2025 October 13
+
 - Fix a bug: unable to generate user authentication code for SSO providers if the user created by manager
 
 ## v6.4.11 2025 October 1
