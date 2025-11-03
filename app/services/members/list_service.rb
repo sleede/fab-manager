@@ -7,7 +7,6 @@ class Members::ListService
       @query = User.includes(:profile, :group, :statistic_profile, :children)
                    .joins(:profile,
                           :statistic_profile,
-                          :group,
                           :roles,
                           'LEFT JOIN (
                               SELECT *

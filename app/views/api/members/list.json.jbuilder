@@ -10,7 +10,7 @@ json.array!(@members) do |member|
   end
   json.need_completion member.need_completion?
   json.group do
-    json.name member.group.name
+    json.name member.group&.name
   end
   if member.subscribed_plan
     json.subscribed_plan do

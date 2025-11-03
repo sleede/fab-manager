@@ -2,6 +2,8 @@
 
 ## Next release
 
+- Imrpovement: show members with incomplete profile in admin members list page
+
 ## v6.4.12 2025 October 13
 
 - Fix a bug: unable to generate user authentication code for SSO providers if the user created by manager
