@@ -2,6 +2,8 @@
 
 ## Next release
 
+## v6.4.13 2025 November 4
+
 - Imrpovement: show members with incomplete profile in admin members list page
 - Fix a bug: prevent show training disabled in user credits
 
