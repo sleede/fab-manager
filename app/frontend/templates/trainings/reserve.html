@@ -64,14 +64,14 @@
           reservation-contexts="reservationContexts"></cart>
 
 
-    <uib-alert type="info m">
+    <uib-alert type="info m" ng-if="trainingInformationMessage">
       <p class="text-sm font-bold">
         <i class="fa fa-lightbulb-o"></i>
         <span ng-bind-html="trainingInformationMessage"></span>
       </p>
     </uib-alert>
 
-    <uib-alert type="warning m">
+    <uib-alert type="warning m" ng-if="trainingExplicationsAlert">
       <p class="text-sm">
         <i class="fa fa-warning"></i>
         <span ng-bind-html="trainingExplicationsAlert"></span>
