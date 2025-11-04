@@ -34,6 +34,11 @@ Application.Controllers.controller('DashboardController', ['$scope', 'memberProm
       return trainingCredits.find(tc => tc.training_id === trainingId);
     };
 
+    $scope.trainingIsActive = function (trainingId) {
+      const training = trainingsPromise.find(t => t.id === trainingId);
+      return training && !training.disabled;
+    };
+
     /**
      * Return the name associated with the provided training ID
      * @param trainingId training identifier

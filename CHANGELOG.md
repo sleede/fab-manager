@@ -2,6 +2,11 @@
 
 ## Next release
 
+## v6.4.13 2025 November 4
+
+- Imrpovement: show members with incomplete profile in admin members list page
+- Fix a bug: prevent show training disabled in user credits
+
 ## v6.4.12 2025 October 13
 
 - Fix a bug: unable to generate user authentication code for SSO providers if the user created by manager
@@ -25,7 +30,7 @@
 
 - improvement: username length validation is now 50 characters instead of 30 characters
 - Fix a bug: unable to resend auth code for SSO authentication providers
-- Fix a bug: confirmation email is sent two times when a user craated
+- Fix a bug: confirmation email is sent two times when a user created
 
 ## v6.4.7 2025 July 1
 
