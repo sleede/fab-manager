@@ -2,6 +2,8 @@
 
 ## Next release
 
+- Fix a bug: unable to show error message when admin create a partner
+
 ## v6.4.13 2025 November 4
 
 - Imrpovement: show members with incomplete profile in admin members list page
