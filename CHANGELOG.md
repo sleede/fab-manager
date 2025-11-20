@@ -2,6 +2,8 @@
 
 ## Next release
 
+## v6.4.14 2025 November 20
+
 - Fix a bug: unable to show error message when admin create a partner
 - Fix a bug: unable to create a partner if address required
 
