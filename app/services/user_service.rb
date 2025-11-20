@@ -22,6 +22,10 @@ class UserService
         gender: true,
         birthday: Time.current
       )
+      user.build_invoicing_profile(
+        address: Address.new(address: 'Unknown Address')
+      )
+      user.validated_at = Time.current
 
       saved = user.save
       if saved
