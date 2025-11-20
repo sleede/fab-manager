@@ -244,19 +244,18 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
         templateUrl: '/shared/_partner_new_modal.html',
         size: 'lg',
         controller: ['$scope', '$uibModalInstance', 'User', function ($scope, $uibModalInstance, User) {
-          $scope.partner = {};
+          $scope.partner = { profile_attributes: {} };
 
           $scope.ok = function () {
             User.save(
               {},
               { user: $scope.partner },
               function (user) {
-                $scope.partner.id = user.id;
-                $scope.partner.name = `${user.first_name} ${user.last_name}`;
+                $scope.partner = user;
                 $uibModalInstance.close($scope.partner);
               },
               function (error) {
-                growl.error(_t('app.admin.plans.new.unable_to_save_this_user_check_that_there_isnt_an_already_a_user_with_the_same_name'));
+                growl.error(_t('app.admin.members.unable_to_save_this_user_check_that_there_isnt_an_already_a_user_with_the_same_name'));
                 console.error(error);
               }
             );
