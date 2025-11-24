@@ -66,7 +66,7 @@ class Invoices::LabelService
     # @param username [String]
     # @return [String]
     def subscription_label(subscription, username)
-      subscription_start_at = subscription.expired_at - subscription.plan.duration
+      subscription_start_at = subscription.expiration_date - subscription.plan.duration
       duration_verbose = I18n.t("duration.#{subscription.plan.interval}", **{ count: subscription.plan.interval_count })
       I18n.t('invoices.subscription_of_NAME_for_DURATION_starting_from_DATE',
              **{ NAME: username,

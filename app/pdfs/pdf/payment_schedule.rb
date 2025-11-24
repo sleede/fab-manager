@@ -132,7 +132,7 @@ class Pdf::PaymentSchedule < Prawn::Document
   private
 
   def subscription_verbose(subscription, username)
-    subscription_start_at = subscription.expired_at - subscription.plan.duration
+    subscription_start_at = subscription.expiration_date - subscription.plan.duration
     duration_verbose = I18n.t("duration.#{subscription.plan.interval}", count: subscription.plan.interval_count)
     I18n.t('payment_schedules.subscription_of_NAME_for_DURATION_starting_from_DATE',
            **{ NAME: username,

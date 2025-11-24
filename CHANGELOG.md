@@ -2,6 +2,9 @@
 
 ## Next release
 
+- Fix a bug: subscripton start date is not correct when member subscribe with offer free days
+
+
 ## v6.4.14 2025 November 20
 
 - Fix a bug: unable to show error message when admin create a partner
