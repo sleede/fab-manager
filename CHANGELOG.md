@@ -2,6 +2,8 @@
 
 ## Next release
 
+- improvement: uses jemalloc to decrease memory usage
+
 ## v6.4.9 2025 August 18
 
 - Feature: add iCalendar links for machine, space and training reservations

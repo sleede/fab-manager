@@ -11,11 +11,13 @@ RUN locale-gen C.UTF-8
 
 RUN curl -sL https://deb.nodesource.com/setup_18.x | bash -\
   && apt-get update -qq && apt-get install -qq --no-install-recommends \
-    nodejs \
+    nodejs libjemalloc2 \
   && apt-get upgrade -qq \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*\
   && npm install -g yarn@1
+
+ENV LD_PRELOAD=libjemalloc.so.2
 
 # Fix bug: LoadError: Could not open library '/usr/local/bundle/gems/sassc-2.1.0-x86_64-linux/lib/sassc/libsass.so': Error loading shared library ld-linux-x86-64.so.2: No such file or directory (needed by /usr/local/bundle/gems/sassc-2.1.0-x86_64-linux/lib/sassc/libsass.so)
 # add libsass-dev libsass libc6-compat and env below
