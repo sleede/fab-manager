@@ -2,6 +2,8 @@
 
 ## Next release
 
+## v6.4.16 2025 December 8
+
 - Fix a bug: training reservation authorization invalidated date is not correct in mail
 
 ## v6.4.15 2025 November 24
