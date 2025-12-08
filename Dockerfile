@@ -35,7 +35,8 @@ RUN bundle config set without 'development test doc'
 WORKDIR /tmp
 COPY Gemfile /tmp/
 COPY Gemfile.lock /tmp/
-RUN bundle install --binstubs
+RUN bundle binstubs --all
+RUN bundle install
 
 # Install Javascript packages
 WORKDIR /usr/src/app
