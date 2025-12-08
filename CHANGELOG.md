@@ -2,6 +2,10 @@
 
 ## Next release
 
+## v6.4.17 2025 December 8
+
+- Fix a bug: unable to run bundle install in docker image
+
 ## v6.4.16 2025 December 8
 
 - Fix a bug: training reservation authorization invalidated date is not correct in mail
