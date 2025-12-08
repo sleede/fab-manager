@@ -2,6 +2,8 @@
 
 ## Next release
 
+- Fix a bug: training reservation authorization invalidated date is not correct in mail
+
 ## v6.4.15 2025 November 24
 
 - Fix a bug: subscripton start date is not correct when member subscribe with offer free days
