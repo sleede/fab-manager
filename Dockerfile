@@ -28,11 +28,14 @@ RUN gem install bundler
 # Throw error if Gemfile has been modified since Gemfile.lock
 RUN bundle config --global frozen 1
 
+# Disable installation of gems for development and test
+RUN bundle config set without 'development test doc'
+
 # Install gems in a cache efficient way
 WORKDIR /tmp
 COPY Gemfile /tmp/
 COPY Gemfile.lock /tmp/
-RUN bundle install --binstubs --without development test doc
+RUN bundle install --binstubs
 
 # Install Javascript packages
 WORKDIR /usr/src/app
