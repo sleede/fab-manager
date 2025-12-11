@@ -6,6 +6,8 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
     // User's notifications will get refreshed every 30s
     const NOTIFICATIONS_CHECK_PERIOD = 30000;
 
+    let passwordEditModalInstance = null;
+
     /* PUBLIC SCOPE */
 
     // Fab-manager's version
@@ -218,7 +220,11 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
      * @param token {string} security token for password changing. The user should have recieved it by mail
      */
     $scope.editPassword = function (token) {
-      $uibModal.open({
+      if (passwordEditModalInstance) {
+        passwordEditModalInstance.dismiss('cancel');
+      }
+
+      passwordEditModalInstance = $uibModal.open({
         templateUrl: '/shared/passwordEditModal.html',
         size: 'md',
         controller: ['$scope', '$uibModalInstance', '$http', function ($scope, $uibModalInstance, $http) {
@@ -230,7 +236,9 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
 
           $scope.changePassword = function () {
             $scope.alerts = [];
-            return $http.put('/users/password.json', { user: $scope.user }).then(function () { $uibModalInstance.close(); }).catch(function (data) {
+            return $http.put('/users/password.json', { user: $scope.user }).then(function () {
+              $uibModalInstance.close();
+            }).catch(function (data) {
               angular.forEach(data.data.errors, function (v, k) {
                 angular.forEach(v, function (err) {
                   $scope.alerts.push({
@@ -242,10 +250,15 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
             });
           };
         }]
-      }).result.finally(null).then(function () {
+      });
+
+      passwordEditModalInstance.result.finally(function () {
+        passwordEditModalInstance = null;
+      }).then(function () {
         growl.success(_t('app.public.common.your_password_was_successfully_changed'));
         return Auth.login().then(function (user) {
           $scope.setCurrentUser(user);
+          $state.go('.', { reset_password_token: null }, { notify: false, location: 'replace' });
         }, function (error) {
           console.error(`Authentication failed: ${JSON.stringify(error)}`);
         }
