@@ -3,6 +3,7 @@
 ## Next release
 
 - improvement: remove reset_password_token after password changed in url
+- Fix a bug: total number of minutes used of reservation is not correct when using prepaid pack
 
 ## v6.4.18 2025 December 8
 
