@@ -2085,23 +2085,6 @@ sv:
             openlab: "Är projektdelningsmodulen (OpenLab) aktiv?"
           tracking_id_info_html: "För att möjliggöra statistisk spårning av besöken med Google Analytics V4, ange ditt spårnings-ID här. Det är i formen G-XXXXXX. Besök <a href='https://analytics.google.com/analytics/web/' target='_blank'>Google Analytics webbplats</a> för att få en.<br/><strong>Varning:</strong> om du aktiverar den här funktionen kommer en cookie att skapas. Kom ihåg att skriva ner det i din sekretesspolicy, ovan."
           tracking_id: "Spårnings-ID"
-      open_api_clients:
-        add_new_client: "Skapa ny API-klient"
-        api_documentation: "API-dokumentation"
-        open_api_clients: "OpenAPI-klienter"
-        name: "Namn"
-        calls_count: "Antal anrop"
-        token: "Token"
-        created_at: "Skapandedatum"
-        reset_token: "Återkalla åtkomst"
-        client_name: "Klientens namn"
-        confirmation_required: "Bekräftelse krävs"
-        do_you_really_want_to_delete_this_open_api_client: "Vill du verkligen ta bort denna OpenAPI-klient?"
-        do_you_really_want_to_revoke_this_open_api_access: "Vill du verkligen återkalla denna åtkomst? Det kommer att radera och ersätta den nuvarande token."
-        client_successfully_created: "Klienten har skapats."
-        client_successfully_updated: "Klienten har uppdaterats."
-        client_successfully_deleted: "Klienten har tagits bort."
-        access_successfully_revoked: "Åtkomst har återkallats."
       #create a new space
       space_new:
         add_a_new_space: "Lägg till utrymme"
@@ -2139,9 +2122,6 @@ sv:
         customization_of_SETTING_successfully_saved: "Anpassning av {SETTING} har sparats."
       #feature tour
       tour:
-        conclusion:
-          title: "Tack för er uppmärksamhet"
-          content: "<p>Om du vill starta om denna kontextuella hjälp, tryck på <strong>F1</strong> när som helst eller klicka på [? Hjälp] från användarens meny.</p><p>Om du behöver ytterligare hjälp kan du kolla <a href='http://guide-fr.fab.mn' target='_blank'>användarhandboken</a> (endast på franska just nu).</p><p>Fab-managerns team ger även personlig support (hjälp med att komma igång, hjälp med installation, anpassning etc., <a href='mailto:contact@fab-manager.com'>Kontakta oss</a> för mer information.</p>"
         trainings:
           welcome:
             title: "Utbildningar"
@@ -2340,13 +2320,6 @@ sv:
           reservations:
             title: "Bokningar"
             content: "Öppettider, möjlighet att avboka... Varje Fablab har sina egna bokningsregler, som du kan definiera på denna sida."
-        open_api:
-          welcome:
-            title: "OpenAPI"
-            content: "Fab-manager erbjuder ett öppet API som gör det möjligt för tredjepartsprogram att hantera sina data. Denna skärm låter dig ge åtkomst till detta API."
-          doc:
-            title: "Dokumentation"
-            content: "Klicka här för att komma åt API: et online dokumentation."
       store:
         manage_the_store: "Hantera rapporter"
         settings: "Inställningar"

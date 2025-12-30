@@ -2,6 +2,14 @@
 
 # Check the access policies for API::MachinesController
 class MachinePolicy < ApplicationPolicy
+  def index?
+    true
+  end
+
+  def show?
+    true
+  end
+
   def create?
     user.admin?
   end

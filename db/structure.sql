@@ -2053,7 +2053,8 @@ CREATE TABLE public.open_api_clients (
     calls_count integer DEFAULT 0,
     token character varying,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    user_id bigint
 );
 
 
@@ -7138,6 +7139,13 @@ CREATE INDEX index_offer_days_on_subscription_id ON public.offer_days USING btre
 
 
 --
+-- Name: index_open_api_clients_on_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_open_api_clients_on_user_id ON public.open_api_clients USING btree (user_id);
+
+
+--
 -- Name: index_order_activities_on_operator_profile_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -8348,6 +8356,14 @@ ALTER TABLE ONLY public.chained_elements
 
 
 --
+-- Name: open_api_clients fk_rails_52060e48e4; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.open_api_clients
+    ADD CONSTRAINT fk_rails_52060e48e4 FOREIGN KEY (user_id) REFERENCES public.users(id);
+
+
+--
 -- Name: cart_item_event_reservation_booking_users fk_rails_5206c6ca4a; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -9047,6 +9063,8 @@ ALTER TABLE ONLY public.cart_item_event_reservations
 -- PostgreSQL database dump complete
 --
 
+\unrestrict bLE5Z12uuT6yMtP6mxgRiJzdBLXUdbaK0zR6jd596I0QhZ44lees9dgiybEm2Dp
+
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
@@ -9447,6 +9465,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20240605085829'),
 ('20250424164457'),
 ('20250819143916'),
-('20250904090534');
+('20250904090534'),
+('20251228195605');
 
 

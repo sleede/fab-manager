@@ -2085,23 +2085,6 @@ de:
             openlab: "Ist das Projektteilungsmodul (OpenLab) aktiv?"
           tracking_id_info_html: "Um die statistische Analyse der Besuche mithilfe von Google Analytics V4 zu ermöglichen, tragen Sie hier Ihre Tracking-ID in der Form G-XXXXXX ein. Besuchen Sie <a href='https://analytics.google.com/analytics/web/' target='_blank'>die Google Analytics Website</a>, um eine Tracking-ID zu erstellen.<br/><strong>Warnung:</strong> wenn Sie dieses Feature aktivieren, wird ein Cookie erstellt. Denken Sie daran, es oben in Ihrer Datenschutzrichtlinie darauf hingewiesen werden."
           tracking_id: "Tracking-ID"
-      open_api_clients:
-        add_new_client: "Neuen API-Client erstellen"
-        api_documentation: "API-Dokumentation"
-        open_api_clients: "OpenAPI-Clients"
-        name: "Name"
-        calls_count: "Anrufanzahl"
-        token: "Token"
-        created_at: "Erstellungsdatum"
-        reset_token: "Zugriff widerrufen"
-        client_name: "Kundenname"
-        confirmation_required: "Bestätigung erforderlich"
-        do_you_really_want_to_delete_this_open_api_client: "Möchten Sie diesen OpenAPI-Client wirklich löschen?"
-        do_you_really_want_to_revoke_this_open_api_access: "Möchten Sie diesen Zugriff wirklich widerrufen? Er wird das aktuelle Token löschen und ersetzen."
-        client_successfully_created: "Client erfolgreich erstellt."
-        client_successfully_updated: "Client erfolgreich aktualisiert."
-        client_successfully_deleted: "Client erfolgreich gelöscht."
-        access_successfully_revoked: "Zugriff erfolgreich widerrufen."
       #create a new space
       space_new:
         add_a_new_space: "Neuen Raum erstellen"
@@ -2139,9 +2122,6 @@ de:
         customization_of_SETTING_successfully_saved: "Anpassung von {SETTING} erfolgreich gespeichert."
       #feature tour
       tour:
-        conclusion:
-          title: "Vielen Dank für Ihre Aufmerksamkeit"
-          content: "<p>Um diese kontextabhängige Hilfe neu zu starten, können Sie jederzeit <strong>F1</strong> drücken oder klicken Sie im Benutzermenu auf [? Hilfe].</p><p>Zusätzliche Hilfe finden Sie in der <a href='http://guide-fr.fab.mn' target='_blank'>Benutzeranleitung</a> (nur auf Französisch).</p><p>Das Fab-Manager-Team bietet auch personalisierten Support (Hilfe beim Einstieg, Hilfe bei der Installation, Anpassung etc.), <a href='mailto:contact@fab-manager.com'>kontaktieren Sie uns</a> für weitere Informationen.</p>"
         trainings:
           welcome:
             title: "Schulungen"
@@ -2340,13 +2320,6 @@ de:
           reservations:
             title: "Reservierungen"
             content: "Öffnungszeiten, Reservierungssstornierungen... Jedes Fablab hat seine eigenen Reservierungsregeln, die Sie auf dieser Seite festlegen können."
-        open_api:
-          welcome:
-            title: "OpenAPI"
-            content: "Fab-Manager bietet eine offene API an, über die externe Programme einfach auf Fab-Manager-Daten zugreifen können. Hier können Sie Zugriffe auf diese API gewähren."
-          doc:
-            title: "Dokumentation"
-            content: "Klicken Sie hier, um die API Online-Dokumentation aufzurufen."
       store:
         manage_the_store: "Manage the Store"
         settings: "Einstellungen"
