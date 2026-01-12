@@ -2,6 +2,10 @@
 
 ## Next release
 
+## v6.4.20 2026 January 12
+
+- Fix a bug: unable to show gender in stat export
+
 ## v6.4.19 2025 December 12
 
 - improvement: remove reset_password_token after password changed in url
