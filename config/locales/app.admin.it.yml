@@ -2085,23 +2085,6 @@ it:
             openlab: "Il modulo di condivisione dei progetti (OpenLab) è attivo?"
           tracking_id_info_html: "Per abilitare il tracciamento statistico delle visite utilizzando Google Analytics V4, imposta qui il tuo identificativo di tracciamento. È nella forma G-XXXXXX. Visita <a href='https://analytics.google.com/analytics/web/' target='_blank'>il sito Google Analytics</a> per ottenerne uno.<br/><strong>Attenzione:</strong> se abiliti questa funzione, verrà creato un cookie. Ricordati di scriverlo nella tua politica sulla privacy."
           tracking_id: "Tracking ID"
-      open_api_clients:
-        add_new_client: "Crea un nuovo client API"
-        api_documentation: "Documentazione API"
-        open_api_clients: "Client OpenAPI"
-        name: "Nome"
-        calls_count: "Conteggio chiamate"
-        token: "Token"
-        created_at: "Data di creazione"
-        reset_token: "Revoca dell'accesso"
-        client_name: "Nome del client"
-        confirmation_required: "Conferma richiesta"
-        do_you_really_want_to_delete_this_open_api_client: "Vuoi davvero eliminare questo client OpenAPI?"
-        do_you_really_want_to_revoke_this_open_api_access: "Vuoi davvero revocare questo accesso? Cancellerà e sostituirà il token corrente."
-        client_successfully_created: "Client creato correttamente."
-        client_successfully_updated: "Client aggiornato correttamente."
-        client_successfully_deleted: "Client eliminato correttamente."
-        access_successfully_revoked: "Accesso revocato con successo."
       #create a new space
       space_new:
         add_a_new_space: "Aggiungi un nuovo spazio"
@@ -2139,9 +2122,6 @@ it:
         customization_of_SETTING_successfully_saved: "Personalizzazione del {SETTING} avvenuta con successo."
       #feature tour
       tour:
-        conclusion:
-          title: "Grazie per la vostra attenzione"
-          content: "<p>Se vuoi riavviare questo aiuto contestuale, premi <strong>F1</strong> in qualsiasi momento o clicca su «? Aiuto » dal menu dell'utente.</p><p>Se hai bisogno di aiuto aggiuntivo, puoi <a href='http://guide-fr.fab.mn' target='_blank'>controllare la guida utente</a> (solo in francese per ora).</p><p>Il team di Fab-manager fornisce anche supporto personalizzato (aiuto per iniziare, nell'installazione, personalizzazione, ecc.), <a href='mailto:contact@fab-manager.com'>contattateci</a> per ulteriori informazioni.</p>"
         trainings:
           welcome:
             title: "Abilitazioni"
@@ -2340,13 +2320,6 @@ it:
           reservations:
             title: "Prenotazioni"
             content: "Orari di apertura, possibilità di annullare le prenotazioni... Ogni Fablab ha le proprie regole di prenotazione, che è possibile definire in questa pagina."
-        open_api:
-          welcome:
-            title: "OpenAPI"
-            content: "Fab-manager offre un'API open che consente a software di terze parti di trattare semplicemente con i suoi dati. Questa schermata consente di concedere l'accesso a questa API."
-          doc:
-            title: "Documentazione"
-            content: "Clicca qui per accedere alla documentazione online sulle API."
       store:
         manage_the_store: "Gestisci il negozio"
         settings: "Impostazioni"

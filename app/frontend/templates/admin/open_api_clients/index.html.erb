@@ -9,7 +9,7 @@
     </div>
     <div class="col-xs-10 col-sm-10 col-md-7 b-l b-r-md">
       <section class="heading-title">
-        <h1 translate>{{ 'app.admin.open_api_clients.open_api_clients' }}</h1>
+        <h1 translate>{{ 'app.logged.open_api_clients.open_api_clients' }}</h1>
       </section>
     </div>
 
@@ -17,7 +17,7 @@
       <section class="heading-actions wrapper">
         <a href="<%= apipie_apipie_path({version: 'v1'}) %>" target="_blank" class="fab-button is-info m-t-sm documentation-button">
           <i class="fa fa-book" aria-hidden="true"></i>&nbsp;
-           <span translate>{{ 'app.admin.open_api_clients.api_documentation' }}</span>&nbsp;
+           <span translate>{{ 'app.logged.open_api_clients.api_documentation' }}</span>&nbsp;
           <span class="exponent"><i class="fa fa-external-link" aria-hidden="true"></i></span>
         </a>
       </section>
@@ -36,11 +36,11 @@
     <div class="col-md-12">
       <div class="col-md-12">
 
-        <button type="button" class="fab-button is-secondary m-t m-b" ng-click="createClient()" ng-show="!clientFormVisible" translate>{{ 'app.admin.open_api_clients.add_new_client' | translate }}</button>
+        <button type="button" class="fab-button is-secondary m-t m-b" ng-click="createClient()" ng-show="!clientFormVisible" translate>{{ 'app.logged.open_api_clients.add_new_client' | translate }}</button>
 
         <form role="form" id="clientForm" ng-show="clientFormVisible" name="clientForm" class="form-inline m-b m-t" novalidate>
           <div class="form-group" ng-class="{'has-error': clientForm['client[name]'].$dirty && clientForm['client[name]'].$invalid}">
-            <input class="form-control" type="text" name="client[name]" ng-model="client.name" value="" placeholder="{{ 'app.admin.open_api_clients.client_name' | translate }}" required>
+            <input class="form-control" type="text" name="client[name]" ng-model="client.name" value="" placeholder="{{ 'app.logged.open_api_clients.client_name' | translate }}" required>
           </div>
 
           <button class="fab-button" ng-click="cancelEdit()" name="button">{{ 'app.shared.buttons.cancel' | translate }}</button>
@@ -50,13 +50,13 @@
         <table class="table">
           <thead>
             <tr>
-              <th style="width:20%"><a ng-click="setOrder('name')">{{ 'app.admin.open_api_clients.name' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-alpha-asc': order == 'name', 'fa fa-sort-alpha-desc': order == '-name', 'fa fa-arrows-v': order }"></i></a></th>
+              <th style="width:20%"><a ng-click="setOrder('name')">{{ 'app.logged.open_api_clients.name' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-alpha-asc': order == 'name', 'fa fa-sort-alpha-desc': order == '-name', 'fa fa-arrows-v': order }"></i></a></th>
 
-              <th style="width:15%"><a ng-click="setOrder('calls_count')">{{ 'app.admin.open_api_clients.calls_count' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-numeric-asc': order == 'calls_count', 'fa fa-sort-numeric-desc': order == '-calls_count', 'fa fa-arrows-v': order }"></i></a></th>
+              <th style="width:15%"><a ng-click="setOrder('calls_count')">{{ 'app.logged.open_api_clients.calls_count' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-numeric-asc': order == 'calls_count', 'fa fa-sort-numeric-desc': order == '-calls_count', 'fa fa-arrows-v': order }"></i></a></th>
 
-              <th style="width:20%"><a>{{ 'app.admin.open_api_clients.token' | translate }}</a></th>
+              <th style="width:20%"><a>{{ 'app.logged.open_api_clients.token' | translate }}</a></th>
 
-              <th style="width:20%"><a ng-click="setOrder('created_at')">{{ 'app.admin.open_api_clients.created_at' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-numeric-asc': order == 'created_at', 'fa fa-sort-numeric-desc': order == '-created_at', 'fa fa-arrows-v': order }"></i></a></th>
+              <th style="width:20%"><a ng-click="setOrder('created_at')">{{ 'app.logged.open_api_clients.created_at' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-numeric-asc': order == 'created_at', 'fa fa-sort-numeric-desc': order == '-created_at', 'fa fa-arrows-v': order }"></i></a></th>
 
               <th style="width:25%"></th>
             </tr>
@@ -74,7 +74,7 @@
                         </button>
 
                         <button class="btn btn-default" ng-click="resetToken(client)">
-                          <i class="fa fa-times"></i> {{ 'app.admin.open_api_clients.reset_token' | translate }}
+                          <i class="fa fa-times"></i> {{ 'app.logged.open_api_clients.reset_token' | translate }}
                         </button>
 
                         <button class="btn btn-danger" ng-click="deleteClient($index)" ng-show="client.calls_count == 0">

@@ -2085,23 +2085,6 @@ zu:
             openlab: "crwdns27028:0crwdne27028:0"
           tracking_id_info_html: "crwdns27030:0crwdne27030:0"
           tracking_id: "crwdns27032:0crwdne27032:0"
-      open_api_clients:
-        add_new_client: "crwdns27034:0crwdne27034:0"
-        api_documentation: "crwdns27036:0crwdne27036:0"
-        open_api_clients: "crwdns27038:0crwdne27038:0"
-        name: "crwdns27040:0crwdne27040:0"
-        calls_count: "crwdns27042:0crwdne27042:0"
-        token: "crwdns27044:0crwdne27044:0"
-        created_at: "crwdns27046:0crwdne27046:0"
-        reset_token: "crwdns27048:0crwdne27048:0"
-        client_name: "crwdns27050:0crwdne27050:0"
-        confirmation_required: "crwdns27052:0crwdne27052:0"
-        do_you_really_want_to_delete_this_open_api_client: "crwdns27054:0crwdne27054:0"
-        do_you_really_want_to_revoke_this_open_api_access: "crwdns27056:0crwdne27056:0"
-        client_successfully_created: "crwdns27058:0crwdne27058:0"
-        client_successfully_updated: "crwdns27060:0crwdne27060:0"
-        client_successfully_deleted: "crwdns27062:0crwdne27062:0"
-        access_successfully_revoked: "crwdns27064:0crwdne27064:0"
       #create a new space
       space_new:
         add_a_new_space: "crwdns27066:0crwdne27066:0"
@@ -2139,9 +2122,6 @@ zu:
         customization_of_SETTING_successfully_saved: "crwdns27122:0{SETTING}crwdne27122:0"
       #feature tour
       tour:
-        conclusion:
-          title: "crwdns27124:0crwdne27124:0"
-          content: "crwdns27126:0crwdne27126:0"
         trainings:
           welcome:
             title: "crwdns27128:0crwdne27128:0"
@@ -2340,13 +2320,6 @@ zu:
           reservations:
             title: "crwdns27376:0crwdne27376:0"
             content: "crwdns27378:0crwdne27378:0"
-        open_api:
-          welcome:
-            title: "crwdns27380:0crwdne27380:0"
-            content: "crwdns27382:0crwdne27382:0"
-          doc:
-            title: "crwdns27384:0crwdne27384:0"
-            content: "crwdns27386:0crwdne27386:0"
       store:
         manage_the_store: "crwdns31258:0crwdne31258:0"
         settings: "crwdns31260:0crwdne31260:0"
