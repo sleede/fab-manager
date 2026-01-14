@@ -22,6 +22,12 @@ to the corresponding OpenID Connect claims:
 
 To use the automatic mapping, add one of the fields above and click on the magic wand button near to the "Userinfo claim" input.
 
+To activate your new authentication provider, execute the following command within your fabmanager Docker container:
+
+`rails fablab:auth:switch_provider[PROVIDER_NAME]`
+
+**Note:** A container restart is required for the changes to take effect (for any change of the provider settings)!
+
 ## Known issues
 
 ```
