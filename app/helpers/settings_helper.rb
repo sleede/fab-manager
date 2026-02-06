@@ -210,6 +210,9 @@ module SettingsHelper
     reservation_context_feature
     gender_required
     birthday_required
+    dodoc_projects_module
+    dodoc_title
+    dodoc_api_key
   ].freeze
 end
 # rubocop:enable Metrics/ModuleLength

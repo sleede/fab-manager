@@ -744,6 +744,8 @@
     project_categories_wording: "Wording used to replace \"Categories\" on public pages"
     reservation_context_feature: "Force member to select the nature of his reservation when reserving"
     family_account: "Family account"
+    dodoc_projects_module: "DoDoc Projects"
+    dodoc_title: "DoDoc Projects title"
   #statuses of projects
   statuses:
     new: "New"

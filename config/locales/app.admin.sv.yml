@@ -479,6 +479,17 @@ sv:
           default_to_openlab: "Visa OpenLab som standard"
           filters: Projektlista filter
           project_categories: Kategorier
+        dodoc:
+          title: "DoDoc"
+          dodoc_settings: "DoDoc Settings"
+          dodoc_info_html: "DoDoc is a project documentation service. It allows you to create, share, and print project sheets. You can enable DoDoc for your projects by setting the following parameter:"
+          enable_dodoc_projects: "Enable DoDoc projects"
+          dodoc_api_key: "DoDoc API Key"
+          dodoc_title: "DoDoc title"
+          dodoc_api: "DoDoc API"
+          add_a_new_dodoc: "Add a new DoDoc API"
+          dodoc_name: "DoDoc API name"
+          dodoc_url: "DoDoc API url"
       project_categories:
         name: "Namn"
         delete_dialog_title: "Verifiering krävs"
@@ -1922,6 +1933,9 @@ sv:
         enable_family_account: "Aktivera alternativet Familjekonto"
         child_validation_required: "valideringsalternativet för konto för barn"
         child_validation_required_label: "Aktivera valideringsalternativet för konto för barn"
+        dodoc_projects_module: "Enable DoDoc projects module"
+        dodoc_api_key: "DoDoc API key"
+        dodoc_title: "DoDoc title"
         overlapping_options:
           training_reservations: "Utbildningar"
           machine_reservations: "Utrustning"

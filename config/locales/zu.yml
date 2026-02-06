@@ -744,6 +744,8 @@ zu:
     project_categories_wording: "crwdns37661:0crwdne37661:0"
     reservation_context_feature: "crwdns37711:0crwdne37711:0"
     family_account: "crwdns38033:0crwdne38033:0"
+    dodoc_projects_module: "crwdns38272:0crwdne38272:0"
+    dodoc_title: "crwdns38274:0crwdne38274:0"
   #statuses of projects
   statuses:
     new: "crwdns37111:0crwdne37111:0"

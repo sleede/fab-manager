@@ -22,11 +22,6 @@
       height: 226px;
     }
   }
-
-  // fix for full-calendar display on small devices
-  .fc-toolbar {
-    margin-bottom: 2.5em !important;
-  }
 }
 
 @media screen and (max-width: $screen-md-min) {
