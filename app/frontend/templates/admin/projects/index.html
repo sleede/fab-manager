@@ -45,7 +45,10 @@
         <uib-tab heading="{{ 'app.admin.projects.project_categories' | translate }}" index="4">
           <ng-include src="'/admin/projects/project_categories.html'"></ng-include>
         </uib-tab>
-        <uib-tab heading="{{ 'app.admin.projects.settings.title' | translate }}" index="5" class="settings-tab">
+        <uib-tab heading="{{ 'app.admin.projects.dodoc.title' | translate }}" index="5">
+          <ng-include src="'/admin/projects/dodoc.html'"></ng-include>
+        </uib-tab>
+        <uib-tab heading="{{ 'app.admin.projects.settings.title' | translate }}" index="6" class="settings-tab">
           <ng-include src="'/admin/projects/settings.html'"></ng-include>
         </uib-tab>
       </uib-tabset>

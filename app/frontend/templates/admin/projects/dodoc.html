@@ -1,0 +1,92 @@
+<div class="panel panel-default m-t-lg">
+  <div class="panel-heading">
+    <span class="font-sbold" translate>{{ 'app.admin.projects.dodoc.dodoc_settings' }}</span>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <h3 class="m-l" translate>{{ 'app.admin.projects.dodoc.title' }}</h3>
+      <p class="alert alert-warning m-h-md" ng-bind-html="'app.admin.projects.dodoc.dodoc_info_html' | translate"></p>
+      <boolean-setting name="'dodoc_projects_module'"
+                       settings="allSettings"
+                       label="'app.admin.projects.dodoc.enable_dodoc_projects' | translate"
+                       class-name="'m-l'"
+                       on-success="onSuccess"
+                       on-error="onError">
+      </boolean-setting>
+    </div>
+
+    <div ng-show="allSettings.dodoc_projects_module === 'true'">
+      <div class="row">
+        <div class="col-md-12">
+          <text-setting name="dodoc_title"
+                        settings="allSettings"
+                        label="app.admin.projects.dodoc.dodoc_title"
+                        fa-icon="fa-font"
+                        placeholder="DoDoc"
+                        required="true">
+          </text-setting>
+        </div>
+      </div>
+
+      <div class="row m-t">
+        <div class="col-md-12">
+          <text-setting name="dodoc_api_key"
+                        settings="allSettings"
+                        label="app.admin.projects.dodoc.dodoc_api_key"
+                        fa-icon="fa-font">
+          </text-setting>
+        </div>
+      </div>
+
+      <div class="row m-t">
+        <div class="col-md-12">
+          <h3 translate>{{ 'app.admin.projects.dodoc.dodoc_api' }}</h3>
+          <button type="button" class="fab-button is-secondary m-b" ng-click="addDoDoc()" translate>{{ 'app.admin.projects.dodoc.add_a_new_dodoc' }}</button>
+
+          <table class="table">
+            <thead>
+            <tr>
+              <th style="width:30%" translate>{{ 'app.admin.projects.dodoc.dodoc_name' }}</th>
+              <th style="width:50%" class="hidden-xs" translate>{{ 'app.admin.projects.dodoc.dodoc_url' }}</th>
+              <th style="width:20%"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="dodoc in doDocs">
+              <td>
+                <span editable-textarea="dodoc.name" e-rows="1" e-cols="100" e-name="name" e-form="rowform" e-required>
+                  {{ dodoc.name }}
+                </span>
+              </td>
+              <td class="hidden-xs">
+                <span editable-textarea="dodoc.url" e-rows="1" e-cols="100" e-name="url" e-form="rowform" e-required>
+                  <div class="text-sm">{{ dodoc.url }}</div>
+                </span>
+              </td>
+              <td>
+                <!-- form -->
+                <form editable-form name="rowform" onbeforesave="saveDoDoc($data, dodoc.id)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == dodoc">
+                  <button type="submit" ng-disabled="rowform.$waiting" class="fab-button is-secondary">
+                    <i class="fa fa-check"></i>
+                  </button>
+                  <button type="button" ng-disabled="rowform.$waiting" ng-click="cancelDoDoc(rowform, $index)" class="fab-button">
+                    <i class="fa fa-times"></i>
+                  </button>
+                </form>
+                <div class="buttons" ng-show="!rowform.$visible">
+                  <button class="fab-button" ng-click="rowform.$show()">
+                    <i class="fa fa-edit"></i> <span class="hidden-xs hidden-sm" translate>{{ 'app.shared.buttons.edit' }}</span>
+                  </button>
+                  <button class="fab-button is-alert" ng-click="removeDoDoc($index)">
+                    <i class="fa fa-trash-o"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
