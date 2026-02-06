@@ -2,6 +2,10 @@
 
 ## Next release
 
+## v6.5.0 2026 February 6
+
+- Feature: add DoDoc projects in Fab-manager network projects list
+
 ## v6.4.20 2026 January 12
 
 - Fix a bug: unable to show gender in stat export
