@@ -2,6 +2,8 @@
 
 ## Next release
 
+- Fix a bug: unable show event reservations if child of member is deleted
+
 ## v6.5.0 2026 February 6
 
 - Feature: add DoDoc projects in Fab-manager network projects list
