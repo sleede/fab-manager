@@ -2,6 +2,8 @@
 
 ## Next release
 
+## v6.5.1 2026 February 25
+
 - Fix a bug: unable show event reservations if child of member is deleted
 
 ## v6.5.0 2026 February 6
