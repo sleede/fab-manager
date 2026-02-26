@@ -1,6 +1,31 @@
 zh-CN:
   app:
+    tour:
+      open_api:
+        welcome:
+          title: "OpenAPI"
+          content: "Fab-manager提供开放API，允许第三方软件简单处理其数据。此屏幕允许您授予对此API的访问权限。"
+        doc:
+          title: "文档"
+          content: "点击此处访问API在线文档。"
     logged:
+      open_api_clients:
+        add_new_client: "创建新的API客户端"
+        api_documentation: "API文档"
+        open_api_clients: "OpenAPI客户端"
+        name: "名称"
+        calls_count: "调用次数"
+        token: "令牌"
+        created_at: "创建日期"
+        reset_token: "撤销访问"
+        client_name: "客户端名称"
+        confirmation_required: "需要确认"
+        do_you_really_want_to_delete_this_open_api_client: "您确定要删除此OpenAPI客户端吗？"
+        do_you_really_want_to_revoke_this_open_api_access: "您确定要撤销此访问吗？这将擦除并替换当前令牌。"
+        client_successfully_created: "客户端创建成功。"
+        client_successfully_updated: "客户端更新成功。"
+        client_successfully_deleted: "客户端删除成功。"
+        access_successfully_revoked: "访问成功撤销。"
       #user's profile completion page when logging from an SSO provider
       profile_completion:
         confirm_your_new_account: "确认您的新账户"

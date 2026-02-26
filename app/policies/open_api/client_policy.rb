@@ -1,21 +1,35 @@
+# frozen_string_literal: true
+
+# Check the access policies for OpenAPI::ClientsController
 class OpenAPI::ClientPolicy < ApplicationPolicy
   def index?
-    user.has_role? :admin
+    user.present?
+  end
+
+  # Admin can view all tokens
+  class Scope < Scope
+    def resolve
+      if user.admin?
+        scope.all
+      else
+        scope.where(user_id: user.id)
+      end
+    end
   end
 
   def create?
-    user.has_role? :admin
+    user.present?
   end
 
   def update?
-    user.has_role? :admin
+    user.admin? or record.user_id == user.id
   end
 
   def reset_token?
-    user.has_role? :admin
+    user.admin? | record.user_id == user.id
   end
 
   def destroy?
-    user.has_role? :admin and record.calls_count == 0
+    user.admin? || record.user_id == user.id
   end
 end

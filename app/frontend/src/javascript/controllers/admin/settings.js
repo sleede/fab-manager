@@ -431,8 +431,8 @@ Application.Controllers.controller('SettingsController', ['$scope', '$rootScope'
         selector: 'body',
         stepId: 'conclusion',
         order: 11,
-        title: _t('app.admin.tour.conclusion.title'),
-        content: _t('app.admin.tour.conclusion.content'),
+        title: _t('app.shared.tour.conclusion.title'),
+        content: _t('app.shared.tour.conclusion.content'),
         placement: 'bottom',
         orphan: true
       });
