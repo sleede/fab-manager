@@ -2,6 +2,10 @@
 
 ## Next release
 
+## v6.5.2 2026 March 4
+
+- Fix a bug: unable to update event slots when recurrent event is modified
+
 ## v6.5.1 2026 February 25
 
 - Fix a bug: unable show event reservations if child of member is deleted

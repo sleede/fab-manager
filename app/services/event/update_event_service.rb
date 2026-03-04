@@ -43,7 +43,8 @@ class Event::UpdateEventService
         rescue StandardError => e
           results[:events].push status: false, event: occurrence, error: e.try(:record).try(:class).try(:name), message: e.message
         end
-        results[:slots].concat(update_slots(occurrence.availability_id, original_slots_ids))
+        slots_ids = occurrence.availability.slots.map(&:id)
+        results[:slots].concat(update_slots(occurrence.availability_id, slots_ids))
       end
 
       begin
