@@ -32,7 +32,7 @@
           <tbody>
           <tr ng-repeat="reservation in reservations" ng-class="{'disabled': isCancelled(reservation)}">
             <td class="text-c">
-              <a ui-sref="app.logged.members_show({id: reservation.user_id})">{{ reservation.user_full_name }} </a>
+              <a ui-sref="app.admin.members_edit({id: reservation.user_id})">{{ reservation.user_full_name }} </a>
             </td>
             <td>
               <span ng-if="event.event_type === 'standard'">{{ reservation.user_full_name }} </span>
