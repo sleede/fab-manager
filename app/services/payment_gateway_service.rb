@@ -2,6 +2,7 @@
 
 require 'stripe/helper'
 require 'pay_zen/helper'
+require 'asaas/helper'
 
 # create remote items on currently active payment gateway
 class PaymentGatewayService
@@ -12,6 +13,9 @@ class PaymentGatewayService
               elsif PayZen::Helper.enabled?
                 require 'pay_zen/service'
                 PayZen::Service
+              elsif Asaas::Helper.enabled?
+                require 'asaas/service'
+                Asaas::Service
               else
                 require 'payment/service'
                 Payment::Service
@@ -19,8 +23,8 @@ class PaymentGatewayService
     @gateway = service.new
   end
 
-  def create_subscription(payment_schedule, *args)
-    @gateway.create_subscription(payment_schedule, *args)
+  def create_subscription(payment_schedule, *)
+    @gateway.create_subscription(payment_schedule, *)
   end
 
   def cancel_subscription(payment_schedule)
@@ -64,6 +68,9 @@ class PaymentGatewayService
               when /^Stripe::/
                 require 'stripe/service'
                 Stripe::Service
+              when /^Asaas::/
+                require 'asaas/service'
+                Asaas::Service
               else
                 require 'payment/service'
                 Payment::Service

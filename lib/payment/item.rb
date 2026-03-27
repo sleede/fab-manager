@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Style/OneClassPerFile, Lint/RedundantCopDisableDirective
 # Payments module
 module Payment; end
 
@@ -30,8 +31,9 @@ class Payment::Item
   end
 
   def gateway
-    klass[/^(PayZen|Stripe)::/, 1]
+    klass[/^(Asaas|PayZen|Stripe)::/, 1]
   end
 
   def retrieve(_id = nil, *_args); end
 end
+# rubocop:enable Style/OneClassPerFile, Lint/RedundantCopDisableDirective

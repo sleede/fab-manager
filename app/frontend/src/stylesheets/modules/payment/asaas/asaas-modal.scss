@@ -1,0 +1,36 @@
+.asaas-modal {
+  .asaas-intro {
+    .asaas-cpf-field {
+      margin-bottom: 1.6rem;
+    }
+  }
+
+  .asaas-payment-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
+
+    p,
+    label {
+      width: 100%;
+    }
+
+    .asaas-qr-code {
+      display: block;
+      width: min(100%, 28rem);
+      max-width: 28rem;
+      height: auto;
+      object-fit: contain;
+      margin: 0 auto;
+    }
+
+    .asaas-pix-payload {
+      width: 100%;
+      max-width: 100%;
+      resize: vertical;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+  }
+}

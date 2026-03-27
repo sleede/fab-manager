@@ -443,6 +443,18 @@ export const settings: Array<Setting> = [
     localized: 'Passerelle de paiement'
   },
   {
+    name: 'asaas_api_key',
+    value: '$aact_test_key',
+    last_update: '2026-03-27T12:00:00+0100',
+    localized: 'Clé API Asaas'
+  },
+  {
+    name: 'asaas_environment',
+    value: 'sandbox',
+    last_update: '2026-03-27T12:00:00+0100',
+    localized: 'Environnement Asaas'
+  },
+  {
     name: 'public_agenda_module',
     value: 'true',
     last_update: '2021-06-28T11:53:27+0200',

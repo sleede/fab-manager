@@ -1,5 +1,6 @@
 import { ReactElement, useEffect, useState } from 'react';
 import * as React from 'react';
+import { AsaasModal } from './asaas/asaas-modal';
 import { react2angular } from 'react2angular';
 import { Loader } from '../base/loader';
 import { StripeModal } from './stripe/stripe-modal';
@@ -59,6 +60,21 @@ const CardPaymentModal: React.FC<CardPaymentModalProps> = ({ isOpen, toggleModal
   };
 
   /**
+   * Render the Asaas payment modal
+   */
+  const renderAsaasModal = (): ReactElement => {
+    return <AsaasModal isOpen={isOpen}
+      toggleModal={toggleModal}
+      afterSuccess={afterSuccess}
+      onError={onError}
+      cart={cart}
+      order={order}
+      currentUser={currentUser}
+      schedule={schedule}
+      customer={customer} />;
+  };
+
+  /**
    * Render the PayZen payment modal
    */
   const renderPayZenModal = (): ReactElement => {
@@ -79,6 +95,8 @@ const CardPaymentModal: React.FC<CardPaymentModalProps> = ({ isOpen, toggleModal
   if (gateway === null || !isOpen) return <div/>;
 
   switch (gateway.value) {
+    case 'asaas':
+      return renderAsaasModal();
     case 'stripe':
       return renderStripeModal();
     case 'payzen':

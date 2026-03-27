@@ -80,3 +80,4 @@ yarn-debug.log*
 
 *.sql
 *.tar.gz
+postgresql/

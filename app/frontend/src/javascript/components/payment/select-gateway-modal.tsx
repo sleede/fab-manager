@@ -8,6 +8,7 @@ import { BaseSyntheticEvent, useEffect, useState } from 'react';
 import * as React from 'react';
 import { react2angular } from 'react2angular';
 import { useTranslation } from 'react-i18next';
+import { AsaasKeysForm } from './asaas/asaas-keys-form';
 import { StripeKeysForm } from './stripe/stripe-keys-form';
 import { PayzenKeysForm } from './payzen/payzen-keys-form';
 import { FabModal, ModalSize } from '../base/fab-modal';
@@ -91,6 +92,14 @@ export const SelectGatewayModal: React.FC<SelectGatewayModalModalProps> = ({ isO
   };
 
   /**
+   * Callback triggered when the embedded form has validated all the Asaas keys
+   */
+  const handleValidAsaasKeys = (asaasKeys: Map<SettingName, string>): void => {
+    setGatewayConfig(asaasKeys);
+    setPreventConfirmGateway(false);
+  };
+
+  /**
    * Callback triggered when the embedded form has not validated all keys
    */
   const handleInvalidKeys = (): void => {
@@ -132,9 +141,11 @@ export const SelectGatewayModal: React.FC<SelectGatewayModalModalProps> = ({ isO
       <label htmlFor="gateway">{t('app.admin.invoices.payment.select_gateway_modal.select_gateway')}</label>
       <select id="gateway" className="select-gateway" onChange={setGateway} value={selectedGateway}>
         <option />
+        <option value={Gateway.Asaas}>{t('app.admin.invoices.payment.select_gateway_modal.asaas')}</option>
         <option value={Gateway.Stripe}>{t('app.admin.invoices.payment.select_gateway_modal.stripe')}</option>
         <option value={Gateway.PayZen}>{t('app.admin.invoices.payment.select_gateway_modal.payzen')}</option>
       </select>
+      {selectedGateway === Gateway.Asaas && <AsaasKeysForm onValidKeys={handleValidAsaasKeys} onInvalidKeys={handleInvalidKeys} />}
       {selectedGateway === Gateway.Stripe && <StripeKeysForm onValidKeys={handleValidStripeKeys} onInvalidKeys={handleInvalidKeys} />}
       {selectedGateway === Gateway.PayZen && <PayzenKeysForm onValidKeys={handleValidPayZenKeys} onInvalidKeys={handleInvalidKeys} />}
     </FabModal>

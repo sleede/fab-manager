@@ -4,6 +4,7 @@
 class Checkout::PaymentService
   require 'pay_zen/helper'
   require 'stripe/helper'
+  require 'asaas/helper'
   include Payments::PaymentConcern
 
   def payment(order, operator, coupon_code, payment_id = '')
@@ -22,6 +23,8 @@ class Checkout::PaymentService
       Payments::LocalService.new.payment(order, coupon_code)
     elsif Stripe::Helper.enabled? && payment_id.present?
       Payments::StripeService.new.payment(order, coupon_code, payment_id)
+    elsif Asaas::Helper.enabled?
+      { order: order, payment: Payments::AsaasService.new.create_order_payment(order, operator, coupon_code) }
     elsif PayZen::Helper.enabled?
       Payments::PayzenService.new.payment(order, coupon_code)
     else

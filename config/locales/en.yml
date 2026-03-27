@@ -703,6 +703,8 @@ en:
     payzen_public_key: "PayZen client public key"
     payzen_hmac: "PayZen HMAC-SHA-256 key"
     payzen_currency:  "PayZen currency"
+    asaas_api_key: "Asaas API key"
+    asaas_environment: "Asaas environment"
     public_agenda_module: "Public agenda module"
     renew_pack_threshold: "Threshold for packs renewal"
     pack_only_for_subscription: "Restrict packs for subscribers"

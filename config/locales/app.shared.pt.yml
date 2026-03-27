@@ -178,6 +178,20 @@ pt:
         payment_schedule_html: "<p>Você está prestes a assinar um plano de pagamento de {DEADLINES} meses.</p><p>Ao pagar esta conta, você concorda em enviar instruções para a instituição financeira que emite o seu cartão, para obter pagamentos de sua conta de cartão por toda a duração dessa assinatura. Isso implica que os dados do seu cartão são salvos por {GATEWAY} e uma série de pagamentos serão iniciados em seu nome, conforme o cronograma de pagamento mostrado anteriormente.</p>"
         confirm_payment_of_: "Pagamento: {AMOUNT}"
         validate: "Validar"
+      asaas_modal:
+        title: "Pague com Pix"
+        description: "Gere um QR Code Pix dinâmico para concluir este pagamento com a Asaas."
+        cpf: "CPF"
+        cpf_placeholder: "000.000.000-00"
+        invalid_cpf: "Informe um CPF válido para gerar o QR Code Pix."
+        minimum_amount_error: "O Asaas Pix só permite pagamentos a partir de {AMOUNT}."
+        generate_pix_of_AMOUNT: "Gerar QR Code Pix de {AMOUNT}"
+        waiting_payment: "Escaneie o QR Code abaixo ou copie o código Pix. Esta página será atualizada automaticamente assim que o pagamento for recebido."
+        qr_code_alt: "QR Code Pix"
+        copy_and_paste: "Código Pix copia e cola"
+        expires_at: "Validade: {DATE}"
+        payment_expired: "Este QR Code Pix expirou. Gere um novo pagamento para continuar."
+        payment_schedule_not_supported: "O Asaas Pix está disponível apenas para pagamentos avulsos."
       #dialog of on site payment for reservations
       valid_reservation_modal:
         booking_confirmation: "Confirmação de reserva"

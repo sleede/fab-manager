@@ -55,11 +55,13 @@ class SettingService
 
     # rebuild the theme stylesheet
     # @param settings [Array<Setting>]
+    # rubocop:disable Style/ArrayIntersect, Style/CollectionQuerying, Lint/RedundantCopDisableDirective
     def update_theme_stylesheet(settings)
       return unless (%w[main_color secondary_color] & settings.map(&:name)).count.positive?
 
       Stylesheet.theme&.rebuild!
     end
+    # rubocop:enable Style/ArrayIntersect, Style/CollectionQuerying, Lint/RedundantCopDisableDirective
 
     # validate that the provided SCSS has a valid syntax
     # @param setting [Hash{Symbol->String}]
@@ -92,12 +94,19 @@ class SettingService
 
     # sync all objects on stripe
     # @param settings [Array<Setting>]
+    # rubocop:disable Style/ArrayIntersect, Style/CollectionQuerying, Lint/RedundantCopDisableDirective
     def sync_stripe_objects(settings)
       return unless (%w[stripe_secret_key online_payment_module] & settings.map(&:name)).count.positive?
+      return unless Setting.get('payment_gateway') == 'stripe'
 
-      setting = settings.find { |s| s.name == 'stripe_secret_key' }
-      SyncObjectsOnStripeWorker.perform_async(setting.history_values.last&.invoicing_profile&.user&.id)
+      setting = settings.find { |s| s.name == 'stripe_secret_key' } || settings.find { |s| s.name == 'online_payment_module' }
+      history_value = setting&.history_values&.last
+      user_id = history_value&.invoicing_profile&.user_id
+      return unless user_id
+
+      SyncObjectsOnStripeWorker.perform_async(user_id)
     end
+    # rubocop:enable Style/ArrayIntersect, Style/CollectionQuerying, Lint/RedundantCopDisableDirective
 
     # generate the statistics since the last update
     # @param settings [Array<Setting>]
@@ -110,12 +119,14 @@ class SettingService
 
     # export projects to openlab
     # @param settings [Array<Setting>]
+    # rubocop:disable Style/ArrayIntersect, Style/CollectionQuerying, Lint/RedundantCopDisableDirective
     def export_projects_to_openlab(settings)
       return unless (%w[openlab_app_id openlab_app_secret] & settings.map(&:name)).count.positive? &&
                     Setting.get('openlab_app_id').present? && Setting.get('openlab_app_secret').present?
 
       Project.find_each(&:openlab_create)
     end
+    # rubocop:enable Style/ArrayIntersect, Style/CollectionQuerying, Lint/RedundantCopDisableDirective
 
     # automatically validate the admins
     # @param settings [Array<Setting>]

@@ -23,9 +23,11 @@ class SettingPolicy < ApplicationPolicy
     user&.admin? || SettingPolicy.public_whitelist.include?(record.name)
   end
 
+  # rubocop:disable Style/ConcatArrayLiterals, Lint/RedundantCopDisableDirective
   def test_present?
     user&.admin? || SettingPolicy.public_whitelist.concat(%w[openlab_app_secret stripe_secret_key]).include?(record.name)
   end
+  # rubocop:enable Style/ConcatArrayLiterals, Lint/RedundantCopDisableDirective
 
   ##
   # List of settings that anyone can read. The other settings are restricted for admins.
@@ -39,7 +41,7 @@ class SettingPolicy < ApplicationPolicy
        tracking_id book_overlapping_slots slot_duration events_in_calendar spaces_module plans_module invoicing_module
        recaptcha_site_key feature_tour_display disqus_shortname allowed_cad_extensions openlab_app_id openlab_default
        online_payment_module stripe_public_key confirmation_required wallet_module trainings_module address_required
-       payment_gateway payzen_endpoint payzen_public_key public_agenda_module renew_pack_threshold statistics_module
+       payment_gateway payzen_endpoint payzen_public_key asaas_environment public_agenda_module renew_pack_threshold statistics_module
        pack_only_for_subscription overlapping_categories public_registrations facebook twitter viadeo linkedin instagram
        youtube vimeo dailymotion github echosciences pinterest lastfm flickr machines_module user_change_group
        user_validation_required user_validation_required_list store_module store_withdrawal_instructions store_hidden
@@ -56,7 +58,9 @@ class SettingPolicy < ApplicationPolicy
   # This blacklist is automatically generated from the public_whitelist above.
   ##
   def self.public_blacklist
-    Setting.validators.detect { |v| v.instance_of?(ActiveModel::Validations::InclusionValidator) && v.attributes.include?(:name) }
-           .options[:in] - SettingPolicy.public_whitelist
+    Setting
+      .validators
+      .detect { |v| v.instance_of?(ActiveModel::Validations::InclusionValidator) && v.attributes.include?(:name) }
+      .options[:in] - SettingPolicy.public_whitelist
   end
 end

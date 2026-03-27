@@ -10,7 +10,7 @@ Application.Services.factory('Payment', ['$resource', function ($resource) {
       },
       onlinePaymentStatus: {
         method: 'GET',
-        url: '/api/stripe/online_payment_status'
+        url: '/api/payments/online_payment_status'
       }
     }
   );

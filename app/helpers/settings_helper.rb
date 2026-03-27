@@ -147,6 +147,8 @@ module SettingsHelper
     payzen_public_key
     payzen_hmac
     payzen_currency
+    asaas_api_key
+    asaas_environment
     public_agenda_module
     renew_pack_threshold
     pack_only_for_subscription

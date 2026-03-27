@@ -172,6 +172,11 @@ export const payzenSettings = [
   'payzen_currency'
 ] as const;
 
+export const asaasSettings = [
+  'asaas_api_key',
+  'asaas_environment'
+] as const;
+
 export const openLabSettings = [
   'openlab_app_id',
   'openlab_app_secret',
@@ -301,6 +306,7 @@ export const allSettings = [
   ...modulesSettings,
   ...stripeSettings,
   ...payzenSettings,
+  ...asaasSettings,
   ...openLabSettings,
   ...accountSettings,
   ...analyticsSettings,

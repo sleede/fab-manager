@@ -2,7 +2,9 @@
 
 require 'pay_zen/item'
 require 'stripe/item'
+require 'asaas/item'
 
+# rubocop:disable Style/OneClassPerFile, Lint/RedundantCopDisableDirective
 # Payments module
 module Payment; end
 
@@ -23,8 +25,11 @@ class Payment::ItemBuilder
                   PayZen::Item.new(klass, *ids)
                 when /^Stripe::/
                   Stripe::Item.new(klass, *ids)
+                when /^Asaas::/
+                  Asaas::Item.new(klass, *ids)
                 else
                   raise TypeError
                 end
   end
 end
+# rubocop:enable Style/OneClassPerFile, Lint/RedundantCopDisableDirective

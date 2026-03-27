@@ -2,6 +2,10 @@
 
 # Abstract API Controller to be extended by each payment gateway/mean, for handling the payments processes in the front-end
 class API::PaymentsController < API::APIController
+  require 'asaas/helper'
+  require 'pay_zen/helper'
+  require 'stripe/helper'
+
   before_action :authenticate_user!
 
   # This method must be overridden by the the gateways controllers that inherits API::PaymentsControllers
@@ -9,14 +13,23 @@ class API::PaymentsController < API::APIController
     raise NoMethodError
   end
 
+  def online_payment_status
+    authorize :payment
+
+    status = Stripe::Helper.enabled? || PayZen::Helper.enabled? || Asaas::Helper.enabled?
+    render json: { status: status }
+  end
+
   protected
 
   def post_save(_gateway_item_id, _gateway_item_type, _payment_document); end
 
+  # rubocop:disable Style/MinMaxComparison, Lint/RedundantCopDisableDirective
   def get_wallet_debit(user, total_amount)
     wallet_amount = (user.wallet.amount * 100).to_i
     wallet_amount >= total_amount ? total_amount : wallet_amount
   end
+  # rubocop:enable Style/MinMaxComparison, Lint/RedundantCopDisableDirective
 
   def debit_amount(cart)
     price_details = cart.total

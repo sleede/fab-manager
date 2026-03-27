@@ -1,3 +1,8 @@
+\restrict lgxcFCr4jZqpZOdFVddnTNldrbh4uvxndSRtvNgWuxZuxMIP8agO6HSRwyzGtub
+
+-- Dumped from database version 9.6.24
+-- Dumped by pg_dump version 18.3
+
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET idle_in_transaction_session_timeout = 0;
@@ -339,6 +344,55 @@ CREATE TABLE public.ar_internal_metadata (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
+
+
+--
+-- Name: asaas_payments; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.asaas_payments (
+    id bigint NOT NULL,
+    token character varying NOT NULL,
+    status character varying NOT NULL,
+    asaas_customer_id character varying,
+    asaas_payment_id character varying,
+    event_name character varying,
+    item_type character varying,
+    item_id bigint,
+    result_type character varying,
+    result_id bigint,
+    operator_id bigint NOT NULL,
+    customer_id bigint NOT NULL,
+    pix_payload text,
+    pix_encoded_image text,
+    pix_expiration_at timestamp without time zone,
+    amount integer DEFAULT 0 NOT NULL,
+    cart_items jsonb,
+    payment_data jsonb,
+    paid_at timestamp without time zone,
+    finalized_at timestamp without time zone,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: asaas_payments_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.asaas_payments_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: asaas_payments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.asaas_payments_id_seq OWNED BY public.asaas_payments.id;
 
 
 --
@@ -4643,6 +4697,13 @@ ALTER TABLE ONLY public.age_ranges ALTER COLUMN id SET DEFAULT nextval('public.a
 
 
 --
+-- Name: asaas_payments id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.asaas_payments ALTER COLUMN id SET DEFAULT nextval('public.asaas_payments_id_seq'::regclass);
+
+
+--
 -- Name: assets id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -5543,6 +5604,14 @@ ALTER TABLE ONLY public.age_ranges
 
 ALTER TABLE ONLY public.ar_internal_metadata
     ADD CONSTRAINT ar_internal_metadata_pkey PRIMARY KEY (key);
+
+
+--
+-- Name: asaas_payments asaas_payments_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.asaas_payments
+    ADD CONSTRAINT asaas_payments_pkey PRIMARY KEY (id);
 
 
 --
@@ -6561,6 +6630,48 @@ CREATE INDEX index_advanced_accountings_on_accountable ON public.advanced_accoun
 --
 
 CREATE UNIQUE INDEX index_age_ranges_on_slug ON public.age_ranges USING btree (slug);
+
+
+--
+-- Name: index_asaas_payments_on_asaas_payment_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_asaas_payments_on_asaas_payment_id ON public.asaas_payments USING btree (asaas_payment_id);
+
+
+--
+-- Name: index_asaas_payments_on_customer_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_asaas_payments_on_customer_id ON public.asaas_payments USING btree (customer_id);
+
+
+--
+-- Name: index_asaas_payments_on_item_type_and_item_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_asaas_payments_on_item_type_and_item_id ON public.asaas_payments USING btree (item_type, item_id);
+
+
+--
+-- Name: index_asaas_payments_on_operator_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_asaas_payments_on_operator_id ON public.asaas_payments USING btree (operator_id);
+
+
+--
+-- Name: index_asaas_payments_on_result_type_and_result_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_asaas_payments_on_result_type_and_result_id ON public.asaas_payments USING btree (result_type, result_id);
+
+
+--
+-- Name: index_asaas_payments_on_token; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_asaas_payments_on_token ON public.asaas_payments USING btree (token);
 
 
 --
@@ -8068,6 +8179,14 @@ ALTER TABLE ONLY public.payment_infos
 
 
 --
+-- Name: asaas_payments fk_rails_05398214bd; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.asaas_payments
+    ADD CONSTRAINT fk_rails_05398214bd FOREIGN KEY (customer_id) REFERENCES public.users(id);
+
+
+--
 -- Name: cart_item_event_reservation_booking_users fk_rails_0964335a37; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8257,6 +8376,14 @@ ALTER TABLE ONLY public.invoices
 
 ALTER TABLE ONLY public.cart_item_event_reservations
     ADD CONSTRAINT fk_rails_302f96c6bf FOREIGN KEY (customer_profile_id) REFERENCES public.invoicing_profiles(id);
+
+
+--
+-- Name: asaas_payments fk_rails_327c9d86aa; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.asaas_payments
+    ADD CONSTRAINT fk_rails_327c9d86aa FOREIGN KEY (operator_id) REFERENCES public.users(id);
 
 
 --
@@ -9047,6 +9174,8 @@ ALTER TABLE ONLY public.cart_item_event_reservations
 -- PostgreSQL database dump complete
 --
 
+\unrestrict lgxcFCr4jZqpZOdFVddnTNldrbh4uvxndSRtvNgWuxZuxMIP8agO6HSRwyzGtub
+
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
@@ -9447,6 +9576,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20240605085829'),
 ('20250424164457'),
 ('20250819143916'),
-('20250904090534');
+('20250904090534'),
+('20260327120000');
 
 

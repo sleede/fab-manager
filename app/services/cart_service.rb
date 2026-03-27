@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/ClassLength
 # Provides methods for working with cart items
 class CartService
   def initialize(operator)
@@ -9,8 +10,10 @@ class CartService
   # For details about the expected hash format
   # @see app/frontend/src/javascript/models/payment.ts > interface ShoppingCart
   # @return [ShoppingCart]
+  # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
   def from_hash(cart_items)
     cart_items.permit! if cart_items.is_a? ActionController::Parameters
+    cart_items = normalize_cart_items(cart_items)
 
     @customer = customer(cart_items)
     plan_info = plan(cart_items)
@@ -61,7 +64,9 @@ class CartService
       items: items
     )
   end
+  # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
 
+  # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
   def from_payment_schedule(payment_schedule)
     @customer = payment_schedule.user
     subscription = payment_schedule.payment_schedule_objects.find { |pso| pso.object_type == Subscription.name }&.subscription
@@ -113,8 +118,20 @@ class CartService
       items: items
     )
   end
+  # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
 
   private
+
+  def normalize_cart_items(cart_items)
+    case cart_items
+    when ActionController::Parameters
+      cart_items.to_unsafe_h.deep_symbolize_keys
+    when Hash
+      cart_items.deep_symbolize_keys
+    else
+      cart_items
+    end
+  end
 
   def plan(cart_items)
     new_plan_being_bought = false
@@ -148,6 +165,7 @@ class CartService
     end
   end
 
+  # rubocop:disable Metrics/MethodLength
   def reservable_from_hash(cart_item, plan_info)
     reservable = cart_item[:reservable_type]&.constantize&.find(cart_item[:reservable_id])
     case reservable
@@ -188,7 +206,9 @@ class CartService
       raise NotImplementedError
     end
   end
+  # rubocop:enable Metrics/MethodLength
 
+  # rubocop:disable Metrics/MethodLength
   def reservable_from_payment_schedule_object(object, plan)
     reservable = object.reservation.reservable
     cart_item_reservation_slots = object.reservation.slots_reservations.map do |s|
@@ -228,4 +248,6 @@ class CartService
       raise NotImplementedError
     end
   end
+  # rubocop:enable Metrics/MethodLength
 end
+# rubocop:enable Metrics/ClassLength

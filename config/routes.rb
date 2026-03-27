@@ -248,6 +248,8 @@ Rails.application.routes.draw do
     post 'version' => 'version#show'
 
     # card payments handling
+    get 'payments/online_payment_status' => 'payments#online_payment_status'
+
     ## Stripe gateway
     post 'stripe/confirm_payment' => 'stripe/confirm_payment'
     get 'stripe/online_payment_status' => 'stripe/online_payment_status'
@@ -265,6 +267,11 @@ Rails.application.routes.draw do
     post 'payzen/create_token' => 'payzen#create_token'
     post 'payzen/update_token' => 'payzen#update_token'
     post 'payzen/check_cart' => 'payzen#check_cart'
+
+    ## Asaas gateway
+    post 'asaas/create_payment' => 'asaas#create_payment'
+    get 'asaas/payments/:token/status' => 'asaas#status'
+    post 'asaas/webhook' => 'asaas#webhook'
 
     # local payments handling
     post 'local_payment/confirm_payment' => 'local_payment#confirm_payment'

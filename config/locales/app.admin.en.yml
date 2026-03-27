@@ -1152,14 +1152,25 @@ en:
             currency_error: "The inputted value is not a valid currency"
             error_while_saving: "An error occurred while saving the currency: "
             currency_updated: "The PayZen currency was successfully updated to {CURRENCY}."
-          #select a payment gateway
-          select_gateway_modal:
-            select_gateway_title: "Select a payment gateway"
-            gateway_info: "To securely collect and process payments online, Fab-manager needs to use an third-party service authorized by the financial institutions, called a payment gateway."
-            select_gateway: "Please select an available gateway"
-            stripe: "Stripe"
-            payzen: "PayZen"
-            confirm_button: "Validate the gateway"
+        asaas_keys_form:
+          api_key: "API key"
+          environment: "Environment"
+          api_key_info: "Configure the Asaas API key used to create Pix charges. Use a sandbox key to test the integration before going live."
+          sandbox: "Sandbox"
+          production: "Production"
+        asaas_settings:
+          asaas_keys: "Asaas keys"
+          api_key: "API key"
+          environment: "Environment"
+          edit_keys: "Edit keys"
+        select_gateway_modal:
+          select_gateway_title: "Select a payment gateway"
+          gateway_info: "To securely collect and process payments online, Fab-manager needs to use an third-party service authorized by the financial institutions, called a payment gateway."
+          select_gateway: "Please select an available gateway"
+          asaas: "Asaas Pix"
+          stripe: "Stripe"
+          payzen: "PayZen"
+          confirm_button: "Validate the gateway"
         payment_schedules_list:
           filter_schedules: "Filter schedules"
           no_payment_schedules: "No payment schedules to display"
