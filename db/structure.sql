@@ -336,8 +336,8 @@ ALTER SEQUENCE public.age_ranges_id_seq OWNED BY public.age_ranges.id;
 CREATE TABLE public.ar_internal_metadata (
     key character varying NOT NULL,
     value character varying,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
 );
 
 
@@ -2307,41 +2307,6 @@ CREATE SEQUENCE public.payment_gateway_objects_id_seq
 --
 
 ALTER SEQUENCE public.payment_gateway_objects_id_seq OWNED BY public.payment_gateway_objects.id;
-
-
---
--- Name: payment_infos; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.payment_infos (
-    id bigint NOT NULL,
-    data jsonb,
-    state character varying,
-    payment_for character varying,
-    service character varying,
-    statistic_profile_id bigint,
-    created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL
-);
-
-
---
--- Name: payment_infos_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE public.payment_infos_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: payment_infos_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE public.payment_infos_id_seq OWNED BY public.payment_infos.id;
 
 
 --
@@ -4466,8 +4431,8 @@ CREATE TABLE public.users (
     is_allow_newsletter boolean,
     current_sign_in_ip inet,
     last_sign_in_ip inet,
-    validated_at timestamp without time zone,
     mapped_from_sso character varying,
+    validated_at timestamp without time zone,
     supporting_documents_reminder_sent_at timestamp(6) without time zone
 );
 
@@ -5032,13 +4997,6 @@ ALTER TABLE ONLY public.organizations ALTER COLUMN id SET DEFAULT nextval('publi
 --
 
 ALTER TABLE ONLY public.payment_gateway_objects ALTER COLUMN id SET DEFAULT nextval('public.payment_gateway_objects_id_seq'::regclass);
-
-
---
--- Name: payment_infos id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.payment_infos ALTER COLUMN id SET DEFAULT nextval('public.payment_infos_id_seq'::regclass);
 
 
 --
@@ -5991,14 +5949,6 @@ ALTER TABLE ONLY public.organizations
 
 ALTER TABLE ONLY public.payment_gateway_objects
     ADD CONSTRAINT payment_gateway_objects_pkey PRIMARY KEY (id);
-
-
---
--- Name: payment_infos payment_infos_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.payment_infos
-    ADD CONSTRAINT payment_infos_pkey PRIMARY KEY (id);
 
 
 --
@@ -7229,13 +7179,6 @@ CREATE INDEX index_payment_gateway_objects_on_payment_gateway_object_id ON publi
 
 
 --
--- Name: index_payment_infos_on_statistic_profile_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_payment_infos_on_statistic_profile_id ON public.payment_infos USING btree (statistic_profile_id);
-
-
---
 -- Name: index_payment_schedule_items_on_invoice_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -8057,14 +8000,6 @@ CREATE TRIGGER projects_search_content_trigger BEFORE INSERT OR UPDATE ON public
 
 ALTER TABLE ONLY public.payment_schedules
     ADD CONSTRAINT fk_rails_00308dc223 FOREIGN KEY (wallet_transaction_id) REFERENCES public.wallet_transactions(id);
-
-
---
--- Name: payment_infos fk_rails_0308366a58; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.payment_infos
-    ADD CONSTRAINT fk_rails_0308366a58 FOREIGN KEY (statistic_profile_id) REFERENCES public.statistic_profiles(id);
 
 
 --
@@ -9413,10 +9348,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230328094808'),
 ('20230328094809'),
 ('20230331132506'),
-('20230509121907'),
 ('20230509161557'),
 ('20230510141305'),
-('20230511080650'),
 ('20230511081018'),
 ('20230524080448'),
 ('20230524083558'),
@@ -9432,7 +9365,6 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230720085857'),
 ('20230728072726'),
 ('20230728090257'),
-('20230825101952'),
 ('20230828073428'),
 ('20230831103208'),
 ('20230901090637'),
