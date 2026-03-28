@@ -509,6 +509,12 @@ export const settings: Array<Setting> = [
     localized: 'Adresse requise'
   },
   {
+    name: 'gender_required',
+    value: 'true',
+    last_update: '2022-11-28T16:01:00+0200',
+    localized: 'Genre requis'
+  },
+  {
     name: 'store_module',
     value: 'true',
     last_update: '2022-11-21T15:28:45+0100',

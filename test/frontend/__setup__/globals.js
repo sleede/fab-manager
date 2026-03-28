@@ -12,6 +12,7 @@ global.Fablab.storeModule = true;
 global.Fablab.walletModule = true;
 global.Fablab.publicAgendaModule = true;
 global.Fablab.statisticsModule = true;
+global.Fablab.genderRequired = true;
 global.Fablab.defaultHost = 'localhost';
 global.Fablab.trackingId = 'G-123456-7';
 global.Fablab.adminSysId = 1;
