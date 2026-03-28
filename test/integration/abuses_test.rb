@@ -3,22 +3,35 @@
 require 'test_helper'
 
 class AbusesTest < ActionDispatch::IntegrationTest
+  setup do
+    Warden.test_reset!
+  end
+
+  teardown do
+    Warden.test_reset!
+  end
+
   # Abuse report
-  test 'visitor report an abuse' do
+  test 'visitor cannot report an abuse' do
     project = Project.take
 
     post '/api/abuses',
-         params: {
-           abuse: {
-             signaled_type: 'Project',
-             signaled_id: project.id,
-             first_name: 'William',
-             last_name: 'Prindle',
-             email: 'wprindle@iastate.edu',
-             message: 'This project is in infringement with the patent US5014921 A.'
-           }
-         }.to_json,
+         params: { abuse: abuse_attributes(project) }.to_json,
          headers: default_headers
+
+    assert_equal 401, response.status, response.body
+    assert_match(/sign in/, response.body)
+  end
+
+  test 'logged user report an abuse with a valid recaptcha' do
+    project = Project.take
+    login_as(users(:user2), scope: :user)
+
+    with_valid_recaptcha do
+      post '/api/abuses',
+           params: { abuse: abuse_attributes(project) }.to_json,
+           headers: default_headers
+    end
 
     # Check response format & status
     assert_equal 201, response.status, response.body
@@ -41,21 +54,17 @@ class AbusesTest < ActionDispatch::IntegrationTest
   end
 
   # Incomplete abuse report
-  test 'visitor send an invalid report' do
+  test 'logged user send an invalid report with a valid recaptcha' do
     project = Project.first
+    login_as(users(:user2), scope: :user)
 
-    post '/api/abuses',
-         params: {
-           abuse: {
-             signaled_type: 'Project',
-             signaled_id: project.id,
-             first_name: 'John',
-             last_name: 'Wrong',
-             email: '',
-             message: ''
-           }
-         }.to_json,
-         headers: default_headers
+    with_valid_recaptcha do
+      post '/api/abuses',
+           params: {
+             abuse: abuse_attributes(project, first_name: 'John', last_name: 'Wrong', email: '', message: '')
+           }.to_json,
+           headers: default_headers
+    end
 
     assert_equal 422, response.status, response.body
     assert_match(/can't be blank/, response.body)
@@ -93,5 +102,32 @@ class AbusesTest < ActionDispatch::IntegrationTest
     delete '/api/abuses/1'
     assert_response :success
     assert_empty response.body
+  end
+
+  private
+
+  def abuse_attributes(project, **attributes)
+    {
+      signaled_type: 'Project',
+      signaled_id: project.id,
+      first_name: 'William',
+      last_name: 'Prindle',
+      email: 'wprindle@iastate.edu',
+      message: 'This project is in infringement with the patent US5014921 A.',
+      recaptcha: 'valid-token'
+    }.merge(attributes)
+  end
+
+  def with_valid_recaptcha
+    recaptcha_singleton_class = RecaptchaService.singleton_class
+    original_verify = RecaptchaService.method(:verify)
+
+    recaptcha_singleton_class.define_method(:verify) do |_client_response|
+      { 'success' => true }
+    end
+
+    yield
+  ensure
+    recaptcha_singleton_class.define_method(:verify, original_verify)
   end
 end
