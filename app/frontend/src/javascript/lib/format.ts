@@ -62,7 +62,7 @@ export default class FormatLib {
    */
   private static parseISOtime = (date: TDateISO|TDateISOShortTime): Date => {
     const isoTimeMatch = (date as string)?.match(/(^|T)(\d\d:\d\d)/);
-    return new Date(`${moment().format('YYYY-MM-DD')}T${isoTimeMatch[2]}:00${Fablab.timezone_offset}`);
+    return moment.tz(`${moment().format('YYYY-MM-DD')}T${isoTimeMatch[2]}:00`, Fablab.timezone).toDate();
   };
 
   /**

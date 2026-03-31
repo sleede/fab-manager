@@ -67,6 +67,9 @@ class MembersTest < ActionDispatch::IntegrationTest
   test 'admin successfully updates a member' do
     user = User.friendly.find('vlonchamp')
     user_hash = { user: JSON.parse(user.to_json) }
+    user_hash[:user]['profile_attributes'] ||= {}
+    user_hash[:user]['profile_attributes']['first_name'] = user.profile.first_name
+    user_hash[:user]['profile_attributes']['last_name'] = user.profile.last_name
     instagram = 'https://www.instagram.com/vanessa/'
 
     put "/api/members/#{user.id}", params: user_hash.deep_merge(
@@ -85,7 +88,7 @@ class MembersTest < ActionDispatch::IntegrationTest
     # Check update result
     res = json_response(response.body)
     assert_equal 1, res[:group_id], "user's group does not match"
-    assert_equal instagram, res[:profile_attributes][:instagram], "user's social network not updated"
+    assert_equal instagram, user.reload.profile.instagram, "user's social network not updated"
   end
 
   test 'admin search for autocompletion of a member s name' do
