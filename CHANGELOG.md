@@ -2,6 +2,8 @@
 
 ## Next release
 
+## v6.5.4 2026 March 31
+
 - Fix a security issue: restrict exposed personal data in `/api/last_subscribed`, `/api/members` and `/api/members/:id` for public and non-privileged users
 
 ## v6.5.3 2026 March 26
