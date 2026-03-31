@@ -16,18 +16,19 @@ class API::MembersController < API::APIController
     # remove unmerged profiles from list
     @members = @query.to_a
     @members.delete_if(&:need_completion?)
+    @restricted_member_index = !current_user.privileged?
   end
 
   def last_subscribed
-    @query, @members = Members::MembersService.last_registered(params[:last])
-
-    @requested_attributes = ['profile']
+    @query, @members = Members::MembersService.last_registered
+    @public_last_subscribed = true
     render :index
   end
 
   def show
     @member = User.friendly.find(params[:id])
     authorize @member
+    @restricted_member_show = !current_user.privileged?
   end
 
   def create
