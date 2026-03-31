@@ -4,18 +4,28 @@ user_is_admin = current_user&.admin?
 max_members = @query.except(:offset, :limit, :order).count
 
 json.array!(@members) do |member|
-  json.maxMembers max_members
   json.id member.id
-  json.username member.username
-  json.slug member.slug
-  json.name member.profile.full_name
-  json.email member.email if current_user
-  json.first_name member.profile.first_name
-  json.last_name member.profile.last_name
-  json.need_completion member.need_completion?
-  json.group_id member.group_id
+  json.maxMembers max_members if !@public_last_subscribed
+  if @public_last_subscribed
+    json.name member.profile.full_name
+    if member.profile.user_avatar
+      json.avatar do
+        json.id member.profile.user_avatar.id
+        json.attachment_url member.profile.user_avatar.attachment_url
+      end
+    end
+  else
+    json.username member.username
+    json.slug member.slug
+    json.name member.profile.full_name
+    json.email member.email if current_user
+    json.first_name member.profile.first_name
+    json.last_name member.profile.last_name
+    json.need_completion member.need_completion? unless @restricted_member_index
+    json.group_id member.group_id unless @restricted_member_index
+  end
 
-  if attribute_requested?(@requested_attributes, 'profile')
+  if !@public_last_subscribed && attribute_requested?(@requested_attributes, 'profile')
     json.profile do
       if member.profile.user_avatar
         json.user_avatar do
@@ -25,7 +35,7 @@ json.array!(@members) do |member|
       end
       json.first_name member.profile.first_name
       json.last_name member.profile.last_name
-      json.phone member.profile.phone
+      json.phone member.profile.phone unless @restricted_member_index
     end
     if user_is_admin
       json.statistic_profile do
