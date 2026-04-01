@@ -20,7 +20,8 @@ class API::MembersController < API::APIController
   end
 
   def last_subscribed
-    @query, @members = Members::MembersService.last_registered
+    @query, @members = Members::MembersService.last_registered(params[:last])
+    @query, @members = Members::MembersService.last_registered()
     @public_last_subscribed = true
     render :index
   end
@@ -28,7 +29,7 @@ class API::MembersController < API::APIController
   def show
     @member = User.friendly.find(params[:id])
     authorize @member
-    @restricted_member_show = !current_user.privileged?
+    @restricted_member_show = !current_user.privileged? && current_user.id != @member.id
   end
 
   def create

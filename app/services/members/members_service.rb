@@ -103,12 +103,13 @@ class Members::MembersService
     params
   end
 
-  def self.last_registered
+  def self.last_registered(limit = 10)
+    limit = [limit.to_i, 10].min
     query = User.active.with_role(:member)
                 .includes(:statistic_profile, profile: [:user_avatar])
                 .where('is_allow_contact = true AND confirmed_at IS NOT NULL')
                 .order('created_at desc')
-                .limit(10)
+                .limit(limit)
 
     # remove unmerged profiles from list
     members = query.to_a

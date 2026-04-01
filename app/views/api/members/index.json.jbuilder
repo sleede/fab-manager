@@ -27,6 +27,7 @@ json.array!(@members) do |member|
 
   if !@public_last_subscribed && attribute_requested?(@requested_attributes, 'profile')
     json.profile do
+      json.id member.profile.id
       if member.profile.user_avatar
         json.user_avatar do
           json.id member.profile.user_avatar.id

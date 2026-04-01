@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
-json.extract! member, :username, :email, :slug
+json.extract! member, :id, :username, :email, :slug
 unless @restricted_member_show
-  json.id member.id
   json.group_id member.group_id
   json.role member.roles.first.name
 end
