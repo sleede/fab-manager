@@ -2,6 +2,8 @@
 
 ## Next release
 
+## v6.5.6 2026 April 1
+
 - Fix a bug: Update last_subscribed method to use provided last parameter for member retrieval
 
 ## v6.5.5 2026 April 1
