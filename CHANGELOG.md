@@ -2,6 +2,8 @@
 
 ## Next release
 
+## v6.5.5 2026 April 1
+
 - Fix a bug: member unable to edit profile and reserve machine/format/event
 
 ## v6.5.4 2026 March 31
