@@ -21,7 +21,6 @@ class API::MembersController < API::APIController
 
   def last_subscribed
     @query, @members = Members::MembersService.last_registered(params[:last])
-    @query, @members = Members::MembersService.last_registered()
     @public_last_subscribed = true
     render :index
   end
