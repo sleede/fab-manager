@@ -2,6 +2,8 @@
 
 ## Next release
 
+## v6.5.7 2026 April 1
+
 - Fix a bug: unable to show last user profile
 
 ## v6.5.6 2026 April 1
