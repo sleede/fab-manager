@@ -5,9 +5,10 @@ max_members = @query.except(:offset, :limit, :order).count
 
 json.array!(@members) do |member|
   json.id member.id
+  json.slug member.slug
+  json.name member.profile.full_name
   json.maxMembers max_members if !@public_last_subscribed
   if @public_last_subscribed
-    json.name member.profile.full_name
     if member.profile.user_avatar
       json.avatar do
         json.id member.profile.user_avatar.id
@@ -15,9 +16,6 @@ json.array!(@members) do |member|
       end
     end
   else
-    json.username member.username
-    json.slug member.slug
-    json.name member.profile.full_name
     json.email member.email if current_user
     json.first_name member.profile.first_name
     json.last_name member.profile.last_name

@@ -2,6 +2,8 @@
 
 ## Next release
 
+- Fix a bug: unable to show last user profile
+
 ## v6.5.6 2026 April 1
 
 - Fix a bug: Update last_subscribed method to use provided last parameter for member retrieval
