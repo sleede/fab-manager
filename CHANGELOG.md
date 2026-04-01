@@ -2,9 +2,13 @@
 
 ## Next release
 
+## v6.5.6 2026 April 1
+
+- Fix a bug: Update last_subscribed method to use provided last parameter for member retrieval
+
 ## v6.5.5 2026 April 1
 
-- Fix a bug: member unable to edit profile and reserve machine/format/event
+- Fix a bug: member unable to edit profile and reserve machine/training/event
 
 ## v6.5.4 2026 March 31
 
