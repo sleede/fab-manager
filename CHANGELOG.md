@@ -2,6 +2,8 @@
 
 ## Next release
 
+- Fix a bug: member unable to edit profile and reserve machine/format/event
+
 ## v6.5.4 2026 March 31
 
 - Fix a security issue: restrict exposed personal data in `/api/last_subscribed`, `/api/members` and `/api/members/:id` for public and non-privileged users
