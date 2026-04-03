@@ -382,6 +382,9 @@ it:
         previous: "Precedente"
         next: "Successivo"
         end: "Termina il tour"
+        conclusion:
+          title: "Grazie per la vostra attenzione"
+          content: "<p>Se vuoi riavviare questo aiuto contestuale, premi <strong>F1</strong> in qualsiasi momento o clicca su «? Aiuto » dal menu dell'utente.</p><p>Se hai bisogno di aiuto aggiuntivo, puoi <a href='http://guide-fr.fab.mn' target='_blank'>controllare la guida utente</a> (solo in francese per ora).</p><p>Il team di Fab-manager fornisce anche supporto personalizzato (aiuto per iniziare, nell'installazione, personalizzazione, ecc.), <a href='mailto:contact@fab-manager.com'>contattateci</a> per ulteriori informazioni.</p>"
       #help modal
       help:
         title: "Aiuto"

@@ -394,8 +394,8 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
         selector: 'body',
         stepId: 'conclusion',
         order: 3,
-        title: _t('app.admin.tour.conclusion.title'),
-        content: _t('app.admin.tour.conclusion.content'),
+        title: _t('app.shared.tour.conclusion.title'),
+        content: _t('app.shared.tour.conclusion.content'),
         placement: 'bottom',
         orphan: true
       });
