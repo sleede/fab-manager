@@ -8,8 +8,8 @@ class Profile < ApplicationRecord
                                 allow_destroy: true,
                                 reject_if: proc { |attributes| attributes['attachment'].blank? }
 
-  validates :first_name, presence: true, length: { maximum: 30 }
-  validates :last_name, presence: true, length: { maximum: 30 }
+  validates :first_name, presence: true, length: { maximum: 50 }
+  validates :last_name, presence: true, length: { maximum: 50 }
   validates :phone, numericality: { only_integer: true, allow_blank: false, if: -> { Setting.get('phone_required') } }
 
   after_commit :update_invoicing_profile, if: :invoicing_data_was_modified?
