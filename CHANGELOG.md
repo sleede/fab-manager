@@ -2,6 +2,8 @@
 
 ## Next release
 
+- Improvement: Increase name validation length from 30 to 50 characters
+
 ## v6.5.7 2026 April 1
 
 - Fix a bug: unable to show last user profile
