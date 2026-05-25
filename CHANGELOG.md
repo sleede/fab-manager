@@ -2,6 +2,7 @@
 
 ## Next release
 
+- Fix a bug: resolve case-insensitive SSO username collisions during login or account binding
 ## v6.5.8 2026 April 8
 
 - Improvement: Increase name validation length from 30 to 50 characters
