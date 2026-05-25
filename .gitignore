@@ -80,3 +80,8 @@ yarn-debug.log*
 
 *.sql
 *.tar.gz
+
+# Agents                                                                                                                                                                                                                       CLAUDE.local.md
+CLAUDE.local.md
+.claude/settings.local.json                                                                                                                                                                                                    .antigravitycli/
+.antigravitycli/
