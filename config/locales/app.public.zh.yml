@@ -90,7 +90,7 @@ zh-CN:
         user_s_profile_is_required: "必须填写用户资料。"
         birth_date: "出生日期"
         birth_date_is_required: "必须填写出生日期。"
-        phone_number: "电话号码"
+        phone_number: "电话号码（仅限数字）"
         phone_number_is_required: "必须填写电话号码。"
         address: "地址"
         address_is_required: "必须填写地址。"
