@@ -2,6 +2,10 @@
 
 ## Next release
 
+## v6.5.10 2026 July 14
+
+- Improvement: Invalidate member exports when a user is deleted
+
 ## v6.5.9 2026 May 25
 
 - Fix a bug: resolve case-insensitive SSO username collisions during login or account binding
