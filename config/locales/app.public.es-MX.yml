@@ -90,7 +90,7 @@ es-MX:
         user_s_profile_is_required: "El perfil de usuario es obligatorio."
         birth_date: "Fecha de nacimiento"
         birth_date_is_required: "La fecha de nacimiento es obligatoria."
-        phone_number: "Número de telefono"
+        phone_number: "Teléfono (solo números)"
         phone_number_is_required: "El número de telefono es obligatorio."
         address: "Dirección, ciudad, código postal"
         address_is_required: "Dirección requerida"

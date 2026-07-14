@@ -66,6 +66,7 @@ class User < ApplicationRecord
   after_update :update_invoicing_profile, if: :invoicing_data_was_modified?
   after_update :update_statistic_profile, if: :statistic_data_was_modified?
   before_destroy :remove_orphan_drafts
+  before_destroy :invalidate_member_exports
   after_commit :create_gateway_customer, on: [:create]
   after_commit :notify_admin_when_user_is_created, on: :create
 
@@ -257,5 +258,9 @@ class User < ApplicationRecord
     return if password.blank? || SecurePassword.secured?(password)
 
     errors.add I18n.t('app.public.common.password_is_too_weak'), I18n.t('app.public.common.password_is_too_weak_explanations')
+  end
+
+  def invalidate_member_exports
+    Export.where(category: 'users', export_type: 'members').destroy_all
   end
 end

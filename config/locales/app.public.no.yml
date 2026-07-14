@@ -90,7 +90,7 @@
         user_s_profile_is_required: "Brukerprofil er påkrevd."
         birth_date: "Fødselsdato"
         birth_date_is_required: "Fødselsdato er påkrevd."
-        phone_number: "Telefonnummer"
+        phone_number: "Telefonnummer (kun tall)"
         phone_number_is_required: "Telefonnummer er påkrevd."
         address: "Address, city, postal code"
         address_is_required: "Adresse er påkrevd"

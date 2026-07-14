@@ -90,7 +90,7 @@ en:
         user_s_profile_is_required: "User's profile is required."
         birth_date: "Birth date"
         birth_date_is_required: "Birth date is required."
-        phone_number: "Phone number"
+        phone_number: "Phone number (numbers only)"
         phone_number_is_required: "Phone number is required."
         address: "Address, city, postal code"
         address_is_required: "Address is required"

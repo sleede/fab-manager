@@ -90,7 +90,7 @@ sv:
         user_s_profile_is_required: "Användarprofil måste fyllas i."
         birth_date: "Födelsedatum"
         birth_date_is_required: "Födelsedatum måste fyllas i."
-        phone_number: "Telefonnummer"
+        phone_number: "Telefonnummer (endast siffror)"
         phone_number_is_required: "Telefonnummer måste fyllas i."
         address: "Address, city, postal code"
         address_is_required: "Adress måste fyllas i"

@@ -90,7 +90,7 @@ it:
         user_s_profile_is_required: "Il profilo dell'utente è obbligatorio."
         birth_date: "Data di nascita"
         birth_date_is_required: "La data di nascita è obbligatoria."
-        phone_number: "Numero di telefono"
+        phone_number: "Telefono (solo numeri)"
         phone_number_is_required: "Il numero di telefono è obbligatorio."
         address: "Address, city, postal code"
         address_is_required: "L'indirizzo è obbligatorio"
