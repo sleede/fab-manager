@@ -11,6 +11,7 @@ class Export < ApplicationRecord
   validates :user, presence: true
 
   after_commit :generate_and_send_export, on: [:create]
+  before_destroy :delete_physical_file
 
   def file
     dir = "exports/#{category}/#{export_type}"
@@ -39,5 +40,12 @@ class Export < ApplicationRecord
     else
       raise NoMethodError, "Unknown export service for #{category}/#{export_type}"
     end
+  end
+
+  def delete_physical_file
+    path = Rails.root.join(file)
+    File.delete(path) if File.exist?(path)
+  rescue StandardError => e
+    Rails.logger.error("Failed to delete export file #{path}: #{e.message}")
   end
 end
