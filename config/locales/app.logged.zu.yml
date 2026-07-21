@@ -1,6 +1,31 @@
 zu:
   app:
     logged:
+      tour:
+        open_api:
+          welcome:
+            title: "crwdns27380:0crwdne27380:0"
+            content: "crwdns27382:0crwdne27382:0"
+          doc:
+            title: "crwdns27384:0crwdne27384:0"
+            content: "crwdns27386:0crwdne27386:0"
+      open_api_clients:
+        add_new_client: "crwdns27034:0crwdne27034:0"
+        api_documentation: "crwdns27036:0crwdne27036:0"
+        open_api_clients: "crwdns27038:0crwdne27038:0"
+        name: "crwdns27040:0crwdne27040:0"
+        calls_count: "crwdns27042:0crwdne27042:0"
+        token: "crwdns27044:0crwdne27044:0"
+        created_at: "crwdns27046:0crwdne27046:0"
+        reset_token: "crwdns27048:0crwdne27048:0"
+        client_name: "crwdns27050:0crwdne27050:0"
+        confirmation_required: "crwdns27052:0crwdne27052:0"
+        do_you_really_want_to_delete_this_open_api_client: "crwdns27054:0crwdne27054:0"
+        do_you_really_want_to_revoke_this_open_api_access: "crwdns27056:0crwdne27056:0"
+        client_successfully_created: "crwdns27058:0crwdne27058:0"
+        client_successfully_updated: "crwdns27060:0crwdne27060:0"
+        client_successfully_deleted: "crwdns27062:0crwdne27062:0"
+        access_successfully_revoked: "crwdns27064:0crwdne27064:0"
       #user's profile completion page when logging from an SSO provider
       profile_completion:
         confirm_your_new_account: "crwdns27388:0crwdne27388:0"

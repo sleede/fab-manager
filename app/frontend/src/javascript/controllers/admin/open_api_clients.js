@@ -52,12 +52,12 @@ Application.Controllers.controller('OpenAPIClientsController', ['$scope', 'clien
       if (client.id != null) {
         OpenAPIClient.update({ id: client.id }, { open_api_client: client }, function (clientResp) {
           client = clientResp;
-          return growl.success(_t('app.admin.open_api_clients.client_successfully_updated'));
+          return growl.success(_t('app.logged.open_api_clients.client_successfully_updated'));
         });
       } else {
         OpenAPIClient.save({ open_api_client: client }, function (client) {
           $scope.clients.push(client);
-          return growl.success(_t('app.admin.open_api_clients.client_successfully_created'));
+          return growl.success(_t('app.logged.open_api_clients.client_successfully_created'));
         });
       }
 
@@ -76,8 +76,8 @@ Application.Controllers.controller('OpenAPIClientsController', ['$scope', 'clien
         resolve: {
           object () {
             return {
-              title: _t('app.admin.open_api_clients.confirmation_required'),
-              msg: _t('app.admin.open_api_clients.do_you_really_want_to_delete_this_open_api_client')
+              title: _t('app.logged.open_api_clients.confirmation_required'),
+              msg: _t('app.logged.open_api_clients.do_you_really_want_to_delete_this_open_api_client')
             };
           }
         }
@@ -85,7 +85,7 @@ Application.Controllers.controller('OpenAPIClientsController', ['$scope', 'clien
       , () =>
         OpenAPIClient.delete({ id: $scope.clients[index].id }, function () {
           $scope.clients.splice(index, 1);
-          return growl.success(_t('app.admin.open_api_clients.client_successfully_deleted'));
+          return growl.success(_t('app.logged.open_api_clients.client_successfully_deleted'));
         })
       );
 
@@ -94,8 +94,8 @@ Application.Controllers.controller('OpenAPIClientsController', ['$scope', 'clien
         resolve: {
           object () {
             return {
-              title: _t('app.admin.open_api_clients.confirmation_required'),
-              msg: _t('app.admin.open_api_clients.do_you_really_want_to_revoke_this_open_api_access')
+              title: _t('app.logged.open_api_clients.confirmation_required'),
+              msg: _t('app.logged.open_api_clients.do_you_really_want_to_revoke_this_open_api_access')
             };
           }
         }
@@ -103,7 +103,7 @@ Application.Controllers.controller('OpenAPIClientsController', ['$scope', 'clien
       , () =>
         OpenAPIClient.resetToken({ id: client.id }, {}, function (clientResp) {
           client.token = clientResp.token;
-          return growl.success(_t('app.admin.open_api_clients.access_successfully_revoked'));
+          return growl.success(_t('app.logged.open_api_clients.access_successfully_revoked'));
         })
       );
 
@@ -118,8 +118,8 @@ Application.Controllers.controller('OpenAPIClientsController', ['$scope', 'clien
         selector: 'body',
         stepId: 'welcome',
         order: 0,
-        title: _t('app.admin.tour.open_api.welcome.title'),
-        content: _t('app.admin.tour.open_api.welcome.content'),
+        title: _t('app.logged.tour.open_api.welcome.title'),
+        content: _t('app.logged.tour.open_api.welcome.content'),
         placement: 'bottom',
         orphan: true
       });
@@ -127,16 +127,16 @@ Application.Controllers.controller('OpenAPIClientsController', ['$scope', 'clien
         selector: '.heading .documentation-button',
         stepId: 'doc',
         order: 1,
-        title: _t('app.admin.tour.open_api.doc.title'),
-        content: _t('app.admin.tour.open_api.doc.content'),
+        title: _t('app.logged.tour.open_api.doc.title'),
+        content: _t('app.logged.tour.open_api.doc.content'),
         placement: 'bottom'
       });
       uitour.createStep({
         selector: 'body',
         stepId: 'conclusion',
         order: 2,
-        title: _t('app.admin.tour.conclusion.title'),
-        content: _t('app.admin.tour.conclusion.content'),
+        title: _t('app.shared.tour.conclusion.title'),
+        content: _t('app.shared.tour.conclusion.content'),
         placement: 'bottom',
         orphan: true
       });

@@ -6,21 +6,25 @@ module OpenAPI::V1; end
 # Parameters for OpenAPI endpoints
 class OpenAPI::V1::BaseController < ActionController::Base # rubocop:disable Rails/ApplicationController
   include ApplicationHelper
+  include Pundit
 
   protect_from_forgery with: :null_session
   skip_before_action :verify_authenticity_token
   before_action :authenticate
   before_action :increment_calls_count
+  before_action :check_api_permissions
 
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
   rescue_from OpenAPI::ParameterError, with: :bad_request
   rescue_from ActionController::ParameterMissing, with: :bad_request
 
+  rescue_from Pundit::NotAuthorizedError, with: :render_forbidden
+
   rescue_from TypeError, with: :server_error
   rescue_from NoMethodError, with: :server_error
   rescue_from ArgumentError, with: :server_error
 
-  helper_method :current_api_client
+  helper_method :current_user
 
   protected
 
@@ -42,16 +46,38 @@ class OpenAPI::V1::BaseController < ActionController::Base # rubocop:disable Rai
 
   def authenticate_token
     authenticate_with_http_token do |token, _options|
-      @open_api_client = OpenAPI::Client.find_by(token: token)
+      api_client = OpenAPI::Client.find_by(token: token)
+      if api_client&.user
+        @current_user = api_client.user
+        @open_api_client = api_client
+        true
+      else
+        false
+      end
     end
   end
 
-  def current_api_client
-    @open_api_client
+  def check_api_permissions
+    return if current_user.blank?
+
+    protected_actions = %i[create update destroy delete]
+    if protected_actions.include?(action_name.to_sym) && !current_user.admin?
+      render_forbidden
+      return false
+    end
+    true
+  end
+
+  def current_user
+    @current_user || super
   end
 
   def render_unauthorized
     render json: { errors: ['Bad credentials'] }, status: :unauthorized
+  end
+
+  def render_forbidden
+    render json: { errors: ['Forbidden'] }, status: :forbidden
   end
 
   private
