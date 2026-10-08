@@ -72,6 +72,7 @@ de:
     deleted_user: "Gelöschte Benutzer"
   #members management
   members:
+    cannot_change_sso_password: "Das Passwort kann für SSO-Konten nicht geändert werden"
     unable_to_change_the_group_while_a_subscription_is_running: "Die Gruppe kann während eines Abonnements nicht geändert werden"
     please_input_the_authentication_code_sent_to_the_address: "Bitte geben Sie den Authentifizierungscode ein, der an die E-Mail-Adresse %{EMAIL} gesendet wurde"
     your_authentication_code_is_not_valid: "Der Authentifizierungscode ist ungültig."
