@@ -1,7 +1,7 @@
 <%
-  if @project.project_image
+  if @project.project_image&.attachment&.present?
     image = @project.project_image.attachment.medium
-    width, height = image.dimensions
+    width, height = (image.dimensions rescue [nil, nil])
   end
 %>
 

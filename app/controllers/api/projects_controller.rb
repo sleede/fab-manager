@@ -16,6 +16,7 @@ class API::ProjectsController < API::APIController
 
   def show
     @project = Project.friendly.find(params[:id])
+    authorize @project
   end
 
   def markdown
