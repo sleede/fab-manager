@@ -2,6 +2,7 @@
 
 # API Controller for accessing PayZen API endpoints through the front-end app
 class API::PayzenController < API::PaymentsController
+  require 'pay_zen/client'
   require 'pay_zen/charge'
   require 'pay_zen/order'
   require 'pay_zen/token'
@@ -10,13 +11,42 @@ class API::PayzenController < API::PaymentsController
   require 'pay_zen/service'
 
   def sdk_test
+    authorize :payzen, :sdk_test?
+
+    custom_mode = %i[base_url username password].any? { |k| params.key?(k) }
+
+    if custom_mode
+      unless params[:base_url].is_a?(String) && params[:base_url].present? &&
+             params[:username].is_a?(String) && params[:username].present? &&
+             params[:password].is_a?(String) && params[:password].present?
+        render json: { error: 'Missing PayZen test parameters' }, status: :bad_request and return
+      end
+
+      target_url = params[:base_url]
+      username = params[:username]
+      password = params[:password]
+    else
+      target_url = Setting.get('payzen_endpoint')
+      username = Setting.get('payzen_username')
+      password = Setting.get('payzen_password')
+
+      if target_url.blank? || username.blank? || password.blank?
+        render json: { error: 'PayZen is not configured' }, status: :bad_request and return
+      end
+    end
+
+    unless PayZen::Client.valid_url?(target_url)
+      render json: { error: 'Invalid or untrusted PayZen endpoint' }, status: :bad_request and return
+    end
+
     str = 'fab-manager'
 
-    client = PayZen::Charge.new(base_url: params[:base_url], username: params[:username], password: params[:password])
+    client = PayZen::Charge.new(base_url: target_url, username: username, password: password)
     res = client.sdk_test(str)
 
-    @status = (res['answer']['value'] == str)
-  rescue SocketError
+    @status = (res && res.dig('answer', 'value') == str)
+  rescue SocketError, Net::OpenTimeout, Net::ReadTimeout, Errno::ECONNREFUSED,
+         OpenSSL::SSL::SSLError, PayzenError, URI::InvalidURIError, JSON::ParserError
     @status = false
   end
 
