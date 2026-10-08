@@ -2,6 +2,12 @@
 
 ## Next release
 
+- Fix a security issue: prevent SQL injection in product sorting (FM-01)
+- Fix a security issue: enforce authorization on coupons and prevent arbitrary method execution (FM-03)
+- Fix a security issue: prevent SSRF and credential exfiltration in PayZen gateway test endpoint (FM-02)
+- Fix a security issue: restrict draft project access in show route, member search, and social sharing bots (FM-06)
+- Fix a security issue: require current password verification and confirmation on password update (FM-08)
+
 ## v6.5.10 2026 July 14
 
 - Improvement: Invalidate member exports when a user is deleted
