@@ -137,4 +137,146 @@ class ProductsTest < ActionDispatch::IntegrationTest
     assert_equal 0, product.stock['external']
     assert_not_equal original.slug, product.slug
   end
+
+  test 'list products with sorting, anonymous access, and safe order handling' do
+    logout # verify unauthenticated visitor access
+
+    # Setup NULL and 0 amounts to test COALESCE(amount, 0) behavior
+    nil_product_id = Product.first.id
+    zero_product_id = Product.second.id
+    Product.where(id: nil_product_id).update_all(amount: nil)
+    Product.where(id: zero_product_id).update_all(amount: 0)
+
+    # 1. Default sorting (created_at desc)
+    get '/api/products', headers: default_headers
+    assert_response :success
+    default_ids = json_response(response.body)[:data].map { |p| p[:id] }
+    assert_not_empty default_ids
+    assert_equal Product.order(created_at: :desc).page(1).per(12).pluck(:id), default_ids
+
+    # 2. created_at asc
+    get '/api/products?sort=created_at-asc', headers: default_headers
+    assert_response :success
+    created_asc_ids = json_response(response.body)[:data].map { |p| p[:id] }
+    assert_equal Product.order(created_at: :asc).page(1).per(12).pluck(:id), created_asc_ids
+
+    # 3. Name asc & desc
+    get '/api/products?sort=name-asc', headers: default_headers
+    assert_response :success
+    names_asc = json_response(response.body)[:data].map { |p| p[:name] }
+    assert_not_empty names_asc
+    assert_equal Product.order(name: :asc).page(1).per(12).pluck(:name), names_asc
+
+    get '/api/products?sort=name-desc', headers: default_headers
+    assert_response :success
+    names_desc = json_response(response.body)[:data].map { |p| p[:name] }
+    assert_not_empty names_desc
+    assert_equal Product.order(name: :desc).page(1).per(12).pluck(:name), names_desc
+
+    # Case-insensitive direction
+    get '/api/products?sort=name-ASC', headers: default_headers
+    assert_response :success
+    assert_equal names_asc, json_response(response.body)[:data].map { |p| p[:name] }
+
+    # 4. Amount asc & desc (validating COALESCE(amount, 0))
+    get '/api/products?sort=amount-asc', headers: default_headers
+    assert_response :success
+    data_asc = json_response(response.body)[:data]
+    assert_not_empty data_asc
+    amounts_asc = data_asc.map { |p| p[:amount] || 0.0 }
+    assert_equal amounts_asc.sort, amounts_asc
+    # Verify both nil and zero amount products appear in the zero-value group at the front
+    assert_equal 0.0, amounts_asc.first
+    assert_includes data_asc.first(2).map { |p| p[:id] }, nil_product_id
+    assert_includes data_asc.first(2).map { |p| p[:id] }, zero_product_id
+
+    get '/api/products?sort=amount-desc', headers: default_headers
+    assert_response :success
+    data_desc = json_response(response.body)[:data]
+    assert_not_empty data_desc
+    amounts_desc = data_desc.map { |p| p[:amount] || 0.0 }
+    assert_equal amounts_desc.sort.reverse, amounts_desc
+    # Verify both nil and zero amount products appear in the zero-value group at the end
+    assert_equal 0.0, amounts_desc.last
+    assert_includes data_desc.last(2).map { |p| p[:id] }, nil_product_id
+    assert_includes data_desc.last(2).map { |p| p[:id] }, zero_product_id
+
+    get '/api/products?sort=amount-DESC', headers: default_headers
+    assert_response :success
+    assert_equal amounts_desc, json_response(response.body)[:data].map { |p| p[:amount] || 0.0 }
+
+    # 5. Invalid key & direction fallback
+    get '/api/products?sort=name-invalid', headers: default_headers
+    assert_response :success
+    assert_equal names_desc, json_response(response.body)[:data].map { |p| p[:name] }
+
+    get '/api/products?sort=invalid_col-asc', headers: default_headers
+    assert_response :success
+    assert_equal created_asc_ids, json_response(response.body)[:data].map { |p| p[:id] }
+
+    get '/api/products?sort=amount', headers: default_headers
+    assert_response :success
+    assert_equal amounts_desc, json_response(response.body)[:data].map { |p| p[:amount] || 0.0 }
+
+    get '/api/products?sort=', headers: default_headers
+    assert_response :success
+    assert_equal default_ids, json_response(response.body)[:data].map { |p| p[:id] }
+
+    # 6. Non-string parameters (Array / Hash) should safely fall back to default
+    get '/api/products?sort[]=', headers: default_headers
+    assert_response :success
+    assert_equal default_ids, json_response(response.body)[:data].map { |p| p[:id] }
+
+    get '/api/products?sort[key]=amount', headers: default_headers
+    assert_response :success
+    assert_equal default_ids, json_response(response.body)[:data].map { |p| p[:id] }
+
+    # 7. SQL injection payloads: Ensure safe fallback without SQL syntax error or subquery execution
+    sql_1 = capture_product_load_sql do
+      get '/api/products?sort=amount-desc;+SELECT+1', headers: default_headers
+    end
+    assert_response :success
+    assert_equal amounts_desc, json_response(response.body)[:data].map { |p| p[:amount] || 0.0 }
+    assert_match(/ORDER BY COALESCE\("products"\."amount", 0\) DESC/i, sql_1)
+    refute_match(/SELECT 1/i, sql_1)
+
+    sql_2 = capture_product_load_sql do
+      get '/api/products?sort=amount-desc,+%28SELECT+1%29', headers: default_headers
+    end
+    assert_response :success
+    assert_equal amounts_desc, json_response(response.body)[:data].map { |p| p[:amount] || 0.0 }
+    assert_match(/ORDER BY COALESCE\("products"\."amount", 0\) DESC/i, sql_2)
+    refute_match(/SELECT 1/i, sql_2)
+
+    sql_3 = capture_product_load_sql do
+      get '/api/products?sort=amount-asc,+%28CASE+WHEN+1%3D1+THEN+1+ELSE+0+END%29', headers: default_headers
+    end
+    assert_response :success
+    assert_equal amounts_desc, json_response(response.body)[:data].map { |p| p[:amount] || 0.0 }
+    assert_match(/ORDER BY COALESCE\("products"\."amount", 0\) DESC/i, sql_3)
+    refute_match(/CASE WHEN/i, sql_3)
+
+    sql_4 = capture_product_load_sql do
+      get '/api/products?sort=%28SELECT+1%29-desc', headers: default_headers
+    end
+    assert_response :success
+    assert_equal default_ids, json_response(response.body)[:data].map { |p| p[:id] }
+    assert_match(/ORDER BY "products"\."created_at" DESC/i, sql_4)
+    refute_match(/SELECT 1/i, sql_4)
+  end
+
+  private
+
+  def capture_product_load_sql
+    queries = []
+    subscriber = ActiveSupport::Notifications.subscribe('sql.active_record') do |*args|
+      payload = args.last
+      queries << payload[:sql] if payload[:name] == 'Product Load' || (payload[:sql] =~ /FROM\s+"?products"?/i && payload[:sql] !~ /COUNT/i)
+    end
+    yield
+    assert_not_empty queries, 'Expected Product Load SQL query to be captured'
+    queries.last
+  ensure
+    ActiveSupport::Notifications.unsubscribe(subscriber)
+  end
 end

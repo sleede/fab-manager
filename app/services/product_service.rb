@@ -9,6 +9,8 @@ class ProductService
 
     PRODUCTS_PER_PAGE = 12
     MOVEMENTS_PER_PAGE = 10
+    ALLOWED_SORT_KEYS = %w[created_at name amount].freeze
+    ALLOWED_SORT_DIRECTIONS = %w[asc desc].freeze
 
     def list(filters, operator)
       products = Product.includes(:product_images)
@@ -168,14 +170,19 @@ class ProductService
     end
 
     def products_ordering(products, filters)
-      key, order = filters[:sort]&.split('-')
-      key ||= 'created_at'
-      order ||= 'desc'
+      raw_sort = filters[:sort].is_a?(String) ? filters[:sort] : nil
+      raw_key, raw_order = raw_sort&.split('-', 2)
+      key = ALLOWED_SORT_KEYS.include?(raw_key) ? raw_key : 'created_at'
+      direction = ALLOWED_SORT_DIRECTIONS.include?(raw_order&.downcase) ? raw_order.downcase : 'desc'
 
       if key == 'amount'
-        products.order(Arel.sql("COALESCE(amount, 0) #{order.upcase}"))
+        coalesce_amount = Arel::Nodes::NamedFunction.new(
+          'COALESCE',
+          [Product.arel_table[:amount], Arel::Nodes.build_quoted(0)]
+        )
+        products.order(direction == 'asc' ? coalesce_amount.asc : coalesce_amount.desc)
       else
-        products.order(key => order)
+        products.order(key => direction.to_sym)
       end
     end
 
