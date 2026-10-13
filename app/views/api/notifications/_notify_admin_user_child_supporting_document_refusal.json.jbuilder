@@ -2,4 +2,4 @@
 
 json.title notification.notification_type
 json.description t('.refusal',
-                   NAME: notification.attached_object&.supportable&.full_name || t('api.notifications.deleted_user'))
+                   NAME: ERB::Util.html_escape(notification.attached_object&.supportable&.full_name || t('api.notifications.deleted_user')))

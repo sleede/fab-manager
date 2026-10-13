@@ -45,7 +45,14 @@ module ApplicationHelper
   ##
   def _t(key, interpolations)
     message = MessageFormat.new(I18n.t(scope_key_by_partial(key)), I18n.locale.to_s)
-    text = message.format(interpolations)
+    escaped_interpolations = if html_safe_translation_key?(key) && interpolations.is_a?(Hash)
+                               interpolations.transform_values do |val|
+                                 val.is_a?(String) && !val.html_safe? ? ERB::Util.html_escape(val) : val
+                               end
+                             else
+                               interpolations
+                             end
+    text = message.format(escaped_interpolations)
     if html_safe_translation_key?(key)
       text.html_safe # rubocop:disable Rails/OutputSafety
     else
