@@ -6,6 +6,14 @@ class ReservationPolicy < ApplicationPolicy
     user.admin? || (user.manager? && record.user_id != user.id) || record.price.zero?
   end
 
+  def show?
+    return false unless user
+    return true if user.admin? || user.manager?
+
+    profile_id = user.statistic_profile&.id
+    profile_id.present? && record.statistic_profile_id == profile_id
+  end
+
   def update?
     user.admin? || user.manager? || record.user == user
   end

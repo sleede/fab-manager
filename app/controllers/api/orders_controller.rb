@@ -10,7 +10,9 @@ class API::OrdersController < API::APIController
     @result = ::Orders::OrderService.list(params, current_user)
   end
 
-  def show; end
+  def show
+    authorize @order
+  end
 
   def update
     authorize @order

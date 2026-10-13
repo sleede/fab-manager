@@ -7,6 +7,7 @@
 - Fix a security issue: prevent SSRF and credential exfiltration in PayZen gateway test endpoint (FM-02)
 - Fix a security issue: restrict draft project access in show route, member search, and social sharing bots (FM-06)
 - Fix a security issue: require current password verification and confirmation on password update (FM-08)
+- Fix a security issue: prevent unauthorized direct object reference (IDOR) on invoices, orders, reservations, supporting documents, and accounting periods (FM-05)
 
 ## v6.5.10 2026 July 14
 

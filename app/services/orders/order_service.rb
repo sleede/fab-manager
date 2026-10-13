@@ -14,7 +14,7 @@ class Orders::OrderService
       orders = filter_by_state(orders, filters)
       orders = filter_by_period(orders, filters)
 
-      orders = orders.where.not(state: 'cart') if current_user.member?
+      orders = orders.where.not(state: 'cart') unless current_user.privileged?
       orders = orders_ordering(orders, filters)
       total_count = orders.count
       orders = orders.page(filters[:page] || 1).per(ORDERS_PER_PAGE)
@@ -86,9 +86,14 @@ class Orders::OrderService
     end
 
     def withdrawal_instructions(order)
-      res = order&.order_activities&.find_by(activity_type: 'ready')&.note.presence ||
-            Setting.get('store_withdrawal_instructions').presence ||
-            _t('order.please_contact_FABLAB', FABLAB: Setting.get('fablab_name').presence || 'empty')
+      res = if order&.cart?
+              Setting.get('store_withdrawal_instructions').presence ||
+                _t('order.please_contact_FABLAB', FABLAB: Setting.get('fablab_name').presence || 'empty')
+            else
+              order&.order_activities&.find_by(activity_type: 'ready')&.note.presence ||
+                Setting.get('store_withdrawal_instructions').presence ||
+                _t('order.please_contact_FABLAB', FABLAB: Setting.get('fablab_name').presence || 'empty')
+            end
 
       ActionController::Base.helpers.sanitize(res, tags: %w[p ul li h3 u em strong a], attributes: %w[target rel href])
     end
@@ -96,17 +101,17 @@ class Orders::OrderService
     private
 
     def filter_by_user(orders, filters, current_user)
-      if filters[:user_id]
-        statistic_profile_id = current_user.statistic_profile.id
-        if (current_user.member? && current_user.id == filters[:user_id].to_i) || current_user.privileged?
+      if current_user.privileged?
+        if filters[:user_id].present?
           user = User.find(filters[:user_id])
-          statistic_profile_id = user.statistic_profile.id
+          orders = orders.where(statistic_profile_id: user.statistic_profile&.id)
+        else
+          orders = orders.where.not(statistic_profile_id: nil)
         end
-        orders = orders.where(statistic_profile_id: statistic_profile_id)
-      elsif current_user.member?
+      elsif current_user.statistic_profile&.id.present?
         orders = orders.where(statistic_profile_id: current_user.statistic_profile.id)
       else
-        orders = orders.where.not(statistic_profile_id: nil)
+        orders = orders.none
       end
       orders
     end

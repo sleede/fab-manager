@@ -3,7 +3,7 @@
 # Check the access policies for API::OrdersController
 class OrderPolicy < ApplicationPolicy
   def show?
-    user.privileged? || (record.statistic_profile_id == user.statistic_profile.id)
+    user_owns_order?
   end
 
   def update?
@@ -15,6 +15,16 @@ class OrderPolicy < ApplicationPolicy
   end
 
   def withdrawal_instructions?
-    user&.privileged? || (record&.statistic_profile_id == user&.statistic_profile&.id)
+    record&.cart? || user_owns_order?
+  end
+
+  private
+
+  def user_owns_order?
+    return false unless user
+    return true if user.privileged?
+
+    profile_id = user.statistic_profile&.id
+    profile_id.present? && record&.statistic_profile_id == profile_id
   end
 end

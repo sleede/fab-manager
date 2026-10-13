@@ -181,7 +181,12 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
         controller: 'AvoirModalController',
         resolve: {
           invoice () { return invoice; },
-          closedPeriods () { return AccountingPeriod.query().$promise; },
+          closedPeriods () {
+            if ($scope.currentUser && $scope.currentUser.role === 'admin') {
+              return AccountingPeriod.query().$promise;
+            }
+            return [];
+          },
           lastClosingEnd () { return AccountingPeriod.lastClosingEnd().$promise; }
         }
       });

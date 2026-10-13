@@ -38,7 +38,9 @@ class API::SupportingDocumentFilesController < API::APIController
   end
 
   # GET /api/supporting_document_files/1/
-  def show; end
+  def show
+    authorize @supporting_document_file
+  end
 
   private
 

@@ -6,8 +6,16 @@ class InvoicePolicy < ApplicationPolicy
     user.admin?
   end
 
+  def show?
+    download?
+  end
+
   def download?
-    user.admin? || user.manager? || (record.invoicing_profile.user_id == user.id)
+    return false unless user
+    return true if user.admin? || user.manager?
+
+    profile_user_id = record.invoicing_profile&.user_id
+    profile_user_id.present? && profile_user_id == user.id
   end
 
   def create?
