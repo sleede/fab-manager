@@ -2,6 +2,8 @@
 
 ## Next release
 
+## v6.6.0 2026 October 19
+
 - Fix a security issue: prevent SQL injection in product sorting (FM-01)
 - Fix a security issue: enforce authorization on coupons and prevent arbitrary method execution (FM-03)
 - Fix a security issue: prevent SSRF and credential exfiltration in PayZen gateway test endpoint (FM-02)
