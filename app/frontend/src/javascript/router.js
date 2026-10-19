@@ -1006,7 +1006,12 @@ angular.module('application.router', ['ui.router'])
               query: { number: '', customer: '', date: null, order_by: '-date', page: 1, size: 20 }
             }).$promise;
           }],
-          closedPeriods: ['AccountingPeriod', function (AccountingPeriod) { return AccountingPeriod.query().$promise; }]
+          closedPeriods: ['AccountingPeriod', 'currentUser', function (AccountingPeriod, currentUser) {
+            if (currentUser && currentUser.role === 'admin') {
+              return AccountingPeriod.query().$promise;
+            }
+            return [];
+          }]
         }
       })
 

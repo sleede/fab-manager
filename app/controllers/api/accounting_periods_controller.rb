@@ -6,10 +6,13 @@ class API::AccountingPeriodsController < API::APIController
   before_action :set_period, only: %i[show download_archive]
 
   def index
+    authorize AccountingPeriod
     @accounting_periods = Accounting::AccountingPeriodService.all_periods_with_users
   end
 
-  def show; end
+  def show
+    authorize @accounting_period
+  end
 
   def create
     authorize AccountingPeriod

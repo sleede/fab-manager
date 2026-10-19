@@ -3,6 +3,8 @@
 require 'test_helper'
 
 class PayzenTest < ActionDispatch::IntegrationTest
+  include WebMock::API
+
   def setup
     @user = User.members.first
     login_as(@user, scope: :user)
@@ -133,5 +135,155 @@ class PayzenTest < ActionDispatch::IntegrationTest
     assert_equal invoices_count + 1, Invoice.count
     assert_equal slots_reservation_count + 1, SlotsReservation.count
     assert_equal availabilities_count, Availability.count
+  end
+
+  test 'sdk_test is forbidden for regular members and unauthenticated users' do
+    logout
+    post '/api/payzen/sdk_test',
+         params: { base_url: 'https://attacker.com', username: 'user', password: 'password' }.to_json,
+         headers: default_headers
+    assert_response :unauthorized
+
+    login_as(@user, scope: :user)
+    post '/api/payzen/sdk_test',
+         params: { base_url: 'https://attacker.com', username: 'user', password: 'password' }.to_json,
+         headers: default_headers
+    assert_response :forbidden
+  end
+
+  test 'sdk_test as admin rejects unapproved origins and SSRF destinations' do
+    admin = User.admins.first
+    login_as(admin, scope: :user)
+
+    invalid_urls = [
+      'http://api.payzen.eu',
+      'https://unapproved.api.payzen.eu',
+      'https://attacker.com',
+      'https://127.0.0.1',
+      'https://[::1]',
+      'https://169.254.169.254',
+      'https://10.0.0.1',
+      'https://192.168.1.1',
+      'https://evil-payzen.eu',
+      'https://api.payzen.eu.attacker.com',
+      'https://api.payzen.eu:8443',
+      'https://api.payzen.eu/evil/path',
+      'https://api.payzen.eu?param=1'
+    ]
+
+    invalid_urls.each do |url|
+      post '/api/payzen/sdk_test',
+           params: { base_url: url, username: 'user', password: 'password' }.to_json,
+           headers: default_headers
+      assert_response :bad_request, "Expected #{url} to be rejected with 400 Bad Request"
+      json = json_response(response.body)
+      assert_equal 'Invalid or untrusted PayZen endpoint', json[:error]
+    end
+  end
+
+  test 'sdk_test as admin rejects incomplete parameters when custom settings are provided' do
+    admin = User.admins.first
+    login_as(admin, scope: :user)
+
+    incomplete_payloads = [
+      { base_url: '' },
+      { base_url: nil },
+      { base_url: ['https://api.payzen.eu'] },
+      { base_url: { host: 'api.payzen.eu' } },
+      { base_url: 'https://api.payzen.eu' },
+      { base_url: 'https://api.payzen.eu', username: '' },
+      { base_url: 'https://api.payzen.eu', username: 'user' },
+      { base_url: 'https://api.payzen.eu', password: 'pass' },
+      { base_url: 'https://api.payzen.eu', username: 'user', password: '' },
+      { username: 'user' },
+      { password: 'pass' }
+    ]
+
+    incomplete_payloads.each do |payload|
+      post '/api/payzen/sdk_test', params: payload.to_json, headers: default_headers
+      assert_response :bad_request
+      json = json_response(response.body)
+      assert_equal 'Missing PayZen test parameters', json[:error]
+    end
+  end
+
+  test 'payzen client never transmits stored credentials when custom destination is specified' do
+    Setting.set('payzen_username', 'stored_prod_user')
+    Setting.set('payzen_password', 'stored_prod_password')
+
+    client = PayZen::Client.new(base_url: 'https://api.payzen.eu', username: 'custom_user', password: 'custom_password')
+    auth_header = client.send(:authorization_header)
+    assert_equal "Basic #{Base64.strict_encode64('custom_user:custom_password')}", auth_header
+
+    decoded = Base64.decode64(auth_header.delete_prefix('Basic '))
+    assert_equal 'custom_user:custom_password', decoded
+    refute_includes decoded, 'stored_prod_user'
+    refute_includes decoded, 'stored_prod_password'
+
+    incomplete_client = PayZen::Client.new(base_url: 'https://api.payzen.eu')
+    assert_raises(PayzenError) { incomplete_client.send(:authorization_header) }
+  end
+
+  test 'sdk_test as admin uses stored configuration when no custom parameters are provided' do
+    admin = User.admins.first
+    login_as(admin, scope: :user)
+
+    Setting.set('payzen_endpoint', 'https://api.payzen.eu')
+    Setting.set('payzen_username', 'stored_user')
+    Setting.set('payzen_password', 'stored_pass')
+
+    stub_request(:post, 'https://api.payzen.eu/api-payment/V4/Charge/SDKTest')
+      .with(
+        headers: { 'Authorization' => "Basic #{Base64.strict_encode64('stored_user:stored_pass')}" },
+        body: { value: 'fab-manager' }.to_json
+      )
+      .to_return(status: 200, body: '{"answer":{"value":"fab-manager"}}', headers: { 'Content-Type' => 'application/json' })
+
+    post '/api/payzen/sdk_test', params: {}.to_json, headers: default_headers
+    assert_response :success
+    json = json_response(response.body)
+    assert_equal true, json[:success]
+  end
+
+  test 'sdk_test as admin handles success, redirects, and network failures safely' do
+    admin = User.admins.first
+    login_as(admin, scope: :user)
+
+    # Success case
+    stub_request(:post, 'https://api.payzen.eu/api-payment/V4/Charge/SDKTest')
+      .with(
+        headers: { 'Authorization' => "Basic #{Base64.strict_encode64('user:password')}" },
+        body: { value: 'fab-manager' }.to_json
+      )
+      .to_return(status: 200, body: '{"answer":{"value":"fab-manager"}}', headers: { 'Content-Type' => 'application/json' })
+
+    post '/api/payzen/sdk_test',
+         params: { base_url: 'https://api.payzen.eu', username: 'user', password: 'password' }.to_json,
+         headers: default_headers
+    assert_response :success
+    json = json_response(response.body)
+    assert_equal true, json[:success]
+
+    # Redirect (302) rejection case - must not follow redirects
+    stub_request(:post, 'https://api.payzen.eu/api-payment/V4/Charge/SDKTest')
+      .to_return(status: 302, headers: { 'Location' => 'http://127.0.0.1/evil' })
+
+    post '/api/payzen/sdk_test',
+         params: { base_url: 'https://api.payzen.eu', username: 'user', password: 'password' }.to_json,
+         headers: default_headers
+    assert_response :success
+    json = json_response(response.body)
+    assert_equal false, json[:success]
+    assert_not_requested(:any, 'http://127.0.0.1/evil')
+
+    # Network timeout case
+    stub_request(:post, 'https://api.payzen.eu/api-payment/V4/Charge/SDKTest').to_timeout
+
+    post '/api/payzen/sdk_test',
+         params: { base_url: 'https://api.payzen.eu', username: 'user', password: 'password' }.to_json,
+         headers: default_headers
+    assert_response :success
+    json = json_response(response.body)
+    assert_equal false, json[:success]
   end
 end

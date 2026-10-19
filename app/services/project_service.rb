@@ -26,9 +26,12 @@ class ProjectService
     records = records.with_status(query_params['status_id']) if query_params['status_id'].present?
 
     if query_params['member_id'].present?
-      member = User.find(query_params['member_id'])
+      member = User.find_by(id: query_params['member_id'])
       if member
-        records = records.where(id: Project.user_projects(member.statistic_profile.id)).or(Project.where(id: Project.collaborations(member.id)))
+        stat_id = member.statistic_profile&.id
+        author_ids = stat_id ? Project.where(author_statistic_profile_id: stat_id).pluck(:id) : []
+        collab_ids = Project.joins(:project_users).where(project_users: { user_id: member.id }).pluck(:id)
+        records = records.where(id: (author_ids + collab_ids).uniq)
       end
     end
 

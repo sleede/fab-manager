@@ -72,6 +72,7 @@ sv:
     deleted_user: "Raderad användare"
   #members management
   members:
+    cannot_change_sso_password: "Lösenordet kan inte ändras för SSO-konton"
     unable_to_change_the_group_while_a_subscription_is_running: "Det går inte att ändra gruppen medan en prenumeration är aktiv"
     please_input_the_authentication_code_sent_to_the_address: "Ange autentiseringskoden som skickats till e-postadressen %{EMAIL}"
     your_authentication_code_is_not_valid: "Ogiltig aktiveringskod."

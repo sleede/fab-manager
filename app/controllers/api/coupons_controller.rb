@@ -10,13 +10,34 @@ class API::CouponsController < API::APIController
 
   # Number of notifications added to the page when the user clicks on 'load next notifications'
   COUPONS_PER_PAGE = 10
+  ALLOWED_FILTERS = %w[all active disabled expired sold_out].freeze
 
   def index
-    @coupons = Coupon.method(params[:filter]).call.page(params[:page]).per(COUPONS_PER_PAGE).order('created_at DESC')
-    @total = Coupon.method(params[:filter]).call.length
+    authorize Coupon
+
+    if params.key?(:filter)
+      return render json: { error: 'Invalid filter' }, status: :bad_request unless params[:filter].is_a?(String)
+      return render json: { error: 'Invalid filter' }, status: :bad_request if params[:filter].present? && !ALLOWED_FILTERS.include?(params[:filter])
+    end
+
+    filter = params[:filter].presence || 'all'
+
+    coupons_scope = case filter
+                    when 'active'   then Coupon.active
+                    when 'disabled' then Coupon.disabled
+                    when 'expired'  then Coupon.expired
+                    when 'sold_out' then Coupon.sold_out
+                    else                 Coupon.all
+                    end
+
+    @coupons = coupons_scope.page(params[:page]).per(COUPONS_PER_PAGE).order('created_at DESC')
+    count = coupons_scope.count(:all)
+    @total = count.is_a?(Hash) ? count.size : count
   end
 
-  def show; end
+  def show
+    authorize @coupon
+  end
 
   def create
     authorize Coupon

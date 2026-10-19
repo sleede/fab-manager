@@ -72,6 +72,7 @@ zu:
     deleted_user: "crwdns22460:0crwdne22460:0"
   #members management
   members:
+    cannot_change_sso_password: "Password cannot be changed for SSO accounts"
     unable_to_change_the_group_while_a_subscription_is_running: "crwdns3275:0crwdne3275:0"
     please_input_the_authentication_code_sent_to_the_address: "crwdns3277:0%{EMAIL}crwdne3277:0"
     your_authentication_code_is_not_valid: "crwdns3279:0crwdne3279:0"

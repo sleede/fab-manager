@@ -6,7 +6,7 @@ class SupportingDocumentFilePolicy < ApplicationPolicy
     user.privileged?
   end
 
-  %w[create update download].each do |action|
+  %w[create update download show].each do |action|
     define_method "#{action}?" do
       user.privileged? ||
         (record.supportable_type == 'User' && record.supportable_id.to_i == user.id) ||

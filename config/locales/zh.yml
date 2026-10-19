@@ -72,6 +72,7 @@ zh-CN:
     deleted_user: "已删除用户"
   #members management
   members:
+    cannot_change_sso_password: "SSO 账户无法更改本地密码"
     unable_to_change_the_group_while_a_subscription_is_running: "订阅运行时无法更改组"
     please_input_the_authentication_code_sent_to_the_address: "请输入发送到电子邮件地址%{EMAIL}的认证码"
     your_authentication_code_is_not_valid: "您的认证码无效。"

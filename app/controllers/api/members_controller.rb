@@ -48,7 +48,7 @@ class API::MembersController < API::APIController
     authorize @member
     members_service = Members::MembersService.new(@member)
 
-    if members_service.update(user_params, current_user, params[:user][:current_password])
+    if members_service.update(user_params, current_user, params.dig(:user, :current_password))
       # Update password without logging out
       bypass_sign_in(@member) unless current_user.id != params[:id].to_i
       render :show, status: :ok, location: member_path(@member)

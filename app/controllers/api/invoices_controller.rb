@@ -12,7 +12,9 @@ class API::InvoicesController < API::APIController
     ).all.order('reference DESC')
   end
 
-  def show; end
+  def show
+    authorize @invoice
+  end
 
   def download
     authorize @invoice

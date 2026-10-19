@@ -72,6 +72,7 @@ es:
     deleted_user: "Usuario eliminado"
   #members management
   members:
+    cannot_change_sso_password: "La contraseña no se puede cambiar para las cuentas SSO"
     unable_to_change_the_group_while_a_subscription_is_running: "No se puede cambiar de grupo mientras haya una suscripción en curso"
     please_input_the_authentication_code_sent_to_the_address: "Por favor Ingrese el código de autenticación enviado a la dirección de correo electrónico %{EMAIL}"
     your_authentication_code_is_not_valid: "Su código de autenticación no es válido."

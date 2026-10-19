@@ -31,7 +31,7 @@ class Members::MembersService
       end
     end
 
-    handle_password(params, operator, current_password)
+    return false unless handle_password(params, operator, current_password)
 
     Members::MembersService.handle_organization(params)
 
@@ -176,12 +176,48 @@ class Members::MembersService
   end
 
   def handle_password(params, operator, current_password = nil)
-    return unless params[:password] && params[:password_confirmation]
+    current_password ||= params[:current_password]
 
-    return if operator.privileged?
+    if params[:password].blank? && params[:password_confirmation].blank?
+      params.delete(:password)
+      params.delete('password')
+      params.delete(:password_confirmation)
+      params.delete('password_confirmation')
+      return true
+    end
 
-    raise SecurityError, 'current password not provided' if current_password.blank?
+    if @member.provider.present? && @member.provider != 'DatabaseProvider'
+      @member.errors.add(:password, I18n.t('members.cannot_change_sso_password', default: 'Password cannot be changed for SSO accounts'))
+      return false
+    end
 
-    raise SecurityError, 'current password does not match' unless @member.valid_password?(current_password)
+    if params[:password].blank?
+      @member.errors.add(:password, :blank)
+      return false
+    end
+
+    if params[:password_confirmation].blank?
+      @member.errors.add(:password_confirmation, :blank)
+      return false
+    end
+
+    if params[:password] != params[:password_confirmation]
+      @member.errors.add(:password_confirmation, :confirmation, attribute: User.human_attribute_name(:password))
+      return false
+    end
+
+    return true if operator&.privileged? && operator.id != @member.id
+
+    if current_password.blank?
+      @member.errors.add(:current_password, :blank)
+      return false
+    end
+
+    unless @member.valid_password?(current_password)
+      @member.errors.add(:current_password, :invalid)
+      return false
+    end
+
+    true
   end
 end

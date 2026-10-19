@@ -25,7 +25,9 @@ class API::ReservationsController < API::APIController
     end
   end
 
-  def show; end
+  def show
+    authorize @reservation
+  end
 
   def update
     authorize @reservation
