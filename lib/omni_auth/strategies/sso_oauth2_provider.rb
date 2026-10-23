@@ -56,16 +56,11 @@ class OmniAuth::Strategies::SsoOauth2Provider < OmniAuth::Strategies::OAuth2
     logger = SsoLogger.new
 
     @raw_info ||= {}
-    logger.debug "[raw_info] @raw_infos = #{@raw_info&.to_json}"
+    logger.debug '[raw_info] fetching data'
     unless @raw_info.size.positive?
       OmniAuth::Strategies::SsoOauth2Provider.active_provider.auth_provider_mappings.each do |mapping|
-        logger.debug "mapping = #{mapping&.to_json}"
         next if @raw_info.key?(mapping.api_endpoint.to_sym)
 
-        logger.debug "api_endpoint = #{mapping.api_endpoint.to_sym}"
-        logger.debug "access_token = #{access_token&.to_json}"
-        logger.debug "token get = #{access_token.get(mapping.api_endpoint)}"
-        logger.debug "parsed = #{access_token.get(mapping.api_endpoint).parsed}"
         @raw_info[mapping.api_endpoint.to_sym] = access_token.get(mapping.api_endpoint).parsed
       end
     end

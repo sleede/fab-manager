@@ -9,6 +9,7 @@
 - Fix a security issue: require current password verification and confirmation on password update (FM-08)
 - Fix a security issue: prevent unauthorized direct object reference (IDOR) on invoices, orders, reservations, supporting documents, and accounting periods (FM-05)
 - Fix a security issue: prevent persistent HTML injection and XSS in notifications (FM-04)
+- Fix a security issue: ensure SSO debug logging respects boolean toggle and prevent credential dumps (FM-12)
 
 ## v6.5.10 2026 July 14
 

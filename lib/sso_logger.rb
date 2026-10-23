@@ -4,7 +4,7 @@
 class SsoLogger
   def initialize
     @logger = ActiveSupport::TaggedLogging.new(Logger.new($stdout))
-    @log_status = ENV.fetch('SSO_DEBUG', false)
+    @log_status = ENV['SSO_DEBUG'].to_s.strip.downcase == 'true'
   end
 
   def debug(message)

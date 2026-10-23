@@ -14,13 +14,13 @@ module OmniAuth::DataMapping
         logger = SsoLogger.new
         @info ||= {}
 
-        logger.debug "[mapped_info] @info = #{@info.to_json}"
+        logger.debug '[mapped_info] start mapping'
 
         unless @info.size.positive?
           mappings.each do |mapping|
 
             raw_data = ::JsonPath.new(mapping.api_field).on(raw_info[mapping.api_endpoint.to_sym]).first
-            logger.debug "@parsed_info[#{local_sym(mapping)}] mapped from #{raw_data}"
+            logger.debug "@parsed_info[#{local_sym(mapping)}] mapped"
             @info[local_sym(mapping)] = if mapping.transformation
                                           case mapping.transformation['type']
                                           when 'integer'

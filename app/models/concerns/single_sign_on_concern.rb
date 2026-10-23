@@ -53,7 +53,7 @@ module SingleSignOnConcern
     ## @param sso_user {User} the provided user will be DELETED after the merge was successful
     def merge_from_sso(sso_user)
       logger = SsoLogger.new
-      logger.debug "[User::merge_from_sso] initiated with parameter #{sso_user}"
+      logger.debug "[User::merge_from_sso] initiated for user_id=#{sso_user&.id}"
       # update the attributes to link the account to the sso account
       self.provider = sso_user.provider
       self.uid = sso_user.uid
@@ -74,7 +74,7 @@ module SingleSignOnConcern
       logger.debug "found auth_provider=#{auth_provider&.name}"
       auth_provider&.sso_fields&.each do |field|
         value = sso_user.get_data_from_sso_mapping(field)
-        logger.debug "mapping sso field #{field} with value=#{value}"
+        logger.debug "mapping sso field #{field}"
         # We do not merge the email field if its end with the special value '-duplicate' as this means
         # that the user is currently merging with the account that have the same email than the sso.
         # Moreover, if the user is an administrator, we must keep him in his group
@@ -103,7 +103,7 @@ module SingleSignOnConcern
   class_methods do
     def from_omniauth(auth)
       logger = SsoLogger.new
-      logger.debug "[User::from_omniauth] initiated with parameter #{auth}"
+      logger.debug "[User::from_omniauth] initiated for provider=#{auth.provider}"
       active_provider = Rails.configuration.auth_provider
       raise SecurityError, 'The identity provider does not match the activated one' if active_provider.strategy_name != auth.provider
 
@@ -113,7 +113,7 @@ module SingleSignOnConcern
         logger.debug user.id.nil? ? 'no user found, creating a new one' : "found user id=#{user.id}"
         user.profile ||= Profile.new
         auth.info.mapping.each do |key, value|
-          logger.debug "mapping info #{key} with value=#{value}"
+          logger.debug "mapping info #{key}"
           user.set_data_from_sso_mapping(key, value)
         end
         logger.debug 'generating a new password'
