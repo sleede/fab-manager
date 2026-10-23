@@ -10,6 +10,7 @@
 - Fix a security issue: prevent unauthorized direct object reference (IDOR) on invoices, orders, reservations, supporting documents, and accounting periods (FM-05)
 - Fix a security issue: prevent persistent HTML injection and XSS in notifications (FM-04)
 - Fix a security issue: ensure SSO debug logging respects boolean toggle and prevent credential dumps (FM-12)
+- Fix a bug: prevent machine reservation update from falsely detecting itself as a conflict (BUG-02)
 
 ## v6.5.10 2026 July 14
 
