@@ -7,12 +7,8 @@ class ChildService
       NotificationCenter.call type: 'notify_admin_child_created',
                               receiver: User.admins_and_managers,
                               attached_object: child
-      all_files_are_upload = true
-      SupportingDocumentType.where(document_type: 'Child').each do |sdt|
-        file = sdt.supporting_document_files.find_by(supportable: child)
-        all_files_are_upload = false if file.nil? || file.attachment_identifier.nil?
-      end
-      if all_files_are_upload
+
+      if all_supporting_documents_present?(child)
         NotificationCenter.call type: 'notify_admin_user_child_supporting_document_files_created',
                                 receiver: User.admins_and_managers,
                                 attached_object: child
@@ -24,15 +20,10 @@ class ChildService
   end
 
   def self.update(child, child_params)
+    has_new_attachment = new_attachment_uploaded?(child_params)
+
     if child.update(child_params)
-      all_files_are_upload = true
-      SupportingDocumentType.where(document_type: 'Child').each do |sdt|
-        file = sdt.supporting_document_files.find_by(supportable: child)
-        if file.nil? || file.attachment_identifier.nil? || child_params['supporting_document_files_attributes']['0']['attachment'].blank?
-          all_files_are_upload = false
-        end
-      end
-      if all_files_are_upload
+      if has_new_attachment && all_supporting_documents_present?(child)
         NotificationCenter.call type: 'notify_admin_user_child_supporting_document_files_updated',
                                 receiver: User.admins_and_managers,
                                 attached_object: child
@@ -57,5 +48,47 @@ class ChildService
       end
     end
     is_updated
+  end
+
+  class << self
+    private
+
+    def new_attachment_uploaded?(child_params)
+      files_attrs = child_params[:supporting_document_files_attributes] ||
+                    child_params['supporting_document_files_attributes']
+      return false if files_attrs.blank?
+
+      attrs_list = normalize_supporting_documents_attributes(files_attrs)
+      attrs_list.any? do |attrs|
+        next false if attrs.blank?
+
+        destroy_flag = attrs[:_destroy] || attrs['_destroy']
+        next false if ActiveModel::Type::Boolean.new.cast(destroy_flag)
+
+        (attrs[:attachment] || attrs['attachment']).present?
+      end
+    end
+
+    def normalize_supporting_documents_attributes(files_attrs)
+      case files_attrs
+      when Array
+        files_attrs
+      when Hash, ActionController::Parameters
+        if files_attrs.key?(:id) || files_attrs.key?('id')
+          [files_attrs]
+        else
+          files_attrs.values
+        end
+      else
+        Array(files_attrs)
+      end
+    end
+
+    def all_supporting_documents_present?(child)
+      SupportingDocumentType.where(document_type: 'Child').all? do |sdt|
+        file = sdt.supporting_document_files.find_by(supportable: child)
+        file&.attachment_identifier.present?
+      end
+    end
   end
 end

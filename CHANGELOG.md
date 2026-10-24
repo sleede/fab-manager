@@ -14,6 +14,7 @@
 - Fix a security issue: prevent unauthorized ownership and association tampering in children and supporting documents (FM-14)
 - Fix a security issue: enforce user_change_group setting and prevent unauthorized member group changes (FM-09)
 - Fix a security issue: enforce cancellation settings and deadline before booking cancellation (FM-10)
+- Fix a bug: resolve NoMethodError on child update when supporting document attributes are omitted or formatted as array (BUG-01)
 
 ## v6.5.10 2026 July 14
 
