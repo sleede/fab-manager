@@ -11,6 +11,7 @@
 - Fix a security issue: prevent persistent HTML injection and XSS in notifications (FM-04)
 - Fix a security issue: ensure SSO debug logging respects boolean toggle and prevent credential dumps (FM-12)
 - Fix a bug: prevent machine reservation update from falsely detecting itself as a conflict (BUG-02)
+- Fix a security issue: prevent unauthorized ownership and association tampering in children and supporting documents (FM-14)
 
 ## v6.5.10 2026 July 14
 

@@ -17,7 +17,7 @@ class API::ChildrenController < API::APIController
   end
 
   def create
-    @child = Child.new(child_params)
+    @child = current_user.children.build(child_params)
     authorize @child
     if ChildService.create(@child)
       render status: :created
@@ -60,8 +60,8 @@ class API::ChildrenController < API::APIController
   end
 
   def child_params
-    params.require(:child).permit(:first_name, :last_name, :email, :phone, :birthday, :user_id,
-                                  supporting_document_files_attributes: %i[id supportable_id supportable_type
+    params.require(:child).permit(:first_name, :last_name, :email, :phone, :birthday,
+                                  supporting_document_files_attributes: %i[id
                                                                            supporting_document_type_id
                                                                            attachment _destroy])
   end
