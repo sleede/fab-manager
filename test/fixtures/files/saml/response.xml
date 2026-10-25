@@ -1,0 +1,30 @@
+<samlp:Response xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol"
+  xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion" ID="_local_response" Version="2.0"
+  IssueInstant="%{issue_instant}" Destination="%{destination}" InResponseTo="%{request_id}">
+  <saml:Issuer>%{issuer}</saml:Issuer>
+  <samlp:Status><samlp:StatusCode Value="urn:oasis:names:tc:SAML:2.0:status:Success"/></samlp:Status>
+  <saml:Assertion xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion"
+    xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol"
+    ID="_local_assertion" Version="2.0" IssueInstant="%{issue_instant}">
+    <saml:Issuer>%{issuer}</saml:Issuer>
+    <saml:Subject>
+      <saml:NameID>%{name_id}</saml:NameID>
+      <saml:SubjectConfirmation Method="urn:oasis:names:tc:SAML:2.0:cm:bearer">
+        <saml:SubjectConfirmationData Recipient="%{recipient}" InResponseTo="%{request_id}" NotOnOrAfter="%{not_after}"/>
+      </saml:SubjectConfirmation>
+    </saml:Subject>
+    <saml:Conditions NotBefore="%{not_before}" NotOnOrAfter="%{not_after}">
+      <saml:AudienceRestriction><saml:Audience>%{audience}</saml:Audience></saml:AudienceRestriction>
+    </saml:Conditions>
+    <saml:AuthnStatement AuthnInstant="%{issue_instant}" SessionIndex="_local_session">
+      <saml:AuthnContext>
+        <saml:AuthnContextClassRef>urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport</saml:AuthnContextClassRef>
+      </saml:AuthnContext>
+    </saml:AuthnStatement>
+    <saml:AttributeStatement>
+      <saml:Attribute Name="email"><saml:AttributeValue>member@example.test</saml:AttributeValue></saml:Attribute>
+      <saml:Attribute Name="first_name"><saml:AttributeValue>Local</saml:AttributeValue><saml:AttributeValue>Ignored</saml:AttributeValue></saml:Attribute>
+      <saml:Attribute Name="last_name"><saml:AttributeValue>Member</saml:AttributeValue></saml:Attribute>
+    </saml:AttributeStatement>
+  </saml:Assertion>
+</samlp:Response>
