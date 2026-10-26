@@ -77,6 +77,15 @@ class SsoSamlProviderTest < Minitest::Test
     assert_rejected(xml, /signature|fingerprint|certificate/i)
   end
 
+  def test_rejects_signature_from_an_untrusted_key_presenting_the_trusted_certificate
+    trusted_certificate = signing_certificate
+    @signing_key = OpenSSL::PKey::RSA.new(2048)
+    xml = response_xml
+
+    assert_includes xml, Base64.strict_encode64(trusted_certificate.to_der)
+    assert_rejected(xml, /key validation|signature/i)
+  end
+
   def test_rejects_wrong_audience
     assert_rejected(response_xml(audience: 'https://other.example.test/metadata'), /audience/i)
   end
