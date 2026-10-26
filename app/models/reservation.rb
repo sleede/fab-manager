@@ -104,13 +104,14 @@ class Reservation < ApplicationRecord
   private
 
   def machine_not_already_reserved
-    slots_reservations.each do |slot|
-      same_hour_slots = SlotsReservation.joins(:reservation).where(
+    slots_reservations.reject(&:marked_for_destruction?).each do |slot|
+      query = SlotsReservation.joins(:reservation).where(
         reservations: { reservable_type: reservable_type, reservable_id: reservable_id },
         slot_id: slot.slot_id,
         canceled_at: nil
-      ).count
-      if same_hour_slots.positive?
+      )
+      query = query.where.not(id: slot.id) if slot.id.present?
+      if query.exists?
         errors.add(:reservable, 'already reserved')
         break
       end
