@@ -13,7 +13,7 @@ class API::SupportingDocumentFilesController < API::APIController
   # PUT /api/supporting_document_files/1/
   def update
     authorize @supporting_document_file
-    if SupportingDocumentFileService.update(@supporting_document_file, supporting_document_file_params)
+    if SupportingDocumentFileService.update(@supporting_document_file, supporting_document_file_update_params)
       render :show, status: :ok, location: @supporting_document_file
     else
       render json: @supporting_document_file.errors, status: :unprocessable_entity
@@ -51,5 +51,9 @@ class API::SupportingDocumentFilesController < API::APIController
   # Never trust parameters from the scary internet, only allow the white list through.
   def supporting_document_file_params
     params.required(:supporting_document_file).permit(:supporting_document_type_id, :attachment, :supportable_id, :supportable_type)
+  end
+
+  def supporting_document_file_update_params
+    params.required(:supporting_document_file).permit(:supporting_document_type_id, :attachment)
   end
 end

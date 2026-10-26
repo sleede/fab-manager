@@ -4,22 +4,34 @@
 class SlotsReservationsService
   class << self
     def cancel(slot_reservation)
-      # first we mark ths slot reservation as cancelled in DB, to free a ticket
-      slot_reservation.update!(canceled_at: Time.current)
+      canceled = false
+      slot_reservation.with_lock do
+        next if slot_reservation.canceled_at.present?
+
+        # first we mark ths slot reservation as cancelled in DB, to free a ticket
+        slot_reservation.update!(canceled_at: Time.current)
+        canceled = true
+      end
+
+      return false unless canceled
 
       # then we try to remove this reservation from ElasticSearch, to keep the statistics up-to-date
-      model_name = slot_reservation.reservation.reservable.class.name
-      client = Elasticsearch::Model.client
+      begin
+        model_name = slot_reservation.reservation.reservable.class.name
+        client = Elasticsearch::Model.client
 
-      model = "Stats::#{model_name}".constantize
-      client.delete_by_query(
-        index: model.index_name,
-        type: model.document_type,
-        conflicts: 'proceed',
-        body: { query: { match: { reservationId: slot_reservation.reservation_id } } }
-      )
-    rescue Faraday::ConnectionFailed
-      warn 'Unable to update data in elasticsearch'
+        model = "Stats::#{model_name}".constantize
+        client.delete_by_query(
+          index: model.index_name,
+          type: model.document_type,
+          conflicts: 'proceed',
+          body: { query: { match: { reservationId: slot_reservation.reservation_id } } }
+        )
+      rescue Faraday::ConnectionFailed
+        warn 'Unable to update data in elasticsearch'
+      end
+
+      true
     end
 
     def validate(slot_reservation)

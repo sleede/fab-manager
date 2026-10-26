@@ -9,21 +9,16 @@ class Members::MembersService
   end
 
   def update(params, operator, current_password = nil)
-    if subscriber_group_change?(params)
-      # here a group change is requested but unprocessable, handle the exception
-      @member.errors.add(:group_id, I18n.t('members.unable_to_change_the_group_while_a_subscription_is_running'))
-      return false
-    end
+    group_changed, target_group = handle_group_change(params, operator)
+    return false if group_changed == :error
 
-    group_changed = user_group_change?(params)
     ex_group = @member.group
 
     user_validation_required = Setting.get('user_validation_required')
     validated_at_changed = false
-    if group_changed && user_validation_required
-      # here a group change, user must re-validate by admin
-      current_types = @member.group.supporting_document_types
-      new_types = Group.find(params[:group_id].to_i).supporting_document_types
+    if group_changed && user_validation_required && target_group
+      current_types = ex_group&.supporting_document_types || []
+      new_types = target_group.supporting_document_types
       if @member.validated_at? && !(new_types - current_types).empty?
         validated_at_changed = true
         @member.validated_at = nil
@@ -39,7 +34,7 @@ class Members::MembersService
     up_result = member.update(params)
 
     notify_user_profile_complete(not_complete) if up_result
-    member.notify_group_changed(ex_group, validated_at_changed) if group_changed && !ex_group.nil?
+    member.notify_group_changed(ex_group, validated_at_changed) if up_result && group_changed && !ex_group.nil?
     up_result
   end
 
@@ -167,12 +162,53 @@ class Members::MembersService
     end
   end
 
-  def subscriber_group_change?(params)
-    params[:group_id] && @member.group_id != params[:group_id].to_i && !@member.subscribed_plan.nil?
+  def handle_group_change(params, operator)
+    return [false, nil] unless params.key?(:group_id) || params.key?('group_id')
+
+    raw_group_id = params[:group_id] || params['group_id']
+    unless valid_group_id_param?(raw_group_id)
+      @member.errors.add(:group_id, :invalid)
+      return [:error, nil]
+    end
+
+    new_group_id = raw_group_id.to_i
+    return [false, nil] if @member.group_id == new_group_id
+
+    if @member.subscribed_plan.present?
+      @member.errors.add(:group_id, I18n.t('members.unable_to_change_the_group_while_a_subscription_is_running'))
+      return [:error, nil]
+    end
+
+    target_group = Group.find_by(id: new_group_id)
+    return [:error, nil] unless allowed_to_switch_to_group?(target_group, operator)
+
+    [true, target_group]
   end
 
-  def user_group_change?(params)
-    @member.group_id && params[:group_id] && @member.group_id != params[:group_id].to_i
+  def valid_group_id_param?(raw_group_id)
+    (raw_group_id.is_a?(Integer) && raw_group_id.positive?) ||
+      (raw_group_id.is_a?(String) && raw_group_id.strip =~ /\A\d+\z/ && raw_group_id.to_i.positive?)
+  end
+
+  def allowed_to_switch_to_group?(target_group, operator)
+    if target_group.nil?
+      @member.errors.add(:group_id, :invalid)
+      return false
+    end
+
+    return true if operator&.privileged?
+
+    unless Setting.get('user_change_group') == true
+      @member.errors.add(:group_id, I18n.t('members.unable_to_change_group_disabled', default: 'Changing group is not allowed'))
+      return false
+    end
+
+    if target_group.disabled?
+      @member.errors.add(:group_id, :invalid)
+      return false
+    end
+
+    true
   end
 
   def handle_password(params, operator, current_password = nil)

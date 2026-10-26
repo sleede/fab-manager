@@ -13,7 +13,23 @@ class SlotsReservationPolicy < ApplicationPolicy
   end
 
   def cancel?
-    user.admin? || user.manager? || record.reservation.user == user
+    return false unless user
+    return false if record.canceled_at.present?
+    return true if user.privileged?
+
+    return false unless record.reservation&.user == user
+    return false unless Setting.get('booking_cancel_enable') == true
+
+    start_at = record.slot&.start_at
+    return false unless start_at
+
+    raw_delay = Setting.get('booking_cancel_delay')
+    return false if raw_delay.nil? || raw_delay.to_s.strip !~ /\A\d+\z/
+
+    now = Time.current
+    delay = raw_delay.to_i
+
+    start_at > now && start_at >= now + delay.hours
   end
 
   def validate?
