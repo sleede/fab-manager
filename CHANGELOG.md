@@ -2,6 +2,15 @@
 
 ## Next release
 
+## v6.6.1 2026 October 26
+
+- Fix a security issue: ensure SSO debug logging respects boolean toggle and prevent credential dumps (FM-12)
+- Fix a bug: prevent machine reservation update from falsely detecting itself as a conflict (BUG-02)
+- Fix a security issue: prevent unauthorized ownership and association tampering in children and supporting documents (FM-14)
+- Fix a security issue: enforce user_change_group setting and prevent unauthorized member group changes (FM-09)
+- Fix a security issue: enforce cancellation settings and deadline before booking cancellation (FM-10)
+- Fix a bug: resolve NoMethodError on child update when supporting document attributes are omitted or formatted as array (BUG-01)
+
 ## v6.6.0 2026 October 19
 
 - Fix a security issue: prevent SQL injection in product sorting (FM-01)
@@ -11,12 +20,6 @@
 - Fix a security issue: require current password verification and confirmation on password update (FM-08)
 - Fix a security issue: prevent unauthorized direct object reference (IDOR) on invoices, orders, reservations, supporting documents, and accounting periods (FM-05)
 - Fix a security issue: prevent persistent HTML injection and XSS in notifications (FM-04)
-- Fix a security issue: ensure SSO debug logging respects boolean toggle and prevent credential dumps (FM-12)
-- Fix a bug: prevent machine reservation update from falsely detecting itself as a conflict (BUG-02)
-- Fix a security issue: prevent unauthorized ownership and association tampering in children and supporting documents (FM-14)
-- Fix a security issue: enforce user_change_group setting and prevent unauthorized member group changes (FM-09)
-- Fix a security issue: enforce cancellation settings and deadline before booking cancellation (FM-10)
-- Fix a bug: resolve NoMethodError on child update when supporting document attributes are omitted or formatted as array (BUG-01)
 
 ## v6.5.10 2026 July 14
 
