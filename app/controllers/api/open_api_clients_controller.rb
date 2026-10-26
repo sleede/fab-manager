@@ -7,11 +7,12 @@ class API::OpenAPIClientsController < API::APIController
 
   def index
     authorize OpenAPI::Client
-    @clients = OpenAPI::Client.order(:created_at)
+    @clients = policy_scope(OpenAPI::Client).order(:created_at)
   end
 
   def create
     @client = OpenAPI::Client.new(client_params)
+    @client.user = current_user
     authorize @client
     if @client.save
       render status: :created

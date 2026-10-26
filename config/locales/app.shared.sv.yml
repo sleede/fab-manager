@@ -382,6 +382,9 @@ sv:
         previous: "Föregående"
         next: "Nästa"
         end: "Avsluta turen"
+        conclusion:
+          title: "Tack för er uppmärksamhet"
+          content: "<p>Om du vill starta om denna kontextuella hjälp, tryck på <strong>F1</strong> när som helst eller klicka på [? Hjälp] från användarens meny.</p><p>Om du behöver ytterligare hjälp kan du kolla <a href='http://guide-fr.fab.mn' target='_blank'>användarhandboken</a> (endast på franska just nu).</p><p>Fab-managerns team ger även personlig support (hjälp med att komma igång, hjälp med installation, anpassning etc., <a href='mailto:contact@fab-manager.com'>Kontakta oss</a> för mer information.</p>"
       #help modal
       help:
         title: "Hjälp"

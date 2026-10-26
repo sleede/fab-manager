@@ -56,6 +56,8 @@ class User < ApplicationRecord
   has_many :children, dependent: :destroy
   accepts_nested_attributes_for :children, allow_destroy: true
 
+  has_many :open_api_clients, dependent: :destroy
+
   # fix for create admin user
   before_save do
     email&.downcase!

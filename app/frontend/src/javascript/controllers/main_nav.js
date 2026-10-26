@@ -87,6 +87,11 @@ Application.Controllers.controller('MainNavController', ['$scope', 'settingsProm
       linkText: 'app.public.common.subscriptions',
       linkIcon: 'credit-card',
       class: 'plans-link'
+    },
+    {
+      state: 'app.logged.open_api_clients',
+      linkText: 'app.public.common.open_api_clients',
+      linkIcon: 'cloud'
     }
   ].filter(Boolean);
 
@@ -166,12 +171,6 @@ Application.Controllers.controller('MainNavController', ['$scope', 'settingsProm
       state: 'app.admin.projects',
       linkText: 'app.public.common.projects',
       linkIcon: 'tasks',
-      authorizedRoles: ['admin']
-    },
-    {
-      state: 'app.admin.open_api_clients',
-      linkText: 'app.public.common.open_api_clients',
-      linkIcon: 'cloud',
       authorizedRoles: ['admin']
     }
   ].filter(Boolean).concat(Fablab.adminNavLinks);

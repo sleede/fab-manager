@@ -1306,7 +1306,7 @@ angular.module('application.router', ['ui.router'])
       })
 
       // OpenAPI Clients
-      .state('app.admin.open_api_clients', {
+      .state('app.logged.open_api_clients', {
         url: '/open_api_clients',
         views: {
           'main@': {
