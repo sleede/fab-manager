@@ -2,6 +2,11 @@
 
 ## Next release
 
+## v6.6.2 2026 October 29
+
+- Fix a security issue: update SAML, XML and HTML sanitizer dependencies (`omniauth-saml`, `ruby-saml`, `rexml`, `nokogiri`, `rails-html-sanitizer`, `loofah`, `crass`) to resolve public security advisories
+- Improved test coverage: add SAML authentication strategy and HTML sanitization security tests
+
 ## v6.6.1 2026 October 26
 
 - Fix a security issue: ensure SSO debug logging respects boolean toggle and prevent credential dumps (FM-12)
