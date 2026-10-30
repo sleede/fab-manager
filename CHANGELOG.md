@@ -2,6 +2,10 @@
 
 ## Next release
 
+- Fix security issues: update Rack within the 2.2 series and add bounded request parsing, static file and session regression tests
+- Fix security issues: update compatible JavaScript library dependencies and cover their application and tooling contracts
+- Fix security issues: update compatible Webpack 5, Babel 7 and PostCSS dependencies while preserving existing runtime support; remaining legacy build dependencies require separate maintenance
+
 ## v6.6.2 2026 October 29
 
 - Fix a security issue: update SAML, XML and HTML sanitizer dependencies (`omniauth-saml`, `ruby-saml`, `rexml`, `nokogiri`, `rails-html-sanitizer`, `loofah`, `crass`) to resolve public security advisories
