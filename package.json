@@ -17,7 +17,8 @@
   },
   "scripts": {
     "lint": "eslint ./app/frontend/src",
-    "test": "jest"
+    "test": "jest",
+    "test:dependencies": "node --test test/security/javascript_dependencies_test.cjs"
   },
   "license": "AGPL-3.0-only",
   "devDependencies": {
@@ -142,6 +143,7 @@
     "jquery": ">=3.5.0",
     "jquery-ujs": "^1.2.2",
     "js-cookie": "^3.0.1",
+    "lodash": "^4.18.1",
     "medium-editor": "^5.23.3",
     "mini-css-extract-plugin": "^2.6.0",
     "moment": "2.29",
@@ -181,7 +183,7 @@
     "twitter-fetcher": "^18.0.2",
     "typescript": "^4.6.3",
     "ui-select": "0.19",
-    "underscore": "1.12",
+    "underscore": "^1.13.8",
     "use-immer": "^0.5.1",
     "webpack": "5.76.0",
     "webpack-assets-manifest": "5",
