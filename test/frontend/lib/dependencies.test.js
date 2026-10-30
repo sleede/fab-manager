@@ -1,5 +1,5 @@
 import lodash from 'lodash';
-import underscore from 'underscore/underscore';
+import underscore from 'underscore/underscore.js';
 import ApiLib from 'lib/api';
 
 describe('browser dependency compatibility', () => {
