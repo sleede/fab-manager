@@ -57,3 +57,18 @@ three next occurrences at four fixed references and both configured and explicit
 zones. Tests compare those timings and 23/25-hour DST days. Worker tests use synthetic
 fixtures and queued test mail; no scheduler daemon or production job is started.
 The existing ice_cube 0.16.4 family remains pinned by the accepted lockfile.
+
+## Openlab HTTP and WebSocket adapters (R8)
+
+`bash scripts/tests.sh test/lib/http_websocket_dependency_test.rb --seed 12345`
+
+HTTP checks use the real Openlab client/controller with stubbed transport: parameters,
+methods, raw versus parsed JSON/BOM/text/XML, errors/timeouts, relative redirects,
+TLS peer-verification configuration and rejection of an absolute different-host path.
+The HTTParty absolute-path guard does not establish a cross-host redirect policy or
+scheme/port isolation; the application builds fixed Openlab paths. No bypass option is enabled.
+WebSocket checks connect real client frames to ActionCable's actual ClientSocket/Stream
+adapter using in-memory transport callbacks. They cover negotiation, text/binary,
+ping/pong, close and bounded invalid/oversize input. The new driver emits binary Strings;
+ActionCable's outgoing Array API remains supported. No custom application channels or
+consumer usage were found, so this is a framework contract rather than an application journey.
