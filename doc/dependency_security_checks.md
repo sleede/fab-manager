@@ -72,3 +72,45 @@ adapter using in-memory transport callbacks. They cover negotiation, text/binary
 ping/pong, close and bounded invalid/oversize input. The new driver emits binary Strings;
 ActionCable's outgoing Array API remains supported. No custom application channels or
 consumer usage were found, so this is a framework contract rather than an application journey.
+
+## Combined contribution qualification
+
+Run the final combined checks on one recorded commit, after all implementation and
+useful documentation changes. Use the Ruby/Node versions in the repository, frozen
+Bundler/Yarn lockfiles, Linux native tools and disposable PostgreSQL/Redis/Elasticsearch
+services. Inject Stripe/OAuth/OIDC test settings outside Git. Verify database destinations
+before loading the SQL structure or fixtures, and build the Elasticsearch stats mappings.
+
+```bash
+BUNDLE_FROZEN=true bundle _2.4.3_ install --local
+yarn install --frozen-lockfile --non-interactive --offline --production=false
+bash scripts/tests.sh --seed 12345
+yarn test --ci --runInBand
+yarn lint
+yarn tsc --noEmit --project tsconfig.json
+yarn tsc --noEmit --project tsconfig.dev.json
+yarn test:dependencies
+yarn test:build-dependencies
+yarn test:http-dependencies
+bundle _2.4.3_ exec rubocop --format simple
+RAILS_ENV=production NODE_ENV=production bundle _2.4.3_ exec rails assets:precompile
+```
+
+The offline installation commands need the complete verified caches. A missing artifact
+is a setup blocker, not proof that a network install or a different resolution passed.
+Record each command, exit code, source tree and scope. Keep full-suite failures separate
+from isolated passing checks, any diagnostic bootstrap and pre-existing baseline errors.
+Run the changed Ruby files with the same repository cops for the pre-commit scope.
+
+After compilation, exercise the actual HTTP modules and affected reservation, invoice,
+calendar, notification, authentication and upload paths with synthetic data. Real payment
+and IdP accounts are unnecessary: repository fixtures, local test services and protocol
+fixtures provide the boundaries. A framework WebSocket test is not an application channel
+journey when the ActionCable engine is disabled.
+
+Compare upstream-after-R1 to the full contribution and the protected pre-extension commit
+to the extension using the same advisory snapshot. Deduplicate shared transitive findings;
+version matches alone do not establish application exploitability. Archive rejected and
+failed observations rather than rewriting them as successful qualification. A later code
+or dependency change requires rerunning affected checks; documentation-only successors
+must retain the exact tested code/tree relationship without claiming an unexecuted suite.
