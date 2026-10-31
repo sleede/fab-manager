@@ -23,3 +23,13 @@ rejection. A simulated OAuth2 exchange exercises the installed parent API. Devis
 a synthetic hash produced by the previous bcrypt and verifies newly generated passwords.
 The existing Rack checks retain CSRF validation during login/logout. JWT 3 is outside
 the OAuth2 parent's supported range. The bcrypt Java/JRuby advisory does not apply to MRI.
+
+## Mail and notifications (R5)
+
+`bash scripts/tests.sh test/lib/mail_dependency_test.rb test/integration/notifications/notifications_test.rb --seed 12345`
+
+The mail checks round trip MIME/UTF-8/legacy charsets and attachments, check malformed
+headers, and render account, Devise and notification templates through the test adapter.
+They retain the parser preload workaround. No application IMAP client was found; bounded
+IMAP parser checks establish library compatibility and do not represent an IMAP workflow.
+Keep net-imap on the compatible 0.5 family. No message is sent to an external recipient.

@@ -242,7 +242,8 @@ GEM
     loofah (2.25.2)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
-    mail (2.8.1)
+    mail (2.9.1)
+      logger
       mini_mime (>= 0.1.1)
       net-imap
       net-pop
@@ -268,7 +269,7 @@ GEM
     multi_xml (0.7.1)
       bigdecimal (~> 3.1)
     multipart-post (2.1.1)
-    net-imap (0.5.1)
+    net-imap (0.5.15)
       date
       net-protocol
     net-pop (0.1.2)
@@ -593,7 +594,7 @@ DEPENDENCIES
   message_format
   mini_magick
   minitest-reporters
-  net-imap
+  net-imap (~> 0.5.15)
   net-pop
   net-smtp
   oj
