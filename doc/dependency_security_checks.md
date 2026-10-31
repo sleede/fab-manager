@@ -33,3 +33,15 @@ headers, and render account, Devise and notification templates through the test 
 They retain the parser preload workaround. No application IMAP client was found; bounded
 IMAP parser checks establish library compatibility and do not represent an IMAP workflow.
 Keep net-imap on the compatible 0.5 family. No message is sent to an external recipient.
+
+## Serialization and caches (R6)
+
+`bash scripts/tests.sh test/lib/serialization_dependency_test.rb --seed 12345`
+
+Synthetic fixtures were generated with the previous MessagePack/Oj graph. Tests read
+those bytes, exercise the real Bootsnap store, existing Rails JSON date/decimal schemas,
+trusted repository-owned cache entries, a MemoryStore and Sidekiq's JSON/fake queue.
+No global Oj replacement or object-loading policy is enabled. Bootsnap caches are
+platform-specific disposable data; another Ruby platform must invalidate them.
+Native Linux builds and a separate old-library reader check establish the bounded
+rollback behavior of the compatible synthetic formats. No production data is used.
