@@ -173,7 +173,7 @@ GEM
       multi_json
     equalizer (0.0.11)
     erubi (1.13.0)
-    et-orbi (1.2.7)
+    et-orbi (1.4.2)
       tzinfo
     faker (2.10.2)
       i18n (>= 1.6, < 2)
@@ -185,8 +185,8 @@ GEM
     forgery (0.7.0)
     friendly_id (5.1.0)
       activerecord (>= 4.0.0)
-    fugit (1.9.0)
-      et-orbi (~> 1, >= 1.2.7)
+    fugit (1.14.0)
+      et-orbi (~> 1.4)
       raabro (~> 1.4)
     globalid (1.2.1)
       activesupport (>= 6.1)
@@ -201,8 +201,10 @@ GEM
     httpclient (2.8.3)
     i18n (1.14.6)
       concurrent-ruby (~> 1.0)
-    icalendar (2.7.1)
+    icalendar (2.13.0)
+      base64
       ice_cube (~> 0.16)
+      logger
     ice_cube (0.16.4)
     ice_nine (0.11.2)
     image_processing (1.13.0)

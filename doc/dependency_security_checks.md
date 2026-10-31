@@ -45,3 +45,15 @@ No global Oj replacement or object-loading policy is enabled. Bootsnap caches ar
 platform-specific disposable data; another Ruby platform must invalidate them.
 Native Linux builds and a separate old-library reader check establish the bounded
 rollback behavior of the compatible synthetic formats. No production data is used.
+
+## Calendars and scheduled jobs (R7)
+
+`bash scripts/tests.sh test/lib/calendar_dependency_test.rb test/workers/reservation_reminder_worker_test.rb test/integration/events/recurrence_test.rb --seed 12345`
+
+Calendar checks exercise actual reservation feeds/exports and the importer against a
+stubbed feed, preserving text/UID/time fields and recurrence syntax. The committed job
+fixture records every actual ERB/YAML schedule with the previous Fugit/et-orbi versions,
+three next occurrences at four fixed references and both configured and explicit Toronto
+zones. Tests compare those timings and 23/25-hour DST days. Worker tests use synthetic
+fixtures and queued test mail; no scheduler daemon or production job is started.
+The existing ice_cube 0.16.4 family remains pinned by the accepted lockfile.
