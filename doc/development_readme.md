@@ -192,6 +192,7 @@ bundle _2.4.3_ exec rails test test/integration/rack_compatibility_test.rb test/
 bundle _2.4.3_ exec ruby -Itest test/security/sso_saml_provider_test.rb --seed 12345
 yarn test:dependencies
 yarn test:build-dependencies
+yarn test:http-dependencies
 yarn test --ci --runInBand
 yarn lint
 yarn tsc --noEmit --project tsconfig.json
@@ -203,6 +204,11 @@ Rails login/logout with CSRF validation enabled. The Node checks cover library
 behavior and a temporary production Webpack build with Babel, CSS, source maps,
 dynamic imports and minification. They do not replace authenticated browser,
 payment or identity-provider acceptance testing.
+
+The HTTP checks cover the application clients and loopback transports, including
+Devise credential wrapping and CSRF headers. Custom credential headers require
+an explicit `sensitiveHeaders` policy when using the follow-redirects API;
+a library update alone does not configure that policy for callers.
 
 Compile the application assets with the repository's Rails task (there is no
 `yarn build` script). Use a separate local production configuration with synthetic

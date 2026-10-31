@@ -19,7 +19,8 @@
     "lint": "eslint ./app/frontend/src",
     "test": "jest",
     "test:dependencies": "node --test test/security/javascript_dependencies_test.cjs",
-    "test:build-dependencies": "node --test test/security/build_dependencies_test.cjs"
+    "test:build-dependencies": "node --test test/security/build_dependencies_test.cjs",
+    "test:http-dependencies": "node --test test/security/http_client_dependencies_test.cjs"
   },
   "license": "AGPL-3.0-only",
   "devDependencies": {
@@ -119,7 +120,7 @@
     "angular-unsavedchanges": "0.2",
     "angular-xeditable": "0.10",
     "assert": "^2.0.0",
-    "axios": "^0.28.0",
+    "axios": "^0.34.0",
     "babel-loader": "^9.1.2",
     "babel-plugin-macros": "^3.1.0",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
