@@ -83,7 +83,7 @@ gem 'kaminari'
 # Image processing ruby wrapper for ImageMagick
 gem 'mini_magick'
 # upload files
-gem 'carrierwave'
+gem 'carrierwave', '~> 3.1.4'
 
 # slug url
 gem 'friendly_id', '~> 5.1.0'
