@@ -50,6 +50,27 @@ class CalendarDependencyTest < ActiveSupport::TestCase
     assert_equal '-0330', offset.value_ical
   end
 
+  test 'generated VTIMEZONE transitions use the offset in effect before the change' do
+    # RFC 5545 expresses DAYLIGHT/STANDARD onsets in local time at TZOFFSETFROM. iCalendar 2.7.1 emitted them
+    # at TZOFFSETTO (for example 03:00 for the Paris spring change); 2.12.5 and later are correct.
+    expected = {
+      'Europe/Paris' => { daylight: ['020000', '+0100', '+0200'], standard: ['030000', '+0200', '+0100'] },
+      'America/Toronto' => { daylight: ['020000', '-0500', '-0400'], standard: ['020000', '-0400', '-0500'] }
+    }
+    expected.each do |zone, changes|
+      calendar = Icalendar::Calendar.new
+      calendar.add_timezone TZInfo::Timezone.get(zone).ical_timezone(Time.utc(2026, 11, 1, 12))
+      timezone = Icalendar::Calendar.parse(calendar.to_ical).first.timezones.first
+      actual = { daylight: timezone.daylights.first, standard: timezone.standards.first }
+      changes.each do |kind, (onset, from, to)|
+        transition = actual.fetch(kind)
+        assert_equal onset, transition.dtstart.strftime('%H%M%S'), "#{zone} #{kind} onset"
+        assert_equal from, transition.tzoffsetfrom.value_ical, "#{zone} #{kind} offset from"
+        assert_equal to, transition.tzoffsetto.value_ical, "#{zone} #{kind} offset to"
+      end
+    end
+  end
+
   test 'the real calendar importer updates and deletes events from a stubbed feed' do
     source = i_calendars(:one)
     source.update!(url: 'https://calendar.example.test/feed.ics')
