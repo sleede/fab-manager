@@ -13,6 +13,8 @@ Checks exercise real CarrierWave uploaders, ImageMagick variants, content and ex
 validation, configured model size limits, CAD configuration, removal, private destination
 rejection, and Addressable normalization/template round trips. Image processing remains
 on the compatible 1.13 family. Temporary upload roots keep test files outside user storage.
+CarrierWave 3.1 prints a one-time warning for uploaders whose `filename` is guarded by
+`if original_filename`; removing those guards is separate maintenance, not part of this update.
 
 ## Tokens and passwords (R4)
 
@@ -30,7 +32,8 @@ the OAuth2 parent's supported range. The bcrypt Java/JRuby advisory does not app
 
 The mail checks round trip MIME/UTF-8/legacy charsets and attachments, check malformed
 headers, and render account, Devise and notification templates through the test adapter.
-They retain the parser preload workaround. No application IMAP client was found; bounded
+The template tests stub only the compiled-logo manifest lookup, because the test-environment
+Webpack compile is not part of this check. They retain the parser preload workaround. No application IMAP client was found; bounded
 IMAP parser checks establish library compatibility and do not represent an IMAP workflow.
 Keep net-imap on the compatible 0.5 family. No message is sent to an external recipient.
 
@@ -56,6 +59,9 @@ fixture records every actual ERB/YAML schedule with the previous Fugit/et-orbi v
 three next occurrences at four fixed references and both configured and explicit Toronto
 zones. Tests compare those timings and 23/25-hour DST days. Worker tests use synthetic
 fixtures and queued test mail; no scheduler daemon or production job is started.
+iCalendar 2.12.5 corrected the generated VTIMEZONE: DAYLIGHT and STANDARD onsets are now
+expressed in local time at TZOFFSETFROM, as RFC 5545 requires (the Paris spring change moves
+from 03:00 to 02:00). A regression test covers the Paris and Toronto transitions.
 The existing ice_cube 0.16.4 family remains pinned by the accepted lockfile.
 
 ## Openlab HTTP and WebSocket adapters (R8)
@@ -108,9 +114,8 @@ and IdP accounts are unnecessary: repository fixtures, local test services and p
 fixtures provide the boundaries. A framework WebSocket test is not an application channel
 journey when the ActionCable engine is disabled.
 
-Compare upstream-after-R1 to the full contribution and the protected pre-extension commit
-to the extension using the same advisory snapshot. Deduplicate shared transitive findings;
-version matches alone do not establish application exploitability. Archive rejected and
-failed observations rather than rewriting them as successful qualification. A later code
-or dependency change requires rerunning affected checks; documentation-only successors
-must retain the exact tested code/tree relationship without claiming an unexecuted suite.
+When comparing advisory counts before and after an update, use one advisory snapshot for
+every state and deduplicate shared transitive findings. A version match alone does not
+establish application exploitability. Keep failed observations visible rather than
+rewriting them as successful. A later code or dependency change requires rerunning the
+affected checks.
