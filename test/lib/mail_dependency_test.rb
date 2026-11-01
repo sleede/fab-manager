@@ -3,6 +3,7 @@
 require 'test_helper'
 require 'mail'
 require 'net/imap'
+require 'minitest/mock'
 
 class MailDependencyTest < ActiveSupport::TestCase
   setup do
@@ -63,7 +64,7 @@ class MailDependencyTest < ActiveSupport::TestCase
   test 'account creation mail renders and delivers through the test adapter only' do
     user = users(:user2)
     user.email = 'member@example.test'
-    message = UsersMailer.notify_user_account_created(user, 'Synthetic-password-123!').deliver_now
+    message = with_static_packs { UsersMailer.notify_user_account_created(user, 'Synthetic-password-123!').deliver_now }
     assert_equal ['member@example.test'], message.to
     assert_not_empty message.subject
     assert_not_empty message.body.encoded
@@ -74,7 +75,7 @@ class MailDependencyTest < ActiveSupport::TestCase
   test 'Devise reset instructions render their synthetic token through the test adapter' do
     user = users(:user2)
     user.email = 'member@example.test'
-    message = OverwrittenDeviseMailer.reset_password_instructions(user, 'synthetic-reset-token').deliver_now
+    message = with_static_packs { OverwrittenDeviseMailer.reset_password_instructions(user, 'synthetic-reset-token').deliver_now }
     assert_equal ['member@example.test'], message.to
     assert_includes message.body.decoded, 'synthetic-reset-token'
     assert_equal 1, ActionMailer::Base.deliveries.length
@@ -84,7 +85,7 @@ class MailDependencyTest < ActiveSupport::TestCase
   test 'the real user-created notification template renders and uses test delivery' do
     notification = notifications('notification_1')
     notification.receiver.email = 'admin@example.test'
-    message = NotificationsMailer.send_mail_by(notification).deliver_now
+    message = with_static_packs { NotificationsMailer.send_mail_by(notification).deliver_now }
     assert_equal ['admin@example.test'], message.to
     assert_not_empty message.subject
     assert_not_empty message.body.encoded
@@ -101,5 +102,13 @@ class MailDependencyTest < ActiveSupport::TestCase
     assert_equal 42, fetch.data.attr.fetch('UID')
     assert_equal 'hello', fetch.data.attr.fetch('BODY[]')
     assert_raises(Net::IMAP::ResponseParseError) { parser.parse("* 1 FETCH (UID\r\n") }
+  end
+
+  private
+
+  # The mail layout embeds a compiled logo. Webpack output is a build artifact, not the behavior under
+  # test, and the test-environment compile is not available in a clean checkout.
+  def with_static_packs(&)
+    Webpacker.instance.manifest.stub(:lookup!, ->(name, *) { "/packs-test/#{name}" }, &)
   end
 end
