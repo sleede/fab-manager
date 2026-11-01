@@ -51,6 +51,24 @@ class RackCompatibilityTest < ActionDispatch::IntegrationTest
     get '/api/members/current'
     assert_response :unauthorized
   end
+
+  test 'JSON login authenticates only with the Devise user envelope and a valid CSRF token' do
+    get '/api/machines'
+    headers = { 'Accept' => 'application/json', 'X-XSRF-TOKEN' => cookies['XSRF-TOKEN'] }
+
+    post '/users/sign_in', params: { email: @member.email, password: @password }, as: :json, headers: headers
+    assert_response :unauthorized
+    get '/api/members/current'
+    assert_response :unauthorized
+
+    post '/users/sign_in', params: { user: { email: @member.email, password: @password } }, as: :json,
+                           headers: headers.merge('X-XSRF-TOKEN' => cookies['XSRF-TOKEN'])
+    assert_response :success
+    get '/api/members/current'
+    assert_response :success
+    assert_equal @member.id, response.parsed_body.fetch('id')
+  end
+
   test 'allows the authenticated admin to use the mounted Sidekiq application' do
     login_as(users(:user1), scope: :user)
     get '/admin/sidekiq'
