@@ -37,6 +37,22 @@ it is retained. SQL schema replay uses the delivered psql. Archives are tested
 with the delivered pg_restore into 18, not certified as backward-compatible
 restores into 9.6. This is not an automatic data migration or rollback tool.
 
+## Accounting footprints
+
+The fablab:chain and invoice repair tasks add a new chained element without
+removing the previous one, so an invoice, item or schedule can own several.
+Without an explicit order, PostgreSQL 9.6 usually returned the latest while
+PostgreSQL 12 and later return the oldest through the same index, which made
+re-chained records look corrupted. The association now always selects the
+latest element. Count duplicates before and after a server change:
+
+```sql
+SELECT element_type, count(*) AS elements
+FROM (SELECT element_type, element_id FROM chained_elements
+      GROUP BY element_type, element_id HAVING count(*) > 1) duplicated
+GROUP BY element_type;
+```
+
 ## Optional password configuration
 
 config/database.yml.default accepts POSTGRES_HOST, POSTGRES_USERNAME and

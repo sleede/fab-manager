@@ -41,6 +41,7 @@ CA. Make the same code/scenario run against both services on the test network.
 Use a private environment file, not credentials in command-line URLs. Set
 RAILS_ENV=test, RACK_ENV=test, REDIS_HOST=redis, ELASTICSEARCH_HOST=elasticsearch,
 POSTGRESQL_LANGUAGE_ANALYZER=french, TIME_ZONE=America/Toronto, WEEK_STARTING_DAY=monday,
+MAX_IMAGE_SIZE=10485760 (as in env.example; event image tests exceed the 2 MB default),
 ADMIN_EMAIL to an example.test address and ADMIN_PASSWORD to a newly generated
 strong test password. The password policy requires at least 12 characters and
 upper/lowercase, digits and a special character; do not relax it. Mail stays on
