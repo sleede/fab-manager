@@ -5,7 +5,8 @@ class HistoryValue < Footprintable
   belongs_to :setting
   belongs_to :invoicing_profile
 
-  has_one :chained_element, as: :element, dependent: :restrict_with_exception
+  # Re-chaining keeps older elements; the latest one is authoritative
+  has_one :chained_element, -> { order(id: :desc) }, inverse_of: false, as: :element, dependent: :restrict_with_exception
   delegate :footprint, to: :chained_element
   delegate :user, to: :invoicing_profile
 
