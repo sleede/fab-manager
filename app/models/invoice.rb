@@ -13,7 +13,8 @@ class Invoice < PaymentDocument
   belongs_to :wallet_transaction
   belongs_to :coupon
 
-  has_one :chained_element, as: :element, dependent: :restrict_with_exception
+  # Re-chaining keeps older elements; the latest one is authoritative
+  has_one :chained_element, -> { order(id: :desc) }, inverse_of: false, as: :element, dependent: :restrict_with_exception
   has_one :avoir, class_name: 'Avoir', dependent: :destroy, inverse_of: :invoice
   has_one :payment_schedule_item, dependent: :restrict_with_error
   has_one :payment_gateway_object, as: :item, dependent: :destroy

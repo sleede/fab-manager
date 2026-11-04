@@ -215,3 +215,12 @@ In development, visit http://fabmanager-kibana:5601 to use Kibana, the web UI fo
 - [AngularJS](https://docs.angularjs.org/api)
 - [Angular-Bootstrap](http://angular-ui.github.io/bootstrap/)
 - [ElasticSearch 5.6](https://www.elastic.co/guide/en/elasticsearch/reference/5.6/index.html)
+
+
+## PostgreSQL 18 candidate development storage
+
+The PG18 Compose candidate uses the startup/password guard described in [the migration guide](postgresql_migration.md). Preserve existing 9.6 storage and use the explicit logical migration; do not start the new server on its old directory. Prepare the private password/guard files for fresh data and set FM_PG_INITIALIZE=1 only for the first controlled start. The rehearsal matrix of the migration guide remains required before releasing this default.
+
+For the private PG18 server, also prepare the certificate/CA files described in the migration guide and set PGSSLMODE=verify-full with PGSSLROOTCERT pointing to that public CA. Use POSTGRES_PASSWORD_FILE for the private password; custom hostnames require matching certificate SANs.
+
+POSTGRES_DB selects the development database only. The test database, which the test tasks erase, is selected separately with POSTGRES_TEST_DB (default fabmanager_test).

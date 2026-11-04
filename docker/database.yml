@@ -5,26 +5,26 @@ default: &default
   adapter: postgresql
   encoding: unicode
   pool: 25
-  username: <%= ENV["POSTGRES_USERNAME"] %>
-  password: <%= ENV["POSTGRES_PASSWORD"] %>
-  host: <%= ENV["POSTGRES_HOST"] %>
+  username: <%= ENV["POSTGRES_USERNAME"].to_json %>
+  password: <%= (ENV["POSTGRES_PASSWORD_FILE"] ? File.read(ENV.fetch("POSTGRES_PASSWORD_FILE")).strip : ENV["POSTGRES_PASSWORD"]).to_json %>
+  host: <%= ENV["POSTGRES_HOST"].to_json %>
 
 development:
   <<: *default
-  database: fablab_development
+  database: <%= ENV.fetch("POSTGRES_DB", "fablab_development").to_json %>
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rails".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: fablab_test
+  database: <%= ENV.fetch("POSTGRES_TEST_DB", "fablab_test").to_json %>
 
 staging:
   <<: *default
-  database: fablab_staging
+  database: <%= ENV.fetch("POSTGRES_DB", "fablab_staging").to_json %>
 
 
 production:
   <<: *default
-  database: fablab_production
+  database: <%= ENV.fetch("POSTGRES_DB", "fablab_production").to_json %>

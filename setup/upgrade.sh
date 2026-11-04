@@ -7,6 +7,7 @@ parseparams()
   ENVIRONMENTS=()
   PREPROCESSING=()
   SKIP_ASSETS=false
+  SKIP_IMAGE_CLEANUP=false
   while getopts "hyit:s:p:c:e:-:" opt; do
     case "${opt}" in
       i)
@@ -33,6 +34,9 @@ parseparams()
         ;;
       -)
         case "${OPTARG}" in
+          no-image-cleanup)
+            SKIP_IMAGE_CLEANUP=true
+            ;;
           no-compile-assets)
             SKIP_ASSETS=true
             ;;
@@ -49,8 +53,26 @@ parseparams()
   shift $((OPTIND-1))
 }
 
+select_compose()
+{
+  local selected="${COMPOSE_FILE:-docker-compose.yml}"
+  [[ "$selected" != *:* ]] ||
+    { echo "Select one reviewed effective Compose file for this upgrader; multiple files require an explicit merge." >&2; exit 1; }
+  COMPOSE_CONFIG="$(readlink -f "$selected")"
+  [[ -f "$COMPOSE_CONFIG" ]] || { echo "Selected Compose file is missing." >&2; exit 1; }
+  export COMPOSE_FILE="$COMPOSE_CONFIG"
+}
+
 yq() {
-  docker run --rm -i -v "${PWD}:/workdir" --user "$UID" mikefarah/yq:4 "$@"
+  local -a args=("$@")
+  local i
+  for i in "${!args[@]}"; do
+    if [[ "${args[$i]}" == "$COMPOSE_CONFIG" ]]; then
+      args[$i]="/selected/$(basename "$COMPOSE_CONFIG")"
+    fi
+  done
+  docker run --rm -i -v "${PWD}:/workdir" -v "$(dirname "$COMPOSE_CONFIG"):/selected" \
+    --user "$UID" mikefarah/yq:4 "${args[@]}"
 }
 
 jq() {
@@ -120,7 +142,7 @@ config()
       exit 1
   fi
   echo -e "Checking installation..."
-  if [ ! -f "docker-compose.yml" ]; then
+  if [ ! -f "$COMPOSE_CONFIG" ]; then
     echo -e "\e[91m[ ❌ ] docker-compose.yml was not found in ${PWD}. Please run this script from the Fab-manager's installation folder. Exiting... \e[39m"
     exit 1
   fi
@@ -131,12 +153,25 @@ config()
   fi
 
   echo "Checking fabmanager service..."
-  SERVICE="$(yq eval '.services.*.image | select(. == "sleede/fab-manager*") | path | .[-2]' docker-compose.yml)"
+  if [[ -n "${FM_APP_SERVICE:-}" ]]; then
+    [[ "$FM_APP_SERVICE" =~ ^[a-zA-Z0-9][a-zA-Z0-9_.-]*$ ]] ||
+      { echo "Invalid FM_APP_SERVICE." >&2; exit 1; }
+    SERVICE="$FM_APP_SERVICE"
+    [[ "$(yq eval ".services | has(\"$SERVICE\")" "$COMPOSE_CONFIG")" == "true" ]] ||
+      { echo "The selected FM_APP_SERVICE does not exist." >&2; exit 1; }
+  else
+    SERVICE="$(yq eval '.services.*.image | select(. == "sleede/fab-manager*") | path | .[-2]' "$COMPOSE_CONFIG")"
+  fi
+  if [[ "$SERVICE" == *$'\n'* ]]; then
+    echo "Multiple application services found. Select FM_APP_SERVICE explicitly." >&2
+    exit 1
+  fi
+  export FM_APP_SERVICE="$SERVICE"
   YES_ALL=${Y:-false}
   # COMMANDS, SCRIPTS and ENVIRONMENTS are set by parseparams
 
   if [ -z "${SERVICE}" ]; then
-    echo -e "\e[91m[ ❌ ] The service name was not determined. Please check your docker-compose.yml file. Exiting... \e[39m"
+    echo -e "\e[91m[ ❌ ] The service name was not determined. Select FM_APP_SERVICE for an image pinned by ID or a renamed application. Exiting... \e[39m"
     exit 1
   fi
   echo -e "\n"
@@ -151,10 +186,11 @@ verlt() {
     [ "$1" = "$2" ] && return 1 || verlte "$1" "$2"
 }
 
-# set $TAG and $TARGET
+# set $IMAGE_BEFORE, $TAG and $TARGET
 target_version()
 {
-  TAG=$(yq eval ".services.$SERVICE.image" docker-compose.yml | grep -o ':.*')
+  IMAGE_BEFORE=$(yq eval -r ".services.$SERVICE.image" "$COMPOSE_CONFIG")
+  TAG=$(echo "$IMAGE_BEFORE" | grep -o ':.*')
 
   if [ -n "$TARGET" ]; then return; fi
 
@@ -203,6 +239,10 @@ version_check()
 
 add_environments()
 {
+  if [[ "$COMPOSE_CONFIG" == *.json && ${#ENVIRONMENTS[@]} -gt 0 ]]; then
+    echo "Edit environment in the selected effective Compose JSON; -e cannot update its original env_file." >&2
+    exit 1
+  fi
   for ENV in "${ENVIRONMENTS[@]}"; do
     if [[ "$ENV" =~ ^[A-Z0-9_]+=.*$ ]]; then
       local var=$(echo "$ENV" | cut -d '=' -f1)
@@ -232,29 +272,19 @@ compile_assets()
     return 0
   fi
 
-  IMAGE=$(yq eval '.services.*.image | select(. == "sleede/fab-manager*")' docker-compose.yml)
-  mapfile -t COMPOSE_ENVS < <(yq eval ".services.$SERVICE.environment" docker-compose.yml)
-  ENV_ARGS=$(for i in "${COMPOSE_ENVS[@]}"; do sed 's/: /=/g;s/^/-e /g' <<< "$i"; done)
-  PG_ID=$(docker-compose ps -q postgres)
-  if [[ "$PG_ID" = "" ]]; then
-    restore_tag
-    printf "\e[91m[ ❌ ] PostgreSQL container is not running, unable to compile the assets\e[39m\nExiting..."
-    exit 4
-  fi
-  PG_NET_ID=$(docker inspect "$PG_ID" -f "{{json .NetworkSettings.Networks }}" | jq -r '.[] .NetworkID')
-  clean_env_file
   if ! mkdir -p public/new_packs; then
     # if, for any reason, the directory cannot be created, we create it with sudo privileges and changes the ownership to the current user
     elevate_cmd mkdir -p public/new_packs
     elevate_cmd chown "$(id -u):$(id -g)" public/new_packs
   fi
-  # shellcheck disable=SC2068
-  if ! docker run --user "0:0" --rm --env-file ./config/env ${ENV_ARGS[@]} --link "$PG_ID" --net "$PG_NET_ID" -v "${PWD}/public/new_packs:/usr/src/app/public/packs" "$IMAGE" bundle exec rake assets:precompile; then
-    printf "\e[93m[ ⚠ ] Something may have went wrong while compiling the assets, please check the logs above.\e[39m\n"
-    [[ "$YES_ALL" = "true" ]] && confirm="y" || read -rp "[91m::[0m [1mIgnore and continue?[0m (Y/n) " confirm </dev/tty
-    if [[ "$confirm" = "n" ]]; then restore_tag; echo "Exiting..."; exit 4; fi
+  # Compose carries the accepted DB host, TLS and secret mounts into the build runner.
+  if ! docker-compose run --rm --no-deps --user "0:0" \
+      -v "${PWD}/public/new_packs:/usr/src/app/public/packs" "$SERVICE" bundle exec rake assets:precompile; then
+    restore_tag
+    echo "Asset compilation failed; existing packs and services were left unchanged." >&2
+    exit 4
   fi
-  docker-compose down
+  docker-compose stop "$SERVICE"
   if ! rm -rf public/packs; then
     # sometimes we can't delete the packs folder, because of a permission issue. In that case try with sudo
     elevate_cmd rm -rf public/packs
@@ -266,14 +296,15 @@ force_version()
 {
   if [ "$FORCE_TARGET" != "true" ]; then return; fi
 
-  yq -i eval ".services.$SERVICE.image = \"sleede/fab-manager:release-v$TARGET\"" docker-compose.yml
+  yq -i eval ".services.$SERVICE.image = \"sleede/fab-manager:release-v$TARGET\"" "$COMPOSE_CONFIG"
 }
 
 restore_tag()
 {
   if [ "$FORCE_TARGET" != "true" ]; then return; fi
 
-  yq -i eval ".services.$SERVICE.image = \"sleede/fab-manager$TAG\"" docker-compose.yml
+  # restore the exact previous reference, which may be an inspected image ID after a migration
+  yq -i eval ".services.$SERVICE.image = \"$IMAGE_BEFORE\"" "$COMPOSE_CONFIG"
 }
 
 upgrade()
@@ -286,13 +317,18 @@ upgrade()
 
   add_environments
   force_version
-  if ! docker-compose pull "$SERVICE"; then
+  local selected_image
+  selected_image="$(yq eval -r ".services.$SERVICE.image" "$COMPOSE_CONFIG")"
+  if [[ "$selected_image" == sha256:* ]]; then
+    docker image inspect "$selected_image" >/dev/null ||
+      { restore_tag; echo "The inspected application image is no longer available locally." >&2; exit 4; }
+  elif ! docker-compose pull "$SERVICE"; then
     restore_tag
     printf "\e[91m[ ❌ ] An error occurred, detected service name: %s\e[39m\nExiting..." "$SERVICE"
     exit 4
   fi
   BRANCH='master'
-  if yq eval '.services.*.image | select(. == "sleede/fab-manager*")' docker-compose.yml | grep -q ':dev'; then BRANCH='dev'; fi
+  if yq eval '.services.*.image | select(. == "sleede/fab-manager*")' "$COMPOSE_CONFIG" | grep -q ':dev'; then BRANCH='dev'; fi
   for SCRIPT in "${SCRIPTS[@]}"; do
     printf "\e[91m::\e[0m \e[1mRunning script %s from branch %s...\e[0m\n" "$SCRIPT" "$BRANCH"
     if [[ "$YES_ALL" = "true" ]]; then
@@ -329,12 +365,16 @@ upgrade()
       exit 4
     fi
   done
-  docker-compose up -d
+  docker-compose up -d --no-deps --force-recreate "$SERVICE"
   docker ps
 }
 
 clean()
 {
+  if [[ "$SKIP_IMAGE_CLEANUP" == "true" ]]; then
+    echo "Image cleanup skipped; source and rollback images are retained."
+    return
+  fi
   echo -e "\e[91m::\e[0m \e[1mCurrent disk usage:\e[0m"
   df -h /
   [[ "$YES_ALL" = "true" ]] && confirm="y" || read -rp "[91m::[0m [1mClean previous docker images?[0m (y/N) " confirm </dev/tty
@@ -355,6 +395,7 @@ Options:
   -c <string>        Provides additional upgrade command, run in the context of the app (TODO DEPLOY)
   -s <string>        Executes a remote script (TODO DEPOY)
   -e <string>        Adds the environment variable to config/env
+  --no-image-cleanup Preserve source and rollback images
   --no-compile-assets Skip assets compilation step
 Return codes:
   0                  Upgrade terminated successfully
@@ -371,11 +412,41 @@ function trap_ctrlc()
   exit 2
 }
 
+
+# This gate runs before -y/-i, target selection, pulls, preprocessing or Compose changes.
+postgresql_guard()
+{
+  local guard script="${BASH_SOURCE[0]:-}" downloaded=false status
+  if ! command -v python3 >/dev/null; then
+    printf "\e[93m[ ⚠ ] Python 3 is unavailable: the read-only PostgreSQL storage check was skipped.\e[39m\n"
+    return
+  fi
+  if [[ -n "$script" && -f "$script" ]]; then
+    guard="$(dirname "$(readlink -f "$script")")/../scripts/postgresql-upgrade-guard.py"
+  fi
+  if [[ ! -f "${guard:-}" ]]; then
+    # this script is usually piped from GitHub (upgrade.fab.mn): fetch its companion gate the same way
+    guard="$(mktemp)"
+    downloaded=true
+    if ! \curl -fsSL https://raw.githubusercontent.com/sleede/fab-manager/master/scripts/postgresql-upgrade-guard.py > "$guard"; then
+      rm -f "$guard"
+      printf "\e[93m[ ⚠ ] The PostgreSQL storage check could not be downloaded and was skipped.\e[39m\n"
+      return
+    fi
+  fi
+  python3 "$guard"
+  status=$?
+  [[ "$downloaded" == "true" ]] && rm -f "$guard"
+  [[ "$status" == 0 ]] || exit 1
+}
+
 proceed()
 {
   trap "trap_ctrlc" 2 # SIGINT
   parseparams "$@"
+  select_compose
   config
+  postgresql_guard
   version_check
   upgrade
   clean
