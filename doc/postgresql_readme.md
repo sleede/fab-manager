@@ -11,36 +11,45 @@ This can be achieved doing the following:
    docker-compose exec postgres psql -Upostgres
    ```
 
-## Dumping the database
+## Backup and restore with explicit resources
 
-Use the following commands to dump the PostgreSQL database to an archive file
-```bash
-cd /apps/fabmanager/
-docker-compose exec postgres bash
-cd /var/lib/postgresql/data/
-DB=$(psql -U postgres -c \\l | grep production | awk '{print $1}')
-pg_dump -U postgres "$DB" > "${DB}_$(date -I).sql"
-tar cvzf "fabmanager_database_dump_$(date -I).tar.gz" "${DB}_$(date -I).sql"
-```
+For a server migration use [the verified logical migration](postgresql_migration.md),
+which preserves owners/ACL, globals, extensions, large objects and sequences and
+verifies a fresh restoration. Never infer the database by grepping a name, drop
+the source database, or restore an 18 archive directly into 9.6.
 
-If you're connected to your server thought SSH, you can download the resulting dump file using the following:
-```bash
-scp root@remote.server.fab:/apps/fabmanager/postgresql/fabmanager_database_dump_$(date -I).tar.gz .
-```
+For a separate backup, select the actual container, database, administrator,
+TLS hostname, CA and private pgpass file. Use the tested **18.6** client image
+even when the connected source is 9.6. A recent libpq does not upgrade pg_dump.
 
-Restore the dump with the following:
-```bash
-DUMP=$(tar -tvf "fabmanager_database_dump_$(date -I).tar.gz" | awk '{print $6}')
-tar xvf fabmanager_database_dump_$(date -I).tar.gz
-sudo cp "$DUMP" /apps/fabmanager/postgresql/
-cd /apps/fabmanager/
-docker-compose down
-docker-compose up -d postgres
-docker-compose exec postgres dropdb -U postgres fabmanager_production
-docker-compose exec postgres createdb -U postgres fabmanager_production
-docker-compose exec postgres psql -U postgres -d fabmanager_production -f "/var/lib/postgresql/data/${DUMP}"
-docker-compose up -d
-```
+~~~bash
+set -euo pipefail
+umask 077
+# Set all of these to inventoried resources, never production guesses.
+: "${PG_CONTAINER:?}" "${PG_DATABASE:?}" "${PG_ADMIN:?}" "${PG_HOST:?}"
+: "${PGPASS_FILE:?}" "${PG_CA_FILE:?}" "${BACKUP_DIRECTORY:?}"
+mkdir -m 700 "$BACKUP_DIRECTORY"  # refuses an existing directory
+client=(docker run --rm --network "container:$PG_CONTAINER"
+  --mount "type=bind,src=$PGPASS_FILE,dst=/run/pgpass,readonly"
+  --mount "type=bind,src=$PG_CA_FILE,dst=/run/ca.crt,readonly"
+  -e PGPASSFILE=/run/pgpass -e PGSSLROOTCERT=/run/ca.crt -e PGSSLMODE=verify-full
+  -e PGHOST="$PG_HOST" -e PGHOSTADDR=127.0.0.1 -e PGUSER="$PG_ADMIN"
+  postgres:18.6-bookworm@sha256:5c4783a8cc3f0074912164f94dfa1be4e043438f0f707cf968d7af9a0d31a2c8)
+"${client[@]}" pg_dump --format=custom --create --quote-all-identifiers   --dbname="$PG_DATABASE" > "$BACKUP_DIRECTORY/database.dump.partial"   2> "$BACKUP_DIRECTORY/dump-diagnostics.txt"
+test ! -s "$BACKUP_DIRECTORY/dump-diagnostics.txt" # inspect any warning privately
+mv "$BACKUP_DIRECTORY/database.dump.partial" "$BACKUP_DIRECTORY/database.dump"
+"${client[@]}" pg_dumpall --globals-only --no-role-passwords   > "$BACKUP_DIRECTORY/globals.sql" 2> "$BACKUP_DIRECTORY/globals-diagnostics.txt"
+test ! -s "$BACKUP_DIRECTORY/globals-diagnostics.txt"
+sha256sum "$BACKUP_DIRECTORY/database.dump" > "$BACKUP_DIRECTORY/database.sha256"
+~~~
+
+A successful backup is not a successful recovery test. Restore with pg_restore
+18.6 --exit-on-error into a **new, explicitly selected** database/cluster, inspect
+diagnostics, compare data/ACL/business invariants and retain the original.
+Do not blindly execute globals.sql: the target already has postgres, login
+passwords need rotation and non-default tablespaces need explicit mapping.
+The migration tool and its independent-restoration matrix provide that path.
+Keep backups, role exports, configuration and credentials outside Git.
 
 <a name="postgresql-limitations"></a>
 ## PostgreSQL Limitations
