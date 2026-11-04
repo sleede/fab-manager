@@ -10,23 +10,24 @@ class Statistics::Builders::ReservationsBuilderService
       %w[machine space training event].each do |category|
         Statistics::FetcherService.send("each_#{category}_reservation", options) do |r|
           %w[booking hour].each do |type|
-            stat = "Stats::#{category.capitalize}"
-                   .constantize
-                   .new({ date: format_date(r[:date]),
-                          type: type,
-                          subType: r["#{category}_type".to_sym],
-                          ca: r[:ca],
-                          name: r["#{category}_name".to_sym],
-                          reservationId: r[:reservation_id],
-                          reservationContextId: r[:reservation_context_id],
-                          coupon: r[:coupon],
-                          groupName: r[:groupName],
-                        }.merge(user_info_stat(r)))
-            stat[:stat] = (type == 'booking' ? (category == 'event' ? r[:nb_places] : 1) : r[:nb_hours])
+            stat = SearchIndex.build_stat(family: category, attributes: { date: format_date(r[:date]),
+                                                                          type: type,
+                                                                          subType: r["#{category}_type".to_sym],
+                                                                          ca: r[:ca],
+                                                                          name: r["#{category}_name".to_sym],
+                                                                          reservationId: r[:reservation_id],
+                                                                          reservationContextId: r[:reservation_context_id],
+                                                                          coupon: r[:coupon],
+                                                                          groupName: r[:groupName] }.merge(user_info_stat(r)))
+            stat[:stat] = (if type == 'booking'
+                             category == 'event' ? r[:nb_places] : 1
+                           else
+                             r[:nb_hours]
+                           end)
             stat["#{category}Id".to_sym] = r["#{category}_id".to_sym]
 
             stat = add_custom_attributes(category, stat, r)
-            stat.save
+            SearchIndex.save_stat(stat)
           end
         end
       end

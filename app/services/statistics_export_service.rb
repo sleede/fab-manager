@@ -14,13 +14,7 @@ class StatisticsExportService
     # query all stats with range arguments
     query = MultiJson.load(export.query)
 
-    @results = Elasticsearch::Model.client.search(index: 'stats', scroll: '30s', body: query)
-    scroll_id = @results['_scroll_id']
-    while @results['hits']['hits'].size != @results['hits']['total']
-      scroll_res = Elasticsearch::Model.client.scroll(scroll: '30s', scroll_id: scroll_id)
-      @results['hits']['hits'].concat(scroll_res['hits']['hits'])
-      scroll_id = scroll_res['_scroll_id']
-    end
+    @results = SearchIndex.export(family: 'all_stats', query: query)
 
     ids = @results['hits']['hits'].map { |u| u['_source']['userId'] }
     @users = User.includes(:profile).where(id: ids)
@@ -45,13 +39,7 @@ class StatisticsExportService
         query = MultiJson.load(export.query)
         type_key = export.key
 
-        @results = Elasticsearch::Model.client.search({index: 'stats', type: '#{path}', scroll: '30s', body: query})
-        scroll_id = @results['_scroll_id']
-        while @results['hits']['hits'].size != @results['hits']['total']
-          scroll_res = Elasticsearch::Model.client.scroll(scroll: '30s', scroll_id: scroll_id)
-          @results['hits']['hits'].concat(scroll_res['hits']['hits'])
-          scroll_id = scroll_res['_scroll_id']
-        end
+        @results = SearchIndex.export(family: '#{path}', query: query)
 
         ids = @results['hits']['hits'].map { |u| u['_source']['userId'] }
         @users = User.includes(:profile).where(:id => ids)
@@ -70,7 +58,7 @@ class StatisticsExportService
         # write content to file
         File.binwrite(export.file, content)
       end
-    }, __FILE__, __LINE__ - 31
+    }, __FILE__, __LINE__ - 25
   end
   # rubocop:enable Style/DocumentDynamicEvalDefinition
 end

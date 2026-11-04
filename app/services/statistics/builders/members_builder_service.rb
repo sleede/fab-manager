@@ -8,20 +8,20 @@ class Statistics::Builders::MembersBuilderService
     def build(options = default_options)
       # account list
       Statistics::FetcherService.each_member(options) do |m|
-        Stats::Account.create({ date: format_date(m[:date]),
-                                type: 'member',
-                                subType: 'created',
-                                stat: 1,
-                                groupName: m[:groupName] }.merge(user_info_stat(m)))
+        SearchIndex.create_stat(family: 'account', attributes: { date: format_date(m[:date]),
+                                                                 type: 'member',
+                                                                 subType: 'created',
+                                                                 stat: 1,
+                                                                 groupName: m[:groupName] }.merge(user_info_stat(m)))
       end
 
       # member ca list
       Statistics::FetcherService.members_ca_list(options).each do |m|
-        Stats::User.create({ date: format_date(m[:date]),
-                             type: 'revenue',
-                             subType: m[:group],
-                             stat: m[:ca],
-                             groupName: m[:groupName] }.merge(user_info_stat(m)))
+        SearchIndex.create_stat(family: 'user', attributes: { date: format_date(m[:date]),
+                                                              type: 'revenue',
+                                                              subType: m[:group],
+                                                              stat: m[:ca],
+                                                              groupName: m[:groupName] }.merge(user_info_stat(m)))
       end
     end
   end

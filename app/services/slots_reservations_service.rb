@@ -18,17 +18,16 @@ class SlotsReservationsService
       # then we try to remove this reservation from ElasticSearch, to keep the statistics up-to-date
       begin
         model_name = slot_reservation.reservation.reservable.class.name
-        client = Elasticsearch::Model.client
-
-        model = "Stats::#{model_name}".constantize
-        client.delete_by_query(
-          index: model.index_name,
-          type: model.document_type,
+        SearchIndex.delete_by_query(
+          family: model_name.underscore,
           conflicts: 'proceed',
-          body: { query: { match: { reservationId: slot_reservation.reservation_id } } }
+          query: { match: { reservationId: slot_reservation.reservation_id } }
         )
       rescue Faraday::ConnectionFailed
         warn 'Unable to update data in elasticsearch'
+      rescue SearchIndex::IncompleteRead => e
+        # The SQL cancellation is already committed; callers must still run (eg. refunds), as before this boundary.
+        Rails.logger.warn "[SlotsReservationsService] #{e.message} for reservation #{slot_reservation.reservation_id}"
       end
 
       true
