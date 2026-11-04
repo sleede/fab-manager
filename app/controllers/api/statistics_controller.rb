@@ -56,7 +56,7 @@ class API::StatisticsController < API::APIController
   def scroll
     authorize :statistic, :scroll?
 
-    results = Elasticsearch::Model.client.scroll scroll: params[:scroll], scroll_id: params[:scrollId]
+    results = SearchIndex.next_page(cursor: params[:scrollId], keep_alive: params[:scroll]).legacy_response
     render json: results
   end
 end

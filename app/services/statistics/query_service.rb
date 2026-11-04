@@ -12,11 +12,12 @@ class Statistics::QueryService
 
       # run main query in elasticSearch
       query = MultiJson.load(request.body.read)
-      model = "Stats::#{statistic_index.capitalize}".constantize
-      results = model.search(query, request.query_parameters.symbolize_keys).response
+      # URL parameters are ES options only: they cannot replace the route family or the request body.
+      options = request.query_parameters.symbolize_keys.except(:family, :query)
+      results = SearchIndex.search(family: statistic_index, query: query, **options).legacy_response
 
       # run additional custom aggregations, if any
-      CustomAggregationService.new.call(statistic_index, statistic_type, start_date, end_date, custom_query, results)
+      CustomAggregationService.new.call(statistic_index, statistic_type, start_date, end_date, custom_query, results: results)
 
       results
     end
