@@ -1,0 +1,59 @@
+# Single-node target with a NEW named volume. Never reuse an ES5 data volume.
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:9.5.6
+    environment:
+      discovery.type: single-node
+      xpack.license.self_generated.type: basic
+      xpack.security.enabled: "true"
+      xpack.security.http.ssl.enabled: "true"
+      xpack.security.http.ssl.key: certs/elasticsearch.key
+      xpack.security.http.ssl.certificate: certs/elasticsearch.crt
+      xpack.security.http.ssl.certificate_authorities: certs/ca.crt
+      path.repo: /snapshots
+      ELASTIC_PASSWORD_FILE: /run/secrets/elastic_password
+      ES_JAVA_OPTS: -Xms${ES9_HEAP:-512m} -Xmx${ES9_HEAP:-512m}
+    mem_limit: ${ES9_MEMORY:-2g}
+    cpus: ${ES9_CPUS:-2}
+    ulimits:
+      nofile:
+        soft: 65535
+        hard: 65535
+    volumes:
+      - data:/usr/share/elasticsearch/data
+      - snapshots:/snapshots
+      - ${ES9_SECRETS_DIR:?Run deployment prepare first}/server:/usr/share/elasticsearch/config/certs:ro
+      - ./healthcheck.sh:/usr/local/bin/fm-es-healthcheck:ro
+    secrets:
+      - elastic_password
+      - es_health_curl
+    healthcheck:
+      test: ["CMD", "bash", "/usr/local/bin/fm-es-healthcheck"]
+      interval: 15s
+      timeout: 10s
+      retries: 10
+      start_period: 120s
+    networks: [search]
+    depends_on:
+      search-permissions:
+        condition: service_completed_successfully
+    restart: unless-stopped
+  search-permissions:
+    image: docker.elastic.co/elasticsearch/elasticsearch:9.5.6
+    user: "0:0"
+    network_mode: none
+    entrypoint: ["bash", "-ec", "chown 1000:0 /snapshots && chmod 0750 /snapshots"]
+    volumes:
+      - snapshots:/snapshots
+    restart: "no"
+volumes:
+  data:
+  snapshots:
+networks:
+  search:
+    internal: true
+secrets:
+  elastic_password:
+    file: ${ES9_SECRETS_DIR:?Run deployment prepare first}/bootstrap_password
+  es_health_curl:
+    file: ${ES9_SECRETS_DIR:?Run deployment prepare first}/health.curl
