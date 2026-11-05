@@ -1,5 +1,9 @@
 # ELASTICSEARCH
 
+This is the historical ES5 mapping reference. It is not an ES9 setup procedure.
+For the active schema, aliases, API contracts and new-installation instructions,
+see [Elasticsearch 9 application boundary](elasticsearch_boundary.md).
+
 ## Statistics
 
 http://localhost:9200/stats/_mapping?pretty

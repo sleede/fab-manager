@@ -3,30 +3,20 @@
 require 'test_helper'
 require 'rubyXL'
 require 'digest'
+require_relative 'support'
 
-# Destructive ES fixtures: run only against a disposable Elasticsearch 5.6 server.
-# The scenarios are kept together so the same file runs against the unmodified baseline.
+# Destructive ES fixtures: run only against a disposable Elasticsearch 9 server.
+# Same business inputs and frozen ES5.6 expectations; only index setup and native writes differ.
 # rubocop:disable Metrics/ClassLength
 class SearchIndexContractTest < ActionDispatch::IntegrationTest
+  include ElasticsearchContractSupport
   FAMILIES = %w[account event machine project subscription training user space order].freeze
   VOLATILE = %w[took _shards _scroll_id _score max_score _version created_at updated_at].freeze
   class_attribute :observations, default: {}
   REFERENCE = Rails.root.join('test/fixtures/search_index/es56.json')
 
   setup do
-    raise 'Set ES_CONTRACT_ISOLATED=1 for a disposable ES5.6 cluster' unless ENV['ES_CONTRACT_ISOLATED'] == '1'
-
-    @client = Elasticsearch::Model.client
-    assert_match(/^5\.6\./, @client.info.dig('version', 'number'))
-    %w[stats fablab].each { |index| @client.indices.delete(index: index) if @client.indices.exists?(index: index) }
-    @client.indices.create(index: 'stats', body: { settings: { number_of_shards: 1, number_of_replicas: 0 } })
-    FAMILIES.each do |family|
-      @client.indices.put_mapping(index: 'stats', type: family, body: { properties: {
-                                    type: { type: 'keyword' }, subType: { type: 'keyword' }, name: { type: 'keyword' },
-                                    date: { type: 'date' }, stat: { type: 'double' }, ca: { type: 'double' }, age: { type: 'integer' }
-                                  } })
-    end
-    Availability.__elasticsearch__.create_index!
+    reset_search_indices
     login_as(User.with_role(:admin).first, scope: :user)
     travel_to Time.zone.parse('2026-11-03 12:00:00')
   end
@@ -123,15 +113,16 @@ class SearchIndexContractTest < ActionDispatch::IntegrationTest
     worker = AvailabilityIndexerWorker.new
     worker.perform(:index, record.id)
     refresh
-    result = @client.get(index: 'fablab', type: 'availabilities', id: record.id)['_source']
+    result = @client.get(**SearchIndex.target('availabilities'), id: record.id)['_source']
+    result = result.except('__fm')
     assert_equal JSON.parse(record.as_indexed_json), result
     capture('availability', normalized(result))
     record.update!(end_at: Time.zone.parse('2026-03-08 12:00'))
     worker.perform(:index, record.id)
-    assert_equal 3.0, @client.get(index: 'fablab', type: 'availabilities', id: record.id).dig('_source', 'hours_duration')
+    assert_equal 3.0, @client.get(**SearchIndex.target('availabilities'), id: record.id).dig('_source', 'hours_duration')
     worker.perform(:delete, record.id)
     worker.perform(:delete, record.id)
-    assert_raises(Elasticsearch::Transport::Transport::Errors::NotFound) { @client.get(index: 'fablab', type: 'availabilities', id: record.id) }
+    assert_raises(Elastic::Transport::Transport::Errors::NotFound) { @client.get(**SearchIndex.target('availabilities'), id: record.id) }
   end
 
   test 'cleaner preserves historical documents outside inclusive date bounds across all families' do
@@ -221,7 +212,7 @@ class SearchIndexContractTest < ActionDispatch::IntegrationTest
     assert_equal 47, ids.uniq.length
     capture('pagination', ids)
   ensure
-    @client.clear_scroll(scroll_id: cursor) if cursor
+    delete '/_search/scroll', params: { scrollId: cursor }, as: :json if cursor
   end
 
   test 'large per-family and global XLSX exports preserve all rows beyond the result window' do
@@ -286,24 +277,24 @@ class SearchIndexContractTest < ActionDispatch::IntegrationTest
   end
 
   def put_document(family, id, source)
-    @client.index(index: 'stats', type: family, id: id, body: source)
+    SearchIndex.index_document(family: family, id: id, source: source)
   end
 
   def put_availability(id, source)
-    @client.index(index: 'fablab', type: 'availabilities', id: id, body: source)
+    SearchIndex.index_document(family: 'availabilities', id: id, source: source)
   end
 
   def put_many(count)
-    body = count.times.flat_map do |i|
-      [{ index: { _index: 'stats', _type: 'machine', _id: sprintf('%05d', i) } },
-       { type: 'booking', subType: 'imprimante-3d', date: '2026-03-08', userId: 2, stat: 1, age: 20, ca: 0, name: "Machine #{i}" }]
+    documents = count.times.map do |i|
+      { id: sprintf('%05d', i), source: { type: 'booking', subType: 'imprimante-3d', date: '2026-03-08', userId: 2,
+                                          stat: 1, age: 20, ca: 0, name: "Machine #{i}" } }
     end
-    assert_not @client.bulk(body: body)['errors']
+    assert_not SearchIndex.bulk_index(family: 'machine', documents: documents)['errors']
     refresh
   end
 
   def refresh
-    @client.indices.refresh(index: 'stats,fablab')
+    @client.indices.refresh(index: 'fm-stats-all,fm-availabilities')
   end
 
   def gateway(family, query, parameters = {})

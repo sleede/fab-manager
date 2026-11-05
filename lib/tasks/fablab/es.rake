@@ -1,38 +1,37 @@
 # frozen_string_literal: true
 
-# Elasticsearch operations remain on the existing 5.6 cluster.
+# New installation schema setup never deletes indices. Existing data needs its own migration.
 namespace :fablab do
   namespace :es do
-    desc '(re)Build ElasticSearch fablab base for stats'
+    desc 'Initialize or validate the Elasticsearch 9 schema and aliases without deleting data'
+    task initialize: :environment do
+      SearchIndex.initialize_schema!
+    end
+
+    desc 'Read-only validation of an already initialized Elasticsearch 9 schema'
+    task validate: :environment do
+      SearchIndex::Schema.validate!(SearchIndex::Connection.client)
+    end
+
+    desc 'Ensure statistics schema (non-destructive compatibility name for setup)'
     task build_stats: :environment do
-      next unless Setting.get('statistics_module')
-
-      SearchIndex.rebuild_statistics!
+      SearchIndex.initialize_schema! if Setting.get('statistics_module')
     end
 
-    desc 'add event filters to statistics'
-    task add_event_filters: :environment do
-      SearchIndex.add_event_filters
-    end
+    desc 'Validate the event statistics mapping'
+    task add_event_filters: :initialize
 
-    desc 'add spaces reservations to statistics'
-    task add_spaces: :environment do
-      SearchIndex.add_spaces_mapping
-    end
+    desc 'Validate the space statistics mapping'
+    task add_spaces: :initialize
 
-    desc 'sync all/one availabilities in ElasticSearch index'
+    desc 'Synchronize all/one SQL availability to its Elasticsearch projection'
     task :build_availabilities_index, [:id] => :environment do |_task, args|
-      SearchIndex.ensure_availability_mapping
-      if args.id
-        AvailabilityIndexerWorker.perform_async(:index, args.id)
-      else
-        Availability.pluck(:id).each do |availability_id|
-          AvailabilityIndexerWorker.perform_async(:index, availability_id)
-        end
-      end
+      SearchIndex.initialize_schema!
+      ids = args.id ? [args.id] : Availability.pluck(:id)
+      ids.each { |id| AvailabilityIndexerWorker.perform_async(:index, id) }
     end
 
-    desc '(re)generate statistics in ElasticSearch for the past period. Use 0 to generate for today'
+    desc '(re)generate statistics for the past period, removing that period first; use 0 for today'
     task :generate_stats, [:period] => :environment do |_task, args|
       raise 'FATAL ERROR: You must pass a number of days (=> past period) OR a date to generate statistics' unless args.period
 
@@ -42,8 +41,7 @@ namespace :fablab do
         raise 'Interrupted by user' unless confirm == 'y'
       end
 
-      worker = PeriodStatisticsWorker.new
-      worker.perform(args.period)
+      PeriodStatisticsWorker.new.perform(args.period)
     end
   end
 end

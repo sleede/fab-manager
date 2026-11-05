@@ -12,8 +12,6 @@ require 'active_job/railtie'
 # require 'action_cable/engine'
 require 'rails/test_unit/railtie'
 # require 'sprockets/railtie'
-require 'elasticsearch/rails/instrumentation'
-require 'elasticsearch/persistence/model'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.

@@ -6,6 +6,7 @@ class Statistics::CleanerService
 
   class << self
     def clean_stat(options = default_options)
+      ElasticsearchMigrationGuard.rebuild!(options)
       SearchIndex::STAT_FAMILIES.each do |family|
         dates = (to_date(options[:start_date]).to_date..to_date(options[:end_date]).to_date).to_a
         # elasticsearch does not support more than 1024 query arguments

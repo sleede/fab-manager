@@ -1,46 +1,26 @@
 # frozen_string_literal: true
 
 require 'set'
+require 'securerandom'
 
-# The Elasticsearch 5.6 operations used by availability and statistics consumers.
-# Keep legacy model serialization here until the persistence models are detached.
+# Application operations on one Elasticsearch 9 backend. Rails remains the access boundary.
 class SearchIndex
   STAT_FAMILIES = %w[account event machine project subscription training user space order].freeze
-  TARGETS = STAT_FAMILIES.index_with { |family| { index: 'stats', type: family }.freeze }
-                         .merge('availabilities' => { index: 'fablab', type: 'availabilities' }.freeze).freeze
+  FAMILIES = (STAT_FAMILIES + ['availabilities']).freeze
+  TARGETS = FAMILIES.index_with { |family| { index: family == 'availabilities' ? 'fm-availabilities' : "fm-stats-#{family}" }.freeze }.freeze
+  SEARCH_OPTIONS = %i[scroll size from search_type].freeze
 
   class IncompleteRead < StandardError; end
+  class UnsupportedQuery < ArgumentError; end
+  class SchemaConflict < StandardError; end
 
-  # Internal contract; legacy_response is the compatibility edge for AngularJS/XLSX.
-  class Result
-    attr_reader :legacy_response
+  # Preserve every item result so callers can distinguish partial success from failure.
+  class BulkFailure < StandardError
+    attr_reader :items
 
-    def initialize(response)
-      if response['timed_out'] || response.dig('_shards', 'failed').to_i.positive?
-        raise IncompleteRead, 'Elasticsearch returned a partial result'
-      end
-
-      @legacy_response = response
-    end
-
-    def total
-      { 'value' => legacy_response.fetch('hits').fetch('total'), 'relation' => 'eq' }
-    end
-
-    def hits
-      # The catalogue restricts request targets; a read over all_stats keeps any stored type, as the XLSX templates do.
-      legacy_response.fetch('hits').fetch('hits').map do |hit|
-        { 'family' => hit.fetch('_type'), 'id' => hit.fetch('_id').to_s, '_source' => hit.fetch('_source') }
-          .tap { |result| result['routing'] = hit['_routing'] if hit.key?('_routing') }
-      end
-    end
-
-    def to_h
-      { 'total' => total, 'hits' => hits, 'aggregations' => legacy_response['aggregations'] }
-    end
-
-    def cursor
-      legacy_response['_scroll_id']
+    def initialize(items)
+      @items = items
+      super('Elasticsearch bulk contains failed or missing items; inspect items before retrying')
     end
   end
 
@@ -50,29 +30,38 @@ class SearchIndex
     end
 
     def family_for(index:, type:)
-      TARGETS.key(index: index, type: type) || raise(ArgumentError, "Unknown search target: #{index}/#{type}")
+      return type if STAT_FAMILIES.include?(type) && index == 'stats'
+      return type if type == 'availabilities' && index == 'fablab'
+
+      raise ArgumentError, "Unknown search target: #{index}/#{type}"
+    end
+
+    def family_from_index(index)
+      FAMILIES.find { |family| index == Schema.physical(family) } || raise(SchemaConflict, "Unknown search index: #{index}")
     end
 
     def search(family:, query:, **options)
-      Result.new(client.search(**options, **search_target(family), body: query))
+      raise UnsupportedQuery, 'Unsupported search parameter' if (options.keys - SEARCH_OPTIONS).any?
+
+      Result.new(request(:search, **options, index: read_index(family), body: Query.build(query)))
     end
 
     def next_page(cursor:, keep_alive: '30s')
-      Result.new(client.scroll(scroll: keep_alive, scroll_id: cursor))
+      Result.new(request(:scroll, body: { scroll: keep_alive, scroll_id: cursor }))
     end
 
     def close_cursor(cursor:)
-      client.clear_scroll(scroll_id: cursor) if cursor
+      request(:clear_scroll, body: { scroll_id: [cursor] }) if cursor
     end
 
-    # Terminate on an empty page, check the exact total, and release even on errors.
     def each_page(family:, query:, page_size: 1000)
       return enum_for(__method__, family: family, query: query, page_size: page_size) unless block_given?
 
       cursor = nil
       count = 0
       seen = Set.new
-      response = client.search(**search_target(family), body: query, size: page_size, scroll: '30s')
+      body = Query.build(query).merge('size' => page_size)
+      response = request(:search, index: read_index(family), body: body, scroll: '30s')
       cursor = response['_scroll_id']
       page = Result.new(response)
       total = page.total.fetch('value')
@@ -83,7 +72,6 @@ class SearchIndex
           yield page if total.zero?
           break
         end
-
         hits.each do |hit|
           raise IncompleteRead, 'Repeated document in Elasticsearch cursor' unless seen.add?([hit['family'], hit['id']])
         end
@@ -93,8 +81,7 @@ class SearchIndex
         yield page
         raise IncompleteRead, 'Missing Elasticsearch cursor' unless cursor
 
-        # Capture the newest ID before checking the next response for shard errors.
-        response = client.scroll(scroll: '30s', scroll_id: cursor)
+        response = request(:scroll, body: { scroll: '30s', scroll_id: cursor })
         cursor = response['_scroll_id'] || cursor
         page = Result.new(response)
       end
@@ -128,31 +115,53 @@ class SearchIndex
     end
 
     def create_stat(family:, attributes:)
-      record = build_stat(family: family, attributes: attributes)
-      record.run_callbacks(:create) { save_stat(record) }
-      record
+      build_stat(family: family, attributes: attributes).tap { |record| save_stat(record) }
     end
 
     def save_stat(record)
-      target(record.class.document_type)
-      record.save
+      return false unless record.valid?
+
+      record.created_at ||= Time.now.utc
+      record.updated_at = Time.now.utc
+      id = record.id || SecureRandom.uuid
+      index_document(family: record.class.family, id: id, source: record.as_json)
+      record.id = id
+      true
     end
 
-    def update_stat(family:, id:, changes:)
-      client.update(**target(family), id: id.to_s, body: { doc: changes.merge(updated_at: Time.now.utc) })
+    def index_document(family:, id:, source:)
+      request(:index, **target(family), id: id.to_s, require_alias: true, body: document(family, id, source))
     end
 
     def index_availability(record:)
-      client.index(**target('availabilities'), id: record.id.to_s, body: record.as_indexed_json)
+      index_document(family: 'availabilities', id: record.id, source: JSON.parse(record.as_indexed_json))
+    end
+
+    def update_stat(family:, id:, changes:)
+      raise ArgumentError, 'Reserved metadata' if changes.stringify_keys.key?('__fm')
+
+      request(:update, **target(family), id: id.to_s, require_alias: true, body: { doc: changes.merge(updated_at: Time.now.utc) })
+    end
+
+    def bulk_index(family:, documents:)
+      body = documents.flat_map do |entry|
+        [{ index: { _index: target(family).fetch(:index), _id: entry.fetch(:id).to_s } },
+         document(family, entry.fetch(:id), entry.fetch(:source))]
+      end
+      result = request(:bulk, require_alias: true, body: body)
+      items = result.fetch('items')
+      failed = items.any? { |item| item.values.any? { |status| status['error'] || !status.fetch('status').between?(200, 299) } }
+      raise BulkFailure, items if failed || result['errors'] || items.length != documents.length
+
+      result
     end
 
     def delete(family:, id:)
-      client.delete(**target(family), id: id.to_s)
+      request(:delete, **target(family), id: id.to_s)
     end
 
-    # Conflicts are a failure unless the caller explicitly asked Elasticsearch to proceed past them.
     def delete_by_query(family:, query:, **options)
-      result = client.delete_by_query(**options, **target(family), body: { query: query })
+      result = request(:delete_by_query, **options, **target(family), body: Query.build({ query: query }).except('track_total_hits'))
       conflicts = options[:conflicts].to_s != 'proceed' && result['version_conflicts'].to_i.positive?
       raise IncompleteRead, 'Incomplete Elasticsearch deletion' if result['timed_out'] || result.fetch('failures', []).any? || conflicts
 
@@ -160,56 +169,42 @@ class SearchIndex
     end
 
     def refresh(family:)
-      client.indices.refresh(index: search_target(family).fetch(:index))
+      client.indices.refresh(index: read_index(family))
     end
 
     def healthy?
       !!client.cluster.health
-    rescue Elasticsearch::Transport::Transport::Error, Faraday::ConnectionFailed
+    rescue Elastic::Transport::Transport::Error, Faraday::Error, Connection::Unavailable
       false
     end
 
-    # Only the explicit, historically destructive rebuild task calls this method.
-    def rebuild_statistics!
-      client.indices.delete(index: 'stats') if client.indices.exists?(index: 'stats')
-      client.indices.create(index: 'stats', body: { settings: { index: { number_of_replicas: 0 } } })
-      # Preserve the eight explicit legacy mappings; order is dynamically mapped in 5.6.
-      (STAT_FAMILIES - ['order']).each do |family|
-        client.indices.put_mapping(**target(family), body: { properties: statistics_properties })
-      end
-      add_event_filters
-    end
-
-    def add_event_filters
-      client.indices.put_mapping(**target('event'), body: { properties: {
-                                   ageRange: { type: 'string', index: 'not_analyzed' },
-                                   eventTheme: { type: 'string', index: 'not_analyzed' }
-                                 } })
-    end
-
-    def add_spaces_mapping
-      client.indices.put_mapping(**target('space'), body: { properties: statistics_properties })
-    end
-
-    # Applying the known mapping does not delete existing documents or other types.
-    def ensure_availability_mapping
-      client.indices.create(index: 'fablab', body: { settings: Availability.settings.to_hash }) unless client.indices.exists?(index: 'fablab')
-      client.indices.put_mapping(**target('availabilities'), body: Availability.mappings.to_hash)
+    def initialize_schema!
+      Schema.initialize!(client)
     end
 
     private
 
-    def search_target(family)
-      family.to_s == 'all_stats' ? { index: 'stats' } : target(family)
+    def read_index(family)
+      family.to_s == 'all_stats' ? 'fm-stats-all' : target(family).fetch(:index)
     end
 
     def client
-      Elasticsearch::Model.client
+      Connection.client
     end
 
-    def statistics_properties
-      { type: { type: 'string', index: 'not_analyzed' }, subType: { type: 'string', index: 'not_analyzed' },
-        date: { type: 'date' }, name: { type: 'string', index: 'not_analyzed' } }
+    def request(operation, **arguments)
+      ElasticsearchMigrationGuard.write!(client) if %i[index update bulk delete delete_by_query].include?(operation)
+      ActiveSupport::Notifications.instrument('request.elasticsearch', operation: operation, index: arguments[:index]) do
+        response = client.public_send(operation, **arguments)
+        response.respond_to?(:body) ? response.body : response
+      end
+    end
+
+    def document(family, id, source)
+      raise ArgumentError, 'An opaque nonempty ID is required' if id.nil? || id.to_s.empty?
+      raise ArgumentError, 'Reserved metadata' if source.stringify_keys.key?('__fm')
+
+      source.merge('__fm' => { 'uid' => "#{family}##{id}" })
     end
   end
 end

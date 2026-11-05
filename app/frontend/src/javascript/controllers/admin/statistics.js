@@ -44,6 +44,12 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
 
     // id of the elastic search context
     $scope.scrollId = null;
+    const releaseScroll = function () {
+      const cursor = $scope.scrollId;
+      $scope.scrollId = null;
+      if (cursor) es.clearScroll(cursor).catch(error => console.error('Unable to close statistics search', error));
+    };
+    $scope.$on('$destroy', releaseScroll);
 
     // total number of results for the current query
     $scope.totalHits = null;
@@ -320,7 +326,9 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
             return console.error(`Error: something unexpected occurred during elasticSearch scroll query: ${error}`);
           } else {
             $scope.scrollId = response._scroll_id;
-            return $scope.data = $scope.data.concat(response.hits.hits);
+            $scope.data = $scope.data.concat(response.hits.hits);
+            if ($scope.data.length >= $scope.totalHits) releaseScroll();
+            return $scope.data;
           }
         });
       }
@@ -453,6 +461,7 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
      */
     const refreshStats = function () {
       if ($scope.selectedIndex && !$scope.preventRefresh && $scope.type.active) {
+        releaseScroll();
         $scope.data = [];
         $scope.sumCA = 0;
         $scope.averageAge = 0;
@@ -471,6 +480,7 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
             $scope.averageAge = Math.round(res.aggregations.average_age.value * 100) / 100;
             $scope.sumStat = res.aggregations.total_stat.value;
             $scope.scrollId = res._scroll_id;
+            if ($scope.data.length >= $scope.totalHits) releaseScroll();
             return (function () {
               const result = [];
               for (custom of Array.from($scope.type.active.custom_aggregations)) {

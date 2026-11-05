@@ -1,115 +1,269 @@
-# Elasticsearch 5.6 application boundary
+# Elasticsearch 9 application boundary
 
-`SearchIndex` centralizes the operations used by availability projections and
-statistics. This change runs with the existing Elasticsearch 5.6 server and the
-unchanged Ruby and browser dependencies. It has no PostgreSQL migration prerequisite.
+PR-ES-B builds on the reviewed PR-ES-A boundary. It targets a **new** Elasticsearch
+9 cluster, without a PostgreSQL migration prerequisite. It is not an in-place
+upgrade or a data migration tool. Existing ES5 services, volumes and credentials
+must remain unchanged until the separate copy/cutover/rollback procedure is qualified.
 
-The fixed catalogue maps `account`, `event`, `machine`, `project`, `subscription`,
-`training`, `user`, `space` and `order` to their existing types in `stats`.
-`availabilities` maps to `fablab/availabilities`. `all_stats` is an internal read
-scope over `stats`. Unknown families or stored custom aggregation targets raise
-an error before a request is sent. The source business field `type` remains
-separate from the document family.
+## Versions and transport
 
-The application operations are:
+Verified on 2026-11-04: Elasticsearch **9.5.6** supersedes the initially proposed
+9.5.5, including security corrections. The isolated integration environment used
+the official `docker.elastic.co/elasticsearch/elasticsearch:9.5.6` image, HTTPS,
+password authentication, a private CA and no published Elasticsearch port.
+
+The lockfile pins `elasticsearch` / `elasticsearch-api` **9.5.0** and
+`elastic-transport` **8.5.3**. The transport's major version is independent of the
+server major. Ruby **3.2.2**, Rails **7.0.8.7**, Faraday **0.17.3**, OAuth2 **1.4.4**
+and OpenLab **0.0.8** are unchanged. The published client requires Ruby >= 2.6;
+transport 8.5.3 requires Ruby >= 2.5 and Faraday < 3. The resolved old Faraday stack
+was exercised against the real server, including TLS hostname/CA verification,
+bad credentials, searches, bulk, scroll and clear-scroll. OAuth2 token exchange
+and the OpenLab HTTParty client are separately exercised with stub HTTP endpoints.
+These checks do not qualify a real identity provider or OpenLab deployment.
+
+Primary sources:
+
+- [Elasticsearch release notes](https://www.elastic.co/docs/release-notes/elasticsearch)
+- [Official Ruby client](https://www.elastic.co/docs/reference/elasticsearch/clients/ruby)
+- [Ruby transport](https://www.elastic.co/docs/reference/elasticsearch/clients/ruby/transport)
+- [Connecting and product verification](https://www.elastic.co/docs/reference/elasticsearch/clients/ruby/connecting)
+- [Client 9.5.0 gem metadata](https://rubygems.org/api/v2/rubygems/elasticsearch/versions/9.5.0.json)
+- [Transport 8.5.3 gem metadata](https://rubygems.org/api/v2/rubygems/elastic-transport/versions/8.5.3.json)
+- [Current scroll API](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-scroll)
+
+`config/initializers/elasticsearch.rb` creates the official client at
+`Rails.configuration.x.elasticsearch_client`. Configure `ELASTICSEARCH_URL`,
+`ELASTICSEARCH_USERNAME` / `ELASTICSEARCH_PASSWORD` (or `ELASTICSEARCH_API_KEY`),
+and `ELASTICSEARCH_CA_FILE` on the Rails/worker side. Verification and the client
+product check remain enabled. Do not use the retired host-only ES5 installation
+configuration for this branch. No custom compatibility header emulates ES5.
+
+The removed model, persistence, Rails integration and old transport gems have no
+remaining application calls. `Stats::Base` supplies only the typed attributes,
+defaults, validation and JSON values actually used by the nine business classes.
+`SearchIndex` owns persistence and opaque IDs. `request.elasticsearch` notifications
+contain the operation and resolved index, not request bodies or credentials.
+
+## Identity, mappings and aliases
+
+There are ten independent physical indices. The application writes through fixed
+aliases with `require_alias` for index, update and bulk operations. There is no
+browser-supplied target, generic storage interface, fallback backend or double write.
+
+| Source index | Source `_type` | Target physical index | Application alias | Target `_id` |
+| --- | --- | --- | --- | --- |
+| `stats` | `account` | `fm-stats-account-v1` | `fm-stats-account` | unchanged source ID |
+| `stats` | `event` | `fm-stats-event-v1` | `fm-stats-event` | unchanged source ID |
+| `stats` | `machine` | `fm-stats-machine-v1` | `fm-stats-machine` | unchanged source ID |
+| `stats` | `project` | `fm-stats-project-v1` | `fm-stats-project` | unchanged source ID |
+| `stats` | `subscription` | `fm-stats-subscription-v1` | `fm-stats-subscription` | unchanged source ID |
+| `stats` | `training` | `fm-stats-training-v1` | `fm-stats-training` | unchanged source ID |
+| `stats` | `user` | `fm-stats-user-v1` | `fm-stats-user` | unchanged source ID |
+| `stats` | `space` | `fm-stats-space-v1` | `fm-stats-space` | unchanged source ID |
+| `stats` | `order` | `fm-stats-order-v1` | `fm-stats-order` | unchanged source ID |
+| `fablab` | `availabilities` | `fm-availabilities-v1` | `fm-availabilities` | unchanged SQL/source ID |
+
+The mapping is injective over the supported source catalogue: equal IDs in two
+legacy types occupy different indices. The real-server contract writes the same
+ID to every family and reads all of them back. New statistics use UUID strings;
+re-saving an object reuses its ID. The business `_source.type` is preserved.
+The reserved source object `__fm.uid` contains `family#id`, preserving explicit
+legacy `_uid` sorting, and is removed from application/HTTP/XLSX results.
+Writes reject a supplied `__fm` object. Migration must detect a source collision
+with this reserved name before copying anything. Empty IDs are rejected.
+
+The read-only application scope `all_stats` resolves to `fm-stats-all`, covering
+the nine statistical indices. Unknown legacy types require an explicit migration
+decision; they must not be silently discarded. This is a difference from ES-A's
+global ES5 read, which could return unknown stored types. Custom routing, extra
+indices/aliases and site-specific scripts require explicit treatment by the transfer inventory.
+
+`SearchIndex::Schema` is the executable schema definition. It uses typeless
+`mappings.properties`, version/family `_meta`, one shard, zero default replicas
+for the isolated target, and a 1,000-field limit. Production replica/capacity
+choices require an operational plan. Initialization validates existing mappings
+and aliases, not every mutable index setting.
+
+| Fields | Target semantics |
+| --- | --- |
+| `type`, `subType`, `name`, `ageRange`, `eventTheme` in Stats | `keyword`, preserving legacy exact-match fields |
+| `gender`, `group`, `groupName`, `coupon`, `state`, `status` | `text` plus `.keyword` (256-character subfield limit) |
+| `date`, `created_at`, `updated_at`, `eventDate`, `trainingDate` | explicit `date` |
+| IDs, age, users | explicit `long` |
+| `stat`, `ca` | explicit `float` for a new installation, matching the real legacy model precision; migrated float/double/integer mappings are retained |
+| `machineDates.name`, `spaceDates.name` | date values inside ordinary objects |
+| licence/themes/components/machines/project users/products/categories | ordinary objects with long `id`, text/keyword `name` |
+| Availability `available_type` | `text` with the existing `simple` analyzer plus keyword subfield |
+| Availability dates, IDs, durations and places | explicit dates/longs, with float durations matching the legacy projection; migration retains observed precision |
+| additional strings | dynamic text/keyword template; automatic date detection disabled |
+
+Custom numeric/date/array fields and strings exceeding keyword limits must be
+checked against the real source schema by the transfer inventory. Synthetic mappings do not
+prove that every deployed plugin or custom field is compatible. No `_type`
+mapping, typed URL or `string` / `not_analyzed` mapping is sent to ES9.
+
+## Application and API contracts
 
 | Operation | Contract |
 | --- | --- |
-| `search(family:, query:, **options)` | Pass the existing 5.6 DSL and query parameters through; return a `Result`. URL parameters cannot replace the route family or body. A timed-out or shard-partial response raises instead of being rendered as complete statistics. |
-| `next_page(cursor:, keep_alive:)`, `close_cursor(cursor:)` | Continue or release a server cursor. The Rails pagination route retains its existing lifetime contract. |
-| `each_page`, `each_hit` | Scoped enumeration with a 1,000-document default batch, empty-page termination, exact count verification, duplicate detection and cursor release in `ensure`. |
-| `export(family:, query:)` | Collect complete pages for the existing XLSX templates. Raise on incomplete results. |
-| `build_stat`, `create_stat`, `save_stat` | Preserve legacy Stats attributes, validation, callbacks, serialization and generated opaque IDs. |
-| `update_stat(family:, id:, changes:)` | Partial update, including the existing `updated_at` behavior. Unspecified historical fields survive. |
-| `index_availability(record:)`, `delete(family:, id:)` | Preserve the SQL availability projection and ID. The worker still tolerates missing records/documents only in its existing paths. |
-| `delete_by_query(family:, query:, **options)` | Scoped deletion; timeouts, failures and version conflicts remain visible. Conflicts are accepted only when the caller passes `conflicts: 'proceed'`. Reservation cancellation logs an incomplete deletion and continues, because its SQL cancellation is already committed. |
-| `refresh(family:)`, `healthy?` | Existing refresh/cluster health operations through the configured server-side client. |
-| `rebuild_statistics!`, mapping methods | Administrative tasks only. Rebuild remains explicitly destructive; applying the availability mapping preserves documents. |
+| `search(family:, query:, **options)` | Fixed family, translated application DSL, exact totals. Supported URL options: scroll, size, from, search_type. |
+| `next_page`, `close_cursor` | Native ES9 scroll request bodies and clear-scroll request bodies. |
+| `each_page`, `each_hit` | 1,000-document default pages, empty-page termination, exact count and duplicate checks; latest cursor released in `ensure`, including interrupted exports. |
+| `export` | Complete pages assembled for existing XLSX templates; incomplete results raise. XLSX still uses memory proportional to the exported data. |
+| `build_stat`, `create_stat`, `save_stat` | Typed business values, validation, UTC timestamps and opaque IDs. |
+| `update_stat` | Partial update plus `updated_at`; unspecified historical fields survive. |
+| `index_availability`, `delete` | Existing SQL projection/ID, same worker behavior for missing records/documents. |
+| `bulk_index` | Every item status/error and item count checked. `BulkFailure#items` exposes partial successes; callers must not blindly retry the whole batch. |
+| `delete_by_query` | Family-scoped deletion, timeout/failure checks; version conflicts accepted only with explicit `conflicts: 'proceed'`. Reservation cancellation continues after logging an incomplete ES cleanup. |
+| `refresh`, `healthy?` | Configured official client, no dependency on removed Rails instrumentation/model clients. Health preserves the existing reachability contract. |
+| `initialize_schema!` | Non-destructive schema validation/creation, separate from data migration. |
 
-`Result#to_h` exposes `{total: {value, relation}, hits, aggregations}` with string
-keys. Each hit carries `family` (the stored `_type`, which the internal `all_stats`
-scope does not restrict to the catalogue), string `id`, `_source` and optional `routing`.
-Totals are exact (`relation = eq`) on this 5.6 backend. No numeric conversion is
-applied to source JSON. `Result#legacy_response` preserves numeric `hits.total`,
-technical `_type`, `_source.type`, aggregations and scroll IDs for existing consumers.
+`Result#to_h` exposes string keys `{total: {value, relation}, hits, aggregations}`.
+Hits carry family, string ID and unmodified business source values. ES9
+`hits.total` is required to have `relation: eq`; approximate totals, timeouts and
+shard-partial responses raise. The compatibility response used only by existing
+Rails/XLSX consumers has numeric `hits.total` and synthetic legacy `_index` and
+`_type`. Neither is sent back as a typed ES9 request.
 
-All nine `POST /stats/<family>/_search` routes retain Devise authentication and
-the existing administrator-only Pundit policy. They accept the same ES5 DSL and
-`scroll` parameters. `stat-type`, `start-date`, `end-date` and `custom-query` are
-still consumed by Rails for stored custom aggregations. `POST /_search/scroll`
-still accepts `scrollId` and `scroll`. Existing export routes and the export
-worker retain their authorization checks. No migration, schema or raw write API
-is exposed to browsers.
+The DSL adapter translates only the queries found in statistics, graphs, builders
+and stored custom aggregations: bool/term/terms/match/range/exists/match_all,
+metrics, terms, filter, top_hits and date_histogram. It translates keyword sorts
+and terms fields, `_uid`, `_term` ordering, and legacy calendar/fixed intervals.
+Ambiguous intervals are rejected. The exact seeded average-cart script is allowed
+as Painless; other scripts, terms lookup, arbitrary root options and scripted
+sort/top_hits are rejected. Custom scripts need explicit migration review.
 
-The browser `es` service still uses `window.location.origin`: its requests reach
-Rails. `elasticsearch-browser` and its application import remain together.
-Removing that client, testing its compiled browser consumers and detaching the
-Stats persistence models are follow-up ES02 work. AngularJS is unchanged. The
-existing Elasticsearch gems remain necessary for Stats serialization and
-Availability metadata/mappings; they must not be removed in this preparation.
+All nine `POST /stats/<family>/_search` routes retain Devise and the existing
+administrator Pundit policies. Rails still handles `stat-type`, `custom-query`,
+`start-date` and `end-date` for custom aggregations. URL parameters cannot replace
+the route family or body. No raw Elasticsearch API or migration endpoint exists.
 
-The manual rebuild task now uses the configured client and reports HTTP failures
-instead of ignoring `curl` exit status. It keeps the eight explicit legacy
-statistics mappings; `order` retains its existing dynamic mapping behavior.
-The old `machineDates`/`spaceDates` mapping requests were malformed JSON and
-rejected by 5.6; those fields keep their effective dynamic mapping behavior.
-The availability task applies its existing mapping without attempting the mapping
-deletion API removed in 5.6, and its optional ID argument is passed to the worker.
-No task runs automatically at application startup.
+`POST /_search/scroll` accepts `{scrollId, scroll}`. `DELETE /_search/scroll`
+accepts `{scrollId}` and returns 204, using the same authorization policy. Browser
+cursors are Rails-signed, purpose-bound tokens expiring after five minutes;
+Elasticsearch's requested context lifetime may expire earlier. Invalid/expired
+cursors return 410, unsupported/malformed searches return 422, and backend/partial
+read errors return 503, with generic error identifiers rather than cluster details.
+Existing unauthorized/anonymous behavior is preserved.
 
-## Characterization
+AngularJS remains. The `es` service uses `$http` with explicit JSON `Accept` headers against fixed Rails paths,
+preserving callbacks and promises for statistics tables and graphs. The browser
+package, import and Angular dependency were removed together. Refresh, completion
+and destruction release table cursors. No Elastic credential or destination URL
+is present in browser configuration.
 
-Run only in a disposable environment: the contract setup deletes `stats` and
-`fablab`, and Rails loads its complete SQL fixtures. Use an independent ES5.6
-container, PostgreSQL 9.6 test database and Redis with no published ports. Do not
-point these commands at an existing application's services or volumes.
+## New installation versus migration
 
-Install the unchanged lockfiles with Ruby 3.2.2 and Bundler 2.4.3. Use the normal
-test environment with synthetic Stripe/OAuth/OIDC credentials, test mail delivery
-and external network access blocked. Configure a private `config/database.yml`
-and `ELASTICSEARCH_HOST`/`REDIS_HOST` for those disposable services. `db:schema:load`
-uses the existing PostgreSQL client compatibility initializer in master.
+Provision a **new**, separately named ES9 service and empty volume with TLS/auth.
+See [the isolated target example](../docker/elasticsearch9/docker-compose.yml).
+Do not substitute that image into the old compose stack or mount an ES5 data path.
+Configure Rails and workers with server-side credentials and the trusted CA, then:
+
+```sh
+bundle _2.4.3_ install
+RAILS_ENV=production bundle _2.4.3_ exec rails fablab:es:initialize
+RAILS_ENV=production bundle _2.4.3_ exec rails fablab:es:build_availabilities_index
+```
+
+The availability task queues indexing jobs, so its completion requires a worker.
+`fablab:es:build_stats` remains a non-destructive setup alias (honoring the disabled
+statistics setting). `add_event_filters` and `add_spaces` validate the current
+schema. Re-running initialization preserves documents and rejects unknown aliases,
+incompatible mappings and legacy `stats`/`fablab` indices before creating targets.
+It is not automatically invoked at Rails startup. A failed request can leave some
+new empty indices; the safe, idempotent initialization can be retried.
+
+`generate_stats[period]` still explicitly replaces a requested historical period
+from SQL; it is **not** a migration and may not reproduce historical/custom ES
+data. Existing setup/development compose files and `scripts/elastic-upgrade.sh`
+describe the legacy deployment and must not be used to deploy this branch.
+
+For an existing installation, use the explicit
+[historical transfer procedure](../scripts/elasticsearch_migration/README.md)
+(ES03 in the current transfer request; ES05/ES06 in the original plan).
+It inventories and fences the source, takes a native ES5 recovery snapshot,
+copies all ten families through a bounded scroll/archive/bulk pipeline and compares
+complete identities, contents and business aggregations. It never regenerates the
+historical data from current SQL. Unknown families/routing/scripts and missing
+source require explicit treatment. Maintenance, queue isolation, deployment image
+verification, rollback before writes and a post-reopen reconciliation audit are
+separate journaled operations. The optional runtime guard prevents an old job or
+historical cleaner from replacing imported records. Keep it enabled throughout
+the reconciliation period.
+
+The large migration fixture retains a **blocking** sum difference:
+ES5 `200238.15000002686` versus ES9 `200238.15` for 10,037 amounts of 19.95.
+Its document identity/content fingerprints are equal. No tolerance or changed
+expected value makes that aggregation pass. This is distinct from the 14 original
+application observations below, which remain equal. See
+`test/fixtures/search_index/migration_observed.json` for the recorded migration
+results. No production transfer, source authentication change or rollout approval
+is implied by the synthetic tests.
+
+## Evidence and repeatable tests
+
+Use disposable ES9/PG9.6/Redis services, independent volumes, synthetic credentials
+and an internal network. Install the frozen Ruby/Node lockfiles. Set the regular
+test environment and CA/auth variables above. The explicit opt-in contracts delete
+only the ten known ES9 physical indices and load SQL fixtures; never run them
+against a deployed application. They are outside normal `*_test.rb` discovery.
 
 ```sh
 RAILS_ENV=test bundle _2.4.3_ exec rails db:create db:schema:load db:fixtures:load
-RAILS_ENV=test bundle _2.4.3_ exec rails fablab:es:build_stats
-ES_CONTRACT_ISOLATED=1 CHARACTERIZATION_OUTPUT=/private/results/es56.json \
+ES_CONTRACT_ISOLATED=1 CHARACTERIZATION_OUTPUT=/private/es9-results.json \
   RAILS_ENV=test bundle _2.4.3_ exec rails test \
-  test/elasticsearch/contracts.rb test/elasticsearch/operations.rb test/services/search_index_test.rb --seed 12345
+  test/elasticsearch/contracts.rb test/elasticsearch/operations.rb \
+  test/elasticsearch/transport.rb test/services/search_index_test.rb \
+  test/services/search_index_query_test.rb test/services/elasticsearch_http_consumers_test.rb
+yarn install --frozen-lockfile
+yarn test --runInBand
 ```
 
-`test/fixtures/search_index/es56.json` was recorded from the unmodified master
-application at `4d8bdc063a3aee57dffd27a89f2527aa14d5371c`, against Elasticsearch
-5.6.16. The same characterization file runs before and after refactoring. The destructive live contracts use explicit file names
-outside normal `*_test.rb` discovery; standard Rails test runs do not opt into index deletion.
-The reference is asserted per scenario; candidate results do not regenerate it.
-Normalization removes request timing, shard/score/version/cursor metadata and
-model creation/update timestamps. It preserves deterministic IDs, source business
-values, null versus missing fields, integer JSON values, aggregation values,
-bucket order and XLSX cell digests. Generated document IDs are checked as opaque
-strings separately; source serialization is compared without those random IDs.
-XLSX archives are compared by normalized cells, not ZIP timestamps.
+The frozen `test/fixtures/search_index/es56.json` was recorded against real ES5.6.16
+from upstream master `4d8bdc063a3aee57dffd27a89f2527aa14d5371c`. It is unchanged.
+All **14** normalized observations match on ES9.5.6. Normalization excludes timing,
+shards, scores, versions, cursors, random model IDs and creation/update timestamps;
+it preserves business JSON, null/missing/zero distinctions, exact integers,
+aggregation values, deterministic sort/bucket order and XLSX cell digests.
+Unspecified order is canonicalized only for scenarios without a sorting contract.
+No expected snapshot was regenerated to accept different values.
 
-Coverage includes every Stats family, availability worker index/update/delete,
-partial order updates, reservation cancellation, inclusive cleaner bounds,
-disabled daily statistics, SQL builders and unrelated historical documents,
-the three stored custom aggregations (including the average-cart script),
-custom inclusion/exclusion, sums/averages/nulls/zeros, ranking/top hits and
-day/week/month histograms across the Toronto spring DST transition. HTTP cursor
-pagination covers 47 records in batches of seven. Global and per-family machine
-XLSX exports each cover 10,037 records. Anonymous, member, manager and administrator
-search access, restricted scroll/export access and worker authorization are checked.
-Live administrative tests also check the effective eight-family rebuild mapping,
-all nine writable models, repeatable availability mapping, explicit task IDs,
-cleaning across three batches of dates, 23 matching order updates and the absence
-of retained search contexts after successful, empty and interrupted exports.
+Coverage includes all nine Stats families, availability index/update/delete,
+disabled daily statistics, builders, partial updates, cancellation, inclusive
+cleaner bounds, three seeded custom aggregations, zeros/nulls, dates/timezones and
+the Toronto DST boundary, 47-result HTTP pagination, and per-family/global XLSX
+exports of 10,037 documents. Additional ES9 checks cover identity collisions,
+typeless idempotent schema setup, aliases, unknown targets, keyword fields, large
+integers, exact totals, partial bulk failures and cursor cleanup after interruption.
+Anonymous, member, manager, administrator and export-worker permissions are tested.
 
-Synthetic fixtures do not inventory a deployed cluster or site-defined queries,
-plugins, aliases or scripts. The SQL builder reference produces account, machine,
-subscription, user and order documents; event/project/space/training are separately
-covered by serialization, read, identity and cleaner contracts. Those are distinct
-claims. No compiled-browser or hosted CI result is claimed for this Ruby-only
-change. The existing user-family export route remains outside the supported export
-worker catalogue. XLSX rendering still collects the full result in memory.
-TLS/authentication changes, typeless mappings, server upgrades, data copying and
-cutover/rollback qualification belong to the later migration.
+The earlier ES02 combined targeted run had **40 tests / 429 assertions**, no failures/errors/skips;
+the complete Jest run has **72 tests** passing. The standard Rails run has
+**726 tests / 9,531 assertions**, zero failures, one pre-existing SSO constant-loading
+error, zero skips. This is a suite reserve, not a complete suite PASS.
+The compiled Angular service also passed 31 real Edge/Rails/ES9 checks with CSRF
+enabled: real synthetic sessions, anonymous/member/manager/admin permissions,
+all nine families, graph metrics, signed cursors and 47-document pagination.
+The complete production assets compile successfully (resource-limited test runner);
+this does not claim a full visual UI acceptance test. TypeScript reports ten
+diagnostics in each application configuration, identical on ES-A and this branch.
+
+The SQL builder reference produces account/machine/subscription/user/order;
+event/project/space/training also have serialization/read/identity/cleaner coverage,
+not a claim of every real-world builder input. Site-defined queries, data migration,
+production topology, real SSO and hosted CI remain separate qualification work.
+The inherited user-family export route is outside the export worker catalogue.
+
+## ES04 deployment rehearsal
+
+Read [the operator runbook](elasticsearch_deployment.md) for new installs, ES5
+upgrade detection, external services, scoped roles, TLS, backups and rollback.
+The latest affected application contracts pass **44 tests / 458 assertions** with
+the unchanged 14-observation ES5 fixture. Real reference/candidate observations
+also match for ten families, historical snapshots, permissions, custom charts,
+filters and multi-page XLSX exports. Runtime reports client 9.5.0 and none of the
+four removed legacy integrations loaded. This does not waive the explicit raw
+legacy-double aggregation difference documented above, nor the ACD/SSO reserves
+in the general suite. ES03 retains source numeric indexing precision and signed
+zero; defaults and migrated precision are deliberately distinct contracts.

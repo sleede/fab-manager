@@ -91,26 +91,30 @@ class ReservationSubscriptionStatisticServiceTest < ActionDispatch::IntegrationT
       ]
     }.to_json, headers: default_headers
 
-    Stats::Machine.refresh_index!
-    Stats::Training.refresh_index!
-    Stats::Subscription.refresh_index!
+    SearchIndex.refresh(family: 'machine')
+    SearchIndex.refresh(family: 'training')
+    SearchIndex.refresh(family: 'subscription')
 
     # Build the stats for the last 3 days, we expect the above invoices (reservations+subscription) to appear in the resulting stats
     ::Statistics::BuilderService.generate_statistic({ start_date: 2.days.ago.beginning_of_day,
                                                       end_date: Time.current.end_of_day })
 
-    Stats::Machine.refresh_index!
+    SearchIndex.refresh(family: 'machine')
 
     # first machine reservation (2 days ago)
-    stat_booking = Stats::Machine.search(query: { bool: { must: [{ term: { date: 2.days.ago.to_date.iso8601 } },
-                                                                 { term: { type: 'booking' } }] } }).first
+    stat_booking = SearchIndex.search(
+      family: 'machine', query: { query: { bool: { must: [{ term: { date: 2.days.ago.to_date.iso8601 } },
+                                                          { term: { type: 'booking' } }] } } }
+    ).hits.first&.fetch('_source')
     assert_not_nil stat_booking
     assert_equal machine.friendly_id, stat_booking['subType']
     assert_equal 1, stat_booking['stat']
     check_statistics_on_user(stat_booking)
 
-    stat_hour = Stats::Machine.search(query: { bool: { must: [{ term: { date: 2.days.ago.to_date.iso8601 } },
-                                                              { term: { type: 'hour' } }] } }).first
+    stat_hour = SearchIndex.search(
+      family: 'machine', query: { query: { bool: { must: [{ term: { date: 2.days.ago.to_date.iso8601 } },
+                                                          { term: { type: 'hour' } }] } } }
+    ).hits.first&.fetch('_source')
 
     assert_not_nil stat_hour
     assert_equal machine.friendly_id, stat_hour['subType']
@@ -119,15 +123,19 @@ class ReservationSubscriptionStatisticServiceTest < ActionDispatch::IntegrationT
     check_statistics_on_user(stat_hour)
 
     # second machine reservation (today)
-    stat_booking = Stats::Machine.search(query: { bool: { must: [{ term: { date: Time.current.to_date.iso8601 } },
-                                                                 { term: { type: 'booking' } }] } }).first
+    stat_booking = SearchIndex.search(
+      family: 'machine', query: { query: { bool: { must: [{ term: { date: Time.current.to_date.iso8601 } },
+                                                          { term: { type: 'booking' } }] } } }
+    ).hits.first&.fetch('_source')
     assert_not_nil stat_booking
     assert_equal machine.friendly_id, stat_booking['subType']
     assert_equal 1, stat_booking['stat']
     check_statistics_on_user(stat_booking)
 
-    stat_hour = Stats::Machine.search(query: { bool: { must: [{ term: { date: Time.current.to_date.iso8601 } },
-                                                              { term: { type: 'hour' } }] } }).first
+    stat_hour = SearchIndex.search(
+      family: 'machine', query: { query: { bool: { must: [{ term: { date: Time.current.to_date.iso8601 } },
+                                                          { term: { type: 'hour' } }] } } }
+    ).hits.first&.fetch('_source')
 
     assert_not_nil stat_hour
     assert_equal machine.friendly_id, stat_hour['subType']
@@ -136,20 +144,24 @@ class ReservationSubscriptionStatisticServiceTest < ActionDispatch::IntegrationT
     check_statistics_on_user(stat_hour)
 
     # training
-    Stats::Training.refresh_index!
+    SearchIndex.refresh(family: 'training')
 
-    stat_training = Stats::Training.search(query: { bool: { must: [{ term: { date: 1.day.ago.to_date.iso8601 } },
-                                                                   { term: { type: 'booking' } }] } }).first
+    stat_training = SearchIndex.search(
+      family: 'training', query: { query: { bool: { must: [{ term: { date: 1.day.ago.to_date.iso8601 } },
+                                                           { term: { type: 'booking' } }] } } }
+    ).hits.first&.fetch('_source')
     assert_not_nil stat_training
     assert_equal training.friendly_id, stat_training['subType']
     assert_equal tr_slot.start_at.to_date.iso8601, stat_training['trainingDate']
     check_statistics_on_user(stat_training)
 
     # subscription
-    Stats::Subscription.refresh_index!
+    SearchIndex.refresh(family: 'subscription')
 
-    stat_subscription = Stats::Subscription.search(query: { bool: { must: [{ term: { date: 1.day.ago.to_date.iso8601 } },
-                                                                           { term: { type: plan.find_statistic_type.key } }] } }).first
+    stat_subscription = SearchIndex.search(
+      family: 'subscription', query: { query: { bool: { must: [{ term: { date: 1.day.ago.to_date.iso8601 } },
+                                                               { term: { type: plan.find_statistic_type.key } }] } } }
+    ).hits.first&.fetch('_source')
 
     assert_not_nil stat_subscription
     assert_equal plan.find_statistic_type.key, stat_subscription['type']

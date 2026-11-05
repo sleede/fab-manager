@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 # This is a statistical data saved in ElasticSearch, about a store's order
-class Stats::Order
-  include Elasticsearch::Persistence::Model
+class Stats::Order < Stats::Base
   include StatConcern
 
   attribute :orderId, Integer

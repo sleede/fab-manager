@@ -3,11 +3,11 @@
 require 'test_helper'
 require 'minitest/mock'
 
-# Error contracts complement the live 5.6 characterization, without hiding transport failures.
+# Error contracts complement the live ES9 characterization, without hiding transport failures.
 class SearchIndexTest < ActiveSupport::TestCase
   test 'catalogue accepts only the ten physical families' do
     assert_equal 'availabilities', SearchIndex.family_for(index: 'fablab', type: 'availabilities')
-    assert_equal({ index: 'stats', type: 'order' }, SearchIndex.target('order'))
+    assert_equal({ index: 'fm-stats-order' }, SearchIndex.target('order'))
     assert_raises(ArgumentError) { SearchIndex.target('../secrets') }
     assert_raises(ArgumentError) { SearchIndex.family_for(index: 'another-index', type: 'account') }
     assert_raises(ArgumentError) { SearchIndex.build_stat(family: 'availabilities', attributes: {}) }
@@ -24,9 +24,9 @@ class SearchIndexTest < ActiveSupport::TestCase
   test 'cursor releases the latest scroll ID after an empty page' do
     client = Minitest::Mock.new
     client.expect(:search, page('one', 2, %w[a]), **search_options)
-    client.expect(:scroll, page('two', 2, %w[b]), scroll: '30s', scroll_id: 'one')
-    client.expect(:scroll, page('three', 2, []), scroll: '30s', scroll_id: 'two')
-    client.expect(:clear_scroll, {}, scroll_id: 'three')
+    client.expect(:scroll, page('two', 2, %w[b]), body: { scroll: '30s', scroll_id: 'one' })
+    client.expect(:scroll, page('three', 2, []), body: { scroll: '30s', scroll_id: 'two' })
+    client.expect(:clear_scroll, {}, body: { scroll_id: ['three'] })
     SearchIndex.stub(:client, client) do
       assert_equal %w[a b], (SearchIndex.each_hit(family: 'account', query: {}, page_size: 1).map { |hit| hit['id'] })
     end
@@ -37,8 +37,8 @@ class SearchIndexTest < ActiveSupport::TestCase
     [page('two', 2, []), page('two', 2, %w[a]), page('two', 2, %w[b]).merge('_shards' => { 'failed' => 1 })].each do |next_page|
       client = Minitest::Mock.new
       client.expect(:search, page('one', 2, %w[a]), **search_options)
-      client.expect(:scroll, next_page, scroll: '30s', scroll_id: 'one')
-      client.expect(:clear_scroll, {}, scroll_id: 'two')
+      client.expect(:scroll, next_page, body: { scroll: '30s', scroll_id: 'one' })
+      client.expect(:clear_scroll, {}, body: { scroll_id: ['two'] })
       SearchIndex.stub(:client, client) do
         assert_raises(SearchIndex::IncompleteRead) { SearchIndex.each_hit(family: 'account', query: {}, page_size: 1).to_a }
       end
@@ -51,7 +51,7 @@ class SearchIndexTest < ActiveSupport::TestCase
       client = Minitest::Mock.new
       response = page('one', 1, %w[a]).merge('timed_out' => partial)
       client.expect(:search, response, **search_options)
-      client.expect(:clear_scroll, {}, scroll_id: 'one')
+      client.expect(:clear_scroll, {}, body: { scroll_id: ['one'] })
       SearchIndex.stub(:client, client) do
         expected = partial ? SearchIndex::IncompleteRead : IOError
         assert_raises(expected) { SearchIndex.each_hit(family: 'account', query: {}, page_size: 1, &method(:fail_consumer)) }
@@ -63,7 +63,7 @@ class SearchIndexTest < ActiveSupport::TestCase
   test 'scoped deletion reports failures conflicts and timeouts' do
     [{ 'failures' => [{ 'reason' => 'rejected' }] }, { 'version_conflicts' => 1 }, { 'timed_out' => true }].each do |response|
       client = Minitest::Mock.new
-      client.expect(:delete_by_query, response, index: 'stats', type: 'machine', body: { query: { match_all: {} } })
+      client.expect(:delete_by_query, response, index: 'fm-stats-machine', body: { 'query' => { 'match_all' => {} } })
       SearchIndex.stub(:client, client) do
         assert_raises(SearchIndex::IncompleteRead) { SearchIndex.delete_by_query(family: 'machine', query: { match_all: {} }) }
       end
@@ -72,7 +72,7 @@ class SearchIndexTest < ActiveSupport::TestCase
   end
 
   test 'deletion that explicitly proceeds on conflicts accepts them but still reports failures' do
-    options = { index: 'stats', type: 'machine', conflicts: 'proceed', body: { query: { match_all: {} } } }
+    options = { index: 'fm-stats-machine', conflicts: 'proceed', body: { 'query' => { 'match_all' => {} } } }
     client = Minitest::Mock.new
     client.expect(:delete_by_query, { 'deleted' => 1, 'version_conflicts' => 2, 'failures' => [] }, **options)
     client.expect(:delete_by_query, { 'version_conflicts' => 2, 'failures' => [{ 'reason' => 'rejected' }] }, **options)
@@ -94,10 +94,10 @@ class SearchIndexTest < ActiveSupport::TestCase
     assert_not_nil slot_reservation.reload.canceled_at
   end
 
-  test 'all_stats reads keep stored types outside the catalogue' do
+  test 'unknown physical indices require migration review' do
     response = page('one', 1, %w[a])
-    response['hits']['hits'].first['_type'] = 'site_specific'
-    assert_equal 'site_specific', SearchIndex::Result.new(response).hits.first['family']
+    response['hits']['hits'].first['_index'] = 'unknown-site-index'
+    assert_raises(SearchIndex::SchemaConflict) { SearchIndex::Result.new(response) }
   end
 
   test 'statistics URL parameters cannot replace the route family or the request body' do
@@ -121,12 +121,12 @@ class SearchIndexTest < ActiveSupport::TestCase
   end
 
   def page(cursor, total, ids)
-    { '_scroll_id' => cursor, 'hits' => { 'total' => total, 'hits' => ids.map do |id|
-      { '_id' => id, '_type' => 'account', '_source' => { 'type' => 'member', 'stat' => 0 } }
+    { '_scroll_id' => cursor, 'hits' => { 'total' => { 'value' => total, 'relation' => 'eq' }, 'hits' => ids.map do |id|
+      { '_id' => id, '_index' => 'fm-stats-account-v1', '_source' => { 'type' => 'member', 'stat' => 0 } }
     end } }
   end
 
   def search_options
-    { index: 'stats', type: 'account', body: {}, size: 1, scroll: '30s' }
+    { index: 'fm-stats-account', body: { 'size' => 1, 'track_total_hits' => true }, scroll: '30s' }
   end
 end

@@ -5438,11 +5438,6 @@ ee-first@1.1.1:
   resolved "https://registry.yarnpkg.com/ee-first/-/ee-first-1.1.1.tgz#590c61156b0ae2f4f0255732a158b266bc56b21d"
   integrity sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==
 
-elasticsearch-browser@3.1:
-  version "3.1.4"
-  resolved "https://registry.yarnpkg.com/elasticsearch-browser/-/elasticsearch-browser-3.1.4.tgz#7e7db76e96e02b8a69c7659a997df421d4035565"
-  integrity sha1-fn23bpbgK4ppx2WamX30IdQDVWU=
-
 electron-to-chromium@^1.4.251:
   version "1.4.284"
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.284.tgz#61046d1e4cab3a25238f6bf7413795270f125592"

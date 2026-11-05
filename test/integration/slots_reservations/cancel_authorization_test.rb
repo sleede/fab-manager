@@ -216,7 +216,7 @@ class CancelAuthorizationTest < ActionDispatch::IntegrationTest
     travel_to base_time do
       sr = build_slot_reservation(@member, base_time + 48.hours)
 
-      client = Elasticsearch::Model.client
+      client = SearchIndex::Connection.client
       original_method = client.method(:delete_by_query)
       client.define_singleton_method(:delete_by_query) do |*_args|
         raise Faraday::ConnectionFailed, 'ES connection failed'

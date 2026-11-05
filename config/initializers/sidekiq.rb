@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require Rails.root.join('lib/elasticsearch_migration_guard')
 require 'sidekiq'
 require 'sidekiq-scheduler'
 require 'sidekiq/middleware/i18n'
@@ -15,11 +16,13 @@ Sidekiq.configure_server do |config|
   # new jobs to Sidekiq, thus acting as clients
   # see https://github.com/sidekiq/sidekiq/wiki/Middleware for more details
   config.client_middleware do |chain|
+    chain.add ElasticsearchMigrationGuard::ClientMiddleware
     chain.add Sidekiq::Middleware::I18n::Client
     chain.add SidekiqUniqueJobs::Middleware::Client
   end
 
   config.server_middleware do |chain|
+    chain.add ElasticsearchMigrationGuard::ServerMiddleware
     chain.add Sidekiq::Middleware::I18n::Server
     chain.add SidekiqUniqueJobs::Middleware::Server
   end
@@ -27,6 +30,8 @@ Sidekiq.configure_server do |config|
   SidekiqUniqueJobs::Server.configure(config)
 
   config.on(:startup) do
+    # Runs before Sidekiq builds its fetcher, so the mapped queue list is the one consumed.
+    config[:queues] = ElasticsearchMigrationGuard.worker_queues!(config[:queues])
     # load sidekiq-scheduler schedule config
     schedule_file = 'config/schedule.yml'
     if File.exist?(schedule_file)
@@ -41,6 +46,7 @@ Sidekiq.configure_client do |config|
   config.redis = { url: redis_url }
 
   config.client_middleware do |chain|
+    chain.add ElasticsearchMigrationGuard::ClientMiddleware
     chain.add Sidekiq::Middleware::I18n::Client
     chain.add SidekiqUniqueJobs::Middleware::Client
   end

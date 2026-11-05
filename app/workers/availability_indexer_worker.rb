@@ -19,7 +19,7 @@ class AvailabilityIndexerWorker
     when /delete/
       begin
         SearchIndex.delete(family: 'availabilities', id: record_id)
-      rescue Elasticsearch::Transport::Transport::Errors::NotFound
+      rescue Elastic::Transport::Transport::Errors::NotFound
         logger.warn "Availability id(#{record_id}) will not be deleted form ElasticSearch as it has not been already indexed"
       end
     else raise ArgumentError, "Unknown operation '#{operation}'"

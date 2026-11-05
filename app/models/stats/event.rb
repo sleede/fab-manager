@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 # This is a statistical data saved in ElasticSearch, about an event reservation
-class Stats::Event
-  include Elasticsearch::Persistence::Model
+class Stats::Event < Stats::Base
   include StatConcern
   include StatReservationConcern
 
