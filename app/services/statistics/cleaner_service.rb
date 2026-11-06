@@ -7,12 +7,15 @@ class Statistics::CleanerService
   class << self
     def clean_stat(options = default_options)
       ElasticsearchMigrationGuard.rebuild!(options)
+      # A repeated/retried generation must see previous writes and deletions, even before the next automatic refresh.
+      SearchIndex.refresh(family: 'all_stats')
       SearchIndex::STAT_FAMILIES.each do |family|
         dates = (to_date(options[:start_date]).to_date..to_date(options[:end_date]).to_date).to_a
         # elasticsearch does not support more than 1024 query arguments
         dates.each_slice(1024) do |slice_dates|
           SearchIndex.delete_by_query(
             family: family,
+            refresh: true,
             query: {
               terms: {
                 date: slice_dates.map { |d| format_date(d) }

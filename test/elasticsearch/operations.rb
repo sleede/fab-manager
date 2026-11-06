@@ -81,6 +81,23 @@ class SearchIndexOperationsTest < ActionDispatch::IntegrationTest
     assert_equal 'history', @client.get(**SearchIndex.target('availabilities'), id: 'history').dig('_source', 'preserved')
   end
 
+  test 'cleaner refreshes pending writes before selecting documents to delete' do
+    @client.indices.put_settings(index: 'fm-stats-all', body: { index: { refresh_interval: '-1' } })
+    SearchIndex.index_document(family: 'machine', id: 'pending-refresh', source: { date: '2015-06-01', stat: 1 })
+    Statistics::CleanerService.clean_stat(start_date: Date.new(2015, 6, 1), end_date: Date.new(2015, 6, 1))
+    SearchIndex.refresh(family: 'all_stats')
+    assert_equal 0, SearchIndex.search(family: 'machine', query: {}).total.fetch('value')
+  end
+
+  test 'cleaner refreshes deletions before an immediate repeated cleanup' do
+    @client.indices.put_settings(index: 'fm-stats-all', body: { index: { refresh_interval: '-1' } })
+    SearchIndex.index_document(family: 'machine', id: 'repeated-cleanup', source: { date: '2015-06-01', stat: 1 })
+    SearchIndex.refresh(family: 'all_stats')
+    2.times { Statistics::CleanerService.clean_stat(start_date: Date.new(2015, 6, 1), end_date: Date.new(2015, 6, 1)) }
+    SearchIndex.refresh(family: 'all_stats')
+    assert_equal 0, SearchIndex.search(family: 'machine', query: {}).total.fetch('value')
+  end
+
   test 'cleaner crosses three date batches without deleting outside bounds' do
     first = Date.new(2020, 1, 1)
     last = first + 2050
