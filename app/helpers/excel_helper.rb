@@ -6,11 +6,11 @@ module ExcelHelper
   def format_xlsx_cell(source_data, data, styles, types, date_format: nil, source_data_type: '')
     case source_data_type
     when 'date'
-      data.push Date.strptime(source_data, '%Y-%m-%d')
+      data.push(source_data.nil? || source_data == '' ? nil : Date.strptime(source_data, '%Y-%m-%d'))
       styles.push date_format
       types.push :date
     when 'list'
-      data.push source_data.map { |e| e['name'] }.join(', ')
+      data.push(source_data.nil? ? '' : source_data.map { |e| e['name'] }.join(', '))
       styles.push nil
       types.push :string
     when 'number'
@@ -31,7 +31,7 @@ module ExcelHelper
       user&.profile&.full_name || t('export.deleted_user'),
       user&.email || '',
       user&.profile&.phone || '',
-      !hit['_source']['gender'].blank? ? t("export.#{hit['_source']['gender']}") : '',
+      hit['_source']['gender'].present? ? t("export.#{hit['_source']['gender']}") : '',
       hit['_source']['age'],
       subtype.nil? ? '' : subtype.label
     ]
@@ -48,9 +48,9 @@ module ExcelHelper
   end
 
   def add_hardcoded_cells(index, hit, data, styles, types)
-    if index.concerned_by_reservation_context?
-      add_reservation_context_cell(hit, data, styles, types)
-    end
+    return unless index.concerned_by_reservation_context?
+
+    add_reservation_context_cell(hit, data, styles, types)
   end
 
   def add_reservation_context_cell(hit, data, styles, types)
