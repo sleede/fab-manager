@@ -4,7 +4,7 @@ import { User } from '../models/user';
 
 export default class Authentication {
   static async login (email: string, password: string): Promise<User> {
-    const res: AxiosResponse<User> = await apiClient.post('/users/sign_in.json', { email, password });
+    const res: AxiosResponse<User> = await apiClient.post('/users/sign_in.json', { user: { email, password } });
     return res?.data;
   }
 

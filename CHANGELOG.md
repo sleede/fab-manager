@@ -2,6 +2,18 @@
 
 ## Next release
 
+- Fix a bug: wrap direct login credentials in the user parameter required by Devise
+- Fix security issues: update Rack within the 2.2 series and add bounded request parsing, static file and session regression tests
+- Fix security issues: update compatible JavaScript library dependencies and cover their application and tooling contracts
+- Fix security issues: update compatible Webpack 5, Babel 7 and PostCSS dependencies while preserving existing runtime support; remaining legacy build dependencies require separate maintenance
+- Fix security issues: update Axios within the 0.x series and cover application HTTP clients, multipart requests and redirect credential handling
+- Fix security issues: update CarrierWave within the 3.1 series and Addressable, and cover image, document and CAD uploads, size limits and remote URL protection
+- Fix security issues: update JWT within the 2.x series required by OAuth2, and bcrypt, and cover token signatures, claims and password hashes
+- Fix security issues: update Mail and net-imap within the 0.5 series, and cover MIME, character sets, attachments and real notification templates
+- Fix security issues: update MessagePack and Oj (which now requires the ostruct gem), and cover previously serialized cache, job and API data
+- Fix security issues: update iCalendar, Fugit and et-orbi, and cover reservation calendars and every scheduled job across daylight saving time changes. The VTIMEZONE of exported calendars now follows RFC 5545
+- Fix security issues: update HTTParty and the Ruby websocket-driver, and cover the Openlab client and the ActionCable driver contract
+
 ## v6.6.2 2026 October 29
 
 - Fix a security issue: update SAML, XML and HTML sanitizer dependencies (`omniauth-saml`, `ruby-saml`, `rexml`, `nokogiri`, `rails-html-sanitizer`, `loofah`, `crass`) to resolve public security advisories

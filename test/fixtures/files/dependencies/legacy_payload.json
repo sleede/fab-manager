@@ -1,0 +1,17 @@
+{
+  "name": "Montréal",
+  "integer": 1152921504606846976,
+  "values": [
+    null,
+    true,
+    false,
+    1.25
+  ],
+  "nested": {
+    "currency": "EUR",
+    "labels": [
+      "café",
+      "予約"
+    ]
+  }
+}
