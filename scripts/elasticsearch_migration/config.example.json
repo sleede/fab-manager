@@ -59,6 +59,11 @@
     "stop_seconds": 60,
     "auxiliaries": [
       "fm-es5-tls-relay"
-    ]
+    ],
+    "sql_connection": {
+      "hostname": "postgres18",
+      "password_file": "/private/pg-migration/runtime.pgpass",
+      "ca_file": "/private/postgresql-ca.crt"
+    }
   }
 }

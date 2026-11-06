@@ -90,10 +90,48 @@ class Control:
                        'sql': '/var/lib/postgresql/data', 'redis': '/data',
                        'source_backup': self.ledger.config['snapshot']['location']}[side]
         container_side = 'source' if side == 'source_backup' else side
-        mounts = [item for item in self.inspect(self.config[container_side])['Mounts'] if item['Destination'] == destination]
+        info = self.inspect(self.config[container_side])
+        if side == 'sql':
+            environment = dict(value.split('=', 1) for value in info['Config']['Env'] if '=' in value)
+            pgdata = environment.get('PGDATA')
+            roots = {'/var/lib/postgresql/data': '/var/lib/postgresql/data',
+                     '/var/lib/postgresql/18/docker': '/var/lib/postgresql'}
+            if pgdata not in roots:
+                raise Blocked('SQL PGDATA needs an explicit reviewed storage treatment')
+            destination = roots[pgdata]
+            covering = [m for m in info['Mounts'] if pgdata == m['Destination'] or pgdata.startswith(m['Destination'].rstrip('/') + '/')]
+            nested = [m for m in info['Mounts'] if m['Destination'].startswith(pgdata + '/')]
+            if len(covering) != 1 or nested or covering[0]['Destination'] != destination:
+                raise Blocked('SQL requires one complete PGDATA mount without nested data mounts')
+            mount = covering[0]
+            if mount['Type'] == 'bind' and Path(mount['Source']).is_absolute() and ':' not in mount['Source']:
+                return mount['Source']
+        mounts = [item for item in info['Mounts'] if item['Destination'] == destination]
         if len(mounts) != 1 or mounts[0]['Type'] != 'volume':
             raise Blocked('This procedure requires a dedicated named volume: ' + side)
         return mounts[0]['Name']
+
+    def sql(self, query):
+        arguments = ['psql', '-XAt', '-U', self.config.get('sql_user', 'postgres'),
+                     '-d', self.config.get('sql_database', 'postgres'), '-v', 'ON_ERROR_STOP=1', '-c', query]
+        connection = self.config.get('sql_connection')
+        if not connection:
+            # Preserve the explicit legacy local-trust adapter. SCRAM/TLS needs the connection below.
+            return self.run('exec', self.config['sql'], *arguments)
+        if set(connection) != {'hostname', 'password_file', 'ca_file'}:
+            raise Blocked('SQL connection requires explicit hostname, pgpass file and trusted CA')
+        hostname = connection['hostname']
+        if not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9.-]*', hostname):
+            raise Blocked('Explicit SQL certificate hostname required')
+        files = [Path(connection[key]).resolve() for key in ('password_file', 'ca_file')]
+        if any(not p.is_file() or ':' in str(p) for p in files) or files[0].stat().st_mode & 0o077:
+            raise Blocked('Private 0600 pgpass file and readable trusted CA required')
+        image = 'postgres:18.6-bookworm@sha256:5c4783a8cc3f0074912164f94dfa1be4e043438f0f707cf968d7af9a0d31a2c8'
+        return self.run('run', '--rm', '--network', 'container:' + self.config['sql'],
+                        '-v', str(files[0]) + ':/run/pgpass:ro', '-v', str(files[1]) + ':/run/pg-ca.crt:ro',
+                        '-e', 'PGPASSFILE=/run/pgpass', '-e', 'PGHOSTADDR=127.0.0.1',
+                        '-e', 'PGHOST=' + hostname, '-e', 'PGSSLMODE=verify-full',
+                        '-e', 'PGSSLROOTCERT=/run/pg-ca.crt', image, *arguments)
 
     def redis(self, *arguments):
         return self.run('exec', self.config['redis'], 'redis-cli', '--raw', *map(str, arguments)).decode().rstrip('\n')
@@ -165,9 +203,7 @@ class Control:
             if self.inspect(item['name'])['State']['Running']:
                 self.run('stop', '--time', str(self.config.get('stop_seconds', 60)), item['name'])
         # No open SQL transaction may straddle the final snapshot. SQL itself is then stopped.
-        sql = self.run('exec', self.config['sql'], 'psql', '-XAt', '-U', self.config.get('sql_user', 'postgres'),
-                       '-d', self.config.get('sql_database', 'postgres'), '-c',
-                       "SELECT count(*) FROM pg_stat_activity WHERE pid <> pg_backend_pid() AND (state <> 'idle' OR xact_start IS NOT NULL)")
+        sql = self.sql("SELECT count(*) FROM pg_stat_activity WHERE pid <> pg_backend_pid() AND (state <> 'idle' OR xact_start IS NOT NULL)")
         if int(sql.strip()) != 0:
             raise Blocked('SQL transactions remain; stop or drain the identified producers')
         check_sql()

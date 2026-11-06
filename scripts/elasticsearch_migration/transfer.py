@@ -145,9 +145,7 @@ class Transfer:
         self.journal.event('inventory_complete', counts={key: value['count'] for key, value in result['families'].items()})
 
     def sql_queries(self):
-        raw = self.control.run('exec', self.config['docker']['sql'], 'psql', '-XAt', '-U', self.config['docker'].get('sql_user', 'postgres'),
-            '-d', self.config['docker']['sql_database'], '-c',
-            'SELECT row_to_json(q) FROM (SELECT id, es_index, es_type, field, query FROM statistic_custom_aggregations ORDER BY id) q')
+        raw = self.control.sql('SELECT row_to_json(q) FROM (SELECT id, es_index, es_type, field, query FROM statistic_custom_aggregations ORDER BY id) q')
         return [decode(line) for line in raw.decode().splitlines()]
 
     def check_sql(self):

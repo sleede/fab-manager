@@ -27,7 +27,7 @@ directory is not a supported backup.
 ## Supported operating boundary
 
 This implementation supports an explicitly enumerated, single-node Docker source
-and target, PostgreSQL and Redis with dedicated named volumes. Every attached
+and target, PostgreSQL with one complete named-volume or bind data mount, and Redis with a dedicated named volume. Every attached
 network must be internal, with no published ports and no unknown peer. Move the
 installation into maintenance and its services onto reviewed private networks
 before running the tool. Do not publish ES5 to make a transfer possible. Kubernetes,
@@ -273,3 +273,28 @@ now contains 21 distinct cases; the latest 19-case run plus five affected numeri
 regressions cover them without relabeling the preserved large-double difference
 as equality. See the deployment runbook and external ES04 report for timings,
 resources, command logs, unchanged ES5 baseline and general-suite reserves.
+
+## PostgreSQL migration ordering and authenticated SQL
+
+After PostgreSQL migration, ES03 accepts the official PG18 `PGDATA=/var/lib/postgresql/18/docker`
+layout mounted at `/var/lib/postgresql`, including the bind directory produced by
+`postgresql-migrate.py`. The legacy `/var/lib/postgresql/data` layout remains
+supported. A nested WAL/data mount, unknown PGDATA or incomplete mount blocks the
+cold backup. ES/source-repository and Redis mounts retain their named-volume contract.
+The exact SQL storage source and container image are pinned in the journal.
+
+For SCRAM/TLS SQL, supply `docker.sql_connection` with exactly `hostname`,
+`password_file` and `ca_file`. The password file is a private host-side **pgpass**
+file (0600), not the plain runtime password. Use the PG migration's retained
+`runtime.pgpass` and trusted CA. The official pinned PG18 client joins only the
+SQL container's network namespace, connects to loopback with the certificate
+hostname and `sslmode=verify-full`; no secret value is placed in Docker arguments.
+Both custom-aggregation inventory and maintenance transaction checks use it.
+Without this explicit configuration the legacy local-trust adapter is retained;
+it cannot bypass SCRAM. Wrong password and unapproved CA must fail closed.
+
+Order: run the reviewed PG18-compatible **ES5 application** before PG migration,
+prove it on PG18+ES5, then run ES03 and stage the ES9 application with both PG and ES
+file-backed credentials. Do not start the ES9 client application against ES5.
+Combined installation/upgrade conflicts are recorded in the integration report;
+this SQL fix does not rewrite either published branch or imply production approval.
