@@ -19,7 +19,7 @@ angular.module('application', ['ngCookies', 'ngResource', 'ngSanitize', 'ui.rout
   'frapontillo.bootstrap-switch', 'application.controllers', 'application.router', 'application.components',
   'ui.select', 'ui.calendar', 'angularMoment', 'Devise', 'angular-growl', 'xeditable',
   'checklist-model', 'unsavedChanges', 'angular-loading-bar', 'ngTouch',
-  'angularUtils.directives.dirDisqus', 'summernote', 'elasticsearch', 'angular-medium-editor', 'naif.base64',
+  'angularUtils.directives.dirDisqus', 'summernote', 'angular-medium-editor', 'naif.base64',
   'minicolors', 'pascalprecht.translate', 'ngFitText', 'ngAside', 'ngCapsLock', 'vcRecaptcha', 'ui.codemirror',
   'bm.uiTour'])
   .config(['$httpProvider', 'AuthProvider', 'growlProvider', 'unsavedWarningsConfigProvider', 'uibDatepickerPopupConfig', '$provide', '$translateProvider', 'TourConfigProvider', '$sceDelegateProvider',

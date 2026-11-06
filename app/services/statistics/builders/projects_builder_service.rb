@@ -9,10 +9,10 @@ class Statistics::Builders::ProjectsBuilderService
     def build(options = default_options)
       # project list
       Statistics::FetcherService.each_project(options) do |p|
-        Stats::Project.create({ date: format_date(p[:date]),
-                                type: 'project',
-                                subType: 'published',
-                                stat: 1 }.merge(user_info_stat(p)).merge(project_info_stat(p)))
+        SearchIndex.create_stat(family: 'project', attributes: { date: format_date(p[:date]),
+                                                                 type: 'project',
+                                                                 subType: 'published',
+                                                                 stat: 1 }.merge(user_info_stat(p)).merge(project_info_stat(p)))
       end
     end
   end

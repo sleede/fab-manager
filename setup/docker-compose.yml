@@ -1,6 +1,6 @@
 services:
   fabmanager:
-    image: sleede/fab-manager
+    image: ${FABMANAGER_IMAGE:?Set the reviewed ES02-ES04 release image}
     environment:
       RAILS_ENV: production
       RACK_ENV: production
@@ -19,10 +19,13 @@ services:
       - ./plugins:/usr/src/app/plugins
       - ./accounting:/usr/src/app/accounting
       - ./config/auth_provider.yml:/usr/src/app/config/auth_provider.yml
+      - ./config/search/public:/run/es-certificates:ro
+      - ./config/search/runtime_password:/run/es-secrets/runtime_password:ro
     depends_on:
       - postgres
       - redis
-      - elasticsearch
+
+    networks: [default, search]
     restart: always
   postgres:
     image: postgres:9.6
@@ -32,17 +35,51 @@ services:
     environment:
       POSTGRES_HOST_AUTH_METHOD: trust
   elasticsearch:
-    image: elasticsearch:5.6
+    image: docker.elastic.co/elasticsearch/elasticsearch:9.5.6
     environment:
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m -Dlog4j2.formatMsgNoLookups=true"
+      discovery.type: single-node
+      xpack.license.self_generated.type: basic
+      xpack.security.enabled: "true"
+      xpack.security.http.ssl.enabled: "true"
+      xpack.security.http.ssl.key: certs/elasticsearch.key
+      xpack.security.http.ssl.certificate: certs/elasticsearch.crt
+      xpack.security.http.ssl.certificate_authorities: certs/ca.crt
+      path.repo: /snapshots
+      ELASTIC_PASSWORD_FILE: /run/secrets/elastic_password
+      ES_JAVA_OPTS: -Xms${ES9_HEAP:-512m} -Xmx${ES9_HEAP:-512m}
+    mem_limit: ${ES9_MEMORY:-2g}
+    cpus: ${ES9_CPUS:-2}
     ulimits:
-      memlock:
-        soft: -1
-        hard: -1
+      nofile:
+        soft: 65535
+        hard: 65535
     volumes:
-      - ./elasticsearch/config:/usr/share/elasticsearch/config
-      - ./elasticsearch:/usr/share/elasticsearch/data
-    restart: always
+      - data:/usr/share/elasticsearch/data
+      - snapshots:/snapshots
+      - ./config/search/server:/usr/share/elasticsearch/config/certs:ro
+      - ./config/search-tools/healthcheck.sh:/usr/local/bin/fm-es-healthcheck:ro
+    secrets:
+      - elastic_password
+      - es_health_curl
+    healthcheck:
+      test: ["CMD", "bash", "/usr/local/bin/fm-es-healthcheck"]
+      interval: 15s
+      timeout: 10s
+      retries: 10
+      start_period: 120s
+    networks: [search]
+    depends_on:
+      search-permissions:
+        condition: service_completed_successfully
+    restart: unless-stopped
+  search-permissions:
+    image: docker.elastic.co/elasticsearch/elasticsearch:9.5.6
+    user: "0:0"
+    network_mode: none
+    entrypoint: ["bash", "-ec", "chown 1000:0 /snapshots && chmod 0750 /snapshots"]
+    volumes:
+      - snapshots:/snapshots
+    restart: "no"
   redis:
     image: redis:6-alpine
     volumes:
@@ -57,8 +94,20 @@ services:
       - ./config/nginx:/etc/nginx/conf.d
       - ./letsencrypt/etc:/etc/letsencrypt
       - ./log:/var/log/nginx
-    volumes_from:
-      - fabmanager:ro
+      - ./public/packs:/usr/src/app/public/packs:ro
+      - ./public/uploads:/usr/src/app/public/uploads:ro
     links:
       - fabmanager:fabmanager
     restart: always
+
+volumes:
+  data:
+  snapshots:
+networks:
+  search:
+    internal: true
+secrets:
+  elastic_password:
+    file: ./config/search/bootstrap_password
+  es_health_curl:
+    file: ./config/search/health.curl

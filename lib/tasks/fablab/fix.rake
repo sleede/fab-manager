@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'stripe/service'
 
 # Correctives for bugs or upgrades migrations tasks
@@ -103,23 +104,9 @@ namespace :fablab do
     desc '[release 2.6.6] reset slug in events categories'
     task categories_slugs: :environment do
       Category.all.each do |cat|
-        # rubocop:disable Layout/LineLength
-        `curl -XPOST http://#{ENV.fetch('ELASTICSEARCH_HOST', nil)}:9200/stats/event/_update_by_query?conflicts=proceed\\&refresh\\&wait_for_completion -d '
-        {
-          "script": {
-            "source": "ctx._source.subType = params.slug",
-            "lang": "painless",
-            "params": {
-              "slug": "#{cat.slug}"
-            }
-          },
-          "query": {
-            "term": {
-              "subType": "#{cat.name}"
-            }
-          }
-        }';`
-        # rubocop:enable Layout/LineLength
+        SearchIndex.each_hit(family: 'event', query: { query: { term: { subType: cat.name } } }) do |hit|
+          SearchIndex.update_stat(family: 'event', id: hit.fetch('id'), changes: { subType: cat.slug })
+        end
       end
     end
 
@@ -358,7 +345,7 @@ namespace :fablab do
           cpn.delete
           Stripe::Service.new.create_coupon(c.id)
         rescue Stripe::InvalidRequestError => e
-          puts  "Unable to create coupon #{c.code} on stripe: #{e}"
+          puts "Unable to create coupon #{c.code} on stripe: #{e}"
         end
       end
     end

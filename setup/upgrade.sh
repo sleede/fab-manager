@@ -131,7 +131,7 @@ config()
   fi
 
   echo "Checking fabmanager service..."
-  SERVICE="$(yq eval '.services.*.image | select(. == "sleede/fab-manager*") | path | .[-2]' docker-compose.yml)"
+  SERVICE="${FABMANAGER_SERVICE:-$(yq eval '.services.*.image | select(. == "sleede/fab-manager*") | path | .[-2]' docker-compose.yml)}"
   YES_ALL=${Y:-false}
   # COMMANDS, SCRIPTS and ENVIRONMENTS are set by parseparams
 
@@ -376,6 +376,28 @@ proceed()
   trap "trap_ctrlc" 2 # SIGINT
   parseparams "$@"
   config
+  # ES9_DEPLOYMENT_PREFLIGHT: no tag edits, image pulls, stops, or DB writes before this check.
+  local helper="${FM_DEPLOYMENT_HELPER:-}"
+  if [[ -z "$helper" ]] && [[ -n "${BASH_SOURCE[0]:-}" ]] && [[ -f "$(dirname "${BASH_SOURCE[0]}")/../scripts/elasticsearch_deployment.py" ]]; then
+    helper="$(dirname "${BASH_SOURCE[0]}")/../scripts/elasticsearch_deployment.py"
+  fi
+  if [[ -z "$helper" ]]; then
+    # Piped `curl -sSL upgrade.fab.mn | bash`: fetch the read-only helper like the other upgrade scripts.
+    helper=$(mktemp) || exit 3
+    if ! \curl -fsSL "https://raw.githubusercontent.com/sleede/fab-manager/master/scripts/elasticsearch_deployment.py" -o "$helper"; then
+      echo 'Unable to download scripts/elasticsearch_deployment.py for the Elasticsearch preflight.' >&2
+      exit 3
+    fi
+  fi
+  if [[ ! -f "$helper" ]]; then
+    echo "Elasticsearch preflight helper not found: $helper" >&2
+    exit 3
+  fi
+  local es_id
+  es_id="${FM_ELASTICSEARCH_CONTAINER:-$(docker-compose ps -q elasticsearch 2>/dev/null || true)}"
+  local -a es_args=()
+  if [[ -n "$es_id" ]]; then es_args+=(--container "$es_id"); fi
+  python3 "$helper" preflight --env-file config/env --secrets config/search "${es_args[@]}" || exit 3
   version_check
   upgrade
   clean

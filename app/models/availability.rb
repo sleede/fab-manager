@@ -4,11 +4,6 @@
 # Eg. a 3D printer will be reservable on thursday from 9 to 11 pm
 # Availabilities may be subdivided into Slots (of 1h), for some types of reservables (eg. Machine)
 class Availability < ApplicationRecord
-  # elastic initialisations
-  include Elasticsearch::Model
-  index_name 'fablab'
-  document_type 'availabilities'
-
   has_many :machines_availabilities, dependent: :destroy
   has_many :machines, through: :machines_availabilities
   accepts_nested_attributes_for :machines, allow_destroy: true
@@ -47,14 +42,6 @@ class Availability < ApplicationRecord
   ## elastic callbacks
   after_save { AvailabilityIndexerWorker.perform_async(:index, id) }
   after_destroy { AvailabilityIndexerWorker.perform_async(:delete, id) }
-
-  # elastic mapping
-  settings index: { number_of_replicas: 0 } do
-    mappings dynamic: 'true' do
-      indexes 'available_type', analyzer: 'simple'
-      indexes 'subType', index: 'not_analyzed'
-    end
-  end
 
   def safe_destroy
     case available_type

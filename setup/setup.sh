@@ -45,7 +45,7 @@ system_requirements()
       fi
     done
   fi
-  local _commands=("sudo" "curl" "sed" "openssl" "docker" "systemctl")
+  local _commands=("sudo" "curl" "sed" "openssl" "python3" "docker" "systemctl")
   for _command in "${_commands[@]}"; do
     echo "detecting $_command..."
     if ! command -v "$_command"
@@ -197,18 +197,22 @@ prepare_files()
   read -rp "Continue? (Y/n) " confirm </dev/tty
   if [[ "$confirm" = "n" ]]; then exit 1; fi
 
+  if [[ -d "$FABMANAGER_PATH" ]] && [[ -n "$(find "$FABMANAGER_PATH" -mindepth 1 -maxdepth 1 -print -quit)" ]]; then
+    echo 'Installation folder is not empty. Existing ES5 installations require the ES03 migration; nothing was replaced.' >&2
+    exit 3
+  fi
   elevate_cmd mkdir -p "$FABMANAGER_PATH"
   elevate_cmd chown -R "$(whoami)" "$FABMANAGER_PATH"
 
   # create folders before starting the containers, otherwise root will own them
-  local folders=(accounting config elasticsearch/config exports imports invoices log payment_schedules plugins postgresql \
+  local folders=(accounting config exports imports invoices log payment_schedules plugins postgresql \
   supporting_document_files public/packs public/uploads)
   for folder in "${folders[@]}"; do
     mkdir -p "$FABMANAGER_PATH/$folder"
   done
 
   # Fab-manager environment variables
-  \curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/setup/env.example > "$FABMANAGER_PATH/config/env"
+  cp "$FM_RELEASE_SETUP/env.example" "$FABMANAGER_PATH/config/env"
 
   # Fab-manager auth provider configuration file
   touch "$FABMANAGER_PATH/config/auth_provider.yml"
@@ -233,12 +237,27 @@ prepare_files()
     \curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/setup/letsencrypt.timer > "$FABMANAGER_PATH/letsencrypt/systemd/letsencrypt.timer"
   fi
 
-  # ElasticSearch configuration files
-  \curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/setup/elasticsearch.yml > "$FABMANAGER_PATH/elasticsearch/config/elasticsearch.yml"
-  \curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/setup/log4j2.properties > "$FABMANAGER_PATH/elasticsearch/config/log4j2.properties"
-
-  # docker-compose
-  \curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/setup/docker-compose.yml > "$FABMANAGER_PATH/docker-compose.yml"
+  # ES9 release files: never the historical ES5 configuration.
+  cp "$FM_RELEASE_SETUP/docker-compose.yml" "$FABMANAGER_PATH/docker-compose.yml"
+  # Persist the chosen image in the installed Compose file: later docker-compose and upgrade.sh
+  # invocations do not inherit this installer's environment.
+  python3 - "$FABMANAGER_PATH/docker-compose.yml" "$FABMANAGER_IMAGE" <<'PY' || exit 3
+import sys
+path, image = sys.argv[1:]
+placeholder = '${FABMANAGER_IMAGE:?Set the reviewed ES02-ES04 release image}'
+text = open(path).read()
+if text.count(placeholder) != 1:
+    sys.exit('Unexpected docker-compose.yml template')
+open(path, 'w').write(text.replace(placeholder, image))
+PY
+  mkdir -p "$FABMANAGER_PATH/config/search-tools"
+  cp "$FM_RELEASE_SETUP/../scripts/elasticsearch_deployment.py" "$FABMANAGER_PATH/config/search-tools/"
+  cp "$FM_RELEASE_SETUP/../docker/elasticsearch9/healthcheck.sh" "$FABMANAGER_PATH/config/search-tools/"
+  if [[ -n "${FM_SEARCH_ENV_FILE:-}" ]]; then
+    python3 "$FABMANAGER_PATH/config/search-tools/elasticsearch_deployment.py" external --env-file "$FM_SEARCH_ENV_FILE" --secrets "$FABMANAGER_PATH/config/search" --output-env "$FABMANAGER_PATH/config/env" --compose "$FABMANAGER_PATH/docker-compose.yml" || exit 3
+  else
+    python3 "$FABMANAGER_PATH/config/search-tools/elasticsearch_deployment.py" prepare --secrets "$FABMANAGER_PATH/config/search" || exit 3
+  fi
 
   # proxy
   if [ "$CERTIFICATE" != "" ]; then
@@ -280,7 +299,9 @@ prepare_nginx()
       yq -i eval '.services.fabmanager.networks += ["web"]' docker-compose.yml
       yq -i eval '.services.fabmanager.networks += ["db"]' docker-compose.yml
       yq -i eval '.services.postgres.networks += ["db"]' docker-compose.yml
-      yq -i eval '.services.elasticsearch.networks += ["db"]' docker-compose.yml
+      if [[ -z "${FM_SEARCH_ENV_FILE:-}" ]]; then
+        yq -i eval '.services.elasticsearch.networks += ["db"]' docker-compose.yml
+      fi
       yq -i eval '.services.redis.networks += ["db"]' docker-compose.yml
       if ! docker network inspect "$network" 1>/dev/null; then
         echo "Creating the external network $network..."
@@ -289,7 +310,7 @@ prepare_nginx()
     fi
     read -rp "- Do you want to rename the Fab-manager's service? (Y/n) " confirm </dev/tty
     if [ "$confirm" != "n" ]; then
-      current="$(yq eval '.services.*.image | select(. == "sleede/fab-manager*") | path | .[-2]' docker-compose.yml)"
+      current="$SERVICE"
       printf "=======================\n- \e[1mCurrent value: %s\e[21m\n- New value? (leave empty to keep the current value)\n" "$current"
       read -rep "  > " value </dev/tty
       echo "======================="
@@ -325,17 +346,6 @@ prepare_letsencrypt()
 
 prepare_docker()
 {
-  if [ "$(docker ps | wc -l)" -gt 1 ]; then
-    printf "\n\nIf you have previously interrupted the installer, it is recommended to stop any existing docker container before continuing.\n"
-    echo "Here's a list of all existing containers:"
-    docker ps -a
-    read -rp "Force remove all containers? (y/N) " confirm </dev/tty
-    if [ "$confirm" = "y" ]; then
-      # shellcheck disable=SC2046
-      docker rm -f $(docker ps -q)
-    fi
-  fi
-
   # set the current user in the docker-compose.yml, as the owner of the process
   sed -i.bak "s/USER_ID/$(id -u):$(id -g)/g" "$FABMANAGER_PATH/docker-compose.yml"
 
@@ -371,8 +381,8 @@ configure_env_file()
     sed -i.bak "s/DEFAULT_HOST=.*/DEFAULT_HOST=${MAIN_DOMAIN[0]}/g" "$FABMANAGER_PATH/config/env"
   fi
 
-  # we automatically generate the SECRET_KEY_BASE
-  secret=$(docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --rm "$SERVICE" bundle exec rake secret)
+  # Generate the key without booting Rails before Elasticsearch is provisioned.
+  secret=$(openssl rand -hex 64) || exit 3
   sed -i.bak "s/SECRET_KEY_BASE=/SECRET_KEY_BASE=$secret/g" "$FABMANAGER_PATH/config/env"
 
   printf "\n\nWe will now configure the environment variables.\n"
@@ -439,18 +449,32 @@ setup_assets_and_databases()
 {
   printf "\n\nWe will now setup the database.\n"
   read -rp "Continue? (Y/n) " confirm </dev/tty
-  if [ "$confirm" = "n" ]; then return; fi
+  if [ "$confirm" = "n" ]; then exit 3; fi
+
+  # Start and provision the new ES9 service before any application process boots.
+  if [[ -z "${FM_SEARCH_ENV_FILE:-}" ]]; then
+  docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" up -d elasticsearch || exit 3
+  local es_id es_ip
+  es_id=$(docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" ps -q elasticsearch)
+  es_ip=$(docker inspect "$es_id" --format '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}')
+  for attempt in {1..60}; do
+    if python3 "$FABMANAGER_PATH/config/search-tools/elasticsearch_deployment.py" provision --secrets "$FABMANAGER_PATH/config/search" --address "$es_ip"; then break; fi
+    if [[ "$attempt" = 60 ]]; then exit 3; fi
+    sleep 2
+  done
+
+  fi
 
   # create the database
-  docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --rm "$SERVICE" bundle exec rails db:create </dev/tty
-  docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --rm "$SERVICE" bundle exec rails db:migrate </dev/tty
+  docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --rm "$SERVICE" bundle exec rails db:create </dev/tty || exit 3
+  docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --rm "$SERVICE" bundle exec rails db:migrate </dev/tty || exit 3
 
   # prompt default admin email/password
   printf "\n\nWe will now create the default administrator of Fab-manager.\n"
   read_email
   PASSWORD=$(read_password)
   printf "\nOK. We will fill the database now...\n"
-  docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --rm -e ADMIN_EMAIL="$EMAIL" -e ADMIN_PASSWORD="$PASSWORD" "$SERVICE" bundle exec rake db:seed </dev/tty # seed the database
+  docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --rm -e ADMIN_EMAIL="$EMAIL" -e ADMIN_PASSWORD="$PASSWORD" "$SERVICE" bundle exec rake db:seed </dev/tty || exit 3 # seed the database
 
   # now build the assets
   if ! docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --user "0:0" --rm "$SERVICE" bundle exec rake assets:precompile </dev/tty; then
@@ -458,7 +482,16 @@ setup_assets_and_databases()
   fi
 
   # and prepare elasticsearch
-  docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --rm "$SERVICE" bundle exec rake fablab:es:build_stats </dev/tty
+  if [[ -z "${FM_SEARCH_ENV_FILE:-}" ]]; then
+  docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --rm -e ELASTICSEARCH_USERNAME=fm_migration -e ELASTICSEARCH_PASSWORD_FILE=/run/es-secrets/migration_password -v "$FABMANAGER_PATH/config/search/migration_password:/run/es-secrets/migration_password:ro" "$SERVICE" bundle exec rake fablab:es:initialize </dev/tty || exit 3
+  else
+    docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --rm "$SERVICE" bundle exec rake fablab:es:validate || {
+      echo 'External schema is not ready. The administrator must run fablab:es:initialize with separate migration credentials, then start this prepared installation.' >&2
+      exit 3
+    }
+  fi
+  # Final read-only schema check must pass before any application producer starts.
+  docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --rm "$SERVICE" bundle exec rake fablab:es:validate || exit 3
 }
 
 stop()
@@ -521,4 +554,37 @@ setup()
   final_message
 }
 
+# Companion files come from the local checkout; when piped (`curl -sSL setup.fab.mn | bash`,
+# BASH_SOURCE empty) they are downloaded from the same branch as the other installer files.
+resolve_release_bundle()
+{
+  local here=""
+  if [[ -n "${BASH_SOURCE[0]:-}" ]] && [[ -f "${BASH_SOURCE[0]}" ]]; then
+    here=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
+  fi
+  if [[ -n "$here" ]] && [[ -f "$here/../scripts/elasticsearch_deployment.py" ]]; then
+    FM_RELEASE_SETUP="$here"
+    return 0
+  fi
+  local bundle file
+  bundle=$(mktemp -d) || return 1
+  for file in setup/docker-compose.yml setup/env.example scripts/elasticsearch_deployment.py docker/elasticsearch9/healthcheck.sh; do
+    mkdir -p "$bundle/$(dirname "$file")"
+    if ! \curl -fsSL "https://raw.githubusercontent.com/sleede/fab-manager/master/$file" -o "$bundle/$file"; then
+      echo "Unable to download $file" >&2
+      return 1
+    fi
+  done
+  FM_RELEASE_SETUP="$bundle/setup"
+}
+
+if [[ -z "${FABMANAGER_IMAGE:-}" ]]; then
+  echo 'Set FABMANAGER_IMAGE to the ES9 release image, e.g. curl -sSL setup.fab.mn | FABMANAGER_IMAGE=sleede/fab-manager:release-vX.Y.Z bash' >&2
+  exit 3
+fi
+if [[ ! "$FABMANAGER_IMAGE" =~ ^[A-Za-z0-9][A-Za-z0-9./:@_-]*$ ]]; then
+  echo 'FABMANAGER_IMAGE must be an image reference (name[:tag][@digest])' >&2
+  exit 3
+fi
+resolve_release_bundle || exit 3
 setup "$@"

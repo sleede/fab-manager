@@ -1,169 +1,37 @@
 # frozen_string_literal: true
 
-# ElasticSearch relative tasks
+# New installation schema setup never deletes indices. Existing data needs its own migration.
 namespace :fablab do
   namespace :es do
-    desc '(re)Build ElasticSearch fablab base for stats'
+    desc 'Initialize or validate the Elasticsearch 9 schema and aliases without deleting data'
+    task initialize: :environment do
+      SearchIndex.initialize_schema!
+    end
+
+    desc 'Read-only validation of an already initialized Elasticsearch 9 schema'
+    task validate: :environment do
+      SearchIndex::Schema.validate!(SearchIndex::Connection.client)
+    end
+
+    desc 'Ensure statistics schema (non-destructive compatibility name for setup)'
     task build_stats: :environment do
-      exit unless Setting.get('statistics_module')
-
-      delete_stats_index
-      create_stats_index
-      create_stats_mappings
-      add_event_filters
-      add_machine_filters
-      add_space_filters
+      SearchIndex.initialize_schema! if Setting.get('statistics_module')
     end
 
-    def delete_stats_index
-      puts 'DELETE stats'
-      `curl -XDELETE http://#{ENV.fetch('ELASTICSEARCH_HOST')}:9200/stats`
-    end
+    desc 'Validate the event statistics mapping'
+    task add_event_filters: :initialize
 
-    def create_stats_index
-      puts 'PUT index stats'
-      `curl -XPUT http://#{ENV.fetch('ELASTICSEARCH_HOST')}:9200/stats -d'
-    {
-      "settings" : {
-        "index" : {
-          "number_of_replicas" : 0
-        }
-      }
-    }
-    '`
-    end
+    desc 'Validate the space statistics mapping'
+    task add_spaces: :initialize
 
-    def create_stats_mappings
-      %w[account event machine project subscription training user space].each do |stat|
-        puts "PUT Mapping stats/#{stat}"
-        `curl -XPUT http://#{ENV.fetch('ELASTICSEARCH_HOST')}:9200/stats/#{stat}/_mapping -d '
-      {
-         "properties": {
-            "type": {
-               "type": "string",
-               "index" : "not_analyzed"
-            },
-            "subType": {
-               "type": "string",
-               "index" : "not_analyzed"
-            },
-            "date": {
-               "type": "date"
-            },
-            "name": {
-               "type": "string",
-               "index" : "not_analyzed"
-            }
-         }
-      }';`
-      end
-    end
-
-    desc 'add event filters to statistics'
-    task add_event_filters: :environment do
-      add_event_filters
-    end
-
-    def add_event_filters
-      `curl -XPUT http://#{ENV.fetch('ELASTICSEARCH_HOST')}:9200/stats/event/_mapping -d '
-      {
-         "properties": {
-            "ageRange": {
-               "type": "string",
-               "index" : "not_analyzed"
-            },
-            "eventTheme": {
-               "type": "string",
-               "index" : "not_analyzed"
-            }
-         }
-      }';`
-    end
-
-    def add_machine_filters
-      `curl -XPUT http://#{ENV.fetch('ELASTICSEARCH_HOST')}:9200/stats/machine/_mapping -d '
-      {
-         "properties": {
-            "machineDates": {
-               "properties": {
-                  "type": "date",
-               }
-            }
-         }
-      }';`
-    end
-
-    def add_space_filters
-      `curl -XPUT http://#{ENV.fetch('ELASTICSEARCH_HOST')}:9200/stats/space/_mapping -d '
-      {
-         "properties": {
-            "spaceDates": {
-               "properties": {
-                  "type": "date",
-               }
-            }
-         }
-      }';`
-    end
-
-    desc 'add spaces reservations to statistics'
-    task add_spaces: :environment do
-      `curl -XPUT http://#{ENV.fetch('ELASTICSEARCH_HOST')}:9200/stats/space/_mapping -d '
-      {
-         "properties": {
-            "type": {
-               "type": "string",
-               "index" : "not_analyzed"
-            },
-            "subType": {
-               "type": "string",
-               "index" : "not_analyzed"
-            },
-            "date": {
-               "type": "date"
-            },
-            "name": {
-               "type": "string",
-               "index" : "not_analyzed"
-            }
-         }
-      }';`
-    end
-
-    desc 'sync all/one availabilities in ElasticSearch index'
+    desc 'Synchronize all/one SQL availability to its Elasticsearch projection'
     task :build_availabilities_index, [:id] => :environment do |_task, args|
-      client = Availability.__elasticsearch__.client
-      # create index if not exists
-      Availability.__elasticsearch__.create_index! force: true unless client.indices.exists? index: Availability.index_name
-      # delete doctype if exists
-      if client.indices.exists_type? index: Availability.index_name, type: Availability.document_type
-        client.indices.delete_mapping index: Availability.index_name, type: Availability.document_type
-      end
-      # create doctype
-      client.indices.put_mapping index: Availability.index_name,
-                                 type: Availability.document_type,
-                                 body: Availability.mappings.to_hash
-
-      # verify doctype creation was successful
-      if client.indices.exists_type? index: Availability.index_name, type: Availability.document_type
-        puts "[ElasticSearch] #{Availability.index_name}/#{Availability.document_type} successfully created with its mapping."
-
-        # index requested documents
-        if args.id
-          AvailabilityIndexerWorker.perform_async(:index, id)
-        else
-          Availability.pluck(:id).each do |availability_id|
-            AvailabilityIndexerWorker.perform_async(:index, availability_id)
-          end
-        end
-      else
-        puts "[ElasticSearch] An error occurred while creating #{Availability.index_name}/#{Availability.document_type}. " \
-             'Please check your ElasticSearch configuration.'
-        puts "\nCancelling..."
-      end
+      SearchIndex.initialize_schema!
+      ids = args.id ? [args.id] : Availability.pluck(:id)
+      ids.each { |id| AvailabilityIndexerWorker.perform_async(:index, id) }
     end
 
-    desc '(re)generate statistics in ElasticSearch for the past period. Use 0 to generate for today'
+    desc '(re)generate statistics for the past period, removing that period first; use 0 for today'
     task :generate_stats, [:period] => :environment do |_task, args|
       raise 'FATAL ERROR: You must pass a number of days (=> past period) OR a date to generate statistics' unless args.period
 
@@ -173,8 +41,7 @@ namespace :fablab do
         raise 'Interrupted by user' unless confirm == 'y'
       end
 
-      worker = PeriodStatisticsWorker.new
-      worker.perform(args.period)
+      PeriodStatisticsWorker.new.perform(args.period)
     end
   end
 end

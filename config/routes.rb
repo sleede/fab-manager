@@ -317,6 +317,7 @@ Rails.application.routes.draw do
   end
   post '/stats/global/export', to: 'api/statistics#export_global'
   post '_search/scroll', to: 'api/statistics#scroll'
+  delete '_search/scroll', to: 'api/statistics#clear_scroll'
 
   get '/project_collaborator/:valid_token', to: 'api/projects#collaborator_valid'
 

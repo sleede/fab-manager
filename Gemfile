@@ -106,9 +106,8 @@ gem 'pdf-reader'
 gem 'prawn'
 gem 'prawn-table'
 
-gem 'elasticsearch-model', '~> 5'
-gem 'elasticsearch-persistence', '~> 5'
-gem 'elasticsearch-rails', '~> 5'
+gem 'elasticsearch', '9.5.0'
+gem 'elastic-transport', '8.5.3'
 gem 'faraday', '~> 0.17'
 
 gem 'pundit'

@@ -1,5 +1,2 @@
-http.host: 0.0.0.0
-script.inline: true
-script.engine.groovy.inline.update: true
-path.repo: /usr/share/elasticsearch
-
+# Historical file retained as a migration marker only. Do not mount it in ES9.
+# ES9 settings are defined in setup/docker-compose.yml and docker/elasticsearch9/.

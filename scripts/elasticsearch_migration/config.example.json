@@ -1,0 +1,69 @@
+{
+  "source": {
+    "url": "https://legacy-elasticsearch:9200",
+    "version": "5.6.16",
+    "username": "fm_migration",
+    "password_env": "ES_TRANSFER_SOURCE_PASSWORD",
+    "ca_file": "/private/source-ca.crt",
+    "endpoint_container": "fm-es5-tls-relay"
+  },
+  "target": {
+    "url": "https://elasticsearch:9200",
+    "version": "9.5.6",
+    "username": "fm_migration",
+    "password_env": "ES_TRANSFER_TARGET_PASSWORD",
+    "ca_file": "/private/target-ca.crt"
+  },
+  "schema_file": "/private/schema.json",
+  "schema_sha256": "REPLACE_WITH_CANONICAL_ARTIFACT_DIGEST",
+  "minimum_free_bytes": 1073741824,
+  "page_size": 500,
+  "bulk_bytes": 2097152,
+  "document_bytes": 1048576,
+  "protected_through": "REPLACE_WITH_REVIEWED_MAINTENANCE_DAY",
+  "snapshot": {
+    "repository": "fm-migration",
+    "location": "/snapshots"
+  },
+  "activation_file": "/private/deployment.env",
+  "target_activation": {
+    "FABMANAGER_IMAGE": "REPLACE_WITH_REVIEWED_IMAGE_DIGEST",
+    "ELASTICSEARCH_CA_FILE": "/run/es-certificates/ca.crt",
+    "ELASTICSEARCH_USERNAME": "fm_runtime",
+    "ELASTICSEARCH_PASSWORD_FILE": "/run/es-secrets/runtime_password",
+    "ELASTICSEARCH_PASSWORD": "",
+    "ELASTICSEARCH_API_KEY": "",
+    "ELASTICSEARCH_API_KEY_FILE": ""
+  },
+  "docker": {
+    "network": "fm-migration-private",
+    "source": "fm-es5",
+    "target": "fm-es9",
+    "sql": "fm-postgres",
+    "redis": "fm-redis",
+    "producers": [
+      {
+        "name": "fm-web",
+        "target_image": "sha256:REPLACE_WITH_REVIEWED_IMAGE_ID"
+      },
+      {
+        "name": "fm-worker",
+        "worker": true,
+        "target_image": "sha256:REPLACE_WITH_REVIEWED_IMAGE_ID"
+      }
+    ],
+    "sql_database": "fabmanager_production",
+    "sql_user": "postgres",
+    "archive_image": "REPLACE_WITH_PINNED_LOCAL_IMAGE_WITH_TAR_AND_DU",
+    "drain_seconds": 60,
+    "stop_seconds": 60,
+    "auxiliaries": [
+      "fm-es5-tls-relay"
+    ],
+    "sql_connection": {
+      "hostname": "postgres18",
+      "password_file": "/private/pg-migration/runtime.pgpass",
+      "ca_file": "/private/postgresql-ca.crt"
+    }
+  }
+}

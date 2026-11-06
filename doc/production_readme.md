@@ -93,13 +93,16 @@ Run the following command to install Fab-manager.
 This script will guide you through the installation process by checking the requirements and asking you the configuration elements.
 
 ```bash
-\curl -sSL setup.fab.mn | bash
+\curl -sSL setup.fab.mn | FABMANAGER_IMAGE=sleede/fab-manager:release-vX.Y.Z bash
 ```
 
 **OR**, if you don't want to install Fab-manager in `/apps/fabmanager`, use the following instead:
 ```bash
-\curl -sSL setup.fab.mn | bash -s "/my/custom/path"
+\curl -sSL setup.fab.mn | FABMANAGER_IMAGE=sleede/fab-manager:release-vX.Y.Z bash -s "/my/custom/path"
 ```
+
+`FABMANAGER_IMAGE` selects the Elasticsearch 9 release image; see [Elasticsearch deployment](elasticsearch_deployment.md).
+Existing Elasticsearch 5 installations must be migrated first, as described in that guide.
 
 ## Fab-manager for small configurations
 
