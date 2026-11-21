@@ -5,7 +5,8 @@ class API::TranslationsController < API::APIController
   before_action :set_locale
 
   def show
-    translations = I18n.t params[:state]
+    # merge the subtrees of the whole fallback chain, so that locale variants (eg. de-x-informal) can be partial
+    translations = TranslationsService.lookup(params[:state]) || I18n.t(params[:state])
     if translations.instance_of?(String) && translations.start_with?('translation missing')
       render json: { error: translations }, status: :unprocessable_entity
     else
