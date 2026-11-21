@@ -25,8 +25,20 @@ Rails.application.routes.draw do
   ## The priority is based upon order of creation: first created -> highest priority.
   ## See how all your routes lay out with "rake routes".
 
-  constraints user_agent: %r{facebookexternalhit/[0-9]|Twitterbot|Pinterest|Google.*snippet} do
+  # Legacy sharing of the single page application hashbang URLs, for bots using the deprecated AJAX crawling scheme
+  # (/?_escaped_fragment_=/events/1). Other requests to the root, by these bots, fall back to the application.
+  constraints(lambda { |request|
+    request.user_agent.to_s.match?(%r{facebookexternalhit/[0-9]|Twitterbot|Pinterest|Google.*snippet}) &&
+      request.query_parameters.key?('_escaped_fragment_')
+  }) do
     root to: 'social_bot#share', as: :bot_root
+  end
+
+  # Shareable URLs: render the OpenGraph meta tags for link previews, then redirect humans to the application
+  scope format: false do
+    get '/events/:id', to: 'social_bot#event', as: :share_event, constraints: { id: /[0-9]+/ }
+    get '/trainings/:id', to: 'social_bot#training', as: :share_training
+    get '/projects/:id', to: 'social_bot#project', as: :share_project
   end
 
   ## You can have the root of your site routed with "root"
