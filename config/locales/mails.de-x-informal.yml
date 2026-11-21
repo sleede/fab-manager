@@ -1,0 +1,10 @@
+# German, informal address ("du").
+# Only the strings that differ from the formal German (mails.de.yml) are listed here: every missing string
+# falls back to "de".
+de-x-informal:
+  notifications_mailer:
+    notify_member_create_reservation:
+      subject: "Deine Reservierung wurde erfolgreich gespeichert"
+      body:
+        reservation_saved_html: "Deine Reservierung <strong><em>%{RESERVATION}</em></strong> wurde erfolgreich gespeichert"
+        your_reserved_slots: "Deine reservierten Slots sind:"

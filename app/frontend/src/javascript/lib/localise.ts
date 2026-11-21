@@ -15,7 +15,8 @@ export default class LocaliseLib {
    * Bind the dictionnaries for the zxcvbn lib, to the current locale configuration of the app (APP_LOCALE).
    */
   static zxcvbnDictionnaries = () => {
-    switch (Fablab.locale) {
+    // only the language part matters here (eg. de-x-informal -> de)
+    switch (Fablab.locale.split('-')[0]) {
       case 'de':
         return {
           ...zxcvbnCommonPackage.dictionary,

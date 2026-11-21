@@ -186,6 +186,7 @@ Please do not enable this in production, as it can expose sensitive information.
 Configure application's main localization and translation settings.
 
 See `config/locales/app.*.yml` for a list of available locales. Default is **en**.
+To address the users informally in German ("du" instead of "Sie"), set it to **de-x-informal** (see [German, informal address](#german-informal)).
 <a name="RAILS_LOCALE"></a>
 
     RAILS_LOCALE
@@ -196,11 +197,22 @@ Please, be aware that **the configured locale will imply the CURRENCY symbol use
 
 _Eg.: configuring **es-ES** will set the currency symbol to **€** but **es-MX** will set **$** as currency symbol, so setting the `RAILS_LOCALE` to simple **es** (without country indication) will probably not do what you expect._
 
-Available values: `en, en-AU-CA, en-GB, en-IE, en-IN, en-NZ, en-US, en-ZA, fr, fr-CA, fr-CH, fr-CM, fr-FR, es, es-419, es-AR, es-CL, es-CO, es-CR, es-DO, es-EC, es-ES, es-MX, es-MX, es-PA, es-PE, es-US, es-VE, no, pt, pt-BR, it, it-CH, zu, zh-CN`.
+Available values: `de, de-AT, de-CH, de-DE, de-x-informal, en, en-AU, en-CA, en-GB, en-IE, en-IN, en-NZ, en-US, en-ZA, fr, fr-CA, fr-CH, fr-CM, fr-FR, es, es-419, es-AR, es-CL, es-CO, es-CR, es-DO, es-EC, es-ES, es-MX, es-MX, es-PA, es-PE, es-US, es-VE, no, pt, pt-BR, it, it-CH, zu, zh-CN`.
 When not defined, it defaults to **en**.
 
 If your locale is not present in that list or any locale doesn't have your exact expectations, please open a pull request to share your modifications with the community and obtain a rebuilt docker image.
 You can find templates of these files at https://github.com/svenfuchs/rails-i18n/tree/rails-5-x/rails/locale.
+<a name="german-informal"></a>
+#### German, informal address
+
+Fab-manager's German translation (`de`) addresses the users formally ("Sie").
+To address them informally ("du"), set both `RAILS_LOCALE` and `APP_LOCALE` to **de-x-informal** (`x-informal` is a [BCP 47 private use subtag](https://www.rfc-editor.org/rfc/rfc5646#section-2.2.7)).
+
+The `*.de-x-informal.yml` files only contain the strings that differ from the formal German: any string missing from these files is looked up in the `de` files (I18n fallbacks), for the back-end (e-mails, PDF, etc.) as well as for the front-end translations.
+
+The other localization settings do not know about this variant, so configure them as for the formal German, eg. `MOMENT_LOCALE=de`, `SUMMERNOTE_LOCALE=de-DE`, `ANGULAR_LOCALE=de-de`, `FULLCALENDAR_LOCALE=de`, `INTL_LOCALE=de-DE`.
+
+Please note that the e-mails sent by scheduled background jobs (eg. reminders) are generated using the default locale (**de**), and will therefore use the formal address.
 <a name="MOMENT_LOCALE"></a>
 
     MOMENT_LOCALE

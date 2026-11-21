@@ -1,0 +1,20 @@
+# German, informal address ("du").
+# Only the strings that differ from the formal German (app.public.de.yml) are listed here: every missing string
+# falls back to "de".
+de-x-informal:
+  app:
+    public:
+      common:
+        your_new_password: "Dein neues Passwort"
+        your_password_was_successfully_changed: "Dein Passwort wurde erfolgreich geändert."
+        you_will_receive_confirmation_instructions_by_email: "Du erhältst eine Bestätigungsanleitung per E-Mail."
+      projects_show:
+        your_first_name: "Dein Vorname"
+        your_surname: "Dein Nachname"
+        your_email_address: "Deine E-Mail-Adresse"
+        tell_us_why_this_looks_abusive: "Erkläre, warum das beleidigend wirkt"
+        do_you_really_want_to_delete_this_project: "Willst du dieses Projekt wirklich löschen?"
+      plans:
+        your_subscription_expires_on_the_DATE: "Dein Abonnement läuft ab am {DATE}"
+        no_plans: "Für deine Gruppe sind keine Pläne verfügbar"
+        thank_you_your_subscription_is_successful: "Vielen Dank. Dein Abonnement ist erfolgt!"
