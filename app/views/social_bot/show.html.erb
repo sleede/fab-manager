@@ -1,0 +1,57 @@
+<%
+  site_name = Setting.get('fablab_name')
+  facebook_app_id = Setting.get('facebook_app_id')
+  twitter_account = Setting.get('twitter_analytics')
+  image = @share[:image]
+%>
+<!DOCTYPE html>
+<html lang="<%= I18n.locale %>">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= [@share[:title], site_name].compact_blank.join(' - ') %></title>
+  <meta name="description" content="<%= @share[:description] %>">
+  <link rel="canonical" href="<%= @share[:url] %>">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="<%= @share[:title] %>">
+  <meta property="og:description" content="<%= @share[:description] %>">
+  <meta property="og:url" content="<%= @share[:url] %>">
+  <% if site_name.present? %>
+    <meta property="og:site_name" content="<%= site_name %>">
+  <% end %>
+  <% if image %>
+    <meta property="og:image" content="<%= image[:url] %>">
+    <% if image[:width] && image[:height] %>
+      <meta property="og:image:width" content="<%= image[:width] %>">
+      <meta property="og:image:height" content="<%= image[:height] %>">
+    <% end %>
+    <meta property="og:image:alt" content="<%= @share[:title] %>">
+  <% end %>
+  <% if facebook_app_id.present? %>
+    <meta property="fb:app_id" content="<%= facebook_app_id %>">
+  <% end %>
+
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="<%= image ? 'summary_large_image' : 'summary' %>">
+  <% if twitter_account.present? %>
+    <meta name="twitter:site" content="<%= twitter_account %>">
+  <% end %>
+  <meta name="twitter:title" content="<%= @share[:title] %>">
+  <meta name="twitter:description" content="<%= @share[:description] %>">
+  <% if image %>
+    <meta name="twitter:image" content="<%= image[:url] %>">
+  <% end %>
+
+  <%# Bots do not run JavaScript and stay on this page, humans are sent to the single page application %>
+  <script type="text/javascript">
+    window.location.replace(<%= raw json_escape(@share[:app_url].to_json) %>);
+  </script>
+</head>
+<body>
+  <h1><%= @share[:title] %></h1>
+  <p><%= @share[:description] %></p>
+  <p><a href="<%= @share[:app_url] %>"><%= @share[:app_url] %></a></p>
+</body>
+</html>

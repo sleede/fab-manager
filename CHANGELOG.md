@@ -2,6 +2,9 @@
 
 ## Next release
 
+- Fix a bug: links to events, trainings and projects shared on messengers and social networks (WhatsApp, Telegram, Signal, Slack, Discord, LinkedIn, Facebook...) showed a generic preview of the website. The share buttons now use the new `/events/:id`, `/trainings/:id` and `/projects/:id` URLs, which provide OpenGraph and Twitter Card meta tags to any link preview bot, then redirect visitors to the application
+- Fix a bug: the image URL of the legacy social bot meta tags contained a double slash, and listed bots requesting the root URL got a 404 error
+- "Copy link" button on events and projects pages
 - Fix a bug: wrap direct login credentials in the user parameter required by Devise
 - Fix security issues: update Rack within the 2.2 series and add bounded request parsing, static file and session regression tests
 - Fix security issues: update compatible JavaScript library dependencies and cover their application and tooling contracts

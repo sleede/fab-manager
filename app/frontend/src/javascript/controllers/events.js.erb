@@ -597,14 +597,36 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
     };
 
     /**
-     * Return the URL allowing to share the current project on the Facebook social network
+     * Return the public URL of the current event, without the hashbang, to be shared on social networks and messengers.
+     * This URL serves the OpenGraph meta tags used by link previews, then redirects to the application
      */
-    $scope.shareOnFacebook = function () { return `https://www.facebook.com/share.php?u=${$state.href('app.public.events_show', { id: $scope.event.id }, { absolute: true }).replace('#', '%23')}`; };
+    $scope.shareUrl = function () { return `${window.location.origin}/events/${encodeURIComponent($scope.event.id)}`; };
 
     /**
-     * Return the URL allowing to share the current project on the Twitter social network
+     * Return the URL allowing to share the current event on the Facebook social network
      */
-    $scope.shareOnTwitter = function () { return `https://twitter.com/intent/tweet?url=${encodeURIComponent($state.href('app.public.events_show', { id: $scope.event.id }, { absolute: true }))}&text=${encodeURIComponent($scope.event.title)}`; };
+    $scope.shareOnFacebook = function () { return `https://www.facebook.com/share.php?u=${encodeURIComponent($scope.shareUrl())}`; };
+
+    /**
+     * Return the URL allowing to share the current event on the Twitter social network
+     */
+    $scope.shareOnTwitter = function () { return `https://twitter.com/intent/tweet?url=${encodeURIComponent($scope.shareUrl())}&text=${encodeURIComponent($scope.event.title)}`; };
+
+    /**
+     * Copy the public URL of the current event to the clipboard.
+     * If the clipboard API is not available (eg. insecure context), the URL is displayed to be copied manually
+     */
+    $scope.copyShareUrl = function () {
+      const url = $scope.shareUrl();
+      const fallback = function () { window.prompt(_t('app.public.events_show.copy_link'), url); };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url).then(function () {
+          growl.success(_t('app.public.events_show.link_copied'));
+        }).catch(fallback);
+      } else {
+        fallback();
+      }
+    };
 
     /**
      * Return the textual description of the conditions applyable to the given price's category
