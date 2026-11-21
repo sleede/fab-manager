@@ -728,8 +728,8 @@ Application.Controllers.controller('EditProjectController', ['$rootScope', '$sco
 /**
  * Controller used in the public project's details page
  */
-Application.Controllers.controller('ShowProjectController', ['$scope', '$state', 'projectPromise', 'shortnamePromise', 'projectCategoriesWording', '$location', '$uibModal', 'dialogs', '_t',
-  function ($scope, $state, projectPromise, shortnamePromise, projectCategoriesWording, $location, $uibModal, dialogs, _t) {
+Application.Controllers.controller('ShowProjectController', ['$scope', '$state', 'projectPromise', 'shortnamePromise', 'projectCategoriesWording', '$location', '$uibModal', 'dialogs', '_t', 'growl',
+  function ($scope, $state, projectPromise, shortnamePromise, projectCategoriesWording, $location, $uibModal, dialogs, _t, growl) {
   /* PUBLIC SCOPE */
 
     // Store the project's details
@@ -840,14 +840,36 @@ Application.Controllers.controller('ShowProjectController', ['$scope', '$state',
     };
 
     /**
+     * Return the public URL of the current project, without the hashbang, to be shared on social networks and messengers.
+     * This URL serves the OpenGraph meta tags used by link previews, then redirects to the application
+     */
+    $scope.shareUrl = function () { return `${window.location.origin}/projects/${encodeURIComponent($scope.project.slug)}`; };
+
+    /**
      * Return the URL allowing to share the current project on the Facebook social network
      */
-    $scope.shareOnFacebook = function () { return `https://www.facebook.com/share.php?u=${$state.href('app.public.projects_show', { id: $scope.project.slug }, { absolute: true }).replace('#', '%23')}`; };
+    $scope.shareOnFacebook = function () { return `https://www.facebook.com/share.php?u=${encodeURIComponent($scope.shareUrl())}`; };
 
     /**
      * Return the URL allowing to share the current project on the Twitter social network
      */
-    $scope.shareOnTwitter = function () { return `https://twitter.com/intent/tweet?url=${encodeURIComponent($state.href('app.public.projects_show', { id: $scope.project.slug }, { absolute: true }))}&text=${encodeURIComponent($scope.project.name)}`; };
+    $scope.shareOnTwitter = function () { return `https://twitter.com/intent/tweet?url=${encodeURIComponent($scope.shareUrl())}&text=${encodeURIComponent($scope.project.name)}`; };
+
+    /**
+     * Copy the public URL of the current project to the clipboard.
+     * If the clipboard API is not available (eg. insecure context), the URL is displayed to be copied manually
+     */
+    $scope.copyShareUrl = function () {
+      const url = $scope.shareUrl();
+      const fallback = function () { window.prompt(_t('app.public.projects_show.copy_link'), url); };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url).then(function () {
+          growl.success(_t('app.public.projects_show.link_copied'));
+        }).catch(fallback);
+      } else {
+        fallback();
+      }
+    };
 
     /**
      * Overlap global function to allow the user to navigate to the previous screen
