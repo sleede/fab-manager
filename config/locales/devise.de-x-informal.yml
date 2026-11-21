@@ -1,0 +1,12 @@
+# German, informal address ("du").
+# Only the strings that differ from the formal German (devise.de.yml) are listed here: every missing string
+# falls back to "de".
+de-x-informal:
+  devise:
+    failure:
+      already_authenticated: "Du bist bereits angemeldet."
+      unauthenticated: "Du musst dich anmelden oder registrieren, bevor du fortfährst."
+    passwords:
+      send_instructions: "Du erhältst in Kürze eine E-Mail mit Anweisungen, wie du dein Passwort zurücksetzen kannst."
+      updated: "Dein Passwort wurde erfolgreich geändert. Du bist jetzt angemeldet."
+      updated_not_active: "Dein Passwort wurde erfolgreich geändert."
