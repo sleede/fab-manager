@@ -2,6 +2,9 @@
 
 ## Next release
 
+## v6.6.3 2026 November 26
+
+- Fix a bug: unable to complete SSO profile when user_change_group is disabled
 - Fix a bug: wrap direct login credentials in the user parameter required by Devise
 - Fix security issues: update Rack within the 2.2 series and add bounded request parsing, static file and session regression tests
 - Fix security issues: update compatible JavaScript library dependencies and cover their application and tooling contracts
