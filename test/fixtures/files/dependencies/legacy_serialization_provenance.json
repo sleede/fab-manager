@@ -1,0 +1,10 @@
+{
+  "ruby": "ruby 3.2.2 (2023-03-30 revision e51014f9c0) [x86_64-linux]",
+  "versions": {
+    "msgpack": "1.6.1",
+    "oj": "3.14.2",
+    "bootsnap": "1.16.0",
+    "activesupport": "7.0.8.7",
+    "sidekiq": "6.5.12"
+  }
+}

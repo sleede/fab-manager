@@ -166,6 +166,62 @@ Run the test suite with `./scripts/tests.sh`.
 Pleas note: If you haven't set the Stripe's API keys in your `.env` file, the script will ask for them.
 You must provide valid Stripe API **test keys** for the test suite to run.
 
+### Dependency regression checks
+
+Use the Ruby and Node versions in `.ruby-version` and `.nvmrc`, Bundler from
+`Gemfile.lock`, and Yarn 1.22.22. Install the locked dependencies without changing
+the lockfiles:
+
+```bash
+BUNDLE_FROZEN=true bundle _2.4.3_ install
+yarn install --frozen-lockfile --non-interactive --production=false
+```
+
+Run shell commands in Linux (including WSL or the development container). Before
+running Rails tests, verify that the configured PostgreSQL, Redis and
+Elasticsearch instances are disposable local test services. Initialize the test
+schema, fixtures and statistics index using the development setup instructions.
+Keep Stripe test, OAuth and OIDC configuration outside Git; use the existing
+VCR/WebMock boundaries for external services.
+
+The following focused checks complement the complete Rails suite:
+
+```bash
+bundle _2.4.3_ exec ruby -Itest test/security/rack_security_test.rb --seed 12345
+bundle _2.4.3_ exec rails test test/integration/rack_compatibility_test.rb test/integration/supporting_document_files_authorization_test.rb --seed 12345
+bundle _2.4.3_ exec ruby -Itest test/security/sso_saml_provider_test.rb --seed 12345
+yarn test:dependencies
+yarn test:build-dependencies
+yarn test:http-dependencies
+yarn test --ci --runInBand
+yarn lint
+yarn tsc --noEmit --project tsconfig.json
+yarn tsc --noEmit --project tsconfig.dev.json
+```
+
+The Rack checks exercise bounded parser inputs, static file handling and real
+Rails login/logout with CSRF validation enabled. The Node checks cover library
+behavior and a temporary production Webpack build with Babel, CSS, source maps,
+dynamic imports and minification. They do not replace authenticated browser,
+payment or identity-provider acceptance testing.
+
+The HTTP checks cover the application clients and loopback transports, including
+Devise credential wrapping and CSRF headers. Custom credential headers require
+an explicit `sensitiveHeaders` policy when using the follow-redirects API;
+a library update alone does not configure that policy for callers.
+
+Compile the application assets with the repository's Rails task (there is no
+`yarn build` script). Use a separate local production configuration with synthetic
+data and the required locale, timezone and service settings:
+
+```bash
+RAILS_ENV=production NODE_ENV=production YARN_PRODUCTION=false bundle _2.4.3_ exec rails assets:precompile
+```
+
+Use fresh build output when validating a dependency change. Preserve CSRF, TLS
+and signature checks. Record existing suite or type-check errors separately from
+new regressions; a successful build alone does not establish a passing test suite.
+
 <a name="postgresql"></a>
 ## PostgreSQL
 
