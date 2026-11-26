@@ -198,7 +198,7 @@ class Members::MembersService
 
     return true if operator&.privileged?
 
-    unless Setting.get('user_change_group') == true
+    unless @member.group_id.nil? || Setting.get('user_change_group') == true
       @member.errors.add(:group_id, I18n.t('members.unable_to_change_group_disabled', default: 'Changing group is not allowed'))
       return false
     end

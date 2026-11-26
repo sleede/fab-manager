@@ -39,11 +39,21 @@ class GroupChangeAuthorizationTest < ActionDispatch::IntegrationTest
     assert_not_equal 'HackedName', @member.profile.first_name
   end
 
-  test 'member without initial group cannot assign group when user_change_group is false' do
+  test 'member without initial group can assign group when user_change_group is false' do
     @member.update_column(:group_id, nil) # rubocop:disable Rails/SkipsModelValidations
     login_as(@member, scope: :user)
 
     put "/api/members/#{@member.id}", params: { user: { group_id: @group2.id } }.to_json, headers: default_headers
+
+    assert_response :ok
+    assert_equal @group2.id, @member.reload.group_id
+  end
+
+  test 'member without initial group cannot assign disabled group' do
+    @member.update_column(:group_id, nil) # rubocop:disable Rails/SkipsModelValidations
+    login_as(@member, scope: :user)
+
+    put "/api/members/#{@member.id}", params: { user: { group_id: @disabled_group.id } }.to_json, headers: default_headers
 
     assert_response :unprocessable_entity
     assert_nil @member.reload.group_id
