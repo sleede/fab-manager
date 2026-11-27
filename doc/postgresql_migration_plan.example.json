@@ -1,0 +1,63 @@
+{
+  "id": "fm-pg-migration",
+  "state_dir": "/private/fabmanager-migration/run",
+  "project": "replace-with-reviewed-project",
+  "compose_files": [
+    "/absolute/installation/docker-compose.yml"
+  ],
+  "database": "replace_with_actual_database",
+  "app_role": "postgres",
+  "source": {
+    "service": "replace-source-service",
+    "container": "replace-exact-container",
+    "hostname": "replace-certificate-hostname",
+    "admin": "postgres",
+    "password_file": "/private/fabmanager-migration/source.pgpass",
+    "sslmode": "verify-full",
+    "ca_file": "/private/fabmanager-migration/ca.crt",
+    "mount_type": "bind",
+    "mount_source": "/absolute/verified/source",
+    "mount_destination": "/var/lib/postgresql/data",
+    "pgdata": "/var/lib/postgresql/data"
+  },
+  "target": {
+    "service": "postgres18",
+    "container": "replace-new-target-container",
+    "image": "postgres:18.6-bookworm@sha256:5c4783a8cc3f0074912164f94dfa1be4e043438f0f707cf968d7af9a0d31a2c8",
+    "data_path": "/absolute/new/postgresql18",
+    "tls_dir": "/private/fabmanager-migration/certificates/postgres18",
+    "ca_file": "/private/fabmanager-migration/ca.crt"
+  },
+  "producers": [
+    "replace-app-and-worker-services"
+  ],
+  "non_producers": [
+    "replace-redis-elasticsearch-proxy-services"
+  ],
+  "external_producers_stopped": "REPLACE with the inventory of host/external producers, scheduler stop commands and verification.",
+  "approved_superusers": [
+    "postgres"
+  ],
+  "login_password_files": {},
+  "extensions": [
+    "plpgsql",
+    "unaccent",
+    "pg_trgm",
+    "fuzzystrmatch"
+  ],
+  "collation_review": "REPLACE with locale/libc inventory, sorting/uniqueness review and business checks.",
+  "rehearsal_approved": false,
+  "health_command": [
+    "/private/fabmanager-migration/hooks/health"
+  ],
+  "quiet_command": [
+    "/private/fabmanager-migration/hooks/quiet"
+  ],
+  "queue_command": [
+    "/private/fabmanager-migration/hooks/queues"
+  ],
+  "business_command": [
+    "/private/fabmanager-migration/hooks/business"
+  ],
+  "application_service": "replace-main-application-service"
+}

@@ -1,0 +1,47 @@
+# Disposable compatibility services only. The normal setup server is unchanged.
+# Supply a fresh PG_COMPAT_PRIVATE_DIR containing password and TLS material.
+services:
+  pg96:
+    image: postgres:9.6@sha256:caddd35b05cdd56c614ab1f674e63be778e0abdf54e71a7507ff3e28d4902698
+    environment:
+      POSTGRES_PASSWORD_FILE: /run/secrets/database_password
+      POSTGRES_INITDB_ARGS: --auth-host=md5 --auth-local=trust
+    command: [postgres, -c, ssl=on, -c, ssl_cert_file=/certs/server.crt, -c, ssl_key_file=/certs/server.key]
+    secrets: [database_password]
+    volumes:
+      - pg96:/var/lib/postgresql/data
+      - ${PG_COMPAT_PRIVATE_DIR:?Use a fresh private directory}/certificates/pg96:/certs:ro
+    networks: [test]
+    mem_limit: 512m
+  pg18:
+    image: postgres:18.6-bookworm@sha256:5c4783a8cc3f0074912164f94dfa1be4e043438f0f707cf968d7af9a0d31a2c8
+    environment:
+      POSTGRES_PASSWORD_FILE: /run/secrets/database_password
+      POSTGRES_INITDB_ARGS: --auth-host=scram-sha-256 --auth-local=trust
+    command: [postgres, -c, ssl=on, -c, ssl_cert_file=/certs/server.crt, -c, ssl_key_file=/certs/server.key]
+    secrets: [database_password]
+    volumes:
+      - pg18:/var/lib/postgresql
+      - ${PG_COMPAT_PRIVATE_DIR:?Use a fresh private directory}/certificates/pg18:/certs:ro
+    networks: [test]
+    mem_limit: 768m
+  redis:
+    image: redis:6-alpine@sha256:592b215e9287182f11ba9d7c229dc0ba312bb900a016ea65ae378b0127567319
+    networks: [test]
+    mem_limit: 96m
+  elasticsearch:
+    image: elasticsearch:5.6@sha256:d0e119779df7ddf9d476102691d9d0b8783c13434e00d77f01327019c1297839
+    environment:
+      ES_JAVA_OPTS: -Xms256m -Xmx256m
+      discovery.type: single-node
+    networks: [test]
+    mem_limit: 768m
+networks:
+  test:
+    internal: true
+volumes:
+  pg96:
+  pg18:
+secrets:
+  database_password:
+    file: ${PG_COMPAT_PRIVATE_DIR:?Use a fresh private directory}/password

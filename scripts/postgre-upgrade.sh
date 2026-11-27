@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# Historical 9.4 -> 9.6 only. For 9.6 -> 18 use postgresql-migrate.py and doc/postgresql_migration.md.
 
 config()
 {

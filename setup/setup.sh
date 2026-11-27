@@ -189,6 +189,20 @@ read_domain()
   fi
 }
 
+# copy a release file from the checkout running this script, otherwise download it like the other setup files
+release_file()
+{
+  local relative="$1" destination="$2" script="${BASH_SOURCE[0]:-}" local_copy
+  if [[ -n "$script" && -f "$script" ]]; then
+    local_copy="$(dirname "$(readlink -f "$script")")/../$relative"
+    if [[ -f "$local_copy" ]]; then
+      cp "$local_copy" "$destination"
+      return
+    fi
+  fi
+  \curl -fsSL "https://raw.githubusercontent.com/sleede/fab-manager/master/$relative" > "$destination"
+}
+
 prepare_files()
 {
   FABMANAGER_PATH=${1:-/apps/fabmanager}
@@ -196,6 +210,12 @@ prepare_files()
   echo -e "Fab-Manager will be installed in \e[31m$FABMANAGER_PATH\e[0m"
   read -rp "Continue? (Y/n) " confirm </dev/tty
   if [[ "$confirm" = "n" ]]; then exit 1; fi
+
+  if [[ -d "$FABMANAGER_PATH" && -n "$(ls -A "$FABMANAGER_PATH")" ]] || [[ -e "$FABMANAGER_PATH/docker-compose.yml" || -e "$FABMANAGER_PATH/postgresql/PG_VERSION" ||
+        -e "$FABMANAGER_PATH/postgresql/18/docker/PG_VERSION" ]]; then
+    echo "Existing installation detected. Use upgrade.sh and the explicit PostgreSQL migration." >&2
+    exit 1
+  fi
 
   elevate_cmd mkdir -p "$FABMANAGER_PATH"
   elevate_cmd chown -R "$(whoami)" "$FABMANAGER_PATH"
@@ -238,7 +258,8 @@ prepare_files()
   \curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/setup/log4j2.properties > "$FABMANAGER_PATH/elasticsearch/config/log4j2.properties"
 
   # docker-compose
-  \curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/setup/docker-compose.yml > "$FABMANAGER_PATH/docker-compose.yml"
+  release_file setup/docker-compose.yml "$FABMANAGER_PATH/docker-compose.yml" ||
+    { echo "Unable to obtain docker-compose.yml." >&2; exit 1; }
 
   # proxy
   if [ "$CERTIFICATE" != "" ]; then
@@ -325,17 +346,6 @@ prepare_letsencrypt()
 
 prepare_docker()
 {
-  if [ "$(docker ps | wc -l)" -gt 1 ]; then
-    printf "\n\nIf you have previously interrupted the installer, it is recommended to stop any existing docker container before continuing.\n"
-    echo "Here's a list of all existing containers:"
-    docker ps -a
-    read -rp "Force remove all containers? (y/N) " confirm </dev/tty
-    if [ "$confirm" = "y" ]; then
-      # shellcheck disable=SC2046
-      docker rm -f $(docker ps -q)
-    fi
-  fi
-
   # set the current user in the docker-compose.yml, as the owner of the process
   sed -i.bak "s/USER_ID/$(id -u):$(id -g)/g" "$FABMANAGER_PATH/docker-compose.yml"
 
@@ -442,15 +452,15 @@ setup_assets_and_databases()
   if [ "$confirm" = "n" ]; then return; fi
 
   # create the database
-  docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --rm "$SERVICE" bundle exec rails db:create </dev/tty
-  docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --rm "$SERVICE" bundle exec rails db:migrate </dev/tty
+  docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --rm "$SERVICE" bundle exec rails db:create </dev/tty || exit 1
+  docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --rm "$SERVICE" bundle exec rails db:migrate </dev/tty || exit 1
 
   # prompt default admin email/password
   printf "\n\nWe will now create the default administrator of Fab-manager.\n"
   read_email
   PASSWORD=$(read_password)
   printf "\nOK. We will fill the database now...\n"
-  docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --rm -e ADMIN_EMAIL="$EMAIL" -e ADMIN_PASSWORD="$PASSWORD" "$SERVICE" bundle exec rake db:seed </dev/tty # seed the database
+  docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --rm -e ADMIN_EMAIL="$EMAIL" -e ADMIN_PASSWORD="$PASSWORD" "$SERVICE" bundle exec rake db:seed </dev/tty || exit 1 # seed the database
 
   # now build the assets
   if ! docker-compose -f "$FABMANAGER_PATH/docker-compose.yml" run --user "0:0" --rm "$SERVICE" bundle exec rake assets:precompile </dev/tty; then
@@ -504,6 +514,47 @@ function trap_ctrlc()
   exit 2
 }
 
+
+prepare_postgresql()
+{
+  [[ -z "$(ls -A "$FABMANAGER_PATH/postgresql")" ]] ||
+    { echo "PostgreSQL storage is occupied; explicit migration required." >&2; exit 1; }
+  command -v openssl >/dev/null ||
+    { echo "openssl is required to generate the local database secret." >&2; exit 1; }
+  release_file docker/postgresql-entrypoint.sh "$FABMANAGER_PATH/config/postgresql-entrypoint.sh" ||
+    { echo "Unable to obtain the PostgreSQL startup guard; it is required." >&2; exit 1; }
+  mkdir -m 700 "$FABMANAGER_PATH/config/postgresql-guard"
+  chmod 700 "$FABMANAGER_PATH/config"
+  (umask 077; openssl rand -hex 32 > "$FABMANAGER_PATH/config/postgresql-password")
+  chmod 644 "$FABMANAGER_PATH/config/postgresql-password"
+
+  local certificates="$FABMANAGER_PATH/config/postgresql-certificates"
+  mkdir -p "$certificates/postgres"
+  (umask 077
+    openssl genrsa -out "$certificates/ca.key" 2048
+    openssl req -x509 -new -sha256 -days 3650 -key "$certificates/ca.key" \
+      -subj /CN=FabManager-Local-PostgreSQL-CA -out "$certificates/ca.crt"
+    openssl genrsa -out "$certificates/postgres/server.key" 2048
+    openssl req -new -key "$certificates/postgres/server.key" -subj /CN=postgres \
+      -out "$certificates/postgres/server.csr"
+    printf 'subjectAltName=DNS:postgres,DNS:fabmanager-postgres,DNS:localhost,IP:127.0.0.1\nextendedKeyUsage=serverAuth\n' > "$certificates/postgres/extensions"
+    # verify-full rejects an expired certificate and nothing renews it: keep the private CA lifetime
+    openssl x509 -req -sha256 -days 3650 -in "$certificates/postgres/server.csr" -CA "$certificates/ca.crt" \
+      -CAkey "$certificates/ca.key" -CAcreateserial -extfile "$certificates/postgres/extensions" \
+      -out "$certificates/postgres/server.crt"
+  ) || { echo "PostgreSQL TLS provisioning failed." >&2; exit 1; }
+  chmod 755 "$certificates/postgres"
+  chmod 644 "$certificates/ca.crt" "$certificates/postgres/server.crt"
+  if [[ "$EUID" == 0 ]]; then
+    chown 999:999 "$certificates/postgres/server.key"
+  else
+    elevate_cmd chown 999:999 "$certificates/postgres/server.key"
+  fi
+  chmod 600 "$certificates/postgres/server.key"
+
+  export FM_PG_INITIALIZE=1
+}
+
 setup()
 {
   trap "trap_ctrlc" 2 # SIGINT
@@ -511,11 +562,13 @@ setup()
   system_requirements
   config
   prepare_files "$@"
+  prepare_postgresql
   prepare_nginx
   prepare_letsencrypt
   prepare_docker
   configure_env_file
   setup_assets_and_databases
+  unset FM_PG_INITIALIZE
   start
   enable_ssl
   final_message

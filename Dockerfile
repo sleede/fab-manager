@@ -2,10 +2,13 @@ FROM ruby:3.2.2
 MAINTAINER contact@sleede.com
 
 # First we need to be able to fetch from https repositories
+COPY scripts/install-postgresql-client.sh /tmp/install-postgresql-client.sh
+ENV PATH="/usr/lib/postgresql/18/bin:$PATH"
+
 RUN apt-get update && \
     apt-get install -y apt-transport-https \
-      postgresql-client \
-      ca-certificates apt-utils supervisor locales
+      ca-certificates apt-utils supervisor locales curl && \
+    bash /tmp/install-postgresql-client.sh
 
 RUN locale-gen C.UTF-8
 
