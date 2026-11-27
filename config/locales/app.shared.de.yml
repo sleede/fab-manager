@@ -382,6 +382,9 @@ de:
         previous: "Vorherige"
         next: "Nächste"
         end: "Tour beenden"
+        conclusion:
+          title: "Vielen Dank für Ihre Aufmerksamkeit"
+          content: "<p>Um diese kontextabhängige Hilfe neu zu starten, können Sie jederzeit <strong>F1</strong> drücken oder klicken Sie im Benutzermenu auf [? Hilfe].</p><p>Zusätzliche Hilfe finden Sie in der <a href='http://guide-fr.fab.mn' target='_blank'>Benutzeranleitung</a> (nur auf Französisch).</p><p>Das Fab-Manager-Team bietet auch personalisierten Support (Hilfe beim Einstieg, Hilfe bei der Installation, Anpassung etc.), <a href='mailto:contact@fab-manager.com'>kontaktieren Sie uns</a> für weitere Informationen.</p>"
       #help modal
       help:
         title: "Hilfe"

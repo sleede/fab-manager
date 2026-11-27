@@ -382,6 +382,9 @@ zu:
         previous: "crwdns29384:0crwdne29384:0"
         next: "crwdns29386:0crwdne29386:0"
         end: "crwdns29388:0crwdne29388:0"
+        conclusion:
+          title: "crwdns27124:0crwdne27124:0"
+          content: "crwdns27126:0crwdne27126:0"
       #help modal
       help:
         title: "crwdns29390:0crwdne29390:0"

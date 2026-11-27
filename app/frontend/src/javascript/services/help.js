@@ -15,7 +15,7 @@ Application.Services.factory('Help', ['$rootScope', '$uibModal', '$state', 'Auth
       'app.admin.projects': 'projects',
       'app.admin.statistics': 'statistics',
       'app.admin.settings': 'settings',
-      'app.admin.open_api_clients': 'open-api'
+      'app.logged.open_api_clients': 'open-api'
     };
 
     return function (e) {

@@ -2,8 +2,10 @@
 
 # OpenAPI::Client keeps track of the authorized accesses to the 3-rd party API (aka. OpenAPI)
 class OpenAPI::Client < ApplicationRecord
+  belongs_to :user, optional: false
   validates :name, presence: true
   validates :token, uniqueness: true
+  validates :user_id, presence: true
 
   before_create :set_initial_token
 
@@ -23,5 +25,9 @@ class OpenAPI::Client < ApplicationRecord
 
   def generate_unique_secure_token
     SecureRandom.base58(24)
+  end
+
+  def can_perform?(action, resource)
+    user.can?(action, resource)
   end
 end
