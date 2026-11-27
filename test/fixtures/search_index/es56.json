@@ -1,0 +1,1408 @@
+{
+  "access": {
+    "admin": [
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200
+    ],
+    "anonymous": [
+      401,
+      401,
+      401,
+      401,
+      401,
+      401,
+      401,
+      401,
+      401,
+      401,
+      401
+    ],
+    "member": [
+      403,
+      403,
+      403,
+      403,
+      403,
+      403,
+      403,
+      403,
+      403,
+      403,
+      403
+    ]
+  },
+  "availability": {
+    "available_type": "machines",
+    "bookable_hours": 10.0,
+    "date": "2026-03-08",
+    "destroying": false,
+    "end_at": "2026-03-08T11:00:00.000+01:00",
+    "end_date": null,
+    "hours_duration": 2.0,
+    "id": 3,
+    "is_recurrent": null,
+    "lock": false,
+    "nb_periods": null,
+    "nb_total_places": null,
+    "occurrence_id": null,
+    "period": null,
+    "slot_duration": null,
+    "start_at": "2026-03-08T09:00:00.000+01:00",
+    "subType": [
+      "decoupeuse-laser",
+      "decoupeuse-vinyle",
+      "imprimante-3d",
+      "form1-imprimante-3d",
+      "petite-fraiseuse"
+    ]
+  },
+  "builders": {
+    "account": [
+      {
+        "date": "1999-01-01",
+        "historical": "not reconstructible",
+        "type": "member"
+      }
+    ],
+    "event": [
+
+    ],
+    "machine": [
+      {
+        "age": 77,
+        "ca": 15.0,
+        "coupon": null,
+        "date": "2015-06-10",
+        "gender": "female",
+        "group": "standard",
+        "groupName": "standard, association",
+        "machineDates": [
+          {
+            "name": "2015-06-15"
+          }
+        ],
+        "machineId": 2,
+        "name": "Découpeuse vinyle",
+        "reservationContextId": null,
+        "reservationId": 2,
+        "stat": 1.0,
+        "subType": "decoupeuse-vinyle",
+        "type": "booking",
+        "userId": 3
+      },
+      {
+        "age": 77,
+        "ca": 15.0,
+        "coupon": null,
+        "date": "2015-06-10",
+        "gender": "female",
+        "group": "standard",
+        "groupName": "standard, association",
+        "machineDates": [
+          {
+            "name": "2015-06-15"
+          }
+        ],
+        "machineId": 2,
+        "name": "Découpeuse vinyle",
+        "reservationContextId": null,
+        "reservationId": 2,
+        "stat": 1.0,
+        "subType": "decoupeuse-vinyle",
+        "type": "hour",
+        "userId": 3
+      }
+    ],
+    "order": [
+      {
+        "age": 51,
+        "ca": 30.0,
+        "categories": [
+          {
+            "id": 5,
+            "name": "Bois"
+          }
+        ],
+        "coupon": null,
+        "date": "2026-11-03",
+        "gender": "male",
+        "group": "standard",
+        "groupName": "standard, association",
+        "orderId": 15,
+        "products": [
+          {
+            "id": 17,
+            "name": "Panneau de 3 plis mélèze"
+          }
+        ],
+        "stat": 1.0,
+        "state": "paid",
+        "subType": "paid-processed",
+        "type": "store",
+        "userId": 2
+      }
+    ],
+    "project": [
+
+    ],
+    "space": [
+
+    ],
+    "subscription": [
+      {
+        "age": 57,
+        "ca": 30.0,
+        "coupon": null,
+        "date": "2015-06-10",
+        "gender": "female",
+        "group": "standard",
+        "groupName": "standard, association",
+        "invoiceItemId": 3,
+        "planId": 1,
+        "stat": 1.0,
+        "subType": "mensuel",
+        "subscriptionId": 3,
+        "type": "2629746",
+        "userId": 7
+      }
+    ],
+    "training": [
+
+    ],
+    "user": [
+      {
+        "age": 57,
+        "date": "2015-06-10",
+        "gender": "female",
+        "group": "standard",
+        "groupName": "standard, association",
+        "stat": 30.0,
+        "subType": "standard",
+        "type": "revenue",
+        "userId": 7
+      },
+      {
+        "age": 77,
+        "date": "2015-06-10",
+        "gender": "female",
+        "group": "standard",
+        "groupName": "standard, association",
+        "stat": 15.0,
+        "subType": "standard",
+        "type": "revenue",
+        "userId": 3
+      }
+    ]
+  },
+  "cleaner": {
+    "account": {
+      "hits": {
+        "hits": [
+          {
+            "_id": "2026-03-07",
+            "_index": "stats",
+            "_source": {
+              "date": "2026-03-07",
+              "stat": 0,
+              "type": "historic"
+            },
+            "_type": "account",
+            "sort": [
+              1772841600000
+            ]
+          },
+          {
+            "_id": "2026-03-09",
+            "_index": "stats",
+            "_source": {
+              "date": "2026-03-09",
+              "stat": 0,
+              "type": "historic"
+            },
+            "_type": "account",
+            "sort": [
+              1773014400000
+            ]
+          }
+        ],
+        "total": 2
+      },
+      "timed_out": false
+    },
+    "event": {
+      "hits": {
+        "hits": [
+          {
+            "_id": "2026-03-07",
+            "_index": "stats",
+            "_source": {
+              "date": "2026-03-07",
+              "stat": 0,
+              "type": "historic"
+            },
+            "_type": "event",
+            "sort": [
+              1772841600000
+            ]
+          },
+          {
+            "_id": "2026-03-09",
+            "_index": "stats",
+            "_source": {
+              "date": "2026-03-09",
+              "stat": 0,
+              "type": "historic"
+            },
+            "_type": "event",
+            "sort": [
+              1773014400000
+            ]
+          }
+        ],
+        "total": 2
+      },
+      "timed_out": false
+    },
+    "machine": {
+      "hits": {
+        "hits": [
+          {
+            "_id": "2026-03-07",
+            "_index": "stats",
+            "_source": {
+              "date": "2026-03-07",
+              "stat": 0,
+              "type": "historic"
+            },
+            "_type": "machine",
+            "sort": [
+              1772841600000
+            ]
+          },
+          {
+            "_id": "2026-03-09",
+            "_index": "stats",
+            "_source": {
+              "date": "2026-03-09",
+              "stat": 0,
+              "type": "historic"
+            },
+            "_type": "machine",
+            "sort": [
+              1773014400000
+            ]
+          }
+        ],
+        "total": 2
+      },
+      "timed_out": false
+    },
+    "order": {
+      "hits": {
+        "hits": [
+          {
+            "_id": "2026-03-07",
+            "_index": "stats",
+            "_source": {
+              "date": "2026-03-07",
+              "stat": 0,
+              "type": "historic"
+            },
+            "_type": "order",
+            "sort": [
+              1772841600000
+            ]
+          },
+          {
+            "_id": "2026-03-09",
+            "_index": "stats",
+            "_source": {
+              "date": "2026-03-09",
+              "stat": 0,
+              "type": "historic"
+            },
+            "_type": "order",
+            "sort": [
+              1773014400000
+            ]
+          }
+        ],
+        "total": 2
+      },
+      "timed_out": false
+    },
+    "project": {
+      "hits": {
+        "hits": [
+          {
+            "_id": "2026-03-07",
+            "_index": "stats",
+            "_source": {
+              "date": "2026-03-07",
+              "stat": 0,
+              "type": "historic"
+            },
+            "_type": "project",
+            "sort": [
+              1772841600000
+            ]
+          },
+          {
+            "_id": "2026-03-09",
+            "_index": "stats",
+            "_source": {
+              "date": "2026-03-09",
+              "stat": 0,
+              "type": "historic"
+            },
+            "_type": "project",
+            "sort": [
+              1773014400000
+            ]
+          }
+        ],
+        "total": 2
+      },
+      "timed_out": false
+    },
+    "space": {
+      "hits": {
+        "hits": [
+          {
+            "_id": "2026-03-07",
+            "_index": "stats",
+            "_source": {
+              "date": "2026-03-07",
+              "stat": 0,
+              "type": "historic"
+            },
+            "_type": "space",
+            "sort": [
+              1772841600000
+            ]
+          },
+          {
+            "_id": "2026-03-09",
+            "_index": "stats",
+            "_source": {
+              "date": "2026-03-09",
+              "stat": 0,
+              "type": "historic"
+            },
+            "_type": "space",
+            "sort": [
+              1773014400000
+            ]
+          }
+        ],
+        "total": 2
+      },
+      "timed_out": false
+    },
+    "subscription": {
+      "hits": {
+        "hits": [
+          {
+            "_id": "2026-03-07",
+            "_index": "stats",
+            "_source": {
+              "date": "2026-03-07",
+              "stat": 0,
+              "type": "historic"
+            },
+            "_type": "subscription",
+            "sort": [
+              1772841600000
+            ]
+          },
+          {
+            "_id": "2026-03-09",
+            "_index": "stats",
+            "_source": {
+              "date": "2026-03-09",
+              "stat": 0,
+              "type": "historic"
+            },
+            "_type": "subscription",
+            "sort": [
+              1773014400000
+            ]
+          }
+        ],
+        "total": 2
+      },
+      "timed_out": false
+    },
+    "training": {
+      "hits": {
+        "hits": [
+          {
+            "_id": "2026-03-07",
+            "_index": "stats",
+            "_source": {
+              "date": "2026-03-07",
+              "stat": 0,
+              "type": "historic"
+            },
+            "_type": "training",
+            "sort": [
+              1772841600000
+            ]
+          },
+          {
+            "_id": "2026-03-09",
+            "_index": "stats",
+            "_source": {
+              "date": "2026-03-09",
+              "stat": 0,
+              "type": "historic"
+            },
+            "_type": "training",
+            "sort": [
+              1773014400000
+            ]
+          }
+        ],
+        "total": 2
+      },
+      "timed_out": false
+    },
+    "user": {
+      "hits": {
+        "hits": [
+          {
+            "_id": "2026-03-07",
+            "_index": "stats",
+            "_source": {
+              "date": "2026-03-07",
+              "stat": 0,
+              "type": "historic"
+            },
+            "_type": "user",
+            "sort": [
+              1772841600000
+            ]
+          },
+          {
+            "_id": "2026-03-09",
+            "_index": "stats",
+            "_source": {
+              "date": "2026-03-09",
+              "stat": 0,
+              "type": "historic"
+            },
+            "_type": "user",
+            "sort": [
+              1773014400000
+            ]
+          }
+        ],
+        "total": 2
+      },
+      "timed_out": false
+    }
+  },
+  "custom": {
+    "available_hours": {
+      "value": 6.0
+    },
+    "available_tickets": {
+      "value": 6.0
+    },
+    "average_cart": {
+      "value": "3.4333333333333336"
+    }
+  },
+  "custom-filter-0": {
+    "aggregations": {
+      "available_hours": {
+        "value": 4.0
+      },
+      "count": {
+        "value": 0.0
+      }
+    },
+    "hits": {
+      "hits": [
+
+      ],
+      "total": 0
+    },
+    "timed_out": false
+  },
+  "custom-filter-1": {
+    "aggregations": {
+      "available_hours": {
+        "value": 2.0
+      },
+      "count": {
+        "value": 0.0
+      }
+    },
+    "hits": {
+      "hits": [
+
+      ],
+      "total": 0
+    },
+    "timed_out": false
+  },
+  "disabled": {
+    "hits": {
+      "hits": [
+        {
+          "_id": "historic",
+          "_index": "stats",
+          "_source": {
+            "date": "2026-03-08",
+            "stat": 1,
+            "type": "member"
+          },
+          "_type": "account"
+        }
+      ],
+      "total": 1
+    },
+    "timed_out": false
+  },
+  "exports": {
+    "global": {
+      "cells_sha256": "901cb765fe4be0d886cbbec2b099c3d51916c07b47dd07d7a37090b39326c8c9",
+      "rows": {
+        "Abonnements - Durée  1 an": 1,
+        "Abonnements - Durée  2 mois": 1,
+        "Abonnements - Durée  un mois": 1,
+        "Commandes - Boutique": 1,
+        "Espaces - Nombre d'heures": 1,
+        "Espaces - Réservations": 1,
+        "Formations - Nombre d'heures": 1,
+        "Formations - Réservations": 1,
+        "Heu. - Nombre d'heures": 1,
+        "Heures machines - Réservations": 10038,
+        "Inscriptions - Utilisateurs": 1,
+        "Projets - Projets": 1,
+        "Évènements - Nombre d'heures": 1,
+        "Évènements - Nombre de places": 1
+      }
+    },
+    "machine": {
+      "cells_sha256": "1df2538cbdfc5f284193a842bfa890d3fb6f0573bfa580de02d3dc866770fb7e",
+      "rows": {
+        "Heures machines": 10042
+      }
+    }
+  },
+  "families": {
+    "account": {
+      "hits": {
+        "hits": [
+          {
+            "_id": "0009007199254740993-é",
+            "_index": "stats",
+            "_source": {
+              "age": null,
+              "date": "2026-03-08",
+              "exactInteger": 9007199254740993,
+              "historical": {
+                "label": "Historique é",
+                "missingFromSql": true
+              },
+              "stat": 0,
+              "subType": "opaque-subtype",
+              "type": "business-type",
+              "userId": 2
+            },
+            "_type": "account",
+            "sort": [
+              "account#0009007199254740993-é"
+            ]
+          }
+        ],
+        "total": 1
+      },
+      "timed_out": false
+    },
+    "event": {
+      "hits": {
+        "hits": [
+          {
+            "_id": "0009007199254740993-é",
+            "_index": "stats",
+            "_source": {
+              "age": null,
+              "date": "2026-03-08",
+              "exactInteger": 9007199254740993,
+              "historical": {
+                "label": "Historique é",
+                "missingFromSql": true
+              },
+              "stat": 0,
+              "subType": "opaque-subtype",
+              "type": "business-type",
+              "userId": 2
+            },
+            "_type": "event",
+            "sort": [
+              "event#0009007199254740993-é"
+            ]
+          }
+        ],
+        "total": 1
+      },
+      "timed_out": false
+    },
+    "machine": {
+      "hits": {
+        "hits": [
+          {
+            "_id": "0009007199254740993-é",
+            "_index": "stats",
+            "_source": {
+              "age": null,
+              "date": "2026-03-08",
+              "exactInteger": 9007199254740993,
+              "historical": {
+                "label": "Historique é",
+                "missingFromSql": true
+              },
+              "stat": 0,
+              "subType": "opaque-subtype",
+              "type": "business-type",
+              "userId": 2
+            },
+            "_type": "machine",
+            "sort": [
+              "machine#0009007199254740993-é"
+            ]
+          }
+        ],
+        "total": 1
+      },
+      "timed_out": false
+    },
+    "order": {
+      "hits": {
+        "hits": [
+          {
+            "_id": "0009007199254740993-é",
+            "_index": "stats",
+            "_source": {
+              "age": null,
+              "date": "2026-03-08",
+              "exactInteger": 9007199254740993,
+              "historical": {
+                "label": "Historique é",
+                "missingFromSql": true
+              },
+              "stat": 0,
+              "subType": "opaque-subtype",
+              "type": "business-type",
+              "userId": 2
+            },
+            "_type": "order",
+            "sort": [
+              "order#0009007199254740993-é"
+            ]
+          }
+        ],
+        "total": 1
+      },
+      "timed_out": false
+    },
+    "project": {
+      "hits": {
+        "hits": [
+          {
+            "_id": "0009007199254740993-é",
+            "_index": "stats",
+            "_source": {
+              "age": null,
+              "date": "2026-03-08",
+              "exactInteger": 9007199254740993,
+              "historical": {
+                "label": "Historique é",
+                "missingFromSql": true
+              },
+              "stat": 0,
+              "subType": "opaque-subtype",
+              "type": "business-type",
+              "userId": 2
+            },
+            "_type": "project",
+            "sort": [
+              "project#0009007199254740993-é"
+            ]
+          }
+        ],
+        "total": 1
+      },
+      "timed_out": false
+    },
+    "space": {
+      "hits": {
+        "hits": [
+          {
+            "_id": "0009007199254740993-é",
+            "_index": "stats",
+            "_source": {
+              "age": null,
+              "date": "2026-03-08",
+              "exactInteger": 9007199254740993,
+              "historical": {
+                "label": "Historique é",
+                "missingFromSql": true
+              },
+              "stat": 0,
+              "subType": "opaque-subtype",
+              "type": "business-type",
+              "userId": 2
+            },
+            "_type": "space",
+            "sort": [
+              "space#0009007199254740993-é"
+            ]
+          }
+        ],
+        "total": 1
+      },
+      "timed_out": false
+    },
+    "subscription": {
+      "hits": {
+        "hits": [
+          {
+            "_id": "0009007199254740993-é",
+            "_index": "stats",
+            "_source": {
+              "age": null,
+              "date": "2026-03-08",
+              "exactInteger": 9007199254740993,
+              "historical": {
+                "label": "Historique é",
+                "missingFromSql": true
+              },
+              "stat": 0,
+              "subType": "opaque-subtype",
+              "type": "business-type",
+              "userId": 2
+            },
+            "_type": "subscription",
+            "sort": [
+              "subscription#0009007199254740993-é"
+            ]
+          }
+        ],
+        "total": 1
+      },
+      "timed_out": false
+    },
+    "training": {
+      "hits": {
+        "hits": [
+          {
+            "_id": "0009007199254740993-é",
+            "_index": "stats",
+            "_source": {
+              "age": null,
+              "date": "2026-03-08",
+              "exactInteger": 9007199254740993,
+              "historical": {
+                "label": "Historique é",
+                "missingFromSql": true
+              },
+              "stat": 0,
+              "subType": "opaque-subtype",
+              "type": "business-type",
+              "userId": 2
+            },
+            "_type": "training",
+            "sort": [
+              "training#0009007199254740993-é"
+            ]
+          }
+        ],
+        "total": 1
+      },
+      "timed_out": false
+    },
+    "user": {
+      "hits": {
+        "hits": [
+          {
+            "_id": "0009007199254740993-é",
+            "_index": "stats",
+            "_source": {
+              "age": null,
+              "date": "2026-03-08",
+              "exactInteger": 9007199254740993,
+              "historical": {
+                "label": "Historique é",
+                "missingFromSql": true
+              },
+              "stat": 0,
+              "subType": "opaque-subtype",
+              "type": "business-type",
+              "userId": 2
+            },
+            "_type": "user",
+            "sort": [
+              "user#0009007199254740993-é"
+            ]
+          }
+        ],
+        "total": 1
+      },
+      "timed_out": false
+    }
+  },
+  "graphs": {
+    "day": {
+      "aggregations": {
+        "average": {
+          "value": 20.0
+        },
+        "calendar": {
+          "buckets": [
+            {
+              "doc_count": 0,
+              "key": 1772773200000,
+              "key_as_string": "2026-03-06T00:00:00.000-05:00",
+              "stat": {
+                "value": 0.0
+              }
+            },
+            {
+              "doc_count": 1,
+              "key": 1772859600000,
+              "key_as_string": "2026-03-07T00:00:00.000-05:00",
+              "stat": {
+                "value": 0.0
+              }
+            },
+            {
+              "doc_count": 2,
+              "key": 1772946000000,
+              "key_as_string": "2026-03-08T00:00:00.000-05:00",
+              "stat": {
+                "value": 2.0
+              }
+            },
+            {
+              "doc_count": 1,
+              "key": 1773028800000,
+              "key_as_string": "2026-03-09T00:00:00.000-04:00",
+              "stat": {
+                "value": 4.0
+              }
+            },
+            {
+              "doc_count": 0,
+              "key": 1773115200000,
+              "key_as_string": "2026-03-10T00:00:00.000-04:00",
+              "stat": {
+                "value": 0.0
+              }
+            }
+          ]
+        },
+        "empty": {
+          "value": null
+        },
+        "ranked": {
+          "buckets": [
+            {
+              "doc_count": 2,
+              "first": {
+                "hits": {
+                  "hits": [
+                    {
+                      "_id": "1",
+                      "_index": "stats",
+                      "_source": {
+                        "date": "2026-03-08T01:30:00-05:00",
+                        "stat": null
+                      },
+                      "_type": "machine",
+                      "sort": [
+                        1772951400000
+                      ]
+                    }
+                  ],
+                  "total": 2
+                }
+              },
+              "key": "beta",
+              "revenue": {
+                "value": 30.75
+              }
+            },
+            {
+              "doc_count": 2,
+              "first": {
+                "hits": {
+                  "hits": [
+                    {
+                      "_id": "0",
+                      "_index": "stats",
+                      "_source": {
+                        "date": "2026-03-07T23:30:00-05:00",
+                        "stat": 0
+                      },
+                      "_type": "machine",
+                      "sort": [
+                        1772944200000
+                      ]
+                    }
+                  ],
+                  "total": 2
+                }
+              },
+              "key": "alpha",
+              "revenue": {
+                "value": 0.0
+              }
+            }
+          ],
+          "doc_count_error_upper_bound": 0,
+          "sum_other_doc_count": 0
+        },
+        "sum": {
+          "value": 6.0
+        }
+      },
+      "hits": {
+        "hits": [
+
+        ],
+        "total": 4
+      },
+      "timed_out": false
+    },
+    "month": {
+      "aggregations": {
+        "average": {
+          "value": 20.0
+        },
+        "calendar": {
+          "buckets": [
+            {
+              "doc_count": 4,
+              "key": 1772341200000,
+              "key_as_string": "2026-03-01T00:00:00.000-05:00",
+              "stat": {
+                "value": 6.0
+              }
+            }
+          ]
+        },
+        "empty": {
+          "value": null
+        },
+        "ranked": {
+          "buckets": [
+            {
+              "doc_count": 2,
+              "first": {
+                "hits": {
+                  "hits": [
+                    {
+                      "_id": "1",
+                      "_index": "stats",
+                      "_source": {
+                        "date": "2026-03-08T01:30:00-05:00",
+                        "stat": null
+                      },
+                      "_type": "machine",
+                      "sort": [
+                        1772951400000
+                      ]
+                    }
+                  ],
+                  "total": 2
+                }
+              },
+              "key": "beta",
+              "revenue": {
+                "value": 30.75
+              }
+            },
+            {
+              "doc_count": 2,
+              "first": {
+                "hits": {
+                  "hits": [
+                    {
+                      "_id": "0",
+                      "_index": "stats",
+                      "_source": {
+                        "date": "2026-03-07T23:30:00-05:00",
+                        "stat": 0
+                      },
+                      "_type": "machine",
+                      "sort": [
+                        1772944200000
+                      ]
+                    }
+                  ],
+                  "total": 2
+                }
+              },
+              "key": "alpha",
+              "revenue": {
+                "value": 0.0
+              }
+            }
+          ],
+          "doc_count_error_upper_bound": 0,
+          "sum_other_doc_count": 0
+        },
+        "sum": {
+          "value": 6.0
+        }
+      },
+      "hits": {
+        "hits": [
+
+        ],
+        "total": 4
+      },
+      "timed_out": false
+    },
+    "week": {
+      "aggregations": {
+        "average": {
+          "value": 20.0
+        },
+        "calendar": {
+          "buckets": [
+            {
+              "doc_count": 3,
+              "key": 1772427600000,
+              "key_as_string": "2026-03-02T00:00:00.000-05:00",
+              "stat": {
+                "value": 2.0
+              }
+            },
+            {
+              "doc_count": 1,
+              "key": 1773028800000,
+              "key_as_string": "2026-03-09T00:00:00.000-04:00",
+              "stat": {
+                "value": 4.0
+              }
+            }
+          ]
+        },
+        "empty": {
+          "value": null
+        },
+        "ranked": {
+          "buckets": [
+            {
+              "doc_count": 2,
+              "first": {
+                "hits": {
+                  "hits": [
+                    {
+                      "_id": "1",
+                      "_index": "stats",
+                      "_source": {
+                        "date": "2026-03-08T01:30:00-05:00",
+                        "stat": null
+                      },
+                      "_type": "machine",
+                      "sort": [
+                        1772951400000
+                      ]
+                    }
+                  ],
+                  "total": 2
+                }
+              },
+              "key": "beta",
+              "revenue": {
+                "value": 30.75
+              }
+            },
+            {
+              "doc_count": 2,
+              "first": {
+                "hits": {
+                  "hits": [
+                    {
+                      "_id": "0",
+                      "_index": "stats",
+                      "_source": {
+                        "date": "2026-03-07T23:30:00-05:00",
+                        "stat": 0
+                      },
+                      "_type": "machine",
+                      "sort": [
+                        1772944200000
+                      ]
+                    }
+                  ],
+                  "total": 2
+                }
+              },
+              "key": "alpha",
+              "revenue": {
+                "value": 0.0
+              }
+            }
+          ],
+          "doc_count_error_upper_bound": 0,
+          "sum_other_doc_count": 0
+        },
+        "sum": {
+          "value": 6.0
+        }
+      },
+      "hits": {
+        "hits": [
+
+        ],
+        "total": 4
+      },
+      "timed_out": false
+    }
+  },
+  "order-update": {
+    "_id": "order",
+    "_index": "stats",
+    "_source": {
+      "ca": 10.25,
+      "date": "2026-03-08",
+      "historical": "must survive",
+      "orderId": 15,
+      "state": "ready",
+      "subType": "paid-processed",
+      "type": "store"
+    },
+    "_type": "order"
+  },
+  "pagination": [
+    "00000",
+    "00001",
+    "00002",
+    "00003",
+    "00004",
+    "00005",
+    "00006",
+    "00007",
+    "00008",
+    "00009",
+    "00010",
+    "00011",
+    "00012",
+    "00013",
+    "00014",
+    "00015",
+    "00016",
+    "00017",
+    "00018",
+    "00019",
+    "00020",
+    "00021",
+    "00022",
+    "00023",
+    "00024",
+    "00025",
+    "00026",
+    "00027",
+    "00028",
+    "00029",
+    "00030",
+    "00031",
+    "00032",
+    "00033",
+    "00034",
+    "00035",
+    "00036",
+    "00037",
+    "00038",
+    "00039",
+    "00040",
+    "00041",
+    "00042",
+    "00043",
+    "00044",
+    "00045",
+    "00046"
+  ],
+  "serialization": {
+    "account": {
+      "age": null,
+      "date": "2026-03-08",
+      "gender": null,
+      "group": null,
+      "groupName": null,
+      "stat": 0.0,
+      "subType": null,
+      "type": "booking",
+      "userId": 2
+    },
+    "event": {
+      "age": null,
+      "ageRange": null,
+      "ca": null,
+      "coupon": null,
+      "date": "2026-03-08",
+      "eventDate": null,
+      "eventId": null,
+      "eventTheme": null,
+      "gender": null,
+      "group": null,
+      "groupName": null,
+      "name": null,
+      "reservationContextId": null,
+      "reservationId": null,
+      "stat": 0.0,
+      "subType": null,
+      "type": "booking",
+      "userId": 2
+    },
+    "machine": {
+      "age": null,
+      "ca": null,
+      "coupon": null,
+      "date": "2026-03-08",
+      "gender": null,
+      "group": null,
+      "groupName": null,
+      "machineDates": [
+
+      ],
+      "machineId": null,
+      "name": null,
+      "reservationContextId": null,
+      "reservationId": null,
+      "stat": 0.0,
+      "subType": null,
+      "type": "booking",
+      "userId": 2
+    },
+    "order": {
+      "age": null,
+      "ca": null,
+      "categories": [
+
+      ],
+      "coupon": null,
+      "date": "2026-03-08",
+      "gender": null,
+      "group": null,
+      "groupName": null,
+      "orderId": null,
+      "products": [
+
+      ],
+      "stat": 0.0,
+      "state": null,
+      "subType": null,
+      "type": "booking",
+      "userId": 2
+    },
+    "project": {
+      "age": null,
+      "components": [
+
+      ],
+      "date": "2026-03-08",
+      "gender": null,
+      "group": null,
+      "groupName": null,
+      "licence": {
+      },
+      "machines": [
+
+      ],
+      "name": null,
+      "projectId": null,
+      "projectUserNames": [
+
+      ],
+      "stat": 0.0,
+      "status": null,
+      "subType": null,
+      "themes": [
+
+      ],
+      "type": "booking",
+      "userId": 2,
+      "users": null
+    },
+    "space": {
+      "age": null,
+      "ca": null,
+      "coupon": null,
+      "date": "2026-03-08",
+      "gender": null,
+      "group": null,
+      "groupName": null,
+      "name": null,
+      "reservationContextId": null,
+      "reservationId": null,
+      "spaceDates": [
+
+      ],
+      "spaceId": null,
+      "stat": 0.0,
+      "subType": null,
+      "type": "booking",
+      "userId": 2
+    },
+    "subscription": {
+      "age": null,
+      "ca": null,
+      "coupon": null,
+      "date": "2026-03-08",
+      "gender": null,
+      "group": null,
+      "groupName": null,
+      "invoiceItemId": null,
+      "planId": null,
+      "stat": 0.0,
+      "subType": null,
+      "subscriptionId": null,
+      "type": "booking",
+      "userId": 2
+    },
+    "training": {
+      "age": null,
+      "ca": null,
+      "coupon": null,
+      "date": "2026-03-08",
+      "gender": null,
+      "group": null,
+      "groupName": null,
+      "name": null,
+      "reservationContextId": null,
+      "reservationId": null,
+      "stat": 0.0,
+      "subType": null,
+      "trainingDate": null,
+      "trainingId": null,
+      "type": "booking",
+      "userId": 2
+    },
+    "user": {
+      "age": null,
+      "date": "2026-03-08",
+      "gender": null,
+      "group": null,
+      "groupName": null,
+      "stat": 0.0,
+      "subType": null,
+      "type": "booking",
+      "userId": 2
+    }
+  }
+}
