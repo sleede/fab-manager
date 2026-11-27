@@ -1,4 +1,4 @@
-zh-CN:
+zh:
   layouts:
     notifications_mailer:
       see_you_later: "再见 {GENDER, select, neutral{} other{the}}" #messageFormat interpolation
