@@ -82,4 +82,20 @@ class ChainedElementTest < ActiveSupport::TestCase
     end
     assert source.check_footprint
   end
+
+  test 'the latest element is used after re-chaining' do
+    invoice = sample_reservation_invoice(users(:user2), users(:user1))
+    item = invoice.invoice_items.first
+    stale = item.chained_element
+    item.update_column(:description, 'Corrected before re-chaining') # rubocop:disable Rails/SkipsModelValidations
+    item.chain_record
+
+    latest = ChainedElement.where(element: item).order(:id).last
+    assert_not_equal stale.id, latest.id
+    assert stale.corrupted?
+    assert_equal latest, item.reload.chained_element
+    assert_equal latest, InvoiceItem.includes(:chained_element).find(item.id).chained_element
+    assert item.check_footprint
+    assert invoice.check_footprint
+  end
 end

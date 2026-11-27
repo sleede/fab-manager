@@ -11,7 +11,8 @@ class PaymentSchedule < PaymentDocument
   belongs_to :statistic_profile
   belongs_to :operator_profile, class_name: 'InvoicingProfile'
 
-  has_one :chained_element, as: :element, dependent: :restrict_with_exception
+  # Re-chaining keeps older elements; the latest one is authoritative
+  has_one :chained_element, -> { order(id: :desc) }, inverse_of: false, as: :element, dependent: :restrict_with_exception
   has_many :payment_schedule_items, dependent: :destroy
   has_many :payment_gateway_objects, as: :item, dependent: :destroy
   has_many :payment_schedule_objects, dependent: :destroy

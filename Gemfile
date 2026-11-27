@@ -64,7 +64,8 @@ end
 
 gem 'seed_dump'
 
-gem 'pg'
+# Build against the pinned system libpq instead of a bundled client library.
+gem 'pg', '1.7.0', force_ruby_platform: true
 gem 'pg_search'
 
 # authentication
